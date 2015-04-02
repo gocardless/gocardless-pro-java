@@ -47,37 +47,37 @@ public class GoCardlessClient {
     private GoCardlessClient(GoCardlessHttpClient httpClient) {
         this.httpClient = httpClient;
         
-        this.apiKeys = new ApiKeyRepository(httpClient);
+            this.apiKeys = new ApiKeyRepository(httpClient);
         
-        this.creditors = new CreditorRepository(httpClient);
+            this.creditors = new CreditorRepository(httpClient);
         
-        this.creditorBankAccounts = new CreditorBankAccountRepository(httpClient);
+            this.creditorBankAccounts = new CreditorBankAccountRepository(httpClient);
         
-        this.customers = new CustomerRepository(httpClient);
+            this.customers = new CustomerRepository(httpClient);
         
-        this.customerBankAccounts = new CustomerBankAccountRepository(httpClient);
+            this.customerBankAccounts = new CustomerBankAccountRepository(httpClient);
         
-        this.events = new EventRepository(httpClient);
+            this.events = new EventRepository(httpClient);
         
-        this.helpers = new HelperRepository(httpClient);
+            this.helpers = new HelperRepository(httpClient);
         
-        this.mandates = new MandateRepository(httpClient);
+            this.mandates = new MandateRepository(httpClient);
         
-        this.payments = new PaymentRepository(httpClient);
+            this.payments = new PaymentRepository(httpClient);
         
-        this.payouts = new PayoutRepository(httpClient);
+            this.payouts = new PayoutRepository(httpClient);
         
-        this.publishableApiKeys = new PublishableApiKeyRepository(httpClient);
+            this.publishableApiKeys = new PublishableApiKeyRepository(httpClient);
         
-        this.redirectFlows = new RedirectFlowRepository(httpClient);
+            this.redirectFlows = new RedirectFlowRepository(httpClient);
         
-        this.refunds = new RefundRepository(httpClient);
+            this.refunds = new RefundRepository(httpClient);
         
-        this.roles = new RoleRepository(httpClient);
+            this.roles = new RoleRepository(httpClient);
         
-        this.subscriptions = new SubscriptionRepository(httpClient);
+            this.subscriptions = new SubscriptionRepository(httpClient);
         
-        this.users = new UserRepository(httpClient);
+            this.users = new UserRepository(httpClient);
         
     }
 
