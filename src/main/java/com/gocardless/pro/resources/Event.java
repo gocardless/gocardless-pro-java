@@ -7,124 +7,122 @@ import java.util.List;
 public class Event {
     
         
-            
-            
-                
-
-                private String action;
-
-                public String getAction() {
-                    return action;
-                }
-
-                public void setAction(String action) {
-                    this.action = action;
-                }
-            
         
             
-            
-                
 
-                private String createdAt;
+            private String action;
 
-                public String getCreatedAt() {
-                    return createdAt;
-                }
+            public String getAction() {
+                return action;
+            }
 
-                public void setCreatedAt(String createdAt) {
-                    this.createdAt = createdAt;
-                }
-            
+            public void setAction(String action) {
+                this.action = action;
+            }
+        
+    
+        
         
             
-            
-                
 
-                private Object details;
+            private String createdAt;
 
-                public Object getDetails() {
-                    return details;
-                }
+            public String getCreatedAt() {
+                return createdAt;
+            }
 
-                public void setDetails(Object details) {
-                    this.details = details;
-                }
-            
+            public void setCreatedAt(String createdAt) {
+                this.createdAt = createdAt;
+            }
+        
+    
+        
         
             
-            
-                
 
-                private String id;
+            private Object details;
 
-                public String getId() {
-                    return id;
-                }
+            public Object getDetails() {
+                return details;
+            }
 
-                public void setId(String id) {
-                    this.id = id;
-                }
-            
+            public void setDetails(Object details) {
+                this.details = details;
+            }
+        
+    
+        
         
             
-            
-                
 
-                private Object links;
+            private String id;
 
-                public Object getLinks() {
-                    return links;
-                }
+            public String getId() {
+                return id;
+            }
 
-                public void setLinks(Object links) {
-                    this.links = links;
-                }
-            
+            public void setId(String id) {
+                this.id = id;
+            }
+        
+    
+        
         
             
-            
-                
 
-                private Object metadata;
+            private Object links;
 
-                public Object getMetadata() {
-                    return metadata;
-                }
+            public Object getLinks() {
+                return links;
+            }
 
-                public void setMetadata(Object metadata) {
-                    this.metadata = metadata;
-                }
-            
+            public void setLinks(Object links) {
+                this.links = links;
+            }
+        
+    
+        
         
             
+
+            private Object metadata;
+
+            public Object getMetadata() {
+                return metadata;
+            }
+
+            public void setMetadata(Object metadata) {
+                this.metadata = metadata;
+            }
+        
+    
+        
+        
             
+
+            public enum ResourceType {
                 
+                    PAYMENTS,
+                
+                    MANDATES,
+                
+                    PAYOUTS,
+                
+                    REFUNDS,
+                
+                    SUBSCRIPTIONS,
+                
+            }
 
-                public enum ResourceType {
-                    
-                        PAYMENTS,
-                    
-                        MANDATES,
-                    
-                        PAYOUTS,
-                    
-                        REFUNDS,
-                    
-                        SUBSCRIPTIONS,
-                    
-                }
+            private ResourceType resourceType;
 
-                private ResourceType resourceType;
+            public ResourceType getResourceType() {
+                return resourceType;
+            }
 
-                public ResourceType getResourceType() {
-                    return resourceType;
-                }
-
-                public void setResourceType(ResourceType resourceType) {
-                    this.resourceType = resourceType;
-                }
-            
+            public void setResourceType(ResourceType resourceType) {
+                this.resourceType = resourceType;
+            }
         
     
 }

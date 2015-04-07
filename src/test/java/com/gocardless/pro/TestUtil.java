@@ -1,6 +1,7 @@
 package com.gocardless.pro;
 
 import co.freeside.betamax.ssl.DummyX509TrustManager;
+import com.gocardless.pro.http.HttpClient;
 import com.squareup.okhttp.OkHttpClient;
 import org.apache.http.conn.ssl.AllowAllHostnameVerifier;
 
@@ -17,5 +18,9 @@ public class TestUtil {
         OkHttpClient rawClient = client.getHttpClient().getRawClient();
         rawClient.setSslSocketFactory(sc.getSocketFactory());
         rawClient.setHostnameVerifier(new AllowAllHostnameVerifier());
+    }
+
+    public static HttpClient createHttpClient(String apiKey, String apiSecret, String baseUrl) {
+        return new HttpClient(apiKey, apiSecret, baseUrl);
     }
 }

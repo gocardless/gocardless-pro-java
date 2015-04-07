@@ -7,110 +7,108 @@ import java.util.List;
 public class ApiKey {
     
         
-            
-            
-                
-
-                private String createdAt;
-
-                public String getCreatedAt() {
-                    return createdAt;
-                }
-
-                public void setCreatedAt(String createdAt) {
-                    this.createdAt = createdAt;
-                }
-            
         
             
-            
-                
 
-                private boolean enabled;
+            private String createdAt;
 
-                public boolean getEnabled() {
-                    return enabled;
-                }
+            public String getCreatedAt() {
+                return createdAt;
+            }
 
-                public void setEnabled(boolean enabled) {
-                    this.enabled = enabled;
-                }
-            
+            public void setCreatedAt(String createdAt) {
+                this.createdAt = createdAt;
+            }
+        
+    
+        
         
             
-            
-                
 
-                private String id;
+            private boolean enabled;
 
-                public String getId() {
-                    return id;
-                }
+            public boolean getEnabled() {
+                return enabled;
+            }
 
-                public void setId(String id) {
-                    this.id = id;
-                }
-            
+            public void setEnabled(boolean enabled) {
+                this.enabled = enabled;
+            }
+        
+    
+        
         
             
-            
-                
 
-                private String key;
+            private String id;
 
-                public String getKey() {
-                    return key;
-                }
+            public String getId() {
+                return id;
+            }
 
-                public void setKey(String key) {
-                    this.key = key;
-                }
-            
+            public void setId(String id) {
+                this.id = id;
+            }
+        
+    
+        
         
             
-            
-                
 
-                private Object links;
+            private String key;
 
-                public Object getLinks() {
-                    return links;
-                }
+            public String getKey() {
+                return key;
+            }
 
-                public void setLinks(Object links) {
-                    this.links = links;
-                }
-            
+            public void setKey(String key) {
+                this.key = key;
+            }
+        
+    
+        
         
             
-            
-                
 
-                private String name;
+            private Object links;
 
-                public String getName() {
-                    return name;
-                }
+            public Object getLinks() {
+                return links;
+            }
 
-                public void setName(String name) {
-                    this.name = name;
-                }
-            
+            public void setLinks(Object links) {
+                this.links = links;
+            }
+        
+    
+        
         
             
+
+            private String name;
+
+            public String getName() {
+                return name;
+            }
+
+            public void setName(String name) {
+                this.name = name;
+            }
+        
+    
+        
+        
             
-                
 
-                private String webhookUrl;
+            private String webhookUrl;
 
-                public String getWebhookUrl() {
-                    return webhookUrl;
-                }
+            public String getWebhookUrl() {
+                return webhookUrl;
+            }
 
-                public void setWebhookUrl(String webhookUrl) {
-                    this.webhookUrl = webhookUrl;
-                }
-            
+            public void setWebhookUrl(String webhookUrl) {
+                this.webhookUrl = webhookUrl;
+            }
         
     
 }

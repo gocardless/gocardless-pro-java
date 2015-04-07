@@ -2,6 +2,7 @@
 
 package com.gocardless.pro;
 
+import com.gocardless.pro.http.HttpClient;
 import com.gocardless.pro.repositories.*;
 import com.google.common.annotations.VisibleForTesting;
 import com.squareup.okhttp.OkHttpClient;
@@ -9,7 +10,7 @@ import com.squareup.okhttp.OkHttpClient;
 import java.net.URI;
 
 public class GoCardlessClient {
-    private final GoCardlessHttpClient httpClient;
+    private final HttpClient httpClient;
     
         private final ApiKeyRepository apiKeys;
     
@@ -44,7 +45,7 @@ public class GoCardlessClient {
         private final UserRepository users;
     
 
-    private GoCardlessClient(GoCardlessHttpClient httpClient) {
+    private GoCardlessClient(HttpClient httpClient) {
         this.httpClient = httpClient;
         
             this.apiKeys = new ApiKeyRepository(httpClient);
@@ -180,11 +181,11 @@ public class GoCardlessClient {
     
 
     @VisibleForTesting
-    GoCardlessHttpClient getHttpClient() {
+    HttpClient getHttpClient() {
         return httpClient;
     }
 
     public static GoCardlessClient create(String apiKey, String apiSecret, String baseUrl) {
-        return new GoCardlessClient(new GoCardlessHttpClient(apiKey, apiSecret, baseUrl));
+        return new GoCardlessClient(new HttpClient(apiKey, apiSecret, baseUrl));
     }
 }

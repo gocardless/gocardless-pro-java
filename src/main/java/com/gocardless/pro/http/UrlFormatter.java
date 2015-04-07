@@ -1,4 +1,4 @@
-package com.gocardless.pro;
+package com.gocardless.pro.http;
 
 import java.net.MalformedURLException;
 import java.net.URI;

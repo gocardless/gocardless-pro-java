@@ -7,110 +7,108 @@ import java.util.List;
 public class User {
     
         
-            
-            
-                
-
-                private String createdAt;
-
-                public String getCreatedAt() {
-                    return createdAt;
-                }
-
-                public void setCreatedAt(String createdAt) {
-                    this.createdAt = createdAt;
-                }
-            
         
             
-            
-                
 
-                private String email;
+            private String createdAt;
 
-                public String getEmail() {
-                    return email;
-                }
+            public String getCreatedAt() {
+                return createdAt;
+            }
 
-                public void setEmail(String email) {
-                    this.email = email;
-                }
-            
+            public void setCreatedAt(String createdAt) {
+                this.createdAt = createdAt;
+            }
+        
+    
+        
         
             
-            
-                
 
-                private boolean enabled;
+            private String email;
 
-                public boolean getEnabled() {
-                    return enabled;
-                }
+            public String getEmail() {
+                return email;
+            }
 
-                public void setEnabled(boolean enabled) {
-                    this.enabled = enabled;
-                }
-            
+            public void setEmail(String email) {
+                this.email = email;
+            }
+        
+    
+        
         
             
-            
-                
 
-                private String familyName;
+            private boolean enabled;
 
-                public String getFamilyName() {
-                    return familyName;
-                }
+            public boolean getEnabled() {
+                return enabled;
+            }
 
-                public void setFamilyName(String familyName) {
-                    this.familyName = familyName;
-                }
-            
+            public void setEnabled(boolean enabled) {
+                this.enabled = enabled;
+            }
+        
+    
+        
         
             
-            
-                
 
-                private String givenName;
+            private String familyName;
 
-                public String getGivenName() {
-                    return givenName;
-                }
+            public String getFamilyName() {
+                return familyName;
+            }
 
-                public void setGivenName(String givenName) {
-                    this.givenName = givenName;
-                }
-            
+            public void setFamilyName(String familyName) {
+                this.familyName = familyName;
+            }
+        
+    
+        
         
             
-            
-                
 
-                private String id;
+            private String givenName;
 
-                public String getId() {
-                    return id;
-                }
+            public String getGivenName() {
+                return givenName;
+            }
 
-                public void setId(String id) {
-                    this.id = id;
-                }
-            
+            public void setGivenName(String givenName) {
+                this.givenName = givenName;
+            }
+        
+    
+        
         
             
+
+            private String id;
+
+            public String getId() {
+                return id;
+            }
+
+            public void setId(String id) {
+                this.id = id;
+            }
+        
+    
+        
+        
             
-                
 
-                private Object links;
+            private Object links;
 
-                public Object getLinks() {
-                    return links;
-                }
+            public Object getLinks() {
+                return links;
+            }
 
-                public void setLinks(Object links) {
-                    this.links = links;
-                }
-            
+            public void setLinks(Object links) {
+                this.links = links;
+            }
         
     
 }

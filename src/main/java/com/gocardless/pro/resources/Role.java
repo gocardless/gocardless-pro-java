@@ -7,80 +7,78 @@ import java.util.List;
 public class Role {
     
         
-            
-            
-                
-
-                private String createdAt;
-
-                public String getCreatedAt() {
-                    return createdAt;
-                }
-
-                public void setCreatedAt(String createdAt) {
-                    this.createdAt = createdAt;
-                }
-            
         
             
-            
-                
 
-                private boolean enabled;
+            private String createdAt;
 
-                public boolean getEnabled() {
-                    return enabled;
-                }
+            public String getCreatedAt() {
+                return createdAt;
+            }
 
-                public void setEnabled(boolean enabled) {
-                    this.enabled = enabled;
-                }
-            
+            public void setCreatedAt(String createdAt) {
+                this.createdAt = createdAt;
+            }
+        
+    
+        
         
             
-            
-                
 
-                private String id;
+            private boolean enabled;
 
-                public String getId() {
-                    return id;
-                }
+            public boolean getEnabled() {
+                return enabled;
+            }
 
-                public void setId(String id) {
-                    this.id = id;
-                }
-            
+            public void setEnabled(boolean enabled) {
+                this.enabled = enabled;
+            }
+        
+    
+        
         
             
-            
-                
 
-                private String name;
+            private String id;
 
-                public String getName() {
-                    return name;
-                }
+            public String getId() {
+                return id;
+            }
 
-                public void setName(String name) {
-                    this.name = name;
-                }
-            
+            public void setId(String id) {
+                this.id = id;
+            }
+        
+    
+        
         
             
+
+            private String name;
+
+            public String getName() {
+                return name;
+            }
+
+            public void setName(String name) {
+                this.name = name;
+            }
+        
+    
+        
+        
             
-                
 
-                private List<Object> permissions;
+            private List<Object> permissions;
 
-                public List<Object> getPermissions() {
-                    return permissions;
-                }
+            public List<Object> getPermissions() {
+                return permissions;
+            }
 
-                public void setPermissions(List<Object> permissions) {
-                    this.permissions = permissions;
-                }
-            
+            public void setPermissions(List<Object> permissions) {
+                this.permissions = permissions;
+            }
         
     
 }

@@ -7,95 +7,93 @@ import java.util.List;
 public class Refund {
     
         
-            
-            
-                
-
-                private int amount;
-
-                public int getAmount() {
-                    return amount;
-                }
-
-                public void setAmount(int amount) {
-                    this.amount = amount;
-                }
-            
         
             
-            
-                
 
-                private String createdAt;
+            private int amount;
 
-                public String getCreatedAt() {
-                    return createdAt;
-                }
+            public int getAmount() {
+                return amount;
+            }
 
-                public void setCreatedAt(String createdAt) {
-                    this.createdAt = createdAt;
-                }
-            
+            public void setAmount(int amount) {
+                this.amount = amount;
+            }
+        
+    
+        
         
             
-            
-                
 
-                private String currency;
+            private String createdAt;
 
-                public String getCurrency() {
-                    return currency;
-                }
+            public String getCreatedAt() {
+                return createdAt;
+            }
 
-                public void setCurrency(String currency) {
-                    this.currency = currency;
-                }
-            
+            public void setCreatedAt(String createdAt) {
+                this.createdAt = createdAt;
+            }
+        
+    
+        
         
             
-            
-                
 
-                private String id;
+            private String currency;
 
-                public String getId() {
-                    return id;
-                }
+            public String getCurrency() {
+                return currency;
+            }
 
-                public void setId(String id) {
-                    this.id = id;
-                }
-            
+            public void setCurrency(String currency) {
+                this.currency = currency;
+            }
+        
+    
+        
         
             
-            
-                
 
-                private Object links;
+            private String id;
 
-                public Object getLinks() {
-                    return links;
-                }
+            public String getId() {
+                return id;
+            }
 
-                public void setLinks(Object links) {
-                    this.links = links;
-                }
-            
+            public void setId(String id) {
+                this.id = id;
+            }
+        
+    
+        
         
             
+
+            private Object links;
+
+            public Object getLinks() {
+                return links;
+            }
+
+            public void setLinks(Object links) {
+                this.links = links;
+            }
+        
+    
+        
+        
             
-                
 
-                private Object metadata;
+            private Object metadata;
 
-                public Object getMetadata() {
-                    return metadata;
-                }
+            public Object getMetadata() {
+                return metadata;
+            }
 
-                public void setMetadata(Object metadata) {
-                    this.metadata = metadata;
-                }
-            
+            public void setMetadata(Object metadata) {
+                this.metadata = metadata;
+            }
         
     
 }

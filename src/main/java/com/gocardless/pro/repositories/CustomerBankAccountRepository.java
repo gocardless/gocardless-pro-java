@@ -3,59 +3,140 @@
 
 package com.gocardless.pro.repositories;
 
-import com.gocardless.pro.GoCardlessHttpClient;
+import com.gocardless.pro.http.GetRequest;
+import com.gocardless.pro.http.HttpClient;
+import com.gocardless.pro.http.ListRequest;
 import com.gocardless.pro.resources.CustomerBankAccount;
 import com.google.common.collect.ImmutableMap;
+import com.google.gson.reflect.TypeToken;
 
 import java.io.IOException;
+import java.util.List;
+import java.util.Map;
 
 public class CustomerBankAccountRepository {
-    private GoCardlessHttpClient httpClient;
+    private HttpClient httpClient;
 
-    public CustomerBankAccountRepository(GoCardlessHttpClient httpClient) {
+    public CustomerBankAccountRepository(HttpClient httpClient) {
         this.httpClient = httpClient;
     }
 
     
         
-        public CustomerBankAccount create() throws IOException {
         
-            throw new IllegalStateException("Not implemented!");
-        
-        }
-    
-        
-        public CustomerBankAccount list() throws IOException {
-        
-            throw new IllegalStateException("Not implemented!");
+            public void create() throws IOException {
+                throw new IllegalStateException("Not implemented!");
         
         }
     
         
-        public CustomerBankAccount get(String identity) throws IOException {
         
-            ImmutableMap.Builder<String, String> params = ImmutableMap.builder();
+            public CustomerBankAccountListRequest list() throws IOException {
+                return new CustomerBankAccountListRequest(httpClient
+                
+                );
+        
+        }
+    
+        
+        
+            public CustomerBankAccountGetRequest get(String identity) throws IOException {
+                return new CustomerBankAccountGetRequest(httpClient
+                
+                    , identity
+                
+                );
+        
+        }
+    
+        
+        
+            public void update(String identity) throws IOException {
+                throw new IllegalStateException("Not implemented!");
+        
+        }
+    
+        
+        
+            public void disable(String identity) throws IOException {
+                throw new IllegalStateException("Not implemented!");
+        
+        }
+    
 
-            
-                params.put("identity", identity);
-            
+    
+        
+        
+    
+        
+        
+            public final class CustomerBankAccountListRequest extends ListRequest<CustomerBankAccount> {
+              
 
-            return httpClient.get("/customer_bank_accounts/:identity", params.build(), "customer_bank_accounts", CustomerBankAccount.class);
+              private CustomerBankAccountListRequest(HttpClient httpClient
+                  
+              ) {
+                  super(httpClient, "/customer_bank_accounts", "customer_bank_accounts",
+                      
+                          new TypeToken<List<CustomerBankAccount>>() {}
+                      
+                  );
+
+                  
+              }
+
+              @Override
+              protected Map<String, String> getParams() {
+                  ImmutableMap.Builder<String, String> params = ImmutableMap.builder();
+
+                  
+
+                  return params.build();
+              }
+            }
         
-        }
     
         
-        public CustomerBankAccount update(String identity) throws IOException {
         
-            throw new IllegalStateException("Not implemented!");
+            public final class CustomerBankAccountGetRequest extends GetRequest<CustomerBankAccount> {
+              
+                  private final String identity;
+              
+
+              private CustomerBankAccountGetRequest(HttpClient httpClient
+                  
+                      , String identity
+                  
+              ) {
+                  super(httpClient, "/customer_bank_accounts/:identity", "customer_bank_accounts",
+                      
+                          CustomerBankAccount.class
+                      
+                  );
+
+                  
+                      
+                      this.identity = identity;
+                  
+              }
+
+              @Override
+              protected Map<String, String> getParams() {
+                  ImmutableMap.Builder<String, String> params = ImmutableMap.builder();
+
+                  
+                      params.put("identity", identity);
+                  
+
+                  return params.build();
+              }
+            }
         
-        }
     
         
-        public CustomerBankAccount disable(String identity) throws IOException {
         
-            throw new IllegalStateException("Not implemented!");
+    
         
-        }
+        
     
 }

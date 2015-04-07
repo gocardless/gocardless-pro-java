@@ -3,59 +3,140 @@
 
 package com.gocardless.pro.repositories;
 
-import com.gocardless.pro.GoCardlessHttpClient;
+import com.gocardless.pro.http.GetRequest;
+import com.gocardless.pro.http.HttpClient;
+import com.gocardless.pro.http.ListRequest;
 import com.gocardless.pro.resources.PublishableApiKey;
 import com.google.common.collect.ImmutableMap;
+import com.google.gson.reflect.TypeToken;
 
 import java.io.IOException;
+import java.util.List;
+import java.util.Map;
 
 public class PublishableApiKeyRepository {
-    private GoCardlessHttpClient httpClient;
+    private HttpClient httpClient;
 
-    public PublishableApiKeyRepository(GoCardlessHttpClient httpClient) {
+    public PublishableApiKeyRepository(HttpClient httpClient) {
         this.httpClient = httpClient;
     }
 
     
         
-        public PublishableApiKey create() throws IOException {
         
-            throw new IllegalStateException("Not implemented!");
-        
-        }
-    
-        
-        public PublishableApiKey list() throws IOException {
-        
-            throw new IllegalStateException("Not implemented!");
+            public void create() throws IOException {
+                throw new IllegalStateException("Not implemented!");
         
         }
     
         
-        public PublishableApiKey get(String identity) throws IOException {
         
-            ImmutableMap.Builder<String, String> params = ImmutableMap.builder();
+            public PublishableApiKeyListRequest list() throws IOException {
+                return new PublishableApiKeyListRequest(httpClient
+                
+                );
+        
+        }
+    
+        
+        
+            public PublishableApiKeyGetRequest get(String identity) throws IOException {
+                return new PublishableApiKeyGetRequest(httpClient
+                
+                    , identity
+                
+                );
+        
+        }
+    
+        
+        
+            public void update(String identity) throws IOException {
+                throw new IllegalStateException("Not implemented!");
+        
+        }
+    
+        
+        
+            public void disable(String identity) throws IOException {
+                throw new IllegalStateException("Not implemented!");
+        
+        }
+    
 
-            
-                params.put("identity", identity);
-            
+    
+        
+        
+    
+        
+        
+            public final class PublishableApiKeyListRequest extends ListRequest<PublishableApiKey> {
+              
 
-            return httpClient.get("/publishable_api_key/:identity", params.build(), "publishable_api_keys", PublishableApiKey.class);
+              private PublishableApiKeyListRequest(HttpClient httpClient
+                  
+              ) {
+                  super(httpClient, "/publishable_api_keys", "publishable_api_keys",
+                      
+                          new TypeToken<List<PublishableApiKey>>() {}
+                      
+                  );
+
+                  
+              }
+
+              @Override
+              protected Map<String, String> getParams() {
+                  ImmutableMap.Builder<String, String> params = ImmutableMap.builder();
+
+                  
+
+                  return params.build();
+              }
+            }
         
-        }
     
         
-        public PublishableApiKey update(String identity) throws IOException {
         
-            throw new IllegalStateException("Not implemented!");
+            public final class PublishableApiKeyGetRequest extends GetRequest<PublishableApiKey> {
+              
+                  private final String identity;
+              
+
+              private PublishableApiKeyGetRequest(HttpClient httpClient
+                  
+                      , String identity
+                  
+              ) {
+                  super(httpClient, "/publishable_api_keys/:identity", "publishable_api_keys",
+                      
+                          PublishableApiKey.class
+                      
+                  );
+
+                  
+                      
+                      this.identity = identity;
+                  
+              }
+
+              @Override
+              protected Map<String, String> getParams() {
+                  ImmutableMap.Builder<String, String> params = ImmutableMap.builder();
+
+                  
+                      params.put("identity", identity);
+                  
+
+                  return params.build();
+              }
+            }
         
-        }
     
         
-        public PublishableApiKey disable(String identity) throws IOException {
         
-            throw new IllegalStateException("Not implemented!");
+    
         
-        }
+        
     
 }

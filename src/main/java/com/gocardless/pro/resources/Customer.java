@@ -7,200 +7,198 @@ import java.util.List;
 public class Customer {
     
         
-            
-            
-                
-
-                private String addressLine1;
-
-                public String getAddressLine1() {
-                    return addressLine1;
-                }
-
-                public void setAddressLine1(String addressLine1) {
-                    this.addressLine1 = addressLine1;
-                }
-            
         
             
-            
-                
 
-                private String addressLine2;
+            private String addressLine1;
 
-                public String getAddressLine2() {
-                    return addressLine2;
-                }
+            public String getAddressLine1() {
+                return addressLine1;
+            }
 
-                public void setAddressLine2(String addressLine2) {
-                    this.addressLine2 = addressLine2;
-                }
-            
+            public void setAddressLine1(String addressLine1) {
+                this.addressLine1 = addressLine1;
+            }
+        
+    
+        
         
             
-            
-                
 
-                private String addressLine3;
+            private String addressLine2;
 
-                public String getAddressLine3() {
-                    return addressLine3;
-                }
+            public String getAddressLine2() {
+                return addressLine2;
+            }
 
-                public void setAddressLine3(String addressLine3) {
-                    this.addressLine3 = addressLine3;
-                }
-            
+            public void setAddressLine2(String addressLine2) {
+                this.addressLine2 = addressLine2;
+            }
+        
+    
+        
         
             
-            
-                
 
-                private String city;
+            private String addressLine3;
 
-                public String getCity() {
-                    return city;
-                }
+            public String getAddressLine3() {
+                return addressLine3;
+            }
 
-                public void setCity(String city) {
-                    this.city = city;
-                }
-            
+            public void setAddressLine3(String addressLine3) {
+                this.addressLine3 = addressLine3;
+            }
+        
+    
+        
         
             
-            
-                
 
-                private String countryCode;
+            private String city;
 
-                public String getCountryCode() {
-                    return countryCode;
-                }
+            public String getCity() {
+                return city;
+            }
 
-                public void setCountryCode(String countryCode) {
-                    this.countryCode = countryCode;
-                }
-            
+            public void setCity(String city) {
+                this.city = city;
+            }
+        
+    
+        
         
             
-            
-                
 
-                private String createdAt;
+            private String countryCode;
 
-                public String getCreatedAt() {
-                    return createdAt;
-                }
+            public String getCountryCode() {
+                return countryCode;
+            }
 
-                public void setCreatedAt(String createdAt) {
-                    this.createdAt = createdAt;
-                }
-            
+            public void setCountryCode(String countryCode) {
+                this.countryCode = countryCode;
+            }
+        
+    
+        
         
             
-            
-                
 
-                private String email;
+            private String createdAt;
 
-                public String getEmail() {
-                    return email;
-                }
+            public String getCreatedAt() {
+                return createdAt;
+            }
 
-                public void setEmail(String email) {
-                    this.email = email;
-                }
-            
+            public void setCreatedAt(String createdAt) {
+                this.createdAt = createdAt;
+            }
+        
+    
+        
         
             
-            
-                
 
-                private String familyName;
+            private String email;
 
-                public String getFamilyName() {
-                    return familyName;
-                }
+            public String getEmail() {
+                return email;
+            }
 
-                public void setFamilyName(String familyName) {
-                    this.familyName = familyName;
-                }
-            
+            public void setEmail(String email) {
+                this.email = email;
+            }
+        
+    
+        
         
             
-            
-                
 
-                private String givenName;
+            private String familyName;
 
-                public String getGivenName() {
-                    return givenName;
-                }
+            public String getFamilyName() {
+                return familyName;
+            }
 
-                public void setGivenName(String givenName) {
-                    this.givenName = givenName;
-                }
-            
+            public void setFamilyName(String familyName) {
+                this.familyName = familyName;
+            }
+        
+    
+        
         
             
-            
-                
 
-                private String id;
+            private String givenName;
 
-                public String getId() {
-                    return id;
-                }
+            public String getGivenName() {
+                return givenName;
+            }
 
-                public void setId(String id) {
-                    this.id = id;
-                }
-            
+            public void setGivenName(String givenName) {
+                this.givenName = givenName;
+            }
+        
+    
+        
         
             
-            
-                
 
-                private Object metadata;
+            private String id;
 
-                public Object getMetadata() {
-                    return metadata;
-                }
+            public String getId() {
+                return id;
+            }
 
-                public void setMetadata(Object metadata) {
-                    this.metadata = metadata;
-                }
-            
+            public void setId(String id) {
+                this.id = id;
+            }
+        
+    
+        
         
             
-            
-                
 
-                private String postalCode;
+            private Object metadata;
 
-                public String getPostalCode() {
-                    return postalCode;
-                }
+            public Object getMetadata() {
+                return metadata;
+            }
 
-                public void setPostalCode(String postalCode) {
-                    this.postalCode = postalCode;
-                }
-            
+            public void setMetadata(Object metadata) {
+                this.metadata = metadata;
+            }
+        
+    
+        
         
             
+
+            private String postalCode;
+
+            public String getPostalCode() {
+                return postalCode;
+            }
+
+            public void setPostalCode(String postalCode) {
+                this.postalCode = postalCode;
+            }
+        
+    
+        
+        
             
-                
 
-                private String region;
+            private String region;
 
-                public String getRegion() {
-                    return region;
-                }
+            public String getRegion() {
+                return region;
+            }
 
-                public void setRegion(String region) {
-                    this.region = region;
-                }
-            
+            public void setRegion(String region) {
+                this.region = region;
+            }
         
     
 }

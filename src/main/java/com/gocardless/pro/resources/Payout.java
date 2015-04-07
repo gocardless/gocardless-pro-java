@@ -7,118 +7,116 @@ import java.util.List;
 public class Payout {
     
         
-            
-            
-                
-
-                private int amount;
-
-                public int getAmount() {
-                    return amount;
-                }
-
-                public void setAmount(int amount) {
-                    this.amount = amount;
-                }
-            
         
             
-            
-                
 
-                private String createdAt;
+            private int amount;
 
-                public String getCreatedAt() {
-                    return createdAt;
-                }
+            public int getAmount() {
+                return amount;
+            }
 
-                public void setCreatedAt(String createdAt) {
-                    this.createdAt = createdAt;
-                }
-            
+            public void setAmount(int amount) {
+                this.amount = amount;
+            }
+        
+    
+        
         
             
-            
-                
 
-                private String currency;
+            private String createdAt;
 
-                public String getCurrency() {
-                    return currency;
-                }
+            public String getCreatedAt() {
+                return createdAt;
+            }
 
-                public void setCurrency(String currency) {
-                    this.currency = currency;
-                }
-            
+            public void setCreatedAt(String createdAt) {
+                this.createdAt = createdAt;
+            }
+        
+    
+        
         
             
-            
-                
 
-                private String id;
+            private String currency;
 
-                public String getId() {
-                    return id;
-                }
+            public String getCurrency() {
+                return currency;
+            }
 
-                public void setId(String id) {
-                    this.id = id;
-                }
-            
+            public void setCurrency(String currency) {
+                this.currency = currency;
+            }
+        
+    
+        
         
             
-            
-                
 
-                private Object links;
+            private String id;
 
-                public Object getLinks() {
-                    return links;
-                }
+            public String getId() {
+                return id;
+            }
 
-                public void setLinks(Object links) {
-                    this.links = links;
-                }
-            
+            public void setId(String id) {
+                this.id = id;
+            }
+        
+    
+        
         
             
-            
-                
 
-                private String reference;
+            private Object links;
 
-                public String getReference() {
-                    return reference;
-                }
+            public Object getLinks() {
+                return links;
+            }
 
-                public void setReference(String reference) {
-                    this.reference = reference;
-                }
-            
+            public void setLinks(Object links) {
+                this.links = links;
+            }
+        
+    
+        
         
             
+
+            private String reference;
+
+            public String getReference() {
+                return reference;
+            }
+
+            public void setReference(String reference) {
+                this.reference = reference;
+            }
+        
+    
+        
+        
             
+
+            public enum Status {
                 
+                    PENDING,
+                
+                    PAID,
+                
+            }
 
-                public enum Status {
-                    
-                        PENDING,
-                    
-                        PAID,
-                    
-                }
+            private Status status;
 
-                private Status status;
+            public Status getStatus() {
+                return status;
+            }
 
-                public Status getStatus() {
-                    return status;
-                }
-
-                public void setStatus(Status status) {
-                    this.status = status;
-                }
-            
+            public void setStatus(Status status) {
+                this.status = status;
+            }
         
     
 }

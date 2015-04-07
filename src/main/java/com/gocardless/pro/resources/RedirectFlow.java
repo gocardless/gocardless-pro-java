@@ -7,133 +7,131 @@ import java.util.List;
 public class RedirectFlow {
     
         
-            
-            
-                
-
-                private String createdAt;
-
-                public String getCreatedAt() {
-                    return createdAt;
-                }
-
-                public void setCreatedAt(String createdAt) {
-                    this.createdAt = createdAt;
-                }
-            
         
             
-            
-                
 
-                private String description;
+            private String createdAt;
 
-                public String getDescription() {
-                    return description;
-                }
+            public String getCreatedAt() {
+                return createdAt;
+            }
 
-                public void setDescription(String description) {
-                    this.description = description;
-                }
-            
+            public void setCreatedAt(String createdAt) {
+                this.createdAt = createdAt;
+            }
+        
+    
+        
         
             
-            
-                
 
-                private String id;
+            private String description;
 
-                public String getId() {
-                    return id;
-                }
+            public String getDescription() {
+                return description;
+            }
 
-                public void setId(String id) {
-                    this.id = id;
-                }
-            
+            public void setDescription(String description) {
+                this.description = description;
+            }
+        
+    
+        
         
             
-            
-                
 
-                private Object links;
+            private String id;
 
-                public Object getLinks() {
-                    return links;
-                }
+            public String getId() {
+                return id;
+            }
 
-                public void setLinks(Object links) {
-                    this.links = links;
-                }
-            
+            public void setId(String id) {
+                this.id = id;
+            }
+        
+    
+        
         
             
-            
-                
 
-                private String redirectUrl;
+            private Object links;
 
-                public String getRedirectUrl() {
-                    return redirectUrl;
-                }
+            public Object getLinks() {
+                return links;
+            }
 
-                public void setRedirectUrl(String redirectUrl) {
-                    this.redirectUrl = redirectUrl;
-                }
-            
+            public void setLinks(Object links) {
+                this.links = links;
+            }
+        
+    
+        
         
             
-            
-                
 
-                public enum Scheme {
-                    
-                        BACS,
-                    
-                        SEPA_CORE,
-                    
-                }
+            private String redirectUrl;
 
-                private Scheme scheme;
+            public String getRedirectUrl() {
+                return redirectUrl;
+            }
 
-                public Scheme getScheme() {
-                    return scheme;
-                }
-
-                public void setScheme(Scheme scheme) {
-                    this.scheme = scheme;
-                }
-            
+            public void setRedirectUrl(String redirectUrl) {
+                this.redirectUrl = redirectUrl;
+            }
+        
+    
+        
         
             
-            
+
+            public enum Scheme {
                 
+                    BACS,
+                
+                    SEPA_CORE,
+                
+            }
 
-                private String sessionToken;
+            private Scheme scheme;
 
-                public String getSessionToken() {
-                    return sessionToken;
-                }
+            public Scheme getScheme() {
+                return scheme;
+            }
 
-                public void setSessionToken(String sessionToken) {
-                    this.sessionToken = sessionToken;
-                }
-            
+            public void setScheme(Scheme scheme) {
+                this.scheme = scheme;
+            }
+        
+    
+        
         
             
+
+            private String sessionToken;
+
+            public String getSessionToken() {
+                return sessionToken;
+            }
+
+            public void setSessionToken(String sessionToken) {
+                this.sessionToken = sessionToken;
+            }
+        
+    
+        
+        
             
-                
 
-                private String successRedirectUrl;
+            private String successRedirectUrl;
 
-                public String getSuccessRedirectUrl() {
-                    return successRedirectUrl;
-                }
+            public String getSuccessRedirectUrl() {
+                return successRedirectUrl;
+            }
 
-                public void setSuccessRedirectUrl(String successRedirectUrl) {
-                    this.successRedirectUrl = successRedirectUrl;
-                }
-            
+            public void setSuccessRedirectUrl(String successRedirectUrl) {
+                this.successRedirectUrl = successRedirectUrl;
+            }
         
     
 }

@@ -1,0 +1,9 @@
+{
+  "items": [{
+    "string_field": "foo",
+    "int_field": 123
+  }, {
+    "string_field": "bar",
+    "int_field": 456
+  }]
+}

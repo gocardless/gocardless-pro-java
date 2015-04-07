@@ -7,141 +7,139 @@ import java.util.List;
 public class Mandate {
     
         
-            
-            
-                
-
-                private String createdAt;
-
-                public String getCreatedAt() {
-                    return createdAt;
-                }
-
-                public void setCreatedAt(String createdAt) {
-                    this.createdAt = createdAt;
-                }
-            
         
             
-            
-                
 
-                private String id;
+            private String createdAt;
 
-                public String getId() {
-                    return id;
-                }
+            public String getCreatedAt() {
+                return createdAt;
+            }
 
-                public void setId(String id) {
-                    this.id = id;
-                }
-            
+            public void setCreatedAt(String createdAt) {
+                this.createdAt = createdAt;
+            }
+        
+    
+        
         
             
-            
-                
 
-                private Object links;
+            private String id;
 
-                public Object getLinks() {
-                    return links;
-                }
+            public String getId() {
+                return id;
+            }
 
-                public void setLinks(Object links) {
-                    this.links = links;
-                }
-            
+            public void setId(String id) {
+                this.id = id;
+            }
+        
+    
+        
         
             
-            
-                
 
-                private Object metadata;
+            private Object links;
 
-                public Object getMetadata() {
-                    return metadata;
-                }
+            public Object getLinks() {
+                return links;
+            }
 
-                public void setMetadata(Object metadata) {
-                    this.metadata = metadata;
-                }
-            
+            public void setLinks(Object links) {
+                this.links = links;
+            }
+        
+    
+        
         
             
-            
-                
 
-                private String nextPossibleChargeDate;
+            private Object metadata;
 
-                public String getNextPossibleChargeDate() {
-                    return nextPossibleChargeDate;
-                }
+            public Object getMetadata() {
+                return metadata;
+            }
 
-                public void setNextPossibleChargeDate(String nextPossibleChargeDate) {
-                    this.nextPossibleChargeDate = nextPossibleChargeDate;
-                }
-            
+            public void setMetadata(Object metadata) {
+                this.metadata = metadata;
+            }
+        
+    
+        
         
             
-            
-                
 
-                private String reference;
+            private String nextPossibleChargeDate;
 
-                public String getReference() {
-                    return reference;
-                }
+            public String getNextPossibleChargeDate() {
+                return nextPossibleChargeDate;
+            }
 
-                public void setReference(String reference) {
-                    this.reference = reference;
-                }
-            
+            public void setNextPossibleChargeDate(String nextPossibleChargeDate) {
+                this.nextPossibleChargeDate = nextPossibleChargeDate;
+            }
+        
+    
+        
         
             
-            
-                
 
-                private String scheme;
+            private String reference;
 
-                public String getScheme() {
-                    return scheme;
-                }
+            public String getReference() {
+                return reference;
+            }
 
-                public void setScheme(String scheme) {
-                    this.scheme = scheme;
-                }
-            
+            public void setReference(String reference) {
+                this.reference = reference;
+            }
+        
+    
+        
         
             
+
+            private String scheme;
+
+            public String getScheme() {
+                return scheme;
+            }
+
+            public void setScheme(String scheme) {
+                this.scheme = scheme;
+            }
+        
+    
+        
+        
             
+
+            public enum Status {
                 
+                    PENDING_SUBMISSION,
+                
+                    SUBMITTED,
+                
+                    ACTIVE,
+                
+                    FAILED,
+                
+                    CANCELLED,
+                
+                    EXPIRED,
+                
+            }
 
-                public enum Status {
-                    
-                        PENDING_SUBMISSION,
-                    
-                        SUBMITTED,
-                    
-                        ACTIVE,
-                    
-                        FAILED,
-                    
-                        CANCELLED,
-                    
-                        EXPIRED,
-                    
-                }
+            private Status status;
 
-                private Status status;
+            public Status getStatus() {
+                return status;
+            }
 
-                public Status getStatus() {
-                    return status;
-                }
-
-                public void setStatus(Status status) {
-                    this.status = status;
-                }
-            
+            public void setStatus(Status status) {
+                this.status = status;
+            }
         
     
 }

@@ -1,4 +1,4 @@
-package com.gocardless.pro;
+package com.gocardless.pro.http;
 
 import com.google.common.collect.ImmutableMap;
 import org.junit.Before;

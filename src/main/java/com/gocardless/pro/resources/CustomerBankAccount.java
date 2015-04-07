@@ -7,155 +7,153 @@ import java.util.List;
 public class CustomerBankAccount {
     
         
-            
-            
-                
-
-                private String accountHolderName;
-
-                public String getAccountHolderName() {
-                    return accountHolderName;
-                }
-
-                public void setAccountHolderName(String accountHolderName) {
-                    this.accountHolderName = accountHolderName;
-                }
-            
         
             
-            
-                
 
-                private String accountNumberEnding;
+            private String accountHolderName;
 
-                public String getAccountNumberEnding() {
-                    return accountNumberEnding;
-                }
+            public String getAccountHolderName() {
+                return accountHolderName;
+            }
 
-                public void setAccountNumberEnding(String accountNumberEnding) {
-                    this.accountNumberEnding = accountNumberEnding;
-                }
-            
+            public void setAccountHolderName(String accountHolderName) {
+                this.accountHolderName = accountHolderName;
+            }
+        
+    
+        
         
             
-            
-                
 
-                private String bankName;
+            private String accountNumberEnding;
 
-                public String getBankName() {
-                    return bankName;
-                }
+            public String getAccountNumberEnding() {
+                return accountNumberEnding;
+            }
 
-                public void setBankName(String bankName) {
-                    this.bankName = bankName;
-                }
-            
+            public void setAccountNumberEnding(String accountNumberEnding) {
+                this.accountNumberEnding = accountNumberEnding;
+            }
+        
+    
+        
         
             
-            
-                
 
-                private String countryCode;
+            private String bankName;
 
-                public String getCountryCode() {
-                    return countryCode;
-                }
+            public String getBankName() {
+                return bankName;
+            }
 
-                public void setCountryCode(String countryCode) {
-                    this.countryCode = countryCode;
-                }
-            
+            public void setBankName(String bankName) {
+                this.bankName = bankName;
+            }
+        
+    
+        
         
             
-            
-                
 
-                private String createdAt;
+            private String countryCode;
 
-                public String getCreatedAt() {
-                    return createdAt;
-                }
+            public String getCountryCode() {
+                return countryCode;
+            }
 
-                public void setCreatedAt(String createdAt) {
-                    this.createdAt = createdAt;
-                }
-            
+            public void setCountryCode(String countryCode) {
+                this.countryCode = countryCode;
+            }
+        
+    
+        
         
             
-            
-                
 
-                private String currency;
+            private String createdAt;
 
-                public String getCurrency() {
-                    return currency;
-                }
+            public String getCreatedAt() {
+                return createdAt;
+            }
 
-                public void setCurrency(String currency) {
-                    this.currency = currency;
-                }
-            
+            public void setCreatedAt(String createdAt) {
+                this.createdAt = createdAt;
+            }
+        
+    
+        
         
             
-            
-                
 
-                private boolean enabled;
+            private String currency;
 
-                public boolean getEnabled() {
-                    return enabled;
-                }
+            public String getCurrency() {
+                return currency;
+            }
 
-                public void setEnabled(boolean enabled) {
-                    this.enabled = enabled;
-                }
-            
+            public void setCurrency(String currency) {
+                this.currency = currency;
+            }
+        
+    
+        
         
             
-            
-                
 
-                private String id;
+            private boolean enabled;
 
-                public String getId() {
-                    return id;
-                }
+            public boolean getEnabled() {
+                return enabled;
+            }
 
-                public void setId(String id) {
-                    this.id = id;
-                }
-            
+            public void setEnabled(boolean enabled) {
+                this.enabled = enabled;
+            }
+        
+    
+        
         
             
-            
-                
 
-                private Object links;
+            private String id;
 
-                public Object getLinks() {
-                    return links;
-                }
+            public String getId() {
+                return id;
+            }
 
-                public void setLinks(Object links) {
-                    this.links = links;
-                }
-            
+            public void setId(String id) {
+                this.id = id;
+            }
+        
+    
+        
         
             
+
+            private Object links;
+
+            public Object getLinks() {
+                return links;
+            }
+
+            public void setLinks(Object links) {
+                this.links = links;
+            }
+        
+    
+        
+        
             
-                
 
-                private Object metadata;
+            private Object metadata;
 
-                public Object getMetadata() {
-                    return metadata;
-                }
+            public Object getMetadata() {
+                return metadata;
+            }
 
-                public void setMetadata(Object metadata) {
-                    this.metadata = metadata;
-                }
-            
+            public void setMetadata(Object metadata) {
+                this.metadata = metadata;
+            }
         
     
 }

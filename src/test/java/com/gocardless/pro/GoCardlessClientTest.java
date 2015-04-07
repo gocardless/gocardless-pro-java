@@ -10,7 +10,7 @@ import org.junit.Rule;
 import org.junit.Test;
 
 import java.io.IOException;
-import java.net.URI;
+import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -35,10 +35,26 @@ public class GoCardlessClientTest {
     @Test
     @Betamax(tape = "get a customer")
     public void shouldGetACustomer() throws IOException {
-        Customer customer = client.customers().get("CU00003068FG73");
+        Customer customer = client.customers().get("CU00003068FG73").execute();
 
         assertThat(customer.getId()).isEqualTo("CU00003068FG73");
         assertThat(customer.getFamilyName()).isEqualTo("Osborne");
         assertThat(customer.getGivenName()).isEqualTo("Frank");
+    }
+
+    @Test
+    @Betamax(tape = "list customers")
+    public void shouldListCustomers() throws IOException {
+        List<Customer> customers = client.customers().list().execute();
+
+        assertThat(customers).hasSize(2);
+
+        assertThat(customers.get(0).getId()).isEqualTo("CU00003068FG73");
+        assertThat(customers.get(0).getFamilyName()).isEqualTo("Osborne");
+        assertThat(customers.get(0).getGivenName()).isEqualTo("Frank");
+
+        assertThat(customers.get(1).getId()).isEqualTo("CU0000302M1J1J");
+        assertThat(customers.get(1).getFamilyName()).isEqualTo("Osborne");
+        assertThat(customers.get(1).getGivenName()).isEqualTo("Sarah");
     }
 }
