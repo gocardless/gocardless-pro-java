@@ -1,99 +1,80 @@
-
-
 package com.gocardless.pro.resources;
 
 import java.util.List;
 
 public class Refund {
-    
-        
-        
-            
 
-            private Integer amount;
 
-            public Integer getAmount() {
-                return amount;
-            }
 
-            public void setAmount(Integer amount) {
-                this.amount = amount;
-            }
-        
-    
-        
-        
-            
+    private Integer amount;
 
-            private String createdAt;
+    public Integer getAmount() {
+        return amount;
+    }
 
-            public String getCreatedAt() {
-                return createdAt;
-            }
+    public void setAmount(Integer amount) {
+        this.amount = amount;
+    }
 
-            public void setCreatedAt(String createdAt) {
-                this.createdAt = createdAt;
-            }
-        
-    
-        
-        
-            
 
-            private String currency;
 
-            public String getCurrency() {
-                return currency;
-            }
+    private String createdAt;
 
-            public void setCurrency(String currency) {
-                this.currency = currency;
-            }
-        
-    
-        
-        
-            
+    public String getCreatedAt() {
+        return createdAt;
+    }
 
-            private String id;
+    public void setCreatedAt(String createdAt) {
+        this.createdAt = createdAt;
+    }
 
-            public String getId() {
-                return id;
-            }
 
-            public void setId(String id) {
-                this.id = id;
-            }
-        
-    
-        
-        
-            
 
-            private Object links;
+    private String currency;
 
-            public Object getLinks() {
-                return links;
-            }
+    public String getCurrency() {
+        return currency;
+    }
 
-            public void setLinks(Object links) {
-                this.links = links;
-            }
-        
-    
-        
-        
-            
+    public void setCurrency(String currency) {
+        this.currency = currency;
+    }
 
-            private Object metadata;
 
-            public Object getMetadata() {
-                return metadata;
-            }
 
-            public void setMetadata(Object metadata) {
-                this.metadata = metadata;
-            }
-        
-    
+    private String id;
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
+
+
+    private Object links;
+
+    public Object getLinks() {
+        return links;
+    }
+
+    public void setLinks(Object links) {
+        this.links = links;
+    }
+
+
+
+    private Object metadata;
+
+    public Object getMetadata() {
+        return metadata;
+    }
+
+    public void setMetadata(Object metadata) {
+        this.metadata = metadata;
+    }
+
+
 }

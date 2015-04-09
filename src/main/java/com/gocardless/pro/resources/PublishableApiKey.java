@@ -1,84 +1,68 @@
-
-
 package com.gocardless.pro.resources;
 
 import java.util.List;
 
 public class PublishableApiKey {
-    
-        
-        
-            
 
-            private String createdAt;
 
-            public String getCreatedAt() {
-                return createdAt;
-            }
 
-            public void setCreatedAt(String createdAt) {
-                this.createdAt = createdAt;
-            }
-        
-    
-        
-        
-            
+    private String createdAt;
 
-            private Boolean enabled;
+    public String getCreatedAt() {
+        return createdAt;
+    }
 
-            public Boolean getEnabled() {
-                return enabled;
-            }
+    public void setCreatedAt(String createdAt) {
+        this.createdAt = createdAt;
+    }
 
-            public void setEnabled(Boolean enabled) {
-                this.enabled = enabled;
-            }
-        
-    
-        
-        
-            
 
-            private String id;
 
-            public String getId() {
-                return id;
-            }
+    private Boolean enabled;
 
-            public void setId(String id) {
-                this.id = id;
-            }
-        
-    
-        
-        
-            
+    public Boolean getEnabled() {
+        return enabled;
+    }
 
-            private String key;
+    public void setEnabled(Boolean enabled) {
+        this.enabled = enabled;
+    }
 
-            public String getKey() {
-                return key;
-            }
 
-            public void setKey(String key) {
-                this.key = key;
-            }
-        
-    
-        
-        
-            
 
-            private String name;
+    private String id;
 
-            public String getName() {
-                return name;
-            }
+    public String getId() {
+        return id;
+    }
 
-            public void setName(String name) {
-                this.name = name;
-            }
-        
-    
+    public void setId(String id) {
+        this.id = id;
+    }
+
+
+
+    private String key;
+
+    public String getKey() {
+        return key;
+    }
+
+    public void setKey(String key) {
+        this.key = key;
+    }
+
+
+
+    private String name;
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+
 }

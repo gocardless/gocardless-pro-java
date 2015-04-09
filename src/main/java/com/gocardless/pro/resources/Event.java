@@ -1,128 +1,106 @@
-
-
 package com.gocardless.pro.resources;
 
 import java.util.List;
 
 public class Event {
-    
-        
-        
-            
 
-            private String action;
 
-            public String getAction() {
-                return action;
-            }
 
-            public void setAction(String action) {
-                this.action = action;
-            }
-        
-    
-        
-        
-            
+    private String action;
 
-            private String createdAt;
+    public String getAction() {
+        return action;
+    }
 
-            public String getCreatedAt() {
-                return createdAt;
-            }
+    public void setAction(String action) {
+        this.action = action;
+    }
 
-            public void setCreatedAt(String createdAt) {
-                this.createdAt = createdAt;
-            }
-        
-    
-        
-        
-            
 
-            private Object details;
 
-            public Object getDetails() {
-                return details;
-            }
+    private String createdAt;
 
-            public void setDetails(Object details) {
-                this.details = details;
-            }
-        
-    
-        
-        
-            
+    public String getCreatedAt() {
+        return createdAt;
+    }
 
-            private String id;
+    public void setCreatedAt(String createdAt) {
+        this.createdAt = createdAt;
+    }
 
-            public String getId() {
-                return id;
-            }
 
-            public void setId(String id) {
-                this.id = id;
-            }
-        
-    
-        
-        
-            
 
-            private Object links;
+    private Object details;
 
-            public Object getLinks() {
-                return links;
-            }
+    public Object getDetails() {
+        return details;
+    }
 
-            public void setLinks(Object links) {
-                this.links = links;
-            }
-        
-    
-        
-        
-            
+    public void setDetails(Object details) {
+        this.details = details;
+    }
 
-            private Object metadata;
 
-            public Object getMetadata() {
-                return metadata;
-            }
 
-            public void setMetadata(Object metadata) {
-                this.metadata = metadata;
-            }
-        
-    
-        
-        
-            
+    private String id;
 
-            public enum ResourceType {
-                
-                    PAYMENTS,
-                
-                    MANDATES,
-                
-                    PAYOUTS,
-                
-                    REFUNDS,
-                
-                    SUBSCRIPTIONS,
-                
-            }
+    public String getId() {
+        return id;
+    }
 
-            private ResourceType resourceType;
+    public void setId(String id) {
+        this.id = id;
+    }
 
-            public ResourceType getResourceType() {
-                return resourceType;
-            }
 
-            public void setResourceType(ResourceType resourceType) {
-                this.resourceType = resourceType;
-            }
-        
-    
+
+    private Object links;
+
+    public Object getLinks() {
+        return links;
+    }
+
+    public void setLinks(Object links) {
+        this.links = links;
+    }
+
+
+
+    private Object metadata;
+
+    public Object getMetadata() {
+        return metadata;
+    }
+
+    public void setMetadata(Object metadata) {
+        this.metadata = metadata;
+    }
+
+
+
+    public enum ResourceType {
+
+        PAYMENTS,
+
+        MANDATES,
+
+        PAYOUTS,
+
+        REFUNDS,
+
+        SUBSCRIPTIONS,
+
+    }
+
+    private ResourceType resourceType;
+
+    public ResourceType getResourceType() {
+        return resourceType;
+    }
+
+    public void setResourceType(ResourceType resourceType) {
+        this.resourceType = resourceType;
+    }
+
+
 }

@@ -15,9 +15,8 @@ import static org.assertj.core.api.Assertions.assertThat;
 public class GetRequestTest extends HttpRequestTest {
     @Test
     public void shouldPerformGetRequest() throws IOException {
-        whenHttp(server).
-                match(get("/dummy/123")).
-                then(status(HttpStatus.OK_200), resourceContent("fixtures/single.json"));
+        whenHttp(server).match(get("/dummy/123")).then(status(HttpStatus.OK_200),
+                resourceContent("fixtures/single.json"));
 
         DummyGetRequest request = new DummyGetRequest();
         DummyItem result = request.execute();

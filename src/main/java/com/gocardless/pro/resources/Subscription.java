@@ -1,277 +1,228 @@
-
-
 package com.gocardless.pro.resources;
 
 import java.util.List;
 
 public class Subscription {
-    
-        
-        
-            
 
-            private Integer amount;
 
-            public Integer getAmount() {
-                return amount;
-            }
 
-            public void setAmount(Integer amount) {
-                this.amount = amount;
-            }
-        
-    
-        
-        
-            
+    private Integer amount;
 
-            private Integer count;
+    public Integer getAmount() {
+        return amount;
+    }
 
-            public Integer getCount() {
-                return count;
-            }
+    public void setAmount(Integer amount) {
+        this.amount = amount;
+    }
 
-            public void setCount(Integer count) {
-                this.count = count;
-            }
-        
-    
-        
-        
-            
 
-            private String createdAt;
 
-            public String getCreatedAt() {
-                return createdAt;
-            }
+    private Integer count;
 
-            public void setCreatedAt(String createdAt) {
-                this.createdAt = createdAt;
-            }
-        
-    
-        
-        
-            
+    public Integer getCount() {
+        return count;
+    }
 
-            private String currency;
+    public void setCount(Integer count) {
+        this.count = count;
+    }
 
-            public String getCurrency() {
-                return currency;
-            }
 
-            public void setCurrency(String currency) {
-                this.currency = currency;
-            }
-        
-    
-        
-        
-            
 
-            private Integer dayOfMonth;
+    private String createdAt;
 
-            public Integer getDayOfMonth() {
-                return dayOfMonth;
-            }
+    public String getCreatedAt() {
+        return createdAt;
+    }
 
-            public void setDayOfMonth(Integer dayOfMonth) {
-                this.dayOfMonth = dayOfMonth;
-            }
-        
-    
-        
-        
-            
+    public void setCreatedAt(String createdAt) {
+        this.createdAt = createdAt;
+    }
 
-            private String endAt;
 
-            public String getEndAt() {
-                return endAt;
-            }
 
-            public void setEndAt(String endAt) {
-                this.endAt = endAt;
-            }
-        
-    
-        
-        
-            
+    private String currency;
 
-            private String id;
+    public String getCurrency() {
+        return currency;
+    }
 
-            public String getId() {
-                return id;
-            }
+    public void setCurrency(String currency) {
+        this.currency = currency;
+    }
 
-            public void setId(String id) {
-                this.id = id;
-            }
-        
-    
-        
-        
-            
 
-            private Integer interval;
 
-            public Integer getInterval() {
-                return interval;
-            }
+    private Integer dayOfMonth;
 
-            public void setInterval(Integer interval) {
-                this.interval = interval;
-            }
-        
-    
-        
-        
-            
+    public Integer getDayOfMonth() {
+        return dayOfMonth;
+    }
 
-            private String intervalUnit;
+    public void setDayOfMonth(Integer dayOfMonth) {
+        this.dayOfMonth = dayOfMonth;
+    }
 
-            public String getIntervalUnit() {
-                return intervalUnit;
-            }
 
-            public void setIntervalUnit(String intervalUnit) {
-                this.intervalUnit = intervalUnit;
-            }
-        
-    
-        
-        
-            
 
-            private Object links;
+    private String endAt;
 
-            public Object getLinks() {
-                return links;
-            }
+    public String getEndAt() {
+        return endAt;
+    }
 
-            public void setLinks(Object links) {
-                this.links = links;
-            }
-        
-    
-        
-        
-            
+    public void setEndAt(String endAt) {
+        this.endAt = endAt;
+    }
 
-            private Object metadata;
 
-            public Object getMetadata() {
-                return metadata;
-            }
 
-            public void setMetadata(Object metadata) {
-                this.metadata = metadata;
-            }
-        
-    
-        
-        
-            
+    private String id;
 
-            public enum Month {
-                
-                    JANUARY,
-                
-                    FEBRUARY,
-                
-                    MARCH,
-                
-                    APRIL,
-                
-                    MAY,
-                
-                    JUNE,
-                
-                    JULY,
-                
-                    AUGUST,
-                
-                    SEPTEMBER,
-                
-                    OCTOBER,
-                
-                    NOVEMBER,
-                
-                    DECEMBER,
-                
-            }
+    public String getId() {
+        return id;
+    }
 
-            private Month month;
+    public void setId(String id) {
+        this.id = id;
+    }
 
-            public Month getMonth() {
-                return month;
-            }
 
-            public void setMonth(Month month) {
-                this.month = month;
-            }
-        
-    
-        
-        
-            
 
-            private String name;
+    private Integer interval;
 
-            public String getName() {
-                return name;
-            }
+    public Integer getInterval() {
+        return interval;
+    }
 
-            public void setName(String name) {
-                this.name = name;
-            }
-        
-    
-        
-        
-            
+    public void setInterval(Integer interval) {
+        this.interval = interval;
+    }
 
-            private String startAt;
 
-            public String getStartAt() {
-                return startAt;
-            }
 
-            public void setStartAt(String startAt) {
-                this.startAt = startAt;
-            }
-        
-    
-        
-        
-            
+    private String intervalUnit;
 
-            private String status;
+    public String getIntervalUnit() {
+        return intervalUnit;
+    }
 
-            public String getStatus() {
-                return status;
-            }
+    public void setIntervalUnit(String intervalUnit) {
+        this.intervalUnit = intervalUnit;
+    }
 
-            public void setStatus(String status) {
-                this.status = status;
-            }
-        
-    
-        
-        
-            
 
-            private List<Object> upcomingPayments;
 
-            public List<Object> getUpcomingPayments() {
-                return upcomingPayments;
-            }
+    private Object links;
 
-            public void setUpcomingPayments(List<Object> upcomingPayments) {
-                this.upcomingPayments = upcomingPayments;
-            }
-        
-    
+    public Object getLinks() {
+        return links;
+    }
+
+    public void setLinks(Object links) {
+        this.links = links;
+    }
+
+
+
+    private Object metadata;
+
+    public Object getMetadata() {
+        return metadata;
+    }
+
+    public void setMetadata(Object metadata) {
+        this.metadata = metadata;
+    }
+
+
+
+    public enum Month {
+
+        JANUARY,
+
+        FEBRUARY,
+
+        MARCH,
+
+        APRIL,
+
+        MAY,
+
+        JUNE,
+
+        JULY,
+
+        AUGUST,
+
+        SEPTEMBER,
+
+        OCTOBER,
+
+        NOVEMBER,
+
+        DECEMBER,
+
+    }
+
+    private Month month;
+
+    public Month getMonth() {
+        return month;
+    }
+
+    public void setMonth(Month month) {
+        this.month = month;
+    }
+
+
+
+    private String name;
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+
+
+    private String startAt;
+
+    public String getStartAt() {
+        return startAt;
+    }
+
+    public void setStartAt(String startAt) {
+        this.startAt = startAt;
+    }
+
+
+
+    private String status;
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
+
+
+
+    private List<Object> upcomingPayments;
+
+    public List<Object> getUpcomingPayments() {
+        return upcomingPayments;
+    }
+
+    public void setUpcomingPayments(List<Object> upcomingPayments) {
+        this.upcomingPayments = upcomingPayments;
+    }
+
+
 }

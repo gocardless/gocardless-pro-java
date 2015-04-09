@@ -36,7 +36,8 @@ public class ResponseParserTest {
         URL resource = getResource("fixtures/multiple.json");
         Reader reader = asCharSource(resource, UTF_8).openStream();
 
-        List<DummyItem> result = parser.parseMultiple(reader, "items", new TypeToken<List<DummyItem>>() {});
+        List<DummyItem> result =
+                parser.parseMultiple(reader, "items", new TypeToken<List<DummyItem>>() {});
 
         assertThat(result).hasSize(2);
 

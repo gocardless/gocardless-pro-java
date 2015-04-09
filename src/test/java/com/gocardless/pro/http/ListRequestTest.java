@@ -18,9 +18,8 @@ import static org.assertj.core.api.Assertions.assertThat;
 public class ListRequestTest extends HttpRequestTest {
     @Test
     public void shouldPerformListRequest() throws IOException {
-        whenHttp(server).
-                match(get("/dummy"), parameter("id", "123")).
-                then(status(HttpStatus.OK_200), resourceContent("fixtures/multiple.json"));
+        whenHttp(server).match(get("/dummy"), parameter("id", "123")).then(
+                status(HttpStatus.OK_200), resourceContent("fixtures/multiple.json"));
 
         DummyListRequest request = new DummyListRequest();
         List<DummyItem> result = request.execute();
@@ -36,7 +35,7 @@ public class ListRequestTest extends HttpRequestTest {
 
     private class DummyListRequest extends ListRequest<DummyItem> {
         public DummyListRequest() {
-            super(client, "/dummy", "items", new TypeToken<List<DummyItem>>(){});
+            super(client, "/dummy", "items", new TypeToken<List<DummyItem>>() {});
         }
 
         @Override

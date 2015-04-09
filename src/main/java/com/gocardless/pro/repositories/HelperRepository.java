@@ -1,6 +1,3 @@
-
-
-
 package com.gocardless.pro.repositories;
 
 import com.gocardless.pro.http.GetRequest;
@@ -21,27 +18,20 @@ public class HelperRepository {
         this.httpClient = httpClient;
     }
 
-    
-        
-        
-            public void mandate() throws IOException {
-                throw new IllegalStateException("Not implemented!");
-        
-        }
-    
-        
-        
-            public void modulusCheck() throws IOException {
-                throw new IllegalStateException("Not implemented!");
-        
-        }
-    
 
-    
-        
-        
-    
-        
-        
-    
+
+    public void mandate() throws IOException {
+        throw new IllegalStateException("Not implemented!");
+
+    }
+
+
+
+    public void modulusCheck() throws IOException {
+        throw new IllegalStateException("Not implemented!");
+
+    }
+
+
+
 }

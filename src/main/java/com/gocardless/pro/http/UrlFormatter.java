@@ -13,16 +13,18 @@ import java.util.Map;
 
 final class UrlFormatter {
     private static final Joiner JOINER = Joiner.on('&');
-    private static final Function<Map.Entry<String, Object>, String> FORMAT_QUERY_PART = new Function<Map.Entry<String, Object>, String>() {
-        @Override
-        public String apply(Map.Entry<String, Object> input) {
-            try {
-                return String.format("%s=%s", input.getKey(), URLEncoder.encode(input.getValue().toString(), "UTF-8"));
-            } catch (UnsupportedEncodingException e) {
-                throw new IllegalArgumentException(e);
-            }
-        }
-    };
+    private static final Function<Map.Entry<String, Object>, String> FORMAT_QUERY_PART =
+            new Function<Map.Entry<String, Object>, String>() {
+                @Override
+                public String apply(Map.Entry<String, Object> input) {
+                    try {
+                        return String.format("%s=%s", input.getKey(),
+                                URLEncoder.encode(input.getValue().toString(), "UTF-8"));
+                    } catch (UnsupportedEncodingException e) {
+                        throw new IllegalArgumentException(e);
+                    }
+                }
+            };
 
     private final URI baseUri;
 
@@ -38,7 +40,8 @@ final class UrlFormatter {
         }
 
         if (!queryParams.isEmpty()) {
-            Iterable<String> queryParts = Iterables.transform(queryParams.entrySet(), FORMAT_QUERY_PART);
+            Iterable<String> queryParts =
+                    Iterables.transform(queryParams.entrySet(), FORMAT_QUERY_PART);
             String queryString = JOINER.join(queryParts);
             path = String.format("%s?%s", path, queryString);
         }

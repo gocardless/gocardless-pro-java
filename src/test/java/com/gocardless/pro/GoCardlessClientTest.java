@@ -1,5 +1,3 @@
-
-
 package com.gocardless.pro;
 
 import co.freeside.betamax.Betamax;
@@ -28,8 +26,7 @@ public class GoCardlessClientTest {
         String apiKey = System.getenv("GC_API_KEY");
         String apiSecret = System.getenv("GC_API_SECRET");
 
-        client = GoCardlessClient.create(
-                apiKey, apiSecret, "https://api-sandbox.gocardless.com");
+        client = GoCardlessClient.create(apiKey, apiSecret, "https://api-sandbox.gocardless.com");
         TestUtil.disableSslCertificateChecking(client);
     }
 
@@ -62,9 +59,7 @@ public class GoCardlessClientTest {
     @Test
     @Betamax(tape = "list mandates for a customer")
     public void shouldListMandatesForACustomer() throws IOException {
-        List<Mandate> mandates = client.mandates().list()
-                .withCustomer("CU00003068FG73")
-                .execute();
+        List<Mandate> mandates = client.mandates().list().withCustomer("CU00003068FG73").execute();
 
         assertThat(mandates).hasSize(2);
         assertThat(mandates.get(0).getId()).isEqualTo("MD00001PEYCSQF");

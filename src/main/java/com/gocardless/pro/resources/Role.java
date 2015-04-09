@@ -1,84 +1,68 @@
-
-
 package com.gocardless.pro.resources;
 
 import java.util.List;
 
 public class Role {
-    
-        
-        
-            
 
-            private String createdAt;
 
-            public String getCreatedAt() {
-                return createdAt;
-            }
 
-            public void setCreatedAt(String createdAt) {
-                this.createdAt = createdAt;
-            }
-        
-    
-        
-        
-            
+    private String createdAt;
 
-            private Boolean enabled;
+    public String getCreatedAt() {
+        return createdAt;
+    }
 
-            public Boolean getEnabled() {
-                return enabled;
-            }
+    public void setCreatedAt(String createdAt) {
+        this.createdAt = createdAt;
+    }
 
-            public void setEnabled(Boolean enabled) {
-                this.enabled = enabled;
-            }
-        
-    
-        
-        
-            
 
-            private String id;
 
-            public String getId() {
-                return id;
-            }
+    private Boolean enabled;
 
-            public void setId(String id) {
-                this.id = id;
-            }
-        
-    
-        
-        
-            
+    public Boolean getEnabled() {
+        return enabled;
+    }
 
-            private String name;
+    public void setEnabled(Boolean enabled) {
+        this.enabled = enabled;
+    }
 
-            public String getName() {
-                return name;
-            }
 
-            public void setName(String name) {
-                this.name = name;
-            }
-        
-    
-        
-        
-            
 
-            private List<Object> permissions;
+    private String id;
 
-            public List<Object> getPermissions() {
-                return permissions;
-            }
+    public String getId() {
+        return id;
+    }
 
-            public void setPermissions(List<Object> permissions) {
-                this.permissions = permissions;
-            }
-        
-    
+    public void setId(String id) {
+        this.id = id;
+    }
+
+
+
+    private String name;
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+
+
+    private List<Object> permissions;
+
+    public List<Object> getPermissions() {
+        return permissions;
+    }
+
+    public void setPermissions(List<Object> permissions) {
+        this.permissions = permissions;
+    }
+
+
 }

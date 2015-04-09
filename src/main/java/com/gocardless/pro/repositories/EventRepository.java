@@ -1,6 +1,3 @@
-
-
-
 package com.gocardless.pro.repositories;
 
 import com.gocardless.pro.http.GetRequest;
@@ -21,355 +18,294 @@ public class EventRepository {
         this.httpClient = httpClient;
     }
 
-    
-        
-        
-            public EventListRequest list() throws IOException {
-                return new EventListRequest(httpClient
-                
-                );
-        
+
+
+    public EventListRequest list() throws IOException {
+        return new EventListRequest(httpClient
+
+        );
+
+    }
+
+
+
+    public EventGetRequest get(String identity) throws IOException {
+        return new EventGetRequest(httpClient
+
+        , identity
+
+        );
+
+    }
+
+
+
+    public static final class EventListRequest extends ListRequest<Event> {
+
+
+
+        private String action;
+
+        public EventListRequest withAction(String action) {
+            this.action = action;
+            return this;
         }
-    
-        
-        
-            public EventGetRequest get(String identity) throws IOException {
-                return new EventGetRequest(httpClient
-                
-                    , identity
-                
-                );
-        
+
+
+
+        private String after;
+
+        public EventListRequest withAfter(String after) {
+            this.after = after;
+            return this;
         }
-    
 
-    
-        
-        
-            public static final class EventListRequest extends ListRequest<Event> {
-              
 
-              
-                  
-                      
 
-                      
-                          
+        private String before;
 
-                          private String action;
+        public EventListRequest withBefore(String before) {
+            this.before = before;
+            return this;
+        }
 
-                          public EventListRequest withAction(String action) {
-                              this.action = action;
-                              return this;
-                          }
-                      
-                  
-                      
 
-                      
-                          
 
-                          private String after;
+        private Object createdAt;
 
-                          public EventListRequest withAfter(String after) {
-                              this.after = after;
-                              return this;
-                          }
-                      
-                  
-                      
+        public EventListRequest withCreatedAt(Object createdAt) {
+            this.createdAt = createdAt;
+            return this;
+        }
 
-                      
-                          
 
-                          private String before;
 
-                          public EventListRequest withBefore(String before) {
-                              this.before = before;
-                              return this;
-                          }
-                      
-                  
-                      
+        public enum Include {
 
-                      
-                          
+            PAYMENT,
 
-                          private Object createdAt;
+            MANDATE,
 
-                          public EventListRequest withCreatedAt(Object createdAt) {
-                              this.createdAt = createdAt;
-                              return this;
-                          }
-                      
-                  
-                      
+            PAYOUT,
 
-                      
-                          
+            REFUND,
 
-                          public enum Include {
-                              
-                                  PAYMENT,
-                              
-                                  MANDATE,
-                              
-                                  PAYOUT,
-                              
-                                  REFUND,
-                              
-                                  SUBSCRIPTION,
-                              
-                          }
+            SUBSCRIPTION,
 
-                          private Include include;
+        }
 
-                          public EventListRequest withInclude(Include include) {
-                              this.include = include;
-                              return this;
-                          }
-                      
-                  
-                      
+        private Include include;
 
-                      
-                          
+        public EventListRequest withInclude(Include include) {
+            this.include = include;
+            return this;
+        }
 
-                          private Integer limit;
 
-                          public EventListRequest withLimit(Integer limit) {
-                              this.limit = limit;
-                              return this;
-                          }
-                      
-                  
-                      
 
-                      
-                          
+        private Integer limit;
 
-                          private String mandate;
+        public EventListRequest withLimit(Integer limit) {
+            this.limit = limit;
+            return this;
+        }
 
-                          public EventListRequest withMandate(String mandate) {
-                              this.mandate = mandate;
-                              return this;
-                          }
-                      
-                  
-                      
 
-                      
-                          
 
-                          private String parentEvent;
+        private String mandate;
 
-                          public EventListRequest withParentEvent(String parentEvent) {
-                              this.parentEvent = parentEvent;
-                              return this;
-                          }
-                      
-                  
-                      
+        public EventListRequest withMandate(String mandate) {
+            this.mandate = mandate;
+            return this;
+        }
 
-                      
-                          
 
-                          private String payment;
 
-                          public EventListRequest withPayment(String payment) {
-                              this.payment = payment;
-                              return this;
-                          }
-                      
-                  
-                      
+        private String parentEvent;
 
-                      
-                          
+        public EventListRequest withParentEvent(String parentEvent) {
+            this.parentEvent = parentEvent;
+            return this;
+        }
 
-                          private String payout;
 
-                          public EventListRequest withPayout(String payout) {
-                              this.payout = payout;
-                              return this;
-                          }
-                      
-                  
-                      
 
-                      
-                          
+        private String payment;
 
-                          private String refund;
+        public EventListRequest withPayment(String payment) {
+            this.payment = payment;
+            return this;
+        }
 
-                          public EventListRequest withRefund(String refund) {
-                              this.refund = refund;
-                              return this;
-                          }
-                      
-                  
-                      
 
-                      
-                          
 
-                          public enum ResourceType {
-                              
-                                  PAYMENTS,
-                              
-                                  MANDATES,
-                              
-                                  PAYOUTS,
-                              
-                                  REFUNDS,
-                              
-                                  SUBSCRIPTIONS,
-                              
-                          }
+        private String payout;
 
-                          private ResourceType resourceType;
+        public EventListRequest withPayout(String payout) {
+            this.payout = payout;
+            return this;
+        }
 
-                          public EventListRequest withResourceType(ResourceType resourceType) {
-                              this.resourceType = resourceType;
-                              return this;
-                          }
-                      
-                  
-                      
 
-                      
-                          
 
-                          private String subscription;
+        private String refund;
 
-                          public EventListRequest withSubscription(String subscription) {
-                              this.subscription = subscription;
-                              return this;
-                          }
-                      
-                  
-              
+        public EventListRequest withRefund(String refund) {
+            this.refund = refund;
+            return this;
+        }
 
-              private EventListRequest(HttpClient httpClient
-                  
-              ) {
-                  super(httpClient, "/events", "events",
-                      
-                          new TypeToken<List<Event>>() {}
-                      
-                  );
 
-                  
-              }
 
-              
+        public enum ResourceType {
 
-              
-                  @Override
-                  protected Map<String, Object> getQueryParams() {
-                      ImmutableMap.Builder<String, Object> params = ImmutableMap.builder();
+            PAYMENTS,
 
-                      
-                          if (action != null) {
-                              params.put("action", action);
-                          }
-                      
-                          if (after != null) {
-                              params.put("after", after);
-                          }
-                      
-                          if (before != null) {
-                              params.put("before", before);
-                          }
-                      
-                          if (createdAt != null) {
-                              params.put("created_at", createdAt);
-                          }
-                      
-                          if (include != null) {
-                              params.put("include", include);
-                          }
-                      
-                          if (limit != null) {
-                              params.put("limit", limit);
-                          }
-                      
-                          if (mandate != null) {
-                              params.put("mandate", mandate);
-                          }
-                      
-                          if (parentEvent != null) {
-                              params.put("parent_event", parentEvent);
-                          }
-                      
-                          if (payment != null) {
-                              params.put("payment", payment);
-                          }
-                      
-                          if (payout != null) {
-                              params.put("payout", payout);
-                          }
-                      
-                          if (refund != null) {
-                              params.put("refund", refund);
-                          }
-                      
-                          if (resourceType != null) {
-                              params.put("resource_type", resourceType);
-                          }
-                      
-                          if (subscription != null) {
-                              params.put("subscription", subscription);
-                          }
-                      
+            MANDATES,
 
-                      return params.build();
-                  }
-              
+            PAYOUTS,
+
+            REFUNDS,
+
+            SUBSCRIPTIONS,
+
+        }
+
+        private ResourceType resourceType;
+
+        public EventListRequest withResourceType(ResourceType resourceType) {
+            this.resourceType = resourceType;
+            return this;
+        }
+
+
+
+        private String subscription;
+
+        public EventListRequest withSubscription(String subscription) {
+            this.subscription = subscription;
+            return this;
+        }
+
+
+
+        private EventListRequest(HttpClient httpClient
+
+        ) {
+            super(httpClient, "/events", "events",
+
+            new TypeToken<List<Event>>() {}
+
+            );
+
+
+        }
+
+
+
+        @Override
+        protected Map<String, Object> getQueryParams() {
+            ImmutableMap.Builder<String, Object> params = ImmutableMap.builder();
+
+
+            if (action != null) {
+                params.put("action", action);
             }
-        
-    
-        
-        
-            public static final class EventGetRequest extends GetRequest<Event> {
-              
-                  private final String identity;
-              
 
-              
-
-              private EventGetRequest(HttpClient httpClient
-                  
-                      , String identity
-                  
-              ) {
-                  super(httpClient, "/events/:identity", "events",
-                      
-                          Event.class
-                      
-                  );
-
-                  
-                      
-                      this.identity = identity;
-                  
-              }
-
-              
-                  @Override
-                  protected Map<String, String> getPathParams() {
-                      ImmutableMap.Builder<String, String> params = ImmutableMap.builder();
-
-                      
-                          params.put("identity", identity);
-                      
-
-                      return params.build();
-                  }
-              
-
-              
+            if (after != null) {
+                params.put("after", after);
             }
-        
-    
+
+            if (before != null) {
+                params.put("before", before);
+            }
+
+            if (createdAt != null) {
+                params.put("created_at", createdAt);
+            }
+
+            if (include != null) {
+                params.put("include", include);
+            }
+
+            if (limit != null) {
+                params.put("limit", limit);
+            }
+
+            if (mandate != null) {
+                params.put("mandate", mandate);
+            }
+
+            if (parentEvent != null) {
+                params.put("parent_event", parentEvent);
+            }
+
+            if (payment != null) {
+                params.put("payment", payment);
+            }
+
+            if (payout != null) {
+                params.put("payout", payout);
+            }
+
+            if (refund != null) {
+                params.put("refund", refund);
+            }
+
+            if (resourceType != null) {
+                params.put("resource_type", resourceType);
+            }
+
+            if (subscription != null) {
+                params.put("subscription", subscription);
+            }
+
+
+            return params.build();
+        }
+
+    }
+
+
+
+    public static final class EventGetRequest extends GetRequest<Event> {
+
+        private final String identity;
+
+
+
+        private EventGetRequest(HttpClient httpClient
+
+        , String identity
+
+        ) {
+            super(httpClient, "/events/:identity", "events",
+
+            Event.class
+
+            );
+
+
+
+            this.identity = identity;
+
+        }
+
+
+        @Override
+        protected Map<String, String> getPathParams() {
+            ImmutableMap.Builder<String, String> params = ImmutableMap.builder();
+
+
+            params.put("identity", identity);
+
+
+            return params.build();
+        }
+
+
+
+    }
+
+
 }

@@ -1,122 +1,100 @@
-
-
 package com.gocardless.pro.resources;
 
 import java.util.List;
 
 public class Payout {
-    
-        
-        
-            
 
-            private Integer amount;
 
-            public Integer getAmount() {
-                return amount;
-            }
 
-            public void setAmount(Integer amount) {
-                this.amount = amount;
-            }
-        
-    
-        
-        
-            
+    private Integer amount;
 
-            private String createdAt;
+    public Integer getAmount() {
+        return amount;
+    }
 
-            public String getCreatedAt() {
-                return createdAt;
-            }
+    public void setAmount(Integer amount) {
+        this.amount = amount;
+    }
 
-            public void setCreatedAt(String createdAt) {
-                this.createdAt = createdAt;
-            }
-        
-    
-        
-        
-            
 
-            private String currency;
 
-            public String getCurrency() {
-                return currency;
-            }
+    private String createdAt;
 
-            public void setCurrency(String currency) {
-                this.currency = currency;
-            }
-        
-    
-        
-        
-            
+    public String getCreatedAt() {
+        return createdAt;
+    }
 
-            private String id;
+    public void setCreatedAt(String createdAt) {
+        this.createdAt = createdAt;
+    }
 
-            public String getId() {
-                return id;
-            }
 
-            public void setId(String id) {
-                this.id = id;
-            }
-        
-    
-        
-        
-            
 
-            private Object links;
+    private String currency;
 
-            public Object getLinks() {
-                return links;
-            }
+    public String getCurrency() {
+        return currency;
+    }
 
-            public void setLinks(Object links) {
-                this.links = links;
-            }
-        
-    
-        
-        
-            
+    public void setCurrency(String currency) {
+        this.currency = currency;
+    }
 
-            private String reference;
 
-            public String getReference() {
-                return reference;
-            }
 
-            public void setReference(String reference) {
-                this.reference = reference;
-            }
-        
-    
-        
-        
-            
+    private String id;
 
-            public enum Status {
-                
-                    PENDING,
-                
-                    PAID,
-                
-            }
+    public String getId() {
+        return id;
+    }
 
-            private Status status;
+    public void setId(String id) {
+        this.id = id;
+    }
 
-            public Status getStatus() {
-                return status;
-            }
 
-            public void setStatus(Status status) {
-                this.status = status;
-            }
-        
-    
+
+    private Object links;
+
+    public Object getLinks() {
+        return links;
+    }
+
+    public void setLinks(Object links) {
+        this.links = links;
+    }
+
+
+
+    private String reference;
+
+    public String getReference() {
+        return reference;
+    }
+
+    public void setReference(String reference) {
+        this.reference = reference;
+    }
+
+
+
+    public enum Status {
+
+        PENDING,
+
+        PAID,
+
+    }
+
+    private Status status;
+
+    public Status getStatus() {
+        return status;
+    }
+
+    public void setStatus(Status status) {
+        this.status = status;
+    }
+
+
 }

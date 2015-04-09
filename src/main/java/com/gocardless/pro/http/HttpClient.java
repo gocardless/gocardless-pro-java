@@ -19,9 +19,9 @@ public class HttpClient {
     static {
         ImmutableMap.Builder<String, String> builder = ImmutableMap.builder();
 
-        
-            builder.put("GoCardless-Version", "2014-11-03");
-        
+
+        builder.put("GoCardless-Version", "2014-11-03");
+
 
         HEADERS = builder.build();
     }
@@ -41,9 +41,8 @@ public class HttpClient {
 
     <T> T get(HttpRequest<T> request) throws IOException {
         URL url = request.getUrl(urlFormatter);
-        Request.Builder httpRequest = new Request.Builder()
-                .url(url)
-                .header("Authorization", credentials);
+        Request.Builder httpRequest =
+                new Request.Builder().url(url).header("Authorization", credentials);
 
         for (Map.Entry<String, String> entry : HEADERS.entrySet()) {
             httpRequest = httpRequest.header(entry.getKey(), entry.getValue());

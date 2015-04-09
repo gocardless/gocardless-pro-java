@@ -1,137 +1,112 @@
-
-
 package com.gocardless.pro.resources;
 
 import java.util.List;
 
 public class RedirectFlow {
-    
-        
-        
-            
 
-            private String createdAt;
 
-            public String getCreatedAt() {
-                return createdAt;
-            }
 
-            public void setCreatedAt(String createdAt) {
-                this.createdAt = createdAt;
-            }
-        
-    
-        
-        
-            
+    private String createdAt;
 
-            private String description;
+    public String getCreatedAt() {
+        return createdAt;
+    }
 
-            public String getDescription() {
-                return description;
-            }
+    public void setCreatedAt(String createdAt) {
+        this.createdAt = createdAt;
+    }
 
-            public void setDescription(String description) {
-                this.description = description;
-            }
-        
-    
-        
-        
-            
 
-            private String id;
 
-            public String getId() {
-                return id;
-            }
+    private String description;
 
-            public void setId(String id) {
-                this.id = id;
-            }
-        
-    
-        
-        
-            
+    public String getDescription() {
+        return description;
+    }
 
-            private Object links;
+    public void setDescription(String description) {
+        this.description = description;
+    }
 
-            public Object getLinks() {
-                return links;
-            }
 
-            public void setLinks(Object links) {
-                this.links = links;
-            }
-        
-    
-        
-        
-            
 
-            private String redirectUrl;
+    private String id;
 
-            public String getRedirectUrl() {
-                return redirectUrl;
-            }
+    public String getId() {
+        return id;
+    }
 
-            public void setRedirectUrl(String redirectUrl) {
-                this.redirectUrl = redirectUrl;
-            }
-        
-    
-        
-        
-            
+    public void setId(String id) {
+        this.id = id;
+    }
 
-            public enum Scheme {
-                
-                    BACS,
-                
-                    SEPA_CORE,
-                
-            }
 
-            private Scheme scheme;
 
-            public Scheme getScheme() {
-                return scheme;
-            }
+    private Object links;
 
-            public void setScheme(Scheme scheme) {
-                this.scheme = scheme;
-            }
-        
-    
-        
-        
-            
+    public Object getLinks() {
+        return links;
+    }
 
-            private String sessionToken;
+    public void setLinks(Object links) {
+        this.links = links;
+    }
 
-            public String getSessionToken() {
-                return sessionToken;
-            }
 
-            public void setSessionToken(String sessionToken) {
-                this.sessionToken = sessionToken;
-            }
-        
-    
-        
-        
-            
 
-            private String successRedirectUrl;
+    private String redirectUrl;
 
-            public String getSuccessRedirectUrl() {
-                return successRedirectUrl;
-            }
+    public String getRedirectUrl() {
+        return redirectUrl;
+    }
 
-            public void setSuccessRedirectUrl(String successRedirectUrl) {
-                this.successRedirectUrl = successRedirectUrl;
-            }
-        
-    
+    public void setRedirectUrl(String redirectUrl) {
+        this.redirectUrl = redirectUrl;
+    }
+
+
+
+    public enum Scheme {
+
+        BACS,
+
+        SEPA_CORE,
+
+    }
+
+    private Scheme scheme;
+
+    public Scheme getScheme() {
+        return scheme;
+    }
+
+    public void setScheme(Scheme scheme) {
+        this.scheme = scheme;
+    }
+
+
+
+    private String sessionToken;
+
+    public String getSessionToken() {
+        return sessionToken;
+    }
+
+    public void setSessionToken(String sessionToken) {
+        this.sessionToken = sessionToken;
+    }
+
+
+
+    private String successRedirectUrl;
+
+    public String getSuccessRedirectUrl() {
+        return successRedirectUrl;
+    }
+
+    public void setSuccessRedirectUrl(String successRedirectUrl) {
+        this.successRedirectUrl = successRedirectUrl;
+    }
+
+
 }

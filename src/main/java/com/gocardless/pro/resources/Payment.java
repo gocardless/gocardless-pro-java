@@ -1,174 +1,140 @@
-
-
 package com.gocardless.pro.resources;
 
 import java.util.List;
 
 public class Payment {
-    
-        
-        
-            
 
-            private Integer amount;
 
-            public Integer getAmount() {
-                return amount;
-            }
 
-            public void setAmount(Integer amount) {
-                this.amount = amount;
-            }
-        
-    
-        
-        
-            
+    private Integer amount;
 
-            private Integer amountRefunded;
+    public Integer getAmount() {
+        return amount;
+    }
 
-            public Integer getAmountRefunded() {
-                return amountRefunded;
-            }
+    public void setAmount(Integer amount) {
+        this.amount = amount;
+    }
 
-            public void setAmountRefunded(Integer amountRefunded) {
-                this.amountRefunded = amountRefunded;
-            }
-        
-    
-        
-        
-            
 
-            private String chargeDate;
 
-            public String getChargeDate() {
-                return chargeDate;
-            }
+    private Integer amountRefunded;
 
-            public void setChargeDate(String chargeDate) {
-                this.chargeDate = chargeDate;
-            }
-        
-    
-        
-        
-            
+    public Integer getAmountRefunded() {
+        return amountRefunded;
+    }
 
-            private String createdAt;
+    public void setAmountRefunded(Integer amountRefunded) {
+        this.amountRefunded = amountRefunded;
+    }
 
-            public String getCreatedAt() {
-                return createdAt;
-            }
 
-            public void setCreatedAt(String createdAt) {
-                this.createdAt = createdAt;
-            }
-        
-    
-        
-        
-            
 
-            private String currency;
+    private String chargeDate;
 
-            public String getCurrency() {
-                return currency;
-            }
+    public String getChargeDate() {
+        return chargeDate;
+    }
 
-            public void setCurrency(String currency) {
-                this.currency = currency;
-            }
-        
-    
-        
-        
-            
+    public void setChargeDate(String chargeDate) {
+        this.chargeDate = chargeDate;
+    }
 
-            private String description;
 
-            public String getDescription() {
-                return description;
-            }
 
-            public void setDescription(String description) {
-                this.description = description;
-            }
-        
-    
-        
-        
-            
+    private String createdAt;
 
-            private String id;
+    public String getCreatedAt() {
+        return createdAt;
+    }
 
-            public String getId() {
-                return id;
-            }
+    public void setCreatedAt(String createdAt) {
+        this.createdAt = createdAt;
+    }
 
-            public void setId(String id) {
-                this.id = id;
-            }
-        
-    
-        
-        
-            
 
-            private Object links;
 
-            public Object getLinks() {
-                return links;
-            }
+    private String currency;
 
-            public void setLinks(Object links) {
-                this.links = links;
-            }
-        
-    
-        
-        
-            
+    public String getCurrency() {
+        return currency;
+    }
 
-            private Object metadata;
+    public void setCurrency(String currency) {
+        this.currency = currency;
+    }
 
-            public Object getMetadata() {
-                return metadata;
-            }
 
-            public void setMetadata(Object metadata) {
-                this.metadata = metadata;
-            }
-        
-    
-        
-        
-            
 
-            private String reference;
+    private String description;
 
-            public String getReference() {
-                return reference;
-            }
+    public String getDescription() {
+        return description;
+    }
 
-            public void setReference(String reference) {
-                this.reference = reference;
-            }
-        
-    
-        
-        
-            
+    public void setDescription(String description) {
+        this.description = description;
+    }
 
-            private String status;
 
-            public String getStatus() {
-                return status;
-            }
 
-            public void setStatus(String status) {
-                this.status = status;
-            }
-        
-    
+    private String id;
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
+
+
+    private Object links;
+
+    public Object getLinks() {
+        return links;
+    }
+
+    public void setLinks(Object links) {
+        this.links = links;
+    }
+
+
+
+    private Object metadata;
+
+    public Object getMetadata() {
+        return metadata;
+    }
+
+    public void setMetadata(Object metadata) {
+        this.metadata = metadata;
+    }
+
+
+
+    private String reference;
+
+    public String getReference() {
+        return reference;
+    }
+
+    public void setReference(String reference) {
+        this.reference = reference;
+    }
+
+
+
+    private String status;
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
+
+
 }

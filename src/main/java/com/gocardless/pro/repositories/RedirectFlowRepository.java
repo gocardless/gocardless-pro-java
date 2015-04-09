@@ -1,6 +1,3 @@
-
-
-
 package com.gocardless.pro.repositories;
 
 import com.gocardless.pro.http.GetRequest;
@@ -21,81 +18,72 @@ public class RedirectFlowRepository {
         this.httpClient = httpClient;
     }
 
-    
-        
-        
-            public void create() throws IOException {
-                throw new IllegalStateException("Not implemented!");
-        
+
+
+    public void create() throws IOException {
+        throw new IllegalStateException("Not implemented!");
+
+    }
+
+
+
+    public RedirectFlowGetRequest get(String identity) throws IOException {
+        return new RedirectFlowGetRequest(httpClient
+
+        , identity
+
+        );
+
+    }
+
+
+
+    public void complete(String identity) throws IOException {
+        throw new IllegalStateException("Not implemented!");
+
+    }
+
+
+
+    public static final class RedirectFlowGetRequest extends GetRequest<RedirectFlow> {
+
+        private final String identity;
+
+
+
+        private RedirectFlowGetRequest(HttpClient httpClient
+
+        , String identity
+
+        ) {
+            super(httpClient, "/redirect_flows/:identity", "redirect_flows",
+
+            RedirectFlow.class
+
+            );
+
+
+
+            this.identity = identity;
+
         }
-    
-        
-        
-            public RedirectFlowGetRequest get(String identity) throws IOException {
-                return new RedirectFlowGetRequest(httpClient
-                
-                    , identity
-                
-                );
-        
+
+
+        @Override
+        protected Map<String, String> getPathParams() {
+            ImmutableMap.Builder<String, String> params = ImmutableMap.builder();
+
+
+            params.put("identity", identity);
+
+
+            return params.build();
         }
-    
-        
-        
-            public void complete(String identity) throws IOException {
-                throw new IllegalStateException("Not implemented!");
-        
-        }
-    
 
-    
-        
-        
-    
-        
-        
-            public static final class RedirectFlowGetRequest extends GetRequest<RedirectFlow> {
-              
-                  private final String identity;
-              
 
-              
 
-              private RedirectFlowGetRequest(HttpClient httpClient
-                  
-                      , String identity
-                  
-              ) {
-                  super(httpClient, "/redirect_flows/:identity", "redirect_flows",
-                      
-                          RedirectFlow.class
-                      
-                  );
+    }
 
-                  
-                      
-                      this.identity = identity;
-                  
-              }
 
-              
-                  @Override
-                  protected Map<String, String> getPathParams() {
-                      ImmutableMap.Builder<String, String> params = ImmutableMap.builder();
 
-                      
-                          params.put("identity", identity);
-                      
-
-                      return params.build();
-                  }
-              
-
-              
-            }
-        
-    
-        
-        
-    
 }

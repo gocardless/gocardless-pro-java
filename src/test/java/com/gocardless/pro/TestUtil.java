@@ -10,7 +10,7 @@ import javax.net.ssl.TrustManager;
 
 public class TestUtil {
     public static void disableSslCertificateChecking(GoCardlessClient client) throws Exception {
-        TrustManager[] trustAllCerts = new TrustManager[]{new DummyX509TrustManager()};
+        TrustManager[] trustAllCerts = new TrustManager[] {new DummyX509TrustManager()};
         SSLContext sc = SSLContext.getInstance("TLS");
 
         sc.init(null, trustAllCerts, new java.security.SecureRandom());

@@ -1,159 +1,128 @@
-
-
 package com.gocardless.pro.resources;
 
 import java.util.List;
 
 public class CustomerBankAccount {
-    
-        
-        
-            
 
-            private String accountHolderName;
 
-            public String getAccountHolderName() {
-                return accountHolderName;
-            }
 
-            public void setAccountHolderName(String accountHolderName) {
-                this.accountHolderName = accountHolderName;
-            }
-        
-    
-        
-        
-            
+    private String accountHolderName;
 
-            private String accountNumberEnding;
+    public String getAccountHolderName() {
+        return accountHolderName;
+    }
 
-            public String getAccountNumberEnding() {
-                return accountNumberEnding;
-            }
+    public void setAccountHolderName(String accountHolderName) {
+        this.accountHolderName = accountHolderName;
+    }
 
-            public void setAccountNumberEnding(String accountNumberEnding) {
-                this.accountNumberEnding = accountNumberEnding;
-            }
-        
-    
-        
-        
-            
 
-            private String bankName;
 
-            public String getBankName() {
-                return bankName;
-            }
+    private String accountNumberEnding;
 
-            public void setBankName(String bankName) {
-                this.bankName = bankName;
-            }
-        
-    
-        
-        
-            
+    public String getAccountNumberEnding() {
+        return accountNumberEnding;
+    }
 
-            private String countryCode;
+    public void setAccountNumberEnding(String accountNumberEnding) {
+        this.accountNumberEnding = accountNumberEnding;
+    }
 
-            public String getCountryCode() {
-                return countryCode;
-            }
 
-            public void setCountryCode(String countryCode) {
-                this.countryCode = countryCode;
-            }
-        
-    
-        
-        
-            
 
-            private String createdAt;
+    private String bankName;
 
-            public String getCreatedAt() {
-                return createdAt;
-            }
+    public String getBankName() {
+        return bankName;
+    }
 
-            public void setCreatedAt(String createdAt) {
-                this.createdAt = createdAt;
-            }
-        
-    
-        
-        
-            
+    public void setBankName(String bankName) {
+        this.bankName = bankName;
+    }
 
-            private String currency;
 
-            public String getCurrency() {
-                return currency;
-            }
 
-            public void setCurrency(String currency) {
-                this.currency = currency;
-            }
-        
-    
-        
-        
-            
+    private String countryCode;
 
-            private Boolean enabled;
+    public String getCountryCode() {
+        return countryCode;
+    }
 
-            public Boolean getEnabled() {
-                return enabled;
-            }
+    public void setCountryCode(String countryCode) {
+        this.countryCode = countryCode;
+    }
 
-            public void setEnabled(Boolean enabled) {
-                this.enabled = enabled;
-            }
-        
-    
-        
-        
-            
 
-            private String id;
 
-            public String getId() {
-                return id;
-            }
+    private String createdAt;
 
-            public void setId(String id) {
-                this.id = id;
-            }
-        
-    
-        
-        
-            
+    public String getCreatedAt() {
+        return createdAt;
+    }
 
-            private Object links;
+    public void setCreatedAt(String createdAt) {
+        this.createdAt = createdAt;
+    }
 
-            public Object getLinks() {
-                return links;
-            }
 
-            public void setLinks(Object links) {
-                this.links = links;
-            }
-        
-    
-        
-        
-            
 
-            private Object metadata;
+    private String currency;
 
-            public Object getMetadata() {
-                return metadata;
-            }
+    public String getCurrency() {
+        return currency;
+    }
 
-            public void setMetadata(Object metadata) {
-                this.metadata = metadata;
-            }
-        
-    
+    public void setCurrency(String currency) {
+        this.currency = currency;
+    }
+
+
+
+    private Boolean enabled;
+
+    public Boolean getEnabled() {
+        return enabled;
+    }
+
+    public void setEnabled(Boolean enabled) {
+        this.enabled = enabled;
+    }
+
+
+
+    private String id;
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
+
+
+    private Object links;
+
+    public Object getLinks() {
+        return links;
+    }
+
+    public void setLinks(Object links) {
+        this.links = links;
+    }
+
+
+
+    private Object metadata;
+
+    public Object getMetadata() {
+        return metadata;
+    }
+
+    public void setMetadata(Object metadata) {
+        this.metadata = metadata;
+    }
+
+
 }

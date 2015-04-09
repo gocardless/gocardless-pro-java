@@ -1,114 +1,92 @@
-
-
 package com.gocardless.pro.resources;
 
 import java.util.List;
 
 public class ApiKey {
-    
-        
-        
-            
 
-            private String createdAt;
 
-            public String getCreatedAt() {
-                return createdAt;
-            }
 
-            public void setCreatedAt(String createdAt) {
-                this.createdAt = createdAt;
-            }
-        
-    
-        
-        
-            
+    private String createdAt;
 
-            private Boolean enabled;
+    public String getCreatedAt() {
+        return createdAt;
+    }
 
-            public Boolean getEnabled() {
-                return enabled;
-            }
+    public void setCreatedAt(String createdAt) {
+        this.createdAt = createdAt;
+    }
 
-            public void setEnabled(Boolean enabled) {
-                this.enabled = enabled;
-            }
-        
-    
-        
-        
-            
 
-            private String id;
 
-            public String getId() {
-                return id;
-            }
+    private Boolean enabled;
 
-            public void setId(String id) {
-                this.id = id;
-            }
-        
-    
-        
-        
-            
+    public Boolean getEnabled() {
+        return enabled;
+    }
 
-            private String key;
+    public void setEnabled(Boolean enabled) {
+        this.enabled = enabled;
+    }
 
-            public String getKey() {
-                return key;
-            }
 
-            public void setKey(String key) {
-                this.key = key;
-            }
-        
-    
-        
-        
-            
 
-            private Object links;
+    private String id;
 
-            public Object getLinks() {
-                return links;
-            }
+    public String getId() {
+        return id;
+    }
 
-            public void setLinks(Object links) {
-                this.links = links;
-            }
-        
-    
-        
-        
-            
+    public void setId(String id) {
+        this.id = id;
+    }
 
-            private String name;
 
-            public String getName() {
-                return name;
-            }
 
-            public void setName(String name) {
-                this.name = name;
-            }
-        
-    
-        
-        
-            
+    private String key;
 
-            private String webhookUrl;
+    public String getKey() {
+        return key;
+    }
 
-            public String getWebhookUrl() {
-                return webhookUrl;
-            }
+    public void setKey(String key) {
+        this.key = key;
+    }
 
-            public void setWebhookUrl(String webhookUrl) {
-                this.webhookUrl = webhookUrl;
-            }
-        
-    
+
+
+    private Object links;
+
+    public Object getLinks() {
+        return links;
+    }
+
+    public void setLinks(Object links) {
+        this.links = links;
+    }
+
+
+
+    private String name;
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+
+
+    private String webhookUrl;
+
+    public String getWebhookUrl() {
+        return webhookUrl;
+    }
+
+    public void setWebhookUrl(String webhookUrl) {
+        this.webhookUrl = webhookUrl;
+    }
+
+
 }

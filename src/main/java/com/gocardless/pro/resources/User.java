@@ -1,114 +1,92 @@
-
-
 package com.gocardless.pro.resources;
 
 import java.util.List;
 
 public class User {
-    
-        
-        
-            
 
-            private String createdAt;
 
-            public String getCreatedAt() {
-                return createdAt;
-            }
 
-            public void setCreatedAt(String createdAt) {
-                this.createdAt = createdAt;
-            }
-        
-    
-        
-        
-            
+    private String createdAt;
 
-            private String email;
+    public String getCreatedAt() {
+        return createdAt;
+    }
 
-            public String getEmail() {
-                return email;
-            }
+    public void setCreatedAt(String createdAt) {
+        this.createdAt = createdAt;
+    }
 
-            public void setEmail(String email) {
-                this.email = email;
-            }
-        
-    
-        
-        
-            
 
-            private Boolean enabled;
 
-            public Boolean getEnabled() {
-                return enabled;
-            }
+    private String email;
 
-            public void setEnabled(Boolean enabled) {
-                this.enabled = enabled;
-            }
-        
-    
-        
-        
-            
+    public String getEmail() {
+        return email;
+    }
 
-            private String familyName;
+    public void setEmail(String email) {
+        this.email = email;
+    }
 
-            public String getFamilyName() {
-                return familyName;
-            }
 
-            public void setFamilyName(String familyName) {
-                this.familyName = familyName;
-            }
-        
-    
-        
-        
-            
 
-            private String givenName;
+    private Boolean enabled;
 
-            public String getGivenName() {
-                return givenName;
-            }
+    public Boolean getEnabled() {
+        return enabled;
+    }
 
-            public void setGivenName(String givenName) {
-                this.givenName = givenName;
-            }
-        
-    
-        
-        
-            
+    public void setEnabled(Boolean enabled) {
+        this.enabled = enabled;
+    }
 
-            private String id;
 
-            public String getId() {
-                return id;
-            }
 
-            public void setId(String id) {
-                this.id = id;
-            }
-        
-    
-        
-        
-            
+    private String familyName;
 
-            private Object links;
+    public String getFamilyName() {
+        return familyName;
+    }
 
-            public Object getLinks() {
-                return links;
-            }
+    public void setFamilyName(String familyName) {
+        this.familyName = familyName;
+    }
 
-            public void setLinks(Object links) {
-                this.links = links;
-            }
-        
-    
+
+
+    private String givenName;
+
+    public String getGivenName() {
+        return givenName;
+    }
+
+    public void setGivenName(String givenName) {
+        this.givenName = givenName;
+    }
+
+
+
+    private String id;
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
+
+
+    private Object links;
+
+    public Object getLinks() {
+        return links;
+    }
+
+    public void setLinks(Object links) {
+        this.links = links;
+    }
+
+
 }
