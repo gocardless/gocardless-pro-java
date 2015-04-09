@@ -3,9 +3,6 @@ package com.gocardless.pro.resources;
 import java.util.List;
 
 public class Mandate {
-
-
-
     private String createdAt;
 
     public String getCreatedAt() {
@@ -15,8 +12,6 @@ public class Mandate {
     public void setCreatedAt(String createdAt) {
         this.createdAt = createdAt;
     }
-
-
 
     private String id;
 
@@ -28,8 +23,6 @@ public class Mandate {
         this.id = id;
     }
 
-
-
     private Object links;
 
     public Object getLinks() {
@@ -39,8 +32,6 @@ public class Mandate {
     public void setLinks(Object links) {
         this.links = links;
     }
-
-
 
     private Object metadata;
 
@@ -52,8 +43,6 @@ public class Mandate {
         this.metadata = metadata;
     }
 
-
-
     private String nextPossibleChargeDate;
 
     public String getNextPossibleChargeDate() {
@@ -63,8 +52,6 @@ public class Mandate {
     public void setNextPossibleChargeDate(String nextPossibleChargeDate) {
         this.nextPossibleChargeDate = nextPossibleChargeDate;
     }
-
-
 
     private String reference;
 
@@ -76,8 +63,6 @@ public class Mandate {
         this.reference = reference;
     }
 
-
-
     private String scheme;
 
     public String getScheme() {
@@ -88,22 +73,8 @@ public class Mandate {
         this.scheme = scheme;
     }
 
-
-
     public enum Status {
-
-        PENDING_SUBMISSION,
-
-        SUBMITTED,
-
-        ACTIVE,
-
-        FAILED,
-
-        CANCELLED,
-
-        EXPIRED,
-
+        PENDING_SUBMISSION, SUBMITTED, ACTIVE, FAILED, CANCELLED, EXPIRED,
     }
 
     private Status status;
@@ -115,6 +86,4 @@ public class Mandate {
     public void setStatus(Status status) {
         this.status = status;
     }
-
-
 }

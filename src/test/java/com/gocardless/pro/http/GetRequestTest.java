@@ -17,10 +17,8 @@ public class GetRequestTest extends HttpRequestTest {
     public void shouldPerformGetRequest() throws IOException {
         whenHttp(server).match(get("/dummy/123")).then(status(HttpStatus.OK_200),
                 resourceContent("fixtures/single.json"));
-
         DummyGetRequest request = new DummyGetRequest();
         DummyItem result = request.execute();
-
         assertThat(result.stringField).isEqualTo("foo");
         assertThat(result.intField).isEqualTo(123);
     }

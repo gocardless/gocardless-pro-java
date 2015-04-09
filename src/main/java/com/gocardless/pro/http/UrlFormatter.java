@@ -25,7 +25,6 @@ final class UrlFormatter {
                     }
                 }
             };
-
     private final URI baseUri;
 
     UrlFormatter(String baseUri) {
@@ -34,18 +33,15 @@ final class UrlFormatter {
 
     URL formatUrl(String template, Map<String, String> pathParams, Map<String, Object> queryParams) {
         String path = template;
-
         for (Map.Entry<String, String> entry : pathParams.entrySet()) {
             path = path.replace(":" + entry.getKey(), entry.getValue());
         }
-
         if (!queryParams.isEmpty()) {
             Iterable<String> queryParts =
                     Iterables.transform(queryParams.entrySet(), FORMAT_QUERY_PART);
             String queryString = JOINER.join(queryParts);
             path = String.format("%s?%s", path, queryString);
         }
-
         try {
             return baseUri.resolve(path).toURL();
         } catch (MalformedURLException e) {

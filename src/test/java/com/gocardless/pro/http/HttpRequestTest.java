@@ -12,7 +12,6 @@ public abstract class HttpRequestTest {
     @Before
     public void start() {
         server = new StubServer().run();
-
         String baseUrl = String.format("http://localhost:%d", server.getPort());
         client = TestUtil.createHttpClient("key", "secret", baseUrl);
     }

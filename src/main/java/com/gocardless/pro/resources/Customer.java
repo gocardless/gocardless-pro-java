@@ -3,9 +3,6 @@ package com.gocardless.pro.resources;
 import java.util.List;
 
 public class Customer {
-
-
-
     private String addressLine1;
 
     public String getAddressLine1() {
@@ -15,8 +12,6 @@ public class Customer {
     public void setAddressLine1(String addressLine1) {
         this.addressLine1 = addressLine1;
     }
-
-
 
     private String addressLine2;
 
@@ -28,8 +23,6 @@ public class Customer {
         this.addressLine2 = addressLine2;
     }
 
-
-
     private String addressLine3;
 
     public String getAddressLine3() {
@@ -39,8 +32,6 @@ public class Customer {
     public void setAddressLine3(String addressLine3) {
         this.addressLine3 = addressLine3;
     }
-
-
 
     private String city;
 
@@ -52,8 +43,6 @@ public class Customer {
         this.city = city;
     }
 
-
-
     private String countryCode;
 
     public String getCountryCode() {
@@ -63,8 +52,6 @@ public class Customer {
     public void setCountryCode(String countryCode) {
         this.countryCode = countryCode;
     }
-
-
 
     private String createdAt;
 
@@ -76,8 +63,6 @@ public class Customer {
         this.createdAt = createdAt;
     }
 
-
-
     private String email;
 
     public String getEmail() {
@@ -87,8 +72,6 @@ public class Customer {
     public void setEmail(String email) {
         this.email = email;
     }
-
-
 
     private String familyName;
 
@@ -100,8 +83,6 @@ public class Customer {
         this.familyName = familyName;
     }
 
-
-
     private String givenName;
 
     public String getGivenName() {
@@ -111,8 +92,6 @@ public class Customer {
     public void setGivenName(String givenName) {
         this.givenName = givenName;
     }
-
-
 
     private String id;
 
@@ -124,8 +103,6 @@ public class Customer {
         this.id = id;
     }
 
-
-
     private Object metadata;
 
     public Object getMetadata() {
@@ -135,8 +112,6 @@ public class Customer {
     public void setMetadata(Object metadata) {
         this.metadata = metadata;
     }
-
-
 
     private String postalCode;
 
@@ -148,8 +123,6 @@ public class Customer {
         this.postalCode = postalCode;
     }
 
-
-
     private String region;
 
     public String getRegion() {
@@ -159,6 +132,4 @@ public class Customer {
     public void setRegion(String region) {
         this.region = region;
     }
-
-
 }

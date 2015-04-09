@@ -9,7 +9,6 @@ public abstract class GetRequest<T> extends HttpRequest<T> {
     public GetRequest(HttpClient httpClient, String pathTemplate, String envelope,
             Class<T> responseClass) {
         super(httpClient, pathTemplate);
-
         this.envelope = envelope;
         this.responseClass = responseClass;
     }

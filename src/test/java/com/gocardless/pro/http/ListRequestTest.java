@@ -20,15 +20,11 @@ public class ListRequestTest extends HttpRequestTest {
     public void shouldPerformListRequest() throws IOException {
         whenHttp(server).match(get("/dummy"), parameter("id", "123")).then(
                 status(HttpStatus.OK_200), resourceContent("fixtures/multiple.json"));
-
         DummyListRequest request = new DummyListRequest();
         List<DummyItem> result = request.execute();
-
         assertThat(result).hasSize(2);
-
         assertThat(result.get(0).stringField).isEqualTo("foo");
         assertThat(result.get(0).intField).isEqualTo(123);
-
         assertThat(result.get(1).stringField).isEqualTo("bar");
         assertThat(result.get(1).intField).isEqualTo(456);
     }

@@ -3,9 +3,6 @@ package com.gocardless.pro.resources;
 import java.util.List;
 
 public class Payment {
-
-
-
     private Integer amount;
 
     public Integer getAmount() {
@@ -15,8 +12,6 @@ public class Payment {
     public void setAmount(Integer amount) {
         this.amount = amount;
     }
-
-
 
     private Integer amountRefunded;
 
@@ -28,8 +23,6 @@ public class Payment {
         this.amountRefunded = amountRefunded;
     }
 
-
-
     private String chargeDate;
 
     public String getChargeDate() {
@@ -39,8 +32,6 @@ public class Payment {
     public void setChargeDate(String chargeDate) {
         this.chargeDate = chargeDate;
     }
-
-
 
     private String createdAt;
 
@@ -52,8 +43,6 @@ public class Payment {
         this.createdAt = createdAt;
     }
 
-
-
     private String currency;
 
     public String getCurrency() {
@@ -63,8 +52,6 @@ public class Payment {
     public void setCurrency(String currency) {
         this.currency = currency;
     }
-
-
 
     private String description;
 
@@ -76,8 +63,6 @@ public class Payment {
         this.description = description;
     }
 
-
-
     private String id;
 
     public String getId() {
@@ -87,8 +72,6 @@ public class Payment {
     public void setId(String id) {
         this.id = id;
     }
-
-
 
     private Object links;
 
@@ -100,8 +83,6 @@ public class Payment {
         this.links = links;
     }
 
-
-
     private Object metadata;
 
     public Object getMetadata() {
@@ -111,8 +92,6 @@ public class Payment {
     public void setMetadata(Object metadata) {
         this.metadata = metadata;
     }
-
-
 
     private String reference;
 
@@ -124,8 +103,6 @@ public class Payment {
         this.reference = reference;
     }
 
-
-
     private String status;
 
     public String getStatus() {
@@ -135,6 +112,4 @@ public class Payment {
     public void setStatus(String status) {
         this.status = status;
     }
-
-
 }

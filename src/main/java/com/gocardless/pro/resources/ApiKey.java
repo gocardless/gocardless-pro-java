@@ -3,9 +3,6 @@ package com.gocardless.pro.resources;
 import java.util.List;
 
 public class ApiKey {
-
-
-
     private String createdAt;
 
     public String getCreatedAt() {
@@ -15,8 +12,6 @@ public class ApiKey {
     public void setCreatedAt(String createdAt) {
         this.createdAt = createdAt;
     }
-
-
 
     private Boolean enabled;
 
@@ -28,8 +23,6 @@ public class ApiKey {
         this.enabled = enabled;
     }
 
-
-
     private String id;
 
     public String getId() {
@@ -39,8 +32,6 @@ public class ApiKey {
     public void setId(String id) {
         this.id = id;
     }
-
-
 
     private String key;
 
@@ -52,8 +43,6 @@ public class ApiKey {
         this.key = key;
     }
 
-
-
     private Object links;
 
     public Object getLinks() {
@@ -63,8 +52,6 @@ public class ApiKey {
     public void setLinks(Object links) {
         this.links = links;
     }
-
-
 
     private String name;
 
@@ -76,8 +63,6 @@ public class ApiKey {
         this.name = name;
     }
 
-
-
     private String webhookUrl;
 
     public String getWebhookUrl() {
@@ -87,6 +72,4 @@ public class ApiKey {
     public void setWebhookUrl(String webhookUrl) {
         this.webhookUrl = webhookUrl;
     }
-
-
 }

@@ -3,9 +3,6 @@ package com.gocardless.pro.resources;
 import java.util.List;
 
 public class Payout {
-
-
-
     private Integer amount;
 
     public Integer getAmount() {
@@ -15,8 +12,6 @@ public class Payout {
     public void setAmount(Integer amount) {
         this.amount = amount;
     }
-
-
 
     private String createdAt;
 
@@ -28,8 +23,6 @@ public class Payout {
         this.createdAt = createdAt;
     }
 
-
-
     private String currency;
 
     public String getCurrency() {
@@ -39,8 +32,6 @@ public class Payout {
     public void setCurrency(String currency) {
         this.currency = currency;
     }
-
-
 
     private String id;
 
@@ -52,8 +43,6 @@ public class Payout {
         this.id = id;
     }
 
-
-
     private Object links;
 
     public Object getLinks() {
@@ -63,8 +52,6 @@ public class Payout {
     public void setLinks(Object links) {
         this.links = links;
     }
-
-
 
     private String reference;
 
@@ -76,14 +63,8 @@ public class Payout {
         this.reference = reference;
     }
 
-
-
     public enum Status {
-
-        PENDING,
-
-        PAID,
-
+        PENDING, PAID,
     }
 
     private Status status;
@@ -95,6 +76,4 @@ public class Payout {
     public void setStatus(Status status) {
         this.status = status;
     }
-
-
 }

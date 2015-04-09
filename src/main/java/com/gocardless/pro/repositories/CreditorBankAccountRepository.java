@@ -18,55 +18,30 @@ public class CreditorBankAccountRepository {
         this.httpClient = httpClient;
     }
 
-
-
     public void create() throws IOException {
         throw new IllegalStateException("Not implemented!");
-
     }
-
-
 
     public CreditorBankAccountListRequest list() throws IOException {
-        return new CreditorBankAccountListRequest(httpClient
-
-        );
-
+        return new CreditorBankAccountListRequest(httpClient);
     }
-
-
 
     public CreditorBankAccountGetRequest get(String identity) throws IOException {
-        return new CreditorBankAccountGetRequest(httpClient
-
-        , identity
-
-        );
-
+        return new CreditorBankAccountGetRequest(httpClient, identity);
     }
-
-
 
     public void disable(String identity) throws IOException {
         throw new IllegalStateException("Not implemented!");
-
     }
-
-
 
     public static final class CreditorBankAccountListRequest extends
             ListRequest<CreditorBankAccount> {
-
-
-
         private String after;
 
         public CreditorBankAccountListRequest withAfter(String after) {
             this.after = after;
             return this;
         }
-
-
 
         private String before;
 
@@ -75,8 +50,6 @@ public class CreditorBankAccountRepository {
             return this;
         }
 
-
-
         private String creditor;
 
         public CreditorBankAccountListRequest withCreditor(String creditor) {
@@ -84,14 +57,8 @@ public class CreditorBankAccountRepository {
             return this;
         }
 
-
-
         public enum Enabled {
-
-            TRUE,
-
-            FALSE,
-
+            TRUE, FALSE,
         }
 
         private Enabled enabled;
@@ -101,8 +68,6 @@ public class CreditorBankAccountRepository {
             return this;
         }
 
-
-
         private Integer limit;
 
         public CreditorBankAccountListRequest withLimit(Integer limit) {
@@ -110,94 +75,47 @@ public class CreditorBankAccountRepository {
             return this;
         }
 
-
-
-        private CreditorBankAccountListRequest(HttpClient httpClient
-
-        ) {
+        private CreditorBankAccountListRequest(HttpClient httpClient) {
             super(httpClient, "/creditor_bank_accounts", "creditor_bank_accounts",
-
-            new TypeToken<List<CreditorBankAccount>>() {}
-
-            );
-
-
+                    new TypeToken<List<CreditorBankAccount>>() {});
         }
-
-
 
         @Override
         protected Map<String, Object> getQueryParams() {
             ImmutableMap.Builder<String, Object> params = ImmutableMap.builder();
-
-
             if (after != null) {
                 params.put("after", after);
             }
-
             if (before != null) {
                 params.put("before", before);
             }
-
             if (creditor != null) {
                 params.put("creditor", creditor);
             }
-
             if (enabled != null) {
                 params.put("enabled", enabled);
             }
-
             if (limit != null) {
                 params.put("limit", limit);
             }
-
-
             return params.build();
         }
-
     }
 
-
-
     public static final class CreditorBankAccountGetRequest extends GetRequest<CreditorBankAccount> {
-
         private final String identity;
 
-
-
-        private CreditorBankAccountGetRequest(HttpClient httpClient
-
-        , String identity
-
-        ) {
+        private CreditorBankAccountGetRequest(HttpClient httpClient, String identity) {
             super(httpClient, "/creditor_bank_accounts/:identity", "creditor_bank_accounts",
-
-            CreditorBankAccount.class
-
-            );
-
-
-
+                    CreditorBankAccount.class);
             this.identity = identity;
-
         }
-
 
         @Override
         protected Map<String, String> getPathParams() {
             ImmutableMap.Builder<String, String> params = ImmutableMap.builder();
-
-
             params.put("identity", identity);
-
-
             return params.build();
         }
-
-
-
     }
-
-
-
 }

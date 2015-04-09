@@ -18,40 +18,21 @@ public class PayoutRepository {
         this.httpClient = httpClient;
     }
 
-
-
     public PayoutListRequest list() throws IOException {
-        return new PayoutListRequest(httpClient
-
-        );
-
+        return new PayoutListRequest(httpClient);
     }
-
-
 
     public PayoutGetRequest get(String identity) throws IOException {
-        return new PayoutGetRequest(httpClient
-
-        , identity
-
-        );
-
+        return new PayoutGetRequest(httpClient, identity);
     }
 
-
-
     public static final class PayoutListRequest extends ListRequest<Payout> {
-
-
-
         private String after;
 
         public PayoutListRequest withAfter(String after) {
             this.after = after;
             return this;
         }
-
-
 
         private String before;
 
@@ -60,16 +41,12 @@ public class PayoutRepository {
             return this;
         }
 
-
-
         private String creditor;
 
         public PayoutListRequest withCreditor(String creditor) {
             this.creditor = creditor;
             return this;
         }
-
-
 
         private String creditorBankAccount;
 
@@ -78,8 +55,6 @@ public class PayoutRepository {
             return this;
         }
 
-
-
         private Integer limit;
 
         public PayoutListRequest withLimit(Integer limit) {
@@ -87,14 +62,8 @@ public class PayoutRepository {
             return this;
         }
 
-
-
         public enum Status {
-
-            PENDING,
-
-            PAID,
-
+            PENDING, PAID,
         }
 
         private Status status;
@@ -104,97 +73,48 @@ public class PayoutRepository {
             return this;
         }
 
-
-
-        private PayoutListRequest(HttpClient httpClient
-
-        ) {
-            super(httpClient, "/payouts", "payouts",
-
-            new TypeToken<List<Payout>>() {}
-
-            );
-
-
+        private PayoutListRequest(HttpClient httpClient) {
+            super(httpClient, "/payouts", "payouts", new TypeToken<List<Payout>>() {});
         }
-
-
 
         @Override
         protected Map<String, Object> getQueryParams() {
             ImmutableMap.Builder<String, Object> params = ImmutableMap.builder();
-
-
             if (after != null) {
                 params.put("after", after);
             }
-
             if (before != null) {
                 params.put("before", before);
             }
-
             if (creditor != null) {
                 params.put("creditor", creditor);
             }
-
             if (creditorBankAccount != null) {
                 params.put("creditor_bank_account", creditorBankAccount);
             }
-
             if (limit != null) {
                 params.put("limit", limit);
             }
-
             if (status != null) {
                 params.put("status", status);
             }
-
-
             return params.build();
         }
-
     }
 
-
-
     public static final class PayoutGetRequest extends GetRequest<Payout> {
-
         private final String identity;
 
-
-
-        private PayoutGetRequest(HttpClient httpClient
-
-        , String identity
-
-        ) {
-            super(httpClient, "/payouts/:identity", "payouts",
-
-            Payout.class
-
-            );
-
-
-
+        private PayoutGetRequest(HttpClient httpClient, String identity) {
+            super(httpClient, "/payouts/:identity", "payouts", Payout.class);
             this.identity = identity;
-
         }
-
 
         @Override
         protected Map<String, String> getPathParams() {
             ImmutableMap.Builder<String, String> params = ImmutableMap.builder();
-
-
             params.put("identity", identity);
-
-
             return params.build();
         }
-
-
-
     }
-
-
 }

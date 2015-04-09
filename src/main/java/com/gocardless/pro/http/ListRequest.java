@@ -12,7 +12,6 @@ public abstract class ListRequest<T> extends HttpRequest<List<T>> {
     public ListRequest(HttpClient httpClient, String pathTemplate, String envelope,
             TypeToken<List<T>> typeToken) {
         super(httpClient, pathTemplate);
-
         this.envelope = envelope;
         this.typeToken = typeToken;
     }

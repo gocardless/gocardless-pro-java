@@ -22,7 +22,6 @@ final class ResponseParser {
     <T> List<T> parseMultiple(Reader stream, String envelope, TypeToken<List<T>> clazz) {
         JsonElement json = new JsonParser().parse(stream);
         JsonArray array = json.getAsJsonObject().getAsJsonArray(envelope);
-
         List<T> items = gson.fromJson(array, clazz.getType());
         return ImmutableList.copyOf(items);
     }

@@ -15,17 +15,11 @@ import static com.google.gson.FieldNamingPolicy.LOWER_CASE_WITH_UNDERSCORES;
 
 public class HttpClient {
     private static final Map<String, String> HEADERS;
-
     static {
         ImmutableMap.Builder<String, String> builder = ImmutableMap.builder();
-
-
         builder.put("GoCardless-Version", "2014-11-03");
-
-
         HEADERS = builder.build();
     }
-
     private final OkHttpClient rawClient;
     private final UrlFormatter urlFormatter;
     private final ResponseParser responseParser;
@@ -35,7 +29,6 @@ public class HttpClient {
         this.rawClient = new OkHttpClient();
         this.urlFormatter = new UrlFormatter(baseUri);
         this.responseParser = new ResponseParser();
-
         this.credentials = Credentials.basic(apiKeyId, apiKey);
     }
 
@@ -43,13 +36,10 @@ public class HttpClient {
         URL url = request.getUrl(urlFormatter);
         Request.Builder httpRequest =
                 new Request.Builder().url(url).header("Authorization", credentials);
-
         for (Map.Entry<String, String> entry : HEADERS.entrySet()) {
             httpRequest = httpRequest.header(entry.getKey(), entry.getValue());
         }
-
         Response response = execute(httpRequest.build());
-
         return request.parseResponse(response.body().charStream(), responseParser);
     }
 

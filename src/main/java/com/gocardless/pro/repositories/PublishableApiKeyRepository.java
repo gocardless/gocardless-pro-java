@@ -18,61 +18,33 @@ public class PublishableApiKeyRepository {
         this.httpClient = httpClient;
     }
 
-
-
     public void create() throws IOException {
         throw new IllegalStateException("Not implemented!");
-
     }
-
-
 
     public PublishableApiKeyListRequest list() throws IOException {
-        return new PublishableApiKeyListRequest(httpClient
-
-        );
-
+        return new PublishableApiKeyListRequest(httpClient);
     }
-
-
 
     public PublishableApiKeyGetRequest get(String identity) throws IOException {
-        return new PublishableApiKeyGetRequest(httpClient
-
-        , identity
-
-        );
-
+        return new PublishableApiKeyGetRequest(httpClient, identity);
     }
-
-
 
     public void update(String identity) throws IOException {
         throw new IllegalStateException("Not implemented!");
-
     }
-
-
 
     public void disable(String identity) throws IOException {
         throw new IllegalStateException("Not implemented!");
-
     }
 
-
-
     public static final class PublishableApiKeyListRequest extends ListRequest<PublishableApiKey> {
-
-
-
         private String after;
 
         public PublishableApiKeyListRequest withAfter(String after) {
             this.after = after;
             return this;
         }
-
-
 
         private String before;
 
@@ -81,14 +53,8 @@ public class PublishableApiKeyRepository {
             return this;
         }
 
-
-
         public enum Enabled {
-
-            TRUE,
-
-            FALSE,
-
+            TRUE, FALSE,
         }
 
         private Enabled enabled;
@@ -98,8 +64,6 @@ public class PublishableApiKeyRepository {
             return this;
         }
 
-
-
         private Integer limit;
 
         public PublishableApiKeyListRequest withLimit(Integer limit) {
@@ -107,90 +71,44 @@ public class PublishableApiKeyRepository {
             return this;
         }
 
-
-
-        private PublishableApiKeyListRequest(HttpClient httpClient
-
-        ) {
+        private PublishableApiKeyListRequest(HttpClient httpClient) {
             super(httpClient, "/publishable_api_keys", "publishable_api_keys",
-
-            new TypeToken<List<PublishableApiKey>>() {}
-
-            );
-
-
+                    new TypeToken<List<PublishableApiKey>>() {});
         }
-
-
 
         @Override
         protected Map<String, Object> getQueryParams() {
             ImmutableMap.Builder<String, Object> params = ImmutableMap.builder();
-
-
             if (after != null) {
                 params.put("after", after);
             }
-
             if (before != null) {
                 params.put("before", before);
             }
-
             if (enabled != null) {
                 params.put("enabled", enabled);
             }
-
             if (limit != null) {
                 params.put("limit", limit);
             }
-
-
             return params.build();
         }
-
     }
 
-
-
     public static final class PublishableApiKeyGetRequest extends GetRequest<PublishableApiKey> {
-
         private final String identity;
 
-
-
-        private PublishableApiKeyGetRequest(HttpClient httpClient
-
-        , String identity
-
-        ) {
+        private PublishableApiKeyGetRequest(HttpClient httpClient, String identity) {
             super(httpClient, "/publishable_api_keys/:identity", "publishable_api_keys",
-
-            PublishableApiKey.class
-
-            );
-
-
-
+                    PublishableApiKey.class);
             this.identity = identity;
-
         }
-
 
         @Override
         protected Map<String, String> getPathParams() {
             ImmutableMap.Builder<String, String> params = ImmutableMap.builder();
-
-
             params.put("identity", identity);
-
-
             return params.build();
         }
-
-
-
     }
-
-
-
 }

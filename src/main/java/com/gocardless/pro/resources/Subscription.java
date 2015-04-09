@@ -3,9 +3,6 @@ package com.gocardless.pro.resources;
 import java.util.List;
 
 public class Subscription {
-
-
-
     private Integer amount;
 
     public Integer getAmount() {
@@ -15,8 +12,6 @@ public class Subscription {
     public void setAmount(Integer amount) {
         this.amount = amount;
     }
-
-
 
     private Integer count;
 
@@ -28,8 +23,6 @@ public class Subscription {
         this.count = count;
     }
 
-
-
     private String createdAt;
 
     public String getCreatedAt() {
@@ -39,8 +32,6 @@ public class Subscription {
     public void setCreatedAt(String createdAt) {
         this.createdAt = createdAt;
     }
-
-
 
     private String currency;
 
@@ -52,8 +43,6 @@ public class Subscription {
         this.currency = currency;
     }
 
-
-
     private Integer dayOfMonth;
 
     public Integer getDayOfMonth() {
@@ -63,8 +52,6 @@ public class Subscription {
     public void setDayOfMonth(Integer dayOfMonth) {
         this.dayOfMonth = dayOfMonth;
     }
-
-
 
     private String endAt;
 
@@ -76,8 +63,6 @@ public class Subscription {
         this.endAt = endAt;
     }
 
-
-
     private String id;
 
     public String getId() {
@@ -87,8 +72,6 @@ public class Subscription {
     public void setId(String id) {
         this.id = id;
     }
-
-
 
     private Integer interval;
 
@@ -100,8 +83,6 @@ public class Subscription {
         this.interval = interval;
     }
 
-
-
     private String intervalUnit;
 
     public String getIntervalUnit() {
@@ -111,8 +92,6 @@ public class Subscription {
     public void setIntervalUnit(String intervalUnit) {
         this.intervalUnit = intervalUnit;
     }
-
-
 
     private Object links;
 
@@ -124,8 +103,6 @@ public class Subscription {
         this.links = links;
     }
 
-
-
     private Object metadata;
 
     public Object getMetadata() {
@@ -136,34 +113,8 @@ public class Subscription {
         this.metadata = metadata;
     }
 
-
-
     public enum Month {
-
-        JANUARY,
-
-        FEBRUARY,
-
-        MARCH,
-
-        APRIL,
-
-        MAY,
-
-        JUNE,
-
-        JULY,
-
-        AUGUST,
-
-        SEPTEMBER,
-
-        OCTOBER,
-
-        NOVEMBER,
-
-        DECEMBER,
-
+        JANUARY, FEBRUARY, MARCH, APRIL, MAY, JUNE, JULY, AUGUST, SEPTEMBER, OCTOBER, NOVEMBER, DECEMBER,
     }
 
     private Month month;
@@ -176,8 +127,6 @@ public class Subscription {
         this.month = month;
     }
 
-
-
     private String name;
 
     public String getName() {
@@ -187,8 +136,6 @@ public class Subscription {
     public void setName(String name) {
         this.name = name;
     }
-
-
 
     private String startAt;
 
@@ -200,8 +147,6 @@ public class Subscription {
         this.startAt = startAt;
     }
 
-
-
     private String status;
 
     public String getStatus() {
@@ -212,8 +157,6 @@ public class Subscription {
         this.status = status;
     }
 
-
-
     private List<Object> upcomingPayments;
 
     public List<Object> getUpcomingPayments() {
@@ -223,6 +166,4 @@ public class Subscription {
     public void setUpcomingPayments(List<Object> upcomingPayments) {
         this.upcomingPayments = upcomingPayments;
     }
-
-
 }

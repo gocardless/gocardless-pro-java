@@ -24,9 +24,7 @@ public class ResponseParserTest {
     public void shouldParseSingle() throws IOException {
         URL resource = getResource("fixtures/single.json");
         Reader reader = asCharSource(resource, UTF_8).openStream();
-
         DummyItem result = parser.parseSingle(reader, "items", DummyItem.class);
-
         assertThat(result.stringField).isEqualTo("foo");
         assertThat(result.intField).isEqualTo(123);
     }
@@ -35,15 +33,11 @@ public class ResponseParserTest {
     public void shouldParseMultiple() throws IOException {
         URL resource = getResource("fixtures/multiple.json");
         Reader reader = asCharSource(resource, UTF_8).openStream();
-
         List<DummyItem> result =
                 parser.parseMultiple(reader, "items", new TypeToken<List<DummyItem>>() {});
-
         assertThat(result).hasSize(2);
-
         assertThat(result.get(0).stringField).isEqualTo("foo");
         assertThat(result.get(0).intField).isEqualTo(123);
-
         assertThat(result.get(1).stringField).isEqualTo("bar");
         assertThat(result.get(1).intField).isEqualTo(456);
     }

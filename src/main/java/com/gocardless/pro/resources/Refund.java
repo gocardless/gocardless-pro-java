@@ -3,9 +3,6 @@ package com.gocardless.pro.resources;
 import java.util.List;
 
 public class Refund {
-
-
-
     private Integer amount;
 
     public Integer getAmount() {
@@ -15,8 +12,6 @@ public class Refund {
     public void setAmount(Integer amount) {
         this.amount = amount;
     }
-
-
 
     private String createdAt;
 
@@ -28,8 +23,6 @@ public class Refund {
         this.createdAt = createdAt;
     }
 
-
-
     private String currency;
 
     public String getCurrency() {
@@ -39,8 +32,6 @@ public class Refund {
     public void setCurrency(String currency) {
         this.currency = currency;
     }
-
-
 
     private String id;
 
@@ -52,8 +43,6 @@ public class Refund {
         this.id = id;
     }
 
-
-
     private Object links;
 
     public Object getLinks() {
@@ -64,8 +53,6 @@ public class Refund {
         this.links = links;
     }
 
-
-
     private Object metadata;
 
     public Object getMetadata() {
@@ -75,6 +62,4 @@ public class Refund {
     public void setMetadata(Object metadata) {
         this.metadata = metadata;
     }
-
-
 }

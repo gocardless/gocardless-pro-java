@@ -3,9 +3,6 @@ package com.gocardless.pro.resources;
 import java.util.List;
 
 public class RedirectFlow {
-
-
-
     private String createdAt;
 
     public String getCreatedAt() {
@@ -15,8 +12,6 @@ public class RedirectFlow {
     public void setCreatedAt(String createdAt) {
         this.createdAt = createdAt;
     }
-
-
 
     private String description;
 
@@ -28,8 +23,6 @@ public class RedirectFlow {
         this.description = description;
     }
 
-
-
     private String id;
 
     public String getId() {
@@ -39,8 +32,6 @@ public class RedirectFlow {
     public void setId(String id) {
         this.id = id;
     }
-
-
 
     private Object links;
 
@@ -52,8 +43,6 @@ public class RedirectFlow {
         this.links = links;
     }
 
-
-
     private String redirectUrl;
 
     public String getRedirectUrl() {
@@ -64,14 +53,8 @@ public class RedirectFlow {
         this.redirectUrl = redirectUrl;
     }
 
-
-
     public enum Scheme {
-
-        BACS,
-
-        SEPA_CORE,
-
+        BACS, SEPA_CORE,
     }
 
     private Scheme scheme;
@@ -84,8 +67,6 @@ public class RedirectFlow {
         this.scheme = scheme;
     }
 
-
-
     private String sessionToken;
 
     public String getSessionToken() {
@@ -96,8 +77,6 @@ public class RedirectFlow {
         this.sessionToken = sessionToken;
     }
 
-
-
     private String successRedirectUrl;
 
     public String getSuccessRedirectUrl() {
@@ -107,6 +86,4 @@ public class RedirectFlow {
     public void setSuccessRedirectUrl(String successRedirectUrl) {
         this.successRedirectUrl = successRedirectUrl;
     }
-
-
 }

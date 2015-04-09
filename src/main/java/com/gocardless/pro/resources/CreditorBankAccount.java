@@ -3,9 +3,6 @@ package com.gocardless.pro.resources;
 import java.util.List;
 
 public class CreditorBankAccount {
-
-
-
     private String accountHolderName;
 
     public String getAccountHolderName() {
@@ -15,8 +12,6 @@ public class CreditorBankAccount {
     public void setAccountHolderName(String accountHolderName) {
         this.accountHolderName = accountHolderName;
     }
-
-
 
     private String accountNumberEnding;
 
@@ -28,8 +23,6 @@ public class CreditorBankAccount {
         this.accountNumberEnding = accountNumberEnding;
     }
 
-
-
     private String bankName;
 
     public String getBankName() {
@@ -39,8 +32,6 @@ public class CreditorBankAccount {
     public void setBankName(String bankName) {
         this.bankName = bankName;
     }
-
-
 
     private String countryCode;
 
@@ -52,8 +43,6 @@ public class CreditorBankAccount {
         this.countryCode = countryCode;
     }
 
-
-
     private String createdAt;
 
     public String getCreatedAt() {
@@ -63,8 +52,6 @@ public class CreditorBankAccount {
     public void setCreatedAt(String createdAt) {
         this.createdAt = createdAt;
     }
-
-
 
     private String currency;
 
@@ -76,8 +63,6 @@ public class CreditorBankAccount {
         this.currency = currency;
     }
 
-
-
     private Boolean enabled;
 
     public Boolean getEnabled() {
@@ -87,8 +72,6 @@ public class CreditorBankAccount {
     public void setEnabled(Boolean enabled) {
         this.enabled = enabled;
     }
-
-
 
     private String id;
 
@@ -100,8 +83,6 @@ public class CreditorBankAccount {
         this.id = id;
     }
 
-
-
     private Object links;
 
     public Object getLinks() {
@@ -112,8 +93,6 @@ public class CreditorBankAccount {
         this.links = links;
     }
 
-
-
     private Object metadata;
 
     public Object getMetadata() {
@@ -123,6 +102,4 @@ public class CreditorBankAccount {
     public void setMetadata(Object metadata) {
         this.metadata = metadata;
     }
-
-
 }

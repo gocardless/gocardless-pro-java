@@ -3,9 +3,6 @@ package com.gocardless.pro.resources;
 import java.util.List;
 
 public class User {
-
-
-
     private String createdAt;
 
     public String getCreatedAt() {
@@ -15,8 +12,6 @@ public class User {
     public void setCreatedAt(String createdAt) {
         this.createdAt = createdAt;
     }
-
-
 
     private String email;
 
@@ -28,8 +23,6 @@ public class User {
         this.email = email;
     }
 
-
-
     private Boolean enabled;
 
     public Boolean getEnabled() {
@@ -39,8 +32,6 @@ public class User {
     public void setEnabled(Boolean enabled) {
         this.enabled = enabled;
     }
-
-
 
     private String familyName;
 
@@ -52,8 +43,6 @@ public class User {
         this.familyName = familyName;
     }
 
-
-
     private String givenName;
 
     public String getGivenName() {
@@ -63,8 +52,6 @@ public class User {
     public void setGivenName(String givenName) {
         this.givenName = givenName;
     }
-
-
 
     private String id;
 
@@ -76,8 +63,6 @@ public class User {
         this.id = id;
     }
 
-
-
     private Object links;
 
     public Object getLinks() {
@@ -87,6 +72,4 @@ public class User {
     public void setLinks(Object links) {
         this.links = links;
     }
-
-
 }

@@ -3,9 +3,6 @@ package com.gocardless.pro.resources;
 import java.util.List;
 
 public class Role {
-
-
-
     private String createdAt;
 
     public String getCreatedAt() {
@@ -15,8 +12,6 @@ public class Role {
     public void setCreatedAt(String createdAt) {
         this.createdAt = createdAt;
     }
-
-
 
     private Boolean enabled;
 
@@ -28,8 +23,6 @@ public class Role {
         this.enabled = enabled;
     }
 
-
-
     private String id;
 
     public String getId() {
@@ -39,8 +32,6 @@ public class Role {
     public void setId(String id) {
         this.id = id;
     }
-
-
 
     private String name;
 
@@ -52,8 +43,6 @@ public class Role {
         this.name = name;
     }
 
-
-
     private List<Object> permissions;
 
     public List<Object> getPermissions() {
@@ -63,6 +52,4 @@ public class Role {
     public void setPermissions(List<Object> permissions) {
         this.permissions = permissions;
     }
-
-
 }

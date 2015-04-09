@@ -3,9 +3,6 @@ package com.gocardless.pro.resources;
 import java.util.List;
 
 public class Event {
-
-
-
     private String action;
 
     public String getAction() {
@@ -15,8 +12,6 @@ public class Event {
     public void setAction(String action) {
         this.action = action;
     }
-
-
 
     private String createdAt;
 
@@ -28,8 +23,6 @@ public class Event {
         this.createdAt = createdAt;
     }
 
-
-
     private Object details;
 
     public Object getDetails() {
@@ -39,8 +32,6 @@ public class Event {
     public void setDetails(Object details) {
         this.details = details;
     }
-
-
 
     private String id;
 
@@ -52,8 +43,6 @@ public class Event {
         this.id = id;
     }
 
-
-
     private Object links;
 
     public Object getLinks() {
@@ -63,8 +52,6 @@ public class Event {
     public void setLinks(Object links) {
         this.links = links;
     }
-
-
 
     private Object metadata;
 
@@ -76,20 +63,8 @@ public class Event {
         this.metadata = metadata;
     }
 
-
-
     public enum ResourceType {
-
-        PAYMENTS,
-
-        MANDATES,
-
-        PAYOUTS,
-
-        REFUNDS,
-
-        SUBSCRIPTIONS,
-
+        PAYMENTS, MANDATES, PAYOUTS, REFUNDS, SUBSCRIPTIONS,
     }
 
     private ResourceType resourceType;
@@ -101,6 +76,4 @@ public class Event {
     public void setResourceType(ResourceType resourceType) {
         this.resourceType = resourceType;
     }
-
-
 }

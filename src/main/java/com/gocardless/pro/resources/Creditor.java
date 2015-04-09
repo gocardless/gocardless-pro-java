@@ -3,9 +3,6 @@ package com.gocardless.pro.resources;
 import java.util.List;
 
 public class Creditor {
-
-
-
     private String addressLine1;
 
     public String getAddressLine1() {
@@ -15,8 +12,6 @@ public class Creditor {
     public void setAddressLine1(String addressLine1) {
         this.addressLine1 = addressLine1;
     }
-
-
 
     private String addressLine2;
 
@@ -28,8 +23,6 @@ public class Creditor {
         this.addressLine2 = addressLine2;
     }
 
-
-
     private String addressLine3;
 
     public String getAddressLine3() {
@@ -39,8 +32,6 @@ public class Creditor {
     public void setAddressLine3(String addressLine3) {
         this.addressLine3 = addressLine3;
     }
-
-
 
     private String city;
 
@@ -52,8 +43,6 @@ public class Creditor {
         this.city = city;
     }
 
-
-
     private String countryCode;
 
     public String getCountryCode() {
@@ -63,8 +52,6 @@ public class Creditor {
     public void setCountryCode(String countryCode) {
         this.countryCode = countryCode;
     }
-
-
 
     private String createdAt;
 
@@ -76,8 +63,6 @@ public class Creditor {
         this.createdAt = createdAt;
     }
 
-
-
     private String id;
 
     public String getId() {
@@ -87,8 +72,6 @@ public class Creditor {
     public void setId(String id) {
         this.id = id;
     }
-
-
 
     private Object links;
 
@@ -100,8 +83,6 @@ public class Creditor {
         this.links = links;
     }
 
-
-
     private String name;
 
     public String getName() {
@@ -111,8 +92,6 @@ public class Creditor {
     public void setName(String name) {
         this.name = name;
     }
-
-
 
     private String postalCode;
 
@@ -124,8 +103,6 @@ public class Creditor {
         this.postalCode = postalCode;
     }
 
-
-
     private String region;
 
     public String getRegion() {
@@ -135,6 +112,4 @@ public class Creditor {
     public void setRegion(String region) {
         this.region = region;
     }
-
-
 }

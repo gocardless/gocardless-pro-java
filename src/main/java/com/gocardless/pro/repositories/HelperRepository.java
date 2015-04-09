@@ -18,20 +18,11 @@ public class HelperRepository {
         this.httpClient = httpClient;
     }
 
-
-
     public void mandate() throws IOException {
         throw new IllegalStateException("Not implemented!");
-
     }
-
-
 
     public void modulusCheck() throws IOException {
         throw new IllegalStateException("Not implemented!");
-
     }
-
-
-
 }

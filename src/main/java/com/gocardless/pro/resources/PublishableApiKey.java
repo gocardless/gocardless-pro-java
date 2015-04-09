@@ -3,9 +3,6 @@ package com.gocardless.pro.resources;
 import java.util.List;
 
 public class PublishableApiKey {
-
-
-
     private String createdAt;
 
     public String getCreatedAt() {
@@ -15,8 +12,6 @@ public class PublishableApiKey {
     public void setCreatedAt(String createdAt) {
         this.createdAt = createdAt;
     }
-
-
 
     private Boolean enabled;
 
@@ -28,8 +23,6 @@ public class PublishableApiKey {
         this.enabled = enabled;
     }
 
-
-
     private String id;
 
     public String getId() {
@@ -39,8 +32,6 @@ public class PublishableApiKey {
     public void setId(String id) {
         this.id = id;
     }
-
-
 
     private String key;
 
@@ -52,8 +43,6 @@ public class PublishableApiKey {
         this.key = key;
     }
 
-
-
     private String name;
 
     public String getName() {
@@ -63,6 +52,4 @@ public class PublishableApiKey {
     public void setName(String name) {
         this.name = name;
     }
-
-
 }
