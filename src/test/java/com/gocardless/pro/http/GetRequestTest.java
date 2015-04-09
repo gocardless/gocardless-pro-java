@@ -32,7 +32,7 @@ public class GetRequestTest extends HttpRequestTest {
         }
 
         @Override
-        protected ImmutableMap<String, String> getParams() {
+        protected ImmutableMap<String, String> getPathParams() {
             return ImmutableMap.of("id", "123");
         }
     }

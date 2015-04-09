@@ -10,13 +10,13 @@ public class Subscription {
         
             
 
-            private int amount;
+            private Integer amount;
 
-            public int getAmount() {
+            public Integer getAmount() {
                 return amount;
             }
 
-            public void setAmount(int amount) {
+            public void setAmount(Integer amount) {
                 this.amount = amount;
             }
         
@@ -25,13 +25,13 @@ public class Subscription {
         
             
 
-            private int count;
+            private Integer count;
 
-            public int getCount() {
+            public Integer getCount() {
                 return count;
             }
 
-            public void setCount(int count) {
+            public void setCount(Integer count) {
                 this.count = count;
             }
         
@@ -70,13 +70,13 @@ public class Subscription {
         
             
 
-            private int dayOfMonth;
+            private Integer dayOfMonth;
 
-            public int getDayOfMonth() {
+            public Integer getDayOfMonth() {
                 return dayOfMonth;
             }
 
-            public void setDayOfMonth(int dayOfMonth) {
+            public void setDayOfMonth(Integer dayOfMonth) {
                 this.dayOfMonth = dayOfMonth;
             }
         
@@ -115,13 +115,13 @@ public class Subscription {
         
             
 
-            private int interval;
+            private Integer interval;
 
-            public int getInterval() {
+            public Integer getInterval() {
                 return interval;
             }
 
-            public void setInterval(int interval) {
+            public void setInterval(Integer interval) {
                 this.interval = interval;
             }
         

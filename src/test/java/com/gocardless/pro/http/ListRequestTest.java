@@ -12,13 +12,14 @@ import static com.xebialabs.restito.builder.stub.StubHttp.whenHttp;
 import static com.xebialabs.restito.semantics.Action.resourceContent;
 import static com.xebialabs.restito.semantics.Action.status;
 import static com.xebialabs.restito.semantics.Condition.get;
+import static com.xebialabs.restito.semantics.Condition.parameter;
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class ListRequestTest extends HttpRequestTest {
     @Test
     public void shouldPerformListRequest() throws IOException {
         whenHttp(server).
-                match(get("/dummy/123")).
+                match(get("/dummy"), parameter("id", "123")).
                 then(status(HttpStatus.OK_200), resourceContent("fixtures/multiple.json"));
 
         DummyListRequest request = new DummyListRequest();
@@ -35,12 +36,12 @@ public class ListRequestTest extends HttpRequestTest {
 
     private class DummyListRequest extends ListRequest<DummyItem> {
         public DummyListRequest() {
-            super(client, "/dummy/:id", "items", new TypeToken<List<DummyItem>>(){});
+            super(client, "/dummy", "items", new TypeToken<List<DummyItem>>(){});
         }
 
         @Override
-        protected ImmutableMap<String, String> getParams() {
-            return ImmutableMap.of("id", "123");
+        protected ImmutableMap<String, Object> getQueryParams() {
+            return ImmutableMap.<String, Object>of("id", "123");
         }
     }
 }

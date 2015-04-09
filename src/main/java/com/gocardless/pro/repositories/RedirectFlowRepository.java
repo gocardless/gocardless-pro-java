@@ -54,9 +54,11 @@ public class RedirectFlowRepository {
     
         
         
-            public final class RedirectFlowGetRequest extends GetRequest<RedirectFlow> {
+            public static final class RedirectFlowGetRequest extends GetRequest<RedirectFlow> {
               
                   private final String identity;
+              
+
               
 
               private RedirectFlowGetRequest(HttpClient httpClient
@@ -76,16 +78,20 @@ public class RedirectFlowRepository {
                   
               }
 
-              @Override
-              protected Map<String, String> getParams() {
-                  ImmutableMap.Builder<String, String> params = ImmutableMap.builder();
+              
+                  @Override
+                  protected Map<String, String> getPathParams() {
+                      ImmutableMap.Builder<String, String> params = ImmutableMap.builder();
 
-                  
-                      params.put("identity", identity);
-                  
+                      
+                          params.put("identity", identity);
+                      
 
-                  return params.build();
-              }
+                      return params.build();
+                  }
+              
+
+              
             }
         
     

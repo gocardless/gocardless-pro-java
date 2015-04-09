@@ -63,7 +63,63 @@ public class RefundRepository {
     
         
         
-            public final class RefundListRequest extends ListRequest<Refund> {
+            public static final class RefundListRequest extends ListRequest<Refund> {
+              
+
+              
+                  
+                      
+
+                      
+                          
+
+                          private String after;
+
+                          public RefundListRequest withAfter(String after) {
+                              this.after = after;
+                              return this;
+                          }
+                      
+                  
+                      
+
+                      
+                          
+
+                          private String before;
+
+                          public RefundListRequest withBefore(String before) {
+                              this.before = before;
+                              return this;
+                          }
+                      
+                  
+                      
+
+                      
+                          
+
+                          private Integer limit;
+
+                          public RefundListRequest withLimit(Integer limit) {
+                              this.limit = limit;
+                              return this;
+                          }
+                      
+                  
+                      
+
+                      
+                          
+
+                          private String payment;
+
+                          public RefundListRequest withPayment(String payment) {
+                              this.payment = payment;
+                              return this;
+                          }
+                      
+                  
               
 
               private RefundListRequest(HttpClient httpClient
@@ -78,22 +134,44 @@ public class RefundRepository {
                   
               }
 
-              @Override
-              protected Map<String, String> getParams() {
-                  ImmutableMap.Builder<String, String> params = ImmutableMap.builder();
+              
 
-                  
+              
+                  @Override
+                  protected Map<String, Object> getQueryParams() {
+                      ImmutableMap.Builder<String, Object> params = ImmutableMap.builder();
 
-                  return params.build();
-              }
+                      
+                          if (after != null) {
+                              params.put("after", after);
+                          }
+                      
+                          if (before != null) {
+                              params.put("before", before);
+                          }
+                      
+                          if (limit != null) {
+                              params.put("limit", limit);
+                          }
+                      
+                          if (payment != null) {
+                              params.put("payment", payment);
+                          }
+                      
+
+                      return params.build();
+                  }
+              
             }
         
     
         
         
-            public final class RefundGetRequest extends GetRequest<Refund> {
+            public static final class RefundGetRequest extends GetRequest<Refund> {
               
                   private final String identity;
+              
+
               
 
               private RefundGetRequest(HttpClient httpClient
@@ -113,16 +191,20 @@ public class RefundRepository {
                   
               }
 
-              @Override
-              protected Map<String, String> getParams() {
-                  ImmutableMap.Builder<String, String> params = ImmutableMap.builder();
+              
+                  @Override
+                  protected Map<String, String> getPathParams() {
+                      ImmutableMap.Builder<String, String> params = ImmutableMap.builder();
 
-                  
-                      params.put("identity", identity);
-                  
+                      
+                          params.put("identity", identity);
+                      
 
-                  return params.build();
-              }
+                      return params.build();
+                  }
+              
+
+              
             }
         
     

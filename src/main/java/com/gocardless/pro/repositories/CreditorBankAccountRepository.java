@@ -63,7 +63,84 @@ public class CreditorBankAccountRepository {
     
         
         
-            public final class CreditorBankAccountListRequest extends ListRequest<CreditorBankAccount> {
+            public static final class CreditorBankAccountListRequest extends ListRequest<CreditorBankAccount> {
+              
+
+              
+                  
+                      
+
+                      
+                          
+
+                          private String after;
+
+                          public CreditorBankAccountListRequest withAfter(String after) {
+                              this.after = after;
+                              return this;
+                          }
+                      
+                  
+                      
+
+                      
+                          
+
+                          private String before;
+
+                          public CreditorBankAccountListRequest withBefore(String before) {
+                              this.before = before;
+                              return this;
+                          }
+                      
+                  
+                      
+
+                      
+                          
+
+                          private String creditor;
+
+                          public CreditorBankAccountListRequest withCreditor(String creditor) {
+                              this.creditor = creditor;
+                              return this;
+                          }
+                      
+                  
+                      
+
+                      
+                          
+
+                          public enum Enabled {
+                              
+                                  TRUE,
+                              
+                                  FALSE,
+                              
+                          }
+
+                          private Enabled enabled;
+
+                          public CreditorBankAccountListRequest withEnabled(Enabled enabled) {
+                              this.enabled = enabled;
+                              return this;
+                          }
+                      
+                  
+                      
+
+                      
+                          
+
+                          private Integer limit;
+
+                          public CreditorBankAccountListRequest withLimit(Integer limit) {
+                              this.limit = limit;
+                              return this;
+                          }
+                      
+                  
               
 
               private CreditorBankAccountListRequest(HttpClient httpClient
@@ -78,22 +155,48 @@ public class CreditorBankAccountRepository {
                   
               }
 
-              @Override
-              protected Map<String, String> getParams() {
-                  ImmutableMap.Builder<String, String> params = ImmutableMap.builder();
+              
 
-                  
+              
+                  @Override
+                  protected Map<String, Object> getQueryParams() {
+                      ImmutableMap.Builder<String, Object> params = ImmutableMap.builder();
 
-                  return params.build();
-              }
+                      
+                          if (after != null) {
+                              params.put("after", after);
+                          }
+                      
+                          if (before != null) {
+                              params.put("before", before);
+                          }
+                      
+                          if (creditor != null) {
+                              params.put("creditor", creditor);
+                          }
+                      
+                          if (enabled != null) {
+                              params.put("enabled", enabled);
+                          }
+                      
+                          if (limit != null) {
+                              params.put("limit", limit);
+                          }
+                      
+
+                      return params.build();
+                  }
+              
             }
         
     
         
         
-            public final class CreditorBankAccountGetRequest extends GetRequest<CreditorBankAccount> {
+            public static final class CreditorBankAccountGetRequest extends GetRequest<CreditorBankAccount> {
               
                   private final String identity;
+              
+
               
 
               private CreditorBankAccountGetRequest(HttpClient httpClient
@@ -113,16 +216,20 @@ public class CreditorBankAccountRepository {
                   
               }
 
-              @Override
-              protected Map<String, String> getParams() {
-                  ImmutableMap.Builder<String, String> params = ImmutableMap.builder();
+              
+                  @Override
+                  protected Map<String, String> getPathParams() {
+                      ImmutableMap.Builder<String, String> params = ImmutableMap.builder();
 
-                  
-                      params.put("identity", identity);
-                  
+                      
+                          params.put("identity", identity);
+                      
 
-                  return params.build();
-              }
+                      return params.build();
+                  }
+              
+
+              
             }
         
     

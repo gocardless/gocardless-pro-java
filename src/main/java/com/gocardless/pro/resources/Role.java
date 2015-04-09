@@ -25,13 +25,13 @@ public class Role {
         
             
 
-            private boolean enabled;
+            private Boolean enabled;
 
-            public boolean getEnabled() {
+            public Boolean getEnabled() {
                 return enabled;
             }
 
-            public void setEnabled(boolean enabled) {
+            public void setEnabled(Boolean enabled) {
                 this.enabled = enabled;
             }
         

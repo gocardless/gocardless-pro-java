@@ -63,7 +63,63 @@ public class CustomerRepository {
     
         
         
-            public final class CustomerListRequest extends ListRequest<Customer> {
+            public static final class CustomerListRequest extends ListRequest<Customer> {
+              
+
+              
+                  
+                      
+
+                      
+                          
+
+                          private String after;
+
+                          public CustomerListRequest withAfter(String after) {
+                              this.after = after;
+                              return this;
+                          }
+                      
+                  
+                      
+
+                      
+                          
+
+                          private String before;
+
+                          public CustomerListRequest withBefore(String before) {
+                              this.before = before;
+                              return this;
+                          }
+                      
+                  
+                      
+
+                      
+                          
+
+                          private Object createdAt;
+
+                          public CustomerListRequest withCreatedAt(Object createdAt) {
+                              this.createdAt = createdAt;
+                              return this;
+                          }
+                      
+                  
+                      
+
+                      
+                          
+
+                          private Integer limit;
+
+                          public CustomerListRequest withLimit(Integer limit) {
+                              this.limit = limit;
+                              return this;
+                          }
+                      
+                  
               
 
               private CustomerListRequest(HttpClient httpClient
@@ -78,22 +134,44 @@ public class CustomerRepository {
                   
               }
 
-              @Override
-              protected Map<String, String> getParams() {
-                  ImmutableMap.Builder<String, String> params = ImmutableMap.builder();
+              
 
-                  
+              
+                  @Override
+                  protected Map<String, Object> getQueryParams() {
+                      ImmutableMap.Builder<String, Object> params = ImmutableMap.builder();
 
-                  return params.build();
-              }
+                      
+                          if (after != null) {
+                              params.put("after", after);
+                          }
+                      
+                          if (before != null) {
+                              params.put("before", before);
+                          }
+                      
+                          if (createdAt != null) {
+                              params.put("created_at", createdAt);
+                          }
+                      
+                          if (limit != null) {
+                              params.put("limit", limit);
+                          }
+                      
+
+                      return params.build();
+                  }
+              
             }
         
     
         
         
-            public final class CustomerGetRequest extends GetRequest<Customer> {
+            public static final class CustomerGetRequest extends GetRequest<Customer> {
               
                   private final String identity;
+              
+
               
 
               private CustomerGetRequest(HttpClient httpClient
@@ -113,16 +191,20 @@ public class CustomerRepository {
                   
               }
 
-              @Override
-              protected Map<String, String> getParams() {
-                  ImmutableMap.Builder<String, String> params = ImmutableMap.builder();
+              
+                  @Override
+                  protected Map<String, String> getPathParams() {
+                      ImmutableMap.Builder<String, String> params = ImmutableMap.builder();
 
-                  
-                      params.put("identity", identity);
-                  
+                      
+                          params.put("identity", identity);
+                      
 
-                  return params.build();
-              }
+                      return params.build();
+                  }
+              
+
+              
             }
         
     

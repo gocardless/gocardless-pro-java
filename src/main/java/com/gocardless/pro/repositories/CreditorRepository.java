@@ -63,7 +63,50 @@ public class CreditorRepository {
     
         
         
-            public final class CreditorListRequest extends ListRequest<Creditor> {
+            public static final class CreditorListRequest extends ListRequest<Creditor> {
+              
+
+              
+                  
+                      
+
+                      
+                          
+
+                          private String after;
+
+                          public CreditorListRequest withAfter(String after) {
+                              this.after = after;
+                              return this;
+                          }
+                      
+                  
+                      
+
+                      
+                          
+
+                          private String before;
+
+                          public CreditorListRequest withBefore(String before) {
+                              this.before = before;
+                              return this;
+                          }
+                      
+                  
+                      
+
+                      
+                          
+
+                          private Integer limit;
+
+                          public CreditorListRequest withLimit(Integer limit) {
+                              this.limit = limit;
+                              return this;
+                          }
+                      
+                  
               
 
               private CreditorListRequest(HttpClient httpClient
@@ -78,22 +121,40 @@ public class CreditorRepository {
                   
               }
 
-              @Override
-              protected Map<String, String> getParams() {
-                  ImmutableMap.Builder<String, String> params = ImmutableMap.builder();
+              
 
-                  
+              
+                  @Override
+                  protected Map<String, Object> getQueryParams() {
+                      ImmutableMap.Builder<String, Object> params = ImmutableMap.builder();
 
-                  return params.build();
-              }
+                      
+                          if (after != null) {
+                              params.put("after", after);
+                          }
+                      
+                          if (before != null) {
+                              params.put("before", before);
+                          }
+                      
+                          if (limit != null) {
+                              params.put("limit", limit);
+                          }
+                      
+
+                      return params.build();
+                  }
+              
             }
         
     
         
         
-            public final class CreditorGetRequest extends GetRequest<Creditor> {
+            public static final class CreditorGetRequest extends GetRequest<Creditor> {
               
                   private final String identity;
+              
+
               
 
               private CreditorGetRequest(HttpClient httpClient
@@ -113,16 +174,20 @@ public class CreditorRepository {
                   
               }
 
-              @Override
-              protected Map<String, String> getParams() {
-                  ImmutableMap.Builder<String, String> params = ImmutableMap.builder();
+              
+                  @Override
+                  protected Map<String, String> getPathParams() {
+                      ImmutableMap.Builder<String, String> params = ImmutableMap.builder();
 
-                  
-                      params.put("identity", identity);
-                  
+                      
+                          params.put("identity", identity);
+                      
 
-                  return params.build();
-              }
+                      return params.build();
+                  }
+              
+
+              
             }
         
     

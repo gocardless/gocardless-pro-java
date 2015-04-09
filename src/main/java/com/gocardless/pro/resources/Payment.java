@@ -10,13 +10,13 @@ public class Payment {
         
             
 
-            private int amount;
+            private Integer amount;
 
-            public int getAmount() {
+            public Integer getAmount() {
                 return amount;
             }
 
-            public void setAmount(int amount) {
+            public void setAmount(Integer amount) {
                 this.amount = amount;
             }
         
@@ -25,13 +25,13 @@ public class Payment {
         
             
 
-            private int amountRefunded;
+            private Integer amountRefunded;
 
-            public int getAmountRefunded() {
+            public Integer getAmountRefunded() {
                 return amountRefunded;
             }
 
-            public void setAmountRefunded(int amountRefunded) {
+            public void setAmountRefunded(Integer amountRefunded) {
                 this.amountRefunded = amountRefunded;
             }
         

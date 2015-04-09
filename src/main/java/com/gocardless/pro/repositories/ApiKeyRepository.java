@@ -70,7 +70,84 @@ public class ApiKeyRepository {
     
         
         
-            public final class ApiKeyListRequest extends ListRequest<ApiKey> {
+            public static final class ApiKeyListRequest extends ListRequest<ApiKey> {
+              
+
+              
+                  
+                      
+
+                      
+                          
+
+                          private String after;
+
+                          public ApiKeyListRequest withAfter(String after) {
+                              this.after = after;
+                              return this;
+                          }
+                      
+                  
+                      
+
+                      
+                          
+
+                          private String before;
+
+                          public ApiKeyListRequest withBefore(String before) {
+                              this.before = before;
+                              return this;
+                          }
+                      
+                  
+                      
+
+                      
+                          
+
+                          public enum Enabled {
+                              
+                                  TRUE,
+                              
+                                  FALSE,
+                              
+                          }
+
+                          private Enabled enabled;
+
+                          public ApiKeyListRequest withEnabled(Enabled enabled) {
+                              this.enabled = enabled;
+                              return this;
+                          }
+                      
+                  
+                      
+
+                      
+                          
+
+                          private Integer limit;
+
+                          public ApiKeyListRequest withLimit(Integer limit) {
+                              this.limit = limit;
+                              return this;
+                          }
+                      
+                  
+                      
+
+                      
+                          
+
+                          private String role;
+
+                          public ApiKeyListRequest withRole(String role) {
+                              this.role = role;
+                              return this;
+                          }
+                      
+                  
               
 
               private ApiKeyListRequest(HttpClient httpClient
@@ -85,22 +162,48 @@ public class ApiKeyRepository {
                   
               }
 
-              @Override
-              protected Map<String, String> getParams() {
-                  ImmutableMap.Builder<String, String> params = ImmutableMap.builder();
+              
 
-                  
+              
+                  @Override
+                  protected Map<String, Object> getQueryParams() {
+                      ImmutableMap.Builder<String, Object> params = ImmutableMap.builder();
 
-                  return params.build();
-              }
+                      
+                          if (after != null) {
+                              params.put("after", after);
+                          }
+                      
+                          if (before != null) {
+                              params.put("before", before);
+                          }
+                      
+                          if (enabled != null) {
+                              params.put("enabled", enabled);
+                          }
+                      
+                          if (limit != null) {
+                              params.put("limit", limit);
+                          }
+                      
+                          if (role != null) {
+                              params.put("role", role);
+                          }
+                      
+
+                      return params.build();
+                  }
+              
             }
         
     
         
         
-            public final class ApiKeyGetRequest extends GetRequest<ApiKey> {
+            public static final class ApiKeyGetRequest extends GetRequest<ApiKey> {
               
                   private final String identity;
+              
+
               
 
               private ApiKeyGetRequest(HttpClient httpClient
@@ -120,16 +223,20 @@ public class ApiKeyRepository {
                   
               }
 
-              @Override
-              protected Map<String, String> getParams() {
-                  ImmutableMap.Builder<String, String> params = ImmutableMap.builder();
+              
+                  @Override
+                  protected Map<String, String> getPathParams() {
+                      ImmutableMap.Builder<String, String> params = ImmutableMap.builder();
 
-                  
-                      params.put("identity", identity);
-                  
+                      
+                          params.put("identity", identity);
+                      
 
-                  return params.build();
-              }
+                      return params.build();
+                  }
+              
+
+              
             }
         
     

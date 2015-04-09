@@ -1,5 +1,7 @@
 package com.gocardless.pro.http;
 
+import com.google.common.collect.ImmutableMap;
+
 import java.io.IOException;
 import java.io.Reader;
 import java.net.URL;
@@ -19,10 +21,16 @@ public abstract class HttpRequest<T> {
     }
 
     URL getUrl(UrlFormatter urlFormatter) {
-        return urlFormatter.formatUrl(pathTemplate, getParams());
+        return urlFormatter.formatUrl(pathTemplate, getPathParams(), getQueryParams());
     }
 
-    protected abstract Map<String, String> getParams();
+    protected Map<String, String> getPathParams() {
+        return ImmutableMap.of();
+    }
+
+    protected Map<String, Object> getQueryParams() {
+        return ImmutableMap.of();
+    }
 
     abstract T parseResponse(Reader stream, ResponseParser responseParser);
 }
