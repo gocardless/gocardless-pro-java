@@ -10,7 +10,7 @@ interactions:
       Connection: Keep-Alive
       GoCardless-Version: '2014-11-03'
       Host: api-sandbox.gocardless.com
-      User-Agent: okhttp/2.3.0
+      User-Agent: gocardless-pro-client/0.0.1-SNAPSHOT Mac_OS_X/10.10.2 Java_HotSpot(TM)_64-Bit_Server_VM/1.8.0_40
   response:
     status: 200
     headers:

@@ -1,9 +1,9 @@
-package com.gocardless.pro.repositories;
+package com.gocardless.pro.services;
 
 import com.gocardless.pro.http.GetRequest;
 import com.gocardless.pro.http.HttpClient;
 import com.gocardless.pro.http.ListRequest;
-import com.gocardless.pro.resources.PublishableApiKey;
+import com.gocardless.pro.resources.CustomerBankAccount;
 import com.google.common.collect.ImmutableMap;
 import com.google.gson.reflect.TypeToken;
 
@@ -11,10 +11,10 @@ import java.io.IOException;
 import java.util.List;
 import java.util.Map;
 
-public class PublishableApiKeyRepository {
+public class CustomerBankAccountService {
     private HttpClient httpClient;
 
-    public PublishableApiKeyRepository(HttpClient httpClient) {
+    public CustomerBankAccountService(HttpClient httpClient) {
         this.httpClient = httpClient;
     }
 
@@ -22,12 +22,12 @@ public class PublishableApiKeyRepository {
         throw new IllegalStateException("Not implemented!");
     }
 
-    public PublishableApiKeyListRequest list() throws IOException {
-        return new PublishableApiKeyListRequest(httpClient);
+    public CustomerBankAccountListRequest list() throws IOException {
+        return new CustomerBankAccountListRequest(httpClient);
     }
 
-    public PublishableApiKeyGetRequest get(String identity) throws IOException {
-        return new PublishableApiKeyGetRequest(httpClient, identity);
+    public CustomerBankAccountGetRequest get(String identity) throws IOException {
+        return new CustomerBankAccountGetRequest(httpClient, identity);
     }
 
     public void update(String identity) throws IOException {
@@ -38,18 +38,26 @@ public class PublishableApiKeyRepository {
         throw new IllegalStateException("Not implemented!");
     }
 
-    public static final class PublishableApiKeyListRequest extends ListRequest<PublishableApiKey> {
+    public static final class CustomerBankAccountListRequest extends
+            ListRequest<CustomerBankAccount> {
         private String after;
 
-        public PublishableApiKeyListRequest withAfter(String after) {
+        public CustomerBankAccountListRequest withAfter(String after) {
             this.after = after;
             return this;
         }
 
         private String before;
 
-        public PublishableApiKeyListRequest withBefore(String before) {
+        public CustomerBankAccountListRequest withBefore(String before) {
             this.before = before;
+            return this;
+        }
+
+        private String customer;
+
+        public CustomerBankAccountListRequest withCustomer(String customer) {
+            this.customer = customer;
             return this;
         }
 
@@ -59,21 +67,21 @@ public class PublishableApiKeyRepository {
 
         private Enabled enabled;
 
-        public PublishableApiKeyListRequest withEnabled(Enabled enabled) {
+        public CustomerBankAccountListRequest withEnabled(Enabled enabled) {
             this.enabled = enabled;
             return this;
         }
 
         private Integer limit;
 
-        public PublishableApiKeyListRequest withLimit(Integer limit) {
+        public CustomerBankAccountListRequest withLimit(Integer limit) {
             this.limit = limit;
             return this;
         }
 
-        private PublishableApiKeyListRequest(HttpClient httpClient) {
-            super(httpClient, "/publishable_api_keys", "publishable_api_keys",
-                    new TypeToken<List<PublishableApiKey>>() {});
+        private CustomerBankAccountListRequest(HttpClient httpClient) {
+            super(httpClient, "/customer_bank_accounts", "customer_bank_accounts",
+                    new TypeToken<List<CustomerBankAccount>>() {});
         }
 
         @Override
@@ -85,6 +93,9 @@ public class PublishableApiKeyRepository {
             if (before != null) {
                 params.put("before", before);
             }
+            if (customer != null) {
+                params.put("customer", customer);
+            }
             if (enabled != null) {
                 params.put("enabled", enabled);
             }
@@ -95,12 +106,12 @@ public class PublishableApiKeyRepository {
         }
     }
 
-    public static final class PublishableApiKeyGetRequest extends GetRequest<PublishableApiKey> {
+    public static final class CustomerBankAccountGetRequest extends GetRequest<CustomerBankAccount> {
         private final String identity;
 
-        private PublishableApiKeyGetRequest(HttpClient httpClient, String identity) {
-            super(httpClient, "/publishable_api_keys/:identity", "publishable_api_keys",
-                    PublishableApiKey.class);
+        private CustomerBankAccountGetRequest(HttpClient httpClient, String identity) {
+            super(httpClient, "/customer_bank_accounts/:identity", "customer_bank_accounts",
+                    CustomerBankAccount.class);
             this.identity = identity;
         }
 

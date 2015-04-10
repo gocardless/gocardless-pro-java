@@ -1,9 +1,9 @@
-package com.gocardless.pro.repositories;
+package com.gocardless.pro.services;
 
 import com.gocardless.pro.http.GetRequest;
 import com.gocardless.pro.http.HttpClient;
 import com.gocardless.pro.http.ListRequest;
-import com.gocardless.pro.resources.User;
+import com.gocardless.pro.resources.Customer;
 import com.google.common.collect.ImmutableMap;
 import com.google.gson.reflect.TypeToken;
 
@@ -11,10 +11,10 @@ import java.io.IOException;
 import java.util.List;
 import java.util.Map;
 
-public class UserRepository {
+public class CustomerService {
     private HttpClient httpClient;
 
-    public UserRepository(HttpClient httpClient) {
+    public CustomerService(HttpClient httpClient) {
         this.httpClient = httpClient;
     }
 
@@ -22,68 +22,49 @@ public class UserRepository {
         throw new IllegalStateException("Not implemented!");
     }
 
-    public UserListRequest list() throws IOException {
-        return new UserListRequest(httpClient);
+    public CustomerListRequest list() throws IOException {
+        return new CustomerListRequest(httpClient);
     }
 
-    public UserGetRequest get(String identity) throws IOException {
-        return new UserGetRequest(httpClient, identity);
+    public CustomerGetRequest get(String identity) throws IOException {
+        return new CustomerGetRequest(httpClient, identity);
     }
 
     public void update(String identity) throws IOException {
         throw new IllegalStateException("Not implemented!");
     }
 
-    public void enable(String identity) throws IOException {
-        throw new IllegalStateException("Not implemented!");
-    }
-
-    public void disable(String identity) throws IOException {
-        throw new IllegalStateException("Not implemented!");
-    }
-
-    public static final class UserListRequest extends ListRequest<User> {
+    public static final class CustomerListRequest extends ListRequest<Customer> {
         private String after;
 
-        public UserListRequest withAfter(String after) {
+        public CustomerListRequest withAfter(String after) {
             this.after = after;
             return this;
         }
 
         private String before;
 
-        public UserListRequest withBefore(String before) {
+        public CustomerListRequest withBefore(String before) {
             this.before = before;
             return this;
         }
 
-        public enum Enabled {
-            TRUE, FALSE,
-        }
+        private Object createdAt;
 
-        private Enabled enabled;
-
-        public UserListRequest withEnabled(Enabled enabled) {
-            this.enabled = enabled;
+        public CustomerListRequest withCreatedAt(Object createdAt) {
+            this.createdAt = createdAt;
             return this;
         }
 
         private Integer limit;
 
-        public UserListRequest withLimit(Integer limit) {
+        public CustomerListRequest withLimit(Integer limit) {
             this.limit = limit;
             return this;
         }
 
-        private String role;
-
-        public UserListRequest withRole(String role) {
-            this.role = role;
-            return this;
-        }
-
-        private UserListRequest(HttpClient httpClient) {
-            super(httpClient, "/users", "users", new TypeToken<List<User>>() {});
+        private CustomerListRequest(HttpClient httpClient) {
+            super(httpClient, "/customers", "customers", new TypeToken<List<Customer>>() {});
         }
 
         @Override
@@ -95,24 +76,21 @@ public class UserRepository {
             if (before != null) {
                 params.put("before", before);
             }
-            if (enabled != null) {
-                params.put("enabled", enabled);
+            if (createdAt != null) {
+                params.put("created_at", createdAt);
             }
             if (limit != null) {
                 params.put("limit", limit);
-            }
-            if (role != null) {
-                params.put("role", role);
             }
             return params.build();
         }
     }
 
-    public static final class UserGetRequest extends GetRequest<User> {
+    public static final class CustomerGetRequest extends GetRequest<Customer> {
         private final String identity;
 
-        private UserGetRequest(HttpClient httpClient, String identity) {
-            super(httpClient, "/users/:identity", "users", User.class);
+        private CustomerGetRequest(HttpClient httpClient, String identity) {
+            super(httpClient, "/customers/:identity", "customers", Customer.class);
             this.identity = identity;
         }
 

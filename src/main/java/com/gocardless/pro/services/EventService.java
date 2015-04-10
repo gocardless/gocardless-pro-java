@@ -1,4 +1,4 @@
-package com.gocardless.pro.repositories;
+package com.gocardless.pro.services;
 
 import com.gocardless.pro.http.GetRequest;
 import com.gocardless.pro.http.HttpClient;
@@ -11,10 +11,10 @@ import java.io.IOException;
 import java.util.List;
 import java.util.Map;
 
-public class EventRepository {
+public class EventService {
     private HttpClient httpClient;
 
-    public EventRepository(HttpClient httpClient) {
+    public EventService(HttpClient httpClient) {
         this.httpClient = httpClient;
     }
 

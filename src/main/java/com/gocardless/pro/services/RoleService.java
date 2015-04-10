@@ -1,9 +1,9 @@
-package com.gocardless.pro.repositories;
+package com.gocardless.pro.services;
 
 import com.gocardless.pro.http.GetRequest;
 import com.gocardless.pro.http.HttpClient;
 import com.gocardless.pro.http.ListRequest;
-import com.gocardless.pro.resources.Customer;
+import com.gocardless.pro.resources.Role;
 import com.google.common.collect.ImmutableMap;
 import com.google.gson.reflect.TypeToken;
 
@@ -11,10 +11,10 @@ import java.io.IOException;
 import java.util.List;
 import java.util.Map;
 
-public class CustomerRepository {
+public class RoleService {
     private HttpClient httpClient;
 
-    public CustomerRepository(HttpClient httpClient) {
+    public RoleService(HttpClient httpClient) {
         this.httpClient = httpClient;
     }
 
@@ -22,49 +22,57 @@ public class CustomerRepository {
         throw new IllegalStateException("Not implemented!");
     }
 
-    public CustomerListRequest list() throws IOException {
-        return new CustomerListRequest(httpClient);
+    public RoleListRequest list() throws IOException {
+        return new RoleListRequest(httpClient);
     }
 
-    public CustomerGetRequest get(String identity) throws IOException {
-        return new CustomerGetRequest(httpClient, identity);
+    public RoleGetRequest get(String identity) throws IOException {
+        return new RoleGetRequest(httpClient, identity);
     }
 
     public void update(String identity) throws IOException {
         throw new IllegalStateException("Not implemented!");
     }
 
-    public static final class CustomerListRequest extends ListRequest<Customer> {
+    public void disable(String identity) throws IOException {
+        throw new IllegalStateException("Not implemented!");
+    }
+
+    public static final class RoleListRequest extends ListRequest<Role> {
         private String after;
 
-        public CustomerListRequest withAfter(String after) {
+        public RoleListRequest withAfter(String after) {
             this.after = after;
             return this;
         }
 
         private String before;
 
-        public CustomerListRequest withBefore(String before) {
+        public RoleListRequest withBefore(String before) {
             this.before = before;
             return this;
         }
 
-        private Object createdAt;
+        public enum Enabled {
+            TRUE, FALSE,
+        }
 
-        public CustomerListRequest withCreatedAt(Object createdAt) {
-            this.createdAt = createdAt;
+        private Enabled enabled;
+
+        public RoleListRequest withEnabled(Enabled enabled) {
+            this.enabled = enabled;
             return this;
         }
 
         private Integer limit;
 
-        public CustomerListRequest withLimit(Integer limit) {
+        public RoleListRequest withLimit(Integer limit) {
             this.limit = limit;
             return this;
         }
 
-        private CustomerListRequest(HttpClient httpClient) {
-            super(httpClient, "/customers", "customers", new TypeToken<List<Customer>>() {});
+        private RoleListRequest(HttpClient httpClient) {
+            super(httpClient, "/roles", "roles", new TypeToken<List<Role>>() {});
         }
 
         @Override
@@ -76,8 +84,8 @@ public class CustomerRepository {
             if (before != null) {
                 params.put("before", before);
             }
-            if (createdAt != null) {
-                params.put("created_at", createdAt);
+            if (enabled != null) {
+                params.put("enabled", enabled);
             }
             if (limit != null) {
                 params.put("limit", limit);
@@ -86,11 +94,11 @@ public class CustomerRepository {
         }
     }
 
-    public static final class CustomerGetRequest extends GetRequest<Customer> {
+    public static final class RoleGetRequest extends GetRequest<Role> {
         private final String identity;
 
-        private CustomerGetRequest(HttpClient httpClient, String identity) {
-            super(httpClient, "/customers/:identity", "customers", Customer.class);
+        private RoleGetRequest(HttpClient httpClient, String identity) {
+            super(httpClient, "/roles/:identity", "roles", Role.class);
             this.identity = identity;
         }
 

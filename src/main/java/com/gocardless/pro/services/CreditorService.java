@@ -1,9 +1,9 @@
-package com.gocardless.pro.repositories;
+package com.gocardless.pro.services;
 
 import com.gocardless.pro.http.GetRequest;
 import com.gocardless.pro.http.HttpClient;
 import com.gocardless.pro.http.ListRequest;
-import com.gocardless.pro.resources.Refund;
+import com.gocardless.pro.resources.Creditor;
 import com.google.common.collect.ImmutableMap;
 import com.google.gson.reflect.TypeToken;
 
@@ -11,10 +11,10 @@ import java.io.IOException;
 import java.util.List;
 import java.util.Map;
 
-public class RefundRepository {
+public class CreditorService {
     private HttpClient httpClient;
 
-    public RefundRepository(HttpClient httpClient) {
+    public CreditorService(HttpClient httpClient) {
         this.httpClient = httpClient;
     }
 
@@ -22,49 +22,42 @@ public class RefundRepository {
         throw new IllegalStateException("Not implemented!");
     }
 
-    public RefundListRequest list() throws IOException {
-        return new RefundListRequest(httpClient);
+    public CreditorListRequest list() throws IOException {
+        return new CreditorListRequest(httpClient);
     }
 
-    public RefundGetRequest get(String identity) throws IOException {
-        return new RefundGetRequest(httpClient, identity);
+    public CreditorGetRequest get(String identity) throws IOException {
+        return new CreditorGetRequest(httpClient, identity);
     }
 
     public void update(String identity) throws IOException {
         throw new IllegalStateException("Not implemented!");
     }
 
-    public static final class RefundListRequest extends ListRequest<Refund> {
+    public static final class CreditorListRequest extends ListRequest<Creditor> {
         private String after;
 
-        public RefundListRequest withAfter(String after) {
+        public CreditorListRequest withAfter(String after) {
             this.after = after;
             return this;
         }
 
         private String before;
 
-        public RefundListRequest withBefore(String before) {
+        public CreditorListRequest withBefore(String before) {
             this.before = before;
             return this;
         }
 
         private Integer limit;
 
-        public RefundListRequest withLimit(Integer limit) {
+        public CreditorListRequest withLimit(Integer limit) {
             this.limit = limit;
             return this;
         }
 
-        private String payment;
-
-        public RefundListRequest withPayment(String payment) {
-            this.payment = payment;
-            return this;
-        }
-
-        private RefundListRequest(HttpClient httpClient) {
-            super(httpClient, "/refunds", "refunds", new TypeToken<List<Refund>>() {});
+        private CreditorListRequest(HttpClient httpClient) {
+            super(httpClient, "/creditors", "creditors", new TypeToken<List<Creditor>>() {});
         }
 
         @Override
@@ -79,18 +72,15 @@ public class RefundRepository {
             if (limit != null) {
                 params.put("limit", limit);
             }
-            if (payment != null) {
-                params.put("payment", payment);
-            }
             return params.build();
         }
     }
 
-    public static final class RefundGetRequest extends GetRequest<Refund> {
+    public static final class CreditorGetRequest extends GetRequest<Creditor> {
         private final String identity;
 
-        private RefundGetRequest(HttpClient httpClient, String identity) {
-            super(httpClient, "/refunds/:identity", "refunds", Refund.class);
+        private CreditorGetRequest(HttpClient httpClient, String identity) {
+            super(httpClient, "/creditors/:identity", "creditors", Creditor.class);
             this.identity = identity;
         }
 

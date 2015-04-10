@@ -1,9 +1,9 @@
-package com.gocardless.pro.repositories;
+package com.gocardless.pro.services;
 
 import com.gocardless.pro.http.GetRequest;
 import com.gocardless.pro.http.HttpClient;
 import com.gocardless.pro.http.ListRequest;
-import com.gocardless.pro.resources.Role;
+import com.gocardless.pro.resources.Refund;
 import com.google.common.collect.ImmutableMap;
 import com.google.gson.reflect.TypeToken;
 
@@ -11,10 +11,10 @@ import java.io.IOException;
 import java.util.List;
 import java.util.Map;
 
-public class RoleRepository {
+public class RefundService {
     private HttpClient httpClient;
 
-    public RoleRepository(HttpClient httpClient) {
+    public RefundService(HttpClient httpClient) {
         this.httpClient = httpClient;
     }
 
@@ -22,57 +22,49 @@ public class RoleRepository {
         throw new IllegalStateException("Not implemented!");
     }
 
-    public RoleListRequest list() throws IOException {
-        return new RoleListRequest(httpClient);
+    public RefundListRequest list() throws IOException {
+        return new RefundListRequest(httpClient);
     }
 
-    public RoleGetRequest get(String identity) throws IOException {
-        return new RoleGetRequest(httpClient, identity);
+    public RefundGetRequest get(String identity) throws IOException {
+        return new RefundGetRequest(httpClient, identity);
     }
 
     public void update(String identity) throws IOException {
         throw new IllegalStateException("Not implemented!");
     }
 
-    public void disable(String identity) throws IOException {
-        throw new IllegalStateException("Not implemented!");
-    }
-
-    public static final class RoleListRequest extends ListRequest<Role> {
+    public static final class RefundListRequest extends ListRequest<Refund> {
         private String after;
 
-        public RoleListRequest withAfter(String after) {
+        public RefundListRequest withAfter(String after) {
             this.after = after;
             return this;
         }
 
         private String before;
 
-        public RoleListRequest withBefore(String before) {
+        public RefundListRequest withBefore(String before) {
             this.before = before;
-            return this;
-        }
-
-        public enum Enabled {
-            TRUE, FALSE,
-        }
-
-        private Enabled enabled;
-
-        public RoleListRequest withEnabled(Enabled enabled) {
-            this.enabled = enabled;
             return this;
         }
 
         private Integer limit;
 
-        public RoleListRequest withLimit(Integer limit) {
+        public RefundListRequest withLimit(Integer limit) {
             this.limit = limit;
             return this;
         }
 
-        private RoleListRequest(HttpClient httpClient) {
-            super(httpClient, "/roles", "roles", new TypeToken<List<Role>>() {});
+        private String payment;
+
+        public RefundListRequest withPayment(String payment) {
+            this.payment = payment;
+            return this;
+        }
+
+        private RefundListRequest(HttpClient httpClient) {
+            super(httpClient, "/refunds", "refunds", new TypeToken<List<Refund>>() {});
         }
 
         @Override
@@ -84,21 +76,21 @@ public class RoleRepository {
             if (before != null) {
                 params.put("before", before);
             }
-            if (enabled != null) {
-                params.put("enabled", enabled);
-            }
             if (limit != null) {
                 params.put("limit", limit);
+            }
+            if (payment != null) {
+                params.put("payment", payment);
             }
             return params.build();
         }
     }
 
-    public static final class RoleGetRequest extends GetRequest<Role> {
+    public static final class RefundGetRequest extends GetRequest<Refund> {
         private final String identity;
 
-        private RoleGetRequest(HttpClient httpClient, String identity) {
-            super(httpClient, "/roles/:identity", "roles", Role.class);
+        private RefundGetRequest(HttpClient httpClient, String identity) {
+            super(httpClient, "/refunds/:identity", "refunds", Refund.class);
             this.identity = identity;
         }
 

@@ -1,9 +1,9 @@
-package com.gocardless.pro.repositories;
+package com.gocardless.pro.services;
 
 import com.gocardless.pro.http.GetRequest;
 import com.gocardless.pro.http.HttpClient;
 import com.gocardless.pro.http.ListRequest;
-import com.gocardless.pro.resources.ApiKey;
+import com.gocardless.pro.resources.User;
 import com.google.common.collect.ImmutableMap;
 import com.google.gson.reflect.TypeToken;
 
@@ -11,10 +11,10 @@ import java.io.IOException;
 import java.util.List;
 import java.util.Map;
 
-public class ApiKeyRepository {
+public class UserService {
     private HttpClient httpClient;
 
-    public ApiKeyRepository(HttpClient httpClient) {
+    public UserService(HttpClient httpClient) {
         this.httpClient = httpClient;
     }
 
@@ -22,15 +22,19 @@ public class ApiKeyRepository {
         throw new IllegalStateException("Not implemented!");
     }
 
-    public ApiKeyListRequest list() throws IOException {
-        return new ApiKeyListRequest(httpClient);
+    public UserListRequest list() throws IOException {
+        return new UserListRequest(httpClient);
     }
 
-    public ApiKeyGetRequest get(String identity) throws IOException {
-        return new ApiKeyGetRequest(httpClient, identity);
+    public UserGetRequest get(String identity) throws IOException {
+        return new UserGetRequest(httpClient, identity);
     }
 
     public void update(String identity) throws IOException {
+        throw new IllegalStateException("Not implemented!");
+    }
+
+    public void enable(String identity) throws IOException {
         throw new IllegalStateException("Not implemented!");
     }
 
@@ -38,17 +42,17 @@ public class ApiKeyRepository {
         throw new IllegalStateException("Not implemented!");
     }
 
-    public static final class ApiKeyListRequest extends ListRequest<ApiKey> {
+    public static final class UserListRequest extends ListRequest<User> {
         private String after;
 
-        public ApiKeyListRequest withAfter(String after) {
+        public UserListRequest withAfter(String after) {
             this.after = after;
             return this;
         }
 
         private String before;
 
-        public ApiKeyListRequest withBefore(String before) {
+        public UserListRequest withBefore(String before) {
             this.before = before;
             return this;
         }
@@ -59,27 +63,27 @@ public class ApiKeyRepository {
 
         private Enabled enabled;
 
-        public ApiKeyListRequest withEnabled(Enabled enabled) {
+        public UserListRequest withEnabled(Enabled enabled) {
             this.enabled = enabled;
             return this;
         }
 
         private Integer limit;
 
-        public ApiKeyListRequest withLimit(Integer limit) {
+        public UserListRequest withLimit(Integer limit) {
             this.limit = limit;
             return this;
         }
 
         private String role;
 
-        public ApiKeyListRequest withRole(String role) {
+        public UserListRequest withRole(String role) {
             this.role = role;
             return this;
         }
 
-        private ApiKeyListRequest(HttpClient httpClient) {
-            super(httpClient, "/api_keys", "api_keys", new TypeToken<List<ApiKey>>() {});
+        private UserListRequest(HttpClient httpClient) {
+            super(httpClient, "/users", "users", new TypeToken<List<User>>() {});
         }
 
         @Override
@@ -104,11 +108,11 @@ public class ApiKeyRepository {
         }
     }
 
-    public static final class ApiKeyGetRequest extends GetRequest<ApiKey> {
+    public static final class UserGetRequest extends GetRequest<User> {
         private final String identity;
 
-        private ApiKeyGetRequest(HttpClient httpClient, String identity) {
-            super(httpClient, "/api_keys/:identity", "api_keys", ApiKey.class);
+        private UserGetRequest(HttpClient httpClient, String identity) {
+            super(httpClient, "/users/:identity", "users", User.class);
             this.identity = identity;
         }
 

@@ -14,6 +14,12 @@ import java.util.Map;
 import static com.google.gson.FieldNamingPolicy.LOWER_CASE_WITH_UNDERSCORES;
 
 public class HttpClient {
+    private static final String USER_AGENT = String.format(
+            "gocardless-pro-client/0.0.1-SNAPSHOT %s/%s %s/%s",
+            replaceSpaces(System.getProperty("os.name")),
+            replaceSpaces(System.getProperty("os.version")),
+            replaceSpaces(System.getProperty("java.vm.name")),
+            replaceSpaces(System.getProperty("java.version")));
     private static final Map<String, String> HEADERS;
     static {
         ImmutableMap.Builder<String, String> builder = ImmutableMap.builder();
@@ -35,7 +41,8 @@ public class HttpClient {
     <T> T get(HttpRequest<T> request) throws IOException {
         URL url = request.getUrl(urlFormatter);
         Request.Builder httpRequest =
-                new Request.Builder().url(url).header("Authorization", credentials);
+                new Request.Builder().url(url).header("Authorization", credentials)
+                        .header("User-Agent", USER_AGENT);
         for (Map.Entry<String, String> entry : HEADERS.entrySet()) {
             httpRequest = httpRequest.header(entry.getKey(), entry.getValue());
         }
@@ -45,6 +52,10 @@ public class HttpClient {
 
     private Response execute(Request request) throws IOException {
         return rawClient.newCall(request).execute();
+    }
+
+    private static String replaceSpaces(String s) {
+        return s.replaceAll(" ", "_");
     }
 
     @VisibleForTesting

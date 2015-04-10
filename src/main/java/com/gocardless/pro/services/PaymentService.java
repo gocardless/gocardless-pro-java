@@ -1,4 +1,4 @@
-package com.gocardless.pro.repositories;
+package com.gocardless.pro.services;
 
 import com.gocardless.pro.http.GetRequest;
 import com.gocardless.pro.http.HttpClient;
@@ -11,10 +11,10 @@ import java.io.IOException;
 import java.util.List;
 import java.util.Map;
 
-public class PaymentRepository {
+public class PaymentService {
     private HttpClient httpClient;
 
-    public PaymentRepository(HttpClient httpClient) {
+    public PaymentService(HttpClient httpClient) {
         this.httpClient = httpClient;
     }
 
