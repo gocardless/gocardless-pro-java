@@ -25,12 +25,27 @@ public class GetRequestTest extends HttpRequestTest {
 
     private class DummyGetRequest extends GetRequest<DummyItem> {
         public DummyGetRequest() {
-            super(client, "/dummy/:id", "items", DummyItem.class);
+            super(client);
         }
 
         @Override
         protected ImmutableMap<String, String> getPathParams() {
             return ImmutableMap.of("id", "123");
+        }
+
+        @Override
+        protected String getPathTemplate() {
+            return "/dummy/:id";
+        }
+
+        @Override
+        protected String getEnvelope() {
+            return "items";
+        }
+
+        @Override
+        protected Class<DummyItem> getResponseClass() {
+            return DummyItem.class;
         }
     }
 }

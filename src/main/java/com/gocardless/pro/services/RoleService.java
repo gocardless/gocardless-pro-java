@@ -1,8 +1,6 @@
 package com.gocardless.pro.services;
 
-import com.gocardless.pro.http.GetRequest;
-import com.gocardless.pro.http.HttpClient;
-import com.gocardless.pro.http.ListRequest;
+import com.gocardless.pro.http.*;
 import com.gocardless.pro.resources.Role;
 import com.google.common.collect.ImmutableMap;
 import com.google.gson.reflect.TypeToken;
@@ -18,8 +16,8 @@ public class RoleService {
         this.httpClient = httpClient;
     }
 
-    public void create() throws IOException {
-        throw new IllegalStateException("Not implemented!");
+    public RoleCreateRequest create() throws IOException {
+        return new RoleCreateRequest(httpClient);
     }
 
     public RoleListRequest list() throws IOException {
@@ -30,12 +28,52 @@ public class RoleService {
         return new RoleGetRequest(httpClient, identity);
     }
 
-    public void update(String identity) throws IOException {
-        throw new IllegalStateException("Not implemented!");
+    public RoleUpdateRequest update(String identity) throws IOException {
+        return new RoleUpdateRequest(httpClient, identity);
     }
 
-    public void disable(String identity) throws IOException {
-        throw new IllegalStateException("Not implemented!");
+    public RoleDisableRequest disable(String identity) throws IOException {
+        return new RoleDisableRequest(httpClient, identity);
+    }
+
+    public static final class RoleCreateRequest extends PostRequest<Role> {
+        private String name;
+
+        public RoleCreateRequest withName(String name) {
+            this.name = name;
+            return this;
+        }
+
+        private List<Object> permissions;
+
+        public RoleCreateRequest withPermissions(List<Object> permissions) {
+            this.permissions = permissions;
+            return this;
+        }
+
+        private RoleCreateRequest(HttpClient httpClient) {
+            super(httpClient);
+        }
+
+        @Override
+        protected String getPathTemplate() {
+            return "/roles";
+        }
+
+        @Override
+        protected String getEnvelope() {
+            return "roles";
+        }
+
+        @Override
+        protected Class<Role> getResponseClass() {
+            return Role.class;
+        }
+
+        @Override
+        protected boolean hasBody() {
+            return true;
+        }
     }
 
     public static final class RoleListRequest extends ListRequest<Role> {
@@ -72,7 +110,7 @@ public class RoleService {
         }
 
         private RoleListRequest(HttpClient httpClient) {
-            super(httpClient, "/roles", "roles", new TypeToken<List<Role>>() {});
+            super(httpClient);
         }
 
         @Override
@@ -92,13 +130,29 @@ public class RoleService {
             }
             return params.build();
         }
+
+        @Override
+        protected String getPathTemplate() {
+            return "/roles";
+        }
+
+        @Override
+        protected String getEnvelope() {
+            return "roles";
+        }
+
+        @Override
+        protected TypeToken<List<Role>> getTypeToken() {
+            return new TypeToken<List<Role>>() {};
+        }
     }
 
     public static final class RoleGetRequest extends GetRequest<Role> {
+        @PathParam
         private final String identity;
 
         private RoleGetRequest(HttpClient httpClient, String identity) {
-            super(httpClient, "/roles/:identity", "roles", Role.class);
+            super(httpClient);
             this.identity = identity;
         }
 
@@ -107,6 +161,108 @@ public class RoleService {
             ImmutableMap.Builder<String, String> params = ImmutableMap.builder();
             params.put("identity", identity);
             return params.build();
+        }
+
+        @Override
+        protected String getPathTemplate() {
+            return "/roles/:identity";
+        }
+
+        @Override
+        protected String getEnvelope() {
+            return "roles";
+        }
+
+        @Override
+        protected Class<Role> getResponseClass() {
+            return Role.class;
+        }
+    }
+
+    public static final class RoleUpdateRequest extends PutRequest<Role> {
+        @PathParam
+        private final String identity;
+        private String name;
+
+        public RoleUpdateRequest withName(String name) {
+            this.name = name;
+            return this;
+        }
+
+        private List<Object> permissions;
+
+        public RoleUpdateRequest withPermissions(List<Object> permissions) {
+            this.permissions = permissions;
+            return this;
+        }
+
+        private RoleUpdateRequest(HttpClient httpClient, String identity) {
+            super(httpClient);
+            this.identity = identity;
+        }
+
+        @Override
+        protected Map<String, String> getPathParams() {
+            ImmutableMap.Builder<String, String> params = ImmutableMap.builder();
+            params.put("identity", identity);
+            return params.build();
+        }
+
+        @Override
+        protected String getPathTemplate() {
+            return "/roles/:identity";
+        }
+
+        @Override
+        protected String getEnvelope() {
+            return "roles";
+        }
+
+        @Override
+        protected Class<Role> getResponseClass() {
+            return Role.class;
+        }
+
+        @Override
+        protected boolean hasBody() {
+            return true;
+        }
+    }
+
+    public static final class RoleDisableRequest extends PostRequest<Role> {
+        @PathParam
+        private final String identity;
+
+        private RoleDisableRequest(HttpClient httpClient, String identity) {
+            super(httpClient);
+            this.identity = identity;
+        }
+
+        @Override
+        protected Map<String, String> getPathParams() {
+            ImmutableMap.Builder<String, String> params = ImmutableMap.builder();
+            params.put("identity", identity);
+            return params.build();
+        }
+
+        @Override
+        protected String getPathTemplate() {
+            return "/roles/:identity/actions/disable";
+        }
+
+        @Override
+        protected String getEnvelope() {
+            return "roles";
+        }
+
+        @Override
+        protected Class<Role> getResponseClass() {
+            return Role.class;
+        }
+
+        @Override
+        protected boolean hasBody() {
+            return false;
         }
     }
 }

@@ -1,8 +1,6 @@
 package com.gocardless.pro.services;
 
-import com.gocardless.pro.http.GetRequest;
-import com.gocardless.pro.http.HttpClient;
-import com.gocardless.pro.http.ListRequest;
+import com.gocardless.pro.http.*;
 import com.gocardless.pro.resources.CreditorBankAccount;
 import com.google.common.collect.ImmutableMap;
 import com.google.gson.reflect.TypeToken;
@@ -18,8 +16,8 @@ public class CreditorBankAccountService {
         this.httpClient = httpClient;
     }
 
-    public void create() throws IOException {
-        throw new IllegalStateException("Not implemented!");
+    public CreditorBankAccountCreateRequest create() throws IOException {
+        return new CreditorBankAccountCreateRequest(httpClient);
     }
 
     public CreditorBankAccountListRequest list() throws IOException {
@@ -30,8 +28,106 @@ public class CreditorBankAccountService {
         return new CreditorBankAccountGetRequest(httpClient, identity);
     }
 
-    public void disable(String identity) throws IOException {
-        throw new IllegalStateException("Not implemented!");
+    public CreditorBankAccountDisableRequest disable(String identity) throws IOException {
+        return new CreditorBankAccountDisableRequest(httpClient, identity);
+    }
+
+    public static final class CreditorBankAccountCreateRequest extends
+            PostRequest<CreditorBankAccount> {
+        private String accountHolderName;
+
+        public CreditorBankAccountCreateRequest withAccountHolderName(String accountHolderName) {
+            this.accountHolderName = accountHolderName;
+            return this;
+        }
+
+        private String accountNumber;
+
+        public CreditorBankAccountCreateRequest withAccountNumber(String accountNumber) {
+            this.accountNumber = accountNumber;
+            return this;
+        }
+
+        private String bankCode;
+
+        public CreditorBankAccountCreateRequest withBankCode(String bankCode) {
+            this.bankCode = bankCode;
+            return this;
+        }
+
+        private String branchCode;
+
+        public CreditorBankAccountCreateRequest withBranchCode(String branchCode) {
+            this.branchCode = branchCode;
+            return this;
+        }
+
+        private String countryCode;
+
+        public CreditorBankAccountCreateRequest withCountryCode(String countryCode) {
+            this.countryCode = countryCode;
+            return this;
+        }
+
+        private String currency;
+
+        public CreditorBankAccountCreateRequest withCurrency(String currency) {
+            this.currency = currency;
+            return this;
+        }
+
+        private String iban;
+
+        public CreditorBankAccountCreateRequest withIban(String iban) {
+            this.iban = iban;
+            return this;
+        }
+
+        private Object links;
+
+        public CreditorBankAccountCreateRequest withLinks(Object links) {
+            this.links = links;
+            return this;
+        }
+
+        private Object metadata;
+
+        public CreditorBankAccountCreateRequest withMetadata(Object metadata) {
+            this.metadata = metadata;
+            return this;
+        }
+
+        private Boolean setAsDefaultPayoutAccount;
+
+        public CreditorBankAccountCreateRequest withSetAsDefaultPayoutAccount(
+                Boolean setAsDefaultPayoutAccount) {
+            this.setAsDefaultPayoutAccount = setAsDefaultPayoutAccount;
+            return this;
+        }
+
+        private CreditorBankAccountCreateRequest(HttpClient httpClient) {
+            super(httpClient);
+        }
+
+        @Override
+        protected String getPathTemplate() {
+            return "/creditor_bank_accounts";
+        }
+
+        @Override
+        protected String getEnvelope() {
+            return "creditor_bank_accounts";
+        }
+
+        @Override
+        protected Class<CreditorBankAccount> getResponseClass() {
+            return CreditorBankAccount.class;
+        }
+
+        @Override
+        protected boolean hasBody() {
+            return true;
+        }
     }
 
     public static final class CreditorBankAccountListRequest extends
@@ -76,8 +172,7 @@ public class CreditorBankAccountService {
         }
 
         private CreditorBankAccountListRequest(HttpClient httpClient) {
-            super(httpClient, "/creditor_bank_accounts", "creditor_bank_accounts",
-                    new TypeToken<List<CreditorBankAccount>>() {});
+            super(httpClient);
         }
 
         @Override
@@ -100,14 +195,29 @@ public class CreditorBankAccountService {
             }
             return params.build();
         }
+
+        @Override
+        protected String getPathTemplate() {
+            return "/creditor_bank_accounts";
+        }
+
+        @Override
+        protected String getEnvelope() {
+            return "creditor_bank_accounts";
+        }
+
+        @Override
+        protected TypeToken<List<CreditorBankAccount>> getTypeToken() {
+            return new TypeToken<List<CreditorBankAccount>>() {};
+        }
     }
 
     public static final class CreditorBankAccountGetRequest extends GetRequest<CreditorBankAccount> {
+        @PathParam
         private final String identity;
 
         private CreditorBankAccountGetRequest(HttpClient httpClient, String identity) {
-            super(httpClient, "/creditor_bank_accounts/:identity", "creditor_bank_accounts",
-                    CreditorBankAccount.class);
+            super(httpClient);
             this.identity = identity;
         }
 
@@ -116,6 +226,59 @@ public class CreditorBankAccountService {
             ImmutableMap.Builder<String, String> params = ImmutableMap.builder();
             params.put("identity", identity);
             return params.build();
+        }
+
+        @Override
+        protected String getPathTemplate() {
+            return "/creditor_bank_accounts/:identity";
+        }
+
+        @Override
+        protected String getEnvelope() {
+            return "creditor_bank_accounts";
+        }
+
+        @Override
+        protected Class<CreditorBankAccount> getResponseClass() {
+            return CreditorBankAccount.class;
+        }
+    }
+
+    public static final class CreditorBankAccountDisableRequest extends
+            PostRequest<CreditorBankAccount> {
+        @PathParam
+        private final String identity;
+
+        private CreditorBankAccountDisableRequest(HttpClient httpClient, String identity) {
+            super(httpClient);
+            this.identity = identity;
+        }
+
+        @Override
+        protected Map<String, String> getPathParams() {
+            ImmutableMap.Builder<String, String> params = ImmutableMap.builder();
+            params.put("identity", identity);
+            return params.build();
+        }
+
+        @Override
+        protected String getPathTemplate() {
+            return "/creditor_bank_accounts/:identity/actions/disable";
+        }
+
+        @Override
+        protected String getEnvelope() {
+            return "creditor_bank_accounts";
+        }
+
+        @Override
+        protected Class<CreditorBankAccount> getResponseClass() {
+            return CreditorBankAccount.class;
+        }
+
+        @Override
+        protected boolean hasBody() {
+            return false;
         }
     }
 }

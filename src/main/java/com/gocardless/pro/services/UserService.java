@@ -1,8 +1,6 @@
 package com.gocardless.pro.services;
 
-import com.gocardless.pro.http.GetRequest;
-import com.gocardless.pro.http.HttpClient;
-import com.gocardless.pro.http.ListRequest;
+import com.gocardless.pro.http.*;
 import com.gocardless.pro.resources.User;
 import com.google.common.collect.ImmutableMap;
 import com.google.gson.reflect.TypeToken;
@@ -18,8 +16,8 @@ public class UserService {
         this.httpClient = httpClient;
     }
 
-    public void create() throws IOException {
-        throw new IllegalStateException("Not implemented!");
+    public UserCreateRequest create() throws IOException {
+        return new UserCreateRequest(httpClient);
     }
 
     public UserListRequest list() throws IOException {
@@ -30,16 +28,84 @@ public class UserService {
         return new UserGetRequest(httpClient, identity);
     }
 
-    public void update(String identity) throws IOException {
-        throw new IllegalStateException("Not implemented!");
+    public UserUpdateRequest update(String identity) throws IOException {
+        return new UserUpdateRequest(httpClient, identity);
     }
 
-    public void enable(String identity) throws IOException {
-        throw new IllegalStateException("Not implemented!");
+    public UserEnableRequest enable(String identity) throws IOException {
+        return new UserEnableRequest(httpClient, identity);
     }
 
-    public void disable(String identity) throws IOException {
-        throw new IllegalStateException("Not implemented!");
+    public UserDisableRequest disable(String identity) throws IOException {
+        return new UserDisableRequest(httpClient, identity);
+    }
+
+    public static final class UserCreateRequest extends PostRequest<User> {
+        private String email;
+
+        public UserCreateRequest withEmail(String email) {
+            this.email = email;
+            return this;
+        }
+
+        private String familyName;
+
+        public UserCreateRequest withFamilyName(String familyName) {
+            this.familyName = familyName;
+            return this;
+        }
+
+        private String givenName;
+
+        public UserCreateRequest withGivenName(String givenName) {
+            this.givenName = givenName;
+            return this;
+        }
+
+        private Object links;
+
+        public UserCreateRequest withLinks(Object links) {
+            this.links = links;
+            return this;
+        }
+
+        private String password;
+
+        public UserCreateRequest withPassword(String password) {
+            this.password = password;
+            return this;
+        }
+
+        private String passwordConfirmation;
+
+        public UserCreateRequest withPasswordConfirmation(String passwordConfirmation) {
+            this.passwordConfirmation = passwordConfirmation;
+            return this;
+        }
+
+        private UserCreateRequest(HttpClient httpClient) {
+            super(httpClient);
+        }
+
+        @Override
+        protected String getPathTemplate() {
+            return "/users";
+        }
+
+        @Override
+        protected String getEnvelope() {
+            return "users";
+        }
+
+        @Override
+        protected Class<User> getResponseClass() {
+            return User.class;
+        }
+
+        @Override
+        protected boolean hasBody() {
+            return true;
+        }
     }
 
     public static final class UserListRequest extends ListRequest<User> {
@@ -83,7 +149,7 @@ public class UserService {
         }
 
         private UserListRequest(HttpClient httpClient) {
-            super(httpClient, "/users", "users", new TypeToken<List<User>>() {});
+            super(httpClient);
         }
 
         @Override
@@ -106,13 +172,29 @@ public class UserService {
             }
             return params.build();
         }
+
+        @Override
+        protected String getPathTemplate() {
+            return "/users";
+        }
+
+        @Override
+        protected String getEnvelope() {
+            return "users";
+        }
+
+        @Override
+        protected TypeToken<List<User>> getTypeToken() {
+            return new TypeToken<List<User>>() {};
+        }
     }
 
     public static final class UserGetRequest extends GetRequest<User> {
+        @PathParam
         private final String identity;
 
         private UserGetRequest(HttpClient httpClient, String identity) {
-            super(httpClient, "/users/:identity", "users", User.class);
+            super(httpClient);
             this.identity = identity;
         }
 
@@ -121,6 +203,173 @@ public class UserService {
             ImmutableMap.Builder<String, String> params = ImmutableMap.builder();
             params.put("identity", identity);
             return params.build();
+        }
+
+        @Override
+        protected String getPathTemplate() {
+            return "/users/:identity";
+        }
+
+        @Override
+        protected String getEnvelope() {
+            return "users";
+        }
+
+        @Override
+        protected Class<User> getResponseClass() {
+            return User.class;
+        }
+    }
+
+    public static final class UserUpdateRequest extends PutRequest<User> {
+        @PathParam
+        private final String identity;
+        private String email;
+
+        public UserUpdateRequest withEmail(String email) {
+            this.email = email;
+            return this;
+        }
+
+        private String familyName;
+
+        public UserUpdateRequest withFamilyName(String familyName) {
+            this.familyName = familyName;
+            return this;
+        }
+
+        private String givenName;
+
+        public UserUpdateRequest withGivenName(String givenName) {
+            this.givenName = givenName;
+            return this;
+        }
+
+        private Object links;
+
+        public UserUpdateRequest withLinks(Object links) {
+            this.links = links;
+            return this;
+        }
+
+        private String password;
+
+        public UserUpdateRequest withPassword(String password) {
+            this.password = password;
+            return this;
+        }
+
+        private String passwordConfirmation;
+
+        public UserUpdateRequest withPasswordConfirmation(String passwordConfirmation) {
+            this.passwordConfirmation = passwordConfirmation;
+            return this;
+        }
+
+        private UserUpdateRequest(HttpClient httpClient, String identity) {
+            super(httpClient);
+            this.identity = identity;
+        }
+
+        @Override
+        protected Map<String, String> getPathParams() {
+            ImmutableMap.Builder<String, String> params = ImmutableMap.builder();
+            params.put("identity", identity);
+            return params.build();
+        }
+
+        @Override
+        protected String getPathTemplate() {
+            return "/users/:identity";
+        }
+
+        @Override
+        protected String getEnvelope() {
+            return "users";
+        }
+
+        @Override
+        protected Class<User> getResponseClass() {
+            return User.class;
+        }
+
+        @Override
+        protected boolean hasBody() {
+            return true;
+        }
+    }
+
+    public static final class UserEnableRequest extends PostRequest<User> {
+        @PathParam
+        private final String identity;
+
+        private UserEnableRequest(HttpClient httpClient, String identity) {
+            super(httpClient);
+            this.identity = identity;
+        }
+
+        @Override
+        protected Map<String, String> getPathParams() {
+            ImmutableMap.Builder<String, String> params = ImmutableMap.builder();
+            params.put("identity", identity);
+            return params.build();
+        }
+
+        @Override
+        protected String getPathTemplate() {
+            return "/users/:identity/actions/enable";
+        }
+
+        @Override
+        protected String getEnvelope() {
+            return "users";
+        }
+
+        @Override
+        protected Class<User> getResponseClass() {
+            return User.class;
+        }
+
+        @Override
+        protected boolean hasBody() {
+            return false;
+        }
+    }
+
+    public static final class UserDisableRequest extends PostRequest<User> {
+        @PathParam
+        private final String identity;
+
+        private UserDisableRequest(HttpClient httpClient, String identity) {
+            super(httpClient);
+            this.identity = identity;
+        }
+
+        @Override
+        protected Map<String, String> getPathParams() {
+            ImmutableMap.Builder<String, String> params = ImmutableMap.builder();
+            params.put("identity", identity);
+            return params.build();
+        }
+
+        @Override
+        protected String getPathTemplate() {
+            return "/users/:identity/actions/disable";
+        }
+
+        @Override
+        protected String getEnvelope() {
+            return "users";
+        }
+
+        @Override
+        protected Class<User> getResponseClass() {
+            return User.class;
+        }
+
+        @Override
+        protected boolean hasBody() {
+            return false;
         }
     }
 }

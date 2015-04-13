@@ -1,8 +1,6 @@
 package com.gocardless.pro.services;
 
-import com.gocardless.pro.http.GetRequest;
-import com.gocardless.pro.http.HttpClient;
-import com.gocardless.pro.http.ListRequest;
+import com.gocardless.pro.http.*;
 import com.gocardless.pro.resources.Payment;
 import com.google.common.collect.ImmutableMap;
 import com.google.gson.reflect.TypeToken;
@@ -18,8 +16,8 @@ public class PaymentService {
         this.httpClient = httpClient;
     }
 
-    public void create() throws IOException {
-        throw new IllegalStateException("Not implemented!");
+    public PaymentCreateRequest create() throws IOException {
+        return new PaymentCreateRequest(httpClient);
     }
 
     public PaymentListRequest list() throws IOException {
@@ -30,16 +28,91 @@ public class PaymentService {
         return new PaymentGetRequest(httpClient, identity);
     }
 
-    public void update(String identity) throws IOException {
-        throw new IllegalStateException("Not implemented!");
+    public PaymentUpdateRequest update(String identity) throws IOException {
+        return new PaymentUpdateRequest(httpClient, identity);
     }
 
-    public void cancel(String identity) throws IOException {
-        throw new IllegalStateException("Not implemented!");
+    public PaymentCancelRequest cancel(String identity) throws IOException {
+        return new PaymentCancelRequest(httpClient, identity);
     }
 
-    public void retry(String identity) throws IOException {
-        throw new IllegalStateException("Not implemented!");
+    public PaymentRetryRequest retry(String identity) throws IOException {
+        return new PaymentRetryRequest(httpClient, identity);
+    }
+
+    public static final class PaymentCreateRequest extends PostRequest<Payment> {
+        private Integer amount;
+
+        public PaymentCreateRequest withAmount(Integer amount) {
+            this.amount = amount;
+            return this;
+        }
+
+        private String chargeDate;
+
+        public PaymentCreateRequest withChargeDate(String chargeDate) {
+            this.chargeDate = chargeDate;
+            return this;
+        }
+
+        private String currency;
+
+        public PaymentCreateRequest withCurrency(String currency) {
+            this.currency = currency;
+            return this;
+        }
+
+        private String description;
+
+        public PaymentCreateRequest withDescription(String description) {
+            this.description = description;
+            return this;
+        }
+
+        private Object links;
+
+        public PaymentCreateRequest withLinks(Object links) {
+            this.links = links;
+            return this;
+        }
+
+        private Object metadata;
+
+        public PaymentCreateRequest withMetadata(Object metadata) {
+            this.metadata = metadata;
+            return this;
+        }
+
+        private String reference;
+
+        public PaymentCreateRequest withReference(String reference) {
+            this.reference = reference;
+            return this;
+        }
+
+        private PaymentCreateRequest(HttpClient httpClient) {
+            super(httpClient);
+        }
+
+        @Override
+        protected String getPathTemplate() {
+            return "/payments";
+        }
+
+        @Override
+        protected String getEnvelope() {
+            return "payments";
+        }
+
+        @Override
+        protected Class<Payment> getResponseClass() {
+            return Payment.class;
+        }
+
+        @Override
+        protected boolean hasBody() {
+            return true;
+        }
     }
 
     public static final class PaymentListRequest extends ListRequest<Payment> {
@@ -107,7 +180,7 @@ public class PaymentService {
         }
 
         private PaymentListRequest(HttpClient httpClient) {
-            super(httpClient, "/payments", "payments", new TypeToken<List<Payment>>() {});
+            super(httpClient);
         }
 
         @Override
@@ -142,13 +215,29 @@ public class PaymentService {
             }
             return params.build();
         }
+
+        @Override
+        protected String getPathTemplate() {
+            return "/payments";
+        }
+
+        @Override
+        protected String getEnvelope() {
+            return "payments";
+        }
+
+        @Override
+        protected TypeToken<List<Payment>> getTypeToken() {
+            return new TypeToken<List<Payment>>() {};
+        }
     }
 
     public static final class PaymentGetRequest extends GetRequest<Payment> {
+        @PathParam
         private final String identity;
 
         private PaymentGetRequest(HttpClient httpClient, String identity) {
-            super(httpClient, "/payments/:identity", "payments", Payment.class);
+            super(httpClient);
             this.identity = identity;
         }
 
@@ -157,6 +246,150 @@ public class PaymentService {
             ImmutableMap.Builder<String, String> params = ImmutableMap.builder();
             params.put("identity", identity);
             return params.build();
+        }
+
+        @Override
+        protected String getPathTemplate() {
+            return "/payments/:identity";
+        }
+
+        @Override
+        protected String getEnvelope() {
+            return "payments";
+        }
+
+        @Override
+        protected Class<Payment> getResponseClass() {
+            return Payment.class;
+        }
+    }
+
+    public static final class PaymentUpdateRequest extends PutRequest<Payment> {
+        @PathParam
+        private final String identity;
+        private Object metadata;
+
+        public PaymentUpdateRequest withMetadata(Object metadata) {
+            this.metadata = metadata;
+            return this;
+        }
+
+        private PaymentUpdateRequest(HttpClient httpClient, String identity) {
+            super(httpClient);
+            this.identity = identity;
+        }
+
+        @Override
+        protected Map<String, String> getPathParams() {
+            ImmutableMap.Builder<String, String> params = ImmutableMap.builder();
+            params.put("identity", identity);
+            return params.build();
+        }
+
+        @Override
+        protected String getPathTemplate() {
+            return "/payments/:identity";
+        }
+
+        @Override
+        protected String getEnvelope() {
+            return "payments";
+        }
+
+        @Override
+        protected Class<Payment> getResponseClass() {
+            return Payment.class;
+        }
+
+        @Override
+        protected boolean hasBody() {
+            return true;
+        }
+    }
+
+    public static final class PaymentCancelRequest extends PostRequest<Payment> {
+        @PathParam
+        private final String identity;
+        private Object metadata;
+
+        public PaymentCancelRequest withMetadata(Object metadata) {
+            this.metadata = metadata;
+            return this;
+        }
+
+        private PaymentCancelRequest(HttpClient httpClient, String identity) {
+            super(httpClient);
+            this.identity = identity;
+        }
+
+        @Override
+        protected Map<String, String> getPathParams() {
+            ImmutableMap.Builder<String, String> params = ImmutableMap.builder();
+            params.put("identity", identity);
+            return params.build();
+        }
+
+        @Override
+        protected String getPathTemplate() {
+            return "/payments/:identity/actions/cancel";
+        }
+
+        @Override
+        protected String getEnvelope() {
+            return "payments";
+        }
+
+        @Override
+        protected Class<Payment> getResponseClass() {
+            return Payment.class;
+        }
+
+        @Override
+        protected boolean hasBody() {
+            return true;
+        }
+    }
+
+    public static final class PaymentRetryRequest extends PostRequest<Payment> {
+        @PathParam
+        private final String identity;
+        private Object metadata;
+
+        public PaymentRetryRequest withMetadata(Object metadata) {
+            this.metadata = metadata;
+            return this;
+        }
+
+        private PaymentRetryRequest(HttpClient httpClient, String identity) {
+            super(httpClient);
+            this.identity = identity;
+        }
+
+        @Override
+        protected Map<String, String> getPathParams() {
+            ImmutableMap.Builder<String, String> params = ImmutableMap.builder();
+            params.put("identity", identity);
+            return params.build();
+        }
+
+        @Override
+        protected String getPathTemplate() {
+            return "/payments/:identity/actions/retry";
+        }
+
+        @Override
+        protected String getEnvelope() {
+            return "payments";
+        }
+
+        @Override
+        protected Class<Payment> getResponseClass() {
+            return Payment.class;
+        }
+
+        @Override
+        protected boolean hasBody() {
+            return true;
         }
     }
 }

@@ -2,11 +2,21 @@ package com.gocardless.pro;
 
 import co.freeside.betamax.ssl.DummyX509TrustManager;
 import com.gocardless.pro.http.HttpClient;
+import com.google.common.base.Predicate;
+import com.google.common.io.Resources;
+import com.google.gson.JsonElement;
+import com.google.gson.JsonParser;
 import com.squareup.okhttp.OkHttpClient;
+import com.xebialabs.restito.semantics.Call;
+import com.xebialabs.restito.semantics.Condition;
 import org.apache.http.conn.ssl.AllowAllHostnameVerifier;
 
 import javax.net.ssl.SSLContext;
 import javax.net.ssl.TrustManager;
+import java.io.IOException;
+
+import static com.google.common.base.Charsets.UTF_8;
+import static com.google.common.io.Resources.getResource;
 
 public class TestUtil {
     public static void disableSslCertificateChecking(GoCardlessClient client) throws Exception {
@@ -20,5 +30,27 @@ public class TestUtil {
 
     public static HttpClient createHttpClient(String apiKey, String apiSecret, String baseUrl) {
         return new HttpClient(apiKey, apiSecret, baseUrl);
+    }
+
+    public static boolean jsonMatchesFixture(String actual, String fixturePath) throws IOException {
+        JsonParser parser = new JsonParser();
+        String expectedJson = Resources.toString(getResource(fixturePath), UTF_8);
+        JsonElement result = parser.parse(actual);
+        JsonElement expected = parser.parse(expectedJson);
+        return result.equals(expected);
+    }
+
+    public static Condition withJsonBody(final String fixturePath) {
+        return Condition.custom(new Predicate<Call>() {
+            @Override
+            public boolean apply(Call input) {
+                try {
+                    return input.getPostBody() != null
+                            && jsonMatchesFixture(input.getPostBody(), fixturePath);
+                } catch (IOException e) {
+                    throw new IllegalArgumentException(e);
+                }
+            }
+        });
     }
 }

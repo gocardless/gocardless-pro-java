@@ -2,16 +2,12 @@ package com.gocardless.pro.http;
 
 import com.google.common.annotations.VisibleForTesting;
 import com.google.common.collect.ImmutableMap;
-import com.squareup.okhttp.Credentials;
-import com.squareup.okhttp.OkHttpClient;
-import com.squareup.okhttp.Request;
-import com.squareup.okhttp.Response;
+import com.google.gson.Gson;
+import com.squareup.okhttp.*;
 
 import java.io.IOException;
 import java.net.URL;
 import java.util.Map;
-
-import static com.google.gson.FieldNamingPolicy.LOWER_CASE_WITH_UNDERSCORES;
 
 public class HttpClient {
     private static final String USER_AGENT = String.format(
@@ -20,6 +16,7 @@ public class HttpClient {
             replaceSpaces(System.getProperty("os.version")),
             replaceSpaces(System.getProperty("java.vm.name")),
             replaceSpaces(System.getProperty("java.version")));
+    private static final MediaType MEDIA_TYPE = MediaType.parse("application/json");
     private static final Map<String, String> HEADERS;
     static {
         ImmutableMap.Builder<String, String> builder = ImmutableMap.builder();
@@ -29,25 +26,37 @@ public class HttpClient {
     private final OkHttpClient rawClient;
     private final UrlFormatter urlFormatter;
     private final ResponseParser responseParser;
+    private final RequestWriter requestWriter;
     private final String credentials;
 
     public HttpClient(String apiKeyId, String apiKey, String baseUri) {
         this.rawClient = new OkHttpClient();
         this.urlFormatter = new UrlFormatter(baseUri);
-        this.responseParser = new ResponseParser();
+        Gson gson = GsonFactory.build();
+        this.responseParser = new ResponseParser(gson);
+        this.requestWriter = new RequestWriter(gson);
         this.credentials = Credentials.basic(apiKeyId, apiKey);
     }
 
-    <T> T get(HttpRequest<T> request) throws IOException {
+    <T> T execute(HttpRequest<T> request) throws IOException {
         URL url = request.getUrl(urlFormatter);
         Request.Builder httpRequest =
                 new Request.Builder().url(url).header("Authorization", credentials)
-                        .header("User-Agent", USER_AGENT);
+                        .header("User-Agent", USER_AGENT)
+                        .method(request.getMethod(), getBody(request));
         for (Map.Entry<String, String> entry : HEADERS.entrySet()) {
             httpRequest = httpRequest.header(entry.getKey(), entry.getValue());
         }
         Response response = execute(httpRequest.build());
         return request.parseResponse(response.body().charStream(), responseParser);
+    }
+
+    private <T> RequestBody getBody(HttpRequest<T> request) {
+        if (!request.hasBody()) {
+            return null;
+        }
+        String json = requestWriter.write(request, request.getEnvelope());
+        return RequestBody.create(MEDIA_TYPE, json);
     }
 
     private Response execute(Request request) throws IOException {

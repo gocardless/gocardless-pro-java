@@ -1,8 +1,6 @@
 package com.gocardless.pro.services;
 
-import com.gocardless.pro.http.GetRequest;
-import com.gocardless.pro.http.HttpClient;
-import com.gocardless.pro.http.ListRequest;
+import com.gocardless.pro.http.*;
 import com.gocardless.pro.resources.Subscription;
 import com.google.common.collect.ImmutableMap;
 import com.google.gson.reflect.TypeToken;
@@ -18,8 +16,8 @@ public class SubscriptionService {
         this.httpClient = httpClient;
     }
 
-    public void create() throws IOException {
-        throw new IllegalStateException("Not implemented!");
+    public SubscriptionCreateRequest create() throws IOException {
+        return new SubscriptionCreateRequest(httpClient);
     }
 
     public SubscriptionListRequest list() throws IOException {
@@ -30,12 +28,126 @@ public class SubscriptionService {
         return new SubscriptionGetRequest(httpClient, identity);
     }
 
-    public void update(String identity) throws IOException {
-        throw new IllegalStateException("Not implemented!");
+    public SubscriptionUpdateRequest update(String identity) throws IOException {
+        return new SubscriptionUpdateRequest(httpClient, identity);
     }
 
-    public void cancel(String identity) throws IOException {
-        throw new IllegalStateException("Not implemented!");
+    public SubscriptionCancelRequest cancel(String identity) throws IOException {
+        return new SubscriptionCancelRequest(httpClient, identity);
+    }
+
+    public static final class SubscriptionCreateRequest extends PostRequest<Subscription> {
+        private Integer amount;
+
+        public SubscriptionCreateRequest withAmount(Integer amount) {
+            this.amount = amount;
+            return this;
+        }
+
+        private Integer count;
+
+        public SubscriptionCreateRequest withCount(Integer count) {
+            this.count = count;
+            return this;
+        }
+
+        private String currency;
+
+        public SubscriptionCreateRequest withCurrency(String currency) {
+            this.currency = currency;
+            return this;
+        }
+
+        private Integer dayOfMonth;
+
+        public SubscriptionCreateRequest withDayOfMonth(Integer dayOfMonth) {
+            this.dayOfMonth = dayOfMonth;
+            return this;
+        }
+
+        private String endAt;
+
+        public SubscriptionCreateRequest withEndAt(String endAt) {
+            this.endAt = endAt;
+            return this;
+        }
+
+        private Integer interval;
+
+        public SubscriptionCreateRequest withInterval(Integer interval) {
+            this.interval = interval;
+            return this;
+        }
+
+        private String intervalUnit;
+
+        public SubscriptionCreateRequest withIntervalUnit(String intervalUnit) {
+            this.intervalUnit = intervalUnit;
+            return this;
+        }
+
+        private Object links;
+
+        public SubscriptionCreateRequest withLinks(Object links) {
+            this.links = links;
+            return this;
+        }
+
+        private Object metadata;
+
+        public SubscriptionCreateRequest withMetadata(Object metadata) {
+            this.metadata = metadata;
+            return this;
+        }
+
+        public enum Month {
+            JANUARY, FEBRUARY, MARCH, APRIL, MAY, JUNE, JULY, AUGUST, SEPTEMBER, OCTOBER, NOVEMBER, DECEMBER,
+        }
+
+        private Month month;
+
+        public SubscriptionCreateRequest withMonth(Month month) {
+            this.month = month;
+            return this;
+        }
+
+        private String name;
+
+        public SubscriptionCreateRequest withName(String name) {
+            this.name = name;
+            return this;
+        }
+
+        private String startAt;
+
+        public SubscriptionCreateRequest withStartAt(String startAt) {
+            this.startAt = startAt;
+            return this;
+        }
+
+        private SubscriptionCreateRequest(HttpClient httpClient) {
+            super(httpClient);
+        }
+
+        @Override
+        protected String getPathTemplate() {
+            return "/subscriptions";
+        }
+
+        @Override
+        protected String getEnvelope() {
+            return "subscriptions";
+        }
+
+        @Override
+        protected Class<Subscription> getResponseClass() {
+            return Subscription.class;
+        }
+
+        @Override
+        protected boolean hasBody() {
+            return true;
+        }
     }
 
     public static final class SubscriptionListRequest extends ListRequest<Subscription> {
@@ -75,8 +187,7 @@ public class SubscriptionService {
         }
 
         private SubscriptionListRequest(HttpClient httpClient) {
-            super(httpClient, "/subscriptions", "subscriptions",
-                    new TypeToken<List<Subscription>>() {});
+            super(httpClient);
         }
 
         @Override
@@ -99,13 +210,29 @@ public class SubscriptionService {
             }
             return params.build();
         }
+
+        @Override
+        protected String getPathTemplate() {
+            return "/subscriptions";
+        }
+
+        @Override
+        protected String getEnvelope() {
+            return "subscriptions";
+        }
+
+        @Override
+        protected TypeToken<List<Subscription>> getTypeToken() {
+            return new TypeToken<List<Subscription>>() {};
+        }
     }
 
     public static final class SubscriptionGetRequest extends GetRequest<Subscription> {
+        @PathParam
         private final String identity;
 
         private SubscriptionGetRequest(HttpClient httpClient, String identity) {
-            super(httpClient, "/subscriptions/:identity", "subscriptions", Subscription.class);
+            super(httpClient);
             this.identity = identity;
         }
 
@@ -114,6 +241,114 @@ public class SubscriptionService {
             ImmutableMap.Builder<String, String> params = ImmutableMap.builder();
             params.put("identity", identity);
             return params.build();
+        }
+
+        @Override
+        protected String getPathTemplate() {
+            return "/subscriptions/:identity";
+        }
+
+        @Override
+        protected String getEnvelope() {
+            return "subscriptions";
+        }
+
+        @Override
+        protected Class<Subscription> getResponseClass() {
+            return Subscription.class;
+        }
+    }
+
+    public static final class SubscriptionUpdateRequest extends PutRequest<Subscription> {
+        @PathParam
+        private final String identity;
+        private Object metadata;
+
+        public SubscriptionUpdateRequest withMetadata(Object metadata) {
+            this.metadata = metadata;
+            return this;
+        }
+
+        private String name;
+
+        public SubscriptionUpdateRequest withName(String name) {
+            this.name = name;
+            return this;
+        }
+
+        private SubscriptionUpdateRequest(HttpClient httpClient, String identity) {
+            super(httpClient);
+            this.identity = identity;
+        }
+
+        @Override
+        protected Map<String, String> getPathParams() {
+            ImmutableMap.Builder<String, String> params = ImmutableMap.builder();
+            params.put("identity", identity);
+            return params.build();
+        }
+
+        @Override
+        protected String getPathTemplate() {
+            return "/subscriptions/:identity";
+        }
+
+        @Override
+        protected String getEnvelope() {
+            return "subscriptions";
+        }
+
+        @Override
+        protected Class<Subscription> getResponseClass() {
+            return Subscription.class;
+        }
+
+        @Override
+        protected boolean hasBody() {
+            return true;
+        }
+    }
+
+    public static final class SubscriptionCancelRequest extends PostRequest<Subscription> {
+        @PathParam
+        private final String identity;
+        private Object metadata;
+
+        public SubscriptionCancelRequest withMetadata(Object metadata) {
+            this.metadata = metadata;
+            return this;
+        }
+
+        private SubscriptionCancelRequest(HttpClient httpClient, String identity) {
+            super(httpClient);
+            this.identity = identity;
+        }
+
+        @Override
+        protected Map<String, String> getPathParams() {
+            ImmutableMap.Builder<String, String> params = ImmutableMap.builder();
+            params.put("identity", identity);
+            return params.build();
+        }
+
+        @Override
+        protected String getPathTemplate() {
+            return "/subscriptions/:identity/actions/cancel";
+        }
+
+        @Override
+        protected String getEnvelope() {
+            return "subscriptions";
+        }
+
+        @Override
+        protected Class<Subscription> getResponseClass() {
+            return Subscription.class;
+        }
+
+        @Override
+        protected boolean hasBody() {
+            return true;
         }
     }
 }

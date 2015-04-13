@@ -31,12 +31,27 @@ public class ListRequestTest extends HttpRequestTest {
 
     private class DummyListRequest extends ListRequest<DummyItem> {
         public DummyListRequest() {
-            super(client, "/dummy", "items", new TypeToken<List<DummyItem>>() {});
+            super(client);
         }
 
         @Override
         protected ImmutableMap<String, Object> getQueryParams() {
             return ImmutableMap.<String, Object>of("id", "123");
+        }
+
+        @Override
+        protected String getPathTemplate() {
+            return "/dummy";
+        }
+
+        @Override
+        protected String getEnvelope() {
+            return "items";
+        }
+
+        @Override
+        protected TypeToken<List<DummyItem>> getTypeToken() {
+            return new TypeToken<List<DummyItem>>() {};
         }
     }
 }

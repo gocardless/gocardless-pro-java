@@ -1,8 +1,6 @@
 package com.gocardless.pro.services;
 
-import com.gocardless.pro.http.GetRequest;
-import com.gocardless.pro.http.HttpClient;
-import com.gocardless.pro.http.ListRequest;
+import com.gocardless.pro.http.*;
 import com.gocardless.pro.resources.Refund;
 import com.google.common.collect.ImmutableMap;
 import com.google.gson.reflect.TypeToken;
@@ -18,8 +16,8 @@ public class RefundService {
         this.httpClient = httpClient;
     }
 
-    public void create() throws IOException {
-        throw new IllegalStateException("Not implemented!");
+    public RefundCreateRequest create() throws IOException {
+        return new RefundCreateRequest(httpClient);
     }
 
     public RefundListRequest list() throws IOException {
@@ -30,8 +28,62 @@ public class RefundService {
         return new RefundGetRequest(httpClient, identity);
     }
 
-    public void update(String identity) throws IOException {
-        throw new IllegalStateException("Not implemented!");
+    public RefundUpdateRequest update(String identity) throws IOException {
+        return new RefundUpdateRequest(httpClient, identity);
+    }
+
+    public static final class RefundCreateRequest extends PostRequest<Refund> {
+        private Integer amount;
+
+        public RefundCreateRequest withAmount(Integer amount) {
+            this.amount = amount;
+            return this;
+        }
+
+        private Object links;
+
+        public RefundCreateRequest withLinks(Object links) {
+            this.links = links;
+            return this;
+        }
+
+        private Object metadata;
+
+        public RefundCreateRequest withMetadata(Object metadata) {
+            this.metadata = metadata;
+            return this;
+        }
+
+        private Integer totalAmountConfirmation;
+
+        public RefundCreateRequest withTotalAmountConfirmation(Integer totalAmountConfirmation) {
+            this.totalAmountConfirmation = totalAmountConfirmation;
+            return this;
+        }
+
+        private RefundCreateRequest(HttpClient httpClient) {
+            super(httpClient);
+        }
+
+        @Override
+        protected String getPathTemplate() {
+            return "/refunds";
+        }
+
+        @Override
+        protected String getEnvelope() {
+            return "refunds";
+        }
+
+        @Override
+        protected Class<Refund> getResponseClass() {
+            return Refund.class;
+        }
+
+        @Override
+        protected boolean hasBody() {
+            return true;
+        }
     }
 
     public static final class RefundListRequest extends ListRequest<Refund> {
@@ -64,7 +116,7 @@ public class RefundService {
         }
 
         private RefundListRequest(HttpClient httpClient) {
-            super(httpClient, "/refunds", "refunds", new TypeToken<List<Refund>>() {});
+            super(httpClient);
         }
 
         @Override
@@ -84,13 +136,29 @@ public class RefundService {
             }
             return params.build();
         }
+
+        @Override
+        protected String getPathTemplate() {
+            return "/refunds";
+        }
+
+        @Override
+        protected String getEnvelope() {
+            return "refunds";
+        }
+
+        @Override
+        protected TypeToken<List<Refund>> getTypeToken() {
+            return new TypeToken<List<Refund>>() {};
+        }
     }
 
     public static final class RefundGetRequest extends GetRequest<Refund> {
+        @PathParam
         private final String identity;
 
         private RefundGetRequest(HttpClient httpClient, String identity) {
-            super(httpClient, "/refunds/:identity", "refunds", Refund.class);
+            super(httpClient);
             this.identity = identity;
         }
 
@@ -99,6 +167,64 @@ public class RefundService {
             ImmutableMap.Builder<String, String> params = ImmutableMap.builder();
             params.put("identity", identity);
             return params.build();
+        }
+
+        @Override
+        protected String getPathTemplate() {
+            return "/refunds/:identity";
+        }
+
+        @Override
+        protected String getEnvelope() {
+            return "refunds";
+        }
+
+        @Override
+        protected Class<Refund> getResponseClass() {
+            return Refund.class;
+        }
+    }
+
+    public static final class RefundUpdateRequest extends PutRequest<Refund> {
+        @PathParam
+        private final String identity;
+        private Object metadata;
+
+        public RefundUpdateRequest withMetadata(Object metadata) {
+            this.metadata = metadata;
+            return this;
+        }
+
+        private RefundUpdateRequest(HttpClient httpClient, String identity) {
+            super(httpClient);
+            this.identity = identity;
+        }
+
+        @Override
+        protected Map<String, String> getPathParams() {
+            ImmutableMap.Builder<String, String> params = ImmutableMap.builder();
+            params.put("identity", identity);
+            return params.build();
+        }
+
+        @Override
+        protected String getPathTemplate() {
+            return "/refunds/:identity";
+        }
+
+        @Override
+        protected String getEnvelope() {
+            return "refunds";
+        }
+
+        @Override
+        protected Class<Refund> getResponseClass() {
+            return Refund.class;
+        }
+
+        @Override
+        protected boolean hasBody() {
+            return true;
         }
     }
 }

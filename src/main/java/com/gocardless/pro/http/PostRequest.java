@@ -2,8 +2,8 @@ package com.gocardless.pro.http;
 
 import java.io.Reader;
 
-public abstract class GetRequest<T> extends HttpRequest<T> {
-    public GetRequest(HttpClient httpClient) {
+public abstract class PostRequest<T> extends HttpRequest<T> {
+    public PostRequest(HttpClient httpClient) {
         super(httpClient);
     }
 
@@ -14,12 +14,7 @@ public abstract class GetRequest<T> extends HttpRequest<T> {
 
     @Override
     protected final String getMethod() {
-        return "GET";
-    }
-
-    @Override
-    protected final boolean hasBody() {
-        return false;
+        return "POST";
     }
 
     protected abstract Class<T> getResponseClass();

@@ -1,8 +1,6 @@
 package com.gocardless.pro.services;
 
-import com.gocardless.pro.http.GetRequest;
-import com.gocardless.pro.http.HttpClient;
-import com.gocardless.pro.http.ListRequest;
+import com.gocardless.pro.http.*;
 import com.gocardless.pro.resources.PublishableApiKey;
 import com.google.common.collect.ImmutableMap;
 import com.google.gson.reflect.TypeToken;
@@ -18,8 +16,8 @@ public class PublishableApiKeyService {
         this.httpClient = httpClient;
     }
 
-    public void create() throws IOException {
-        throw new IllegalStateException("Not implemented!");
+    public PublishableApiKeyCreateRequest create() throws IOException {
+        return new PublishableApiKeyCreateRequest(httpClient);
     }
 
     public PublishableApiKeyListRequest list() throws IOException {
@@ -30,12 +28,45 @@ public class PublishableApiKeyService {
         return new PublishableApiKeyGetRequest(httpClient, identity);
     }
 
-    public void update(String identity) throws IOException {
-        throw new IllegalStateException("Not implemented!");
+    public PublishableApiKeyUpdateRequest update(String identity) throws IOException {
+        return new PublishableApiKeyUpdateRequest(httpClient, identity);
     }
 
-    public void disable(String identity) throws IOException {
-        throw new IllegalStateException("Not implemented!");
+    public PublishableApiKeyDisableRequest disable(String identity) throws IOException {
+        return new PublishableApiKeyDisableRequest(httpClient, identity);
+    }
+
+    public static final class PublishableApiKeyCreateRequest extends PostRequest<PublishableApiKey> {
+        private String name;
+
+        public PublishableApiKeyCreateRequest withName(String name) {
+            this.name = name;
+            return this;
+        }
+
+        private PublishableApiKeyCreateRequest(HttpClient httpClient) {
+            super(httpClient);
+        }
+
+        @Override
+        protected String getPathTemplate() {
+            return "/publishable_api_keys";
+        }
+
+        @Override
+        protected String getEnvelope() {
+            return "publishable_api_keys";
+        }
+
+        @Override
+        protected Class<PublishableApiKey> getResponseClass() {
+            return PublishableApiKey.class;
+        }
+
+        @Override
+        protected boolean hasBody() {
+            return true;
+        }
     }
 
     public static final class PublishableApiKeyListRequest extends ListRequest<PublishableApiKey> {
@@ -72,8 +103,7 @@ public class PublishableApiKeyService {
         }
 
         private PublishableApiKeyListRequest(HttpClient httpClient) {
-            super(httpClient, "/publishable_api_keys", "publishable_api_keys",
-                    new TypeToken<List<PublishableApiKey>>() {});
+            super(httpClient);
         }
 
         @Override
@@ -93,14 +123,29 @@ public class PublishableApiKeyService {
             }
             return params.build();
         }
+
+        @Override
+        protected String getPathTemplate() {
+            return "/publishable_api_keys";
+        }
+
+        @Override
+        protected String getEnvelope() {
+            return "publishable_api_keys";
+        }
+
+        @Override
+        protected TypeToken<List<PublishableApiKey>> getTypeToken() {
+            return new TypeToken<List<PublishableApiKey>>() {};
+        }
     }
 
     public static final class PublishableApiKeyGetRequest extends GetRequest<PublishableApiKey> {
+        @PathParam
         private final String identity;
 
         private PublishableApiKeyGetRequest(HttpClient httpClient, String identity) {
-            super(httpClient, "/publishable_api_keys/:identity", "publishable_api_keys",
-                    PublishableApiKey.class);
+            super(httpClient);
             this.identity = identity;
         }
 
@@ -109,6 +154,102 @@ public class PublishableApiKeyService {
             ImmutableMap.Builder<String, String> params = ImmutableMap.builder();
             params.put("identity", identity);
             return params.build();
+        }
+
+        @Override
+        protected String getPathTemplate() {
+            return "/publishable_api_keys/:identity";
+        }
+
+        @Override
+        protected String getEnvelope() {
+            return "publishable_api_keys";
+        }
+
+        @Override
+        protected Class<PublishableApiKey> getResponseClass() {
+            return PublishableApiKey.class;
+        }
+    }
+
+    public static final class PublishableApiKeyUpdateRequest extends PutRequest<PublishableApiKey> {
+        @PathParam
+        private final String identity;
+        private String name;
+
+        public PublishableApiKeyUpdateRequest withName(String name) {
+            this.name = name;
+            return this;
+        }
+
+        private PublishableApiKeyUpdateRequest(HttpClient httpClient, String identity) {
+            super(httpClient);
+            this.identity = identity;
+        }
+
+        @Override
+        protected Map<String, String> getPathParams() {
+            ImmutableMap.Builder<String, String> params = ImmutableMap.builder();
+            params.put("identity", identity);
+            return params.build();
+        }
+
+        @Override
+        protected String getPathTemplate() {
+            return "/publishable_api_keys/:identity";
+        }
+
+        @Override
+        protected String getEnvelope() {
+            return "publishable_api_keys";
+        }
+
+        @Override
+        protected Class<PublishableApiKey> getResponseClass() {
+            return PublishableApiKey.class;
+        }
+
+        @Override
+        protected boolean hasBody() {
+            return true;
+        }
+    }
+
+    public static final class PublishableApiKeyDisableRequest extends
+            PostRequest<PublishableApiKey> {
+        @PathParam
+        private final String identity;
+
+        private PublishableApiKeyDisableRequest(HttpClient httpClient, String identity) {
+            super(httpClient);
+            this.identity = identity;
+        }
+
+        @Override
+        protected Map<String, String> getPathParams() {
+            ImmutableMap.Builder<String, String> params = ImmutableMap.builder();
+            params.put("identity", identity);
+            return params.build();
+        }
+
+        @Override
+        protected String getPathTemplate() {
+            return "/publishable_api_keys/:identity/actions/disable";
+        }
+
+        @Override
+        protected String getEnvelope() {
+            return "publishable_api_keys";
+        }
+
+        @Override
+        protected Class<PublishableApiKey> getResponseClass() {
+            return PublishableApiKey.class;
+        }
+
+        @Override
+        protected boolean hasBody() {
+            return false;
         }
     }
 }

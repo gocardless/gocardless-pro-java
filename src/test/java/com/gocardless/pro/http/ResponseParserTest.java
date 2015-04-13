@@ -1,6 +1,7 @@
 package com.gocardless.pro.http;
 
 import com.google.gson.reflect.TypeToken;
+import org.junit.Before;
 import org.junit.Test;
 
 import java.io.IOException;
@@ -16,8 +17,9 @@ import static org.assertj.core.api.Assertions.assertThat;
 public class ResponseParserTest {
     private ResponseParser parser;
 
-    public ResponseParserTest() {
-        parser = new ResponseParser();
+    @Before
+    public void setUp() {
+        parser = new ResponseParser(GsonFactory.build());
     }
 
     @Test

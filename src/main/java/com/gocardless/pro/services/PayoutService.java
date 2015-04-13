@@ -1,8 +1,6 @@
 package com.gocardless.pro.services;
 
-import com.gocardless.pro.http.GetRequest;
-import com.gocardless.pro.http.HttpClient;
-import com.gocardless.pro.http.ListRequest;
+import com.gocardless.pro.http.*;
 import com.gocardless.pro.resources.Payout;
 import com.google.common.collect.ImmutableMap;
 import com.google.gson.reflect.TypeToken;
@@ -74,7 +72,7 @@ public class PayoutService {
         }
 
         private PayoutListRequest(HttpClient httpClient) {
-            super(httpClient, "/payouts", "payouts", new TypeToken<List<Payout>>() {});
+            super(httpClient);
         }
 
         @Override
@@ -100,13 +98,29 @@ public class PayoutService {
             }
             return params.build();
         }
+
+        @Override
+        protected String getPathTemplate() {
+            return "/payouts";
+        }
+
+        @Override
+        protected String getEnvelope() {
+            return "payouts";
+        }
+
+        @Override
+        protected TypeToken<List<Payout>> getTypeToken() {
+            return new TypeToken<List<Payout>>() {};
+        }
     }
 
     public static final class PayoutGetRequest extends GetRequest<Payout> {
+        @PathParam
         private final String identity;
 
         private PayoutGetRequest(HttpClient httpClient, String identity) {
-            super(httpClient, "/payouts/:identity", "payouts", Payout.class);
+            super(httpClient);
             this.identity = identity;
         }
 
@@ -115,6 +129,21 @@ public class PayoutService {
             ImmutableMap.Builder<String, String> params = ImmutableMap.builder();
             params.put("identity", identity);
             return params.build();
+        }
+
+        @Override
+        protected String getPathTemplate() {
+            return "/payouts/:identity";
+        }
+
+        @Override
+        protected String getEnvelope() {
+            return "payouts";
+        }
+
+        @Override
+        protected Class<Payout> getResponseClass() {
+            return Payout.class;
         }
     }
 }

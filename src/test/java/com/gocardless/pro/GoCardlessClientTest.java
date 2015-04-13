@@ -2,7 +2,7 @@ package com.gocardless.pro;
 
 import co.freeside.betamax.Betamax;
 import co.freeside.betamax.Recorder;
-import com.gocardless.pro.resources.Customer;
+import com.gocardless.pro.resources.*;
 import com.gocardless.pro.resources.Mandate;
 import org.junit.Before;
 import org.junit.Rule;
@@ -57,5 +57,30 @@ public class GoCardlessClientTest {
         assertThat(mandates).hasSize(2);
         assertThat(mandates.get(0).getId()).isEqualTo("MD00001PEYCSQF");
         assertThat(mandates.get(1).getId()).isEqualTo("MD00001P57AN84");
+    }
+
+    @Test
+    @Betamax(tape = "disable an api key")
+    public void shouldDisableAnApiKey() throws IOException {
+        ApiKey key = client.apiKeys().disable("AK00001335JR69").execute();
+        assertThat(key.getEnabled()).isFalse();
+    }
+
+    @Test
+    @Betamax(tape = "create and update a customer")
+    public void shouldCreateAndUpdateCustomer() throws IOException {
+        Customer customer =
+                client.customers().create().withFamilyName("Osborne").withGivenName("Sharon")
+                        .withAddressLine1("27 Acer Road").withAddressLine2("Apt 2")
+                        .withCity("London").withPostalCode("E8 3GX").withCountryCode("GB")
+                        .execute();
+        assertThat(customer.getId()).isNotNull();
+        assertThat(customer.getFamilyName()).isEqualTo("Osborne");
+        assertThat(customer.getGivenName()).isEqualTo("Sharon");
+        Customer updatedCustomer =
+                client.customers().update(customer.getId()).withGivenName("Ozzy").execute();
+        assertThat(updatedCustomer.getId()).isEqualTo(customer.getId());
+        assertThat(updatedCustomer.getFamilyName()).isEqualTo("Osborne");
+        assertThat(updatedCustomer.getGivenName()).isEqualTo("Ozzy");
     }
 }

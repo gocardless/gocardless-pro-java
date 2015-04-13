@@ -1,8 +1,6 @@
 package com.gocardless.pro.services;
 
-import com.gocardless.pro.http.GetRequest;
-import com.gocardless.pro.http.HttpClient;
-import com.gocardless.pro.http.ListRequest;
+import com.gocardless.pro.http.*;
 import com.gocardless.pro.resources.Event;
 import com.google.common.collect.ImmutableMap;
 import com.google.gson.reflect.TypeToken;
@@ -127,7 +125,7 @@ public class EventService {
         }
 
         private EventListRequest(HttpClient httpClient) {
-            super(httpClient, "/events", "events", new TypeToken<List<Event>>() {});
+            super(httpClient);
         }
 
         @Override
@@ -174,13 +172,29 @@ public class EventService {
             }
             return params.build();
         }
+
+        @Override
+        protected String getPathTemplate() {
+            return "/events";
+        }
+
+        @Override
+        protected String getEnvelope() {
+            return "events";
+        }
+
+        @Override
+        protected TypeToken<List<Event>> getTypeToken() {
+            return new TypeToken<List<Event>>() {};
+        }
     }
 
     public static final class EventGetRequest extends GetRequest<Event> {
+        @PathParam
         private final String identity;
 
         private EventGetRequest(HttpClient httpClient, String identity) {
-            super(httpClient, "/events/:identity", "events", Event.class);
+            super(httpClient);
             this.identity = identity;
         }
 
@@ -189,6 +203,21 @@ public class EventService {
             ImmutableMap.Builder<String, String> params = ImmutableMap.builder();
             params.put("identity", identity);
             return params.build();
+        }
+
+        @Override
+        protected String getPathTemplate() {
+            return "/events/:identity";
+        }
+
+        @Override
+        protected String getEnvelope() {
+            return "events";
+        }
+
+        @Override
+        protected Class<Event> getResponseClass() {
+            return Event.class;
         }
     }
 }

@@ -8,20 +8,18 @@ import java.net.URL;
 import java.util.Map;
 
 public abstract class HttpRequest<T> {
-    protected final HttpClient httpClient;
-    protected final String pathTemplate;
+    private transient final HttpClient httpClient;
 
-    public HttpRequest(HttpClient httpClient, String pathTemplate) {
+    public HttpRequest(HttpClient httpClient) {
         this.httpClient = httpClient;
-        this.pathTemplate = pathTemplate;
     }
 
     public T execute() throws IOException {
-        return httpClient.get(this);
+        return httpClient.execute(this);
     }
 
     URL getUrl(UrlFormatter urlFormatter) {
-        return urlFormatter.formatUrl(pathTemplate, getPathParams(), getQueryParams());
+        return urlFormatter.formatUrl(getPathTemplate(), getPathParams(), getQueryParams());
     }
 
     protected Map<String, String> getPathParams() {
@@ -32,5 +30,13 @@ public abstract class HttpRequest<T> {
         return ImmutableMap.of();
     }
 
-    abstract T parseResponse(Reader stream, ResponseParser responseParser);
+    protected abstract String getPathTemplate();
+
+    protected abstract String getMethod();
+
+    protected abstract String getEnvelope();
+
+    protected abstract boolean hasBody();
+
+    protected abstract T parseResponse(Reader stream, ResponseParser responseParser);
 }

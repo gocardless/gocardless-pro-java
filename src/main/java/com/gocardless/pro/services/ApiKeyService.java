@@ -1,8 +1,6 @@
 package com.gocardless.pro.services;
 
-import com.gocardless.pro.http.GetRequest;
-import com.gocardless.pro.http.HttpClient;
-import com.gocardless.pro.http.ListRequest;
+import com.gocardless.pro.http.*;
 import com.gocardless.pro.resources.ApiKey;
 import com.google.common.collect.ImmutableMap;
 import com.google.gson.reflect.TypeToken;
@@ -18,8 +16,8 @@ public class ApiKeyService {
         this.httpClient = httpClient;
     }
 
-    public void create() throws IOException {
-        throw new IllegalStateException("Not implemented!");
+    public ApiKeyCreateRequest create() throws IOException {
+        return new ApiKeyCreateRequest(httpClient);
     }
 
     public ApiKeyListRequest list() throws IOException {
@@ -30,12 +28,59 @@ public class ApiKeyService {
         return new ApiKeyGetRequest(httpClient, identity);
     }
 
-    public void update(String identity) throws IOException {
-        throw new IllegalStateException("Not implemented!");
+    public ApiKeyUpdateRequest update(String identity) throws IOException {
+        return new ApiKeyUpdateRequest(httpClient, identity);
     }
 
-    public void disable(String identity) throws IOException {
-        throw new IllegalStateException("Not implemented!");
+    public ApiKeyDisableRequest disable(String identity) throws IOException {
+        return new ApiKeyDisableRequest(httpClient, identity);
+    }
+
+    public static final class ApiKeyCreateRequest extends PostRequest<ApiKey> {
+        private Object links;
+
+        public ApiKeyCreateRequest withLinks(Object links) {
+            this.links = links;
+            return this;
+        }
+
+        private String name;
+
+        public ApiKeyCreateRequest withName(String name) {
+            this.name = name;
+            return this;
+        }
+
+        private String webhookUrl;
+
+        public ApiKeyCreateRequest withWebhookUrl(String webhookUrl) {
+            this.webhookUrl = webhookUrl;
+            return this;
+        }
+
+        private ApiKeyCreateRequest(HttpClient httpClient) {
+            super(httpClient);
+        }
+
+        @Override
+        protected String getPathTemplate() {
+            return "/api_keys";
+        }
+
+        @Override
+        protected String getEnvelope() {
+            return "api_keys";
+        }
+
+        @Override
+        protected Class<ApiKey> getResponseClass() {
+            return ApiKey.class;
+        }
+
+        @Override
+        protected boolean hasBody() {
+            return true;
+        }
     }
 
     public static final class ApiKeyListRequest extends ListRequest<ApiKey> {
@@ -79,7 +124,7 @@ public class ApiKeyService {
         }
 
         private ApiKeyListRequest(HttpClient httpClient) {
-            super(httpClient, "/api_keys", "api_keys", new TypeToken<List<ApiKey>>() {});
+            super(httpClient);
         }
 
         @Override
@@ -102,13 +147,29 @@ public class ApiKeyService {
             }
             return params.build();
         }
+
+        @Override
+        protected String getPathTemplate() {
+            return "/api_keys";
+        }
+
+        @Override
+        protected String getEnvelope() {
+            return "api_keys";
+        }
+
+        @Override
+        protected TypeToken<List<ApiKey>> getTypeToken() {
+            return new TypeToken<List<ApiKey>>() {};
+        }
     }
 
     public static final class ApiKeyGetRequest extends GetRequest<ApiKey> {
+        @PathParam
         private final String identity;
 
         private ApiKeyGetRequest(HttpClient httpClient, String identity) {
-            super(httpClient, "/api_keys/:identity", "api_keys", ApiKey.class);
+            super(httpClient);
             this.identity = identity;
         }
 
@@ -117,6 +178,108 @@ public class ApiKeyService {
             ImmutableMap.Builder<String, String> params = ImmutableMap.builder();
             params.put("identity", identity);
             return params.build();
+        }
+
+        @Override
+        protected String getPathTemplate() {
+            return "/api_keys/:identity";
+        }
+
+        @Override
+        protected String getEnvelope() {
+            return "api_keys";
+        }
+
+        @Override
+        protected Class<ApiKey> getResponseClass() {
+            return ApiKey.class;
+        }
+    }
+
+    public static final class ApiKeyUpdateRequest extends PutRequest<ApiKey> {
+        @PathParam
+        private final String identity;
+        private String name;
+
+        public ApiKeyUpdateRequest withName(String name) {
+            this.name = name;
+            return this;
+        }
+
+        private String webhookUrl;
+
+        public ApiKeyUpdateRequest withWebhookUrl(String webhookUrl) {
+            this.webhookUrl = webhookUrl;
+            return this;
+        }
+
+        private ApiKeyUpdateRequest(HttpClient httpClient, String identity) {
+            super(httpClient);
+            this.identity = identity;
+        }
+
+        @Override
+        protected Map<String, String> getPathParams() {
+            ImmutableMap.Builder<String, String> params = ImmutableMap.builder();
+            params.put("identity", identity);
+            return params.build();
+        }
+
+        @Override
+        protected String getPathTemplate() {
+            return "/api_keys/:identity";
+        }
+
+        @Override
+        protected String getEnvelope() {
+            return "api_keys";
+        }
+
+        @Override
+        protected Class<ApiKey> getResponseClass() {
+            return ApiKey.class;
+        }
+
+        @Override
+        protected boolean hasBody() {
+            return true;
+        }
+    }
+
+    public static final class ApiKeyDisableRequest extends PostRequest<ApiKey> {
+        @PathParam
+        private final String identity;
+
+        private ApiKeyDisableRequest(HttpClient httpClient, String identity) {
+            super(httpClient);
+            this.identity = identity;
+        }
+
+        @Override
+        protected Map<String, String> getPathParams() {
+            ImmutableMap.Builder<String, String> params = ImmutableMap.builder();
+            params.put("identity", identity);
+            return params.build();
+        }
+
+        @Override
+        protected String getPathTemplate() {
+            return "/api_keys/:identity/actions/disable";
+        }
+
+        @Override
+        protected String getEnvelope() {
+            return "api_keys";
+        }
+
+        @Override
+        protected Class<ApiKey> getResponseClass() {
+            return ApiKey.class;
+        }
+
+        @Override
+        protected boolean hasBody() {
+            return false;
         }
     }
 }
