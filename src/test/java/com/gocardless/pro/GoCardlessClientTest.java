@@ -11,6 +11,7 @@ import org.junit.Test;
 import java.io.IOException;
 import java.util.List;
 
+import static com.gocardless.pro.GoCardlessClient.Environment.SANDBOX;
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class GoCardlessClientTest {
@@ -23,7 +24,7 @@ public class GoCardlessClientTest {
         recorder.setSslSupport(true);
         String apiKey = System.getenv("GC_API_KEY");
         String apiSecret = System.getenv("GC_API_SECRET");
-        client = GoCardlessClient.create(apiKey, apiSecret, "https://api-sandbox.gocardless.com");
+        client = GoCardlessClient.create(apiKey, apiSecret, SANDBOX);
         TestUtil.disableSslCertificateChecking(client);
     }
 

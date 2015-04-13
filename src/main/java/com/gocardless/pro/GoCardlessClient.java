@@ -107,12 +107,33 @@ public class GoCardlessClient {
         return users;
     }
 
-    @VisibleForTesting
-    HttpClient getHttpClient() {
-        return httpClient;
+    public enum Environment {
+        LIVE, SANDBOX;
+        public String getBaseUrl() {
+            switch (this) {
+                case LIVE:
+                    return "https://api.gocardless.com";
+                case SANDBOX:
+                    return "https://api-sandbox.gocardless.com";
+            }
+            throw new IllegalArgumentException("Unknown environment:" + this);
+        }
+    }
+
+    public static GoCardlessClient create(String apiKey, String apiSecret) {
+        return create(apiKey, apiSecret, Environment.LIVE);
     }
 
     public static GoCardlessClient create(String apiKey, String apiSecret, String baseUrl) {
         return new GoCardlessClient(new HttpClient(apiKey, apiSecret, baseUrl));
+    }
+
+    public static GoCardlessClient create(String apiKey, String apiSecret, Environment environment) {
+        return create(apiKey, apiSecret, environment.getBaseUrl());
+    }
+
+    @VisibleForTesting
+    HttpClient getHttpClient() {
+        return httpClient;
     }
 }
