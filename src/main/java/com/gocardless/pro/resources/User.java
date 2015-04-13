@@ -1,8 +1,5 @@
 package com.gocardless.pro.resources;
 
-import java.util.List;
-import java.util.Map;
-
 public class User {
     private User() {
         // blank to prevent instantiation

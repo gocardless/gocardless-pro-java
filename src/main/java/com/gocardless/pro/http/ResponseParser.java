@@ -1,13 +1,11 @@
 package com.gocardless.pro.http;
 
-import com.google.common.collect.ImmutableList;
-import com.google.gson.*;
-import com.google.gson.reflect.TypeToken;
-
 import java.io.Reader;
 import java.util.List;
 
-import static com.google.gson.FieldNamingPolicy.LOWER_CASE_WITH_UNDERSCORES;
+import com.google.common.collect.ImmutableList;
+import com.google.gson.*;
+import com.google.gson.reflect.TypeToken;
 
 final class ResponseParser {
     private final Gson gson;

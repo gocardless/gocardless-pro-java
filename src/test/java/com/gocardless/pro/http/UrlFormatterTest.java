@@ -1,11 +1,12 @@
 package com.gocardless.pro.http;
 
-import com.google.common.collect.ImmutableMap;
-import org.junit.Before;
-import org.junit.Test;
-
 import java.net.URL;
 import java.util.Map;
+
+import com.google.common.collect.ImmutableMap;
+
+import org.junit.Before;
+import org.junit.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
 

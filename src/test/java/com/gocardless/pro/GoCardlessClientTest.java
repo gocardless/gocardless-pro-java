@@ -1,17 +1,20 @@
 package com.gocardless.pro;
 
+import java.io.IOException;
+import java.util.List;
+
 import co.freeside.betamax.Betamax;
 import co.freeside.betamax.Recorder;
+
 import com.gocardless.pro.resources.*;
 import com.gocardless.pro.resources.Mandate;
+
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
 
-import java.io.IOException;
-import java.util.List;
-
 import static com.gocardless.pro.GoCardlessClient.Environment.SANDBOX;
+
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class GoCardlessClientTest {

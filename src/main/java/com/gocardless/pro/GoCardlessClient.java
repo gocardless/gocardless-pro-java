@@ -2,6 +2,7 @@ package com.gocardless.pro;
 
 import com.gocardless.pro.http.HttpClient;
 import com.gocardless.pro.services.*;
+
 import com.google.common.annotations.VisibleForTesting;
 
 public class GoCardlessClient {

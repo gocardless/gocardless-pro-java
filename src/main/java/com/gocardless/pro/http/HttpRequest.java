@@ -1,11 +1,11 @@
 package com.gocardless.pro.http;
 
-import com.google.common.collect.ImmutableMap;
-
 import java.io.IOException;
 import java.io.Reader;
 import java.net.URL;
 import java.util.Map;
+
+import com.google.common.collect.ImmutableMap;
 
 public abstract class HttpRequest<T> {
     private transient final HttpClient httpClient;

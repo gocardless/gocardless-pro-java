@@ -1,8 +1,5 @@
 package com.gocardless.pro.resources;
 
-import java.util.List;
-import java.util.Map;
-
 public class RedirectFlow {
     private RedirectFlow() {
         // blank to prevent instantiation

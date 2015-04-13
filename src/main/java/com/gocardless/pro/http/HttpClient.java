@@ -1,13 +1,14 @@
 package com.gocardless.pro.http;
 
-import com.google.common.annotations.VisibleForTesting;
-import com.google.common.collect.ImmutableMap;
-import com.google.gson.Gson;
-import com.squareup.okhttp.*;
-
 import java.io.IOException;
 import java.net.URL;
 import java.util.Map;
+
+import com.google.common.annotations.VisibleForTesting;
+import com.google.common.collect.ImmutableMap;
+import com.google.gson.Gson;
+
+import com.squareup.okhttp.*;
 
 public class HttpClient {
     private static final String USER_AGENT = String.format(

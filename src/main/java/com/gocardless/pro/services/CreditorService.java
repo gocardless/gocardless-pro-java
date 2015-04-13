@@ -1,13 +1,14 @@
 package com.gocardless.pro.services;
 
-import com.gocardless.pro.http.*;
-import com.gocardless.pro.resources.Creditor;
-import com.google.common.collect.ImmutableMap;
-import com.google.gson.reflect.TypeToken;
-
 import java.io.IOException;
 import java.util.List;
 import java.util.Map;
+
+import com.gocardless.pro.http.*;
+import com.gocardless.pro.resources.Creditor;
+
+import com.google.common.collect.ImmutableMap;
+import com.google.gson.reflect.TypeToken;
 
 public class CreditorService {
     private HttpClient httpClient;

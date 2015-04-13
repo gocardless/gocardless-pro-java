@@ -1,28 +1,33 @@
 package com.gocardless.pro;
 
+import java.io.IOException;
+
+import javax.net.ssl.SSLContext;
+
 import co.freeside.betamax.ssl.DummyX509TrustManager;
+
 import com.gocardless.pro.http.HttpClient;
+
 import com.google.common.base.Predicate;
 import com.google.common.io.Resources;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonParser;
+
 import com.squareup.okhttp.OkHttpClient;
+
 import com.xebialabs.restito.semantics.Call;
 import com.xebialabs.restito.semantics.Condition;
-import org.apache.http.conn.ssl.AllowAllHostnameVerifier;
 
-import javax.net.ssl.SSLContext;
-import javax.net.ssl.TrustManager;
-import java.io.IOException;
+import org.apache.http.conn.ssl.AllowAllHostnameVerifier;
 
 import static com.google.common.base.Charsets.UTF_8;
 import static com.google.common.io.Resources.getResource;
 
 public class TestUtil {
     public static void disableSslCertificateChecking(GoCardlessClient client) throws Exception {
-        TrustManager[] trustAllCerts = new TrustManager[] {new DummyX509TrustManager()};
         SSLContext sc = SSLContext.getInstance("TLS");
-        sc.init(null, trustAllCerts, new java.security.SecureRandom());
+        sc.init(null, new DummyX509TrustManager[] {new DummyX509TrustManager()},
+                new java.security.SecureRandom());
         OkHttpClient rawClient = client.getHttpClient().getRawClient();
         rawClient.setSslSocketFactory(sc.getSocketFactory());
         rawClient.setHostnameVerifier(new AllowAllHostnameVerifier());

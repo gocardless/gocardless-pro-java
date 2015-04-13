@@ -1,13 +1,9 @@
 package com.gocardless.pro.services;
 
+import java.io.IOException;
+
 import com.gocardless.pro.http.*;
 import com.gocardless.pro.resources.Helper;
-import com.google.common.collect.ImmutableMap;
-import com.google.gson.reflect.TypeToken;
-
-import java.io.IOException;
-import java.util.List;
-import java.util.Map;
 
 public class HelperService {
     private HttpClient httpClient;

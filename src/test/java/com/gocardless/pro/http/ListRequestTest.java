@@ -1,18 +1,21 @@
 package com.gocardless.pro.http;
 
-import com.google.common.collect.ImmutableMap;
-import com.google.gson.reflect.TypeToken;
-import org.glassfish.grizzly.http.util.HttpStatus;
-import org.junit.Test;
-
 import java.io.IOException;
 import java.util.List;
+
+import com.google.common.collect.ImmutableMap;
+import com.google.gson.reflect.TypeToken;
+
+import org.glassfish.grizzly.http.util.HttpStatus;
+
+import org.junit.Test;
 
 import static com.xebialabs.restito.builder.stub.StubHttp.whenHttp;
 import static com.xebialabs.restito.semantics.Action.resourceContent;
 import static com.xebialabs.restito.semantics.Action.status;
 import static com.xebialabs.restito.semantics.Condition.get;
 import static com.xebialabs.restito.semantics.Condition.parameter;
+
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class ListRequestTest extends HttpRequestTest {

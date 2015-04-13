@@ -1,9 +1,9 @@
 package com.gocardless.pro.http;
 
-import com.google.gson.reflect.TypeToken;
-
 import java.io.Reader;
 import java.util.List;
+
+import com.google.gson.reflect.TypeToken;
 
 public abstract class ListRequest<T> extends HttpRequest<List<T>> {
     public ListRequest(HttpClient httpClient) {

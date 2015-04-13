@@ -1,13 +1,12 @@
 package com.gocardless.pro.services;
 
+import java.io.IOException;
+import java.util.Map;
+
 import com.gocardless.pro.http.*;
 import com.gocardless.pro.resources.RedirectFlow;
-import com.google.common.collect.ImmutableMap;
-import com.google.gson.reflect.TypeToken;
 
-import java.io.IOException;
-import java.util.List;
-import java.util.Map;
+import com.google.common.collect.ImmutableMap;
 
 public class RedirectFlowService {
     private HttpClient httpClient;

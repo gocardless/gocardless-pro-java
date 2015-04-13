@@ -1,7 +1,9 @@
 package com.gocardless.pro.http;
 
 import com.gocardless.pro.TestUtil;
+
 import com.xebialabs.restito.server.StubServer;
+
 import org.junit.After;
 import org.junit.Before;
 

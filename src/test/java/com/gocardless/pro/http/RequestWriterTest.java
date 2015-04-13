@@ -1,11 +1,12 @@
 package com.gocardless.pro.http;
 
+import java.io.IOException;
+
 import org.junit.Before;
 import org.junit.Test;
 
-import java.io.IOException;
-
 import static com.gocardless.pro.TestUtil.jsonMatchesFixture;
+
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class RequestWriterTest {
