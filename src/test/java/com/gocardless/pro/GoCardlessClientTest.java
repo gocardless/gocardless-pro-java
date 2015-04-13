@@ -56,7 +56,9 @@ public class GoCardlessClientTest {
         List<Mandate> mandates = client.mandates().list().withCustomer("CU00003068FG73").execute();
         assertThat(mandates).hasSize(2);
         assertThat(mandates.get(0).getId()).isEqualTo("MD00001PEYCSQF");
+        assertThat(mandates.get(0).getLinks().getCreditor()).isEqualTo("CR000035EME9H5");
         assertThat(mandates.get(1).getId()).isEqualTo("MD00001P57AN84");
+        assertThat(mandates.get(1).getLinks().getCreditor()).isEqualTo("CR000035EME9H5");
     }
 
     @Test

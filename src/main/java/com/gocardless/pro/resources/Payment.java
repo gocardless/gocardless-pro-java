@@ -1,115 +1,93 @@
 package com.gocardless.pro.resources;
 
 import java.util.List;
+import java.util.Map;
 
 public class Payment {
+    private Payment() {
+        // blank to prevent instantiation
+    }
+
     private Integer amount;
+    private Integer amountRefunded;
+    private String chargeDate;
+    private String createdAt;
+    private String currency;
+    private String description;
+    private String id;
+    private Links links;
+    private Map<String, String> metadata;
+    private String reference;
+    private String status;
 
     public Integer getAmount() {
         return amount;
     }
 
-    public void setAmount(Integer amount) {
-        this.amount = amount;
-    }
-
-    private Integer amountRefunded;
-
     public Integer getAmountRefunded() {
         return amountRefunded;
     }
-
-    public void setAmountRefunded(Integer amountRefunded) {
-        this.amountRefunded = amountRefunded;
-    }
-
-    private String chargeDate;
 
     public String getChargeDate() {
         return chargeDate;
     }
 
-    public void setChargeDate(String chargeDate) {
-        this.chargeDate = chargeDate;
-    }
-
-    private String createdAt;
-
     public String getCreatedAt() {
         return createdAt;
     }
-
-    public void setCreatedAt(String createdAt) {
-        this.createdAt = createdAt;
-    }
-
-    private String currency;
 
     public String getCurrency() {
         return currency;
     }
 
-    public void setCurrency(String currency) {
-        this.currency = currency;
-    }
-
-    private String description;
-
     public String getDescription() {
         return description;
     }
-
-    public void setDescription(String description) {
-        this.description = description;
-    }
-
-    private String id;
 
     public String getId() {
         return id;
     }
 
-    public void setId(String id) {
-        this.id = id;
-    }
-
-    private Object links;
-
-    public Object getLinks() {
+    public Links getLinks() {
         return links;
     }
 
-    public void setLinks(Object links) {
-        this.links = links;
-    }
-
-    private Object metadata;
-
-    public Object getMetadata() {
+    public Map<String, String> getMetadata() {
         return metadata;
     }
-
-    public void setMetadata(Object metadata) {
-        this.metadata = metadata;
-    }
-
-    private String reference;
 
     public String getReference() {
         return reference;
     }
 
-    public void setReference(String reference) {
-        this.reference = reference;
-    }
-
-    private String status;
-
     public String getStatus() {
         return status;
     }
 
-    public void setStatus(String status) {
-        this.status = status;
+    public static class Links {
+        private Links() {
+            // blank to prevent instantiation
+        }
+
+        private String creditor;
+        private String mandate;
+        private String payout;
+        private String subscription;
+
+        public String getCreditor() {
+            return creditor;
+        }
+
+        public String getMandate() {
+            return mandate;
+        }
+
+        public String getPayout() {
+            return payout;
+        }
+
+        public String getSubscription() {
+            return subscription;
+        }
     }
 }

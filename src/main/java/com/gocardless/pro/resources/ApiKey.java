@@ -1,75 +1,58 @@
 package com.gocardless.pro.resources;
 
 import java.util.List;
+import java.util.Map;
 
 public class ApiKey {
+    private ApiKey() {
+        // blank to prevent instantiation
+    }
+
     private String createdAt;
+    private Boolean enabled;
+    private String id;
+    private String key;
+    private Links links;
+    private String name;
+    private String webhookUrl;
 
     public String getCreatedAt() {
         return createdAt;
     }
 
-    public void setCreatedAt(String createdAt) {
-        this.createdAt = createdAt;
-    }
-
-    private Boolean enabled;
-
     public Boolean getEnabled() {
         return enabled;
     }
-
-    public void setEnabled(Boolean enabled) {
-        this.enabled = enabled;
-    }
-
-    private String id;
 
     public String getId() {
         return id;
     }
 
-    public void setId(String id) {
-        this.id = id;
-    }
-
-    private String key;
-
     public String getKey() {
         return key;
     }
 
-    public void setKey(String key) {
-        this.key = key;
-    }
-
-    private Object links;
-
-    public Object getLinks() {
+    public Links getLinks() {
         return links;
     }
-
-    public void setLinks(Object links) {
-        this.links = links;
-    }
-
-    private String name;
 
     public String getName() {
         return name;
     }
 
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    private String webhookUrl;
-
     public String getWebhookUrl() {
         return webhookUrl;
     }
 
-    public void setWebhookUrl(String webhookUrl) {
-        this.webhookUrl = webhookUrl;
+    public static class Links {
+        private Links() {
+            // blank to prevent instantiation
+        }
+
+        private String role;
+
+        public String getRole() {
+            return role;
+        }
     }
 }

@@ -1,55 +1,53 @@
 package com.gocardless.pro.resources;
 
 import java.util.List;
+import java.util.Map;
 
 public class Role {
+    private Role() {
+        // blank to prevent instantiation
+    }
+
     private String createdAt;
+    private Boolean enabled;
+    private String id;
+    private String name;
+    private List<Permissions> permissions;
 
     public String getCreatedAt() {
         return createdAt;
     }
 
-    public void setCreatedAt(String createdAt) {
-        this.createdAt = createdAt;
-    }
-
-    private Boolean enabled;
-
     public Boolean getEnabled() {
         return enabled;
     }
-
-    public void setEnabled(Boolean enabled) {
-        this.enabled = enabled;
-    }
-
-    private String id;
 
     public String getId() {
         return id;
     }
 
-    public void setId(String id) {
-        this.id = id;
-    }
-
-    private String name;
-
     public String getName() {
         return name;
     }
 
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    private List<Object> permissions;
-
-    public List<Object> getPermissions() {
+    public List<Permissions> getPermissions() {
         return permissions;
     }
 
-    public void setPermissions(List<Object> permissions) {
-        this.permissions = permissions;
+    public static class Permissions {
+        private Permissions() {
+            // blank to prevent instantiation
+        }
+
+        private String access;
+        private String resource;
+
+        public String getAccess() {
+            return access;
+        }
+
+        public String getResource() {
+            return resource;
+        }
     }
 }

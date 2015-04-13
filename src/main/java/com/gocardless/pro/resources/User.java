@@ -1,75 +1,58 @@
 package com.gocardless.pro.resources;
 
 import java.util.List;
+import java.util.Map;
 
 public class User {
+    private User() {
+        // blank to prevent instantiation
+    }
+
     private String createdAt;
+    private String email;
+    private Boolean enabled;
+    private String familyName;
+    private String givenName;
+    private String id;
+    private Links links;
 
     public String getCreatedAt() {
         return createdAt;
     }
 
-    public void setCreatedAt(String createdAt) {
-        this.createdAt = createdAt;
-    }
-
-    private String email;
-
     public String getEmail() {
         return email;
     }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
-    private Boolean enabled;
 
     public Boolean getEnabled() {
         return enabled;
     }
 
-    public void setEnabled(Boolean enabled) {
-        this.enabled = enabled;
-    }
-
-    private String familyName;
-
     public String getFamilyName() {
         return familyName;
     }
-
-    public void setFamilyName(String familyName) {
-        this.familyName = familyName;
-    }
-
-    private String givenName;
 
     public String getGivenName() {
         return givenName;
     }
 
-    public void setGivenName(String givenName) {
-        this.givenName = givenName;
-    }
-
-    private String id;
-
     public String getId() {
         return id;
     }
 
-    public void setId(String id) {
-        this.id = id;
-    }
-
-    private Object links;
-
-    public Object getLinks() {
+    public Links getLinks() {
         return links;
     }
 
-    public void setLinks(Object links) {
-        this.links = links;
+    public static class Links {
+        private Links() {
+            // blank to prevent instantiation
+        }
+
+        private String role;
+
+        public String getRole() {
+            return role;
+        }
     }
 }

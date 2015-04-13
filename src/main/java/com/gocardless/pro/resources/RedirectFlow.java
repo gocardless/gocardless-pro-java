@@ -1,89 +1,67 @@
 package com.gocardless.pro.resources;
 
 import java.util.List;
+import java.util.Map;
 
 public class RedirectFlow {
+    private RedirectFlow() {
+        // blank to prevent instantiation
+    }
+
     private String createdAt;
+    private String description;
+    private String id;
+    private Links links;
+    private String redirectUrl;
+    private Scheme scheme;
+    private String sessionToken;
+    private String successRedirectUrl;
 
     public String getCreatedAt() {
         return createdAt;
     }
 
-    public void setCreatedAt(String createdAt) {
-        this.createdAt = createdAt;
-    }
-
-    private String description;
-
     public String getDescription() {
         return description;
     }
-
-    public void setDescription(String description) {
-        this.description = description;
-    }
-
-    private String id;
 
     public String getId() {
         return id;
     }
 
-    public void setId(String id) {
-        this.id = id;
-    }
-
-    private Object links;
-
-    public Object getLinks() {
+    public Links getLinks() {
         return links;
     }
-
-    public void setLinks(Object links) {
-        this.links = links;
-    }
-
-    private String redirectUrl;
 
     public String getRedirectUrl() {
         return redirectUrl;
     }
 
-    public void setRedirectUrl(String redirectUrl) {
-        this.redirectUrl = redirectUrl;
+    public Scheme getScheme() {
+        return scheme;
+    }
+
+    public String getSessionToken() {
+        return sessionToken;
+    }
+
+    public String getSuccessRedirectUrl() {
+        return successRedirectUrl;
     }
 
     public enum Scheme {
         BACS, SEPA_CORE,
     }
 
-    private Scheme scheme;
+    public static class Links {
+        private Links() {
+            // blank to prevent instantiation
+        }
 
-    public Scheme getScheme() {
-        return scheme;
-    }
+        private String creditor;
 
-    public void setScheme(Scheme scheme) {
-        this.scheme = scheme;
-    }
-
-    private String sessionToken;
-
-    public String getSessionToken() {
-        return sessionToken;
-    }
-
-    public void setSessionToken(String sessionToken) {
-        this.sessionToken = sessionToken;
-    }
-
-    private String successRedirectUrl;
-
-    public String getSuccessRedirectUrl() {
-        return successRedirectUrl;
-    }
-
-    public void setSuccessRedirectUrl(String successRedirectUrl) {
-        this.successRedirectUrl = successRedirectUrl;
+        public String getCreditor() {
+            return creditor;
+        }
     }
 }

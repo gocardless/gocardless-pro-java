@@ -1,65 +1,53 @@
 package com.gocardless.pro.resources;
 
 import java.util.List;
+import java.util.Map;
 
 public class Refund {
+    private Refund() {
+        // blank to prevent instantiation
+    }
+
     private Integer amount;
+    private String createdAt;
+    private String currency;
+    private String id;
+    private Links links;
+    private Map<String, String> metadata;
 
     public Integer getAmount() {
         return amount;
     }
 
-    public void setAmount(Integer amount) {
-        this.amount = amount;
-    }
-
-    private String createdAt;
-
     public String getCreatedAt() {
         return createdAt;
     }
-
-    public void setCreatedAt(String createdAt) {
-        this.createdAt = createdAt;
-    }
-
-    private String currency;
 
     public String getCurrency() {
         return currency;
     }
 
-    public void setCurrency(String currency) {
-        this.currency = currency;
-    }
-
-    private String id;
-
     public String getId() {
         return id;
     }
 
-    public void setId(String id) {
-        this.id = id;
-    }
-
-    private Object links;
-
-    public Object getLinks() {
+    public Links getLinks() {
         return links;
     }
 
-    public void setLinks(Object links) {
-        this.links = links;
-    }
-
-    private Object metadata;
-
-    public Object getMetadata() {
+    public Map<String, String> getMetadata() {
         return metadata;
     }
 
-    public void setMetadata(Object metadata) {
-        this.metadata = metadata;
+    public static class Links {
+        private Links() {
+            // blank to prevent instantiation
+        }
+
+        private String payment;
+
+        public String getPayment() {
+            return payment;
+        }
     }
 }
