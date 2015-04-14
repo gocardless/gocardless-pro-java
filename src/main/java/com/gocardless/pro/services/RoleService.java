@@ -1,6 +1,5 @@
 package com.gocardless.pro.services;
 
-import java.io.IOException;
 import java.util.List;
 import java.util.Map;
 
@@ -17,23 +16,23 @@ public class RoleService {
         this.httpClient = httpClient;
     }
 
-    public RoleCreateRequest create() throws IOException {
+    public RoleCreateRequest create() {
         return new RoleCreateRequest(httpClient);
     }
 
-    public RoleListRequest list() throws IOException {
+    public RoleListRequest list() {
         return new RoleListRequest(httpClient);
     }
 
-    public RoleGetRequest get(String identity) throws IOException {
+    public RoleGetRequest get(String identity) {
         return new RoleGetRequest(httpClient, identity);
     }
 
-    public RoleUpdateRequest update(String identity) throws IOException {
+    public RoleUpdateRequest update(String identity) {
         return new RoleUpdateRequest(httpClient, identity);
     }
 
-    public RoleDisableRequest disable(String identity) throws IOException {
+    public RoleDisableRequest disable(String identity) {
         return new RoleDisableRequest(httpClient, identity);
     }
 

@@ -1,8 +1,11 @@
 package com.gocardless.pro.http;
 
 import java.io.IOException;
+import java.io.Reader;
 import java.net.URL;
 import java.util.Map;
+
+import com.gocardless.pro.exceptions.*;
 
 import com.google.common.annotations.VisibleForTesting;
 import com.google.common.collect.ImmutableMap;
@@ -39,7 +42,7 @@ public class HttpClient {
         this.credentials = Credentials.basic(apiKeyId, apiKey);
     }
 
-    <T> T execute(HttpRequest<T> request) throws IOException {
+    <T> T execute(HttpRequest<T> request) {
         URL url = request.getUrl(urlFormatter);
         Request.Builder httpRequest =
                 new Request.Builder().url(url).header("Authorization", credentials)
@@ -49,7 +52,11 @@ public class HttpClient {
             httpRequest = httpRequest.header(entry.getKey(), entry.getValue());
         }
         Response response = execute(httpRequest.build());
-        return request.parseResponse(response.body().charStream(), responseParser);
+        if (response.isSuccessful()) {
+            return handleSuccessfulResponse(request, response);
+        } else {
+            throw handleErrorResponse(response);
+        }
     }
 
     private <T> RequestBody getBody(HttpRequest<T> request) {
@@ -60,8 +67,28 @@ public class HttpClient {
         return RequestBody.create(MEDIA_TYPE, json);
     }
 
-    private Response execute(Request request) throws IOException {
-        return rawClient.newCall(request).execute();
+    private Response execute(Request request) {
+        try {
+            return rawClient.newCall(request).execute();
+        } catch (IOException e) {
+            throw new GoCardlessClientException("Failed to execute request", e);
+        }
+    }
+
+    private <T> T handleSuccessfulResponse(HttpRequest<T> request, Response response) {
+        try (Reader stream = response.body().charStream()) {
+            return request.parseResponse(stream, responseParser);
+        } catch (IOException e) {
+            throw new GoCardlessClientException("Failed to read response body", e);
+        }
+    }
+
+    private GoCardlessException handleErrorResponse(Response response) {
+        try (Reader stream = response.body().charStream()) {
+            return responseParser.parseError(stream);
+        } catch (IOException e) {
+            throw new GoCardlessClientException("Failed to read response body", e);
+        }
     }
 
     private static String replaceSpaces(String s) {

@@ -1,6 +1,5 @@
 package com.gocardless.pro.services;
 
-import java.io.IOException;
 import java.util.List;
 import java.util.Map;
 
@@ -17,11 +16,11 @@ public class PayoutService {
         this.httpClient = httpClient;
     }
 
-    public PayoutListRequest list() throws IOException {
+    public PayoutListRequest list() {
         return new PayoutListRequest(httpClient);
     }
 
-    public PayoutGetRequest get(String identity) throws IOException {
+    public PayoutGetRequest get(String identity) {
         return new PayoutGetRequest(httpClient, identity);
     }
 

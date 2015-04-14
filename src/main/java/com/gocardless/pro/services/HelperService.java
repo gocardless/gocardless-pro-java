@@ -1,7 +1,5 @@
 package com.gocardless.pro.services;
 
-import java.io.IOException;
-
 import com.gocardless.pro.http.*;
 import com.gocardless.pro.resources.Helper;
 
@@ -12,11 +10,11 @@ public class HelperService {
         this.httpClient = httpClient;
     }
 
-    public HelperMandateRequest mandate() throws IOException {
+    public HelperMandateRequest mandate() {
         return new HelperMandateRequest(httpClient);
     }
 
-    public HelperModulusCheckRequest modulusCheck() throws IOException {
+    public HelperModulusCheckRequest modulusCheck() {
         return new HelperModulusCheckRequest(httpClient);
     }
 

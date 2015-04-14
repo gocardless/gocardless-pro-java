@@ -1,6 +1,5 @@
 package com.gocardless.pro.services;
 
-import java.io.IOException;
 import java.util.List;
 import java.util.Map;
 
@@ -17,19 +16,19 @@ public class CreditorService {
         this.httpClient = httpClient;
     }
 
-    public CreditorCreateRequest create() throws IOException {
+    public CreditorCreateRequest create() {
         return new CreditorCreateRequest(httpClient);
     }
 
-    public CreditorListRequest list() throws IOException {
+    public CreditorListRequest list() {
         return new CreditorListRequest(httpClient);
     }
 
-    public CreditorGetRequest get(String identity) throws IOException {
+    public CreditorGetRequest get(String identity) {
         return new CreditorGetRequest(httpClient, identity);
     }
 
-    public CreditorUpdateRequest update(String identity) throws IOException {
+    public CreditorUpdateRequest update(String identity) {
         return new CreditorUpdateRequest(httpClient, identity);
     }
 

@@ -1,6 +1,5 @@
 package com.gocardless.pro.http;
 
-import java.io.IOException;
 import java.io.Reader;
 import java.net.URL;
 import java.util.Map;
@@ -14,7 +13,7 @@ public abstract class HttpRequest<T> {
         this.httpClient = httpClient;
     }
 
-    public T execute() throws IOException {
+    public T execute() {
         return httpClient.execute(this);
     }
 

@@ -1,6 +1,5 @@
 package com.gocardless.pro.services;
 
-import java.io.IOException;
 import java.util.List;
 import java.util.Map;
 
@@ -17,23 +16,23 @@ public class PublishableApiKeyService {
         this.httpClient = httpClient;
     }
 
-    public PublishableApiKeyCreateRequest create() throws IOException {
+    public PublishableApiKeyCreateRequest create() {
         return new PublishableApiKeyCreateRequest(httpClient);
     }
 
-    public PublishableApiKeyListRequest list() throws IOException {
+    public PublishableApiKeyListRequest list() {
         return new PublishableApiKeyListRequest(httpClient);
     }
 
-    public PublishableApiKeyGetRequest get(String identity) throws IOException {
+    public PublishableApiKeyGetRequest get(String identity) {
         return new PublishableApiKeyGetRequest(httpClient, identity);
     }
 
-    public PublishableApiKeyUpdateRequest update(String identity) throws IOException {
+    public PublishableApiKeyUpdateRequest update(String identity) {
         return new PublishableApiKeyUpdateRequest(httpClient, identity);
     }
 
-    public PublishableApiKeyDisableRequest disable(String identity) throws IOException {
+    public PublishableApiKeyDisableRequest disable(String identity) {
         return new PublishableApiKeyDisableRequest(httpClient, identity);
     }
 

@@ -1,6 +1,5 @@
 package com.gocardless.pro.services;
 
-import java.io.IOException;
 import java.util.List;
 import java.util.Map;
 
@@ -17,19 +16,19 @@ public class RefundService {
         this.httpClient = httpClient;
     }
 
-    public RefundCreateRequest create() throws IOException {
+    public RefundCreateRequest create() {
         return new RefundCreateRequest(httpClient);
     }
 
-    public RefundListRequest list() throws IOException {
+    public RefundListRequest list() {
         return new RefundListRequest(httpClient);
     }
 
-    public RefundGetRequest get(String identity) throws IOException {
+    public RefundGetRequest get(String identity) {
         return new RefundGetRequest(httpClient, identity);
     }
 
-    public RefundUpdateRequest update(String identity) throws IOException {
+    public RefundUpdateRequest update(String identity) {
         return new RefundUpdateRequest(httpClient, identity);
     }
 

@@ -58,4 +58,9 @@ public class TestUtil {
             }
         });
     }
+
+    public static class DummyItem {
+        public String stringField;
+        public int intField;
+    }
 }

@@ -1,6 +1,5 @@
 package com.gocardless.pro.services;
 
-import java.io.IOException;
 import java.util.List;
 import java.util.Map;
 
@@ -17,27 +16,27 @@ public class UserService {
         this.httpClient = httpClient;
     }
 
-    public UserCreateRequest create() throws IOException {
+    public UserCreateRequest create() {
         return new UserCreateRequest(httpClient);
     }
 
-    public UserListRequest list() throws IOException {
+    public UserListRequest list() {
         return new UserListRequest(httpClient);
     }
 
-    public UserGetRequest get(String identity) throws IOException {
+    public UserGetRequest get(String identity) {
         return new UserGetRequest(httpClient, identity);
     }
 
-    public UserUpdateRequest update(String identity) throws IOException {
+    public UserUpdateRequest update(String identity) {
         return new UserUpdateRequest(httpClient, identity);
     }
 
-    public UserEnableRequest enable(String identity) throws IOException {
+    public UserEnableRequest enable(String identity) {
         return new UserEnableRequest(httpClient, identity);
     }
 
-    public UserDisableRequest disable(String identity) throws IOException {
+    public UserDisableRequest disable(String identity) {
         return new UserDisableRequest(httpClient, identity);
     }
 

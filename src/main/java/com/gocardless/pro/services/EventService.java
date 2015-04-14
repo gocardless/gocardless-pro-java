@@ -1,6 +1,5 @@
 package com.gocardless.pro.services;
 
-import java.io.IOException;
 import java.util.List;
 import java.util.Map;
 
@@ -17,11 +16,11 @@ public class EventService {
         this.httpClient = httpClient;
     }
 
-    public EventListRequest list() throws IOException {
+    public EventListRequest list() {
         return new EventListRequest(httpClient);
     }
 
-    public EventGetRequest get(String identity) throws IOException {
+    public EventGetRequest get(String identity) {
         return new EventGetRequest(httpClient, identity);
     }
 

@@ -1,9 +1,10 @@
 package com.gocardless.pro.http;
 
-import java.io.IOException;
+import com.gocardless.pro.TestUtil.DummyItem;
 
 import org.glassfish.grizzly.http.util.HttpStatus;
 
+import org.junit.Rule;
 import org.junit.Test;
 
 import static com.gocardless.pro.TestUtil.withJsonBody;
@@ -15,11 +16,14 @@ import static com.xebialabs.restito.semantics.Condition.*;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class PostRequestTest extends HttpRequestTest {
+public class PostRequestTest {
+    @Rule
+    public MockHttp http = new MockHttp();
+
     @Test
-    public void shouldPerformPostRequest() throws IOException {
-        whenHttp(server).match(post("/dummy"), not(withPostBody())).then(status(HttpStatus.OK_200),
-                resourceContent("fixtures/single.json"));
+    public void shouldPerformPostRequest() {
+        whenHttp(http.server()).match(post("/dummy"), not(withPostBody())).then(
+                status(HttpStatus.OK_200), resourceContent("fixtures/single.json"));
         DummyPostRequest request = new DummyPostRequest();
         DummyItem result = request.execute();
         assertThat(result.stringField).isEqualTo("foo");
@@ -27,8 +31,8 @@ public class PostRequestTest extends HttpRequestTest {
     }
 
     @Test
-    public void shouldPerformPostRequestWithBody() throws IOException {
-        whenHttp(server).match(post("/dummy"), withJsonBody("fixtures/single.json")).then(
+    public void shouldPerformPostRequestWithBody() {
+        whenHttp(http.server()).match(post("/dummy"), withJsonBody("fixtures/single.json")).then(
                 status(HttpStatus.OK_200), resourceContent("fixtures/single.json"));
         DummyPostRequest request = new DummyPostRequestWithBody();
         DummyItem result = request.execute();
@@ -38,7 +42,7 @@ public class PostRequestTest extends HttpRequestTest {
 
     private class DummyPostRequest extends PostRequest<DummyItem> {
         public DummyPostRequest() {
-            super(client);
+            super(http.client());
         }
 
         @Override

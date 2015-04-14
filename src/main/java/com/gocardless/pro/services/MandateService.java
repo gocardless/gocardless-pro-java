@@ -1,6 +1,5 @@
 package com.gocardless.pro.services;
 
-import java.io.IOException;
 import java.util.List;
 import java.util.Map;
 
@@ -17,27 +16,27 @@ public class MandateService {
         this.httpClient = httpClient;
     }
 
-    public MandateCreateRequest create() throws IOException {
+    public MandateCreateRequest create() {
         return new MandateCreateRequest(httpClient);
     }
 
-    public MandateListRequest list() throws IOException {
+    public MandateListRequest list() {
         return new MandateListRequest(httpClient);
     }
 
-    public MandateGetRequest get(String identity) throws IOException {
+    public MandateGetRequest get(String identity) {
         return new MandateGetRequest(httpClient, identity);
     }
 
-    public MandateUpdateRequest update(String identity) throws IOException {
+    public MandateUpdateRequest update(String identity) {
         return new MandateUpdateRequest(httpClient, identity);
     }
 
-    public MandateCancelRequest cancel(String identity) throws IOException {
+    public MandateCancelRequest cancel(String identity) {
         return new MandateCancelRequest(httpClient, identity);
     }
 
-    public MandateReinstateRequest reinstate(String identity) throws IOException {
+    public MandateReinstateRequest reinstate(String identity) {
         return new MandateReinstateRequest(httpClient, identity);
     }
 

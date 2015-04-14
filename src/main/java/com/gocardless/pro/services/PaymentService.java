@@ -1,6 +1,5 @@
 package com.gocardless.pro.services;
 
-import java.io.IOException;
 import java.util.List;
 import java.util.Map;
 
@@ -17,27 +16,27 @@ public class PaymentService {
         this.httpClient = httpClient;
     }
 
-    public PaymentCreateRequest create() throws IOException {
+    public PaymentCreateRequest create() {
         return new PaymentCreateRequest(httpClient);
     }
 
-    public PaymentListRequest list() throws IOException {
+    public PaymentListRequest list() {
         return new PaymentListRequest(httpClient);
     }
 
-    public PaymentGetRequest get(String identity) throws IOException {
+    public PaymentGetRequest get(String identity) {
         return new PaymentGetRequest(httpClient, identity);
     }
 
-    public PaymentUpdateRequest update(String identity) throws IOException {
+    public PaymentUpdateRequest update(String identity) {
         return new PaymentUpdateRequest(httpClient, identity);
     }
 
-    public PaymentCancelRequest cancel(String identity) throws IOException {
+    public PaymentCancelRequest cancel(String identity) {
         return new PaymentCancelRequest(httpClient, identity);
     }
 
-    public PaymentRetryRequest retry(String identity) throws IOException {
+    public PaymentRetryRequest retry(String identity) {
         return new PaymentRetryRequest(httpClient, identity);
     }
 

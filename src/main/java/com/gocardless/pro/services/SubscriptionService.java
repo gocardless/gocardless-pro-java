@@ -1,6 +1,5 @@
 package com.gocardless.pro.services;
 
-import java.io.IOException;
 import java.util.List;
 import java.util.Map;
 
@@ -17,23 +16,23 @@ public class SubscriptionService {
         this.httpClient = httpClient;
     }
 
-    public SubscriptionCreateRequest create() throws IOException {
+    public SubscriptionCreateRequest create() {
         return new SubscriptionCreateRequest(httpClient);
     }
 
-    public SubscriptionListRequest list() throws IOException {
+    public SubscriptionListRequest list() {
         return new SubscriptionListRequest(httpClient);
     }
 
-    public SubscriptionGetRequest get(String identity) throws IOException {
+    public SubscriptionGetRequest get(String identity) {
         return new SubscriptionGetRequest(httpClient, identity);
     }
 
-    public SubscriptionUpdateRequest update(String identity) throws IOException {
+    public SubscriptionUpdateRequest update(String identity) {
         return new SubscriptionUpdateRequest(httpClient, identity);
     }
 
-    public SubscriptionCancelRequest cancel(String identity) throws IOException {
+    public SubscriptionCancelRequest cancel(String identity) {
         return new SubscriptionCancelRequest(httpClient, identity);
     }
 

@@ -1,13 +1,13 @@
 package com.gocardless.pro.http;
 
-import java.io.IOException;
 import java.util.List;
+
+import com.gocardless.pro.TestUtil.DummyItem;
 
 import com.google.common.collect.ImmutableMap;
 import com.google.gson.reflect.TypeToken;
 
-import org.glassfish.grizzly.http.util.HttpStatus;
-
+import org.junit.Rule;
 import org.junit.Test;
 
 import static com.xebialabs.restito.builder.stub.StubHttp.whenHttp;
@@ -18,11 +18,16 @@ import static com.xebialabs.restito.semantics.Condition.parameter;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class ListRequestTest extends HttpRequestTest {
+import static org.glassfish.grizzly.http.util.HttpStatus.OK_200;
+
+public class ListRequestTest {
+    @Rule
+    public MockHttp http = new MockHttp();
+
     @Test
-    public void shouldPerformListRequest() throws IOException {
-        whenHttp(server).match(get("/dummy"), parameter("id", "123")).then(
-                status(HttpStatus.OK_200), resourceContent("fixtures/multiple.json"));
+    public void shouldPerformListRequest() {
+        whenHttp(http.server()).match(get("/dummy"), parameter("id", "123")).then(status(OK_200),
+                resourceContent("fixtures/multiple.json"));
         DummyListRequest request = new DummyListRequest();
         List<DummyItem> result = request.execute();
         assertThat(result).hasSize(2);
@@ -34,7 +39,7 @@ public class ListRequestTest extends HttpRequestTest {
 
     private class DummyListRequest extends ListRequest<DummyItem> {
         public DummyListRequest() {
-            super(client);
+            super(http.client());
         }
 
         @Override

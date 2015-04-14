@@ -1,6 +1,5 @@
 package com.gocardless.pro;
 
-import java.io.IOException;
 import java.util.List;
 
 import co.freeside.betamax.Betamax;
@@ -33,7 +32,7 @@ public class GoCardlessClientTest {
 
     @Test
     @Betamax(tape = "get a customer")
-    public void shouldGetACustomer() throws IOException {
+    public void shouldGetACustomer() {
         Customer customer = client.customers().get("CU00003068FG73").execute();
         assertThat(customer.getId()).isEqualTo("CU00003068FG73");
         assertThat(customer.getFamilyName()).isEqualTo("Osborne");
@@ -42,7 +41,7 @@ public class GoCardlessClientTest {
 
     @Test
     @Betamax(tape = "list customers")
-    public void shouldListCustomers() throws IOException {
+    public void shouldListCustomers() {
         List<Customer> customers = client.customers().list().execute();
         assertThat(customers).hasSize(2);
         assertThat(customers.get(0).getId()).isEqualTo("CU00003068FG73");
@@ -55,7 +54,7 @@ public class GoCardlessClientTest {
 
     @Test
     @Betamax(tape = "list mandates for a customer")
-    public void shouldListMandatesForACustomer() throws IOException {
+    public void shouldListMandatesForACustomer() {
         List<Mandate> mandates = client.mandates().list().withCustomer("CU00003068FG73").execute();
         assertThat(mandates).hasSize(2);
         assertThat(mandates.get(0).getId()).isEqualTo("MD00001PEYCSQF");
@@ -66,14 +65,14 @@ public class GoCardlessClientTest {
 
     @Test
     @Betamax(tape = "disable an api key")
-    public void shouldDisableAnApiKey() throws IOException {
+    public void shouldDisableAnApiKey() {
         ApiKey key = client.apiKeys().disable("AK00001335JR69").execute();
         assertThat(key.getEnabled()).isFalse();
     }
 
     @Test
     @Betamax(tape = "create and update a customer")
-    public void shouldCreateAndUpdateCustomer() throws IOException {
+    public void shouldCreateAndUpdateCustomer() {
         Customer customer =
                 client.customers().create().withFamilyName("Osborne").withGivenName("Sharon")
                         .withAddressLine1("27 Acer Road").withAddressLine2("Apt 2")

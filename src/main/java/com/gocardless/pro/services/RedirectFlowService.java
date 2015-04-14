@@ -1,6 +1,5 @@
 package com.gocardless.pro.services;
 
-import java.io.IOException;
 import java.util.Map;
 
 import com.gocardless.pro.http.*;
@@ -15,15 +14,15 @@ public class RedirectFlowService {
         this.httpClient = httpClient;
     }
 
-    public RedirectFlowCreateRequest create() throws IOException {
+    public RedirectFlowCreateRequest create() {
         return new RedirectFlowCreateRequest(httpClient);
     }
 
-    public RedirectFlowGetRequest get(String identity) throws IOException {
+    public RedirectFlowGetRequest get(String identity) {
         return new RedirectFlowGetRequest(httpClient, identity);
     }
 
-    public RedirectFlowCompleteRequest complete(String identity) throws IOException {
+    public RedirectFlowCompleteRequest complete(String identity) {
         return new RedirectFlowCompleteRequest(httpClient, identity);
     }
 
