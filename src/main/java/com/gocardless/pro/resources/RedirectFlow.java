@@ -56,9 +56,14 @@ public class RedirectFlow {
         }
 
         private String creditor;
+        private String mandate;
 
         public String getCreditor() {
             return creditor;
+        }
+
+        public String getMandate() {
+            return mandate;
         }
     }
 }
