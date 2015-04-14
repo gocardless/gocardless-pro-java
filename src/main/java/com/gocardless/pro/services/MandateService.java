@@ -6,6 +6,7 @@ import java.util.Map;
 import com.gocardless.pro.http.*;
 import com.gocardless.pro.resources.Mandate;
 
+import com.google.common.base.Joiner;
 import com.google.common.collect.ImmutableMap;
 import com.google.gson.reflect.TypeToken;
 
@@ -41,28 +42,25 @@ public class MandateService {
     }
 
     public static final class MandateCreateRequest extends PostRequest<Mandate> {
-        private Object links;
+        private Links links;
+        private Map<String, String> metadata;
+        private String reference;
+        private String scheme;
 
-        public MandateCreateRequest withLinks(Object links) {
+        public MandateCreateRequest withLinks(Links links) {
             this.links = links;
             return this;
         }
 
-        private Object metadata;
-
-        public MandateCreateRequest withMetadata(Object metadata) {
+        public MandateCreateRequest withMetadata(Map<String, String> metadata) {
             this.metadata = metadata;
             return this;
         }
-
-        private String reference;
 
         public MandateCreateRequest withReference(String reference) {
             this.reference = reference;
             return this;
         }
-
-        private String scheme;
 
         public MandateCreateRequest withScheme(String scheme) {
             this.scheme = scheme;
@@ -92,61 +90,69 @@ public class MandateService {
         protected boolean hasBody() {
             return true;
         }
+
+        public static class Links {
+            private String creditor;
+            private String customerBankAccount;
+
+            public Links withCreditor(String creditor) {
+                this.creditor = creditor;
+                return this;
+            }
+
+            public Links withCustomerBankAccount(String customerBankAccount) {
+                this.customerBankAccount = customerBankAccount;
+                return this;
+            }
+        }
     }
 
     public static final class MandateListRequest extends ListRequest<Mandate> {
         private String after;
+        private String before;
+        private String creditor;
+        private String customer;
+        private String customerBankAccount;
+        private Integer limit;
+        private String reference;
+        private List<Status> status;
 
         public MandateListRequest withAfter(String after) {
             this.after = after;
             return this;
         }
 
-        private String before;
-
         public MandateListRequest withBefore(String before) {
             this.before = before;
             return this;
         }
-
-        private String creditor;
 
         public MandateListRequest withCreditor(String creditor) {
             this.creditor = creditor;
             return this;
         }
 
-        private String customer;
-
         public MandateListRequest withCustomer(String customer) {
             this.customer = customer;
             return this;
         }
-
-        private String customerBankAccount;
 
         public MandateListRequest withCustomerBankAccount(String customerBankAccount) {
             this.customerBankAccount = customerBankAccount;
             return this;
         }
 
-        private Integer limit;
-
         public MandateListRequest withLimit(Integer limit) {
             this.limit = limit;
             return this;
         }
-
-        private String reference;
 
         public MandateListRequest withReference(String reference) {
             this.reference = reference;
             return this;
         }
 
-        private List<String> status;
-
-        public MandateListRequest withStatus(List<String> status) {
+        public MandateListRequest withStatus(List<Status> status) {
             this.status = status;
             return this;
         }
@@ -180,7 +186,7 @@ public class MandateService {
                 params.put("reference", reference);
             }
             if (status != null) {
-                params.put("status", status);
+                params.put("status", Joiner.on(",").join(status));
             }
             return params.build();
         }
@@ -198,6 +204,14 @@ public class MandateService {
         @Override
         protected TypeToken<List<Mandate>> getTypeToken() {
             return new TypeToken<List<Mandate>>() {};
+        }
+
+        public enum Status {
+            PENDING_SUBMISSION, SUBMITTED, ACTIVE, FAILED, CANCELLED, EXPIRED;
+            @Override
+            public String toString() {
+                return name().toLowerCase();
+            }
         }
     }
 
@@ -236,9 +250,9 @@ public class MandateService {
     public static final class MandateUpdateRequest extends PutRequest<Mandate> {
         @PathParam
         private final String identity;
-        private Object metadata;
+        private Map<String, String> metadata;
 
-        public MandateUpdateRequest withMetadata(Object metadata) {
+        public MandateUpdateRequest withMetadata(Map<String, String> metadata) {
             this.metadata = metadata;
             return this;
         }
@@ -279,9 +293,9 @@ public class MandateService {
     public static final class MandateCancelRequest extends PostRequest<Mandate> {
         @PathParam
         private final String identity;
-        private Object metadata;
+        private Map<String, String> metadata;
 
-        public MandateCancelRequest withMetadata(Object metadata) {
+        public MandateCancelRequest withMetadata(Map<String, String> metadata) {
             this.metadata = metadata;
             return this;
         }
@@ -322,9 +336,9 @@ public class MandateService {
     public static final class MandateReinstateRequest extends PostRequest<Mandate> {
         @PathParam
         private final String identity;
-        private Object metadata;
+        private Map<String, String> metadata;
 
-        public MandateReinstateRequest withMetadata(Object metadata) {
+        public MandateReinstateRequest withMetadata(Map<String, String> metadata) {
             this.metadata = metadata;
             return this;
         }

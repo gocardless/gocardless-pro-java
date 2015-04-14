@@ -6,13 +6,19 @@ import co.freeside.betamax.Betamax;
 import co.freeside.betamax.Recorder;
 
 import com.gocardless.pro.resources.*;
-import com.gocardless.pro.resources.Mandate;
+import com.gocardless.pro.services.CustomerService.CustomerListRequest;
+import com.gocardless.pro.services.PaymentService.PaymentCreateRequest;
+
+import com.google.common.collect.ImmutableList;
+import com.google.common.collect.ImmutableMap;
 
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
 
 import static com.gocardless.pro.GoCardlessClient.Environment.SANDBOX;
+import static com.gocardless.pro.services.MandateService.MandateListRequest.Status.ACTIVE;
+import static com.gocardless.pro.services.MandateService.MandateListRequest.Status.FAILED;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -64,6 +70,16 @@ public class GoCardlessClientTest {
     }
 
     @Test
+    @Betamax(tape = "list mandates by customer and status")
+    public void shouldListMandatesByCustomerAndStatus() {
+        List<Mandate> mandates =
+                client.mandates().list().withCustomer("CU00003068FG73")
+                        .withStatus(ImmutableList.of(ACTIVE, FAILED)).execute();
+        assertThat(mandates).hasSize(1);
+        assertThat(mandates.get(0).getId()).isEqualTo("MD00001PEYCSQF");
+    }
+
+    @Test
     @Betamax(tape = "disable an api key")
     public void shouldDisableAnApiKey() {
         ApiKey key = client.apiKeys().disable("AK00001335JR69").execute();
@@ -86,5 +102,30 @@ public class GoCardlessClientTest {
         assertThat(updatedCustomer.getId()).isEqualTo(customer.getId());
         assertThat(updatedCustomer.getFamilyName()).isEqualTo("Osborne");
         assertThat(updatedCustomer.getGivenName()).isEqualTo("Ozzy");
+    }
+
+    @Test
+    @Betamax(tape = "get customers created after")
+    public void shouldGetCustomersCreatedAfter() {
+        CustomerListRequest.CreatedAt createdAt =
+                new CustomerListRequest.CreatedAt().withGte("2015-04-13T15:02:40Z");
+        List<Customer> result = client.customers().list().withCreatedAt(createdAt).execute();
+        assertThat(result.size()).isEqualTo(1);
+        assertThat(result.get(0).getId()).isEqualTo("CU0000321DW2ZH");
+    }
+
+    @Test
+    @Betamax(tape = "create a payment")
+    public void shouldCreateAPayment() {
+        Payment payment =
+                client.payments().create().withAmount(2000).withCurrency("GBP")
+                        .withMetadata(ImmutableMap.of("foo", "bar"))
+                        .withLinks(new PaymentCreateRequest.Links().withMandate("MD00001PEYCSQF"))
+                        .execute();
+        assertThat(payment.getId()).isNotNull();
+        assertThat(payment.getAmount()).isEqualTo(2000);
+        assertThat(payment.getCurrency()).isEqualTo("GBP");
+        assertThat(payment.getMetadata()).hasSize(1).containsEntry("foo", "bar");
+        assertThat(payment.getLinks().getMandate()).isEqualTo("MD00001PEYCSQF");
     }
 }

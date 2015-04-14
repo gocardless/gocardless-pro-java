@@ -42,41 +42,36 @@ public class UserService {
 
     public static final class UserCreateRequest extends PostRequest<User> {
         private String email;
+        private String familyName;
+        private String givenName;
+        private Links links;
+        private String password;
+        private String passwordConfirmation;
 
         public UserCreateRequest withEmail(String email) {
             this.email = email;
             return this;
         }
 
-        private String familyName;
-
         public UserCreateRequest withFamilyName(String familyName) {
             this.familyName = familyName;
             return this;
         }
-
-        private String givenName;
 
         public UserCreateRequest withGivenName(String givenName) {
             this.givenName = givenName;
             return this;
         }
 
-        private Object links;
-
-        public UserCreateRequest withLinks(Object links) {
+        public UserCreateRequest withLinks(Links links) {
             this.links = links;
             return this;
         }
-
-        private String password;
 
         public UserCreateRequest withPassword(String password) {
             this.password = password;
             return this;
         }
-
-        private String passwordConfirmation;
 
         public UserCreateRequest withPasswordConfirmation(String passwordConfirmation) {
             this.passwordConfirmation = passwordConfirmation;
@@ -106,42 +101,43 @@ public class UserService {
         protected boolean hasBody() {
             return true;
         }
+
+        public static class Links {
+            private String role;
+
+            public Links withRole(String role) {
+                this.role = role;
+                return this;
+            }
+        }
     }
 
     public static final class UserListRequest extends ListRequest<User> {
         private String after;
+        private String before;
+        private Enabled enabled;
+        private Integer limit;
+        private String role;
 
         public UserListRequest withAfter(String after) {
             this.after = after;
             return this;
         }
 
-        private String before;
-
         public UserListRequest withBefore(String before) {
             this.before = before;
             return this;
         }
-
-        public enum Enabled {
-            TRUE, FALSE,
-        }
-
-        private Enabled enabled;
 
         public UserListRequest withEnabled(Enabled enabled) {
             this.enabled = enabled;
             return this;
         }
 
-        private Integer limit;
-
         public UserListRequest withLimit(Integer limit) {
             this.limit = limit;
             return this;
         }
-
-        private String role;
 
         public UserListRequest withRole(String role) {
             this.role = role;
@@ -187,6 +183,14 @@ public class UserService {
         protected TypeToken<List<User>> getTypeToken() {
             return new TypeToken<List<User>>() {};
         }
+
+        public enum Enabled {
+            TRUE, FALSE;
+            @Override
+            public String toString() {
+                return name().toLowerCase();
+            }
+        }
     }
 
     public static final class UserGetRequest extends GetRequest<User> {
@@ -225,41 +229,36 @@ public class UserService {
         @PathParam
         private final String identity;
         private String email;
+        private String familyName;
+        private String givenName;
+        private Links links;
+        private String password;
+        private String passwordConfirmation;
 
         public UserUpdateRequest withEmail(String email) {
             this.email = email;
             return this;
         }
 
-        private String familyName;
-
         public UserUpdateRequest withFamilyName(String familyName) {
             this.familyName = familyName;
             return this;
         }
-
-        private String givenName;
 
         public UserUpdateRequest withGivenName(String givenName) {
             this.givenName = givenName;
             return this;
         }
 
-        private Object links;
-
-        public UserUpdateRequest withLinks(Object links) {
+        public UserUpdateRequest withLinks(Links links) {
             this.links = links;
             return this;
         }
-
-        private String password;
 
         public UserUpdateRequest withPassword(String password) {
             this.password = password;
             return this;
         }
-
-        private String passwordConfirmation;
 
         public UserUpdateRequest withPasswordConfirmation(String passwordConfirmation) {
             this.passwordConfirmation = passwordConfirmation;
@@ -296,6 +295,15 @@ public class UserService {
         @Override
         protected boolean hasBody() {
             return true;
+        }
+
+        public static class Links {
+            private String role;
+
+            public Links withRole(String role) {
+                this.role = role;
+                return this;
+            }
         }
     }
 

@@ -34,76 +34,66 @@ public class CustomerService {
 
     public static final class CustomerCreateRequest extends PostRequest<Customer> {
         private String addressLine1;
+        private String addressLine2;
+        private String addressLine3;
+        private String city;
+        private String countryCode;
+        private String email;
+        private String familyName;
+        private String givenName;
+        private Map<String, String> metadata;
+        private String postalCode;
+        private String region;
 
         public CustomerCreateRequest withAddressLine1(String addressLine1) {
             this.addressLine1 = addressLine1;
             return this;
         }
 
-        private String addressLine2;
-
         public CustomerCreateRequest withAddressLine2(String addressLine2) {
             this.addressLine2 = addressLine2;
             return this;
         }
-
-        private String addressLine3;
 
         public CustomerCreateRequest withAddressLine3(String addressLine3) {
             this.addressLine3 = addressLine3;
             return this;
         }
 
-        private String city;
-
         public CustomerCreateRequest withCity(String city) {
             this.city = city;
             return this;
         }
-
-        private String countryCode;
 
         public CustomerCreateRequest withCountryCode(String countryCode) {
             this.countryCode = countryCode;
             return this;
         }
 
-        private String email;
-
         public CustomerCreateRequest withEmail(String email) {
             this.email = email;
             return this;
         }
-
-        private String familyName;
 
         public CustomerCreateRequest withFamilyName(String familyName) {
             this.familyName = familyName;
             return this;
         }
 
-        private String givenName;
-
         public CustomerCreateRequest withGivenName(String givenName) {
             this.givenName = givenName;
             return this;
         }
 
-        private Object metadata;
-
-        public CustomerCreateRequest withMetadata(Object metadata) {
+        public CustomerCreateRequest withMetadata(Map<String, String> metadata) {
             this.metadata = metadata;
             return this;
         }
-
-        private String postalCode;
 
         public CustomerCreateRequest withPostalCode(String postalCode) {
             this.postalCode = postalCode;
             return this;
         }
-
-        private String region;
 
         public CustomerCreateRequest withRegion(String region) {
             this.region = region;
@@ -137,27 +127,24 @@ public class CustomerService {
 
     public static final class CustomerListRequest extends ListRequest<Customer> {
         private String after;
+        private String before;
+        private CreatedAt createdAt;
+        private Integer limit;
 
         public CustomerListRequest withAfter(String after) {
             this.after = after;
             return this;
         }
 
-        private String before;
-
         public CustomerListRequest withBefore(String before) {
             this.before = before;
             return this;
         }
 
-        private Object createdAt;
-
-        public CustomerListRequest withCreatedAt(Object createdAt) {
+        public CustomerListRequest withCreatedAt(CreatedAt createdAt) {
             this.createdAt = createdAt;
             return this;
         }
-
-        private Integer limit;
 
         public CustomerListRequest withLimit(Integer limit) {
             this.limit = limit;
@@ -178,7 +165,7 @@ public class CustomerService {
                 params.put("before", before);
             }
             if (createdAt != null) {
-                params.put("created_at", createdAt);
+                params.putAll(createdAt.getQueryParams());
             }
             if (limit != null) {
                 params.put("limit", limit);
@@ -199,6 +186,50 @@ public class CustomerService {
         @Override
         protected TypeToken<List<Customer>> getTypeToken() {
             return new TypeToken<List<Customer>>() {};
+        }
+
+        public static class CreatedAt {
+            private String gt;
+            private String gte;
+            private String lt;
+            private String lte;
+
+            public CreatedAt withGt(String gt) {
+                this.gt = gt;
+                return this;
+            }
+
+            public CreatedAt withGte(String gte) {
+                this.gte = gte;
+                return this;
+            }
+
+            public CreatedAt withLt(String lt) {
+                this.lt = lt;
+                return this;
+            }
+
+            public CreatedAt withLte(String lte) {
+                this.lte = lte;
+                return this;
+            }
+
+            public Map<String, Object> getQueryParams() {
+                ImmutableMap.Builder<String, Object> params = ImmutableMap.builder();
+                if (gt != null) {
+                    params.put("created_at[gt]", gt);
+                }
+                if (gte != null) {
+                    params.put("created_at[gte]", gte);
+                }
+                if (lt != null) {
+                    params.put("created_at[lt]", lt);
+                }
+                if (lte != null) {
+                    params.put("created_at[lte]", lte);
+                }
+                return params.build();
+            }
         }
     }
 
@@ -238,76 +269,66 @@ public class CustomerService {
         @PathParam
         private final String identity;
         private String addressLine1;
+        private String addressLine2;
+        private String addressLine3;
+        private String city;
+        private String countryCode;
+        private String email;
+        private String familyName;
+        private String givenName;
+        private Map<String, String> metadata;
+        private String postalCode;
+        private String region;
 
         public CustomerUpdateRequest withAddressLine1(String addressLine1) {
             this.addressLine1 = addressLine1;
             return this;
         }
 
-        private String addressLine2;
-
         public CustomerUpdateRequest withAddressLine2(String addressLine2) {
             this.addressLine2 = addressLine2;
             return this;
         }
-
-        private String addressLine3;
 
         public CustomerUpdateRequest withAddressLine3(String addressLine3) {
             this.addressLine3 = addressLine3;
             return this;
         }
 
-        private String city;
-
         public CustomerUpdateRequest withCity(String city) {
             this.city = city;
             return this;
         }
-
-        private String countryCode;
 
         public CustomerUpdateRequest withCountryCode(String countryCode) {
             this.countryCode = countryCode;
             return this;
         }
 
-        private String email;
-
         public CustomerUpdateRequest withEmail(String email) {
             this.email = email;
             return this;
         }
-
-        private String familyName;
 
         public CustomerUpdateRequest withFamilyName(String familyName) {
             this.familyName = familyName;
             return this;
         }
 
-        private String givenName;
-
         public CustomerUpdateRequest withGivenName(String givenName) {
             this.givenName = givenName;
             return this;
         }
 
-        private Object metadata;
-
-        public CustomerUpdateRequest withMetadata(Object metadata) {
+        public CustomerUpdateRequest withMetadata(Map<String, String> metadata) {
             this.metadata = metadata;
             return this;
         }
-
-        private String postalCode;
 
         public CustomerUpdateRequest withPostalCode(String postalCode) {
             this.postalCode = postalCode;
             return this;
         }
-
-        private String region;
 
         public CustomerUpdateRequest withRegion(String region) {
             this.region = region;

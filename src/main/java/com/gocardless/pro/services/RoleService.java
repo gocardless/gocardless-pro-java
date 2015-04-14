@@ -38,15 +38,14 @@ public class RoleService {
 
     public static final class RoleCreateRequest extends PostRequest<Role> {
         private String name;
+        private List<Permissions> permissions;
 
         public RoleCreateRequest withName(String name) {
             this.name = name;
             return this;
         }
 
-        private List<Object> permissions;
-
-        public RoleCreateRequest withPermissions(List<Object> permissions) {
+        public RoleCreateRequest withPermissions(List<Permissions> permissions) {
             this.permissions = permissions;
             return this;
         }
@@ -74,35 +73,43 @@ public class RoleService {
         protected boolean hasBody() {
             return true;
         }
+
+        public static class Permissions {
+            private String access;
+            private String resource;
+
+            public Permissions withAccess(String access) {
+                this.access = access;
+                return this;
+            }
+
+            public Permissions withResource(String resource) {
+                this.resource = resource;
+                return this;
+            }
+        }
     }
 
     public static final class RoleListRequest extends ListRequest<Role> {
         private String after;
+        private String before;
+        private Enabled enabled;
+        private Integer limit;
 
         public RoleListRequest withAfter(String after) {
             this.after = after;
             return this;
         }
 
-        private String before;
-
         public RoleListRequest withBefore(String before) {
             this.before = before;
             return this;
         }
 
-        public enum Enabled {
-            TRUE, FALSE,
-        }
-
-        private Enabled enabled;
-
         public RoleListRequest withEnabled(Enabled enabled) {
             this.enabled = enabled;
             return this;
         }
-
-        private Integer limit;
 
         public RoleListRequest withLimit(Integer limit) {
             this.limit = limit;
@@ -145,6 +152,14 @@ public class RoleService {
         protected TypeToken<List<Role>> getTypeToken() {
             return new TypeToken<List<Role>>() {};
         }
+
+        public enum Enabled {
+            TRUE, FALSE;
+            @Override
+            public String toString() {
+                return name().toLowerCase();
+            }
+        }
     }
 
     public static final class RoleGetRequest extends GetRequest<Role> {
@@ -183,15 +198,14 @@ public class RoleService {
         @PathParam
         private final String identity;
         private String name;
+        private List<Permissions> permissions;
 
         public RoleUpdateRequest withName(String name) {
             this.name = name;
             return this;
         }
 
-        private List<Object> permissions;
-
-        public RoleUpdateRequest withPermissions(List<Object> permissions) {
+        public RoleUpdateRequest withPermissions(List<Permissions> permissions) {
             this.permissions = permissions;
             return this;
         }
@@ -226,6 +240,21 @@ public class RoleService {
         @Override
         protected boolean hasBody() {
             return true;
+        }
+
+        public static class Permissions {
+            private String access;
+            private String resource;
+
+            public Permissions withAccess(String access) {
+                this.access = access;
+                return this;
+            }
+
+            public Permissions withResource(String resource) {
+                this.resource = resource;
+                return this;
+            }
         }
     }
 

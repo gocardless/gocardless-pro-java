@@ -39,64 +39,56 @@ public class CustomerBankAccountService {
     public static final class CustomerBankAccountCreateRequest extends
             PostRequest<CustomerBankAccount> {
         private String accountHolderName;
+        private String accountNumber;
+        private String bankCode;
+        private String branchCode;
+        private String countryCode;
+        private String currency;
+        private String iban;
+        private Links links;
+        private Map<String, String> metadata;
 
         public CustomerBankAccountCreateRequest withAccountHolderName(String accountHolderName) {
             this.accountHolderName = accountHolderName;
             return this;
         }
 
-        private String accountNumber;
-
         public CustomerBankAccountCreateRequest withAccountNumber(String accountNumber) {
             this.accountNumber = accountNumber;
             return this;
         }
-
-        private String bankCode;
 
         public CustomerBankAccountCreateRequest withBankCode(String bankCode) {
             this.bankCode = bankCode;
             return this;
         }
 
-        private String branchCode;
-
         public CustomerBankAccountCreateRequest withBranchCode(String branchCode) {
             this.branchCode = branchCode;
             return this;
         }
-
-        private String countryCode;
 
         public CustomerBankAccountCreateRequest withCountryCode(String countryCode) {
             this.countryCode = countryCode;
             return this;
         }
 
-        private String currency;
-
         public CustomerBankAccountCreateRequest withCurrency(String currency) {
             this.currency = currency;
             return this;
         }
-
-        private String iban;
 
         public CustomerBankAccountCreateRequest withIban(String iban) {
             this.iban = iban;
             return this;
         }
 
-        private Object links;
-
-        public CustomerBankAccountCreateRequest withLinks(Object links) {
+        public CustomerBankAccountCreateRequest withLinks(Links links) {
             this.links = links;
             return this;
         }
 
-        private Object metadata;
-
-        public CustomerBankAccountCreateRequest withMetadata(Object metadata) {
+        public CustomerBankAccountCreateRequest withMetadata(Map<String, String> metadata) {
             this.metadata = metadata;
             return this;
         }
@@ -124,43 +116,50 @@ public class CustomerBankAccountService {
         protected boolean hasBody() {
             return true;
         }
+
+        public static class Links {
+            private String customer;
+            private String customerBankAccountToken;
+
+            public Links withCustomer(String customer) {
+                this.customer = customer;
+                return this;
+            }
+
+            public Links withCustomerBankAccountToken(String customerBankAccountToken) {
+                this.customerBankAccountToken = customerBankAccountToken;
+                return this;
+            }
+        }
     }
 
     public static final class CustomerBankAccountListRequest extends
             ListRequest<CustomerBankAccount> {
         private String after;
+        private String before;
+        private String customer;
+        private Enabled enabled;
+        private Integer limit;
 
         public CustomerBankAccountListRequest withAfter(String after) {
             this.after = after;
             return this;
         }
 
-        private String before;
-
         public CustomerBankAccountListRequest withBefore(String before) {
             this.before = before;
             return this;
         }
-
-        private String customer;
 
         public CustomerBankAccountListRequest withCustomer(String customer) {
             this.customer = customer;
             return this;
         }
 
-        public enum Enabled {
-            TRUE, FALSE,
-        }
-
-        private Enabled enabled;
-
         public CustomerBankAccountListRequest withEnabled(Enabled enabled) {
             this.enabled = enabled;
             return this;
         }
-
-        private Integer limit;
 
         public CustomerBankAccountListRequest withLimit(Integer limit) {
             this.limit = limit;
@@ -206,6 +205,14 @@ public class CustomerBankAccountService {
         protected TypeToken<List<CustomerBankAccount>> getTypeToken() {
             return new TypeToken<List<CustomerBankAccount>>() {};
         }
+
+        public enum Enabled {
+            TRUE, FALSE;
+            @Override
+            public String toString() {
+                return name().toLowerCase();
+            }
+        }
     }
 
     public static final class CustomerBankAccountGetRequest extends GetRequest<CustomerBankAccount> {
@@ -244,9 +251,9 @@ public class CustomerBankAccountService {
             PutRequest<CustomerBankAccount> {
         @PathParam
         private final String identity;
-        private Object metadata;
+        private Map<String, String> metadata;
 
-        public CustomerBankAccountUpdateRequest withMetadata(Object metadata) {
+        public CustomerBankAccountUpdateRequest withMetadata(Map<String, String> metadata) {
             this.metadata = metadata;
             return this;
         }

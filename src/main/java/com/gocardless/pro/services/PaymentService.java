@@ -42,48 +42,42 @@ public class PaymentService {
 
     public static final class PaymentCreateRequest extends PostRequest<Payment> {
         private Integer amount;
+        private String chargeDate;
+        private String currency;
+        private String description;
+        private Links links;
+        private Map<String, String> metadata;
+        private String reference;
 
         public PaymentCreateRequest withAmount(Integer amount) {
             this.amount = amount;
             return this;
         }
 
-        private String chargeDate;
-
         public PaymentCreateRequest withChargeDate(String chargeDate) {
             this.chargeDate = chargeDate;
             return this;
         }
-
-        private String currency;
 
         public PaymentCreateRequest withCurrency(String currency) {
             this.currency = currency;
             return this;
         }
 
-        private String description;
-
         public PaymentCreateRequest withDescription(String description) {
             this.description = description;
             return this;
         }
 
-        private Object links;
-
-        public PaymentCreateRequest withLinks(Object links) {
+        public PaymentCreateRequest withLinks(Links links) {
             this.links = links;
             return this;
         }
 
-        private Object metadata;
-
-        public PaymentCreateRequest withMetadata(Object metadata) {
+        public PaymentCreateRequest withMetadata(Map<String, String> metadata) {
             this.metadata = metadata;
             return this;
         }
-
-        private String reference;
 
         public PaymentCreateRequest withReference(String reference) {
             this.reference = reference;
@@ -113,66 +107,67 @@ public class PaymentService {
         protected boolean hasBody() {
             return true;
         }
+
+        public static class Links {
+            private String mandate;
+
+            public Links withMandate(String mandate) {
+                this.mandate = mandate;
+                return this;
+            }
+        }
     }
 
     public static final class PaymentListRequest extends ListRequest<Payment> {
         private String after;
+        private String before;
+        private CreatedAt createdAt;
+        private String creditor;
+        private String customer;
+        private Integer limit;
+        private String mandate;
+        private String status;
+        private String subscription;
 
         public PaymentListRequest withAfter(String after) {
             this.after = after;
             return this;
         }
 
-        private String before;
-
         public PaymentListRequest withBefore(String before) {
             this.before = before;
             return this;
         }
 
-        private Object createdAt;
-
-        public PaymentListRequest withCreatedAt(Object createdAt) {
+        public PaymentListRequest withCreatedAt(CreatedAt createdAt) {
             this.createdAt = createdAt;
             return this;
         }
-
-        private String creditor;
 
         public PaymentListRequest withCreditor(String creditor) {
             this.creditor = creditor;
             return this;
         }
 
-        private String customer;
-
         public PaymentListRequest withCustomer(String customer) {
             this.customer = customer;
             return this;
         }
-
-        private Integer limit;
 
         public PaymentListRequest withLimit(Integer limit) {
             this.limit = limit;
             return this;
         }
 
-        private String mandate;
-
         public PaymentListRequest withMandate(String mandate) {
             this.mandate = mandate;
             return this;
         }
 
-        private String status;
-
         public PaymentListRequest withStatus(String status) {
             this.status = status;
             return this;
         }
-
-        private String subscription;
 
         public PaymentListRequest withSubscription(String subscription) {
             this.subscription = subscription;
@@ -193,7 +188,7 @@ public class PaymentService {
                 params.put("before", before);
             }
             if (createdAt != null) {
-                params.put("created_at", createdAt);
+                params.putAll(createdAt.getQueryParams());
             }
             if (creditor != null) {
                 params.put("creditor", creditor);
@@ -229,6 +224,50 @@ public class PaymentService {
         @Override
         protected TypeToken<List<Payment>> getTypeToken() {
             return new TypeToken<List<Payment>>() {};
+        }
+
+        public static class CreatedAt {
+            private String gt;
+            private String gte;
+            private String lt;
+            private String lte;
+
+            public CreatedAt withGt(String gt) {
+                this.gt = gt;
+                return this;
+            }
+
+            public CreatedAt withGte(String gte) {
+                this.gte = gte;
+                return this;
+            }
+
+            public CreatedAt withLt(String lt) {
+                this.lt = lt;
+                return this;
+            }
+
+            public CreatedAt withLte(String lte) {
+                this.lte = lte;
+                return this;
+            }
+
+            public Map<String, Object> getQueryParams() {
+                ImmutableMap.Builder<String, Object> params = ImmutableMap.builder();
+                if (gt != null) {
+                    params.put("created_at[gt]", gt);
+                }
+                if (gte != null) {
+                    params.put("created_at[gte]", gte);
+                }
+                if (lt != null) {
+                    params.put("created_at[lt]", lt);
+                }
+                if (lte != null) {
+                    params.put("created_at[lte]", lte);
+                }
+                return params.build();
+            }
         }
     }
 
@@ -267,9 +306,9 @@ public class PaymentService {
     public static final class PaymentUpdateRequest extends PutRequest<Payment> {
         @PathParam
         private final String identity;
-        private Object metadata;
+        private Map<String, String> metadata;
 
-        public PaymentUpdateRequest withMetadata(Object metadata) {
+        public PaymentUpdateRequest withMetadata(Map<String, String> metadata) {
             this.metadata = metadata;
             return this;
         }
@@ -310,9 +349,9 @@ public class PaymentService {
     public static final class PaymentCancelRequest extends PostRequest<Payment> {
         @PathParam
         private final String identity;
-        private Object metadata;
+        private Map<String, String> metadata;
 
-        public PaymentCancelRequest withMetadata(Object metadata) {
+        public PaymentCancelRequest withMetadata(Map<String, String> metadata) {
             this.metadata = metadata;
             return this;
         }
@@ -353,9 +392,9 @@ public class PaymentService {
     public static final class PaymentRetryRequest extends PostRequest<Payment> {
         @PathParam
         private final String identity;
-        private Object metadata;
+        private Map<String, String> metadata;
 
-        public PaymentRetryRequest withMetadata(Object metadata) {
+        public PaymentRetryRequest withMetadata(Map<String, String> metadata) {
             this.metadata = metadata;
             return this;
         }

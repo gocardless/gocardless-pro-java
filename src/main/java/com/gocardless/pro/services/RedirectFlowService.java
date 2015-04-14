@@ -28,38 +28,30 @@ public class RedirectFlowService {
 
     public static final class RedirectFlowCreateRequest extends PostRequest<RedirectFlow> {
         private String description;
+        private Links links;
+        private Scheme scheme;
+        private String sessionToken;
+        private String successRedirectUrl;
 
         public RedirectFlowCreateRequest withDescription(String description) {
             this.description = description;
             return this;
         }
 
-        private Object links;
-
-        public RedirectFlowCreateRequest withLinks(Object links) {
+        public RedirectFlowCreateRequest withLinks(Links links) {
             this.links = links;
             return this;
         }
-
-        public enum Scheme {
-            BACS, SEPA_CORE,
-        }
-
-        private Scheme scheme;
 
         public RedirectFlowCreateRequest withScheme(Scheme scheme) {
             this.scheme = scheme;
             return this;
         }
 
-        private String sessionToken;
-
         public RedirectFlowCreateRequest withSessionToken(String sessionToken) {
             this.sessionToken = sessionToken;
             return this;
         }
-
-        private String successRedirectUrl;
 
         public RedirectFlowCreateRequest withSuccessRedirectUrl(String successRedirectUrl) {
             this.successRedirectUrl = successRedirectUrl;
@@ -88,6 +80,23 @@ public class RedirectFlowService {
         @Override
         protected boolean hasBody() {
             return true;
+        }
+
+        public enum Scheme {
+            BACS, SEPA_CORE;
+            @Override
+            public String toString() {
+                return name().toLowerCase();
+            }
+        }
+
+        public static class Links {
+            private String creditor;
+
+            public Links withCreditor(String creditor) {
+                this.creditor = creditor;
+                return this;
+            }
         }
     }
 

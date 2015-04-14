@@ -34,27 +34,24 @@ public class RefundService {
 
     public static final class RefundCreateRequest extends PostRequest<Refund> {
         private Integer amount;
+        private Links links;
+        private Map<String, String> metadata;
+        private Integer totalAmountConfirmation;
 
         public RefundCreateRequest withAmount(Integer amount) {
             this.amount = amount;
             return this;
         }
 
-        private Object links;
-
-        public RefundCreateRequest withLinks(Object links) {
+        public RefundCreateRequest withLinks(Links links) {
             this.links = links;
             return this;
         }
 
-        private Object metadata;
-
-        public RefundCreateRequest withMetadata(Object metadata) {
+        public RefundCreateRequest withMetadata(Map<String, String> metadata) {
             this.metadata = metadata;
             return this;
         }
-
-        private Integer totalAmountConfirmation;
 
         public RefundCreateRequest withTotalAmountConfirmation(Integer totalAmountConfirmation) {
             this.totalAmountConfirmation = totalAmountConfirmation;
@@ -84,31 +81,37 @@ public class RefundService {
         protected boolean hasBody() {
             return true;
         }
+
+        public static class Links {
+            private String payment;
+
+            public Links withPayment(String payment) {
+                this.payment = payment;
+                return this;
+            }
+        }
     }
 
     public static final class RefundListRequest extends ListRequest<Refund> {
         private String after;
+        private String before;
+        private Integer limit;
+        private String payment;
 
         public RefundListRequest withAfter(String after) {
             this.after = after;
             return this;
         }
 
-        private String before;
-
         public RefundListRequest withBefore(String before) {
             this.before = before;
             return this;
         }
 
-        private Integer limit;
-
         public RefundListRequest withLimit(Integer limit) {
             this.limit = limit;
             return this;
         }
-
-        private String payment;
 
         public RefundListRequest withPayment(String payment) {
             this.payment = payment;
@@ -188,9 +191,9 @@ public class RefundService {
     public static final class RefundUpdateRequest extends PutRequest<Refund> {
         @PathParam
         private final String identity;
-        private Object metadata;
+        private Map<String, String> metadata;
 
-        public RefundUpdateRequest withMetadata(Object metadata) {
+        public RefundUpdateRequest withMetadata(Map<String, String> metadata) {
             this.metadata = metadata;
             return this;
         }

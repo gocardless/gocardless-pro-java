@@ -26,98 +26,78 @@ public class EventService {
 
     public static final class EventListRequest extends ListRequest<Event> {
         private String action;
+        private String after;
+        private String before;
+        private CreatedAt createdAt;
+        private Include include;
+        private Integer limit;
+        private String mandate;
+        private String parentEvent;
+        private String payment;
+        private String payout;
+        private String refund;
+        private ResourceType resourceType;
+        private String subscription;
 
         public EventListRequest withAction(String action) {
             this.action = action;
             return this;
         }
 
-        private String after;
-
         public EventListRequest withAfter(String after) {
             this.after = after;
             return this;
         }
-
-        private String before;
 
         public EventListRequest withBefore(String before) {
             this.before = before;
             return this;
         }
 
-        private Object createdAt;
-
-        public EventListRequest withCreatedAt(Object createdAt) {
+        public EventListRequest withCreatedAt(CreatedAt createdAt) {
             this.createdAt = createdAt;
             return this;
         }
-
-        public enum Include {
-            PAYMENT, MANDATE, PAYOUT, REFUND, SUBSCRIPTION,
-        }
-
-        private Include include;
 
         public EventListRequest withInclude(Include include) {
             this.include = include;
             return this;
         }
 
-        private Integer limit;
-
         public EventListRequest withLimit(Integer limit) {
             this.limit = limit;
             return this;
         }
-
-        private String mandate;
 
         public EventListRequest withMandate(String mandate) {
             this.mandate = mandate;
             return this;
         }
 
-        private String parentEvent;
-
         public EventListRequest withParentEvent(String parentEvent) {
             this.parentEvent = parentEvent;
             return this;
         }
-
-        private String payment;
 
         public EventListRequest withPayment(String payment) {
             this.payment = payment;
             return this;
         }
 
-        private String payout;
-
         public EventListRequest withPayout(String payout) {
             this.payout = payout;
             return this;
         }
-
-        private String refund;
 
         public EventListRequest withRefund(String refund) {
             this.refund = refund;
             return this;
         }
 
-        public enum ResourceType {
-            PAYMENTS, MANDATES, PAYOUTS, REFUNDS, SUBSCRIPTIONS,
-        }
-
-        private ResourceType resourceType;
-
         public EventListRequest withResourceType(ResourceType resourceType) {
             this.resourceType = resourceType;
             return this;
         }
-
-        private String subscription;
 
         public EventListRequest withSubscription(String subscription) {
             this.subscription = subscription;
@@ -141,7 +121,7 @@ public class EventService {
                 params.put("before", before);
             }
             if (createdAt != null) {
-                params.put("created_at", createdAt);
+                params.putAll(createdAt.getQueryParams());
             }
             if (include != null) {
                 params.put("include", include);
@@ -186,6 +166,66 @@ public class EventService {
         @Override
         protected TypeToken<List<Event>> getTypeToken() {
             return new TypeToken<List<Event>>() {};
+        }
+
+        public enum Include {
+            PAYMENT, MANDATE, PAYOUT, REFUND, SUBSCRIPTION;
+            @Override
+            public String toString() {
+                return name().toLowerCase();
+            }
+        }
+
+        public enum ResourceType {
+            PAYMENTS, MANDATES, PAYOUTS, REFUNDS, SUBSCRIPTIONS;
+            @Override
+            public String toString() {
+                return name().toLowerCase();
+            }
+        }
+
+        public static class CreatedAt {
+            private String gt;
+            private String gte;
+            private String lt;
+            private String lte;
+
+            public CreatedAt withGt(String gt) {
+                this.gt = gt;
+                return this;
+            }
+
+            public CreatedAt withGte(String gte) {
+                this.gte = gte;
+                return this;
+            }
+
+            public CreatedAt withLt(String lt) {
+                this.lt = lt;
+                return this;
+            }
+
+            public CreatedAt withLte(String lte) {
+                this.lte = lte;
+                return this;
+            }
+
+            public Map<String, Object> getQueryParams() {
+                ImmutableMap.Builder<String, Object> params = ImmutableMap.builder();
+                if (gt != null) {
+                    params.put("created_at[gt]", gt);
+                }
+                if (gte != null) {
+                    params.put("created_at[gte]", gte);
+                }
+                if (lt != null) {
+                    params.put("created_at[lt]", lt);
+                }
+                if (lte != null) {
+                    params.put("created_at[lte]", lte);
+                }
+                return params.build();
+            }
         }
     }
 

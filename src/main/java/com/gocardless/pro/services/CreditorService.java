@@ -34,62 +34,54 @@ public class CreditorService {
 
     public static final class CreditorCreateRequest extends PostRequest<Creditor> {
         private String addressLine1;
+        private String addressLine2;
+        private String addressLine3;
+        private String city;
+        private String countryCode;
+        private Links links;
+        private String name;
+        private String postalCode;
+        private String region;
 
         public CreditorCreateRequest withAddressLine1(String addressLine1) {
             this.addressLine1 = addressLine1;
             return this;
         }
 
-        private String addressLine2;
-
         public CreditorCreateRequest withAddressLine2(String addressLine2) {
             this.addressLine2 = addressLine2;
             return this;
         }
-
-        private String addressLine3;
 
         public CreditorCreateRequest withAddressLine3(String addressLine3) {
             this.addressLine3 = addressLine3;
             return this;
         }
 
-        private String city;
-
         public CreditorCreateRequest withCity(String city) {
             this.city = city;
             return this;
         }
-
-        private String countryCode;
 
         public CreditorCreateRequest withCountryCode(String countryCode) {
             this.countryCode = countryCode;
             return this;
         }
 
-        private Object links;
-
-        public CreditorCreateRequest withLinks(Object links) {
+        public CreditorCreateRequest withLinks(Links links) {
             this.links = links;
             return this;
         }
-
-        private String name;
 
         public CreditorCreateRequest withName(String name) {
             this.name = name;
             return this;
         }
 
-        private String postalCode;
-
         public CreditorCreateRequest withPostalCode(String postalCode) {
             this.postalCode = postalCode;
             return this;
         }
-
-        private String region;
 
         public CreditorCreateRequest withRegion(String region) {
             this.region = region;
@@ -119,24 +111,31 @@ public class CreditorService {
         protected boolean hasBody() {
             return true;
         }
+
+        public static class Links {
+            private String logo;
+
+            public Links withLogo(String logo) {
+                this.logo = logo;
+                return this;
+            }
+        }
     }
 
     public static final class CreditorListRequest extends ListRequest<Creditor> {
         private String after;
+        private String before;
+        private Integer limit;
 
         public CreditorListRequest withAfter(String after) {
             this.after = after;
             return this;
         }
 
-        private String before;
-
         public CreditorListRequest withBefore(String before) {
             this.before = before;
             return this;
         }
-
-        private Integer limit;
 
         public CreditorListRequest withLimit(Integer limit) {
             this.limit = limit;
@@ -214,62 +213,54 @@ public class CreditorService {
         @PathParam
         private final String identity;
         private String addressLine1;
+        private String addressLine2;
+        private String addressLine3;
+        private String city;
+        private String countryCode;
+        private Links links;
+        private String name;
+        private String postalCode;
+        private String region;
 
         public CreditorUpdateRequest withAddressLine1(String addressLine1) {
             this.addressLine1 = addressLine1;
             return this;
         }
 
-        private String addressLine2;
-
         public CreditorUpdateRequest withAddressLine2(String addressLine2) {
             this.addressLine2 = addressLine2;
             return this;
         }
-
-        private String addressLine3;
 
         public CreditorUpdateRequest withAddressLine3(String addressLine3) {
             this.addressLine3 = addressLine3;
             return this;
         }
 
-        private String city;
-
         public CreditorUpdateRequest withCity(String city) {
             this.city = city;
             return this;
         }
-
-        private String countryCode;
 
         public CreditorUpdateRequest withCountryCode(String countryCode) {
             this.countryCode = countryCode;
             return this;
         }
 
-        private Object links;
-
-        public CreditorUpdateRequest withLinks(Object links) {
+        public CreditorUpdateRequest withLinks(Links links) {
             this.links = links;
             return this;
         }
-
-        private String name;
 
         public CreditorUpdateRequest withName(String name) {
             this.name = name;
             return this;
         }
 
-        private String postalCode;
-
         public CreditorUpdateRequest withPostalCode(String postalCode) {
             this.postalCode = postalCode;
             return this;
         }
-
-        private String region;
 
         public CreditorUpdateRequest withRegion(String region) {
             this.region = region;
@@ -306,6 +297,27 @@ public class CreditorService {
         @Override
         protected boolean hasBody() {
             return true;
+        }
+
+        public static class Links {
+            private String defaultEurPayoutAccount;
+            private String defaultGbpPayoutAccount;
+            private String logo;
+
+            public Links withDefaultEurPayoutAccount(String defaultEurPayoutAccount) {
+                this.defaultEurPayoutAccount = defaultEurPayoutAccount;
+                return this;
+            }
+
+            public Links withDefaultGbpPayoutAccount(String defaultGbpPayoutAccount) {
+                this.defaultGbpPayoutAccount = defaultGbpPayoutAccount;
+                return this;
+            }
+
+            public Links withLogo(String logo) {
+                this.logo = logo;
+                return this;
+            }
         }
     }
 }

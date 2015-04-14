@@ -38,87 +38,72 @@ public class SubscriptionService {
 
     public static final class SubscriptionCreateRequest extends PostRequest<Subscription> {
         private Integer amount;
+        private Integer count;
+        private String currency;
+        private Integer dayOfMonth;
+        private String endAt;
+        private Integer interval;
+        private String intervalUnit;
+        private Links links;
+        private Map<String, String> metadata;
+        private Month month;
+        private String name;
+        private String startAt;
 
         public SubscriptionCreateRequest withAmount(Integer amount) {
             this.amount = amount;
             return this;
         }
 
-        private Integer count;
-
         public SubscriptionCreateRequest withCount(Integer count) {
             this.count = count;
             return this;
         }
-
-        private String currency;
 
         public SubscriptionCreateRequest withCurrency(String currency) {
             this.currency = currency;
             return this;
         }
 
-        private Integer dayOfMonth;
-
         public SubscriptionCreateRequest withDayOfMonth(Integer dayOfMonth) {
             this.dayOfMonth = dayOfMonth;
             return this;
         }
-
-        private String endAt;
 
         public SubscriptionCreateRequest withEndAt(String endAt) {
             this.endAt = endAt;
             return this;
         }
 
-        private Integer interval;
-
         public SubscriptionCreateRequest withInterval(Integer interval) {
             this.interval = interval;
             return this;
         }
-
-        private String intervalUnit;
 
         public SubscriptionCreateRequest withIntervalUnit(String intervalUnit) {
             this.intervalUnit = intervalUnit;
             return this;
         }
 
-        private Object links;
-
-        public SubscriptionCreateRequest withLinks(Object links) {
+        public SubscriptionCreateRequest withLinks(Links links) {
             this.links = links;
             return this;
         }
 
-        private Object metadata;
-
-        public SubscriptionCreateRequest withMetadata(Object metadata) {
+        public SubscriptionCreateRequest withMetadata(Map<String, String> metadata) {
             this.metadata = metadata;
             return this;
         }
-
-        public enum Month {
-            JANUARY, FEBRUARY, MARCH, APRIL, MAY, JUNE, JULY, AUGUST, SEPTEMBER, OCTOBER, NOVEMBER, DECEMBER,
-        }
-
-        private Month month;
 
         public SubscriptionCreateRequest withMonth(Month month) {
             this.month = month;
             return this;
         }
 
-        private String name;
-
         public SubscriptionCreateRequest withName(String name) {
             this.name = name;
             return this;
         }
-
-        private String startAt;
 
         public SubscriptionCreateRequest withStartAt(String startAt) {
             this.startAt = startAt;
@@ -148,38 +133,51 @@ public class SubscriptionService {
         protected boolean hasBody() {
             return true;
         }
+
+        public enum Month {
+            JANUARY, FEBRUARY, MARCH, APRIL, MAY, JUNE, JULY, AUGUST, SEPTEMBER, OCTOBER, NOVEMBER, DECEMBER;
+            @Override
+            public String toString() {
+                return name().toLowerCase();
+            }
+        }
+
+        public static class Links {
+            private String mandate;
+
+            public Links withMandate(String mandate) {
+                this.mandate = mandate;
+                return this;
+            }
+        }
     }
 
     public static final class SubscriptionListRequest extends ListRequest<Subscription> {
         private String after;
+        private String before;
+        private String customer;
+        private Integer limit;
+        private String mandate;
 
         public SubscriptionListRequest withAfter(String after) {
             this.after = after;
             return this;
         }
 
-        private String before;
-
         public SubscriptionListRequest withBefore(String before) {
             this.before = before;
             return this;
         }
-
-        private String customer;
 
         public SubscriptionListRequest withCustomer(String customer) {
             this.customer = customer;
             return this;
         }
 
-        private Integer limit;
-
         public SubscriptionListRequest withLimit(Integer limit) {
             this.limit = limit;
             return this;
         }
-
-        private String mandate;
 
         public SubscriptionListRequest withMandate(String mandate) {
             this.mandate = mandate;
@@ -262,14 +260,13 @@ public class SubscriptionService {
     public static final class SubscriptionUpdateRequest extends PutRequest<Subscription> {
         @PathParam
         private final String identity;
-        private Object metadata;
+        private Map<String, String> metadata;
+        private String name;
 
-        public SubscriptionUpdateRequest withMetadata(Object metadata) {
+        public SubscriptionUpdateRequest withMetadata(Map<String, String> metadata) {
             this.metadata = metadata;
             return this;
         }
-
-        private String name;
 
         public SubscriptionUpdateRequest withName(String name) {
             this.name = name;
@@ -312,9 +309,9 @@ public class SubscriptionService {
     public static final class SubscriptionCancelRequest extends PostRequest<Subscription> {
         @PathParam
         private final String identity;
-        private Object metadata;
+        private Map<String, String> metadata;
 
-        public SubscriptionCancelRequest withMetadata(Object metadata) {
+        public SubscriptionCancelRequest withMetadata(Map<String, String> metadata) {
             this.metadata = metadata;
             return this;
         }

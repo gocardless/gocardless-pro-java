@@ -37,21 +37,19 @@ public class ApiKeyService {
     }
 
     public static final class ApiKeyCreateRequest extends PostRequest<ApiKey> {
-        private Object links;
+        private Links links;
+        private String name;
+        private String webhookUrl;
 
-        public ApiKeyCreateRequest withLinks(Object links) {
+        public ApiKeyCreateRequest withLinks(Links links) {
             this.links = links;
             return this;
         }
-
-        private String name;
 
         public ApiKeyCreateRequest withName(String name) {
             this.name = name;
             return this;
         }
-
-        private String webhookUrl;
 
         public ApiKeyCreateRequest withWebhookUrl(String webhookUrl) {
             this.webhookUrl = webhookUrl;
@@ -81,42 +79,43 @@ public class ApiKeyService {
         protected boolean hasBody() {
             return true;
         }
+
+        public static class Links {
+            private String role;
+
+            public Links withRole(String role) {
+                this.role = role;
+                return this;
+            }
+        }
     }
 
     public static final class ApiKeyListRequest extends ListRequest<ApiKey> {
         private String after;
+        private String before;
+        private Enabled enabled;
+        private Integer limit;
+        private String role;
 
         public ApiKeyListRequest withAfter(String after) {
             this.after = after;
             return this;
         }
 
-        private String before;
-
         public ApiKeyListRequest withBefore(String before) {
             this.before = before;
             return this;
         }
-
-        public enum Enabled {
-            TRUE, FALSE,
-        }
-
-        private Enabled enabled;
 
         public ApiKeyListRequest withEnabled(Enabled enabled) {
             this.enabled = enabled;
             return this;
         }
 
-        private Integer limit;
-
         public ApiKeyListRequest withLimit(Integer limit) {
             this.limit = limit;
             return this;
         }
-
-        private String role;
 
         public ApiKeyListRequest withRole(String role) {
             this.role = role;
@@ -162,6 +161,14 @@ public class ApiKeyService {
         protected TypeToken<List<ApiKey>> getTypeToken() {
             return new TypeToken<List<ApiKey>>() {};
         }
+
+        public enum Enabled {
+            TRUE, FALSE;
+            @Override
+            public String toString() {
+                return name().toLowerCase();
+            }
+        }
     }
 
     public static final class ApiKeyGetRequest extends GetRequest<ApiKey> {
@@ -200,13 +207,12 @@ public class ApiKeyService {
         @PathParam
         private final String identity;
         private String name;
+        private String webhookUrl;
 
         public ApiKeyUpdateRequest withName(String name) {
             this.name = name;
             return this;
         }
-
-        private String webhookUrl;
 
         public ApiKeyUpdateRequest withWebhookUrl(String webhookUrl) {
             this.webhookUrl = webhookUrl;

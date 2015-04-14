@@ -26,45 +26,36 @@ public class PayoutService {
 
     public static final class PayoutListRequest extends ListRequest<Payout> {
         private String after;
+        private String before;
+        private String creditor;
+        private String creditorBankAccount;
+        private Integer limit;
+        private Status status;
 
         public PayoutListRequest withAfter(String after) {
             this.after = after;
             return this;
         }
 
-        private String before;
-
         public PayoutListRequest withBefore(String before) {
             this.before = before;
             return this;
         }
-
-        private String creditor;
 
         public PayoutListRequest withCreditor(String creditor) {
             this.creditor = creditor;
             return this;
         }
 
-        private String creditorBankAccount;
-
         public PayoutListRequest withCreditorBankAccount(String creditorBankAccount) {
             this.creditorBankAccount = creditorBankAccount;
             return this;
         }
 
-        private Integer limit;
-
         public PayoutListRequest withLimit(Integer limit) {
             this.limit = limit;
             return this;
         }
-
-        public enum Status {
-            PENDING, PAID,
-        }
-
-        private Status status;
 
         public PayoutListRequest withStatus(Status status) {
             this.status = status;
@@ -112,6 +103,14 @@ public class PayoutService {
         @Override
         protected TypeToken<List<Payout>> getTypeToken() {
             return new TypeToken<List<Payout>>() {};
+        }
+
+        public enum Status {
+            PENDING, PAID;
+            @Override
+            public String toString() {
+                return name().toLowerCase();
+            }
         }
     }
 

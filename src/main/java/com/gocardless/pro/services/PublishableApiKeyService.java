@@ -71,31 +71,24 @@ public class PublishableApiKeyService {
 
     public static final class PublishableApiKeyListRequest extends ListRequest<PublishableApiKey> {
         private String after;
+        private String before;
+        private Enabled enabled;
+        private Integer limit;
 
         public PublishableApiKeyListRequest withAfter(String after) {
             this.after = after;
             return this;
         }
 
-        private String before;
-
         public PublishableApiKeyListRequest withBefore(String before) {
             this.before = before;
             return this;
         }
 
-        public enum Enabled {
-            TRUE, FALSE,
-        }
-
-        private Enabled enabled;
-
         public PublishableApiKeyListRequest withEnabled(Enabled enabled) {
             this.enabled = enabled;
             return this;
         }
-
-        private Integer limit;
 
         public PublishableApiKeyListRequest withLimit(Integer limit) {
             this.limit = limit;
@@ -137,6 +130,14 @@ public class PublishableApiKeyService {
         @Override
         protected TypeToken<List<PublishableApiKey>> getTypeToken() {
             return new TypeToken<List<PublishableApiKey>>() {};
+        }
+
+        public enum Enabled {
+            TRUE, FALSE;
+            @Override
+            public String toString() {
+                return name().toLowerCase();
+            }
         }
     }
 
