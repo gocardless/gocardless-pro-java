@@ -22,11 +22,13 @@ final class ResponseParser {
         return gson.fromJson(object, clazz);
     }
 
-    <T> List<T> parseMultiple(Reader stream, String envelope, TypeToken<List<T>> clazz) {
-        JsonElement json = new JsonParser().parse(stream);
-        JsonArray array = json.getAsJsonObject().getAsJsonArray(envelope);
+    <T> ListResponse<T> parsePage(Reader stream, String envelope, TypeToken<List<T>> clazz) {
+        JsonObject json = new JsonParser().parse(stream).getAsJsonObject();
+        JsonArray array = json.getAsJsonArray(envelope);
         List<T> items = gson.fromJson(array, clazz.getType());
-        return ImmutableList.copyOf(items);
+        JsonObject metaJson = json.getAsJsonObject("meta");
+        ListResponse.Meta meta = gson.fromJson(metaJson, ListResponse.Meta.class);
+        return new ListResponse<>(ImmutableList.copyOf(items), meta);
     }
 
     GoCardlessApiException parseError(Reader stream) {

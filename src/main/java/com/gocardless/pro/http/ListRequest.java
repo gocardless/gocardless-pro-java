@@ -5,14 +5,14 @@ import java.util.List;
 
 import com.google.gson.reflect.TypeToken;
 
-public abstract class ListRequest<T> extends HttpRequest<List<T>> {
+public abstract class ListRequest<T> extends HttpRequest<ListResponse<T>> {
     public ListRequest(HttpClient httpClient) {
         super(httpClient);
     }
 
     @Override
-    protected List<T> parseResponse(Reader stream, ResponseParser responseParser) {
-        return responseParser.parseMultiple(stream, getEnvelope(), getTypeToken());
+    protected ListResponse<T> parseResponse(Reader stream, ResponseParser responseParser) {
+        return responseParser.parsePage(stream, getEnvelope(), getTypeToken());
     }
 
     @Override

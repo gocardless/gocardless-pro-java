@@ -40,16 +40,19 @@ public class ResponseParserTest {
     }
 
     @Test
-    public void shouldParseMultiple() throws IOException {
-        URL resource = getResource("fixtures/multiple.json");
+    public void shouldParsePage() throws IOException {
+        URL resource = getResource("fixtures/page.json");
         Reader reader = asCharSource(resource, UTF_8).openStream();
-        List<DummyItem> result =
-                parser.parseMultiple(reader, "items", new TypeToken<List<DummyItem>>() {});
-        assertThat(result).hasSize(2);
-        assertThat(result.get(0).stringField).isEqualTo("foo");
-        assertThat(result.get(0).intField).isEqualTo(123);
-        assertThat(result.get(1).stringField).isEqualTo("bar");
-        assertThat(result.get(1).intField).isEqualTo(456);
+        ListResponse<DummyItem> result =
+                parser.parsePage(reader, "items", new TypeToken<List<DummyItem>>() {});
+        assertThat(result.getItems()).hasSize(2);
+        assertThat(result.getItems().get(0).stringField).isEqualTo("foo");
+        assertThat(result.getItems().get(0).intField).isEqualTo(123);
+        assertThat(result.getItems().get(1).stringField).isEqualTo("bar");
+        assertThat(result.getItems().get(1).intField).isEqualTo(456);
+        assertThat(result.getAfter()).isEqualTo("ID123");
+        assertThat(result.getBefore()).isEqualTo("ID456");
+        assertThat(result.getLimit()).isEqualTo(50);
     }
 
     @Test
