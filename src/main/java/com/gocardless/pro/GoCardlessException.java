@@ -1,7 +1,7 @@
-package com.gocardless.pro.exceptions;
+package com.gocardless.pro;
 
 /**
- * Base class for API exceptions.
+ * Base class for client library exceptions.
  */
 public abstract class GoCardlessException extends RuntimeException {
     protected GoCardlessException(String message) {

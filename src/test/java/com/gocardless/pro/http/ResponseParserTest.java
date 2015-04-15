@@ -5,8 +5,7 @@ import java.io.Reader;
 import java.net.URL;
 import java.util.List;
 
-import com.gocardless.pro.exceptions.*;
-import com.gocardless.pro.exceptions.ApiErrorResponse.ApiError;
+import com.gocardless.pro.errors.*;
 import com.gocardless.pro.http.HttpTestUtil.DummyItem;
 
 import com.google.gson.reflect.TypeToken;
@@ -14,7 +13,7 @@ import com.google.gson.reflect.TypeToken;
 import org.junit.Before;
 import org.junit.Test;
 
-import static com.gocardless.pro.exceptions.ApiErrorResponse.ErrorType.*;
+import static com.gocardless.pro.errors.ErrorType.*;
 
 import static com.google.common.base.Charsets.UTF_8;
 import static com.google.common.io.Resources.asCharSource;

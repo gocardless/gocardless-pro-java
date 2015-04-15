@@ -3,7 +3,9 @@ package com.gocardless.pro.http;
 import java.io.Reader;
 import java.util.List;
 
-import com.gocardless.pro.exceptions.*;
+import com.gocardless.pro.errors.ApiErrorResponse;
+import com.gocardless.pro.errors.GoCardlessApiException;
+import com.gocardless.pro.errors.GoCardlessErrorMapper;
 
 import com.google.common.collect.ImmutableList;
 import com.google.gson.*;
@@ -33,16 +35,6 @@ final class ResponseParser {
 
     GoCardlessApiException parseError(Reader stream) {
         ApiErrorResponse error = parseSingle(stream, "error", ApiErrorResponse.class);
-        switch (error.getType()) {
-            case GOCARDLESS:
-                return new GoCardlessInternalException(error);
-            case INVALID_API_USAGE:
-                return new InvalidApiUsageException(error);
-            case INVALID_STATE:
-                return new InvalidStateException(error);
-            case VALIDATION_FAILED:
-                return new ValidationFailedException(error);
-        }
-        throw new IllegalStateException("Unknown error type: " + error.getType());
+        return GoCardlessErrorMapper.toException(error);
     }
 }

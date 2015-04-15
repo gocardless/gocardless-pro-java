@@ -1,6 +1,6 @@
 package com.gocardless.pro.http;
 
-import com.gocardless.pro.exceptions.InvalidApiUsageException;
+import com.gocardless.pro.errors.InvalidApiUsageException;
 import com.gocardless.pro.http.HttpTestUtil.DummyItem;
 
 import com.google.common.collect.ImmutableMap;
