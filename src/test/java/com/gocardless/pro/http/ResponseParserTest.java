@@ -5,9 +5,9 @@ import java.io.Reader;
 import java.net.URL;
 import java.util.List;
 
-import com.gocardless.pro.TestUtil.DummyItem;
 import com.gocardless.pro.exceptions.*;
 import com.gocardless.pro.exceptions.ApiErrorResponse.ApiError;
+import com.gocardless.pro.http.HttpTestUtil.DummyItem;
 
 import com.google.gson.reflect.TypeToken;
 

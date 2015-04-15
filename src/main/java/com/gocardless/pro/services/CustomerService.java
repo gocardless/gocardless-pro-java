@@ -9,29 +9,60 @@ import com.gocardless.pro.resources.Customer;
 import com.google.common.collect.ImmutableMap;
 import com.google.gson.reflect.TypeToken;
 
+/**
+ * Service class for working with Customer resources.
+ *
+ * Customer objects hold the contact details for a customer. A customer can have several [customer
+ * bank accounts](https://developer.gocardless.com/pro/#api-endpoints-customer-bank-accounts), which
+ * in turn can have several Direct Debit
+ * [mandates](https://developer.gocardless.com/pro/#api-endpoints-mandates).
+ */
 public class CustomerService {
     private HttpClient httpClient;
 
+    /**
+     * Constructor.  Users of this library should have no need to call this - an instance
+     * of this class can be obtained by calling
+      {@link com.gocardless.pro.GoCardlessClient#customers() }.
+     */
     public CustomerService(HttpClient httpClient) {
         this.httpClient = httpClient;
     }
 
+    /**
+     * Creates a new customer object.
+     */
     public CustomerCreateRequest create() {
         return new CustomerCreateRequest(httpClient);
     }
 
+    /**
+     * Returns a [cursor-paginated](https://developer.gocardless.com/pro/#overview-cursor-pagination)
+     * list of your customers.
+     */
     public CustomerListRequest list() {
         return new CustomerListRequest(httpClient);
     }
 
+    /**
+     * Retrieves the details of an existing customer.
+     */
     public CustomerGetRequest get(String identity) {
         return new CustomerGetRequest(httpClient, identity);
     }
 
+    /**
+     * Updates a customer object. Supports all of the fields supported when creating a customer.
+     */
     public CustomerUpdateRequest update(String identity) {
         return new CustomerUpdateRequest(httpClient, identity);
     }
 
+    /**
+     * Request class for {@link CustomerService#create }.
+     *
+     * Creates a new customer object.
+     */
     public static final class CustomerCreateRequest extends PostRequest<Customer> {
         private String addressLine1;
         private String addressLine2;
@@ -45,56 +76,91 @@ public class CustomerService {
         private String postalCode;
         private String region;
 
+        /**
+         * The first line of the customer's address.
+         */
         public CustomerCreateRequest withAddressLine1(String addressLine1) {
             this.addressLine1 = addressLine1;
             return this;
         }
 
+        /**
+         * The second line of the customer's address.
+         */
         public CustomerCreateRequest withAddressLine2(String addressLine2) {
             this.addressLine2 = addressLine2;
             return this;
         }
 
+        /**
+         * The third line of the customer's address.
+         */
         public CustomerCreateRequest withAddressLine3(String addressLine3) {
             this.addressLine3 = addressLine3;
             return this;
         }
 
+        /**
+         * The city of the customer's address.
+         */
         public CustomerCreateRequest withCity(String city) {
             this.city = city;
             return this;
         }
 
+        /**
+         * [ISO 3166-1](http://en.wikipedia.org/wiki/ISO_3166-1_alpha-2#Officially_assigned_code_elements)
+         * alpha-2 code.
+         */
         public CustomerCreateRequest withCountryCode(String countryCode) {
             this.countryCode = countryCode;
             return this;
         }
 
+        /**
+         * Customer's email address.
+         */
         public CustomerCreateRequest withEmail(String email) {
             this.email = email;
             return this;
         }
 
+        /**
+         * Customer's surname.
+         */
         public CustomerCreateRequest withFamilyName(String familyName) {
             this.familyName = familyName;
             return this;
         }
 
+        /**
+         * Customer's first name.
+         */
         public CustomerCreateRequest withGivenName(String givenName) {
             this.givenName = givenName;
             return this;
         }
 
+        /**
+         * Key-value store of custom data. Up to 3 keys are permitted, with key names up to 50 characters and
+         * values up to 200 characters.
+         */
         public CustomerCreateRequest withMetadata(Map<String, String> metadata) {
             this.metadata = metadata;
             return this;
         }
 
+        /**
+         * The customer's postal code.
+         */
         public CustomerCreateRequest withPostalCode(String postalCode) {
             this.postalCode = postalCode;
             return this;
         }
 
+        /**
+         * The customer's address region, county or department.
+         */
         public CustomerCreateRequest withRegion(String region) {
             this.region = region;
             return this;
@@ -125,17 +191,29 @@ public class CustomerService {
         }
     }
 
+    /**
+     * Request class for {@link CustomerService#list }.
+     *
+     * Returns a [cursor-paginated](https://developer.gocardless.com/pro/#overview-cursor-pagination)
+     * list of your customers.
+     */
     public static final class CustomerListRequest extends ListRequest<Customer> {
         private String after;
         private String before;
         private CreatedAt createdAt;
         private Integer limit;
 
+        /**
+         * Cursor pointing to the start of the desired set.
+         */
         public CustomerListRequest withAfter(String after) {
             this.after = after;
             return this;
         }
 
+        /**
+         * Cursor pointing to the end of the desired set.
+         */
         public CustomerListRequest withBefore(String before) {
             this.before = before;
             return this;
@@ -146,6 +224,9 @@ public class CustomerService {
             return this;
         }
 
+        /**
+         * Number of records to return.
+         */
         public CustomerListRequest withLimit(Integer limit) {
             this.limit = limit;
             return this;
@@ -194,21 +275,33 @@ public class CustomerService {
             private String lt;
             private String lte;
 
+            /**
+             * Limit to records created after the specified date-time.
+             */
             public CreatedAt withGt(String gt) {
                 this.gt = gt;
                 return this;
             }
 
+            /**
+             * Limit to records created on or after the specified date-time.
+             */
             public CreatedAt withGte(String gte) {
                 this.gte = gte;
                 return this;
             }
 
+            /**
+             * Limit to records created before the specified date-time.
+             */
             public CreatedAt withLt(String lt) {
                 this.lt = lt;
                 return this;
             }
 
+            /**
+             * Limit to records created on or before the specified date-time.
+             */
             public CreatedAt withLte(String lte) {
                 this.lte = lte;
                 return this;
@@ -233,6 +326,11 @@ public class CustomerService {
         }
     }
 
+    /**
+     * Request class for {@link CustomerService#get }.
+     *
+     * Retrieves the details of an existing customer.
+     */
     public static final class CustomerGetRequest extends GetRequest<Customer> {
         @PathParam
         private final String identity;
@@ -265,6 +363,11 @@ public class CustomerService {
         }
     }
 
+    /**
+     * Request class for {@link CustomerService#update }.
+     *
+     * Updates a customer object. Supports all of the fields supported when creating a customer.
+     */
     public static final class CustomerUpdateRequest extends PutRequest<Customer> {
         @PathParam
         private final String identity;
@@ -280,56 +383,91 @@ public class CustomerService {
         private String postalCode;
         private String region;
 
+        /**
+         * The first line of the customer's address.
+         */
         public CustomerUpdateRequest withAddressLine1(String addressLine1) {
             this.addressLine1 = addressLine1;
             return this;
         }
 
+        /**
+         * The second line of the customer's address.
+         */
         public CustomerUpdateRequest withAddressLine2(String addressLine2) {
             this.addressLine2 = addressLine2;
             return this;
         }
 
+        /**
+         * The third line of the customer's address.
+         */
         public CustomerUpdateRequest withAddressLine3(String addressLine3) {
             this.addressLine3 = addressLine3;
             return this;
         }
 
+        /**
+         * The city of the customer's address.
+         */
         public CustomerUpdateRequest withCity(String city) {
             this.city = city;
             return this;
         }
 
+        /**
+         * [ISO 3166-1](http://en.wikipedia.org/wiki/ISO_3166-1_alpha-2#Officially_assigned_code_elements)
+         * alpha-2 code.
+         */
         public CustomerUpdateRequest withCountryCode(String countryCode) {
             this.countryCode = countryCode;
             return this;
         }
 
+        /**
+         * Customer's email address.
+         */
         public CustomerUpdateRequest withEmail(String email) {
             this.email = email;
             return this;
         }
 
+        /**
+         * Customer's surname.
+         */
         public CustomerUpdateRequest withFamilyName(String familyName) {
             this.familyName = familyName;
             return this;
         }
 
+        /**
+         * Customer's first name.
+         */
         public CustomerUpdateRequest withGivenName(String givenName) {
             this.givenName = givenName;
             return this;
         }
 
+        /**
+         * Key-value store of custom data. Up to 3 keys are permitted, with key names up to 50 characters and
+         * values up to 200 characters.
+         */
         public CustomerUpdateRequest withMetadata(Map<String, String> metadata) {
             this.metadata = metadata;
             return this;
         }
 
+        /**
+         * The customer's postal code.
+         */
         public CustomerUpdateRequest withPostalCode(String postalCode) {
             this.postalCode = postalCode;
             return this;
         }
 
+        /**
+         * The customer's address region, county or department.
+         */
         public CustomerUpdateRequest withRegion(String region) {
             this.region = region;
             return this;

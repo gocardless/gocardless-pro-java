@@ -9,37 +9,72 @@ import com.gocardless.pro.resources.User;
 import com.google.common.collect.ImmutableMap;
 import com.google.gson.reflect.TypeToken;
 
+/**
+ * Service class for working with User resources.
+ *
+ * 
+ */
 public class UserService {
     private HttpClient httpClient;
 
+    /**
+     * Constructor.  Users of this library should have no need to call this - an instance
+     * of this class can be obtained by calling
+      {@link com.gocardless.pro.GoCardlessClient#users() }.
+     */
     public UserService(HttpClient httpClient) {
         this.httpClient = httpClient;
     }
 
+    /**
+     * <a name="user_exists"></a>Creates a new user object. Email addresses must be unique.
+     */
     public UserCreateRequest create() {
         return new UserCreateRequest(httpClient);
     }
 
+    /**
+     * Returns a [cursor-paginated](https://developer.gocardless.com/pro/#overview-cursor-pagination)
+     * list of your users.
+     */
     public UserListRequest list() {
         return new UserListRequest(httpClient);
     }
 
+    /**
+     * Retrieves the details of an existing user. In addition to the usual permissions based access
+     * rules, any user can access their own record.
+     */
     public UserGetRequest get(String identity) {
         return new UserGetRequest(httpClient, identity);
     }
 
+    /**
+     * Updates a user object. Supports all of the fields supported when creating a user.
+     */
     public UserUpdateRequest update(String identity) {
         return new UserUpdateRequest(httpClient, identity);
     }
 
+    /**
+     * Enables a user
+     */
     public UserEnableRequest enable(String identity) {
         return new UserEnableRequest(httpClient, identity);
     }
 
+    /**
+     * Disables a user
+     */
     public UserDisableRequest disable(String identity) {
         return new UserDisableRequest(httpClient, identity);
     }
 
+    /**
+     * Request class for {@link UserService#create }.
+     *
+     * <a name="user_exists"></a>Creates a new user object. Email addresses must be unique.
+     */
     public static final class UserCreateRequest extends PostRequest<User> {
         private String email;
         private String familyName;
@@ -48,16 +83,25 @@ public class UserService {
         private String password;
         private String passwordConfirmation;
 
+        /**
+         * Unique email address, used as a username.
+         */
         public UserCreateRequest withEmail(String email) {
             this.email = email;
             return this;
         }
 
+        /**
+         * User's surname. This field may not exceed 100 characters.
+         */
         public UserCreateRequest withFamilyName(String familyName) {
             this.familyName = familyName;
             return this;
         }
 
+        /**
+         * User's given name. This field may not exceed 100 characters.
+         */
         public UserCreateRequest withGivenName(String givenName) {
             this.givenName = givenName;
             return this;
@@ -68,11 +112,17 @@ public class UserService {
             return this;
         }
 
+        /**
+         * This field must be at least 12 characters.
+         */
         public UserCreateRequest withPassword(String password) {
             this.password = password;
             return this;
         }
 
+        /**
+         * If supplied, this must match `password`.
+         */
         public UserCreateRequest withPasswordConfirmation(String passwordConfirmation) {
             this.passwordConfirmation = passwordConfirmation;
             return this;
@@ -105,6 +155,10 @@ public class UserService {
         public static class Links {
             private String role;
 
+            /**
+             * ID of the user's [role](https://developer.gocardless.com/pro/#api-endpoints-roles), which dictates
+             * what resources the user can see.
+             */
             public Links withRole(String role) {
                 this.role = role;
                 return this;
@@ -112,6 +166,12 @@ public class UserService {
         }
     }
 
+    /**
+     * Request class for {@link UserService#list }.
+     *
+     * Returns a [cursor-paginated](https://developer.gocardless.com/pro/#overview-cursor-pagination)
+     * list of your users.
+     */
     public static final class UserListRequest extends ListRequest<User> {
         private String after;
         private String before;
@@ -119,26 +179,41 @@ public class UserService {
         private Integer limit;
         private String role;
 
+        /**
+         * Cursor pointing to the start of the desired set.
+         */
         public UserListRequest withAfter(String after) {
             this.after = after;
             return this;
         }
 
+        /**
+         * Cursor pointing to the end of the desired set.
+         */
         public UserListRequest withBefore(String before) {
             this.before = before;
             return this;
         }
 
+        /**
+         * Get enabled or disabled users.
+         */
         public UserListRequest withEnabled(Enabled enabled) {
             this.enabled = enabled;
             return this;
         }
 
+        /**
+         * Number of records to return.
+         */
         public UserListRequest withLimit(Integer limit) {
             this.limit = limit;
             return this;
         }
 
+        /**
+         * Unique identifier, beginning with "RO"
+         */
         public UserListRequest withRole(String role) {
             this.role = role;
             return this;
@@ -193,6 +268,12 @@ public class UserService {
         }
     }
 
+    /**
+     * Request class for {@link UserService#get }.
+     *
+     * Retrieves the details of an existing user. In addition to the usual permissions based access
+     * rules, any user can access their own record.
+     */
     public static final class UserGetRequest extends GetRequest<User> {
         @PathParam
         private final String identity;
@@ -225,6 +306,11 @@ public class UserService {
         }
     }
 
+    /**
+     * Request class for {@link UserService#update }.
+     *
+     * Updates a user object. Supports all of the fields supported when creating a user.
+     */
     public static final class UserUpdateRequest extends PutRequest<User> {
         @PathParam
         private final String identity;
@@ -235,16 +321,25 @@ public class UserService {
         private String password;
         private String passwordConfirmation;
 
+        /**
+         * Unique email address, used as a username.
+         */
         public UserUpdateRequest withEmail(String email) {
             this.email = email;
             return this;
         }
 
+        /**
+         * User's surname. This field may not exceed 100 characters.
+         */
         public UserUpdateRequest withFamilyName(String familyName) {
             this.familyName = familyName;
             return this;
         }
 
+        /**
+         * User's given name. This field may not exceed 100 characters.
+         */
         public UserUpdateRequest withGivenName(String givenName) {
             this.givenName = givenName;
             return this;
@@ -255,11 +350,17 @@ public class UserService {
             return this;
         }
 
+        /**
+         * This field must be at least 12 characters.
+         */
         public UserUpdateRequest withPassword(String password) {
             this.password = password;
             return this;
         }
 
+        /**
+         * If supplied, this must match `password`.
+         */
         public UserUpdateRequest withPasswordConfirmation(String passwordConfirmation) {
             this.passwordConfirmation = passwordConfirmation;
             return this;
@@ -300,6 +401,10 @@ public class UserService {
         public static class Links {
             private String role;
 
+            /**
+             * ID of the user's [role](https://developer.gocardless.com/pro/#api-endpoints-roles), which dictates
+             * what resources the user can see.
+             */
             public Links withRole(String role) {
                 this.role = role;
                 return this;
@@ -307,6 +412,11 @@ public class UserService {
         }
     }
 
+    /**
+     * Request class for {@link UserService#enable }.
+     *
+     * Enables a user
+     */
     public static final class UserEnableRequest extends PostRequest<User> {
         @PathParam
         private final String identity;
@@ -344,6 +454,11 @@ public class UserService {
         }
     }
 
+    /**
+     * Request class for {@link UserService#disable }.
+     *
+     * Disables a user
+     */
     public static final class UserDisableRequest extends PostRequest<User> {
         @PathParam
         private final String identity;

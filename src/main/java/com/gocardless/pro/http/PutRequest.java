@@ -2,8 +2,13 @@ package com.gocardless.pro.http;
 
 import java.io.Reader;
 
+/**
+ * Base class for PUT requests.
+ *
+ * @param <T> the type of the item returned by this request.
+ */
 public abstract class PutRequest<T> extends HttpRequest<T> {
-    public PutRequest(HttpClient httpClient) {
+    protected PutRequest(HttpClient httpClient) {
         super(httpClient);
     }
 

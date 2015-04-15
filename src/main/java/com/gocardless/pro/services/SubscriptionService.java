@@ -9,33 +9,125 @@ import com.gocardless.pro.resources.Subscription;
 import com.google.common.collect.ImmutableMap;
 import com.google.gson.reflect.TypeToken;
 
+/**
+ * Service class for working with Subscription resources.
+ *
+ * Subscriptions create [payments](https://developer.gocardless.com/pro/#api-endpoints-payments)
+ * according to a schedule.
+ * 
+ * #### Recurrence Rules
+ * 
+ * The following rules apply when specifying
+ * recurrence:
+ * - The first payment must be charged within 1 year.
+ * - When neither `month` nor
+ * `day_of_month` are present, the subscription will recur from the `start_at` based on the
+ * `interval_unit`.
+ * - If `month` or `day_of_month` are present, the recurrence rules will be
+ * applied from the `start_at`, and the following validations apply:
+ * 
+ * | interval_unit   | month  
+ *                                        | day_of_month                            |
+ * |
+ * :-------------- | :--------------------------------------------- |
+ * :-------------------------------------- |
+ * | yearly          | optional (required if
+ * `day_of_month` provided) | optional (required if `month` provided) |
+ * | monthly         | invalid
+ *                                        | required                                |
+ * | weekly     
+ *     | invalid                                        | invalid                                 |
+ *
+ * 
+ * Examples:
+ * 
+ * | interval_unit   | interval   | month   | day_of_month   | valid?              
+ *                               |
+ * | :-------------- | :--------- | :------ | :------------- |
+ * :------------------------------------------------- |
+ * | yearly          | 1          | january |
+ * -1             | valid                                              |
+ * | yearly          | 1     
+ *     | march   |                | invalid - missing `day_of_month`                   |
+ * | monthly 
+ *        | 6          |         | 12             | valid                                            
+ *  |
+ * | monthly         | 6          | august  | 12             | invalid - `month` must be blank  
+ *                  |
+ * | weekly          | 2          |         |                | valid            
+ *                                  |
+ * | weekly          | 2          | october | 10             |
+ * invalid - `month` and `day_of_month` must be blank |
+ * 
+ * #### Rolling dates
+ * 
+ * When a charge
+ * date falls on a non-business day, one of two things will happen:
+ * 
+ * - if the recurrence rule
+ * specified `-1` as the `day_of_month`, the charge date will be rolled __backwards__ to the previous
+ * business day (i.e., the last working day of the month).
+ * - otherwise the charge date will be
+ * rolled __forwards__ to the next business day.
+ * 
+ */
 public class SubscriptionService {
     private HttpClient httpClient;
 
+    /**
+     * Constructor.  Users of this library should have no need to call this - an instance
+     * of this class can be obtained by calling
+      {@link com.gocardless.pro.GoCardlessClient#subscriptions() }.
+     */
     public SubscriptionService(HttpClient httpClient) {
         this.httpClient = httpClient;
     }
 
+    /**
+     * Creates a new subscription object
+     */
     public SubscriptionCreateRequest create() {
         return new SubscriptionCreateRequest(httpClient);
     }
 
+    /**
+     * Returns a [cursor-paginated](https://developer.gocardless.com/pro/#overview-cursor-pagination)
+     * list of your subscriptions.
+     */
     public SubscriptionListRequest list() {
         return new SubscriptionListRequest(httpClient);
     }
 
+    /**
+     * Retrieves the details of a single subscription.
+     */
     public SubscriptionGetRequest get(String identity) {
         return new SubscriptionGetRequest(httpClient, identity);
     }
 
+    /**
+     * Updates a subscription object.
+     */
     public SubscriptionUpdateRequest update(String identity) {
         return new SubscriptionUpdateRequest(httpClient, identity);
     }
 
+    /**
+     * Immediately cancels a subscription; no more payments will be created under it. Any metadata
+     * supplied to this endpoint will be stored on the payment cancellation event it causes.
+     * 
+     * This
+     * will fail with a cancellation_failed error if the subscription is already cancelled or finished.
+     */
     public SubscriptionCancelRequest cancel(String identity) {
         return new SubscriptionCancelRequest(httpClient, identity);
     }
 
+    /**
+     * Request class for {@link SubscriptionService#create }.
+     *
+     * Creates a new subscription object
+     */
     public static final class SubscriptionCreateRequest extends PostRequest<Subscription> {
         private Integer amount;
         private Integer count;
@@ -50,36 +142,63 @@ public class SubscriptionService {
         private String name;
         private String startAt;
 
+        /**
+         * Amount in pence or cents.
+         */
         public SubscriptionCreateRequest withAmount(Integer amount) {
             this.amount = amount;
             return this;
         }
 
+        /**
+         * An alternative way to set `end_at`. The total number of payments that should be taken by this
+         * subscription. This will set `end_at` automatically.
+         */
         public SubscriptionCreateRequest withCount(Integer count) {
             this.count = count;
             return this;
         }
 
+        /**
+         * [ISO 4217](http://en.wikipedia.org/wiki/ISO_4217) currency code. Currently only `GBP` and `EUR`
+         * are supported.
+         */
         public SubscriptionCreateRequest withCurrency(String currency) {
             this.currency = currency;
             return this;
         }
 
+        /**
+         * As per RFC 2445. The day of the month to charge customers on. `1`-`28` or `-1` to indicate the
+         * last day of the month
+         */
         public SubscriptionCreateRequest withDayOfMonth(Integer dayOfMonth) {
             this.dayOfMonth = dayOfMonth;
             return this;
         }
 
+        /**
+         * Date after which no further payments should be charged. If a payment falls on this date, it **will
+         * not** be charged. If blank, the subscription will continue forever. Alternatively, `count` can be
+         * set to achieve a specific number of payments.
+         */
         public SubscriptionCreateRequest withEndAt(String endAt) {
             this.endAt = endAt;
             return this;
         }
 
+        /**
+         * Number of `interval_units` between customer charge dates. Must result in at least one charge date
+         * per year. Defaults to `1`.
+         */
         public SubscriptionCreateRequest withInterval(Integer interval) {
             this.interval = interval;
             return this;
         }
 
+        /**
+         * The unit of time between customer charge dates. One of `weekly`, `monthly` or `yearly`.
+         */
         public SubscriptionCreateRequest withIntervalUnit(String intervalUnit) {
             this.intervalUnit = intervalUnit;
             return this;
@@ -90,21 +209,37 @@ public class SubscriptionService {
             return this;
         }
 
+        /**
+         * Key-value store of custom data. Up to 3 keys are permitted, with key names up to 50 characters and
+         * values up to 200 characters.
+         */
         public SubscriptionCreateRequest withMetadata(Map<String, String> metadata) {
             this.metadata = metadata;
             return this;
         }
 
+        /**
+         * Name of the month on which to charge a customer. Must be lowercase.
+         */
         public SubscriptionCreateRequest withMonth(Month month) {
             this.month = month;
             return this;
         }
 
+        /**
+         * Optional name for the subscription. This field must not exceed 255 characters.
+         */
         public SubscriptionCreateRequest withName(String name) {
             this.name = name;
             return this;
         }
 
+        /**
+         * The date on which the first payment should be charged. Must be within one year of creation and on
+         * or after the [mandate](https://developer.gocardless.com/pro/#api-endpoints-mandates)'s
+         * `next_possible_charge_date`. When blank, this will be set as the mandate's
+         * `next_possible_charge_date`.
+         */
         public SubscriptionCreateRequest withStartAt(String startAt) {
             this.startAt = startAt;
             return this;
@@ -145,6 +280,10 @@ public class SubscriptionService {
         public static class Links {
             private String mandate;
 
+            /**
+             * ID of the associated [mandate](https://developer.gocardless.com/pro/#api-endpoints-mandates) which
+             * the subscription will create payments against.
+             */
             public Links withMandate(String mandate) {
                 this.mandate = mandate;
                 return this;
@@ -152,6 +291,12 @@ public class SubscriptionService {
         }
     }
 
+    /**
+     * Request class for {@link SubscriptionService#list }.
+     *
+     * Returns a [cursor-paginated](https://developer.gocardless.com/pro/#overview-cursor-pagination)
+     * list of your subscriptions.
+     */
     public static final class SubscriptionListRequest extends ListRequest<Subscription> {
         private String after;
         private String before;
@@ -159,26 +304,41 @@ public class SubscriptionService {
         private Integer limit;
         private String mandate;
 
+        /**
+         * Cursor pointing to the start of the desired set.
+         */
         public SubscriptionListRequest withAfter(String after) {
             this.after = after;
             return this;
         }
 
+        /**
+         * Cursor pointing to the end of the desired set.
+         */
         public SubscriptionListRequest withBefore(String before) {
             this.before = before;
             return this;
         }
 
+        /**
+         * Unique identifier, beginning with "CU".
+         */
         public SubscriptionListRequest withCustomer(String customer) {
             this.customer = customer;
             return this;
         }
 
+        /**
+         * Number of records to return.
+         */
         public SubscriptionListRequest withLimit(Integer limit) {
             this.limit = limit;
             return this;
         }
 
+        /**
+         * Unique identifier, beginning with "MD"
+         */
         public SubscriptionListRequest withMandate(String mandate) {
             this.mandate = mandate;
             return this;
@@ -225,6 +385,11 @@ public class SubscriptionService {
         }
     }
 
+    /**
+     * Request class for {@link SubscriptionService#get }.
+     *
+     * Retrieves the details of a single subscription.
+     */
     public static final class SubscriptionGetRequest extends GetRequest<Subscription> {
         @PathParam
         private final String identity;
@@ -257,17 +422,29 @@ public class SubscriptionService {
         }
     }
 
+    /**
+     * Request class for {@link SubscriptionService#update }.
+     *
+     * Updates a subscription object.
+     */
     public static final class SubscriptionUpdateRequest extends PutRequest<Subscription> {
         @PathParam
         private final String identity;
         private Map<String, String> metadata;
         private String name;
 
+        /**
+         * Key-value store of custom data. Up to 3 keys are permitted, with key names up to 50 characters and
+         * values up to 200 characters.
+         */
         public SubscriptionUpdateRequest withMetadata(Map<String, String> metadata) {
             this.metadata = metadata;
             return this;
         }
 
+        /**
+         * Optional name for the subscription. This field must not exceed 255 characters.
+         */
         public SubscriptionUpdateRequest withName(String name) {
             this.name = name;
             return this;
@@ -306,11 +483,24 @@ public class SubscriptionService {
         }
     }
 
+    /**
+     * Request class for {@link SubscriptionService#cancel }.
+     *
+     * Immediately cancels a subscription; no more payments will be created under it. Any metadata
+     * supplied to this endpoint will be stored on the payment cancellation event it causes.
+     * 
+     * This
+     * will fail with a cancellation_failed error if the subscription is already cancelled or finished.
+     */
     public static final class SubscriptionCancelRequest extends PostRequest<Subscription> {
         @PathParam
         private final String identity;
         private Map<String, String> metadata;
 
+        /**
+         * Key-value store of custom data. Up to 3 keys are permitted, with key names up to 50 characters and
+         * values up to 200 characters.
+         */
         public SubscriptionCancelRequest withMetadata(Map<String, String> metadata) {
             this.metadata = metadata;
             return this;

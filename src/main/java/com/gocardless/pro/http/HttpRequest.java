@@ -6,13 +6,24 @@ import java.util.Map;
 
 import com.google.common.collect.ImmutableMap;
 
-public abstract class HttpRequest<T> {
+/**
+ * Base class for HTTP requests.
+ *
+ * @param <T> the type of the item returned by this request.
+ */
+abstract class HttpRequest<T> {
     private transient final HttpClient httpClient;
 
-    public HttpRequest(HttpClient httpClient) {
+    HttpRequest(HttpClient httpClient) {
         this.httpClient = httpClient;
     }
 
+    /**
+     * Executes this request.
+     *
+     * Returns the API response.
+     * @throws com.gocardless.pro.exceptions.GoCardlessException
+     */
     public T execute() {
         return httpClient.execute(this);
     }

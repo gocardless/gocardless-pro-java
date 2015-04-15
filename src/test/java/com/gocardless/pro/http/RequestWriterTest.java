@@ -5,7 +5,7 @@ import java.io.IOException;
 import org.junit.Before;
 import org.junit.Test;
 
-import static com.gocardless.pro.TestUtil.jsonMatchesFixture;
+import static com.gocardless.pro.http.HttpTestUtil.jsonMatchesFixture;
 
 import static org.assertj.core.api.Assertions.assertThat;
 

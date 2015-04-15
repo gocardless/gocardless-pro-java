@@ -1,13 +1,13 @@
 package com.gocardless.pro.http;
 
-import com.gocardless.pro.TestUtil.DummyItem;
+import com.gocardless.pro.http.HttpTestUtil.DummyItem;
 
 import org.glassfish.grizzly.http.util.HttpStatus;
 
 import org.junit.Rule;
 import org.junit.Test;
 
-import static com.gocardless.pro.TestUtil.withJsonBody;
+import static com.gocardless.pro.http.HttpTestUtil.withJsonBody;
 
 import static com.xebialabs.restito.builder.stub.StubHttp.whenHttp;
 import static com.xebialabs.restito.semantics.Action.resourceContent;

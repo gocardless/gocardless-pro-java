@@ -5,6 +5,7 @@ import java.util.List;
 import co.freeside.betamax.Betamax;
 import co.freeside.betamax.Recorder;
 
+import com.gocardless.pro.http.HttpTestUtil;
 import com.gocardless.pro.http.ListResponse;
 import com.gocardless.pro.resources.*;
 import com.gocardless.pro.services.CustomerService.CustomerListRequest;
@@ -34,7 +35,7 @@ public class GoCardlessClientTest {
         String apiKey = System.getenv("GC_API_KEY");
         String apiSecret = System.getenv("GC_API_SECRET");
         client = GoCardlessClient.create(apiKey, apiSecret, SANDBOX);
-        TestUtil.disableSslCertificateChecking(client);
+        HttpTestUtil.disableSslCertificateChecking(client);
     }
 
     @Test

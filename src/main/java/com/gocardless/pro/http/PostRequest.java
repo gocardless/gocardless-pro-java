@@ -2,8 +2,13 @@ package com.gocardless.pro.http;
 
 import java.io.Reader;
 
+/**
+ * Base class for POST requests.
+ *
+ * @param <T> the type of the item returned by this request.
+ */
 public abstract class PostRequest<T> extends HttpRequest<T> {
-    public PostRequest(HttpClient httpClient) {
+    protected PostRequest(HttpClient httpClient) {
         super(httpClient);
     }
 

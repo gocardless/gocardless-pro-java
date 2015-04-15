@@ -5,8 +5,13 @@ import java.util.List;
 
 import com.google.gson.reflect.TypeToken;
 
+/**
+ * Base class for GET requests that return multiple items.
+ *
+ * @param <T> the type of the item returned by this request.
+ */
 public abstract class ListRequest<T> extends HttpRequest<ListResponse<T>> {
-    public ListRequest(HttpClient httpClient) {
+    protected ListRequest(HttpClient httpClient) {
         super(httpClient);
     }
 

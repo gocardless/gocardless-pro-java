@@ -9,37 +9,101 @@ import com.gocardless.pro.resources.Payment;
 import com.google.common.collect.ImmutableMap;
 import com.google.gson.reflect.TypeToken;
 
+/**
+ * Service class for working with Payment resources.
+ *
+ * Payment objects represent payments from a
+ * [customer](https://developer.gocardless.com/pro/#api-endpoints-customers) to a
+ * [creditor](https://developer.gocardless.com/pro/#api-endpoints-creditors), taken against a Direct
+ * Debit [mandate](https://developer.gocardless.com/pro/#api-endpoints-mandates).
+ * 
+ * GoCardless
+ * will notify you via a [webhook](https://developer.gocardless.com/pro/#webhooks) whenever the state
+ * of a payment changes.
+ */
 public class PaymentService {
     private HttpClient httpClient;
 
+    /**
+     * Constructor.  Users of this library should have no need to call this - an instance
+     * of this class can be obtained by calling
+      {@link com.gocardless.pro.GoCardlessClient#payments() }.
+     */
     public PaymentService(HttpClient httpClient) {
         this.httpClient = httpClient;
     }
 
+    /**
+     * <a name="mandate_is_inactive"></a>Creates a new payment object.
+     * 
+     * This fails with a
+     * `mandate_is_inactive` error if the linked
+     * [mandate](https://developer.gocardless.com/pro/#api-endpoints-mandates) is cancelled. Payments can
+     * be created against `pending_submission` mandates, but they will not be submitted until the mandate
+     * becomes active.
+     */
     public PaymentCreateRequest create() {
         return new PaymentCreateRequest(httpClient);
     }
 
+    /**
+     * Returns a [cursor-paginated](https://developer.gocardless.com/pro/#overview-cursor-pagination)
+     * list of your payments.
+     */
     public PaymentListRequest list() {
         return new PaymentListRequest(httpClient);
     }
 
+    /**
+     * Retrieves the details of a single existing payment.
+     */
     public PaymentGetRequest get(String identity) {
         return new PaymentGetRequest(httpClient, identity);
     }
 
+    /**
+     * Updates a payment object. This accepts only the metadata parameter.
+     */
     public PaymentUpdateRequest update(String identity) {
         return new PaymentUpdateRequest(httpClient, identity);
     }
 
+    /**
+     * Cancels the payment if it has not already been submitted to the banks. Any metadata supplied to
+     * this endpoint will be stored on the payment cancellation event it causes.
+     * 
+     * This will fail with
+     * a `cancellation_failed` error unless the payment's status is `pending_submission`.
+     */
     public PaymentCancelRequest cancel(String identity) {
         return new PaymentCancelRequest(httpClient, identity);
     }
 
+    /**
+     * <a name="retry_failed"></a>Retries a failed payment if the underlying mandate is active. You will
+     * receive a `resubmission_requested` webhook, but after that retrying the payment follows the same
+     * process as its initial creation, so you will receive a `submitted` webhook, followed by a
+     * `confirmed` or `failed` event. Any metadata supplied to this endpoint will be stored against the
+     * payment submission event it causes.
+     * 
+     * This will return a `retry_failed` error if the payment
+     * has not failed.
+     */
     public PaymentRetryRequest retry(String identity) {
         return new PaymentRetryRequest(httpClient, identity);
     }
 
+    /**
+     * Request class for {@link PaymentService#create }.
+     *
+     * <a name="mandate_is_inactive"></a>Creates a new payment object.
+     * 
+     * This fails with a
+     * `mandate_is_inactive` error if the linked
+     * [mandate](https://developer.gocardless.com/pro/#api-endpoints-mandates) is cancelled. Payments can
+     * be created against `pending_submission` mandates, but they will not be submitted until the mandate
+     * becomes active.
+     */
     public static final class PaymentCreateRequest extends PostRequest<Payment> {
         private Integer amount;
         private String chargeDate;
@@ -49,21 +113,37 @@ public class PaymentService {
         private Map<String, String> metadata;
         private String reference;
 
+        /**
+         * Amount in pence or cents.
+         */
         public PaymentCreateRequest withAmount(Integer amount) {
             this.amount = amount;
             return this;
         }
 
+        /**
+         * A future date on which the payment should be collected. If not specified, the payment will be
+         * collected as soon as possible. This must be on or after the
+         * [mandate](https://developer.gocardless.com/pro/#api-endpoints-mandates)'s
+         * `next_possible_charge_date`, and will be rolled-forwards by GoCardless if it is not a working day.
+         */
         public PaymentCreateRequest withChargeDate(String chargeDate) {
             this.chargeDate = chargeDate;
             return this;
         }
 
+        /**
+         * [ISO 4217](http://en.wikipedia.org/wiki/ISO_4217#Active_codes) currency code, currently only "GBP"
+         * and "EUR" are supported.
+         */
         public PaymentCreateRequest withCurrency(String currency) {
             this.currency = currency;
             return this;
         }
 
+        /**
+         * A human readable description of the payment.
+         */
         public PaymentCreateRequest withDescription(String description) {
             this.description = description;
             return this;
@@ -74,11 +154,20 @@ public class PaymentService {
             return this;
         }
 
+        /**
+         * Key-value store of custom data. Up to 3 keys are permitted, with key names up to 50 characters and
+         * values up to 200 characters.
+         */
         public PaymentCreateRequest withMetadata(Map<String, String> metadata) {
             this.metadata = metadata;
             return this;
         }
 
+        /**
+         * An optional payment reference. This will be appended to the mandate reference on your customer's
+         * bank statement. For Bacs payments this can be up to 10 characters, for SEPA Core payments the
+         * limit is 140 characters.
+         */
         public PaymentCreateRequest withReference(String reference) {
             this.reference = reference;
             return this;
@@ -111,6 +200,10 @@ public class PaymentService {
         public static class Links {
             private String mandate;
 
+            /**
+             * ID of the [mandate](https://developer.gocardless.com/pro/#api-endpoints-mandates) against which
+             * this payment should be collected.
+             */
             public Links withMandate(String mandate) {
                 this.mandate = mandate;
                 return this;
@@ -118,6 +211,12 @@ public class PaymentService {
         }
     }
 
+    /**
+     * Request class for {@link PaymentService#list }.
+     *
+     * Returns a [cursor-paginated](https://developer.gocardless.com/pro/#overview-cursor-pagination)
+     * list of your payments.
+     */
     public static final class PaymentListRequest extends ListRequest<Payment> {
         private String after;
         private String before;
@@ -129,11 +228,17 @@ public class PaymentService {
         private String status;
         private String subscription;
 
+        /**
+         * Cursor pointing to the start of the desired set.
+         */
         public PaymentListRequest withAfter(String after) {
             this.after = after;
             return this;
         }
 
+        /**
+         * Cursor pointing to the end of the desired set.
+         */
         public PaymentListRequest withBefore(String before) {
             this.before = before;
             return this;
@@ -144,31 +249,66 @@ public class PaymentService {
             return this;
         }
 
+        /**
+         * ID of a creditor to filter payments by. If you pass this parameter, you cannot also pass
+         * `customer`.
+         */
         public PaymentListRequest withCreditor(String creditor) {
             this.creditor = creditor;
             return this;
         }
 
+        /**
+         * ID of a customer to filter payments by. If you pass this parameter, you cannot also pass
+         * `creditor`.
+         */
         public PaymentListRequest withCustomer(String customer) {
             this.customer = customer;
             return this;
         }
 
+        /**
+         * Number of records to return.
+         */
         public PaymentListRequest withLimit(Integer limit) {
             this.limit = limit;
             return this;
         }
 
+        /**
+         * Unique identifier, beginning with "MD"
+         */
         public PaymentListRequest withMandate(String mandate) {
             this.mandate = mandate;
             return this;
         }
 
+        /**
+         * One of:
+         * <ul>
+         * <li>`pending_submission`: the payment has been created, but not yet submitted to
+         * the banks</li>
+         * <li>`submitted`: the payment has been submitted to the banks</li>
+         *
+         * <li>`confirmed`: the payment has been confirmed as collected</li>
+         * <li>`failed`: the payment
+         * failed to be processed. Note that payments can fail after being confirmed, if the failure message
+         * is sent late by the banks.</li>
+         * <li>`charged_back`: the payment has been charged back</li>
+         *
+         * <li>`paid_out`:  the payment has been paid out</li>
+         * <li>`cancelled`: the payment has been
+         * cancelled</li>
+         * </ul>
+         */
         public PaymentListRequest withStatus(String status) {
             this.status = status;
             return this;
         }
 
+        /**
+         * Unique identifier, beginning with "SB"
+         */
         public PaymentListRequest withSubscription(String subscription) {
             this.subscription = subscription;
             return this;
@@ -232,21 +372,33 @@ public class PaymentService {
             private String lt;
             private String lte;
 
+            /**
+             * Limit to records created after the specified date-time.
+             */
             public CreatedAt withGt(String gt) {
                 this.gt = gt;
                 return this;
             }
 
+            /**
+             * Limit to records created on or after the specified date-time.
+             */
             public CreatedAt withGte(String gte) {
                 this.gte = gte;
                 return this;
             }
 
+            /**
+             * Limit to records created before the specified date-time.
+             */
             public CreatedAt withLt(String lt) {
                 this.lt = lt;
                 return this;
             }
 
+            /**
+             * Limit to records created on or before the specified date-time.
+             */
             public CreatedAt withLte(String lte) {
                 this.lte = lte;
                 return this;
@@ -271,6 +423,11 @@ public class PaymentService {
         }
     }
 
+    /**
+     * Request class for {@link PaymentService#get }.
+     *
+     * Retrieves the details of a single existing payment.
+     */
     public static final class PaymentGetRequest extends GetRequest<Payment> {
         @PathParam
         private final String identity;
@@ -303,11 +460,20 @@ public class PaymentService {
         }
     }
 
+    /**
+     * Request class for {@link PaymentService#update }.
+     *
+     * Updates a payment object. This accepts only the metadata parameter.
+     */
     public static final class PaymentUpdateRequest extends PutRequest<Payment> {
         @PathParam
         private final String identity;
         private Map<String, String> metadata;
 
+        /**
+         * Key-value store of custom data. Up to 3 keys are permitted, with key names up to 50 characters and
+         * values up to 200 characters.
+         */
         public PaymentUpdateRequest withMetadata(Map<String, String> metadata) {
             this.metadata = metadata;
             return this;
@@ -346,11 +512,24 @@ public class PaymentService {
         }
     }
 
+    /**
+     * Request class for {@link PaymentService#cancel }.
+     *
+     * Cancels the payment if it has not already been submitted to the banks. Any metadata supplied to
+     * this endpoint will be stored on the payment cancellation event it causes.
+     * 
+     * This will fail with
+     * a `cancellation_failed` error unless the payment's status is `pending_submission`.
+     */
     public static final class PaymentCancelRequest extends PostRequest<Payment> {
         @PathParam
         private final String identity;
         private Map<String, String> metadata;
 
+        /**
+         * Key-value store of custom data. Up to 3 keys are permitted, with key names up to 50 characters and
+         * values up to 200 characters.
+         */
         public PaymentCancelRequest withMetadata(Map<String, String> metadata) {
             this.metadata = metadata;
             return this;
@@ -389,11 +568,27 @@ public class PaymentService {
         }
     }
 
+    /**
+     * Request class for {@link PaymentService#retry }.
+     *
+     * <a name="retry_failed"></a>Retries a failed payment if the underlying mandate is active. You will
+     * receive a `resubmission_requested` webhook, but after that retrying the payment follows the same
+     * process as its initial creation, so you will receive a `submitted` webhook, followed by a
+     * `confirmed` or `failed` event. Any metadata supplied to this endpoint will be stored against the
+     * payment submission event it causes.
+     * 
+     * This will return a `retry_failed` error if the payment
+     * has not failed.
+     */
     public static final class PaymentRetryRequest extends PostRequest<Payment> {
         @PathParam
         private final String identity;
         private Map<String, String> metadata;
 
+        /**
+         * Key-value store of custom data. Up to 3 keys are permitted, with key names up to 50 characters and
+         * values up to 200 characters.
+         */
         public PaymentRetryRequest withMetadata(Map<String, String> metadata) {
             this.metadata = metadata;
             return this;

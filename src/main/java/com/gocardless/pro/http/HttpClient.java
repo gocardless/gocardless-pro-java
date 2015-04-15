@@ -13,6 +13,11 @@ import com.google.gson.Gson;
 
 import com.squareup.okhttp.*;
 
+/**
+ * An HTTP client that can execute {@link HttpRequest}s.
+ *
+ * Users of this library should not need to access this class directly.
+ */
 public class HttpClient {
     private static final String USER_AGENT = String.format(
             "gocardless-pro-client/0.0.1-SNAPSHOT %s/%s %s/%s",
@@ -33,13 +38,20 @@ public class HttpClient {
     private final RequestWriter requestWriter;
     private final String credentials;
 
-    public HttpClient(String apiKeyId, String apiKey, String baseUri) {
+    /**
+     * Constructor.  Users of this library should not need to access this class directly.
+     *
+     * @param apiKey the API key.
+     * @param apiSecret the API secret.
+     * @param baseUrl base URI to make requests against.
+     */
+    public HttpClient(String apiKey, String apiSecret, String baseUrl) {
         this.rawClient = new OkHttpClient();
-        this.urlFormatter = new UrlFormatter(baseUri);
+        this.urlFormatter = new UrlFormatter(baseUrl);
         Gson gson = GsonFactory.build();
         this.responseParser = new ResponseParser(gson);
         this.requestWriter = new RequestWriter(gson);
-        this.credentials = Credentials.basic(apiKeyId, apiKey);
+        this.credentials = Credentials.basic(apiKey, apiSecret);
     }
 
     <T> T execute(HttpRequest<T> request) {
@@ -96,7 +108,7 @@ public class HttpClient {
     }
 
     @VisibleForTesting
-    public OkHttpClient getRawClient() {
+    OkHttpClient getRawClient() {
         return rawClient;
     }
 }

@@ -27,8 +27,8 @@ final class UrlFormatter {
             };
     private final URI baseUri;
 
-    UrlFormatter(String baseUri) {
-        this.baseUri = URI.create(baseUri);
+    UrlFormatter(String baseUrl) {
+        this.baseUri = URI.create(baseUrl);
     }
 
     URL formatUrl(String template, Map<String, String> pathParams, Map<String, Object> queryParams) {

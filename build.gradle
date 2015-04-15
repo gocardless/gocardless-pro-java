@@ -7,6 +7,10 @@ repositories {
     mavenCentral()
 }
 
+configurations {
+    pegdownDoclet
+}
+
 dependencies {
     compile 'com.squareup.okhttp:okhttp:2.3.0'
     compile 'com.google.code.gson:gson:2.3.1'
@@ -18,4 +22,16 @@ dependencies {
 
     testCompile 'co.freeside:betamax:1.1.2'
     testCompile 'org.codehaus.groovy:groovy-all:2.2.0'
+
+    pegdownDoclet 'ch.raffael.pegdown-doclet:pegdown-doclet:1.1.1'
+}
+
+javadoc {
+    options.docletpath = configurations.pegdownDoclet.files.asType(List)
+    options.doclet = 'ch.raffael.doclets.pegdown.PegdownDoclet'
+    options.memberLevel = JavadocMemberLevel.PUBLIC
+
+    options.links = [
+      'http://docs.oracle.com/javase/7/docs/api/'
+    ]
 }

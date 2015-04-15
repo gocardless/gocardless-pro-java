@@ -2,8 +2,13 @@ package com.gocardless.pro.http;
 
 import java.io.Reader;
 
+/**
+ * Base class for GET requests that return a single item.
+ *
+ * @param <T> the type of the item returned by this request.
+ */
 public abstract class GetRequest<T> extends HttpRequest<T> {
-    public GetRequest(HttpClient httpClient) {
+    protected GetRequest(HttpClient httpClient) {
         super(httpClient);
     }
 

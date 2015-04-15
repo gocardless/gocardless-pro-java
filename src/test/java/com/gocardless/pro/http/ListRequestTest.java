@@ -2,7 +2,7 @@ package com.gocardless.pro.http;
 
 import java.util.List;
 
-import com.gocardless.pro.TestUtil.DummyItem;
+import com.gocardless.pro.http.HttpTestUtil.DummyItem;
 
 import com.google.common.collect.ImmutableMap;
 import com.google.gson.reflect.TypeToken;

@@ -1,5 +1,6 @@
 package com.gocardless.pro.http;
 
+import com.gocardless.pro.GoCardlessClient;
 import com.gocardless.pro.TestUtil;
 
 import com.xebialabs.restito.server.StubServer;
@@ -25,6 +26,7 @@ public class MockHttp extends ExternalResource {
 
     public HttpClient client() {
         String baseUrl = String.format("http://localhost:%d", server.getPort());
-        return TestUtil.createHttpClient("key", "secret", baseUrl);
+        GoCardlessClient client = GoCardlessClient.create("key", "secret", baseUrl);;
+        return TestUtil.getHttpClient(client);
     }
 }
