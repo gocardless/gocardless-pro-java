@@ -10,7 +10,7 @@ import com.google.common.collect.ImmutableMap;
 import com.google.gson.reflect.TypeToken;
 
 /**
- * Service class for working with Refund resources.
+ * Service class for working with refund resources.
  *
  * Refund objects represent (partial) refunds of a
  * [payment](https://developer.gocardless.com/pro/#api-endpoints-payment) back to the

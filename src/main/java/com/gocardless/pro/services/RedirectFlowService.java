@@ -8,7 +8,7 @@ import com.gocardless.pro.resources.RedirectFlow;
 import com.google.common.collect.ImmutableMap;
 
 /**
- * Service class for working with Redirect Flow resources.
+ * Service class for working with redirect flow resources.
  *
  * Redirect flows enable you to use GoCardless Pro's secure payment pages to set up mandates with
  * your customers.

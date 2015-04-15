@@ -3,7 +3,7 @@ package com.gocardless.pro.resources;
 import java.util.Map;
 
 /**
- * Represents a Mandate resource returned from the API.
+ * Represents a mandate resource returned from the API.
  *
  * Mandates represent the Direct Debit mandate with a
  * [customer](https://developer.gocardless.com/pro/#api-endpoints-customers).

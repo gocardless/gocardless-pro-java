@@ -3,7 +3,7 @@ package com.gocardless.pro.resources;
 import java.util.Map;
 
 /**
- * Represents a Event resource returned from the API.
+ * Represents a event resource returned from the API.
  *
  * Events are stored for all webhooks. An event refers to a resource which has been updated, for
  * example a payment which has been collected, or a mandate which has been transferred.

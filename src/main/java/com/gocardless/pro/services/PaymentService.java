@@ -10,7 +10,7 @@ import com.google.common.collect.ImmutableMap;
 import com.google.gson.reflect.TypeToken;
 
 /**
- * Service class for working with Payment resources.
+ * Service class for working with payment resources.
  *
  * Payment objects represent payments from a
  * [customer](https://developer.gocardless.com/pro/#api-endpoints-customers) to a

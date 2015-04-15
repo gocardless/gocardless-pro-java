@@ -3,7 +3,7 @@ package com.gocardless.pro.resources;
 import java.util.Map;
 
 /**
- * Represents a Creditor Bank Account resource returned from the API.
+ * Represents a creditor bank account resource returned from the API.
  *
  * Creditor Bank Accounts hold the bank details of a
  * [creditor](https://developer.gocardless.com/pro/#api-endpoints-creditor). These are the bank

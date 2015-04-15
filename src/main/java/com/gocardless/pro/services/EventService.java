@@ -10,7 +10,7 @@ import com.google.common.collect.ImmutableMap;
 import com.google.gson.reflect.TypeToken;
 
 /**
- * Service class for working with Event resources.
+ * Service class for working with event resources.
  *
  * Events are stored for all webhooks. An event refers to a resource which has been updated, for
  * example a payment which has been collected, or a mandate which has been transferred.

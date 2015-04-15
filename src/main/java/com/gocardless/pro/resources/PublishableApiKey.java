@@ -1,7 +1,7 @@
 package com.gocardless.pro.resources;
 
 /**
- * Represents a Publishable API Key resource returned from the API.
+ * Represents a publishable api key resource returned from the API.
  *
  * Publishable API keys are designed to be used by the [js
  * flow](https://developer.gocardless.com/pro/#api-endpoints-customer-bank-account-tokens). You

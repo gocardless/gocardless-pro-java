@@ -10,7 +10,7 @@ import com.google.common.collect.ImmutableMap;
 import com.google.gson.reflect.TypeToken;
 
 /**
- * Service class for working with Role resources.
+ * Service class for working with role resources.
  *
  * <a name="insufficient_permissions"></a>Roles represent a set of permissions that may be granted to
  * a user. The permissions are specified at the resource-type level, and can be `full_access` or

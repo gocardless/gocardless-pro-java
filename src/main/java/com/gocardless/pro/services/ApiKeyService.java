@@ -10,7 +10,7 @@ import com.google.common.collect.ImmutableMap;
 import com.google.gson.reflect.TypeToken;
 
 /**
- * Service class for working with API Key resources.
+ * Service class for working with api key resources.
  *
  * <a name="api_key_not_active"></a>API keys are designed to be used by any integrations you build.
  * You should generate a key and then use it to make requests to the API and set the webhook URL for

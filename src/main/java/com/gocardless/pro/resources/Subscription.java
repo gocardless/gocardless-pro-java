@@ -4,7 +4,7 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * Represents a Subscription resource returned from the API.
+ * Represents a subscription resource returned from the API.
  *
  * Subscriptions create [payments](https://developer.gocardless.com/pro/#api-endpoints-payments)
  * according to a schedule.

@@ -10,7 +10,7 @@ import com.google.common.collect.ImmutableMap;
 import com.google.gson.reflect.TypeToken;
 
 /**
- * Service class for working with Creditor Bank Account resources.
+ * Service class for working with creditor bank account resources.
  *
  * Creditor Bank Accounts hold the bank details of a
  * [creditor](https://developer.gocardless.com/pro/#api-endpoints-creditor). These are the bank

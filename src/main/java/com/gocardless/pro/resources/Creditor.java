@@ -1,7 +1,7 @@
 package com.gocardless.pro.resources;
 
 /**
- * Represents a Creditor resource returned from the API.
+ * Represents a creditor resource returned from the API.
  *
  * Each [payment](https://developer.gocardless.com/pro/#api-endpoints-payments) taken through the API
  * is linked to a "creditor", to whom the payment is then paid out. In most cases your organisation

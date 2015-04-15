@@ -6,7 +6,7 @@ import com.gocardless.pro.http.*;
 import com.gocardless.pro.resources.Helper;
 
 /**
- * Service class for working with Helper resources.
+ * Service class for working with helper resources.
  *
  * 
  */

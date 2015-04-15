@@ -48,7 +48,7 @@ public class GoCardlessClient {
     }
 
     /**
-     * A service class for working with api_key resources.
+     * A service class for working with api key resources.
      */
     public ApiKeyService apiKeys() {
         return apiKeys;
@@ -62,7 +62,7 @@ public class GoCardlessClient {
     }
 
     /**
-     * A service class for working with creditor_bank_account resources.
+     * A service class for working with creditor bank account resources.
      */
     public CreditorBankAccountService creditorBankAccounts() {
         return creditorBankAccounts;
@@ -76,7 +76,7 @@ public class GoCardlessClient {
     }
 
     /**
-     * A service class for working with customer_bank_account resources.
+     * A service class for working with customer bank account resources.
      */
     public CustomerBankAccountService customerBankAccounts() {
         return customerBankAccounts;
@@ -118,14 +118,14 @@ public class GoCardlessClient {
     }
 
     /**
-     * A service class for working with publishable_api_key resources.
+     * A service class for working with publishable api key resources.
      */
     public PublishableApiKeyService publishableApiKeys() {
         return publishableApiKeys;
     }
 
     /**
-     * A service class for working with redirect_flow resources.
+     * A service class for working with redirect flow resources.
      */
     public RedirectFlowService redirectFlows() {
         return redirectFlows;

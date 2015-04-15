@@ -10,7 +10,7 @@ import com.google.common.collect.ImmutableMap;
 import com.google.gson.reflect.TypeToken;
 
 /**
- * Service class for working with Payout resources.
+ * Service class for working with payout resources.
  *
  * Payouts represent transfers from GoCardless to a
  * [creditor](https://developer.gocardless.com/pro/#api-endpoints-creditors). Each payout contains

@@ -3,7 +3,7 @@ package com.gocardless.pro.resources;
 import java.util.Map;
 
 /**
- * Represents a Payment resource returned from the API.
+ * Represents a payment resource returned from the API.
  *
  * Payment objects represent payments from a
  * [customer](https://developer.gocardless.com/pro/#api-endpoints-customers) to a

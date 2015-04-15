@@ -10,7 +10,7 @@ import com.google.common.collect.ImmutableMap;
 import com.google.gson.reflect.TypeToken;
 
 /**
- * Service class for working with Customer Bank Account resources.
+ * Service class for working with customer bank account resources.
  *
  * Customer Bank Accounts hold the bank details of a
  * [customer](https://developer.gocardless.com/pro/#api-endpoints-customers). They always belong to a

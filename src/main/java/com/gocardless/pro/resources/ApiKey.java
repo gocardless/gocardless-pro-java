@@ -1,7 +1,7 @@
 package com.gocardless.pro.resources;
 
 /**
- * Represents a API Key resource returned from the API.
+ * Represents a api key resource returned from the API.
  *
  * <a name="api_key_not_active"></a>API keys are designed to be used by any integrations you build.
  * You should generate a key and then use it to make requests to the API and set the webhook URL for

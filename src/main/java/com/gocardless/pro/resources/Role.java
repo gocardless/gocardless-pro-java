@@ -3,7 +3,7 @@ package com.gocardless.pro.resources;
 import java.util.List;
 
 /**
- * Represents a Role resource returned from the API.
+ * Represents a role resource returned from the API.
  *
  * <a name="insufficient_permissions"></a>Roles represent a set of permissions that may be granted to
  * a user. The permissions are specified at the resource-type level, and can be `full_access` or
