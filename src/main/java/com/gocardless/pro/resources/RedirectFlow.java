@@ -107,7 +107,7 @@ public class RedirectFlow {
     }
 
     public enum Scheme {
-        BACS, SEPA_CORE, NULL,
+        BACS, SEPA_CORE,
     }
 
     public static class Links {
