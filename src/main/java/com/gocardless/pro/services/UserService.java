@@ -10,7 +10,7 @@ import com.google.common.collect.ImmutableMap;
 import com.google.gson.reflect.TypeToken;
 
 /**
- * Service class for working with User resources.
+ * Service class for working with user resources.
  *
  * 
  */

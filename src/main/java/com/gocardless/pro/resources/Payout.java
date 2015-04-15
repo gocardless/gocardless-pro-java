@@ -1,7 +1,7 @@
 package com.gocardless.pro.resources;
 
 /**
- * Represents a Payout resource returned from the API.
+ * Represents a payout resource returned from the API.
  *
  * Payouts represent transfers from GoCardless to a
  * [creditor](https://developer.gocardless.com/pro/#api-endpoints-creditors). Each payout contains

@@ -1,7 +1,7 @@
 package com.gocardless.pro.resources;
 
 /**
- * Represents a Redirect Flow resource returned from the API.
+ * Represents a redirect flow resource returned from the API.
  *
  * Redirect flows enable you to use GoCardless Pro's secure payment pages to set up mandates with
  * your customers.

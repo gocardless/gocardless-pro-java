@@ -10,7 +10,7 @@ import com.google.common.collect.ImmutableMap;
 import com.google.gson.reflect.TypeToken;
 
 /**
- * Service class for working with Creditor resources.
+ * Service class for working with creditor resources.
  *
  * Each [payment](https://developer.gocardless.com/pro/#api-endpoints-payments) taken through the API
  * is linked to a "creditor", to whom the payment is then paid out. In most cases your organisation

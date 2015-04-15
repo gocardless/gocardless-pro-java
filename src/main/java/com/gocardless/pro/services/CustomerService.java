@@ -10,7 +10,7 @@ import com.google.common.collect.ImmutableMap;
 import com.google.gson.reflect.TypeToken;
 
 /**
- * Service class for working with Customer resources.
+ * Service class for working with customer resources.
  *
  * Customer objects hold the contact details for a customer. A customer can have several [customer
  * bank accounts](https://developer.gocardless.com/pro/#api-endpoints-customer-bank-accounts), which

@@ -10,7 +10,7 @@ import com.google.common.collect.ImmutableMap;
 import com.google.gson.reflect.TypeToken;
 
 /**
- * Service class for working with Subscription resources.
+ * Service class for working with subscription resources.
  *
  * Subscriptions create [payments](https://developer.gocardless.com/pro/#api-endpoints-payments)
  * according to a schedule.

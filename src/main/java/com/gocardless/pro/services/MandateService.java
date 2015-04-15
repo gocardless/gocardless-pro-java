@@ -11,7 +11,7 @@ import com.google.common.collect.ImmutableMap;
 import com.google.gson.reflect.TypeToken;
 
 /**
- * Service class for working with Mandate resources.
+ * Service class for working with mandate resources.
  *
  * Mandates represent the Direct Debit mandate with a
  * [customer](https://developer.gocardless.com/pro/#api-endpoints-customers).

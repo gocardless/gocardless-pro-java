@@ -10,7 +10,7 @@ import com.google.common.collect.ImmutableMap;
 import com.google.gson.reflect.TypeToken;
 
 /**
- * Service class for working with Publishable API Key resources.
+ * Service class for working with publishable api key resources.
  *
  * Publishable API keys are designed to be used by the [js
  * flow](https://developer.gocardless.com/pro/#api-endpoints-customer-bank-account-tokens). You

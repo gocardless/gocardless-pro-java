@@ -3,7 +3,7 @@ package com.gocardless.pro.resources;
 import java.util.Map;
 
 /**
- * Represents a Customer Bank Account resource returned from the API.
+ * Represents a customer bank account resource returned from the API.
  *
  * Customer Bank Accounts hold the bank details of a
  * [customer](https://developer.gocardless.com/pro/#api-endpoints-customers). They always belong to a

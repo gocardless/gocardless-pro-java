@@ -3,7 +3,7 @@ package com.gocardless.pro.resources;
 import java.util.Map;
 
 /**
- * Represents a Customer resource returned from the API.
+ * Represents a customer resource returned from the API.
  *
  * Customer objects hold the contact details for a customer. A customer can have several [customer
  * bank accounts](https://developer.gocardless.com/pro/#api-endpoints-customer-bank-accounts), which

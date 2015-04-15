@@ -3,7 +3,7 @@ package com.gocardless.pro.resources;
 import java.util.Map;
 
 /**
- * Represents a Refund resource returned from the API.
+ * Represents a refund resource returned from the API.
  *
  * Refund objects represent (partial) refunds of a
  * [payment](https://developer.gocardless.com/pro/#api-endpoints-payment) back to the
