@@ -1,140 +1,141 @@
 package com.gocardless.pro.resources;
 
-import java.util.List;
-
+/**
+ * Represents a Creditor resource returned from the API.
+ *
+ * Each [payment](https://developer.gocardless.com/pro/#api-endpoints-payments) taken through the API
+ * is linked to a "creditor", to whom the payment is then paid out. In most cases your organisation
+ * will have a single "creditor", but the API also supports collecting payments on behalf of
+ * others.
+ * 
+ * Please get in touch if you wish to use this endpoint. Currently, for Anti Money
+ * Laundering reasons, any creditors you add must be directly related to your organisation.
+ */
 public class Creditor {
-
-
+    private Creditor() {
+        // blank to prevent instantiation
+    }
 
     private String addressLine1;
+    private String addressLine2;
+    private String addressLine3;
+    private String city;
+    private String countryCode;
+    private String createdAt;
+    private String id;
+    private Links links;
+    private String name;
+    private String postalCode;
+    private String region;
 
+    /**
+     * The first line of the creditor's address.
+     */
     public String getAddressLine1() {
         return addressLine1;
     }
 
-    public void setAddressLine1(String addressLine1) {
-        this.addressLine1 = addressLine1;
-    }
-
-
-
-    private String addressLine2;
-
+    /**
+     * The second line of the creditor's address.
+     */
     public String getAddressLine2() {
         return addressLine2;
     }
 
-    public void setAddressLine2(String addressLine2) {
-        this.addressLine2 = addressLine2;
-    }
-
-
-
-    private String addressLine3;
-
+    /**
+     * The third line of the creditor's address.
+     */
     public String getAddressLine3() {
         return addressLine3;
     }
 
-    public void setAddressLine3(String addressLine3) {
-        this.addressLine3 = addressLine3;
-    }
-
-
-
-    private String city;
-
+    /**
+     * The city of the creditor's address.
+     */
     public String getCity() {
         return city;
     }
 
-    public void setCity(String city) {
-        this.city = city;
-    }
-
-
-
-    private String countryCode;
-
+    /**
+     * [ISO 3166-1](http://en.wikipedia.org/wiki/ISO_3166-1_alpha-2#Officially_assigned_code_elements)
+     * alpha-2 code, currently only "GB" is supported.
+     */
     public String getCountryCode() {
         return countryCode;
     }
 
-    public void setCountryCode(String countryCode) {
-        this.countryCode = countryCode;
-    }
-
-
-
-    private String createdAt;
-
+    /**
+     * Fixed [timestamp](https://developer.gocardless.com/pro/#overview-time-zones-dates), recording when
+     * this resource was created.
+     */
     public String getCreatedAt() {
         return createdAt;
     }
 
-    public void setCreatedAt(String createdAt) {
-        this.createdAt = createdAt;
-    }
-
-
-
-    private String id;
-
+    /**
+     * Unique identifier, beginning with "CR".
+     */
     public String getId() {
         return id;
     }
 
-    public void setId(String id) {
-        this.id = id;
-    }
-
-
-
-    private Object links;
-
-    public Object getLinks() {
+    public Links getLinks() {
         return links;
     }
 
-    public void setLinks(Object links) {
-        this.links = links;
-    }
-
-
-
-    private String name;
-
+    /**
+     * The creditor's name.
+     */
     public String getName() {
         return name;
     }
 
-    public void setName(String name) {
-        this.name = name;
-    }
-
-
-
-    private String postalCode;
-
+    /**
+     * The creditor's postal code.
+     */
     public String getPostalCode() {
         return postalCode;
     }
 
-    public void setPostalCode(String postalCode) {
-        this.postalCode = postalCode;
-    }
-
-
-
-    private String region;
-
+    /**
+     * The creditor's address region, county or department.
+     */
     public String getRegion() {
         return region;
     }
 
-    public void setRegion(String region) {
-        this.region = region;
+    public static class Links {
+        private Links() {
+            // blank to prevent instantiation
+        }
+
+        private String defaultEurPayoutAccount;
+        private String defaultGbpPayoutAccount;
+        private String logo;
+
+        /**
+         * ID of the [bank
+         * account](https://developer.gocardless.com/pro/#api-endpoints-creditor-bank-accounts) which is set
+         * up to receive payouts in EUR.
+         */
+        public String getDefaultEurPayoutAccount() {
+            return defaultEurPayoutAccount;
+        }
+
+        /**
+         * ID of the [bank
+         * account](https://developer.gocardless.com/pro/#api-endpoints-creditor-bank-accounts) which is set
+         * up to receive payouts in GBP.
+         */
+        public String getDefaultGbpPayoutAccount() {
+            return defaultGbpPayoutAccount;
+        }
+
+        /**
+         * ID of the logo used on the Redirect Flow payment pages.
+         */
+        public String getLogo() {
+            return logo;
+        }
     }
-
-
 }

@@ -1,164 +1,125 @@
 package com.gocardless.pro.resources;
 
-import java.util.List;
+import java.util.Map;
 
+/**
+ * Represents a Customer resource returned from the API.
+ *
+ * Customer objects hold the contact details for a customer. A customer can have several [customer
+ * bank accounts](https://developer.gocardless.com/pro/#api-endpoints-customer-bank-accounts), which
+ * in turn can have several Direct Debit
+ * [mandates](https://developer.gocardless.com/pro/#api-endpoints-mandates).
+ */
 public class Customer {
-
-
+    private Customer() {
+        // blank to prevent instantiation
+    }
 
     private String addressLine1;
+    private String addressLine2;
+    private String addressLine3;
+    private String city;
+    private String countryCode;
+    private String createdAt;
+    private String email;
+    private String familyName;
+    private String givenName;
+    private String id;
+    private Map<String, String> metadata;
+    private String postalCode;
+    private String region;
 
+    /**
+     * The first line of the customer's address.
+     */
     public String getAddressLine1() {
         return addressLine1;
     }
 
-    public void setAddressLine1(String addressLine1) {
-        this.addressLine1 = addressLine1;
-    }
-
-
-
-    private String addressLine2;
-
+    /**
+     * The second line of the customer's address.
+     */
     public String getAddressLine2() {
         return addressLine2;
     }
 
-    public void setAddressLine2(String addressLine2) {
-        this.addressLine2 = addressLine2;
-    }
-
-
-
-    private String addressLine3;
-
+    /**
+     * The third line of the customer's address.
+     */
     public String getAddressLine3() {
         return addressLine3;
     }
 
-    public void setAddressLine3(String addressLine3) {
-        this.addressLine3 = addressLine3;
-    }
-
-
-
-    private String city;
-
+    /**
+     * The city of the customer's address.
+     */
     public String getCity() {
         return city;
     }
 
-    public void setCity(String city) {
-        this.city = city;
-    }
-
-
-
-    private String countryCode;
-
+    /**
+     * [ISO 3166-1](http://en.wikipedia.org/wiki/ISO_3166-1_alpha-2#Officially_assigned_code_elements)
+     * alpha-2 code.
+     */
     public String getCountryCode() {
         return countryCode;
     }
 
-    public void setCountryCode(String countryCode) {
-        this.countryCode = countryCode;
-    }
-
-
-
-    private String createdAt;
-
+    /**
+     * Fixed [timestamp](https://developer.gocardless.com/pro/#overview-time-zones-dates), recording when
+     * this resource was created.
+     */
     public String getCreatedAt() {
         return createdAt;
     }
 
-    public void setCreatedAt(String createdAt) {
-        this.createdAt = createdAt;
-    }
-
-
-
-    private String email;
-
+    /**
+     * Customer's email address.
+     */
     public String getEmail() {
         return email;
     }
 
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
-
-
-    private String familyName;
-
+    /**
+     * Customer's surname.
+     */
     public String getFamilyName() {
         return familyName;
     }
 
-    public void setFamilyName(String familyName) {
-        this.familyName = familyName;
-    }
-
-
-
-    private String givenName;
-
+    /**
+     * Customer's first name.
+     */
     public String getGivenName() {
         return givenName;
     }
 
-    public void setGivenName(String givenName) {
-        this.givenName = givenName;
-    }
-
-
-
-    private String id;
-
+    /**
+     * Unique identifier, beginning with "CU".
+     */
     public String getId() {
         return id;
     }
 
-    public void setId(String id) {
-        this.id = id;
-    }
-
-
-
-    private Object metadata;
-
-    public Object getMetadata() {
+    /**
+     * Key-value store of custom data. Up to 3 keys are permitted, with key names up to 50 characters and
+     * values up to 200 characters.
+     */
+    public Map<String, String> getMetadata() {
         return metadata;
     }
 
-    public void setMetadata(Object metadata) {
-        this.metadata = metadata;
-    }
-
-
-
-    private String postalCode;
-
+    /**
+     * The customer's postal code.
+     */
     public String getPostalCode() {
         return postalCode;
     }
 
-    public void setPostalCode(String postalCode) {
-        this.postalCode = postalCode;
-    }
-
-
-
-    private String region;
-
+    /**
+     * The customer's address region, county or department.
+     */
     public String getRegion() {
         return region;
     }
-
-    public void setRegion(String region) {
-        this.region = region;
-    }
-
-
 }

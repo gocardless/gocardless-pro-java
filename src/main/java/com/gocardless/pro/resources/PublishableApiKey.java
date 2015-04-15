@@ -1,68 +1,60 @@
 package com.gocardless.pro.resources;
 
-import java.util.List;
-
+/**
+ * Represents a Publishable API Key resource returned from the API.
+ *
+ * Publishable API keys are designed to be used by the [js
+ * flow](https://developer.gocardless.com/pro/#api-endpoints-customer-bank-account-tokens). You
+ * should generate a key and then use it to make requests to the API. They do not expire, but can be
+ * disabled.
+ * 
+ * Publishable API keys only have permissions to create [customer bank account
+ * tokens](https://developer.gocardless.com/pro/#api-endpoints-customer-bank-account-tokens).
+ */
 public class PublishableApiKey {
-
-
+    private PublishableApiKey() {
+        // blank to prevent instantiation
+    }
 
     private String createdAt;
+    private Boolean enabled;
+    private String id;
+    private String key;
+    private String name;
 
+    /**
+     * Fixed [timestamp](https://developer.gocardless.com/pro/#overview-time-zones-dates), recording when
+     * this resource was created.
+     */
     public String getCreatedAt() {
         return createdAt;
     }
 
-    public void setCreatedAt(String createdAt) {
-        this.createdAt = createdAt;
-    }
-
-
-
-    private Boolean enabled;
-
+    /**
+     * Boolean value showing whether the API key is enabled or disabled.
+     */
     public Boolean getEnabled() {
         return enabled;
     }
 
-    public void setEnabled(Boolean enabled) {
-        this.enabled = enabled;
-    }
-
-
-
-    private String id;
-
+    /**
+     * Unique identifier, beginning with "PK"
+     */
     public String getId() {
         return id;
     }
 
-    public void setId(String id) {
-        this.id = id;
-    }
-
-
-
-    private String key;
-
+    /**
+     * Secret key.
+     */
     public String getKey() {
         return key;
     }
 
-    public void setKey(String key) {
-        this.key = key;
-    }
-
-
-
-    private String name;
-
+    /**
+     * Human readable name for the key. This should not exceed 75 characters.
+     */
     public String getName() {
         return name;
     }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-
 }

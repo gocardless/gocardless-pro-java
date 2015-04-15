@@ -1,92 +1,78 @@
 package com.gocardless.pro.resources;
 
-import java.util.List;
-
 public class User {
-
-
+    private User() {
+        // blank to prevent instantiation
+    }
 
     private String createdAt;
+    private String email;
+    private Boolean enabled;
+    private String familyName;
+    private String givenName;
+    private String id;
+    private Links links;
 
+    /**
+     * Fixed [timestamp](https://developer.gocardless.com/pro/#overview-time-zones-dates), recording when
+     * this resource was created.
+     */
     public String getCreatedAt() {
         return createdAt;
     }
 
-    public void setCreatedAt(String createdAt) {
-        this.createdAt = createdAt;
-    }
-
-
-
-    private String email;
-
+    /**
+     * Unique email address, used as a username.
+     */
     public String getEmail() {
         return email;
     }
 
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
-
-
-    private Boolean enabled;
-
+    /**
+     * Boolean value showing whether the user is enabled or disabled.
+     */
     public Boolean getEnabled() {
         return enabled;
     }
 
-    public void setEnabled(Boolean enabled) {
-        this.enabled = enabled;
-    }
-
-
-
-    private String familyName;
-
+    /**
+     * User's surname. This field may not exceed 100 characters.
+     */
     public String getFamilyName() {
         return familyName;
     }
 
-    public void setFamilyName(String familyName) {
-        this.familyName = familyName;
-    }
-
-
-
-    private String givenName;
-
+    /**
+     * User's given name. This field may not exceed 100 characters.
+     */
     public String getGivenName() {
         return givenName;
     }
 
-    public void setGivenName(String givenName) {
-        this.givenName = givenName;
-    }
-
-
-
-    private String id;
-
+    /**
+     * Unique identifier, beginning with "US"
+     */
     public String getId() {
         return id;
     }
 
-    public void setId(String id) {
-        this.id = id;
-    }
-
-
-
-    private Object links;
-
-    public Object getLinks() {
+    public Links getLinks() {
         return links;
     }
 
-    public void setLinks(Object links) {
-        this.links = links;
+    public static class Links {
+        private Links() {
+            // blank to prevent instantiation
+        }
+
+        private String role;
+
+        /**
+         * ID of the user's [role](https://developer.gocardless.com/pro/#api-endpoints-roles), which dictates
+         * what resources the user can see.
+         */
+        public String getRole() {
+            return role;
+        }
     }
-
-
 }

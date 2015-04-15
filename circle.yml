@@ -1,0 +1,24 @@
+dependencies:
+  cache_directories:
+    - ~/.gradle
+    - .gradle
+
+test:
+  override:
+    - ./gradlew test
+  post:
+    - cp build/test-results/*.xml $CIRCLE_TEST_REPORTS
+
+deployment:
+  git:
+    branch: master
+    commands:
+      - ./gradlew javadoc
+      - git config user.name "Circle CI"
+      - git config user.email "robot+circleci@gocardless.com"
+      - git checkout gh-pages
+      - rm -rf com resources
+      - mv build/docs/javadoc/* .
+      - git add .
+      - git commit -m "[ci skip] Generate Javadoc"
+      - git push origin gh-pages

@@ -1,27 +1,35 @@
 package com.gocardless.pro.http;
 
-import com.google.common.collect.ImmutableMap;
-
-import java.io.IOException;
 import java.io.Reader;
 import java.net.URL;
 import java.util.Map;
 
-public abstract class HttpRequest<T> {
-    protected final HttpClient httpClient;
-    protected final String pathTemplate;
+import com.google.common.collect.ImmutableMap;
 
-    public HttpRequest(HttpClient httpClient, String pathTemplate) {
+/**
+ * Base class for HTTP requests.
+ *
+ * @param <T> the type of the item returned by this request.
+ */
+abstract class HttpRequest<T> {
+    private transient final HttpClient httpClient;
+
+    HttpRequest(HttpClient httpClient) {
         this.httpClient = httpClient;
-        this.pathTemplate = pathTemplate;
     }
 
-    public T execute() throws IOException {
-        return httpClient.get(this);
+    /**
+     * Executes this request.
+     *
+     * Returns the API response.
+     * @throws com.gocardless.pro.exceptions.GoCardlessException
+     */
+    public T execute() {
+        return httpClient.execute(this);
     }
 
     URL getUrl(UrlFormatter urlFormatter) {
-        return urlFormatter.formatUrl(pathTemplate, getPathParams(), getQueryParams());
+        return urlFormatter.formatUrl(getPathTemplate(), getPathParams(), getQueryParams());
     }
 
     protected Map<String, String> getPathParams() {
@@ -32,5 +40,13 @@ public abstract class HttpRequest<T> {
         return ImmutableMap.of();
     }
 
-    abstract T parseResponse(Reader stream, ResponseParser responseParser);
+    protected abstract String getPathTemplate();
+
+    protected abstract String getMethod();
+
+    protected abstract String getEnvelope();
+
+    protected abstract boolean hasBody();
+
+    protected abstract T parseResponse(Reader stream, ResponseParser responseParser);
 }

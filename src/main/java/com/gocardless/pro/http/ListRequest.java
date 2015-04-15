@@ -1,24 +1,34 @@
 package com.gocardless.pro.http;
 
-import com.google.gson.reflect.TypeToken;
-
 import java.io.Reader;
 import java.util.List;
 
-public abstract class ListRequest<T> extends HttpRequest<List<T>> {
-    private final String envelope;
-    private final TypeToken<List<T>> typeToken;
+import com.google.gson.reflect.TypeToken;
 
-    public ListRequest(HttpClient httpClient, String pathTemplate, String envelope,
-            TypeToken<List<T>> typeToken) {
-        super(httpClient, pathTemplate);
-
-        this.envelope = envelope;
-        this.typeToken = typeToken;
+/**
+ * Base class for GET requests that return multiple items.
+ *
+ * @param <T> the type of the item returned by this request.
+ */
+public abstract class ListRequest<T> extends HttpRequest<ListResponse<T>> {
+    protected ListRequest(HttpClient httpClient) {
+        super(httpClient);
     }
 
     @Override
-    List<T> parseResponse(Reader stream, ResponseParser responseParser) {
-        return responseParser.parseMultiple(stream, envelope, typeToken);
+    protected ListResponse<T> parseResponse(Reader stream, ResponseParser responseParser) {
+        return responseParser.parsePage(stream, getEnvelope(), getTypeToken());
     }
+
+    @Override
+    protected final String getMethod() {
+        return "GET";
+    }
+
+    @Override
+    protected final boolean hasBody() {
+        return false;
+    }
+
+    protected abstract TypeToken<List<T>> getTypeToken();
 }

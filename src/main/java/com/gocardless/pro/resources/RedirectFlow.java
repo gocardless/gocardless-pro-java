@@ -1,112 +1,138 @@
 package com.gocardless.pro.resources;
 
-import java.util.List;
-
+/**
+ * Represents a Redirect Flow resource returned from the API.
+ *
+ * Redirect flows enable you to use GoCardless Pro's secure payment pages to set up mandates with
+ * your customers.
+ * 
+ * The overall flow is:
+ * 
+ * 1. You
+ * [create](https://developer.gocardless.com/pro/#create-a-redirect-flow) a redirect flow for your
+ * customer, and redirect them to the returned redirect url, e.g.
+ * `https://pay.gocardless.com/flow/RE123`.
+ * 
+ * 2. Your customer supplies their name, email,
+ * address, and bank account details, and submits the form. This securely stores their details, and
+ * redirects them back to your `success_redirect_url` with `redirect_flow_id=RE123` in the
+ * querystring.
+ * 
+ * 3. You
+ * [complete](https://developer.gocardless.com/pro/#complete-a-redirect-flow) the redirect flow,
+ * which creates a [customer](https://developer.gocardless.com/pro/#api-endpoints-customers),
+ * [customer bank
+ * account](https://developer.gocardless.com/pro/#api-endpoints-customer-bank-accounts), and
+ * [mandate](https://developer.gocardless.com/pro/#api-endpoints-mandates), and returns the ID of the
+ * mandate. You may wish to create a
+ * [subscription](https://developer.gocardless.com/pro/#api-endpoints-subscriptions) or
+ * [payment](https://developer.gocardless.com/pro/#api-endpoints-payments) at this point.
+ * 
+ * It is
+ * recommended that you link the redirect flow to your user object as soon as it is created, and
+ * attach the created resources to that user in the complete step.
+ * 
+ * Redirect flows expire 30
+ * minutes after they are first created. You cannot
+ * [complete](https://developer.gocardless.com/pro/#complete-a-redirect-flow) an expired redirect
+ * flow.
+ */
 public class RedirectFlow {
-
-
+    private RedirectFlow() {
+        // blank to prevent instantiation
+    }
 
     private String createdAt;
+    private String description;
+    private String id;
+    private Links links;
+    private String redirectUrl;
+    private Scheme scheme;
+    private String sessionToken;
+    private String successRedirectUrl;
 
+    /**
+     * Fixed [timestamp](https://developer.gocardless.com/pro/#overview-time-zones-dates), recording when
+     * this resource was created.
+     */
     public String getCreatedAt() {
         return createdAt;
     }
 
-    public void setCreatedAt(String createdAt) {
-        this.createdAt = createdAt;
-    }
-
-
-
-    private String description;
-
+    /**
+     * A description of the item the customer is paying for
+     */
     public String getDescription() {
         return description;
     }
 
-    public void setDescription(String description) {
-        this.description = description;
-    }
-
-
-
-    private String id;
-
+    /**
+     * Unique identifier, beginning with "RE"
+     */
     public String getId() {
         return id;
     }
 
-    public void setId(String id) {
-        this.id = id;
-    }
-
-
-
-    private Object links;
-
-    public Object getLinks() {
+    public Links getLinks() {
         return links;
     }
 
-    public void setLinks(Object links) {
-        this.links = links;
-    }
-
-
-
-    private String redirectUrl;
-
+    /**
+     * The URI to redirect the customer to to setup their mandate
+     */
     public String getRedirectUrl() {
         return redirectUrl;
     }
 
-    public void setRedirectUrl(String redirectUrl) {
-        this.redirectUrl = redirectUrl;
-    }
-
-
-
-    public enum Scheme {
-
-        BACS,
-
-        SEPA_CORE,
-
-    }
-
-    private Scheme scheme;
-
+    /**
+     * The Direct Debit scheme of the mandate. If specified, the payment pages will only allow the set-up
+     * of a mandate for the specified scheme.
+     */
     public Scheme getScheme() {
         return scheme;
     }
 
-    public void setScheme(Scheme scheme) {
-        this.scheme = scheme;
-    }
-
-
-
-    private String sessionToken;
-
+    /**
+     * The customer's session ID
+     */
     public String getSessionToken() {
         return sessionToken;
     }
 
-    public void setSessionToken(String sessionToken) {
-        this.sessionToken = sessionToken;
-    }
-
-
-
-    private String successRedirectUrl;
-
+    /**
+     * The URI to redirect to upon success mandate setup
+     */
     public String getSuccessRedirectUrl() {
         return successRedirectUrl;
     }
 
-    public void setSuccessRedirectUrl(String successRedirectUrl) {
-        this.successRedirectUrl = successRedirectUrl;
+    public enum Scheme {
+        BACS, SEPA_CORE, NULL,
     }
 
+    public static class Links {
+        private Links() {
+            // blank to prevent instantiation
+        }
 
+        private String creditor;
+        private String mandate;
+
+        /**
+         * The [creditor](https://developer.gocardless.com/pro/#api-endpoints-creditors) for whom the mandate
+         * will be created. The `name` of the creditor will be displayed on the payment page.
+         */
+        public String getCreditor() {
+            return creditor;
+        }
+
+        /**
+         * ID of [mandate](https://developer.gocardless.com/pro/#api-endpoints-mandates) created by this
+         * redirect flow.<br/>**Note**: this property will not be present until the redirect flow has been
+         * successfully completed.
+         */
+        public String getMandate() {
+            return mandate;
+        }
+    }
 }

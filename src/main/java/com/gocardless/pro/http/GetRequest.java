@@ -2,20 +2,30 @@ package com.gocardless.pro.http;
 
 import java.io.Reader;
 
+/**
+ * Base class for GET requests that return a single item.
+ *
+ * @param <T> the type of the item returned by this request.
+ */
 public abstract class GetRequest<T> extends HttpRequest<T> {
-    private final String envelope;
-    private final Class<T> responseClass;
-
-    public GetRequest(HttpClient httpClient, String pathTemplate, String envelope,
-            Class<T> responseClass) {
-        super(httpClient, pathTemplate);
-
-        this.envelope = envelope;
-        this.responseClass = responseClass;
+    protected GetRequest(HttpClient httpClient) {
+        super(httpClient);
     }
 
     @Override
-    T parseResponse(Reader stream, ResponseParser responseParser) {
-        return responseParser.parseSingle(stream, envelope, responseClass);
+    protected T parseResponse(Reader stream, ResponseParser responseParser) {
+        return responseParser.parseSingle(stream, getEnvelope(), getResponseClass());
     }
+
+    @Override
+    protected final String getMethod() {
+        return "GET";
+    }
+
+    @Override
+    protected final boolean hasBody() {
+        return false;
+    }
+
+    protected abstract Class<T> getResponseClass();
 }
