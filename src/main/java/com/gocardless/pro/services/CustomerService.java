@@ -198,16 +198,13 @@ public class CustomerService {
      * list of your customers.
      */
     public static final class CustomerListRequest extends ListRequest<Customer> {
-        private String after;
-        private String before;
         private CreatedAt createdAt;
-        private Integer limit;
 
         /**
          * Cursor pointing to the start of the desired set.
          */
         public CustomerListRequest withAfter(String after) {
-            this.after = after;
+            setAfter(after);
             return this;
         }
 
@@ -215,7 +212,7 @@ public class CustomerService {
          * Cursor pointing to the end of the desired set.
          */
         public CustomerListRequest withBefore(String before) {
-            this.before = before;
+            setBefore(before);
             return this;
         }
 
@@ -228,7 +225,7 @@ public class CustomerService {
          * Number of records to return.
          */
         public CustomerListRequest withLimit(Integer limit) {
-            this.limit = limit;
+            setLimit(limit);
             return this;
         }
 
@@ -239,17 +236,9 @@ public class CustomerService {
         @Override
         protected Map<String, Object> getQueryParams() {
             ImmutableMap.Builder<String, Object> params = ImmutableMap.builder();
-            if (after != null) {
-                params.put("after", after);
-            }
-            if (before != null) {
-                params.put("before", before);
-            }
+            params.putAll(super.getQueryParams());
             if (createdAt != null) {
                 params.putAll(createdAt.getQueryParams());
-            }
-            if (limit != null) {
-                params.put("limit", limit);
             }
             return params.build();
         }

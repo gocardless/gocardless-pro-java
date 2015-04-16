@@ -50,11 +50,8 @@ public class EventService {
      */
     public static final class EventListRequest extends ListRequest<Event> {
         private String action;
-        private String after;
-        private String before;
         private CreatedAt createdAt;
         private Include include;
-        private Integer limit;
         private String mandate;
         private String parentEvent;
         private String payment;
@@ -75,7 +72,7 @@ public class EventService {
          * Cursor pointing to the start of the desired set.
          */
         public EventListRequest withAfter(String after) {
-            this.after = after;
+            setAfter(after);
             return this;
         }
 
@@ -83,7 +80,7 @@ public class EventService {
          * Cursor pointing to the end of the desired set.
          */
         public EventListRequest withBefore(String before) {
-            this.before = before;
+            setBefore(before);
             return this;
         }
 
@@ -113,7 +110,7 @@ public class EventService {
          * Number of records to return.
          */
         public EventListRequest withLimit(Integer limit) {
-            this.limit = limit;
+            setLimit(limit);
             return this;
         }
 
@@ -196,23 +193,15 @@ public class EventService {
         @Override
         protected Map<String, Object> getQueryParams() {
             ImmutableMap.Builder<String, Object> params = ImmutableMap.builder();
+            params.putAll(super.getQueryParams());
             if (action != null) {
                 params.put("action", action);
-            }
-            if (after != null) {
-                params.put("after", after);
-            }
-            if (before != null) {
-                params.put("before", before);
             }
             if (createdAt != null) {
                 params.putAll(createdAt.getQueryParams());
             }
             if (include != null) {
                 params.put("include", include);
-            }
-            if (limit != null) {
-                params.put("limit", limit);
             }
             if (mandate != null) {
                 params.put("mandate", mandate);

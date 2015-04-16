@@ -5,6 +5,7 @@ import java.util.List;
 import com.gocardless.pro.http.HttpTestUtil.DummyItem;
 
 import com.google.common.collect.ImmutableMap;
+import com.google.common.collect.Lists;
 import com.google.gson.reflect.TypeToken;
 
 import org.junit.Rule;
@@ -28,7 +29,7 @@ public class ListRequestTest {
     public void shouldPerformListRequest() {
         whenHttp(http.server()).match(get("/dummy"), parameter("id", "123")).then(status(OK_200),
                 resourceContent("fixtures/page.json"));
-        DummyListRequest request = new DummyListRequest();
+        DummyListRequest request = new DummyListRequest(http.client());
         ListResponse<DummyItem> result = request.execute();
         assertThat(result.getItems()).hasSize(2);
         assertThat(result.getItems().get(0).stringField).isEqualTo("foo");
@@ -37,14 +38,33 @@ public class ListRequestTest {
         assertThat(result.getItems().get(1).intField).isEqualTo(456);
     }
 
-    private class DummyListRequest extends ListRequest<DummyItem> {
-        public DummyListRequest() {
-            super(http.client());
+    @Test
+    public void shouldBeAbleToIterateThroughList() {
+        whenHttp(http.server()).match(get("/dummy"), parameter("id", "123")).then(status(OK_200),
+                resourceContent("fixtures/first-page.json"));
+        whenHttp(http.server()).match(get("/dummy"), parameter("id", "123"),
+                parameter("after", "ID123")).then(status(OK_200),
+                resourceContent("fixtures/last-page.json"));
+        DummyListRequest request = new DummyListRequest(http.client());
+        List<DummyItem> result = Lists.newArrayList(request);
+        assertThat(result).hasSize(3);
+        assertThat(result.get(0).stringField).isEqualTo("foo");
+        assertThat(result.get(0).intField).isEqualTo(111);
+        assertThat(result.get(1).stringField).isEqualTo("bar");
+        assertThat(result.get(1).intField).isEqualTo(222);
+        assertThat(result.get(2).stringField).isEqualTo("baz");
+        assertThat(result.get(2).intField).isEqualTo(333);
+    }
+
+    static class DummyListRequest extends ListRequest<DummyItem> {
+        public DummyListRequest(HttpClient client) {
+            super(client);
         }
 
         @Override
         protected ImmutableMap<String, Object> getQueryParams() {
-            return ImmutableMap.<String, Object>of("id", "123");
+            return ImmutableMap.<String, Object>builder().putAll(super.getQueryParams())
+                    .put("id", "123").build();
         }
 
         @Override

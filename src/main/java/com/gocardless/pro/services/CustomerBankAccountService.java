@@ -257,17 +257,14 @@ public class CustomerBankAccountService {
      */
     public static final class CustomerBankAccountListRequest extends
             ListRequest<CustomerBankAccount> {
-        private String after;
-        private String before;
         private String customer;
         private Enabled enabled;
-        private Integer limit;
 
         /**
          * Cursor pointing to the start of the desired set.
          */
         public CustomerBankAccountListRequest withAfter(String after) {
-            this.after = after;
+            setAfter(after);
             return this;
         }
 
@@ -275,7 +272,7 @@ public class CustomerBankAccountService {
          * Cursor pointing to the end of the desired set.
          */
         public CustomerBankAccountListRequest withBefore(String before) {
-            this.before = before;
+            setBefore(before);
             return this;
         }
 
@@ -299,7 +296,7 @@ public class CustomerBankAccountService {
          * Number of records to return.
          */
         public CustomerBankAccountListRequest withLimit(Integer limit) {
-            this.limit = limit;
+            setLimit(limit);
             return this;
         }
 
@@ -310,20 +307,12 @@ public class CustomerBankAccountService {
         @Override
         protected Map<String, Object> getQueryParams() {
             ImmutableMap.Builder<String, Object> params = ImmutableMap.builder();
-            if (after != null) {
-                params.put("after", after);
-            }
-            if (before != null) {
-                params.put("before", before);
-            }
+            params.putAll(super.getQueryParams());
             if (customer != null) {
                 params.put("customer", customer);
             }
             if (enabled != null) {
                 params.put("enabled", enabled);
-            }
-            if (limit != null) {
-                params.put("limit", limit);
             }
             return params.build();
         }

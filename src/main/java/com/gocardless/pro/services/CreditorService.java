@@ -191,15 +191,11 @@ public class CreditorService {
      * list of your creditors.
      */
     public static final class CreditorListRequest extends ListRequest<Creditor> {
-        private String after;
-        private String before;
-        private Integer limit;
-
         /**
          * Cursor pointing to the start of the desired set.
          */
         public CreditorListRequest withAfter(String after) {
-            this.after = after;
+            setAfter(after);
             return this;
         }
 
@@ -207,7 +203,7 @@ public class CreditorService {
          * Cursor pointing to the end of the desired set.
          */
         public CreditorListRequest withBefore(String before) {
-            this.before = before;
+            setBefore(before);
             return this;
         }
 
@@ -215,7 +211,7 @@ public class CreditorService {
          * Number of records to return.
          */
         public CreditorListRequest withLimit(Integer limit) {
-            this.limit = limit;
+            setLimit(limit);
             return this;
         }
 
@@ -226,15 +222,7 @@ public class CreditorService {
         @Override
         protected Map<String, Object> getQueryParams() {
             ImmutableMap.Builder<String, Object> params = ImmutableMap.builder();
-            if (after != null) {
-                params.put("after", after);
-            }
-            if (before != null) {
-                params.put("before", before);
-            }
-            if (limit != null) {
-                params.put("limit", limit);
-            }
+            params.putAll(super.getQueryParams());
             return params.build();
         }
 
