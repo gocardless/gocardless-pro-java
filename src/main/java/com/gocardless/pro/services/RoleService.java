@@ -169,10 +169,10 @@ public class RoleService {
         }
 
         public static class Permissions {
-            private String access;
+            private Access access;
             private String resource;
 
-            public Permissions withAccess(String access) {
+            public Permissions withAccess(Access access) {
                 this.access = access;
                 return this;
             }
@@ -180,6 +180,14 @@ public class RoleService {
             public Permissions withResource(String resource) {
                 this.resource = resource;
                 return this;
+            }
+
+            public enum Access {
+                READ_ONLY, FULL_ACCESS;
+                @Override
+                public String toString() {
+                    return name().toLowerCase();
+                }
             }
         }
     }
@@ -366,10 +374,10 @@ public class RoleService {
         }
 
         public static class Permissions {
-            private String access;
+            private Access access;
             private String resource;
 
-            public Permissions withAccess(String access) {
+            public Permissions withAccess(Access access) {
                 this.access = access;
                 return this;
             }
@@ -377,6 +385,14 @@ public class RoleService {
             public Permissions withResource(String resource) {
                 this.resource = resource;
                 return this;
+            }
+
+            public enum Access {
+                READ_ONLY, FULL_ACCESS;
+                @Override
+                public String toString() {
+                    return name().toLowerCase();
+                }
             }
         }
     }

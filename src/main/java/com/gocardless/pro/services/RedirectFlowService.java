@@ -43,6 +43,9 @@ import com.google.common.collect.ImmutableMap;
  * minutes after they are first created. You cannot
  * [complete](https://developer.gocardless.com/pro/#complete-a-redirect-flow) an expired redirect
  * flow.
+ * 
+ * [View an example integration](https://pay-sandbox.gocardless.com/AL000000AKFPFF) that
+ * uses redirect flows.
  */
 public class RedirectFlowService {
     private HttpClient httpClient;

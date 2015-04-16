@@ -78,7 +78,7 @@ public class Subscription {
     private String endAt;
     private String id;
     private Integer interval;
-    private String intervalUnit;
+    private IntervalUnit intervalUnit;
     private Links links;
     private Map<String, String> metadata;
     private Month month;
@@ -153,7 +153,7 @@ public class Subscription {
     /**
      * The unit of time between customer charge dates. One of `weekly`, `monthly` or `yearly`.
      */
-    public String getIntervalUnit() {
+    public IntervalUnit getIntervalUnit() {
         return intervalUnit;
     }
 
@@ -213,6 +213,10 @@ public class Subscription {
      */
     public List<UpcomingPayments> getUpcomingPayments() {
         return upcomingPayments;
+    }
+
+    public enum IntervalUnit {
+        WEEKLY, MONTHLY, YEARLY,
     }
 
     public enum Month {

@@ -29,7 +29,7 @@ public class Payment {
     private Links links;
     private Map<String, String> metadata;
     private String reference;
-    private String status;
+    private Status status;
 
     /**
      * Amount in pence or cents.
@@ -124,8 +124,12 @@ public class Payment {
      * cancelled</li>
      * </ul>
      */
-    public String getStatus() {
+    public Status getStatus() {
         return status;
+    }
+
+    public enum Status {
+        PENDING_SUBMISSION, SUBMITTED, CONFIRMED, FAILED, CHARGED_BACK, PAID_OUT, CANCELLED,
     }
 
     public static class Links {

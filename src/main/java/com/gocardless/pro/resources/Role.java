@@ -117,15 +117,19 @@ public class Role {
             // blank to prevent instantiation
         }
 
-        private String access;
+        private Access access;
         private String resource;
 
-        public String getAccess() {
+        public Access getAccess() {
             return access;
         }
 
         public String getResource() {
             return resource;
+        }
+
+        public enum Access {
+            READ_ONLY, FULL_ACCESS,
         }
     }
 }

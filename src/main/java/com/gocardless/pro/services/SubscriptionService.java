@@ -135,7 +135,7 @@ public class SubscriptionService {
         private Integer dayOfMonth;
         private String endAt;
         private Integer interval;
-        private String intervalUnit;
+        private IntervalUnit intervalUnit;
         private Links links;
         private Map<String, String> metadata;
         private Month month;
@@ -199,7 +199,7 @@ public class SubscriptionService {
         /**
          * The unit of time between customer charge dates. One of `weekly`, `monthly` or `yearly`.
          */
-        public SubscriptionCreateRequest withIntervalUnit(String intervalUnit) {
+        public SubscriptionCreateRequest withIntervalUnit(IntervalUnit intervalUnit) {
             this.intervalUnit = intervalUnit;
             return this;
         }
@@ -267,6 +267,14 @@ public class SubscriptionService {
         @Override
         protected boolean hasBody() {
             return true;
+        }
+
+        public enum IntervalUnit {
+            WEEKLY, MONTHLY, YEARLY;
+            @Override
+            public String toString() {
+                return name().toLowerCase();
+            }
         }
 
         public enum Month {

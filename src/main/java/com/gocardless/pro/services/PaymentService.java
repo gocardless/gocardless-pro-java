@@ -222,7 +222,7 @@ public class PaymentService {
         private String creditor;
         private String customer;
         private String mandate;
-        private String status;
+        private Status status;
         private String subscription;
 
         /**
@@ -298,7 +298,7 @@ public class PaymentService {
          * cancelled</li>
          * </ul>
          */
-        public PaymentListRequest withStatus(String status) {
+        public PaymentListRequest withStatus(Status status) {
             this.status = status;
             return this;
         }
@@ -353,6 +353,14 @@ public class PaymentService {
         @Override
         protected TypeToken<List<Payment>> getTypeToken() {
             return new TypeToken<List<Payment>>() {};
+        }
+
+        public enum Status {
+            PENDING_SUBMISSION, SUBMITTED, CONFIRMED, FAILED, CHARGED_BACK, PAID_OUT, CANCELLED;
+            @Override
+            public String toString() {
+                return name().toLowerCase();
+            }
         }
 
         public static class CreatedAt {
