@@ -1,5 +1,5 @@
 com.gocardless.pro
-com.gocardless.pro.exceptions
+com.gocardless.pro.errors
 com.gocardless.pro.http
 com.gocardless.pro.resources
 com.gocardless.pro.services
