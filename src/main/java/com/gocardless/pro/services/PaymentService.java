@@ -218,12 +218,9 @@ public class PaymentService {
      * list of your payments.
      */
     public static final class PaymentListRequest extends ListRequest<Payment> {
-        private String after;
-        private String before;
         private CreatedAt createdAt;
         private String creditor;
         private String customer;
-        private Integer limit;
         private String mandate;
         private String status;
         private String subscription;
@@ -232,7 +229,7 @@ public class PaymentService {
          * Cursor pointing to the start of the desired set.
          */
         public PaymentListRequest withAfter(String after) {
-            this.after = after;
+            setAfter(after);
             return this;
         }
 
@@ -240,7 +237,7 @@ public class PaymentService {
          * Cursor pointing to the end of the desired set.
          */
         public PaymentListRequest withBefore(String before) {
-            this.before = before;
+            setBefore(before);
             return this;
         }
 
@@ -271,7 +268,7 @@ public class PaymentService {
          * Number of records to return.
          */
         public PaymentListRequest withLimit(Integer limit) {
-            this.limit = limit;
+            setLimit(limit);
             return this;
         }
 
@@ -321,12 +318,7 @@ public class PaymentService {
         @Override
         protected Map<String, Object> getQueryParams() {
             ImmutableMap.Builder<String, Object> params = ImmutableMap.builder();
-            if (after != null) {
-                params.put("after", after);
-            }
-            if (before != null) {
-                params.put("before", before);
-            }
+            params.putAll(super.getQueryParams());
             if (createdAt != null) {
                 params.putAll(createdAt.getQueryParams());
             }
@@ -335,9 +327,6 @@ public class PaymentService {
             }
             if (customer != null) {
                 params.put("customer", customer);
-            }
-            if (limit != null) {
-                params.put("limit", limit);
             }
             if (mandate != null) {
                 params.put("mandate", mandate);

@@ -223,17 +223,14 @@ public class CreditorBankAccountService {
      */
     public static final class CreditorBankAccountListRequest extends
             ListRequest<CreditorBankAccount> {
-        private String after;
-        private String before;
         private String creditor;
         private Enabled enabled;
-        private Integer limit;
 
         /**
          * Cursor pointing to the start of the desired set.
          */
         public CreditorBankAccountListRequest withAfter(String after) {
-            this.after = after;
+            setAfter(after);
             return this;
         }
 
@@ -241,7 +238,7 @@ public class CreditorBankAccountService {
          * Cursor pointing to the end of the desired set.
          */
         public CreditorBankAccountListRequest withBefore(String before) {
-            this.before = before;
+            setBefore(before);
             return this;
         }
 
@@ -265,7 +262,7 @@ public class CreditorBankAccountService {
          * Number of records to return.
          */
         public CreditorBankAccountListRequest withLimit(Integer limit) {
-            this.limit = limit;
+            setLimit(limit);
             return this;
         }
 
@@ -276,20 +273,12 @@ public class CreditorBankAccountService {
         @Override
         protected Map<String, Object> getQueryParams() {
             ImmutableMap.Builder<String, Object> params = ImmutableMap.builder();
-            if (after != null) {
-                params.put("after", after);
-            }
-            if (before != null) {
-                params.put("before", before);
-            }
+            params.putAll(super.getQueryParams());
             if (creditor != null) {
                 params.put("creditor", creditor);
             }
             if (enabled != null) {
                 params.put("enabled", enabled);
-            }
-            if (limit != null) {
-                params.put("limit", limit);
             }
             return params.build();
         }

@@ -13,6 +13,7 @@ import com.gocardless.pro.services.PaymentService.PaymentCreateRequest;
 
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableMap;
+import com.google.common.collect.Lists;
 
 import org.junit.Before;
 import org.junit.Rule;
@@ -150,5 +151,16 @@ public class GoCardlessClientTest {
         assertThat(page2.getBefore()).isNotNull();
         assertThat(page2.getAfter()).isNull();
         assertThat(page2.getLimit()).isEqualTo(2);
+    }
+
+    @Test
+    @Betamax(tape = "iterate through mandates")
+    public void shouldIterateThroughMandates() {
+        Iterable<Mandate> iterable = client.mandates().list().withLimit(2);
+        List<Mandate> mandates = Lists.newArrayList(iterable);
+        assertThat(mandates).hasSize(3);
+        assertThat(mandates.get(0).getId()).isEqualTo("MD00001PEYCSQF");
+        assertThat(mandates.get(1).getId()).isEqualTo("MD00001P57AN84");
+        assertThat(mandates.get(2).getId()).isEqualTo("MD00001P1KTRNY");
     }
 }

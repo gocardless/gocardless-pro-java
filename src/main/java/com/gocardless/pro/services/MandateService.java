@@ -193,12 +193,9 @@ public class MandateService {
      * list of your mandates. Except where stated, these filters can only be used one at a time.
      */
     public static final class MandateListRequest extends ListRequest<Mandate> {
-        private String after;
-        private String before;
         private String creditor;
         private String customer;
         private String customerBankAccount;
-        private Integer limit;
         private String reference;
         private List<Status> status;
 
@@ -206,7 +203,7 @@ public class MandateService {
          * Cursor pointing to the start of the desired set.
          */
         public MandateListRequest withAfter(String after) {
-            this.after = after;
+            setAfter(after);
             return this;
         }
 
@@ -214,7 +211,7 @@ public class MandateService {
          * Cursor pointing to the end of the desired set.
          */
         public MandateListRequest withBefore(String before) {
-            this.before = before;
+            setBefore(before);
             return this;
         }
 
@@ -251,7 +248,7 @@ public class MandateService {
          * Number of records to return.
          */
         public MandateListRequest withLimit(Integer limit) {
-            this.limit = limit;
+            setLimit(limit);
             return this;
         }
 
@@ -278,12 +275,7 @@ public class MandateService {
         @Override
         protected Map<String, Object> getQueryParams() {
             ImmutableMap.Builder<String, Object> params = ImmutableMap.builder();
-            if (after != null) {
-                params.put("after", after);
-            }
-            if (before != null) {
-                params.put("before", before);
-            }
+            params.putAll(super.getQueryParams());
             if (creditor != null) {
                 params.put("creditor", creditor);
             }
@@ -292,9 +284,6 @@ public class MandateService {
             }
             if (customerBankAccount != null) {
                 params.put("customer_bank_account", customerBankAccount);
-            }
-            if (limit != null) {
-                params.put("limit", limit);
             }
             if (reference != null) {
                 params.put("reference", reference);

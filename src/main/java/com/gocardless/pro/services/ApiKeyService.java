@@ -143,17 +143,14 @@ public class ApiKeyService {
      * list of your API keys.
      */
     public static final class ApiKeyListRequest extends ListRequest<ApiKey> {
-        private String after;
-        private String before;
         private Enabled enabled;
-        private Integer limit;
         private String role;
 
         /**
          * Cursor pointing to the start of the desired set.
          */
         public ApiKeyListRequest withAfter(String after) {
-            this.after = after;
+            setAfter(after);
             return this;
         }
 
@@ -161,7 +158,7 @@ public class ApiKeyService {
          * Cursor pointing to the end of the desired set.
          */
         public ApiKeyListRequest withBefore(String before) {
-            this.before = before;
+            setBefore(before);
             return this;
         }
 
@@ -177,7 +174,7 @@ public class ApiKeyService {
          * Number of records to return.
          */
         public ApiKeyListRequest withLimit(Integer limit) {
-            this.limit = limit;
+            setLimit(limit);
             return this;
         }
 
@@ -196,17 +193,9 @@ public class ApiKeyService {
         @Override
         protected Map<String, Object> getQueryParams() {
             ImmutableMap.Builder<String, Object> params = ImmutableMap.builder();
-            if (after != null) {
-                params.put("after", after);
-            }
-            if (before != null) {
-                params.put("before", before);
-            }
+            params.putAll(super.getQueryParams());
             if (enabled != null) {
                 params.put("enabled", enabled);
-            }
-            if (limit != null) {
-                params.put("limit", limit);
             }
             if (role != null) {
                 params.put("role", role);

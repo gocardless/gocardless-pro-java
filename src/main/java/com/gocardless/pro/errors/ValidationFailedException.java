@@ -1,7 +1,7 @@
 package com.gocardless.pro.errors;
 
 /**
- * Execption thrown when the parameters submitted with your request were invalid.
+ * Exception thrown when the parameters submitted with your request were invalid.
  */
 public class ValidationFailedException extends GoCardlessApiException {
     ValidationFailedException(ApiErrorResponse error) {
