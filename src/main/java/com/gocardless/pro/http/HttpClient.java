@@ -5,7 +5,7 @@ import java.io.Reader;
 import java.net.URL;
 import java.util.Map;
 
-import com.gocardless.pro.exceptions.*;
+import com.gocardless.pro.GoCardlessException;
 
 import com.google.common.annotations.VisibleForTesting;
 import com.google.common.collect.ImmutableMap;
@@ -83,7 +83,7 @@ public class HttpClient {
         try {
             return rawClient.newCall(request).execute();
         } catch (IOException e) {
-            throw new GoCardlessClientException("Failed to execute request", e);
+            throw new GoCardlessNetworkException("Failed to execute request", e);
         }
     }
 
@@ -91,7 +91,7 @@ public class HttpClient {
         try (Reader stream = response.body().charStream()) {
             return request.parseResponse(stream, responseParser);
         } catch (IOException e) {
-            throw new GoCardlessClientException("Failed to read response body", e);
+            throw new GoCardlessNetworkException("Failed to read response body", e);
         }
     }
 
@@ -99,7 +99,7 @@ public class HttpClient {
         try (Reader stream = response.body().charStream()) {
             return responseParser.parseError(stream);
         } catch (IOException e) {
-            throw new GoCardlessClientException("Failed to read response body", e);
+            throw new GoCardlessNetworkException("Failed to read response body", e);
         }
     }
 

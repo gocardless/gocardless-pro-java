@@ -1,9 +1,8 @@
-package com.gocardless.pro.exceptions;
+package com.gocardless.pro.errors;
 
 import java.util.List;
 
-import com.gocardless.pro.exceptions.ApiErrorResponse.ApiError;
-import com.gocardless.pro.exceptions.ApiErrorResponse.ErrorType;
+import com.gocardless.pro.GoCardlessException;
 
 /**
  * Base class for exceptions that are thrown as a result of error responses from
@@ -12,7 +11,7 @@ import com.gocardless.pro.exceptions.ApiErrorResponse.ErrorType;
 public class GoCardlessApiException extends GoCardlessException {
     private final ApiErrorResponse error;
 
-    public GoCardlessApiException(ApiErrorResponse error) {
+    GoCardlessApiException(ApiErrorResponse error) {
         super(error.getMessage());
         this.error = error;
     }

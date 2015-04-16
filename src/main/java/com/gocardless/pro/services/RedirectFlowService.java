@@ -164,7 +164,7 @@ public class RedirectFlowService {
         }
 
         public enum Scheme {
-            BACS, SEPA_CORE, NULL;
+            BACS, SEPA_CORE;
             @Override
             public String toString() {
                 return name().toLowerCase();
