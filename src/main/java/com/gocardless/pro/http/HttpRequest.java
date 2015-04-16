@@ -22,7 +22,7 @@ abstract class HttpRequest<T> {
      * Executes this request.
      *
      * Returns the API response.
-     * @throws com.gocardless.pro.exceptions.GoCardlessException
+     * @throws com.gocardless.pro.GoCardlessException
      */
     public T execute() {
         return httpClient.execute(this);
