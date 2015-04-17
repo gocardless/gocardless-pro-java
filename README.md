@@ -82,7 +82,7 @@ Any errors will result in a `GoCardlessException` being thrown.  If the error is
 * InvalidStateException
 * ValidationFailedException
 
-See the [documentation](http://gocardless.github.io/pro-client-java/com/gocardless/errors/package-summary.html) for more details.
+See the [documentation](http://gocardless.github.io/gocardless-pro-java/com/gocardless/errors/package-summary.html) for more details.
 
 ## Compatibility
 
@@ -90,7 +90,7 @@ This library requires JDK version 7 or above.
 
 ## Documentation
 
-Full Javadoc can be found [here](http://gocardless.github.io/pro-client-java/com/gocardless/package-summary.html).
+Full Javadoc can be found [here](http://gocardless.github.io/gocardless-pro-java/com/gocardless/package-summary.html).
 
 ## Contributing
 
