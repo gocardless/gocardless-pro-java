@@ -1,7 +1,10 @@
 apply plugin: 'java'
+apply plugin: 'maven'
+apply plugin: 'signing'
 
 sourceCompatibility = 1.7
-version = '0.0.1-SNAPSHOT'
+group = ' com.gocardless'
+version = '0.0.1'
 
 repositories {
     mavenCentral()
@@ -34,4 +37,84 @@ javadoc {
     options.links = [
       'http://docs.oracle.com/javase/7/docs/api/'
     ]
+}
+
+task javadocJar(type: Jar, dependsOn: javadoc) {
+    from tasks.javadoc.destinationDir
+    classifier = 'javadoc'
+}
+
+task sourcesJar(type: Jar) {
+    from sourceSets.main.allSource
+    classifier = 'sources'
+}
+
+artifacts {
+    archives jar
+
+    archives javadocJar
+    archives sourcesJar
+}
+
+signing {
+    required { gradle.taskGraph.hasTask("uploadArchives") }
+    sign configurations.archives
+}
+
+gradle.taskGraph.whenReady { taskGraph ->
+    if (taskGraph.allTasks.any { it instanceof Sign }) {
+        Console console = System.console()
+
+        def password = console.readPassword("Enter private key password: ")
+
+        allprojects { ext."signing.password" = password }
+    }
+}
+
+uploadArchives {
+    repositories {
+        mavenDeployer {
+            beforeDeployment { MavenDeployment deployment -> signing.signPom(deployment) }
+
+            def username = project.hasProperty('sonatypeUsername') ? project.getProperty('sonatypeUsername') : ''
+            def password = project.hasProperty('sonatypePassword') ? project.getProperty('sonatypePassword') : ''
+
+            repository(url: "https://oss.sonatype.org/service/local/staging/deploy/maven2/") {
+                authentication(userName: username, password: password)
+            }
+
+            snapshotRepository(url: "https://oss.sonatype.org/content/repositories/snapshots/") {
+                authentication(userName: username, password: password)
+            }
+
+            pom.project {
+                name 'GoCardless Pro Client'
+                packaging 'jar'
+                description 'Client library for accessing the GoCardless Pro API'
+                url 'http://developer.gocardless.com/pro'
+
+                scm {
+                    url 'scm:git@github.com:gocardless/gocardless-pro-java.git'
+                    connection 'scm:git@github.com:gocardless/gocardless-pro-java.git'
+                    developerConnection 'scm:git@github.com:gocardless/gocardless-pro-java.git'
+                }
+
+                licenses {
+                    license {
+                        name 'MIT'
+                        url 'http://www.opensource.org/licenses/mit-license.php'
+                        distribution 'repo'
+                    }
+                }
+
+                developers {
+                    developer {
+                        id 'matt-thomson'
+                        name 'Matt Thomson'
+                        email 'mattthomson@gocardless.com'
+                    }
+                }
+            }
+        }
+    }
 }
