@@ -20,7 +20,7 @@ import com.squareup.okhttp.*;
  */
 public class HttpClient {
     private static final String USER_AGENT = String.format(
-            "gocardless-pro-java/0.0.1-SNAPSHOT %s/%s %s/%s",
+            "gocardless-pro/0.0.1-SNAPSHOT %s/%s %s/%s",
             replaceSpaces(System.getProperty("os.name")),
             replaceSpaces(System.getProperty("os.version")),
             replaceSpaces(System.getProperty("java.vm.name")),
