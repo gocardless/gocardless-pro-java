@@ -1,0 +1,254 @@
+package com.gocardless.resources;
+
+import java.util.Map;
+
+/**
+ * Represents a event resource returned from the API.
+ *
+ * Events are stored for all webhooks. An event refers to a resource which has been updated, for
+ * example a payment which has been collected, or a mandate which has been transferred.
+ */
+public class Event {
+    private Event() {
+        // blank to prevent instantiation
+    }
+
+    private String action;
+    private String createdAt;
+    private Details details;
+    private String id;
+    private Links links;
+    private Map<String, String> metadata;
+    private ResourceType resourceType;
+
+    /**
+     * What has happened to the resource.
+     */
+    public String getAction() {
+        return action;
+    }
+
+    /**
+     * Fixed [timestamp](https://developer.gocardless.com/pro/#overview-time-zones-dates), recording when
+     * this resource was created.
+     */
+    public String getCreatedAt() {
+        return createdAt;
+    }
+
+    public Details getDetails() {
+        return details;
+    }
+
+    /**
+     * Unique identifier, beginning with "EV"
+     */
+    public String getId() {
+        return id;
+    }
+
+    public Links getLinks() {
+        return links;
+    }
+
+    /**
+     * If the `details[origin]` is `api`, this will contain any metadata you specified when triggering
+     * this event. In other cases it will be an empty object.
+     */
+    public Map<String, String> getMetadata() {
+        return metadata;
+    }
+
+    /**
+     * The resource type for this event. One of:
+     * <ul>
+     * <li>`payments`</li>
+     * <li>`mandates`</li>
+     *
+     * <li>`payouts`</li>
+     * <li>`refunds`</li>
+     * <li>`subscriptions`</li>
+     * </ul>
+     */
+    public ResourceType getResourceType() {
+        return resourceType;
+    }
+
+    public enum ResourceType {
+        PAYMENTS, MANDATES, PAYOUTS, REFUNDS, SUBSCRIPTIONS,
+    }
+
+    public static class Details {
+        private Details() {
+            // blank to prevent instantiation
+        }
+
+        private String cause;
+        private String description;
+        private Origin origin;
+        private String reasonCode;
+        private ReportType reportType;
+        private Scheme scheme;
+
+        /**
+         * What triggered the event.
+         */
+        public String getCause() {
+            return cause;
+        }
+
+        /**
+         * Human readable description of the cause. _Note:_ Changes to event descriptions are not considered
+         * breaking, so your integration should not parse these messages, using `details[cause]` and/or
+         * `details[reason_code]` instead.
+         */
+        public String getDescription() {
+            return description;
+        }
+
+        /**
+         * Who initiated the event. One of:
+         * <ul>
+         * <li>`bank`: this event was triggered by a report from
+         * the banks</li>
+         * <li>`gocardless`: this event was performed by GoCardless automatically</li>
+         *
+         * <li>`api`: this event was triggered by an API endpoint</li>
+         * </ul>
+         */
+        public Origin getOrigin() {
+            return origin;
+        }
+
+        /**
+         * Set when a `bank` is the origin of the event. This is the reason code received in the report from
+         * the customer's bank. See the [GoCardless Direct Debit
+         * guide](https://gocardless.com/direct-debit/receiving-messages) for information on the meanings of
+         * different reason codes.
+         */
+        public String getReasonCode() {
+            return reasonCode;
+        }
+
+        /**
+         * The report that this message was received in. One of:
+         * <ul>
+         * <li>`auddis`: Automated Direct
+         * Debit Instruction Service</li>
+         * <li>`addacs`: Automated Direct Debit Amendment and Cancellation
+         * Service</li>
+         * <li>`arudd`: Automated Return of Unpaid Direct Debit</li>
+         * <li>`ddica`: Direct
+         * Debit Indemnity Claim Advice</li>
+         * <li>`processing`: SEPA processing report</li>
+         *
+         * <li>`settlement`: SEPA settlement report</li>
+         * </ul>
+         */
+        public ReportType getReportType() {
+            return reportType;
+        }
+
+        /**
+         * Set when a bank is the origin of the event.
+         */
+        public Scheme getScheme() {
+            return scheme;
+        }
+
+        public enum Origin {
+            BANK, API, GOCARDLESS,
+        }
+
+        public enum ReportType {
+            AUDDIS, ADDACS, ARUDD, DDICA, SETTLEMENT, PROCESSING,
+        }
+
+        public enum Scheme {
+            BACS, SEPA_CORE,
+        }
+    }
+
+    public static class Links {
+        private Links() {
+            // blank to prevent instantiation
+        }
+
+        private String mandate;
+        private String newCustomerBankAccount;
+        private String parentEvent;
+        private String payment;
+        private String payout;
+        private String previousCustomerBankAccount;
+        private String refund;
+        private String subscription;
+
+        /**
+         * If `resource_type` is `mandates`, this is the ID of the
+         * [mandate](https://developer.gocardless.com/pro/#api-endpoints-mandates) which has been updated.
+         */
+        public String getMandate() {
+            return mandate;
+        }
+
+        /**
+         * This is only included for mandate transfer events, when it is the ID of the [customer bank
+         * account](https://developer.gocardless.com/pro/#api-endpoints-customer-bank-accounts) which the
+         * mandate is being transferred to.
+         */
+        public String getNewCustomerBankAccount() {
+            return newCustomerBankAccount;
+        }
+
+        /**
+         * If this event was caused by another, this is the ID of the cause. For example, if a mandate is
+         * cancelled it automatically cancels all pending payments associated with it; in this case, the
+         * payment cancellation events would have the ID of the mandate cancellation event in this field.
+         */
+        public String getParentEvent() {
+            return parentEvent;
+        }
+
+        /**
+         * If `resource_type` is `payments`, this is the ID of the
+         * [payment](https://developer.gocardless.com/pro/#api-endpoints-payments) which has been updated.
+         */
+        public String getPayment() {
+            return payment;
+        }
+
+        /**
+         * If `resource_type` is `payouts`, this is the ID of the
+         * [payout](https://developer.gocardless.com/pro/#api-endpoints-payouts) which has been updated.
+         */
+        public String getPayout() {
+            return payout;
+        }
+
+        /**
+         * This is only included for mandate transfer events, when it is the ID of the [customer bank
+         * account](https://developer.gocardless.com/pro/#api-endpoints-customer-bank-accounts) which the
+         * mandate is being transferred from.
+         */
+        public String getPreviousCustomerBankAccount() {
+            return previousCustomerBankAccount;
+        }
+
+        /**
+         * If `resource_type` is `refunds`, this is the ID of the
+         * [refund](https://developer.gocardless.com/pro/#api-endpoints-refunds) which has been updated.
+         */
+        public String getRefund() {
+            return refund;
+        }
+
+        /**
+         * If `resource_type` is `subscription`, this is the ID of the
+         * [subscription](https://developer.gocardless.com/pro/#api-endpoints-subscriptions) which has been
+         * updated.
+         */
+        public String getSubscription() {
+            return subscription;
+        }
+    }
+}
