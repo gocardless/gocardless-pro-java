@@ -1,5 +1,6 @@
 package com.gocardless.pro.services;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -160,11 +161,35 @@ public class CreditorBankAccountService {
         }
 
         /**
+         * ID of the [creditor](https://developer.gocardless.com/pro/#api-endpoints-creditors) that owns this
+         * bank account.
+         */
+        public CreditorBankAccountCreateRequest withLinksCreditor(String creditor) {
+            if (links == null) {
+                links = new Links();
+            }
+            links.withCreditor(creditor);
+            return this;
+        }
+
+        /**
          * Key-value store of custom data. Up to 3 keys are permitted, with key names up to 50 characters and
          * values up to 200 characters.
          */
         public CreditorBankAccountCreateRequest withMetadata(Map<String, String> metadata) {
             this.metadata = metadata;
+            return this;
+        }
+
+        /**
+         * Key-value store of custom data. Up to 3 keys are permitted, with key names up to 50 characters and
+         * values up to 200 characters.
+         */
+        public CreditorBankAccountCreateRequest withMetadata(String key, String value) {
+            if (metadata == null) {
+                metadata = new HashMap<>();
+            }
+            metadata.put(key, value);
             return this;
         }
 

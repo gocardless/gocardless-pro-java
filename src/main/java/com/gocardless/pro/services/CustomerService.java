@@ -1,5 +1,6 @@
 package com.gocardless.pro.services;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -151,6 +152,18 @@ public class CustomerService {
         }
 
         /**
+         * Key-value store of custom data. Up to 3 keys are permitted, with key names up to 50 characters and
+         * values up to 200 characters.
+         */
+        public CustomerCreateRequest withMetadata(String key, String value) {
+            if (metadata == null) {
+                metadata = new HashMap<>();
+            }
+            metadata.put(key, value);
+            return this;
+        }
+
+        /**
          * The customer's postal code.
          */
         public CustomerCreateRequest withPostalCode(String postalCode) {
@@ -218,6 +231,50 @@ public class CustomerService {
 
         public CustomerListRequest withCreatedAt(CreatedAt createdAt) {
             this.createdAt = createdAt;
+            return this;
+        }
+
+        /**
+         * Limit to records created after the specified date-time.
+         */
+        public CustomerListRequest withCreatedAtGt(String gt) {
+            if (createdAt == null) {
+                createdAt = new CreatedAt();
+            }
+            createdAt.withGt(gt);
+            return this;
+        }
+
+        /**
+         * Limit to records created on or after the specified date-time.
+         */
+        public CustomerListRequest withCreatedAtGte(String gte) {
+            if (createdAt == null) {
+                createdAt = new CreatedAt();
+            }
+            createdAt.withGte(gte);
+            return this;
+        }
+
+        /**
+         * Limit to records created before the specified date-time.
+         */
+        public CustomerListRequest withCreatedAtLt(String lt) {
+            if (createdAt == null) {
+                createdAt = new CreatedAt();
+            }
+            createdAt.withLt(lt);
+            return this;
+        }
+
+        /**
+         * Limit to records created on or before the specified date-time.
+         */
+        public CustomerListRequest withCreatedAtLte(String lte) {
+            if (createdAt == null) {
+                createdAt = new CreatedAt();
+            }
+            createdAt.withLte(lte);
             return this;
         }
 
@@ -443,6 +500,18 @@ public class CustomerService {
          */
         public CustomerUpdateRequest withMetadata(Map<String, String> metadata) {
             this.metadata = metadata;
+            return this;
+        }
+
+        /**
+         * Key-value store of custom data. Up to 3 keys are permitted, with key names up to 50 characters and
+         * values up to 200 characters.
+         */
+        public CustomerUpdateRequest withMetadata(String key, String value) {
+            if (metadata == null) {
+                metadata = new HashMap<>();
+            }
+            metadata.put(key, value);
             return this;
         }
 

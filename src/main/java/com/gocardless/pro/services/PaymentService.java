@@ -1,5 +1,6 @@
 package com.gocardless.pro.services;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -155,11 +156,35 @@ public class PaymentService {
         }
 
         /**
+         * ID of the [mandate](https://developer.gocardless.com/pro/#api-endpoints-mandates) against which
+         * this payment should be collected.
+         */
+        public PaymentCreateRequest withLinksMandate(String mandate) {
+            if (links == null) {
+                links = new Links();
+            }
+            links.withMandate(mandate);
+            return this;
+        }
+
+        /**
          * Key-value store of custom data. Up to 3 keys are permitted, with key names up to 50 characters and
          * values up to 200 characters.
          */
         public PaymentCreateRequest withMetadata(Map<String, String> metadata) {
             this.metadata = metadata;
+            return this;
+        }
+
+        /**
+         * Key-value store of custom data. Up to 3 keys are permitted, with key names up to 50 characters and
+         * values up to 200 characters.
+         */
+        public PaymentCreateRequest withMetadata(String key, String value) {
+            if (metadata == null) {
+                metadata = new HashMap<>();
+            }
+            metadata.put(key, value);
             return this;
         }
 
@@ -243,6 +268,50 @@ public class PaymentService {
 
         public PaymentListRequest withCreatedAt(CreatedAt createdAt) {
             this.createdAt = createdAt;
+            return this;
+        }
+
+        /**
+         * Limit to records created after the specified date-time.
+         */
+        public PaymentListRequest withCreatedAtGt(String gt) {
+            if (createdAt == null) {
+                createdAt = new CreatedAt();
+            }
+            createdAt.withGt(gt);
+            return this;
+        }
+
+        /**
+         * Limit to records created on or after the specified date-time.
+         */
+        public PaymentListRequest withCreatedAtGte(String gte) {
+            if (createdAt == null) {
+                createdAt = new CreatedAt();
+            }
+            createdAt.withGte(gte);
+            return this;
+        }
+
+        /**
+         * Limit to records created before the specified date-time.
+         */
+        public PaymentListRequest withCreatedAtLt(String lt) {
+            if (createdAt == null) {
+                createdAt = new CreatedAt();
+            }
+            createdAt.withLt(lt);
+            return this;
+        }
+
+        /**
+         * Limit to records created on or before the specified date-time.
+         */
+        public PaymentListRequest withCreatedAtLte(String lte) {
+            if (createdAt == null) {
+                createdAt = new CreatedAt();
+            }
+            createdAt.withLte(lte);
             return this;
         }
 
@@ -476,6 +545,18 @@ public class PaymentService {
             return this;
         }
 
+        /**
+         * Key-value store of custom data. Up to 3 keys are permitted, with key names up to 50 characters and
+         * values up to 200 characters.
+         */
+        public PaymentUpdateRequest withMetadata(String key, String value) {
+            if (metadata == null) {
+                metadata = new HashMap<>();
+            }
+            metadata.put(key, value);
+            return this;
+        }
+
         private PaymentUpdateRequest(HttpClient httpClient, String identity) {
             super(httpClient);
             this.identity = identity;
@@ -529,6 +610,18 @@ public class PaymentService {
          */
         public PaymentCancelRequest withMetadata(Map<String, String> metadata) {
             this.metadata = metadata;
+            return this;
+        }
+
+        /**
+         * Key-value store of custom data. Up to 3 keys are permitted, with key names up to 50 characters and
+         * values up to 200 characters.
+         */
+        public PaymentCancelRequest withMetadata(String key, String value) {
+            if (metadata == null) {
+                metadata = new HashMap<>();
+            }
+            metadata.put(key, value);
             return this;
         }
 
@@ -588,6 +681,18 @@ public class PaymentService {
          */
         public PaymentRetryRequest withMetadata(Map<String, String> metadata) {
             this.metadata = metadata;
+            return this;
+        }
+
+        /**
+         * Key-value store of custom data. Up to 3 keys are permitted, with key names up to 50 characters and
+         * values up to 200 characters.
+         */
+        public PaymentRetryRequest withMetadata(String key, String value) {
+            if (metadata == null) {
+                metadata = new HashMap<>();
+            }
+            metadata.put(key, value);
             return this;
         }
 

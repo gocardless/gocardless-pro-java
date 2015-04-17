@@ -118,6 +118,18 @@ public class RedirectFlowService {
         }
 
         /**
+         * The [creditor](https://developer.gocardless.com/pro/#api-endpoints-creditors) for whom the mandate
+         * will be created. The `name` of the creditor will be displayed on the payment page.
+         */
+        public RedirectFlowCreateRequest withLinksCreditor(String creditor) {
+            if (links == null) {
+                links = new Links();
+            }
+            links.withCreditor(creditor);
+            return this;
+        }
+
+        /**
          * The Direct Debit scheme of the mandate. If specified, the payment pages will only allow the set-up
          * of a mandate for the specified scheme.
          */

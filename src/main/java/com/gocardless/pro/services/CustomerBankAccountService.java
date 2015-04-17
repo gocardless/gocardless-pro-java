@@ -1,5 +1,6 @@
 package com.gocardless.pro.services;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -192,11 +193,49 @@ public class CustomerBankAccountService {
         }
 
         /**
+         * ID of the [customer](https://developer.gocardless.com/pro/#api-endpoints-customers) that owns this
+         * bank account.
+         */
+        public CustomerBankAccountCreateRequest withLinksCustomer(String customer) {
+            if (links == null) {
+                links = new Links();
+            }
+            links.withCustomer(customer);
+            return this;
+        }
+
+        /**
+         * ID of a [customer bank account
+         * token](https://developer.gocardless.com/pro/#api-endpoints-customer-bank-account-tokens) to use in
+         * place of bank account parameters.
+         */
+        public CustomerBankAccountCreateRequest withLinksCustomerBankAccountToken(
+                String customerBankAccountToken) {
+            if (links == null) {
+                links = new Links();
+            }
+            links.withCustomerBankAccountToken(customerBankAccountToken);
+            return this;
+        }
+
+        /**
          * Key-value store of custom data. Up to 3 keys are permitted, with key names up to 50 characters and
          * values up to 200 characters.
          */
         public CustomerBankAccountCreateRequest withMetadata(Map<String, String> metadata) {
             this.metadata = metadata;
+            return this;
+        }
+
+        /**
+         * Key-value store of custom data. Up to 3 keys are permitted, with key names up to 50 characters and
+         * values up to 200 characters.
+         */
+        public CustomerBankAccountCreateRequest withMetadata(String key, String value) {
+            if (metadata == null) {
+                metadata = new HashMap<>();
+            }
+            metadata.put(key, value);
             return this;
         }
 
@@ -395,6 +434,18 @@ public class CustomerBankAccountService {
          */
         public CustomerBankAccountUpdateRequest withMetadata(Map<String, String> metadata) {
             this.metadata = metadata;
+            return this;
+        }
+
+        /**
+         * Key-value store of custom data. Up to 3 keys are permitted, with key names up to 50 characters and
+         * values up to 200 characters.
+         */
+        public CustomerBankAccountUpdateRequest withMetadata(String key, String value) {
+            if (metadata == null) {
+                metadata = new HashMap<>();
+            }
+            metadata.put(key, value);
             return this;
         }
 

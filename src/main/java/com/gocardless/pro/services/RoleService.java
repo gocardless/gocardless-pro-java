@@ -1,5 +1,6 @@
 package com.gocardless.pro.services;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -141,6 +142,24 @@ public class RoleService {
          */
         public RoleCreateRequest withPermissions(List<Permissions> permissions) {
             this.permissions = permissions;
+            return this;
+        }
+
+        /**
+         * An array of key-value pairs that define the permissions the role has. Each element of the array
+         * contains the following keys:
+         * <ul>
+         * <li>`resource`: the relevant, pluralised API resource, e.g.
+         * `customers`</li>
+         * <li>`access`: the access level. One of `full_access` or `read_only`</li>
+         *
+         * </ul>
+         */
+        public RoleCreateRequest withPermissions(Permissions permissions) {
+            if (this.permissions == null) {
+                this.permissions = new ArrayList<>();
+            }
+            this.permissions.add(permissions);
             return this;
         }
 
@@ -338,6 +357,24 @@ public class RoleService {
          */
         public RoleUpdateRequest withPermissions(List<Permissions> permissions) {
             this.permissions = permissions;
+            return this;
+        }
+
+        /**
+         * An array of key-value pairs that define the permissions the role has. Each element of the array
+         * contains the following keys:
+         * <ul>
+         * <li>`resource`: the relevant, pluralised API resource, e.g.
+         * `customers`</li>
+         * <li>`access`: the access level. One of `full_access` or `read_only`</li>
+         *
+         * </ul>
+         */
+        public RoleUpdateRequest withPermissions(Permissions permissions) {
+            if (this.permissions == null) {
+                this.permissions = new ArrayList<>();
+            }
+            this.permissions.add(permissions);
             return this;
         }
 

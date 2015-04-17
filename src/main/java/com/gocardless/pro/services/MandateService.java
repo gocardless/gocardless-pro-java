@@ -1,5 +1,7 @@
 package com.gocardless.pro.services;
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -112,11 +114,47 @@ public class MandateService {
         }
 
         /**
+         * ID of the associated [creditor](https://developer.gocardless.com/pro/#api-endpoints-creditors).
+         */
+        public MandateCreateRequest withLinksCreditor(String creditor) {
+            if (links == null) {
+                links = new Links();
+            }
+            links.withCreditor(creditor);
+            return this;
+        }
+
+        /**
+         * ID of the associated [customer bank
+         * account](https://developer.gocardless.com/pro/#api-endpoints-customer-bank-account) which the
+         * mandate is created and submits payments against.
+         */
+        public MandateCreateRequest withLinksCustomerBankAccount(String customerBankAccount) {
+            if (links == null) {
+                links = new Links();
+            }
+            links.withCustomerBankAccount(customerBankAccount);
+            return this;
+        }
+
+        /**
          * Key-value store of custom data. Up to 3 keys are permitted, with key names up to 50 characters and
          * values up to 200 characters.
          */
         public MandateCreateRequest withMetadata(Map<String, String> metadata) {
             this.metadata = metadata;
+            return this;
+        }
+
+        /**
+         * Key-value store of custom data. Up to 3 keys are permitted, with key names up to 50 characters and
+         * values up to 200 characters.
+         */
+        public MandateCreateRequest withMetadata(String key, String value) {
+            if (metadata == null) {
+                metadata = new HashMap<>();
+            }
+            metadata.put(key, value);
             return this;
         }
 
@@ -268,6 +306,17 @@ public class MandateService {
             return this;
         }
 
+        /**
+         * At most three valid status values
+         */
+        public MandateListRequest withStatus(Status status) {
+            if (this.status == null) {
+                this.status = new ArrayList<>();
+            }
+            this.status.add(status);
+            return this;
+        }
+
         private MandateListRequest(HttpClient httpClient) {
             super(httpClient);
         }
@@ -383,6 +432,18 @@ public class MandateService {
             return this;
         }
 
+        /**
+         * Key-value store of custom data. Up to 3 keys are permitted, with key names up to 50 characters and
+         * values up to 200 characters.
+         */
+        public MandateUpdateRequest withMetadata(String key, String value) {
+            if (metadata == null) {
+                metadata = new HashMap<>();
+            }
+            metadata.put(key, value);
+            return this;
+        }
+
         private MandateUpdateRequest(HttpClient httpClient, String identity) {
             super(httpClient);
             this.identity = identity;
@@ -436,6 +497,18 @@ public class MandateService {
          */
         public MandateCancelRequest withMetadata(Map<String, String> metadata) {
             this.metadata = metadata;
+            return this;
+        }
+
+        /**
+         * Key-value store of custom data. Up to 3 keys are permitted, with key names up to 50 characters and
+         * values up to 200 characters.
+         */
+        public MandateCancelRequest withMetadata(String key, String value) {
+            if (metadata == null) {
+                metadata = new HashMap<>();
+            }
+            metadata.put(key, value);
             return this;
         }
 
@@ -495,6 +568,18 @@ public class MandateService {
          */
         public MandateReinstateRequest withMetadata(Map<String, String> metadata) {
             this.metadata = metadata;
+            return this;
+        }
+
+        /**
+         * Key-value store of custom data. Up to 3 keys are permitted, with key names up to 50 characters and
+         * values up to 200 characters.
+         */
+        public MandateReinstateRequest withMetadata(String key, String value) {
+            if (metadata == null) {
+                metadata = new HashMap<>();
+            }
+            metadata.put(key, value);
             return this;
         }
 

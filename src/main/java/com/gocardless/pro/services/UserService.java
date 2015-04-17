@@ -113,6 +113,18 @@ public class UserService {
         }
 
         /**
+         * ID of the user's [role](https://developer.gocardless.com/pro/#api-endpoints-roles), which dictates
+         * what resources the user can see.
+         */
+        public UserCreateRequest withLinksRole(String role) {
+            if (links == null) {
+                links = new Links();
+            }
+            links.withRole(role);
+            return this;
+        }
+
+        /**
          * This field must be at least 12 characters.
          */
         public UserCreateRequest withPassword(String password) {
@@ -336,6 +348,18 @@ public class UserService {
 
         public UserUpdateRequest withLinks(Links links) {
             this.links = links;
+            return this;
+        }
+
+        /**
+         * ID of the user's [role](https://developer.gocardless.com/pro/#api-endpoints-roles), which dictates
+         * what resources the user can see.
+         */
+        public UserUpdateRequest withLinksRole(String role) {
+            if (links == null) {
+                links = new Links();
+            }
+            links.withRole(role);
             return this;
         }
 

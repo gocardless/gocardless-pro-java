@@ -81,6 +81,17 @@ public class ApiKeyService {
         }
 
         /**
+         * Unique identifier, beginning with "RO"
+         */
+        public ApiKeyCreateRequest withLinksRole(String role) {
+            if (links == null) {
+                links = new Links();
+            }
+            links.withRole(role);
+            return this;
+        }
+
+        /**
          * Human readable name for the key. This field cannot exceed 75 characters.
          */
         public ApiKeyCreateRequest withName(String name) {

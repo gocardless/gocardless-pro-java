@@ -90,6 +90,50 @@ public class EventService {
         }
 
         /**
+         * Limit to records created after the specified date-time.
+         */
+        public EventListRequest withCreatedAtGt(String gt) {
+            if (createdAt == null) {
+                createdAt = new CreatedAt();
+            }
+            createdAt.withGt(gt);
+            return this;
+        }
+
+        /**
+         * Limit to records created on or after the specified date-time.
+         */
+        public EventListRequest withCreatedAtGte(String gte) {
+            if (createdAt == null) {
+                createdAt = new CreatedAt();
+            }
+            createdAt.withGte(gte);
+            return this;
+        }
+
+        /**
+         * Limit to records created before the specified date-time.
+         */
+        public EventListRequest withCreatedAtLt(String lt) {
+            if (createdAt == null) {
+                createdAt = new CreatedAt();
+            }
+            createdAt.withLt(lt);
+            return this;
+        }
+
+        /**
+         * Limit to records created on or before the specified date-time.
+         */
+        public EventListRequest withCreatedAtLte(String lte) {
+            if (createdAt == null) {
+                createdAt = new CreatedAt();
+            }
+            createdAt.withLte(lte);
+            return this;
+        }
+
+        /**
          * Includes linked resources in the response. Must be used with the `resource_type` parameter
          * specified. The include should be one of:
          * <ul>

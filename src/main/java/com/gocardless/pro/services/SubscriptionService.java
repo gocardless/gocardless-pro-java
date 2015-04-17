@@ -1,5 +1,6 @@
 package com.gocardless.pro.services;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -210,11 +211,35 @@ public class SubscriptionService {
         }
 
         /**
+         * ID of the associated [mandate](https://developer.gocardless.com/pro/#api-endpoints-mandates) which
+         * the subscription will create payments against.
+         */
+        public SubscriptionCreateRequest withLinksMandate(String mandate) {
+            if (links == null) {
+                links = new Links();
+            }
+            links.withMandate(mandate);
+            return this;
+        }
+
+        /**
          * Key-value store of custom data. Up to 3 keys are permitted, with key names up to 50 characters and
          * values up to 200 characters.
          */
         public SubscriptionCreateRequest withMetadata(Map<String, String> metadata) {
             this.metadata = metadata;
+            return this;
+        }
+
+        /**
+         * Key-value store of custom data. Up to 3 keys are permitted, with key names up to 50 characters and
+         * values up to 200 characters.
+         */
+        public SubscriptionCreateRequest withMetadata(String key, String value) {
+            if (metadata == null) {
+                metadata = new HashMap<>();
+            }
+            metadata.put(key, value);
             return this;
         }
 
@@ -440,6 +465,18 @@ public class SubscriptionService {
         }
 
         /**
+         * Key-value store of custom data. Up to 3 keys are permitted, with key names up to 50 characters and
+         * values up to 200 characters.
+         */
+        public SubscriptionUpdateRequest withMetadata(String key, String value) {
+            if (metadata == null) {
+                metadata = new HashMap<>();
+            }
+            metadata.put(key, value);
+            return this;
+        }
+
+        /**
          * Optional name for the subscription. This field must not exceed 255 characters.
          */
         public SubscriptionUpdateRequest withName(String name) {
@@ -500,6 +537,18 @@ public class SubscriptionService {
          */
         public SubscriptionCancelRequest withMetadata(Map<String, String> metadata) {
             this.metadata = metadata;
+            return this;
+        }
+
+        /**
+         * Key-value store of custom data. Up to 3 keys are permitted, with key names up to 50 characters and
+         * values up to 200 characters.
+         */
+        public SubscriptionCancelRequest withMetadata(String key, String value) {
+            if (metadata == null) {
+                metadata = new HashMap<>();
+            }
+            metadata.put(key, value);
             return this;
         }
 

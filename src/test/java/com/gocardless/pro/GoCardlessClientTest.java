@@ -8,11 +8,7 @@ import co.freeside.betamax.Recorder;
 import com.gocardless.pro.http.HttpTestUtil;
 import com.gocardless.pro.http.ListResponse;
 import com.gocardless.pro.resources.*;
-import com.gocardless.pro.services.CustomerService.CustomerListRequest;
-import com.gocardless.pro.services.PaymentService.PaymentCreateRequest;
 
-import com.google.common.collect.ImmutableList;
-import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.Lists;
 
 import org.junit.Before;
@@ -77,8 +73,8 @@ public class GoCardlessClientTest {
     @Betamax(tape = "list mandates by customer and status")
     public void shouldListMandatesByCustomerAndStatus() {
         List<Mandate> mandates =
-                client.mandates().list().withCustomer("CU00003068FG73")
-                        .withStatus(ImmutableList.of(ACTIVE, FAILED)).execute().getItems();
+                client.mandates().list().withCustomer("CU00003068FG73").withStatus(ACTIVE)
+                        .withStatus(FAILED).execute().getItems();
         assertThat(mandates).hasSize(1);
         assertThat(mandates.get(0).getId()).isEqualTo("MD00001PEYCSQF");
     }
@@ -111,10 +107,9 @@ public class GoCardlessClientTest {
     @Test
     @Betamax(tape = "get customers created after")
     public void shouldGetCustomersCreatedAfter() {
-        CustomerListRequest.CreatedAt createdAt =
-                new CustomerListRequest.CreatedAt().withGte("2015-04-13T15:02:40Z");
         List<Customer> result =
-                client.customers().list().withCreatedAt(createdAt).execute().getItems();
+                client.customers().list().withCreatedAtGte("2015-04-13T15:02:40Z").execute()
+                        .getItems();
         assertThat(result.size()).isEqualTo(1);
         assertThat(result.get(0).getId()).isEqualTo("CU0000321DW2ZH");
     }
@@ -124,9 +119,7 @@ public class GoCardlessClientTest {
     public void shouldCreateAPayment() {
         Payment payment =
                 client.payments().create().withAmount(2000).withCurrency("GBP")
-                        .withMetadata(ImmutableMap.of("foo", "bar"))
-                        .withLinks(new PaymentCreateRequest.Links().withMandate("MD00001PEYCSQF"))
-                        .execute();
+                        .withMetadata("foo", "bar").withLinksMandate("MD00001PEYCSQF").execute();
         assertThat(payment.getId()).isNotNull();
         assertThat(payment.getAmount()).isEqualTo(2000);
         assertThat(payment.getCurrency()).isEqualTo("GBP");

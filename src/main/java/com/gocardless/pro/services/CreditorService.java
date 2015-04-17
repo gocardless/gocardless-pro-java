@@ -124,6 +124,17 @@ public class CreditorService {
         }
 
         /**
+         * ID of the logo used on the Redirect Flow payment pages.
+         */
+        public CreditorCreateRequest withLinksLogo(String logo) {
+            if (links == null) {
+                links = new Links();
+            }
+            links.withLogo(logo);
+            return this;
+        }
+
+        /**
          * The creditor's name.
          */
         public CreditorCreateRequest withName(String name) {
@@ -340,6 +351,43 @@ public class CreditorService {
 
         public CreditorUpdateRequest withLinks(Links links) {
             this.links = links;
+            return this;
+        }
+
+        /**
+         * ID of the [bank
+         * account](https://developer.gocardless.com/pro/#api-endpoints-creditor-bank-accounts) which is set
+         * up to receive payouts in EUR.
+         */
+        public CreditorUpdateRequest withLinksDefaultEurPayoutAccount(String defaultEurPayoutAccount) {
+            if (links == null) {
+                links = new Links();
+            }
+            links.withDefaultEurPayoutAccount(defaultEurPayoutAccount);
+            return this;
+        }
+
+        /**
+         * ID of the [bank
+         * account](https://developer.gocardless.com/pro/#api-endpoints-creditor-bank-accounts) which is set
+         * up to receive payouts in GBP.
+         */
+        public CreditorUpdateRequest withLinksDefaultGbpPayoutAccount(String defaultGbpPayoutAccount) {
+            if (links == null) {
+                links = new Links();
+            }
+            links.withDefaultGbpPayoutAccount(defaultGbpPayoutAccount);
+            return this;
+        }
+
+        /**
+         * ID of the logo used on the Redirect Flow payment pages.
+         */
+        public CreditorUpdateRequest withLinksLogo(String logo) {
+            if (links == null) {
+                links = new Links();
+            }
+            links.withLogo(logo);
             return this;
         }
 

@@ -1,5 +1,6 @@
 package com.gocardless.pro.services;
 
+import java.util.HashMap;
 import java.util.Map;
 
 import com.gocardless.pro.http.*;
@@ -160,6 +161,14 @@ public class HelperService {
 
         public HelperMandateRequest withLinks(Map<String, String> links) {
             this.links = links;
+            return this;
+        }
+
+        public HelperMandateRequest withLinks(String key, String value) {
+            if (links == null) {
+                links = new HashMap<>();
+            }
+            links.put(key, value);
             return this;
         }
 
