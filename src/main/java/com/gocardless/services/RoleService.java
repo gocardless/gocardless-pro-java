@@ -8,6 +8,7 @@ import com.gocardless.http.*;
 import com.gocardless.resources.Role;
 
 import com.google.common.collect.ImmutableMap;
+import com.google.gson.annotations.SerializedName;
 import com.google.gson.reflect.TypeToken;
 
 /**
@@ -202,7 +203,9 @@ public class RoleService {
             }
 
             public enum Access {
-                READ_ONLY, FULL_ACCESS;
+                @SerializedName("read_only")
+                READ_ONLY, @SerializedName("full_access")
+                FULL_ACCESS;
                 @Override
                 public String toString() {
                     return name().toLowerCase();
@@ -281,7 +284,9 @@ public class RoleService {
         }
 
         public enum Enabled {
-            TRUE, FALSE;
+            @SerializedName("true")
+            TRUE, @SerializedName("false")
+            FALSE;
             @Override
             public String toString() {
                 return name().toLowerCase();
@@ -425,7 +430,9 @@ public class RoleService {
             }
 
             public enum Access {
-                READ_ONLY, FULL_ACCESS;
+                @SerializedName("read_only")
+                READ_ONLY, @SerializedName("full_access")
+                FULL_ACCESS;
                 @Override
                 public String toString() {
                     return name().toLowerCase();

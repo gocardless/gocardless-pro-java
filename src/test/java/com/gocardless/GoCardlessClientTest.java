@@ -18,6 +18,7 @@ import org.junit.Test;
 import static com.gocardless.GoCardlessClient.Environment.SANDBOX;
 import static com.gocardless.services.MandateService.MandateListRequest.Status.ACTIVE;
 import static com.gocardless.services.MandateService.MandateListRequest.Status.FAILED;
+import static com.gocardless.services.SubscriptionService.SubscriptionCreateRequest.IntervalUnit.MONTHLY;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -163,5 +164,14 @@ public class GoCardlessClientTest {
         Mandate mandate =
                 client.mandates().cancel("MD00001P1KTRNY").withMetadata("foo", "bar").execute();
         assertThat(mandate.getNextPossibleChargeDate()).isNull();
+    }
+
+    @Test
+    @Betamax(tape = "create a subscription")
+    public void shouldCreateASubscription() {
+        Subscription subscription =
+                client.subscriptions().create().withAmount(1000).withCurrency("GBP")
+                        .withIntervalUnit(MONTHLY).withLinksMandate("MD00001PEYCSQF").execute();
+        assertThat(subscription.getId()).isNotNull();
     }
 }

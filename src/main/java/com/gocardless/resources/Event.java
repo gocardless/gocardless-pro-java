@@ -2,6 +2,8 @@ package com.gocardless.resources;
 
 import java.util.Map;
 
+import com.google.gson.annotations.SerializedName;
+
 /**
  * Represents a event resource returned from the API.
  *
@@ -75,7 +77,12 @@ public class Event {
     }
 
     public enum ResourceType {
-        PAYMENTS, MANDATES, PAYOUTS, REFUNDS, SUBSCRIPTIONS,
+        @SerializedName("payments")
+        PAYMENTS, @SerializedName("mandates")
+        MANDATES, @SerializedName("payouts")
+        PAYOUTS, @SerializedName("refunds")
+        REFUNDS, @SerializedName("subscriptions")
+        SUBSCRIPTIONS,
     }
 
     public static class Details {
@@ -157,15 +164,26 @@ public class Event {
         }
 
         public enum Origin {
-            BANK, API, GOCARDLESS,
+            @SerializedName("bank")
+            BANK, @SerializedName("api")
+            API, @SerializedName("gocardless")
+            GOCARDLESS,
         }
 
         public enum ReportType {
-            AUDDIS, ADDACS, ARUDD, DDICA, SETTLEMENT, PROCESSING,
+            @SerializedName("auddis")
+            AUDDIS, @SerializedName("addacs")
+            ADDACS, @SerializedName("arudd")
+            ARUDD, @SerializedName("ddica")
+            DDICA, @SerializedName("settlement")
+            SETTLEMENT, @SerializedName("processing")
+            PROCESSING,
         }
 
         public enum Scheme {
-            BACS, SEPA_CORE,
+            @SerializedName("bacs")
+            BACS, @SerializedName("sepa_core")
+            SEPA_CORE,
         }
     }
 

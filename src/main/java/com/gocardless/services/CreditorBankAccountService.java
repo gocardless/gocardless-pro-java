@@ -8,6 +8,7 @@ import com.gocardless.http.*;
 import com.gocardless.resources.CreditorBankAccount;
 
 import com.google.common.collect.ImmutableMap;
+import com.google.gson.annotations.SerializedName;
 import com.google.gson.reflect.TypeToken;
 
 /**
@@ -324,7 +325,9 @@ public class CreditorBankAccountService {
         }
 
         public enum Enabled {
-            TRUE, FALSE;
+            @SerializedName("true")
+            TRUE, @SerializedName("false")
+            FALSE;
             @Override
             public String toString() {
                 return name().toLowerCase();

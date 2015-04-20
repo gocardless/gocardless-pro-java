@@ -2,6 +2,8 @@ package com.gocardless.resources;
 
 import java.util.Map;
 
+import com.google.gson.annotations.SerializedName;
+
 /**
  * Represents a mandate resource returned from the API.
  *
@@ -97,7 +99,13 @@ public class Mandate {
     }
 
     public enum Status {
-        PENDING_SUBMISSION, SUBMITTED, ACTIVE, FAILED, CANCELLED, EXPIRED,
+        @SerializedName("pending_submission")
+        PENDING_SUBMISSION, @SerializedName("submitted")
+        SUBMITTED, @SerializedName("active")
+        ACTIVE, @SerializedName("failed")
+        FAILED, @SerializedName("cancelled")
+        CANCELLED, @SerializedName("expired")
+        EXPIRED,
     }
 
     public static class Links {

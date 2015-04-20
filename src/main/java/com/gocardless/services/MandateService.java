@@ -10,6 +10,7 @@ import com.gocardless.resources.Mandate;
 
 import com.google.common.base.Joiner;
 import com.google.common.collect.ImmutableMap;
+import com.google.gson.annotations.SerializedName;
 import com.google.gson.reflect.TypeToken;
 
 /**
@@ -359,7 +360,13 @@ public class MandateService {
         }
 
         public enum Status {
-            PENDING_SUBMISSION, SUBMITTED, ACTIVE, FAILED, CANCELLED, EXPIRED;
+            @SerializedName("pending_submission")
+            PENDING_SUBMISSION, @SerializedName("submitted")
+            SUBMITTED, @SerializedName("active")
+            ACTIVE, @SerializedName("failed")
+            FAILED, @SerializedName("cancelled")
+            CANCELLED, @SerializedName("expired")
+            EXPIRED;
             @Override
             public String toString() {
                 return name().toLowerCase();

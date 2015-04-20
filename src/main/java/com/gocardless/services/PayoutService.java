@@ -7,6 +7,7 @@ import com.gocardless.http.*;
 import com.gocardless.resources.Payout;
 
 import com.google.common.collect.ImmutableMap;
+import com.google.gson.annotations.SerializedName;
 import com.google.gson.reflect.TypeToken;
 
 /**
@@ -145,7 +146,9 @@ public class PayoutService {
         }
 
         public enum Status {
-            PENDING, PAID;
+            @SerializedName("pending")
+            PENDING, @SerializedName("paid")
+            PAID;
             @Override
             public String toString() {
                 return name().toLowerCase();

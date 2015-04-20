@@ -3,6 +3,8 @@ package com.gocardless.resources;
 import java.util.List;
 import java.util.Map;
 
+import com.google.gson.annotations.SerializedName;
+
 /**
  * Represents a subscription resource returned from the API.
  *
@@ -216,11 +218,26 @@ public class Subscription {
     }
 
     public enum IntervalUnit {
-        WEEKLY, MONTHLY, YEARLY,
+        @SerializedName("weekly")
+        WEEKLY, @SerializedName("monthly")
+        MONTHLY, @SerializedName("yearly")
+        YEARLY,
     }
 
     public enum Month {
-        JANUARY, FEBRUARY, MARCH, APRIL, MAY, JUNE, JULY, AUGUST, SEPTEMBER, OCTOBER, NOVEMBER, DECEMBER,
+        @SerializedName("january")
+        JANUARY, @SerializedName("february")
+        FEBRUARY, @SerializedName("march")
+        MARCH, @SerializedName("april")
+        APRIL, @SerializedName("may")
+        MAY, @SerializedName("june")
+        JUNE, @SerializedName("july")
+        JULY, @SerializedName("august")
+        AUGUST, @SerializedName("september")
+        SEPTEMBER, @SerializedName("october")
+        OCTOBER, @SerializedName("november")
+        NOVEMBER, @SerializedName("december")
+        DECEMBER,
     }
 
     public static class Links {

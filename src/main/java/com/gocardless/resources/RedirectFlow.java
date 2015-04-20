@@ -1,5 +1,7 @@
 package com.gocardless.resources;
 
+import com.google.gson.annotations.SerializedName;
+
 /**
  * Represents a redirect flow resource returned from the API.
  *
@@ -110,7 +112,9 @@ public class RedirectFlow {
     }
 
     public enum Scheme {
-        BACS, SEPA_CORE,
+        @SerializedName("bacs")
+        BACS, @SerializedName("sepa_core")
+        SEPA_CORE,
     }
 
     public static class Links {

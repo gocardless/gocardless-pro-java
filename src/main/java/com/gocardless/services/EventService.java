@@ -7,6 +7,7 @@ import com.gocardless.http.*;
 import com.gocardless.resources.Event;
 
 import com.google.common.collect.ImmutableMap;
+import com.google.gson.annotations.SerializedName;
 import com.google.gson.reflect.TypeToken;
 
 /**
@@ -287,7 +288,12 @@ public class EventService {
         }
 
         public enum Include {
-            PAYMENT, MANDATE, PAYOUT, REFUND, SUBSCRIPTION;
+            @SerializedName("payment")
+            PAYMENT, @SerializedName("mandate")
+            MANDATE, @SerializedName("payout")
+            PAYOUT, @SerializedName("refund")
+            REFUND, @SerializedName("subscription")
+            SUBSCRIPTION;
             @Override
             public String toString() {
                 return name().toLowerCase();
@@ -295,7 +301,12 @@ public class EventService {
         }
 
         public enum ResourceType {
-            PAYMENTS, MANDATES, PAYOUTS, REFUNDS, SUBSCRIPTIONS;
+            @SerializedName("payments")
+            PAYMENTS, @SerializedName("mandates")
+            MANDATES, @SerializedName("payouts")
+            PAYOUTS, @SerializedName("refunds")
+            REFUNDS, @SerializedName("subscriptions")
+            SUBSCRIPTIONS;
             @Override
             public String toString() {
                 return name().toLowerCase();

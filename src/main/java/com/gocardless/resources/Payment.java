@@ -2,6 +2,8 @@ package com.gocardless.resources;
 
 import java.util.Map;
 
+import com.google.gson.annotations.SerializedName;
+
 /**
  * Represents a payment resource returned from the API.
  *
@@ -129,7 +131,14 @@ public class Payment {
     }
 
     public enum Status {
-        PENDING_SUBMISSION, SUBMITTED, CONFIRMED, FAILED, CHARGED_BACK, PAID_OUT, CANCELLED,
+        @SerializedName("pending_submission")
+        PENDING_SUBMISSION, @SerializedName("submitted")
+        SUBMITTED, @SerializedName("confirmed")
+        CONFIRMED, @SerializedName("failed")
+        FAILED, @SerializedName("charged_back")
+        CHARGED_BACK, @SerializedName("paid_out")
+        PAID_OUT, @SerializedName("cancelled")
+        CANCELLED,
     }
 
     public static class Links {

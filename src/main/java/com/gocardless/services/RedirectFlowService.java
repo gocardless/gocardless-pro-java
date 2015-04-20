@@ -6,6 +6,7 @@ import com.gocardless.http.*;
 import com.gocardless.resources.RedirectFlow;
 
 import com.google.common.collect.ImmutableMap;
+import com.google.gson.annotations.SerializedName;
 
 /**
  * Service class for working with redirect flow resources.
@@ -179,7 +180,9 @@ public class RedirectFlowService {
         }
 
         public enum Scheme {
-            BACS, SEPA_CORE;
+            @SerializedName("bacs")
+            BACS, @SerializedName("sepa_core")
+            SEPA_CORE;
             @Override
             public String toString() {
                 return name().toLowerCase();

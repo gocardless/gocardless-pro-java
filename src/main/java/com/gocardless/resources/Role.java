@@ -2,6 +2,8 @@ package com.gocardless.resources;
 
 import java.util.List;
 
+import com.google.gson.annotations.SerializedName;
+
 /**
  * Represents a role resource returned from the API.
  *
@@ -129,7 +131,9 @@ public class Role {
         }
 
         public enum Access {
-            READ_ONLY, FULL_ACCESS,
+            @SerializedName("read_only")
+            READ_ONLY, @SerializedName("full_access")
+            FULL_ACCESS,
         }
     }
 }

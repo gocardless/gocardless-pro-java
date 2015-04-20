@@ -1,5 +1,7 @@
 package com.gocardless.resources;
 
+import com.google.gson.annotations.SerializedName;
+
 /**
  * Represents a payout resource returned from the API.
  *
@@ -76,7 +78,9 @@ public class Payout {
     }
 
     public enum Status {
-        PENDING, PAID,
+        @SerializedName("pending")
+        PENDING, @SerializedName("paid")
+        PAID,
     }
 
     public static class Links {

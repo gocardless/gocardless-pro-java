@@ -8,6 +8,7 @@ import com.gocardless.http.*;
 import com.gocardless.resources.Subscription;
 
 import com.google.common.collect.ImmutableMap;
+import com.google.gson.annotations.SerializedName;
 import com.google.gson.reflect.TypeToken;
 
 /**
@@ -295,7 +296,10 @@ public class SubscriptionService {
         }
 
         public enum IntervalUnit {
-            WEEKLY, MONTHLY, YEARLY;
+            @SerializedName("weekly")
+            WEEKLY, @SerializedName("monthly")
+            MONTHLY, @SerializedName("yearly")
+            YEARLY;
             @Override
             public String toString() {
                 return name().toLowerCase();
@@ -303,7 +307,19 @@ public class SubscriptionService {
         }
 
         public enum Month {
-            JANUARY, FEBRUARY, MARCH, APRIL, MAY, JUNE, JULY, AUGUST, SEPTEMBER, OCTOBER, NOVEMBER, DECEMBER;
+            @SerializedName("january")
+            JANUARY, @SerializedName("february")
+            FEBRUARY, @SerializedName("march")
+            MARCH, @SerializedName("april")
+            APRIL, @SerializedName("may")
+            MAY, @SerializedName("june")
+            JUNE, @SerializedName("july")
+            JULY, @SerializedName("august")
+            AUGUST, @SerializedName("september")
+            SEPTEMBER, @SerializedName("october")
+            OCTOBER, @SerializedName("november")
+            NOVEMBER, @SerializedName("december")
+            DECEMBER;
             @Override
             public String toString() {
                 return name().toLowerCase();
