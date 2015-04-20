@@ -296,5 +296,10 @@ public class RedirectFlowService {
         protected boolean hasBody() {
             return true;
         }
+
+        @Override
+        protected String getRequestEnvelope() {
+            return "data";
+        }
     }
 }

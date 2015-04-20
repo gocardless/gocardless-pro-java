@@ -74,7 +74,7 @@ public class HttpClient {
         if (!request.hasBody()) {
             return null;
         }
-        String json = requestWriter.write(request, request.getEnvelope());
+        String json = requestWriter.write(request, request.getRequestEnvelope());
         return RequestBody.create(MEDIA_TYPE, json);
     }
 

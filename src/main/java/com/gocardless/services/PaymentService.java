@@ -656,6 +656,11 @@ public class PaymentService {
         protected boolean hasBody() {
             return true;
         }
+
+        @Override
+        protected String getRequestEnvelope() {
+            return "data";
+        }
     }
 
     /**
@@ -726,6 +731,11 @@ public class PaymentService {
         @Override
         protected boolean hasBody() {
             return true;
+        }
+
+        @Override
+        protected String getRequestEnvelope() {
+            return "data";
         }
     }
 }

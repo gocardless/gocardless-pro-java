@@ -543,6 +543,11 @@ public class MandateService {
         protected boolean hasBody() {
             return true;
         }
+
+        @Override
+        protected String getRequestEnvelope() {
+            return "data";
+        }
     }
 
     /**
@@ -613,6 +618,11 @@ public class MandateService {
         @Override
         protected boolean hasBody() {
             return true;
+        }
+
+        @Override
+        protected String getRequestEnvelope() {
+            return "data";
         }
     }
 }

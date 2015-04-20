@@ -156,4 +156,12 @@ public class GoCardlessClientTest {
         assertThat(mandates.get(1).getId()).isEqualTo("MD00001P57AN84");
         assertThat(mandates.get(2).getId()).isEqualTo("MD00001P1KTRNY");
     }
+
+    @Test
+    @Betamax(tape = "cancel a mandate")
+    public void shouldCancelAMandate() {
+        Mandate mandate =
+                client.mandates().cancel("MD00001P1KTRNY").withMetadata("foo", "bar").execute();
+        assertThat(mandate.getNextPossibleChargeDate()).isNull();
+    }
 }

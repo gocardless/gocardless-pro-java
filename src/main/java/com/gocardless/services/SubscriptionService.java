@@ -583,5 +583,10 @@ public class SubscriptionService {
         protected boolean hasBody() {
             return true;
         }
+
+        @Override
+        protected String getRequestEnvelope() {
+            return "data";
+        }
     }
 }

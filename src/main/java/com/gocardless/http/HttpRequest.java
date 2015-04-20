@@ -40,6 +40,10 @@ abstract class HttpRequest<T> {
         return ImmutableMap.of();
     }
 
+    protected String getRequestEnvelope() {
+        return getEnvelope();
+    }
+
     protected abstract String getPathTemplate();
 
     protected abstract String getMethod();

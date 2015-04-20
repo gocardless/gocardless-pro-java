@@ -227,6 +227,11 @@ public class HelperService {
         protected boolean hasBody() {
             return true;
         }
+
+        @Override
+        protected String getRequestEnvelope() {
+            return "data";
+        }
     }
 
     /**
@@ -319,6 +324,11 @@ public class HelperService {
         @Override
         protected boolean hasBody() {
             return true;
+        }
+
+        @Override
+        protected String getRequestEnvelope() {
+            return "data";
         }
     }
 }
