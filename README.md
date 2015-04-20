@@ -4,6 +4,8 @@ This library provides a simple wrapper around the [GoCardless Pro API](http://de
 
 This client is still in beta and is subject to change. Until a stable major version is released you should expect breaking changes.
 
+An example application using this library can be found [here](https://github.com/gocardless/gocardless-pro-java-example).
+
 ## Getting started
 
 With Maven:
