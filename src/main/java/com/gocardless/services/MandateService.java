@@ -46,8 +46,12 @@ public class MandateService {
      * Returns a [cursor-paginated](https://developer.gocardless.com/pro/#overview-cursor-pagination)
      * list of your mandates. Except where stated, these filters can only be used one at a time.
      */
-    public MandateListRequest list() {
-        return new MandateListRequest(httpClient);
+    public MandateListRequest<ListResponse<Mandate>> list() {
+        return new MandateListRequest<>(httpClient, ListRequest.<Mandate>pagingExecutor());
+    }
+
+    public MandateListRequest<Iterable<Mandate>> all() {
+        return new MandateListRequest<>(httpClient, ListRequest.<Mandate>iteratingExecutor());
     }
 
     /**
@@ -231,7 +235,7 @@ public class MandateService {
      * Returns a [cursor-paginated](https://developer.gocardless.com/pro/#overview-cursor-pagination)
      * list of your mandates. Except where stated, these filters can only be used one at a time.
      */
-    public static final class MandateListRequest extends ListRequest<Mandate> {
+    public static final class MandateListRequest<S> extends ListRequest<S, Mandate> {
         private String creditor;
         private String customer;
         private String customerBankAccount;
@@ -241,7 +245,7 @@ public class MandateService {
         /**
          * Cursor pointing to the start of the desired set.
          */
-        public MandateListRequest withAfter(String after) {
+        public MandateListRequest<S> withAfter(String after) {
             setAfter(after);
             return this;
         }
@@ -249,7 +253,7 @@ public class MandateService {
         /**
          * Cursor pointing to the end of the desired set.
          */
-        public MandateListRequest withBefore(String before) {
+        public MandateListRequest<S> withBefore(String before) {
             setBefore(before);
             return this;
         }
@@ -259,7 +263,7 @@ public class MandateService {
          * this endpoint will return all mandates for the given creditor. Cannot be used in conjunction with
          * `customer_bank_account`
          */
-        public MandateListRequest withCreditor(String creditor) {
+        public MandateListRequest<S> withCreditor(String creditor) {
             this.creditor = creditor;
             return this;
         }
@@ -267,7 +271,7 @@ public class MandateService {
         /**
          * Unique identifier, beginning with "CU".
          */
-        public MandateListRequest withCustomer(String customer) {
+        public MandateListRequest<S> withCustomer(String customer) {
             this.customer = customer;
             return this;
         }
@@ -278,7 +282,7 @@ public class MandateService {
          * specified, this endpoint will return all mandates for the given bank account. Cannot be used in
          * conjunction with `creditor`
          */
-        public MandateListRequest withCustomerBankAccount(String customerBankAccount) {
+        public MandateListRequest<S> withCustomerBankAccount(String customerBankAccount) {
             this.customerBankAccount = customerBankAccount;
             return this;
         }
@@ -286,7 +290,7 @@ public class MandateService {
         /**
          * Number of records to return.
          */
-        public MandateListRequest withLimit(Integer limit) {
+        public MandateListRequest<S> withLimit(Integer limit) {
             setLimit(limit);
             return this;
         }
@@ -294,7 +298,7 @@ public class MandateService {
         /**
          * Unique 6 to 18 character reference. Can be supplied or auto-generated.
          */
-        public MandateListRequest withReference(String reference) {
+        public MandateListRequest<S> withReference(String reference) {
             this.reference = reference;
             return this;
         }
@@ -302,7 +306,7 @@ public class MandateService {
         /**
          * At most three valid status values
          */
-        public MandateListRequest withStatus(List<Status> status) {
+        public MandateListRequest<S> withStatus(List<Status> status) {
             this.status = status;
             return this;
         }
@@ -310,7 +314,7 @@ public class MandateService {
         /**
          * At most three valid status values
          */
-        public MandateListRequest withStatus(Status status) {
+        public MandateListRequest<S> withStatus(Status status) {
             if (this.status == null) {
                 this.status = new ArrayList<>();
             }
@@ -318,8 +322,8 @@ public class MandateService {
             return this;
         }
 
-        private MandateListRequest(HttpClient httpClient) {
-            super(httpClient);
+        private MandateListRequest(HttpClient httpClient, ListRequestExecutor<S, Mandate> executor) {
+            super(httpClient, executor);
         }
 
         @Override

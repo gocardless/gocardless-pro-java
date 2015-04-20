@@ -1,7 +1,6 @@
 package com.gocardless.http;
 
 import java.io.Reader;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
@@ -13,17 +12,26 @@ import com.google.gson.reflect.TypeToken;
  *
  * @param <T> the type of the item returned by this request.
  */
-public abstract class ListRequest<T> extends HttpRequest<ListResponse<T>> implements Iterable<T> {
+public abstract class ListRequest<S, T> extends HttpRequest<ListResponse<T>> {
+    private final ListRequestExecutor<S, T> executor;
     private String after;
     private String before;
     private Integer limit;
 
-    protected ListRequest(HttpClient httpClient) {
+    protected ListRequest(HttpClient httpClient, ListRequestExecutor<S, T> executor) {
         super(httpClient);
+        this.executor = executor;
     }
 
-    public Iterator<T> iterator() {
-        return new PaginatingIterator<>(this);
+    /**
+     * Executes this request.
+     *
+     * Returns the API response.
+     *
+     * @throws com.gocardless.GoCardlessException
+     */
+    public S execute() {
+        return executor.execute(this, getHttpClient());
     }
 
     @Override
@@ -68,5 +76,28 @@ public abstract class ListRequest<T> extends HttpRequest<ListResponse<T>> implem
 
     protected void setLimit(Integer limit) {
         this.limit = limit;
+    }
+
+    public interface ListRequestExecutor<S, T> {
+        S execute(ListRequest<S, T> request, HttpClient client);
+    }
+
+    public static <T> ListRequestExecutor<ListResponse<T>, T> pagingExecutor() {
+        return new ListRequestExecutor<ListResponse<T>, T>() {
+            @Override
+            public ListResponse<T> execute(ListRequest<ListResponse<T>, T> request,
+                    HttpClient client) {
+                return client.execute(request);
+            }
+        };
+    }
+
+    public static <T> ListRequestExecutor<Iterable<T>, T> iteratingExecutor() {
+        return new ListRequestExecutor<Iterable<T>, T>() {
+            @Override
+            public Iterable<T> execute(ListRequest<Iterable<T>, T> request, HttpClient client) {
+                return new PaginatingIterable<>(request, client);
+            }
+        };
     }
 }

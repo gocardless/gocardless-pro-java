@@ -62,8 +62,12 @@ public class RefundService {
      * Returns a [cursor-paginated](https://developer.gocardless.com/pro/#overview-cursor-pagination)
      * list of your refunds.
      */
-    public RefundListRequest list() {
-        return new RefundListRequest(httpClient);
+    public RefundListRequest<ListResponse<Refund>> list() {
+        return new RefundListRequest<>(httpClient, ListRequest.<Refund>pagingExecutor());
+    }
+
+    public RefundListRequest<Iterable<Refund>> all() {
+        return new RefundListRequest<>(httpClient, ListRequest.<Refund>iteratingExecutor());
     }
 
     /**
@@ -201,13 +205,13 @@ public class RefundService {
      * Returns a [cursor-paginated](https://developer.gocardless.com/pro/#overview-cursor-pagination)
      * list of your refunds.
      */
-    public static final class RefundListRequest extends ListRequest<Refund> {
+    public static final class RefundListRequest<S> extends ListRequest<S, Refund> {
         private String payment;
 
         /**
          * Cursor pointing to the start of the desired set.
          */
-        public RefundListRequest withAfter(String after) {
+        public RefundListRequest<S> withAfter(String after) {
             setAfter(after);
             return this;
         }
@@ -215,7 +219,7 @@ public class RefundService {
         /**
          * Cursor pointing to the end of the desired set.
          */
-        public RefundListRequest withBefore(String before) {
+        public RefundListRequest<S> withBefore(String before) {
             setBefore(before);
             return this;
         }
@@ -223,7 +227,7 @@ public class RefundService {
         /**
          * Number of records to return.
          */
-        public RefundListRequest withLimit(Integer limit) {
+        public RefundListRequest<S> withLimit(Integer limit) {
             setLimit(limit);
             return this;
         }
@@ -231,13 +235,13 @@ public class RefundService {
         /**
          * Unique identifier, beginning with "PM"
          */
-        public RefundListRequest withPayment(String payment) {
+        public RefundListRequest<S> withPayment(String payment) {
             this.payment = payment;
             return this;
         }
 
-        private RefundListRequest(HttpClient httpClient) {
-            super(httpClient);
+        private RefundListRequest(HttpClient httpClient, ListRequestExecutor<S, Refund> executor) {
+            super(httpClient, executor);
         }
 
         @Override

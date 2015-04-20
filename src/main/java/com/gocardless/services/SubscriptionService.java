@@ -96,8 +96,13 @@ public class SubscriptionService {
      * Returns a [cursor-paginated](https://developer.gocardless.com/pro/#overview-cursor-pagination)
      * list of your subscriptions.
      */
-    public SubscriptionListRequest list() {
-        return new SubscriptionListRequest(httpClient);
+    public SubscriptionListRequest<ListResponse<Subscription>> list() {
+        return new SubscriptionListRequest<>(httpClient, ListRequest.<Subscription>pagingExecutor());
+    }
+
+    public SubscriptionListRequest<Iterable<Subscription>> all() {
+        return new SubscriptionListRequest<>(httpClient,
+                ListRequest.<Subscription>iteratingExecutor());
     }
 
     /**
@@ -346,14 +351,14 @@ public class SubscriptionService {
      * Returns a [cursor-paginated](https://developer.gocardless.com/pro/#overview-cursor-pagination)
      * list of your subscriptions.
      */
-    public static final class SubscriptionListRequest extends ListRequest<Subscription> {
+    public static final class SubscriptionListRequest<S> extends ListRequest<S, Subscription> {
         private String customer;
         private String mandate;
 
         /**
          * Cursor pointing to the start of the desired set.
          */
-        public SubscriptionListRequest withAfter(String after) {
+        public SubscriptionListRequest<S> withAfter(String after) {
             setAfter(after);
             return this;
         }
@@ -361,7 +366,7 @@ public class SubscriptionService {
         /**
          * Cursor pointing to the end of the desired set.
          */
-        public SubscriptionListRequest withBefore(String before) {
+        public SubscriptionListRequest<S> withBefore(String before) {
             setBefore(before);
             return this;
         }
@@ -369,7 +374,7 @@ public class SubscriptionService {
         /**
          * Unique identifier, beginning with "CU".
          */
-        public SubscriptionListRequest withCustomer(String customer) {
+        public SubscriptionListRequest<S> withCustomer(String customer) {
             this.customer = customer;
             return this;
         }
@@ -377,7 +382,7 @@ public class SubscriptionService {
         /**
          * Number of records to return.
          */
-        public SubscriptionListRequest withLimit(Integer limit) {
+        public SubscriptionListRequest<S> withLimit(Integer limit) {
             setLimit(limit);
             return this;
         }
@@ -385,13 +390,14 @@ public class SubscriptionService {
         /**
          * Unique identifier, beginning with "MD"
          */
-        public SubscriptionListRequest withMandate(String mandate) {
+        public SubscriptionListRequest<S> withMandate(String mandate) {
             this.mandate = mandate;
             return this;
         }
 
-        private SubscriptionListRequest(HttpClient httpClient) {
-            super(httpClient);
+        private SubscriptionListRequest(HttpClient httpClient,
+                ListRequestExecutor<S, Subscription> executor) {
+            super(httpClient, executor);
         }
 
         @Override

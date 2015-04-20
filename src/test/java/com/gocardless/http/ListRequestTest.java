@@ -29,7 +29,8 @@ public class ListRequestTest {
     public void shouldPerformListRequest() {
         whenHttp(http.server()).match(get("/dummy"), parameter("id", "123")).then(status(OK_200),
                 resourceContent("fixtures/page.json"));
-        DummyListRequest request = new DummyListRequest(http.client());
+        DummyListRequest<ListResponse<DummyItem>> request =
+                DummyListRequest.pageRequest(http.client());
         ListResponse<DummyItem> result = request.execute();
         assertThat(result.getItems()).hasSize(2);
         assertThat(result.getItems().get(0).stringField).isEqualTo("foo");
@@ -45,8 +46,10 @@ public class ListRequestTest {
         whenHttp(http.server()).match(get("/dummy"), parameter("id", "123"),
                 parameter("after", "ID123")).then(status(OK_200),
                 resourceContent("fixtures/last-page.json"));
-        DummyListRequest request = new DummyListRequest(http.client());
-        List<DummyItem> result = Lists.newArrayList(request);
+        DummyListRequest<Iterable<DummyItem>> request =
+                DummyListRequest.iterableRequest(http.client());
+        Iterable<DummyItem> iterable = request.execute();
+        List<DummyItem> result = Lists.newArrayList(iterable);
         assertThat(result).hasSize(3);
         assertThat(result.get(0).stringField).isEqualTo("foo");
         assertThat(result.get(0).intField).isEqualTo(111);
@@ -56,9 +59,9 @@ public class ListRequestTest {
         assertThat(result.get(2).intField).isEqualTo(333);
     }
 
-    static class DummyListRequest extends ListRequest<DummyItem> {
-        public DummyListRequest(HttpClient client) {
-            super(client);
+    static class DummyListRequest<S> extends ListRequest<S, DummyItem> {
+        private DummyListRequest(HttpClient httpClient, ListRequestExecutor<S, DummyItem> executor) {
+            super(httpClient, executor);
         }
 
         @Override
@@ -80,6 +83,14 @@ public class ListRequestTest {
         @Override
         protected TypeToken<List<DummyItem>> getTypeToken() {
             return new TypeToken<List<DummyItem>>() {};
+        }
+
+        static DummyListRequest<ListResponse<DummyItem>> pageRequest(HttpClient httpClient) {
+            return new DummyListRequest<>(httpClient, ListRequest.<DummyItem>pagingExecutor());
+        }
+
+        static DummyListRequest<Iterable<DummyItem>> iterableRequest(HttpClient httpClient) {
+            return new DummyListRequest<>(httpClient, ListRequest.<DummyItem>iteratingExecutor());
         }
     }
 }

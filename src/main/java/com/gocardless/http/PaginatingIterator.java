@@ -6,12 +6,14 @@ import com.google.common.collect.AbstractIterator;
 import com.google.common.collect.Lists;
 
 class PaginatingIterator<T> extends AbstractIterator<T> {
-    private final ListRequest<T> request;
+    private final ListRequest<?, T> request;
+    private final HttpClient client;
     private List<T> items;
     private String nextCursor;
 
-    PaginatingIterator(ListRequest<T> request) {
+    PaginatingIterator(ListRequest<?, T> request, HttpClient client) {
         this.request = request;
+        this.client = client;
         loadPage();
     }
 
@@ -30,7 +32,7 @@ class PaginatingIterator<T> extends AbstractIterator<T> {
 
     private void loadPage() {
         request.setAfter(nextCursor);
-        ListResponse<T> response = request.execute();
+        ListResponse<T> response = client.execute(request);
         items = Lists.newArrayList(response.getItems());
         nextCursor = response.getAfter();
     }

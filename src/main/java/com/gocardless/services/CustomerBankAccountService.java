@@ -64,8 +64,14 @@ public class CustomerBankAccountService {
      * Returns a [cursor-paginated](https://developer.gocardless.com/pro/#overview-cursor-pagination)
      * list of your bank accounts.
      */
-    public CustomerBankAccountListRequest list() {
-        return new CustomerBankAccountListRequest(httpClient);
+    public CustomerBankAccountListRequest<ListResponse<CustomerBankAccount>> list() {
+        return new CustomerBankAccountListRequest<>(httpClient,
+                ListRequest.<CustomerBankAccount>pagingExecutor());
+    }
+
+    public CustomerBankAccountListRequest<Iterable<CustomerBankAccount>> all() {
+        return new CustomerBankAccountListRequest<>(httpClient,
+                ListRequest.<CustomerBankAccount>iteratingExecutor());
     }
 
     /**
@@ -295,15 +301,15 @@ public class CustomerBankAccountService {
      * Returns a [cursor-paginated](https://developer.gocardless.com/pro/#overview-cursor-pagination)
      * list of your bank accounts.
      */
-    public static final class CustomerBankAccountListRequest extends
-            ListRequest<CustomerBankAccount> {
+    public static final class CustomerBankAccountListRequest<S> extends
+            ListRequest<S, CustomerBankAccount> {
         private String customer;
         private Enabled enabled;
 
         /**
          * Cursor pointing to the start of the desired set.
          */
-        public CustomerBankAccountListRequest withAfter(String after) {
+        public CustomerBankAccountListRequest<S> withAfter(String after) {
             setAfter(after);
             return this;
         }
@@ -311,7 +317,7 @@ public class CustomerBankAccountService {
         /**
          * Cursor pointing to the end of the desired set.
          */
-        public CustomerBankAccountListRequest withBefore(String before) {
+        public CustomerBankAccountListRequest<S> withBefore(String before) {
             setBefore(before);
             return this;
         }
@@ -319,7 +325,7 @@ public class CustomerBankAccountService {
         /**
          * Unique identifier, beginning with "CU".
          */
-        public CustomerBankAccountListRequest withCustomer(String customer) {
+        public CustomerBankAccountListRequest<S> withCustomer(String customer) {
             this.customer = customer;
             return this;
         }
@@ -327,7 +333,7 @@ public class CustomerBankAccountService {
         /**
          * Get enabled or disabled customer bank accounts.
          */
-        public CustomerBankAccountListRequest withEnabled(Enabled enabled) {
+        public CustomerBankAccountListRequest<S> withEnabled(Enabled enabled) {
             this.enabled = enabled;
             return this;
         }
@@ -335,13 +341,14 @@ public class CustomerBankAccountService {
         /**
          * Number of records to return.
          */
-        public CustomerBankAccountListRequest withLimit(Integer limit) {
+        public CustomerBankAccountListRequest<S> withLimit(Integer limit) {
             setLimit(limit);
             return this;
         }
 
-        private CustomerBankAccountListRequest(HttpClient httpClient) {
-            super(httpClient);
+        private CustomerBankAccountListRequest(HttpClient httpClient,
+                ListRequestExecutor<S, CustomerBankAccount> executor) {
+            super(httpClient, executor);
         }
 
         @Override

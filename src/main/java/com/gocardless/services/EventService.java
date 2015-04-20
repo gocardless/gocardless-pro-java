@@ -32,8 +32,12 @@ public class EventService {
      * Returns a [cursor-paginated](https://developer.gocardless.com/pro/#overview-cursor-pagination)
      * list of your events.
      */
-    public EventListRequest list() {
-        return new EventListRequest(httpClient);
+    public EventListRequest<ListResponse<Event>> list() {
+        return new EventListRequest<>(httpClient, ListRequest.<Event>pagingExecutor());
+    }
+
+    public EventListRequest<Iterable<Event>> all() {
+        return new EventListRequest<>(httpClient, ListRequest.<Event>iteratingExecutor());
     }
 
     /**
@@ -49,7 +53,7 @@ public class EventService {
      * Returns a [cursor-paginated](https://developer.gocardless.com/pro/#overview-cursor-pagination)
      * list of your events.
      */
-    public static final class EventListRequest extends ListRequest<Event> {
+    public static final class EventListRequest<S> extends ListRequest<S, Event> {
         private String action;
         private CreatedAt createdAt;
         private Include include;
@@ -64,7 +68,7 @@ public class EventService {
         /**
          * Limit to events with a given `action`.
          */
-        public EventListRequest withAction(String action) {
+        public EventListRequest<S> withAction(String action) {
             this.action = action;
             return this;
         }
@@ -72,7 +76,7 @@ public class EventService {
         /**
          * Cursor pointing to the start of the desired set.
          */
-        public EventListRequest withAfter(String after) {
+        public EventListRequest<S> withAfter(String after) {
             setAfter(after);
             return this;
         }
@@ -80,12 +84,12 @@ public class EventService {
         /**
          * Cursor pointing to the end of the desired set.
          */
-        public EventListRequest withBefore(String before) {
+        public EventListRequest<S> withBefore(String before) {
             setBefore(before);
             return this;
         }
 
-        public EventListRequest withCreatedAt(CreatedAt createdAt) {
+        public EventListRequest<S> withCreatedAt(CreatedAt createdAt) {
             this.createdAt = createdAt;
             return this;
         }
@@ -93,7 +97,7 @@ public class EventService {
         /**
          * Limit to records created after the specified date-time.
          */
-        public EventListRequest withCreatedAtGt(String gt) {
+        public EventListRequest<S> withCreatedAtGt(String gt) {
             if (createdAt == null) {
                 createdAt = new CreatedAt();
             }
@@ -104,7 +108,7 @@ public class EventService {
         /**
          * Limit to records created on or after the specified date-time.
          */
-        public EventListRequest withCreatedAtGte(String gte) {
+        public EventListRequest<S> withCreatedAtGte(String gte) {
             if (createdAt == null) {
                 createdAt = new CreatedAt();
             }
@@ -115,7 +119,7 @@ public class EventService {
         /**
          * Limit to records created before the specified date-time.
          */
-        public EventListRequest withCreatedAtLt(String lt) {
+        public EventListRequest<S> withCreatedAtLt(String lt) {
             if (createdAt == null) {
                 createdAt = new CreatedAt();
             }
@@ -126,7 +130,7 @@ public class EventService {
         /**
          * Limit to records created on or before the specified date-time.
          */
-        public EventListRequest withCreatedAtLte(String lte) {
+        public EventListRequest<S> withCreatedAtLte(String lte) {
             if (createdAt == null) {
                 createdAt = new CreatedAt();
             }
@@ -146,7 +150,7 @@ public class EventService {
          * <li>`subscription`</li>
          * </ul>
          */
-        public EventListRequest withInclude(Include include) {
+        public EventListRequest<S> withInclude(Include include) {
             this.include = include;
             return this;
         }
@@ -154,7 +158,7 @@ public class EventService {
         /**
          * Number of records to return.
          */
-        public EventListRequest withLimit(Integer limit) {
+        public EventListRequest<S> withLimit(Integer limit) {
             setLimit(limit);
             return this;
         }
@@ -163,7 +167,7 @@ public class EventService {
          * ID of a [mandate](https://developer.gocardless.com/pro/#api-endpoints-mandates). If specified,
          * this endpoint will return all events for the given mandate.
          */
-        public EventListRequest withMandate(String mandate) {
+        public EventListRequest<S> withMandate(String mandate) {
             this.mandate = mandate;
             return this;
         }
@@ -172,7 +176,7 @@ public class EventService {
          * ID of an event. If specified, this endpint will return all events whose parent_event is the given
          * event ID.
          */
-        public EventListRequest withParentEvent(String parentEvent) {
+        public EventListRequest<S> withParentEvent(String parentEvent) {
             this.parentEvent = parentEvent;
             return this;
         }
@@ -181,7 +185,7 @@ public class EventService {
          * ID of a [payment](https://developer.gocardless.com/pro/#api-endpoints-payments). If specified,
          * this endpoint will return all events for the given payment.
          */
-        public EventListRequest withPayment(String payment) {
+        public EventListRequest<S> withPayment(String payment) {
             this.payment = payment;
             return this;
         }
@@ -190,7 +194,7 @@ public class EventService {
          * ID of a [payout](https://developer.gocardless.com/pro/#api-endpoints-payouts). If specified, this
          * endpoint will return all events for the given payout.
          */
-        public EventListRequest withPayout(String payout) {
+        public EventListRequest<S> withPayout(String payout) {
             this.payout = payout;
             return this;
         }
@@ -199,7 +203,7 @@ public class EventService {
          * ID of a [refund](https://developer.gocardless.com/pro/#api-endpoints-refunds). If specified, this
          * endpoint will return all events for the given refund.
          */
-        public EventListRequest withRefund(String refund) {
+        public EventListRequest<S> withRefund(String refund) {
             this.refund = refund;
             return this;
         }
@@ -217,7 +221,7 @@ public class EventService {
          * <li>`refunds`</li>
          * </ul>
          */
-        public EventListRequest withResourceType(ResourceType resourceType) {
+        public EventListRequest<S> withResourceType(ResourceType resourceType) {
             this.resourceType = resourceType;
             return this;
         }
@@ -226,13 +230,13 @@ public class EventService {
          * ID of a [subscription](#api-endpoints-subscriptions). If specified, this endpoint will return all
          * events for the given subscription.
          */
-        public EventListRequest withSubscription(String subscription) {
+        public EventListRequest<S> withSubscription(String subscription) {
             this.subscription = subscription;
             return this;
         }
 
-        private EventListRequest(HttpClient httpClient) {
-            super(httpClient);
+        private EventListRequest(HttpClient httpClient, ListRequestExecutor<S, Event> executor) {
+            super(httpClient, executor);
         }
 
         @Override

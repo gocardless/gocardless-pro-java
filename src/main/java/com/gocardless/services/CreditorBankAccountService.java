@@ -50,8 +50,14 @@ public class CreditorBankAccountService {
      * Returns a [cursor-paginated](https://developer.gocardless.com/pro/#overview-cursor-pagination)
      * list of your creditor bank accounts.
      */
-    public CreditorBankAccountListRequest list() {
-        return new CreditorBankAccountListRequest(httpClient);
+    public CreditorBankAccountListRequest<ListResponse<CreditorBankAccount>> list() {
+        return new CreditorBankAccountListRequest<>(httpClient,
+                ListRequest.<CreditorBankAccount>pagingExecutor());
+    }
+
+    public CreditorBankAccountListRequest<Iterable<CreditorBankAccount>> all() {
+        return new CreditorBankAccountListRequest<>(httpClient,
+                ListRequest.<CreditorBankAccount>iteratingExecutor());
     }
 
     /**
@@ -247,15 +253,15 @@ public class CreditorBankAccountService {
      * Returns a [cursor-paginated](https://developer.gocardless.com/pro/#overview-cursor-pagination)
      * list of your creditor bank accounts.
      */
-    public static final class CreditorBankAccountListRequest extends
-            ListRequest<CreditorBankAccount> {
+    public static final class CreditorBankAccountListRequest<S> extends
+            ListRequest<S, CreditorBankAccount> {
         private String creditor;
         private Enabled enabled;
 
         /**
          * Cursor pointing to the start of the desired set.
          */
-        public CreditorBankAccountListRequest withAfter(String after) {
+        public CreditorBankAccountListRequest<S> withAfter(String after) {
             setAfter(after);
             return this;
         }
@@ -263,7 +269,7 @@ public class CreditorBankAccountService {
         /**
          * Cursor pointing to the end of the desired set.
          */
-        public CreditorBankAccountListRequest withBefore(String before) {
+        public CreditorBankAccountListRequest<S> withBefore(String before) {
             setBefore(before);
             return this;
         }
@@ -271,7 +277,7 @@ public class CreditorBankAccountService {
         /**
          * Unique identifier, beginning with "CR".
          */
-        public CreditorBankAccountListRequest withCreditor(String creditor) {
+        public CreditorBankAccountListRequest<S> withCreditor(String creditor) {
             this.creditor = creditor;
             return this;
         }
@@ -279,7 +285,7 @@ public class CreditorBankAccountService {
         /**
          * Get enabled or disabled creditor bank accounts.
          */
-        public CreditorBankAccountListRequest withEnabled(Enabled enabled) {
+        public CreditorBankAccountListRequest<S> withEnabled(Enabled enabled) {
             this.enabled = enabled;
             return this;
         }
@@ -287,13 +293,14 @@ public class CreditorBankAccountService {
         /**
          * Number of records to return.
          */
-        public CreditorBankAccountListRequest withLimit(Integer limit) {
+        public CreditorBankAccountListRequest<S> withLimit(Integer limit) {
             setLimit(limit);
             return this;
         }
 
-        private CreditorBankAccountListRequest(HttpClient httpClient) {
-            super(httpClient);
+        private CreditorBankAccountListRequest(HttpClient httpClient,
+                ListRequestExecutor<S, CreditorBankAccount> executor) {
+            super(httpClient, executor);
         }
 
         @Override

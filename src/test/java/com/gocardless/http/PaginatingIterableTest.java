@@ -1,6 +1,5 @@
 package com.gocardless.http;
 
-import java.util.Iterator;
 import java.util.List;
 
 import com.gocardless.http.HttpTestUtil.DummyItem;
@@ -21,7 +20,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 import static org.glassfish.grizzly.http.util.HttpStatus.OK_200;
 
-public class PaginatingIteratorTest {
+public class PaginatingIterableTest {
     @Rule
     public MockHttp http = new MockHttp();
 
@@ -33,10 +32,11 @@ public class PaginatingIteratorTest {
         whenHttp(http.server()).match(get("/dummy"), parameter("id", "123"),
                 parameter("limit", "2"), parameter("after", "ID123")).then(status(OK_200),
                 resourceContent("fixtures/last-page.json"));
-        DummyListRequest request = new DummyListRequest(http.client());
+        DummyListRequest<Iterable<DummyItem>> request =
+                DummyListRequest.iterableRequest(http.client());
         request.setLimit(2);
-        Iterator<DummyItem> iterator = new PaginatingIterator<>(request);
-        List<DummyItem> items = Lists.newArrayList(iterator);
+        Iterable<DummyItem> iterable = new PaginatingIterable<>(request, http.client());
+        List<DummyItem> items = Lists.newArrayList(iterable);
         assertThat(items).hasSize(3);
         assertThat(items.get(0).stringField).isEqualTo("foo");
         assertThat(items.get(0).intField).isEqualTo(111);
@@ -54,10 +54,11 @@ public class PaginatingIteratorTest {
         whenHttp(http.server()).match(get("/dummy"), parameter("id", "123"),
                 parameter("limit", "2"), parameter("after", "ID123")).then(status(OK_200),
                 resourceContent("fixtures/empty-page.json"));
-        DummyListRequest request = new DummyListRequest(http.client());
+        DummyListRequest<Iterable<DummyItem>> request =
+                DummyListRequest.iterableRequest(http.client());
         request.setLimit(2);
-        Iterator<DummyItem> iterator = new PaginatingIterator<>(request);
-        List<DummyItem> items = Lists.newArrayList(iterator);
+        Iterable<DummyItem> iterable = new PaginatingIterable<>(request, http.client());
+        List<DummyItem> items = Lists.newArrayList(iterable);
         assertThat(items).hasSize(2);
         assertThat(items.get(0).stringField).isEqualTo("foo");
         assertThat(items.get(0).intField).isEqualTo(111);

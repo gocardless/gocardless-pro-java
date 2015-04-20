@@ -35,8 +35,12 @@ public class PayoutService {
      * Returns a [cursor-paginated](https://developer.gocardless.com/pro/#overview-cursor-pagination)
      * list of your payouts.
      */
-    public PayoutListRequest list() {
-        return new PayoutListRequest(httpClient);
+    public PayoutListRequest<ListResponse<Payout>> list() {
+        return new PayoutListRequest<>(httpClient, ListRequest.<Payout>pagingExecutor());
+    }
+
+    public PayoutListRequest<Iterable<Payout>> all() {
+        return new PayoutListRequest<>(httpClient, ListRequest.<Payout>iteratingExecutor());
     }
 
     /**
@@ -52,7 +56,7 @@ public class PayoutService {
      * Returns a [cursor-paginated](https://developer.gocardless.com/pro/#overview-cursor-pagination)
      * list of your payouts.
      */
-    public static final class PayoutListRequest extends ListRequest<Payout> {
+    public static final class PayoutListRequest<S> extends ListRequest<S, Payout> {
         private String creditor;
         private String creditorBankAccount;
         private Status status;
@@ -60,7 +64,7 @@ public class PayoutService {
         /**
          * Cursor pointing to the start of the desired set.
          */
-        public PayoutListRequest withAfter(String after) {
+        public PayoutListRequest<S> withAfter(String after) {
             setAfter(after);
             return this;
         }
@@ -68,7 +72,7 @@ public class PayoutService {
         /**
          * Cursor pointing to the end of the desired set.
          */
-        public PayoutListRequest withBefore(String before) {
+        public PayoutListRequest<S> withBefore(String before) {
             setBefore(before);
             return this;
         }
@@ -76,7 +80,7 @@ public class PayoutService {
         /**
          * Unique identifier, beginning with "CR".
          */
-        public PayoutListRequest withCreditor(String creditor) {
+        public PayoutListRequest<S> withCreditor(String creditor) {
             this.creditor = creditor;
             return this;
         }
@@ -84,7 +88,7 @@ public class PayoutService {
         /**
          * Unique identifier, beginning with "BA"
          */
-        public PayoutListRequest withCreditorBankAccount(String creditorBankAccount) {
+        public PayoutListRequest<S> withCreditorBankAccount(String creditorBankAccount) {
             this.creditorBankAccount = creditorBankAccount;
             return this;
         }
@@ -92,7 +96,7 @@ public class PayoutService {
         /**
          * Number of records to return.
          */
-        public PayoutListRequest withLimit(Integer limit) {
+        public PayoutListRequest<S> withLimit(Integer limit) {
             setLimit(limit);
             return this;
         }
@@ -105,13 +109,13 @@ public class PayoutService {
          * <li>`paid`: the payout has been sent to the banks</li>
          * </ul>
          */
-        public PayoutListRequest withStatus(Status status) {
+        public PayoutListRequest<S> withStatus(Status status) {
             this.status = status;
             return this;
         }
 
-        private PayoutListRequest(HttpClient httpClient) {
-            super(httpClient);
+        private PayoutListRequest(HttpClient httpClient, ListRequestExecutor<S, Payout> executor) {
+            super(httpClient, executor);
         }
 
         @Override

@@ -41,8 +41,12 @@ public class CustomerService {
      * Returns a [cursor-paginated](https://developer.gocardless.com/pro/#overview-cursor-pagination)
      * list of your customers.
      */
-    public CustomerListRequest list() {
-        return new CustomerListRequest(httpClient);
+    public CustomerListRequest<ListResponse<Customer>> list() {
+        return new CustomerListRequest<>(httpClient, ListRequest.<Customer>pagingExecutor());
+    }
+
+    public CustomerListRequest<Iterable<Customer>> all() {
+        return new CustomerListRequest<>(httpClient, ListRequest.<Customer>iteratingExecutor());
     }
 
     /**
@@ -210,13 +214,13 @@ public class CustomerService {
      * Returns a [cursor-paginated](https://developer.gocardless.com/pro/#overview-cursor-pagination)
      * list of your customers.
      */
-    public static final class CustomerListRequest extends ListRequest<Customer> {
+    public static final class CustomerListRequest<S> extends ListRequest<S, Customer> {
         private CreatedAt createdAt;
 
         /**
          * Cursor pointing to the start of the desired set.
          */
-        public CustomerListRequest withAfter(String after) {
+        public CustomerListRequest<S> withAfter(String after) {
             setAfter(after);
             return this;
         }
@@ -224,12 +228,12 @@ public class CustomerService {
         /**
          * Cursor pointing to the end of the desired set.
          */
-        public CustomerListRequest withBefore(String before) {
+        public CustomerListRequest<S> withBefore(String before) {
             setBefore(before);
             return this;
         }
 
-        public CustomerListRequest withCreatedAt(CreatedAt createdAt) {
+        public CustomerListRequest<S> withCreatedAt(CreatedAt createdAt) {
             this.createdAt = createdAt;
             return this;
         }
@@ -237,7 +241,7 @@ public class CustomerService {
         /**
          * Limit to records created after the specified date-time.
          */
-        public CustomerListRequest withCreatedAtGt(String gt) {
+        public CustomerListRequest<S> withCreatedAtGt(String gt) {
             if (createdAt == null) {
                 createdAt = new CreatedAt();
             }
@@ -248,7 +252,7 @@ public class CustomerService {
         /**
          * Limit to records created on or after the specified date-time.
          */
-        public CustomerListRequest withCreatedAtGte(String gte) {
+        public CustomerListRequest<S> withCreatedAtGte(String gte) {
             if (createdAt == null) {
                 createdAt = new CreatedAt();
             }
@@ -259,7 +263,7 @@ public class CustomerService {
         /**
          * Limit to records created before the specified date-time.
          */
-        public CustomerListRequest withCreatedAtLt(String lt) {
+        public CustomerListRequest<S> withCreatedAtLt(String lt) {
             if (createdAt == null) {
                 createdAt = new CreatedAt();
             }
@@ -270,7 +274,7 @@ public class CustomerService {
         /**
          * Limit to records created on or before the specified date-time.
          */
-        public CustomerListRequest withCreatedAtLte(String lte) {
+        public CustomerListRequest<S> withCreatedAtLte(String lte) {
             if (createdAt == null) {
                 createdAt = new CreatedAt();
             }
@@ -281,13 +285,13 @@ public class CustomerService {
         /**
          * Number of records to return.
          */
-        public CustomerListRequest withLimit(Integer limit) {
+        public CustomerListRequest<S> withLimit(Integer limit) {
             setLimit(limit);
             return this;
         }
 
-        private CustomerListRequest(HttpClient httpClient) {
-            super(httpClient);
+        private CustomerListRequest(HttpClient httpClient, ListRequestExecutor<S, Customer> executor) {
+            super(httpClient, executor);
         }
 
         @Override

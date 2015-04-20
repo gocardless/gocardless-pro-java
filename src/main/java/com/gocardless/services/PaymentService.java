@@ -52,8 +52,12 @@ public class PaymentService {
      * Returns a [cursor-paginated](https://developer.gocardless.com/pro/#overview-cursor-pagination)
      * list of your payments.
      */
-    public PaymentListRequest list() {
-        return new PaymentListRequest(httpClient);
+    public PaymentListRequest<ListResponse<Payment>> list() {
+        return new PaymentListRequest<>(httpClient, ListRequest.<Payment>pagingExecutor());
+    }
+
+    public PaymentListRequest<Iterable<Payment>> all() {
+        return new PaymentListRequest<>(httpClient, ListRequest.<Payment>iteratingExecutor());
     }
 
     /**
@@ -243,7 +247,7 @@ public class PaymentService {
      * Returns a [cursor-paginated](https://developer.gocardless.com/pro/#overview-cursor-pagination)
      * list of your payments.
      */
-    public static final class PaymentListRequest extends ListRequest<Payment> {
+    public static final class PaymentListRequest<S> extends ListRequest<S, Payment> {
         private CreatedAt createdAt;
         private String creditor;
         private String customer;
@@ -254,7 +258,7 @@ public class PaymentService {
         /**
          * Cursor pointing to the start of the desired set.
          */
-        public PaymentListRequest withAfter(String after) {
+        public PaymentListRequest<S> withAfter(String after) {
             setAfter(after);
             return this;
         }
@@ -262,12 +266,12 @@ public class PaymentService {
         /**
          * Cursor pointing to the end of the desired set.
          */
-        public PaymentListRequest withBefore(String before) {
+        public PaymentListRequest<S> withBefore(String before) {
             setBefore(before);
             return this;
         }
 
-        public PaymentListRequest withCreatedAt(CreatedAt createdAt) {
+        public PaymentListRequest<S> withCreatedAt(CreatedAt createdAt) {
             this.createdAt = createdAt;
             return this;
         }
@@ -275,7 +279,7 @@ public class PaymentService {
         /**
          * Limit to records created after the specified date-time.
          */
-        public PaymentListRequest withCreatedAtGt(String gt) {
+        public PaymentListRequest<S> withCreatedAtGt(String gt) {
             if (createdAt == null) {
                 createdAt = new CreatedAt();
             }
@@ -286,7 +290,7 @@ public class PaymentService {
         /**
          * Limit to records created on or after the specified date-time.
          */
-        public PaymentListRequest withCreatedAtGte(String gte) {
+        public PaymentListRequest<S> withCreatedAtGte(String gte) {
             if (createdAt == null) {
                 createdAt = new CreatedAt();
             }
@@ -297,7 +301,7 @@ public class PaymentService {
         /**
          * Limit to records created before the specified date-time.
          */
-        public PaymentListRequest withCreatedAtLt(String lt) {
+        public PaymentListRequest<S> withCreatedAtLt(String lt) {
             if (createdAt == null) {
                 createdAt = new CreatedAt();
             }
@@ -308,7 +312,7 @@ public class PaymentService {
         /**
          * Limit to records created on or before the specified date-time.
          */
-        public PaymentListRequest withCreatedAtLte(String lte) {
+        public PaymentListRequest<S> withCreatedAtLte(String lte) {
             if (createdAt == null) {
                 createdAt = new CreatedAt();
             }
@@ -320,7 +324,7 @@ public class PaymentService {
          * ID of a creditor to filter payments by. If you pass this parameter, you cannot also pass
          * `customer`.
          */
-        public PaymentListRequest withCreditor(String creditor) {
+        public PaymentListRequest<S> withCreditor(String creditor) {
             this.creditor = creditor;
             return this;
         }
@@ -329,7 +333,7 @@ public class PaymentService {
          * ID of a customer to filter payments by. If you pass this parameter, you cannot also pass
          * `creditor`.
          */
-        public PaymentListRequest withCustomer(String customer) {
+        public PaymentListRequest<S> withCustomer(String customer) {
             this.customer = customer;
             return this;
         }
@@ -337,7 +341,7 @@ public class PaymentService {
         /**
          * Number of records to return.
          */
-        public PaymentListRequest withLimit(Integer limit) {
+        public PaymentListRequest<S> withLimit(Integer limit) {
             setLimit(limit);
             return this;
         }
@@ -345,7 +349,7 @@ public class PaymentService {
         /**
          * Unique identifier, beginning with "MD"
          */
-        public PaymentListRequest withMandate(String mandate) {
+        public PaymentListRequest<S> withMandate(String mandate) {
             this.mandate = mandate;
             return this;
         }
@@ -368,7 +372,7 @@ public class PaymentService {
          * cancelled</li>
          * </ul>
          */
-        public PaymentListRequest withStatus(Status status) {
+        public PaymentListRequest<S> withStatus(Status status) {
             this.status = status;
             return this;
         }
@@ -376,13 +380,13 @@ public class PaymentService {
         /**
          * Unique identifier, beginning with "SB"
          */
-        public PaymentListRequest withSubscription(String subscription) {
+        public PaymentListRequest<S> withSubscription(String subscription) {
             this.subscription = subscription;
             return this;
         }
 
-        private PaymentListRequest(HttpClient httpClient) {
-            super(httpClient);
+        private PaymentListRequest(HttpClient httpClient, ListRequestExecutor<S, Payment> executor) {
+            super(httpClient, executor);
         }
 
         @Override

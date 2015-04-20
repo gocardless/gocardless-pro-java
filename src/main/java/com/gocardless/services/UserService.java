@@ -38,8 +38,12 @@ public class UserService {
      * Returns a [cursor-paginated](https://developer.gocardless.com/pro/#overview-cursor-pagination)
      * list of your users.
      */
-    public UserListRequest list() {
-        return new UserListRequest(httpClient);
+    public UserListRequest<ListResponse<User>> list() {
+        return new UserListRequest<>(httpClient, ListRequest.<User>pagingExecutor());
+    }
+
+    public UserListRequest<Iterable<User>> all() {
+        return new UserListRequest<>(httpClient, ListRequest.<User>iteratingExecutor());
     }
 
     /**
@@ -185,14 +189,14 @@ public class UserService {
      * Returns a [cursor-paginated](https://developer.gocardless.com/pro/#overview-cursor-pagination)
      * list of your users.
      */
-    public static final class UserListRequest extends ListRequest<User> {
+    public static final class UserListRequest<S> extends ListRequest<S, User> {
         private Enabled enabled;
         private String role;
 
         /**
          * Cursor pointing to the start of the desired set.
          */
-        public UserListRequest withAfter(String after) {
+        public UserListRequest<S> withAfter(String after) {
             setAfter(after);
             return this;
         }
@@ -200,7 +204,7 @@ public class UserService {
         /**
          * Cursor pointing to the end of the desired set.
          */
-        public UserListRequest withBefore(String before) {
+        public UserListRequest<S> withBefore(String before) {
             setBefore(before);
             return this;
         }
@@ -208,7 +212,7 @@ public class UserService {
         /**
          * Get enabled or disabled users.
          */
-        public UserListRequest withEnabled(Enabled enabled) {
+        public UserListRequest<S> withEnabled(Enabled enabled) {
             this.enabled = enabled;
             return this;
         }
@@ -216,7 +220,7 @@ public class UserService {
         /**
          * Number of records to return.
          */
-        public UserListRequest withLimit(Integer limit) {
+        public UserListRequest<S> withLimit(Integer limit) {
             setLimit(limit);
             return this;
         }
@@ -224,13 +228,13 @@ public class UserService {
         /**
          * Unique identifier, beginning with "RO"
          */
-        public UserListRequest withRole(String role) {
+        public UserListRequest<S> withRole(String role) {
             this.role = role;
             return this;
         }
 
-        private UserListRequest(HttpClient httpClient) {
-            super(httpClient);
+        private UserListRequest(HttpClient httpClient, ListRequestExecutor<S, User> executor) {
+            super(httpClient, executor);
         }
 
         @Override

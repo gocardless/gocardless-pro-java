@@ -150,7 +150,7 @@ public class GoCardlessClientTest {
     @Test
     @Betamax(tape = "iterate through mandates")
     public void shouldIterateThroughMandates() {
-        Iterable<Mandate> iterable = client.mandates().list().withLimit(2);
+        Iterable<Mandate> iterable = client.mandates().all().withLimit(2).execute();
         List<Mandate> mandates = Lists.newArrayList(iterable);
         assertThat(mandates).hasSize(3);
         assertThat(mandates.get(0).getId()).isEqualTo("MD00001PEYCSQF");

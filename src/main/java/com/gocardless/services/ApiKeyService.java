@@ -40,8 +40,12 @@ public class ApiKeyService {
      * Returns a [cursor-paginated](https://developer.gocardless.com/pro/#overview-cursor-pagination)
      * list of your API keys.
      */
-    public ApiKeyListRequest list() {
-        return new ApiKeyListRequest(httpClient);
+    public ApiKeyListRequest<ListResponse<ApiKey>> list() {
+        return new ApiKeyListRequest<>(httpClient, ListRequest.<ApiKey>pagingExecutor());
+    }
+
+    public ApiKeyListRequest<Iterable<ApiKey>> all() {
+        return new ApiKeyListRequest<>(httpClient, ListRequest.<ApiKey>iteratingExecutor());
     }
 
     /**
@@ -154,14 +158,14 @@ public class ApiKeyService {
      * Returns a [cursor-paginated](https://developer.gocardless.com/pro/#overview-cursor-pagination)
      * list of your API keys.
      */
-    public static final class ApiKeyListRequest extends ListRequest<ApiKey> {
+    public static final class ApiKeyListRequest<S> extends ListRequest<S, ApiKey> {
         private Enabled enabled;
         private String role;
 
         /**
          * Cursor pointing to the start of the desired set.
          */
-        public ApiKeyListRequest withAfter(String after) {
+        public ApiKeyListRequest<S> withAfter(String after) {
             setAfter(after);
             return this;
         }
@@ -169,7 +173,7 @@ public class ApiKeyService {
         /**
          * Cursor pointing to the end of the desired set.
          */
-        public ApiKeyListRequest withBefore(String before) {
+        public ApiKeyListRequest<S> withBefore(String before) {
             setBefore(before);
             return this;
         }
@@ -177,7 +181,7 @@ public class ApiKeyService {
         /**
          * Get enabled or disabled API keys.
          */
-        public ApiKeyListRequest withEnabled(Enabled enabled) {
+        public ApiKeyListRequest<S> withEnabled(Enabled enabled) {
             this.enabled = enabled;
             return this;
         }
@@ -185,7 +189,7 @@ public class ApiKeyService {
         /**
          * Number of records to return.
          */
-        public ApiKeyListRequest withLimit(Integer limit) {
+        public ApiKeyListRequest<S> withLimit(Integer limit) {
             setLimit(limit);
             return this;
         }
@@ -193,13 +197,13 @@ public class ApiKeyService {
         /**
          * Unique identifier, beginning with "RO"
          */
-        public ApiKeyListRequest withRole(String role) {
+        public ApiKeyListRequest<S> withRole(String role) {
             this.role = role;
             return this;
         }
 
-        private ApiKeyListRequest(HttpClient httpClient) {
-            super(httpClient);
+        private ApiKeyListRequest(HttpClient httpClient, ListRequestExecutor<S, ApiKey> executor) {
+            super(httpClient, executor);
         }
 
         @Override

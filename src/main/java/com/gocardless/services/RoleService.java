@@ -89,8 +89,12 @@ public class RoleService {
     /**
      * List all existing roles
      */
-    public RoleListRequest list() {
-        return new RoleListRequest(httpClient);
+    public RoleListRequest<ListResponse<Role>> list() {
+        return new RoleListRequest<>(httpClient, ListRequest.<Role>pagingExecutor());
+    }
+
+    public RoleListRequest<Iterable<Role>> all() {
+        return new RoleListRequest<>(httpClient, ListRequest.<Role>iteratingExecutor());
     }
 
     /**
@@ -219,13 +223,13 @@ public class RoleService {
      *
      * List all existing roles
      */
-    public static final class RoleListRequest extends ListRequest<Role> {
+    public static final class RoleListRequest<S> extends ListRequest<S, Role> {
         private Enabled enabled;
 
         /**
          * Cursor pointing to the start of the desired set.
          */
-        public RoleListRequest withAfter(String after) {
+        public RoleListRequest<S> withAfter(String after) {
             setAfter(after);
             return this;
         }
@@ -233,7 +237,7 @@ public class RoleService {
         /**
          * Cursor pointing to the end of the desired set.
          */
-        public RoleListRequest withBefore(String before) {
+        public RoleListRequest<S> withBefore(String before) {
             setBefore(before);
             return this;
         }
@@ -241,7 +245,7 @@ public class RoleService {
         /**
          * Get enabled or disabled roles.
          */
-        public RoleListRequest withEnabled(Enabled enabled) {
+        public RoleListRequest<S> withEnabled(Enabled enabled) {
             this.enabled = enabled;
             return this;
         }
@@ -249,13 +253,13 @@ public class RoleService {
         /**
          * Number of records to return.
          */
-        public RoleListRequest withLimit(Integer limit) {
+        public RoleListRequest<S> withLimit(Integer limit) {
             setLimit(limit);
             return this;
         }
 
-        private RoleListRequest(HttpClient httpClient) {
-            super(httpClient);
+        private RoleListRequest(HttpClient httpClient, ListRequestExecutor<S, Role> executor) {
+            super(httpClient, executor);
         }
 
         @Override

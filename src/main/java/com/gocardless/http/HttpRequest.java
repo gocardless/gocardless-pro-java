@@ -18,16 +18,6 @@ abstract class HttpRequest<T> {
         this.httpClient = httpClient;
     }
 
-    /**
-     * Executes this request.
-     *
-     * Returns the API response.
-     * @throws com.gocardless.GoCardlessException
-     */
-    public T execute() {
-        return httpClient.execute(this);
-    }
-
     URL getUrl(UrlFormatter urlFormatter) {
         return urlFormatter.formatUrl(getPathTemplate(), getPathParams(), getQueryParams());
     }
@@ -38,6 +28,10 @@ abstract class HttpRequest<T> {
 
     protected Map<String, Object> getQueryParams() {
         return ImmutableMap.of();
+    }
+
+    protected HttpClient getHttpClient() {
+        return httpClient;
     }
 
     protected String getRequestEnvelope() {

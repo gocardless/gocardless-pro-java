@@ -44,8 +44,14 @@ public class PublishableApiKeyService {
      * Returns a [cursor-paginated](https://developer.gocardless.com/pro/#overview-cursor-pagination)
      * list of your publishable API keys
      */
-    public PublishableApiKeyListRequest list() {
-        return new PublishableApiKeyListRequest(httpClient);
+    public PublishableApiKeyListRequest<ListResponse<PublishableApiKey>> list() {
+        return new PublishableApiKeyListRequest<>(httpClient,
+                ListRequest.<PublishableApiKey>pagingExecutor());
+    }
+
+    public PublishableApiKeyListRequest<Iterable<PublishableApiKey>> all() {
+        return new PublishableApiKeyListRequest<>(httpClient,
+                ListRequest.<PublishableApiKey>iteratingExecutor());
     }
 
     /**
@@ -118,13 +124,14 @@ public class PublishableApiKeyService {
      * Returns a [cursor-paginated](https://developer.gocardless.com/pro/#overview-cursor-pagination)
      * list of your publishable API keys
      */
-    public static final class PublishableApiKeyListRequest extends ListRequest<PublishableApiKey> {
+    public static final class PublishableApiKeyListRequest<S> extends
+            ListRequest<S, PublishableApiKey> {
         private Enabled enabled;
 
         /**
          * Cursor pointing to the start of the desired set.
          */
-        public PublishableApiKeyListRequest withAfter(String after) {
+        public PublishableApiKeyListRequest<S> withAfter(String after) {
             setAfter(after);
             return this;
         }
@@ -132,7 +139,7 @@ public class PublishableApiKeyService {
         /**
          * Cursor pointing to the end of the desired set.
          */
-        public PublishableApiKeyListRequest withBefore(String before) {
+        public PublishableApiKeyListRequest<S> withBefore(String before) {
             setBefore(before);
             return this;
         }
@@ -140,7 +147,7 @@ public class PublishableApiKeyService {
         /**
          * Get enabled or disabled publishable API keys.
          */
-        public PublishableApiKeyListRequest withEnabled(Enabled enabled) {
+        public PublishableApiKeyListRequest<S> withEnabled(Enabled enabled) {
             this.enabled = enabled;
             return this;
         }
@@ -148,13 +155,14 @@ public class PublishableApiKeyService {
         /**
          * Number of records to return.
          */
-        public PublishableApiKeyListRequest withLimit(Integer limit) {
+        public PublishableApiKeyListRequest<S> withLimit(Integer limit) {
             setLimit(limit);
             return this;
         }
 
-        private PublishableApiKeyListRequest(HttpClient httpClient) {
-            super(httpClient);
+        private PublishableApiKeyListRequest(HttpClient httpClient,
+                ListRequestExecutor<S, PublishableApiKey> executor) {
+            super(httpClient, executor);
         }
 
         @Override

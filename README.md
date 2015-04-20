@@ -62,7 +62,7 @@ ListResponse<Customer> nextPage = client.customers().list.withAfter(cursor).exec
 * Iterating through all of the items in a collection:
 
 ```java
-for (Customer customer : client.customers().list()) {
+for (Customer customer : client.customers().all().execute()) {
     System.out.println(customer.getGivenName());
 }
 ```

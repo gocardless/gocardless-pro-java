@@ -12,6 +12,17 @@ public abstract class GetRequest<T> extends HttpRequest<T> {
         super(httpClient);
     }
 
+    /**
+     * Executes this request.
+     *
+     * Returns the API response.
+     *
+     * @throws com.gocardless.GoCardlessException
+     */
+    public T execute() {
+        return getHttpClient().execute(this);
+    }
+
     @Override
     protected T parseResponse(Reader stream, ResponseParser responseParser) {
         return responseParser.parseSingle(stream, getEnvelope(), getResponseClass());

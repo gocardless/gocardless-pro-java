@@ -43,8 +43,12 @@ public class CreditorService {
      * Returns a [cursor-paginated](https://developer.gocardless.com/pro/#overview-cursor-pagination)
      * list of your creditors.
      */
-    public CreditorListRequest list() {
-        return new CreditorListRequest(httpClient);
+    public CreditorListRequest<ListResponse<Creditor>> list() {
+        return new CreditorListRequest<>(httpClient, ListRequest.<Creditor>pagingExecutor());
+    }
+
+    public CreditorListRequest<Iterable<Creditor>> all() {
+        return new CreditorListRequest<>(httpClient, ListRequest.<Creditor>iteratingExecutor());
     }
 
     /**
@@ -201,11 +205,11 @@ public class CreditorService {
      * Returns a [cursor-paginated](https://developer.gocardless.com/pro/#overview-cursor-pagination)
      * list of your creditors.
      */
-    public static final class CreditorListRequest extends ListRequest<Creditor> {
+    public static final class CreditorListRequest<S> extends ListRequest<S, Creditor> {
         /**
          * Cursor pointing to the start of the desired set.
          */
-        public CreditorListRequest withAfter(String after) {
+        public CreditorListRequest<S> withAfter(String after) {
             setAfter(after);
             return this;
         }
@@ -213,7 +217,7 @@ public class CreditorService {
         /**
          * Cursor pointing to the end of the desired set.
          */
-        public CreditorListRequest withBefore(String before) {
+        public CreditorListRequest<S> withBefore(String before) {
             setBefore(before);
             return this;
         }
@@ -221,13 +225,13 @@ public class CreditorService {
         /**
          * Number of records to return.
          */
-        public CreditorListRequest withLimit(Integer limit) {
+        public CreditorListRequest<S> withLimit(Integer limit) {
             setLimit(limit);
             return this;
         }
 
-        private CreditorListRequest(HttpClient httpClient) {
-            super(httpClient);
+        private CreditorListRequest(HttpClient httpClient, ListRequestExecutor<S, Creditor> executor) {
+            super(httpClient, executor);
         }
 
         @Override
