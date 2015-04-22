@@ -41,7 +41,7 @@ public class Payment {
     }
 
     /**
-     * Amount refunded in pence or cents.
+     * Amount [refunded](https://developer.gocardless.com/pro/#api-endpoints-refunds) in pence or cents.
      */
     public Integer getAmountRefunded() {
         return amountRefunded;

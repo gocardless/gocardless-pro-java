@@ -21,11 +21,11 @@ import com.google.gson.reflect.TypeToken;
  * to create, show, list and update your refunds.
  * 
  * GoCardless will notify you via a
- * [webhook](https://developer.gocardless.com/pro/#webhooks) whenever a refund is created.
+ * [webhook](https://developer.gocardless.com/pro/#webhooks) whenever a refund is created, and will
+ * update the `amount_refunded` property of the payment.
  * 
- *
- * _Note:_ A payment that has been (partially) refunded can still receive a late failure or
- * chargeback from the banks.
+ * _Note:_ A payment that has been
+ * (partially) refunded can still receive a late failure or chargeback from the banks.
  */
 public class RefundService {
     private HttpClient httpClient;
