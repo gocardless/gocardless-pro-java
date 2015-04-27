@@ -35,7 +35,8 @@ public class UserService {
     }
 
     /**
-     * Returns a [cursor-paginated](https://developer.gocardless.com/pro/#overview-cursor-pagination)
+     * Returns a
+     * [cursor-paginated](https://developer.gocardless.com/pro/2014-11-03/#overview-cursor-pagination)
      * list of your users.
      */
     public UserListRequest<ListResponse<User>> list() {
@@ -118,8 +119,8 @@ public class UserService {
         }
 
         /**
-         * ID of the user's [role](https://developer.gocardless.com/pro/#api-endpoints-roles), which dictates
-         * what resources the user can see.
+         * ID of the user's [role](https://developer.gocardless.com/pro/2014-11-03/#api-endpoints-roles),
+         * which dictates what resources the user can see.
          */
         public UserCreateRequest withLinksRole(String role) {
             if (links == null) {
@@ -173,8 +174,8 @@ public class UserService {
             private String role;
 
             /**
-             * ID of the user's [role](https://developer.gocardless.com/pro/#api-endpoints-roles), which dictates
-             * what resources the user can see.
+             * ID of the user's [role](https://developer.gocardless.com/pro/2014-11-03/#api-endpoints-roles),
+             * which dictates what resources the user can see.
              */
             public Links withRole(String role) {
                 this.role = role;
@@ -186,7 +187,8 @@ public class UserService {
     /**
      * Request class for {@link UserService#list }.
      *
-     * Returns a [cursor-paginated](https://developer.gocardless.com/pro/#overview-cursor-pagination)
+     * Returns a
+     * [cursor-paginated](https://developer.gocardless.com/pro/2014-11-03/#overview-cursor-pagination)
      * list of your users.
      */
     public static final class UserListRequest<S> extends ListRequest<S, User> {
@@ -359,8 +361,8 @@ public class UserService {
         }
 
         /**
-         * ID of the user's [role](https://developer.gocardless.com/pro/#api-endpoints-roles), which dictates
-         * what resources the user can see.
+         * ID of the user's [role](https://developer.gocardless.com/pro/2014-11-03/#api-endpoints-roles),
+         * which dictates what resources the user can see.
          */
         public UserUpdateRequest withLinksRole(String role) {
             if (links == null) {
@@ -422,8 +424,8 @@ public class UserService {
             private String role;
 
             /**
-             * ID of the user's [role](https://developer.gocardless.com/pro/#api-endpoints-roles), which dictates
-             * what resources the user can see.
+             * ID of the user's [role](https://developer.gocardless.com/pro/2014-11-03/#api-endpoints-roles),
+             * which dictates what resources the user can see.
              */
             public Links withRole(String role) {
                 this.role = role;

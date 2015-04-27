@@ -14,12 +14,12 @@ import com.google.gson.reflect.TypeToken;
  * Service class for working with publishable api key resources.
  *
  * Publishable API keys are designed to be used by the [js
- * flow](https://developer.gocardless.com/pro/#api-endpoints-customer-bank-account-tokens). You
- * should generate a key and then use it to make requests to the API. They do not expire, but can be
- * disabled.
+ * flow](https://developer.gocardless.com/pro/2014-11-03/#api-endpoints-customer-bank-account-tokens).
+ * You should generate a key and then use it to make requests to the API. They do not expire, but can
+ * be disabled.
  * 
  * Publishable API keys only have permissions to create [customer bank account
- * tokens](https://developer.gocardless.com/pro/#api-endpoints-customer-bank-account-tokens).
+ * tokens](https://developer.gocardless.com/pro/2014-11-03/#api-endpoints-customer-bank-account-tokens).
  */
 public class PublishableApiKeyService {
     private HttpClient httpClient;
@@ -41,7 +41,8 @@ public class PublishableApiKeyService {
     }
 
     /**
-     * Returns a [cursor-paginated](https://developer.gocardless.com/pro/#overview-cursor-pagination)
+     * Returns a
+     * [cursor-paginated](https://developer.gocardless.com/pro/2014-11-03/#overview-cursor-pagination)
      * list of your publishable API keys
      */
     public PublishableApiKeyListRequest<ListResponse<PublishableApiKey>> list() {
@@ -121,7 +122,8 @@ public class PublishableApiKeyService {
     /**
      * Request class for {@link PublishableApiKeyService#list }.
      *
-     * Returns a [cursor-paginated](https://developer.gocardless.com/pro/#overview-cursor-pagination)
+     * Returns a
+     * [cursor-paginated](https://developer.gocardless.com/pro/2014-11-03/#overview-cursor-pagination)
      * list of your publishable API keys
      */
     public static final class PublishableApiKeyListRequest<S> extends

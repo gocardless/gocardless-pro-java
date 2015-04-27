@@ -37,7 +37,8 @@ public class ApiKeyService {
     }
 
     /**
-     * Returns a [cursor-paginated](https://developer.gocardless.com/pro/#overview-cursor-pagination)
+     * Returns a
+     * [cursor-paginated](https://developer.gocardless.com/pro/2014-11-03/#overview-cursor-pagination)
      * list of your API keys.
      */
     public ApiKeyListRequest<ListResponse<ApiKey>> list() {
@@ -155,7 +156,8 @@ public class ApiKeyService {
     /**
      * Request class for {@link ApiKeyService#list }.
      *
-     * Returns a [cursor-paginated](https://developer.gocardless.com/pro/#overview-cursor-pagination)
+     * Returns a
+     * [cursor-paginated](https://developer.gocardless.com/pro/2014-11-03/#overview-cursor-pagination)
      * list of your API keys.
      */
     public static final class ApiKeyListRequest<S> extends ListRequest<S, ApiKey> {

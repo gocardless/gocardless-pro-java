@@ -31,8 +31,8 @@ public class Event {
     }
 
     /**
-     * Fixed [timestamp](https://developer.gocardless.com/pro/#overview-time-zones-dates), recording when
-     * this resource was created.
+     * Fixed [timestamp](https://developer.gocardless.com/pro/2014-11-03/#overview-time-zones-dates),
+     * recording when this resource was created.
      */
     public String getCreatedAt() {
         return createdAt;
@@ -203,7 +203,8 @@ public class Event {
 
         /**
          * If `resource_type` is `mandates`, this is the ID of the
-         * [mandate](https://developer.gocardless.com/pro/#api-endpoints-mandates) which has been updated.
+         * [mandate](https://developer.gocardless.com/pro/2014-11-03/#api-endpoints-mandates) which has been
+         * updated.
          */
         public String getMandate() {
             return mandate;
@@ -211,8 +212,8 @@ public class Event {
 
         /**
          * This is only included for mandate transfer events, when it is the ID of the [customer bank
-         * account](https://developer.gocardless.com/pro/#api-endpoints-customer-bank-accounts) which the
-         * mandate is being transferred to.
+         * account](https://developer.gocardless.com/pro/2014-11-03/#api-endpoints-customer-bank-accounts)
+         * which the mandate is being transferred to.
          */
         public String getNewCustomerBankAccount() {
             return newCustomerBankAccount;
@@ -229,7 +230,8 @@ public class Event {
 
         /**
          * If `resource_type` is `payments`, this is the ID of the
-         * [payment](https://developer.gocardless.com/pro/#api-endpoints-payments) which has been updated.
+         * [payment](https://developer.gocardless.com/pro/2014-11-03/#api-endpoints-payments) which has been
+         * updated.
          */
         public String getPayment() {
             return payment;
@@ -237,7 +239,8 @@ public class Event {
 
         /**
          * If `resource_type` is `payouts`, this is the ID of the
-         * [payout](https://developer.gocardless.com/pro/#api-endpoints-payouts) which has been updated.
+         * [payout](https://developer.gocardless.com/pro/2014-11-03/#api-endpoints-payouts) which has been
+         * updated.
          */
         public String getPayout() {
             return payout;
@@ -245,8 +248,8 @@ public class Event {
 
         /**
          * This is only included for mandate transfer events, when it is the ID of the [customer bank
-         * account](https://developer.gocardless.com/pro/#api-endpoints-customer-bank-accounts) which the
-         * mandate is being transferred from.
+         * account](https://developer.gocardless.com/pro/2014-11-03/#api-endpoints-customer-bank-accounts)
+         * which the mandate is being transferred from.
          */
         public String getPreviousCustomerBankAccount() {
             return previousCustomerBankAccount;
@@ -254,7 +257,8 @@ public class Event {
 
         /**
          * If `resource_type` is `refunds`, this is the ID of the
-         * [refund](https://developer.gocardless.com/pro/#api-endpoints-refunds) which has been updated.
+         * [refund](https://developer.gocardless.com/pro/2014-11-03/#api-endpoints-refunds) which has been
+         * updated.
          */
         public String getRefund() {
             return refund;
@@ -262,8 +266,8 @@ public class Event {
 
         /**
          * If `resource_type` is `subscription`, this is the ID of the
-         * [subscription](https://developer.gocardless.com/pro/#api-endpoints-subscriptions) which has been
-         * updated.
+         * [subscription](https://developer.gocardless.com/pro/2014-11-03/#api-endpoints-subscriptions) which
+         * has been updated.
          */
         public String getSubscription() {
             return subscription;

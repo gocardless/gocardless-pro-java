@@ -6,10 +6,10 @@ import com.google.gson.annotations.SerializedName;
  * Represents a payout resource returned from the API.
  *
  * Payouts represent transfers from GoCardless to a
- * [creditor](https://developer.gocardless.com/pro/#api-endpoints-creditors). Each payout contains
- * the funds collected from one or many
- * [payments](https://developer.gocardless.com/pro/#api-endpoints-payments). Payouts are created
- * automatically after a payment has been successfully collected.
+ * [creditor](https://developer.gocardless.com/pro/2014-11-03/#api-endpoints-creditors). Each payout
+ * contains the funds collected from one or many
+ * [payments](https://developer.gocardless.com/pro/2014-11-03/#api-endpoints-payments). Payouts are
+ * created automatically after a payment has been successfully collected.
  */
 public class Payout {
     private Payout() {
@@ -32,8 +32,8 @@ public class Payout {
     }
 
     /**
-     * Fixed [timestamp](https://developer.gocardless.com/pro/#overview-time-zones-dates), recording when
-     * this resource was created.
+     * Fixed [timestamp](https://developer.gocardless.com/pro/2014-11-03/#overview-time-zones-dates),
+     * recording when this resource was created.
      */
     public String getCreatedAt() {
         return createdAt;
@@ -92,15 +92,16 @@ public class Payout {
         private String creditorBankAccount;
 
         /**
-         * ID of [creditor](https://developer.gocardless.com/pro/#api-endpoints-creditors) who will receive
-         * this payout, i.e. the owner of the `creditor_bank_account`.
+         * ID of [creditor](https://developer.gocardless.com/pro/2014-11-03/#api-endpoints-creditors) who
+         * will receive this payout, i.e. the owner of the `creditor_bank_account`.
          */
         public String getCreditor() {
             return creditor;
         }
 
         /**
-         * ID of [bank account](https://developer.gocardless.com/pro/#api-endpoints-creditor-bank-accounts)
+         * ID of [bank
+         * account](https://developer.gocardless.com/pro/2014-11-03/#api-endpoints-creditor-bank-accounts)
          * which this will be sent to.
          */
         public String getCreditorBankAccount() {

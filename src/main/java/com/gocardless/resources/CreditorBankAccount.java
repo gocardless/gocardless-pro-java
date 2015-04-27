@@ -6,9 +6,10 @@ import java.util.Map;
  * Represents a creditor bank account resource returned from the API.
  *
  * Creditor Bank Accounts hold the bank details of a
- * [creditor](https://developer.gocardless.com/pro/#api-endpoints-creditor). These are the bank
- * accounts which your [payouts](https://developer.gocardless.com/pro/#api-endpoints-payouts) will be
- * sent to.
+ * [creditor](https://developer.gocardless.com/pro/2014-11-03/#api-endpoints-creditor). These are the
+ * bank accounts which your
+ * [payouts](https://developer.gocardless.com/pro/2014-11-03/#api-endpoints-payouts) will be sent
+ * to.
  * 
  * Note that creditor bank accounts must be unique, and so you will encounter a
  * `bank_account_exists` error if you try to create a duplicate bank account. You may wish to handle
@@ -33,8 +34,8 @@ public class CreditorBankAccount {
 
     /**
      * Name of the account holder, as known by the bank. Usually this is the same as the name stored with
-     * the linked [creditor](https://developer.gocardless.com/pro/#api-endpoints-creditors). This field
-     * cannot exceed 18 characters.
+     * the linked [creditor](https://developer.gocardless.com/pro/2014-11-03/#api-endpoints-creditors).
+     * This field cannot exceed 18 characters.
      */
     public String getAccountHolderName() {
         return accountHolderName;
@@ -63,8 +64,8 @@ public class CreditorBankAccount {
     }
 
     /**
-     * Fixed [timestamp](https://developer.gocardless.com/pro/#overview-time-zones-dates), recording when
-     * this resource was created.
+     * Fixed [timestamp](https://developer.gocardless.com/pro/2014-11-03/#overview-time-zones-dates),
+     * recording when this resource was created.
      */
     public String getCreatedAt() {
         return createdAt;
@@ -112,8 +113,8 @@ public class CreditorBankAccount {
         private String creditor;
 
         /**
-         * ID of the [creditor](https://developer.gocardless.com/pro/#api-endpoints-creditors) that owns this
-         * bank account.
+         * ID of the [creditor](https://developer.gocardless.com/pro/2014-11-03/#api-endpoints-creditors)
+         * that owns this bank account.
          */
         public String getCreditor() {
             return creditor;

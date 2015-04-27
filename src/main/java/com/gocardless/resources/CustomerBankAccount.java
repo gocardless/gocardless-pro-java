@@ -6,15 +6,16 @@ import java.util.Map;
  * Represents a customer bank account resource returned from the API.
  *
  * Customer Bank Accounts hold the bank details of a
- * [customer](https://developer.gocardless.com/pro/#api-endpoints-customers). They always belong to a
- * [customer](https://developer.gocardless.com/pro/#api-endpoints-customers), and may be linked to
- * several Direct Debit [mandates](https://developer.gocardless.com/pro/#api-endpoints-mandates).
- *
+ * [customer](https://developer.gocardless.com/pro/2014-11-03/#api-endpoints-customers). They always
+ * belong to a [customer](https://developer.gocardless.com/pro/2014-11-03/#api-endpoints-customers),
+ * and may be linked to several Direct Debit
+ * [mandates](https://developer.gocardless.com/pro/2014-11-03/#api-endpoints-mandates).
  * 
- * Note that customer bank accounts must be unique, and so you will encounter a
- * `bank_account_exists` error if you try to create a duplicate bank account. You may wish to handle
- * this by updating the existing record instead, the ID of which will be provided as
- * links[customer_bank_account] in the error response.
+ * Note
+ * that customer bank accounts must be unique, and so you will encounter a `bank_account_exists`
+ * error if you try to create a duplicate bank account. You may wish to handle this by updating the
+ * existing record instead, the ID of which will be provided as links[customer_bank_account] in the
+ * error response.
  */
 public class CustomerBankAccount {
     private CustomerBankAccount() {
@@ -34,8 +35,8 @@ public class CustomerBankAccount {
 
     /**
      * Name of the account holder, as known by the bank. Usually this matches the name of the linked
-     * [customer](https://developer.gocardless.com/pro/#api-endpoints-customers). This field cannot
-     * exceed 18 characters.
+     * [customer](https://developer.gocardless.com/pro/2014-11-03/#api-endpoints-customers). This field
+     * cannot exceed 18 characters.
      */
     public String getAccountHolderName() {
         return accountHolderName;
@@ -64,8 +65,8 @@ public class CustomerBankAccount {
     }
 
     /**
-     * Fixed [timestamp](https://developer.gocardless.com/pro/#overview-time-zones-dates), recording when
-     * this resource was created.
+     * Fixed [timestamp](https://developer.gocardless.com/pro/2014-11-03/#overview-time-zones-dates),
+     * recording when this resource was created.
      */
     public String getCreatedAt() {
         return createdAt;
@@ -113,8 +114,8 @@ public class CustomerBankAccount {
         private String customer;
 
         /**
-         * ID of the [customer](https://developer.gocardless.com/pro/#api-endpoints-customers) that owns this
-         * bank account.
+         * ID of the [customer](https://developer.gocardless.com/pro/2014-11-03/#api-endpoints-customers)
+         * that owns this bank account.
          */
         public String getCustomer() {
             return customer;

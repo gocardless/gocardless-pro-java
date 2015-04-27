@@ -14,8 +14,8 @@ public class User {
     private Links links;
 
     /**
-     * Fixed [timestamp](https://developer.gocardless.com/pro/#overview-time-zones-dates), recording when
-     * this resource was created.
+     * Fixed [timestamp](https://developer.gocardless.com/pro/2014-11-03/#overview-time-zones-dates),
+     * recording when this resource was created.
      */
     public String getCreatedAt() {
         return createdAt;
@@ -68,8 +68,8 @@ public class User {
         private String role;
 
         /**
-         * ID of the user's [role](https://developer.gocardless.com/pro/#api-endpoints-roles), which dictates
-         * what resources the user can see.
+         * ID of the user's [role](https://developer.gocardless.com/pro/2014-11-03/#api-endpoints-roles),
+         * which dictates what resources the user can see.
          */
         public String getRole() {
             return role;
