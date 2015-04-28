@@ -102,7 +102,6 @@ public class HelperService {
         private String mandateReference;
         private String scheme;
         private String signedAt;
-        private String sortCode;
 
         /**
          * Name of the account holder, as known by the bank. Usually this matches the name of the linked
@@ -200,14 +199,6 @@ public class HelperService {
             return this;
         }
 
-        /**
-         * 6 digit, valid UK sort code.
-         */
-        public HelperMandateRequest withSortCode(String sortCode) {
-            this.sortCode = sortCode;
-            return this;
-        }
-
         private HelperMandateRequest(HttpClient httpClient) {
             super(httpClient);
         }
@@ -257,7 +248,6 @@ public class HelperService {
         private String branchCode;
         private String countryCode;
         private String iban;
-        private String sortCode;
 
         /**
          * 8 digit, valid UK bank account number.
@@ -297,14 +287,6 @@ public class HelperService {
          */
         public HelperModulusCheckRequest withIban(String iban) {
             this.iban = iban;
-            return this;
-        }
-
-        /**
-         * 6 digit, valid UK sort code.
-         */
-        public HelperModulusCheckRequest withSortCode(String sortCode) {
-            this.sortCode = sortCode;
             return this;
         }
 
