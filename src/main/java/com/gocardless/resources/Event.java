@@ -94,7 +94,6 @@ public class Event {
         private String description;
         private Origin origin;
         private String reasonCode;
-        private ReportType reportType;
         private Scheme scheme;
 
         /**
@@ -138,25 +137,6 @@ public class Event {
         }
 
         /**
-         * The report that this message was received in. One of:
-         * <ul>
-         * <li>`auddis`: Automated Direct
-         * Debit Instruction Service</li>
-         * <li>`addacs`: Automated Direct Debit Amendment and Cancellation
-         * Service</li>
-         * <li>`arudd`: Automated Return of Unpaid Direct Debit</li>
-         * <li>`ddica`: Direct
-         * Debit Indemnity Claim Advice</li>
-         * <li>`processing`: SEPA processing report</li>
-         *
-         * <li>`settlement`: SEPA settlement report</li>
-         * </ul>
-         */
-        public ReportType getReportType() {
-            return reportType;
-        }
-
-        /**
          * Set when a bank is the origin of the event.
          */
         public Scheme getScheme() {
@@ -168,16 +148,6 @@ public class Event {
             BANK, @SerializedName("api")
             API, @SerializedName("gocardless")
             GOCARDLESS,
-        }
-
-        public enum ReportType {
-            @SerializedName("auddis")
-            AUDDIS, @SerializedName("addacs")
-            ADDACS, @SerializedName("arudd")
-            ARUDD, @SerializedName("ddica")
-            DDICA, @SerializedName("settlement")
-            SETTLEMENT, @SerializedName("processing")
-            PROCESSING,
         }
 
         public enum Scheme {
