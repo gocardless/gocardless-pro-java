@@ -15,7 +15,7 @@ import com.google.gson.reflect.TypeToken;
  * Service class for working with subscription resources.
  *
  * Subscriptions create
- * [payments](https://developer.gocardless.com/pro/2014-11-03/#api-endpoints-payments) according to a
+ * [payments](https://developer.gocardless.com/pro/2015-04-29/#api-endpoints-payments) according to a
  * schedule.
  * 
  * #### Recurrence Rules
@@ -95,7 +95,7 @@ public class SubscriptionService {
 
     /**
      * Returns a
-     * [cursor-paginated](https://developer.gocardless.com/pro/2014-11-03/#overview-cursor-pagination)
+     * [cursor-paginated](https://developer.gocardless.com/pro/2015-04-29/#overview-cursor-pagination)
      * list of your subscriptions.
      */
     public SubscriptionListRequest<ListResponse<Subscription>> list() {
@@ -220,7 +220,7 @@ public class SubscriptionService {
 
         /**
          * ID of the associated
-         * [mandate](https://developer.gocardless.com/pro/2014-11-03/#api-endpoints-mandates) which the
+         * [mandate](https://developer.gocardless.com/pro/2015-04-29/#api-endpoints-mandates) which the
          * subscription will create payments against.
          */
         public SubscriptionCreateRequest withLinksMandate(String mandate) {
@@ -270,7 +270,7 @@ public class SubscriptionService {
 
         /**
          * The date on which the first payment should be charged. Must be within one year of creation and on
-         * or after the [mandate](https://developer.gocardless.com/pro/2014-11-03/#api-endpoints-mandates)'s
+         * or after the [mandate](https://developer.gocardless.com/pro/2015-04-29/#api-endpoints-mandates)'s
          * `next_possible_charge_date`. When blank, this will be set as the mandate's
          * `next_possible_charge_date`.
          */
@@ -339,7 +339,7 @@ public class SubscriptionService {
 
             /**
              * ID of the associated
-             * [mandate](https://developer.gocardless.com/pro/2014-11-03/#api-endpoints-mandates) which the
+             * [mandate](https://developer.gocardless.com/pro/2015-04-29/#api-endpoints-mandates) which the
              * subscription will create payments against.
              */
             public Links withMandate(String mandate) {
@@ -353,7 +353,7 @@ public class SubscriptionService {
      * Request class for {@link SubscriptionService#list }.
      *
      * Returns a
-     * [cursor-paginated](https://developer.gocardless.com/pro/2014-11-03/#overview-cursor-pagination)
+     * [cursor-paginated](https://developer.gocardless.com/pro/2015-04-29/#overview-cursor-pagination)
      * list of your subscriptions.
      */
     public static final class SubscriptionListRequest<S> extends ListRequest<S, Subscription> {

@@ -12,7 +12,7 @@ import com.google.gson.reflect.TypeToken;
 /**
  * Service class for working with creditor resources.
  *
- * Each [payment](https://developer.gocardless.com/pro/2014-11-03/#api-endpoints-payments) taken
+ * Each [payment](https://developer.gocardless.com/pro/2015-04-29/#api-endpoints-payments) taken
  * through the API is linked to a "creditor", to whom the payment is then paid out. In most cases
  * your organisation will have a single "creditor", but the API also supports collecting payments on
  * behalf of others.
@@ -41,7 +41,7 @@ public class CreditorService {
 
     /**
      * Returns a
-     * [cursor-paginated](https://developer.gocardless.com/pro/2014-11-03/#overview-cursor-pagination)
+     * [cursor-paginated](https://developer.gocardless.com/pro/2015-04-29/#overview-cursor-pagination)
      * list of your creditors.
      */
     public CreditorListRequest<ListResponse<Creditor>> list() {
@@ -204,7 +204,7 @@ public class CreditorService {
      * Request class for {@link CreditorService#list }.
      *
      * Returns a
-     * [cursor-paginated](https://developer.gocardless.com/pro/2014-11-03/#overview-cursor-pagination)
+     * [cursor-paginated](https://developer.gocardless.com/pro/2015-04-29/#overview-cursor-pagination)
      * list of your creditors.
      */
     public static final class CreditorListRequest<S> extends ListRequest<S, Creditor> {
@@ -362,7 +362,7 @@ public class CreditorService {
 
         /**
          * ID of the [bank
-         * account](https://developer.gocardless.com/pro/2014-11-03/#api-endpoints-creditor-bank-accounts)
+         * account](https://developer.gocardless.com/pro/2015-04-29/#api-endpoints-creditor-bank-accounts)
          * which is set up to receive payouts in EUR.
          */
         public CreditorUpdateRequest withLinksDefaultEurPayoutAccount(String defaultEurPayoutAccount) {
@@ -375,7 +375,7 @@ public class CreditorService {
 
         /**
          * ID of the [bank
-         * account](https://developer.gocardless.com/pro/2014-11-03/#api-endpoints-creditor-bank-accounts)
+         * account](https://developer.gocardless.com/pro/2015-04-29/#api-endpoints-creditor-bank-accounts)
          * which is set up to receive payouts in GBP.
          */
         public CreditorUpdateRequest withLinksDefaultGbpPayoutAccount(String defaultGbpPayoutAccount) {
@@ -460,7 +460,7 @@ public class CreditorService {
 
             /**
              * ID of the [bank
-             * account](https://developer.gocardless.com/pro/2014-11-03/#api-endpoints-creditor-bank-accounts)
+             * account](https://developer.gocardless.com/pro/2015-04-29/#api-endpoints-creditor-bank-accounts)
              * which is set up to receive payouts in EUR.
              */
             public Links withDefaultEurPayoutAccount(String defaultEurPayoutAccount) {
@@ -470,7 +470,7 @@ public class CreditorService {
 
             /**
              * ID of the [bank
-             * account](https://developer.gocardless.com/pro/2014-11-03/#api-endpoints-creditor-bank-accounts)
+             * account](https://developer.gocardless.com/pro/2015-04-29/#api-endpoints-creditor-bank-accounts)
              * which is set up to receive payouts in GBP.
              */
             public Links withDefaultGbpPayoutAccount(String defaultGbpPayoutAccount) {

@@ -14,22 +14,23 @@ With Maven:
 <dependency>
     <groupId>com.gocardless</groupId>
     <artifactId>gocardless-pro</artifactId>
-    <version>0.1.1</version>
+    <version>0.2.0</version>
 </dependency>
 ```
 
 With Gradle:
 
 ```
-compile 'com.gocardless:gocardless-pro:0.1.1'
+compile 'com.gocardless:gocardless-pro:0.2.0'
 ```
 
 ## Initializing the client
 
-The client is initialised with the API Key ID and the API Key `key` property.
+The client is initialised with an access token.
 
 ```java
-GoCardlessClient client = GoCardlessClient.create(apiKey, apiSecret);
+String accessToken = "AO00000123";
+GoCardlessClient client = GoCardlessClient.create(accessToken);
 ```
 
 ## Examples

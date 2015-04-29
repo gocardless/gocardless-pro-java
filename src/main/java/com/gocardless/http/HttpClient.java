@@ -19,7 +19,7 @@ import com.squareup.okhttp.*;
  * Users of this library should not need to access this class directly.
  */
 public class HttpClient {
-    private static final String USER_AGENT = String.format("gocardless-pro/0.1.1 %s/%s %s/%s",
+    private static final String USER_AGENT = String.format("gocardless-pro/0.2.0 %s/%s %s/%s",
             replaceSpaces(System.getProperty("os.name")),
             replaceSpaces(System.getProperty("os.version")),
             replaceSpaces(System.getProperty("java.vm.name")),
@@ -28,7 +28,7 @@ public class HttpClient {
     private static final Map<String, String> HEADERS;
     static {
         ImmutableMap.Builder<String, String> builder = ImmutableMap.builder();
-        builder.put("GoCardless-Version", "2014-11-03");
+        builder.put("GoCardless-Version", "2015-04-29");
         HEADERS = builder.build();
     }
     private final OkHttpClient rawClient;
@@ -40,17 +40,16 @@ public class HttpClient {
     /**
      * Constructor.  Users of this library should not need to access this class directly.
      *
-     * @param apiKey the API key.
-     * @param apiSecret the API secret.
+     * @param accessToken the access token.
      * @param baseUrl base URI to make requests against.
      */
-    public HttpClient(String apiKey, String apiSecret, String baseUrl) {
+    public HttpClient(String accessToken, String baseUrl) {
         this.rawClient = new OkHttpClient();
         this.urlFormatter = new UrlFormatter(baseUrl);
         Gson gson = GsonFactory.build();
         this.responseParser = new ResponseParser(gson);
         this.requestWriter = new RequestWriter(gson);
-        this.credentials = Credentials.basic(apiKey, apiSecret);
+        this.credentials = String.format("Bearer %s", accessToken);
     }
 
     <T> T execute(HttpRequest<T> request) {

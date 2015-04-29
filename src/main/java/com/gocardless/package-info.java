@@ -5,7 +5,8 @@
  * created as follows:
  * 
  * <pre>
- * GoCardlessClient client = GoCardlessClient.create(apiKey, apiSecret);
+ * String accessToken = &quot;AO00000123&quot;;
+ * GoCardlessClient client = GoCardlessClient.create(accessToken);
  * </pre>
  * 
  * The API can then be accessed by calling the various service methods on {@code client}.

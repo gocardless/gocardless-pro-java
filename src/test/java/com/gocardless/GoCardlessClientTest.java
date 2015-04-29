@@ -30,9 +30,8 @@ public class GoCardlessClientTest {
     @Before
     public void setUp() throws Exception {
         recorder.setSslSupport(true);
-        String apiKey = System.getenv("GC_API_KEY");
-        String apiSecret = System.getenv("GC_API_SECRET");
-        client = GoCardlessClient.create(apiKey, apiSecret, SANDBOX);
+        String accessToken = System.getenv("GC_ACCESS_TOKEN");
+        client = GoCardlessClient.create(accessToken, SANDBOX);
         HttpTestUtil.disableSslCertificateChecking(client);
     }
 
@@ -78,13 +77,6 @@ public class GoCardlessClientTest {
                         .withStatus(FAILED).execute().getItems();
         assertThat(mandates).hasSize(1);
         assertThat(mandates.get(0).getId()).isEqualTo("MD00001PEYCSQF");
-    }
-
-    @Test
-    @Betamax(tape = "disable an api key")
-    public void shouldDisableAnApiKey() {
-        ApiKey key = client.apiKeys().disable("AK00001335JR69").execute();
-        assertThat(key.getEnabled()).isFalse();
     }
 
     @Test

@@ -32,9 +32,9 @@ public class HelperService {
      * 
      * Bank account details may either be supplied using the IBAN (international bank
      * account number), or [local
-     * details](https://developer.gocardless.com/pro/2014-11-03/#ui-compliance-local-bank-details). For
+     * details](https://developer.gocardless.com/pro/2015-04-29/#ui-compliance-local-bank-details). For
      * more information on the different fields required in each country, please see the [local bank
-     * details](https://developer.gocardless.com/pro/2014-11-03/#ui-compliance-local-bank-details)
+     * details](https://developer.gocardless.com/pro/2015-04-29/#ui-compliance-local-bank-details)
      * section.
      * 
      * To generate a mandate in a foreign language, set your `Accept-Language` header to
@@ -44,7 +44,7 @@ public class HelperService {
      * 
      *
      * _Note:_ If you want to render a PDF of an existing mandate you can also do so using the [mandate
-     * show endpoint](https://developer.gocardless.com/pro/2014-11-03/#mandates-get-a-single-mandate).
+     * show endpoint](https://developer.gocardless.com/pro/2015-04-29/#mandates-get-a-single-mandate).
      */
     public HelperMandateRequest mandate() {
         return new HelperMandateRequest(httpClient);
@@ -56,9 +56,9 @@ public class HelperService {
      * Bank
      * account details may either be supplied using the IBAN (international bank account number), or
      * [local
-     * details](https://developer.gocardless.com/pro/2014-11-03/#ui-compliance-local-bank-details). For
+     * details](https://developer.gocardless.com/pro/2015-04-29/#ui-compliance-local-bank-details). For
      * more information on the different fields required in each country, please see the [local bank
-     * details](https://developer.gocardless.com/pro/2014-11-03/#ui-compliance-local-bank-details)
+     * details](https://developer.gocardless.com/pro/2015-04-29/#ui-compliance-local-bank-details)
      * section.
      */
     public HelperModulusCheckRequest modulusCheck() {
@@ -76,9 +76,9 @@ public class HelperService {
      * 
      * Bank account details may either be supplied using the IBAN (international bank
      * account number), or [local
-     * details](https://developer.gocardless.com/pro/2014-11-03/#ui-compliance-local-bank-details). For
+     * details](https://developer.gocardless.com/pro/2015-04-29/#ui-compliance-local-bank-details). For
      * more information on the different fields required in each country, please see the [local bank
-     * details](https://developer.gocardless.com/pro/2014-11-03/#ui-compliance-local-bank-details)
+     * details](https://developer.gocardless.com/pro/2015-04-29/#ui-compliance-local-bank-details)
      * section.
      * 
      * To generate a mandate in a foreign language, set your `Accept-Language` header to
@@ -88,7 +88,7 @@ public class HelperService {
      * 
      *
      * _Note:_ If you want to render a PDF of an existing mandate you can also do so using the [mandate
-     * show endpoint](https://developer.gocardless.com/pro/2014-11-03/#mandates-get-a-single-mandate).
+     * show endpoint](https://developer.gocardless.com/pro/2015-04-29/#mandates-get-a-single-mandate).
      */
     public static final class HelperMandateRequest extends PostRequest<Helper> {
         private String accountHolderName;
@@ -105,7 +105,7 @@ public class HelperService {
 
         /**
          * Name of the account holder, as known by the bank. Usually this matches the name of the linked
-         * [customer](https://developer.gocardless.com/pro/2014-11-03/#api-endpoints-customers). This field
+         * [customer](https://developer.gocardless.com/pro/2015-04-29/#api-endpoints-customers). This field
          * cannot exceed 18 characters.
          */
         public HelperMandateRequest withAccountHolderName(String accountHolderName) {
@@ -237,9 +237,9 @@ public class HelperService {
      * Bank
      * account details may either be supplied using the IBAN (international bank account number), or
      * [local
-     * details](https://developer.gocardless.com/pro/2014-11-03/#ui-compliance-local-bank-details). For
+     * details](https://developer.gocardless.com/pro/2015-04-29/#ui-compliance-local-bank-details). For
      * more information on the different fields required in each country, please see the [local bank
-     * details](https://developer.gocardless.com/pro/2014-11-03/#ui-compliance-local-bank-details)
+     * details](https://developer.gocardless.com/pro/2015-04-29/#ui-compliance-local-bank-details)
      * section.
      */
     public static final class HelperModulusCheckRequest extends PostRequest<Helper> {

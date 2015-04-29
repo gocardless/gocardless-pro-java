@@ -17,7 +17,7 @@ import com.google.gson.annotations.SerializedName;
  * The overall flow is:
  * 
  * 1. You
- * [create](https://developer.gocardless.com/pro/2014-11-03/#create-a-redirect-flow) a redirect flow
+ * [create](https://developer.gocardless.com/pro/2015-04-29/#create-a-redirect-flow) a redirect flow
  * for your customer, and redirect them to the returned redirect url, e.g.
  * `https://pay.gocardless.com/flow/RE123`.
  * 
@@ -27,15 +27,15 @@ import com.google.gson.annotations.SerializedName;
  * querystring.
  * 
  * 3. You
- * [complete](https://developer.gocardless.com/pro/2014-11-03/#complete-a-redirect-flow) the redirect
+ * [complete](https://developer.gocardless.com/pro/2015-04-29/#complete-a-redirect-flow) the redirect
  * flow, which creates a
- * [customer](https://developer.gocardless.com/pro/2014-11-03/#api-endpoints-customers), [customer
+ * [customer](https://developer.gocardless.com/pro/2015-04-29/#api-endpoints-customers), [customer
  * bank
- * account](https://developer.gocardless.com/pro/2014-11-03/#api-endpoints-customer-bank-accounts),
- * and [mandate](https://developer.gocardless.com/pro/2014-11-03/#api-endpoints-mandates), and
+ * account](https://developer.gocardless.com/pro/2015-04-29/#api-endpoints-customer-bank-accounts),
+ * and [mandate](https://developer.gocardless.com/pro/2015-04-29/#api-endpoints-mandates), and
  * returns the ID of the mandate. You may wish to create a
- * [subscription](https://developer.gocardless.com/pro/2014-11-03/#api-endpoints-subscriptions) or
- * [payment](https://developer.gocardless.com/pro/2014-11-03/#api-endpoints-payments) at this
+ * [subscription](https://developer.gocardless.com/pro/2015-04-29/#api-endpoints-subscriptions) or
+ * [payment](https://developer.gocardless.com/pro/2015-04-29/#api-endpoints-payments) at this
  * point.
  * 
  * It is recommended that you link the redirect flow to your user object as soon as it is
@@ -43,7 +43,7 @@ import com.google.gson.annotations.SerializedName;
  * 
  * Redirect flows
  * expire 30 minutes after they are first created. You cannot
- * [complete](https://developer.gocardless.com/pro/2014-11-03/#complete-a-redirect-flow) an expired
+ * [complete](https://developer.gocardless.com/pro/2015-04-29/#complete-a-redirect-flow) an expired
  * redirect flow.
  * 
  * [View an example
@@ -78,10 +78,10 @@ public class RedirectFlowService {
 
     /**
      * This creates a
-     * [customer](https://developer.gocardless.com/pro/2014-11-03/#api-endpoints-customers), [customer
+     * [customer](https://developer.gocardless.com/pro/2015-04-29/#api-endpoints-customers), [customer
      * bank
-     * account](https://developer.gocardless.com/pro/2014-11-03/#api-endpoints-customer-bank-account),
-     * and [mandate](https://developer.gocardless.com/pro/2014-11-03/#api-endpoints-mandates) using the
+     * account](https://developer.gocardless.com/pro/2015-04-29/#api-endpoints-customer-bank-account),
+     * and [mandate](https://developer.gocardless.com/pro/2015-04-29/#api-endpoints-mandates) using the
      * details supplied by your customer and returns the ID of the created mandate.
      * 
      * This will return
@@ -121,7 +121,7 @@ public class RedirectFlowService {
         }
 
         /**
-         * The [creditor](https://developer.gocardless.com/pro/2014-11-03/#api-endpoints-creditors) for whom
+         * The [creditor](https://developer.gocardless.com/pro/2015-04-29/#api-endpoints-creditors) for whom
          * the mandate will be created. The `name` of the creditor will be displayed on the payment page.
          */
         public RedirectFlowCreateRequest withLinksCreditor(String creditor) {
@@ -195,7 +195,7 @@ public class RedirectFlowService {
             private String creditor;
 
             /**
-             * The [creditor](https://developer.gocardless.com/pro/2014-11-03/#api-endpoints-creditors) for whom
+             * The [creditor](https://developer.gocardless.com/pro/2015-04-29/#api-endpoints-creditors) for whom
              * the mandate will be created. The `name` of the creditor will be displayed on the payment page.
              */
             public Links withCreditor(String creditor) {
@@ -246,10 +246,10 @@ public class RedirectFlowService {
      * Request class for {@link RedirectFlowService#complete }.
      *
      * This creates a
-     * [customer](https://developer.gocardless.com/pro/2014-11-03/#api-endpoints-customers), [customer
+     * [customer](https://developer.gocardless.com/pro/2015-04-29/#api-endpoints-customers), [customer
      * bank
-     * account](https://developer.gocardless.com/pro/2014-11-03/#api-endpoints-customer-bank-account),
-     * and [mandate](https://developer.gocardless.com/pro/2014-11-03/#api-endpoints-mandates) using the
+     * account](https://developer.gocardless.com/pro/2015-04-29/#api-endpoints-customer-bank-account),
+     * and [mandate](https://developer.gocardless.com/pro/2015-04-29/#api-endpoints-mandates) using the
      * details supplied by your customer and returns the ID of the created mandate.
      * 
      * This will return

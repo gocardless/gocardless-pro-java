@@ -14,9 +14,9 @@ import com.google.gson.reflect.TypeToken;
  * Service class for working with payout resources.
  *
  * Payouts represent transfers from GoCardless to a
- * [creditor](https://developer.gocardless.com/pro/2014-11-03/#api-endpoints-creditors). Each payout
+ * [creditor](https://developer.gocardless.com/pro/2015-04-29/#api-endpoints-creditors). Each payout
  * contains the funds collected from one or many
- * [payments](https://developer.gocardless.com/pro/2014-11-03/#api-endpoints-payments). Payouts are
+ * [payments](https://developer.gocardless.com/pro/2015-04-29/#api-endpoints-payments). Payouts are
  * created automatically after a payment has been successfully collected.
  */
 public class PayoutService {
@@ -33,7 +33,7 @@ public class PayoutService {
 
     /**
      * Returns a
-     * [cursor-paginated](https://developer.gocardless.com/pro/2014-11-03/#overview-cursor-pagination)
+     * [cursor-paginated](https://developer.gocardless.com/pro/2015-04-29/#overview-cursor-pagination)
      * list of your payouts.
      */
     public PayoutListRequest<ListResponse<Payout>> list() {
@@ -55,7 +55,7 @@ public class PayoutService {
      * Request class for {@link PayoutService#list }.
      *
      * Returns a
-     * [cursor-paginated](https://developer.gocardless.com/pro/2014-11-03/#overview-cursor-pagination)
+     * [cursor-paginated](https://developer.gocardless.com/pro/2015-04-29/#overview-cursor-pagination)
      * list of your payouts.
      */
     public static final class PayoutListRequest<S> extends ListRequest<S, Payout> {

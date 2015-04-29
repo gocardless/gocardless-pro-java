@@ -30,7 +30,7 @@ public class EventService {
 
     /**
      * Returns a
-     * [cursor-paginated](https://developer.gocardless.com/pro/2014-11-03/#overview-cursor-pagination)
+     * [cursor-paginated](https://developer.gocardless.com/pro/2015-04-29/#overview-cursor-pagination)
      * list of your events.
      */
     public EventListRequest<ListResponse<Event>> list() {
@@ -52,7 +52,7 @@ public class EventService {
      * Request class for {@link EventService#list }.
      *
      * Returns a
-     * [cursor-paginated](https://developer.gocardless.com/pro/2014-11-03/#overview-cursor-pagination)
+     * [cursor-paginated](https://developer.gocardless.com/pro/2015-04-29/#overview-cursor-pagination)
      * list of your events.
      */
     public static final class EventListRequest<S> extends ListRequest<S, Event> {
@@ -166,7 +166,7 @@ public class EventService {
         }
 
         /**
-         * ID of a [mandate](https://developer.gocardless.com/pro/2014-11-03/#api-endpoints-mandates). If
+         * ID of a [mandate](https://developer.gocardless.com/pro/2015-04-29/#api-endpoints-mandates). If
          * specified, this endpoint will return all events for the given mandate.
          */
         public EventListRequest<S> withMandate(String mandate) {
@@ -184,7 +184,7 @@ public class EventService {
         }
 
         /**
-         * ID of a [payment](https://developer.gocardless.com/pro/2014-11-03/#api-endpoints-payments). If
+         * ID of a [payment](https://developer.gocardless.com/pro/2015-04-29/#api-endpoints-payments). If
          * specified, this endpoint will return all events for the given payment.
          */
         public EventListRequest<S> withPayment(String payment) {
@@ -193,7 +193,7 @@ public class EventService {
         }
 
         /**
-         * ID of a [payout](https://developer.gocardless.com/pro/2014-11-03/#api-endpoints-payouts). If
+         * ID of a [payout](https://developer.gocardless.com/pro/2015-04-29/#api-endpoints-payouts). If
          * specified, this endpoint will return all events for the given payout.
          */
         public EventListRequest<S> withPayout(String payout) {
@@ -202,7 +202,7 @@ public class EventService {
         }
 
         /**
-         * ID of a [refund](https://developer.gocardless.com/pro/2014-11-03/#api-endpoints-refunds). If
+         * ID of a [refund](https://developer.gocardless.com/pro/2015-04-29/#api-endpoints-refunds). If
          * specified, this endpoint will return all events for the given refund.
          */
         public EventListRequest<S> withRefund(String refund) {

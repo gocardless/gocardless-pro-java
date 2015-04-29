@@ -10,7 +10,6 @@ import com.google.common.annotations.VisibleForTesting;
  */
 public class GoCardlessClient {
     private final HttpClient httpClient;
-    private final ApiKeyService apiKeys;
     private final CreditorService creditors;
     private final CreditorBankAccountService creditorBankAccounts;
     private final CustomerService customers;
@@ -20,16 +19,12 @@ public class GoCardlessClient {
     private final MandateService mandates;
     private final PaymentService payments;
     private final PayoutService payouts;
-    private final PublishableApiKeyService publishableApiKeys;
     private final RedirectFlowService redirectFlows;
     private final RefundService refunds;
-    private final RoleService roles;
     private final SubscriptionService subscriptions;
-    private final UserService users;
 
     private GoCardlessClient(HttpClient httpClient) {
         this.httpClient = httpClient;
-        this.apiKeys = new ApiKeyService(httpClient);
         this.creditors = new CreditorService(httpClient);
         this.creditorBankAccounts = new CreditorBankAccountService(httpClient);
         this.customers = new CustomerService(httpClient);
@@ -39,19 +34,9 @@ public class GoCardlessClient {
         this.mandates = new MandateService(httpClient);
         this.payments = new PaymentService(httpClient);
         this.payouts = new PayoutService(httpClient);
-        this.publishableApiKeys = new PublishableApiKeyService(httpClient);
         this.redirectFlows = new RedirectFlowService(httpClient);
         this.refunds = new RefundService(httpClient);
-        this.roles = new RoleService(httpClient);
         this.subscriptions = new SubscriptionService(httpClient);
-        this.users = new UserService(httpClient);
-    }
-
-    /**
-     * A service class for working with api key resources.
-     */
-    public ApiKeyService apiKeys() {
-        return apiKeys;
     }
 
     /**
@@ -118,13 +103,6 @@ public class GoCardlessClient {
     }
 
     /**
-     * A service class for working with publishable api key resources.
-     */
-    public PublishableApiKeyService publishableApiKeys() {
-        return publishableApiKeys;
-    }
-
-    /**
      * A service class for working with redirect flow resources.
      */
     public RedirectFlowService redirectFlows() {
@@ -139,24 +117,10 @@ public class GoCardlessClient {
     }
 
     /**
-     * A service class for working with role resources.
-     */
-    public RoleService roles() {
-        return roles;
-    }
-
-    /**
      * A service class for working with subscription resources.
      */
     public SubscriptionService subscriptions() {
         return subscriptions;
-    }
-
-    /**
-     * A service class for working with user resources.
-     */
-    public UserService users() {
-        return users;
     }
 
     /**
@@ -185,33 +149,30 @@ public class GoCardlessClient {
     /**
      * Creates an instance of the client in the live environment.
      *
-     * @param apiKey the API key
-     * @param apiSecret the API secret
+     * @param accessToken the access token
      */
-    public static GoCardlessClient create(String apiKey, String apiSecret) {
-        return create(apiKey, apiSecret, Environment.LIVE);
+    public static GoCardlessClient create(String accessToken) {
+        return create(accessToken, Environment.LIVE);
     }
 
     /**
      * Creates an instance of the client in a specified environment.
      *
-     * @param apiKey the API key
-     * @param apiSecret the API secret
+     * @param accessToken the access token
      * @param environment the environment
      */
-    public static GoCardlessClient create(String apiKey, String apiSecret, Environment environment) {
-        return create(apiKey, apiSecret, environment.getBaseUrl());
+    public static GoCardlessClient create(String accessToken, Environment environment) {
+        return create(accessToken, environment.getBaseUrl());
     }
 
     /**
      * Creates an instance of the client running against a custom URL.
      *
-     * @param apiKey the API key
-     * @param apiSecret the API secret
+     * @param accessToken the access token
      * @param baseUrl the base URL of the API
      */
-    public static GoCardlessClient create(String apiKey, String apiSecret, String baseUrl) {
-        return new GoCardlessClient(new HttpClient(apiKey, apiSecret, baseUrl));
+    public static GoCardlessClient create(String accessToken, String baseUrl) {
+        return new GoCardlessClient(new HttpClient(accessToken, baseUrl));
     }
 
     @VisibleForTesting

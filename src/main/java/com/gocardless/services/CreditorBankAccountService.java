@@ -15,9 +15,9 @@ import com.google.gson.reflect.TypeToken;
  * Service class for working with creditor bank account resources.
  *
  * Creditor Bank Accounts hold the bank details of a
- * [creditor](https://developer.gocardless.com/pro/2014-11-03/#api-endpoints-creditor). These are the
+ * [creditor](https://developer.gocardless.com/pro/2015-04-29/#api-endpoints-creditor). These are the
  * bank accounts which your
- * [payouts](https://developer.gocardless.com/pro/2014-11-03/#api-endpoints-payouts) will be sent
+ * [payouts](https://developer.gocardless.com/pro/2015-04-29/#api-endpoints-payouts) will be sent
  * to.
  * 
  * Note that creditor bank accounts must be unique, and so you will encounter a
@@ -49,7 +49,7 @@ public class CreditorBankAccountService {
 
     /**
      * Returns a
-     * [cursor-paginated](https://developer.gocardless.com/pro/2014-11-03/#overview-cursor-pagination)
+     * [cursor-paginated](https://developer.gocardless.com/pro/2015-04-29/#overview-cursor-pagination)
      * list of your creditor bank accounts.
      */
     public CreditorBankAccountListRequest<ListResponse<CreditorBankAccount>> list() {
@@ -106,7 +106,7 @@ public class CreditorBankAccountService {
 
         /**
          * Name of the account holder, as known by the bank. Usually this is the same as the name stored with
-         * the linked [creditor](https://developer.gocardless.com/pro/2014-11-03/#api-endpoints-creditors).
+         * the linked [creditor](https://developer.gocardless.com/pro/2015-04-29/#api-endpoints-creditors).
          * This field cannot exceed 18 characters.
          */
         public CreditorBankAccountCreateRequest withAccountHolderName(String accountHolderName) {
@@ -170,7 +170,7 @@ public class CreditorBankAccountService {
         }
 
         /**
-         * ID of the [creditor](https://developer.gocardless.com/pro/2014-11-03/#api-endpoints-creditors)
+         * ID of the [creditor](https://developer.gocardless.com/pro/2015-04-29/#api-endpoints-creditors)
          * that owns this bank account.
          */
         public CreditorBankAccountCreateRequest withLinksCreditor(String creditor) {
@@ -239,7 +239,7 @@ public class CreditorBankAccountService {
             private String creditor;
 
             /**
-             * ID of the [creditor](https://developer.gocardless.com/pro/2014-11-03/#api-endpoints-creditors)
+             * ID of the [creditor](https://developer.gocardless.com/pro/2015-04-29/#api-endpoints-creditors)
              * that owns this bank account.
              */
             public Links withCreditor(String creditor) {
@@ -253,7 +253,7 @@ public class CreditorBankAccountService {
      * Request class for {@link CreditorBankAccountService#list }.
      *
      * Returns a
-     * [cursor-paginated](https://developer.gocardless.com/pro/2014-11-03/#overview-cursor-pagination)
+     * [cursor-paginated](https://developer.gocardless.com/pro/2015-04-29/#overview-cursor-pagination)
      * list of your creditor bank accounts.
      */
     public static final class CreditorBankAccountListRequest<S> extends

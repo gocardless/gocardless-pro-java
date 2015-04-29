@@ -15,9 +15,9 @@ import com.google.gson.reflect.TypeToken;
  *
  * Customer objects hold the contact details for a customer. A customer can have several [customer
  * bank
- * accounts](https://developer.gocardless.com/pro/2014-11-03/#api-endpoints-customer-bank-accounts),
+ * accounts](https://developer.gocardless.com/pro/2015-04-29/#api-endpoints-customer-bank-accounts),
  * which in turn can have several Direct Debit
- * [mandates](https://developer.gocardless.com/pro/2014-11-03/#api-endpoints-mandates).
+ * [mandates](https://developer.gocardless.com/pro/2015-04-29/#api-endpoints-mandates).
  */
 public class CustomerService {
     private HttpClient httpClient;
@@ -40,7 +40,7 @@ public class CustomerService {
 
     /**
      * Returns a
-     * [cursor-paginated](https://developer.gocardless.com/pro/2014-11-03/#overview-cursor-pagination)
+     * [cursor-paginated](https://developer.gocardless.com/pro/2015-04-29/#overview-cursor-pagination)
      * list of your customers.
      */
     public CustomerListRequest<ListResponse<Customer>> list() {
@@ -214,7 +214,7 @@ public class CustomerService {
      * Request class for {@link CustomerService#list }.
      *
      * Returns a
-     * [cursor-paginated](https://developer.gocardless.com/pro/2014-11-03/#overview-cursor-pagination)
+     * [cursor-paginated](https://developer.gocardless.com/pro/2015-04-29/#overview-cursor-pagination)
      * list of your customers.
      */
     public static final class CustomerListRequest<S> extends ListRequest<S, Customer> {

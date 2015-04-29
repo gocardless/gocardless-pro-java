@@ -9,7 +9,7 @@ import com.google.gson.annotations.SerializedName;
  * Represents a subscription resource returned from the API.
  *
  * Subscriptions create
- * [payments](https://developer.gocardless.com/pro/2014-11-03/#api-endpoints-payments) according to a
+ * [payments](https://developer.gocardless.com/pro/2015-04-29/#api-endpoints-payments) according to a
  * schedule.
  * 
  * #### Recurrence Rules
@@ -106,7 +106,7 @@ public class Subscription {
     }
 
     /**
-     * Fixed [timestamp](https://developer.gocardless.com/pro/2014-11-03/#overview-time-zones-dates),
+     * Fixed [timestamp](https://developer.gocardless.com/pro/2015-04-29/#overview-time-zones-dates),
      * recording when this resource was created.
      */
     public String getCreatedAt() {
@@ -188,7 +188,7 @@ public class Subscription {
 
     /**
      * The date on which the first payment should be charged. Must be within one year of creation and on
-     * or after the [mandate](https://developer.gocardless.com/pro/2014-11-03/#api-endpoints-mandates)'s
+     * or after the [mandate](https://developer.gocardless.com/pro/2015-04-29/#api-endpoints-mandates)'s
      * `next_possible_charge_date`. When blank, this will be set as the mandate's
      * `next_possible_charge_date`.
      */
@@ -250,7 +250,7 @@ public class Subscription {
 
         /**
          * ID of the associated
-         * [mandate](https://developer.gocardless.com/pro/2014-11-03/#api-endpoints-mandates) which the
+         * [mandate](https://developer.gocardless.com/pro/2015-04-29/#api-endpoints-mandates) which the
          * subscription will create payments against.
          */
         public String getMandate() {
