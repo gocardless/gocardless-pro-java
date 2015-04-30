@@ -127,7 +127,7 @@ public class Mandate {
 
         /**
          * ID of the associated [customer bank
-         * account](https://developer.gocardless.com/pro/2015-04-29/#api-endpoints-customer-bank-account)
+         * account](https://developer.gocardless.com/pro/2015-04-29/#api-endpoints-customer-bank-accounts)
          * which the mandate is created and submits payments against.
          */
         public String getCustomerBankAccount() {

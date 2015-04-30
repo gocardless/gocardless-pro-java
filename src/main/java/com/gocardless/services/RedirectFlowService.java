@@ -80,7 +80,7 @@ public class RedirectFlowService {
      * This creates a
      * [customer](https://developer.gocardless.com/pro/2015-04-29/#api-endpoints-customers), [customer
      * bank
-     * account](https://developer.gocardless.com/pro/2015-04-29/#api-endpoints-customer-bank-account),
+     * account](https://developer.gocardless.com/pro/2015-04-29/#api-endpoints-customer-bank-accounts),
      * and [mandate](https://developer.gocardless.com/pro/2015-04-29/#api-endpoints-mandates) using the
      * details supplied by your customer and returns the ID of the created mandate.
      * 
@@ -248,7 +248,7 @@ public class RedirectFlowService {
      * This creates a
      * [customer](https://developer.gocardless.com/pro/2015-04-29/#api-endpoints-customers), [customer
      * bank
-     * account](https://developer.gocardless.com/pro/2015-04-29/#api-endpoints-customer-bank-account),
+     * account](https://developer.gocardless.com/pro/2015-04-29/#api-endpoints-customer-bank-accounts),
      * and [mandate](https://developer.gocardless.com/pro/2015-04-29/#api-endpoints-mandates) using the
      * details supplied by your customer and returns the ID of the created mandate.
      * 
