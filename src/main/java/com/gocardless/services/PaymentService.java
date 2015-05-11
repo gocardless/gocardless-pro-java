@@ -97,6 +97,8 @@ public class PaymentService {
      * 
      * This will return a `retry_failed` error if the payment
      * has not failed.
+     * 
+     * Payments can be retried up to 3 times.
      */
     public PaymentRetryRequest retry(String identity) {
         return new PaymentRetryRequest(httpClient, identity);
@@ -690,6 +692,8 @@ public class PaymentService {
      * 
      * This will return a `retry_failed` error if the payment
      * has not failed.
+     * 
+     * Payments can be retried up to 3 times.
      */
     public static final class PaymentRetryRequest extends PostRequest<Payment> {
         @PathParam

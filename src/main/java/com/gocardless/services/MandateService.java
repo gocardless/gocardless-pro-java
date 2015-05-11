@@ -99,6 +99,9 @@ public class MandateService {
      * 
      * This will fail with
      * a `mandate_not_inactive` error if the mandate is already being submitted, or is active.
+     * 
+     *
+     * Mandates can be resubmitted up to 3 times.
      */
     public MandateReinstateRequest reinstate(String identity) {
         return new MandateReinstateRequest(httpClient, identity);
@@ -577,6 +580,9 @@ public class MandateService {
      * 
      * This will fail with
      * a `mandate_not_inactive` error if the mandate is already being submitted, or is active.
+     * 
+     *
+     * Mandates can be resubmitted up to 3 times.
      */
     public static final class MandateReinstateRequest extends PostRequest<Mandate> {
         @PathParam
