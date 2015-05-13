@@ -86,6 +86,7 @@ public class Subscription {
     private Map<String, String> metadata;
     private Month month;
     private String name;
+    private String paymentReference;
     private String startAt;
     private String status;
     private List<UpcomingPayments> upcomingPayments;
@@ -184,6 +185,16 @@ public class Subscription {
      */
     public String getName() {
         return name;
+    }
+
+    /**
+     * An optional payment reference. This will be set as the reference on each payment created and will
+     * appear on your customer's bank statement. See the documentation for the [create payment
+     * endpoint](https://developer.gocardless.com/pro/2015-04-29/#payments-create-a-payment) for more
+     * details.
+     */
+    public String getPaymentReference() {
+        return paymentReference;
     }
 
     /**

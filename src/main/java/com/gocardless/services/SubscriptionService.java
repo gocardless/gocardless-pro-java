@@ -149,6 +149,7 @@ public class SubscriptionService {
         private Map<String, String> metadata;
         private Month month;
         private String name;
+        private String paymentReference;
         private String startAt;
 
         /**
@@ -265,6 +266,17 @@ public class SubscriptionService {
          */
         public SubscriptionCreateRequest withName(String name) {
             this.name = name;
+            return this;
+        }
+
+        /**
+         * An optional payment reference. This will be set as the reference on each payment created and will
+         * appear on your customer's bank statement. See the documentation for the [create payment
+         * endpoint](https://developer.gocardless.com/pro/2015-04-29/#payments-create-a-payment) for more
+         * details.
+         */
+        public SubscriptionCreateRequest withPaymentReference(String paymentReference) {
+            this.paymentReference = paymentReference;
             return this;
         }
 
@@ -481,6 +493,7 @@ public class SubscriptionService {
         private final String identity;
         private Map<String, String> metadata;
         private String name;
+        private String paymentReference;
 
         /**
          * Key-value store of custom data. Up to 3 keys are permitted, with key names up to 50 characters and
@@ -508,6 +521,17 @@ public class SubscriptionService {
          */
         public SubscriptionUpdateRequest withName(String name) {
             this.name = name;
+            return this;
+        }
+
+        /**
+         * An optional payment reference. This will be set as the reference on each payment created and will
+         * appear on your customer's bank statement. See the documentation for the [create payment
+         * endpoint](https://developer.gocardless.com/pro/2015-04-29/#payments-create-a-payment) for more
+         * details.
+         */
+        public SubscriptionUpdateRequest withPaymentReference(String paymentReference) {
+            this.paymentReference = paymentReference;
             return this;
         }
 
