@@ -1,5 +1,6 @@
 package com.gocardless.services;
 
+import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -68,8 +69,13 @@ public class MandateService {
      * 639-1](http://en.wikipedia.org/wiki/List_of_ISO_639-1_codes#Partial_ISO_639_table) language code
      * as an `Accept-Language` header.
      */
-    public MandateGetRequest get(String identity) {
-        return new MandateGetRequest(httpClient, identity);
+    public MandateGetRequest<Mandate> get(String identity) {
+        return new MandateGetRequest<>(httpClient, GetRequest.<Mandate>jsonExecutor(), identity);
+    }
+
+    public MandateGetRequest<InputStream> download(String identity) {
+        return new MandateGetRequest<>(httpClient,
+                GetRequest.<Mandate>downloadExecutor("application/pdf"), identity);
     }
 
     /**
@@ -400,12 +406,13 @@ public class MandateService {
      * 639-1](http://en.wikipedia.org/wiki/List_of_ISO_639-1_codes#Partial_ISO_639_table) language code
      * as an `Accept-Language` header.
      */
-    public static final class MandateGetRequest extends GetRequest<Mandate> {
+    public static final class MandateGetRequest<S> extends GetRequest<S, Mandate> {
         @PathParam
         private final String identity;
 
-        private MandateGetRequest(HttpClient httpClient, String identity) {
-            super(httpClient);
+        private MandateGetRequest(HttpClient httpClient, GetRequestExecutor<S, Mandate> executor,
+                String identity) {
+            super(httpClient, executor);
             this.identity = identity;
         }
 

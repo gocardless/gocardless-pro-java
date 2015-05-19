@@ -55,8 +55,8 @@ public class CreditorService {
     /**
      * Retrieves the details of an existing creditor.
      */
-    public CreditorGetRequest get(String identity) {
-        return new CreditorGetRequest(httpClient, identity);
+    public CreditorGetRequest<Creditor> get(String identity) {
+        return new CreditorGetRequest<>(httpClient, GetRequest.<Creditor>jsonExecutor(), identity);
     }
 
     /**
@@ -264,12 +264,13 @@ public class CreditorService {
      *
      * Retrieves the details of an existing creditor.
      */
-    public static final class CreditorGetRequest extends GetRequest<Creditor> {
+    public static final class CreditorGetRequest<S> extends GetRequest<S, Creditor> {
         @PathParam
         private final String identity;
 
-        private CreditorGetRequest(HttpClient httpClient, String identity) {
-            super(httpClient);
+        private CreditorGetRequest(HttpClient httpClient, GetRequestExecutor<S, Creditor> executor,
+                String identity) {
+            super(httpClient, executor);
             this.identity = identity;
         }
 

@@ -1,5 +1,7 @@
 package com.gocardless;
 
+import java.io.IOException;
+import java.io.InputStream;
 import java.util.List;
 
 import co.freeside.betamax.Betamax;
@@ -10,6 +12,7 @@ import com.gocardless.http.ListResponse;
 import com.gocardless.resources.*;
 
 import com.google.common.collect.Lists;
+import com.google.common.io.ByteStreams;
 
 import org.junit.Before;
 import org.junit.Rule;
@@ -165,5 +168,13 @@ public class GoCardlessClientTest {
                 client.subscriptions().create().withAmount(1000).withCurrency("GBP")
                         .withIntervalUnit(MONTHLY).withLinksMandate("MD00001PEYCSQF").execute();
         assertThat(subscription.getId()).isNotNull();
+    }
+
+    @Test
+    @Betamax(tape = "download a mandate")
+    public void shouldDownloadAMandate() throws IOException {
+        InputStream mandate = client.mandates().download("MD00001PEYCSQF").execute();
+        byte[] pdf = ByteStreams.toByteArray(mandate);
+        assertThat(pdf).isNotEmpty();
     }
 }

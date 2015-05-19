@@ -44,8 +44,8 @@ public class EventService {
     /**
      * Retrieves the details of a single event.
      */
-    public EventGetRequest get(String identity) {
-        return new EventGetRequest(httpClient, identity);
+    public EventGetRequest<Event> get(String identity) {
+        return new EventGetRequest<>(httpClient, GetRequest.<Event>jsonExecutor(), identity);
     }
 
     /**
@@ -381,12 +381,13 @@ public class EventService {
      *
      * Retrieves the details of a single event.
      */
-    public static final class EventGetRequest extends GetRequest<Event> {
+    public static final class EventGetRequest<S> extends GetRequest<S, Event> {
         @PathParam
         private final String identity;
 
-        private EventGetRequest(HttpClient httpClient, String identity) {
-            super(httpClient);
+        private EventGetRequest(HttpClient httpClient, GetRequestExecutor<S, Event> executor,
+                String identity) {
+            super(httpClient, executor);
             this.identity = identity;
         }
 
