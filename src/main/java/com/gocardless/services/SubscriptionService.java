@@ -110,8 +110,9 @@ public class SubscriptionService {
     /**
      * Retrieves the details of a single subscription.
      */
-    public SubscriptionGetRequest get(String identity) {
-        return new SubscriptionGetRequest(httpClient, identity);
+    public SubscriptionGetRequest<Subscription> get(String identity) {
+        return new SubscriptionGetRequest<>(httpClient, GetRequest.<Subscription>jsonExecutor(),
+                identity);
     }
 
     /**
@@ -451,12 +452,13 @@ public class SubscriptionService {
      *
      * Retrieves the details of a single subscription.
      */
-    public static final class SubscriptionGetRequest extends GetRequest<Subscription> {
+    public static final class SubscriptionGetRequest<S> extends GetRequest<S, Subscription> {
         @PathParam
         private final String identity;
 
-        private SubscriptionGetRequest(HttpClient httpClient, String identity) {
-            super(httpClient);
+        private SubscriptionGetRequest(HttpClient httpClient,
+                GetRequestExecutor<S, Subscription> executor, String identity) {
+            super(httpClient, executor);
             this.identity = identity;
         }
 

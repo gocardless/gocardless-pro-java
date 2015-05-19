@@ -66,8 +66,8 @@ public class PaymentService {
     /**
      * Retrieves the details of a single existing payment.
      */
-    public PaymentGetRequest get(String identity) {
-        return new PaymentGetRequest(httpClient, identity);
+    public PaymentGetRequest<Payment> get(String identity) {
+        return new PaymentGetRequest<>(httpClient, GetRequest.<Payment>jsonExecutor(), identity);
     }
 
     /**
@@ -512,12 +512,13 @@ public class PaymentService {
      *
      * Retrieves the details of a single existing payment.
      */
-    public static final class PaymentGetRequest extends GetRequest<Payment> {
+    public static final class PaymentGetRequest<S> extends GetRequest<S, Payment> {
         @PathParam
         private final String identity;
 
-        private PaymentGetRequest(HttpClient httpClient, String identity) {
-            super(httpClient);
+        private PaymentGetRequest(HttpClient httpClient, GetRequestExecutor<S, Payment> executor,
+                String identity) {
+            super(httpClient, executor);
             this.identity = identity;
         }
 

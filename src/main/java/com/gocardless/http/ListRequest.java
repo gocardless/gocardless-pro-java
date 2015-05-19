@@ -1,6 +1,6 @@
 package com.gocardless.http;
 
-import java.io.Reader;
+import java.io.InputStream;
 import java.util.List;
 import java.util.Map;
 
@@ -35,7 +35,7 @@ public abstract class ListRequest<S, T> extends HttpRequest<ListResponse<T>> {
     }
 
     @Override
-    protected ListResponse<T> parseResponse(Reader stream, ResponseParser responseParser) {
+    protected ListResponse<T> parseResponse(InputStream stream, ResponseParser responseParser) {
         return responseParser.parsePage(stream, getEnvelope(), getTypeToken());
     }
 

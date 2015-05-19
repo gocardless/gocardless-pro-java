@@ -47,8 +47,8 @@ public class PayoutService {
     /**
      * Retrieves the details of a single payout.
      */
-    public PayoutGetRequest get(String identity) {
-        return new PayoutGetRequest(httpClient, identity);
+    public PayoutGetRequest<Payout> get(String identity) {
+        return new PayoutGetRequest<>(httpClient, GetRequest.<Payout>jsonExecutor(), identity);
     }
 
     /**
@@ -167,12 +167,13 @@ public class PayoutService {
      *
      * Retrieves the details of a single payout.
      */
-    public static final class PayoutGetRequest extends GetRequest<Payout> {
+    public static final class PayoutGetRequest<S> extends GetRequest<S, Payout> {
         @PathParam
         private final String identity;
 
-        private PayoutGetRequest(HttpClient httpClient, String identity) {
-            super(httpClient);
+        private PayoutGetRequest(HttpClient httpClient, GetRequestExecutor<S, Payout> executor,
+                String identity) {
+            super(httpClient, executor);
             this.identity = identity;
         }
 

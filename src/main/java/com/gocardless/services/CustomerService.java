@@ -54,8 +54,8 @@ public class CustomerService {
     /**
      * Retrieves the details of an existing customer.
      */
-    public CustomerGetRequest get(String identity) {
-        return new CustomerGetRequest(httpClient, identity);
+    public CustomerGetRequest<Customer> get(String identity) {
+        return new CustomerGetRequest<>(httpClient, GetRequest.<Customer>jsonExecutor(), identity);
     }
 
     /**
@@ -384,12 +384,13 @@ public class CustomerService {
      *
      * Retrieves the details of an existing customer.
      */
-    public static final class CustomerGetRequest extends GetRequest<Customer> {
+    public static final class CustomerGetRequest<S> extends GetRequest<S, Customer> {
         @PathParam
         private final String identity;
 
-        private CustomerGetRequest(HttpClient httpClient, String identity) {
-            super(httpClient);
+        private CustomerGetRequest(HttpClient httpClient, GetRequestExecutor<S, Customer> executor,
+                String identity) {
+            super(httpClient, executor);
             this.identity = identity;
         }
 

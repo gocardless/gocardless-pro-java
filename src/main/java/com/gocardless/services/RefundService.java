@@ -79,8 +79,8 @@ public class RefundService {
     /**
      * Retrieves all details for a single refund
      */
-    public RefundGetRequest get(String identity) {
-        return new RefundGetRequest(httpClient, identity);
+    public RefundGetRequest<Refund> get(String identity) {
+        return new RefundGetRequest<>(httpClient, GetRequest.<Refund>jsonExecutor(), identity);
     }
 
     /**
@@ -287,12 +287,13 @@ public class RefundService {
      *
      * Retrieves all details for a single refund
      */
-    public static final class RefundGetRequest extends GetRequest<Refund> {
+    public static final class RefundGetRequest<S> extends GetRequest<S, Refund> {
         @PathParam
         private final String identity;
 
-        private RefundGetRequest(HttpClient httpClient, String identity) {
-            super(httpClient);
+        private RefundGetRequest(HttpClient httpClient, GetRequestExecutor<S, Refund> executor,
+                String identity) {
+            super(httpClient, executor);
             this.identity = identity;
         }
 
