@@ -75,7 +75,6 @@ public class CustomerService {
         private String addressLine2;
         private String addressLine3;
         private String city;
-        private String companyName;
         private String countryCode;
         private String email;
         private String familyName;
@@ -113,14 +112,6 @@ public class CustomerService {
          */
         public CustomerCreateRequest withCity(String city) {
             this.city = city;
-            return this;
-        }
-
-        /**
-         * Company Name.
-         */
-        public CustomerCreateRequest withCompanyName(String companyName) {
-            this.companyName = companyName;
             return this;
         }
 
@@ -438,7 +429,6 @@ public class CustomerService {
         private String addressLine2;
         private String addressLine3;
         private String city;
-        private String companyName;
         private String countryCode;
         private String email;
         private String familyName;
@@ -476,14 +466,6 @@ public class CustomerService {
          */
         public CustomerUpdateRequest withCity(String city) {
             this.city = city;
-            return this;
-        }
-
-        /**
-         * Company Name.
-         */
-        public CustomerUpdateRequest withCompanyName(String companyName) {
-            this.companyName = companyName;
             return this;
         }
 

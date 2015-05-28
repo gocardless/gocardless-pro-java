@@ -20,7 +20,6 @@ public class Customer {
     private String addressLine2;
     private String addressLine3;
     private String city;
-    private String companyName;
     private String countryCode;
     private String createdAt;
     private String email;
@@ -57,13 +56,6 @@ public class Customer {
      */
     public String getCity() {
         return city;
-    }
-
-    /**
-     * Company Name.
-     */
-    public String getCompanyName() {
-        return companyName;
     }
 
     /**
