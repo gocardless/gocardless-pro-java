@@ -35,7 +35,7 @@ public class CreditorBankAccount {
     /**
      * Name of the account holder, as known by the bank. Usually this is the same as the name stored with
      * the linked [creditor](https://developer.gocardless.com/pro/2015-04-29/#api-endpoints-creditors).
-     * This field cannot exceed 18 characters.
+     * This field will be transliterated, upcased and truncated to 18 characters.
      */
     public String getAccountHolderName() {
         return accountHolderName;

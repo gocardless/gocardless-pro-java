@@ -36,7 +36,7 @@ public class CustomerBankAccount {
     /**
      * Name of the account holder, as known by the bank. Usually this matches the name of the linked
      * [customer](https://developer.gocardless.com/pro/2015-04-29/#api-endpoints-customers). This field
-     * cannot exceed 18 characters.
+     * will be transliterated, upcased and truncated to 18 characters.
      */
     public String getAccountHolderName() {
         return accountHolderName;
