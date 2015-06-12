@@ -45,7 +45,8 @@ public class PayoutService {
     }
 
     /**
-     * Retrieves the details of a single payout.
+     * Retrieves the details of a single payout. For an example of how to reconcile the transactions in a
+     * payout, see [this guide](#events-fetching-events-for-a-payout).
      */
     public PayoutGetRequest<Payout> get(String identity) {
         return new PayoutGetRequest<>(httpClient, GetRequest.<Payout>jsonExecutor(), identity);
@@ -165,7 +166,8 @@ public class PayoutService {
     /**
      * Request class for {@link PayoutService#get }.
      *
-     * Retrieves the details of a single payout.
+     * Retrieves the details of a single payout. For an example of how to reconcile the transactions in a
+     * payout, see [this guide](#events-fetching-events-for-a-payout).
      */
     public static final class PayoutGetRequest<S> extends GetRequest<S, Payout> {
         @PathParam
