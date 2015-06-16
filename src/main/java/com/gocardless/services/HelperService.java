@@ -104,7 +104,7 @@ public class HelperService {
         private String signedAt;
 
         /**
-         * Name of the account holder, as known by the bank. Usually this matches the name of the linked
+         * Name of the account holder, as known by the bank. Usually this matches the name of the
          * [customer](https://developer.gocardless.com/pro/2015-04-29/#api-endpoints-customers). This field
          * cannot exceed 18 characters.
          */
@@ -114,7 +114,9 @@ public class HelperService {
         }
 
         /**
-         * 8 digit, valid UK bank account number.
+         * Bank account number. See [local
+         * details](https://developer.gocardless.com/pro/2015-04-29/#ui-compliance-local-bank-details) for
+         * more information.
          */
         public HelperMandateRequest withAccountNumber(String accountNumber) {
             this.accountNumber = accountNumber;
@@ -122,7 +124,9 @@ public class HelperService {
         }
 
         /**
-         * Bank identifier code.
+         * Bank code. See [local
+         * details](https://developer.gocardless.com/pro/2015-04-29/#ui-compliance-local-bank-details) for
+         * more information.
          */
         public HelperMandateRequest withBankCode(String bankCode) {
             this.bankCode = bankCode;
@@ -130,7 +134,7 @@ public class HelperService {
         }
 
         /**
-         * Bank Identifier Code
+         * SWIFT BIC. Optional (will be derived from the `iban` or local details if not provided).
          */
         public HelperMandateRequest withBic(String bic) {
             this.bic = bic;
@@ -138,7 +142,9 @@ public class HelperService {
         }
 
         /**
-         * Branch identifier code.
+         * Branch code. See [local
+         * details](https://developer.gocardless.com/pro/2015-04-29/#ui-compliance-local-bank-details) for
+         * more information.
          */
         public HelperMandateRequest withBranchCode(String branchCode) {
             this.branchCode = branchCode;
@@ -155,7 +161,8 @@ public class HelperService {
         }
 
         /**
-         * International Bank Account Number
+         * International Bank Account Number. Alternatively you can provide [local
+         * details](https://developer.gocardless.com/pro/2015-04-29/#ui-compliance-local-bank-details).
          */
         public HelperMandateRequest withIban(String iban) {
             this.iban = iban;
@@ -176,7 +183,7 @@ public class HelperService {
         }
 
         /**
-         * Mandate reference (normally set by GoCardless)
+         * Unique 6 to 18 character reference. This may be left blank at the point of signing.
          */
         public HelperMandateRequest withMandateReference(String mandateReference) {
             this.mandateReference = mandateReference;
@@ -184,7 +191,8 @@ public class HelperService {
         }
 
         /**
-         * Direct Debit scheme
+         * Direct Debit scheme. Can be supplied or automatically detected from the customer's bank account
+         * details (if provided).
          */
         public HelperMandateRequest withScheme(String scheme) {
             this.scheme = scheme;
@@ -192,7 +200,7 @@ public class HelperService {
         }
 
         /**
-         * Will render a form with this date and no signature field.
+         * If provided, this endpoint will render a form with this date and no signature field.
          */
         public HelperMandateRequest withSignedAt(String signedAt) {
             this.signedAt = signedAt;
@@ -250,7 +258,9 @@ public class HelperService {
         private String iban;
 
         /**
-         * 8 digit, valid UK bank account number.
+         * Bank account number. See [local
+         * details](https://developer.gocardless.com/pro/2015-04-29/#ui-compliance-local-bank-details) for
+         * more information.
          */
         public HelperModulusCheckRequest withAccountNumber(String accountNumber) {
             this.accountNumber = accountNumber;
@@ -258,7 +268,9 @@ public class HelperService {
         }
 
         /**
-         * Bank identifier code.
+         * Bank code. See [local
+         * details](https://developer.gocardless.com/pro/2015-04-29/#ui-compliance-local-bank-details) for
+         * more information.
          */
         public HelperModulusCheckRequest withBankCode(String bankCode) {
             this.bankCode = bankCode;
@@ -266,7 +278,9 @@ public class HelperService {
         }
 
         /**
-         * Branch identifier code.
+         * Branch code. See [local
+         * details](https://developer.gocardless.com/pro/2015-04-29/#ui-compliance-local-bank-details) for
+         * more information.
          */
         public HelperModulusCheckRequest withBranchCode(String branchCode) {
             this.branchCode = branchCode;
@@ -283,7 +297,8 @@ public class HelperService {
         }
 
         /**
-         * International Bank Account Number
+         * International Bank Account Number. Alternatively you can provide [local
+         * details](https://developer.gocardless.com/pro/2015-04-29/#ui-compliance-local-bank-details).
          */
         public HelperModulusCheckRequest withIban(String iban) {
             this.iban = iban;

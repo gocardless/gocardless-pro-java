@@ -116,7 +116,9 @@ public class CreditorBankAccountService {
         }
 
         /**
-         * 8 digit, valid UK bank account number.
+         * Bank account number. See [local
+         * details](https://developer.gocardless.com/pro/2015-04-29/#ui-compliance-local-bank-details) for
+         * more information.
          */
         public CreditorBankAccountCreateRequest withAccountNumber(String accountNumber) {
             this.accountNumber = accountNumber;
@@ -124,7 +126,9 @@ public class CreditorBankAccountService {
         }
 
         /**
-         * Bank identifier code
+         * Bank code. See [local
+         * details](https://developer.gocardless.com/pro/2015-04-29/#ui-compliance-local-bank-details) for
+         * more information.
          */
         public CreditorBankAccountCreateRequest withBankCode(String bankCode) {
             this.bankCode = bankCode;
@@ -132,7 +136,9 @@ public class CreditorBankAccountService {
         }
 
         /**
-         * Branch identifier code
+         * Branch code. See [local
+         * details](https://developer.gocardless.com/pro/2015-04-29/#ui-compliance-local-bank-details) for
+         * more information.
          */
         public CreditorBankAccountCreateRequest withBranchCode(String branchCode) {
             this.branchCode = branchCode;
@@ -158,7 +164,8 @@ public class CreditorBankAccountService {
         }
 
         /**
-         * International Bank Account Number
+         * International Bank Account Number. Alternatively you can provide [local
+         * details](https://developer.gocardless.com/pro/2015-04-29/#ui-compliance-local-bank-details).
          */
         public CreditorBankAccountCreateRequest withIban(String iban) {
             this.iban = iban;
