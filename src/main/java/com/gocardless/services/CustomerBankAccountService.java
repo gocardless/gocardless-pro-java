@@ -39,10 +39,10 @@ public class CustomerBankAccountService {
     }
 
     /**
-     * Creates a new bank account object associated to a customer id.
+     * Creates a new customer bank account object.
      * 
-     * There are three different ways
-     * to supply bank account details:
+     * There are three different ways to supply bank
+     * account details:
      * 
      * - [Local
      * details](https://developer.gocardless.com/pro/2015-04-29/#ui-compliance-local-bank-details)
@@ -107,10 +107,10 @@ public class CustomerBankAccountService {
     /**
      * Request class for {@link CustomerBankAccountService#create }.
      *
-     * Creates a new bank account object associated to a customer id.
+     * Creates a new customer bank account object.
      * 
-     * There are three different ways
-     * to supply bank account details:
+     * There are three different ways to supply bank
+     * account details:
      * 
      * - [Local
      * details](https://developer.gocardless.com/pro/2015-04-29/#ui-compliance-local-bank-details)
@@ -148,9 +148,9 @@ public class CustomerBankAccountService {
         }
 
         /**
-         * Bank account number. See [local
+         * Bank account number - see [local
          * details](https://developer.gocardless.com/pro/2015-04-29/#ui-compliance-local-bank-details) for
-         * more information.
+         * more information. Alternatively you can provide an `iban`.
          */
         public CustomerBankAccountCreateRequest withAccountNumber(String accountNumber) {
             this.accountNumber = accountNumber;
@@ -158,9 +158,9 @@ public class CustomerBankAccountService {
         }
 
         /**
-         * Bank code. See [local
+         * Bank code - see [local
          * details](https://developer.gocardless.com/pro/2015-04-29/#ui-compliance-local-bank-details) for
-         * more information.
+         * more information.  Alternatively you can provide an `iban`.
          */
         public CustomerBankAccountCreateRequest withBankCode(String bankCode) {
             this.bankCode = bankCode;
@@ -168,9 +168,9 @@ public class CustomerBankAccountService {
         }
 
         /**
-         * Branch code. See [local
+         * Branch code - see [local
          * details](https://developer.gocardless.com/pro/2015-04-29/#ui-compliance-local-bank-details) for
-         * more information.
+         * more information. Alternatively you can provide an `iban`.
          */
         public CustomerBankAccountCreateRequest withBranchCode(String branchCode) {
             this.branchCode = branchCode;

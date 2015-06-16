@@ -114,7 +114,7 @@ public class HelperService {
         }
 
         /**
-         * Bank account number. See [local
+         * Bank account number - see [local
          * details](https://developer.gocardless.com/pro/2015-04-29/#ui-compliance-local-bank-details) for
          * more information.
          */
@@ -124,7 +124,7 @@ public class HelperService {
         }
 
         /**
-         * Bank code. See [local
+         * Bank code - see [local
          * details](https://developer.gocardless.com/pro/2015-04-29/#ui-compliance-local-bank-details) for
          * more information.
          */
@@ -142,7 +142,7 @@ public class HelperService {
         }
 
         /**
-         * Branch code. See [local
+         * Branch code - see [local
          * details](https://developer.gocardless.com/pro/2015-04-29/#ui-compliance-local-bank-details) for
          * more information.
          */
@@ -258,7 +258,7 @@ public class HelperService {
         private String iban;
 
         /**
-         * Bank account number. See [local
+         * Bank account number - see [local
          * details](https://developer.gocardless.com/pro/2015-04-29/#ui-compliance-local-bank-details) for
          * more information.
          */
@@ -268,7 +268,7 @@ public class HelperService {
         }
 
         /**
-         * Bank code. See [local
+         * Bank code - see [local
          * details](https://developer.gocardless.com/pro/2015-04-29/#ui-compliance-local-bank-details) for
          * more information.
          */
@@ -278,7 +278,7 @@ public class HelperService {
         }
 
         /**
-         * Branch code. See [local
+         * Branch code - see [local
          * details](https://developer.gocardless.com/pro/2015-04-29/#ui-compliance-local-bank-details) for
          * more information.
          */

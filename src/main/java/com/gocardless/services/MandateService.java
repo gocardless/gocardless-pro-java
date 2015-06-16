@@ -38,7 +38,7 @@ public class MandateService {
     }
 
     /**
-     * Creates a new mandate object
+     * Creates a new mandate object.
      */
     public MandateCreateRequest create() {
         return new MandateCreateRequest(httpClient);
@@ -116,7 +116,7 @@ public class MandateService {
     /**
      * Request class for {@link MandateService#create }.
      *
-     * Creates a new mandate object
+     * Creates a new mandate object.
      */
     public static final class MandateCreateRequest extends PostRequest<Mandate> {
         private Links links;

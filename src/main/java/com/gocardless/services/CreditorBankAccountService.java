@@ -39,9 +39,6 @@ public class CreditorBankAccountService {
 
     /**
      * Creates a new creditor bank account object.
-     * 
-     * Bank account details may be supplied using the
-     * IBAN (international bank account number) or [local details](#ui-compliance-local-bank-details).
      */
     public CreditorBankAccountCreateRequest create() {
         return new CreditorBankAccountCreateRequest(httpClient);
@@ -88,9 +85,6 @@ public class CreditorBankAccountService {
      * Request class for {@link CreditorBankAccountService#create }.
      *
      * Creates a new creditor bank account object.
-     * 
-     * Bank account details may be supplied using the
-     * IBAN (international bank account number) or [local details](#ui-compliance-local-bank-details).
      */
     public static final class CreditorBankAccountCreateRequest extends
             PostRequest<CreditorBankAccount> {
@@ -116,9 +110,9 @@ public class CreditorBankAccountService {
         }
 
         /**
-         * Bank account number. See [local
+         * Bank account number - see [local
          * details](https://developer.gocardless.com/pro/2015-04-29/#ui-compliance-local-bank-details) for
-         * more information.
+         * more information. Alternatively you can provide an `iban`.
          */
         public CreditorBankAccountCreateRequest withAccountNumber(String accountNumber) {
             this.accountNumber = accountNumber;
@@ -126,9 +120,9 @@ public class CreditorBankAccountService {
         }
 
         /**
-         * Bank code. See [local
+         * Bank code - see [local
          * details](https://developer.gocardless.com/pro/2015-04-29/#ui-compliance-local-bank-details) for
-         * more information.
+         * more information. Alternatively you can provide an `iban`.
          */
         public CreditorBankAccountCreateRequest withBankCode(String bankCode) {
             this.bankCode = bankCode;
@@ -136,9 +130,9 @@ public class CreditorBankAccountService {
         }
 
         /**
-         * Branch code. See [local
+         * Branch code - see [local
          * details](https://developer.gocardless.com/pro/2015-04-29/#ui-compliance-local-bank-details) for
-         * more information.
+         * more information. Alternatively you can provide an `iban`.
          */
         public CreditorBankAccountCreateRequest withBranchCode(String branchCode) {
             this.branchCode = branchCode;
@@ -147,7 +141,7 @@ public class CreditorBankAccountService {
 
         /**
          * [ISO 3166-1](http://en.wikipedia.org/wiki/ISO_3166-1_alpha-2#Officially_assigned_code_elements)
-         * alpha-2 code. Currently only GB is supported.
+         * alpha-2 code. Defaults to the country code of the `iban` if supplied, otherwise is required.
          */
         public CreditorBankAccountCreateRequest withCountryCode(String countryCode) {
             this.countryCode = countryCode;
