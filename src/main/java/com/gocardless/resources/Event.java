@@ -105,8 +105,7 @@ public class Event {
 
         /**
          * Human readable description of the cause. _Note:_ Changes to event descriptions are not considered
-         * breaking, so your integration should not parse these messages, using `details[cause]` and/or
-         * `details[reason_code]` instead.
+         * breaking.
          */
         public String getDescription() {
             return description;
