@@ -117,7 +117,7 @@ public class CustomerService {
         }
 
         /**
-         * Company Name.
+         * Customer's company name. Required unless a `given_name` and `family_name` are provided.
          */
         public CustomerCreateRequest withCompanyName(String companyName) {
             this.companyName = companyName;
@@ -142,7 +142,7 @@ public class CustomerService {
         }
 
         /**
-         * Customer's surname.
+         * Customer's surname. Required unless a `company_name` is provided.
          */
         public CustomerCreateRequest withFamilyName(String familyName) {
             this.familyName = familyName;
@@ -150,7 +150,7 @@ public class CustomerService {
         }
 
         /**
-         * Customer's first name.
+         * Customer's first name. Required unless a `company_name` is provided.
          */
         public CustomerCreateRequest withGivenName(String givenName) {
             this.givenName = givenName;
@@ -480,7 +480,7 @@ public class CustomerService {
         }
 
         /**
-         * Company Name.
+         * Customer's company name. Required unless a `given_name` and `family_name` are provided.
          */
         public CustomerUpdateRequest withCompanyName(String companyName) {
             this.companyName = companyName;
@@ -505,7 +505,7 @@ public class CustomerService {
         }
 
         /**
-         * Customer's surname.
+         * Customer's surname. Required unless a `company_name` is provided.
          */
         public CustomerUpdateRequest withFamilyName(String familyName) {
             this.familyName = familyName;
@@ -513,7 +513,7 @@ public class CustomerService {
         }
 
         /**
-         * Customer's first name.
+         * Customer's first name. Required unless a `company_name` is provided.
          */
         public CustomerUpdateRequest withGivenName(String givenName) {
             this.givenName = givenName;

@@ -60,7 +60,7 @@ public class Customer {
     }
 
     /**
-     * Company Name.
+     * Customer's company name. Required unless a `given_name` and `family_name` are provided.
      */
     public String getCompanyName() {
         return companyName;
@@ -90,14 +90,14 @@ public class Customer {
     }
 
     /**
-     * Customer's surname.
+     * Customer's surname. Required unless a `company_name` is provided.
      */
     public String getFamilyName() {
         return familyName;
     }
 
     /**
-     * Customer's first name.
+     * Customer's first name. Required unless a `company_name` is provided.
      */
     public String getGivenName() {
         return givenName;
