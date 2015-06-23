@@ -111,8 +111,8 @@ public class CreditorBankAccountService {
 
         /**
          * Bank account number - see [local
-         * details](https://developer.gocardless.com/pro/2015-04-29/#ui-compliance-local-bank-details) for
-         * more information. Alternatively you can provide an `iban`.
+         * details](https://developer.gocardless.com/pro/2015-04-29/#ui-local-bank-details) for more
+         * information. Alternatively you can provide an `iban`.
          */
         public CreditorBankAccountCreateRequest withAccountNumber(String accountNumber) {
             this.accountNumber = accountNumber;
@@ -121,8 +121,8 @@ public class CreditorBankAccountService {
 
         /**
          * Bank code - see [local
-         * details](https://developer.gocardless.com/pro/2015-04-29/#ui-compliance-local-bank-details) for
-         * more information. Alternatively you can provide an `iban`.
+         * details](https://developer.gocardless.com/pro/2015-04-29/#ui-local-bank-details) for more
+         * information. Alternatively you can provide an `iban`.
          */
         public CreditorBankAccountCreateRequest withBankCode(String bankCode) {
             this.bankCode = bankCode;
@@ -131,8 +131,8 @@ public class CreditorBankAccountService {
 
         /**
          * Branch code - see [local
-         * details](https://developer.gocardless.com/pro/2015-04-29/#ui-compliance-local-bank-details) for
-         * more information. Alternatively you can provide an `iban`.
+         * details](https://developer.gocardless.com/pro/2015-04-29/#ui-local-bank-details) for more
+         * information. Alternatively you can provide an `iban`.
          */
         public CreditorBankAccountCreateRequest withBranchCode(String branchCode) {
             this.branchCode = branchCode;
@@ -159,7 +159,7 @@ public class CreditorBankAccountService {
 
         /**
          * International Bank Account Number. Alternatively you can provide [local
-         * details](https://developer.gocardless.com/pro/2015-04-29/#ui-compliance-local-bank-details).
+         * details](https://developer.gocardless.com/pro/2015-04-29/#ui-local-bank-details).
          */
         public CreditorBankAccountCreateRequest withIban(String iban) {
             this.iban = iban;

@@ -45,17 +45,17 @@ public class CustomerBankAccountService {
      * account details:
      * 
      * - [Local
-     * details](https://developer.gocardless.com/pro/2015-04-29/#ui-compliance-local-bank-details)
+     * details](https://developer.gocardless.com/pro/2015-04-29/#ui-local-bank-details)
      * 
-     * -
-     * IBAN
+     * - IBAN
      * 
+     *
      * - [Customer Bank Account
      * Tokens](https://developer.gocardless.com/pro/2015-04-29/#js-flow-create-a-customer-bank-account-token)
      *
      * 
      * For more information on the different fields required in each country, see [local bank
-     * details](https://developer.gocardless.com/pro/2015-04-29/#ui-compliance-local-bank-details).
+     * details](https://developer.gocardless.com/pro/2015-04-29/#ui-local-bank-details).
      */
     public CustomerBankAccountCreateRequest create() {
         return new CustomerBankAccountCreateRequest(httpClient);
@@ -113,17 +113,17 @@ public class CustomerBankAccountService {
      * account details:
      * 
      * - [Local
-     * details](https://developer.gocardless.com/pro/2015-04-29/#ui-compliance-local-bank-details)
+     * details](https://developer.gocardless.com/pro/2015-04-29/#ui-local-bank-details)
      * 
-     * -
-     * IBAN
+     * - IBAN
      * 
+     *
      * - [Customer Bank Account
      * Tokens](https://developer.gocardless.com/pro/2015-04-29/#js-flow-create-a-customer-bank-account-token)
      *
      * 
      * For more information on the different fields required in each country, see [local bank
-     * details](https://developer.gocardless.com/pro/2015-04-29/#ui-compliance-local-bank-details).
+     * details](https://developer.gocardless.com/pro/2015-04-29/#ui-local-bank-details).
      */
     public static final class CustomerBankAccountCreateRequest extends
             PostRequest<CustomerBankAccount> {
@@ -149,8 +149,8 @@ public class CustomerBankAccountService {
 
         /**
          * Bank account number - see [local
-         * details](https://developer.gocardless.com/pro/2015-04-29/#ui-compliance-local-bank-details) for
-         * more information. Alternatively you can provide an `iban`.
+         * details](https://developer.gocardless.com/pro/2015-04-29/#ui-local-bank-details) for more
+         * information. Alternatively you can provide an `iban`.
          */
         public CustomerBankAccountCreateRequest withAccountNumber(String accountNumber) {
             this.accountNumber = accountNumber;
@@ -159,8 +159,8 @@ public class CustomerBankAccountService {
 
         /**
          * Bank code - see [local
-         * details](https://developer.gocardless.com/pro/2015-04-29/#ui-compliance-local-bank-details) for
-         * more information.  Alternatively you can provide an `iban`.
+         * details](https://developer.gocardless.com/pro/2015-04-29/#ui-local-bank-details) for more
+         * information.  Alternatively you can provide an `iban`.
          */
         public CustomerBankAccountCreateRequest withBankCode(String bankCode) {
             this.bankCode = bankCode;
@@ -169,8 +169,8 @@ public class CustomerBankAccountService {
 
         /**
          * Branch code - see [local
-         * details](https://developer.gocardless.com/pro/2015-04-29/#ui-compliance-local-bank-details) for
-         * more information. Alternatively you can provide an `iban`.
+         * details](https://developer.gocardless.com/pro/2015-04-29/#ui-local-bank-details) for more
+         * information. Alternatively you can provide an `iban`.
          */
         public CustomerBankAccountCreateRequest withBranchCode(String branchCode) {
             this.branchCode = branchCode;
@@ -197,7 +197,7 @@ public class CustomerBankAccountService {
 
         /**
          * International Bank Account Number. Alternatively you can provide [local
-         * details](https://developer.gocardless.com/pro/2015-04-29/#ui-compliance-local-bank-details).
+         * details](https://developer.gocardless.com/pro/2015-04-29/#ui-local-bank-details).
          */
         public CustomerBankAccountCreateRequest withIban(String iban) {
             this.iban = iban;

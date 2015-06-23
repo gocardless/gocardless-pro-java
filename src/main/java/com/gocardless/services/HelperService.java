@@ -32,13 +32,12 @@ public class HelperService {
      * 
      * Bank account details may either be supplied using the IBAN (international bank
      * account number), or [local
-     * details](https://developer.gocardless.com/pro/2015-04-29/#ui-compliance-local-bank-details). For
-     * more information on the different fields required in each country, please see the [local bank
-     * details](https://developer.gocardless.com/pro/2015-04-29/#ui-compliance-local-bank-details)
-     * section.
+     * details](https://developer.gocardless.com/pro/2015-04-29/#ui-local-bank-details). For more
+     * information on the different fields required in each country, please see the [local bank
+     * details](https://developer.gocardless.com/pro/2015-04-29/#ui-local-bank-details) section.
      * 
-     * To generate a mandate in a foreign language, set your `Accept-Language` header to
-     * the relevant [ISO
+     * To
+     * generate a mandate in a foreign language, set your `Accept-Language` header to the relevant [ISO
      * 639-1](http://en.wikipedia.org/wiki/List_of_ISO_639-1_codes#Partial_ISO_639_table) language code.
      * Currently Dutch, English, French, German, Italian, Portuguese and Spanish are supported.
      * 
@@ -55,11 +54,9 @@ public class HelperService {
      * 
      * Bank
      * account details may either be supplied using the IBAN (international bank account number), or
-     * [local
-     * details](https://developer.gocardless.com/pro/2015-04-29/#ui-compliance-local-bank-details). For
-     * more information on the different fields required in each country, please see the [local bank
-     * details](https://developer.gocardless.com/pro/2015-04-29/#ui-compliance-local-bank-details)
-     * section.
+     * [local details](https://developer.gocardless.com/pro/2015-04-29/#ui-local-bank-details). For more
+     * information on the different fields required in each country, please see the [local bank
+     * details](https://developer.gocardless.com/pro/2015-04-29/#ui-local-bank-details) section.
      */
     public HelperModulusCheckRequest modulusCheck() {
         return new HelperModulusCheckRequest(httpClient);
@@ -76,13 +73,12 @@ public class HelperService {
      * 
      * Bank account details may either be supplied using the IBAN (international bank
      * account number), or [local
-     * details](https://developer.gocardless.com/pro/2015-04-29/#ui-compliance-local-bank-details). For
-     * more information on the different fields required in each country, please see the [local bank
-     * details](https://developer.gocardless.com/pro/2015-04-29/#ui-compliance-local-bank-details)
-     * section.
+     * details](https://developer.gocardless.com/pro/2015-04-29/#ui-local-bank-details). For more
+     * information on the different fields required in each country, please see the [local bank
+     * details](https://developer.gocardless.com/pro/2015-04-29/#ui-local-bank-details) section.
      * 
-     * To generate a mandate in a foreign language, set your `Accept-Language` header to
-     * the relevant [ISO
+     * To
+     * generate a mandate in a foreign language, set your `Accept-Language` header to the relevant [ISO
      * 639-1](http://en.wikipedia.org/wiki/List_of_ISO_639-1_codes#Partial_ISO_639_table) language code.
      * Currently Dutch, English, French, German, Italian, Portuguese and Spanish are supported.
      * 
@@ -115,8 +111,8 @@ public class HelperService {
 
         /**
          * Bank account number - see [local
-         * details](https://developer.gocardless.com/pro/2015-04-29/#ui-compliance-local-bank-details) for
-         * more information.
+         * details](https://developer.gocardless.com/pro/2015-04-29/#ui-local-bank-details) for more
+         * information.
          */
         public HelperMandateRequest withAccountNumber(String accountNumber) {
             this.accountNumber = accountNumber;
@@ -125,8 +121,8 @@ public class HelperService {
 
         /**
          * Bank code - see [local
-         * details](https://developer.gocardless.com/pro/2015-04-29/#ui-compliance-local-bank-details) for
-         * more information.
+         * details](https://developer.gocardless.com/pro/2015-04-29/#ui-local-bank-details) for more
+         * information.
          */
         public HelperMandateRequest withBankCode(String bankCode) {
             this.bankCode = bankCode;
@@ -143,8 +139,8 @@ public class HelperService {
 
         /**
          * Branch code - see [local
-         * details](https://developer.gocardless.com/pro/2015-04-29/#ui-compliance-local-bank-details) for
-         * more information.
+         * details](https://developer.gocardless.com/pro/2015-04-29/#ui-local-bank-details) for more
+         * information.
          */
         public HelperMandateRequest withBranchCode(String branchCode) {
             this.branchCode = branchCode;
@@ -162,7 +158,7 @@ public class HelperService {
 
         /**
          * International Bank Account Number. Alternatively you can provide [local
-         * details](https://developer.gocardless.com/pro/2015-04-29/#ui-compliance-local-bank-details).
+         * details](https://developer.gocardless.com/pro/2015-04-29/#ui-local-bank-details).
          */
         public HelperMandateRequest withIban(String iban) {
             this.iban = iban;
@@ -244,11 +240,9 @@ public class HelperService {
      * 
      * Bank
      * account details may either be supplied using the IBAN (international bank account number), or
-     * [local
-     * details](https://developer.gocardless.com/pro/2015-04-29/#ui-compliance-local-bank-details). For
-     * more information on the different fields required in each country, please see the [local bank
-     * details](https://developer.gocardless.com/pro/2015-04-29/#ui-compliance-local-bank-details)
-     * section.
+     * [local details](https://developer.gocardless.com/pro/2015-04-29/#ui-local-bank-details). For more
+     * information on the different fields required in each country, please see the [local bank
+     * details](https://developer.gocardless.com/pro/2015-04-29/#ui-local-bank-details) section.
      */
     public static final class HelperModulusCheckRequest extends PostRequest<Helper> {
         private String accountNumber;
@@ -259,8 +253,8 @@ public class HelperService {
 
         /**
          * Bank account number - see [local
-         * details](https://developer.gocardless.com/pro/2015-04-29/#ui-compliance-local-bank-details) for
-         * more information.
+         * details](https://developer.gocardless.com/pro/2015-04-29/#ui-local-bank-details) for more
+         * information.
          */
         public HelperModulusCheckRequest withAccountNumber(String accountNumber) {
             this.accountNumber = accountNumber;
@@ -269,8 +263,8 @@ public class HelperService {
 
         /**
          * Bank code - see [local
-         * details](https://developer.gocardless.com/pro/2015-04-29/#ui-compliance-local-bank-details) for
-         * more information.
+         * details](https://developer.gocardless.com/pro/2015-04-29/#ui-local-bank-details) for more
+         * information.
          */
         public HelperModulusCheckRequest withBankCode(String bankCode) {
             this.bankCode = bankCode;
@@ -279,8 +273,8 @@ public class HelperService {
 
         /**
          * Branch code - see [local
-         * details](https://developer.gocardless.com/pro/2015-04-29/#ui-compliance-local-bank-details) for
-         * more information.
+         * details](https://developer.gocardless.com/pro/2015-04-29/#ui-local-bank-details) for more
+         * information.
          */
         public HelperModulusCheckRequest withBranchCode(String branchCode) {
             this.branchCode = branchCode;
@@ -298,7 +292,7 @@ public class HelperService {
 
         /**
          * International Bank Account Number. Alternatively you can provide [local
-         * details](https://developer.gocardless.com/pro/2015-04-29/#ui-compliance-local-bank-details).
+         * details](https://developer.gocardless.com/pro/2015-04-29/#ui-local-bank-details).
          */
         public HelperModulusCheckRequest withIban(String iban) {
             this.iban = iban;
