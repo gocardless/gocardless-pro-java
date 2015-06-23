@@ -109,7 +109,8 @@ public class RedirectFlowService {
         private String successRedirectUrl;
 
         /**
-         * A description of the item the customer is paying for
+         * A description of the item the customer is paying for. This will be shown on the hosted payment
+         * pages.
          */
         public RedirectFlowCreateRequest withDescription(String description) {
             this.description = description;
@@ -143,7 +144,9 @@ public class RedirectFlowService {
         }
 
         /**
-         * The customer's session ID
+         * The customer's session ID must be provided when the redirect flow is set up and again when it is
+         * completed. This allows integrators to ensure that the user who was originally sent to the
+         * GoCardless payment pages is the one who has completed them.
          */
         public RedirectFlowCreateRequest withSessionToken(String sessionToken) {
             this.sessionToken = sessionToken;
@@ -151,7 +154,7 @@ public class RedirectFlowService {
         }
 
         /**
-         * The URI to redirect to upon success mandate setup
+         * The URL to redirect to upon successful mandate setup.
          */
         public RedirectFlowCreateRequest withSuccessRedirectUrl(String successRedirectUrl) {
             this.successRedirectUrl = successRedirectUrl;
@@ -266,7 +269,9 @@ public class RedirectFlowService {
         private String sessionToken;
 
         /**
-         * The customer's session ID
+         * The customer's session ID must be provided when the redirect flow is set up and again when it is
+         * completed. This allows integrators to ensure that the user who was originally sent to the
+         * GoCardless payment pages is the one who has completed them.
          */
         public RedirectFlowCompleteRequest withSessionToken(String sessionToken) {
             this.sessionToken = sessionToken;

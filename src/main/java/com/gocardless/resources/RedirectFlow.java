@@ -66,14 +66,15 @@ public class RedirectFlow {
     }
 
     /**
-     * A description of the item the customer is paying for
+     * A description of the item the customer is paying for. This will be shown on the hosted payment
+     * pages.
      */
     public String getDescription() {
         return description;
     }
 
     /**
-     * Unique identifier, beginning with "RE"
+     * Unique identifier, beginning with "RE".
      */
     public String getId() {
         return id;
@@ -84,7 +85,8 @@ public class RedirectFlow {
     }
 
     /**
-     * The URI to redirect the customer to to setup their mandate
+     * The URL of the hosted payment pages for this redirect flow. This is the URL you should redirect
+     * your customer to.
      */
     public String getRedirectUrl() {
         return redirectUrl;
@@ -99,14 +101,16 @@ public class RedirectFlow {
     }
 
     /**
-     * The customer's session ID
+     * The customer's session ID must be provided when the redirect flow is set up and again when it is
+     * completed. This allows integrators to ensure that the user who was originally sent to the
+     * GoCardless payment pages is the one who has completed them.
      */
     public String getSessionToken() {
         return sessionToken;
     }
 
     /**
-     * The URI to redirect to upon success mandate setup
+     * The URL to redirect to upon successful mandate setup.
      */
     public String getSuccessRedirectUrl() {
         return successRedirectUrl;
