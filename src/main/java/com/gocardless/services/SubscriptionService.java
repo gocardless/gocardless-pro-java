@@ -14,39 +14,38 @@ import com.google.gson.reflect.TypeToken;
 /**
  * Service class for working with subscription resources.
  *
- * Subscriptions create
- * [payments](https://developer.gocardless.com/pro/2015-04-29/#core-endpoints-payments) according to
- * a schedule.
+ * Subscriptions create [payments](#core-endpoints-payments) according to a schedule.
  * 
- * #### Recurrence Rules
+ * ####
+ * Recurrence Rules
  * 
- * The following rules apply when specifying
- * recurrence:
- * - The first payment must be charged within 1 year.
- * - When neither `month` nor
- * `day_of_month` are present, the subscription will recur from the `start_at` based on the
- * `interval_unit`.
- * - If `month` or `day_of_month` are present, the recurrence rules will be
- * applied from the `start_at`, and the following validations apply:
+ * The following rules apply when specifying recurrence:
+ * - The first payment
+ * must be charged within 1 year.
+ * - When neither `month` nor `day_of_month` are present, the
+ * subscription will recur from the `start_at` based on the `interval_unit`.
+ * - If `month` or
+ * `day_of_month` are present, the recurrence rules will be applied from the `start_at`, and the
+ * following validations apply:
  * 
- * | interval_unit   | month  
- *                                        | day_of_month                            |
+ * | interval_unit   | month                                       
+ *   | day_of_month                            |
+ * | :-------------- |
+ * :--------------------------------------------- | :-------------------------------------- |
  * |
- * :-------------- | :--------------------------------------------- |
- * :-------------------------------------- |
- * | yearly          | optional (required if
- * `day_of_month` provided) | optional (required if `month` provided) |
- * | monthly         | invalid
- *                                        | required                                |
- * | weekly     
- *     | invalid                                        | invalid                                 |
- *
+ * yearly          | optional (required if `day_of_month` provided) | optional (required if `month`
+ * provided) |
+ * | monthly         | invalid                                        | required       
+ *                         |
+ * | weekly          | invalid                                        |
+ * invalid                                 |
  * 
  * Examples:
  * 
- * | interval_unit   | interval   | month   | day_of_month   | valid?              
- *                               |
- * | :-------------- | :--------- | :------ | :------------- |
+ * | interval_unit   | interval   |
+ * month   | day_of_month   | valid?                                             |
+ * |
+ * :-------------- | :--------- | :------ | :------------- |
  * :------------------------------------------------- |
  * | yearly          | 1          | january |
  * -1             | valid                                              |
@@ -94,9 +93,7 @@ public class SubscriptionService {
     }
 
     /**
-     * Returns a
-     * [cursor-paginated](https://developer.gocardless.com/pro/2015-04-29/#overview-cursor-pagination)
-     * list of your subscriptions.
+     * Returns a [cursor-paginated](#overview-cursor-pagination) list of your subscriptions.
      */
     public SubscriptionListRequest<ListResponse<Subscription>> list() {
         return new SubscriptionListRequest<>(httpClient, ListRequest.<Subscription>pagingExecutor());
@@ -221,9 +218,8 @@ public class SubscriptionService {
         }
 
         /**
-         * ID of the associated
-         * [mandate](https://developer.gocardless.com/pro/2015-04-29/#core-endpoints-mandates) which the
-         * subscription will create payments against.
+         * ID of the associated [mandate](#core-endpoints-mandates) which the subscription will create
+         * payments against.
          */
         public SubscriptionCreateRequest withLinksMandate(String mandate) {
             if (links == null) {
@@ -273,8 +269,7 @@ public class SubscriptionService {
         /**
          * An optional payment reference. This will be set as the reference on each payment created and will
          * appear on your customer's bank statement. See the documentation for the [create payment
-         * endpoint](https://developer.gocardless.com/pro/2015-04-29/#payments-create-a-payment) for more
-         * details.
+         * endpoint](#payments-create-a-payment) for more details.
          */
         public SubscriptionCreateRequest withPaymentReference(String paymentReference) {
             this.paymentReference = paymentReference;
@@ -283,9 +278,8 @@ public class SubscriptionService {
 
         /**
          * The date on which the first payment should be charged. Must be within one year of creation and on
-         * or after the [mandate](https://developer.gocardless.com/pro/2015-04-29/#core-endpoints-mandates)'s
-         * `next_possible_charge_date`. When blank, this will be set as the mandate's
-         * `next_possible_charge_date`.
+         * or after the [mandate](#core-endpoints-mandates)'s `next_possible_charge_date`. When blank, this
+         * will be set as the mandate's `next_possible_charge_date`.
          */
         public SubscriptionCreateRequest withStartAt(String startAt) {
             this.startAt = startAt;
@@ -351,9 +345,8 @@ public class SubscriptionService {
             private String mandate;
 
             /**
-             * ID of the associated
-             * [mandate](https://developer.gocardless.com/pro/2015-04-29/#core-endpoints-mandates) which the
-             * subscription will create payments against.
+             * ID of the associated [mandate](#core-endpoints-mandates) which the subscription will create
+             * payments against.
              */
             public Links withMandate(String mandate) {
                 this.mandate = mandate;
@@ -365,9 +358,7 @@ public class SubscriptionService {
     /**
      * Request class for {@link SubscriptionService#list }.
      *
-     * Returns a
-     * [cursor-paginated](https://developer.gocardless.com/pro/2015-04-29/#overview-cursor-pagination)
-     * list of your subscriptions.
+     * Returns a [cursor-paginated](#overview-cursor-pagination) list of your subscriptions.
      */
     public static final class SubscriptionListRequest<S> extends ListRequest<S, Subscription> {
         private String customer;
@@ -529,8 +520,7 @@ public class SubscriptionService {
         /**
          * An optional payment reference. This will be set as the reference on each payment created and will
          * appear on your customer's bank statement. See the documentation for the [create payment
-         * endpoint](https://developer.gocardless.com/pro/2015-04-29/#payments-create-a-payment) for more
-         * details.
+         * endpoint](#payments-create-a-payment) for more details.
          */
         public SubscriptionUpdateRequest withPaymentReference(String paymentReference) {
             this.paymentReference = paymentReference;

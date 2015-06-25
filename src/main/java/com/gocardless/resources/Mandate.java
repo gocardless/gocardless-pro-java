@@ -7,13 +7,10 @@ import com.google.gson.annotations.SerializedName;
 /**
  * Represents a mandate resource returned from the API.
  *
- * Mandates represent the Direct Debit mandate with a
- * [customer](https://developer.gocardless.com/pro/2015-04-29/#core-endpoints-customers).
+ * Mandates represent the Direct Debit mandate with a [customer](#core-endpoints-customers).
  * 
  *
- * GoCardless will notify you via a
- * [webhook](https://developer.gocardless.com/pro/2015-04-29/#webhooks) whenever the status of a
- * mandate changes.
+ * GoCardless will notify you via a [webhook](#webhooks) whenever the status of a mandate changes.
  */
 public class Mandate {
     private Mandate() {
@@ -30,8 +27,7 @@ public class Mandate {
     private Status status;
 
     /**
-     * Fixed [timestamp](https://developer.gocardless.com/pro/2015-04-29/#overview-time-zones-dates),
-     * recording when this resource was created.
+     * Fixed [timestamp](#overview-time-zones-dates), recording when this resource was created.
      */
     public String getCreatedAt() {
         return createdAt;
@@ -118,17 +114,15 @@ public class Mandate {
         private String customerBankAccount;
 
         /**
-         * ID of the associated
-         * [creditor](https://developer.gocardless.com/pro/2015-04-29/#core-endpoints-creditors).
+         * ID of the associated [creditor](#core-endpoints-creditors).
          */
         public String getCreditor() {
             return creditor;
         }
 
         /**
-         * ID of the associated [customer bank
-         * account](https://developer.gocardless.com/pro/2015-04-29/#core-endpoints-customer-bank-accounts)
-         * which the mandate is created and submits payments against.
+         * ID of the associated [customer bank account](#core-endpoints-customer-bank-accounts) which the
+         * mandate is created and submits payments against.
          */
         public String getCustomerBankAccount() {
             return customerBankAccount;

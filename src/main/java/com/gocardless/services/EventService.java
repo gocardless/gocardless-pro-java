@@ -29,9 +29,7 @@ public class EventService {
     }
 
     /**
-     * Returns a
-     * [cursor-paginated](https://developer.gocardless.com/pro/2015-04-29/#overview-cursor-pagination)
-     * list of your events.
+     * Returns a [cursor-paginated](#overview-cursor-pagination) list of your events.
      */
     public EventListRequest<ListResponse<Event>> list() {
         return new EventListRequest<>(httpClient, ListRequest.<Event>pagingExecutor());
@@ -51,9 +49,7 @@ public class EventService {
     /**
      * Request class for {@link EventService#list }.
      *
-     * Returns a
-     * [cursor-paginated](https://developer.gocardless.com/pro/2015-04-29/#overview-cursor-pagination)
-     * list of your events.
+     * Returns a [cursor-paginated](#overview-cursor-pagination) list of your events.
      */
     public static final class EventListRequest<S> extends ListRequest<S, Event> {
         private String action;
@@ -166,8 +162,8 @@ public class EventService {
         }
 
         /**
-         * ID of a [mandate](https://developer.gocardless.com/pro/2015-04-29/#core-endpoints-mandates). If
-         * specified, this endpoint will return all events for the given mandate.
+         * ID of a [mandate](#core-endpoints-mandates). If specified, this endpoint will return all events
+         * for the given mandate.
          */
         public EventListRequest<S> withMandate(String mandate) {
             this.mandate = mandate;
@@ -184,8 +180,8 @@ public class EventService {
         }
 
         /**
-         * ID of a [payment](https://developer.gocardless.com/pro/2015-04-29/#core-endpoints-payments). If
-         * specified, this endpoint will return all events for the given payment.
+         * ID of a [payment](#core-endpoints-payments). If specified, this endpoint will return all events
+         * for the given payment.
          */
         public EventListRequest<S> withPayment(String payment) {
             this.payment = payment;
@@ -193,8 +189,8 @@ public class EventService {
         }
 
         /**
-         * ID of a [payout](https://developer.gocardless.com/pro/2015-04-29/#core-endpoints-payouts). If
-         * specified, this endpoint will return all events for the given payout.
+         * ID of a [payout](#core-endpoints-payouts). If specified, this endpoint will return all events for
+         * the given payout.
          */
         public EventListRequest<S> withPayout(String payout) {
             this.payout = payout;
@@ -202,8 +198,8 @@ public class EventService {
         }
 
         /**
-         * ID of a [refund](https://developer.gocardless.com/pro/2015-04-29/#core-endpoints-refunds). If
-         * specified, this endpoint will return all events for the given refund.
+         * ID of a [refund](#core-endpoints-refunds). If specified, this endpoint will return all events for
+         * the given refund.
          */
         public EventListRequest<S> withRefund(String refund) {
             this.refund = refund;

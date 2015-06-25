@@ -14,16 +14,12 @@ import com.google.gson.reflect.TypeToken;
 /**
  * Service class for working with payment resources.
  *
- * Payment objects represent payments from a
- * [customer](https://developer.gocardless.com/pro/2015-04-29/#core-endpoints-customers) to a
- * [creditor](https://developer.gocardless.com/pro/2015-04-29/#core-endpoints-creditors), taken
- * against a Direct Debit
- * [mandate](https://developer.gocardless.com/pro/2015-04-29/#core-endpoints-mandates).
+ * Payment objects represent payments from a [customer](#core-endpoints-customers) to a
+ * [creditor](#core-endpoints-creditors), taken against a Direct Debit
+ * [mandate](#core-endpoints-mandates).
  * 
- *
- * GoCardless will notify you via a
- * [webhook](https://developer.gocardless.com/pro/2015-04-29/#webhooks) whenever the state of a
- * payment changes.
+ * GoCardless will notify you via a [webhook](#webhooks)
+ * whenever the state of a payment changes.
  */
 public class PaymentService {
     private HttpClient httpClient;
@@ -41,8 +37,7 @@ public class PaymentService {
      * <a name="mandate_is_inactive"></a>Creates a new payment object.
      * 
      * This fails with a
-     * `mandate_is_inactive` error if the linked
-     * [mandate](https://developer.gocardless.com/pro/2015-04-29/#core-endpoints-mandates) is cancelled.
+     * `mandate_is_inactive` error if the linked [mandate](#core-endpoints-mandates) is cancelled.
      * Payments can be created against `pending_submission` mandates, but they will not be submitted
      * until the mandate becomes active.
      */
@@ -51,9 +46,7 @@ public class PaymentService {
     }
 
     /**
-     * Returns a
-     * [cursor-paginated](https://developer.gocardless.com/pro/2015-04-29/#overview-cursor-pagination)
-     * list of your payments.
+     * Returns a [cursor-paginated](#overview-cursor-pagination) list of your payments.
      */
     public PaymentListRequest<ListResponse<Payment>> list() {
         return new PaymentListRequest<>(httpClient, ListRequest.<Payment>pagingExecutor());
@@ -110,8 +103,7 @@ public class PaymentService {
      * <a name="mandate_is_inactive"></a>Creates a new payment object.
      * 
      * This fails with a
-     * `mandate_is_inactive` error if the linked
-     * [mandate](https://developer.gocardless.com/pro/2015-04-29/#core-endpoints-mandates) is cancelled.
+     * `mandate_is_inactive` error if the linked [mandate](#core-endpoints-mandates) is cancelled.
      * Payments can be created against `pending_submission` mandates, but they will not be submitted
      * until the mandate becomes active.
      */
@@ -134,8 +126,7 @@ public class PaymentService {
 
         /**
          * A future date on which the payment should be collected. If not specified, the payment will be
-         * collected as soon as possible. This must be on or after the
-         * [mandate](https://developer.gocardless.com/pro/2015-04-29/#core-endpoints-mandates)'s
+         * collected as soon as possible. This must be on or after the [mandate](#core-endpoints-mandates)'s
          * `next_possible_charge_date`, and will be rolled-forwards by GoCardless if it is not a working day.
          */
         public PaymentCreateRequest withChargeDate(String chargeDate) {
@@ -166,8 +157,7 @@ public class PaymentService {
         }
 
         /**
-         * ID of the [mandate](https://developer.gocardless.com/pro/2015-04-29/#core-endpoints-mandates)
-         * against which this payment should be collected.
+         * ID of the [mandate](#core-endpoints-mandates) against which this payment should be collected.
          */
         public PaymentCreateRequest withLinksMandate(String mandate) {
             if (links == null) {
@@ -236,8 +226,7 @@ public class PaymentService {
             private String mandate;
 
             /**
-             * ID of the [mandate](https://developer.gocardless.com/pro/2015-04-29/#core-endpoints-mandates)
-             * against which this payment should be collected.
+             * ID of the [mandate](#core-endpoints-mandates) against which this payment should be collected.
              */
             public Links withMandate(String mandate) {
                 this.mandate = mandate;
@@ -249,9 +238,7 @@ public class PaymentService {
     /**
      * Request class for {@link PaymentService#list }.
      *
-     * Returns a
-     * [cursor-paginated](https://developer.gocardless.com/pro/2015-04-29/#overview-cursor-pagination)
-     * list of your payments.
+     * Returns a [cursor-paginated](#overview-cursor-pagination) list of your payments.
      */
     public static final class PaymentListRequest<S> extends ListRequest<S, Payment> {
         private CreatedAt createdAt;

@@ -5,15 +5,13 @@ import java.util.Map;
 /**
  * Represents a refund resource returned from the API.
  *
- * Refund objects represent (partial) refunds of a
- * [payment](https://developer.gocardless.com/pro/2015-04-29/#core-endpoints-payment) back to the
- * [customer](https://developer.gocardless.com/pro/2015-04-29/#core-endpoints-customers).
+ * Refund objects represent (partial) refunds of a [payment](#core-endpoints-payment) back to the
+ * [customer](#core-endpoints-customers).
  * 
- * The
- * API allows you to create, show, list and update your refunds.
+ * The API allows you to create, show, list and update
+ * your refunds.
  * 
- * GoCardless will notify you via
- * a [webhook](https://developer.gocardless.com/pro/2015-04-29/#webhooks) whenever a refund is
+ * GoCardless will notify you via a [webhook](#webhooks) whenever a refund is
  * created, and will update the `amount_refunded` property of the payment.
  * 
  * _Note:_ A payment
@@ -39,8 +37,7 @@ public class Refund {
     }
 
     /**
-     * Fixed [timestamp](https://developer.gocardless.com/pro/2015-04-29/#overview-time-zones-dates),
-     * recording when this resource was created.
+     * Fixed [timestamp](#overview-time-zones-dates), recording when this resource was created.
      */
     public String getCreatedAt() {
         return createdAt;
@@ -48,8 +45,7 @@ public class Refund {
 
     /**
      * [ISO 4217](http://en.wikipedia.org/wiki/ISO_4217#Active_codes) currency code. This is set to the
-     * currency of the refund's
-     * [payment](https://developer.gocardless.com/pro/2015-04-29/#core-endpoints-payments).
+     * currency of the refund's [payment](#core-endpoints-payments).
      */
     public String getCurrency() {
         return currency;
@@ -82,8 +78,7 @@ public class Refund {
         private String payment;
 
         /**
-         * ID of the [payment](https://developer.gocardless.com/pro/2015-04-29/#core-endpoints-payments)
-         * against which the refund is being made.
+         * ID of the [payment](#core-endpoints-payments) against which the refund is being made.
          */
         public String getPayment() {
             return payment;

@@ -12,13 +12,13 @@ import com.google.gson.reflect.TypeToken;
 /**
  * Service class for working with creditor resources.
  *
- * Each [payment](https://developer.gocardless.com/pro/2015-04-29/#core-endpoints-payments) taken
- * through the API is linked to a "creditor", to whom the payment is then paid out. In most cases
- * your organisation will have a single "creditor", but the API also supports collecting payments on
- * behalf of others.
+ * Each [payment](#core-endpoints-payments) taken through the API is linked to a "creditor", to whom
+ * the payment is then paid out. In most cases your organisation will have a single "creditor", but
+ * the API also supports collecting payments on behalf of others.
  * 
- * Please get in touch if you wish to use this endpoint. Currently, for Anti
- * Money Laundering reasons, any creditors you add must be directly related to your organisation.
+ * Please get in touch if you
+ * wish to use this endpoint. Currently, for Anti Money Laundering reasons, any creditors you add
+ * must be directly related to your organisation.
  */
 public class CreditorService {
     private HttpClient httpClient;
@@ -40,9 +40,7 @@ public class CreditorService {
     }
 
     /**
-     * Returns a
-     * [cursor-paginated](https://developer.gocardless.com/pro/2015-04-29/#overview-cursor-pagination)
-     * list of your creditors.
+     * Returns a [cursor-paginated](#overview-cursor-pagination) list of your creditors.
      */
     public CreditorListRequest<ListResponse<Creditor>> list() {
         return new CreditorListRequest<>(httpClient, ListRequest.<Creditor>pagingExecutor());
@@ -203,9 +201,7 @@ public class CreditorService {
     /**
      * Request class for {@link CreditorService#list }.
      *
-     * Returns a
-     * [cursor-paginated](https://developer.gocardless.com/pro/2015-04-29/#overview-cursor-pagination)
-     * list of your creditors.
+     * Returns a [cursor-paginated](#overview-cursor-pagination) list of your creditors.
      */
     public static final class CreditorListRequest<S> extends ListRequest<S, Creditor> {
         /**
@@ -362,9 +358,8 @@ public class CreditorService {
         }
 
         /**
-         * ID of the [bank
-         * account](https://developer.gocardless.com/pro/2015-04-29/#core-endpoints-creditor-bank-accounts)
-         * which is set up to receive payouts in EUR.
+         * ID of the [bank account](#core-endpoints-creditor-bank-accounts) which is set up to receive
+         * payouts in EUR.
          */
         public CreditorUpdateRequest withLinksDefaultEurPayoutAccount(String defaultEurPayoutAccount) {
             if (links == null) {
@@ -375,9 +370,8 @@ public class CreditorService {
         }
 
         /**
-         * ID of the [bank
-         * account](https://developer.gocardless.com/pro/2015-04-29/#core-endpoints-creditor-bank-accounts)
-         * which is set up to receive payouts in GBP.
+         * ID of the [bank account](#core-endpoints-creditor-bank-accounts) which is set up to receive
+         * payouts in GBP.
          */
         public CreditorUpdateRequest withLinksDefaultGbpPayoutAccount(String defaultGbpPayoutAccount) {
             if (links == null) {
@@ -460,9 +454,8 @@ public class CreditorService {
             private String logo;
 
             /**
-             * ID of the [bank
-             * account](https://developer.gocardless.com/pro/2015-04-29/#core-endpoints-creditor-bank-accounts)
-             * which is set up to receive payouts in EUR.
+             * ID of the [bank account](#core-endpoints-creditor-bank-accounts) which is set up to receive
+             * payouts in EUR.
              */
             public Links withDefaultEurPayoutAccount(String defaultEurPayoutAccount) {
                 this.defaultEurPayoutAccount = defaultEurPayoutAccount;
@@ -470,9 +463,8 @@ public class CreditorService {
             }
 
             /**
-             * ID of the [bank
-             * account](https://developer.gocardless.com/pro/2015-04-29/#core-endpoints-creditor-bank-accounts)
-             * which is set up to receive payouts in GBP.
+             * ID of the [bank account](#core-endpoints-creditor-bank-accounts) which is set up to receive
+             * payouts in GBP.
              */
             public Links withDefaultGbpPayoutAccount(String defaultGbpPayoutAccount) {
                 this.defaultGbpPayoutAccount = defaultGbpPayoutAccount;

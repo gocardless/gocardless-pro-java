@@ -16,9 +16,8 @@ import com.google.gson.annotations.SerializedName;
  * 
  * The overall flow is:
  * 
- * 1. You
- * [create](https://developer.gocardless.com/pro/2015-04-29/#create-a-redirect-flow) a redirect flow
- * for your customer, and redirect them to the returned redirect url, e.g.
+ * 1. You [create](#create-a-redirect-flow) a redirect
+ * flow for your customer, and redirect them to the returned redirect url, e.g.
  * `https://pay.gocardless.com/flow/RE123`.
  * 
  * 2. Your customer supplies their name, email,
@@ -26,25 +25,19 @@ import com.google.gson.annotations.SerializedName;
  * redirects them back to your `success_redirect_url` with `redirect_flow_id=RE123` in the
  * querystring.
  * 
- * 3. You
- * [complete](https://developer.gocardless.com/pro/2015-04-29/#complete-a-redirect-flow) the redirect
- * flow, which creates a
- * [customer](https://developer.gocardless.com/pro/2015-04-29/#core-endpoints-customers), [customer
- * bank
- * account](https://developer.gocardless.com/pro/2015-04-29/#core-endpoints-customer-bank-accounts),
- * and [mandate](https://developer.gocardless.com/pro/2015-04-29/#core-endpoints-mandates), and
+ * 3. You [complete](#complete-a-redirect-flow) the redirect flow, which creates a
+ * [customer](#core-endpoints-customers), [customer bank
+ * account](#core-endpoints-customer-bank-accounts), and [mandate](#core-endpoints-mandates), and
  * returns the ID of the mandate. You may wish to create a
- * [subscription](https://developer.gocardless.com/pro/2015-04-29/#core-endpoints-subscriptions) or
- * [payment](https://developer.gocardless.com/pro/2015-04-29/#core-endpoints-payments) at this
+ * [subscription](#core-endpoints-subscriptions) or [payment](#core-endpoints-payments) at this
  * point.
  * 
  * It is recommended that you link the redirect flow to your user object as soon as it is
  * created, and attach the created resources to that user in the complete step.
  * 
  * Redirect flows
- * expire 30 minutes after they are first created. You cannot
- * [complete](https://developer.gocardless.com/pro/2015-04-29/#complete-a-redirect-flow) an expired
- * redirect flow.
+ * expire 30 minutes after they are first created. You cannot [complete](#complete-a-redirect-flow)
+ * an expired redirect flow.
  * 
  * [View an example
  * integration](https://pay-sandbox.gocardless.com/AL000000AKFPFF) that uses redirect flows.
@@ -78,18 +71,15 @@ public class RedirectFlowService {
     }
 
     /**
-     * This creates a
-     * [customer](https://developer.gocardless.com/pro/2015-04-29/#core-endpoints-customers), [customer
-     * bank
-     * account](https://developer.gocardless.com/pro/2015-04-29/#core-endpoints-customer-bank-accounts),
-     * and [mandate](https://developer.gocardless.com/pro/2015-04-29/#core-endpoints-mandates) using the
-     * details supplied by your customer and returns the ID of the created mandate.
+     * This creates a [customer](#core-endpoints-customers), [customer bank
+     * account](#core-endpoints-customer-bank-accounts), and [mandate](#core-endpoints-mandates) using
+     * the details supplied by your customer and returns the ID of the created mandate.
      * 
-     * This will return
-     * a `redirect_flow_incomplete` error if your customer has not yet been redirected back to your site,
-     * and a `redirect_flow_already_completed` error if your integration has already completed this flow.
-     * It will return a `bad_request` error if the `session_token` differs to the one supplied when the
-     * redirect flow was created.
+     * This will
+     * return a `redirect_flow_incomplete` error if your customer has not yet been redirected back to
+     * your site, and a `redirect_flow_already_completed` error if your integration has already completed
+     * this flow. It will return a `bad_request` error if the `session_token` differs to the one supplied
+     * when the redirect flow was created.
      */
     public RedirectFlowCompleteRequest complete(String identity) {
         return new RedirectFlowCompleteRequest(httpClient, identity);
@@ -123,8 +113,8 @@ public class RedirectFlowService {
         }
 
         /**
-         * The [creditor](https://developer.gocardless.com/pro/2015-04-29/#core-endpoints-creditors) for whom
-         * the mandate will be created. The `name` of the creditor will be displayed on the payment page.
+         * The [creditor](#core-endpoints-creditors) for whom the mandate will be created. The `name` of the
+         * creditor will be displayed on the payment page.
          */
         public RedirectFlowCreateRequest withLinksCreditor(String creditor) {
             if (links == null) {
@@ -199,8 +189,8 @@ public class RedirectFlowService {
             private String creditor;
 
             /**
-             * The [creditor](https://developer.gocardless.com/pro/2015-04-29/#core-endpoints-creditors) for whom
-             * the mandate will be created. The `name` of the creditor will be displayed on the payment page.
+             * The [creditor](#core-endpoints-creditors) for whom the mandate will be created. The `name` of the
+             * creditor will be displayed on the payment page.
              */
             public Links withCreditor(String creditor) {
                 this.creditor = creditor;
@@ -250,18 +240,15 @@ public class RedirectFlowService {
     /**
      * Request class for {@link RedirectFlowService#complete }.
      *
-     * This creates a
-     * [customer](https://developer.gocardless.com/pro/2015-04-29/#core-endpoints-customers), [customer
-     * bank
-     * account](https://developer.gocardless.com/pro/2015-04-29/#core-endpoints-customer-bank-accounts),
-     * and [mandate](https://developer.gocardless.com/pro/2015-04-29/#core-endpoints-mandates) using the
-     * details supplied by your customer and returns the ID of the created mandate.
+     * This creates a [customer](#core-endpoints-customers), [customer bank
+     * account](#core-endpoints-customer-bank-accounts), and [mandate](#core-endpoints-mandates) using
+     * the details supplied by your customer and returns the ID of the created mandate.
      * 
-     * This will return
-     * a `redirect_flow_incomplete` error if your customer has not yet been redirected back to your site,
-     * and a `redirect_flow_already_completed` error if your integration has already completed this flow.
-     * It will return a `bad_request` error if the `session_token` differs to the one supplied when the
-     * redirect flow was created.
+     * This will
+     * return a `redirect_flow_incomplete` error if your customer has not yet been redirected back to
+     * your site, and a `redirect_flow_already_completed` error if your integration has already completed
+     * this flow. It will return a `bad_request` error if the `session_token` differs to the one supplied
+     * when the redirect flow was created.
      */
     public static final class RedirectFlowCompleteRequest extends PostRequest<RedirectFlow> {
         @PathParam

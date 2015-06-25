@@ -5,16 +5,14 @@ import java.util.Map;
 /**
  * Represents a creditor bank account resource returned from the API.
  *
- * Creditor Bank Accounts hold the bank details of a
- * [creditor](https://developer.gocardless.com/pro/2015-04-29/#core-endpoints-creditor). These are
- * the bank accounts which your
- * [payouts](https://developer.gocardless.com/pro/2015-04-29/#core-endpoints-payouts) will be sent
- * to.
+ * Creditor Bank Accounts hold the bank details of a [creditor](#core-endpoints-creditor). These are
+ * the bank accounts which your [payouts](#core-endpoints-payouts) will be sent to.
  * 
- * Note that creditor bank accounts must be unique, and so you will encounter a
- * `bank_account_exists` error if you try to create a duplicate bank account. You may wish to handle
- * this by updating the existing record instead, the ID of which will be provided as
- * `links[creditor_bank_account]` in the error response.
+ * Note that
+ * creditor bank accounts must be unique, and so you will encounter a `bank_account_exists` error if
+ * you try to create a duplicate bank account. You may wish to handle this by updating the existing
+ * record instead, the ID of which will be provided as `links[creditor_bank_account]` in the error
+ * response.
  */
 public class CreditorBankAccount {
     private CreditorBankAccount() {
@@ -34,8 +32,8 @@ public class CreditorBankAccount {
 
     /**
      * Name of the account holder, as known by the bank. Usually this is the same as the name stored with
-     * the linked [creditor](https://developer.gocardless.com/pro/2015-04-29/#core-endpoints-creditors).
-     * This field will be transliterated, upcased and truncated to 18 characters.
+     * the linked [creditor](#core-endpoints-creditors). This field will be transliterated, upcased and
+     * truncated to 18 characters.
      */
     public String getAccountHolderName() {
         return accountHolderName;
@@ -64,8 +62,7 @@ public class CreditorBankAccount {
     }
 
     /**
-     * Fixed [timestamp](https://developer.gocardless.com/pro/2015-04-29/#overview-time-zones-dates),
-     * recording when this resource was created.
+     * Fixed [timestamp](#overview-time-zones-dates), recording when this resource was created.
      */
     public String getCreatedAt() {
         return createdAt;
@@ -113,8 +110,7 @@ public class CreditorBankAccount {
         private String creditor;
 
         /**
-         * ID of the [creditor](https://developer.gocardless.com/pro/2015-04-29/#core-endpoints-creditors)
-         * that owns this bank account.
+         * ID of the [creditor](#core-endpoints-creditors) that owns this bank account.
          */
         public String getCreditor() {
             return creditor;

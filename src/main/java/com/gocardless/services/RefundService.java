@@ -13,15 +13,13 @@ import com.google.gson.reflect.TypeToken;
 /**
  * Service class for working with refund resources.
  *
- * Refund objects represent (partial) refunds of a
- * [payment](https://developer.gocardless.com/pro/2015-04-29/#core-endpoints-payment) back to the
- * [customer](https://developer.gocardless.com/pro/2015-04-29/#core-endpoints-customers).
+ * Refund objects represent (partial) refunds of a [payment](#core-endpoints-payment) back to the
+ * [customer](#core-endpoints-customers).
  * 
- * The
- * API allows you to create, show, list and update your refunds.
+ * The API allows you to create, show, list and update
+ * your refunds.
  * 
- * GoCardless will notify you via
- * a [webhook](https://developer.gocardless.com/pro/2015-04-29/#webhooks) whenever a refund is
+ * GoCardless will notify you via a [webhook](#webhooks) whenever a refund is
  * created, and will update the `amount_refunded` property of the payment.
  * 
  * _Note:_ A payment
@@ -46,13 +44,12 @@ public class RefundService {
      * name="total_amount_confirmation_invalid"></a><a name="number_of_refunds_exceeded"></a>
      * 
      * -
-     * `refund_payment_invalid_state` error if the linked
-     * [payment](https://developer.gocardless.com/pro/2015-04-29/#core-endpoints-payments) isn't either
-     * `confirmed` or `paid_out`.
+     * `refund_payment_invalid_state` error if the linked [payment](#core-endpoints-payments) isn't
+     * either `confirmed` or `paid_out`.
      * 
-     * - `total_amount_confirmation_invalid` if the confirmation amount
-     * doesn't match the total amount refunded for the payment. This safeguard is there to prevent two
-     * processes from creating refunds without awareness of each other.
+     * - `total_amount_confirmation_invalid` if the confirmation
+     * amount doesn't match the total amount refunded for the payment. This safeguard is there to prevent
+     * two processes from creating refunds without awareness of each other.
      * 
      * -
      * `number_of_refunds_exceeded` if five or more refunds have already been created against the
@@ -64,9 +61,7 @@ public class RefundService {
     }
 
     /**
-     * Returns a
-     * [cursor-paginated](https://developer.gocardless.com/pro/2015-04-29/#overview-cursor-pagination)
-     * list of your refunds.
+     * Returns a [cursor-paginated](#overview-cursor-pagination) list of your refunds.
      */
     public RefundListRequest<ListResponse<Refund>> list() {
         return new RefundListRequest<>(httpClient, ListRequest.<Refund>pagingExecutor());
@@ -99,13 +94,12 @@ public class RefundService {
      * name="total_amount_confirmation_invalid"></a><a name="number_of_refunds_exceeded"></a>
      * 
      * -
-     * `refund_payment_invalid_state` error if the linked
-     * [payment](https://developer.gocardless.com/pro/2015-04-29/#core-endpoints-payments) isn't either
-     * `confirmed` or `paid_out`.
+     * `refund_payment_invalid_state` error if the linked [payment](#core-endpoints-payments) isn't
+     * either `confirmed` or `paid_out`.
      * 
-     * - `total_amount_confirmation_invalid` if the confirmation amount
-     * doesn't match the total amount refunded for the payment. This safeguard is there to prevent two
-     * processes from creating refunds without awareness of each other.
+     * - `total_amount_confirmation_invalid` if the confirmation
+     * amount doesn't match the total amount refunded for the payment. This safeguard is there to prevent
+     * two processes from creating refunds without awareness of each other.
      * 
      * -
      * `number_of_refunds_exceeded` if five or more refunds have already been created against the
@@ -132,8 +126,7 @@ public class RefundService {
         }
 
         /**
-         * ID of the [payment](https://developer.gocardless.com/pro/2015-04-29/#core-endpoints-payments)
-         * against which the refund is being made.
+         * ID of the [payment](#core-endpoints-payments) against which the refund is being made.
          */
         public RefundCreateRequest withLinksPayment(String payment) {
             if (links == null) {
@@ -200,8 +193,7 @@ public class RefundService {
             private String payment;
 
             /**
-             * ID of the [payment](https://developer.gocardless.com/pro/2015-04-29/#core-endpoints-payments)
-             * against which the refund is being made.
+             * ID of the [payment](#core-endpoints-payments) against which the refund is being made.
              */
             public Links withPayment(String payment) {
                 this.payment = payment;
@@ -213,9 +205,7 @@ public class RefundService {
     /**
      * Request class for {@link RefundService#list }.
      *
-     * Returns a
-     * [cursor-paginated](https://developer.gocardless.com/pro/2015-04-29/#overview-cursor-pagination)
-     * list of your refunds.
+     * Returns a [cursor-paginated](#overview-cursor-pagination) list of your refunds.
      */
     public static final class RefundListRequest<S> extends ListRequest<S, Refund> {
         private String payment;

@@ -8,39 +8,38 @@ import com.google.gson.annotations.SerializedName;
 /**
  * Represents a subscription resource returned from the API.
  *
- * Subscriptions create
- * [payments](https://developer.gocardless.com/pro/2015-04-29/#core-endpoints-payments) according to
- * a schedule.
+ * Subscriptions create [payments](#core-endpoints-payments) according to a schedule.
  * 
- * #### Recurrence Rules
+ * ####
+ * Recurrence Rules
  * 
- * The following rules apply when specifying
- * recurrence:
- * - The first payment must be charged within 1 year.
- * - When neither `month` nor
- * `day_of_month` are present, the subscription will recur from the `start_at` based on the
- * `interval_unit`.
- * - If `month` or `day_of_month` are present, the recurrence rules will be
- * applied from the `start_at`, and the following validations apply:
+ * The following rules apply when specifying recurrence:
+ * - The first payment
+ * must be charged within 1 year.
+ * - When neither `month` nor `day_of_month` are present, the
+ * subscription will recur from the `start_at` based on the `interval_unit`.
+ * - If `month` or
+ * `day_of_month` are present, the recurrence rules will be applied from the `start_at`, and the
+ * following validations apply:
  * 
- * | interval_unit   | month  
- *                                        | day_of_month                            |
+ * | interval_unit   | month                                       
+ *   | day_of_month                            |
+ * | :-------------- |
+ * :--------------------------------------------- | :-------------------------------------- |
  * |
- * :-------------- | :--------------------------------------------- |
- * :-------------------------------------- |
- * | yearly          | optional (required if
- * `day_of_month` provided) | optional (required if `month` provided) |
- * | monthly         | invalid
- *                                        | required                                |
- * | weekly     
- *     | invalid                                        | invalid                                 |
- *
+ * yearly          | optional (required if `day_of_month` provided) | optional (required if `month`
+ * provided) |
+ * | monthly         | invalid                                        | required       
+ *                         |
+ * | weekly          | invalid                                        |
+ * invalid                                 |
  * 
  * Examples:
  * 
- * | interval_unit   | interval   | month   | day_of_month   | valid?              
- *                               |
- * | :-------------- | :--------- | :------ | :------------- |
+ * | interval_unit   | interval   |
+ * month   | day_of_month   | valid?                                             |
+ * |
+ * :-------------- | :--------- | :------ | :------------- |
  * :------------------------------------------------- |
  * | yearly          | 1          | january |
  * -1             | valid                                              |
@@ -107,8 +106,7 @@ public class Subscription {
     }
 
     /**
-     * Fixed [timestamp](https://developer.gocardless.com/pro/2015-04-29/#overview-time-zones-dates),
-     * recording when this resource was created.
+     * Fixed [timestamp](#overview-time-zones-dates), recording when this resource was created.
      */
     public String getCreatedAt() {
         return createdAt;
@@ -190,8 +188,7 @@ public class Subscription {
     /**
      * An optional payment reference. This will be set as the reference on each payment created and will
      * appear on your customer's bank statement. See the documentation for the [create payment
-     * endpoint](https://developer.gocardless.com/pro/2015-04-29/#payments-create-a-payment) for more
-     * details.
+     * endpoint](#payments-create-a-payment) for more details.
      */
     public String getPaymentReference() {
         return paymentReference;
@@ -199,9 +196,8 @@ public class Subscription {
 
     /**
      * The date on which the first payment should be charged. Must be within one year of creation and on
-     * or after the [mandate](https://developer.gocardless.com/pro/2015-04-29/#core-endpoints-mandates)'s
-     * `next_possible_charge_date`. When blank, this will be set as the mandate's
-     * `next_possible_charge_date`.
+     * or after the [mandate](#core-endpoints-mandates)'s `next_possible_charge_date`. When blank, this
+     * will be set as the mandate's `next_possible_charge_date`.
      */
     public String getStartAt() {
         return startAt;
@@ -260,9 +256,8 @@ public class Subscription {
         private String mandate;
 
         /**
-         * ID of the associated
-         * [mandate](https://developer.gocardless.com/pro/2015-04-29/#core-endpoints-mandates) which the
-         * subscription will create payments against.
+         * ID of the associated [mandate](#core-endpoints-mandates) which the subscription will create
+         * payments against.
          */
         public String getMandate() {
             return mandate;

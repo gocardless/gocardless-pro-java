@@ -14,16 +14,14 @@ import com.google.gson.reflect.TypeToken;
 /**
  * Service class for working with creditor bank account resources.
  *
- * Creditor Bank Accounts hold the bank details of a
- * [creditor](https://developer.gocardless.com/pro/2015-04-29/#core-endpoints-creditor). These are
- * the bank accounts which your
- * [payouts](https://developer.gocardless.com/pro/2015-04-29/#core-endpoints-payouts) will be sent
- * to.
+ * Creditor Bank Accounts hold the bank details of a [creditor](#core-endpoints-creditor). These are
+ * the bank accounts which your [payouts](#core-endpoints-payouts) will be sent to.
  * 
- * Note that creditor bank accounts must be unique, and so you will encounter a
- * `bank_account_exists` error if you try to create a duplicate bank account. You may wish to handle
- * this by updating the existing record instead, the ID of which will be provided as
- * `links[creditor_bank_account]` in the error response.
+ * Note that
+ * creditor bank accounts must be unique, and so you will encounter a `bank_account_exists` error if
+ * you try to create a duplicate bank account. You may wish to handle this by updating the existing
+ * record instead, the ID of which will be provided as `links[creditor_bank_account]` in the error
+ * response.
  */
 public class CreditorBankAccountService {
     private HttpClient httpClient;
@@ -45,9 +43,7 @@ public class CreditorBankAccountService {
     }
 
     /**
-     * Returns a
-     * [cursor-paginated](https://developer.gocardless.com/pro/2015-04-29/#overview-cursor-pagination)
-     * list of your creditor bank accounts.
+     * Returns a [cursor-paginated](#overview-cursor-pagination) list of your creditor bank accounts.
      */
     public CreditorBankAccountListRequest<ListResponse<CreditorBankAccount>> list() {
         return new CreditorBankAccountListRequest<>(httpClient,
@@ -101,8 +97,8 @@ public class CreditorBankAccountService {
 
         /**
          * Name of the account holder, as known by the bank. Usually this is the same as the name stored with
-         * the linked [creditor](https://developer.gocardless.com/pro/2015-04-29/#core-endpoints-creditors).
-         * This field will be transliterated, upcased and truncated to 18 characters.
+         * the linked [creditor](#core-endpoints-creditors). This field will be transliterated, upcased and
+         * truncated to 18 characters.
          */
         public CreditorBankAccountCreateRequest withAccountHolderName(String accountHolderName) {
             this.accountHolderName = accountHolderName;
@@ -110,9 +106,8 @@ public class CreditorBankAccountService {
         }
 
         /**
-         * Bank account number - see [local
-         * details](https://developer.gocardless.com/pro/2015-04-29/#ui-local-bank-details) for more
-         * information. Alternatively you can provide an `iban`.
+         * Bank account number - see [local details](#ui-local-bank-details) for more information.
+         * Alternatively you can provide an `iban`.
          */
         public CreditorBankAccountCreateRequest withAccountNumber(String accountNumber) {
             this.accountNumber = accountNumber;
@@ -120,9 +115,8 @@ public class CreditorBankAccountService {
         }
 
         /**
-         * Bank code - see [local
-         * details](https://developer.gocardless.com/pro/2015-04-29/#ui-local-bank-details) for more
-         * information. Alternatively you can provide an `iban`.
+         * Bank code - see [local details](#ui-local-bank-details) for more information. Alternatively you
+         * can provide an `iban`.
          */
         public CreditorBankAccountCreateRequest withBankCode(String bankCode) {
             this.bankCode = bankCode;
@@ -130,9 +124,8 @@ public class CreditorBankAccountService {
         }
 
         /**
-         * Branch code - see [local
-         * details](https://developer.gocardless.com/pro/2015-04-29/#ui-local-bank-details) for more
-         * information. Alternatively you can provide an `iban`.
+         * Branch code - see [local details](#ui-local-bank-details) for more information. Alternatively you
+         * can provide an `iban`.
          */
         public CreditorBankAccountCreateRequest withBranchCode(String branchCode) {
             this.branchCode = branchCode;
@@ -159,7 +152,7 @@ public class CreditorBankAccountService {
 
         /**
          * International Bank Account Number. Alternatively you can provide [local
-         * details](https://developer.gocardless.com/pro/2015-04-29/#ui-local-bank-details).
+         * details](#ui-local-bank-details).
          */
         public CreditorBankAccountCreateRequest withIban(String iban) {
             this.iban = iban;
@@ -172,8 +165,7 @@ public class CreditorBankAccountService {
         }
 
         /**
-         * ID of the [creditor](https://developer.gocardless.com/pro/2015-04-29/#core-endpoints-creditors)
-         * that owns this bank account.
+         * ID of the [creditor](#core-endpoints-creditors) that owns this bank account.
          */
         public CreditorBankAccountCreateRequest withLinksCreditor(String creditor) {
             if (links == null) {
@@ -241,8 +233,7 @@ public class CreditorBankAccountService {
             private String creditor;
 
             /**
-             * ID of the [creditor](https://developer.gocardless.com/pro/2015-04-29/#core-endpoints-creditors)
-             * that owns this bank account.
+             * ID of the [creditor](#core-endpoints-creditors) that owns this bank account.
              */
             public Links withCreditor(String creditor) {
                 this.creditor = creditor;
@@ -254,9 +245,7 @@ public class CreditorBankAccountService {
     /**
      * Request class for {@link CreditorBankAccountService#list }.
      *
-     * Returns a
-     * [cursor-paginated](https://developer.gocardless.com/pro/2015-04-29/#overview-cursor-pagination)
-     * list of your creditor bank accounts.
+     * Returns a [cursor-paginated](#overview-cursor-pagination) list of your creditor bank accounts.
      */
     public static final class CreditorBankAccountListRequest<S> extends
             ListRequest<S, CreditorBankAccount> {

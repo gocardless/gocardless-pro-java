@@ -17,13 +17,10 @@ import com.google.gson.reflect.TypeToken;
 /**
  * Service class for working with mandate resources.
  *
- * Mandates represent the Direct Debit mandate with a
- * [customer](https://developer.gocardless.com/pro/2015-04-29/#core-endpoints-customers).
+ * Mandates represent the Direct Debit mandate with a [customer](#core-endpoints-customers).
  * 
  *
- * GoCardless will notify you via a
- * [webhook](https://developer.gocardless.com/pro/2015-04-29/#webhooks) whenever the status of a
- * mandate changes.
+ * GoCardless will notify you via a [webhook](#webhooks) whenever the status of a mandate changes.
  */
 public class MandateService {
     private HttpClient httpClient;
@@ -45,9 +42,8 @@ public class MandateService {
     }
 
     /**
-     * Returns a
-     * [cursor-paginated](https://developer.gocardless.com/pro/2015-04-29/#overview-cursor-pagination)
-     * list of your mandates. Except where stated, these filters can only be used one at a time.
+     * Returns a [cursor-paginated](#overview-cursor-pagination) list of your mandates. Except where
+     * stated, these filters can only be used one at a time.
      */
     public MandateListRequest<ListResponse<Mandate>> list() {
         return new MandateListRequest<>(httpClient, ListRequest.<Mandate>pagingExecutor());
@@ -130,8 +126,7 @@ public class MandateService {
         }
 
         /**
-         * ID of the associated
-         * [creditor](https://developer.gocardless.com/pro/2015-04-29/#core-endpoints-creditors).
+         * ID of the associated [creditor](#core-endpoints-creditors).
          */
         public MandateCreateRequest withLinksCreditor(String creditor) {
             if (links == null) {
@@ -142,9 +137,8 @@ public class MandateService {
         }
 
         /**
-         * ID of the associated [customer bank
-         * account](https://developer.gocardless.com/pro/2015-04-29/#core-endpoints-customer-bank-accounts)
-         * which the mandate is created and submits payments against.
+         * ID of the associated [customer bank account](#core-endpoints-customer-bank-accounts) which the
+         * mandate is created and submits payments against.
          */
         public MandateCreateRequest withLinksCustomerBankAccount(String customerBankAccount) {
             if (links == null) {
@@ -222,8 +216,7 @@ public class MandateService {
             private String customerBankAccount;
 
             /**
-             * ID of the associated
-             * [creditor](https://developer.gocardless.com/pro/2015-04-29/#core-endpoints-creditors).
+             * ID of the associated [creditor](#core-endpoints-creditors).
              */
             public Links withCreditor(String creditor) {
                 this.creditor = creditor;
@@ -231,9 +224,8 @@ public class MandateService {
             }
 
             /**
-             * ID of the associated [customer bank
-             * account](https://developer.gocardless.com/pro/2015-04-29/#core-endpoints-customer-bank-accounts)
-             * which the mandate is created and submits payments against.
+             * ID of the associated [customer bank account](#core-endpoints-customer-bank-accounts) which the
+             * mandate is created and submits payments against.
              */
             public Links withCustomerBankAccount(String customerBankAccount) {
                 this.customerBankAccount = customerBankAccount;
@@ -245,9 +237,8 @@ public class MandateService {
     /**
      * Request class for {@link MandateService#list }.
      *
-     * Returns a
-     * [cursor-paginated](https://developer.gocardless.com/pro/2015-04-29/#overview-cursor-pagination)
-     * list of your mandates. Except where stated, these filters can only be used one at a time.
+     * Returns a [cursor-paginated](#overview-cursor-pagination) list of your mandates. Except where
+     * stated, these filters can only be used one at a time.
      */
     public static final class MandateListRequest<S> extends ListRequest<S, Mandate> {
         private String creditor;
@@ -273,9 +264,8 @@ public class MandateService {
         }
 
         /**
-         * ID of a [creditor](https://developer.gocardless.com/pro/2015-04-29/#core-endpoints-creditors). If
-         * specified, this endpoint will return all mandates for the given creditor. Cannot be used in
-         * conjunction with `customer_bank_account`
+         * ID of a [creditor](#core-endpoints-creditors). If specified, this endpoint will return all
+         * mandates for the given creditor. Cannot be used in conjunction with `customer_bank_account`
          */
         public MandateListRequest<S> withCreditor(String creditor) {
             this.creditor = creditor;
@@ -291,10 +281,9 @@ public class MandateService {
         }
 
         /**
-         * ID of a [customer bank
-         * account](https://developer.gocardless.com/pro/2015-04-29/#core-endpoints-customer-bank-accounts).
-         * If specified, this endpoint will return all mandates for the given bank account. Cannot be used in
-         * conjunction with `creditor`
+         * ID of a [customer bank account](#core-endpoints-customer-bank-accounts). If specified, this
+         * endpoint will return all mandates for the given bank account. Cannot be used in conjunction with
+         * `creditor`
          */
         public MandateListRequest<S> withCustomerBankAccount(String customerBankAccount) {
             this.customerBankAccount = customerBankAccount;
