@@ -15,10 +15,10 @@ import com.google.gson.reflect.TypeToken;
  * Service class for working with customer bank account resources.
  *
  * Customer Bank Accounts hold the bank details of a
- * [customer](https://developer.gocardless.com/pro/2015-04-29/#api-endpoints-customers). They always
- * belong to a [customer](https://developer.gocardless.com/pro/2015-04-29/#api-endpoints-customers),
+ * [customer](https://developer.gocardless.com/pro/2015-04-29/#core-endpoints-customers). They always
+ * belong to a [customer](https://developer.gocardless.com/pro/2015-04-29/#core-endpoints-customers),
  * and may be linked to several Direct Debit
- * [mandates](https://developer.gocardless.com/pro/2015-04-29/#api-endpoints-mandates).
+ * [mandates](https://developer.gocardless.com/pro/2015-04-29/#core-endpoints-mandates).
  * 
  * Note
  * that customer bank accounts must be unique, and so you will encounter a `bank_account_exists`
@@ -139,7 +139,7 @@ public class CustomerBankAccountService {
 
         /**
          * Name of the account holder, as known by the bank. Usually this matches the name of the linked
-         * [customer](https://developer.gocardless.com/pro/2015-04-29/#api-endpoints-customers). This field
+         * [customer](https://developer.gocardless.com/pro/2015-04-29/#core-endpoints-customers). This field
          * will be transliterated, upcased and truncated to 18 characters.
          */
         public CustomerBankAccountCreateRequest withAccountHolderName(String accountHolderName) {
@@ -210,7 +210,7 @@ public class CustomerBankAccountService {
         }
 
         /**
-         * ID of the [customer](https://developer.gocardless.com/pro/2015-04-29/#api-endpoints-customers)
+         * ID of the [customer](https://developer.gocardless.com/pro/2015-04-29/#core-endpoints-customers)
          * that owns this bank account.
          */
         public CustomerBankAccountCreateRequest withLinksCustomer(String customer) {
@@ -223,7 +223,7 @@ public class CustomerBankAccountService {
 
         /**
          * ID of a [customer bank account
-         * token](https://developer.gocardless.com/pro/2015-04-29/#api-endpoints-customer-bank-account-tokens)
+         * token](https://developer.gocardless.com/pro/2015-04-29/#core-endpoints-customer-bank-account-tokens)
          * to use in place of bank account parameters.
          */
         public CustomerBankAccountCreateRequest withLinksCustomerBankAccountToken(
@@ -285,7 +285,7 @@ public class CustomerBankAccountService {
             private String customerBankAccountToken;
 
             /**
-             * ID of the [customer](https://developer.gocardless.com/pro/2015-04-29/#api-endpoints-customers)
+             * ID of the [customer](https://developer.gocardless.com/pro/2015-04-29/#core-endpoints-customers)
              * that owns this bank account.
              */
             public Links withCustomer(String customer) {
@@ -295,7 +295,7 @@ public class CustomerBankAccountService {
 
             /**
              * ID of a [customer bank account
-             * token](https://developer.gocardless.com/pro/2015-04-29/#api-endpoints-customer-bank-account-tokens)
+             * token](https://developer.gocardless.com/pro/2015-04-29/#core-endpoints-customer-bank-account-tokens)
              * to use in place of bank account parameters.
              */
             public Links withCustomerBankAccountToken(String customerBankAccountToken) {

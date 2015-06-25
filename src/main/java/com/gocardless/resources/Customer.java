@@ -7,9 +7,9 @@ import java.util.Map;
  *
  * Customer objects hold the contact details for a customer. A customer can have several [customer
  * bank
- * accounts](https://developer.gocardless.com/pro/2015-04-29/#api-endpoints-customer-bank-accounts),
+ * accounts](https://developer.gocardless.com/pro/2015-04-29/#core-endpoints-customer-bank-accounts),
  * which in turn can have several Direct Debit
- * [mandates](https://developer.gocardless.com/pro/2015-04-29/#api-endpoints-mandates).
+ * [mandates](https://developer.gocardless.com/pro/2015-04-29/#core-endpoints-mandates).
  */
 public class Customer {
     private Customer() {

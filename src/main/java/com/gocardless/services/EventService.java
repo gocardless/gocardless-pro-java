@@ -166,7 +166,7 @@ public class EventService {
         }
 
         /**
-         * ID of a [mandate](https://developer.gocardless.com/pro/2015-04-29/#api-endpoints-mandates). If
+         * ID of a [mandate](https://developer.gocardless.com/pro/2015-04-29/#core-endpoints-mandates). If
          * specified, this endpoint will return all events for the given mandate.
          */
         public EventListRequest<S> withMandate(String mandate) {
@@ -184,7 +184,7 @@ public class EventService {
         }
 
         /**
-         * ID of a [payment](https://developer.gocardless.com/pro/2015-04-29/#api-endpoints-payments). If
+         * ID of a [payment](https://developer.gocardless.com/pro/2015-04-29/#core-endpoints-payments). If
          * specified, this endpoint will return all events for the given payment.
          */
         public EventListRequest<S> withPayment(String payment) {
@@ -193,7 +193,7 @@ public class EventService {
         }
 
         /**
-         * ID of a [payout](https://developer.gocardless.com/pro/2015-04-29/#api-endpoints-payouts). If
+         * ID of a [payout](https://developer.gocardless.com/pro/2015-04-29/#core-endpoints-payouts). If
          * specified, this endpoint will return all events for the given payout.
          */
         public EventListRequest<S> withPayout(String payout) {
@@ -202,7 +202,7 @@ public class EventService {
         }
 
         /**
-         * ID of a [refund](https://developer.gocardless.com/pro/2015-04-29/#api-endpoints-refunds). If
+         * ID of a [refund](https://developer.gocardless.com/pro/2015-04-29/#core-endpoints-refunds). If
          * specified, this endpoint will return all events for the given refund.
          */
         public EventListRequest<S> withRefund(String refund) {
@@ -229,7 +229,7 @@ public class EventService {
         }
 
         /**
-         * ID of a [subscription](#api-endpoints-subscriptions). If specified, this endpoint will return all
+         * ID of a [subscription](#core-endpoints-subscriptions). If specified, this endpoint will return all
          * events for the given subscription.
          */
         public EventListRequest<S> withSubscription(String subscription) {

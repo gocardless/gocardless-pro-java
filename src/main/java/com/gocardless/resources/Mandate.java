@@ -8,7 +8,7 @@ import com.google.gson.annotations.SerializedName;
  * Represents a mandate resource returned from the API.
  *
  * Mandates represent the Direct Debit mandate with a
- * [customer](https://developer.gocardless.com/pro/2015-04-29/#api-endpoints-customers).
+ * [customer](https://developer.gocardless.com/pro/2015-04-29/#core-endpoints-customers).
  * 
  *
  * GoCardless will notify you via a
@@ -119,7 +119,7 @@ public class Mandate {
 
         /**
          * ID of the associated
-         * [creditor](https://developer.gocardless.com/pro/2015-04-29/#api-endpoints-creditors).
+         * [creditor](https://developer.gocardless.com/pro/2015-04-29/#core-endpoints-creditors).
          */
         public String getCreditor() {
             return creditor;
@@ -127,7 +127,7 @@ public class Mandate {
 
         /**
          * ID of the associated [customer bank
-         * account](https://developer.gocardless.com/pro/2015-04-29/#api-endpoints-customer-bank-accounts)
+         * account](https://developer.gocardless.com/pro/2015-04-29/#core-endpoints-customer-bank-accounts)
          * which the mandate is created and submits payments against.
          */
         public String getCustomerBankAccount() {

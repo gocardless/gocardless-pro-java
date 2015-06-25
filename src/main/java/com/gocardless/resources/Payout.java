@@ -6,9 +6,9 @@ import com.google.gson.annotations.SerializedName;
  * Represents a payout resource returned from the API.
  *
  * Payouts represent transfers from GoCardless to a
- * [creditor](https://developer.gocardless.com/pro/2015-04-29/#api-endpoints-creditors). Each payout
+ * [creditor](https://developer.gocardless.com/pro/2015-04-29/#core-endpoints-creditors). Each payout
  * contains the funds collected from one or many
- * [payments](https://developer.gocardless.com/pro/2015-04-29/#api-endpoints-payments). Payouts are
+ * [payments](https://developer.gocardless.com/pro/2015-04-29/#core-endpoints-payments). Payouts are
  * created automatically after a payment has been successfully collected.
  */
 public class Payout {
@@ -92,7 +92,7 @@ public class Payout {
         private String creditorBankAccount;
 
         /**
-         * ID of [creditor](https://developer.gocardless.com/pro/2015-04-29/#api-endpoints-creditors) who
+         * ID of [creditor](https://developer.gocardless.com/pro/2015-04-29/#core-endpoints-creditors) who
          * will receive this payout, i.e. the owner of the `creditor_bank_account`.
          */
         public String getCreditor() {
@@ -101,7 +101,7 @@ public class Payout {
 
         /**
          * ID of [bank
-         * account](https://developer.gocardless.com/pro/2015-04-29/#api-endpoints-creditor-bank-accounts)
+         * account](https://developer.gocardless.com/pro/2015-04-29/#core-endpoints-creditor-bank-accounts)
          * which this will be sent to.
          */
         public String getCreditorBankAccount() {

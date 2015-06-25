@@ -18,7 +18,7 @@ import com.google.gson.reflect.TypeToken;
  * Service class for working with mandate resources.
  *
  * Mandates represent the Direct Debit mandate with a
- * [customer](https://developer.gocardless.com/pro/2015-04-29/#api-endpoints-customers).
+ * [customer](https://developer.gocardless.com/pro/2015-04-29/#core-endpoints-customers).
  * 
  *
  * GoCardless will notify you via a
@@ -131,7 +131,7 @@ public class MandateService {
 
         /**
          * ID of the associated
-         * [creditor](https://developer.gocardless.com/pro/2015-04-29/#api-endpoints-creditors).
+         * [creditor](https://developer.gocardless.com/pro/2015-04-29/#core-endpoints-creditors).
          */
         public MandateCreateRequest withLinksCreditor(String creditor) {
             if (links == null) {
@@ -143,7 +143,7 @@ public class MandateService {
 
         /**
          * ID of the associated [customer bank
-         * account](https://developer.gocardless.com/pro/2015-04-29/#api-endpoints-customer-bank-accounts)
+         * account](https://developer.gocardless.com/pro/2015-04-29/#core-endpoints-customer-bank-accounts)
          * which the mandate is created and submits payments against.
          */
         public MandateCreateRequest withLinksCustomerBankAccount(String customerBankAccount) {
@@ -223,7 +223,7 @@ public class MandateService {
 
             /**
              * ID of the associated
-             * [creditor](https://developer.gocardless.com/pro/2015-04-29/#api-endpoints-creditors).
+             * [creditor](https://developer.gocardless.com/pro/2015-04-29/#core-endpoints-creditors).
              */
             public Links withCreditor(String creditor) {
                 this.creditor = creditor;
@@ -232,7 +232,7 @@ public class MandateService {
 
             /**
              * ID of the associated [customer bank
-             * account](https://developer.gocardless.com/pro/2015-04-29/#api-endpoints-customer-bank-accounts)
+             * account](https://developer.gocardless.com/pro/2015-04-29/#core-endpoints-customer-bank-accounts)
              * which the mandate is created and submits payments against.
              */
             public Links withCustomerBankAccount(String customerBankAccount) {
@@ -273,7 +273,7 @@ public class MandateService {
         }
 
         /**
-         * ID of a [creditor](https://developer.gocardless.com/pro/2015-04-29/#api-endpoints-creditors). If
+         * ID of a [creditor](https://developer.gocardless.com/pro/2015-04-29/#core-endpoints-creditors). If
          * specified, this endpoint will return all mandates for the given creditor. Cannot be used in
          * conjunction with `customer_bank_account`
          */
@@ -292,7 +292,7 @@ public class MandateService {
 
         /**
          * ID of a [customer bank
-         * account](https://developer.gocardless.com/pro/2015-04-29/#api-endpoints-customer-bank-accounts).
+         * account](https://developer.gocardless.com/pro/2015-04-29/#core-endpoints-customer-bank-accounts).
          * If specified, this endpoint will return all mandates for the given bank account. Cannot be used in
          * conjunction with `creditor`
          */

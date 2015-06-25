@@ -8,10 +8,10 @@ import com.google.gson.annotations.SerializedName;
  * Represents a payment resource returned from the API.
  *
  * Payment objects represent payments from a
- * [customer](https://developer.gocardless.com/pro/2015-04-29/#api-endpoints-customers) to a
- * [creditor](https://developer.gocardless.com/pro/2015-04-29/#api-endpoints-creditors), taken
+ * [customer](https://developer.gocardless.com/pro/2015-04-29/#core-endpoints-customers) to a
+ * [creditor](https://developer.gocardless.com/pro/2015-04-29/#core-endpoints-creditors), taken
  * against a Direct Debit
- * [mandate](https://developer.gocardless.com/pro/2015-04-29/#api-endpoints-mandates).
+ * [mandate](https://developer.gocardless.com/pro/2015-04-29/#core-endpoints-mandates).
  * 
  *
  * GoCardless will notify you via a
@@ -43,8 +43,8 @@ public class Payment {
     }
 
     /**
-     * Amount [refunded](https://developer.gocardless.com/pro/2015-04-29/#api-endpoints-refunds) in pence
-     * or cents.
+     * Amount [refunded](https://developer.gocardless.com/pro/2015-04-29/#core-endpoints-refunds) in
+     * pence or cents.
      */
     public Integer getAmountRefunded() {
         return amountRefunded;
@@ -53,7 +53,7 @@ public class Payment {
     /**
      * A future date on which the payment should be collected. If not specified, the payment will be
      * collected as soon as possible. This must be on or after the
-     * [mandate](https://developer.gocardless.com/pro/2015-04-29/#api-endpoints-mandates)'s
+     * [mandate](https://developer.gocardless.com/pro/2015-04-29/#core-endpoints-mandates)'s
      * `next_possible_charge_date`, and will be rolled-forwards by GoCardless if it is not a working day.
      */
     public String getChargeDate() {
@@ -155,7 +155,7 @@ public class Payment {
         private String subscription;
 
         /**
-         * ID of [creditor](https://developer.gocardless.com/pro/2015-04-29/#api-endpoints-creditors) to
+         * ID of [creditor](https://developer.gocardless.com/pro/2015-04-29/#core-endpoints-creditors) to
          * which the collected payment will be sent.
          */
         public String getCreditor() {
@@ -163,7 +163,7 @@ public class Payment {
         }
 
         /**
-         * ID of the [mandate](https://developer.gocardless.com/pro/2015-04-29/#api-endpoints-mandates)
+         * ID of the [mandate](https://developer.gocardless.com/pro/2015-04-29/#core-endpoints-mandates)
          * against which this payment should be collected.
          */
         public String getMandate() {
@@ -171,7 +171,7 @@ public class Payment {
         }
 
         /**
-         * ID of [payout](https://developer.gocardless.com/pro/2015-04-29/#api-endpoints-payouts) which
+         * ID of [payout](https://developer.gocardless.com/pro/2015-04-29/#core-endpoints-payouts) which
          * contains the funds from this payment.<br/>**Note**: this property will not be present until the
          * payment has been successfully collected.
          */
@@ -180,9 +180,10 @@ public class Payment {
         }
 
         /**
-         * ID of [subscription](https://developer.gocardless.com/pro/2015-04-29/#api-endpoints-subscriptions)
-         * from which this payment was created.<br/>**Note**: this property will only be present if this
-         * payment is part of a subscription.
+         * ID of
+         * [subscription](https://developer.gocardless.com/pro/2015-04-29/#core-endpoints-subscriptions) from
+         * which this payment was created.<br/>**Note**: this property will only be present if this payment
+         * is part of a subscription.
          */
         public String getSubscription() {
             return subscription;

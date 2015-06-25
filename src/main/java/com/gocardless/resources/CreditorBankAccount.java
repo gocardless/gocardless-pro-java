@@ -6,9 +6,9 @@ import java.util.Map;
  * Represents a creditor bank account resource returned from the API.
  *
  * Creditor Bank Accounts hold the bank details of a
- * [creditor](https://developer.gocardless.com/pro/2015-04-29/#api-endpoints-creditor). These are the
- * bank accounts which your
- * [payouts](https://developer.gocardless.com/pro/2015-04-29/#api-endpoints-payouts) will be sent
+ * [creditor](https://developer.gocardless.com/pro/2015-04-29/#core-endpoints-creditor). These are
+ * the bank accounts which your
+ * [payouts](https://developer.gocardless.com/pro/2015-04-29/#core-endpoints-payouts) will be sent
  * to.
  * 
  * Note that creditor bank accounts must be unique, and so you will encounter a
@@ -34,7 +34,7 @@ public class CreditorBankAccount {
 
     /**
      * Name of the account holder, as known by the bank. Usually this is the same as the name stored with
-     * the linked [creditor](https://developer.gocardless.com/pro/2015-04-29/#api-endpoints-creditors).
+     * the linked [creditor](https://developer.gocardless.com/pro/2015-04-29/#core-endpoints-creditors).
      * This field will be transliterated, upcased and truncated to 18 characters.
      */
     public String getAccountHolderName() {
@@ -113,7 +113,7 @@ public class CreditorBankAccount {
         private String creditor;
 
         /**
-         * ID of the [creditor](https://developer.gocardless.com/pro/2015-04-29/#api-endpoints-creditors)
+         * ID of the [creditor](https://developer.gocardless.com/pro/2015-04-29/#core-endpoints-creditors)
          * that owns this bank account.
          */
         public String getCreditor() {

@@ -14,18 +14,18 @@ import com.google.gson.reflect.TypeToken;
  * Service class for working with refund resources.
  *
  * Refund objects represent (partial) refunds of a
- * [payment](https://developer.gocardless.com/pro/2015-04-29/#api-endpoints-payment) back to the
- * [customer](https://developer.gocardless.com/pro/2015-04-29/#api-endpoints-customers).
+ * [payment](https://developer.gocardless.com/pro/2015-04-29/#core-endpoints-payment) back to the
+ * [customer](https://developer.gocardless.com/pro/2015-04-29/#core-endpoints-customers).
  * 
- * The API
- * allows you to create, show, list and update your refunds.
+ * The
+ * API allows you to create, show, list and update your refunds.
  * 
- * GoCardless will notify you via a
- * [webhook](https://developer.gocardless.com/pro/2015-04-29/#webhooks) whenever a refund is created,
- * and will update the `amount_refunded` property of the payment.
+ * GoCardless will notify you via
+ * a [webhook](https://developer.gocardless.com/pro/2015-04-29/#webhooks) whenever a refund is
+ * created, and will update the `amount_refunded` property of the payment.
  * 
- * _Note:_ A payment that has
- * been (partially) refunded can still receive a late failure or chargeback from the banks.
+ * _Note:_ A payment
+ * that has been (partially) refunded can still receive a late failure or chargeback from the banks.
  */
 public class RefundService {
     private HttpClient httpClient;
@@ -47,7 +47,7 @@ public class RefundService {
      * 
      * -
      * `refund_payment_invalid_state` error if the linked
-     * [payment](https://developer.gocardless.com/pro/2015-04-29/#api-endpoints-payments) isn't either
+     * [payment](https://developer.gocardless.com/pro/2015-04-29/#core-endpoints-payments) isn't either
      * `confirmed` or `paid_out`.
      * 
      * - `total_amount_confirmation_invalid` if the confirmation amount
@@ -100,7 +100,7 @@ public class RefundService {
      * 
      * -
      * `refund_payment_invalid_state` error if the linked
-     * [payment](https://developer.gocardless.com/pro/2015-04-29/#api-endpoints-payments) isn't either
+     * [payment](https://developer.gocardless.com/pro/2015-04-29/#core-endpoints-payments) isn't either
      * `confirmed` or `paid_out`.
      * 
      * - `total_amount_confirmation_invalid` if the confirmation amount
@@ -132,7 +132,7 @@ public class RefundService {
         }
 
         /**
-         * ID of the [payment](https://developer.gocardless.com/pro/2015-04-29/#api-endpoints-payments)
+         * ID of the [payment](https://developer.gocardless.com/pro/2015-04-29/#core-endpoints-payments)
          * against which the refund is being made.
          */
         public RefundCreateRequest withLinksPayment(String payment) {
@@ -200,7 +200,7 @@ public class RefundService {
             private String payment;
 
             /**
-             * ID of the [payment](https://developer.gocardless.com/pro/2015-04-29/#api-endpoints-payments)
+             * ID of the [payment](https://developer.gocardless.com/pro/2015-04-29/#core-endpoints-payments)
              * against which the refund is being made.
              */
             public Links withPayment(String payment) {

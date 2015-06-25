@@ -23,13 +23,13 @@ import com.google.gson.annotations.SerializedName;
  * 3. You
  * [complete](https://developer.gocardless.com/pro/2015-04-29/#complete-a-redirect-flow) the redirect
  * flow, which creates a
- * [customer](https://developer.gocardless.com/pro/2015-04-29/#api-endpoints-customers), [customer
+ * [customer](https://developer.gocardless.com/pro/2015-04-29/#core-endpoints-customers), [customer
  * bank
- * account](https://developer.gocardless.com/pro/2015-04-29/#api-endpoints-customer-bank-accounts),
- * and [mandate](https://developer.gocardless.com/pro/2015-04-29/#api-endpoints-mandates), and
+ * account](https://developer.gocardless.com/pro/2015-04-29/#core-endpoints-customer-bank-accounts),
+ * and [mandate](https://developer.gocardless.com/pro/2015-04-29/#core-endpoints-mandates), and
  * returns the ID of the mandate. You may wish to create a
- * [subscription](https://developer.gocardless.com/pro/2015-04-29/#api-endpoints-subscriptions) or
- * [payment](https://developer.gocardless.com/pro/2015-04-29/#api-endpoints-payments) at this
+ * [subscription](https://developer.gocardless.com/pro/2015-04-29/#core-endpoints-subscriptions) or
+ * [payment](https://developer.gocardless.com/pro/2015-04-29/#core-endpoints-payments) at this
  * point.
  * 
  * It is recommended that you link the redirect flow to your user object as soon as it is
@@ -131,7 +131,7 @@ public class RedirectFlow {
         private String mandate;
 
         /**
-         * The [creditor](https://developer.gocardless.com/pro/2015-04-29/#api-endpoints-creditors) for whom
+         * The [creditor](https://developer.gocardless.com/pro/2015-04-29/#core-endpoints-creditors) for whom
          * the mandate will be created. The `name` of the creditor will be displayed on the payment page.
          */
         public String getCreditor() {
@@ -139,7 +139,7 @@ public class RedirectFlow {
         }
 
         /**
-         * ID of [mandate](https://developer.gocardless.com/pro/2015-04-29/#api-endpoints-mandates) created
+         * ID of [mandate](https://developer.gocardless.com/pro/2015-04-29/#core-endpoints-mandates) created
          * by this redirect flow.<br/>**Note**: this property will not be present until the redirect flow has
          * been successfully completed.
          */
