@@ -11,16 +11,7 @@ import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
 
-import static com.xebialabs.restito.builder.stub.StubHttp.whenHttp;
-import static com.xebialabs.restito.semantics.Action.header;
-import static com.xebialabs.restito.semantics.Action.resourceContent;
-import static com.xebialabs.restito.semantics.Action.status;
-import static com.xebialabs.restito.semantics.Condition.get;
-
 import static org.assertj.core.api.Assertions.assertThat;
-
-import static org.glassfish.grizzly.http.util.HttpStatus.BAD_REQUEST_400;
-import static org.glassfish.grizzly.http.util.HttpStatus.OK_200;
 
 public class GetRequestTest {
     @Rule
@@ -35,29 +26,27 @@ public class GetRequestTest {
     }
 
     @Test
-    public void shouldPerformGetRequest() {
-        whenHttp(http.server()).match(get("/dummy/123")).then(status(OK_200),
-                resourceContent("fixtures/single.json"));
+    public void shouldPerformGetRequest() throws Exception {
+        http.enqueueResponse(200, "fixtures/single.json");
         DummyItem result = request.execute();
         assertThat(result.stringField).isEqualTo("foo");
         assertThat(result.intField).isEqualTo(123);
+        http.assertRequestMade("GET", "/dummy/123");
     }
 
     @Test
-    public void shouldPerformWrappedGetRequest() {
-        whenHttp(http.server()).match(get("/dummy/123")).then(status(OK_200),
-                resourceContent("fixtures/single.json"), header("foo", "bar"));
+    public void shouldPerformWrappedGetRequest() throws Exception {
+        http.enqueueResponse(200, "fixtures/single.json", ImmutableMap.of("foo", "bar"));
         HttpResponse<DummyItem> result = request.executeWrapped();
         assertThat(result.getStatusCode()).isEqualTo(200);
         assertThat(result.getHeaders().get("foo")).containsExactly("bar");
         assertThat(result.getResource().stringField).isEqualTo("foo");
         assertThat(result.getResource().intField).isEqualTo(123);
+        http.assertRequestMade("GET", "/dummy/123");
     }
 
-    @Test
-    public void shouldThrowOnApiError() {
-        whenHttp(http.server()).match(get("/dummy/123")).then(status(BAD_REQUEST_400),
-                resourceContent("fixtures/invalid_api_usage.json"));
+    public void shouldThrowOnApiError() throws Exception {
+        http.enqueueResponse(400, "fixtures/invalid_api_usage.json");
         exception.expect(InvalidApiUsageException.class);
         exception.expectMessage("Invalid document structure");
         request.execute();

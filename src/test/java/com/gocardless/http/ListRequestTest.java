@@ -11,24 +11,15 @@ import com.google.gson.reflect.TypeToken;
 import org.junit.Rule;
 import org.junit.Test;
 
-import static com.xebialabs.restito.builder.stub.StubHttp.whenHttp;
-import static com.xebialabs.restito.semantics.Action.resourceContent;
-import static com.xebialabs.restito.semantics.Action.status;
-import static com.xebialabs.restito.semantics.Condition.get;
-import static com.xebialabs.restito.semantics.Condition.parameter;
-
 import static org.assertj.core.api.Assertions.assertThat;
-
-import static org.glassfish.grizzly.http.util.HttpStatus.OK_200;
 
 public class ListRequestTest {
     @Rule
     public MockHttp http = new MockHttp();
 
     @Test
-    public void shouldPerformListRequest() {
-        whenHttp(http.server()).match(get("/dummy"), parameter("id", "123")).then(status(OK_200),
-                resourceContent("fixtures/page.json"));
+    public void shouldPerformListRequest() throws Exception {
+        http.enqueueResponse(200, "fixtures/page.json");
         DummyListRequest<ListResponse<DummyItem>> request =
                 DummyListRequest.pageRequest(http.client());
         ListResponse<DummyItem> result = request.execute();
@@ -37,15 +28,13 @@ public class ListRequestTest {
         assertThat(result.getItems().get(0).intField).isEqualTo(123);
         assertThat(result.getItems().get(1).stringField).isEqualTo("bar");
         assertThat(result.getItems().get(1).intField).isEqualTo(456);
+        http.assertRequestMade("GET", "/dummy?id=123");
     }
 
     @Test
-    public void shouldBeAbleToIterateThroughList() {
-        whenHttp(http.server()).match(get("/dummy"), parameter("id", "123")).then(status(OK_200),
-                resourceContent("fixtures/first-page.json"));
-        whenHttp(http.server()).match(get("/dummy"), parameter("id", "123"),
-                parameter("after", "ID123")).then(status(OK_200),
-                resourceContent("fixtures/last-page.json"));
+    public void shouldBeAbleToIterateThroughList() throws Exception {
+        http.enqueueResponse(200, "fixtures/first-page.json");
+        http.enqueueResponse(200, "fixtures/last-page.json");
         DummyListRequest<Iterable<DummyItem>> request =
                 DummyListRequest.iterableRequest(http.client());
         Iterable<DummyItem> iterable = request.execute();
@@ -57,6 +46,8 @@ public class ListRequestTest {
         assertThat(result.get(1).intField).isEqualTo(222);
         assertThat(result.get(2).stringField).isEqualTo("baz");
         assertThat(result.get(2).intField).isEqualTo(333);
+        http.assertRequestMade("GET", "/dummy?id=123");
+        http.assertRequestMade("GET", "/dummy?after=ID123&id=123");
     }
 
     static class DummyListRequest<S> extends ListRequest<S, DummyItem> {
