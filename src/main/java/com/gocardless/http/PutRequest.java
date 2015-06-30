@@ -7,7 +7,7 @@ import java.io.Reader;
  *
  * @param <T> the type of the item returned by this request.
  */
-public abstract class PutRequest<T> extends HttpRequest<T> {
+public abstract class PutRequest<T> extends ApiRequest<T> {
     protected PutRequest(HttpClient httpClient) {
         super(httpClient);
     }
@@ -26,12 +26,12 @@ public abstract class PutRequest<T> extends HttpRequest<T> {
     /**
      * Executes this request.
      *
-     * Returns a {@link com.gocardless.http.HttpResponse} that wraps the
+     * Returns a {@link com.gocardless.http.ApiResponse} that wraps the
      * response entity.
      *
      * @throws com.gocardless.GoCardlessException
      */
-    public HttpResponse<T> executeWrapped() {
+    public ApiResponse<T> executeWrapped() {
         return getHttpClient().executeWrapped(this);
     }
 

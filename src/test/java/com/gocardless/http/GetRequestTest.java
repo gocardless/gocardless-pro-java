@@ -1,7 +1,7 @@
 package com.gocardless.http;
 
 import com.gocardless.errors.InvalidApiUsageException;
-import com.gocardless.http.HttpResponse;
+import com.gocardless.http.ApiResponse;
 import com.gocardless.http.HttpTestUtil.DummyItem;
 
 import com.google.common.collect.ImmutableMap;
@@ -37,7 +37,7 @@ public class GetRequestTest {
     @Test
     public void shouldPerformWrappedGetRequest() throws Exception {
         http.enqueueResponse(200, "fixtures/single.json", ImmutableMap.of("foo", "bar"));
-        HttpResponse<DummyItem> result = request.executeWrapped();
+        ApiResponse<DummyItem> result = request.executeWrapped();
         assertThat(result.getStatusCode()).isEqualTo(200);
         assertThat(result.getHeaders().get("foo")).containsExactly("bar");
         assertThat(result.getResource().stringField).isEqualTo("foo");

@@ -34,7 +34,7 @@ public class PutRequestTest {
     public void shouldPerformWrappedPutRequest() throws Exception {
         http.enqueueResponse(200, "fixtures/single.json");
         DummyPutRequest request = new DummyPutRequest();
-        HttpResponse<DummyItem> result = request.executeWrapped();
+        ApiResponse<DummyItem> result = request.executeWrapped();
         assertThat(result.getStatusCode()).isEqualTo(200);
         assertThat(result.getHeaders().get("foo")).containsExactly("bar");
         assertThat(result.getResource().stringField).isEqualTo("foo");

@@ -14,7 +14,7 @@ import com.google.gson.Gson;
 import com.squareup.okhttp.*;
 
 /**
- * An HTTP client that can execute {@link HttpRequest}s.
+ * An HTTP client that can execute {@link ApiRequest}s.
  *
  * Users of this library should not need to access this class directly.
  */
@@ -54,32 +54,32 @@ public class HttpClient {
         this.credentials = String.format("Bearer %s", accessToken);
     }
 
-    <T> T execute(HttpRequest<T> httpRequest) {
-        Request request = buildRequest(httpRequest);
+    <T> T execute(ApiRequest<T> apiRequest) {
+        Request request = buildRequest(apiRequest);
         Response response = execute(request);
-        return parseResponseBody(httpRequest, response);
+        return parseResponseBody(apiRequest, response);
     }
 
-    <T> HttpResponse<T> executeWrapped(HttpRequest<T> httpRequest) {
-        Request request = buildRequest(httpRequest);
+    <T> ApiResponse<T> executeWrapped(ApiRequest<T> apiRequest) {
+        Request request = buildRequest(apiRequest);
         Response response = execute(request);
-        T resource = parseResponseBody(httpRequest, response);
-        return new HttpResponse<T>(resource, response.code(), response.headers().toMultimap());
+        T resource = parseResponseBody(apiRequest, response);
+        return new ApiResponse<T>(resource, response.code(), response.headers().toMultimap());
     }
 
-    <T> Request buildRequest(HttpRequest<T> httpRequest) {
-        URL url = httpRequest.getUrl(urlFormatter);
+    <T> Request buildRequest(ApiRequest<T> apiRequest) {
+        URL url = apiRequest.getUrl(urlFormatter);
         Request.Builder request =
                 new Request.Builder().url(url).header("Authorization", credentials)
                         .header("User-Agent", USER_AGENT)
-                        .method(httpRequest.getMethod(), getBody(httpRequest));
+                        .method(apiRequest.getMethod(), getBody(apiRequest));
         for (Map.Entry<String, String> entry : HEADERS.entrySet()) {
             request = request.header(entry.getKey(), entry.getValue());
         }
         return request.build();
     }
 
-    private <T> RequestBody getBody(HttpRequest<T> request) {
+    private <T> RequestBody getBody(ApiRequest<T> request) {
         if (!request.hasBody()) {
             if (request.getMethod().equals("GET")) {
                 return null;
@@ -104,7 +104,7 @@ public class HttpClient {
         return response;
     }
 
-    private <T> T parseResponseBody(HttpRequest<T> request, Response response) {
+    private <T> T parseResponseBody(ApiRequest<T> request, Response response) {
         try (Reader stream = response.body().charStream()) {
             return request.parseResponse(stream, responseParser);
         } catch (IOException e) {

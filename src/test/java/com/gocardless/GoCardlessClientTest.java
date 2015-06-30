@@ -5,7 +5,7 @@ import java.util.List;
 import co.freeside.betamax.Betamax;
 import co.freeside.betamax.Recorder;
 
-import com.gocardless.http.HttpResponse;
+import com.gocardless.http.ApiResponse;
 import com.gocardless.http.HttpTestUtil;
 import com.gocardless.http.ListResponse;
 import com.gocardless.resources.*;
@@ -48,7 +48,7 @@ public class GoCardlessClientTest {
     @Test
     @Betamax(tape = "get a customer wrapped")
     public void shouldGetACustomerWrapped() {
-        HttpResponse<Customer> response = client.customers().get("CU00003068FG73").executeWrapped();
+        ApiResponse<Customer> response = client.customers().get("CU00003068FG73").executeWrapped();
         assertThat(response.getStatusCode()).isEqualTo(200);
         assertThat(response.getHeaders().get("RateLimit-Limit")).containsExactly("1000");
         Customer customer = response.getResource();

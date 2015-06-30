@@ -7,16 +7,16 @@ import com.google.common.collect.ImmutableListMultimap;
 import com.google.common.collect.Multimap;
 
 /**
- * Base class for HTTP responses.
+ * Base class for API responses.
  *
  * @param <T> the type of the resource within this response.
  */
-public class HttpResponse<T> {
+public class ApiResponse<T> {
     private final T resource;
     private final int statusCode;
     private final Multimap<String, String> headers;
 
-    public HttpResponse(T resource, int statusCode, Map<String, List<String>> headers) {
+    public ApiResponse(T resource, int statusCode, Map<String, List<String>> headers) {
         this.resource = resource;
         this.statusCode = statusCode;
         this.headers = buildHeaderMap(headers);

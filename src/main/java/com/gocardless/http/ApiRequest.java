@@ -7,14 +7,14 @@ import java.util.Map;
 import com.google.common.collect.ImmutableMap;
 
 /**
- * Base class for HTTP requests.
+ * Base class for API requests.
  *
  * @param <T> the type of the item returned by this request.
  */
-abstract class HttpRequest<T> {
+abstract class ApiRequest<T> {
     private transient final HttpClient httpClient;
 
-    HttpRequest(HttpClient httpClient) {
+    ApiRequest(HttpClient httpClient) {
         this.httpClient = httpClient;
     }
 

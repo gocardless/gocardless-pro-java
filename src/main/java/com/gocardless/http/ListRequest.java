@@ -12,7 +12,7 @@ import com.google.gson.reflect.TypeToken;
  *
  * @param <T> the type of the item returned by this request.
  */
-public abstract class ListRequest<S, T> extends HttpRequest<ListResponse<T>> {
+public abstract class ListRequest<S, T> extends ApiRequest<ListResponse<T>> {
     private final ListRequestExecutor<S, T> executor;
     private String after;
     private String before;
