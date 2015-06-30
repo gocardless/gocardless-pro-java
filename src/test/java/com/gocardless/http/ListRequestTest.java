@@ -10,12 +10,15 @@ import com.google.gson.reflect.TypeToken;
 
 import org.junit.Rule;
 import org.junit.Test;
+import org.junit.rules.ExpectedException;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class ListRequestTest {
     @Rule
     public MockHttp http = new MockHttp();
+    @Rule
+    public ExpectedException exception = ExpectedException.none();
 
     @Test
     public void shouldPerformListRequest() throws Exception {
@@ -28,6 +31,18 @@ public class ListRequestTest {
         assertThat(result.getItems().get(0).intField).isEqualTo(123);
         assertThat(result.getItems().get(1).stringField).isEqualTo("bar");
         assertThat(result.getItems().get(1).intField).isEqualTo(456);
+        http.assertRequestMade("GET", "/dummy?id=123");
+    }
+
+    @Test
+    public void shouldPerformWrappedListRequest() throws Exception {
+        http.enqueueResponse(200, "fixtures/page.json", ImmutableMap.of("foo", "bar"));
+        DummyListRequest<ListResponse<DummyItem>> request =
+                DummyListRequest.pageRequest(http.client());
+        ApiResponse<ListResponse<DummyItem>> result = request.executeWrapped();
+        assertThat(result.getStatusCode()).isEqualTo(200);
+        assertThat(result.getHeaders().get("foo")).containsExactly("bar");
+        assertThat(result.getResource().getItems()).hasSize(2);
         http.assertRequestMade("GET", "/dummy?id=123");
     }
 
@@ -48,6 +63,14 @@ public class ListRequestTest {
         assertThat(result.get(2).intField).isEqualTo(333);
         http.assertRequestMade("GET", "/dummy?id=123");
         http.assertRequestMade("GET", "/dummy?after=ID123&id=123");
+    }
+
+    @Test
+    public void shouldNotAllowExecuteWrappedWhenIterating() {
+        DummyListRequest<Iterable<DummyItem>> request =
+                DummyListRequest.iterableRequest(http.client());
+        exception.expect(IllegalStateException.class);
+        request.executeWrapped();
     }
 
     static class DummyListRequest<S> extends ListRequest<S, DummyItem> {
