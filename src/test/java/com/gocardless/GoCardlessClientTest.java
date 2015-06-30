@@ -179,4 +179,14 @@ public class GoCardlessClientTest {
                         .withIntervalUnit(MONTHLY).withLinksMandate("MD00001PEYCSQF").execute();
         assertThat(subscription.getId()).isNotNull();
     }
+
+    @Test
+    @Betamax(tape = "list enabled creditor bank accounts")
+    public void shouldListEnabledCreditorBankAccounts() {
+        Iterable<CreditorBankAccount> iterable =
+                client.creditorBankAccounts().all().withEnabled(true).execute();
+        List<CreditorBankAccount> bankAccounts = Lists.newArrayList(iterable);
+        assertThat(bankAccounts).hasSize(1);
+        assertThat(bankAccounts.get(0).getId()).isEqualTo("BA00001NN2B44F");
+    }
 }

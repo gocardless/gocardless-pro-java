@@ -8,7 +8,6 @@ import com.gocardless.http.*;
 import com.gocardless.resources.CustomerBankAccount;
 
 import com.google.common.collect.ImmutableMap;
-import com.google.gson.annotations.SerializedName;
 import com.google.gson.reflect.TypeToken;
 
 /**
@@ -294,7 +293,7 @@ public class CustomerBankAccountService {
     public static final class CustomerBankAccountListRequest<S> extends
             ListRequest<S, CustomerBankAccount> {
         private String customer;
-        private Enabled enabled;
+        private Boolean enabled;
 
         /**
          * Cursor pointing to the start of the desired set.
@@ -323,7 +322,7 @@ public class CustomerBankAccountService {
         /**
          * Get enabled or disabled customer bank accounts.
          */
-        public CustomerBankAccountListRequest<S> withEnabled(Enabled enabled) {
+        public CustomerBankAccountListRequest<S> withEnabled(Boolean enabled) {
             this.enabled = enabled;
             return this;
         }
@@ -367,16 +366,6 @@ public class CustomerBankAccountService {
         @Override
         protected TypeToken<List<CustomerBankAccount>> getTypeToken() {
             return new TypeToken<List<CustomerBankAccount>>() {};
-        }
-
-        public enum Enabled {
-            @SerializedName("true")
-            TRUE, @SerializedName("false")
-            FALSE;
-            @Override
-            public String toString() {
-                return name().toLowerCase();
-            }
         }
     }
 

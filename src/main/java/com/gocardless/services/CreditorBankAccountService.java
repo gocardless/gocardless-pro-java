@@ -8,7 +8,6 @@ import com.gocardless.http.*;
 import com.gocardless.resources.CreditorBankAccount;
 
 import com.google.common.collect.ImmutableMap;
-import com.google.gson.annotations.SerializedName;
 import com.google.gson.reflect.TypeToken;
 
 /**
@@ -249,7 +248,7 @@ public class CreditorBankAccountService {
     public static final class CreditorBankAccountListRequest<S> extends
             ListRequest<S, CreditorBankAccount> {
         private String creditor;
-        private Enabled enabled;
+        private Boolean enabled;
 
         /**
          * Cursor pointing to the start of the desired set.
@@ -278,7 +277,7 @@ public class CreditorBankAccountService {
         /**
          * Get enabled or disabled creditor bank accounts.
          */
-        public CreditorBankAccountListRequest<S> withEnabled(Enabled enabled) {
+        public CreditorBankAccountListRequest<S> withEnabled(Boolean enabled) {
             this.enabled = enabled;
             return this;
         }
@@ -322,16 +321,6 @@ public class CreditorBankAccountService {
         @Override
         protected TypeToken<List<CreditorBankAccount>> getTypeToken() {
             return new TypeToken<List<CreditorBankAccount>>() {};
-        }
-
-        public enum Enabled {
-            @SerializedName("true")
-            TRUE, @SerializedName("false")
-            FALSE;
-            @Override
-            public String toString() {
-                return name().toLowerCase();
-            }
         }
     }
 
