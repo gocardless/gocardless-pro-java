@@ -44,8 +44,8 @@ public class PayoutService {
      * Retrieves the details of a single payout. For an example of how to reconcile the transactions in a
      * payout, see [this guide](#events-fetching-events-for-a-payout).
      */
-    public PayoutGetRequest<Payout> get(String identity) {
-        return new PayoutGetRequest<>(httpClient, GetRequest.<Payout>jsonExecutor(), identity);
+    public PayoutGetRequest get(String identity) {
+        return new PayoutGetRequest(httpClient, identity);
     }
 
     /**
@@ -83,7 +83,7 @@ public class PayoutService {
         }
 
         /**
-         * Unique identifier, beginning with "BA"
+         * Unique identifier, beginning with "BA".
          */
         public PayoutListRequest<S> withCreditorBankAccount(String creditorBankAccount) {
             this.creditorBankAccount = creditorBankAccount;
@@ -163,13 +163,12 @@ public class PayoutService {
      * Retrieves the details of a single payout. For an example of how to reconcile the transactions in a
      * payout, see [this guide](#events-fetching-events-for-a-payout).
      */
-    public static final class PayoutGetRequest<S> extends GetRequest<S, Payout> {
+    public static final class PayoutGetRequest extends GetRequest<Payout> {
         @PathParam
         private final String identity;
 
-        private PayoutGetRequest(HttpClient httpClient, GetRequestExecutor<S, Payout> executor,
-                String identity) {
-            super(httpClient, executor);
+        private PayoutGetRequest(HttpClient httpClient, String identity) {
+            super(httpClient);
             this.identity = identity;
         }
 

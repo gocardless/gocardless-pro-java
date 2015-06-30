@@ -1,5 +1,6 @@
 package com.gocardless.services;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -53,8 +54,8 @@ public class CreditorService {
     /**
      * Retrieves the details of an existing creditor.
      */
-    public CreditorGetRequest<Creditor> get(String identity) {
-        return new CreditorGetRequest<>(httpClient, GetRequest.<Creditor>jsonExecutor(), identity);
+    public CreditorGetRequest get(String identity) {
+        return new CreditorGetRequest(httpClient, identity);
     }
 
     /**
@@ -75,7 +76,7 @@ public class CreditorService {
         private String addressLine3;
         private String city;
         private String countryCode;
-        private Links links;
+        private Map<String, String> links;
         private String name;
         private String postalCode;
         private String region;
@@ -121,19 +122,16 @@ public class CreditorService {
             return this;
         }
 
-        public CreditorCreateRequest withLinks(Links links) {
+        public CreditorCreateRequest withLinks(Map<String, String> links) {
             this.links = links;
             return this;
         }
 
-        /**
-         * ID of the logo used on the Redirect Flow payment pages.
-         */
-        public CreditorCreateRequest withLinksLogo(String logo) {
+        public CreditorCreateRequest withLinks(String key, String value) {
             if (links == null) {
-                links = new Links();
+                links = new HashMap<>();
             }
-            links.withLogo(logo);
+            links.put(key, value);
             return this;
         }
 
@@ -183,18 +181,6 @@ public class CreditorService {
         @Override
         protected boolean hasBody() {
             return true;
-        }
-
-        public static class Links {
-            private String logo;
-
-            /**
-             * ID of the logo used on the Redirect Flow payment pages.
-             */
-            public Links withLogo(String logo) {
-                this.logo = logo;
-                return this;
-            }
         }
     }
 
@@ -260,13 +246,12 @@ public class CreditorService {
      *
      * Retrieves the details of an existing creditor.
      */
-    public static final class CreditorGetRequest<S> extends GetRequest<S, Creditor> {
+    public static final class CreditorGetRequest extends GetRequest<Creditor> {
         @PathParam
         private final String identity;
 
-        private CreditorGetRequest(HttpClient httpClient, GetRequestExecutor<S, Creditor> executor,
-                String identity) {
-            super(httpClient, executor);
+        private CreditorGetRequest(HttpClient httpClient, String identity) {
+            super(httpClient);
             this.identity = identity;
         }
 
@@ -382,17 +367,6 @@ public class CreditorService {
         }
 
         /**
-         * ID of the logo used on the Redirect Flow payment pages.
-         */
-        public CreditorUpdateRequest withLinksLogo(String logo) {
-            if (links == null) {
-                links = new Links();
-            }
-            links.withLogo(logo);
-            return this;
-        }
-
-        /**
          * The creditor's name.
          */
         public CreditorUpdateRequest withName(String name) {
@@ -451,7 +425,6 @@ public class CreditorService {
         public static class Links {
             private String defaultEurPayoutAccount;
             private String defaultGbpPayoutAccount;
-            private String logo;
 
             /**
              * ID of the [bank account](#core-endpoints-creditor-bank-accounts) which is set up to receive
@@ -468,14 +441,6 @@ public class CreditorService {
              */
             public Links withDefaultGbpPayoutAccount(String defaultGbpPayoutAccount) {
                 this.defaultGbpPayoutAccount = defaultGbpPayoutAccount;
-                return this;
-            }
-
-            /**
-             * ID of the logo used on the Redirect Flow payment pages.
-             */
-            public Links withLogo(String logo) {
-                this.logo = logo;
                 return this;
             }
         }

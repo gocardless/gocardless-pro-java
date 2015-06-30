@@ -1,7 +1,7 @@
 package com.gocardless.http;
 
 import java.io.IOException;
-import java.io.InputStream;
+import java.io.Reader;
 import java.net.URL;
 import java.util.List;
 
@@ -15,7 +15,8 @@ import org.junit.Test;
 
 import static com.gocardless.errors.ErrorType.*;
 
-import static com.google.common.io.Resources.asByteSource;
+import static com.google.common.base.Charsets.UTF_8;
+import static com.google.common.io.Resources.asCharSource;
 import static com.google.common.io.Resources.getResource;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -31,8 +32,8 @@ public class ResponseParserTest {
     @Test
     public void shouldParseSingle() throws IOException {
         URL resource = getResource("fixtures/single.json");
-        InputStream stream = asByteSource(resource).openStream();
-        DummyItem result = parser.parseSingle(stream, "items", DummyItem.class);
+        Reader reader = asCharSource(resource, UTF_8).openStream();
+        DummyItem result = parser.parseSingle(reader, "items", DummyItem.class);
         assertThat(result.stringField).isEqualTo("foo");
         assertThat(result.intField).isEqualTo(123);
     }
@@ -40,9 +41,9 @@ public class ResponseParserTest {
     @Test
     public void shouldParsePage() throws IOException {
         URL resource = getResource("fixtures/page.json");
-        InputStream stream = asByteSource(resource).openStream();
+        Reader reader = asCharSource(resource, UTF_8).openStream();
         ListResponse<DummyItem> result =
-                parser.parsePage(stream, "items", new TypeToken<List<DummyItem>>() {});
+                parser.parsePage(reader, "items", new TypeToken<List<DummyItem>>() {});
         assertThat(result.getItems()).hasSize(2);
         assertThat(result.getItems().get(0).stringField).isEqualTo("foo");
         assertThat(result.getItems().get(0).intField).isEqualTo(123);
@@ -56,8 +57,8 @@ public class ResponseParserTest {
     @Test
     public void shouldParseInvalidApiUsageError() throws IOException {
         URL resource = getResource("fixtures/invalid_api_usage.json");
-        InputStream stream = asByteSource(resource).openStream();
-        GoCardlessApiException exception = parser.parseError(stream);
+        Reader reader = asCharSource(resource, UTF_8).openStream();
+        GoCardlessApiException exception = parser.parseError(reader);
         assertThat(exception).isInstanceOf(InvalidApiUsageException.class);
         assertThat(exception.getType()).isEqualTo(INVALID_API_USAGE);
         assertThat(exception.getMessage()).isEqualTo("Invalid document structure");
@@ -74,8 +75,8 @@ public class ResponseParserTest {
     @Test
     public void shouldParseInvalidStateError() throws IOException {
         URL resource = getResource("fixtures/invalid_state.json");
-        InputStream stream = asByteSource(resource).openStream();
-        GoCardlessApiException exception = parser.parseError(stream);
+        Reader reader = asCharSource(resource, UTF_8).openStream();
+        GoCardlessApiException exception = parser.parseError(reader);
         assertThat(exception).isInstanceOf(InvalidStateException.class);
         assertThat(exception.getType()).isEqualTo(INVALID_STATE);
         assertThat(exception.getMessage()).isEqualTo("Bank account already exists");
@@ -93,8 +94,8 @@ public class ResponseParserTest {
     @Test
     public void shouldParseValidationFailedError() throws IOException {
         URL resource = getResource("fixtures/validation_failed.json");
-        InputStream stream = asByteSource(resource).openStream();
-        GoCardlessApiException exception = parser.parseError(stream);
+        Reader reader = asCharSource(resource, UTF_8).openStream();
+        GoCardlessApiException exception = parser.parseError(reader);
         assertThat(exception).isInstanceOf(ValidationFailedException.class);
         assertThat(exception.getType()).isEqualTo(VALIDATION_FAILED);
         assertThat(exception.getMessage()).isEqualTo("Validation failed");
@@ -114,8 +115,8 @@ public class ResponseParserTest {
     @Test
     public void shouldParseInternalError() throws IOException {
         URL resource = getResource("fixtures/internal_error.json");
-        InputStream stream = asByteSource(resource).openStream();
-        GoCardlessApiException exception = parser.parseError(stream);
+        Reader reader = asCharSource(resource, UTF_8).openStream();
+        GoCardlessApiException exception = parser.parseError(reader);
         assertThat(exception).isInstanceOf(GoCardlessInternalException.class);
         assertThat(exception.getType()).isEqualTo(GOCARDLESS);
         assertThat(exception.getMessage()).isEqualTo("THE BEES THEY'RE IN MY EYES");

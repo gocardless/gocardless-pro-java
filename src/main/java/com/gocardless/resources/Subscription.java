@@ -88,7 +88,7 @@ public class Subscription {
     private String paymentReference;
     private String startAt;
     private String status;
-    private List<UpcomingPayments> upcomingPayments;
+    private List<UpcomingPayment> upcomingPayments;
 
     /**
      * Amount in pence or cents.
@@ -122,7 +122,7 @@ public class Subscription {
 
     /**
      * As per RFC 2445. The day of the month to charge customers on. `1`-`28` or `-1` to indicate the
-     * last day of the month
+     * last day of the month.
      */
     public Integer getDayOfMonth() {
         return dayOfMonth;
@@ -138,7 +138,7 @@ public class Subscription {
     }
 
     /**
-     * Unique identifier, beginning with "SB"
+     * Unique identifier, beginning with "SB".
      */
     public String getId() {
         return id;
@@ -179,7 +179,8 @@ public class Subscription {
     }
 
     /**
-     * Optional name for the subscription. This field must not exceed 255 characters.
+     * Optional name for the subscription. This will be set as the description on each payment created.
+     * Must not exceed 255 characters.
      */
     public String getName() {
         return name;
@@ -221,7 +222,7 @@ public class Subscription {
     /**
      * Up to 10 upcoming payments with the amount, in pence, and charge date for each.
      */
-    public List<UpcomingPayments> getUpcomingPayments() {
+    public List<UpcomingPayment> getUpcomingPayments() {
         return upcomingPayments;
     }
 
@@ -264,8 +265,8 @@ public class Subscription {
         }
     }
 
-    public static class UpcomingPayments {
-        private UpcomingPayments() {
+    public static class UpcomingPayment {
+        private UpcomingPayment() {
             // blank to prevent instantiation
         }
 

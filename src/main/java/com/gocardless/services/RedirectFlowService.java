@@ -63,9 +63,8 @@ public class RedirectFlowService {
     /**
      * Returns all details about a single redirect flow
      */
-    public RedirectFlowGetRequest<RedirectFlow> get(String identity) {
-        return new RedirectFlowGetRequest<>(httpClient, GetRequest.<RedirectFlow>jsonExecutor(),
-                identity);
+    public RedirectFlowGetRequest get(String identity) {
+        return new RedirectFlowGetRequest(httpClient, identity);
     }
 
     /**
@@ -202,13 +201,12 @@ public class RedirectFlowService {
      *
      * Returns all details about a single redirect flow
      */
-    public static final class RedirectFlowGetRequest<S> extends GetRequest<S, RedirectFlow> {
+    public static final class RedirectFlowGetRequest extends GetRequest<RedirectFlow> {
         @PathParam
         private final String identity;
 
-        private RedirectFlowGetRequest(HttpClient httpClient,
-                GetRequestExecutor<S, RedirectFlow> executor, String identity) {
-            super(httpClient, executor);
+        private RedirectFlowGetRequest(HttpClient httpClient, String identity) {
+            super(httpClient);
             this.identity = identity;
         }
 

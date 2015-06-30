@@ -77,7 +77,7 @@ public class Payment {
     }
 
     /**
-     * Unique identifier, beginning with "PM"
+     * Unique identifier, beginning with "PM".
      */
     public String getId() {
         return id;

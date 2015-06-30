@@ -42,7 +42,7 @@ public class Event {
     }
 
     /**
-     * Unique identifier, beginning with "EV"
+     * Unique identifier, beginning with "EV".
      */
     public String getId() {
         return id;

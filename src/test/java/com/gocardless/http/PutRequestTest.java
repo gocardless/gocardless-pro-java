@@ -10,6 +10,7 @@ import org.junit.Test;
 import static com.gocardless.http.HttpTestUtil.withJsonBody;
 
 import static com.xebialabs.restito.builder.stub.StubHttp.whenHttp;
+import static com.xebialabs.restito.semantics.Action.header;
 import static com.xebialabs.restito.semantics.Action.resourceContent;
 import static com.xebialabs.restito.semantics.Action.status;
 import static com.xebialabs.restito.semantics.Condition.*;
@@ -38,6 +39,18 @@ public class PutRequestTest {
         DummyItem result = request.execute();
         assertThat(result.stringField).isEqualTo("foo");
         assertThat(result.intField).isEqualTo(123);
+    }
+
+    public void shouldPerformWrappedPutRequest() {
+        whenHttp(http.server()).match(put("/dummy"), not(withPostBody())).then(
+                status(HttpStatus.OK_200), resourceContent("fixtures/single.json"),
+                header("foo", "bar"));
+        DummyPutRequest request = new DummyPutRequest();
+        HttpResponse<DummyItem> result = request.executeWrapped();
+        assertThat(result.getStatusCode()).isEqualTo(200);
+        assertThat(result.getHeaders().get("foo")).containsExactly("bar");
+        assertThat(result.getResource().stringField).isEqualTo("foo");
+        assertThat(result.getResource().intField).isEqualTo(123);
     }
 
     private class DummyPutRequest extends PutRequest<DummyItem> {

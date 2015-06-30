@@ -10,6 +10,7 @@ import org.junit.Test;
 import static com.gocardless.http.HttpTestUtil.withJsonBody;
 
 import static com.xebialabs.restito.builder.stub.StubHttp.whenHttp;
+import static com.xebialabs.restito.semantics.Action.header;
 import static com.xebialabs.restito.semantics.Action.resourceContent;
 import static com.xebialabs.restito.semantics.Action.status;
 import static com.xebialabs.restito.semantics.Condition.*;
@@ -38,6 +39,19 @@ public class PostRequestTest {
         DummyItem result = request.execute();
         assertThat(result.stringField).isEqualTo("foo");
         assertThat(result.intField).isEqualTo(123);
+    }
+
+    @Test
+    public void shouldPerformWrappedPostRequest() {
+        whenHttp(http.server()).match(post("/dummy"), not(withPostBody())).then(
+                status(HttpStatus.OK_200), resourceContent("fixtures/single.json"),
+                header("foo", "bar"));
+        DummyPostRequest request = new DummyPostRequest();
+        HttpResponse<DummyItem> result = request.executeWrapped();
+        assertThat(result.getStatusCode()).isEqualTo(200);
+        assertThat(result.getHeaders().get("foo")).containsExactly("bar");
+        assertThat(result.getResource().stringField).isEqualTo("foo");
+        assertThat(result.getResource().intField).isEqualTo(123);
     }
 
     private class DummyPostRequest extends PostRequest<DummyItem> {

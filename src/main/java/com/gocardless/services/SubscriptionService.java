@@ -107,9 +107,8 @@ public class SubscriptionService {
     /**
      * Retrieves the details of a single subscription.
      */
-    public SubscriptionGetRequest<Subscription> get(String identity) {
-        return new SubscriptionGetRequest<>(httpClient, GetRequest.<Subscription>jsonExecutor(),
-                identity);
+    public SubscriptionGetRequest get(String identity) {
+        return new SubscriptionGetRequest(httpClient, identity);
     }
 
     /**
@@ -178,7 +177,7 @@ public class SubscriptionService {
 
         /**
          * As per RFC 2445. The day of the month to charge customers on. `1`-`28` or `-1` to indicate the
-         * last day of the month
+         * last day of the month.
          */
         public SubscriptionCreateRequest withDayOfMonth(Integer dayOfMonth) {
             this.dayOfMonth = dayOfMonth;
@@ -259,7 +258,8 @@ public class SubscriptionService {
         }
 
         /**
-         * Optional name for the subscription. This field must not exceed 255 characters.
+         * Optional name for the subscription. This will be set as the description on each payment created.
+         * Must not exceed 255 characters.
          */
         public SubscriptionCreateRequest withName(String name) {
             this.name = name;
@@ -397,7 +397,7 @@ public class SubscriptionService {
         }
 
         /**
-         * Unique identifier, beginning with "MD"
+         * Unique identifier, beginning with "MD".
          */
         public SubscriptionListRequest<S> withMandate(String mandate) {
             this.mandate = mandate;
@@ -443,13 +443,12 @@ public class SubscriptionService {
      *
      * Retrieves the details of a single subscription.
      */
-    public static final class SubscriptionGetRequest<S> extends GetRequest<S, Subscription> {
+    public static final class SubscriptionGetRequest extends GetRequest<Subscription> {
         @PathParam
         private final String identity;
 
-        private SubscriptionGetRequest(HttpClient httpClient,
-                GetRequestExecutor<S, Subscription> executor, String identity) {
-            super(httpClient, executor);
+        private SubscriptionGetRequest(HttpClient httpClient, String identity) {
+            super(httpClient);
             this.identity = identity;
         }
 
@@ -510,7 +509,8 @@ public class SubscriptionService {
         }
 
         /**
-         * Optional name for the subscription. This field must not exceed 255 characters.
+         * Optional name for the subscription. This will be set as the description on each payment created.
+         * Must not exceed 255 characters.
          */
         public SubscriptionUpdateRequest withName(String name) {
             this.name = name;

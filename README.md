@@ -107,6 +107,10 @@ See the [documentation](http://gocardless.github.io/gocardless-pro-java/com/goca
 
 This library requires JDK version 7 or above.
 
+## Logging
+
+All requests are logged at `INFO` level using [SLF4J](http://www.slf4j.org/).  Logs will only be sent if you have an SLF4J binding on your classpath - we recommend using [Logback](http://logback.qos.ch/).
+
 ## Documentation
 
 Full Javadoc can be found [here](http://gocardless.github.io/gocardless-pro-java/com/gocardless/package-summary.html).

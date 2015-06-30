@@ -1,7 +1,7 @@
 package com.gocardless.http;
 
 import java.io.IOException;
-import java.io.InputStream;
+import java.io.Reader;
 import java.net.URL;
 import java.util.Map;
 
@@ -24,6 +24,7 @@ public class HttpClient {
             replaceSpaces(System.getProperty("os.version")),
             replaceSpaces(System.getProperty("java.vm.name")),
             replaceSpaces(System.getProperty("java.version")));
+    private static final RequestBody EMPTY_BODY = RequestBody.create(null, new byte[0]);
     private static final MediaType MEDIA_TYPE = MediaType.parse("application/json");
     private static final Map<String, String> HEADERS;
     static {
@@ -45,6 +46,7 @@ public class HttpClient {
      */
     public HttpClient(String accessToken, String baseUrl) {
         this.rawClient = new OkHttpClient();
+        rawClient.interceptors().add(new LoggingInterceptor());
         this.urlFormatter = new UrlFormatter(baseUrl);
         Gson gson = GsonFactory.build();
         this.responseParser = new ResponseParser(gson);
@@ -52,52 +54,66 @@ public class HttpClient {
         this.credentials = String.format("Bearer %s", accessToken);
     }
 
-    InputStream rawExecute(HttpRequest<?> request, String accept) {
-        URL url = request.getUrl(urlFormatter);
-        Request.Builder httpRequest =
-                new Request.Builder().url(url).header("Accept", accept)
-                        .header("Authorization", credentials).header("User-Agent", USER_AGENT)
-                        .method(request.getMethod(), getBody(request));
-        for (Map.Entry<String, String> entry : HEADERS.entrySet()) {
-            httpRequest = httpRequest.header(entry.getKey(), entry.getValue());
-        }
-        Response response = execute(httpRequest.build());
-        if (!response.isSuccessful()) {
-            throw handleErrorResponse(response);
-        }
-        try {
-            return response.body().byteStream();
-        } catch (IOException e) {
-            throw new GoCardlessNetworkException("Failed to read response body", e);
-        }
+    <T> T execute(HttpRequest<T> httpRequest) {
+        Request request = buildRequest(httpRequest);
+        Response response = execute(request);
+        return parseResponseBody(httpRequest, response);
     }
 
-    <T> T execute(HttpRequest<T> request) {
-        try (InputStream stream = rawExecute(request, MEDIA_TYPE.toString())) {
-            return request.parseResponse(stream, responseParser);
-        } catch (IOException e) {
-            throw new GoCardlessNetworkException("Failed to read response body", e);
+    <T> HttpResponse<T> executeWrapped(HttpRequest<T> httpRequest) {
+        Request request = buildRequest(httpRequest);
+        Response response = execute(request);
+        T resource = parseResponseBody(httpRequest, response);
+        return new HttpResponse<T>(resource, response.code(), response.headers().toMultimap());
+    }
+
+    <T> Request buildRequest(HttpRequest<T> httpRequest) {
+        URL url = httpRequest.getUrl(urlFormatter);
+        Request.Builder request =
+                new Request.Builder().url(url).header("Authorization", credentials)
+                        .header("User-Agent", USER_AGENT)
+                        .method(httpRequest.getMethod(), getBody(httpRequest));
+        for (Map.Entry<String, String> entry : HEADERS.entrySet()) {
+            request = request.header(entry.getKey(), entry.getValue());
         }
+        return request.build();
     }
 
     private <T> RequestBody getBody(HttpRequest<T> request) {
         if (!request.hasBody()) {
-            return null;
+            if (request.getMethod().equals("GET")) {
+                return null;
+            } else {
+                return EMPTY_BODY;
+            }
         }
         String json = requestWriter.write(request, request.getRequestEnvelope());
         return RequestBody.create(MEDIA_TYPE, json);
     }
 
     private Response execute(Request request) {
+        Response response;
         try {
-            return rawClient.newCall(request).execute();
+            response = rawClient.newCall(request).execute();
         } catch (IOException e) {
             throw new GoCardlessNetworkException("Failed to execute request", e);
+        }
+        if (!response.isSuccessful()) {
+            throw handleErrorResponse(response);
+        }
+        return response;
+    }
+
+    private <T> T parseResponseBody(HttpRequest<T> request, Response response) {
+        try (Reader stream = response.body().charStream()) {
+            return request.parseResponse(stream, responseParser);
+        } catch (IOException e) {
+            throw new GoCardlessNetworkException("Failed to read response body", e);
         }
     }
 
     private GoCardlessException handleErrorResponse(Response response) {
-        try (InputStream stream = response.body().byteStream()) {
+        try (Reader stream = response.body().charStream()) {
             return responseParser.parseError(stream);
         } catch (IOException e) {
             throw new GoCardlessNetworkException("Failed to read response body", e);

@@ -1,6 +1,5 @@
 package com.gocardless.services;
 
-import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -65,13 +64,8 @@ public class MandateService {
      * 639-1](http://en.wikipedia.org/wiki/List_of_ISO_639-1_codes#Partial_ISO_639_table) language code
      * as an `Accept-Language` header.
      */
-    public MandateGetRequest<Mandate> get(String identity) {
-        return new MandateGetRequest<>(httpClient, GetRequest.<Mandate>jsonExecutor(), identity);
-    }
-
-    public MandateGetRequest<InputStream> download(String identity) {
-        return new MandateGetRequest<>(httpClient,
-                GetRequest.<Mandate>downloadExecutor("application/pdf"), identity);
+    public MandateGetRequest get(String identity) {
+        return new MandateGetRequest(httpClient, identity);
     }
 
     /**
@@ -178,9 +172,9 @@ public class MandateService {
         }
 
         /**
-         * Direct Debit scheme to which this mandate and associated payments are submitted. Can be supplied
-         * or automatically detected from the customer's bank account. Currently only "bacs" and "sepa_core"
-         * are supported.
+         * <a name="mandates_scheme"></a>Direct Debit scheme to which this mandate and associated payments
+         * are submitted. Can be supplied or automatically detected from the customer's bank account.
+         * Currently only "bacs" and "sepa_core" are supported.
          */
         public MandateCreateRequest withScheme(String scheme) {
             this.scheme = scheme;
@@ -395,13 +389,12 @@ public class MandateService {
      * 639-1](http://en.wikipedia.org/wiki/List_of_ISO_639-1_codes#Partial_ISO_639_table) language code
      * as an `Accept-Language` header.
      */
-    public static final class MandateGetRequest<S> extends GetRequest<S, Mandate> {
+    public static final class MandateGetRequest extends GetRequest<Mandate> {
         @PathParam
         private final String identity;
 
-        private MandateGetRequest(HttpClient httpClient, GetRequestExecutor<S, Mandate> executor,
-                String identity) {
-            super(httpClient, executor);
+        private MandateGetRequest(HttpClient httpClient, String identity) {
+            super(httpClient);
             this.identity = identity;
         }
 

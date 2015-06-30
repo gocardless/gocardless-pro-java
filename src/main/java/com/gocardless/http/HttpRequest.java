@@ -1,6 +1,6 @@
 package com.gocardless.http;
 
-import java.io.InputStream;
+import java.io.Reader;
 import java.net.URL;
 import java.util.Map;
 
@@ -46,5 +46,5 @@ abstract class HttpRequest<T> {
 
     protected abstract boolean hasBody();
 
-    protected abstract T parseResponse(InputStream stream, ResponseParser responseParser);
+    protected abstract T parseResponse(Reader stream, ResponseParser responseParser);
 }

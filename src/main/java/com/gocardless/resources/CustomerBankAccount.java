@@ -84,7 +84,7 @@ public class CustomerBankAccount {
     }
 
     /**
-     * Unique identifier, beginning with "BA"
+     * Unique identifier, beginning with "BA".
      */
     public String getId() {
         return id;

@@ -16,14 +16,12 @@ import com.google.gson.reflect.TypeToken;
  * Refund objects represent (partial) refunds of a [payment](#core-endpoints-payment) back to the
  * [customer](#core-endpoints-customers).
  * 
- * The API allows you to create, show, list and update
- * your refunds.
+ * GoCardless will notify you via a [webhook](#webhooks)
+ * whenever a refund is created, and will update the `amount_refunded` property of the payment.
  * 
- * GoCardless will notify you via a [webhook](#webhooks) whenever a refund is
- * created, and will update the `amount_refunded` property of the payment.
- * 
- * _Note:_ A payment
- * that has been (partially) refunded can still receive a late failure or chargeback from the banks.
+ *
+ * _Note:_ A payment that has been (partially) refunded can still receive a late failure or
+ * chargeback from the banks.
  */
 public class RefundService {
     private HttpClient httpClient;
@@ -74,8 +72,8 @@ public class RefundService {
     /**
      * Retrieves all details for a single refund
      */
-    public RefundGetRequest<Refund> get(String identity) {
-        return new RefundGetRequest<>(httpClient, GetRequest.<Refund>jsonExecutor(), identity);
+    public RefundGetRequest get(String identity) {
+        return new RefundGetRequest(httpClient, identity);
     }
 
     /**
@@ -235,7 +233,7 @@ public class RefundService {
         }
 
         /**
-         * Unique identifier, beginning with "PM"
+         * Unique identifier, beginning with "PM".
          */
         public RefundListRequest<S> withPayment(String payment) {
             this.payment = payment;
@@ -277,13 +275,12 @@ public class RefundService {
      *
      * Retrieves all details for a single refund
      */
-    public static final class RefundGetRequest<S> extends GetRequest<S, Refund> {
+    public static final class RefundGetRequest extends GetRequest<Refund> {
         @PathParam
         private final String identity;
 
-        private RefundGetRequest(HttpClient httpClient, GetRequestExecutor<S, Refund> executor,
-                String identity) {
-            super(httpClient, executor);
+        private RefundGetRequest(HttpClient httpClient, String identity) {
+            super(httpClient);
             this.identity = identity;
         }
 

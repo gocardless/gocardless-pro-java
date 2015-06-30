@@ -34,7 +34,7 @@ public class Mandate {
     }
 
     /**
-     * Unique identifier, beginning with "MD"
+     * Unique identifier, beginning with "MD".
      */
     public String getId() {
         return id;
@@ -53,7 +53,7 @@ public class Mandate {
     }
 
     /**
-     * The earliest date a newly created payment for this mandate could be charged
+     * The earliest date a newly created payment for this mandate could be charged.
      */
     public String getNextPossibleChargeDate() {
         return nextPossibleChargeDate;
@@ -67,9 +67,9 @@ public class Mandate {
     }
 
     /**
-     * Direct Debit scheme to which this mandate and associated payments are submitted. Can be supplied
-     * or automatically detected from the customer's bank account. Currently only "bacs" and "sepa_core"
-     * are supported.
+     * <a name="mandates_scheme"></a>Direct Debit scheme to which this mandate and associated payments
+     * are submitted. Can be supplied or automatically detected from the customer's bank account.
+     * Currently only "bacs" and "sepa_core" are supported.
      */
     public String getScheme() {
         return scheme;

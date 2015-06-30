@@ -45,7 +45,7 @@ public class Payout {
     }
 
     /**
-     * Unique identifier, beginning with "PO"
+     * Unique identifier, beginning with "PO".
      */
     public String getId() {
         return id;

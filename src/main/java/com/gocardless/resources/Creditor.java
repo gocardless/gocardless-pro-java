@@ -110,7 +110,6 @@ public class Creditor {
 
         private String defaultEurPayoutAccount;
         private String defaultGbpPayoutAccount;
-        private String logo;
 
         /**
          * ID of the [bank account](#core-endpoints-creditor-bank-accounts) which is set up to receive
@@ -126,13 +125,6 @@ public class Creditor {
          */
         public String getDefaultGbpPayoutAccount() {
             return defaultGbpPayoutAccount;
-        }
-
-        /**
-         * ID of the logo used on the Redirect Flow payment pages.
-         */
-        public String getLogo() {
-            return logo;
         }
     }
 }

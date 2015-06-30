@@ -58,9 +58,8 @@ public class CreditorBankAccountService {
     /**
      * Retrieves the details of an existing creditor bank account.
      */
-    public CreditorBankAccountGetRequest<CreditorBankAccount> get(String identity) {
-        return new CreditorBankAccountGetRequest<>(httpClient,
-                GetRequest.<CreditorBankAccount>jsonExecutor(), identity);
+    public CreditorBankAccountGetRequest get(String identity) {
+        return new CreditorBankAccountGetRequest(httpClient, identity);
     }
 
     /**
@@ -341,14 +340,12 @@ public class CreditorBankAccountService {
      *
      * Retrieves the details of an existing creditor bank account.
      */
-    public static final class CreditorBankAccountGetRequest<S> extends
-            GetRequest<S, CreditorBankAccount> {
+    public static final class CreditorBankAccountGetRequest extends GetRequest<CreditorBankAccount> {
         @PathParam
         private final String identity;
 
-        private CreditorBankAccountGetRequest(HttpClient httpClient,
-                GetRequestExecutor<S, CreditorBankAccount> executor, String identity) {
-            super(httpClient, executor);
+        private CreditorBankAccountGetRequest(HttpClient httpClient, String identity) {
+            super(httpClient);
             this.identity = identity;
         }
 
