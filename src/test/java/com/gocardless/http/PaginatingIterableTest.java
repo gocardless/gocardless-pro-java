@@ -10,28 +10,16 @@ import com.google.common.collect.Lists;
 import org.junit.Rule;
 import org.junit.Test;
 
-import static com.xebialabs.restito.builder.stub.StubHttp.whenHttp;
-import static com.xebialabs.restito.semantics.Action.resourceContent;
-import static com.xebialabs.restito.semantics.Action.status;
-import static com.xebialabs.restito.semantics.Condition.get;
-import static com.xebialabs.restito.semantics.Condition.parameter;
-
 import static org.assertj.core.api.Assertions.assertThat;
-
-import static org.glassfish.grizzly.http.util.HttpStatus.OK_200;
 
 public class PaginatingIterableTest {
     @Rule
     public MockHttp http = new MockHttp();
 
     @Test
-    public void shouldIterateThroughPages() {
-        whenHttp(http.server()).match(get("/dummy"), parameter("id", "123"),
-                parameter("limit", "2")).then(status(OK_200),
-                resourceContent("fixtures/first-page.json"));
-        whenHttp(http.server()).match(get("/dummy"), parameter("id", "123"),
-                parameter("limit", "2"), parameter("after", "ID123")).then(status(OK_200),
-                resourceContent("fixtures/last-page.json"));
+    public void shouldIterateThroughPages() throws Exception {
+        http.enqueueResponse(200, "fixtures/first-page.json");
+        http.enqueueResponse(200, "fixtures/last-page.json");
         DummyListRequest<Iterable<DummyItem>> request =
                 DummyListRequest.iterableRequest(http.client());
         request.setLimit(2);
@@ -44,16 +32,14 @@ public class PaginatingIterableTest {
         assertThat(items.get(1).intField).isEqualTo(222);
         assertThat(items.get(2).stringField).isEqualTo("baz");
         assertThat(items.get(2).intField).isEqualTo(333);
+        http.assertRequestMade("GET", "/dummy?limit=2&id=123");
+        http.assertRequestMade("GET", "/dummy?after=ID123&limit=2&id=123");
     }
 
     @Test
-    public void shouldCopeWithEmptyLastPage() {
-        whenHttp(http.server()).match(get("/dummy"), parameter("id", "123"),
-                parameter("limit", "2")).then(status(OK_200),
-                resourceContent("fixtures/first-page.json"));
-        whenHttp(http.server()).match(get("/dummy"), parameter("id", "123"),
-                parameter("limit", "2"), parameter("after", "ID123")).then(status(OK_200),
-                resourceContent("fixtures/empty-page.json"));
+    public void shouldCopeWithEmptyLastPage() throws Exception {
+        http.enqueueResponse(200, "fixtures/first-page.json");
+        http.enqueueResponse(200, "fixtures/empty-page.json");
         DummyListRequest<Iterable<DummyItem>> request =
                 DummyListRequest.iterableRequest(http.client());
         request.setLimit(2);
@@ -64,5 +50,7 @@ public class PaginatingIterableTest {
         assertThat(items.get(0).intField).isEqualTo(111);
         assertThat(items.get(1).stringField).isEqualTo("bar");
         assertThat(items.get(1).intField).isEqualTo(222);
+        http.assertRequestMade("GET", "/dummy?limit=2&id=123");
+        http.assertRequestMade("GET", "/dummy?after=ID123&limit=2&id=123");
     }
 }

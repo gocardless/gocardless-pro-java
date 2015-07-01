@@ -8,23 +8,19 @@ import com.gocardless.http.*;
 import com.gocardless.resources.CustomerBankAccount;
 
 import com.google.common.collect.ImmutableMap;
-import com.google.gson.annotations.SerializedName;
 import com.google.gson.reflect.TypeToken;
 
 /**
  * Service class for working with customer bank account resources.
  *
- * Customer Bank Accounts hold the bank details of a
- * [customer](https://developer.gocardless.com/pro/2015-04-29/#api-endpoints-customers). They always
- * belong to a [customer](https://developer.gocardless.com/pro/2015-04-29/#api-endpoints-customers),
- * and may be linked to several Direct Debit
- * [mandates](https://developer.gocardless.com/pro/2015-04-29/#api-endpoints-mandates).
+ * Customer Bank Accounts hold the bank details of a [customer](#core-endpoints-customers). They
+ * always belong to a [customer](#core-endpoints-customers), and may be linked to several Direct
+ * Debit [mandates](#core-endpoints-mandates).
  * 
- * Note
- * that customer bank accounts must be unique, and so you will encounter a `bank_account_exists`
- * error if you try to create a duplicate bank account. You may wish to handle this by updating the
- * existing record instead, the ID of which will be provided as links[customer_bank_account] in the
- * error response.
+ * Note that customer bank accounts must be unique,
+ * and so you will encounter a `bank_account_exists` error if you try to create a duplicate bank
+ * account. You may wish to handle this by updating the existing record instead, the ID of which will
+ * be provided as links[customer_bank_account] in the error response.
  */
 public class CustomerBankAccountService {
     private HttpClient httpClient;
@@ -39,32 +35,27 @@ public class CustomerBankAccountService {
     }
 
     /**
-     * Creates a new bank account object associated to a customer id.
+     * Creates a new customer bank account object.
      * 
-     * There are three different ways
-     * to supply bank account details:
+     * There are three different ways to supply bank
+     * account details:
      * 
-     * - [Local
-     * details](https://developer.gocardless.com/pro/2015-04-29/#ui-compliance-local-bank-details)
+     * - [Local details](#ui-local-bank-details)
      * 
-     * -
-     * IBAN
+     * - IBAN
      * 
-     * - [Customer Bank Account
-     * Tokens](https://developer.gocardless.com/pro/2015-04-29/#js-flow-create-a-customer-bank-account-token)
-     *
+     * - [Customer Bank
+     * Account Tokens](#js-flow-create-a-customer-bank-account-token)
      * 
-     * For more information on the different fields required in each country, see [local bank
-     * details](https://developer.gocardless.com/pro/2015-04-29/#ui-compliance-local-bank-details).
+     * For more information on the
+     * different fields required in each country, see [local bank details](#ui-local-bank-details).
      */
     public CustomerBankAccountCreateRequest create() {
         return new CustomerBankAccountCreateRequest(httpClient);
     }
 
     /**
-     * Returns a
-     * [cursor-paginated](https://developer.gocardless.com/pro/2015-04-29/#overview-cursor-pagination)
-     * list of your bank accounts.
+     * Returns a [cursor-paginated](#overview-cursor-pagination) list of your bank accounts.
      */
     public CustomerBankAccountListRequest<ListResponse<CustomerBankAccount>> list() {
         return new CustomerBankAccountListRequest<>(httpClient,
@@ -79,9 +70,8 @@ public class CustomerBankAccountService {
     /**
      * Retrieves the details of an existing bank account.
      */
-    public CustomerBankAccountGetRequest<CustomerBankAccount> get(String identity) {
-        return new CustomerBankAccountGetRequest<>(httpClient,
-                GetRequest.<CustomerBankAccount>jsonExecutor(), identity);
+    public CustomerBankAccountGetRequest get(String identity) {
+        return new CustomerBankAccountGetRequest(httpClient, identity);
     }
 
     /**
@@ -107,23 +97,20 @@ public class CustomerBankAccountService {
     /**
      * Request class for {@link CustomerBankAccountService#create }.
      *
-     * Creates a new bank account object associated to a customer id.
+     * Creates a new customer bank account object.
      * 
-     * There are three different ways
-     * to supply bank account details:
+     * There are three different ways to supply bank
+     * account details:
      * 
-     * - [Local
-     * details](https://developer.gocardless.com/pro/2015-04-29/#ui-compliance-local-bank-details)
+     * - [Local details](#ui-local-bank-details)
      * 
-     * -
-     * IBAN
+     * - IBAN
      * 
-     * - [Customer Bank Account
-     * Tokens](https://developer.gocardless.com/pro/2015-04-29/#js-flow-create-a-customer-bank-account-token)
-     *
+     * - [Customer Bank
+     * Account Tokens](#js-flow-create-a-customer-bank-account-token)
      * 
-     * For more information on the different fields required in each country, see [local bank
-     * details](https://developer.gocardless.com/pro/2015-04-29/#ui-compliance-local-bank-details).
+     * For more information on the
+     * different fields required in each country, see [local bank details](#ui-local-bank-details).
      */
     public static final class CustomerBankAccountCreateRequest extends
             PostRequest<CustomerBankAccount> {
@@ -139,8 +126,8 @@ public class CustomerBankAccountService {
 
         /**
          * Name of the account holder, as known by the bank. Usually this matches the name of the linked
-         * [customer](https://developer.gocardless.com/pro/2015-04-29/#api-endpoints-customers). This field
-         * cannot exceed 18 characters.
+         * [customer](#core-endpoints-customers). This field will be transliterated, upcased and truncated to
+         * 18 characters.
          */
         public CustomerBankAccountCreateRequest withAccountHolderName(String accountHolderName) {
             this.accountHolderName = accountHolderName;
@@ -148,7 +135,8 @@ public class CustomerBankAccountService {
         }
 
         /**
-         * 8 digit, valid UK bank account number.
+         * Bank account number - see [local details](#ui-local-bank-details) for more information.
+         * Alternatively you can provide an `iban`.
          */
         public CustomerBankAccountCreateRequest withAccountNumber(String accountNumber) {
             this.accountNumber = accountNumber;
@@ -156,7 +144,8 @@ public class CustomerBankAccountService {
         }
 
         /**
-         * Bank identifier code
+         * Bank code - see [local details](#ui-local-bank-details) for more information.  Alternatively you
+         * can provide an `iban`.
          */
         public CustomerBankAccountCreateRequest withBankCode(String bankCode) {
             this.bankCode = bankCode;
@@ -164,7 +153,8 @@ public class CustomerBankAccountService {
         }
 
         /**
-         * Branch identifier code
+         * Branch code - see [local details](#ui-local-bank-details) for more information. Alternatively you
+         * can provide an `iban`.
          */
         public CustomerBankAccountCreateRequest withBranchCode(String branchCode) {
             this.branchCode = branchCode;
@@ -190,7 +180,8 @@ public class CustomerBankAccountService {
         }
 
         /**
-         * International Bank Account Number
+         * International Bank Account Number. Alternatively you can provide [local
+         * details](#ui-local-bank-details).
          */
         public CustomerBankAccountCreateRequest withIban(String iban) {
             this.iban = iban;
@@ -203,8 +194,7 @@ public class CustomerBankAccountService {
         }
 
         /**
-         * ID of the [customer](https://developer.gocardless.com/pro/2015-04-29/#api-endpoints-customers)
-         * that owns this bank account.
+         * ID of the [customer](#core-endpoints-customers) that owns this bank account.
          */
         public CustomerBankAccountCreateRequest withLinksCustomer(String customer) {
             if (links == null) {
@@ -215,9 +205,8 @@ public class CustomerBankAccountService {
         }
 
         /**
-         * ID of a [customer bank account
-         * token](https://developer.gocardless.com/pro/2015-04-29/#api-endpoints-customer-bank-account-tokens)
-         * to use in place of bank account parameters.
+         * ID of a [customer bank account token](#core-endpoints-customer-bank-account-tokens) to use in
+         * place of bank account parameters.
          */
         public CustomerBankAccountCreateRequest withLinksCustomerBankAccountToken(
                 String customerBankAccountToken) {
@@ -278,8 +267,7 @@ public class CustomerBankAccountService {
             private String customerBankAccountToken;
 
             /**
-             * ID of the [customer](https://developer.gocardless.com/pro/2015-04-29/#api-endpoints-customers)
-             * that owns this bank account.
+             * ID of the [customer](#core-endpoints-customers) that owns this bank account.
              */
             public Links withCustomer(String customer) {
                 this.customer = customer;
@@ -287,9 +275,8 @@ public class CustomerBankAccountService {
             }
 
             /**
-             * ID of a [customer bank account
-             * token](https://developer.gocardless.com/pro/2015-04-29/#api-endpoints-customer-bank-account-tokens)
-             * to use in place of bank account parameters.
+             * ID of a [customer bank account token](#core-endpoints-customer-bank-account-tokens) to use in
+             * place of bank account parameters.
              */
             public Links withCustomerBankAccountToken(String customerBankAccountToken) {
                 this.customerBankAccountToken = customerBankAccountToken;
@@ -301,14 +288,12 @@ public class CustomerBankAccountService {
     /**
      * Request class for {@link CustomerBankAccountService#list }.
      *
-     * Returns a
-     * [cursor-paginated](https://developer.gocardless.com/pro/2015-04-29/#overview-cursor-pagination)
-     * list of your bank accounts.
+     * Returns a [cursor-paginated](#overview-cursor-pagination) list of your bank accounts.
      */
     public static final class CustomerBankAccountListRequest<S> extends
             ListRequest<S, CustomerBankAccount> {
         private String customer;
-        private Enabled enabled;
+        private Boolean enabled;
 
         /**
          * Cursor pointing to the start of the desired set.
@@ -337,7 +322,7 @@ public class CustomerBankAccountService {
         /**
          * Get enabled or disabled customer bank accounts.
          */
-        public CustomerBankAccountListRequest<S> withEnabled(Enabled enabled) {
+        public CustomerBankAccountListRequest<S> withEnabled(Boolean enabled) {
             this.enabled = enabled;
             return this;
         }
@@ -382,16 +367,6 @@ public class CustomerBankAccountService {
         protected TypeToken<List<CustomerBankAccount>> getTypeToken() {
             return new TypeToken<List<CustomerBankAccount>>() {};
         }
-
-        public enum Enabled {
-            @SerializedName("true")
-            TRUE, @SerializedName("false")
-            FALSE;
-            @Override
-            public String toString() {
-                return name().toLowerCase();
-            }
-        }
     }
 
     /**
@@ -399,14 +374,12 @@ public class CustomerBankAccountService {
      *
      * Retrieves the details of an existing bank account.
      */
-    public static final class CustomerBankAccountGetRequest<S> extends
-            GetRequest<S, CustomerBankAccount> {
+    public static final class CustomerBankAccountGetRequest extends GetRequest<CustomerBankAccount> {
         @PathParam
         private final String identity;
 
-        private CustomerBankAccountGetRequest(HttpClient httpClient,
-                GetRequestExecutor<S, CustomerBankAccount> executor, String identity) {
-            super(httpClient, executor);
+        private CustomerBankAccountGetRequest(HttpClient httpClient, String identity) {
+            super(httpClient);
             this.identity = identity;
         }
 

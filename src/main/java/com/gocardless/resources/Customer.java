@@ -6,10 +6,8 @@ import java.util.Map;
  * Represents a customer resource returned from the API.
  *
  * Customer objects hold the contact details for a customer. A customer can have several [customer
- * bank
- * accounts](https://developer.gocardless.com/pro/2015-04-29/#api-endpoints-customer-bank-accounts),
- * which in turn can have several Direct Debit
- * [mandates](https://developer.gocardless.com/pro/2015-04-29/#api-endpoints-mandates).
+ * bank accounts](#core-endpoints-customer-bank-accounts), which in turn can have several Direct
+ * Debit [mandates](#core-endpoints-mandates).
  */
 public class Customer {
     private Customer() {
@@ -60,7 +58,7 @@ public class Customer {
     }
 
     /**
-     * Company Name.
+     * Customer's company name. Required unless a `given_name` and `family_name` are provided.
      */
     public String getCompanyName() {
         return companyName;
@@ -75,8 +73,7 @@ public class Customer {
     }
 
     /**
-     * Fixed [timestamp](https://developer.gocardless.com/pro/2015-04-29/#overview-time-zones-dates),
-     * recording when this resource was created.
+     * Fixed [timestamp](#overview-time-zones-dates), recording when this resource was created.
      */
     public String getCreatedAt() {
         return createdAt;
@@ -90,14 +87,14 @@ public class Customer {
     }
 
     /**
-     * Customer's surname.
+     * Customer's surname. Required unless a `company_name` is provided.
      */
     public String getFamilyName() {
         return familyName;
     }
 
     /**
-     * Customer's first name.
+     * Customer's first name. Required unless a `company_name` is provided.
      */
     public String getGivenName() {
         return givenName;

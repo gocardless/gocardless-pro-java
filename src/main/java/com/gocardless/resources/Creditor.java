@@ -3,13 +3,13 @@ package com.gocardless.resources;
 /**
  * Represents a creditor resource returned from the API.
  *
- * Each [payment](https://developer.gocardless.com/pro/2015-04-29/#api-endpoints-payments) taken
- * through the API is linked to a "creditor", to whom the payment is then paid out. In most cases
- * your organisation will have a single "creditor", but the API also supports collecting payments on
- * behalf of others.
+ * Each [payment](#core-endpoints-payments) taken through the API is linked to a "creditor", to whom
+ * the payment is then paid out. In most cases your organisation will have a single "creditor", but
+ * the API also supports collecting payments on behalf of others.
  * 
- * Please get in touch if you wish to use this endpoint. Currently, for Anti
- * Money Laundering reasons, any creditors you add must be directly related to your organisation.
+ * Please get in touch if you
+ * wish to use this endpoint. Currently, for Anti Money Laundering reasons, any creditors you add
+ * must be directly related to your organisation.
  */
 public class Creditor {
     private Creditor() {
@@ -65,8 +65,7 @@ public class Creditor {
     }
 
     /**
-     * Fixed [timestamp](https://developer.gocardless.com/pro/2015-04-29/#overview-time-zones-dates),
-     * recording when this resource was created.
+     * Fixed [timestamp](#overview-time-zones-dates), recording when this resource was created.
      */
     public String getCreatedAt() {
         return createdAt;
@@ -111,31 +110,21 @@ public class Creditor {
 
         private String defaultEurPayoutAccount;
         private String defaultGbpPayoutAccount;
-        private String logo;
 
         /**
-         * ID of the [bank
-         * account](https://developer.gocardless.com/pro/2015-04-29/#api-endpoints-creditor-bank-accounts)
-         * which is set up to receive payouts in EUR.
+         * ID of the [bank account](#core-endpoints-creditor-bank-accounts) which is set up to receive
+         * payouts in EUR.
          */
         public String getDefaultEurPayoutAccount() {
             return defaultEurPayoutAccount;
         }
 
         /**
-         * ID of the [bank
-         * account](https://developer.gocardless.com/pro/2015-04-29/#api-endpoints-creditor-bank-accounts)
-         * which is set up to receive payouts in GBP.
+         * ID of the [bank account](#core-endpoints-creditor-bank-accounts) which is set up to receive
+         * payouts in GBP.
          */
         public String getDefaultGbpPayoutAccount() {
             return defaultGbpPayoutAccount;
-        }
-
-        /**
-         * ID of the logo used on the Redirect Flow payment pages.
-         */
-        public String getLogo() {
-            return logo;
         }
     }
 }

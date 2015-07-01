@@ -1,6 +1,6 @@
 package com.gocardless.http;
 
-import java.io.InputStream;
+import java.io.Reader;
 import java.util.List;
 import java.util.Map;
 
@@ -12,7 +12,7 @@ import com.google.gson.reflect.TypeToken;
  *
  * @param <T> the type of the item returned by this request.
  */
-public abstract class ListRequest<S, T> extends HttpRequest<ListResponse<T>> {
+public abstract class ListRequest<S, T> extends ApiRequest<ListResponse<T>> {
     private final ListRequestExecutor<S, T> executor;
     private String after;
     private String before;
@@ -34,8 +34,20 @@ public abstract class ListRequest<S, T> extends HttpRequest<ListResponse<T>> {
         return executor.execute(this, getHttpClient());
     }
 
+    /**
+     * Executes this request.
+     *
+     * Returns a {@link com.gocardless.http.ApiResponse} that wraps the
+     * response entity.
+     *
+     * @throws com.gocardless.GoCardlessException
+     */
+    public ApiResponse<S> executeWrapped() {
+        return executor.executeWrapped(this, getHttpClient());
+    }
+
     @Override
-    protected ListResponse<T> parseResponse(InputStream stream, ResponseParser responseParser) {
+    protected ListResponse<T> parseResponse(Reader stream, ResponseParser responseParser) {
         return responseParser.parsePage(stream, getEnvelope(), getTypeToken());
     }
 
@@ -80,6 +92,8 @@ public abstract class ListRequest<S, T> extends HttpRequest<ListResponse<T>> {
 
     public interface ListRequestExecutor<S, T> {
         S execute(ListRequest<S, T> request, HttpClient client);
+
+        ApiResponse<S> executeWrapped(ListRequest<S, T> request, HttpClient client);
     }
 
     public static <T> ListRequestExecutor<ListResponse<T>, T> pagingExecutor() {
@@ -89,6 +103,12 @@ public abstract class ListRequest<S, T> extends HttpRequest<ListResponse<T>> {
                     HttpClient client) {
                 return client.execute(request);
             }
+
+            @Override
+            public ApiResponse<ListResponse<T>> executeWrapped(
+                    ListRequest<ListResponse<T>, T> request, HttpClient client) {
+                return client.executeWrapped(request);
+            }
         };
     }
 
@@ -97,6 +117,13 @@ public abstract class ListRequest<S, T> extends HttpRequest<ListResponse<T>> {
             @Override
             public Iterable<T> execute(ListRequest<Iterable<T>, T> request, HttpClient client) {
                 return new PaginatingIterable<>(request, client);
+            }
+
+            @Override
+            public ApiResponse<Iterable<T>> executeWrapped(ListRequest<Iterable<T>, T> request,
+                    HttpClient client) {
+                throw new IllegalStateException(
+                        "executeWrapped not available when iterating through list responses");
             }
         };
     }

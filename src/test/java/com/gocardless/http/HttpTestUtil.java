@@ -9,15 +9,11 @@ import co.freeside.betamax.ssl.DummyX509TrustManager;
 import com.gocardless.GoCardlessClient;
 import com.gocardless.TestUtil;
 
-import com.google.common.base.Predicate;
 import com.google.common.io.Resources;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonParser;
 
 import com.squareup.okhttp.OkHttpClient;
-
-import com.xebialabs.restito.semantics.Call;
-import com.xebialabs.restito.semantics.Condition;
 
 import org.apache.http.conn.ssl.AllowAllHostnameVerifier;
 
@@ -40,20 +36,6 @@ public class HttpTestUtil {
         JsonElement result = parser.parse(actual);
         JsonElement expected = parser.parse(expectedJson);
         return result.equals(expected);
-    }
-
-    public static Condition withJsonBody(final String fixturePath) {
-        return Condition.custom(new Predicate<Call>() {
-            @Override
-            public boolean apply(Call input) {
-                try {
-                    return input.getPostBody() != null
-                            && jsonMatchesFixture(input.getPostBody(), fixturePath);
-                } catch (IOException e) {
-                    throw new IllegalArgumentException(e);
-                }
-            }
-        });
     }
 
     public static class DummyItem {

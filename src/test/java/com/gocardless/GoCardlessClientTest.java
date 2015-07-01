@@ -1,18 +1,16 @@
 package com.gocardless;
 
-import java.io.IOException;
-import java.io.InputStream;
 import java.util.List;
 
 import co.freeside.betamax.Betamax;
 import co.freeside.betamax.Recorder;
 
+import com.gocardless.http.ApiResponse;
 import com.gocardless.http.HttpTestUtil;
 import com.gocardless.http.ListResponse;
 import com.gocardless.resources.*;
 
 import com.google.common.collect.Lists;
-import com.google.common.io.ByteStreams;
 
 import org.junit.Before;
 import org.junit.Rule;
@@ -42,6 +40,18 @@ public class GoCardlessClientTest {
     @Betamax(tape = "get a customer")
     public void shouldGetACustomer() {
         Customer customer = client.customers().get("CU00003068FG73").execute();
+        assertThat(customer.getId()).isEqualTo("CU00003068FG73");
+        assertThat(customer.getFamilyName()).isEqualTo("Osborne");
+        assertThat(customer.getGivenName()).isEqualTo("Frank");
+    }
+
+    @Test
+    @Betamax(tape = "get a customer wrapped")
+    public void shouldGetACustomerWrapped() {
+        ApiResponse<Customer> response = client.customers().get("CU00003068FG73").executeWrapped();
+        assertThat(response.getStatusCode()).isEqualTo(200);
+        assertThat(response.getHeaders().get("RateLimit-Limit")).containsExactly("1000");
+        Customer customer = response.getResource();
         assertThat(customer.getId()).isEqualTo("CU00003068FG73");
         assertThat(customer.getFamilyName()).isEqualTo("Osborne");
         assertThat(customer.getGivenName()).isEqualTo("Frank");
@@ -171,10 +181,12 @@ public class GoCardlessClientTest {
     }
 
     @Test
-    @Betamax(tape = "download a mandate")
-    public void shouldDownloadAMandate() throws IOException {
-        InputStream mandate = client.mandates().download("MD00001PEYCSQF").execute();
-        byte[] pdf = ByteStreams.toByteArray(mandate);
-        assertThat(pdf).isNotEmpty();
+    @Betamax(tape = "list enabled creditor bank accounts")
+    public void shouldListEnabledCreditorBankAccounts() {
+        Iterable<CreditorBankAccount> iterable =
+                client.creditorBankAccounts().all().withEnabled(true).execute();
+        List<CreditorBankAccount> bankAccounts = Lists.newArrayList(iterable);
+        assertThat(bankAccounts).hasSize(1);
+        assertThat(bankAccounts.get(0).getId()).isEqualTo("BA00001NN2B44F");
     }
 }

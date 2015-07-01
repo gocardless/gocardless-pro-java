@@ -8,22 +8,19 @@ import com.gocardless.http.*;
 import com.gocardless.resources.CreditorBankAccount;
 
 import com.google.common.collect.ImmutableMap;
-import com.google.gson.annotations.SerializedName;
 import com.google.gson.reflect.TypeToken;
 
 /**
  * Service class for working with creditor bank account resources.
  *
- * Creditor Bank Accounts hold the bank details of a
- * [creditor](https://developer.gocardless.com/pro/2015-04-29/#api-endpoints-creditor). These are the
- * bank accounts which your
- * [payouts](https://developer.gocardless.com/pro/2015-04-29/#api-endpoints-payouts) will be sent
- * to.
+ * Creditor Bank Accounts hold the bank details of a [creditor](#core-endpoints-creditor). These are
+ * the bank accounts which your [payouts](#core-endpoints-payouts) will be sent to.
  * 
- * Note that creditor bank accounts must be unique, and so you will encounter a
- * `bank_account_exists` error if you try to create a duplicate bank account. You may wish to handle
- * this by updating the existing record instead, the ID of which will be provided as
- * `links[creditor_bank_account]` in the error response.
+ * Note that
+ * creditor bank accounts must be unique, and so you will encounter a `bank_account_exists` error if
+ * you try to create a duplicate bank account. You may wish to handle this by updating the existing
+ * record instead, the ID of which will be provided as `links[creditor_bank_account]` in the error
+ * response.
  */
 public class CreditorBankAccountService {
     private HttpClient httpClient;
@@ -39,18 +36,13 @@ public class CreditorBankAccountService {
 
     /**
      * Creates a new creditor bank account object.
-     * 
-     * Bank account details may be supplied using the
-     * IBAN (international bank account number) or [local details](#ui-compliance-local-bank-details).
      */
     public CreditorBankAccountCreateRequest create() {
         return new CreditorBankAccountCreateRequest(httpClient);
     }
 
     /**
-     * Returns a
-     * [cursor-paginated](https://developer.gocardless.com/pro/2015-04-29/#overview-cursor-pagination)
-     * list of your creditor bank accounts.
+     * Returns a [cursor-paginated](#overview-cursor-pagination) list of your creditor bank accounts.
      */
     public CreditorBankAccountListRequest<ListResponse<CreditorBankAccount>> list() {
         return new CreditorBankAccountListRequest<>(httpClient,
@@ -65,9 +57,8 @@ public class CreditorBankAccountService {
     /**
      * Retrieves the details of an existing creditor bank account.
      */
-    public CreditorBankAccountGetRequest<CreditorBankAccount> get(String identity) {
-        return new CreditorBankAccountGetRequest<>(httpClient,
-                GetRequest.<CreditorBankAccount>jsonExecutor(), identity);
+    public CreditorBankAccountGetRequest get(String identity) {
+        return new CreditorBankAccountGetRequest(httpClient, identity);
     }
 
     /**
@@ -88,9 +79,6 @@ public class CreditorBankAccountService {
      * Request class for {@link CreditorBankAccountService#create }.
      *
      * Creates a new creditor bank account object.
-     * 
-     * Bank account details may be supplied using the
-     * IBAN (international bank account number) or [local details](#ui-compliance-local-bank-details).
      */
     public static final class CreditorBankAccountCreateRequest extends
             PostRequest<CreditorBankAccount> {
@@ -107,8 +95,8 @@ public class CreditorBankAccountService {
 
         /**
          * Name of the account holder, as known by the bank. Usually this is the same as the name stored with
-         * the linked [creditor](https://developer.gocardless.com/pro/2015-04-29/#api-endpoints-creditors).
-         * This field cannot exceed 18 characters.
+         * the linked [creditor](#core-endpoints-creditors). This field will be transliterated, upcased and
+         * truncated to 18 characters.
          */
         public CreditorBankAccountCreateRequest withAccountHolderName(String accountHolderName) {
             this.accountHolderName = accountHolderName;
@@ -116,7 +104,8 @@ public class CreditorBankAccountService {
         }
 
         /**
-         * 8 digit, valid UK bank account number.
+         * Bank account number - see [local details](#ui-local-bank-details) for more information.
+         * Alternatively you can provide an `iban`.
          */
         public CreditorBankAccountCreateRequest withAccountNumber(String accountNumber) {
             this.accountNumber = accountNumber;
@@ -124,7 +113,8 @@ public class CreditorBankAccountService {
         }
 
         /**
-         * Bank identifier code
+         * Bank code - see [local details](#ui-local-bank-details) for more information. Alternatively you
+         * can provide an `iban`.
          */
         public CreditorBankAccountCreateRequest withBankCode(String bankCode) {
             this.bankCode = bankCode;
@@ -132,7 +122,8 @@ public class CreditorBankAccountService {
         }
 
         /**
-         * Branch identifier code
+         * Branch code - see [local details](#ui-local-bank-details) for more information. Alternatively you
+         * can provide an `iban`.
          */
         public CreditorBankAccountCreateRequest withBranchCode(String branchCode) {
             this.branchCode = branchCode;
@@ -141,7 +132,7 @@ public class CreditorBankAccountService {
 
         /**
          * [ISO 3166-1](http://en.wikipedia.org/wiki/ISO_3166-1_alpha-2#Officially_assigned_code_elements)
-         * alpha-2 code. Currently only GB is supported.
+         * alpha-2 code. Defaults to the country code of the `iban` if supplied, otherwise is required.
          */
         public CreditorBankAccountCreateRequest withCountryCode(String countryCode) {
             this.countryCode = countryCode;
@@ -158,7 +149,8 @@ public class CreditorBankAccountService {
         }
 
         /**
-         * International Bank Account Number
+         * International Bank Account Number. Alternatively you can provide [local
+         * details](#ui-local-bank-details).
          */
         public CreditorBankAccountCreateRequest withIban(String iban) {
             this.iban = iban;
@@ -171,8 +163,7 @@ public class CreditorBankAccountService {
         }
 
         /**
-         * ID of the [creditor](https://developer.gocardless.com/pro/2015-04-29/#api-endpoints-creditors)
-         * that owns this bank account.
+         * ID of the [creditor](#core-endpoints-creditors) that owns this bank account.
          */
         public CreditorBankAccountCreateRequest withLinksCreditor(String creditor) {
             if (links == null) {
@@ -240,8 +231,7 @@ public class CreditorBankAccountService {
             private String creditor;
 
             /**
-             * ID of the [creditor](https://developer.gocardless.com/pro/2015-04-29/#api-endpoints-creditors)
-             * that owns this bank account.
+             * ID of the [creditor](#core-endpoints-creditors) that owns this bank account.
              */
             public Links withCreditor(String creditor) {
                 this.creditor = creditor;
@@ -253,14 +243,12 @@ public class CreditorBankAccountService {
     /**
      * Request class for {@link CreditorBankAccountService#list }.
      *
-     * Returns a
-     * [cursor-paginated](https://developer.gocardless.com/pro/2015-04-29/#overview-cursor-pagination)
-     * list of your creditor bank accounts.
+     * Returns a [cursor-paginated](#overview-cursor-pagination) list of your creditor bank accounts.
      */
     public static final class CreditorBankAccountListRequest<S> extends
             ListRequest<S, CreditorBankAccount> {
         private String creditor;
-        private Enabled enabled;
+        private Boolean enabled;
 
         /**
          * Cursor pointing to the start of the desired set.
@@ -289,7 +277,7 @@ public class CreditorBankAccountService {
         /**
          * Get enabled or disabled creditor bank accounts.
          */
-        public CreditorBankAccountListRequest<S> withEnabled(Enabled enabled) {
+        public CreditorBankAccountListRequest<S> withEnabled(Boolean enabled) {
             this.enabled = enabled;
             return this;
         }
@@ -334,16 +322,6 @@ public class CreditorBankAccountService {
         protected TypeToken<List<CreditorBankAccount>> getTypeToken() {
             return new TypeToken<List<CreditorBankAccount>>() {};
         }
-
-        public enum Enabled {
-            @SerializedName("true")
-            TRUE, @SerializedName("false")
-            FALSE;
-            @Override
-            public String toString() {
-                return name().toLowerCase();
-            }
-        }
     }
 
     /**
@@ -351,14 +329,12 @@ public class CreditorBankAccountService {
      *
      * Retrieves the details of an existing creditor bank account.
      */
-    public static final class CreditorBankAccountGetRequest<S> extends
-            GetRequest<S, CreditorBankAccount> {
+    public static final class CreditorBankAccountGetRequest extends GetRequest<CreditorBankAccount> {
         @PathParam
         private final String identity;
 
-        private CreditorBankAccountGetRequest(HttpClient httpClient,
-                GetRequestExecutor<S, CreditorBankAccount> executor, String identity) {
-            super(httpClient, executor);
+        private CreditorBankAccountGetRequest(HttpClient httpClient, String identity) {
+            super(httpClient);
             this.identity = identity;
         }
 

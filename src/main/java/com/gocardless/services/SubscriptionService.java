@@ -14,23 +14,22 @@ import com.google.gson.reflect.TypeToken;
 /**
  * Service class for working with subscription resources.
  *
- * Subscriptions create
- * [payments](https://developer.gocardless.com/pro/2015-04-29/#api-endpoints-payments) according to a
- * schedule.
+ * Subscriptions create [payments](#core-endpoints-payments) according to a schedule.
  * 
- * #### Recurrence Rules
+ * ####
+ * Recurrence Rules
  * 
  * The following rules apply when specifying recurrence:
- *
- * - The first payment must be charged within 1 year.
- * - When neither `month` nor `day_of_month` are
- * present, the subscription will recur from the `start_at` based on the `interval_unit`.
- * - If
- * `month` or `day_of_month` are present, the recurrence rules will be applied from the `start_at`,
- * and the following validations apply:
+ * - The first payment
+ * must be charged within 1 year.
+ * - When neither `month` nor `day_of_month` are present, the
+ * subscription will recur from the `start_at` based on the `interval_unit`.
+ * - If `month` or
+ * `day_of_month` are present, the recurrence rules will be applied from the `start_at`, and the
+ * following validations apply:
  * 
- * | interval_unit   | month                               
- *           | day_of_month                            |
+ * | interval_unit   | month                                       
+ *   | day_of_month                            |
  * | :-------------- |
  * :--------------------------------------------- | :-------------------------------------- |
  * |
@@ -94,9 +93,7 @@ public class SubscriptionService {
     }
 
     /**
-     * Returns a
-     * [cursor-paginated](https://developer.gocardless.com/pro/2015-04-29/#overview-cursor-pagination)
-     * list of your subscriptions.
+     * Returns a [cursor-paginated](#overview-cursor-pagination) list of your subscriptions.
      */
     public SubscriptionListRequest<ListResponse<Subscription>> list() {
         return new SubscriptionListRequest<>(httpClient, ListRequest.<Subscription>pagingExecutor());
@@ -110,9 +107,8 @@ public class SubscriptionService {
     /**
      * Retrieves the details of a single subscription.
      */
-    public SubscriptionGetRequest<Subscription> get(String identity) {
-        return new SubscriptionGetRequest<>(httpClient, GetRequest.<Subscription>jsonExecutor(),
-                identity);
+    public SubscriptionGetRequest get(String identity) {
+        return new SubscriptionGetRequest(httpClient, identity);
     }
 
     /**
@@ -181,7 +177,7 @@ public class SubscriptionService {
 
         /**
          * As per RFC 2445. The day of the month to charge customers on. `1`-`28` or `-1` to indicate the
-         * last day of the month
+         * last day of the month.
          */
         public SubscriptionCreateRequest withDayOfMonth(Integer dayOfMonth) {
             this.dayOfMonth = dayOfMonth;
@@ -221,9 +217,8 @@ public class SubscriptionService {
         }
 
         /**
-         * ID of the associated
-         * [mandate](https://developer.gocardless.com/pro/2015-04-29/#api-endpoints-mandates) which the
-         * subscription will create payments against.
+         * ID of the associated [mandate](#core-endpoints-mandates) which the subscription will create
+         * payments against.
          */
         public SubscriptionCreateRequest withLinksMandate(String mandate) {
             if (links == null) {
@@ -263,7 +258,8 @@ public class SubscriptionService {
         }
 
         /**
-         * Optional name for the subscription. This field must not exceed 255 characters.
+         * Optional name for the subscription. This will be set as the description on each payment created.
+         * Must not exceed 255 characters.
          */
         public SubscriptionCreateRequest withName(String name) {
             this.name = name;
@@ -273,8 +269,7 @@ public class SubscriptionService {
         /**
          * An optional payment reference. This will be set as the reference on each payment created and will
          * appear on your customer's bank statement. See the documentation for the [create payment
-         * endpoint](https://developer.gocardless.com/pro/2015-04-29/#payments-create-a-payment) for more
-         * details.
+         * endpoint](#payments-create-a-payment) for more details.
          */
         public SubscriptionCreateRequest withPaymentReference(String paymentReference) {
             this.paymentReference = paymentReference;
@@ -283,9 +278,8 @@ public class SubscriptionService {
 
         /**
          * The date on which the first payment should be charged. Must be within one year of creation and on
-         * or after the [mandate](https://developer.gocardless.com/pro/2015-04-29/#api-endpoints-mandates)'s
-         * `next_possible_charge_date`. When blank, this will be set as the mandate's
-         * `next_possible_charge_date`.
+         * or after the [mandate](#core-endpoints-mandates)'s `next_possible_charge_date`. When blank, this
+         * will be set as the mandate's `next_possible_charge_date`.
          */
         public SubscriptionCreateRequest withStartAt(String startAt) {
             this.startAt = startAt;
@@ -351,9 +345,8 @@ public class SubscriptionService {
             private String mandate;
 
             /**
-             * ID of the associated
-             * [mandate](https://developer.gocardless.com/pro/2015-04-29/#api-endpoints-mandates) which the
-             * subscription will create payments against.
+             * ID of the associated [mandate](#core-endpoints-mandates) which the subscription will create
+             * payments against.
              */
             public Links withMandate(String mandate) {
                 this.mandate = mandate;
@@ -365,9 +358,7 @@ public class SubscriptionService {
     /**
      * Request class for {@link SubscriptionService#list }.
      *
-     * Returns a
-     * [cursor-paginated](https://developer.gocardless.com/pro/2015-04-29/#overview-cursor-pagination)
-     * list of your subscriptions.
+     * Returns a [cursor-paginated](#overview-cursor-pagination) list of your subscriptions.
      */
     public static final class SubscriptionListRequest<S> extends ListRequest<S, Subscription> {
         private String customer;
@@ -406,7 +397,7 @@ public class SubscriptionService {
         }
 
         /**
-         * Unique identifier, beginning with "MD"
+         * Unique identifier, beginning with "MD".
          */
         public SubscriptionListRequest<S> withMandate(String mandate) {
             this.mandate = mandate;
@@ -452,13 +443,12 @@ public class SubscriptionService {
      *
      * Retrieves the details of a single subscription.
      */
-    public static final class SubscriptionGetRequest<S> extends GetRequest<S, Subscription> {
+    public static final class SubscriptionGetRequest extends GetRequest<Subscription> {
         @PathParam
         private final String identity;
 
-        private SubscriptionGetRequest(HttpClient httpClient,
-                GetRequestExecutor<S, Subscription> executor, String identity) {
-            super(httpClient, executor);
+        private SubscriptionGetRequest(HttpClient httpClient, String identity) {
+            super(httpClient);
             this.identity = identity;
         }
 
@@ -519,7 +509,8 @@ public class SubscriptionService {
         }
 
         /**
-         * Optional name for the subscription. This field must not exceed 255 characters.
+         * Optional name for the subscription. This will be set as the description on each payment created.
+         * Must not exceed 255 characters.
          */
         public SubscriptionUpdateRequest withName(String name) {
             this.name = name;
@@ -529,8 +520,7 @@ public class SubscriptionService {
         /**
          * An optional payment reference. This will be set as the reference on each payment created and will
          * appear on your customer's bank statement. See the documentation for the [create payment
-         * endpoint](https://developer.gocardless.com/pro/2015-04-29/#payments-create-a-payment) for more
-         * details.
+         * endpoint](#payments-create-a-payment) for more details.
          */
         public SubscriptionUpdateRequest withPaymentReference(String paymentReference) {
             this.paymentReference = paymentReference;

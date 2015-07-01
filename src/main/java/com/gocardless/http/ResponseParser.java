@@ -1,7 +1,5 @@
 package com.gocardless.http;
 
-import java.io.InputStream;
-import java.io.InputStreamReader;
 import java.io.Reader;
 import java.util.List;
 
@@ -20,16 +18,14 @@ final class ResponseParser {
         this.gson = gson;
     }
 
-    <T> T parseSingle(InputStream stream, String envelope, Class<T> clazz) {
-        Reader reader = new InputStreamReader(stream);
-        JsonElement json = new JsonParser().parse(reader);
+    <T> T parseSingle(Reader stream, String envelope, Class<T> clazz) {
+        JsonElement json = new JsonParser().parse(stream);
         JsonObject object = json.getAsJsonObject().getAsJsonObject(envelope);
         return gson.fromJson(object, clazz);
     }
 
-    <T> ListResponse<T> parsePage(InputStream stream, String envelope, TypeToken<List<T>> clazz) {
-        Reader reader = new InputStreamReader(stream);
-        JsonObject json = new JsonParser().parse(reader).getAsJsonObject();
+    <T> ListResponse<T> parsePage(Reader stream, String envelope, TypeToken<List<T>> clazz) {
+        JsonObject json = new JsonParser().parse(stream).getAsJsonObject();
         JsonArray array = json.getAsJsonArray(envelope);
         List<T> items = gson.fromJson(array, clazz.getType());
         JsonObject metaJson = json.getAsJsonObject("meta");
@@ -37,7 +33,7 @@ final class ResponseParser {
         return new ListResponse<>(ImmutableList.copyOf(items), meta);
     }
 
-    GoCardlessApiException parseError(InputStream stream) {
+    GoCardlessApiException parseError(Reader stream) {
         ApiErrorResponse error = parseSingle(stream, "error", ApiErrorResponse.class);
         return GoCardlessErrorMapper.toException(error);
     }

@@ -14,10 +14,8 @@ import com.google.gson.reflect.TypeToken;
  * Service class for working with customer resources.
  *
  * Customer objects hold the contact details for a customer. A customer can have several [customer
- * bank
- * accounts](https://developer.gocardless.com/pro/2015-04-29/#api-endpoints-customer-bank-accounts),
- * which in turn can have several Direct Debit
- * [mandates](https://developer.gocardless.com/pro/2015-04-29/#api-endpoints-mandates).
+ * bank accounts](#core-endpoints-customer-bank-accounts), which in turn can have several Direct
+ * Debit [mandates](#core-endpoints-mandates).
  */
 public class CustomerService {
     private HttpClient httpClient;
@@ -39,9 +37,7 @@ public class CustomerService {
     }
 
     /**
-     * Returns a
-     * [cursor-paginated](https://developer.gocardless.com/pro/2015-04-29/#overview-cursor-pagination)
-     * list of your customers.
+     * Returns a [cursor-paginated](#overview-cursor-pagination) list of your customers.
      */
     public CustomerListRequest<ListResponse<Customer>> list() {
         return new CustomerListRequest<>(httpClient, ListRequest.<Customer>pagingExecutor());
@@ -54,8 +50,8 @@ public class CustomerService {
     /**
      * Retrieves the details of an existing customer.
      */
-    public CustomerGetRequest<Customer> get(String identity) {
-        return new CustomerGetRequest<>(httpClient, GetRequest.<Customer>jsonExecutor(), identity);
+    public CustomerGetRequest get(String identity) {
+        return new CustomerGetRequest(httpClient, identity);
     }
 
     /**
@@ -117,7 +113,7 @@ public class CustomerService {
         }
 
         /**
-         * Company Name.
+         * Customer's company name. Required unless a `given_name` and `family_name` are provided.
          */
         public CustomerCreateRequest withCompanyName(String companyName) {
             this.companyName = companyName;
@@ -142,7 +138,7 @@ public class CustomerService {
         }
 
         /**
-         * Customer's surname.
+         * Customer's surname. Required unless a `company_name` is provided.
          */
         public CustomerCreateRequest withFamilyName(String familyName) {
             this.familyName = familyName;
@@ -150,7 +146,7 @@ public class CustomerService {
         }
 
         /**
-         * Customer's first name.
+         * Customer's first name. Required unless a `company_name` is provided.
          */
         public CustomerCreateRequest withGivenName(String givenName) {
             this.givenName = givenName;
@@ -222,9 +218,7 @@ public class CustomerService {
     /**
      * Request class for {@link CustomerService#list }.
      *
-     * Returns a
-     * [cursor-paginated](https://developer.gocardless.com/pro/2015-04-29/#overview-cursor-pagination)
-     * list of your customers.
+     * Returns a [cursor-paginated](#overview-cursor-pagination) list of your customers.
      */
     public static final class CustomerListRequest<S> extends ListRequest<S, Customer> {
         private CreatedAt createdAt;
@@ -393,13 +387,12 @@ public class CustomerService {
      *
      * Retrieves the details of an existing customer.
      */
-    public static final class CustomerGetRequest<S> extends GetRequest<S, Customer> {
+    public static final class CustomerGetRequest extends GetRequest<Customer> {
         @PathParam
         private final String identity;
 
-        private CustomerGetRequest(HttpClient httpClient, GetRequestExecutor<S, Customer> executor,
-                String identity) {
-            super(httpClient, executor);
+        private CustomerGetRequest(HttpClient httpClient, String identity) {
+            super(httpClient);
             this.identity = identity;
         }
 
@@ -480,7 +473,7 @@ public class CustomerService {
         }
 
         /**
-         * Company Name.
+         * Customer's company name. Required unless a `given_name` and `family_name` are provided.
          */
         public CustomerUpdateRequest withCompanyName(String companyName) {
             this.companyName = companyName;
@@ -505,7 +498,7 @@ public class CustomerService {
         }
 
         /**
-         * Customer's surname.
+         * Customer's surname. Required unless a `company_name` is provided.
          */
         public CustomerUpdateRequest withFamilyName(String familyName) {
             this.familyName = familyName;
@@ -513,7 +506,7 @@ public class CustomerService {
         }
 
         /**
-         * Customer's first name.
+         * Customer's first name. Required unless a `company_name` is provided.
          */
         public CustomerUpdateRequest withGivenName(String givenName) {
             this.givenName = givenName;

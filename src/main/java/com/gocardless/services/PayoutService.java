@@ -13,11 +13,9 @@ import com.google.gson.reflect.TypeToken;
 /**
  * Service class for working with payout resources.
  *
- * Payouts represent transfers from GoCardless to a
- * [creditor](https://developer.gocardless.com/pro/2015-04-29/#api-endpoints-creditors). Each payout
- * contains the funds collected from one or many
- * [payments](https://developer.gocardless.com/pro/2015-04-29/#api-endpoints-payments). Payouts are
- * created automatically after a payment has been successfully collected.
+ * Payouts represent transfers from GoCardless to a [creditor](#core-endpoints-creditors). Each
+ * payout contains the funds collected from one or many [payments](#core-endpoints-payments). Payouts
+ * are created automatically after a payment has been successfully collected.
  */
 public class PayoutService {
     private HttpClient httpClient;
@@ -32,9 +30,7 @@ public class PayoutService {
     }
 
     /**
-     * Returns a
-     * [cursor-paginated](https://developer.gocardless.com/pro/2015-04-29/#overview-cursor-pagination)
-     * list of your payouts.
+     * Returns a [cursor-paginated](#overview-cursor-pagination) list of your payouts.
      */
     public PayoutListRequest<ListResponse<Payout>> list() {
         return new PayoutListRequest<>(httpClient, ListRequest.<Payout>pagingExecutor());
@@ -45,18 +41,17 @@ public class PayoutService {
     }
 
     /**
-     * Retrieves the details of a single payout.
+     * Retrieves the details of a single payout. For an example of how to reconcile the transactions in a
+     * payout, see [this guide](#events-fetching-events-for-a-payout).
      */
-    public PayoutGetRequest<Payout> get(String identity) {
-        return new PayoutGetRequest<>(httpClient, GetRequest.<Payout>jsonExecutor(), identity);
+    public PayoutGetRequest get(String identity) {
+        return new PayoutGetRequest(httpClient, identity);
     }
 
     /**
      * Request class for {@link PayoutService#list }.
      *
-     * Returns a
-     * [cursor-paginated](https://developer.gocardless.com/pro/2015-04-29/#overview-cursor-pagination)
-     * list of your payouts.
+     * Returns a [cursor-paginated](#overview-cursor-pagination) list of your payouts.
      */
     public static final class PayoutListRequest<S> extends ListRequest<S, Payout> {
         private String creditor;
@@ -88,7 +83,7 @@ public class PayoutService {
         }
 
         /**
-         * Unique identifier, beginning with "BA"
+         * Unique identifier, beginning with "BA".
          */
         public PayoutListRequest<S> withCreditorBankAccount(String creditorBankAccount) {
             this.creditorBankAccount = creditorBankAccount;
@@ -165,15 +160,15 @@ public class PayoutService {
     /**
      * Request class for {@link PayoutService#get }.
      *
-     * Retrieves the details of a single payout.
+     * Retrieves the details of a single payout. For an example of how to reconcile the transactions in a
+     * payout, see [this guide](#events-fetching-events-for-a-payout).
      */
-    public static final class PayoutGetRequest<S> extends GetRequest<S, Payout> {
+    public static final class PayoutGetRequest extends GetRequest<Payout> {
         @PathParam
         private final String identity;
 
-        private PayoutGetRequest(HttpClient httpClient, GetRequestExecutor<S, Payout> executor,
-                String identity) {
-            super(httpClient, executor);
+        private PayoutGetRequest(HttpClient httpClient, String identity) {
+            super(httpClient);
             this.identity = identity;
         }
 

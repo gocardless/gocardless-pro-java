@@ -1,20 +1,20 @@
 package com.gocardless.http;
 
-import java.io.InputStream;
+import java.io.Reader;
 import java.net.URL;
 import java.util.Map;
 
 import com.google.common.collect.ImmutableMap;
 
 /**
- * Base class for HTTP requests.
+ * Base class for API requests.
  *
  * @param <T> the type of the item returned by this request.
  */
-abstract class HttpRequest<T> {
+abstract class ApiRequest<T> {
     private transient final HttpClient httpClient;
 
-    HttpRequest(HttpClient httpClient) {
+    ApiRequest(HttpClient httpClient) {
         this.httpClient = httpClient;
     }
 
@@ -46,5 +46,5 @@ abstract class HttpRequest<T> {
 
     protected abstract boolean hasBody();
 
-    protected abstract T parseResponse(InputStream stream, ResponseParser responseParser);
+    protected abstract T parseResponse(Reader stream, ResponseParser responseParser);
 }

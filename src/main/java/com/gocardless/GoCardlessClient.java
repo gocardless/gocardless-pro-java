@@ -17,6 +17,8 @@ public class GoCardlessClient {
     private final EventService events;
     private final HelperService helpers;
     private final MandateService mandates;
+    private final MandatePdfService mandatePdfs;
+    private final ModulusCheckService modulusChecks;
     private final PaymentService payments;
     private final PayoutService payouts;
     private final RedirectFlowService redirectFlows;
@@ -32,6 +34,8 @@ public class GoCardlessClient {
         this.events = new EventService(httpClient);
         this.helpers = new HelperService(httpClient);
         this.mandates = new MandateService(httpClient);
+        this.mandatePdfs = new MandatePdfService(httpClient);
+        this.modulusChecks = new ModulusCheckService(httpClient);
         this.payments = new PaymentService(httpClient);
         this.payouts = new PayoutService(httpClient);
         this.redirectFlows = new RedirectFlowService(httpClient);
@@ -86,6 +90,20 @@ public class GoCardlessClient {
      */
     public MandateService mandates() {
         return mandates;
+    }
+
+    /**
+     * A service class for working with mandate pdf resources.
+     */
+    public MandatePdfService mandatePdfs() {
+        return mandatePdfs;
+    }
+
+    /**
+     * A service class for working with modulus check resources.
+     */
+    public ModulusCheckService modulusChecks() {
+        return modulusChecks;
     }
 
     /**

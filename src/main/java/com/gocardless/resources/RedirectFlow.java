@@ -5,14 +5,15 @@ import com.google.gson.annotations.SerializedName;
 /**
  * Represents a redirect flow resource returned from the API.
  *
- * Redirect flows enable you to use GoCardless Pro's secure payment pages to set up mandates with
- * your customers.
+ * Redirect flows enable you to use GoCardless Pro's [hosted payment
+ * pages](https://pay-sandbox.gocardless.com/AL000000AKFPFF) to set up mandates with your customers.
+ * These pages are fully compliant and have been translated into Dutch, French, German, Italian,
+ * Portuguese and Spanish.
  * 
  * The overall flow is:
  * 
- * 1. You
- * [create](https://developer.gocardless.com/pro/2015-04-29/#create-a-redirect-flow) a redirect flow
- * for your customer, and redirect them to the returned redirect url, e.g.
+ * 1. You [create](#create-a-redirect-flow) a
+ * redirect flow for your customer, and redirect them to the returned redirect url, e.g.
  * `https://pay.gocardless.com/flow/RE123`.
  * 
  * 2. Your customer supplies their name, email,
@@ -20,28 +21,18 @@ import com.google.gson.annotations.SerializedName;
  * redirects them back to your `success_redirect_url` with `redirect_flow_id=RE123` in the
  * querystring.
  * 
- * 3. You
- * [complete](https://developer.gocardless.com/pro/2015-04-29/#complete-a-redirect-flow) the redirect
- * flow, which creates a
- * [customer](https://developer.gocardless.com/pro/2015-04-29/#api-endpoints-customers), [customer
- * bank
- * account](https://developer.gocardless.com/pro/2015-04-29/#api-endpoints-customer-bank-accounts),
- * and [mandate](https://developer.gocardless.com/pro/2015-04-29/#api-endpoints-mandates), and
+ * 3. You [complete](#complete-a-redirect-flow) the redirect flow, which creates a
+ * [customer](#core-endpoints-customers), [customer bank
+ * account](#core-endpoints-customer-bank-accounts), and [mandate](#core-endpoints-mandates), and
  * returns the ID of the mandate. You may wish to create a
- * [subscription](https://developer.gocardless.com/pro/2015-04-29/#api-endpoints-subscriptions) or
- * [payment](https://developer.gocardless.com/pro/2015-04-29/#api-endpoints-payments) at this
+ * [subscription](#core-endpoints-subscriptions) or [payment](#core-endpoints-payments) at this
  * point.
  * 
  * It is recommended that you link the redirect flow to your user object as soon as it is
  * created, and attach the created resources to that user in the complete step.
  * 
  * Redirect flows
- * expire 30 minutes after they are first created. You cannot
- * [complete](https://developer.gocardless.com/pro/2015-04-29/#complete-a-redirect-flow) an expired
- * redirect flow.
- * 
- * [View an example
- * integration](https://pay-sandbox.gocardless.com/AL000000AKFPFF) that uses redirect flows.
+ * expire 30 minutes after they are first created. You cannot complete an expired redirect flow.
  */
 public class RedirectFlow {
     private RedirectFlow() {
@@ -58,22 +49,22 @@ public class RedirectFlow {
     private String successRedirectUrl;
 
     /**
-     * Fixed [timestamp](https://developer.gocardless.com/pro/2015-04-29/#overview-time-zones-dates),
-     * recording when this resource was created.
+     * Fixed [timestamp](#overview-time-zones-dates), recording when this resource was created.
      */
     public String getCreatedAt() {
         return createdAt;
     }
 
     /**
-     * A description of the item the customer is paying for
+     * A description of the item the customer is paying for. This will be shown on the hosted payment
+     * pages.
      */
     public String getDescription() {
         return description;
     }
 
     /**
-     * Unique identifier, beginning with "RE"
+     * Unique identifier, beginning with "RE".
      */
     public String getId() {
         return id;
@@ -84,7 +75,8 @@ public class RedirectFlow {
     }
 
     /**
-     * The URI to redirect the customer to to setup their mandate
+     * The URL of the hosted payment pages for this redirect flow. This is the URL you should redirect
+     * your customer to.
      */
     public String getRedirectUrl() {
         return redirectUrl;
@@ -99,14 +91,16 @@ public class RedirectFlow {
     }
 
     /**
-     * The customer's session ID
+     * The customer's session ID must be provided when the redirect flow is set up and again when it is
+     * completed. This allows integrators to ensure that the user who was originally sent to the
+     * GoCardless payment pages is the one who has completed them.
      */
     public String getSessionToken() {
         return sessionToken;
     }
 
     /**
-     * The URI to redirect to upon success mandate setup
+     * The URL to redirect to upon successful mandate setup.
      */
     public String getSuccessRedirectUrl() {
         return successRedirectUrl;
@@ -127,17 +121,16 @@ public class RedirectFlow {
         private String mandate;
 
         /**
-         * The [creditor](https://developer.gocardless.com/pro/2015-04-29/#api-endpoints-creditors) for whom
-         * the mandate will be created. The `name` of the creditor will be displayed on the payment page.
+         * The [creditor](#core-endpoints-creditors) for whom the mandate will be created. The `name` of the
+         * creditor will be displayed on the payment page.
          */
         public String getCreditor() {
             return creditor;
         }
 
         /**
-         * ID of [mandate](https://developer.gocardless.com/pro/2015-04-29/#api-endpoints-mandates) created
-         * by this redirect flow.<br/>**Note**: this property will not be present until the redirect flow has
-         * been successfully completed.
+         * ID of [mandate](#core-endpoints-mandates) created by this redirect flow.<br/>**Note**: this
+         * property will not be present until the redirect flow has been successfully completed.
          */
         public String getMandate() {
             return mandate;

@@ -1,6 +1,5 @@
 package com.gocardless.services;
 
-import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -17,13 +16,10 @@ import com.google.gson.reflect.TypeToken;
 /**
  * Service class for working with mandate resources.
  *
- * Mandates represent the Direct Debit mandate with a
- * [customer](https://developer.gocardless.com/pro/2015-04-29/#api-endpoints-customers).
+ * Mandates represent the Direct Debit mandate with a [customer](#core-endpoints-customers).
  * 
  *
- * GoCardless will notify you via a
- * [webhook](https://developer.gocardless.com/pro/2015-04-29/#webhooks) whenever the status of a
- * mandate changes.
+ * GoCardless will notify you via a [webhook](#webhooks) whenever the status of a mandate changes.
  */
 public class MandateService {
     private HttpClient httpClient;
@@ -38,16 +34,15 @@ public class MandateService {
     }
 
     /**
-     * Creates a new mandate object
+     * Creates a new mandate object.
      */
     public MandateCreateRequest create() {
         return new MandateCreateRequest(httpClient);
     }
 
     /**
-     * Returns a
-     * [cursor-paginated](https://developer.gocardless.com/pro/2015-04-29/#overview-cursor-pagination)
-     * list of your mandates. Except where stated, these filters can only be used one at a time.
+     * Returns a [cursor-paginated](#overview-cursor-pagination) list of your mandates. Except where
+     * stated, these filters can only be used one at a time.
      */
     public MandateListRequest<ListResponse<Mandate>> list() {
         return new MandateListRequest<>(httpClient, ListRequest.<Mandate>pagingExecutor());
@@ -69,13 +64,8 @@ public class MandateService {
      * 639-1](http://en.wikipedia.org/wiki/List_of_ISO_639-1_codes#Partial_ISO_639_table) language code
      * as an `Accept-Language` header.
      */
-    public MandateGetRequest<Mandate> get(String identity) {
-        return new MandateGetRequest<>(httpClient, GetRequest.<Mandate>jsonExecutor(), identity);
-    }
-
-    public MandateGetRequest<InputStream> download(String identity) {
-        return new MandateGetRequest<>(httpClient,
-                GetRequest.<Mandate>downloadExecutor("application/pdf"), identity);
+    public MandateGetRequest get(String identity) {
+        return new MandateGetRequest(httpClient, identity);
     }
 
     /**
@@ -116,7 +106,7 @@ public class MandateService {
     /**
      * Request class for {@link MandateService#create }.
      *
-     * Creates a new mandate object
+     * Creates a new mandate object.
      */
     public static final class MandateCreateRequest extends PostRequest<Mandate> {
         private Links links;
@@ -130,8 +120,7 @@ public class MandateService {
         }
 
         /**
-         * ID of the associated
-         * [creditor](https://developer.gocardless.com/pro/2015-04-29/#api-endpoints-creditors).
+         * ID of the associated [creditor](#core-endpoints-creditors).
          */
         public MandateCreateRequest withLinksCreditor(String creditor) {
             if (links == null) {
@@ -142,9 +131,8 @@ public class MandateService {
         }
 
         /**
-         * ID of the associated [customer bank
-         * account](https://developer.gocardless.com/pro/2015-04-29/#api-endpoints-customer-bank-accounts)
-         * which the mandate is created and submits payments against.
+         * ID of the associated [customer bank account](#core-endpoints-customer-bank-accounts) which the
+         * mandate is created and submits payments against.
          */
         public MandateCreateRequest withLinksCustomerBankAccount(String customerBankAccount) {
             if (links == null) {
@@ -184,9 +172,9 @@ public class MandateService {
         }
 
         /**
-         * Direct Debit scheme to which this mandate and associated payments are submitted. Can be supplied
-         * or automatically detected from the customer's bank account. Currently only "bacs" and "sepa_core"
-         * are supported.
+         * <a name="mandates_scheme"></a>Direct Debit scheme to which this mandate and associated payments
+         * are submitted. Can be supplied or automatically detected from the customer's bank account.
+         * Currently only "bacs" and "sepa_core" are supported.
          */
         public MandateCreateRequest withScheme(String scheme) {
             this.scheme = scheme;
@@ -222,8 +210,7 @@ public class MandateService {
             private String customerBankAccount;
 
             /**
-             * ID of the associated
-             * [creditor](https://developer.gocardless.com/pro/2015-04-29/#api-endpoints-creditors).
+             * ID of the associated [creditor](#core-endpoints-creditors).
              */
             public Links withCreditor(String creditor) {
                 this.creditor = creditor;
@@ -231,9 +218,8 @@ public class MandateService {
             }
 
             /**
-             * ID of the associated [customer bank
-             * account](https://developer.gocardless.com/pro/2015-04-29/#api-endpoints-customer-bank-accounts)
-             * which the mandate is created and submits payments against.
+             * ID of the associated [customer bank account](#core-endpoints-customer-bank-accounts) which the
+             * mandate is created and submits payments against.
              */
             public Links withCustomerBankAccount(String customerBankAccount) {
                 this.customerBankAccount = customerBankAccount;
@@ -245,9 +231,8 @@ public class MandateService {
     /**
      * Request class for {@link MandateService#list }.
      *
-     * Returns a
-     * [cursor-paginated](https://developer.gocardless.com/pro/2015-04-29/#overview-cursor-pagination)
-     * list of your mandates. Except where stated, these filters can only be used one at a time.
+     * Returns a [cursor-paginated](#overview-cursor-pagination) list of your mandates. Except where
+     * stated, these filters can only be used one at a time.
      */
     public static final class MandateListRequest<S> extends ListRequest<S, Mandate> {
         private String creditor;
@@ -273,9 +258,8 @@ public class MandateService {
         }
 
         /**
-         * ID of a [creditor](https://developer.gocardless.com/pro/2015-04-29/#api-endpoints-creditors). If
-         * specified, this endpoint will return all mandates for the given creditor. Cannot be used in
-         * conjunction with `customer_bank_account`
+         * ID of a [creditor](#core-endpoints-creditors). If specified, this endpoint will return all
+         * mandates for the given creditor. Cannot be used in conjunction with `customer_bank_account`
          */
         public MandateListRequest<S> withCreditor(String creditor) {
             this.creditor = creditor;
@@ -291,10 +275,9 @@ public class MandateService {
         }
 
         /**
-         * ID of a [customer bank
-         * account](https://developer.gocardless.com/pro/2015-04-29/#api-endpoints-customer-bank-accounts).
-         * If specified, this endpoint will return all mandates for the given bank account. Cannot be used in
-         * conjunction with `creditor`
+         * ID of a [customer bank account](#core-endpoints-customer-bank-accounts). If specified, this
+         * endpoint will return all mandates for the given bank account. Cannot be used in conjunction with
+         * `creditor`
          */
         public MandateListRequest<S> withCustomerBankAccount(String customerBankAccount) {
             this.customerBankAccount = customerBankAccount;
@@ -406,13 +389,12 @@ public class MandateService {
      * 639-1](http://en.wikipedia.org/wiki/List_of_ISO_639-1_codes#Partial_ISO_639_table) language code
      * as an `Accept-Language` header.
      */
-    public static final class MandateGetRequest<S> extends GetRequest<S, Mandate> {
+    public static final class MandateGetRequest extends GetRequest<Mandate> {
         @PathParam
         private final String identity;
 
-        private MandateGetRequest(HttpClient httpClient, GetRequestExecutor<S, Mandate> executor,
-                String identity) {
-            super(httpClient, executor);
+        private MandateGetRequest(HttpClient httpClient, String identity) {
+            super(httpClient);
             this.identity = identity;
         }
 

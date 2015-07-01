@@ -1,5 +1,6 @@
 package com.gocardless.services;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -12,13 +13,13 @@ import com.google.gson.reflect.TypeToken;
 /**
  * Service class for working with creditor resources.
  *
- * Each [payment](https://developer.gocardless.com/pro/2015-04-29/#api-endpoints-payments) taken
- * through the API is linked to a "creditor", to whom the payment is then paid out. In most cases
- * your organisation will have a single "creditor", but the API also supports collecting payments on
- * behalf of others.
+ * Each [payment](#core-endpoints-payments) taken through the API is linked to a "creditor", to whom
+ * the payment is then paid out. In most cases your organisation will have a single "creditor", but
+ * the API also supports collecting payments on behalf of others.
  * 
- * Please get in touch if you wish to use this endpoint. Currently, for Anti
- * Money Laundering reasons, any creditors you add must be directly related to your organisation.
+ * Please get in touch if you
+ * wish to use this endpoint. Currently, for Anti Money Laundering reasons, any creditors you add
+ * must be directly related to your organisation.
  */
 public class CreditorService {
     private HttpClient httpClient;
@@ -40,9 +41,7 @@ public class CreditorService {
     }
 
     /**
-     * Returns a
-     * [cursor-paginated](https://developer.gocardless.com/pro/2015-04-29/#overview-cursor-pagination)
-     * list of your creditors.
+     * Returns a [cursor-paginated](#overview-cursor-pagination) list of your creditors.
      */
     public CreditorListRequest<ListResponse<Creditor>> list() {
         return new CreditorListRequest<>(httpClient, ListRequest.<Creditor>pagingExecutor());
@@ -55,8 +54,8 @@ public class CreditorService {
     /**
      * Retrieves the details of an existing creditor.
      */
-    public CreditorGetRequest<Creditor> get(String identity) {
-        return new CreditorGetRequest<>(httpClient, GetRequest.<Creditor>jsonExecutor(), identity);
+    public CreditorGetRequest get(String identity) {
+        return new CreditorGetRequest(httpClient, identity);
     }
 
     /**
@@ -77,7 +76,7 @@ public class CreditorService {
         private String addressLine3;
         private String city;
         private String countryCode;
-        private Links links;
+        private Map<String, String> links;
         private String name;
         private String postalCode;
         private String region;
@@ -123,19 +122,16 @@ public class CreditorService {
             return this;
         }
 
-        public CreditorCreateRequest withLinks(Links links) {
+        public CreditorCreateRequest withLinks(Map<String, String> links) {
             this.links = links;
             return this;
         }
 
-        /**
-         * ID of the logo used on the Redirect Flow payment pages.
-         */
-        public CreditorCreateRequest withLinksLogo(String logo) {
+        public CreditorCreateRequest withLinks(String key, String value) {
             if (links == null) {
-                links = new Links();
+                links = new HashMap<>();
             }
-            links.withLogo(logo);
+            links.put(key, value);
             return this;
         }
 
@@ -186,26 +182,12 @@ public class CreditorService {
         protected boolean hasBody() {
             return true;
         }
-
-        public static class Links {
-            private String logo;
-
-            /**
-             * ID of the logo used on the Redirect Flow payment pages.
-             */
-            public Links withLogo(String logo) {
-                this.logo = logo;
-                return this;
-            }
-        }
     }
 
     /**
      * Request class for {@link CreditorService#list }.
      *
-     * Returns a
-     * [cursor-paginated](https://developer.gocardless.com/pro/2015-04-29/#overview-cursor-pagination)
-     * list of your creditors.
+     * Returns a [cursor-paginated](#overview-cursor-pagination) list of your creditors.
      */
     public static final class CreditorListRequest<S> extends ListRequest<S, Creditor> {
         /**
@@ -264,13 +246,12 @@ public class CreditorService {
      *
      * Retrieves the details of an existing creditor.
      */
-    public static final class CreditorGetRequest<S> extends GetRequest<S, Creditor> {
+    public static final class CreditorGetRequest extends GetRequest<Creditor> {
         @PathParam
         private final String identity;
 
-        private CreditorGetRequest(HttpClient httpClient, GetRequestExecutor<S, Creditor> executor,
-                String identity) {
-            super(httpClient, executor);
+        private CreditorGetRequest(HttpClient httpClient, String identity) {
+            super(httpClient);
             this.identity = identity;
         }
 
@@ -362,9 +343,8 @@ public class CreditorService {
         }
 
         /**
-         * ID of the [bank
-         * account](https://developer.gocardless.com/pro/2015-04-29/#api-endpoints-creditor-bank-accounts)
-         * which is set up to receive payouts in EUR.
+         * ID of the [bank account](#core-endpoints-creditor-bank-accounts) which is set up to receive
+         * payouts in EUR.
          */
         public CreditorUpdateRequest withLinksDefaultEurPayoutAccount(String defaultEurPayoutAccount) {
             if (links == null) {
@@ -375,26 +355,14 @@ public class CreditorService {
         }
 
         /**
-         * ID of the [bank
-         * account](https://developer.gocardless.com/pro/2015-04-29/#api-endpoints-creditor-bank-accounts)
-         * which is set up to receive payouts in GBP.
+         * ID of the [bank account](#core-endpoints-creditor-bank-accounts) which is set up to receive
+         * payouts in GBP.
          */
         public CreditorUpdateRequest withLinksDefaultGbpPayoutAccount(String defaultGbpPayoutAccount) {
             if (links == null) {
                 links = new Links();
             }
             links.withDefaultGbpPayoutAccount(defaultGbpPayoutAccount);
-            return this;
-        }
-
-        /**
-         * ID of the logo used on the Redirect Flow payment pages.
-         */
-        public CreditorUpdateRequest withLinksLogo(String logo) {
-            if (links == null) {
-                links = new Links();
-            }
-            links.withLogo(logo);
             return this;
         }
 
@@ -457,12 +425,10 @@ public class CreditorService {
         public static class Links {
             private String defaultEurPayoutAccount;
             private String defaultGbpPayoutAccount;
-            private String logo;
 
             /**
-             * ID of the [bank
-             * account](https://developer.gocardless.com/pro/2015-04-29/#api-endpoints-creditor-bank-accounts)
-             * which is set up to receive payouts in EUR.
+             * ID of the [bank account](#core-endpoints-creditor-bank-accounts) which is set up to receive
+             * payouts in EUR.
              */
             public Links withDefaultEurPayoutAccount(String defaultEurPayoutAccount) {
                 this.defaultEurPayoutAccount = defaultEurPayoutAccount;
@@ -470,20 +436,11 @@ public class CreditorService {
             }
 
             /**
-             * ID of the [bank
-             * account](https://developer.gocardless.com/pro/2015-04-29/#api-endpoints-creditor-bank-accounts)
-             * which is set up to receive payouts in GBP.
+             * ID of the [bank account](#core-endpoints-creditor-bank-accounts) which is set up to receive
+             * payouts in GBP.
              */
             public Links withDefaultGbpPayoutAccount(String defaultGbpPayoutAccount) {
                 this.defaultGbpPayoutAccount = defaultGbpPayoutAccount;
-                return this;
-            }
-
-            /**
-             * ID of the logo used on the Redirect Flow payment pages.
-             */
-            public Links withLogo(String logo) {
-                this.logo = logo;
                 return this;
             }
         }

@@ -1,13 +1,13 @@
 package com.gocardless.http;
 
-import java.io.InputStream;
+import java.io.Reader;
 
 /**
  * Base class for PUT requests.
  *
  * @param <T> the type of the item returned by this request.
  */
-public abstract class PutRequest<T> extends HttpRequest<T> {
+public abstract class PutRequest<T> extends ApiRequest<T> {
     protected PutRequest(HttpClient httpClient) {
         super(httpClient);
     }
@@ -15,7 +15,7 @@ public abstract class PutRequest<T> extends HttpRequest<T> {
     /**
      * Executes this request.
      *
-     * Returns the API response.
+     * Returns the response entity.
      *
      * @throws com.gocardless.GoCardlessException
      */
@@ -23,8 +23,20 @@ public abstract class PutRequest<T> extends HttpRequest<T> {
         return getHttpClient().execute(this);
     }
 
+    /**
+     * Executes this request.
+     *
+     * Returns a {@link com.gocardless.http.ApiResponse} that wraps the
+     * response entity.
+     *
+     * @throws com.gocardless.GoCardlessException
+     */
+    public ApiResponse<T> executeWrapped() {
+        return getHttpClient().executeWrapped(this);
+    }
+
     @Override
-    protected T parseResponse(InputStream stream, ResponseParser responseParser) {
+    protected T parseResponse(Reader stream, ResponseParser responseParser) {
         return responseParser.parseSingle(stream, getEnvelope(), getResponseClass());
     }
 
