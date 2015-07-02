@@ -15,7 +15,7 @@ public class MandatePdf {
     private String url;
 
     /**
-     * The date and time at which the `url` will expire (30 minutes after the original request).
+     * The date and time at which the `url` will expire (10 minutes after the original request).
      */
     public String getExpiresAt() {
         return expiresAt;

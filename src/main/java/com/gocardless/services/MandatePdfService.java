@@ -154,7 +154,8 @@ public class MandatePdfService {
 
         /**
          * Direct Debit scheme. Can be supplied or automatically detected from the bank account details
-         * provided.
+         * provided. If you do not provide a scheme, you must provide either a mandate, an `iban`, or [local
+         * details](#ui-local-bank-details) including a `country_code`.
          */
         public MandatePdfCreateRequest withScheme(String scheme) {
             this.scheme = scheme;
