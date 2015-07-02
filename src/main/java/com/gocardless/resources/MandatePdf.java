@@ -3,7 +3,8 @@ package com.gocardless.resources;
 /**
  * Represents a mandate pdf resource returned from the API.
  *
- * Construct a mandate PDF for a given set of bank details or an already-existing mandate.
+ * Mandate PDFs allow you to easily display [scheme-rules compliant](#ui-compliance-requirements)
+ * Direct Debit mandates to your customers.
  */
 public class MandatePdf {
     private MandatePdf() {
@@ -14,8 +15,7 @@ public class MandatePdf {
     private String url;
 
     /**
-     * The date and time at which `url` will cease to be accessible (30 minutes after the original
-     * request).
+     * The date and time at which the `url` will expire (30 minutes after the original request).
      */
     public String getExpiresAt() {
         return expiresAt;
@@ -23,8 +23,7 @@ public class MandatePdf {
 
     /**
      * The URL at which this mandate PDF can be viewed until it expires at the date and time specified by
-     * `expires_at`. *You should not store this URL as it will only work for a short period of time. The
-     * structure of these URLs may change at any time.*
+     * `expires_at`. You should not store this URL or rely on its structure remaining the same.
      */
     public String getUrl() {
         return url;
