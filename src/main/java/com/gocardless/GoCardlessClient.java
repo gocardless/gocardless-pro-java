@@ -10,6 +10,7 @@ import com.google.common.annotations.VisibleForTesting;
  */
 public class GoCardlessClient {
     private final HttpClient httpClient;
+    private final BankDetailsLookupService bankDetailsLookups;
     private final CreditorService creditors;
     private final CreditorBankAccountService creditorBankAccounts;
     private final CustomerService customers;
@@ -18,7 +19,6 @@ public class GoCardlessClient {
     private final HelperService helpers;
     private final MandateService mandates;
     private final MandatePdfService mandatePdfs;
-    private final ModulusCheckService modulusChecks;
     private final PaymentService payments;
     private final PayoutService payouts;
     private final RedirectFlowService redirectFlows;
@@ -27,6 +27,7 @@ public class GoCardlessClient {
 
     private GoCardlessClient(HttpClient httpClient) {
         this.httpClient = httpClient;
+        this.bankDetailsLookups = new BankDetailsLookupService(httpClient);
         this.creditors = new CreditorService(httpClient);
         this.creditorBankAccounts = new CreditorBankAccountService(httpClient);
         this.customers = new CustomerService(httpClient);
@@ -35,12 +36,18 @@ public class GoCardlessClient {
         this.helpers = new HelperService(httpClient);
         this.mandates = new MandateService(httpClient);
         this.mandatePdfs = new MandatePdfService(httpClient);
-        this.modulusChecks = new ModulusCheckService(httpClient);
         this.payments = new PaymentService(httpClient);
         this.payouts = new PayoutService(httpClient);
         this.redirectFlows = new RedirectFlowService(httpClient);
         this.refunds = new RefundService(httpClient);
         this.subscriptions = new SubscriptionService(httpClient);
+    }
+
+    /**
+     * A service class for working with bank details lookup resources.
+     */
+    public BankDetailsLookupService bankDetailsLookups() {
+        return bankDetailsLookups;
     }
 
     /**
@@ -97,13 +104,6 @@ public class GoCardlessClient {
      */
     public MandatePdfService mandatePdfs() {
         return mandatePdfs;
-    }
-
-    /**
-     * A service class for working with modulus check resources.
-     */
-    public ModulusCheckService modulusChecks() {
-        return modulusChecks;
     }
 
     /**
