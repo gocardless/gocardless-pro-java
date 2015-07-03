@@ -6,7 +6,8 @@ import com.gocardless.resources.MandatePdf;
 /**
  * Service class for working with mandate pdf resources.
  *
- * Construct a mandate PDF for a given set of bank details or an already-existing mandate.
+ * Mandate PDFs allow you to easily display [scheme-rules compliant](#ui-compliance-requirements)
+ * Direct Debit mandates to your customers.
  */
 public class MandatePdfService {
     private HttpClient httpClient;
@@ -21,17 +22,16 @@ public class MandatePdfService {
     }
 
     /**
-     * Generates a temporary URL for viewing a PDF mandate.
+     * Generates a PDF mandate and returns its temporary URL.
      * 
-     * Bank account details may be supplied
-     * using an IBAN (international bank account number), or [local details](#ui-local-bank-details), or
-     * alternatively you can provide the ID of an existing [mandate](#core-endpoints-mandates) to create
-     * a PDF of.
+     * Customer and bank account details can
+     * be left blank (for a blank mandate), provided manually, or inferred from the ID of an existing
+     * [mandate](#core-endpoints-mandates).
      * 
-     * To generate a mandate in a foreign language, set your `Accept-Language` header to
-     * the relevant [ISO
+     * To generate a PDF mandate in a foreign language, set
+     * your `Accept-Language` header to the relevant [ISO
      * 639-1](http://en.wikipedia.org/wiki/List_of_ISO_639-1_codes#Partial_ISO_639_table) language code.
-     * Currently Dutch, English, French, German, Italian, Portuguese and Spanish are supported.
+     * Supported languages are Dutch, English, French, German, Italian, Portuguese and Spanish.
      */
     public MandatePdfCreateRequest create() {
         return new MandatePdfCreateRequest(httpClient);
@@ -40,17 +40,16 @@ public class MandatePdfService {
     /**
      * Request class for {@link MandatePdfService#create }.
      *
-     * Generates a temporary URL for viewing a PDF mandate.
+     * Generates a PDF mandate and returns its temporary URL.
      * 
-     * Bank account details may be supplied
-     * using an IBAN (international bank account number), or [local details](#ui-local-bank-details), or
-     * alternatively you can provide the ID of an existing [mandate](#core-endpoints-mandates) to create
-     * a PDF of.
+     * Customer and bank account details can
+     * be left blank (for a blank mandate), provided manually, or inferred from the ID of an existing
+     * [mandate](#core-endpoints-mandates).
      * 
-     * To generate a mandate in a foreign language, set your `Accept-Language` header to
-     * the relevant [ISO
+     * To generate a PDF mandate in a foreign language, set
+     * your `Accept-Language` header to the relevant [ISO
      * 639-1](http://en.wikipedia.org/wiki/List_of_ISO_639-1_codes#Partial_ISO_639_table) language code.
-     * Currently Dutch, English, French, German, Italian, Portuguese and Spanish are supported.
+     * Supported languages are Dutch, English, French, German, Italian, Portuguese and Spanish.
      */
     public static final class MandatePdfCreateRequest extends PostRequest<MandatePdf> {
         private String accountHolderName;
@@ -76,7 +75,7 @@ public class MandatePdfService {
 
         /**
          * Bank account number - see [local details](#ui-local-bank-details) for more information.
-         * Alternatively you can provide an `iban` or link to an existing mandate.
+         * Alternatively you can provide an `iban`.
          */
         public MandatePdfCreateRequest withAccountNumber(String accountNumber) {
             this.accountNumber = accountNumber;
@@ -85,7 +84,7 @@ public class MandatePdfService {
 
         /**
          * Bank code - see [local details](#ui-local-bank-details) for more information. Alternatively you
-         * can provide an `iban` or link to an existing mandate.
+         * can provide an `iban`.
          */
         public MandatePdfCreateRequest withBankCode(String bankCode) {
             this.bankCode = bankCode;
@@ -93,7 +92,8 @@ public class MandatePdfService {
         }
 
         /**
-         * SWIFT BIC. Optional (will be derived from the `iban` or local details if not provided).
+         * SWIFT BIC. Will be derived automatically if a valid `iban` or [local
+         * details](#ui-local-bank-details) are provided.
          */
         public MandatePdfCreateRequest withBic(String bic) {
             this.bic = bic;
@@ -102,7 +102,7 @@ public class MandatePdfService {
 
         /**
          * Branch code - see [local details](#ui-local-bank-details) for more information. Alternatively you
-         * can provide an `iban` or link to an existing mandate.
+         * can provide an `iban`.
          */
         public MandatePdfCreateRequest withBranchCode(String branchCode) {
             this.branchCode = branchCode;
@@ -120,7 +120,7 @@ public class MandatePdfService {
 
         /**
          * International Bank Account Number. Alternatively you can provide [local
-         * details](#ui-local-bank-details) or link to an existing mandate.
+         * details](#ui-local-bank-details).
          */
         public MandatePdfCreateRequest withIban(String iban) {
             this.iban = iban;
@@ -133,7 +133,8 @@ public class MandatePdfService {
         }
 
         /**
-         * ID of an existing [mandate](#core-endpoints-mandates) to build the PDF from.
+         * ID of an existing [mandate](#core-endpoints-mandates) to build the PDF from. The customer's bank
+         * details will be censored in the generated PDF.
          */
         public MandatePdfCreateRequest withLinksMandate(String mandate) {
             if (links == null) {
@@ -152,8 +153,9 @@ public class MandatePdfService {
         }
 
         /**
-         * Direct Debit scheme. Can be supplied or automatically detected from the bank account details or
-         * mandate provided.
+         * Direct Debit scheme. Can be supplied or automatically detected from the bank account details
+         * provided. If you do not provide a scheme, you must provide either a mandate, an `iban`, or [local
+         * details](#ui-local-bank-details) including a `country_code`.
          */
         public MandatePdfCreateRequest withScheme(String scheme) {
             this.scheme = scheme;
@@ -196,7 +198,8 @@ public class MandatePdfService {
             private String mandate;
 
             /**
-             * ID of an existing [mandate](#core-endpoints-mandates) to build the PDF from.
+             * ID of an existing [mandate](#core-endpoints-mandates) to build the PDF from. The customer's bank
+             * details will be censored in the generated PDF.
              */
             public Links withMandate(String mandate) {
                 this.mandate = mandate;

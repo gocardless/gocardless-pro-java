@@ -156,7 +156,9 @@ public class RefundService {
         }
 
         /**
-         * Total expected refunded amount in pence.
+         * Total expected refunded amount in pence or cents. If there are other partial refunds against this
+         * payment, this value should be the sum of the existing refunds plus the amount of the refund being
+         * created.
          */
         public RefundCreateRequest withTotalAmountConfirmation(Integer totalAmountConfirmation) {
             this.totalAmountConfirmation = totalAmountConfirmation;
