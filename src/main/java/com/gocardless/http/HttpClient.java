@@ -29,7 +29,7 @@ public class HttpClient {
     private static final Map<String, String> HEADERS;
     static {
         ImmutableMap.Builder<String, String> builder = ImmutableMap.builder();
-        builder.put("GoCardless-Version", "2015-04-29");
+        builder.put("GoCardless-Version", "2015-07-06");
         HEADERS = builder.build();
     }
     private final OkHttpClient rawClient;

@@ -134,7 +134,7 @@ public class MandatePdfService {
 
         /**
          * ID of an existing [mandate](#core-endpoints-mandates) to build the PDF from. The customer's bank
-         * details will be censored in the generated PDF.
+         * details will be censored in the generated PDF. No other parameters may be provided alongside this.
          */
         public MandatePdfCreateRequest withLinksMandate(String mandate) {
             if (links == null) {
@@ -199,7 +199,7 @@ public class MandatePdfService {
 
             /**
              * ID of an existing [mandate](#core-endpoints-mandates) to build the PDF from. The customer's bank
-             * details will be censored in the generated PDF.
+             * details will be censored in the generated PDF. No other parameters may be provided alongside this.
              */
             public Links withMandate(String mandate) {
                 this.mandate = mandate;
