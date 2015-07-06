@@ -25,7 +25,7 @@ import com.google.gson.reflect.TypeToken;
  * - When neither `month` nor `day_of_month` are present, the
  * subscription will recur from the `start_date` based on the `interval_unit`.
  * - If `month` or
- * `day_of_month` are present, the recurrence rules will be applied from the `start_at`, and the
+ * `day_of_month` are present, the recurrence rules will be applied from the `start_date`, and the
  * following validations apply:
  * 
  * | interval_unit   | month                                       
@@ -147,7 +147,7 @@ public class SubscriptionService {
         private Month month;
         private String name;
         private String paymentReference;
-        private String startAt;
+        private String startDate;
 
         /**
          * Amount in pence or cents.
@@ -281,8 +281,8 @@ public class SubscriptionService {
          * or after the [mandate](#core-endpoints-mandates)'s `next_possible_charge_date`. When blank, this
          * will be set as the mandate's `next_possible_charge_date`.
          */
-        public SubscriptionCreateRequest withStartAt(String startAt) {
-            this.startAt = startAt;
+        public SubscriptionCreateRequest withStartDate(String startDate) {
+            this.startDate = startDate;
             return this;
         }
 
