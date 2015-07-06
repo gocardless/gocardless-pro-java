@@ -16,7 +16,6 @@ public class GoCardlessClient {
     private final CustomerService customers;
     private final CustomerBankAccountService customerBankAccounts;
     private final EventService events;
-    private final HelperService helpers;
     private final MandateService mandates;
     private final MandatePdfService mandatePdfs;
     private final PaymentService payments;
@@ -33,7 +32,6 @@ public class GoCardlessClient {
         this.customers = new CustomerService(httpClient);
         this.customerBankAccounts = new CustomerBankAccountService(httpClient);
         this.events = new EventService(httpClient);
-        this.helpers = new HelperService(httpClient);
         this.mandates = new MandateService(httpClient);
         this.mandatePdfs = new MandatePdfService(httpClient);
         this.payments = new PaymentService(httpClient);
@@ -83,13 +81,6 @@ public class GoCardlessClient {
      */
     public EventService events() {
         return events;
-    }
-
-    /**
-     * A service class for working with helper resources.
-     */
-    public HelperService helpers() {
-        return helpers;
     }
 
     /**
