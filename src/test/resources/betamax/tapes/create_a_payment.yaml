@@ -12,7 +12,7 @@ interactions:
       Content-Type: application/json; charset=utf-8
       GoCardless-Version: '2014-11-03'
       Host: api-sandbox.gocardless.com
-      User-Agent: gocardless-pro-client/0.0.1-SNAPSHOT Mac_OS_X/10.10.2 Java_HotSpot(TM)_64-Bit_Server_VM/1.8.0_40
+      User-Agent: gocardless-pro/0.0.1 java/1.8 Java_HotSpot_TM__64-Bit_Server_VM/1.8.0_45 Mac_OS_X/10.10.4
     body: '{"payments":{"amount":2000,"currency":"GBP","links":{"mandate":"MD00001PEYCSQF"},"metadata":{"foo":"bar"}}}'
   response:
     status: 201

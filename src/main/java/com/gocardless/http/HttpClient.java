@@ -19,11 +19,18 @@ import com.squareup.okhttp.*;
  * Users of this library should not need to access this class directly.
  */
 public class HttpClient {
-    private static final String USER_AGENT = String.format("gocardless-pro/0.5.0 %s/%s %s/%s",
-            replaceSpaces(System.getProperty("os.name")),
-            replaceSpaces(System.getProperty("os.version")),
-            replaceSpaces(System.getProperty("java.vm.name")),
-            replaceSpaces(System.getProperty("java.version")));
+    /**
+     * See http://tools.ietf.org/html/rfc7230#section-3.2.6.
+     */
+    private static final String DISALLOWED_USER_AGENT_CHARACTERS =
+            "[^\\w!#$%&'\\*\\+\\-\\.\\^`\\|~]";
+    private static final String USER_AGENT = String.format(
+            "gocardless-pro/0.5.1 java/%s %s/%s %s/%s",
+            cleanUserAgentToken(System.getProperty("java.vm.specification.version")),
+            cleanUserAgentToken(System.getProperty("java.vm.name")),
+            cleanUserAgentToken(System.getProperty("java.version")),
+            cleanUserAgentToken(System.getProperty("os.name")),
+            cleanUserAgentToken(System.getProperty("os.version")));
     private static final RequestBody EMPTY_BODY = RequestBody.create(null, new byte[0]);
     private static final MediaType MEDIA_TYPE = MediaType.parse("application/json");
     private static final Map<String, String> HEADERS;
@@ -120,8 +127,8 @@ public class HttpClient {
         }
     }
 
-    private static String replaceSpaces(String s) {
-        return s.replaceAll(" ", "_");
+    private static String cleanUserAgentToken(String s) {
+        return s.replaceAll(DISALLOWED_USER_AGENT_CHARACTERS, "_");
     }
 
     @VisibleForTesting

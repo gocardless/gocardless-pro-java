@@ -11,7 +11,7 @@ interactions:
       Content-Length: '0'
       GoCardless-Version: '2014-11-03'
       Host: api-sandbox.gocardless.com
-      User-Agent: okhttp/2.3.0
+      User-Agent: gocardless-pro/0.0.1 java/1.8 Java_HotSpot_TM__64-Bit_Server_VM/1.8.0_45 Mac_OS_X/10.10.4
   response:
     status: 200
     headers:
