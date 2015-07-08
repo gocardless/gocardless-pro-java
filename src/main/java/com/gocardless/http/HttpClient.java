@@ -19,7 +19,7 @@ import com.squareup.okhttp.*;
  * Users of this library should not need to access this class directly.
  */
 public class HttpClient {
-    private static final String USER_AGENT = String.format("gocardless-pro/0.4.0 %s/%s %s/%s",
+    private static final String USER_AGENT = String.format("gocardless-pro/0.5.0 %s/%s %s/%s",
             replaceSpaces(System.getProperty("os.name")),
             replaceSpaces(System.getProperty("os.version")),
             replaceSpaces(System.getProperty("java.vm.name")),
@@ -29,7 +29,7 @@ public class HttpClient {
     private static final Map<String, String> HEADERS;
     static {
         ImmutableMap.Builder<String, String> builder = ImmutableMap.builder();
-        builder.put("GoCardless-Version", "2015-04-29");
+        builder.put("GoCardless-Version", "2015-07-06");
         HEADERS = builder.build();
     }
     private final OkHttpClient rawClient;

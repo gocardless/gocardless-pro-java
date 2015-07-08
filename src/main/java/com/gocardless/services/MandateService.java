@@ -54,15 +54,6 @@ public class MandateService {
 
     /**
      * Retrieves the details of an existing mandate.
-     * 
-     * If you specify `Accept: application/pdf` on a
-     * request to this endpoint it will return a PDF complying to the relevant scheme rules, which you
-     * can present to your customer.
-     * 
-     * PDF mandates can be retrieved in Dutch, English, French,
-     * German, Italian, Portuguese and Spanish by specifying the [ISO
-     * 639-1](http://en.wikipedia.org/wiki/List_of_ISO_639-1_codes#Partial_ISO_639_table) language code
-     * as an `Accept-Language` header.
      */
     public MandateGetRequest get(String identity) {
         return new MandateGetRequest(httpClient, identity);
@@ -379,15 +370,6 @@ public class MandateService {
      * Request class for {@link MandateService#get }.
      *
      * Retrieves the details of an existing mandate.
-     * 
-     * If you specify `Accept: application/pdf` on a
-     * request to this endpoint it will return a PDF complying to the relevant scheme rules, which you
-     * can present to your customer.
-     * 
-     * PDF mandates can be retrieved in Dutch, English, French,
-     * German, Italian, Portuguese and Spanish by specifying the [ISO
-     * 639-1](http://en.wikipedia.org/wiki/List_of_ISO_639-1_codes#Partial_ISO_639_table) language code
-     * as an `Accept-Language` header.
      */
     public static final class MandateGetRequest extends GetRequest<Mandate> {
         @PathParam

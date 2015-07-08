@@ -111,7 +111,7 @@ public class MandatePdfService {
 
         /**
          * [ISO 3166-1](http://en.wikipedia.org/wiki/ISO_3166-1_alpha-2#Officially_assigned_code_elements)
-         * alpha-2 code. Defaults to the country code of the `iban` if supplied, otherwise is required.
+         * alpha-2 code. Required if providing local details.
          */
         public MandatePdfCreateRequest withCountryCode(String countryCode) {
             this.countryCode = countryCode;
@@ -134,7 +134,7 @@ public class MandatePdfService {
 
         /**
          * ID of an existing [mandate](#core-endpoints-mandates) to build the PDF from. The customer's bank
-         * details will be censored in the generated PDF.
+         * details will be censored in the generated PDF. No other parameters may be provided alongside this.
          */
         public MandatePdfCreateRequest withLinksMandate(String mandate) {
             if (links == null) {
@@ -199,7 +199,7 @@ public class MandatePdfService {
 
             /**
              * ID of an existing [mandate](#core-endpoints-mandates) to build the PDF from. The customer's bank
-             * details will be censored in the generated PDF.
+             * details will be censored in the generated PDF. No other parameters may be provided alongside this.
              */
             public Links withMandate(String mandate) {
                 this.mandate = mandate;

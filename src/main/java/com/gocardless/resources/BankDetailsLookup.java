@@ -14,15 +14,15 @@ public class BankDetailsLookup {
         // blank to prevent instantiation
     }
 
-    private List<AvailableScheme> availableSchemes;
+    private List<AvailableDebitScheme> availableDebitSchemes;
     private String bankName;
 
     /**
      * Array of [schemes](#mandates_scheme) supported for this bank account. This will be an empty array
      * if the bank account is not reachable by any schemes.
      */
-    public List<AvailableScheme> getAvailableSchemes() {
-        return availableSchemes;
+    public List<AvailableDebitScheme> getAvailableDebitSchemes() {
+        return availableDebitSchemes;
     }
 
     /**
@@ -32,7 +32,7 @@ public class BankDetailsLookup {
         return bankName;
     }
 
-    public enum AvailableScheme {
+    public enum AvailableDebitScheme {
         @SerializedName("bacs")
         BACS, @SerializedName("sepa_core")
         SEPA_CORE,

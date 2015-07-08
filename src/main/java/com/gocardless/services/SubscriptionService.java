@@ -23,9 +23,9 @@ import com.google.gson.reflect.TypeToken;
  * - The first payment
  * must be charged within 1 year.
  * - When neither `month` nor `day_of_month` are present, the
- * subscription will recur from the `start_at` based on the `interval_unit`.
+ * subscription will recur from the `start_date` based on the `interval_unit`.
  * - If `month` or
- * `day_of_month` are present, the recurrence rules will be applied from the `start_at`, and the
+ * `day_of_month` are present, the recurrence rules will be applied from the `start_date`, and the
  * following validations apply:
  * 
  * | interval_unit   | month                                       
@@ -139,7 +139,7 @@ public class SubscriptionService {
         private Integer count;
         private String currency;
         private Integer dayOfMonth;
-        private String endAt;
+        private String endDate;
         private Integer interval;
         private IntervalUnit intervalUnit;
         private Links links;
@@ -147,7 +147,7 @@ public class SubscriptionService {
         private Month month;
         private String name;
         private String paymentReference;
-        private String startAt;
+        private String startDate;
 
         /**
          * Amount in pence or cents.
@@ -158,8 +158,8 @@ public class SubscriptionService {
         }
 
         /**
-         * An alternative way to set `end_at`. The total number of payments that should be taken by this
-         * subscription. This will set `end_at` automatically.
+         * An alternative way to set `end_date`. The total number of payments that should be taken by this
+         * subscription. This will set `end_date` automatically.
          */
         public SubscriptionCreateRequest withCount(Integer count) {
             this.count = count;
@@ -189,8 +189,8 @@ public class SubscriptionService {
          * not** be charged. If blank, the subscription will continue forever. Alternatively, `count` can be
          * set to achieve a specific number of payments.
          */
-        public SubscriptionCreateRequest withEndAt(String endAt) {
-            this.endAt = endAt;
+        public SubscriptionCreateRequest withEndDate(String endDate) {
+            this.endDate = endDate;
             return this;
         }
 
@@ -281,8 +281,8 @@ public class SubscriptionService {
          * or after the [mandate](#core-endpoints-mandates)'s `next_possible_charge_date`. When blank, this
          * will be set as the mandate's `next_possible_charge_date`.
          */
-        public SubscriptionCreateRequest withStartAt(String startAt) {
-            this.startAt = startAt;
+        public SubscriptionCreateRequest withStartDate(String startDate) {
+            this.startDate = startDate;
             return this;
         }
 

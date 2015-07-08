@@ -17,9 +17,9 @@ import com.google.gson.annotations.SerializedName;
  * - The first payment
  * must be charged within 1 year.
  * - When neither `month` nor `day_of_month` are present, the
- * subscription will recur from the `start_at` based on the `interval_unit`.
+ * subscription will recur from the `start_date` based on the `interval_unit`.
  * - If `month` or
- * `day_of_month` are present, the recurrence rules will be applied from the `start_at`, and the
+ * `day_of_month` are present, the recurrence rules will be applied from the `start_date`, and the
  * following validations apply:
  * 
  * | interval_unit   | month                                       
@@ -77,7 +77,7 @@ public class Subscription {
     private String createdAt;
     private String currency;
     private Integer dayOfMonth;
-    private String endAt;
+    private String endDate;
     private String id;
     private Integer interval;
     private IntervalUnit intervalUnit;
@@ -86,7 +86,7 @@ public class Subscription {
     private Month month;
     private String name;
     private String paymentReference;
-    private String startAt;
+    private String startDate;
     private String status;
     private List<UpcomingPayment> upcomingPayments;
 
@@ -98,8 +98,8 @@ public class Subscription {
     }
 
     /**
-     * An alternative way to set `end_at`. The total number of payments that should be taken by this
-     * subscription. This will set `end_at` automatically.
+     * An alternative way to set `end_date`. The total number of payments that should be taken by this
+     * subscription. This will set `end_date` automatically.
      */
     public Integer getCount() {
         return count;
@@ -133,8 +133,8 @@ public class Subscription {
      * not** be charged. If blank, the subscription will continue forever. Alternatively, `count` can be
      * set to achieve a specific number of payments.
      */
-    public String getEndAt() {
-        return endAt;
+    public String getEndDate() {
+        return endDate;
     }
 
     /**
@@ -200,8 +200,8 @@ public class Subscription {
      * or after the [mandate](#core-endpoints-mandates)'s `next_possible_charge_date`. When blank, this
      * will be set as the mandate's `next_possible_charge_date`.
      */
-    public String getStartAt() {
-        return startAt;
+    public String getStartDate() {
+        return startDate;
     }
 
     /**

@@ -24,7 +24,7 @@ public class BankDetailsLookupService {
      * Performs a bank details lookup.
      * 
      * Bank account details may be supplied using [local
-     * details](#ui-local-bank-details) or an IBAN.
+     * details](#appendix-local-bank-details) or an IBAN.
      */
     public BankDetailsLookupCreateRequest create() {
         return new BankDetailsLookupCreateRequest(httpClient);
@@ -36,7 +36,7 @@ public class BankDetailsLookupService {
      * Performs a bank details lookup.
      * 
      * Bank account details may be supplied using [local
-     * details](#ui-local-bank-details) or an IBAN.
+     * details](#appendix-local-bank-details) or an IBAN.
      */
     public static final class BankDetailsLookupCreateRequest extends PostRequest<BankDetailsLookup> {
         private String accountNumber;
@@ -46,9 +46,8 @@ public class BankDetailsLookupService {
         private String iban;
 
         /**
-         * Bank account number - see [local
-         * details](https://developer.gocardless.com/pro/2015-04-29/#ui-local-bank-details) for more
-         * information. Alternatively you can provide an `iban`.
+         * Bank account number - see [local details](#appendix-local-bank-details) for more information.
+         * Alternatively you can provide an `iban`.
          */
         public BankDetailsLookupCreateRequest withAccountNumber(String accountNumber) {
             this.accountNumber = accountNumber;
@@ -56,9 +55,8 @@ public class BankDetailsLookupService {
         }
 
         /**
-         * Bank code - see [local
-         * details](https://developer.gocardless.com/pro/2015-04-29/#ui-local-bank-details) for more
-         * information. Alternatively you can provide an `iban`.
+         * Bank code - see [local details](#appendix-local-bank-details) for more information. Alternatively
+         * you can provide an `iban`.
          */
         public BankDetailsLookupCreateRequest withBankCode(String bankCode) {
             this.bankCode = bankCode;
@@ -66,9 +64,8 @@ public class BankDetailsLookupService {
         }
 
         /**
-         * Branch code - see [local
-         * details](https://developer.gocardless.com/pro/2015-04-29/#ui-local-bank-details) for more
-         * information. Alternatively you can provide an `iban`.
+         * Branch code - see [local details](#appendix-local-bank-details) for more information.
+         * Alternatively you can provide an `iban`.
          */
         public BankDetailsLookupCreateRequest withBranchCode(String branchCode) {
             this.branchCode = branchCode;
@@ -86,7 +83,7 @@ public class BankDetailsLookupService {
 
         /**
          * International Bank Account Number. Alternatively you can provide [local
-         * details](https://developer.gocardless.com/pro/2015-04-29/#ui-local-bank-details).
+         * details](#appendix-local-bank-details).
          */
         public BankDetailsLookupCreateRequest withIban(String iban) {
             this.iban = iban;
