@@ -19,7 +19,7 @@ import com.squareup.okhttp.*;
  * Users of this library should not need to access this class directly.
  */
 public class HttpClient {
-    private static final String USER_AGENT = String.format("gocardless-pro/0.4.0 %s/%s %s/%s",
+    private static final String USER_AGENT = String.format("gocardless-pro/0.5.0 %s/%s %s/%s",
             replaceSpaces(System.getProperty("os.name")),
             replaceSpaces(System.getProperty("os.version")),
             replaceSpaces(System.getProperty("java.vm.name")),
