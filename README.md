@@ -2,8 +2,6 @@
 
 This library provides a simple wrapper around the [GoCardless Pro API](http://developer.gocardless.com/pro).
 
-This client is still in beta and is subject to change. Until a stable major version is released you should expect breaking changes.
-
 An example application using this library can be found [here](https://github.com/gocardless/gocardless-pro-java-example).
 
 ## Getting started
@@ -14,14 +12,14 @@ With Maven:
 <dependency>
     <groupId>com.gocardless</groupId>
     <artifactId>gocardless-pro</artifactId>
-    <version>0.5.1</version>
+    <version>1.0.0</version>
 </dependency>
 ```
 
 With Gradle:
 
 ```
-compile 'com.gocardless:gocardless-pro:0.5.1'
+compile 'com.gocardless:gocardless-pro:1.0.0'
 ```
 
 ## Initializing the client
