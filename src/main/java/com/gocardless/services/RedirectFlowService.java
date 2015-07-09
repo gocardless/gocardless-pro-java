@@ -110,8 +110,8 @@ public class RedirectFlowService {
         }
 
         /**
-         * The [creditor](#core-endpoints-creditors) for whom the mandate will be created. The `name` of the
-         * creditor will be displayed on the payment page.
+         * The [creditor](#whitelabel-partner-endpoints-creditors) for whom the mandate will be created. The
+         * `name` of the creditor will be displayed on the payment page.
          */
         public RedirectFlowCreateRequest withLinksCreditor(String creditor) {
             if (links == null) {
@@ -186,8 +186,8 @@ public class RedirectFlowService {
             private String creditor;
 
             /**
-             * The [creditor](#core-endpoints-creditors) for whom the mandate will be created. The `name` of the
-             * creditor will be displayed on the payment page.
+             * The [creditor](#whitelabel-partner-endpoints-creditors) for whom the mandate will be created. The
+             * `name` of the creditor will be displayed on the payment page.
              */
             public Links withCreditor(String creditor) {
                 this.creditor = creditor;

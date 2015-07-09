@@ -15,7 +15,7 @@ import com.google.gson.reflect.TypeToken;
  * Service class for working with payment resources.
  *
  * Payment objects represent payments from a [customer](#core-endpoints-customers) to a
- * [creditor](#core-endpoints-creditors), taken against a Direct Debit
+ * [creditor](#whitelabel-partner-endpoints-creditors), taken against a Direct Debit
  * [mandate](#core-endpoints-mandates).
  * 
  * GoCardless will notify you via a [webhook](#webhooks)

@@ -112,16 +112,16 @@ public class Creditor {
         private String defaultGbpPayoutAccount;
 
         /**
-         * ID of the [bank account](#core-endpoints-creditor-bank-accounts) which is set up to receive
-         * payouts in EUR.
+         * ID of the [bank account](#whitelabel-partner-endpoints-creditor-bank-accounts) which is set up to
+         * receive payouts in EUR.
          */
         public String getDefaultEurPayoutAccount() {
             return defaultEurPayoutAccount;
         }
 
         /**
-         * ID of the [bank account](#core-endpoints-creditor-bank-accounts) which is set up to receive
-         * payouts in GBP.
+         * ID of the [bank account](#whitelabel-partner-endpoints-creditor-bank-accounts) which is set up to
+         * receive payouts in GBP.
          */
         public String getDefaultGbpPayoutAccount() {
             return defaultGbpPayoutAccount;

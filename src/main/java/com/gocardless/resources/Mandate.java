@@ -114,7 +114,7 @@ public class Mandate {
         private String customerBankAccount;
 
         /**
-         * ID of the associated [creditor](#core-endpoints-creditors).
+         * ID of the associated [creditor](#whitelabel-partner-endpoints-creditors).
          */
         public String getCreditor() {
             return creditor;

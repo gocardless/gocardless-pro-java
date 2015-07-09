@@ -111,7 +111,7 @@ public class MandateService {
         }
 
         /**
-         * ID of the associated [creditor](#core-endpoints-creditors).
+         * ID of the associated [creditor](#whitelabel-partner-endpoints-creditors).
          */
         public MandateCreateRequest withLinksCreditor(String creditor) {
             if (links == null) {
@@ -201,7 +201,7 @@ public class MandateService {
             private String customerBankAccount;
 
             /**
-             * ID of the associated [creditor](#core-endpoints-creditors).
+             * ID of the associated [creditor](#whitelabel-partner-endpoints-creditors).
              */
             public Links withCreditor(String creditor) {
                 this.creditor = creditor;
@@ -249,8 +249,9 @@ public class MandateService {
         }
 
         /**
-         * ID of a [creditor](#core-endpoints-creditors). If specified, this endpoint will return all
-         * mandates for the given creditor. Cannot be used in conjunction with `customer_bank_account`
+         * ID of a [creditor](#whitelabel-partner-endpoints-creditors). If specified, this endpoint will
+         * return all mandates for the given creditor. Cannot be used in conjunction with
+         * `customer_bank_account`
          */
         public MandateListRequest<S> withCreditor(String creditor) {
             this.creditor = creditor;

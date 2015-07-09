@@ -66,7 +66,7 @@ public class MandatePdfService {
 
         /**
          * Name of the account holder, as known by the bank. Usually this matches the name of the
-         * [customer](#api-endpoints-customers). This field cannot exceed 18 characters.
+         * [customer](#core-endpoints-customers). This field cannot exceed 18 characters.
          */
         public MandatePdfCreateRequest withAccountHolderName(String accountHolderName) {
             this.accountHolderName = accountHolderName;

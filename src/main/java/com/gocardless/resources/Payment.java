@@ -8,7 +8,7 @@ import com.google.gson.annotations.SerializedName;
  * Represents a payment resource returned from the API.
  *
  * Payment objects represent payments from a [customer](#core-endpoints-customers) to a
- * [creditor](#core-endpoints-creditors), taken against a Direct Debit
+ * [creditor](#whitelabel-partner-endpoints-creditors), taken against a Direct Debit
  * [mandate](#core-endpoints-mandates).
  * 
  * GoCardless will notify you via a [webhook](#webhooks)
@@ -148,7 +148,8 @@ public class Payment {
         private String subscription;
 
         /**
-         * ID of [creditor](#core-endpoints-creditors) to which the collected payment will be sent.
+         * ID of [creditor](#whitelabel-partner-endpoints-creditors) to which the collected payment will be
+         * sent.
          */
         public String getCreditor() {
             return creditor;
