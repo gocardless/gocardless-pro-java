@@ -14,7 +14,7 @@ import com.google.gson.reflect.TypeToken;
  * Service class for working with creditor bank account resources.
  *
  * Creditor Bank Accounts hold the bank details of a
- * [creditor](#whitelabel-partner-endpoints-creditor). These are the bank accounts which your
+ * [creditor](#whitelabel-partner-endpoints-creditors). These are the bank accounts which your
  * [payouts](#core-endpoints-payouts) will be sent to.
  * 
  * Note that creditor bank accounts must be
