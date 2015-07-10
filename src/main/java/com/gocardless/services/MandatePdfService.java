@@ -6,8 +6,8 @@ import com.gocardless.resources.MandatePdf;
 /**
  * Service class for working with mandate pdf resources.
  *
- * Mandate PDFs allow you to easily display [scheme-rules compliant](#ui-compliance-requirements)
- * Direct Debit mandates to your customers.
+ * Mandate PDFs allow you to easily display [scheme-rules
+ * compliant](#appendix-compliance-requirements) Direct Debit mandates to your customers.
  */
 public class MandatePdfService {
     private HttpClient httpClient;
