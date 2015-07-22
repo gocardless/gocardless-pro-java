@@ -6,8 +6,8 @@ import com.gocardless.resources.MandatePdf;
 /**
  * Service class for working with mandate pdf resources.
  *
- * Mandate PDFs allow you to easily display [scheme-rules compliant](#ui-compliance-requirements)
- * Direct Debit mandates to your customers.
+ * Mandate PDFs allow you to easily display [scheme-rules
+ * compliant](#appendix-compliance-requirements) Direct Debit mandates to your customers.
  */
 public class MandatePdfService {
     private HttpClient httpClient;
@@ -66,7 +66,7 @@ public class MandatePdfService {
 
         /**
          * Name of the account holder, as known by the bank. Usually this matches the name of the
-         * [customer](#api-endpoints-customers). This field cannot exceed 18 characters.
+         * [customer](#core-endpoints-customers). This field cannot exceed 18 characters.
          */
         public MandatePdfCreateRequest withAccountHolderName(String accountHolderName) {
             this.accountHolderName = accountHolderName;

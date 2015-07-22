@@ -16,6 +16,7 @@ public class BankDetailsLookup {
 
     private List<AvailableDebitScheme> availableDebitSchemes;
     private String bankName;
+    private String bic;
 
     /**
      * Array of [schemes](#mandates_scheme) supported for this bank account. This will be an empty array
@@ -30,6 +31,13 @@ public class BankDetailsLookup {
      */
     public String getBankName() {
         return bankName;
+    }
+
+    /**
+     * ISO 9362 SWIFT BIC of the bank with which the account is held.
+     */
+    public String getBic() {
+        return bic;
     }
 
     public enum AvailableDebitScheme {

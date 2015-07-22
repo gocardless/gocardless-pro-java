@@ -121,8 +121,8 @@ public class RedirectFlow {
         private String mandate;
 
         /**
-         * The [creditor](#core-endpoints-creditors) for whom the mandate will be created. The `name` of the
-         * creditor will be displayed on the payment page.
+         * The [creditor](#whitelabel-partner-endpoints-creditors) for whom the mandate will be created. The
+         * `name` of the creditor will be displayed on the payment page.
          */
         public String getCreditor() {
             return creditor;

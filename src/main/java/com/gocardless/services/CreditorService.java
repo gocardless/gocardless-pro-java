@@ -343,8 +343,8 @@ public class CreditorService {
         }
 
         /**
-         * ID of the [bank account](#core-endpoints-creditor-bank-accounts) which is set up to receive
-         * payouts in EUR.
+         * ID of the [bank account](#whitelabel-partner-endpoints-creditor-bank-accounts) which is set up to
+         * receive payouts in EUR.
          */
         public CreditorUpdateRequest withLinksDefaultEurPayoutAccount(String defaultEurPayoutAccount) {
             if (links == null) {
@@ -355,8 +355,8 @@ public class CreditorService {
         }
 
         /**
-         * ID of the [bank account](#core-endpoints-creditor-bank-accounts) which is set up to receive
-         * payouts in GBP.
+         * ID of the [bank account](#whitelabel-partner-endpoints-creditor-bank-accounts) which is set up to
+         * receive payouts in GBP.
          */
         public CreditorUpdateRequest withLinksDefaultGbpPayoutAccount(String defaultGbpPayoutAccount) {
             if (links == null) {
@@ -427,8 +427,8 @@ public class CreditorService {
             private String defaultGbpPayoutAccount;
 
             /**
-             * ID of the [bank account](#core-endpoints-creditor-bank-accounts) which is set up to receive
-             * payouts in EUR.
+             * ID of the [bank account](#whitelabel-partner-endpoints-creditor-bank-accounts) which is set up to
+             * receive payouts in EUR.
              */
             public Links withDefaultEurPayoutAccount(String defaultEurPayoutAccount) {
                 this.defaultEurPayoutAccount = defaultEurPayoutAccount;
@@ -436,8 +436,8 @@ public class CreditorService {
             }
 
             /**
-             * ID of the [bank account](#core-endpoints-creditor-bank-accounts) which is set up to receive
-             * payouts in GBP.
+             * ID of the [bank account](#whitelabel-partner-endpoints-creditor-bank-accounts) which is set up to
+             * receive payouts in GBP.
              */
             public Links withDefaultGbpPayoutAccount(String defaultGbpPayoutAccount) {
                 this.defaultGbpPayoutAccount = defaultGbpPayoutAccount;
