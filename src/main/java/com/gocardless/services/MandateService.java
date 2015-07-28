@@ -111,7 +111,8 @@ public class MandateService {
         }
 
         /**
-         * ID of the associated [creditor](#whitelabel-partner-endpoints-creditors).
+         * ID of the associated [creditor](#whitelabel-partner-endpoints-creditors). Only required if your
+         * account manages multiple creditors.
          */
         public MandateCreateRequest withLinksCreditor(String creditor) {
             if (links == null) {
@@ -201,7 +202,8 @@ public class MandateService {
             private String customerBankAccount;
 
             /**
-             * ID of the associated [creditor](#whitelabel-partner-endpoints-creditors).
+             * ID of the associated [creditor](#whitelabel-partner-endpoints-creditors). Only required if your
+             * account manages multiple creditors.
              */
             public Links withCreditor(String creditor) {
                 this.creditor = creditor;
