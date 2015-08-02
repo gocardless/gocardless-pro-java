@@ -190,8 +190,8 @@ public class PaymentService {
 
         /**
          * An optional payment reference. This will be appended to the mandate reference on your customer's
-         * bank statement. For Bacs payments this can be up to 10 characters, for SEPA Core payments the
-         * limit is 140 characters.
+         * bank statement. For Bacs payments this can be up to 10 characters, for SEPA payments the limit is
+         * 140 characters.
          */
         public PaymentCreateRequest withReference(String reference) {
             this.reference = reference;
