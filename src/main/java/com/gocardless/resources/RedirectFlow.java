@@ -118,6 +118,8 @@ public class RedirectFlow {
         }
 
         private String creditor;
+        private String customer;
+        private String customerBankAccount;
         private String mandate;
 
         /**
@@ -126,6 +128,23 @@ public class RedirectFlow {
          */
         public String getCreditor() {
             return creditor;
+        }
+
+        /**
+         * ID of [customer](#core-endpoints-customers) created by this redirect flow.<br/>**Note**: this
+         * property will not be present until the redirect flow has been successfully completed.
+         */
+        public String getCustomer() {
+            return customer;
+        }
+
+        /**
+         * ID of [customer bank account](#core-endpoints-customer-bank-accounts) created by this redirect
+         * flow.<br/>**Note**: this property will not be present until the redirect flow has been
+         * successfully completed.
+         */
+        public String getCustomerBankAccount() {
+            return customerBankAccount;
         }
 
         /**

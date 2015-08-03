@@ -111,7 +111,8 @@ public class MandateService {
         }
 
         /**
-         * ID of the associated [creditor](#whitelabel-partner-endpoints-creditors).
+         * ID of the associated [creditor](#whitelabel-partner-endpoints-creditors). Only required if your
+         * account manages multiple creditors.
          */
         public MandateCreateRequest withLinksCreditor(String creditor) {
             if (links == null) {
@@ -165,7 +166,7 @@ public class MandateService {
         /**
          * <a name="mandates_scheme"></a>Direct Debit scheme to which this mandate and associated payments
          * are submitted. Can be supplied or automatically detected from the customer's bank account.
-         * Currently only "bacs" and "sepa_core" are supported.
+         * Currently only "bacs", "sepa_core", and "sepa_cor1" are supported.
          */
         public MandateCreateRequest withScheme(String scheme) {
             this.scheme = scheme;
@@ -201,7 +202,8 @@ public class MandateService {
             private String customerBankAccount;
 
             /**
-             * ID of the associated [creditor](#whitelabel-partner-endpoints-creditors).
+             * ID of the associated [creditor](#whitelabel-partner-endpoints-creditors). Only required if your
+             * account manages multiple creditors.
              */
             public Links withCreditor(String creditor) {
                 this.creditor = creditor;
