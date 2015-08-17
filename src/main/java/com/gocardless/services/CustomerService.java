@@ -76,6 +76,7 @@ public class CustomerService {
         private String email;
         private String familyName;
         private String givenName;
+        private String language;
         private Map<String, String> metadata;
         private String postalCode;
         private String region;
@@ -150,6 +151,17 @@ public class CustomerService {
          */
         public CustomerCreateRequest withGivenName(String givenName) {
             this.givenName = givenName;
+            return this;
+        }
+
+        /**
+         * [ISO 639-1](http://en.wikipedia.org/wiki/List_of_ISO_639-1_codes) code. Used as the language for
+         * notification emails sent by GoCardless if your organisation does not send its own (see [compliance
+         * requirements](#appendix-compliance-requirements)). Currently only "en", "fr", "de", "pt", "es",
+         * "it", "nl" are supported.
+         */
+        public CustomerCreateRequest withLanguage(String language) {
+            this.language = language;
             return this;
         }
 
@@ -436,6 +448,7 @@ public class CustomerService {
         private String email;
         private String familyName;
         private String givenName;
+        private String language;
         private Map<String, String> metadata;
         private String postalCode;
         private String region;
@@ -510,6 +523,17 @@ public class CustomerService {
          */
         public CustomerUpdateRequest withGivenName(String givenName) {
             this.givenName = givenName;
+            return this;
+        }
+
+        /**
+         * [ISO 639-1](http://en.wikipedia.org/wiki/List_of_ISO_639-1_codes) code. Used as the language for
+         * notification emails sent by GoCardless if your organisation does not send its own (see [compliance
+         * requirements](#appendix-compliance-requirements)). Currently only "en", "fr", "de", "pt", "es",
+         * "it", "nl" are supported.
+         */
+        public CustomerUpdateRequest withLanguage(String language) {
+            this.language = language;
             return this;
         }
 
