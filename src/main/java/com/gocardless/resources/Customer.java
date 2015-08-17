@@ -25,6 +25,7 @@ public class Customer {
     private String familyName;
     private String givenName;
     private String id;
+    private String language;
     private Map<String, String> metadata;
     private String postalCode;
     private String region;
@@ -105,6 +106,16 @@ public class Customer {
      */
     public String getId() {
         return id;
+    }
+
+    /**
+     * [ISO 639-1](http://en.wikipedia.org/wiki/List_of_ISO_639-1_codes) code. Used as the language for
+     * notification emails sent by GoCardless if your organisation does not send its own (see [compliance
+     * requirements](#appendix-compliance-requirements)). Currently only "en", "fr", "de", "pt", "es",
+     * "it", "nl" are supported.
+     */
+    public String getLanguage() {
+        return language;
     }
 
     /**
