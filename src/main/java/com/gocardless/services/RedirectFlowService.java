@@ -176,7 +176,8 @@ public class RedirectFlowService {
         public enum Scheme {
             @SerializedName("bacs")
             BACS, @SerializedName("sepa_core")
-            SEPA_CORE;
+            SEPA_CORE, @SerializedName("sepa_cor1")
+            SEPA_COR1;
             @Override
             public String toString() {
                 return name().toLowerCase();
