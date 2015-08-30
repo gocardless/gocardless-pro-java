@@ -117,9 +117,9 @@ public class Payment {
      * is sent late by the banks.</li>
      * <li>`charged_back`: the payment has been charged back</li>
      *
-     * <li>`paid_out`:  the payment has been paid out</li>
-     * <li>`cancelled`: the payment has been
-     * cancelled</li>
+     * <li>`paid_out`:  the payment has been included in a [payout](#core-endpoints-payouts)</li>
+     *
+     * <li>`cancelled`: the payment has been cancelled</li>
      * </ul>
      */
     public Status getStatus() {
