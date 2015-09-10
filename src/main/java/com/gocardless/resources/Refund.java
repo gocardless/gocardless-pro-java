@@ -26,6 +26,7 @@ public class Refund {
     private String id;
     private Links links;
     private Map<String, String> metadata;
+    private String reference;
 
     /**
      * Amount in pence or cents.
@@ -66,6 +67,15 @@ public class Refund {
      */
     public Map<String, String> getMetadata() {
         return metadata;
+    }
+
+    /**
+     * An optional refund reference, displayed on your customer's bank statement. This can be up to 18
+     * characters long for Bacs payments, or 140 characters for SEPA payments. We recommend including
+     * some text by which your customer can identify the refund as coming from you.
+     */
+    public String getReference() {
+        return reference;
     }
 
     public static class Links {

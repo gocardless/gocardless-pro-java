@@ -108,6 +108,7 @@ public class RefundService {
         private Integer amount;
         private Links links;
         private Map<String, String> metadata;
+        private String reference;
         private Integer totalAmountConfirmation;
 
         /**
@@ -152,6 +153,16 @@ public class RefundService {
                 metadata = new HashMap<>();
             }
             metadata.put(key, value);
+            return this;
+        }
+
+        /**
+         * An optional refund reference, displayed on your customer's bank statement. This can be up to 18
+         * characters long for Bacs payments, or 140 characters for SEPA payments. We recommend including
+         * some text by which your customer can identify the refund as coming from you.
+         */
+        public RefundCreateRequest withReference(String reference) {
+            this.reference = reference;
             return this;
         }
 
