@@ -46,7 +46,7 @@ public class MockHttp extends ExternalResource {
     public void enqueueResponse(int statusCode, String fixturePath, Map<String, String> headers)
             throws Exception {
         String body = Resources.toString(Resources.getResource(fixturePath), UTF_8);
-        MockResponse response = new MockResponse().setBody(body);
+        MockResponse response = new MockResponse().setBody(body).setResponseCode(statusCode);
         for (Map.Entry<String, String> header : headers.entrySet()) {
             response.setHeader(header.getKey(), header.getValue());
         }

@@ -71,10 +71,10 @@ public class HttpClient {
         Request request = buildRequest(apiRequest);
         Response response = execute(request);
         T resource = parseResponseBody(apiRequest, response);
-        return new ApiResponse<T>(resource, response.code(), response.headers().toMultimap());
+        return new ApiResponse<>(resource, response.code(), response.headers().toMultimap());
     }
 
-    <T> Request buildRequest(ApiRequest<T> apiRequest) {
+    private <T> Request buildRequest(ApiRequest<T> apiRequest) {
         URL url = apiRequest.getUrl(urlFormatter);
         Request.Builder request =
                 new Request.Builder().url(url).header("Authorization", credentials)

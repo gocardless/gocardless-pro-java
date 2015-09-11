@@ -22,7 +22,7 @@ import com.google.gson.reflect.TypeToken;
  * GoCardless will notify you via a [webhook](#webhooks) whenever the status of a mandate changes.
  */
 public class MandateService {
-    private HttpClient httpClient;
+    private final HttpClient httpClient;
 
     /**
      * Constructor.  Users of this library should have no need to call this - an instance

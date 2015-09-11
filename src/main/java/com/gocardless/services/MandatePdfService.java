@@ -10,7 +10,7 @@ import com.gocardless.resources.MandatePdf;
  * compliant](#appendix-compliance-requirements) Direct Debit mandates to your customers.
  */
 public class MandatePdfService {
-    private HttpClient httpClient;
+    private final HttpClient httpClient;
 
     /**
      * Constructor.  Users of this library should have no need to call this - an instance

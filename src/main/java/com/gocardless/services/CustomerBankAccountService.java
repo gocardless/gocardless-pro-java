@@ -23,7 +23,7 @@ import com.google.gson.reflect.TypeToken;
  * be provided as links[customer_bank_account] in the error response.
  */
 public class CustomerBankAccountService {
-    private HttpClient httpClient;
+    private final HttpClient httpClient;
 
     /**
      * Constructor.  Users of this library should have no need to call this - an instance

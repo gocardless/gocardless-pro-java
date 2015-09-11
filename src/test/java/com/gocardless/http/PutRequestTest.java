@@ -9,7 +9,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 public class PutRequestTest {
     @Rule
-    public MockHttp http = new MockHttp();
+    public final MockHttp http = new MockHttp();
 
     @Test
     public void shouldPerformPutRequest() throws Exception {

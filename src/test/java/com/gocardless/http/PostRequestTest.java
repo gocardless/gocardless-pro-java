@@ -11,7 +11,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 public class PostRequestTest {
     @Rule
-    public MockHttp http = new MockHttp();
+    public final MockHttp http = new MockHttp();
 
     @Test
     public void shouldPerformPostRequest() throws Exception {

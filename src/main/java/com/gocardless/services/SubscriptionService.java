@@ -74,7 +74,7 @@ import com.google.gson.reflect.TypeToken;
  * 
  */
 public class SubscriptionService {
-    private HttpClient httpClient;
+    private final HttpClient httpClient;
 
     /**
      * Constructor.  Users of this library should have no need to call this - an instance

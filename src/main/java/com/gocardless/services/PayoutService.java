@@ -19,7 +19,7 @@ import com.google.gson.reflect.TypeToken;
  * payment has been successfully collected.
  */
 public class PayoutService {
-    private HttpClient httpClient;
+    private final HttpClient httpClient;
 
     /**
      * Constructor.  Users of this library should have no need to call this - an instance

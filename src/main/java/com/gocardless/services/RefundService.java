@@ -24,7 +24,7 @@ import com.google.gson.reflect.TypeToken;
  * chargeback from the banks.
  */
 public class RefundService {
-    private HttpClient httpClient;
+    private final HttpClient httpClient;
 
     /**
      * Constructor.  Users of this library should have no need to call this - an instance

@@ -22,7 +22,7 @@ import com.google.gson.reflect.TypeToken;
  * whenever the state of a payment changes.
  */
 public class PaymentService {
-    private HttpClient httpClient;
+    private final HttpClient httpClient;
 
     /**
      * Constructor.  Users of this library should have no need to call this - an instance

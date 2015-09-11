@@ -13,7 +13,7 @@ public class RequestWriterTest {
     private RequestWriter writer;
 
     @Before
-    public void setUp() throws Exception {
+    public void setUp() {
         writer = new RequestWriter(GsonFactory.build());
     }
 
