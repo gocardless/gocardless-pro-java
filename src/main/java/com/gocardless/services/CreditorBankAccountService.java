@@ -104,7 +104,7 @@ public class CreditorBankAccountService {
         }
 
         /**
-         * Bank account number - see [local details](#ui-local-bank-details) for more information.
+         * Bank account number - see [local details](#appendix-local-bank-details) for more information.
          * Alternatively you can provide an `iban`.
          */
         public CreditorBankAccountCreateRequest withAccountNumber(String accountNumber) {
@@ -113,8 +113,8 @@ public class CreditorBankAccountService {
         }
 
         /**
-         * Bank code - see [local details](#ui-local-bank-details) for more information. Alternatively you
-         * can provide an `iban`.
+         * Bank code - see [local details](#appendix-local-bank-details) for more information. Alternatively
+         * you can provide an `iban`.
          */
         public CreditorBankAccountCreateRequest withBankCode(String bankCode) {
             this.bankCode = bankCode;
@@ -122,8 +122,8 @@ public class CreditorBankAccountService {
         }
 
         /**
-         * Branch code - see [local details](#ui-local-bank-details) for more information. Alternatively you
-         * can provide an `iban`.
+         * Branch code - see [local details](#appendix-local-bank-details) for more information.
+         * Alternatively you can provide an `iban`.
          */
         public CreditorBankAccountCreateRequest withBranchCode(String branchCode) {
             this.branchCode = branchCode;
@@ -150,7 +150,7 @@ public class CreditorBankAccountService {
 
         /**
          * International Bank Account Number. Alternatively you can provide [local
-         * details](#ui-local-bank-details).
+         * details](#appendix-local-bank-details).
          */
         public CreditorBankAccountCreateRequest withIban(String iban) {
             this.iban = iban;

@@ -74,7 +74,7 @@ public class MandatePdfService {
         }
 
         /**
-         * Bank account number - see [local details](#ui-local-bank-details) for more information.
+         * Bank account number - see [local details](#appendix-local-bank-details) for more information.
          * Alternatively you can provide an `iban`.
          */
         public MandatePdfCreateRequest withAccountNumber(String accountNumber) {
@@ -83,8 +83,8 @@ public class MandatePdfService {
         }
 
         /**
-         * Bank code - see [local details](#ui-local-bank-details) for more information. Alternatively you
-         * can provide an `iban`.
+         * Bank code - see [local details](#appendix-local-bank-details) for more information. Alternatively
+         * you can provide an `iban`.
          */
         public MandatePdfCreateRequest withBankCode(String bankCode) {
             this.bankCode = bankCode;
@@ -93,7 +93,7 @@ public class MandatePdfService {
 
         /**
          * SWIFT BIC. Will be derived automatically if a valid `iban` or [local
-         * details](#ui-local-bank-details) are provided.
+         * details](#appendix-local-bank-details) are provided.
          */
         public MandatePdfCreateRequest withBic(String bic) {
             this.bic = bic;
@@ -101,8 +101,8 @@ public class MandatePdfService {
         }
 
         /**
-         * Branch code - see [local details](#ui-local-bank-details) for more information. Alternatively you
-         * can provide an `iban`.
+         * Branch code - see [local details](#appendix-local-bank-details) for more information.
+         * Alternatively you can provide an `iban`.
          */
         public MandatePdfCreateRequest withBranchCode(String branchCode) {
             this.branchCode = branchCode;
@@ -120,7 +120,7 @@ public class MandatePdfService {
 
         /**
          * International Bank Account Number. Alternatively you can provide [local
-         * details](#ui-local-bank-details).
+         * details](#appendix-local-bank-details).
          */
         public MandatePdfCreateRequest withIban(String iban) {
             this.iban = iban;
@@ -155,7 +155,7 @@ public class MandatePdfService {
         /**
          * Direct Debit scheme. Can be supplied or automatically detected from the bank account details
          * provided. If you do not provide a scheme, you must provide either a mandate, an `iban`, or [local
-         * details](#ui-local-bank-details) including a `country_code`.
+         * details](#appendix-local-bank-details) including a `country_code`.
          */
         public MandatePdfCreateRequest withScheme(String scheme) {
             this.scheme = scheme;

@@ -40,15 +40,16 @@ public class CustomerBankAccountService {
      * There are three different ways to supply bank
      * account details:
      * 
-     * - [Local details](#ui-local-bank-details)
+     * - [Local details](#appendix-local-bank-details)
      * 
      * - IBAN
      * 
-     * - [Customer Bank
-     * Account Tokens](#js-flow-create-a-customer-bank-account-token)
+     * - [Customer
+     * Bank Account Tokens](#js-flow-create-a-customer-bank-account-token)
      * 
-     * For more information on the
-     * different fields required in each country, see [local bank details](#ui-local-bank-details).
+     * For more information on
+     * the different fields required in each country, see [local bank
+     * details](#appendix-local-bank-details).
      */
     public CustomerBankAccountCreateRequest create() {
         return new CustomerBankAccountCreateRequest(httpClient);
@@ -102,15 +103,16 @@ public class CustomerBankAccountService {
      * There are three different ways to supply bank
      * account details:
      * 
-     * - [Local details](#ui-local-bank-details)
+     * - [Local details](#appendix-local-bank-details)
      * 
      * - IBAN
      * 
-     * - [Customer Bank
-     * Account Tokens](#js-flow-create-a-customer-bank-account-token)
+     * - [Customer
+     * Bank Account Tokens](#js-flow-create-a-customer-bank-account-token)
      * 
-     * For more information on the
-     * different fields required in each country, see [local bank details](#ui-local-bank-details).
+     * For more information on
+     * the different fields required in each country, see [local bank
+     * details](#appendix-local-bank-details).
      */
     public static final class CustomerBankAccountCreateRequest extends
             PostRequest<CustomerBankAccount> {
@@ -135,7 +137,7 @@ public class CustomerBankAccountService {
         }
 
         /**
-         * Bank account number - see [local details](#ui-local-bank-details) for more information.
+         * Bank account number - see [local details](#appendix-local-bank-details) for more information.
          * Alternatively you can provide an `iban`.
          */
         public CustomerBankAccountCreateRequest withAccountNumber(String accountNumber) {
@@ -144,8 +146,8 @@ public class CustomerBankAccountService {
         }
 
         /**
-         * Bank code - see [local details](#ui-local-bank-details) for more information.  Alternatively you
-         * can provide an `iban`.
+         * Bank code - see [local details](#appendix-local-bank-details) for more information.  Alternatively
+         * you can provide an `iban`.
          */
         public CustomerBankAccountCreateRequest withBankCode(String bankCode) {
             this.bankCode = bankCode;
@@ -153,8 +155,8 @@ public class CustomerBankAccountService {
         }
 
         /**
-         * Branch code - see [local details](#ui-local-bank-details) for more information. Alternatively you
-         * can provide an `iban`.
+         * Branch code - see [local details](#appendix-local-bank-details) for more information.
+         * Alternatively you can provide an `iban`.
          */
         public CustomerBankAccountCreateRequest withBranchCode(String branchCode) {
             this.branchCode = branchCode;
@@ -181,7 +183,7 @@ public class CustomerBankAccountService {
 
         /**
          * International Bank Account Number. Alternatively you can provide [local
-         * details](#ui-local-bank-details).
+         * details](#appendix-local-bank-details).
          */
         public CustomerBankAccountCreateRequest withIban(String iban) {
             this.iban = iban;
