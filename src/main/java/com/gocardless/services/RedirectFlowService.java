@@ -41,7 +41,7 @@ import com.google.gson.annotations.SerializedName;
  * expire 30 minutes after they are first created. You cannot complete an expired redirect flow.
  */
 public class RedirectFlowService {
-    private HttpClient httpClient;
+    private final HttpClient httpClient;
 
     /**
      * Constructor.  Users of this library should have no need to call this - an instance
@@ -174,7 +174,8 @@ public class RedirectFlowService {
         }
 
         public enum Scheme {
-            @SerializedName("bacs")
+            @SerializedName("autogiro")
+            AUTOGIRO, @SerializedName("bacs")
             BACS, @SerializedName("sepa_core")
             SEPA_CORE, @SerializedName("sepa_cor1")
             SEPA_COR1;

@@ -26,11 +26,11 @@ abstract class ApiRequest<T> {
         return ImmutableMap.of();
     }
 
-    protected Map<String, Object> getQueryParams() {
+    Map<String, Object> getQueryParams() {
         return ImmutableMap.of();
     }
 
-    protected HttpClient getHttpClient() {
+    HttpClient getHttpClient() {
         return httpClient;
     }
 

@@ -16,9 +16,9 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 public class ListRequestTest {
     @Rule
-    public MockHttp http = new MockHttp();
+    public final MockHttp http = new MockHttp();
     @Rule
-    public ExpectedException exception = ExpectedException.none();
+    public final ExpectedException exception = ExpectedException.none();
 
     @Test
     public void shouldPerformListRequest() throws Exception {

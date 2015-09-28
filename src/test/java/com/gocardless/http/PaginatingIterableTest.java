@@ -14,7 +14,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 public class PaginatingIterableTest {
     @Rule
-    public MockHttp http = new MockHttp();
+    public final MockHttp http = new MockHttp();
 
     @Test
     public void shouldIterateThroughPages() throws Exception {

@@ -15,13 +15,13 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 public class GetRequestTest {
     @Rule
-    public MockHttp http = new MockHttp();
+    public final MockHttp http = new MockHttp();
     @Rule
-    public ExpectedException exception = ExpectedException.none();
+    public final ExpectedException exception = ExpectedException.none();
     private GetRequest<DummyItem> request;
 
     @Before
-    public void setUp() throws Exception {
+    public void setUp() {
         request = new DummyGetRequest();
     }
 

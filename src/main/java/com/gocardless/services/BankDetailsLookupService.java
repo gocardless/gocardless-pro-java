@@ -9,7 +9,7 @@ import com.gocardless.resources.BankDetailsLookup;
  * Look up the name and reachability of a bank.
  */
 public class BankDetailsLookupService {
-    private HttpClient httpClient;
+    private final HttpClient httpClient;
 
     /**
      * Constructor.  Users of this library should have no need to call this - an instance

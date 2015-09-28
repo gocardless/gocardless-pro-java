@@ -17,7 +17,7 @@ import com.google.gson.reflect.TypeToken;
  * example a payment which has been collected, or a mandate which has been transferred.
  */
 public class EventService {
-    private HttpClient httpClient;
+    private final HttpClient httpClient;
 
     /**
      * Constructor.  Users of this library should have no need to call this - an instance

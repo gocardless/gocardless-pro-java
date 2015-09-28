@@ -22,7 +22,7 @@ import com.google.gson.reflect.TypeToken;
  * GoCardless will notify you via a [webhook](#webhooks) whenever the status of a mandate changes.
  */
 public class MandateService {
-    private HttpClient httpClient;
+    private final HttpClient httpClient;
 
     /**
      * Constructor.  Users of this library should have no need to call this - an instance
@@ -166,7 +166,7 @@ public class MandateService {
         /**
          * <a name="mandates_scheme"></a>Direct Debit scheme to which this mandate and associated payments
          * are submitted. Can be supplied or automatically detected from the customer's bank account.
-         * Currently only "bacs", "sepa_core", and "sepa_cor1" are supported.
+         * Currently only "autogiro", "bacs", "sepa_core", and "sepa_cor1" are supported.
          */
         public MandateCreateRequest withScheme(String scheme) {
             this.scheme = scheme;

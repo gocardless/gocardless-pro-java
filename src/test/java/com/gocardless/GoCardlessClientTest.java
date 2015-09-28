@@ -26,7 +26,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 public class GoCardlessClientTest {
     private GoCardlessClient client;
     @Rule
-    public Recorder recorder = new Recorder();
+    public final Recorder recorder = new Recorder();
 
     @Before
     public void setUp() throws Exception {

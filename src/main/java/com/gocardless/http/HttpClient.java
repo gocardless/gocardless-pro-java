@@ -25,7 +25,7 @@ public class HttpClient {
     private static final String DISALLOWED_USER_AGENT_CHARACTERS =
             "[^\\w!#$%&'\\*\\+\\-\\.\\^`\\|~]";
     private static final String USER_AGENT = String.format(
-            "gocardless-pro/1.5.0 java/%s %s/%s %s/%s",
+            "gocardless-pro/1.6.0 java/%s %s/%s %s/%s",
             cleanUserAgentToken(System.getProperty("java.vm.specification.version")),
             cleanUserAgentToken(System.getProperty("java.vm.name")),
             cleanUserAgentToken(System.getProperty("java.version")),
@@ -71,10 +71,10 @@ public class HttpClient {
         Request request = buildRequest(apiRequest);
         Response response = execute(request);
         T resource = parseResponseBody(apiRequest, response);
-        return new ApiResponse<T>(resource, response.code(), response.headers().toMultimap());
+        return new ApiResponse<>(resource, response.code(), response.headers().toMultimap());
     }
 
-    <T> Request buildRequest(ApiRequest<T> apiRequest) {
+    private <T> Request buildRequest(ApiRequest<T> apiRequest) {
         URL url = apiRequest.getUrl(urlFormatter);
         Request.Builder request =
                 new Request.Builder().url(url).header("Authorization", credentials)
