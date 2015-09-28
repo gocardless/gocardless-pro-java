@@ -4,7 +4,7 @@ interactions:
 - recorded: 2015-04-13T16:29:16.008Z
   request:
     method: GET
-    uri: https://api-sandbox.gocardless.com/mandates?customer=CU00003068FG73&status=active%2Cfailed
+    uri: https://api-sandbox.gocardless.com/mandates?customer=CU00003068FG73&status=active,failed
     headers:
       Accept-Encoding: gzip
       Connection: Keep-Alive

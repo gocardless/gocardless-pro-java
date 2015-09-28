@@ -2,7 +2,6 @@ package com.gocardless.http;
 
 import java.io.IOException;
 import java.io.Reader;
-import java.net.URL;
 import java.util.Map;
 
 import com.gocardless.GoCardlessException;
@@ -75,7 +74,7 @@ public class HttpClient {
     }
 
     private <T> Request buildRequest(ApiRequest<T> apiRequest) {
-        URL url = apiRequest.getUrl(urlFormatter);
+        HttpUrl url = apiRequest.getUrl(urlFormatter);
         Request.Builder request =
                 new Request.Builder().url(url).header("Authorization", credentials)
                         .header("User-Agent", USER_AGENT)

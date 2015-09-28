@@ -1,10 +1,11 @@
 package com.gocardless.http;
 
 import java.io.Reader;
-import java.net.URL;
 import java.util.Map;
 
 import com.google.common.collect.ImmutableMap;
+
+import com.squareup.okhttp.HttpUrl;
 
 /**
  * Base class for API requests.
@@ -18,7 +19,7 @@ abstract class ApiRequest<T> {
         this.httpClient = httpClient;
     }
 
-    URL getUrl(UrlFormatter urlFormatter) {
+    HttpUrl getUrl(UrlFormatter urlFormatter) {
         return urlFormatter.formatUrl(getPathTemplate(), getPathParams(), getQueryParams());
     }
 
