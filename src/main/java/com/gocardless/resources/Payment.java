@@ -21,6 +21,7 @@ public class Payment {
 
     private Integer amount;
     private Integer amountRefunded;
+    private Integer appFee;
     private String chargeDate;
     private String createdAt;
     private String currency;
@@ -32,17 +33,26 @@ public class Payment {
     private Status status;
 
     /**
-     * Amount in pence or cents.
+     * Amount in pence (GBP), cents (EUR), or öre (SEK).
      */
     public Integer getAmount() {
         return amount;
     }
 
     /**
-     * Amount [refunded](#core-endpoints-refunds) in pence or cents.
+     * Amount [refunded](#core-endpoints-refunds) in pence/cents/öre.
      */
     public Integer getAmountRefunded() {
         return amountRefunded;
+    }
+
+    /**
+     * The amount to be deducted from the payment as the OAuth app's fee, in pence or cents. <p
+     * class='beta-notice'><strong>Beta</strong>: This field is part of the <a href='#guides-oauth'>OAuth
+     * API</a>, which is currently in beta.</p>
+     */
+    public Integer getAppFee() {
+        return appFee;
     }
 
     /**
@@ -62,8 +72,8 @@ public class Payment {
     }
 
     /**
-     * [ISO 4217](http://en.wikipedia.org/wiki/ISO_4217#Active_codes) currency code, currently only "GBP"
-     * and "EUR" are supported.
+     * [ISO 4217](http://en.wikipedia.org/wiki/ISO_4217#Active_codes) currency code, currently only
+     * "GBP", "EUR", and "SEK" are supported.
      */
     public String getCurrency() {
         return currency;
@@ -98,7 +108,7 @@ public class Payment {
     /**
      * An optional payment reference. This will be appended to the mandate reference on your customer's
      * bank statement. For Bacs payments this can be up to 10 characters, for SEPA payments the limit is
-     * 140 characters.
+     * 140 characters, and for Autogiro payments the limit is 16 characters.
      */
     public String getReference() {
         return reference;

@@ -16,6 +16,10 @@ import com.google.gson.reflect.TypeToken;
  * Customer objects hold the contact details for a customer. A customer can have several [customer
  * bank accounts](#core-endpoints-customer-bank-accounts), which in turn can have several Direct
  * Debit [mandates](#core-endpoints-mandates).
+ * 
+ * Note: the `swedish_identity_number` field may
+ * only be supplied for Swedish customers, and must be supplied if you intend to set up an Autogiro
+ * mandate with the customer.
  */
 public class CustomerService {
     private final HttpClient httpClient;
@@ -80,6 +84,7 @@ public class CustomerService {
         private Map<String, String> metadata;
         private String postalCode;
         private String region;
+        private String swedishIdentityNumber;
 
         /**
          * The first line of the customer's address.
@@ -200,6 +205,16 @@ public class CustomerService {
          */
         public CustomerCreateRequest withRegion(String region) {
             this.region = region;
+            return this;
+        }
+
+        /**
+         * For Swedish customers only. The civic/company number (personnummer, samordningsnummer, or
+         * organisationsnummer) of the customer. Must be supplied if the customer's bank account is
+         * denominated in Swedish krona (SEK).
+         */
+        public CustomerCreateRequest withSwedishIdentityNumber(String swedishIdentityNumber) {
+            this.swedishIdentityNumber = swedishIdentityNumber;
             return this;
         }
 
@@ -453,6 +468,7 @@ public class CustomerService {
         private Map<String, String> metadata;
         private String postalCode;
         private String region;
+        private String swedishIdentityNumber;
 
         /**
          * The first line of the customer's address.
@@ -573,6 +589,16 @@ public class CustomerService {
          */
         public CustomerUpdateRequest withRegion(String region) {
             this.region = region;
+            return this;
+        }
+
+        /**
+         * For Swedish customers only. The civic/company number (personnummer, samordningsnummer, or
+         * organisationsnummer) of the customer. Must be supplied if the customer's bank account is
+         * denominated in Swedish krona (SEK).
+         */
+        public CustomerUpdateRequest withSwedishIdentityNumber(String swedishIdentityNumber) {
+            this.swedishIdentityNumber = swedishIdentityNumber;
             return this;
         }
 

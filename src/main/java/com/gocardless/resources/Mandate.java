@@ -60,7 +60,8 @@ public class Mandate {
     }
 
     /**
-     * Unique 6 to 18 character reference. Can be supplied or auto-generated.
+     * Unique reference. Can be supplied or auto-generated. Different schemes have different length and
+     * [character set](#character-sets) requirements.
      */
     public String getReference() {
         return reference;

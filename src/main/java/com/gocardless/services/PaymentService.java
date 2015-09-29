@@ -37,9 +37,8 @@ public class PaymentService {
      * <a name="mandate_is_inactive"></a>Creates a new payment object.
      * 
      * This fails with a
-     * `mandate_is_inactive` error if the linked [mandate](#core-endpoints-mandates) is cancelled.
-     * Payments can be created against `pending_submission` mandates, but they will not be submitted
-     * until the mandate becomes active.
+     * `mandate_is_inactive` error if the linked [mandate](#core-endpoints-mandates) is cancelled or has
+     * failed. Payments can be created against `pending_submission`  and `submitted` mandates.
      */
     public PaymentCreateRequest create() {
         return new PaymentCreateRequest(httpClient);
@@ -103,12 +102,12 @@ public class PaymentService {
      * <a name="mandate_is_inactive"></a>Creates a new payment object.
      * 
      * This fails with a
-     * `mandate_is_inactive` error if the linked [mandate](#core-endpoints-mandates) is cancelled.
-     * Payments can be created against `pending_submission` mandates, but they will not be submitted
-     * until the mandate becomes active.
+     * `mandate_is_inactive` error if the linked [mandate](#core-endpoints-mandates) is cancelled or has
+     * failed. Payments can be created against `pending_submission`  and `submitted` mandates.
      */
     public static final class PaymentCreateRequest extends PostRequest<Payment> {
         private Integer amount;
+        private Integer appFee;
         private String chargeDate;
         private String currency;
         private String description;
@@ -117,10 +116,20 @@ public class PaymentService {
         private String reference;
 
         /**
-         * Amount in pence or cents.
+         * Amount in pence (GBP), cents (EUR), or öre (SEK).
          */
         public PaymentCreateRequest withAmount(Integer amount) {
             this.amount = amount;
+            return this;
+        }
+
+        /**
+         * The amount to be deducted from the payment as the OAuth app's fee, in pence or cents. <p
+         * class='beta-notice'><strong>Beta</strong>: This field is part of the <a href='#guides-oauth'>OAuth
+         * API</a>, which is currently in beta.</p>
+         */
+        public PaymentCreateRequest withAppFee(Integer appFee) {
+            this.appFee = appFee;
             return this;
         }
 
@@ -135,8 +144,8 @@ public class PaymentService {
         }
 
         /**
-         * [ISO 4217](http://en.wikipedia.org/wiki/ISO_4217#Active_codes) currency code, currently only "GBP"
-         * and "EUR" are supported.
+         * [ISO 4217](http://en.wikipedia.org/wiki/ISO_4217#Active_codes) currency code, currently only
+         * "GBP", "EUR", and "SEK" are supported.
          */
         public PaymentCreateRequest withCurrency(String currency) {
             this.currency = currency;
@@ -191,7 +200,7 @@ public class PaymentService {
         /**
          * An optional payment reference. This will be appended to the mandate reference on your customer's
          * bank statement. For Bacs payments this can be up to 10 characters, for SEPA payments the limit is
-         * 140 characters.
+         * 140 characters, and for Autogiro payments the limit is 16 characters.
          */
         public PaymentCreateRequest withReference(String reference) {
             this.reference = reference;

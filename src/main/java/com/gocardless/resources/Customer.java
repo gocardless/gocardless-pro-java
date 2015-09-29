@@ -8,6 +8,10 @@ import java.util.Map;
  * Customer objects hold the contact details for a customer. A customer can have several [customer
  * bank accounts](#core-endpoints-customer-bank-accounts), which in turn can have several Direct
  * Debit [mandates](#core-endpoints-mandates).
+ * 
+ * Note: the `swedish_identity_number` field may
+ * only be supplied for Swedish customers, and must be supplied if you intend to set up an Autogiro
+ * mandate with the customer.
  */
 public class Customer {
     private Customer() {
@@ -29,6 +33,7 @@ public class Customer {
     private Map<String, String> metadata;
     private String postalCode;
     private String region;
+    private String swedishIdentityNumber;
 
     /**
      * The first line of the customer's address.
@@ -139,5 +144,14 @@ public class Customer {
      */
     public String getRegion() {
         return region;
+    }
+
+    /**
+     * For Swedish customers only. The civic/company number (personnummer, samordningsnummer, or
+     * organisationsnummer) of the customer. Must be supplied if the customer's bank account is
+     * denominated in Swedish krona (SEK).
+     */
+    public String getSwedishIdentityNumber() {
+        return swedishIdentityNumber;
     }
 }

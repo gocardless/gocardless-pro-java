@@ -63,6 +63,7 @@ public class MandatePdfService {
         private String mandateReference;
         private String scheme;
         private String signatureDate;
+        private String swedishIdentityNumber;
 
         /**
          * Name of the account holder, as known by the bank. Usually this matches the name of the
@@ -120,7 +121,7 @@ public class MandatePdfService {
 
         /**
          * International Bank Account Number. Alternatively you can provide [local
-         * details](#appendix-local-bank-details).
+         * details](#appendix-local-bank-details). IBANs cannot be provided for Autogiro mandates.
          */
         public MandatePdfCreateRequest withIban(String iban) {
             this.iban = iban;
@@ -167,6 +168,15 @@ public class MandatePdfService {
          */
         public MandatePdfCreateRequest withSignatureDate(String signatureDate) {
             this.signatureDate = signatureDate;
+            return this;
+        }
+
+        /**
+         * For Swedish customers only. The civic/company number (personnummer, samordningsnummer, or
+         * organisationsnummer) of the customer. Can only be supplied for Autogiro mandates.
+         */
+        public MandatePdfCreateRequest withSwedishIdentityNumber(String swedishIdentityNumber) {
+            this.swedishIdentityNumber = swedishIdentityNumber;
             return this;
         }
 
