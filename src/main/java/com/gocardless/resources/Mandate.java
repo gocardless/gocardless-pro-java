@@ -60,8 +60,9 @@ public class Mandate {
     }
 
     /**
-     * Unique reference. Can be supplied or auto-generated. Different schemes have different length and
-     * [character set](#character-sets) requirements.
+     * Unique reference. Different schemes have different length and [character set](#character-sets)
+     * requirements. GoCardless will generate a unique reference satisfying the different scheme
+     * requirements if this field is left blank.
      */
     public String getReference() {
         return reference;

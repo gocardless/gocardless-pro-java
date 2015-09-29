@@ -48,7 +48,7 @@ public class Payment {
 
     /**
      * The amount to be deducted from the payment as the OAuth app's fee, in pence or cents. <p
-     * class='beta-notice'><strong>Beta</strong>: This field is part of the <a href='#guides-oauth'>OAuth
+     * class="beta-notice"><strong>Beta</strong>: This field is part of the <a href='#guides-oauth'>OAuth
      * API</a>, which is currently in beta.</p>
      */
     public Integer getAppFee() {

@@ -38,7 +38,8 @@ public class PaymentService {
      * 
      * This fails with a
      * `mandate_is_inactive` error if the linked [mandate](#core-endpoints-mandates) is cancelled or has
-     * failed. Payments can be created against `pending_submission`  and `submitted` mandates.
+     * failed. Payments can be created against `pending_submission` and `submitted` as well as `active`
+     * mandates.
      */
     public PaymentCreateRequest create() {
         return new PaymentCreateRequest(httpClient);
@@ -103,7 +104,8 @@ public class PaymentService {
      * 
      * This fails with a
      * `mandate_is_inactive` error if the linked [mandate](#core-endpoints-mandates) is cancelled or has
-     * failed. Payments can be created against `pending_submission`  and `submitted` mandates.
+     * failed. Payments can be created against `pending_submission` and `submitted` as well as `active`
+     * mandates.
      */
     public static final class PaymentCreateRequest extends PostRequest<Payment> {
         private Integer amount;
@@ -125,7 +127,7 @@ public class PaymentService {
 
         /**
          * The amount to be deducted from the payment as the OAuth app's fee, in pence or cents. <p
-         * class='beta-notice'><strong>Beta</strong>: This field is part of the <a href='#guides-oauth'>OAuth
+         * class="beta-notice"><strong>Beta</strong>: This field is part of the <a href='#guides-oauth'>OAuth
          * API</a>, which is currently in beta.</p>
          */
         public PaymentCreateRequest withAppFee(Integer appFee) {
