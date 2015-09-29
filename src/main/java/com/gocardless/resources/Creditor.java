@@ -58,7 +58,7 @@ public class Creditor {
 
     /**
      * [ISO 3166-1](http://en.wikipedia.org/wiki/ISO_3166-1_alpha-2#Officially_assigned_code_elements)
-     * alpha-2 code, currently only "GB" is supported.
+     * alpha-2 code.
      */
     public String getCountryCode() {
         return countryCode;
@@ -110,6 +110,7 @@ public class Creditor {
 
         private String defaultEurPayoutAccount;
         private String defaultGbpPayoutAccount;
+        private String defaultSekPayoutAccount;
 
         /**
          * ID of the [bank account](#whitelabel-partner-endpoints-creditor-bank-accounts) which is set up to
@@ -125,6 +126,14 @@ public class Creditor {
          */
         public String getDefaultGbpPayoutAccount() {
             return defaultGbpPayoutAccount;
+        }
+
+        /**
+         * ID of the [bank account](#whitelabel-partner-endpoints-creditor-bank-accounts) which is set up to
+         * receive payouts in SEK.
+         */
+        public String getDefaultSekPayoutAccount() {
+            return defaultSekPayoutAccount;
         }
     }
 }

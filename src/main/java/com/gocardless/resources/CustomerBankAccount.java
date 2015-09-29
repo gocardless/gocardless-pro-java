@@ -47,7 +47,7 @@ public class CustomerBankAccount {
     }
 
     /**
-     * Name of bank, taken from sort code.
+     * Name of bank, taken from the bank details.
      */
     public String getBankName() {
         return bankName;

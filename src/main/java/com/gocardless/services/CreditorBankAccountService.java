@@ -150,7 +150,7 @@ public class CreditorBankAccountService {
 
         /**
          * International Bank Account Number. Alternatively you can provide [local
-         * details](#appendix-local-bank-details).
+         * details](#appendix-local-bank-details). IBANs are not accepted for accounts in SEK.
          */
         public CreditorBankAccountCreateRequest withIban(String iban) {
             this.iban = iban;

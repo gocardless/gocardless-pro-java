@@ -112,7 +112,7 @@ public class RefundService {
         private Integer totalAmountConfirmation;
 
         /**
-         * Amount in pence or cents.
+         * Amount in pence/cents/öre.
          */
         public RefundCreateRequest withAmount(Integer amount) {
             this.amount = amount;
@@ -158,8 +158,8 @@ public class RefundService {
 
         /**
          * An optional refund reference, displayed on your customer's bank statement. This can be up to 18
-         * characters long for Bacs payments, or 140 characters for SEPA payments. We recommend including
-         * some text by which your customer can identify the refund as coming from you.
+         * characters long for Bacs payments, 140 characters for SEPA payments, or 25 characters for Autogiro
+         * payments.
          */
         public RefundCreateRequest withReference(String reference) {
             this.reference = reference;
@@ -167,7 +167,7 @@ public class RefundService {
         }
 
         /**
-         * Total expected refunded amount in pence or cents. If there are other partial refunds against this
+         * Total expected refunded amount in pence/cents/öre. If there are other partial refunds against this
          * payment, this value should be the sum of the existing refunds plus the amount of the refund being
          * created.
          */

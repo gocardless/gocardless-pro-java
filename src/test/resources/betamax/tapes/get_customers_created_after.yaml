@@ -4,7 +4,7 @@ interactions:
 - recorded: 2015-04-13T15:02:42.157Z
   request:
     method: GET
-    uri: https://api-sandbox.gocardless.com/customers?created_at[gte]=2015-04-13T15%3A02%3A40Z
+    uri: https://api-sandbox.gocardless.com/customers?created_at[gte]=2015-04-13T15:02:40Z
     headers:
       Accept-Encoding: gzip
       Connection: Keep-Alive

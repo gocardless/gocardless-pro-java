@@ -29,7 +29,7 @@ public class Refund {
     private String reference;
 
     /**
-     * Amount in pence or cents.
+     * Amount in pence/cents/öre.
      */
     public Integer getAmount() {
         return amount;
@@ -71,8 +71,8 @@ public class Refund {
 
     /**
      * An optional refund reference, displayed on your customer's bank statement. This can be up to 18
-     * characters long for Bacs payments, or 140 characters for SEPA payments. We recommend including
-     * some text by which your customer can identify the refund as coming from you.
+     * characters long for Bacs payments, 140 characters for SEPA payments, or 25 characters for Autogiro
+     * payments.
      */
     public String getReference() {
         return reference;

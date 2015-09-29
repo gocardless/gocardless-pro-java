@@ -156,7 +156,9 @@ public class MandateService {
         }
 
         /**
-         * Unique 6 to 18 character reference. Can be supplied or auto-generated.
+         * Unique reference. Different schemes have different length and [character set](#character-sets)
+         * requirements. GoCardless will generate a unique reference satisfying the different scheme
+         * requirements if this field is left blank.
          */
         public MandateCreateRequest withReference(String reference) {
             this.reference = reference;
@@ -287,7 +289,9 @@ public class MandateService {
         }
 
         /**
-         * Unique 6 to 18 character reference. Can be supplied or auto-generated.
+         * Unique reference. Different schemes have different length and [character set](#character-sets)
+         * requirements. GoCardless will generate a unique reference satisfying the different scheme
+         * requirements if this field is left blank.
          */
         public MandateListRequest<S> withReference(String reference) {
             this.reference = reference;

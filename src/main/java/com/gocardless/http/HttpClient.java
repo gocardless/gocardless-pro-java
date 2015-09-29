@@ -2,7 +2,6 @@ package com.gocardless.http;
 
 import java.io.IOException;
 import java.io.Reader;
-import java.net.URL;
 import java.util.Map;
 
 import com.gocardless.GoCardlessException;
@@ -25,7 +24,7 @@ public class HttpClient {
     private static final String DISALLOWED_USER_AGENT_CHARACTERS =
             "[^\\w!#$%&'\\*\\+\\-\\.\\^`\\|~]";
     private static final String USER_AGENT = String.format(
-            "gocardless-pro/1.6.0 java/%s %s/%s %s/%s",
+            "gocardless-pro/1.7.0 java/%s %s/%s %s/%s",
             cleanUserAgentToken(System.getProperty("java.vm.specification.version")),
             cleanUserAgentToken(System.getProperty("java.vm.name")),
             cleanUserAgentToken(System.getProperty("java.version")),
@@ -75,7 +74,7 @@ public class HttpClient {
     }
 
     private <T> Request buildRequest(ApiRequest<T> apiRequest) {
-        URL url = apiRequest.getUrl(urlFormatter);
+        HttpUrl url = apiRequest.getUrl(urlFormatter);
         Request.Builder request =
                 new Request.Builder().url(url).header("Authorization", credentials)
                         .header("User-Agent", USER_AGENT)

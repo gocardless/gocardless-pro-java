@@ -115,7 +115,7 @@ public class CreditorService {
 
         /**
          * [ISO 3166-1](http://en.wikipedia.org/wiki/ISO_3166-1_alpha-2#Officially_assigned_code_elements)
-         * alpha-2 code, currently only "GB" is supported.
+         * alpha-2 code.
          */
         public CreditorCreateRequest withCountryCode(String countryCode) {
             this.countryCode = countryCode;
@@ -440,7 +440,7 @@ public class CreditorService {
 
         /**
          * [ISO 3166-1](http://en.wikipedia.org/wiki/ISO_3166-1_alpha-2#Officially_assigned_code_elements)
-         * alpha-2 code, currently only "GB" is supported.
+         * alpha-2 code.
          */
         public CreditorUpdateRequest withCountryCode(String countryCode) {
             this.countryCode = countryCode;
@@ -473,6 +473,18 @@ public class CreditorService {
                 links = new Links();
             }
             links.withDefaultGbpPayoutAccount(defaultGbpPayoutAccount);
+            return this;
+        }
+
+        /**
+         * ID of the [bank account](#whitelabel-partner-endpoints-creditor-bank-accounts) which is set up to
+         * receive payouts in SEK.
+         */
+        public CreditorUpdateRequest withLinksDefaultSekPayoutAccount(String defaultSekPayoutAccount) {
+            if (links == null) {
+                links = new Links();
+            }
+            links.withDefaultSekPayoutAccount(defaultSekPayoutAccount);
             return this;
         }
 
@@ -535,6 +547,7 @@ public class CreditorService {
         public static class Links {
             private String defaultEurPayoutAccount;
             private String defaultGbpPayoutAccount;
+            private String defaultSekPayoutAccount;
 
             /**
              * ID of the [bank account](#whitelabel-partner-endpoints-creditor-bank-accounts) which is set up to
@@ -551,6 +564,15 @@ public class CreditorService {
              */
             public Links withDefaultGbpPayoutAccount(String defaultGbpPayoutAccount) {
                 this.defaultGbpPayoutAccount = defaultGbpPayoutAccount;
+                return this;
+            }
+
+            /**
+             * ID of the [bank account](#whitelabel-partner-endpoints-creditor-bank-accounts) which is set up to
+             * receive payouts in SEK.
+             */
+            public Links withDefaultSekPayoutAccount(String defaultSekPayoutAccount) {
+                this.defaultSekPayoutAccount = defaultSekPayoutAccount;
                 return this;
             }
         }
