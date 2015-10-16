@@ -55,6 +55,7 @@ public class PayoutService {
      * Returns a [cursor-paginated](#overview-cursor-pagination) list of your payouts.
      */
     public static final class PayoutListRequest<S> extends ListRequest<S, Payout> {
+        private CreatedAt createdAt;
         private String creditor;
         private String creditorBankAccount;
         private Status status;
@@ -72,6 +73,55 @@ public class PayoutService {
          */
         public PayoutListRequest<S> withBefore(String before) {
             setBefore(before);
+            return this;
+        }
+
+        public PayoutListRequest<S> withCreatedAt(CreatedAt createdAt) {
+            this.createdAt = createdAt;
+            return this;
+        }
+
+        /**
+         * Limit to records created after the specified date-time.
+         */
+        public PayoutListRequest<S> withCreatedAtGt(String gt) {
+            if (createdAt == null) {
+                createdAt = new CreatedAt();
+            }
+            createdAt.withGt(gt);
+            return this;
+        }
+
+        /**
+         * Limit to records created on or after the specified date-time.
+         */
+        public PayoutListRequest<S> withCreatedAtGte(String gte) {
+            if (createdAt == null) {
+                createdAt = new CreatedAt();
+            }
+            createdAt.withGte(gte);
+            return this;
+        }
+
+        /**
+         * Limit to records created before the specified date-time.
+         */
+        public PayoutListRequest<S> withCreatedAtLt(String lt) {
+            if (createdAt == null) {
+                createdAt = new CreatedAt();
+            }
+            createdAt.withLt(lt);
+            return this;
+        }
+
+        /**
+         * Limit to records created on or before the specified date-time.
+         */
+        public PayoutListRequest<S> withCreatedAtLte(String lte) {
+            if (createdAt == null) {
+                createdAt = new CreatedAt();
+            }
+            createdAt.withLte(lte);
             return this;
         }
 
@@ -120,6 +170,9 @@ public class PayoutService {
         protected Map<String, Object> getQueryParams() {
             ImmutableMap.Builder<String, Object> params = ImmutableMap.builder();
             params.putAll(super.getQueryParams());
+            if (createdAt != null) {
+                params.putAll(createdAt.getQueryParams());
+            }
             if (creditor != null) {
                 params.put("creditor", creditor);
             }
@@ -154,6 +207,62 @@ public class PayoutService {
             @Override
             public String toString() {
                 return name().toLowerCase();
+            }
+        }
+
+        public static class CreatedAt {
+            private String gt;
+            private String gte;
+            private String lt;
+            private String lte;
+
+            /**
+             * Limit to records created after the specified date-time.
+             */
+            public CreatedAt withGt(String gt) {
+                this.gt = gt;
+                return this;
+            }
+
+            /**
+             * Limit to records created on or after the specified date-time.
+             */
+            public CreatedAt withGte(String gte) {
+                this.gte = gte;
+                return this;
+            }
+
+            /**
+             * Limit to records created before the specified date-time.
+             */
+            public CreatedAt withLt(String lt) {
+                this.lt = lt;
+                return this;
+            }
+
+            /**
+             * Limit to records created on or before the specified date-time.
+             */
+            public CreatedAt withLte(String lte) {
+                this.lte = lte;
+                return this;
+            }
+
+            public Map<String, Object> getQueryParams() {
+                ImmutableMap.Builder<String, Object> params = ImmutableMap.builder();
+                if (gt != null) {
+                    params.put("created_at[gt]", gt);
+                }
+                if (gte != null) {
+                    params.put("created_at[gte]", gte);
+                }
+                if (lt != null) {
+                    params.put("created_at[lt]", lt);
+                }
+                if (lte != null) {
+                    params.put("created_at[lte]", lte);
+                }
+                return params.build();
             }
         }
     }
