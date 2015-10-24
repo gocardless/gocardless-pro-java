@@ -38,8 +38,7 @@ public class Payout {
     }
 
     /**
-     * [ISO 4217](http://en.wikipedia.org/wiki/ISO_4217#Active_codes) currency code. Currently only "GBP"
-     * and "EUR" are supported.
+     * [ISO 4217](http://en.wikipedia.org/wiki/ISO_4217#Active_codes) currency code.
      */
     public String getCurrency() {
         return currency;
