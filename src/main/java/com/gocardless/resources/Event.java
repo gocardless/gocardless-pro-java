@@ -164,6 +164,7 @@ public class Event {
 
         private String mandate;
         private String newCustomerBankAccount;
+        private String organisation;
         private String parentEvent;
         private String payment;
         private String payout;
@@ -185,6 +186,14 @@ public class Event {
          */
         public String getNewCustomerBankAccount() {
             return newCustomerBankAccount;
+        }
+
+        /**
+         * If the event is included in a [webhook](#webhooks-overview) to an (OAuth app)[#guides-oauth], this
+         * is the ID of the account to which it belongs.
+         */
+        public String getOrganisation() {
+            return organisation;
         }
 
         /**
