@@ -18,7 +18,7 @@ dependencies {
     compile 'com.squareup.okhttp:okhttp:2.5.0'
     compile 'com.google.code.gson:gson:2.4'
     compile 'com.google.guava:guava:18.0'
-    compile 'org.slf4j:slf4j-api:1.7.12'
+    compile 'org.slf4j:slf4j-api:1.7.13'
 
     testCompile 'junit:junit:4.12'
     testCompile 'org.assertj:assertj-core:2.2.0'
