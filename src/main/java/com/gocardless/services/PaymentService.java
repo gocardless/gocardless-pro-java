@@ -374,7 +374,10 @@ public class PaymentService {
          * <li>`paid_out`:  the payment has been included in a [payout](#core-endpoints-payouts)</li>
          *
          * <li>`cancelled`: the payment has been cancelled</li>
-         * </ul>
+         * <li>`pending_customer_approval`: we're
+         * waiting for the customer to approve this payment</li>
+         * <li>`customer_approval_denied`: the
+         * customer has denied approval for the payment. You should contact the customer directly</li></ul>
          */
         public PaymentListRequest<S> withStatus(Status status) {
             this.status = status;
@@ -434,14 +437,16 @@ public class PaymentService {
         }
 
         public enum Status {
-            @SerializedName("pending_submission")
+            @SerializedName("pending_customer_approval")
+            PENDING_CUSTOMER_APPROVAL, @SerializedName("pending_submission")
             PENDING_SUBMISSION, @SerializedName("submitted")
             SUBMITTED, @SerializedName("confirmed")
             CONFIRMED, @SerializedName("failed")
             FAILED, @SerializedName("charged_back")
             CHARGED_BACK, @SerializedName("paid_out")
             PAID_OUT, @SerializedName("cancelled")
-            CANCELLED;
+            CANCELLED, @SerializedName("customer_approval_denied")
+            CUSTOMER_APPROVAL_DENIED;
             @Override
             public String toString() {
                 return name().toLowerCase();
