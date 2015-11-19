@@ -87,7 +87,7 @@ public class Subscription {
     private String name;
     private String paymentReference;
     private String startDate;
-    private String status;
+    private Status status;
     private List<UpcomingPayment> upcomingPayments;
 
     /**
@@ -207,15 +207,19 @@ public class Subscription {
     /**
      * One of:
      * <ul>
-     * <li>`active`: the subscription is currently active and will continue to create
-     * payments</li>
-     * <li>`finished`: all of the payments scheduled for creation under this subscription
-     * have been created</li>
-     * <li>`cancelled`: the subscription has been cancelled and will no longer
-     * create payments</li>
+     * <li>`pending_customer_approval`: the subscription is waiting for customer
+     * approval before becoming active</li>
+     * <li>`customer_approval_denied`: the customer did not
+     * approve the subscription</li>
+     * <li>`active`: the subscription is currently active and will
+     * continue to create payments</li>
+     * <li>`finished`: all of the payments scheduled for creation
+     * under this subscription have been created</li>
+     * <li>`cancelled`: the subscription has been
+     * cancelled and will no longer create payments</li>
      * </ul>
      */
-    public String getStatus() {
+    public Status getStatus() {
         return status;
     }
 
@@ -247,6 +251,15 @@ public class Subscription {
         OCTOBER, @SerializedName("november")
         NOVEMBER, @SerializedName("december")
         DECEMBER,
+    }
+
+    public enum Status {
+        @SerializedName("pending_customer_approval")
+        PENDING_CUSTOMER_APPROVAL, @SerializedName("customer_approval_denied")
+        CUSTOMER_APPROVAL_DENIED, @SerializedName("active")
+        ACTIVE, @SerializedName("finished")
+        FINISHED, @SerializedName("cancelled")
+        CANCELLED,
     }
 
     public static class Links {
