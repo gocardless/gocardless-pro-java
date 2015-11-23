@@ -31,7 +31,7 @@ public class MandatePdfService {
      * To generate a PDF mandate in a foreign language, set
      * your `Accept-Language` header to the relevant [ISO
      * 639-1](http://en.wikipedia.org/wiki/List_of_ISO_639-1_codes#Partial_ISO_639_table) language code.
-     * Supported languages are Dutch, English, French, German, Italian, Portuguese and Spanish.
+     * Supported languages are Dutch, English, French, German, Italian, Portuguese, Spanish and Swedish.
      */
     public MandatePdfCreateRequest create() {
         return new MandatePdfCreateRequest(httpClient);
@@ -49,7 +49,7 @@ public class MandatePdfService {
      * To generate a PDF mandate in a foreign language, set
      * your `Accept-Language` header to the relevant [ISO
      * 639-1](http://en.wikipedia.org/wiki/List_of_ISO_639-1_codes#Partial_ISO_639_table) language code.
-     * Supported languages are Dutch, English, French, German, Italian, Portuguese and Spanish.
+     * Supported languages are Dutch, English, French, German, Italian, Portuguese, Spanish and Swedish.
      */
     public static final class MandatePdfCreateRequest extends PostRequest<MandatePdf> {
         private String accountHolderName;
