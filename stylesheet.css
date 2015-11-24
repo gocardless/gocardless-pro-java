@@ -17,7 +17,7 @@
  * along with pegdown-doclet.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-/* Javadoc style sheet
+/* Javadoc style sheet v7
  *
  * Taken from the standard doclet:
  * http://download.java.net/jdk8/docs/api/stylesheet.css
@@ -56,10 +56,10 @@ a[name]:hover {
     text-decoration:none;
     color:#353833;
 }
-/*[MOD]
+[MOD]
 pre {
     font-size:1.3em;
-}*/
+}
 h1 {
     font-size:1.8em;
 }
@@ -81,15 +81,15 @@ h6 {
 ul {
     list-style-type:disc;
 }
-/* [MOD] See `additions` below
+/*[MOD] See `additions` below
 code, tt {
     font-size:1.2em;
-}*/
+*/
 dt code {
-    font-size:1.2em;
+    font-size:14px;
 }
 table tr td dt code {
-    font-size:1.2em;
+    font-size:14px;
     vertical-align:top;
 }
 sup {
@@ -243,7 +243,7 @@ Page header and footer styles
 }
 .header ul li, .footer ul li {
     list-style:none;
-    font-size:1.2em;
+    font-size:14px;
 }
 /*
 Heading styles
@@ -605,7 +605,7 @@ div.block h2 {
 
 /* code block tweaks */
 code, tt {
-    font-size: 1.2em;
+    font-size: 14px;
 }
 pre {
     /* inspired by GitHub */
