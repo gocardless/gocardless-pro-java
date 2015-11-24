@@ -6,12 +6,20 @@ sourceCompatibility = 1.7
 group = ' com.gocardless'
 version = '1.12.1'
 
-repositories {
-    mavenCentral()
+buildscript {
+    repositories {
+        mavenCentral()
+    }
+
+    dependencies {
+        classpath 'ch.raffael.pegdown-doclet:pegdown-doclet:1.2'
+    }
 }
 
-configurations {
-    pegdownDoclet
+apply plugin: 'ch.raffael.pegdown-doclet'
+
+repositories {
+    mavenCentral()
 }
 
 dependencies {
@@ -26,18 +34,6 @@ dependencies {
 
     testCompile 'co.freeside:betamax:1.1.2'
     testCompile 'org.codehaus.groovy:groovy-all:2.2.0'
-
-    pegdownDoclet 'ch.raffael.pegdown-doclet:pegdown-doclet:1.1.1'
-}
-
-javadoc {
-    options.docletpath = configurations.pegdownDoclet.files.asType(List)
-    options.doclet = 'ch.raffael.doclets.pegdown.PegdownDoclet'
-    options.memberLevel = JavadocMemberLevel.PUBLIC
-
-    options.links = [
-      'http://docs.oracle.com/javase/7/docs/api/'
-    ]
 }
 
 task javadocJar(type: Jar, dependsOn: javadoc) {
