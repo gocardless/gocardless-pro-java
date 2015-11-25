@@ -36,6 +36,14 @@ dependencies {
     testCompile 'org.codehaus.groovy:groovy-all:2.2.0'
 }
 
+javadoc {
+    options.memberLevel = JavadocMemberLevel.PUBLIC		
+
+    options.links = [
+      'http://docs.oracle.com/javase/7/docs/api/'
+    ]
+}
+
 task javadocJar(type: Jar, dependsOn: javadoc) {
     from tasks.javadoc.destinationDir
     classifier = 'javadoc'
