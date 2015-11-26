@@ -12,7 +12,7 @@ buildscript {
     }
 
     dependencies {
-        classpath 'ch.raffael.pegdown-doclet:pegdown-doclet:1.2'
+        classpath 'ch.raffael.pegdown-doclet:pegdown-doclet:1.2.1'
     }
 }
 
