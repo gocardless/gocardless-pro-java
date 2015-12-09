@@ -313,7 +313,8 @@ public class MandateService {
         }
 
         /**
-         * Unique identifier, beginning with "CU".
+         * ID of a [customer](#core-endpoints-customers). If specified, this endpoint will return all
+         * mandates for the given customer.
          */
         public MandateListRequest<S> withCustomer(String customer) {
             this.customer = customer;
