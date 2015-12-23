@@ -1,11 +1,10 @@
 package com.gocardless.http;
 
+import com.google.common.collect.ImmutableMap;
+import com.squareup.okhttp.HttpUrl;
+
 import java.io.Reader;
 import java.util.Map;
-
-import com.google.common.collect.ImmutableMap;
-
-import com.squareup.okhttp.HttpUrl;
 
 /**
  * Base class for API requests.
@@ -28,6 +27,10 @@ abstract class ApiRequest<T> {
     }
 
     Map<String, Object> getQueryParams() {
+        return ImmutableMap.of();
+    }
+
+    Map<String, String> getHeaders() {
         return ImmutableMap.of();
     }
 

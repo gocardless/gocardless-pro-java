@@ -1,16 +1,19 @@
 package com.gocardless.http;
 
-import java.io.IOException;
-import java.io.Reader;
-import java.util.Map;
-
 import com.gocardless.GoCardlessException;
-
 import com.google.common.annotations.VisibleForTesting;
 import com.google.common.collect.ImmutableMap;
 import com.google.gson.Gson;
+import com.squareup.okhttp.HttpUrl;
+import com.squareup.okhttp.MediaType;
+import com.squareup.okhttp.OkHttpClient;
+import com.squareup.okhttp.Request;
+import com.squareup.okhttp.RequestBody;
+import com.squareup.okhttp.Response;
 
-import com.squareup.okhttp.*;
+import java.io.IOException;
+import java.io.Reader;
+import java.util.Map;
 
 /**
  * An HTTP client that can execute {@link ApiRequest}s.
@@ -79,9 +82,8 @@ public class HttpClient {
                 new Request.Builder().url(url).header("Authorization", credentials)
                         .header("User-Agent", USER_AGENT)
                         .method(apiRequest.getMethod(), getBody(apiRequest));
-        for (Map.Entry<String, String> entry : HEADERS.entrySet()) {
-            request = request.header(entry.getKey(), entry.getValue());
-        }
+        request = addHeaderContent(request, HEADERS);
+        request = addHeaderContent(request, apiRequest.getHeaders());
         return request.build();
     }
 
@@ -128,6 +130,15 @@ public class HttpClient {
 
     private static String cleanUserAgentToken(String s) {
         return s.replaceAll(DISALLOWED_USER_AGENT_CHARACTERS, "_");
+    }
+
+    private static <T> Request.Builder addHeaderContent(Request.Builder request, Map<String, String> headers)
+    {
+        for (Map.Entry<String, String> entry : headers.entrySet())
+        {
+            request = request.header(entry.getKey(), entry.getValue());
+        }
+        return request;
     }
 
     @VisibleForTesting

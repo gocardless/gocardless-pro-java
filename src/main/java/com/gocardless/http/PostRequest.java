@@ -1,6 +1,10 @@
 package com.gocardless.http;
 
+import com.google.common.collect.ImmutableMap;
+
 import java.io.Reader;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * Base class for POST requests.
@@ -8,6 +12,8 @@ import java.io.Reader;
  * @param <T> the type of the item returned by this request.
  */
 public abstract class PostRequest<T> extends ApiRequest<T> {
+    private final Map<String, String> headers = new HashMap<>();
+
     protected PostRequest(HttpClient httpClient) {
         super(httpClient);
     }
@@ -35,6 +41,12 @@ public abstract class PostRequest<T> extends ApiRequest<T> {
         return getHttpClient().executeWrapped(this);
     }
 
+    public PostRequest<T> withIdempotentKey(final String key)
+    {
+        headers.put("Idempotency-Key", key);
+        return this;
+    }
+
     @Override
     protected T parseResponse(Reader stream, ResponseParser responseParser) {
         return responseParser.parseSingle(stream, getEnvelope(), getResponseClass());
@@ -43,6 +55,12 @@ public abstract class PostRequest<T> extends ApiRequest<T> {
     @Override
     protected final String getMethod() {
         return "POST";
+    }
+
+    @Override
+    Map<String, String> getHeaders()
+    {
+        return ImmutableMap.copyOf(headers);
     }
 
     protected abstract Class<T> getResponseClass();
