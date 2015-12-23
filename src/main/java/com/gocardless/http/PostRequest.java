@@ -12,7 +12,7 @@ import java.util.Map;
  * @param <T> the type of the item returned by this request.
  */
 public abstract class PostRequest<T> extends ApiRequest<T> {
-    private final Map<String, String> headers = new HashMap<>();
+    private final transient Map<String, String> headers = new HashMap<>();
 
     protected PostRequest(HttpClient httpClient) {
         super(httpClient);
