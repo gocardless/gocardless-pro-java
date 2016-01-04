@@ -84,10 +84,15 @@
 <li><a href="http://docs.oracle.com/javase/7/docs/api/java/lang/Object.html?is-external=true" title="class or interface in java.lang">java.lang.Object</a></li>
 <li>
 <ul class="inheritance">
-<li><a href="../../../com/gocardless/http/PostRequest.html" title="class in com.gocardless.http">com.gocardless.http.PostRequest</a>&lt;<a href="../../../com/gocardless/resources/Refund.html" title="class in com.gocardless.resources">Refund</a>&gt;</li>
+<li><a href="../../../com/gocardless/http/PostRequest.html" title="class in com.gocardless.http">com.gocardless.http.PostRequest</a>&lt;T&gt;</li>
+<li>
+<ul class="inheritance">
+<li><a href="../../../com/gocardless/http/IdempotentPostRequest.html" title="class in com.gocardless.http">com.gocardless.http.IdempotentPostRequest</a>&lt;<a href="../../../com/gocardless/resources/Refund.html" title="class in com.gocardless.resources">Refund</a>&gt;</li>
 <li>
 <ul class="inheritance">
 <li>com.gocardless.services.RefundService.RefundCreateRequest</li>
+</ul>
+</li>
 </ul>
 </li>
 </ul>
@@ -103,7 +108,7 @@
 <hr>
 <br>
 <pre>public static final class <span class="strong">RefundService.RefundCreateRequest</span>
-extends <a href="../../../com/gocardless/http/PostRequest.html" title="class in com.gocardless.http">PostRequest</a>&lt;<a href="../../../com/gocardless/resources/Refund.html" title="class in com.gocardless.resources">Refund</a>&gt;</pre>
+extends <a href="../../../com/gocardless/http/IdempotentPostRequest.html" title="class in com.gocardless.http">IdempotentPostRequest</a>&lt;<a href="../../../com/gocardless/resources/Refund.html" title="class in com.gocardless.resources">Refund</a>&gt;</pre>
 <div class="block"><p>Request class for <a href="../../../com/gocardless/services/RefundService.html#create()"><code>RefundService.create()</code></a>.</p><p>Creates a new refund object.</p><p>This fails with:<a name="refund_payment_invalid_state"></a><a
 name="total_amount_confirmation_invalid"></a><a name="number_of_refunds_exceeded"></a></p><p>- <code>refund_payment_invalid_state</code> error if the linked <a href="#core-endpoints-payments">payment</a> isn&rsquo;t either <code>confirmed</code> or <code>paid_out</code>.</p>
 <ul>
@@ -154,34 +159,38 @@ name="total_amount_confirmation_invalid"></a><a name="number_of_refunds_exceeded
 </tr>
 <tr class="rowColor">
 <td class="colFirst"><code><a href="../../../com/gocardless/services/RefundService.RefundCreateRequest.html" title="class in com.gocardless.services">RefundService.RefundCreateRequest</a></code></td>
-<td class="colLast"><code><strong><a href="../../../com/gocardless/services/RefundService.RefundCreateRequest.html#withLinks(com.gocardless.services.RefundService.RefundCreateRequest.Links)">withLinks</a></strong>(<a href="../../../com/gocardless/services/RefundService.RefundCreateRequest.Links.html" title="class in com.gocardless.services">RefundService.RefundCreateRequest.Links</a>&nbsp;links)</code>&nbsp;</td>
+<td class="colLast"><code><strong><a href="../../../com/gocardless/services/RefundService.RefundCreateRequest.html#withIdempotencyKey(java.lang.String)">withIdempotencyKey</a></strong>(<a href="http://docs.oracle.com/javase/7/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</a>&nbsp;idempotencyKey)</code>&nbsp;</td>
 </tr>
 <tr class="altColor">
+<td class="colFirst"><code><a href="../../../com/gocardless/services/RefundService.RefundCreateRequest.html" title="class in com.gocardless.services">RefundService.RefundCreateRequest</a></code></td>
+<td class="colLast"><code><strong><a href="../../../com/gocardless/services/RefundService.RefundCreateRequest.html#withLinks(com.gocardless.services.RefundService.RefundCreateRequest.Links)">withLinks</a></strong>(<a href="../../../com/gocardless/services/RefundService.RefundCreateRequest.Links.html" title="class in com.gocardless.services">RefundService.RefundCreateRequest.Links</a>&nbsp;links)</code>&nbsp;</td>
+</tr>
+<tr class="rowColor">
 <td class="colFirst"><code><a href="../../../com/gocardless/services/RefundService.RefundCreateRequest.html" title="class in com.gocardless.services">RefundService.RefundCreateRequest</a></code></td>
 <td class="colLast"><code><strong><a href="../../../com/gocardless/services/RefundService.RefundCreateRequest.html#withLinksPayment(java.lang.String)">withLinksPayment</a></strong>(<a href="http://docs.oracle.com/javase/7/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</a>&nbsp;payment)</code>
 <div class="block">ID of the <a href="#core-endpoints-payments">payment</a> against which the refund is being made.</div>
 </td>
 </tr>
-<tr class="rowColor">
+<tr class="altColor">
 <td class="colFirst"><code><a href="../../../com/gocardless/services/RefundService.RefundCreateRequest.html" title="class in com.gocardless.services">RefundService.RefundCreateRequest</a></code></td>
 <td class="colLast"><code><strong><a href="../../../com/gocardless/services/RefundService.RefundCreateRequest.html#withMetadata(java.util.Map)">withMetadata</a></strong>(<a href="http://docs.oracle.com/javase/7/docs/api/java/util/Map.html?is-external=true" title="class or interface in java.util">Map</a>&lt;<a href="http://docs.oracle.com/javase/7/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</a>,<a href="http://docs.oracle.com/javase/7/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</a>&gt;&nbsp;metadata)</code>
 <div class="block">Key-value store of custom data.</div>
 </td>
 </tr>
-<tr class="altColor">
+<tr class="rowColor">
 <td class="colFirst"><code><a href="../../../com/gocardless/services/RefundService.RefundCreateRequest.html" title="class in com.gocardless.services">RefundService.RefundCreateRequest</a></code></td>
 <td class="colLast"><code><strong><a href="../../../com/gocardless/services/RefundService.RefundCreateRequest.html#withMetadata(java.lang.String,%20java.lang.String)">withMetadata</a></strong>(<a href="http://docs.oracle.com/javase/7/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</a>&nbsp;key,
             <a href="http://docs.oracle.com/javase/7/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</a>&nbsp;value)</code>
 <div class="block">Key-value store of custom data.</div>
 </td>
 </tr>
-<tr class="rowColor">
+<tr class="altColor">
 <td class="colFirst"><code><a href="../../../com/gocardless/services/RefundService.RefundCreateRequest.html" title="class in com.gocardless.services">RefundService.RefundCreateRequest</a></code></td>
 <td class="colLast"><code><strong><a href="../../../com/gocardless/services/RefundService.RefundCreateRequest.html#withReference(java.lang.String)">withReference</a></strong>(<a href="http://docs.oracle.com/javase/7/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</a>&nbsp;reference)</code>
 <div class="block">An optional refund reference, displayed on your customer&rsquo;s bank statement.</div>
 </td>
 </tr>
-<tr class="altColor">
+<tr class="rowColor">
 <td class="colFirst"><code><a href="../../../com/gocardless/services/RefundService.RefundCreateRequest.html" title="class in com.gocardless.services">RefundService.RefundCreateRequest</a></code></td>
 <td class="colLast"><code><strong><a href="../../../com/gocardless/services/RefundService.RefundCreateRequest.html#withTotalAmountConfirmation(java.lang.Integer)">withTotalAmountConfirmation</a></strong>(<a href="http://docs.oracle.com/javase/7/docs/api/java/lang/Integer.html?is-external=true" title="class or interface in java.lang">Integer</a>&nbsp;totalAmountConfirmation)</code>
 <div class="block">Total expected refunded amount in pence/cents/öre.</div>
@@ -189,11 +198,18 @@ name="total_amount_confirmation_invalid"></a><a name="number_of_refunds_exceeded
 </tr>
 </table>
 <ul class="blockList">
+<li class="blockList"><a name="methods_inherited_from_class_com.gocardless.http.IdempotentPostRequest">
+<!--   -->
+</a>
+<h3>Methods inherited from class&nbsp;com.gocardless.http.<a href="../../../com/gocardless/http/IdempotentPostRequest.html" title="class in com.gocardless.http">IdempotentPostRequest</a></h3>
+<code><a href="../../../com/gocardless/http/IdempotentPostRequest.html#execute()">execute</a></code></li>
+</ul>
+<ul class="blockList">
 <li class="blockList"><a name="methods_inherited_from_class_com.gocardless.http.PostRequest">
 <!--   -->
 </a>
 <h3>Methods inherited from class&nbsp;com.gocardless.http.<a href="../../../com/gocardless/http/PostRequest.html" title="class in com.gocardless.http">PostRequest</a></h3>
-<code><a href="../../../com/gocardless/http/PostRequest.html#execute()">execute</a>, <a href="../../../com/gocardless/http/PostRequest.html#executeWrapped()">executeWrapped</a></code></li>
+<code><a href="../../../com/gocardless/http/PostRequest.html#executeWrapped()">executeWrapped</a></code></li>
 </ul>
 <ul class="blockList">
 <li class="blockList"><a name="methods_inherited_from_class_java.lang.Object">
@@ -279,11 +295,20 @@ name="total_amount_confirmation_invalid"></a><a name="number_of_refunds_exceeded
 <a name="withTotalAmountConfirmation(java.lang.Integer)">
 <!--   -->
 </a>
-<ul class="blockListLast">
+<ul class="blockList">
 <li class="blockList">
 <h4>withTotalAmountConfirmation</h4>
 <pre>public&nbsp;<a href="../../../com/gocardless/services/RefundService.RefundCreateRequest.html" title="class in com.gocardless.services">RefundService.RefundCreateRequest</a>&nbsp;withTotalAmountConfirmation(<a href="http://docs.oracle.com/javase/7/docs/api/java/lang/Integer.html?is-external=true" title="class or interface in java.lang">Integer</a>&nbsp;totalAmountConfirmation)</pre>
 <div class="block"><p>Total expected refunded amount in pence/cents/öre. If there are other partial refunds against this payment, this value should be the sum of the existing refunds plus the amount of the refund being created.</p></div>
+</li>
+</ul>
+<a name="withIdempotencyKey(java.lang.String)">
+<!--   -->
+</a>
+<ul class="blockListLast">
+<li class="blockList">
+<h4>withIdempotencyKey</h4>
+<pre>public&nbsp;<a href="../../../com/gocardless/services/RefundService.RefundCreateRequest.html" title="class in com.gocardless.services">RefundService.RefundCreateRequest</a>&nbsp;withIdempotencyKey(<a href="http://docs.oracle.com/javase/7/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</a>&nbsp;idempotencyKey)</pre>
 </li>
 </ul>
 </li>

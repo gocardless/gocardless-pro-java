@@ -454,6 +454,10 @@
 <dd>
 <div class="block">Executes this request.</div>
 </dd>
+<dt><span class="strong"><a href="./com/gocardless/http/IdempotentPostRequest.html#execute()">execute()</a></span> - Method in class com.gocardless.http.<a href="./com/gocardless/http/IdempotentPostRequest.html" title="class in com.gocardless.http">IdempotentPostRequest</a></dt>
+<dd>
+<div class="block">Executes this request.</div>
+</dd>
 <dt><span class="strong"><a href="./com/gocardless/http/ListRequest.html#execute()">execute()</a></span> - Method in class com.gocardless.http.<a href="./com/gocardless/http/ListRequest.html" title="class in com.gocardless.http">ListRequest</a></dt>
 <dd>
 <div class="block">Executes this request.</div>
@@ -1252,6 +1256,8 @@
 </a>
 <h2 class="title">I</h2>
 <dl>
+<dt><a href="./com/gocardless/http/IdempotentPostRequest.html" title="class in com.gocardless.http"><span class="strong">IdempotentPostRequest</span></a>&lt;<a href="./com/gocardless/http/IdempotentPostRequest.html" title="type parameter in IdempotentPostRequest">T</a>&gt; - Class in <a href="./com/gocardless/http/package-summary.html">com.gocardless.http</a></dt>
+<dd>&nbsp;</dd>
 <dt><a href="./com/gocardless/errors/InvalidApiUsageException.html" title="class in com.gocardless.errors"><span class="strong">InvalidApiUsageException</span></a> - Exception in <a href="./com/gocardless/errors/package-summary.html">com.gocardless.errors</a></dt>
 <dd>
 <div class="block">Exception thrown when there is an error with the request you made.</div>
@@ -1401,6 +1407,10 @@
 <dt><a href="./com/gocardless/services/MandateService.MandateUpdateRequest.html" title="class in com.gocardless.services"><span class="strong">MandateService.MandateUpdateRequest</span></a> - Class in <a href="./com/gocardless/services/package-summary.html">com.gocardless.services</a></dt>
 <dd>
 <div class="block">Request class for <a href="./com/gocardless/services/MandateService.html#update(java.lang.String)"><code>MandateService.update(java.lang.String)</code></a>.</div>
+</dd>
+<dt><span class="strong"><a href="./com/gocardless/http/HttpClient.html#MAX_RETRIES">MAX_RETRIES</a></span> - Static variable in class com.gocardless.http.<a href="./com/gocardless/http/HttpClient.html" title="class in com.gocardless.http">HttpClient</a></dt>
+<dd>
+<div class="block">The maximum number of times that a request can be retried.</div>
 </dd>
 </dl>
 <a name="_P_">
@@ -2599,6 +2609,24 @@ the order they are declared.</div>
 <dd>
 <div class="block">International Bank Account Number.</div>
 </dd>
+<dt><span class="strong"><a href="./com/gocardless/services/CreditorBankAccountService.CreditorBankAccountCreateRequest.html#withIdempotencyKey(java.lang.String)">withIdempotencyKey(String)</a></span> - Method in class com.gocardless.services.<a href="./com/gocardless/services/CreditorBankAccountService.CreditorBankAccountCreateRequest.html" title="class in com.gocardless.services">CreditorBankAccountService.CreditorBankAccountCreateRequest</a></dt>
+<dd>&nbsp;</dd>
+<dt><span class="strong"><a href="./com/gocardless/services/CreditorService.CreditorCreateRequest.html#withIdempotencyKey(java.lang.String)">withIdempotencyKey(String)</a></span> - Method in class com.gocardless.services.<a href="./com/gocardless/services/CreditorService.CreditorCreateRequest.html" title="class in com.gocardless.services">CreditorService.CreditorCreateRequest</a></dt>
+<dd>&nbsp;</dd>
+<dt><span class="strong"><a href="./com/gocardless/services/CustomerBankAccountService.CustomerBankAccountCreateRequest.html#withIdempotencyKey(java.lang.String)">withIdempotencyKey(String)</a></span> - Method in class com.gocardless.services.<a href="./com/gocardless/services/CustomerBankAccountService.CustomerBankAccountCreateRequest.html" title="class in com.gocardless.services">CustomerBankAccountService.CustomerBankAccountCreateRequest</a></dt>
+<dd>&nbsp;</dd>
+<dt><span class="strong"><a href="./com/gocardless/services/CustomerService.CustomerCreateRequest.html#withIdempotencyKey(java.lang.String)">withIdempotencyKey(String)</a></span> - Method in class com.gocardless.services.<a href="./com/gocardless/services/CustomerService.CustomerCreateRequest.html" title="class in com.gocardless.services">CustomerService.CustomerCreateRequest</a></dt>
+<dd>&nbsp;</dd>
+<dt><span class="strong"><a href="./com/gocardless/services/MandateService.MandateCreateRequest.html#withIdempotencyKey(java.lang.String)">withIdempotencyKey(String)</a></span> - Method in class com.gocardless.services.<a href="./com/gocardless/services/MandateService.MandateCreateRequest.html" title="class in com.gocardless.services">MandateService.MandateCreateRequest</a></dt>
+<dd>&nbsp;</dd>
+<dt><span class="strong"><a href="./com/gocardless/services/PaymentService.PaymentCreateRequest.html#withIdempotencyKey(java.lang.String)">withIdempotencyKey(String)</a></span> - Method in class com.gocardless.services.<a href="./com/gocardless/services/PaymentService.PaymentCreateRequest.html" title="class in com.gocardless.services">PaymentService.PaymentCreateRequest</a></dt>
+<dd>&nbsp;</dd>
+<dt><span class="strong"><a href="./com/gocardless/services/RedirectFlowService.RedirectFlowCreateRequest.html#withIdempotencyKey(java.lang.String)">withIdempotencyKey(String)</a></span> - Method in class com.gocardless.services.<a href="./com/gocardless/services/RedirectFlowService.RedirectFlowCreateRequest.html" title="class in com.gocardless.services">RedirectFlowService.RedirectFlowCreateRequest</a></dt>
+<dd>&nbsp;</dd>
+<dt><span class="strong"><a href="./com/gocardless/services/RefundService.RefundCreateRequest.html#withIdempotencyKey(java.lang.String)">withIdempotencyKey(String)</a></span> - Method in class com.gocardless.services.<a href="./com/gocardless/services/RefundService.RefundCreateRequest.html" title="class in com.gocardless.services">RefundService.RefundCreateRequest</a></dt>
+<dd>&nbsp;</dd>
+<dt><span class="strong"><a href="./com/gocardless/services/SubscriptionService.SubscriptionCreateRequest.html#withIdempotencyKey(java.lang.String)">withIdempotencyKey(String)</a></span> - Method in class com.gocardless.services.<a href="./com/gocardless/services/SubscriptionService.SubscriptionCreateRequest.html" title="class in com.gocardless.services">SubscriptionService.SubscriptionCreateRequest</a></dt>
+<dd>&nbsp;</dd>
 <dt><span class="strong"><a href="./com/gocardless/services/EventService.EventListRequest.html#withInclude(com.gocardless.services.EventService.EventListRequest.Include)">withInclude(EventService.EventListRequest.Include)</a></span> - Method in class com.gocardless.services.<a href="./com/gocardless/services/EventService.EventListRequest.html" title="class in com.gocardless.services">EventService.EventListRequest</a></dt>
 <dd>
 <div class="block">Includes linked resources in the response.</div>

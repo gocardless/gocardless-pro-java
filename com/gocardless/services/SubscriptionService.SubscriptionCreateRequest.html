@@ -84,10 +84,15 @@
 <li><a href="http://docs.oracle.com/javase/7/docs/api/java/lang/Object.html?is-external=true" title="class or interface in java.lang">java.lang.Object</a></li>
 <li>
 <ul class="inheritance">
-<li><a href="../../../com/gocardless/http/PostRequest.html" title="class in com.gocardless.http">com.gocardless.http.PostRequest</a>&lt;<a href="../../../com/gocardless/resources/Subscription.html" title="class in com.gocardless.resources">Subscription</a>&gt;</li>
+<li><a href="../../../com/gocardless/http/PostRequest.html" title="class in com.gocardless.http">com.gocardless.http.PostRequest</a>&lt;T&gt;</li>
+<li>
+<ul class="inheritance">
+<li><a href="../../../com/gocardless/http/IdempotentPostRequest.html" title="class in com.gocardless.http">com.gocardless.http.IdempotentPostRequest</a>&lt;<a href="../../../com/gocardless/resources/Subscription.html" title="class in com.gocardless.resources">Subscription</a>&gt;</li>
 <li>
 <ul class="inheritance">
 <li>com.gocardless.services.SubscriptionService.SubscriptionCreateRequest</li>
+</ul>
+</li>
 </ul>
 </li>
 </ul>
@@ -103,7 +108,7 @@
 <hr>
 <br>
 <pre>public static final class <span class="strong">SubscriptionService.SubscriptionCreateRequest</span>
-extends <a href="../../../com/gocardless/http/PostRequest.html" title="class in com.gocardless.http">PostRequest</a>&lt;<a href="../../../com/gocardless/resources/Subscription.html" title="class in com.gocardless.resources">Subscription</a>&gt;</pre>
+extends <a href="../../../com/gocardless/http/IdempotentPostRequest.html" title="class in com.gocardless.http">IdempotentPostRequest</a>&lt;<a href="../../../com/gocardless/resources/Subscription.html" title="class in com.gocardless.resources">Subscription</a>&gt;</pre>
 <div class="block"><p>Request class for <a href="../../../com/gocardless/services/SubscriptionService.html#create()"><code>SubscriptionService.create()</code></a>.</p><p>Creates a new subscription object</p></div>
 </li>
 </ul>
@@ -182,58 +187,62 @@ extends <a href="../../../com/gocardless/http/PostRequest.html" title="class in 
 </tr>
 <tr class="rowColor">
 <td class="colFirst"><code><a href="../../../com/gocardless/services/SubscriptionService.SubscriptionCreateRequest.html" title="class in com.gocardless.services">SubscriptionService.SubscriptionCreateRequest</a></code></td>
+<td class="colLast"><code><strong><a href="../../../com/gocardless/services/SubscriptionService.SubscriptionCreateRequest.html#withIdempotencyKey(java.lang.String)">withIdempotencyKey</a></strong>(<a href="http://docs.oracle.com/javase/7/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</a>&nbsp;idempotencyKey)</code>&nbsp;</td>
+</tr>
+<tr class="altColor">
+<td class="colFirst"><code><a href="../../../com/gocardless/services/SubscriptionService.SubscriptionCreateRequest.html" title="class in com.gocardless.services">SubscriptionService.SubscriptionCreateRequest</a></code></td>
 <td class="colLast"><code><strong><a href="../../../com/gocardless/services/SubscriptionService.SubscriptionCreateRequest.html#withInterval(java.lang.Integer)">withInterval</a></strong>(<a href="http://docs.oracle.com/javase/7/docs/api/java/lang/Integer.html?is-external=true" title="class or interface in java.lang">Integer</a>&nbsp;interval)</code>
 <div class="block">Number of <code>interval_units</code> between customer charge dates.</div>
 </td>
 </tr>
-<tr class="altColor">
+<tr class="rowColor">
 <td class="colFirst"><code><a href="../../../com/gocardless/services/SubscriptionService.SubscriptionCreateRequest.html" title="class in com.gocardless.services">SubscriptionService.SubscriptionCreateRequest</a></code></td>
 <td class="colLast"><code><strong><a href="../../../com/gocardless/services/SubscriptionService.SubscriptionCreateRequest.html#withIntervalUnit(com.gocardless.services.SubscriptionService.SubscriptionCreateRequest.IntervalUnit)">withIntervalUnit</a></strong>(<a href="../../../com/gocardless/services/SubscriptionService.SubscriptionCreateRequest.IntervalUnit.html" title="enum in com.gocardless.services">SubscriptionService.SubscriptionCreateRequest.IntervalUnit</a>&nbsp;intervalUnit)</code>
 <div class="block">The unit of time between customer charge dates.</div>
 </td>
 </tr>
-<tr class="rowColor">
+<tr class="altColor">
 <td class="colFirst"><code><a href="../../../com/gocardless/services/SubscriptionService.SubscriptionCreateRequest.html" title="class in com.gocardless.services">SubscriptionService.SubscriptionCreateRequest</a></code></td>
 <td class="colLast"><code><strong><a href="../../../com/gocardless/services/SubscriptionService.SubscriptionCreateRequest.html#withLinks(com.gocardless.services.SubscriptionService.SubscriptionCreateRequest.Links)">withLinks</a></strong>(<a href="../../../com/gocardless/services/SubscriptionService.SubscriptionCreateRequest.Links.html" title="class in com.gocardless.services">SubscriptionService.SubscriptionCreateRequest.Links</a>&nbsp;links)</code>&nbsp;</td>
 </tr>
-<tr class="altColor">
+<tr class="rowColor">
 <td class="colFirst"><code><a href="../../../com/gocardless/services/SubscriptionService.SubscriptionCreateRequest.html" title="class in com.gocardless.services">SubscriptionService.SubscriptionCreateRequest</a></code></td>
 <td class="colLast"><code><strong><a href="../../../com/gocardless/services/SubscriptionService.SubscriptionCreateRequest.html#withLinksMandate(java.lang.String)">withLinksMandate</a></strong>(<a href="http://docs.oracle.com/javase/7/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</a>&nbsp;mandate)</code>
 <div class="block">ID of the associated <a href="#core-endpoints-mandates">mandate</a> which the subscription will create payments against.</div>
 </td>
 </tr>
-<tr class="rowColor">
+<tr class="altColor">
 <td class="colFirst"><code><a href="../../../com/gocardless/services/SubscriptionService.SubscriptionCreateRequest.html" title="class in com.gocardless.services">SubscriptionService.SubscriptionCreateRequest</a></code></td>
 <td class="colLast"><code><strong><a href="../../../com/gocardless/services/SubscriptionService.SubscriptionCreateRequest.html#withMetadata(java.util.Map)">withMetadata</a></strong>(<a href="http://docs.oracle.com/javase/7/docs/api/java/util/Map.html?is-external=true" title="class or interface in java.util">Map</a>&lt;<a href="http://docs.oracle.com/javase/7/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</a>,<a href="http://docs.oracle.com/javase/7/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</a>&gt;&nbsp;metadata)</code>
 <div class="block">Key-value store of custom data.</div>
 </td>
 </tr>
-<tr class="altColor">
+<tr class="rowColor">
 <td class="colFirst"><code><a href="../../../com/gocardless/services/SubscriptionService.SubscriptionCreateRequest.html" title="class in com.gocardless.services">SubscriptionService.SubscriptionCreateRequest</a></code></td>
 <td class="colLast"><code><strong><a href="../../../com/gocardless/services/SubscriptionService.SubscriptionCreateRequest.html#withMetadata(java.lang.String,%20java.lang.String)">withMetadata</a></strong>(<a href="http://docs.oracle.com/javase/7/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</a>&nbsp;key,
             <a href="http://docs.oracle.com/javase/7/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</a>&nbsp;value)</code>
 <div class="block">Key-value store of custom data.</div>
 </td>
 </tr>
-<tr class="rowColor">
+<tr class="altColor">
 <td class="colFirst"><code><a href="../../../com/gocardless/services/SubscriptionService.SubscriptionCreateRequest.html" title="class in com.gocardless.services">SubscriptionService.SubscriptionCreateRequest</a></code></td>
 <td class="colLast"><code><strong><a href="../../../com/gocardless/services/SubscriptionService.SubscriptionCreateRequest.html#withMonth(com.gocardless.services.SubscriptionService.SubscriptionCreateRequest.Month)">withMonth</a></strong>(<a href="../../../com/gocardless/services/SubscriptionService.SubscriptionCreateRequest.Month.html" title="enum in com.gocardless.services">SubscriptionService.SubscriptionCreateRequest.Month</a>&nbsp;month)</code>
 <div class="block">Name of the month on which to charge a customer.</div>
 </td>
 </tr>
-<tr class="altColor">
+<tr class="rowColor">
 <td class="colFirst"><code><a href="../../../com/gocardless/services/SubscriptionService.SubscriptionCreateRequest.html" title="class in com.gocardless.services">SubscriptionService.SubscriptionCreateRequest</a></code></td>
 <td class="colLast"><code><strong><a href="../../../com/gocardless/services/SubscriptionService.SubscriptionCreateRequest.html#withName(java.lang.String)">withName</a></strong>(<a href="http://docs.oracle.com/javase/7/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</a>&nbsp;name)</code>
 <div class="block">Optional name for the subscription.</div>
 </td>
 </tr>
-<tr class="rowColor">
+<tr class="altColor">
 <td class="colFirst"><code><a href="../../../com/gocardless/services/SubscriptionService.SubscriptionCreateRequest.html" title="class in com.gocardless.services">SubscriptionService.SubscriptionCreateRequest</a></code></td>
 <td class="colLast"><code><strong><a href="../../../com/gocardless/services/SubscriptionService.SubscriptionCreateRequest.html#withPaymentReference(java.lang.String)">withPaymentReference</a></strong>(<a href="http://docs.oracle.com/javase/7/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</a>&nbsp;paymentReference)</code>
 <div class="block">An optional payment reference.</div>
 </td>
 </tr>
-<tr class="altColor">
+<tr class="rowColor">
 <td class="colFirst"><code><a href="../../../com/gocardless/services/SubscriptionService.SubscriptionCreateRequest.html" title="class in com.gocardless.services">SubscriptionService.SubscriptionCreateRequest</a></code></td>
 <td class="colLast"><code><strong><a href="../../../com/gocardless/services/SubscriptionService.SubscriptionCreateRequest.html#withStartDate(java.lang.String)">withStartDate</a></strong>(<a href="http://docs.oracle.com/javase/7/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</a>&nbsp;startDate)</code>
 <div class="block">The date on which the first payment should be charged.</div>
@@ -241,11 +250,18 @@ extends <a href="../../../com/gocardless/http/PostRequest.html" title="class in 
 </tr>
 </table>
 <ul class="blockList">
+<li class="blockList"><a name="methods_inherited_from_class_com.gocardless.http.IdempotentPostRequest">
+<!--   -->
+</a>
+<h3>Methods inherited from class&nbsp;com.gocardless.http.<a href="../../../com/gocardless/http/IdempotentPostRequest.html" title="class in com.gocardless.http">IdempotentPostRequest</a></h3>
+<code><a href="../../../com/gocardless/http/IdempotentPostRequest.html#execute()">execute</a></code></li>
+</ul>
+<ul class="blockList">
 <li class="blockList"><a name="methods_inherited_from_class_com.gocardless.http.PostRequest">
 <!--   -->
 </a>
 <h3>Methods inherited from class&nbsp;com.gocardless.http.<a href="../../../com/gocardless/http/PostRequest.html" title="class in com.gocardless.http">PostRequest</a></h3>
-<code><a href="../../../com/gocardless/http/PostRequest.html#execute()">execute</a>, <a href="../../../com/gocardless/http/PostRequest.html#executeWrapped()">executeWrapped</a></code></li>
+<code><a href="../../../com/gocardless/http/PostRequest.html#executeWrapped()">executeWrapped</a></code></li>
 </ul>
 <ul class="blockList">
 <li class="blockList"><a name="methods_inherited_from_class_java.lang.Object">
@@ -411,11 +427,20 @@ extends <a href="../../../com/gocardless/http/PostRequest.html" title="class in 
 <a name="withStartDate(java.lang.String)">
 <!--   -->
 </a>
-<ul class="blockListLast">
+<ul class="blockList">
 <li class="blockList">
 <h4>withStartDate</h4>
 <pre>public&nbsp;<a href="../../../com/gocardless/services/SubscriptionService.SubscriptionCreateRequest.html" title="class in com.gocardless.services">SubscriptionService.SubscriptionCreateRequest</a>&nbsp;withStartDate(<a href="http://docs.oracle.com/javase/7/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</a>&nbsp;startDate)</pre>
 <div class="block"><p>The date on which the first payment should be charged. Must be within one year of creation and on or after the <a href="#core-endpoints-mandates">mandate</a>&rsquo;s <code>next_possible_charge_date</code>. When blank, this will be set as the mandate&rsquo;s <code>next_possible_charge_date</code>.</p></div>
+</li>
+</ul>
+<a name="withIdempotencyKey(java.lang.String)">
+<!--   -->
+</a>
+<ul class="blockListLast">
+<li class="blockList">
+<h4>withIdempotencyKey</h4>
+<pre>public&nbsp;<a href="../../../com/gocardless/services/SubscriptionService.SubscriptionCreateRequest.html" title="class in com.gocardless.services">SubscriptionService.SubscriptionCreateRequest</a>&nbsp;withIdempotencyKey(<a href="http://docs.oracle.com/javase/7/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</a>&nbsp;idempotencyKey)</pre>
 </li>
 </ul>
 </li>

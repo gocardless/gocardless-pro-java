@@ -2,13 +2,13 @@
 <!-- NewPage -->
 <html lang="en">
 <head>
-<title>HttpClient (gocardless-pro 1.13.0 API)</title>
+<title>IdempotentPostRequest (gocardless-pro 1.13.0 API)</title>
 <link rel="stylesheet" type="text/css" href="../../../stylesheet.css" title="Style">
 </head>
 <body>
 <script type="text/javascript"><!--
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="HttpClient (gocardless-pro 1.13.0 API)";
+        parent.document.title="IdempotentPostRequest (gocardless-pro 1.13.0 API)";
     }
 //-->
 </script>
@@ -33,12 +33,12 @@
 </div>
 <div class="subNav">
 <ul class="navList">
-<li><a href="../../../com/gocardless/http/GoCardlessNetworkException.html" title="class in com.gocardless.http"><span class="strong">Prev Class</span></a></li>
-<li><a href="../../../com/gocardless/http/IdempotentPostRequest.html" title="class in com.gocardless.http"><span class="strong">Next Class</span></a></li>
+<li><a href="../../../com/gocardless/http/HttpClient.html" title="class in com.gocardless.http"><span class="strong">Prev Class</span></a></li>
+<li><a href="../../../com/gocardless/http/ListRequest.html" title="class in com.gocardless.http"><span class="strong">Next Class</span></a></li>
 </ul>
 <ul class="navList">
-<li><a href="../../../index.html?com/gocardless/http/HttpClient.html" target="_top">Frames</a></li>
-<li><a href="HttpClient.html" target="_top">No Frames</a></li>
+<li><a href="../../../index.html?com/gocardless/http/IdempotentPostRequest.html" target="_top">Frames</a></li>
+<li><a href="IdempotentPostRequest.html" target="_top">No Frames</a></li>
 </ul>
 <ul class="navList" id="allclasses_navbar_top">
 <li><a href="../../../allclasses-noframe.html">All Classes</a></li>
@@ -59,15 +59,15 @@
 <ul class="subNavList">
 <li>Summary:&nbsp;</li>
 <li>Nested&nbsp;|&nbsp;</li>
-<li><a href="#field_summary">Field</a>&nbsp;|&nbsp;</li>
-<li><a href="#constructor_summary">Constr</a>&nbsp;|&nbsp;</li>
-<li><a href="#methods_inherited_from_class_java.lang.Object">Method</a></li>
+<li>Field&nbsp;|&nbsp;</li>
+<li>Constr&nbsp;|&nbsp;</li>
+<li><a href="#method_summary">Method</a></li>
 </ul>
 <ul class="subNavList">
 <li>Detail:&nbsp;</li>
-<li><a href="#field_detail">Field</a>&nbsp;|&nbsp;</li>
-<li><a href="#constructor_detail">Constr</a>&nbsp;|&nbsp;</li>
-<li>Method</li>
+<li>Field&nbsp;|&nbsp;</li>
+<li>Constr&nbsp;|&nbsp;</li>
+<li><a href="#method_detail">Method</a></li>
 </ul>
 </div>
 <a name="skip-navbar_top">
@@ -77,78 +77,65 @@
 <!-- ======== START OF CLASS DATA ======== -->
 <div class="header">
 <div class="subTitle">com.gocardless.http</div>
-<h2 title="Class HttpClient" class="title">Class HttpClient</h2>
+<h2 title="Class IdempotentPostRequest" class="title">Class IdempotentPostRequest&lt;T&gt;</h2>
 </div>
 <div class="contentContainer">
 <ul class="inheritance">
 <li><a href="http://docs.oracle.com/javase/7/docs/api/java/lang/Object.html?is-external=true" title="class or interface in java.lang">java.lang.Object</a></li>
 <li>
 <ul class="inheritance">
-<li>com.gocardless.http.HttpClient</li>
+<li><a href="../../../com/gocardless/http/PostRequest.html" title="class in com.gocardless.http">com.gocardless.http.PostRequest</a>&lt;T&gt;</li>
+<li>
+<ul class="inheritance">
+<li>com.gocardless.http.IdempotentPostRequest&lt;T&gt;</li>
+</ul>
+</li>
 </ul>
 </li>
 </ul>
 <div class="description">
 <ul class="blockList">
 <li class="blockList">
+<dl>
+<dt>Direct Known Subclasses:</dt>
+<dd><a href="../../../com/gocardless/services/CreditorBankAccountService.CreditorBankAccountCreateRequest.html" title="class in com.gocardless.services">CreditorBankAccountService.CreditorBankAccountCreateRequest</a>, <a href="../../../com/gocardless/services/CreditorService.CreditorCreateRequest.html" title="class in com.gocardless.services">CreditorService.CreditorCreateRequest</a>, <a href="../../../com/gocardless/services/CustomerBankAccountService.CustomerBankAccountCreateRequest.html" title="class in com.gocardless.services">CustomerBankAccountService.CustomerBankAccountCreateRequest</a>, <a href="../../../com/gocardless/services/CustomerService.CustomerCreateRequest.html" title="class in com.gocardless.services">CustomerService.CustomerCreateRequest</a>, <a href="../../../com/gocardless/services/MandateService.MandateCreateRequest.html" title="class in com.gocardless.services">MandateService.MandateCreateRequest</a>, <a href="../../../com/gocardless/services/PaymentService.PaymentCreateRequest.html" title="class in com.gocardless.services">PaymentService.PaymentCreateRequest</a>, <a href="../../../com/gocardless/services/RedirectFlowService.RedirectFlowCreateRequest.html" title="class in com.gocardless.services">RedirectFlowService.RedirectFlowCreateRequest</a>, <a href="../../../com/gocardless/services/RefundService.RefundCreateRequest.html" title="class in com.gocardless.services">RefundService.RefundCreateRequest</a>, <a href="../../../com/gocardless/services/SubscriptionService.SubscriptionCreateRequest.html" title="class in com.gocardless.services">SubscriptionService.SubscriptionCreateRequest</a></dd>
+</dl>
 <hr>
 <br>
-<pre>public class <span class="strong">HttpClient</span>
-extends <a href="http://docs.oracle.com/javase/7/docs/api/java/lang/Object.html?is-external=true" title="class or interface in java.lang">Object</a></pre>
-<div class="block"><p>An HTTP client that can execute <code>ApiRequest</code>s.</p><p>Users of this library should not need to access this class directly.</p></div>
+<pre>public abstract class <span class="strong">IdempotentPostRequest&lt;T&gt;</span>
+extends <a href="../../../com/gocardless/http/PostRequest.html" title="class in com.gocardless.http">PostRequest</a>&lt;T&gt;</pre>
 </li>
 </ul>
 </div>
 <div class="summary">
 <ul class="blockList">
 <li class="blockList">
-<!-- =========== FIELD SUMMARY =========== -->
-<ul class="blockList">
-<li class="blockList"><a name="field_summary">
-<!--   -->
-</a>
-<h3>Field Summary</h3>
-<table class="overviewSummary" border="0" cellpadding="3" cellspacing="0" summary="Field Summary table, listing fields, and an explanation">
-<caption><span>Fields</span><span class="tabEnd">&nbsp;</span></caption>
-<tr>
-<th class="colFirst" scope="col">Modifier and Type</th>
-<th class="colLast" scope="col">Field and Description</th>
-</tr>
-<tr class="altColor">
-<td class="colFirst"><code>static int</code></td>
-<td class="colLast"><code><strong><a href="../../../com/gocardless/http/HttpClient.html#MAX_RETRIES">MAX_RETRIES</a></strong></code>
-<div class="block">The maximum number of times that a request can be retried.</div>
-</td>
-</tr>
-</table>
-</li>
-</ul>
-<!-- ======== CONSTRUCTOR SUMMARY ======== -->
-<ul class="blockList">
-<li class="blockList"><a name="constructor_summary">
-<!--   -->
-</a>
-<h3>Constructor Summary</h3>
-<table class="overviewSummary" border="0" cellpadding="3" cellspacing="0" summary="Constructor Summary table, listing constructors, and an explanation">
-<caption><span>Constructors</span><span class="tabEnd">&nbsp;</span></caption>
-<tr>
-<th class="colOne" scope="col">Constructor and Description</th>
-</tr>
-<tr class="altColor">
-<td class="colOne"><code><strong><a href="../../../com/gocardless/http/HttpClient.html#HttpClient(java.lang.String,%20java.lang.String)">HttpClient</a></strong>(<a href="http://docs.oracle.com/javase/7/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</a>&nbsp;accessToken,
-          <a href="http://docs.oracle.com/javase/7/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</a>&nbsp;baseUrl)</code>
-<div class="block">Constructor.</div>
-</td>
-</tr>
-</table>
-</li>
-</ul>
 <!-- ========== METHOD SUMMARY =========== -->
 <ul class="blockList">
 <li class="blockList"><a name="method_summary">
 <!--   -->
 </a>
 <h3>Method Summary</h3>
+<table class="overviewSummary" border="0" cellpadding="3" cellspacing="0" summary="Method Summary table, listing methods, and an explanation">
+<caption><span>Methods</span><span class="tabEnd">&nbsp;</span></caption>
+<tr>
+<th class="colFirst" scope="col">Modifier and Type</th>
+<th class="colLast" scope="col">Method and Description</th>
+</tr>
+<tr class="altColor">
+<td class="colFirst"><code><a href="../../../com/gocardless/http/IdempotentPostRequest.html" title="type parameter in IdempotentPostRequest">T</a></code></td>
+<td class="colLast"><code><strong><a href="../../../com/gocardless/http/IdempotentPostRequest.html#execute()">execute</a></strong>()</code>
+<div class="block">Executes this request.</div>
+</td>
+</tr>
+</table>
+<ul class="blockList">
+<li class="blockList"><a name="methods_inherited_from_class_com.gocardless.http.PostRequest">
+<!--   -->
+</a>
+<h3>Methods inherited from class&nbsp;com.gocardless.http.<a href="../../../com/gocardless/http/PostRequest.html" title="class in com.gocardless.http">PostRequest</a></h3>
+<code><a href="../../../com/gocardless/http/PostRequest.html#executeWrapped()">executeWrapped</a></code></li>
+</ul>
 <ul class="blockList">
 <li class="blockList"><a name="methods_inherited_from_class_java.lang.Object">
 <!--   -->
@@ -164,41 +151,25 @@ extends <a href="http://docs.oracle.com/javase/7/docs/api/java/lang/Object.html?
 <div class="details">
 <ul class="blockList">
 <li class="blockList">
-<!-- ============ FIELD DETAIL =========== -->
+<!-- ============ METHOD DETAIL ========== -->
 <ul class="blockList">
-<li class="blockList"><a name="field_detail">
+<li class="blockList"><a name="method_detail">
 <!--   -->
 </a>
-<h3>Field Detail</h3>
-<a name="MAX_RETRIES">
+<h3>Method Detail</h3>
+<a name="execute()">
 <!--   -->
 </a>
 <ul class="blockListLast">
 <li class="blockList">
-<h4>MAX_RETRIES</h4>
-<pre>public static final&nbsp;int MAX_RETRIES</pre>
-<div class="block"><p>The maximum number of times that a request can be retried.</p></div>
-<dl><dt><span class="strong">See Also:</span></dt><dd><a href="../../../constant-values.html#com.gocardless.http.HttpClient.MAX_RETRIES">Constant Field Values</a></dd></dl>
-</li>
-</ul>
-</li>
-</ul>
-<!-- ========= CONSTRUCTOR DETAIL ======== -->
-<ul class="blockList">
-<li class="blockList"><a name="constructor_detail">
-<!--   -->
-</a>
-<h3>Constructor Detail</h3>
-<a name="HttpClient(java.lang.String, java.lang.String)">
-<!--   -->
-</a>
-<ul class="blockListLast">
-<li class="blockList">
-<h4>HttpClient</h4>
-<pre>public&nbsp;HttpClient(<a href="http://docs.oracle.com/javase/7/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</a>&nbsp;accessToken,
-          <a href="http://docs.oracle.com/javase/7/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</a>&nbsp;baseUrl)</pre>
-<div class="block"><p>Constructor. Users of this library should not need to access this class directly.</p></div>
-<dl><dt><span class="strong">Parameters:</span></dt><dd><code>accessToken</code> - the access token.</dd><dd><code>baseUrl</code> - base URI to make requests against.</dd></dl>
+<h4>execute</h4>
+<pre>public&nbsp;<a href="../../../com/gocardless/http/IdempotentPostRequest.html" title="type parameter in IdempotentPostRequest">T</a>&nbsp;execute()</pre>
+<div class="block"><p>Executes this request.</p><p>Returns the response entity.</p></div>
+<dl>
+<dt><strong>Overrides:</strong></dt>
+<dd><code><a href="../../../com/gocardless/http/PostRequest.html#execute()">execute</a></code>&nbsp;in class&nbsp;<code><a href="../../../com/gocardless/http/PostRequest.html" title="class in com.gocardless.http">PostRequest</a>&lt;<a href="../../../com/gocardless/http/IdempotentPostRequest.html" title="type parameter in IdempotentPostRequest">T</a>&gt;</code></dd>
+<dt><span class="strong">Throws:</span></dt>
+<dd><code><a href="../../../com/gocardless/GoCardlessException.html" title="class in com.gocardless">GoCardlessException</a></code></dd></dl>
 </li>
 </ul>
 </li>
@@ -230,12 +201,12 @@ hljs.initHighlightingOnLoad();
 </div>
 <div class="subNav">
 <ul class="navList">
-<li><a href="../../../com/gocardless/http/GoCardlessNetworkException.html" title="class in com.gocardless.http"><span class="strong">Prev Class</span></a></li>
-<li><a href="../../../com/gocardless/http/IdempotentPostRequest.html" title="class in com.gocardless.http"><span class="strong">Next Class</span></a></li>
+<li><a href="../../../com/gocardless/http/HttpClient.html" title="class in com.gocardless.http"><span class="strong">Prev Class</span></a></li>
+<li><a href="../../../com/gocardless/http/ListRequest.html" title="class in com.gocardless.http"><span class="strong">Next Class</span></a></li>
 </ul>
 <ul class="navList">
-<li><a href="../../../index.html?com/gocardless/http/HttpClient.html" target="_top">Frames</a></li>
-<li><a href="HttpClient.html" target="_top">No Frames</a></li>
+<li><a href="../../../index.html?com/gocardless/http/IdempotentPostRequest.html" target="_top">Frames</a></li>
+<li><a href="IdempotentPostRequest.html" target="_top">No Frames</a></li>
 </ul>
 <ul class="navList" id="allclasses_navbar_bottom">
 <li><a href="../../../allclasses-noframe.html">All Classes</a></li>
@@ -256,15 +227,15 @@ hljs.initHighlightingOnLoad();
 <ul class="subNavList">
 <li>Summary:&nbsp;</li>
 <li>Nested&nbsp;|&nbsp;</li>
-<li><a href="#field_summary">Field</a>&nbsp;|&nbsp;</li>
-<li><a href="#constructor_summary">Constr</a>&nbsp;|&nbsp;</li>
-<li><a href="#methods_inherited_from_class_java.lang.Object">Method</a></li>
+<li>Field&nbsp;|&nbsp;</li>
+<li>Constr&nbsp;|&nbsp;</li>
+<li><a href="#method_summary">Method</a></li>
 </ul>
 <ul class="subNavList">
 <li>Detail:&nbsp;</li>
-<li><a href="#field_detail">Field</a>&nbsp;|&nbsp;</li>
-<li><a href="#constructor_detail">Constr</a>&nbsp;|&nbsp;</li>
-<li>Method</li>
+<li>Field&nbsp;|&nbsp;</li>
+<li>Constr&nbsp;|&nbsp;</li>
+<li><a href="#method_detail">Method</a></li>
 </ul>
 </div>
 <a name="skip-navbar_bottom">
