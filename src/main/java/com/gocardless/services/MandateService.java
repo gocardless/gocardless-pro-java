@@ -99,7 +99,7 @@ public class MandateService {
      *
      * Creates a new mandate object.
      */
-    public static final class MandateCreateRequest extends PostRequest<Mandate> {
+    public static final class MandateCreateRequest extends IdempotentPostRequest<Mandate> {
         private Links links;
         private Map<String, String> metadata;
         private String reference;
@@ -173,6 +173,16 @@ public class MandateService {
         public MandateCreateRequest withScheme(String scheme) {
             this.scheme = scheme;
             return this;
+        }
+
+        public MandateCreateRequest withIdempotencyKey(String idempotencyKey) {
+            super.setIdempotencyKey(idempotencyKey);
+            return this;
+        }
+
+        @Override
+        protected GetRequest<Mandate> handleConflict(HttpClient httpClient, String id) {
+            return new MandateGetRequest(httpClient, id);
         }
 
         private MandateCreateRequest(HttpClient httpClient) {

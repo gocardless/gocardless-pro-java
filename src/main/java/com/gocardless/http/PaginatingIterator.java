@@ -32,7 +32,7 @@ class PaginatingIterator<T> extends AbstractIterator<T> {
 
     private void loadPage() {
         request.setAfter(nextCursor);
-        ListResponse<T> response = client.execute(request);
+        ListResponse<T> response = client.executeWithRetries(request);
         items = Lists.newArrayList(response.getItems());
         nextCursor = response.getAfter();
     }

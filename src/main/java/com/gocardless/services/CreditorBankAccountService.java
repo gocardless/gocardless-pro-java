@@ -81,7 +81,7 @@ public class CreditorBankAccountService {
      * Creates a new creditor bank account object.
      */
     public static final class CreditorBankAccountCreateRequest extends
-            PostRequest<CreditorBankAccount> {
+            IdempotentPostRequest<CreditorBankAccount> {
         private String accountHolderName;
         private String accountNumber;
         private String bankCode;
@@ -202,6 +202,16 @@ public class CreditorBankAccountService {
                 Boolean setAsDefaultPayoutAccount) {
             this.setAsDefaultPayoutAccount = setAsDefaultPayoutAccount;
             return this;
+        }
+
+        public CreditorBankAccountCreateRequest withIdempotencyKey(String idempotencyKey) {
+            super.setIdempotencyKey(idempotencyKey);
+            return this;
+        }
+
+        @Override
+        protected GetRequest<CreditorBankAccount> handleConflict(HttpClient httpClient, String id) {
+            return new CreditorBankAccountGetRequest(httpClient, id);
         }
 
         private CreditorBankAccountCreateRequest(HttpClient httpClient) {
