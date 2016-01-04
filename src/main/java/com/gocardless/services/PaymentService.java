@@ -107,7 +107,7 @@ public class PaymentService {
      * failed. Payments can be created against `pending_submission` and `submitted` as well as `active`
      * mandates.
      */
-    public static final class PaymentCreateRequest extends PostRequest<Payment> {
+    public static final class PaymentCreateRequest extends IdempotentPostRequest<Payment> {
         private Integer amount;
         private Integer appFee;
         private String chargeDate;
@@ -207,6 +207,16 @@ public class PaymentService {
         public PaymentCreateRequest withReference(String reference) {
             this.reference = reference;
             return this;
+        }
+
+        public PaymentCreateRequest withIdempotencyKey(String idempotencyKey) {
+            super.setIdempotencyKey(idempotencyKey);
+            return this;
+        }
+
+        @Override
+        protected GetRequest<Payment> handleConflict(HttpClient httpClient, String id) {
+            return new PaymentGetRequest(httpClient, id);
         }
 
         private PaymentCreateRequest(HttpClient httpClient) {

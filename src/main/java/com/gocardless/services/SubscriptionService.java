@@ -134,7 +134,7 @@ public class SubscriptionService {
      *
      * Creates a new subscription object
      */
-    public static final class SubscriptionCreateRequest extends PostRequest<Subscription> {
+    public static final class SubscriptionCreateRequest extends IdempotentPostRequest<Subscription> {
         private Integer amount;
         private Integer count;
         private String currency;
@@ -284,6 +284,16 @@ public class SubscriptionService {
         public SubscriptionCreateRequest withStartDate(String startDate) {
             this.startDate = startDate;
             return this;
+        }
+
+        public SubscriptionCreateRequest withIdempotencyKey(String idempotencyKey) {
+            super.setIdempotencyKey(idempotencyKey);
+            return this;
+        }
+
+        @Override
+        protected GetRequest<Subscription> handleConflict(HttpClient httpClient, String id) {
+            return new SubscriptionGetRequest(httpClient, id);
         }
 
         private SubscriptionCreateRequest(HttpClient httpClient) {

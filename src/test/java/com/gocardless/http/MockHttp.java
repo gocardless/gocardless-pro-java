@@ -19,6 +19,8 @@ import static com.gocardless.http.HttpTestUtil.jsonMatchesFixture;
 
 import static com.google.common.base.Charsets.UTF_8;
 
+import static com.squareup.okhttp.mockwebserver.SocketPolicy.DISCONNECT_AT_START;
+
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class MockHttp extends ExternalResource {
@@ -53,14 +55,31 @@ public class MockHttp extends ExternalResource {
         server.enqueue(response);
     }
 
+    public void enqueueNetworkFailure() {
+        server.enqueue(new MockResponse().setSocketPolicy(DISCONNECT_AT_START));
+    }
+
     public void assertRequestMade(String method, String path) throws Exception {
-        assertRequestMade(method, path, null);
+        assertRequestMade(method, path, null, ImmutableMap.<String, String>of());
     }
 
     public void assertRequestMade(String method, String path, String fixturePath) throws Exception {
+        assertRequestMade(method, path, fixturePath, ImmutableMap.<String, String>of());
+    }
+
+    public void assertRequestMade(String method, String path, Map<String, String> headers)
+            throws Exception {
+        assertRequestMade(method, path, null, headers);
+    }
+
+    public void assertRequestMade(String method, String path, String fixturePath,
+            Map<String, String> headers) throws Exception {
         RecordedRequest recordedRequest = server.takeRequest();
         assertThat(recordedRequest.getMethod()).isEqualTo(method);
         assertThat(recordedRequest.getPath()).isEqualTo(path);
+        for (Map.Entry<String, String> header : headers.entrySet()) {
+            assertThat(recordedRequest.getHeader(header.getKey())).isEqualTo(header.getValue());
+        }
         if (fixturePath == null) {
             assertThat(recordedRequest.getBodySize()).isEqualTo(0);
         } else {

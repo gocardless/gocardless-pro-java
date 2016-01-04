@@ -115,7 +115,7 @@ public class CustomerBankAccountService {
      * details](#appendix-local-bank-details).
      */
     public static final class CustomerBankAccountCreateRequest extends
-            PostRequest<CustomerBankAccount> {
+            IdempotentPostRequest<CustomerBankAccount> {
         private String accountHolderName;
         private String accountNumber;
         private String bankCode;
@@ -238,6 +238,16 @@ public class CustomerBankAccountService {
             }
             metadata.put(key, value);
             return this;
+        }
+
+        public CustomerBankAccountCreateRequest withIdempotencyKey(String idempotencyKey) {
+            super.setIdempotencyKey(idempotencyKey);
+            return this;
+        }
+
+        @Override
+        protected GetRequest<CustomerBankAccount> handleConflict(HttpClient httpClient, String id) {
+            return new CustomerBankAccountGetRequest(httpClient, id);
         }
 
         private CustomerBankAccountCreateRequest(HttpClient httpClient) {

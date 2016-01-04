@@ -3,14 +3,22 @@ package com.gocardless.http;
 import java.io.IOException;
 import java.io.Reader;
 import java.util.Map;
+import java.util.concurrent.Callable;
+import java.util.concurrent.ExecutionException;
+
+import com.github.rholder.retry.*;
 
 import com.gocardless.GoCardlessException;
+import com.gocardless.errors.GoCardlessInternalException;
 
 import com.google.common.annotations.VisibleForTesting;
+import com.google.common.base.Throwables;
 import com.google.common.collect.ImmutableMap;
 import com.google.gson.Gson;
 
 import com.squareup.okhttp.*;
+
+import static java.util.concurrent.TimeUnit.MILLISECONDS;
 
 /**
  * An HTTP client that can execute {@link ApiRequest}s.
@@ -61,23 +69,56 @@ public class HttpClient {
     }
 
     <T> T execute(ApiRequest<T> apiRequest) {
-        Request request = buildRequest(apiRequest);
+        return execute(apiRequest, ImmutableMap.<String, String>of());
+    }
+
+    <T> T execute(ApiRequest<T> apiRequest, Map<String, String> headers) {
+        Request request = buildRequest(apiRequest, headers);
         Response response = execute(request);
         return parseResponseBody(apiRequest, response);
     }
 
     <T> ApiResponse<T> executeWrapped(ApiRequest<T> apiRequest) {
-        Request request = buildRequest(apiRequest);
+        return executeWrapped(apiRequest, ImmutableMap.<String, String>of());
+    }
+
+    <T> ApiResponse<T> executeWrapped(ApiRequest<T> apiRequest, Map<String, String> headers) {
+        Request request = buildRequest(apiRequest, headers);
         Response response = execute(request);
         T resource = parseResponseBody(apiRequest, response);
         return new ApiResponse<>(resource, response.code(), response.headers().toMultimap());
     }
 
-    private <T> Request buildRequest(ApiRequest<T> apiRequest) {
+    <T> T executeWithRetries(ApiRequest<T> apiRequest) {
+        return executeWithRetries(apiRequest, ImmutableMap.<String, String>of());
+    }
+
+    <T> T executeWithRetries(final ApiRequest<T> apiRequest, final Map<String, String> headers) {
+        Retryer<T> retrier =
+                RetryerBuilder.<T>newBuilder()
+                        .retryIfExceptionOfType(GoCardlessNetworkException.class)
+                        .retryIfExceptionOfType(GoCardlessInternalException.class)
+                        .withWaitStrategy(WaitStrategies.fixedWait(500, MILLISECONDS))
+                        .withStopStrategy(StopStrategies.stopAfterAttempt(3)).build();
+        Callable<T> executeOnce = new Callable<T>() {
+            @Override
+            public T call() throws Exception {
+                return execute(apiRequest, headers);
+            }
+        };
+        try {
+            return retrier.call(executeOnce);
+        } catch (ExecutionException | RetryException e) {
+            Throwable cause = e.getCause();
+            throw Throwables.propagate(cause);
+        }
+    }
+
+    private <T> Request buildRequest(ApiRequest<T> apiRequest, Map<String, String> headers) {
         HttpUrl url = apiRequest.getUrl(urlFormatter);
         Request.Builder request =
-                new Request.Builder().url(url).header("Authorization", credentials)
-                        .header("User-Agent", USER_AGENT)
+                new Request.Builder().url(url).headers(Headers.of(headers))
+                        .header("Authorization", credentials).header("User-Agent", USER_AGENT)
                         .method(apiRequest.getMethod(), getBody(apiRequest));
         for (Map.Entry<String, String> entry : HEADERS.entrySet()) {
             request = request.header(entry.getKey(), entry.getValue());

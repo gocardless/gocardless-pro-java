@@ -70,7 +70,7 @@ public class CustomerService {
      *
      * Creates a new customer object.
      */
-    public static final class CustomerCreateRequest extends PostRequest<Customer> {
+    public static final class CustomerCreateRequest extends IdempotentPostRequest<Customer> {
         private String addressLine1;
         private String addressLine2;
         private String addressLine3;
@@ -218,6 +218,16 @@ public class CustomerService {
         public CustomerCreateRequest withSwedishIdentityNumber(String swedishIdentityNumber) {
             this.swedishIdentityNumber = swedishIdentityNumber;
             return this;
+        }
+
+        public CustomerCreateRequest withIdempotencyKey(String idempotencyKey) {
+            super.setIdempotencyKey(idempotencyKey);
+            return this;
+        }
+
+        @Override
+        protected GetRequest<Customer> handleConflict(HttpClient httpClient, String id) {
+            return new CustomerGetRequest(httpClient, id);
         }
 
         private CustomerCreateRequest(HttpClient httpClient) {
