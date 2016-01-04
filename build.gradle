@@ -4,7 +4,7 @@ apply plugin: 'signing'
 
 sourceCompatibility = 1.7
 group = ' com.gocardless'
-version = '1.12.4'
+version = '1.13.0'
 
 buildscript {
     repositories {
@@ -23,14 +23,14 @@ repositories {
 }
 
 dependencies {
-    compile 'com.squareup.okhttp:okhttp:2.7.0'
+    compile 'com.squareup.okhttp:okhttp:2.7.1'
     compile 'com.google.code.gson:gson:2.5'
     compile 'com.google.guava:guava:19.0'
     compile 'org.slf4j:slf4j-api:1.7.13'
 
     testCompile 'junit:junit:4.12'
-    testCompile 'org.assertj:assertj-core:2.2.0'
-    testCompile 'com.squareup.okhttp:mockwebserver:2.7.0'
+    testCompile 'org.assertj:assertj-core:2.3.0'
+    testCompile 'com.squareup.okhttp:mockwebserver:2.7.1'
 
     testCompile 'co.freeside:betamax:1.1.2'
     testCompile 'org.codehaus.groovy:groovy-all:2.2.0'
