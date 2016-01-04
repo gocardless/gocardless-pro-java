@@ -27,6 +27,10 @@ import static java.util.concurrent.TimeUnit.MILLISECONDS;
  */
 public class HttpClient {
     /**
+     * The maximum number of times that a request can be retried.
+     */
+    public static final int MAX_RETRIES = 3;
+    /**
      * See http://tools.ietf.org/html/rfc7230#section-3.2.6.
      */
     private static final String DISALLOWED_USER_AGENT_CHARACTERS =
@@ -99,7 +103,7 @@ public class HttpClient {
                         .retryIfExceptionOfType(GoCardlessNetworkException.class)
                         .retryIfExceptionOfType(GoCardlessInternalException.class)
                         .withWaitStrategy(WaitStrategies.fixedWait(500, MILLISECONDS))
-                        .withStopStrategy(StopStrategies.stopAfterAttempt(3)).build();
+                        .withStopStrategy(StopStrategies.stopAfterAttempt(MAX_RETRIES)).build();
         Callable<T> executeOnce = new Callable<T>() {
             @Override
             public T call() throws Exception {

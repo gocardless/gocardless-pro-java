@@ -34,8 +34,13 @@ public abstract class IdempotentPostRequest<T> extends PostRequest<T> {
      */
     @Override
     public T execute() {
-        String idempotencyKey = UUID.randomUUID().toString();
-        Map<String, String> headers = ImmutableMap.of("Idempotency-Key", getIdempotencyKey());
+        String requestIdempotencyKey;
+        if (this.idempotencyKey == null) {
+            requestIdempotencyKey = UUID.randomUUID().toString();
+        } else {
+            requestIdempotencyKey = this.idempotencyKey;
+        }
+        Map<String, String> headers = ImmutableMap.of("Idempotency-Key", requestIdempotencyKey);
         try {
             return getHttpClient().executeWithRetries(this, headers);
         } catch (InvalidStateException e) {
@@ -51,14 +56,6 @@ public abstract class IdempotentPostRequest<T> extends PostRequest<T> {
 
     protected void setIdempotencyKey(String idempotencyKey) {
         this.idempotencyKey = idempotencyKey;
-    }
-
-    private String getIdempotencyKey() {
-        if (this.idempotencyKey == null) {
-            return UUID.randomUUID().toString();
-        } else {
-            return idempotencyKey;
-        }
     }
 
     protected abstract GetRequest<T> handleConflict(HttpClient httpClient, String id);

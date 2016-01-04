@@ -1,6 +1,6 @@
 package com.gocardless.http;
 
-import com.gocardless.errors.InvalidStateException;
+import com.gocardless.errors.ValidationFailedException;
 
 import com.google.common.collect.ImmutableMap;
 
@@ -74,16 +74,16 @@ public class IdempotentPostRequestTest {
     }
 
     @Test
-    public void shouldPropagateExceptionForNonConflict() throws Exception {
-        http.enqueueResponse(409, "fixtures/invalid_state.json");
+    public void shouldPropagateExceptionForNonConflictError() throws Exception {
+        http.enqueueResponse(422, "fixtures/validation_failed.json");
         DummyPostRequest request = new DummyPostRequest();
-        exception.expect(InvalidStateException.class);
+        exception.expect(ValidationFailedException.class);
         request.execute();
     }
 
     @Test
     public void shouldPropagateExceptionIfTooManyFailures() {
-        for (int i = 0; i < 3; i++) {
+        for (int i = 0; i < HttpClient.MAX_RETRIES; i++) {
             http.enqueueNetworkFailure();
         }
         DummyPostRequest request = new DummyPostRequest();
