@@ -20,7 +20,7 @@ public abstract class GetRequest<T> extends ApiRequest<T> {
      * @throws com.gocardless.GoCardlessException
      */
     public T execute() {
-        return getHttpClient().execute(this);
+        return getHttpClient().executeWithRetries(this);
     }
 
     /**

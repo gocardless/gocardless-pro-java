@@ -104,7 +104,7 @@ public class RefundService {
      * payment.
      * 
      */
-    public static final class RefundCreateRequest extends PostRequest<Refund> {
+    public static final class RefundCreateRequest extends IdempotentPostRequest<Refund> {
         private Integer amount;
         private Links links;
         private Map<String, String> metadata;
@@ -174,6 +174,16 @@ public class RefundService {
         public RefundCreateRequest withTotalAmountConfirmation(Integer totalAmountConfirmation) {
             this.totalAmountConfirmation = totalAmountConfirmation;
             return this;
+        }
+
+        public RefundCreateRequest withIdempotencyKey(String idempotencyKey) {
+            super.setIdempotencyKey(idempotencyKey);
+            return this;
+        }
+
+        @Override
+        protected GetRequest<Refund> handleConflict(HttpClient httpClient, String id) {
+            return new RefundGetRequest(httpClient, id);
         }
 
         private RefundCreateRequest(HttpClient httpClient) {

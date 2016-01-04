@@ -45,11 +45,32 @@ public class GetRequestTest {
         http.assertRequestMade("GET", "/dummy/123");
     }
 
+    @Test
     public void shouldThrowOnApiError() throws Exception {
         http.enqueueResponse(400, "fixtures/invalid_api_usage.json");
         exception.expect(InvalidApiUsageException.class);
         exception.expectMessage("Invalid document structure");
         request.execute();
+    }
+
+    @Test
+    public void shouldRetryOnNetworkFailure() throws Exception {
+        http.enqueueNetworkFailure();
+        http.enqueueResponse(200, "fixtures/single.json");
+        DummyItem result = request.execute();
+        assertThat(result.stringField).isEqualTo("foo");
+        assertThat(result.intField).isEqualTo(123);
+        http.assertRequestMade("GET", "/dummy/123");
+    }
+
+    @Test
+    public void shouldRetryOnInternalError() throws Exception {
+        http.enqueueResponse(500, "fixtures/internal_error.json");
+        http.enqueueResponse(200, "fixtures/single.json");
+        DummyItem result = request.execute();
+        assertThat(result.stringField).isEqualTo("foo");
+        assertThat(result.intField).isEqualTo(123);
+        http.assertRequestMade("GET", "/dummy/123");
     }
 
     private class DummyGetRequest extends GetRequest<DummyItem> {

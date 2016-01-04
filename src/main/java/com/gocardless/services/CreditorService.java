@@ -70,7 +70,7 @@ public class CreditorService {
      *
      * Creates a new creditor.
      */
-    public static final class CreditorCreateRequest extends PostRequest<Creditor> {
+    public static final class CreditorCreateRequest extends IdempotentPostRequest<Creditor> {
         private String addressLine1;
         private String addressLine2;
         private String addressLine3;
@@ -157,6 +157,16 @@ public class CreditorService {
         public CreditorCreateRequest withRegion(String region) {
             this.region = region;
             return this;
+        }
+
+        public CreditorCreateRequest withIdempotencyKey(String idempotencyKey) {
+            super.setIdempotencyKey(idempotencyKey);
+            return this;
+        }
+
+        @Override
+        protected GetRequest<Creditor> handleConflict(HttpClient httpClient, String id) {
+            return new CreditorGetRequest(httpClient, id);
         }
 
         private CreditorCreateRequest(HttpClient httpClient) {

@@ -88,7 +88,7 @@ public class RedirectFlowService {
      * Creates a redirect flow object which can then be used to redirect your customer to the GoCardless
      * Pro hosted payment pages.
      */
-    public static final class RedirectFlowCreateRequest extends PostRequest<RedirectFlow> {
+    public static final class RedirectFlowCreateRequest extends IdempotentPostRequest<RedirectFlow> {
         private String description;
         private Links links;
         private Scheme scheme;
@@ -147,6 +147,16 @@ public class RedirectFlowService {
         public RedirectFlowCreateRequest withSuccessRedirectUrl(String successRedirectUrl) {
             this.successRedirectUrl = successRedirectUrl;
             return this;
+        }
+
+        public RedirectFlowCreateRequest withIdempotencyKey(String idempotencyKey) {
+            super.setIdempotencyKey(idempotencyKey);
+            return this;
+        }
+
+        @Override
+        protected GetRequest<RedirectFlow> handleConflict(HttpClient httpClient, String id) {
+            return new RedirectFlowGetRequest(httpClient, id);
         }
 
         private RedirectFlowCreateRequest(HttpClient httpClient) {

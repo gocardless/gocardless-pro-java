@@ -22,6 +22,28 @@ public class PutRequestTest {
     }
 
     @Test
+    public void shouldRetryOnNetworkFailure() throws Exception {
+        http.enqueueNetworkFailure();
+        http.enqueueResponse(200, "fixtures/single.json");
+        DummyPutRequest request = new DummyPutRequest();
+        DummyItem result = request.execute();
+        assertThat(result.stringField).isEqualTo("foo");
+        assertThat(result.intField).isEqualTo(123);
+        http.assertRequestMade("PUT", "/dummy");
+    }
+
+    @Test
+    public void shouldRetryOnInternalError() throws Exception {
+        http.enqueueResponse(500, "fixtures/internal_error.json");
+        http.enqueueResponse(200, "fixtures/single.json");
+        DummyPutRequest request = new DummyPutRequest();
+        DummyItem result = request.execute();
+        assertThat(result.stringField).isEqualTo("foo");
+        assertThat(result.intField).isEqualTo(123);
+        http.assertRequestMade("PUT", "/dummy");
+    }
+
+    @Test
     public void shouldPerformPutRequestWithBody() throws Exception {
         http.enqueueResponse(200, "fixtures/single.json");
         DummyPutRequest request = new DummyPutRequestWithBody();

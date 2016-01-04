@@ -90,6 +90,10 @@ Subscription subscription = client.subscriptions().update("SU123")
     .execute();
 ```
 
+### Retrying requests
+
+The library will attempt to retry most failing requests automatically (with the execption of some that are not safe to retry).  If you want to override this behaviour (for example, to provide your own retry mechanism), then you can use the `executeWrapped` method in place of `execute`.  This returns an `ApiResponse` object, which also gives access to the response status code and headers.
+
 ### Handling errors
 
 Any errors will result in a `GoCardlessException` being thrown.  If the error is due to an error response from the API, then an appropriate subclass of `GoCardlessApiException` will be thrown, providing more information about the nature of the error.  This will be one of:

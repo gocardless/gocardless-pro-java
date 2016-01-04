@@ -35,6 +35,36 @@ public class ListRequestTest {
     }
 
     @Test
+    public void shouldRetryOnNetworkFailure() throws Exception {
+        http.enqueueNetworkFailure();
+        http.enqueueResponse(200, "fixtures/page.json");
+        DummyListRequest<ListResponse<DummyItem>> request =
+                DummyListRequest.pageRequest(http.client());
+        ListResponse<DummyItem> result = request.execute();
+        assertThat(result.getItems()).hasSize(2);
+        assertThat(result.getItems().get(0).stringField).isEqualTo("foo");
+        assertThat(result.getItems().get(0).intField).isEqualTo(123);
+        assertThat(result.getItems().get(1).stringField).isEqualTo("bar");
+        assertThat(result.getItems().get(1).intField).isEqualTo(456);
+        http.assertRequestMade("GET", "/dummy?id=123");
+    }
+
+    @Test
+    public void shouldRetryOnInternalError() throws Exception {
+        http.enqueueResponse(500, "fixtures/internal_error.json");
+        http.enqueueResponse(200, "fixtures/page.json");
+        DummyListRequest<ListResponse<DummyItem>> request =
+                DummyListRequest.pageRequest(http.client());
+        ListResponse<DummyItem> result = request.execute();
+        assertThat(result.getItems()).hasSize(2);
+        assertThat(result.getItems().get(0).stringField).isEqualTo("foo");
+        assertThat(result.getItems().get(0).intField).isEqualTo(123);
+        assertThat(result.getItems().get(1).stringField).isEqualTo("bar");
+        assertThat(result.getItems().get(1).intField).isEqualTo(456);
+        http.assertRequestMade("GET", "/dummy?id=123");
+    }
+
+    @Test
     public void shouldPerformWrappedListRequest() throws Exception {
         http.enqueueResponse(200, "fixtures/page.json", ImmutableMap.of("foo", "bar"));
         DummyListRequest<ListResponse<DummyItem>> request =

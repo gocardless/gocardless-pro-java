@@ -101,7 +101,7 @@ public abstract class ListRequest<S, T> extends ApiRequest<ListResponse<T>> {
             @Override
             public ListResponse<T> execute(ListRequest<ListResponse<T>, T> request,
                     HttpClient client) {
-                return client.execute(request);
+                return client.executeWithRetries(request);
             }
 
             @Override
