@@ -221,7 +221,7 @@ public class CustomerBankAccountService {
 
         /**
          * Key-value store of custom data. Up to 3 keys are permitted, with key names up to 50 characters and
-         * values up to 200 characters.
+         * values up to 500 characters.
          */
         public CustomerBankAccountCreateRequest withMetadata(Map<String, String> metadata) {
             this.metadata = metadata;
@@ -230,7 +230,7 @@ public class CustomerBankAccountService {
 
         /**
          * Key-value store of custom data. Up to 3 keys are permitted, with key names up to 50 characters and
-         * values up to 200 characters.
+         * values up to 500 characters.
          */
         public CustomerBankAccountCreateRequest withMetadata(String key, String value) {
             if (metadata == null) {
@@ -431,7 +431,7 @@ public class CustomerBankAccountService {
 
         /**
          * Key-value store of custom data. Up to 3 keys are permitted, with key names up to 50 characters and
-         * values up to 200 characters.
+         * values up to 500 characters.
          */
         public CustomerBankAccountUpdateRequest withMetadata(Map<String, String> metadata) {
             this.metadata = metadata;
@@ -440,7 +440,7 @@ public class CustomerBankAccountService {
 
         /**
          * Key-value store of custom data. Up to 3 keys are permitted, with key names up to 50 characters and
-         * values up to 200 characters.
+         * values up to 500 characters.
          */
         public CustomerBankAccountUpdateRequest withMetadata(String key, String value) {
             if (metadata == null) {

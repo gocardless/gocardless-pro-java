@@ -136,7 +136,7 @@ public class MandateService {
 
         /**
          * Key-value store of custom data. Up to 3 keys are permitted, with key names up to 50 characters and
-         * values up to 200 characters.
+         * values up to 500 characters.
          */
         public MandateCreateRequest withMetadata(Map<String, String> metadata) {
             this.metadata = metadata;
@@ -145,7 +145,7 @@ public class MandateService {
 
         /**
          * Key-value store of custom data. Up to 3 keys are permitted, with key names up to 50 characters and
-         * values up to 200 characters.
+         * values up to 500 characters.
          */
         public MandateCreateRequest withMetadata(String key, String value) {
             if (metadata == null) {
@@ -542,7 +542,7 @@ public class MandateService {
 
         /**
          * Key-value store of custom data. Up to 3 keys are permitted, with key names up to 50 characters and
-         * values up to 200 characters.
+         * values up to 500 characters.
          */
         public MandateUpdateRequest withMetadata(Map<String, String> metadata) {
             this.metadata = metadata;
@@ -551,7 +551,7 @@ public class MandateService {
 
         /**
          * Key-value store of custom data. Up to 3 keys are permitted, with key names up to 50 characters and
-         * values up to 200 characters.
+         * values up to 500 characters.
          */
         public MandateUpdateRequest withMetadata(String key, String value) {
             if (metadata == null) {
@@ -610,7 +610,7 @@ public class MandateService {
 
         /**
          * Key-value store of custom data. Up to 3 keys are permitted, with key names up to 50 characters and
-         * values up to 200 characters.
+         * values up to 500 characters.
          */
         public MandateCancelRequest withMetadata(Map<String, String> metadata) {
             this.metadata = metadata;
@@ -619,7 +619,7 @@ public class MandateService {
 
         /**
          * Key-value store of custom data. Up to 3 keys are permitted, with key names up to 50 characters and
-         * values up to 200 characters.
+         * values up to 500 characters.
          */
         public MandateCancelRequest withMetadata(String key, String value) {
             if (metadata == null) {
@@ -689,7 +689,7 @@ public class MandateService {
 
         /**
          * Key-value store of custom data. Up to 3 keys are permitted, with key names up to 50 characters and
-         * values up to 200 characters.
+         * values up to 500 characters.
          */
         public MandateReinstateRequest withMetadata(Map<String, String> metadata) {
             this.metadata = metadata;
@@ -698,7 +698,7 @@ public class MandateService {
 
         /**
          * Key-value store of custom data. Up to 3 keys are permitted, with key names up to 50 characters and
-         * values up to 200 characters.
+         * values up to 500 characters.
          */
         public MandateReinstateRequest withMetadata(String key, String value) {
             if (metadata == null) {

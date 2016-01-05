@@ -180,7 +180,7 @@ public class PaymentService {
 
         /**
          * Key-value store of custom data. Up to 3 keys are permitted, with key names up to 50 characters and
-         * values up to 200 characters.
+         * values up to 500 characters.
          */
         public PaymentCreateRequest withMetadata(Map<String, String> metadata) {
             this.metadata = metadata;
@@ -189,7 +189,7 @@ public class PaymentService {
 
         /**
          * Key-value store of custom data. Up to 3 keys are permitted, with key names up to 50 characters and
-         * values up to 200 characters.
+         * values up to 500 characters.
          */
         public PaymentCreateRequest withMetadata(String key, String value) {
             if (metadata == null) {
@@ -569,7 +569,7 @@ public class PaymentService {
 
         /**
          * Key-value store of custom data. Up to 3 keys are permitted, with key names up to 50 characters and
-         * values up to 200 characters.
+         * values up to 500 characters.
          */
         public PaymentUpdateRequest withMetadata(Map<String, String> metadata) {
             this.metadata = metadata;
@@ -578,7 +578,7 @@ public class PaymentService {
 
         /**
          * Key-value store of custom data. Up to 3 keys are permitted, with key names up to 50 characters and
-         * values up to 200 characters.
+         * values up to 500 characters.
          */
         public PaymentUpdateRequest withMetadata(String key, String value) {
             if (metadata == null) {
@@ -637,7 +637,7 @@ public class PaymentService {
 
         /**
          * Key-value store of custom data. Up to 3 keys are permitted, with key names up to 50 characters and
-         * values up to 200 characters.
+         * values up to 500 characters.
          */
         public PaymentCancelRequest withMetadata(Map<String, String> metadata) {
             this.metadata = metadata;
@@ -646,7 +646,7 @@ public class PaymentService {
 
         /**
          * Key-value store of custom data. Up to 3 keys are permitted, with key names up to 50 characters and
-         * values up to 200 characters.
+         * values up to 500 characters.
          */
         public PaymentCancelRequest withMetadata(String key, String value) {
             if (metadata == null) {
@@ -715,7 +715,7 @@ public class PaymentService {
 
         /**
          * Key-value store of custom data. Up to 3 keys are permitted, with key names up to 50 characters and
-         * values up to 200 characters.
+         * values up to 500 characters.
          */
         public PaymentRetryRequest withMetadata(Map<String, String> metadata) {
             this.metadata = metadata;
@@ -724,7 +724,7 @@ public class PaymentService {
 
         /**
          * Key-value store of custom data. Up to 3 keys are permitted, with key names up to 50 characters and
-         * values up to 200 characters.
+         * values up to 500 characters.
          */
         public PaymentRetryRequest withMetadata(String key, String value) {
             if (metadata == null) {
