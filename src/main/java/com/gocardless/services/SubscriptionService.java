@@ -230,7 +230,7 @@ public class SubscriptionService {
 
         /**
          * Key-value store of custom data. Up to 3 keys are permitted, with key names up to 50 characters and
-         * values up to 200 characters.
+         * values up to 500 characters.
          */
         public SubscriptionCreateRequest withMetadata(Map<String, String> metadata) {
             this.metadata = metadata;
@@ -239,7 +239,7 @@ public class SubscriptionService {
 
         /**
          * Key-value store of custom data. Up to 3 keys are permitted, with key names up to 50 characters and
-         * values up to 200 characters.
+         * values up to 500 characters.
          */
         public SubscriptionCreateRequest withMetadata(String key, String value) {
             if (metadata == null) {
@@ -608,7 +608,7 @@ public class SubscriptionService {
 
         /**
          * Key-value store of custom data. Up to 3 keys are permitted, with key names up to 50 characters and
-         * values up to 200 characters.
+         * values up to 500 characters.
          */
         public SubscriptionUpdateRequest withMetadata(Map<String, String> metadata) {
             this.metadata = metadata;
@@ -617,7 +617,7 @@ public class SubscriptionService {
 
         /**
          * Key-value store of custom data. Up to 3 keys are permitted, with key names up to 50 characters and
-         * values up to 200 characters.
+         * values up to 500 characters.
          */
         public SubscriptionUpdateRequest withMetadata(String key, String value) {
             if (metadata == null) {
@@ -695,7 +695,7 @@ public class SubscriptionService {
 
         /**
          * Key-value store of custom data. Up to 3 keys are permitted, with key names up to 50 characters and
-         * values up to 200 characters.
+         * values up to 500 characters.
          */
         public SubscriptionCancelRequest withMetadata(Map<String, String> metadata) {
             this.metadata = metadata;
@@ -704,7 +704,7 @@ public class SubscriptionService {
 
         /**
          * Key-value store of custom data. Up to 3 keys are permitted, with key names up to 50 characters and
-         * values up to 200 characters.
+         * values up to 500 characters.
          */
         public SubscriptionCancelRequest withMetadata(String key, String value) {
             if (metadata == null) {

@@ -46,7 +46,7 @@ public class Mandate {
 
     /**
      * Key-value store of custom data. Up to 3 keys are permitted, with key names up to 50 characters and
-     * values up to 200 characters.
+     * values up to 500 characters.
      */
     public Map<String, String> getMetadata() {
         return metadata;

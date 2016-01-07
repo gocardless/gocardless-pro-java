@@ -173,7 +173,7 @@ public class CustomerService {
 
         /**
          * Key-value store of custom data. Up to 3 keys are permitted, with key names up to 50 characters and
-         * values up to 200 characters.
+         * values up to 500 characters.
          */
         public CustomerCreateRequest withMetadata(Map<String, String> metadata) {
             this.metadata = metadata;
@@ -182,7 +182,7 @@ public class CustomerService {
 
         /**
          * Key-value store of custom data. Up to 3 keys are permitted, with key names up to 50 characters and
-         * values up to 200 characters.
+         * values up to 500 characters.
          */
         public CustomerCreateRequest withMetadata(String key, String value) {
             if (metadata == null) {
@@ -569,7 +569,7 @@ public class CustomerService {
 
         /**
          * Key-value store of custom data. Up to 3 keys are permitted, with key names up to 50 characters and
-         * values up to 200 characters.
+         * values up to 500 characters.
          */
         public CustomerUpdateRequest withMetadata(Map<String, String> metadata) {
             this.metadata = metadata;
@@ -578,7 +578,7 @@ public class CustomerService {
 
         /**
          * Key-value store of custom data. Up to 3 keys are permitted, with key names up to 50 characters and
-         * values up to 200 characters.
+         * values up to 500 characters.
          */
         public CustomerUpdateRequest withMetadata(String key, String value) {
             if (metadata == null) {
