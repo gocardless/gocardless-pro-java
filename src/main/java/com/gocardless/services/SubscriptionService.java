@@ -269,7 +269,9 @@ public class SubscriptionService {
         /**
          * An optional payment reference. This will be set as the reference on each payment created and will
          * appear on your customer's bank statement. See the documentation for the [create payment
-         * endpoint](#payments-create-a-payment) for more details.
+         * endpoint](#payments-create-a-payment) for more details. <p
+         * class='restricted-notice'><strong>Restricted</strong>: You need your own Service User Number to
+         * specify a payment reference for Bacs payments.</p>
          */
         public SubscriptionCreateRequest withPaymentReference(String paymentReference) {
             this.paymentReference = paymentReference;
@@ -639,7 +641,9 @@ public class SubscriptionService {
         /**
          * An optional payment reference. This will be set as the reference on each payment created and will
          * appear on your customer's bank statement. See the documentation for the [create payment
-         * endpoint](#payments-create-a-payment) for more details.
+         * endpoint](#payments-create-a-payment) for more details. <p
+         * class='restricted-notice'><strong>Restricted</strong>: You need your own Service User Number to
+         * specify a payment reference for Bacs payments.</p>
          */
         public SubscriptionUpdateRequest withPaymentReference(String paymentReference) {
             this.paymentReference = paymentReference;

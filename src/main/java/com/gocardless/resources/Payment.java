@@ -70,7 +70,9 @@ public class Payment {
     }
 
     /**
-     * A human readable description of the payment.
+     * A human-readable description of the payment. This will be included in the notification email
+     * GoCardless sends to your customer if your organisation does not send its own notifications (see
+     * [compliance requirements](#appendix-compliance-requirements)).
      */
     public String getDescription() {
         return description;
@@ -98,7 +100,9 @@ public class Payment {
     /**
      * An optional payment reference that will appear on your customer's bank statement. For Bacs
      * payments this can be up to 10 characters, for SEPA payments the limit is 140 characters, and for
-     * Autogiro payments the limit is 11 characters.
+     * Autogiro payments the limit is 11 characters. <p
+     * class='restricted-notice'><strong>Restricted</strong>: You need your own Service User Number to
+     * specify a payment reference for Bacs payments.</p>
      */
     public String getReference() {
         return reference;
