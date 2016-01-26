@@ -2,13 +2,13 @@
 <!-- NewPage -->
 <html lang="en">
 <head>
-<title>SubscriptionService.SubscriptionCreateRequest (gocardless-pro 1.15.1 API)</title>
+<title>SubscriptionService.SubscriptionCreateRequest (gocardless-pro 1.15.2 API)</title>
 <link rel="stylesheet" type="text/css" href="../../../stylesheet.css" title="Style">
 </head>
 <body>
 <script type="text/javascript"><!--
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="SubscriptionService.SubscriptionCreateRequest (gocardless-pro 1.15.1 API)";
+        parent.document.title="SubscriptionService.SubscriptionCreateRequest (gocardless-pro 1.15.2 API)";
     }
 //-->
 </script>
@@ -421,7 +421,8 @@ extends <a href="../../../com/gocardless/http/IdempotentPostRequest.html" title=
 <li class="blockList">
 <h4>withPaymentReference</h4>
 <pre>public&nbsp;<a href="../../../com/gocardless/services/SubscriptionService.SubscriptionCreateRequest.html" title="class in com.gocardless.services">SubscriptionService.SubscriptionCreateRequest</a>&nbsp;withPaymentReference(<a href="http://docs.oracle.com/javase/7/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</a>&nbsp;paymentReference)</pre>
-<div class="block"><p>An optional payment reference. This will be set as the reference on each payment created and will appear on your customer&rsquo;s bank statement. See the documentation for the <a href="#payments-create-a-payment">create payment endpoint</a> for more details.</p></div>
+<div class="block"><p>An optional payment reference. This will be set as the reference on each payment created and will appear on your customer&rsquo;s bank statement. See the documentation for the <a href="#payments-create-a-payment">create payment endpoint</a> for more details. <p
+class='restricted-notice'><strong>Restricted</strong>: You need your own Service User Number to specify a payment reference for Bacs payments.</p></p></div>
 </li>
 </ul>
 <a name="withStartDate(java.lang.String)">
