@@ -36,7 +36,7 @@ public class HttpClient {
     private static final String DISALLOWED_USER_AGENT_CHARACTERS =
             "[^\\w!#$%&'\\*\\+\\-\\.\\^`\\|~]";
     private static final String USER_AGENT = String.format(
-            "gocardless-pro/1.15.1 java/%s %s/%s %s/%s",
+            "gocardless-pro/1.15.2 java/%s %s/%s %s/%s",
             cleanUserAgentToken(System.getProperty("java.vm.specification.version")),
             cleanUserAgentToken(System.getProperty("java.vm.name")),
             cleanUserAgentToken(System.getProperty("java.version")),
