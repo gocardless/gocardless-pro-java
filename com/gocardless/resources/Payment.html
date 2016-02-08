@@ -2,13 +2,13 @@
 <!-- NewPage -->
 <html lang="en">
 <head>
-<title>Payment (gocardless-pro 1.15.2 API)</title>
+<title>Payment (gocardless-pro 1.15.3 API)</title>
 <link rel="stylesheet" type="text/css" href="../../../stylesheet.css" title="Style">
 </head>
 <body>
 <script type="text/javascript"><!--
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="Payment (gocardless-pro 1.15.2 API)";
+        parent.document.title="Payment (gocardless-pro 1.15.3 API)";
     }
 //-->
 </script>
@@ -198,7 +198,7 @@ extends <a href="http://docs.oracle.com/javase/7/docs/api/java/lang/Object.html?
 <tr class="altColor">
 <td class="colFirst"><code><a href="../../../com/gocardless/resources/Payment.Status.html" title="enum in com.gocardless.resources">Payment.Status</a></code></td>
 <td class="colLast"><code><strong><a href="../../../com/gocardless/resources/Payment.html#getStatus()">getStatus</a></strong>()</code>
-<div class="block">One of:  <code>pending_submission</code>: the payment has been created, but not yet submitted to the banks <code>submitted</code>: the payment has been submitted to the banks</div>
+<div class="block">One of:  <code>pending_customer_approval</code>: we&rsquo;re waiting for the customer to approve this payment <code>pending_submission</code>: the payment has been created, but not yet submitted to the banks <code>submitted</code>: the payment has been submitted to the banks</div>
 </td>
 </tr>
 </table>
@@ -330,16 +330,12 @@ class='restricted-notice'><strong>Restricted</strong>: You need your own Service
 <li class="blockList">
 <h4>getStatus</h4>
 <pre>public&nbsp;<a href="../../../com/gocardless/resources/Payment.Status.html" title="enum in com.gocardless.resources">Payment.Status</a>&nbsp;getStatus()</pre>
-<div class="block"><p>One of: <ul> <li><code>pending_submission</code>: the payment has been created, but not yet submitted to the banks</li> <li><code>submitted</code>: the payment has been submitted to the banks</li></p>
+<div class="block"><p>One of: <ul> <li><code>pending_customer_approval</code>: we&rsquo;re waiting for the customer to approve this payment</li> <li><code>pending_submission</code>: the payment has been created, but not yet submitted to the banks</li> <li><code>submitted</code>: the payment has been submitted to the banks</li></p>
 <li>`confirmed`: the payment has been confirmed as collected</li>
-<li>`failed`: the payment
-failed to be processed. Note that payments can fail after being confirmed, if the failure message
-is sent late by the banks.</li>
-<li>`charged_back`: the payment has been charged back</li>
-<li>`paid_out`:  the payment has been included in a [payout](#core-endpoints-payouts)</li>
-<li>`cancelled`: the payment has been cancelled</li>
-<li>`pending_customer_approval`: we're
-waiting for the customer to approve this payment</li><p><li><code>customer_approval_denied</code>: the customer has denied approval for the payment. You should contact the customer directly</li></ul></p></div>
+<li>`paid_out`:  the payment
+has been included in a [payout](#core-endpoints-payouts)</li>
+<li>`cancelled`: the payment has
+been cancelled</li><p><li><code>customer_approval_denied</code>: the customer has denied approval for the payment. You should contact the customer directly</li></ul> <li><code>failed</code>: the payment failed to be processed. Note that payments can fail after being confirmed if the failure message is sent late by the banks.</li> <li><code>charged_back</code>: the payment has been charged back</li></p></div>
 </li>
 </ul>
 </li>
