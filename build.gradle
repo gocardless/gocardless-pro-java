@@ -23,7 +23,7 @@ repositories {
 }
 
 dependencies {
-    compile 'com.squareup.okhttp:okhttp:2.7.3'
+    compile 'com.squareup.okhttp:okhttp:2.7.4'
     compile 'com.google.code.gson:gson:2.5'
     compile 'com.google.guava:guava:19.0'
     compile 'org.slf4j:slf4j-api:1.7.14'
@@ -31,7 +31,7 @@ dependencies {
 
     testCompile 'junit:junit:4.12'
     testCompile 'org.assertj:assertj-core:2.3.0'
-    testCompile 'com.squareup.okhttp:mockwebserver:2.7.3'
+    testCompile 'com.squareup.okhttp:mockwebserver:2.7.4'
 
     testCompile 'co.freeside:betamax:1.1.2'
     testCompile 'org.codehaus.groovy:groovy-all:2.2.0'
