@@ -16,6 +16,7 @@ public class Payout {
     }
 
     private Integer amount;
+    private String arrivalDate;
     private String createdAt;
     private String currency;
     private String id;
@@ -28,6 +29,21 @@ public class Payout {
      */
     public Integer getAmount() {
         return amount;
+    }
+
+    /**
+     * Date the payout is due to arrive in the creditor's bank account
+     * One of:
+     * <ul>
+     *  
+     * <li>`2014-01-01`: the payout has been paid and is due to arrive in the creditor's bank
+     *   account
+     * on this day</li>
+     *   <li>`null`: the payout hasn't been paid yet</li>
+     * </ul>
+     */
+    public String getArrivalDate() {
+        return arrivalDate;
     }
 
     /**
