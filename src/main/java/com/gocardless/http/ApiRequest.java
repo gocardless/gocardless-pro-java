@@ -27,7 +27,7 @@ abstract class ApiRequest<T> {
         return ImmutableMap.of();
     }
 
-    Map<String, Object> getQueryParams() {
+    protected Map<String, Object> getQueryParams() {
         return ImmutableMap.of();
     }
 

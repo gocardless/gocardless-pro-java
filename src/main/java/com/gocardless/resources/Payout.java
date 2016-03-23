@@ -32,7 +32,7 @@ public class Payout {
     }
 
     /**
-     * Date the payout is due to arrive in the creditor's bank account
+     * Date the payout is due to arrive in the creditor's bank account.
      * One of:
      * <ul>
      *  
@@ -41,6 +41,7 @@ public class Payout {
      * on this day</li>
      *   <li>`null`: the payout hasn't been paid yet</li>
      * </ul>
+     * 
      */
     public String getArrivalDate() {
         return arrivalDate;
