@@ -2,9 +2,11 @@ package com.gocardless.errors;
 
 import java.util.List;
 
+import com.google.common.base.Joiner;
 import com.google.common.collect.ImmutableList;
 
 public class ApiErrorResponse {
+    private static final Joiner JOINER = Joiner.on(", ");
     private final String message;
     private final ErrorType type;
     private final String documentationUrl;
@@ -47,5 +49,14 @@ public class ApiErrorResponse {
             return ImmutableList.of();
         }
         return ImmutableList.copyOf(errors);
+    }
+
+    @Override
+    public String toString() {
+        if (errors == null || errors.isEmpty()) {
+            return message;
+        } else {
+            return JOINER.join(errors);
+        }
     }
 }

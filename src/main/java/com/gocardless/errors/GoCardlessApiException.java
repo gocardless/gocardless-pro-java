@@ -12,8 +12,15 @@ public class GoCardlessApiException extends GoCardlessException {
     private final ApiErrorResponse error;
 
     GoCardlessApiException(ApiErrorResponse error) {
-        super(error.getMessage());
+        super(error.toString());
         this.error = error;
+    }
+
+    /**
+     * Returns a human-readable description of the error.
+     */
+    public String getErrorMessage() {
+        return error.getMessage();
     }
 
     /**
@@ -50,5 +57,10 @@ public class GoCardlessApiException extends GoCardlessException {
      */
     public List<ApiError> getErrors() {
         return error.getErrors();
+    }
+
+    @Override
+    public String toString() {
+        return error.toString();
     }
 }

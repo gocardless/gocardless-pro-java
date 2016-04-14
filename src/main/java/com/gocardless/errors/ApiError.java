@@ -2,12 +2,14 @@ package com.gocardless.errors;
 
 import java.util.Map;
 
+import com.google.common.base.Joiner;
 import com.google.common.collect.ImmutableMap;
 
 /**
  * Representation of an individual error handling an API request.
  */
 public class ApiError {
+    private static final Joiner JOINER = Joiner.on(" ").skipNulls();
     private final String message;
     private final String reason;
     private final String field;
@@ -49,5 +51,10 @@ public class ApiError {
             return ImmutableMap.of();
         }
         return ImmutableMap.copyOf(links);
+    }
+
+    @Override
+    public String toString() {
+        return JOINER.join(field, message);
     }
 }
