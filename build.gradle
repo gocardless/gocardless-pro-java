@@ -4,7 +4,7 @@ apply plugin: 'signing'
 
 sourceCompatibility = 1.7
 group = ' com.gocardless'
-version = '1.17.0'
+version = '1.18.0'
 
 buildscript {
     repositories {
