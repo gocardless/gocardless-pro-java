@@ -62,6 +62,7 @@ public class ResponseParserTest {
         assertThat(exception).isInstanceOf(InvalidApiUsageException.class);
         assertThat(exception.getType()).isEqualTo(INVALID_API_USAGE);
         assertThat(exception.getMessage()).isEqualTo("Invalid document structure");
+        assertThat(exception.getErrorMessage()).isEqualTo("Invalid document structure");
         assertThat(exception.getDocumentationUrl()).isEqualTo(
                 "https://developer.gocardless.com/pro#invalid_document_structure");
         assertThat(exception.getRequestId()).isEqualTo("bd271b37-a2f5-47c8-b461-040dfe0e9cb1");
@@ -80,6 +81,7 @@ public class ResponseParserTest {
         assertThat(exception).isInstanceOf(InvalidStateException.class);
         assertThat(exception.getType()).isEqualTo(INVALID_STATE);
         assertThat(exception.getMessage()).isEqualTo("Bank account already exists");
+        assertThat(exception.getErrorMessage()).isEqualTo("Bank account already exists");
         assertThat(exception.getDocumentationUrl()).isEqualTo(
                 "https://developer.gocardless.com/pro#bank_account_exists");
         assertThat(exception.getRequestId()).isEqualTo("bd271b37-a2f5-47c8-b461-040dfe0e9cb1");
@@ -98,7 +100,10 @@ public class ResponseParserTest {
         GoCardlessApiException exception = parser.parseError(reader);
         assertThat(exception).isInstanceOf(ValidationFailedException.class);
         assertThat(exception.getType()).isEqualTo(VALIDATION_FAILED);
-        assertThat(exception.getMessage()).isEqualTo("Validation failed");
+        assertThat(exception.getMessage())
+                .isEqualTo(
+                        "branch_code must be a number, branch_code is the wrong length (should be 8 characters)");
+        assertThat(exception.getErrorMessage()).isEqualTo("Validation failed");
         assertThat(exception.getDocumentationUrl()).isEqualTo(
                 "https://developer.gocardless.com/pro#validation_failed");
         assertThat(exception.getRequestId()).isEqualTo("dd50eaaf-8213-48fe-90d6-5466872efbc4");
@@ -120,6 +125,7 @@ public class ResponseParserTest {
         assertThat(exception).isInstanceOf(GoCardlessInternalException.class);
         assertThat(exception.getType()).isEqualTo(GOCARDLESS);
         assertThat(exception.getMessage()).isEqualTo("THE BEES THEY'RE IN MY EYES");
+        assertThat(exception.getErrorMessage()).isEqualTo("THE BEES THEY'RE IN MY EYES");
         assertThat(exception.getDocumentationUrl()).isEqualTo(
                 "https://developer.gocardless.com/pro#internal_error");
         assertThat(exception.getRequestId()).isEqualTo("41a59cf8-ca4c-474c-9931-7f01fb547bc7");
