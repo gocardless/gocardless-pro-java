@@ -423,7 +423,8 @@ public class MandateService {
         }
 
         public enum Status {
-            @SerializedName("pending_submission")
+            @SerializedName("pending_customer_approval")
+            PENDING_CUSTOMER_APPROVAL, @SerializedName("pending_submission")
             PENDING_SUBMISSION, @SerializedName("submitted")
             SUBMITTED, @SerializedName("active")
             ACTIVE, @SerializedName("failed")

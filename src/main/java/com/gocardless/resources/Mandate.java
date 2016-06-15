@@ -80,6 +80,8 @@ public class Mandate {
     /**
      * One of:
      * <ul>
+     * <li>`pending_customer_approval`: the mandate has not yet been signed by the
+     * second customer</li>
      * <li>`pending_submission`: the mandate has not yet been submitted to the
      * customer's bank</li>
      * <li>`submitted`: the mandate has been submitted to the customer's bank but
@@ -98,7 +100,8 @@ public class Mandate {
     }
 
     public enum Status {
-        @SerializedName("pending_submission")
+        @SerializedName("pending_customer_approval")
+        PENDING_CUSTOMER_APPROVAL, @SerializedName("pending_submission")
         PENDING_SUBMISSION, @SerializedName("submitted")
         SUBMITTED, @SerializedName("active")
         ACTIVE, @SerializedName("failed")

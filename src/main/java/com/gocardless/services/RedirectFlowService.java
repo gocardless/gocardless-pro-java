@@ -11,7 +11,7 @@ import com.google.gson.annotations.SerializedName;
 /**
  * Service class for working with redirect flow resources.
  *
- * Redirect flows enable you to use GoCardless Pro's [hosted payment
+ * Redirect flows enable you to use GoCardless' [hosted payment
  * pages](https://pay-sandbox.gocardless.com/AL000000AKFPFF) to set up mandates with your customers.
  * These pages are fully compliant and have been translated into Dutch, French, German, Italian,
  * Portuguese, Spanish and Swedish.
@@ -54,7 +54,7 @@ public class RedirectFlowService {
 
     /**
      * Creates a redirect flow object which can then be used to redirect your customer to the GoCardless
-     * Pro hosted payment pages.
+     * hosted payment pages.
      */
     public RedirectFlowCreateRequest create() {
         return new RedirectFlowCreateRequest(httpClient);
@@ -86,7 +86,7 @@ public class RedirectFlowService {
      * Request class for {@link RedirectFlowService#create }.
      *
      * Creates a redirect flow object which can then be used to redirect your customer to the GoCardless
-     * Pro hosted payment pages.
+     * hosted payment pages.
      */
     public static final class RedirectFlowCreateRequest extends IdempotentPostRequest<RedirectFlow> {
         private String description;

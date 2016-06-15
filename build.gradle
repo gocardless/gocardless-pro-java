@@ -4,7 +4,7 @@ apply plugin: 'signing'
 
 sourceCompatibility = 1.7
 group = ' com.gocardless'
-version = '1.18.0'
+version = '1.19.0'
 
 buildscript {
     repositories {
@@ -24,7 +24,7 @@ repositories {
 
 dependencies {
     compile 'com.squareup.okhttp:okhttp:2.7.5'
-    compile 'com.google.code.gson:gson:2.6.2'
+    compile 'com.google.code.gson:gson:2.7'
     compile 'com.google.guava:guava:19.0'
     compile 'org.slf4j:slf4j-api:1.7.21'
     compile 'com.github.rholder:guava-retrying:2.0.0'

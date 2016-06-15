@@ -383,13 +383,6 @@ public class CreditorService {
         }
 
         @Override
-        protected Map<String, Object> getQueryParams() {
-            ImmutableMap.Builder<String, Object> params = ImmutableMap.builder();
-            params.putAll(super.getQueryParams());
-            return params.build();
-        }
-
-        @Override
         protected String getPathTemplate() {
             return "/creditors/:identity";
         }
