@@ -2,13 +2,13 @@
 <!-- NewPage -->
 <html lang="en">
 <head>
-<title>PaymentService.PaymentCreateRequest (gocardless-pro 1.18.0 API)</title>
+<title>PaymentService.PaymentCreateRequest (gocardless-pro 1.19.0 API)</title>
 <link rel="stylesheet" type="text/css" href="../../../stylesheet.css" title="Style">
 </head>
 <body>
 <script type="text/javascript"><!--
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="PaymentService.PaymentCreateRequest (gocardless-pro 1.18.0 API)";
+        parent.document.title="PaymentService.PaymentCreateRequest (gocardless-pro 1.19.0 API)";
     }
 //-->
 </script>
@@ -109,7 +109,7 @@
 <br>
 <pre>public static final class <span class="strong">PaymentService.PaymentCreateRequest</span>
 extends <a href="../../../com/gocardless/http/IdempotentPostRequest.html" title="class in com.gocardless.http">IdempotentPostRequest</a>&lt;<a href="../../../com/gocardless/resources/Payment.html" title="class in com.gocardless.resources">Payment</a>&gt;</pre>
-<div class="block"><p>Request class for <a href="../../../com/gocardless/services/PaymentService.html#create()"><code>PaymentService.create()</code></a>.</p><p><a name="mandate_is_inactive"></a>Creates a new payment object.</p><p>This fails with a <code>mandate_is_inactive</code> error if the linked <a href="#core-endpoints-mandates">mandate</a> is cancelled or has failed. Payments can be created against <code>pending_submission</code> and <code>submitted</code> as well as <code>active</code> mandates.</p></div>
+<div class="block"><p>Request class for <a href="../../../com/gocardless/services/PaymentService.html#create()"><code>PaymentService.create()</code></a>.</p><p><a name="mandate_is_inactive"></a>Creates a new payment object.</p><p>This fails with a <code>mandate_is_inactive</code> error if the linked <a href="#core-endpoints-mandates">mandate</a> is cancelled or has failed. Payments can be created against mandates with status of: <code>pending_customer_approval</code>, <code>pending_submission</code>, <code>submitted</code>, and <code>active</code>.</p></div>
 </li>
 </ul>
 </div>
