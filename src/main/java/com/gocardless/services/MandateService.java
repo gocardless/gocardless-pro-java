@@ -41,8 +41,7 @@ public class MandateService {
     }
 
     /**
-     * Returns a [cursor-paginated](#overview-cursor-pagination) list of your mandates. Except where
-     * stated, these filters can only be used one at a time.
+     * Returns a [cursor-paginated](#overview-cursor-pagination) list of your mandates.
      */
     public MandateListRequest<ListResponse<Mandate>> list() {
         return new MandateListRequest<>(httpClient, ListRequest.<Mandate>pagingExecutor());
@@ -236,8 +235,7 @@ public class MandateService {
     /**
      * Request class for {@link MandateService#list }.
      *
-     * Returns a [cursor-paginated](#overview-cursor-pagination) list of your mandates. Except where
-     * stated, these filters can only be used one at a time.
+     * Returns a [cursor-paginated](#overview-cursor-pagination) list of your mandates.
      */
     public static final class MandateListRequest<S> extends ListRequest<S, Mandate> {
         private CreatedAt createdAt;
@@ -314,7 +312,7 @@ public class MandateService {
 
         /**
          * ID of a [creditor](#whitelabel-partner-endpoints-creditors). If specified, this endpoint will
-         * return all mandates for the given creditor. Cannot be used in conjunction with
+         * return all mandates for the given creditor. Cannot be used in conjunction with `customer` or
          * `customer_bank_account`
          */
         public MandateListRequest<S> withCreditor(String creditor) {
@@ -324,7 +322,8 @@ public class MandateService {
 
         /**
          * ID of a [customer](#core-endpoints-customers). If specified, this endpoint will return all
-         * mandates for the given customer.
+         * mandates for the given customer. Cannot be used in conjunction with `customer_bank_account` or
+         * `creditor`
          */
         public MandateListRequest<S> withCustomer(String customer) {
             this.customer = customer;
@@ -334,7 +333,7 @@ public class MandateService {
         /**
          * ID of a [customer bank account](#core-endpoints-customer-bank-accounts). If specified, this
          * endpoint will return all mandates for the given bank account. Cannot be used in conjunction with
-         * `creditor`
+         * `customer` or `creditor`
          */
         public MandateListRequest<S> withCustomerBankAccount(String customerBankAccount) {
             this.customerBankAccount = customerBankAccount;
