@@ -19,6 +19,7 @@ public class Payout {
     private String arrivalDate;
     private String createdAt;
     private String currency;
+    private Integer deductedFees;
     private String id;
     private Links links;
     private String reference;
@@ -59,6 +60,21 @@ public class Payout {
      */
     public String getCurrency() {
         return currency;
+    }
+
+    /**
+     * Fees that have already been deducted from the payout amount in pence or cents.
+     * 
+     * For each
+     * `late_failure_settled` or `chargeback_settled` action, we refund the transaction fees in a payout.
+     * This means that a payout can have a negative `deducted_fees`. This field is calculated as
+     * `GoCardless fees + app fees - refunded fees`
+     * 
+     * If the merchant is invoiced for fees separately
+     * from the payout, then `deducted_fees` will be 0.
+     */
+    public Integer getDeductedFees() {
+        return deductedFees;
     }
 
     /**
