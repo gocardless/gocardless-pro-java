@@ -2,13 +2,13 @@
 <!-- NewPage -->
 <html lang="en">
 <head>
-<title>Payout (gocardless-pro 1.19.0 API)</title>
+<title>Payout (gocardless-pro 1.20.0 API)</title>
 <link rel="stylesheet" type="text/css" href="../../../stylesheet.css" title="Style">
 </head>
 <body>
 <script type="text/javascript"><!--
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="Payout (gocardless-pro 1.19.0 API)";
+        parent.document.title="Payout (gocardless-pro 1.20.0 API)";
     }
 //-->
 </script>
@@ -162,22 +162,28 @@ extends <a href="http://docs.oracle.com/javase/7/docs/api/java/lang/Object.html?
 </td>
 </tr>
 <tr class="altColor">
+<td class="colFirst"><code><a href="http://docs.oracle.com/javase/7/docs/api/java/lang/Integer.html?is-external=true" title="class or interface in java.lang">Integer</a></code></td>
+<td class="colLast"><code><strong><a href="../../../com/gocardless/resources/Payout.html#getDeductedFees()">getDeductedFees</a></strong>()</code>
+<div class="block">Fees that have already been deducted from the payout amount in pence or cents.</div>
+</td>
+</tr>
+<tr class="rowColor">
 <td class="colFirst"><code><a href="http://docs.oracle.com/javase/7/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</a></code></td>
 <td class="colLast"><code><strong><a href="../../../com/gocardless/resources/Payout.html#getId()">getId</a></strong>()</code>
 <div class="block">Unique identifier, beginning with &ldquo;PO&rdquo;.</div>
 </td>
 </tr>
-<tr class="rowColor">
+<tr class="altColor">
 <td class="colFirst"><code><a href="../../../com/gocardless/resources/Payout.Links.html" title="class in com.gocardless.resources">Payout.Links</a></code></td>
 <td class="colLast"><code><strong><a href="../../../com/gocardless/resources/Payout.html#getLinks()">getLinks</a></strong>()</code>&nbsp;</td>
 </tr>
-<tr class="altColor">
+<tr class="rowColor">
 <td class="colFirst"><code><a href="http://docs.oracle.com/javase/7/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</a></code></td>
 <td class="colLast"><code><strong><a href="../../../com/gocardless/resources/Payout.html#getReference()">getReference</a></strong>()</code>
 <div class="block">Reference which appears on the creditor&rsquo;s bank statement.</div>
 </td>
 </tr>
-<tr class="rowColor">
+<tr class="altColor">
 <td class="colFirst"><code><a href="../../../com/gocardless/resources/Payout.Status.html" title="enum in com.gocardless.resources">Payout.Status</a></code></td>
 <td class="colLast"><code><strong><a href="../../../com/gocardless/resources/Payout.html#getStatus()">getStatus</a></strong>()</code>
 <div class="block">One of:  <code>pending</code>: the payout has been created, but not yet sent to the banks</div>
@@ -246,6 +252,16 @@ on this day</li><p><li><code>null</code>: the payout hasn&rsquo;t been paid yet<
 <h4>getCurrency</h4>
 <pre>public&nbsp;<a href="http://docs.oracle.com/javase/7/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</a>&nbsp;getCurrency()</pre>
 <div class="block"><p><a href="http://en.wikipedia.org/wiki/ISO_4217#Active_codes">ISO 4217</a> currency code.</p></div>
+</li>
+</ul>
+<a name="getDeductedFees()">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>getDeductedFees</h4>
+<pre>public&nbsp;<a href="http://docs.oracle.com/javase/7/docs/api/java/lang/Integer.html?is-external=true" title="class or interface in java.lang">Integer</a>&nbsp;getDeductedFees()</pre>
+<div class="block"><p>Fees that have already been deducted from the payout amount in pence or cents.</p><p>For each <code>late_failure_settled</code> or <code>chargeback_settled</code> action, we refund the transaction fees in a payout. This means that a payout can have a negative <code>deducted_fees</code>. This field is calculated as <code>GoCardless fees + app fees - refunded fees</code></p><p>If the merchant is invoiced for fees separately from the payout, then <code>deducted_fees</code> will be 0.</p></div>
 </li>
 </ul>
 <a name="getId()">

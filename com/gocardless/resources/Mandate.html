@@ -2,13 +2,13 @@
 <!-- NewPage -->
 <html lang="en">
 <head>
-<title>Mandate (gocardless-pro 1.19.0 API)</title>
+<title>Mandate (gocardless-pro 1.20.0 API)</title>
 <link rel="stylesheet" type="text/css" href="../../../stylesheet.css" title="Style">
 </head>
 <body>
 <script type="text/javascript"><!--
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="Mandate (gocardless-pro 1.19.0 API)";
+        parent.document.title="Mandate (gocardless-pro 1.20.0 API)";
     }
 //-->
 </script>
@@ -166,18 +166,24 @@ extends <a href="http://docs.oracle.com/javase/7/docs/api/java/lang/Object.html?
 </td>
 </tr>
 <tr class="rowColor">
+<td class="colFirst"><code><a href="http://docs.oracle.com/javase/7/docs/api/java/lang/Boolean.html?is-external=true" title="class or interface in java.lang">Boolean</a></code></td>
+<td class="colLast"><code><strong><a href="../../../com/gocardless/resources/Mandate.html#getPaymentsRequireApproval()">getPaymentsRequireApproval</a></strong>()</code>
+<div class="block">Boolean value showing whether payments and subscriptions under this mandate require approval via an automated email before being processed.</div>
+</td>
+</tr>
+<tr class="altColor">
 <td class="colFirst"><code><a href="http://docs.oracle.com/javase/7/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</a></code></td>
 <td class="colLast"><code><strong><a href="../../../com/gocardless/resources/Mandate.html#getReference()">getReference</a></strong>()</code>
 <div class="block">Unique reference.</div>
 </td>
 </tr>
-<tr class="altColor">
+<tr class="rowColor">
 <td class="colFirst"><code><a href="http://docs.oracle.com/javase/7/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</a></code></td>
 <td class="colLast"><code><strong><a href="../../../com/gocardless/resources/Mandate.html#getScheme()">getScheme</a></strong>()</code>
 <div class="block"><a name="mandates_scheme"></a>Direct Debit scheme to which this mandate and associated payments are submitted.</div>
 </td>
 </tr>
-<tr class="rowColor">
+<tr class="altColor">
 <td class="colFirst"><code><a href="../../../com/gocardless/resources/Mandate.Status.html" title="enum in com.gocardless.resources">Mandate.Status</a></code></td>
 <td class="colLast"><code><strong><a href="../../../com/gocardless/resources/Mandate.html#getStatus()">getStatus</a></strong>()</code>
 <div class="block">One of:  <code>pending_customer_approval</code>: the mandate has not yet been signed by the second customer <code>pending_submission</code>: the mandate has not yet been submitted to the customer&rsquo;s bank <code>submitted</code>: the mandate has been submitted to the customer&rsquo;s bank but has not been processed yet <code>active</code>: the mandate has been successfully set up by the customer&rsquo;s bank <code>failed</code>: the mandate could not be created <code>cancelled</code>: the mandate has been cancelled <code>expired</code>: the mandate has expired due to dormancy</div>
@@ -252,6 +258,16 @@ extends <a href="http://docs.oracle.com/javase/7/docs/api/java/lang/Object.html?
 <h4>getNextPossibleChargeDate</h4>
 <pre>public&nbsp;<a href="http://docs.oracle.com/javase/7/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</a>&nbsp;getNextPossibleChargeDate()</pre>
 <div class="block"><p>The earliest date a newly created payment for this mandate could be charged.</p></div>
+</li>
+</ul>
+<a name="getPaymentsRequireApproval()">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>getPaymentsRequireApproval</h4>
+<pre>public&nbsp;<a href="http://docs.oracle.com/javase/7/docs/api/java/lang/Boolean.html?is-external=true" title="class or interface in java.lang">Boolean</a>&nbsp;getPaymentsRequireApproval()</pre>
+<div class="block"><p>Boolean value showing whether payments and subscriptions under this mandate require approval via an automated email before being processed.</p></div>
 </li>
 </ul>
 <a name="getReference()">

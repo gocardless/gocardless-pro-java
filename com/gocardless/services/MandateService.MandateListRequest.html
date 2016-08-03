@@ -2,13 +2,13 @@
 <!-- NewPage -->
 <html lang="en">
 <head>
-<title>MandateService.MandateListRequest (gocardless-pro 1.19.0 API)</title>
+<title>MandateService.MandateListRequest (gocardless-pro 1.20.0 API)</title>
 <link rel="stylesheet" type="text/css" href="../../../stylesheet.css" title="Style">
 </head>
 <body>
 <script type="text/javascript"><!--
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="MandateService.MandateListRequest (gocardless-pro 1.19.0 API)";
+        parent.document.title="MandateService.MandateListRequest (gocardless-pro 1.20.0 API)";
     }
 //-->
 </script>
@@ -104,7 +104,7 @@
 <br>
 <pre>public static final class <span class="strong">MandateService.MandateListRequest&lt;S&gt;</span>
 extends <a href="../../../com/gocardless/http/ListRequest.html" title="class in com.gocardless.http">ListRequest</a>&lt;S,<a href="../../../com/gocardless/resources/Mandate.html" title="class in com.gocardless.resources">Mandate</a>&gt;</pre>
-<div class="block"><p>Request class for <a href="../../../com/gocardless/services/MandateService.html#list()"><code>MandateService.list()</code></a>.</p><p>Returns a <a href="#overview-cursor-pagination">cursor-paginated</a> list of your mandates. Except where stated, these filters can only be used one at a time.</p></div>
+<div class="block"><p>Request class for <a href="../../../com/gocardless/services/MandateService.html#list()"><code>MandateService.list()</code></a>.</p><p>Returns a <a href="#overview-cursor-pagination">cursor-paginated</a> list of your mandates.</p></div>
 </li>
 </ul>
 </div>
@@ -340,7 +340,7 @@ extends <a href="../../../com/gocardless/http/ListRequest.html" title="class in 
 <li class="blockList">
 <h4>withCreditor</h4>
 <pre>public&nbsp;<a href="../../../com/gocardless/services/MandateService.MandateListRequest.html" title="class in com.gocardless.services">MandateService.MandateListRequest</a>&lt;<a href="../../../com/gocardless/services/MandateService.MandateListRequest.html" title="type parameter in MandateService.MandateListRequest">S</a>&gt;&nbsp;withCreditor(<a href="http://docs.oracle.com/javase/7/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</a>&nbsp;creditor)</pre>
-<div class="block"><p>ID of a <a href="#whitelabel-partner-endpoints-creditors">creditor</a>. If specified, this endpoint will return all mandates for the given creditor. Cannot be used in conjunction with <code>customer_bank_account</code></p></div>
+<div class="block"><p>ID of a <a href="#whitelabel-partner-endpoints-creditors">creditor</a>. If specified, this endpoint will return all mandates for the given creditor. Cannot be used in conjunction with <code>customer</code> or <code>customer_bank_account</code></p></div>
 </li>
 </ul>
 <a name="withCustomer(java.lang.String)">
@@ -350,7 +350,7 @@ extends <a href="../../../com/gocardless/http/ListRequest.html" title="class in 
 <li class="blockList">
 <h4>withCustomer</h4>
 <pre>public&nbsp;<a href="../../../com/gocardless/services/MandateService.MandateListRequest.html" title="class in com.gocardless.services">MandateService.MandateListRequest</a>&lt;<a href="../../../com/gocardless/services/MandateService.MandateListRequest.html" title="type parameter in MandateService.MandateListRequest">S</a>&gt;&nbsp;withCustomer(<a href="http://docs.oracle.com/javase/7/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</a>&nbsp;customer)</pre>
-<div class="block"><p>ID of a <a href="#core-endpoints-customers">customer</a>. If specified, this endpoint will return all mandates for the given customer.</p></div>
+<div class="block"><p>ID of a <a href="#core-endpoints-customers">customer</a>. If specified, this endpoint will return all mandates for the given customer. Cannot be used in conjunction with <code>customer_bank_account</code> or <code>creditor</code></p></div>
 </li>
 </ul>
 <a name="withCustomerBankAccount(java.lang.String)">
@@ -360,7 +360,7 @@ extends <a href="../../../com/gocardless/http/ListRequest.html" title="class in 
 <li class="blockList">
 <h4>withCustomerBankAccount</h4>
 <pre>public&nbsp;<a href="../../../com/gocardless/services/MandateService.MandateListRequest.html" title="class in com.gocardless.services">MandateService.MandateListRequest</a>&lt;<a href="../../../com/gocardless/services/MandateService.MandateListRequest.html" title="type parameter in MandateService.MandateListRequest">S</a>&gt;&nbsp;withCustomerBankAccount(<a href="http://docs.oracle.com/javase/7/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</a>&nbsp;customerBankAccount)</pre>
-<div class="block"><p>ID of a <a href="#core-endpoints-customer-bank-accounts">customer bank account</a>. If specified, this endpoint will return all mandates for the given bank account. Cannot be used in conjunction with <code>creditor</code></p></div>
+<div class="block"><p>ID of a <a href="#core-endpoints-customer-bank-accounts">customer bank account</a>. If specified, this endpoint will return all mandates for the given bank account. Cannot be used in conjunction with <code>customer</code> or <code>creditor</code></p></div>
 </li>
 </ul>
 <a name="withLimit(java.lang.Integer)">
