@@ -142,7 +142,8 @@ public class RedirectFlowService {
         }
 
         /**
-         * The URL to redirect to upon successful mandate setup.
+         * The URL to redirect to upon successful mandate setup. You must use a URL beginning `https` in the
+         * live environment.
          */
         public RedirectFlowCreateRequest withSuccessRedirectUrl(String successRedirectUrl) {
             this.successRedirectUrl = successRedirectUrl;

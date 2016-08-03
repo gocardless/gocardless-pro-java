@@ -22,6 +22,7 @@ public class Mandate {
     private Links links;
     private Map<String, String> metadata;
     private String nextPossibleChargeDate;
+    private Boolean paymentsRequireApproval;
     private String reference;
     private String scheme;
     private Status status;
@@ -57,6 +58,14 @@ public class Mandate {
      */
     public String getNextPossibleChargeDate() {
         return nextPossibleChargeDate;
+    }
+
+    /**
+     * Boolean value showing whether payments and subscriptions under this mandate require approval via
+     * an automated email before being processed.
+     */
+    public Boolean getPaymentsRequireApproval() {
+        return paymentsRequireApproval;
     }
 
     /**
