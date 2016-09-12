@@ -1,10 +1,8 @@
 # Java Client for GoCardless Pro API
 
-This library provides a simple wrapper around the [GoCardless API](http://developer.gocardless.com/api-reference).
+This library provides a simple wrapper around the [GoCardless Pro API](http://developer.gocardless.com/pro).
 
-- ["Getting started" guide](https://developer.gocardless.com/getting-started/api/introduction/?lang=python) with copy and paste Python code samples
-- [API Reference](https://developer.gocardless.com/api-reference/2015-07-06)
-- [Example application](https://github.com/gocardless/gocardless-pro-java-example)
+An example application using this library can be found [here](https://github.com/gocardless/gocardless-pro-java-example).
 
 ## Getting started
 
