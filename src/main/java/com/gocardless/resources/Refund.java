@@ -10,10 +10,6 @@ import java.util.Map;
  * 
  * GoCardless will notify you via a [webhook](#webhooks)
  * whenever a refund is created, and will update the `amount_refunded` property of the payment.
- * 
- *
- * _Note:_ A payment that has been (partially) refunded can still receive a late failure or
- * chargeback from the banks.
  */
 public class Refund {
     private Refund() {
