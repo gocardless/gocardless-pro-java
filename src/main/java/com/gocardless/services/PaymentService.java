@@ -385,11 +385,12 @@ public class PaymentService {
          * <li>`cancelled`: the payment has
          * been cancelled</li>
          * <li>`customer_approval_denied`: the customer has denied approval for the
-         * payment. You should contact the customer directly</li></ul>
-         * <li>`failed`: the payment failed to
-         * be processed. Note that payments can fail after being confirmed if the failure message is sent
-         * late by the banks.</li>
+         * payment. You should contact the customer directly</li>
+         * <li>`failed`: the payment failed to be
+         * processed. Note that payments can fail after being confirmed if the failure message is sent late
+         * by the banks.</li>
          * <li>`charged_back`: the payment has been charged back</li>
+         * </ul>
          */
         public PaymentListRequest<S> withStatus(Status status) {
             this.status = status;
