@@ -185,9 +185,8 @@ public class SubscriptionService {
         }
 
         /**
-         * Date after which no further payments should be charged. If a payment falls on this date, it **will
-         * not** be charged. If blank, the subscription will continue forever. Alternatively, `count` can be
-         * set to achieve a specific number of payments.
+         * Date on or after which no further payments should be created. If blank, the subscription will
+         * continue forever. Alternatively, `count` can be set to achieve a specific number of payments.
          */
         public SubscriptionCreateRequest withEndDate(String endDate) {
             this.endDate = endDate;
