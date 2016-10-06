@@ -18,8 +18,8 @@ import com.google.gson.reflect.TypeToken;
  * [creditor](#whitelabel-partner-endpoints-creditors), taken against a Direct Debit
  * [mandate](#core-endpoints-mandates).
  * 
- * GoCardless will notify you via a [webhook](#webhooks)
- * whenever the state of a payment changes.
+ * GoCardless will notify you via a
+ * [webhook](#appendix-webhooks) whenever the state of a payment changes.
  */
 public class PaymentService {
     private final HttpClient httpClient;
@@ -46,7 +46,7 @@ public class PaymentService {
     }
 
     /**
-     * Returns a [cursor-paginated](#overview-cursor-pagination) list of your payments.
+     * Returns a [cursor-paginated](#api-usage-cursor-pagination) list of your payments.
      */
     public PaymentListRequest<ListResponse<Payment>> list() {
         return new PaymentListRequest<>(httpClient, ListRequest.<Payment>pagingExecutor());
@@ -261,7 +261,7 @@ public class PaymentService {
     /**
      * Request class for {@link PaymentService#list }.
      *
-     * Returns a [cursor-paginated](#overview-cursor-pagination) list of your payments.
+     * Returns a [cursor-paginated](#api-usage-cursor-pagination) list of your payments.
      */
     public static final class PaymentListRequest<S> extends ListRequest<S, Payment> {
         private CreatedAt createdAt;

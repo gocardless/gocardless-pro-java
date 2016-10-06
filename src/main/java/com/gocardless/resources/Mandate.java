@@ -10,7 +10,8 @@ import com.google.gson.annotations.SerializedName;
  * Mandates represent the Direct Debit mandate with a [customer](#core-endpoints-customers).
  * 
  *
- * GoCardless will notify you via a [webhook](#webhooks) whenever the status of a mandate changes.
+ * GoCardless will notify you via a [webhook](#appendix-webhooks) whenever the status of a mandate
+ * changes.
  */
 public class Mandate {
     private Mandate() {
@@ -28,7 +29,7 @@ public class Mandate {
     private Status status;
 
     /**
-     * Fixed [timestamp](#overview-time-zones-dates), recording when this resource was created.
+     * Fixed [timestamp](#api-usage-time-zones--dates), recording when this resource was created.
      */
     public String getCreatedAt() {
         return createdAt;
@@ -69,9 +70,9 @@ public class Mandate {
     }
 
     /**
-     * Unique reference. Different schemes have different length and [character set](#character-sets)
-     * requirements. GoCardless will generate a unique reference satisfying the different scheme
-     * requirements if this field is left blank.
+     * Unique reference. Different schemes have different length and [character
+     * set](#appendix-character-sets) requirements. GoCardless will generate a unique reference
+     * satisfying the different scheme requirements if this field is left blank.
      */
     public String getReference() {
         return reference;

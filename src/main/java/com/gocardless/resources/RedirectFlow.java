@@ -13,16 +13,17 @@ import com.google.gson.annotations.SerializedName;
  * The overall flow is:
  * 
  * 1. You
- * [create](#create-a-redirect-flow) a redirect flow for your customer, and redirect them to the
- * returned redirect url, e.g. `https://pay.gocardless.com/flow/RE123`.
+ * [create](#redirect-flows-create-a-redirect-flow) a redirect flow for your customer, and redirect
+ * them to the returned redirect url, e.g. `https://pay.gocardless.com/flow/RE123`.
  * 
- * 2. Your customer
- * supplies their name, email, address, and bank account details, and submits the form. This securely
- * stores their details, and redirects them back to your `success_redirect_url` with
+ * 2. Your
+ * customer supplies their name, email, address, and bank account details, and submits the form. This
+ * securely stores their details, and redirects them back to your `success_redirect_url` with
  * `redirect_flow_id=RE123` in the querystring.
  * 
- * 3. You [complete](#complete-a-redirect-flow) the
- * redirect flow, which creates a [customer](#core-endpoints-customers), [customer bank
+ * 3. You
+ * [complete](#redirect-flows-complete-a-redirect-flow) the redirect flow, which creates a
+ * [customer](#core-endpoints-customers), [customer bank
  * account](#core-endpoints-customer-bank-accounts), and [mandate](#core-endpoints-mandates), and
  * returns the ID of the mandate. You may wish to create a
  * [subscription](#core-endpoints-subscriptions) or [payment](#core-endpoints-payments) at this
@@ -49,7 +50,7 @@ public class RedirectFlow {
     private String successRedirectUrl;
 
     /**
-     * Fixed [timestamp](#overview-time-zones-dates), recording when this resource was created.
+     * Fixed [timestamp](#api-usage-time-zones--dates), recording when this resource was created.
      */
     public String getCreatedAt() {
         return createdAt;

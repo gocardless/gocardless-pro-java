@@ -42,7 +42,7 @@ public class CreditorBankAccountService {
     }
 
     /**
-     * Returns a [cursor-paginated](#overview-cursor-pagination) list of your creditor bank accounts.
+     * Returns a [cursor-paginated](#api-usage-cursor-pagination) list of your creditor bank accounts.
      */
     public CreditorBankAccountListRequest<ListResponse<CreditorBankAccount>> list() {
         return new CreditorBankAccountListRequest<>(httpClient,
@@ -254,7 +254,7 @@ public class CreditorBankAccountService {
     /**
      * Request class for {@link CreditorBankAccountService#list }.
      *
-     * Returns a [cursor-paginated](#overview-cursor-pagination) list of your creditor bank accounts.
+     * Returns a [cursor-paginated](#api-usage-cursor-pagination) list of your creditor bank accounts.
      */
     public static final class CreditorBankAccountListRequest<S> extends
             ListRequest<S, CreditorBankAccount> {

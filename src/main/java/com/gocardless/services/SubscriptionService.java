@@ -94,7 +94,7 @@ public class SubscriptionService {
     }
 
     /**
-     * Returns a [cursor-paginated](#overview-cursor-pagination) list of your subscriptions.
+     * Returns a [cursor-paginated](#api-usage-cursor-pagination) list of your subscriptions.
      */
     public SubscriptionListRequest<ListResponse<Subscription>> list() {
         return new SubscriptionListRequest<>(httpClient, ListRequest.<Subscription>pagingExecutor());
@@ -370,7 +370,7 @@ public class SubscriptionService {
     /**
      * Request class for {@link SubscriptionService#list }.
      *
-     * Returns a [cursor-paginated](#overview-cursor-pagination) list of your subscriptions.
+     * Returns a [cursor-paginated](#api-usage-cursor-pagination) list of your subscriptions.
      */
     public static final class SubscriptionListRequest<S> extends ListRequest<S, Subscription> {
         private CreatedAt createdAt;

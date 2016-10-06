@@ -31,7 +31,7 @@ public class PayoutService {
     }
 
     /**
-     * Returns a [cursor-paginated](#overview-cursor-pagination) list of your payouts.
+     * Returns a [cursor-paginated](#api-usage-cursor-pagination) list of your payouts.
      */
     public PayoutListRequest<ListResponse<Payout>> list() {
         return new PayoutListRequest<>(httpClient, ListRequest.<Payout>pagingExecutor());
@@ -52,7 +52,7 @@ public class PayoutService {
     /**
      * Request class for {@link PayoutService#list }.
      *
-     * Returns a [cursor-paginated](#overview-cursor-pagination) list of your payouts.
+     * Returns a [cursor-paginated](#api-usage-cursor-pagination) list of your payouts.
      */
     public static final class PayoutListRequest<S> extends ListRequest<S, Payout> {
         private CreatedAt createdAt;

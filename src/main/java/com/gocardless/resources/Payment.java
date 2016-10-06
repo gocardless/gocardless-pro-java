@@ -11,8 +11,8 @@ import com.google.gson.annotations.SerializedName;
  * [creditor](#whitelabel-partner-endpoints-creditors), taken against a Direct Debit
  * [mandate](#core-endpoints-mandates).
  * 
- * GoCardless will notify you via a [webhook](#webhooks)
- * whenever the state of a payment changes.
+ * GoCardless will notify you via a
+ * [webhook](#appendix-webhooks) whenever the state of a payment changes.
  */
 public class Payment {
     private Payment() {
@@ -55,7 +55,7 @@ public class Payment {
     }
 
     /**
-     * Fixed [timestamp](#overview-time-zones-dates), recording when this resource was created.
+     * Fixed [timestamp](#api-usage-time-zones--dates), recording when this resource was created.
      */
     public String getCreatedAt() {
         return createdAt;

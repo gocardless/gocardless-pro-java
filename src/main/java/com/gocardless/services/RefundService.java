@@ -13,11 +13,12 @@ import com.google.gson.reflect.TypeToken;
 /**
  * Service class for working with refund resources.
  *
- * Refund objects represent (partial) refunds of a [payment](#core-endpoints-payment) back to the
+ * Refund objects represent (partial) refunds of a [payment](#core-endpoints-payments) back to the
  * [customer](#core-endpoints-customers).
  * 
- * GoCardless will notify you via a [webhook](#webhooks)
- * whenever a refund is created, and will update the `amount_refunded` property of the payment.
+ * GoCardless will notify you via a
+ * [webhook](#appendix-webhooks) whenever a refund is created, and will update the `amount_refunded`
+ * property of the payment.
  */
 public class RefundService {
     private final HttpClient httpClient;
@@ -55,7 +56,7 @@ public class RefundService {
     }
 
     /**
-     * Returns a [cursor-paginated](#overview-cursor-pagination) list of your refunds.
+     * Returns a [cursor-paginated](#api-usage-cursor-pagination) list of your refunds.
      */
     public RefundListRequest<ListResponse<Refund>> list() {
         return new RefundListRequest<>(httpClient, ListRequest.<Refund>pagingExecutor());
@@ -222,7 +223,7 @@ public class RefundService {
     /**
      * Request class for {@link RefundService#list }.
      *
-     * Returns a [cursor-paginated](#overview-cursor-pagination) list of your refunds.
+     * Returns a [cursor-paginated](#api-usage-cursor-pagination) list of your refunds.
      */
     public static final class RefundListRequest<S> extends ListRequest<S, Refund> {
         private CreatedAt createdAt;

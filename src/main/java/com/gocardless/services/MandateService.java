@@ -19,7 +19,8 @@ import com.google.gson.reflect.TypeToken;
  * Mandates represent the Direct Debit mandate with a [customer](#core-endpoints-customers).
  * 
  *
- * GoCardless will notify you via a [webhook](#webhooks) whenever the status of a mandate changes.
+ * GoCardless will notify you via a [webhook](#appendix-webhooks) whenever the status of a mandate
+ * changes.
  */
 public class MandateService {
     private final HttpClient httpClient;
@@ -41,7 +42,7 @@ public class MandateService {
     }
 
     /**
-     * Returns a [cursor-paginated](#overview-cursor-pagination) list of your mandates.
+     * Returns a [cursor-paginated](#api-usage-cursor-pagination) list of your mandates.
      */
     public MandateListRequest<ListResponse<Mandate>> list() {
         return new MandateListRequest<>(httpClient, ListRequest.<Mandate>pagingExecutor());
@@ -155,9 +156,9 @@ public class MandateService {
         }
 
         /**
-         * Unique reference. Different schemes have different length and [character set](#character-sets)
-         * requirements. GoCardless will generate a unique reference satisfying the different scheme
-         * requirements if this field is left blank.
+         * Unique reference. Different schemes have different length and [character
+         * set](#appendix-character-sets) requirements. GoCardless will generate a unique reference
+         * satisfying the different scheme requirements if this field is left blank.
          */
         public MandateCreateRequest withReference(String reference) {
             this.reference = reference;
@@ -235,7 +236,7 @@ public class MandateService {
     /**
      * Request class for {@link MandateService#list }.
      *
-     * Returns a [cursor-paginated](#overview-cursor-pagination) list of your mandates.
+     * Returns a [cursor-paginated](#api-usage-cursor-pagination) list of your mandates.
      */
     public static final class MandateListRequest<S> extends ListRequest<S, Mandate> {
         private CreatedAt createdAt;
@@ -349,9 +350,9 @@ public class MandateService {
         }
 
         /**
-         * Unique reference. Different schemes have different length and [character set](#character-sets)
-         * requirements. GoCardless will generate a unique reference satisfying the different scheme
-         * requirements if this field is left blank.
+         * Unique reference. Different schemes have different length and [character
+         * set](#appendix-character-sets) requirements. GoCardless will generate a unique reference
+         * satisfying the different scheme requirements if this field is left blank.
          */
         public MandateListRequest<S> withReference(String reference) {
             this.reference = reference;

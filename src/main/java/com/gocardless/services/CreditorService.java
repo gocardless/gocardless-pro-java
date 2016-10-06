@@ -41,7 +41,7 @@ public class CreditorService {
     }
 
     /**
-     * Returns a [cursor-paginated](#overview-cursor-pagination) list of your creditors.
+     * Returns a [cursor-paginated](#api-usage-cursor-pagination) list of your creditors.
      */
     public CreditorListRequest<ListResponse<Creditor>> list() {
         return new CreditorListRequest<>(httpClient, ListRequest.<Creditor>pagingExecutor());
@@ -197,7 +197,7 @@ public class CreditorService {
     /**
      * Request class for {@link CreditorService#list }.
      *
-     * Returns a [cursor-paginated](#overview-cursor-pagination) list of your creditors.
+     * Returns a [cursor-paginated](#api-usage-cursor-pagination) list of your creditors.
      */
     public static final class CreditorListRequest<S> extends ListRequest<S, Creditor> {
         private CreatedAt createdAt;
