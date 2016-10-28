@@ -24,7 +24,7 @@ repositories {
 
 dependencies {
     compile 'com.squareup.okhttp:okhttp:2.7.5'
-    compile 'com.google.code.gson:gson:2.7'
+    compile 'com.google.code.gson:gson:2.8.0'
     compile 'com.google.guava:guava:19.0'
     compile 'org.slf4j:slf4j-api:1.7.21'
     compile 'com.github.rholder:guava-retrying:2.0.0'
@@ -72,8 +72,10 @@ gradle.taskGraph.whenReady { taskGraph ->
     if (taskGraph.allTasks.any { it instanceof Sign }) {
         Console console = System.console()
 
+        def keyId = console.readLine("Enter GPG key ID: ")
         def password = console.readPassword("Enter private key password: ")
 
+        allprojects { ext."signing.keyId" = keyId }
         allprojects { ext."signing.password" = password }
     }
 }
