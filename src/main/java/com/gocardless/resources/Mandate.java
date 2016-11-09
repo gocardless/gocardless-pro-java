@@ -81,7 +81,7 @@ public class Mandate {
     /**
      * <a name="mandates_scheme"></a>Direct Debit scheme to which this mandate and associated payments
      * are submitted. Can be supplied or automatically detected from the customer's bank account.
-     * Currently only "autogiro", "bacs", "sepa_core", and "sepa_cor1" are supported.
+     * Currently only "autogiro", "bacs", and "sepa_core" are supported.
      */
     public String getScheme() {
         return scheme;
