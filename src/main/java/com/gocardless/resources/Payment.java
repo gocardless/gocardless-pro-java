@@ -8,7 +8,7 @@ import com.google.gson.annotations.SerializedName;
  * Represents a payment resource returned from the API.
  *
  * Payment objects represent payments from a [customer](#core-endpoints-customers) to a
- * [creditor](#whitelabel-partner-endpoints-creditors), taken against a Direct Debit
+ * [creditor](#core-endpoints-creditors), taken against a Direct Debit
  * [mandate](#core-endpoints-mandates).
  * 
  * GoCardless will notify you via a
@@ -23,7 +23,7 @@ public class Payment {
     private Integer amountRefunded;
     private String chargeDate;
     private String createdAt;
-    private String currency;
+    private Currency currency;
     private String description;
     private String id;
     private Links links;
@@ -62,10 +62,10 @@ public class Payment {
     }
 
     /**
-     * [ISO 4217](http://en.wikipedia.org/wiki/ISO_4217#Active_codes) currency code, currently only
+     * [ISO 4217](http://en.wikipedia.org/wiki/ISO_4217#Active_codes) currency code. Currently only
      * "GBP", "EUR", and "SEK" are supported.
      */
-    public String getCurrency() {
+    public Currency getCurrency() {
         return currency;
     }
 
@@ -134,6 +134,13 @@ public class Payment {
         return status;
     }
 
+    public enum Currency {
+        @SerializedName("GBP")
+        GBP, @SerializedName("EUR")
+        EUR, @SerializedName("SEK")
+        SEK,
+    }
+
     public enum Status {
         @SerializedName("pending_customer_approval")
         PENDING_CUSTOMER_APPROVAL, @SerializedName("pending_submission")
@@ -158,8 +165,7 @@ public class Payment {
         private String subscription;
 
         /**
-         * ID of [creditor](#whitelabel-partner-endpoints-creditors) to which the collected payment will be
-         * sent.
+         * ID of [creditor](#core-endpoints-creditors) to which the collected payment will be sent.
          */
         public String getCreditor() {
             return creditor;

@@ -111,9 +111,9 @@ public class RedirectFlowService {
         }
 
         /**
-         * The [creditor](#whitelabel-partner-endpoints-creditors) for whom the mandate will be created. The
-         * `name` of the creditor will be displayed on the payment page. Required if your account manages
-         * multiple creditors.
+         * The [creditor](#core-endpoints-creditors) for whom the mandate will be created. The `name` of the
+         * creditor will be displayed on the payment page. Required if your account manages multiple
+         * creditors.
          */
         public RedirectFlowCreateRequest withLinksCreditor(String creditor) {
             if (links == null) {
@@ -125,7 +125,8 @@ public class RedirectFlowService {
 
         /**
          * The Direct Debit scheme of the mandate. If specified, the payment pages will only allow the set-up
-         * of a mandate for the specified scheme.
+         * of a mandate for the specified scheme. It is recommended that you leave this blank so the most
+         * appropriate scheme is picked based on the customer's bank account.
          */
         public RedirectFlowCreateRequest withScheme(Scheme scheme) {
             this.scheme = scheme;
@@ -189,8 +190,7 @@ public class RedirectFlowService {
             @SerializedName("autogiro")
             AUTOGIRO, @SerializedName("bacs")
             BACS, @SerializedName("sepa_core")
-            SEPA_CORE, @SerializedName("sepa_cor1")
-            SEPA_COR1;
+            SEPA_CORE;
             @Override
             public String toString() {
                 return name().toLowerCase();
@@ -201,9 +201,9 @@ public class RedirectFlowService {
             private String creditor;
 
             /**
-             * The [creditor](#whitelabel-partner-endpoints-creditors) for whom the mandate will be created. The
-             * `name` of the creditor will be displayed on the payment page. Required if your account manages
-             * multiple creditors.
+             * The [creditor](#core-endpoints-creditors) for whom the mandate will be created. The `name` of the
+             * creditor will be displayed on the payment page. Required if your account manages multiple
+             * creditors.
              */
             public Links withCreditor(String creditor) {
                 this.creditor = creditor;

@@ -13,14 +13,14 @@ import com.google.gson.reflect.TypeToken;
 /**
  * Service class for working with creditor bank account resources.
  *
- * Creditor Bank Accounts hold the bank details of a
- * [creditor](#whitelabel-partner-endpoints-creditors). These are the bank accounts which your
- * [payouts](#core-endpoints-payouts) will be sent to.
+ * Creditor Bank Accounts hold the bank details of a [creditor](#core-endpoints-creditors). These are
+ * the bank accounts which your [payouts](#core-endpoints-payouts) will be sent to.
  * 
- * Note that creditor bank accounts must be
- * unique, and so you will encounter a `bank_account_exists` error if you try to create a duplicate
- * bank account. You may wish to handle this by updating the existing record instead, the ID of which
- * will be provided as `links[creditor_bank_account]` in the error response.
+ * Note that
+ * creditor bank accounts must be unique, and so you will encounter a `bank_account_exists` error if
+ * you try to create a duplicate bank account. You may wish to handle this by updating the existing
+ * record instead, the ID of which will be provided as `links[creditor_bank_account]` in the error
+ * response.
  */
 public class CreditorBankAccountService {
     private final HttpClient httpClient;
@@ -95,8 +95,8 @@ public class CreditorBankAccountService {
 
         /**
          * Name of the account holder, as known by the bank. Usually this is the same as the name stored with
-         * the linked [creditor](#whitelabel-partner-endpoints-creditors). This field will be transliterated,
-         * upcased and truncated to 18 characters.
+         * the linked [creditor](#core-endpoints-creditors). This field will be transliterated, upcased and
+         * truncated to 18 characters.
          */
         public CreditorBankAccountCreateRequest withAccountHolderName(String accountHolderName) {
             this.accountHolderName = accountHolderName;
@@ -163,7 +163,7 @@ public class CreditorBankAccountService {
         }
 
         /**
-         * ID of the [creditor](#whitelabel-partner-endpoints-creditors) that owns this bank account.
+         * ID of the [creditor](#core-endpoints-creditors) that owns this bank account.
          */
         public CreditorBankAccountCreateRequest withLinksCreditor(String creditor) {
             if (links == null) {
@@ -242,7 +242,7 @@ public class CreditorBankAccountService {
             private String creditor;
 
             /**
-             * ID of the [creditor](#whitelabel-partner-endpoints-creditors) that owns this bank account.
+             * ID of the [creditor](#core-endpoints-creditors) that owns this bank account.
              */
             public Links withCreditor(String creditor) {
                 this.creditor = creditor;

@@ -9,6 +9,7 @@ import com.gocardless.http.ApiResponse;
 import com.gocardless.http.HttpTestUtil;
 import com.gocardless.http.ListResponse;
 import com.gocardless.resources.*;
+import com.gocardless.services.PaymentService.PaymentCreateRequest;
 
 import com.google.common.collect.Lists;
 
@@ -124,11 +125,12 @@ public class GoCardlessClientTest {
     @Betamax(tape = "create a payment")
     public void shouldCreateAPayment() {
         Payment payment =
-                client.payments().create().withAmount(2000).withCurrency("GBP")
-                        .withMetadata("foo", "bar").withLinksMandate("MD00001PEYCSQF").execute();
+                client.payments().create().withAmount(2000)
+                        .withCurrency(PaymentCreateRequest.Currency.GBP).withMetadata("foo", "bar")
+                        .withLinksMandate("MD00001PEYCSQF").execute();
         assertThat(payment.getId()).isNotNull();
         assertThat(payment.getAmount()).isEqualTo(2000);
-        assertThat(payment.getCurrency()).isEqualTo("GBP");
+        assertThat(payment.getCurrency()).isEqualTo(Payment.Currency.GBP);
         assertThat(payment.getMetadata()).hasSize(1).containsEntry("foo", "bar");
         assertThat(payment.getLinks().getMandate()).isEqualTo("MD00001PEYCSQF");
     }

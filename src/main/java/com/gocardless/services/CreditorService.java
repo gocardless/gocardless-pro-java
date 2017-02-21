@@ -383,6 +383,13 @@ public class CreditorService {
         }
 
         @Override
+        protected Map<String, Object> getQueryParams() {
+            ImmutableMap.Builder<String, Object> params = ImmutableMap.builder();
+            params.putAll(super.getQueryParams());
+            return params.build();
+        }
+
+        @Override
         protected String getPathTemplate() {
             return "/creditors/:identity";
         }
@@ -463,8 +470,8 @@ public class CreditorService {
         }
 
         /**
-         * ID of the [bank account](#whitelabel-partner-endpoints-creditor-bank-accounts) which is set up to
-         * receive payouts in EUR.
+         * ID of the [bank account](#core-endpoints-creditor-bank-accounts) which is set up to receive
+         * payouts in EUR.
          */
         public CreditorUpdateRequest withLinksDefaultEurPayoutAccount(String defaultEurPayoutAccount) {
             if (links == null) {
@@ -475,8 +482,8 @@ public class CreditorService {
         }
 
         /**
-         * ID of the [bank account](#whitelabel-partner-endpoints-creditor-bank-accounts) which is set up to
-         * receive payouts in GBP.
+         * ID of the [bank account](#core-endpoints-creditor-bank-accounts) which is set up to receive
+         * payouts in GBP.
          */
         public CreditorUpdateRequest withLinksDefaultGbpPayoutAccount(String defaultGbpPayoutAccount) {
             if (links == null) {
@@ -487,8 +494,8 @@ public class CreditorService {
         }
 
         /**
-         * ID of the [bank account](#whitelabel-partner-endpoints-creditor-bank-accounts) which is set up to
-         * receive payouts in SEK.
+         * ID of the [bank account](#core-endpoints-creditor-bank-accounts) which is set up to receive
+         * payouts in SEK.
          */
         public CreditorUpdateRequest withLinksDefaultSekPayoutAccount(String defaultSekPayoutAccount) {
             if (links == null) {
@@ -560,8 +567,8 @@ public class CreditorService {
             private String defaultSekPayoutAccount;
 
             /**
-             * ID of the [bank account](#whitelabel-partner-endpoints-creditor-bank-accounts) which is set up to
-             * receive payouts in EUR.
+             * ID of the [bank account](#core-endpoints-creditor-bank-accounts) which is set up to receive
+             * payouts in EUR.
              */
             public Links withDefaultEurPayoutAccount(String defaultEurPayoutAccount) {
                 this.defaultEurPayoutAccount = defaultEurPayoutAccount;
@@ -569,8 +576,8 @@ public class CreditorService {
             }
 
             /**
-             * ID of the [bank account](#whitelabel-partner-endpoints-creditor-bank-accounts) which is set up to
-             * receive payouts in GBP.
+             * ID of the [bank account](#core-endpoints-creditor-bank-accounts) which is set up to receive
+             * payouts in GBP.
              */
             public Links withDefaultGbpPayoutAccount(String defaultGbpPayoutAccount) {
                 this.defaultGbpPayoutAccount = defaultGbpPayoutAccount;
@@ -578,8 +585,8 @@ public class CreditorService {
             }
 
             /**
-             * ID of the [bank account](#whitelabel-partner-endpoints-creditor-bank-accounts) which is set up to
-             * receive payouts in SEK.
+             * ID of the [bank account](#core-endpoints-creditor-bank-accounts) which is set up to receive
+             * payouts in SEK.
              */
             public Links withDefaultSekPayoutAccount(String defaultSekPayoutAccount) {
                 this.defaultSekPayoutAccount = defaultSekPayoutAccount;

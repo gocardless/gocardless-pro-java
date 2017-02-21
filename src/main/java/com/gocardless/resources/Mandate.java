@@ -126,13 +126,22 @@ public class Mandate {
         }
 
         private String creditor;
+        private String customer;
         private String customerBankAccount;
+        private String newMandate;
 
         /**
-         * ID of the associated [creditor](#whitelabel-partner-endpoints-creditors).
+         * ID of the associated [creditor](#core-endpoints-creditors).
          */
         public String getCreditor() {
             return creditor;
+        }
+
+        /**
+         * ID of the associated [customer](#core-endpoints-customers)
+         */
+        public String getCustomer() {
+            return customer;
         }
 
         /**
@@ -141,6 +150,13 @@ public class Mandate {
          */
         public String getCustomerBankAccount() {
             return customerBankAccount;
+        }
+
+        /**
+         * ID of the new mandate if this mandate has been replaced.
+         */
+        public String getNewMandate() {
+            return newMandate;
         }
     }
 }

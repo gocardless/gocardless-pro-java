@@ -13,10 +13,9 @@ import com.google.gson.reflect.TypeToken;
 /**
  * Service class for working with payout resources.
  *
- * Payouts represent transfers from GoCardless to a
- * [creditor](#whitelabel-partner-endpoints-creditors). Each payout contains the funds collected from
- * one or many [payments](#core-endpoints-payments). Payouts are created automatically after a
- * payment has been successfully collected.
+ * Payouts represent transfers from GoCardless to a [creditor](#core-endpoints-creditors). Each
+ * payout contains the funds collected from one or many [payments](#core-endpoints-payments). Payouts
+ * are created automatically after a payment has been successfully collected.
  */
 public class PayoutService {
     private final HttpClient httpClient;
@@ -58,6 +57,7 @@ public class PayoutService {
         private CreatedAt createdAt;
         private String creditor;
         private String creditorBankAccount;
+        private Currency currency;
         private Status status;
 
         /**
@@ -142,6 +142,15 @@ public class PayoutService {
         }
 
         /**
+         * [ISO 4217](http://en.wikipedia.org/wiki/ISO_4217#Active_codes) currency code. Currently only
+         * "GBP", "EUR", and "SEK" are supported.
+         */
+        public PayoutListRequest<S> withCurrency(Currency currency) {
+            this.currency = currency;
+            return this;
+        }
+
+        /**
          * Number of records to return.
          */
         public PayoutListRequest<S> withLimit(Integer limit) {
@@ -179,6 +188,9 @@ public class PayoutService {
             if (creditorBankAccount != null) {
                 params.put("creditor_bank_account", creditorBankAccount);
             }
+            if (currency != null) {
+                params.put("currency", currency);
+            }
             if (status != null) {
                 params.put("status", status);
             }
@@ -198,6 +210,17 @@ public class PayoutService {
         @Override
         protected TypeToken<List<Payout>> getTypeToken() {
             return new TypeToken<List<Payout>>() {};
+        }
+
+        public enum Currency {
+            @SerializedName("GBP")
+            GBP, @SerializedName("EUR")
+            EUR, @SerializedName("SEK")
+            SEK;
+            @Override
+            public String toString() {
+                return name().toLowerCase();
+            }
         }
 
         public enum Status {

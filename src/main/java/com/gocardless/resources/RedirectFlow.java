@@ -85,7 +85,8 @@ public class RedirectFlow {
 
     /**
      * The Direct Debit scheme of the mandate. If specified, the payment pages will only allow the set-up
-     * of a mandate for the specified scheme.
+     * of a mandate for the specified scheme. It is recommended that you leave this blank so the most
+     * appropriate scheme is picked based on the customer's bank account.
      */
     public Scheme getScheme() {
         return scheme;
@@ -112,8 +113,7 @@ public class RedirectFlow {
         @SerializedName("autogiro")
         AUTOGIRO, @SerializedName("bacs")
         BACS, @SerializedName("sepa_core")
-        SEPA_CORE, @SerializedName("sepa_cor1")
-        SEPA_COR1,
+        SEPA_CORE,
     }
 
     public static class Links {
@@ -127,8 +127,8 @@ public class RedirectFlow {
         private String mandate;
 
         /**
-         * The [creditor](#whitelabel-partner-endpoints-creditors) for whom the mandate will be created. The
-         * `name` of the creditor will be displayed on the payment page.
+         * The [creditor](#core-endpoints-creditors) for whom the mandate will be created. The `name` of the
+         * creditor will be displayed on the payment page.
          */
         public String getCreditor() {
             return creditor;

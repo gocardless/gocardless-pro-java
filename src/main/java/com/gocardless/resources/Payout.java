@@ -5,10 +5,9 @@ import com.google.gson.annotations.SerializedName;
 /**
  * Represents a payout resource returned from the API.
  *
- * Payouts represent transfers from GoCardless to a
- * [creditor](#whitelabel-partner-endpoints-creditors). Each payout contains the funds collected from
- * one or many [payments](#core-endpoints-payments). Payouts are created automatically after a
- * payment has been successfully collected.
+ * Payouts represent transfers from GoCardless to a [creditor](#core-endpoints-creditors). Each
+ * payout contains the funds collected from one or many [payments](#core-endpoints-payments). Payouts
+ * are created automatically after a payment has been successfully collected.
  */
 public class Payout {
     private Payout() {
@@ -18,7 +17,7 @@ public class Payout {
     private Integer amount;
     private String arrivalDate;
     private String createdAt;
-    private String currency;
+    private Currency currency;
     private Integer deductedFees;
     private String id;
     private Links links;
@@ -56,9 +55,10 @@ public class Payout {
     }
 
     /**
-     * [ISO 4217](http://en.wikipedia.org/wiki/ISO_4217#Active_codes) currency code.
+     * [ISO 4217](http://en.wikipedia.org/wiki/ISO_4217#Active_codes) currency code. Currently only
+     * "GBP", "EUR", and "SEK" are supported.
      */
-    public String getCurrency() {
+    public Currency getCurrency() {
         return currency;
     }
 
@@ -107,6 +107,13 @@ public class Payout {
         return status;
     }
 
+    public enum Currency {
+        @SerializedName("GBP")
+        GBP, @SerializedName("EUR")
+        EUR, @SerializedName("SEK")
+        SEK,
+    }
+
     public enum Status {
         @SerializedName("pending")
         PENDING, @SerializedName("paid")
@@ -122,16 +129,15 @@ public class Payout {
         private String creditorBankAccount;
 
         /**
-         * ID of [creditor](#whitelabel-partner-endpoints-creditors) who will receive this payout, i.e. the
-         * owner of the `creditor_bank_account`.
+         * ID of [creditor](#core-endpoints-creditors) who will receive this payout, i.e. the owner of the
+         * `creditor_bank_account`.
          */
         public String getCreditor() {
             return creditor;
         }
 
         /**
-         * ID of [bank account](#whitelabel-partner-endpoints-creditor-bank-accounts) which this will be sent
-         * to.
+         * ID of [bank account](#core-endpoints-creditor-bank-accounts) which this will be sent to.
          */
         public String getCreditorBankAccount() {
             return creditorBankAccount;

@@ -74,7 +74,6 @@ public class Subscription {
     }
 
     private Integer amount;
-    private Integer count;
     private String createdAt;
     private String currency;
     private Integer dayOfMonth;
@@ -96,14 +95,6 @@ public class Subscription {
      */
     public Integer getAmount() {
         return amount;
-    }
-
-    /**
-     * An alternative way to set `end_date`. The total number of payments that should be taken by this
-     * subscription. This will set `end_date` automatically.
-     */
-    public Integer getCount() {
-        return count;
     }
 
     /**
