@@ -41,7 +41,7 @@ public class CustomerService {
     }
 
     /**
-     * Returns a [cursor-paginated](#overview-cursor-pagination) list of your customers.
+     * Returns a [cursor-paginated](#api-usage-cursor-pagination) list of your customers.
      */
     public CustomerListRequest<ListResponse<Customer>> list() {
         return new CustomerListRequest<>(httpClient, ListRequest.<Customer>pagingExecutor());
@@ -258,7 +258,7 @@ public class CustomerService {
     /**
      * Request class for {@link CustomerService#list }.
      *
-     * Returns a [cursor-paginated](#overview-cursor-pagination) list of your customers.
+     * Returns a [cursor-paginated](#api-usage-cursor-pagination) list of your customers.
      */
     public static final class CustomerListRequest<S> extends ListRequest<S, Customer> {
         private CreatedAt createdAt;

@@ -8,11 +8,11 @@ import com.google.gson.annotations.SerializedName;
  * Represents a payment resource returned from the API.
  *
  * Payment objects represent payments from a [customer](#core-endpoints-customers) to a
- * [creditor](#whitelabel-partner-endpoints-creditors), taken against a Direct Debit
+ * [creditor](#core-endpoints-creditors), taken against a Direct Debit
  * [mandate](#core-endpoints-mandates).
  * 
- * GoCardless will notify you via a [webhook](#webhooks)
- * whenever the state of a payment changes.
+ * GoCardless will notify you via a
+ * [webhook](#appendix-webhooks) whenever the state of a payment changes.
  */
 public class Payment {
     private Payment() {
@@ -23,7 +23,7 @@ public class Payment {
     private Integer amountRefunded;
     private String chargeDate;
     private String createdAt;
-    private String currency;
+    private Currency currency;
     private String description;
     private String id;
     private Links links;
@@ -55,17 +55,17 @@ public class Payment {
     }
 
     /**
-     * Fixed [timestamp](#overview-time-zones-dates), recording when this resource was created.
+     * Fixed [timestamp](#api-usage-time-zones--dates), recording when this resource was created.
      */
     public String getCreatedAt() {
         return createdAt;
     }
 
     /**
-     * [ISO 4217](http://en.wikipedia.org/wiki/ISO_4217#Active_codes) currency code, currently only
+     * [ISO 4217](http://en.wikipedia.org/wiki/ISO_4217#Active_codes) currency code. Currently only
      * "GBP", "EUR", and "SEK" are supported.
      */
-    public String getCurrency() {
+    public Currency getCurrency() {
         return currency;
     }
 
@@ -123,14 +123,22 @@ public class Payment {
      * <li>`cancelled`: the payment has
      * been cancelled</li>
      * <li>`customer_approval_denied`: the customer has denied approval for the
-     * payment. You should contact the customer directly</li></ul>
-     * <li>`failed`: the payment failed to
-     * be processed. Note that payments can fail after being confirmed if the failure message is sent
-     * late by the banks.</li>
+     * payment. You should contact the customer directly</li>
+     * <li>`failed`: the payment failed to be
+     * processed. Note that payments can fail after being confirmed if the failure message is sent late
+     * by the banks.</li>
      * <li>`charged_back`: the payment has been charged back</li>
+     * </ul>
      */
     public Status getStatus() {
         return status;
+    }
+
+    public enum Currency {
+        @SerializedName("GBP")
+        GBP, @SerializedName("EUR")
+        EUR, @SerializedName("SEK")
+        SEK,
     }
 
     public enum Status {
@@ -157,8 +165,7 @@ public class Payment {
         private String subscription;
 
         /**
-         * ID of [creditor](#whitelabel-partner-endpoints-creditors) to which the collected payment will be
-         * sent.
+         * ID of [creditor](#core-endpoints-creditors) to which the collected payment will be sent.
          */
         public String getCreditor() {
             return creditor;

@@ -15,11 +15,11 @@ import com.google.gson.reflect.TypeToken;
  * Service class for working with payment resources.
  *
  * Payment objects represent payments from a [customer](#core-endpoints-customers) to a
- * [creditor](#whitelabel-partner-endpoints-creditors), taken against a Direct Debit
+ * [creditor](#core-endpoints-creditors), taken against a Direct Debit
  * [mandate](#core-endpoints-mandates).
  * 
- * GoCardless will notify you via a [webhook](#webhooks)
- * whenever the state of a payment changes.
+ * GoCardless will notify you via a
+ * [webhook](#appendix-webhooks) whenever the state of a payment changes.
  */
 public class PaymentService {
     private final HttpClient httpClient;
@@ -46,7 +46,7 @@ public class PaymentService {
     }
 
     /**
-     * Returns a [cursor-paginated](#overview-cursor-pagination) list of your payments.
+     * Returns a [cursor-paginated](#api-usage-cursor-pagination) list of your payments.
      */
     public PaymentListRequest<ListResponse<Payment>> list() {
         return new PaymentListRequest<>(httpClient, ListRequest.<Payment>pagingExecutor());
@@ -111,7 +111,7 @@ public class PaymentService {
         private Integer amount;
         private Integer appFee;
         private String chargeDate;
-        private String currency;
+        private Currency currency;
         private String description;
         private Links links;
         private Map<String, String> metadata;
@@ -126,9 +126,7 @@ public class PaymentService {
         }
 
         /**
-         * The amount to be deducted from the payment as the OAuth app's fee, in pence or cents. <p
-         * class="beta-notice"><strong>Beta</strong>: This field is part of the <a href='#guides-oauth'>OAuth
-         * API</a>, which is currently in beta.</p>
+         * The amount to be deducted from the payment as the OAuth app's fee, in pence or cents.
          */
         public PaymentCreateRequest withAppFee(Integer appFee) {
             this.appFee = appFee;
@@ -146,10 +144,10 @@ public class PaymentService {
         }
 
         /**
-         * [ISO 4217](http://en.wikipedia.org/wiki/ISO_4217#Active_codes) currency code, currently only
+         * [ISO 4217](http://en.wikipedia.org/wiki/ISO_4217#Active_codes) currency code. Currently only
          * "GBP", "EUR", and "SEK" are supported.
          */
-        public PaymentCreateRequest withCurrency(String currency) {
+        public PaymentCreateRequest withCurrency(Currency currency) {
             this.currency = currency;
             return this;
         }
@@ -247,6 +245,17 @@ public class PaymentService {
             return true;
         }
 
+        public enum Currency {
+            @SerializedName("GBP")
+            GBP, @SerializedName("EUR")
+            EUR, @SerializedName("SEK")
+            SEK;
+            @Override
+            public String toString() {
+                return name().toLowerCase();
+            }
+        }
+
         public static class Links {
             private String mandate;
 
@@ -263,11 +272,12 @@ public class PaymentService {
     /**
      * Request class for {@link PaymentService#list }.
      *
-     * Returns a [cursor-paginated](#overview-cursor-pagination) list of your payments.
+     * Returns a [cursor-paginated](#api-usage-cursor-pagination) list of your payments.
      */
     public static final class PaymentListRequest<S> extends ListRequest<S, Payment> {
         private CreatedAt createdAt;
         private String creditor;
+        private Currency currency;
         private String customer;
         private String mandate;
         private Status status;
@@ -348,6 +358,15 @@ public class PaymentService {
         }
 
         /**
+         * [ISO 4217](http://en.wikipedia.org/wiki/ISO_4217#Active_codes) currency code. Currently only
+         * "GBP", "EUR", and "SEK" are supported.
+         */
+        public PaymentListRequest<S> withCurrency(Currency currency) {
+            this.currency = currency;
+            return this;
+        }
+
+        /**
          * ID of a customer to filter payments by. If you pass this parameter, you cannot also pass
          * `creditor`.
          */
@@ -387,11 +406,12 @@ public class PaymentService {
          * <li>`cancelled`: the payment has
          * been cancelled</li>
          * <li>`customer_approval_denied`: the customer has denied approval for the
-         * payment. You should contact the customer directly</li></ul>
-         * <li>`failed`: the payment failed to
-         * be processed. Note that payments can fail after being confirmed if the failure message is sent
-         * late by the banks.</li>
+         * payment. You should contact the customer directly</li>
+         * <li>`failed`: the payment failed to be
+         * processed. Note that payments can fail after being confirmed if the failure message is sent late
+         * by the banks.</li>
          * <li>`charged_back`: the payment has been charged back</li>
+         * </ul>
          */
         public PaymentListRequest<S> withStatus(Status status) {
             this.status = status;
@@ -419,6 +439,9 @@ public class PaymentService {
             }
             if (creditor != null) {
                 params.put("creditor", creditor);
+            }
+            if (currency != null) {
+                params.put("currency", currency);
             }
             if (customer != null) {
                 params.put("customer", customer);
@@ -448,6 +471,17 @@ public class PaymentService {
         @Override
         protected TypeToken<List<Payment>> getTypeToken() {
             return new TypeToken<List<Payment>>() {};
+        }
+
+        public enum Currency {
+            @SerializedName("GBP")
+            GBP, @SerializedName("EUR")
+            EUR, @SerializedName("SEK")
+            SEK;
+            @Override
+            public String toString() {
+                return name().toLowerCase();
+            }
         }
 
         public enum Status {

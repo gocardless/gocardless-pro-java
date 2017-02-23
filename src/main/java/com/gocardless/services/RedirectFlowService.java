@@ -19,16 +19,17 @@ import com.google.gson.annotations.SerializedName;
  * The overall flow is:
  * 
  * 1. You
- * [create](#create-a-redirect-flow) a redirect flow for your customer, and redirect them to the
- * returned redirect url, e.g. `https://pay.gocardless.com/flow/RE123`.
+ * [create](#redirect-flows-create-a-redirect-flow) a redirect flow for your customer, and redirect
+ * them to the returned redirect url, e.g. `https://pay.gocardless.com/flow/RE123`.
  * 
- * 2. Your customer
- * supplies their name, email, address, and bank account details, and submits the form. This securely
- * stores their details, and redirects them back to your `success_redirect_url` with
+ * 2. Your
+ * customer supplies their name, email, address, and bank account details, and submits the form. This
+ * securely stores their details, and redirects them back to your `success_redirect_url` with
  * `redirect_flow_id=RE123` in the querystring.
  * 
- * 3. You [complete](#complete-a-redirect-flow) the
- * redirect flow, which creates a [customer](#core-endpoints-customers), [customer bank
+ * 3. You
+ * [complete](#redirect-flows-complete-a-redirect-flow) the redirect flow, which creates a
+ * [customer](#core-endpoints-customers), [customer bank
  * account](#core-endpoints-customer-bank-accounts), and [mandate](#core-endpoints-mandates), and
  * returns the ID of the mandate. You may wish to create a
  * [subscription](#core-endpoints-subscriptions) or [payment](#core-endpoints-payments) at this
@@ -110,9 +111,9 @@ public class RedirectFlowService {
         }
 
         /**
-         * The [creditor](#whitelabel-partner-endpoints-creditors) for whom the mandate will be created. The
-         * `name` of the creditor will be displayed on the payment page. Required if your account manages
-         * multiple creditors.
+         * The [creditor](#core-endpoints-creditors) for whom the mandate will be created. The `name` of the
+         * creditor will be displayed on the payment page. Required if your account manages multiple
+         * creditors.
          */
         public RedirectFlowCreateRequest withLinksCreditor(String creditor) {
             if (links == null) {
@@ -124,7 +125,8 @@ public class RedirectFlowService {
 
         /**
          * The Direct Debit scheme of the mandate. If specified, the payment pages will only allow the set-up
-         * of a mandate for the specified scheme.
+         * of a mandate for the specified scheme. It is recommended that you leave this blank so the most
+         * appropriate scheme is picked based on the customer's bank account.
          */
         public RedirectFlowCreateRequest withScheme(Scheme scheme) {
             this.scheme = scheme;
@@ -188,8 +190,7 @@ public class RedirectFlowService {
             @SerializedName("autogiro")
             AUTOGIRO, @SerializedName("bacs")
             BACS, @SerializedName("sepa_core")
-            SEPA_CORE, @SerializedName("sepa_cor1")
-            SEPA_COR1;
+            SEPA_CORE;
             @Override
             public String toString() {
                 return name().toLowerCase();
@@ -200,9 +201,9 @@ public class RedirectFlowService {
             private String creditor;
 
             /**
-             * The [creditor](#whitelabel-partner-endpoints-creditors) for whom the mandate will be created. The
-             * `name` of the creditor will be displayed on the payment page. Required if your account manages
-             * multiple creditors.
+             * The [creditor](#core-endpoints-creditors) for whom the mandate will be created. The `name` of the
+             * creditor will be displayed on the payment page. Required if your account manages multiple
+             * creditors.
              */
             public Links withCreditor(String creditor) {
                 this.creditor = creditor;

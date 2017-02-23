@@ -1,8 +1,10 @@
 # Java Client for GoCardless Pro API
 
-This library provides a simple wrapper around the [GoCardless Pro API](http://developer.gocardless.com/pro).
+This library provides a simple wrapper around the [GoCardless API](http://developer.gocardless.com/api-reference).
 
-An example application using this library can be found [here](https://github.com/gocardless/gocardless-pro-java-example).
+- ["Getting started" guide](https://developer.gocardless.com/getting-started/api/introduction/?lang=java) with copy and paste Java code samples
+- [API Reference](https://developer.gocardless.com/api-reference/2015-07-06)
+- [Example application](https://github.com/gocardless/gocardless-pro-java-example)
 
 ## Getting started
 
@@ -12,14 +14,14 @@ With Maven:
 <dependency>
     <groupId>com.gocardless</groupId>
     <artifactId>gocardless-pro</artifactId>
-    <version>1.20.0</version>
+    <version>2.0.0</version>
 </dependency>
 ```
 
 With Gradle:
 
 ```
-compile 'com.gocardless:gocardless-pro:1.20.0'
+compile 'com.gocardless:gocardless-pro:2.0.0'
 ```
 
 ## Initializing the client
@@ -119,4 +121,4 @@ Full Javadoc can be found [here](http://gocardless.github.io/gocardless-pro-java
 
 ## Contributing
 
-This client is auto-generated from Crank, a toolchain that we hope to soon open source. Issues should for now be reported on this repository.  __Please do not modify the source code yourself, your changes will be overriden!__
+This client is auto-generated from Crank, a toolchain that we hope to soon open source. Issues should for now be reported on this repository.  __Please do not modify the source code yourself, your changes will be overridden!__

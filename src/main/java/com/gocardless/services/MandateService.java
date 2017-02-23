@@ -19,7 +19,8 @@ import com.google.gson.reflect.TypeToken;
  * Mandates represent the Direct Debit mandate with a [customer](#core-endpoints-customers).
  * 
  *
- * GoCardless will notify you via a [webhook](#webhooks) whenever the status of a mandate changes.
+ * GoCardless will notify you via a [webhook](#appendix-webhooks) whenever the status of a mandate
+ * changes.
  */
 public class MandateService {
     private final HttpClient httpClient;
@@ -41,7 +42,7 @@ public class MandateService {
     }
 
     /**
-     * Returns a [cursor-paginated](#overview-cursor-pagination) list of your mandates.
+     * Returns a [cursor-paginated](#api-usage-cursor-pagination) list of your mandates.
      */
     public MandateListRequest<ListResponse<Mandate>> list() {
         return new MandateListRequest<>(httpClient, ListRequest.<Mandate>pagingExecutor());
@@ -110,8 +111,8 @@ public class MandateService {
         }
 
         /**
-         * ID of the associated [creditor](#whitelabel-partner-endpoints-creditors). Only required if your
-         * account manages multiple creditors.
+         * ID of the associated [creditor](#core-endpoints-creditors). Only required if your account manages
+         * multiple creditors.
          */
         public MandateCreateRequest withLinksCreditor(String creditor) {
             if (links == null) {
@@ -155,9 +156,9 @@ public class MandateService {
         }
 
         /**
-         * Unique reference. Different schemes have different length and [character set](#character-sets)
-         * requirements. GoCardless will generate a unique reference satisfying the different scheme
-         * requirements if this field is left blank.
+         * Unique reference. Different schemes have different length and [character
+         * set](#appendix-character-sets) requirements. GoCardless will generate a unique reference
+         * satisfying the different scheme requirements if this field is left blank.
          */
         public MandateCreateRequest withReference(String reference) {
             this.reference = reference;
@@ -167,7 +168,7 @@ public class MandateService {
         /**
          * <a name="mandates_scheme"></a>Direct Debit scheme to which this mandate and associated payments
          * are submitted. Can be supplied or automatically detected from the customer's bank account.
-         * Currently only "autogiro", "bacs", "sepa_core", and "sepa_cor1" are supported.
+         * Currently only "autogiro", "bacs", and "sepa_core" are supported.
          */
         public MandateCreateRequest withScheme(String scheme) {
             this.scheme = scheme;
@@ -213,8 +214,8 @@ public class MandateService {
             private String customerBankAccount;
 
             /**
-             * ID of the associated [creditor](#whitelabel-partner-endpoints-creditors). Only required if your
-             * account manages multiple creditors.
+             * ID of the associated [creditor](#core-endpoints-creditors). Only required if your account manages
+             * multiple creditors.
              */
             public Links withCreditor(String creditor) {
                 this.creditor = creditor;
@@ -235,7 +236,7 @@ public class MandateService {
     /**
      * Request class for {@link MandateService#list }.
      *
-     * Returns a [cursor-paginated](#overview-cursor-pagination) list of your mandates.
+     * Returns a [cursor-paginated](#api-usage-cursor-pagination) list of your mandates.
      */
     public static final class MandateListRequest<S> extends ListRequest<S, Mandate> {
         private CreatedAt createdAt;
@@ -311,8 +312,8 @@ public class MandateService {
         }
 
         /**
-         * ID of a [creditor](#whitelabel-partner-endpoints-creditors). If specified, this endpoint will
-         * return all mandates for the given creditor. Cannot be used in conjunction with `customer` or
+         * ID of a [creditor](#core-endpoints-creditors). If specified, this endpoint will return all
+         * mandates for the given creditor. Cannot be used in conjunction with `customer` or
          * `customer_bank_account`
          */
         public MandateListRequest<S> withCreditor(String creditor) {
@@ -349,9 +350,9 @@ public class MandateService {
         }
 
         /**
-         * Unique reference. Different schemes have different length and [character set](#character-sets)
-         * requirements. GoCardless will generate a unique reference satisfying the different scheme
-         * requirements if this field is left blank.
+         * Unique reference. Different schemes have different length and [character
+         * set](#appendix-character-sets) requirements. GoCardless will generate a unique reference
+         * satisfying the different scheme requirements if this field is left blank.
          */
         public MandateListRequest<S> withReference(String reference) {
             this.reference = reference;

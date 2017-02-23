@@ -20,7 +20,7 @@ import com.google.gson.reflect.TypeToken;
  * Note that customer bank accounts must be unique,
  * and so you will encounter a `bank_account_exists` error if you try to create a duplicate bank
  * account. You may wish to handle this by updating the existing record instead, the ID of which will
- * be provided as links[customer_bank_account] in the error response.
+ * be provided as `links[customer_bank_account]` in the error response.
  */
 public class CustomerBankAccountService {
     private final HttpClient httpClient;
@@ -45,10 +45,10 @@ public class CustomerBankAccountService {
      * - IBAN
      * 
      * - [Customer
-     * Bank Account Tokens](#js-flow-create-a-customer-bank-account-token)
+     * Bank Account Tokens](#javascript-flow-create-a-customer-bank-account-token)
      * 
-     * For more information on
-     * the different fields required in each country, see [local bank
+     * For more
+     * information on the different fields required in each country, see [local bank
      * details](#appendix-local-bank-details).
      */
     public CustomerBankAccountCreateRequest create() {
@@ -56,7 +56,7 @@ public class CustomerBankAccountService {
     }
 
     /**
-     * Returns a [cursor-paginated](#overview-cursor-pagination) list of your bank accounts.
+     * Returns a [cursor-paginated](#api-usage-cursor-pagination) list of your bank accounts.
      */
     public CustomerBankAccountListRequest<ListResponse<CustomerBankAccount>> list() {
         return new CustomerBankAccountListRequest<>(httpClient,
@@ -108,10 +108,10 @@ public class CustomerBankAccountService {
      * - IBAN
      * 
      * - [Customer
-     * Bank Account Tokens](#js-flow-create-a-customer-bank-account-token)
+     * Bank Account Tokens](#javascript-flow-create-a-customer-bank-account-token)
      * 
-     * For more information on
-     * the different fields required in each country, see [local bank
+     * For more
+     * information on the different fields required in each country, see [local bank
      * details](#appendix-local-bank-details).
      */
     public static final class CustomerBankAccountCreateRequest extends
@@ -207,7 +207,7 @@ public class CustomerBankAccountService {
         }
 
         /**
-         * ID of a [customer bank account token](#core-endpoints-customer-bank-account-tokens) to use in
+         * ID of a [customer bank account token](#javascript-flow-customer-bank-account-tokens) to use in
          * place of bank account parameters.
          */
         public CustomerBankAccountCreateRequest withLinksCustomerBankAccountToken(
@@ -287,7 +287,7 @@ public class CustomerBankAccountService {
             }
 
             /**
-             * ID of a [customer bank account token](#core-endpoints-customer-bank-account-tokens) to use in
+             * ID of a [customer bank account token](#javascript-flow-customer-bank-account-tokens) to use in
              * place of bank account parameters.
              */
             public Links withCustomerBankAccountToken(String customerBankAccountToken) {
@@ -300,7 +300,7 @@ public class CustomerBankAccountService {
     /**
      * Request class for {@link CustomerBankAccountService#list }.
      *
-     * Returns a [cursor-paginated](#overview-cursor-pagination) list of your bank accounts.
+     * Returns a [cursor-paginated](#api-usage-cursor-pagination) list of your bank accounts.
      */
     public static final class CustomerBankAccountListRequest<S> extends
             ListRequest<S, CustomerBankAccount> {

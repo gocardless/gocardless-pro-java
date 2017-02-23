@@ -5,15 +5,12 @@ import java.util.Map;
 /**
  * Represents a refund resource returned from the API.
  *
- * Refund objects represent (partial) refunds of a [payment](#core-endpoints-payment) back to the
+ * Refund objects represent (partial) refunds of a [payment](#core-endpoints-payments) back to the
  * [customer](#core-endpoints-customers).
  * 
- * GoCardless will notify you via a [webhook](#webhooks)
- * whenever a refund is created, and will update the `amount_refunded` property of the payment.
- * 
- *
- * _Note:_ A payment that has been (partially) refunded can still receive a late failure or
- * chargeback from the banks.
+ * GoCardless will notify you via a
+ * [webhook](#appendix-webhooks) whenever a refund is created, and will update the `amount_refunded`
+ * property of the payment.
  */
 public class Refund {
     private Refund() {
@@ -36,7 +33,7 @@ public class Refund {
     }
 
     /**
-     * Fixed [timestamp](#overview-time-zones-dates), recording when this resource was created.
+     * Fixed [timestamp](#api-usage-time-zones--dates), recording when this resource was created.
      */
     public String getCreatedAt() {
         return createdAt;

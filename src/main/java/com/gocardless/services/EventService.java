@@ -29,7 +29,7 @@ public class EventService {
     }
 
     /**
-     * Returns a [cursor-paginated](#overview-cursor-pagination) list of your events.
+     * Returns a [cursor-paginated](#api-usage-cursor-pagination) list of your events.
      */
     public EventListRequest<ListResponse<Event>> list() {
         return new EventListRequest<>(httpClient, ListRequest.<Event>pagingExecutor());
@@ -49,7 +49,7 @@ public class EventService {
     /**
      * Request class for {@link EventService#list }.
      *
-     * Returns a [cursor-paginated](#overview-cursor-pagination) list of your events.
+     * Returns a [cursor-paginated](#api-usage-cursor-pagination) list of your events.
      */
     public static final class EventListRequest<S> extends ListRequest<S, Event> {
         private String action;

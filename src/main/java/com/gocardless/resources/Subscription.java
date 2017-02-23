@@ -10,14 +10,15 @@ import com.google.gson.annotations.SerializedName;
  *
  * Subscriptions create [payments](#core-endpoints-payments) according to a schedule.
  * 
- * ####
+ * ###
  * Recurrence Rules
  * 
  * The following rules apply when specifying recurrence:
- * - The first payment
- * must be charged within 1 year.
- * - When neither `month` nor `day_of_month` are present, the
- * subscription will recur from the `start_date` based on the `interval_unit`.
+ * 
+ * - The first
+ * payment must be charged within 1 year.
+ * - When neither `month` nor `day_of_month` are present,
+ * the subscription will recur from the `start_date` based on the `interval_unit`.
  * - If `month` or
  * `day_of_month` are present, the recurrence rules will be applied from the `start_date`, and the
  * following validations apply:
@@ -55,7 +56,7 @@ import com.google.gson.annotations.SerializedName;
  * | weekly          | 2          | october | 10             |
  * invalid - `month` and `day_of_month` must be blank |
  * 
- * #### Rolling dates
+ * ### Rolling dates
  * 
  * When a charge
  * date falls on a non-business day, one of two things will happen:
@@ -73,7 +74,6 @@ public class Subscription {
     }
 
     private Integer amount;
-    private Integer count;
     private String createdAt;
     private String currency;
     private Integer dayOfMonth;
@@ -98,15 +98,7 @@ public class Subscription {
     }
 
     /**
-     * An alternative way to set `end_date`. The total number of payments that should be taken by this
-     * subscription. This will set `end_date` automatically.
-     */
-    public Integer getCount() {
-        return count;
-    }
-
-    /**
-     * Fixed [timestamp](#overview-time-zones-dates), recording when this resource was created.
+     * Fixed [timestamp](#api-usage-time-zones--dates), recording when this resource was created.
      */
     public String getCreatedAt() {
         return createdAt;
@@ -129,9 +121,8 @@ public class Subscription {
     }
 
     /**
-     * Date after which no further payments should be charged. If a payment falls on this date, it **will
-     * not** be charged. If blank, the subscription will continue forever. Alternatively, `count` can be
-     * set to achieve a specific number of payments.
+     * Date on or after which no further payments should be created. If blank, the subscription will
+     * continue forever. Alternatively, `count` can be set to achieve a specific number of payments.
      */
     public String getEndDate() {
         return endDate;

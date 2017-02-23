@@ -31,7 +31,7 @@ public class Event {
     }
 
     /**
-     * Fixed [timestamp](#overview-time-zones-dates), recording when this resource was created.
+     * Fixed [timestamp](#api-usage-time-zones--dates), recording when this resource was created.
      */
     public String getCreatedAt() {
         return createdAt;
@@ -164,6 +164,7 @@ public class Event {
 
         private String mandate;
         private String newCustomerBankAccount;
+        private String newMandate;
         private String organisation;
         private String parentEvent;
         private String payment;
@@ -189,8 +190,16 @@ public class Event {
         }
 
         /**
-         * If the event is included in a [webhook](#webhooks-overview) to an (OAuth app)[#guides-oauth], this
-         * is the ID of the account to which it belongs.
+         * This is only included for mandate replaced events, when it is the ID of the new
+         * [mandate](#core-endpoints-mandates) that replaces the existing mandate.
+         */
+        public String getNewMandate() {
+            return newMandate;
+        }
+
+        /**
+         * If the event is included in a [webhook](#webhooks-overview) to an [OAuth app](#appendix-oauth),
+         * this is the ID of the account to which it belongs.
          */
         public String getOrganisation() {
             return organisation;

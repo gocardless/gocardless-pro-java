@@ -16,14 +16,15 @@ import com.google.gson.reflect.TypeToken;
  *
  * Subscriptions create [payments](#core-endpoints-payments) according to a schedule.
  * 
- * ####
+ * ###
  * Recurrence Rules
  * 
  * The following rules apply when specifying recurrence:
- * - The first payment
- * must be charged within 1 year.
- * - When neither `month` nor `day_of_month` are present, the
- * subscription will recur from the `start_date` based on the `interval_unit`.
+ * 
+ * - The first
+ * payment must be charged within 1 year.
+ * - When neither `month` nor `day_of_month` are present,
+ * the subscription will recur from the `start_date` based on the `interval_unit`.
  * - If `month` or
  * `day_of_month` are present, the recurrence rules will be applied from the `start_date`, and the
  * following validations apply:
@@ -61,7 +62,7 @@ import com.google.gson.reflect.TypeToken;
  * | weekly          | 2          | october | 10             |
  * invalid - `month` and `day_of_month` must be blank |
  * 
- * #### Rolling dates
+ * ### Rolling dates
  * 
  * When a charge
  * date falls on a non-business day, one of two things will happen:
@@ -93,7 +94,7 @@ public class SubscriptionService {
     }
 
     /**
-     * Returns a [cursor-paginated](#overview-cursor-pagination) list of your subscriptions.
+     * Returns a [cursor-paginated](#api-usage-cursor-pagination) list of your subscriptions.
      */
     public SubscriptionListRequest<ListResponse<Subscription>> list() {
         return new SubscriptionListRequest<>(httpClient, ListRequest.<Subscription>pagingExecutor());
@@ -185,9 +186,8 @@ public class SubscriptionService {
         }
 
         /**
-         * Date after which no further payments should be charged. If a payment falls on this date, it **will
-         * not** be charged. If blank, the subscription will continue forever. Alternatively, `count` can be
-         * set to achieve a specific number of payments.
+         * Date on or after which no further payments should be created. If blank, the subscription will
+         * continue forever. Alternatively, `count` can be set to achieve a specific number of payments.
          */
         public SubscriptionCreateRequest withEndDate(String endDate) {
             this.endDate = endDate;
@@ -370,7 +370,7 @@ public class SubscriptionService {
     /**
      * Request class for {@link SubscriptionService#list }.
      *
-     * Returns a [cursor-paginated](#overview-cursor-pagination) list of your subscriptions.
+     * Returns a [cursor-paginated](#api-usage-cursor-pagination) list of your subscriptions.
      */
     public static final class SubscriptionListRequest<S> extends ListRequest<S, Subscription> {
         private CreatedAt createdAt;

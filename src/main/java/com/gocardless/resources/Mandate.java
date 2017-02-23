@@ -10,7 +10,8 @@ import com.google.gson.annotations.SerializedName;
  * Mandates represent the Direct Debit mandate with a [customer](#core-endpoints-customers).
  * 
  *
- * GoCardless will notify you via a [webhook](#webhooks) whenever the status of a mandate changes.
+ * GoCardless will notify you via a [webhook](#appendix-webhooks) whenever the status of a mandate
+ * changes.
  */
 public class Mandate {
     private Mandate() {
@@ -28,7 +29,7 @@ public class Mandate {
     private Status status;
 
     /**
-     * Fixed [timestamp](#overview-time-zones-dates), recording when this resource was created.
+     * Fixed [timestamp](#api-usage-time-zones--dates), recording when this resource was created.
      */
     public String getCreatedAt() {
         return createdAt;
@@ -69,9 +70,9 @@ public class Mandate {
     }
 
     /**
-     * Unique reference. Different schemes have different length and [character set](#character-sets)
-     * requirements. GoCardless will generate a unique reference satisfying the different scheme
-     * requirements if this field is left blank.
+     * Unique reference. Different schemes have different length and [character
+     * set](#appendix-character-sets) requirements. GoCardless will generate a unique reference
+     * satisfying the different scheme requirements if this field is left blank.
      */
     public String getReference() {
         return reference;
@@ -80,7 +81,7 @@ public class Mandate {
     /**
      * <a name="mandates_scheme"></a>Direct Debit scheme to which this mandate and associated payments
      * are submitted. Can be supplied or automatically detected from the customer's bank account.
-     * Currently only "autogiro", "bacs", "sepa_core", and "sepa_cor1" are supported.
+     * Currently only "autogiro", "bacs", and "sepa_core" are supported.
      */
     public String getScheme() {
         return scheme;
@@ -125,13 +126,22 @@ public class Mandate {
         }
 
         private String creditor;
+        private String customer;
         private String customerBankAccount;
+        private String newMandate;
 
         /**
-         * ID of the associated [creditor](#whitelabel-partner-endpoints-creditors).
+         * ID of the associated [creditor](#core-endpoints-creditors).
          */
         public String getCreditor() {
             return creditor;
+        }
+
+        /**
+         * ID of the associated [customer](#core-endpoints-customers)
+         */
+        public String getCustomer() {
+            return customer;
         }
 
         /**
@@ -140,6 +150,13 @@ public class Mandate {
          */
         public String getCustomerBankAccount() {
             return customerBankAccount;
+        }
+
+        /**
+         * ID of the new mandate if this mandate has been replaced.
+         */
+        public String getNewMandate() {
+            return newMandate;
         }
     }
 }
