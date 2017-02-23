@@ -14,14 +14,14 @@ With Maven:
 <dependency>
     <groupId>com.gocardless</groupId>
     <artifactId>gocardless-pro</artifactId>
-    <version>1.20.0</version>
+    <version>2.0.0</version>
 </dependency>
 ```
 
 With Gradle:
 
 ```
-compile 'com.gocardless:gocardless-pro:1.20.0'
+compile 'com.gocardless:gocardless-pro:2.0.0'
 ```
 
 ## Initializing the client
@@ -121,4 +121,4 @@ Full Javadoc can be found [here](http://gocardless.github.io/gocardless-pro-java
 
 ## Contributing
 
-This client is auto-generated from Crank, a toolchain that we hope to soon open source. Issues should for now be reported on this repository.  __Please do not modify the source code yourself, your changes will be overriden!__
+This client is auto-generated from Crank, a toolchain that we hope to soon open source. Issues should for now be reported on this repository.  __Please do not modify the source code yourself, your changes will be overridden!__
