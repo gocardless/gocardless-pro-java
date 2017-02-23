@@ -2,13 +2,13 @@
 <!-- NewPage -->
 <html lang="en">
 <head>
-<title>RedirectFlow.Scheme (gocardless-pro 1.20.0 API)</title>
+<title>RedirectFlow.Scheme (gocardless-pro 2.0.0 API)</title>
 <link rel="stylesheet" type="text/css" href="../../../stylesheet.css" title="Style">
 </head>
 <body>
 <script type="text/javascript"><!--
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="RedirectFlow.Scheme (gocardless-pro 1.20.0 API)";
+        parent.document.title="RedirectFlow.Scheme (gocardless-pro 2.0.0 API)";
     }
 //-->
 </script>
@@ -132,9 +132,6 @@ extends <a href="http://docs.oracle.com/javase/7/docs/api/java/lang/Enum.html?is
 <td class="colOne"><code><strong><a href="../../../com/gocardless/resources/RedirectFlow.Scheme.html#BACS">BACS</a></strong></code>&nbsp;</td>
 </tr>
 <tr class="altColor">
-<td class="colOne"><code><strong><a href="../../../com/gocardless/resources/RedirectFlow.Scheme.html#SEPA_COR1">SEPA_COR1</a></strong></code>&nbsp;</td>
-</tr>
-<tr class="rowColor">
 <td class="colOne"><code><strong><a href="../../../com/gocardless/resources/RedirectFlow.Scheme.html#SEPA_CORE">SEPA_CORE</a></strong></code>&nbsp;</td>
 </tr>
 </table>
@@ -200,7 +197,8 @@ the order they are declared.</div>
 <ul class="blockList">
 <li class="blockList">
 <h4>AUTOGIRO</h4>
-<pre>public static final&nbsp;<a href="../../../com/gocardless/resources/RedirectFlow.Scheme.html" title="enum in com.gocardless.resources">RedirectFlow.Scheme</a> AUTOGIRO</pre>
+<pre>@SerializedName(value="autogiro")
+public static final&nbsp;<a href="../../../com/gocardless/resources/RedirectFlow.Scheme.html" title="enum in com.gocardless.resources">RedirectFlow.Scheme</a> AUTOGIRO</pre>
 </li>
 </ul>
 <a name="BACS">
@@ -209,25 +207,18 @@ the order they are declared.</div>
 <ul class="blockList">
 <li class="blockList">
 <h4>BACS</h4>
-<pre>public static final&nbsp;<a href="../../../com/gocardless/resources/RedirectFlow.Scheme.html" title="enum in com.gocardless.resources">RedirectFlow.Scheme</a> BACS</pre>
+<pre>@SerializedName(value="bacs")
+public static final&nbsp;<a href="../../../com/gocardless/resources/RedirectFlow.Scheme.html" title="enum in com.gocardless.resources">RedirectFlow.Scheme</a> BACS</pre>
 </li>
 </ul>
 <a name="SEPA_CORE">
 <!--   -->
 </a>
-<ul class="blockList">
-<li class="blockList">
-<h4>SEPA_CORE</h4>
-<pre>public static final&nbsp;<a href="../../../com/gocardless/resources/RedirectFlow.Scheme.html" title="enum in com.gocardless.resources">RedirectFlow.Scheme</a> SEPA_CORE</pre>
-</li>
-</ul>
-<a name="SEPA_COR1">
-<!--   -->
-</a>
 <ul class="blockListLast">
 <li class="blockList">
-<h4>SEPA_COR1</h4>
-<pre>public static final&nbsp;<a href="../../../com/gocardless/resources/RedirectFlow.Scheme.html" title="enum in com.gocardless.resources">RedirectFlow.Scheme</a> SEPA_COR1</pre>
+<h4>SEPA_CORE</h4>
+<pre>@SerializedName(value="sepa_core")
+public static final&nbsp;<a href="../../../com/gocardless/resources/RedirectFlow.Scheme.html" title="enum in com.gocardless.resources">RedirectFlow.Scheme</a> SEPA_CORE</pre>
 </li>
 </ul>
 </li>

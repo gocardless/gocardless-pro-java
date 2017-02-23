@@ -2,13 +2,13 @@
 <!-- NewPage -->
 <html lang="en">
 <head>
-<title>Event.Links (gocardless-pro 1.20.0 API)</title>
+<title>Event.Links (gocardless-pro 2.0.0 API)</title>
 <link rel="stylesheet" type="text/css" href="../../../stylesheet.css" title="Style">
 </head>
 <body>
 <script type="text/javascript"><!--
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="Event.Links (gocardless-pro 1.20.0 API)";
+        parent.document.title="Event.Links (gocardless-pro 2.0.0 API)";
     }
 //-->
 </script>
@@ -131,41 +131,47 @@ extends <a href="http://docs.oracle.com/javase/7/docs/api/java/lang/Object.html?
 </tr>
 <tr class="altColor">
 <td class="colFirst"><code><a href="http://docs.oracle.com/javase/7/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</a></code></td>
-<td class="colLast"><code><strong><a href="../../../com/gocardless/resources/Event.Links.html#getOrganisation()">getOrganisation</a></strong>()</code>
-<div class="block">If the event is included in a <a href="#webhooks-overview">webhook</a> to an (OAuth app)[#guides-oauth], this is the ID of the account to which it belongs.</div>
+<td class="colLast"><code><strong><a href="../../../com/gocardless/resources/Event.Links.html#getNewMandate()">getNewMandate</a></strong>()</code>
+<div class="block">This is only included for mandate replaced events, when it is the ID of the new <a href="#core-endpoints-mandates">mandate</a> that replaces the existing mandate.</div>
 </td>
 </tr>
 <tr class="rowColor">
+<td class="colFirst"><code><a href="http://docs.oracle.com/javase/7/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</a></code></td>
+<td class="colLast"><code><strong><a href="../../../com/gocardless/resources/Event.Links.html#getOrganisation()">getOrganisation</a></strong>()</code>
+<div class="block">If the event is included in a <a href="#webhooks-overview">webhook</a> to an <a href="#appendix-oauth">OAuth app</a>, this is the ID of the account to which it belongs.</div>
+</td>
+</tr>
+<tr class="altColor">
 <td class="colFirst"><code><a href="http://docs.oracle.com/javase/7/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</a></code></td>
 <td class="colLast"><code><strong><a href="../../../com/gocardless/resources/Event.Links.html#getParentEvent()">getParentEvent</a></strong>()</code>
 <div class="block">If this event was caused by another, this is the ID of the cause.</div>
 </td>
 </tr>
-<tr class="altColor">
+<tr class="rowColor">
 <td class="colFirst"><code><a href="http://docs.oracle.com/javase/7/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</a></code></td>
 <td class="colLast"><code><strong><a href="../../../com/gocardless/resources/Event.Links.html#getPayment()">getPayment</a></strong>()</code>
 <div class="block">If <code>resource_type</code> is <code>payments</code>, this is the ID of the <a href="#core-endpoints-payments">payment</a> which has been updated.</div>
 </td>
 </tr>
-<tr class="rowColor">
+<tr class="altColor">
 <td class="colFirst"><code><a href="http://docs.oracle.com/javase/7/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</a></code></td>
 <td class="colLast"><code><strong><a href="../../../com/gocardless/resources/Event.Links.html#getPayout()">getPayout</a></strong>()</code>
 <div class="block">If <code>resource_type</code> is <code>payouts</code>, this is the ID of the <a href="#core-endpoints-payouts">payout</a> which has been updated.</div>
 </td>
 </tr>
-<tr class="altColor">
+<tr class="rowColor">
 <td class="colFirst"><code><a href="http://docs.oracle.com/javase/7/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</a></code></td>
 <td class="colLast"><code><strong><a href="../../../com/gocardless/resources/Event.Links.html#getPreviousCustomerBankAccount()">getPreviousCustomerBankAccount</a></strong>()</code>
 <div class="block">This is only included for mandate transfer events, when it is the ID of the <a href="#core-endpoints-customer-bank-accounts">customer bank account</a> which the mandate is being transferred from.</div>
 </td>
 </tr>
-<tr class="rowColor">
+<tr class="altColor">
 <td class="colFirst"><code><a href="http://docs.oracle.com/javase/7/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</a></code></td>
 <td class="colLast"><code><strong><a href="../../../com/gocardless/resources/Event.Links.html#getRefund()">getRefund</a></strong>()</code>
 <div class="block">If <code>resource_type</code> is <code>refunds</code>, this is the ID of the <a href="#core-endpoints-refunds">refund</a> which has been updated.</div>
 </td>
 </tr>
-<tr class="altColor">
+<tr class="rowColor">
 <td class="colFirst"><code><a href="http://docs.oracle.com/javase/7/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</a></code></td>
 <td class="colLast"><code><strong><a href="../../../com/gocardless/resources/Event.Links.html#getSubscription()">getSubscription</a></strong>()</code>
 <div class="block">If <code>resource_type</code> is <code>subscription</code>, this is the ID of the <a href="#core-endpoints-subscriptions">subscription</a> which has been updated.</div>
@@ -213,6 +219,16 @@ extends <a href="http://docs.oracle.com/javase/7/docs/api/java/lang/Object.html?
 <div class="block"><p>This is only included for mandate transfer events, when it is the ID of the <a href="#core-endpoints-customer-bank-accounts">customer bank account</a> which the mandate is being transferred to.</p></div>
 </li>
 </ul>
+<a name="getNewMandate()">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>getNewMandate</h4>
+<pre>public&nbsp;<a href="http://docs.oracle.com/javase/7/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</a>&nbsp;getNewMandate()</pre>
+<div class="block"><p>This is only included for mandate replaced events, when it is the ID of the new <a href="#core-endpoints-mandates">mandate</a> that replaces the existing mandate.</p></div>
+</li>
+</ul>
 <a name="getOrganisation()">
 <!--   -->
 </a>
@@ -220,7 +236,7 @@ extends <a href="http://docs.oracle.com/javase/7/docs/api/java/lang/Object.html?
 <li class="blockList">
 <h4>getOrganisation</h4>
 <pre>public&nbsp;<a href="http://docs.oracle.com/javase/7/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</a>&nbsp;getOrganisation()</pre>
-<div class="block"><p>If the event is included in a <a href="#webhooks-overview">webhook</a> to an (OAuth app)[#guides-oauth], this is the ID of the account to which it belongs.</p></div>
+<div class="block"><p>If the event is included in a <a href="#webhooks-overview">webhook</a> to an <a href="#appendix-oauth">OAuth app</a>, this is the ID of the account to which it belongs.</p></div>
 </li>
 </ul>
 <a name="getParentEvent()">

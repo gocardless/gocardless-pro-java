@@ -2,13 +2,13 @@
 <!-- NewPage -->
 <html lang="en">
 <head>
-<title>SubscriptionService (gocardless-pro 1.20.0 API)</title>
+<title>SubscriptionService (gocardless-pro 2.0.0 API)</title>
 <link rel="stylesheet" type="text/css" href="../../../stylesheet.css" title="Style">
 </head>
 <body>
 <script type="text/javascript"><!--
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="SubscriptionService (gocardless-pro 1.20.0 API)";
+        parent.document.title="SubscriptionService (gocardless-pro 2.0.0 API)";
     }
 //-->
 </script>
@@ -95,7 +95,12 @@
 <br>
 <pre>public class <span class="strong">SubscriptionService</span>
 extends <a href="http://docs.oracle.com/javase/7/docs/api/java/lang/Object.html?is-external=true" title="class or interface in java.lang">Object</a></pre>
-<div class="block"><p>Service class for working with subscription resources.</p><p>Subscriptions create <a href="#core-endpoints-payments">payments</a> according to a schedule.</p><p>#### Recurrence Rules</p><p>The following rules apply when specifying recurrence: - The first payment must be charged within 1 year. - When neither <code>month</code> nor <code>day_of_month</code> are present, the subscription will recur from the <code>start_date</code> based on the <code>interval_unit</code>. - If <code>month</code> or <code>day_of_month</code> are present, the recurrence rules will be applied from the <code>start_date</code>, and the following validations apply:</p>
+<div class="block"><p>Service class for working with subscription resources.</p><p>Subscriptions create <a href="#core-endpoints-payments">payments</a> according to a schedule.</p><p>### Recurrence Rules</p><p>The following rules apply when specifying recurrence:</p>
+<ul>
+  <li>The first payment must be charged within 1 year.</li>
+  <li>When neither <code>month</code> nor <code>day_of_month</code> are present, the subscription will recur from the <code>start_date</code> based on the <code>interval_unit</code>.</li>
+  <li>If <code>month</code> or <code>day_of_month</code> are present, the recurrence rules will be applied from the <code>start_date</code>, and the following validations apply:</li>
+</ul>
 <table>
   <thead>
     <tr>
@@ -107,7 +112,7 @@ extends <a href="http://docs.oracle.com/javase/7/docs/api/java/lang/Object.html?
       <th align="left">day_of_month </th>
     </tr>
   </thead>
-</table><p>:&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash; | :&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&ndash; | | yearly | optional (required if <code>day_of_month</code> provided) | optional (required if <code>month</code> provided) | | monthly | invalid | required<br/> | | weekly | invalid | invalid |</p><p>Examples:</p><p>| interval_unit | interval | month | day_of_month | valid? | | :&mdash;&mdash;&mdash;&mdash;&ndash; | :&mdash;&mdash;&mdash; | :&mdash;&mdash; | :&mdash;&mdash;&mdash;&mdash;- | :&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;- | | yearly | 1 | january | -1 | valid | | yearly | 1<br/> | march | | invalid - missing <code>day_of_month</code> | | monthly  | 6 | | 12 | valid<br/> | | monthly | 6 | august | 12 | invalid - <code>month</code> must be blank<br/> | | weekly | 2 | | | valid<br/> | | weekly | 2 | october | 10 | invalid - <code>month</code> and <code>day_of_month</code> must be blank |</p><h4>Rolling dates</h4><p>When a charge date falls on a non-business day, one of two things will happen:</p>
+</table><p>:&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash; | :&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&ndash; | | yearly | optional (required if <code>day_of_month</code> provided) | optional (required if <code>month</code> provided) | | monthly | invalid | required<br/> | | weekly | invalid | invalid |</p><p>Examples:</p><p>| interval_unit | interval | month | day_of_month | valid? | | :&mdash;&mdash;&mdash;&mdash;&ndash; | :&mdash;&mdash;&mdash; | :&mdash;&mdash; | :&mdash;&mdash;&mdash;&mdash;- | :&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;- | | yearly | 1 | january | -1 | valid | | yearly | 1<br/> | march | | invalid - missing <code>day_of_month</code> | | monthly  | 6 | | 12 | valid<br/> | | monthly | 6 | august | 12 | invalid - <code>month</code> must be blank<br/> | | weekly | 2 | | | valid<br/> | | weekly | 2 | october | 10 | invalid - <code>month</code> and <code>day_of_month</code> must be blank |</p><h3>Rolling dates</h3><p>When a charge date falls on a non-business day, one of two things will happen:</p>
 <ul>
   <li>if the recurrence rule specified <code>-1</code> as the <code>day_of_month</code>, the charge date will be rolled <strong>backwards</strong> to the previous business day (i.e., the last working day of the month).</li>
   <li>otherwise the charge date will be rolled <strong>forwards</strong> to the next business day.</li>
@@ -219,7 +224,7 @@ extends <a href="http://docs.oracle.com/javase/7/docs/api/java/lang/Object.html?
 <tr class="altColor">
 <td class="colFirst"><code><a href="../../../com/gocardless/services/SubscriptionService.SubscriptionListRequest.html" title="class in com.gocardless.services">SubscriptionService.SubscriptionListRequest</a>&lt;<a href="../../../com/gocardless/http/ListResponse.html" title="class in com.gocardless.http">ListResponse</a>&lt;<a href="../../../com/gocardless/resources/Subscription.html" title="class in com.gocardless.resources">Subscription</a>&gt;&gt;</code></td>
 <td class="colLast"><code><strong><a href="../../../com/gocardless/services/SubscriptionService.html#list()">list</a></strong>()</code>
-<div class="block">Returns a <a href="#overview-cursor-pagination">cursor-paginated</a> list of your subscriptions.</div>
+<div class="block">Returns a <a href="#api-usage-cursor-pagination">cursor-paginated</a> list of your subscriptions.</div>
 </td>
 </tr>
 <tr class="rowColor">
@@ -285,7 +290,7 @@ extends <a href="http://docs.oracle.com/javase/7/docs/api/java/lang/Object.html?
 <li class="blockList">
 <h4>list</h4>
 <pre>public&nbsp;<a href="../../../com/gocardless/services/SubscriptionService.SubscriptionListRequest.html" title="class in com.gocardless.services">SubscriptionService.SubscriptionListRequest</a>&lt;<a href="../../../com/gocardless/http/ListResponse.html" title="class in com.gocardless.http">ListResponse</a>&lt;<a href="../../../com/gocardless/resources/Subscription.html" title="class in com.gocardless.resources">Subscription</a>&gt;&gt;&nbsp;list()</pre>
-<div class="block"><p>Returns a <a href="#overview-cursor-pagination">cursor-paginated</a> list of your subscriptions.</p></div>
+<div class="block"><p>Returns a <a href="#api-usage-cursor-pagination">cursor-paginated</a> list of your subscriptions.</p></div>
 </li>
 </ul>
 <a name="all()">

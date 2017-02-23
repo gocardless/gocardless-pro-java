@@ -2,13 +2,13 @@
 <!-- NewPage -->
 <html lang="en">
 <head>
-<title>Creditor (gocardless-pro 1.20.0 API)</title>
+<title>Creditor (gocardless-pro 2.0.0 API)</title>
 <link rel="stylesheet" type="text/css" href="../../../stylesheet.css" title="Style">
 </head>
 <body>
 <script type="text/javascript"><!--
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="Creditor (gocardless-pro 1.20.0 API)";
+        parent.document.title="Creditor (gocardless-pro 2.0.0 API)";
     }
 //-->
 </script>
@@ -118,6 +118,10 @@ extends <a href="http://docs.oracle.com/javase/7/docs/api/java/lang/Object.html?
 <td class="colFirst"><code>static class&nbsp;</code></td>
 <td class="colLast"><code><strong><a href="../../../com/gocardless/resources/Creditor.Links.html" title="class in com.gocardless.resources">Creditor.Links</a></strong></code>&nbsp;</td>
 </tr>
+<tr class="rowColor">
+<td class="colFirst"><code>static class&nbsp;</code></td>
+<td class="colLast"><code><strong><a href="../../../com/gocardless/resources/Creditor.SchemeIdentifier.html" title="class in com.gocardless.resources">Creditor.SchemeIdentifier</a></strong></code>&nbsp;</td>
+</tr>
 </table>
 </li>
 </ul>
@@ -166,7 +170,7 @@ extends <a href="http://docs.oracle.com/javase/7/docs/api/java/lang/Object.html?
 <tr class="rowColor">
 <td class="colFirst"><code><a href="http://docs.oracle.com/javase/7/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</a></code></td>
 <td class="colLast"><code><strong><a href="../../../com/gocardless/resources/Creditor.html#getCreatedAt()">getCreatedAt</a></strong>()</code>
-<div class="block">Fixed <a href="#overview-time-zones-dates">timestamp</a>, recording when this resource was created.</div>
+<div class="block">Fixed <a href="#api-usage-time-zones--dates">timestamp</a>, recording when this resource was created.</div>
 </td>
 </tr>
 <tr class="altColor">
@@ -181,20 +185,32 @@ extends <a href="http://docs.oracle.com/javase/7/docs/api/java/lang/Object.html?
 </tr>
 <tr class="altColor">
 <td class="colFirst"><code><a href="http://docs.oracle.com/javase/7/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</a></code></td>
+<td class="colLast"><code><strong><a href="../../../com/gocardless/resources/Creditor.html#getLogoUrl()">getLogoUrl</a></strong>()</code>
+<div class="block">URL for the creditor&rsquo;s logo, which may be shown on their payment pages.</div>
+</td>
+</tr>
+<tr class="rowColor">
+<td class="colFirst"><code><a href="http://docs.oracle.com/javase/7/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</a></code></td>
 <td class="colLast"><code><strong><a href="../../../com/gocardless/resources/Creditor.html#getName()">getName</a></strong>()</code>
 <div class="block">The creditor&rsquo;s name.</div>
 </td>
 </tr>
-<tr class="rowColor">
+<tr class="altColor">
 <td class="colFirst"><code><a href="http://docs.oracle.com/javase/7/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</a></code></td>
 <td class="colLast"><code><strong><a href="../../../com/gocardless/resources/Creditor.html#getPostalCode()">getPostalCode</a></strong>()</code>
 <div class="block">The creditor&rsquo;s postal code.</div>
 </td>
 </tr>
-<tr class="altColor">
+<tr class="rowColor">
 <td class="colFirst"><code><a href="http://docs.oracle.com/javase/7/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</a></code></td>
 <td class="colLast"><code><strong><a href="../../../com/gocardless/resources/Creditor.html#getRegion()">getRegion</a></strong>()</code>
 <div class="block">The creditor&rsquo;s address region, county or department.</div>
+</td>
+</tr>
+<tr class="altColor">
+<td class="colFirst"><code><a href="http://docs.oracle.com/javase/7/docs/api/java/util/List.html?is-external=true" title="class or interface in java.util">List</a>&lt;<a href="../../../com/gocardless/resources/Creditor.SchemeIdentifier.html" title="class in com.gocardless.resources">Creditor.SchemeIdentifier</a>&gt;</code></td>
+<td class="colLast"><code><strong><a href="../../../com/gocardless/resources/Creditor.html#getSchemeIdentifiers()">getSchemeIdentifiers</a></strong>()</code>
+<div class="block">An array of the scheme identifiers this creditor can create mandates against.</div>
 </td>
 </tr>
 </table>
@@ -276,7 +292,7 @@ extends <a href="http://docs.oracle.com/javase/7/docs/api/java/lang/Object.html?
 <li class="blockList">
 <h4>getCreatedAt</h4>
 <pre>public&nbsp;<a href="http://docs.oracle.com/javase/7/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</a>&nbsp;getCreatedAt()</pre>
-<div class="block"><p>Fixed <a href="#overview-time-zones-dates">timestamp</a>, recording when this resource was created.</p></div>
+<div class="block"><p>Fixed <a href="#api-usage-time-zones--dates">timestamp</a>, recording when this resource was created.</p></div>
 </li>
 </ul>
 <a name="getId()">
@@ -296,6 +312,16 @@ extends <a href="http://docs.oracle.com/javase/7/docs/api/java/lang/Object.html?
 <li class="blockList">
 <h4>getLinks</h4>
 <pre>public&nbsp;<a href="../../../com/gocardless/resources/Creditor.Links.html" title="class in com.gocardless.resources">Creditor.Links</a>&nbsp;getLinks()</pre>
+</li>
+</ul>
+<a name="getLogoUrl()">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>getLogoUrl</h4>
+<pre>public&nbsp;<a href="http://docs.oracle.com/javase/7/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</a>&nbsp;getLogoUrl()</pre>
+<div class="block"><p>URL for the creditor&rsquo;s logo, which may be shown on their payment pages.</p></div>
 </li>
 </ul>
 <a name="getName()">
@@ -321,11 +347,21 @@ extends <a href="http://docs.oracle.com/javase/7/docs/api/java/lang/Object.html?
 <a name="getRegion()">
 <!--   -->
 </a>
-<ul class="blockListLast">
+<ul class="blockList">
 <li class="blockList">
 <h4>getRegion</h4>
 <pre>public&nbsp;<a href="http://docs.oracle.com/javase/7/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</a>&nbsp;getRegion()</pre>
 <div class="block"><p>The creditor&rsquo;s address region, county or department.</p></div>
+</li>
+</ul>
+<a name="getSchemeIdentifiers()">
+<!--   -->
+</a>
+<ul class="blockListLast">
+<li class="blockList">
+<h4>getSchemeIdentifiers</h4>
+<pre>public&nbsp;<a href="http://docs.oracle.com/javase/7/docs/api/java/util/List.html?is-external=true" title="class or interface in java.util">List</a>&lt;<a href="../../../com/gocardless/resources/Creditor.SchemeIdentifier.html" title="class in com.gocardless.resources">Creditor.SchemeIdentifier</a>&gt;&nbsp;getSchemeIdentifiers()</pre>
+<div class="block"><p>An array of the scheme identifiers this creditor can create mandates against.</p><p>The support address, <code>phone_number</code> and <code>email</code> fields are for customers to contact the merchant for support purposes. They must be displayed on the payment page, please see our <a href="#appendix-compliance-requirements">compliance requirements</a> for more details.</p></div>
 </li>
 </ul>
 </li>
