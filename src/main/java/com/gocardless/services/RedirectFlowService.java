@@ -92,6 +92,7 @@ public class RedirectFlowService {
     public static final class RedirectFlowCreateRequest extends IdempotentPostRequest<RedirectFlow> {
         private String description;
         private Links links;
+        private PrefillDetails prefillDetails;
         private Scheme scheme;
         private String sessionToken;
         private String successRedirectUrl;
@@ -120,6 +121,23 @@ public class RedirectFlowService {
                 links = new Links();
             }
             links.withCreditor(creditor);
+            return this;
+        }
+
+        public RedirectFlowCreateRequest withPrefillDetails(PrefillDetails prefillDetails) {
+            this.prefillDetails = prefillDetails;
+            return this;
+        }
+
+        /**
+         * Information used to prefill the form. It will be stored unvalidated and the customer will be able
+         * to review and amend it before completing the form.
+         */
+        public RedirectFlowCreateRequest withPrefillDetailsCustomer(Customer customer) {
+            if (prefillDetails == null) {
+                prefillDetails = new PrefillDetails();
+            }
+            prefillDetails.withCustomer(customer);
             return this;
         }
 
@@ -207,6 +225,185 @@ public class RedirectFlowService {
              */
             public Links withCreditor(String creditor) {
                 this.creditor = creditor;
+                return this;
+            }
+        }
+
+        public static class Customer {
+            private String addressLine1;
+            private String addressLine2;
+            private String addressLine3;
+            private String city;
+            private String companyName;
+            private String countryCode;
+            private String email;
+            private String familyName;
+            private String givenName;
+            private String language;
+            private String postalCode;
+            private String region;
+            private String swedishIdentityNumber;
+
+            /**
+             * The first line of the customer's address.
+             */
+            public Customer withAddressLine1(String addressLine1) {
+                this.addressLine1 = addressLine1;
+                return this;
+            }
+
+            /**
+             * The second line of the customer's address.
+             */
+            public Customer withAddressLine2(String addressLine2) {
+                this.addressLine2 = addressLine2;
+                return this;
+            }
+
+            /**
+             * The third line of the customer's address.
+             */
+            public Customer withAddressLine3(String addressLine3) {
+                this.addressLine3 = addressLine3;
+                return this;
+            }
+
+            /**
+             * The city of the customer's address.
+             */
+            public Customer withCity(String city) {
+                this.city = city;
+                return this;
+            }
+
+            /**
+             * Customer's company name.
+             */
+            public Customer withCompanyName(String companyName) {
+                this.companyName = companyName;
+                return this;
+            }
+
+            /**
+             * [ISO 3166-1](http://en.wikipedia.org/wiki/ISO_3166-1_alpha-2#Officially_assigned_code_elements)
+             * alpha-2 code.
+             */
+            public Customer withCountryCode(String countryCode) {
+                this.countryCode = countryCode;
+                return this;
+            }
+
+            /**
+             * Customer's email address.
+             */
+            public Customer withEmail(String email) {
+                this.email = email;
+                return this;
+            }
+
+            /**
+             * Customer's surname.
+             */
+            public Customer withFamilyName(String familyName) {
+                this.familyName = familyName;
+                return this;
+            }
+
+            /**
+             * Customer's first name.
+             */
+            public Customer withGivenName(String givenName) {
+                this.givenName = givenName;
+                return this;
+            }
+
+            /**
+             * [ISO 639-1](http://en.wikipedia.org/wiki/List_of_ISO_639-1_codes) code.
+             */
+            public Customer withLanguage(String language) {
+                this.language = language;
+                return this;
+            }
+
+            /**
+             * The customer's postal code.
+             */
+            public Customer withPostalCode(String postalCode) {
+                this.postalCode = postalCode;
+                return this;
+            }
+
+            /**
+             * The customer's address region, county or department.
+             */
+            public Customer withRegion(String region) {
+                this.region = region;
+                return this;
+            }
+
+            /**
+             * For Swedish customers only. The civic/company number (personnummer, samordningsnummer, or
+             * organisationsnummer) of the customer.
+             */
+            public Customer withSwedishIdentityNumber(String swedishIdentityNumber) {
+                this.swedishIdentityNumber = swedishIdentityNumber;
+                return this;
+            }
+
+            public Map<String, Object> getQueryParams() {
+                ImmutableMap.Builder<String, Object> params = ImmutableMap.builder();
+                if (addressLine1 != null) {
+                    params.put("customer[address_line1]", addressLine1);
+                }
+                if (addressLine2 != null) {
+                    params.put("customer[address_line2]", addressLine2);
+                }
+                if (addressLine3 != null) {
+                    params.put("customer[address_line3]", addressLine3);
+                }
+                if (city != null) {
+                    params.put("customer[city]", city);
+                }
+                if (companyName != null) {
+                    params.put("customer[company_name]", companyName);
+                }
+                if (countryCode != null) {
+                    params.put("customer[country_code]", countryCode);
+                }
+                if (email != null) {
+                    params.put("customer[email]", email);
+                }
+                if (familyName != null) {
+                    params.put("customer[family_name]", familyName);
+                }
+                if (givenName != null) {
+                    params.put("customer[given_name]", givenName);
+                }
+                if (language != null) {
+                    params.put("customer[language]", language);
+                }
+                if (postalCode != null) {
+                    params.put("customer[postal_code]", postalCode);
+                }
+                if (region != null) {
+                    params.put("customer[region]", region);
+                }
+                if (swedishIdentityNumber != null) {
+                    params.put("customer[swedish_identity_number]", swedishIdentityNumber);
+                }
+                return params.build();
+            }
+        }
+
+        public static class PrefillDetails {
+            private Customer customer;
+
+            /**
+             * Information used to prefill the form. It will be stored unvalidated and the customer will be able
+             * to review and amend it before completing the form.
+             */
+            public PrefillDetails withCustomer(Customer customer) {
+                this.customer = customer;
                 return this;
             }
         }
