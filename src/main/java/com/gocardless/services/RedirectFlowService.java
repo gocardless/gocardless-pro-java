@@ -92,6 +92,7 @@ public class RedirectFlowService {
     public static final class RedirectFlowCreateRequest extends IdempotentPostRequest<RedirectFlow> {
         private String description;
         private Links links;
+        private PrefilledCustomer prefilledCustomer;
         private Scheme scheme;
         private String sessionToken;
         private String successRedirectUrl;
@@ -120,6 +121,162 @@ public class RedirectFlowService {
                 links = new Links();
             }
             links.withCreditor(creditor);
+            return this;
+        }
+
+        /**
+         * Information used to prefill the payment page so your customer doesn't have to re-type details you
+         * already hold about them. It will be stored unvalidated and the customer will be able to review and
+         * amend it before completing the form.
+         */
+        public RedirectFlowCreateRequest withPrefilledCustomer(PrefilledCustomer prefilledCustomer) {
+            this.prefilledCustomer = prefilledCustomer;
+            return this;
+        }
+
+        /**
+         * The first line of the customer's address.
+         */
+        public RedirectFlowCreateRequest withPrefilledCustomerAddressLine1(String addressLine1) {
+            if (prefilledCustomer == null) {
+                prefilledCustomer = new PrefilledCustomer();
+            }
+            prefilledCustomer.withAddressLine1(addressLine1);
+            return this;
+        }
+
+        /**
+         * The second line of the customer's address.
+         */
+        public RedirectFlowCreateRequest withPrefilledCustomerAddressLine2(String addressLine2) {
+            if (prefilledCustomer == null) {
+                prefilledCustomer = new PrefilledCustomer();
+            }
+            prefilledCustomer.withAddressLine2(addressLine2);
+            return this;
+        }
+
+        /**
+         * The third line of the customer's address.
+         */
+        public RedirectFlowCreateRequest withPrefilledCustomerAddressLine3(String addressLine3) {
+            if (prefilledCustomer == null) {
+                prefilledCustomer = new PrefilledCustomer();
+            }
+            prefilledCustomer.withAddressLine3(addressLine3);
+            return this;
+        }
+
+        /**
+         * The city of the customer's address.
+         */
+        public RedirectFlowCreateRequest withPrefilledCustomerCity(String city) {
+            if (prefilledCustomer == null) {
+                prefilledCustomer = new PrefilledCustomer();
+            }
+            prefilledCustomer.withCity(city);
+            return this;
+        }
+
+        /**
+         * Customer's company name.
+         */
+        public RedirectFlowCreateRequest withPrefilledCustomerCompanyName(String companyName) {
+            if (prefilledCustomer == null) {
+                prefilledCustomer = new PrefilledCustomer();
+            }
+            prefilledCustomer.withCompanyName(companyName);
+            return this;
+        }
+
+        /**
+         * [ISO 3166-1](http://en.wikipedia.org/wiki/ISO_3166-1_alpha-2#Officially_assigned_code_elements)
+         * alpha-2 code.
+         */
+        public RedirectFlowCreateRequest withPrefilledCustomerCountryCode(String countryCode) {
+            if (prefilledCustomer == null) {
+                prefilledCustomer = new PrefilledCustomer();
+            }
+            prefilledCustomer.withCountryCode(countryCode);
+            return this;
+        }
+
+        /**
+         * Customer's email address.
+         */
+        public RedirectFlowCreateRequest withPrefilledCustomerEmail(String email) {
+            if (prefilledCustomer == null) {
+                prefilledCustomer = new PrefilledCustomer();
+            }
+            prefilledCustomer.withEmail(email);
+            return this;
+        }
+
+        /**
+         * Customer's surname.
+         */
+        public RedirectFlowCreateRequest withPrefilledCustomerFamilyName(String familyName) {
+            if (prefilledCustomer == null) {
+                prefilledCustomer = new PrefilledCustomer();
+            }
+            prefilledCustomer.withFamilyName(familyName);
+            return this;
+        }
+
+        /**
+         * Customer's first name.
+         */
+        public RedirectFlowCreateRequest withPrefilledCustomerGivenName(String givenName) {
+            if (prefilledCustomer == null) {
+                prefilledCustomer = new PrefilledCustomer();
+            }
+            prefilledCustomer.withGivenName(givenName);
+            return this;
+        }
+
+        /**
+         * [ISO 639-1](http://en.wikipedia.org/wiki/List_of_ISO_639-1_codes) code.
+         */
+        public RedirectFlowCreateRequest withPrefilledCustomerLanguage(String language) {
+            if (prefilledCustomer == null) {
+                prefilledCustomer = new PrefilledCustomer();
+            }
+            prefilledCustomer.withLanguage(language);
+            return this;
+        }
+
+        /**
+         * The customer's postal code.
+         */
+        public RedirectFlowCreateRequest withPrefilledCustomerPostalCode(String postalCode) {
+            if (prefilledCustomer == null) {
+                prefilledCustomer = new PrefilledCustomer();
+            }
+            prefilledCustomer.withPostalCode(postalCode);
+            return this;
+        }
+
+        /**
+         * The customer's address region, county or department.
+         */
+        public RedirectFlowCreateRequest withPrefilledCustomerRegion(String region) {
+            if (prefilledCustomer == null) {
+                prefilledCustomer = new PrefilledCustomer();
+            }
+            prefilledCustomer.withRegion(region);
+            return this;
+        }
+
+        /**
+         * For Swedish customers only. The civic/company number (personnummer, samordningsnummer, or
+         * organisationsnummer) of the customer.
+         */
+        public RedirectFlowCreateRequest withPrefilledCustomerSwedishIdentityNumber(
+                String swedishIdentityNumber) {
+            if (prefilledCustomer == null) {
+                prefilledCustomer = new PrefilledCustomer();
+            }
+            prefilledCustomer.withSwedishIdentityNumber(swedishIdentityNumber);
             return this;
         }
 
@@ -207,6 +364,128 @@ public class RedirectFlowService {
              */
             public Links withCreditor(String creditor) {
                 this.creditor = creditor;
+                return this;
+            }
+        }
+
+        public static class PrefilledCustomer {
+            private String addressLine1;
+            private String addressLine2;
+            private String addressLine3;
+            private String city;
+            private String companyName;
+            private String countryCode;
+            private String email;
+            private String familyName;
+            private String givenName;
+            private String language;
+            private String postalCode;
+            private String region;
+            private String swedishIdentityNumber;
+
+            /**
+             * The first line of the customer's address.
+             */
+            public PrefilledCustomer withAddressLine1(String addressLine1) {
+                this.addressLine1 = addressLine1;
+                return this;
+            }
+
+            /**
+             * The second line of the customer's address.
+             */
+            public PrefilledCustomer withAddressLine2(String addressLine2) {
+                this.addressLine2 = addressLine2;
+                return this;
+            }
+
+            /**
+             * The third line of the customer's address.
+             */
+            public PrefilledCustomer withAddressLine3(String addressLine3) {
+                this.addressLine3 = addressLine3;
+                return this;
+            }
+
+            /**
+             * The city of the customer's address.
+             */
+            public PrefilledCustomer withCity(String city) {
+                this.city = city;
+                return this;
+            }
+
+            /**
+             * Customer's company name.
+             */
+            public PrefilledCustomer withCompanyName(String companyName) {
+                this.companyName = companyName;
+                return this;
+            }
+
+            /**
+             * [ISO 3166-1](http://en.wikipedia.org/wiki/ISO_3166-1_alpha-2#Officially_assigned_code_elements)
+             * alpha-2 code.
+             */
+            public PrefilledCustomer withCountryCode(String countryCode) {
+                this.countryCode = countryCode;
+                return this;
+            }
+
+            /**
+             * Customer's email address.
+             */
+            public PrefilledCustomer withEmail(String email) {
+                this.email = email;
+                return this;
+            }
+
+            /**
+             * Customer's surname.
+             */
+            public PrefilledCustomer withFamilyName(String familyName) {
+                this.familyName = familyName;
+                return this;
+            }
+
+            /**
+             * Customer's first name.
+             */
+            public PrefilledCustomer withGivenName(String givenName) {
+                this.givenName = givenName;
+                return this;
+            }
+
+            /**
+             * [ISO 639-1](http://en.wikipedia.org/wiki/List_of_ISO_639-1_codes) code.
+             */
+            public PrefilledCustomer withLanguage(String language) {
+                this.language = language;
+                return this;
+            }
+
+            /**
+             * The customer's postal code.
+             */
+            public PrefilledCustomer withPostalCode(String postalCode) {
+                this.postalCode = postalCode;
+                return this;
+            }
+
+            /**
+             * The customer's address region, county or department.
+             */
+            public PrefilledCustomer withRegion(String region) {
+                this.region = region;
+                return this;
+            }
+
+            /**
+             * For Swedish customers only. The civic/company number (personnummer, samordningsnummer, or
+             * organisationsnummer) of the customer.
+             */
+            public PrefilledCustomer withSwedishIdentityNumber(String swedishIdentityNumber) {
+                this.swedishIdentityNumber = swedishIdentityNumber;
                 return this;
             }
         }
