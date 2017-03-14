@@ -137,6 +137,7 @@ public class SubscriptionService {
      */
     public static final class SubscriptionCreateRequest extends IdempotentPostRequest<Subscription> {
         private Integer amount;
+        private Integer appFee;
         private Integer count;
         private String currency;
         private Integer dayOfMonth;
@@ -155,6 +156,14 @@ public class SubscriptionService {
          */
         public SubscriptionCreateRequest withAmount(Integer amount) {
             this.amount = amount;
+            return this;
+        }
+
+        /**
+         * The amount to be deducted from the payment as the OAuth app's fee, in pence or cents.
+         */
+        public SubscriptionCreateRequest withAppFee(Integer appFee) {
+            this.appFee = appFee;
             return this;
         }
 
