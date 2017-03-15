@@ -21,6 +21,7 @@ public class Payout {
     private Integer deductedFees;
     private String id;
     private Links links;
+    private PayoutType payoutType;
     private String reference;
     private Status status;
 
@@ -89,6 +90,13 @@ public class Payout {
     }
 
     /**
+     * Whether a payout contains merchant revenue or partner fees.
+     */
+    public PayoutType getPayoutType() {
+        return payoutType;
+    }
+
+    /**
      * Reference which appears on the creditor's bank statement.
      */
     public String getReference() {
@@ -112,6 +120,12 @@ public class Payout {
         GBP, @SerializedName("EUR")
         EUR, @SerializedName("SEK")
         SEK,
+    }
+
+    public enum PayoutType {
+        @SerializedName("merchant")
+        MERCHANT, @SerializedName("partner")
+        PARTNER,
     }
 
     public enum Status {
