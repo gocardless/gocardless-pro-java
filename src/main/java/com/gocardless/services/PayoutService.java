@@ -58,6 +58,7 @@ public class PayoutService {
         private String creditor;
         private String creditorBankAccount;
         private Currency currency;
+        private PayoutType payoutType;
         private Status status;
 
         /**
@@ -159,6 +160,14 @@ public class PayoutService {
         }
 
         /**
+         * Whether a payout contains merchant revenue or partner fees.
+         */
+        public PayoutListRequest<S> withPayoutType(PayoutType payoutType) {
+            this.payoutType = payoutType;
+            return this;
+        }
+
+        /**
          * One of:
          * <ul>
          * <li>`pending`: the payout has been created, but not yet sent to the banks</li>
@@ -191,6 +200,9 @@ public class PayoutService {
             if (currency != null) {
                 params.put("currency", currency);
             }
+            if (payoutType != null) {
+                params.put("payout_type", payoutType);
+            }
             if (status != null) {
                 params.put("status", status);
             }
@@ -217,6 +229,16 @@ public class PayoutService {
             GBP, @SerializedName("EUR")
             EUR, @SerializedName("SEK")
             SEK;
+            @Override
+            public String toString() {
+                return name().toLowerCase();
+            }
+        }
+
+        public enum PayoutType {
+            @SerializedName("merchant")
+            MERCHANT, @SerializedName("partner")
+            PARTNER;
             @Override
             public String toString() {
                 return name().toLowerCase();
