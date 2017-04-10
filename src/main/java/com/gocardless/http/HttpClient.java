@@ -36,7 +36,7 @@ public class HttpClient {
     private static final String DISALLOWED_USER_AGENT_CHARACTERS =
             "[^\\w!#$%&'\\*\\+\\-\\.\\^`\\|~]";
     private static final String USER_AGENT = String.format(
-            "gocardless-pro/2.2.0 java/%s %s/%s %s/%s",
+            "gocardless-pro-java/2.2.0 java/%s %s/%s %s/%s",
             cleanUserAgentToken(System.getProperty("java.vm.specification.version")),
             cleanUserAgentToken(System.getProperty("java.vm.name")),
             cleanUserAgentToken(System.getProperty("java.version")),
@@ -48,6 +48,8 @@ public class HttpClient {
     static {
         ImmutableMap.Builder<String, String> builder = ImmutableMap.builder();
         builder.put("GoCardless-Version", "2015-07-06");
+        builder.put("GoCardless-Client-Library", "{{ .Config.client_name }}");
+        builder.put("GoCardless-Client-Version", "{{ .Config.version }}");
         HEADERS = builder.build();
     }
     private final OkHttpClient rawClient;

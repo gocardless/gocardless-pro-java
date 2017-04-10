@@ -103,7 +103,7 @@ uploadArchives {
                 name 'GoCardless Pro Client'
                 packaging 'jar'
                 description 'Client library for accessing the GoCardless Pro API'
-                url 'http://developer.gocardless.com/pro'
+                url 'http://developer.gocardless.com/'
 
                 scm {
                     url 'scm:git@github.com:gocardless/gocardless-pro-java.git'
