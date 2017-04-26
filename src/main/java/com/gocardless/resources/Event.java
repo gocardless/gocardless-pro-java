@@ -96,7 +96,8 @@ public class Event {
         private Scheme scheme;
 
         /**
-         * What triggered the event.
+         * What triggered the event. _Note:_ `cause` is our simplified and predictable key indicating what
+         * triggered the event.
          */
         public String getCause() {
             return cause;
@@ -128,7 +129,8 @@ public class Event {
          * Set when a `bank` is the origin of the event. This is the reason code received in the report from
          * the customer's bank. See the [GoCardless Direct Debit
          * guide](https://gocardless.com/direct-debit/receiving-messages) for information on the meanings of
-         * different reason codes.
+         * different reason codes. _Note:_ `reason_code` is payment scheme-specific and can be inconsistent
+         * between banks.
          */
         public String getReasonCode() {
             return reasonCode;
