@@ -199,7 +199,7 @@ extends <a href="http://docs.oracle.com/javase/7/docs/api/java/lang/Object.html?
 <li class="blockList">
 <h4>getCause</h4>
 <pre>public&nbsp;<a href="http://docs.oracle.com/javase/7/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</a>&nbsp;getCause()</pre>
-<div class="block"><p>What triggered the event.</p></div>
+<div class="block"><p>What triggered the event. <em>Note:</em> <code>cause</code> is our simplified and predictable key indicating what triggered the event.</p></div>
 </li>
 </ul>
 <a name="getDescription()">
@@ -230,7 +230,7 @@ extends <a href="http://docs.oracle.com/javase/7/docs/api/java/lang/Object.html?
 <li class="blockList">
 <h4>getReasonCode</h4>
 <pre>public&nbsp;<a href="http://docs.oracle.com/javase/7/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</a>&nbsp;getReasonCode()</pre>
-<div class="block"><p>Set when a <code>bank</code> is the origin of the event. This is the reason code received in the report from the customer&rsquo;s bank. See the <a href="https://gocardless.com/direct-debit/receiving-messages">GoCardless Direct Debit guide</a> for information on the meanings of different reason codes.</p></div>
+<div class="block"><p>Set when a <code>bank</code> is the origin of the event. This is the reason code received in the report from the customer&rsquo;s bank. See the <a href="https://gocardless.com/direct-debit/receiving-messages">GoCardless Direct Debit guide</a> for information on the meanings of different reason codes. <em>Note:</em> <code>reason_code</code> is payment scheme-specific and can be inconsistent between banks.</p></div>
 </li>
 </ul>
 <a name="getScheme()">
