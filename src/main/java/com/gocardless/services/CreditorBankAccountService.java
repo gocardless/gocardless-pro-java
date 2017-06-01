@@ -150,7 +150,8 @@ public class CreditorBankAccountService {
 
         /**
          * International Bank Account Number. Alternatively you can provide [local
-         * details](#appendix-local-bank-details). IBANs are not accepted for accounts in SEK.
+         * details](#appendix-local-bank-details). IBANs are not accepted for Swedish bank accounts
+         * denominated in SEK - you must supply [local details](#local-bank-details-sweden).
          */
         public CreditorBankAccountCreateRequest withIban(String iban) {
             this.iban = iban;
@@ -336,7 +337,7 @@ public class CreditorBankAccountService {
         }
 
         /**
-         * Get enabled or disabled creditor bank accounts.
+         * Boolean value showing whether the bank account is enabled or disabled
          */
         public CreditorBankAccountListRequest<S> withEnabled(Boolean enabled) {
             this.enabled = enabled;

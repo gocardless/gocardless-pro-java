@@ -33,6 +33,7 @@ public class Creditor {
     private String postalCode;
     private String region;
     private List<SchemeIdentifier> schemeIdentifiers;
+    private VerificationStatus verificationStatus;
 
     /**
      * The first line of the creditor's address.
@@ -126,6 +127,35 @@ public class Creditor {
      */
     public List<SchemeIdentifier> getSchemeIdentifiers() {
         return schemeIdentifiers;
+    }
+
+    /**
+     * The creditor's verification status, indicating whether they can yet receive payouts. For more
+     * details on handling verification as a partner, see our ["Helping your users get verified"
+     * guide](/getting-started/partners/helping-your-users-get-verified/). One of:
+     * <ul>
+     *
+     * <li>`successful`: The creditor's account is fully verified, and they can receive payouts. Once a
+     * creditor has been successfully verified, they may in the future require further verification - for
+     * example, if they change their payout bank account, we will have to check that they own the new
+     * bank account before they can receive payouts again.</li>
+     * <li>`in_review`: The creditor has
+     * provided all of the information currently requested, and it is awaiting review by GoCardless
+     * before they can be verified and receive payouts.</li>
+     * <li>`action_required`: The creditor needs
+     * to provide further information to verify their account so they can receive payouts, and should
+     * visit the verification flow.</li>
+     * </ul>
+     */
+    public VerificationStatus getVerificationStatus() {
+        return verificationStatus;
+    }
+
+    public enum VerificationStatus {
+        @SerializedName("successful")
+        SUCCESSFUL, @SerializedName("in_review")
+        IN_REVIEW, @SerializedName("action_required")
+        ACTION_REQUIRED,
     }
 
     public static class Links {

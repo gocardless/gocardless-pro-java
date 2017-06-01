@@ -183,7 +183,8 @@ public class CustomerBankAccountService {
 
         /**
          * International Bank Account Number. Alternatively you can provide [local
-         * details](#appendix-local-bank-details). IBANs are not accepted for accounts in SEK.
+         * details](#appendix-local-bank-details). IBANs are not accepted for Swedish bank accounts
+         * denominated in SEK - you must supply [local details](#local-bank-details-sweden).
          */
         public CustomerBankAccountCreateRequest withIban(String iban) {
             this.iban = iban;

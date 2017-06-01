@@ -14,6 +14,7 @@ import com.gocardless.services.PaymentService.PaymentCreateRequest;
 import com.google.common.collect.Lists;
 
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Rule;
 import org.junit.Test;
 
@@ -24,6 +25,7 @@ import static com.gocardless.services.SubscriptionService.SubscriptionCreateRequ
 
 import static org.assertj.core.api.Assertions.assertThat;
 
+@Ignore
 public class GoCardlessClientTest {
     private GoCardlessClient client;
     @Rule
