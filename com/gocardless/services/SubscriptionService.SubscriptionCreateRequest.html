@@ -347,7 +347,8 @@ extends <a href="../../../com/gocardless/http/IdempotentPostRequest.html" title=
 <li class="blockList">
 <h4>withEndDate</h4>
 <pre>public&nbsp;<a href="../../../com/gocardless/services/SubscriptionService.SubscriptionCreateRequest.html" title="class in com.gocardless.services">SubscriptionService.SubscriptionCreateRequest</a>&nbsp;withEndDate(<a href="http://docs.oracle.com/javase/7/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</a>&nbsp;endDate)</pre>
-<div class="block"><p>Date on or after which no further payments should be created. If blank, the subscription will continue forever. Alternatively, <code>count</code> can be set to achieve a specific number of payments.</p></div>
+<div class="block"><p>Date on or after which no further payments should be created. If this field is blank and <code>count</code> is not specified, the subscription will continue forever. <p
+class='deprecated-notice'><strong>Deprecated</strong>: This field will be removed in a future API version. Use <code>count</code> to specify a number of payments instead. </p></p></div>
 </li>
 </ul>
 <a name="withInterval(java.lang.Integer)">

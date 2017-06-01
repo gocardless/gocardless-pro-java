@@ -234,6 +234,8 @@
 <dd>&nbsp;</dd>
 <dt><a href="./com/gocardless/resources/Creditor.SchemeIdentifier.Scheme.html" title="enum in com.gocardless.resources"><span class="strong">Creditor.SchemeIdentifier.Scheme</span></a> - Enum in <a href="./com/gocardless/resources/package-summary.html">com.gocardless.resources</a></dt>
 <dd>&nbsp;</dd>
+<dt><a href="./com/gocardless/resources/Creditor.VerificationStatus.html" title="enum in com.gocardless.resources"><span class="strong">Creditor.VerificationStatus</span></a> - Enum in <a href="./com/gocardless/resources/package-summary.html">com.gocardless.resources</a></dt>
+<dd>&nbsp;</dd>
 <dt><a href="./com/gocardless/resources/CreditorBankAccount.html" title="class in com.gocardless.resources"><span class="strong">CreditorBankAccount</span></a> - Class in <a href="./com/gocardless/resources/package-summary.html">com.gocardless.resources</a></dt>
 <dd>
 <div class="block">Represents a creditor bank account resource returned from the API.</div>
@@ -1314,6 +1316,10 @@
 <dd>
 <div class="block">The URL at which this mandate PDF can be viewed until it expires at the date and time specified by <code>expires_at</code>.</div>
 </dd>
+<dt><span class="strong"><a href="./com/gocardless/resources/Creditor.html#getVerificationStatus()">getVerificationStatus()</a></span> - Method in class com.gocardless.resources.<a href="./com/gocardless/resources/Creditor.html" title="class in com.gocardless.resources">Creditor</a></dt>
+<dd>
+<div class="block">The creditor&rsquo;s verification status, indicating whether they can yet receive payouts.</div>
+</dd>
 <dt><a href="./com/gocardless/errors/GoCardlessApiException.html" title="class in com.gocardless.errors"><span class="strong">GoCardlessApiException</span></a> - Exception in <a href="./com/gocardless/errors/package-summary.html">com.gocardless.errors</a></dt>
 <dd>
 <div class="block">Base class for exceptions that are thrown as a result of error responses from the API.</div>
@@ -1908,6 +1914,10 @@
 <dd>
 <div class="block">Returns the enum constant of this type with the specified name.</div>
 </dd>
+<dt><span class="strong"><a href="./com/gocardless/resources/Creditor.VerificationStatus.html#valueOf(java.lang.String)">valueOf(String)</a></span> - Static method in enum com.gocardless.resources.<a href="./com/gocardless/resources/Creditor.VerificationStatus.html" title="enum in com.gocardless.resources">Creditor.VerificationStatus</a></dt>
+<dd>
+<div class="block">Returns the enum constant of this type with the specified name.</div>
+</dd>
 <dt><span class="strong"><a href="./com/gocardless/resources/Event.Details.Origin.html#valueOf(java.lang.String)">valueOf(String)</a></span> - Static method in enum com.gocardless.resources.<a href="./com/gocardless/resources/Event.Details.Origin.html" title="enum in com.gocardless.resources">Event.Details.Origin</a></dt>
 <dd>
 <div class="block">Returns the enum constant of this type with the specified name.</div>
@@ -2029,6 +2039,11 @@ the order they are declared.</div>
 the order they are declared.</div>
 </dd>
 <dt><span class="strong"><a href="./com/gocardless/resources/Creditor.SchemeIdentifier.Scheme.html#values()">values()</a></span> - Static method in enum com.gocardless.resources.<a href="./com/gocardless/resources/Creditor.SchemeIdentifier.Scheme.html" title="enum in com.gocardless.resources">Creditor.SchemeIdentifier.Scheme</a></dt>
+<dd>
+<div class="block">Returns an array containing the constants of this enum type, in
+the order they are declared.</div>
+</dd>
+<dt><span class="strong"><a href="./com/gocardless/resources/Creditor.VerificationStatus.html#values()">values()</a></span> - Static method in enum com.gocardless.resources.<a href="./com/gocardless/resources/Creditor.VerificationStatus.html" title="enum in com.gocardless.resources">Creditor.VerificationStatus</a></dt>
 <dd>
 <div class="block">Returns an array containing the constants of this enum type, in
 the order they are declared.</div>
@@ -2774,7 +2789,7 @@ the order they are declared.</div>
 </dd>
 <dt><span class="strong"><a href="./com/gocardless/services/CreditorBankAccountService.CreditorBankAccountListRequest.html#withEnabled(java.lang.Boolean)">withEnabled(Boolean)</a></span> - Method in class com.gocardless.services.<a href="./com/gocardless/services/CreditorBankAccountService.CreditorBankAccountListRequest.html" title="class in com.gocardless.services">CreditorBankAccountService.CreditorBankAccountListRequest</a></dt>
 <dd>
-<div class="block">Get enabled or disabled creditor bank accounts.</div>
+<div class="block">Boolean value showing whether the bank account is enabled or disabled</div>
 </dd>
 <dt><span class="strong"><a href="./com/gocardless/services/CustomerBankAccountService.CustomerBankAccountListRequest.html#withEnabled(java.lang.Boolean)">withEnabled(Boolean)</a></span> - Method in class com.gocardless.services.<a href="./com/gocardless/services/CustomerBankAccountService.CustomerBankAccountListRequest.html" title="class in com.gocardless.services">CustomerBankAccountService.CustomerBankAccountListRequest</a></dt>
 <dd>
