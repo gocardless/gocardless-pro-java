@@ -1,0 +1,12 @@
+{
+    "payments": {
+        "amount": 2000,
+        "currency": "GBP",
+        "links": {
+            "mandate": "MD00001PEYCSQF"
+        },
+        "metadata": {
+            "foo": "bar"
+        }
+    }
+}

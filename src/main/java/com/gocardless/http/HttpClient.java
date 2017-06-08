@@ -11,7 +11,6 @@ import com.github.rholder.retry.*;
 import com.gocardless.GoCardlessException;
 import com.gocardless.errors.GoCardlessInternalException;
 
-import com.google.common.annotations.VisibleForTesting;
 import com.google.common.base.Throwables;
 import com.google.common.collect.ImmutableMap;
 import com.google.gson.Gson;
@@ -175,10 +174,5 @@ public class HttpClient {
 
     private static String cleanUserAgentToken(String s) {
         return s.replaceAll(DISALLOWED_USER_AGENT_CHARACTERS, "_");
-    }
-
-    @VisibleForTesting
-    OkHttpClient getRawClient() {
-        return rawClient;
     }
 }

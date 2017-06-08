@@ -2,55 +2,50 @@ package com.gocardless;
 
 import java.util.List;
 
-import co.freeside.betamax.Betamax;
-import co.freeside.betamax.Recorder;
-
 import com.gocardless.http.ApiResponse;
-import com.gocardless.http.HttpTestUtil;
 import com.gocardless.http.ListResponse;
+import com.gocardless.http.MockHttp;
 import com.gocardless.resources.*;
 import com.gocardless.services.PaymentService.PaymentCreateRequest;
 
+import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.Lists;
 
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Rule;
 import org.junit.Test;
 
-import static com.gocardless.GoCardlessClient.Environment.SANDBOX;
 import static com.gocardless.services.MandateService.MandateListRequest.Status.ACTIVE;
 import static com.gocardless.services.MandateService.MandateListRequest.Status.FAILED;
 import static com.gocardless.services.SubscriptionService.SubscriptionCreateRequest.IntervalUnit.MONTHLY;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-@Ignore
 public class GoCardlessClientTest {
+    private static final String ACCESS_TOKEN = "access-token";
     private GoCardlessClient client;
     @Rule
-    public final Recorder recorder = new Recorder();
+    public final MockHttp http = new MockHttp();
 
     @Before
     public void setUp() throws Exception {
-        recorder.setSslSupport(true);
-        String accessToken = System.getenv("GC_ACCESS_TOKEN");
-        client = GoCardlessClient.create(accessToken, SANDBOX);
-        HttpTestUtil.disableSslCertificateChecking(client);
+        client = GoCardlessClient.create(ACCESS_TOKEN, http.getBaseUrl());
     }
 
     @Test
-    @Betamax(tape = "get a customer")
-    public void shouldGetACustomer() {
+    public void shouldGetACustomer() throws Exception {
+        http.enqueueResponse(200, "fixtures/client/get_a_customer.json");
         Customer customer = client.customers().get("CU00003068FG73").execute();
         assertThat(customer.getId()).isEqualTo("CU00003068FG73");
         assertThat(customer.getFamilyName()).isEqualTo("Osborne");
         assertThat(customer.getGivenName()).isEqualTo("Frank");
+        http.assertRequestMade("GET", "/customers/CU00003068FG73");
     }
 
     @Test
-    @Betamax(tape = "get a customer wrapped")
-    public void shouldGetACustomerWrapped() {
+    public void shouldGetACustomerWrapped() throws Exception {
+        http.enqueueResponse(200, "fixtures/client/get_a_customer.json",
+                ImmutableMap.of("RateLimit-Limit", "1000"));
         ApiResponse<Customer> response = client.customers().get("CU00003068FG73").executeWrapped();
         assertThat(response.getStatusCode()).isEqualTo(200);
         assertThat(response.getHeaders().get("RateLimit-Limit")).containsExactly("1000");
@@ -58,11 +53,12 @@ public class GoCardlessClientTest {
         assertThat(customer.getId()).isEqualTo("CU00003068FG73");
         assertThat(customer.getFamilyName()).isEqualTo("Osborne");
         assertThat(customer.getGivenName()).isEqualTo("Frank");
+        http.assertRequestMade("GET", "/customers/CU00003068FG73");
     }
 
     @Test
-    @Betamax(tape = "list customers")
-    public void shouldListCustomers() {
+    public void shouldListCustomers() throws Exception {
+        http.enqueueResponse(200, "fixtures/client/list_customers.json");
         List<Customer> customers = client.customers().list().execute().getItems();
         assertThat(customers).hasSize(2);
         assertThat(customers.get(0).getId()).isEqualTo("CU00003068FG73");
@@ -71,11 +67,12 @@ public class GoCardlessClientTest {
         assertThat(customers.get(1).getId()).isEqualTo("CU0000302M1J1J");
         assertThat(customers.get(1).getFamilyName()).isEqualTo("Osborne");
         assertThat(customers.get(1).getGivenName()).isEqualTo("Sarah");
+        http.assertRequestMade("GET", "/customers");
     }
 
     @Test
-    @Betamax(tape = "list mandates for a customer")
-    public void shouldListMandatesForACustomer() {
+    public void shouldListMandatesForACustomer() throws Exception {
+        http.enqueueResponse(200, "fixtures/client/list_mandates_for_a_customer.json");
         List<Mandate> mandates =
                 client.mandates().list().withCustomer("CU00003068FG73").execute().getItems();
         assertThat(mandates).hasSize(2);
@@ -83,21 +80,23 @@ public class GoCardlessClientTest {
         assertThat(mandates.get(0).getLinks().getCreditor()).isEqualTo("CR000035EME9H5");
         assertThat(mandates.get(1).getId()).isEqualTo("MD00001P57AN84");
         assertThat(mandates.get(1).getLinks().getCreditor()).isEqualTo("CR000035EME9H5");
+        http.assertRequestMade("GET", "/mandates?customer=CU00003068FG73");
     }
 
     @Test
-    @Betamax(tape = "list mandates by customer and status")
-    public void shouldListMandatesByCustomerAndStatus() {
+    public void shouldListMandatesByCustomerAndStatus() throws Exception {
+        http.enqueueResponse(200, "fixtures/client/list_mandates_by_customer_and_status.json");
         List<Mandate> mandates =
                 client.mandates().list().withCustomer("CU00003068FG73").withStatus(ACTIVE)
                         .withStatus(FAILED).execute().getItems();
         assertThat(mandates).hasSize(1);
         assertThat(mandates.get(0).getId()).isEqualTo("MD00001PEYCSQF");
+        http.assertRequestMade("GET", "/mandates?customer=CU00003068FG73&status=active,failed");
     }
 
     @Test
-    @Betamax(tape = "create and update a customer")
-    public void shouldCreateAndUpdateCustomer() {
+    public void shouldCreateACustomer() throws Exception {
+        http.enqueueResponse(201, "fixtures/client/create_a_customer_response.json");
         Customer customer =
                 client.customers().create().withFamilyName("Osborne").withGivenName("Sharon")
                         .withAddressLine1("27 Acer Road").withAddressLine2("Apt 2")
@@ -106,26 +105,36 @@ public class GoCardlessClientTest {
         assertThat(customer.getId()).isNotNull();
         assertThat(customer.getFamilyName()).isEqualTo("Osborne");
         assertThat(customer.getGivenName()).isEqualTo("Sharon");
-        Customer updatedCustomer =
-                client.customers().update(customer.getId()).withGivenName("Ozzy").execute();
-        assertThat(updatedCustomer.getId()).isEqualTo(customer.getId());
-        assertThat(updatedCustomer.getFamilyName()).isEqualTo("Osborne");
-        assertThat(updatedCustomer.getGivenName()).isEqualTo("Ozzy");
+        http.assertRequestMade("POST", "/customers",
+                "fixtures/client/create_a_customer_request.json");
     }
 
     @Test
-    @Betamax(tape = "get customers created after")
-    public void shouldGetCustomersCreatedAfter() {
+    public void shouldUpdateACustomer() throws Exception {
+        http.enqueueResponse(200, "fixtures/client/update_a_customer_response.json");
+        Customer customer =
+                client.customers().update("CU000031FFQ5H3").withGivenName("Ozzy").execute();
+        assertThat(customer.getId()).isEqualTo("CU000031FFQ5H3");
+        assertThat(customer.getFamilyName()).isEqualTo("Osborne");
+        assertThat(customer.getGivenName()).isEqualTo("Ozzy");
+        http.assertRequestMade("PUT", "/customers/CU000031FFQ5H3",
+                "fixtures/client/update_a_customer_request.json");
+    }
+
+    @Test
+    public void shouldGetCustomersCreatedAfter() throws Exception {
+        http.enqueueResponse(200, "fixtures/client/get_customers_created_after.json");
         List<Customer> result =
                 client.customers().list().withCreatedAtGte("2015-04-13T15:02:40Z").execute()
                         .getItems();
         assertThat(result.size()).isEqualTo(1);
         assertThat(result.get(0).getId()).isEqualTo("CU0000321DW2ZH");
+        http.assertRequestMade("GET", "/customers?created_at[gte]=2015-04-13T15:02:40Z");
     }
 
     @Test
-    @Betamax(tape = "create a payment")
-    public void shouldCreateAPayment() {
+    public void shouldCreateAPayment() throws Exception {
+        http.enqueueResponse(201, "fixtures/client/create_a_payment_response.json");
         Payment payment =
                 client.payments().create().withAmount(2000)
                         .withCurrency(PaymentCreateRequest.Currency.GBP).withMetadata("foo", "bar")
@@ -135,11 +144,12 @@ public class GoCardlessClientTest {
         assertThat(payment.getCurrency()).isEqualTo(Payment.Currency.GBP);
         assertThat(payment.getMetadata()).hasSize(1).containsEntry("foo", "bar");
         assertThat(payment.getLinks().getMandate()).isEqualTo("MD00001PEYCSQF");
+        http.assertRequestMade("POST", "/payments", "fixtures/client/create_a_payment_request.json");
     }
 
     @Test
-    @Betamax(tape = "page through mandates")
-    public void shouldPageThroughMandates() {
+    public void shouldPageThroughMandates() throws Exception {
+        http.enqueueResponse(200, "fixtures/client/list_mandates_page_1.json");
         ListResponse<Mandate> page1 = client.mandates().list().withLimit(2).execute();
         assertThat(page1.getItems()).hasSize(2);
         assertThat(page1.getItems().get(0).getId()).isEqualTo("MD00001PEYCSQF");
@@ -147,6 +157,8 @@ public class GoCardlessClientTest {
         assertThat(page1.getBefore()).isNull();
         assertThat(page1.getAfter()).isNotNull();
         assertThat(page1.getLimit()).isEqualTo(2);
+        http.assertRequestMade("GET", "/mandates?limit=2");
+        http.enqueueResponse(200, "fixtures/client/list_mandates_page_2.json");
         ListResponse<Mandate> page2 =
                 client.mandates().list().withLimit(2).withAfter(page1.getAfter()).execute();
         assertThat(page2.getItems()).hasSize(1);
@@ -154,43 +166,52 @@ public class GoCardlessClientTest {
         assertThat(page2.getBefore()).isNotNull();
         assertThat(page2.getAfter()).isNull();
         assertThat(page2.getLimit()).isEqualTo(2);
+        http.assertRequestMade("GET", "/mandates?after=MD00001P57AN84&limit=2");
     }
 
     @Test
-    @Betamax(tape = "iterate through mandates")
-    public void shouldIterateThroughMandates() {
+    public void shouldIterateThroughMandates() throws Exception {
+        http.enqueueResponse(200, "fixtures/client/list_mandates_page_1.json");
+        http.enqueueResponse(200, "fixtures/client/list_mandates_page_2.json");
         Iterable<Mandate> iterable = client.mandates().all().withLimit(2).execute();
         List<Mandate> mandates = Lists.newArrayList(iterable);
         assertThat(mandates).hasSize(3);
         assertThat(mandates.get(0).getId()).isEqualTo("MD00001PEYCSQF");
         assertThat(mandates.get(1).getId()).isEqualTo("MD00001P57AN84");
         assertThat(mandates.get(2).getId()).isEqualTo("MD00001P1KTRNY");
+        http.assertRequestMade("GET", "/mandates?limit=2");
+        http.assertRequestMade("GET", "/mandates?after=MD00001P57AN84&limit=2");
     }
 
     @Test
-    @Betamax(tape = "cancel a mandate")
-    public void shouldCancelAMandate() {
+    public void shouldCancelAMandate() throws Exception {
+        http.enqueueResponse(200, "fixtures/client/cancel_a_mandate_response.json");
         Mandate mandate =
                 client.mandates().cancel("MD00001P1KTRNY").withMetadata("foo", "bar").execute();
         assertThat(mandate.getNextPossibleChargeDate()).isNull();
+        http.assertRequestMade("POST", "/mandates/MD00001P1KTRNY/actions/cancel",
+                "fixtures/client/cancel_a_mandate_request.json");
     }
 
     @Test
-    @Betamax(tape = "create a subscription")
-    public void shouldCreateASubscription() {
+    public void shouldCreateASubscription() throws Exception {
+        http.enqueueResponse(201, "fixtures/client/create_a_subscription_response.json");
         Subscription subscription =
                 client.subscriptions().create().withAmount(1000).withCurrency("GBP")
                         .withIntervalUnit(MONTHLY).withLinksMandate("MD00001PEYCSQF").execute();
         assertThat(subscription.getId()).isNotNull();
+        http.assertRequestMade("POST", "/subscriptions",
+                "fixtures/client/create_a_subscription_request.json");
     }
 
     @Test
-    @Betamax(tape = "list enabled creditor bank accounts")
-    public void shouldListEnabledCreditorBankAccounts() {
+    public void shouldListEnabledCreditorBankAccounts() throws Exception {
+        http.enqueueResponse(200, "fixtures/client/list_enabled_creditor_bank_accounts.json");
         Iterable<CreditorBankAccount> iterable =
                 client.creditorBankAccounts().all().withEnabled(true).execute();
         List<CreditorBankAccount> bankAccounts = Lists.newArrayList(iterable);
         assertThat(bankAccounts).hasSize(1);
         assertThat(bankAccounts.get(0).getId()).isEqualTo("BA00001NN2B44F");
+        http.assertRequestMade("GET", "/creditor_bank_accounts?enabled=true");
     }
 }

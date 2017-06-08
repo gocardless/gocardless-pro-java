@@ -88,9 +88,12 @@ public class MockHttp extends ExternalResource {
         }
     }
 
+    public String getBaseUrl() {
+        return String.format("http://localhost:%d", server.getPort());
+    }
+
     public HttpClient client() {
-        String baseUrl = String.format("http://localhost:%d", server.getPort());
-        GoCardlessClient client = GoCardlessClient.create("token", baseUrl);
+        GoCardlessClient client = GoCardlessClient.create("token", getBaseUrl());
         return TestUtil.getHttpClient(client);
     }
 }

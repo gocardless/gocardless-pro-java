@@ -1,0 +1,62 @@
+{
+    "subscriptions": {
+        "amount": 1000,
+        "created_at": "2015-04-20T13:20:43.273Z",
+        "currency": "GBP",
+        "day_of_month": null,
+        "end_at": null,
+        "id": "SB000011EYZVP7",
+        "interval": 1,
+        "interval_unit": "monthly",
+        "links": {
+            "mandate": "MD00001PEYCSQF"
+        },
+        "metadata": {},
+        "month": null,
+        "name": null,
+        "start_at": "2015-04-23",
+        "status": "active",
+        "upcoming_payments": [
+            {
+                "amount": 1000,
+                "charge_date": "2015-04-23"
+            },
+            {
+                "amount": 1000,
+                "charge_date": "2015-05-26"
+            },
+            {
+                "amount": 1000,
+                "charge_date": "2015-06-23"
+            },
+            {
+                "amount": 1000,
+                "charge_date": "2015-07-23"
+            },
+            {
+                "amount": 1000,
+                "charge_date": "2015-08-24"
+            },
+            {
+                "amount": 1000,
+                "charge_date": "2015-09-23"
+            },
+            {
+                "amount": 1000,
+                "charge_date": "2015-10-23"
+            },
+            {
+                "amount": 1000,
+                "charge_date": "2015-11-23"
+            },
+            {
+                "amount": 1000,
+                "charge_date": "2015-12-23"
+            },
+            {
+                "amount": 1000,
+                "charge_date": "2016-01-25"
+            }
+        ]
+    }
+}

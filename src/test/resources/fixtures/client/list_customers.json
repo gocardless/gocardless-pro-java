@@ -1,0 +1,41 @@
+{
+    "customers": [
+        {
+            "address_line1": "27 Acer Road",
+            "address_line2": "Apt 2",
+            "address_line3": null,
+            "city": "London",
+            "country_code": "GB",
+            "created_at": "2015-03-26T18:06:37.820Z",
+            "email": "frank.osborne@example.com",
+            "family_name": "Osborne",
+            "given_name": "Frank",
+            "id": "CU00003068FG73",
+            "metadata": {},
+            "postal_code": "E8 3GX",
+            "region": ""
+        },
+        {
+            "address_line1": "27 Acer Road",
+            "address_line2": "Apt 2",
+            "address_line3": null,
+            "city": "London",
+            "country_code": "GB",
+            "created_at": "2015-03-26T12:40:45.533Z",
+            "email": "sarah.osborne@example.com",
+            "family_name": "Osborne",
+            "given_name": "Sarah",
+            "id": "CU0000302M1J1J",
+            "metadata": {},
+            "postal_code": "E8 3GX",
+            "region": null
+        }
+    ],
+    "meta": {
+        "cursors": {
+            "after": null,
+            "before": null
+        },
+        "limit": 50
+    }
+}

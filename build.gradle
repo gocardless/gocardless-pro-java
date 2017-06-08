@@ -35,9 +35,6 @@ dependencies {
     testCompile 'junit:junit:4.12'
     testCompile 'org.assertj:assertj-core:2.6.0'
     testCompile 'com.squareup.okhttp:mockwebserver:2.7.5'
-
-    testCompile 'co.freeside:betamax:1.1.2'
-    testCompile 'org.codehaus.groovy:groovy-all:2.2.0'
 }
 
 javadoc {

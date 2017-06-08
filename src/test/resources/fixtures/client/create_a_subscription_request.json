@@ -1,0 +1,10 @@
+{
+    "subscriptions": {
+        "amount": 1000,
+        "currency": "GBP",
+        "interval_unit": "monthly",
+        "links": {
+            "mandate": "MD00001PEYCSQF"
+        }
+    }
+}
