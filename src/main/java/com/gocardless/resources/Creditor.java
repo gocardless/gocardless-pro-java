@@ -333,8 +333,8 @@ public class Creditor {
 
         public enum Scheme {
             @SerializedName("bacs")
-            BACS, @SerializedName("sepa_core")
-            SEPA_CORE, @SerializedName("autogiro")
+            BACS, @SerializedName("sepa")
+            SEPA, @SerializedName("autogiro")
             AUTOGIRO,
         }
     }
