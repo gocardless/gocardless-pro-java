@@ -119,6 +119,8 @@ public class Event {
          * <li>`gocardless`: this event was performed by GoCardless automatically</li>
          *
          * <li>`api`: this event was triggered by an API endpoint</li>
+         * <li>`customer`: this event was
+         * triggered by a Customer</li>
          * </ul>
          */
         public Origin getOrigin() {
@@ -147,7 +149,8 @@ public class Event {
             @SerializedName("bank")
             BANK, @SerializedName("api")
             API, @SerializedName("gocardless")
-            GOCARDLESS,
+            GOCARDLESS, @SerializedName("customer")
+            CUSTOMER,
         }
 
         public enum Scheme {
