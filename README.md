@@ -52,12 +52,12 @@ To fetch items in a collection, there are two options:
 
 ```java
 ListResponse<Customer> firstPage = client.customers().list().execute();
-for (Customer customer : client.customers().list().execute()) {
+for (Customer customer : firstPage.getItems()) {
     System.out.println(customer.getGivenName());
 }
 
 String cursor = firstPage.getAfter();
-ListResponse<Customer> nextPage = client.customers().list.withAfter(cursor).execute();
+ListResponse<Customer> nextPage = client.customers().list().withAfter(cursor).execute();
 ```
 
 * Iterating through all of the items in a collection:
