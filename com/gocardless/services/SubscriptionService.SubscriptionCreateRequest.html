@@ -158,19 +158,19 @@ extends <a href="../../../com/gocardless/http/IdempotentPostRequest.html" title=
 <tr class="altColor">
 <td class="colFirst"><code><a href="../../../com/gocardless/services/SubscriptionService.SubscriptionCreateRequest.html" title="class in com.gocardless.services">SubscriptionService.SubscriptionCreateRequest</a></code></td>
 <td class="colLast"><code><strong><a href="../../../com/gocardless/services/SubscriptionService.SubscriptionCreateRequest.html#withAmount(java.lang.Integer)">withAmount</a></strong>(<a href="http://docs.oracle.com/javase/7/docs/api/java/lang/Integer.html?is-external=true" title="class or interface in java.lang">Integer</a>&nbsp;amount)</code>
-<div class="block">Amount in pence or cents.</div>
+<div class="block">Amount in pence (GBP), cents (EUR), or öre (SEK).</div>
 </td>
 </tr>
 <tr class="rowColor">
 <td class="colFirst"><code><a href="../../../com/gocardless/services/SubscriptionService.SubscriptionCreateRequest.html" title="class in com.gocardless.services">SubscriptionService.SubscriptionCreateRequest</a></code></td>
 <td class="colLast"><code><strong><a href="../../../com/gocardless/services/SubscriptionService.SubscriptionCreateRequest.html#withAppFee(java.lang.Integer)">withAppFee</a></strong>(<a href="http://docs.oracle.com/javase/7/docs/api/java/lang/Integer.html?is-external=true" title="class or interface in java.lang">Integer</a>&nbsp;appFee)</code>
-<div class="block">The amount to be deducted from the payment as the OAuth app&rsquo;s fee, in pence or cents.</div>
+<div class="block">The amount to be deducted from the payment as the OAuth app&rsquo;s fee, in pence (GBP), cents (EUR), or öre (SEK).</div>
 </td>
 </tr>
 <tr class="altColor">
 <td class="colFirst"><code><a href="../../../com/gocardless/services/SubscriptionService.SubscriptionCreateRequest.html" title="class in com.gocardless.services">SubscriptionService.SubscriptionCreateRequest</a></code></td>
 <td class="colLast"><code><strong><a href="../../../com/gocardless/services/SubscriptionService.SubscriptionCreateRequest.html#withCount(java.lang.Integer)">withCount</a></strong>(<a href="http://docs.oracle.com/javase/7/docs/api/java/lang/Integer.html?is-external=true" title="class or interface in java.lang">Integer</a>&nbsp;count)</code>
-<div class="block">An alternative way to set <code>end_date</code>.</div>
+<div class="block">The total number of payments that should be taken by this subscription.</div>
 </td>
 </tr>
 <tr class="rowColor">
@@ -297,7 +297,7 @@ extends <a href="../../../com/gocardless/http/IdempotentPostRequest.html" title=
 <li class="blockList">
 <h4>withAmount</h4>
 <pre>public&nbsp;<a href="../../../com/gocardless/services/SubscriptionService.SubscriptionCreateRequest.html" title="class in com.gocardless.services">SubscriptionService.SubscriptionCreateRequest</a>&nbsp;withAmount(<a href="http://docs.oracle.com/javase/7/docs/api/java/lang/Integer.html?is-external=true" title="class or interface in java.lang">Integer</a>&nbsp;amount)</pre>
-<div class="block"><p>Amount in pence or cents.</p></div>
+<div class="block"><p>Amount in pence (GBP), cents (EUR), or öre (SEK).</p></div>
 </li>
 </ul>
 <a name="withAppFee(java.lang.Integer)">
@@ -307,7 +307,7 @@ extends <a href="../../../com/gocardless/http/IdempotentPostRequest.html" title=
 <li class="blockList">
 <h4>withAppFee</h4>
 <pre>public&nbsp;<a href="../../../com/gocardless/services/SubscriptionService.SubscriptionCreateRequest.html" title="class in com.gocardless.services">SubscriptionService.SubscriptionCreateRequest</a>&nbsp;withAppFee(<a href="http://docs.oracle.com/javase/7/docs/api/java/lang/Integer.html?is-external=true" title="class or interface in java.lang">Integer</a>&nbsp;appFee)</pre>
-<div class="block"><p>The amount to be deducted from the payment as the OAuth app&rsquo;s fee, in pence or cents.</p></div>
+<div class="block"><p>The amount to be deducted from the payment as the OAuth app&rsquo;s fee, in pence (GBP), cents (EUR), or öre (SEK).</p></div>
 </li>
 </ul>
 <a name="withCount(java.lang.Integer)">
@@ -317,7 +317,7 @@ extends <a href="../../../com/gocardless/http/IdempotentPostRequest.html" title=
 <li class="blockList">
 <h4>withCount</h4>
 <pre>public&nbsp;<a href="../../../com/gocardless/services/SubscriptionService.SubscriptionCreateRequest.html" title="class in com.gocardless.services">SubscriptionService.SubscriptionCreateRequest</a>&nbsp;withCount(<a href="http://docs.oracle.com/javase/7/docs/api/java/lang/Integer.html?is-external=true" title="class or interface in java.lang">Integer</a>&nbsp;count)</pre>
-<div class="block"><p>An alternative way to set <code>end_date</code>. The total number of payments that should be taken by this subscription. This will set <code>end_date</code> automatically.</p></div>
+<div class="block"><p>The total number of payments that should be taken by this subscription.</p></div>
 </li>
 </ul>
 <a name="withCurrency(java.lang.String)">
@@ -327,7 +327,7 @@ extends <a href="../../../com/gocardless/http/IdempotentPostRequest.html" title=
 <li class="blockList">
 <h4>withCurrency</h4>
 <pre>public&nbsp;<a href="../../../com/gocardless/services/SubscriptionService.SubscriptionCreateRequest.html" title="class in com.gocardless.services">SubscriptionService.SubscriptionCreateRequest</a>&nbsp;withCurrency(<a href="http://docs.oracle.com/javase/7/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</a>&nbsp;currency)</pre>
-<div class="block"><p><a href="http://en.wikipedia.org/wiki/ISO_4217">ISO 4217</a> currency code. Currently only <code>GBP</code> and <code>EUR</code> are supported.</p></div>
+<div class="block"><p><a href="http://en.wikipedia.org/wiki/ISO_4217">ISO 4217</a> currency code. Currently only <code>GBP</code>, <code>EUR</code>, and <code>SEK</code> are supported.</p></div>
 </li>
 </ul>
 <a name="withDayOfMonth(java.lang.Integer)">
