@@ -91,7 +91,7 @@ public class Subscription {
     private List<UpcomingPayment> upcomingPayments;
 
     /**
-     * Amount in pence or cents.
+     * Amount in pence (GBP), cents (EUR), or öre (SEK).
      */
     public Integer getAmount() {
         return amount;
@@ -105,8 +105,8 @@ public class Subscription {
     }
 
     /**
-     * [ISO 4217](http://en.wikipedia.org/wiki/ISO_4217) currency code. Currently only `GBP` and `EUR`
-     * are supported.
+     * [ISO 4217](http://en.wikipedia.org/wiki/ISO_4217) currency code. Currently only `GBP`, `EUR`, and
+     * `SEK` are supported.
      */
     public String getCurrency() {
         return currency;

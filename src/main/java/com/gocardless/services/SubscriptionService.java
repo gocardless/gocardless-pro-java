@@ -152,7 +152,7 @@ public class SubscriptionService {
         private String startDate;
 
         /**
-         * Amount in pence or cents.
+         * Amount in pence (GBP), cents (EUR), or öre (SEK).
          */
         public SubscriptionCreateRequest withAmount(Integer amount) {
             this.amount = amount;
@@ -160,7 +160,8 @@ public class SubscriptionService {
         }
 
         /**
-         * The amount to be deducted from the payment as the OAuth app's fee, in pence or cents.
+         * The amount to be deducted from the payment as the OAuth app's fee, in pence (GBP), cents (EUR), or
+         * öre (SEK).
          */
         public SubscriptionCreateRequest withAppFee(Integer appFee) {
             this.appFee = appFee;
@@ -168,8 +169,7 @@ public class SubscriptionService {
         }
 
         /**
-         * An alternative way to set `end_date`. The total number of payments that should be taken by this
-         * subscription. This will set `end_date` automatically.
+         * The total number of payments that should be taken by this subscription.
          */
         public SubscriptionCreateRequest withCount(Integer count) {
             this.count = count;
@@ -177,8 +177,8 @@ public class SubscriptionService {
         }
 
         /**
-         * [ISO 4217](http://en.wikipedia.org/wiki/ISO_4217) currency code. Currently only `GBP` and `EUR`
-         * are supported.
+         * [ISO 4217](http://en.wikipedia.org/wiki/ISO_4217) currency code. Currently only `GBP`, `EUR`, and
+         * `SEK` are supported.
          */
         public SubscriptionCreateRequest withCurrency(String currency) {
             this.currency = currency;
