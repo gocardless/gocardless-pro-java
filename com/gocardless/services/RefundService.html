@@ -248,10 +248,12 @@ extends <a href="http://docs.oracle.com/javase/7/docs/api/java/lang/Object.html?
 <h4>create</h4>
 <pre>public&nbsp;<a href="../../../com/gocardless/services/RefundService.RefundCreateRequest.html" title="class in com.gocardless.services">RefundService.RefundCreateRequest</a>&nbsp;create()</pre>
 <div class="block"><p>Creates a new refund object.</p><p>This fails with:<a name="refund_payment_invalid_state"></a><a
-name="total_amount_confirmation_invalid"></a><a name="number_of_refunds_exceeded"></a></p><p>- <code>refund_payment_invalid_state</code> error if the linked <a href="#core-endpoints-payments">payment</a> isn&rsquo;t either <code>confirmed</code> or <code>paid_out</code>.</p>
+name="total_amount_confirmation_invalid"></a><a name="number_of_refunds_exceeded"></a></p>
 <ul>
-  <li><code>total_amount_confirmation_invalid</code> if the confirmation amount doesn&rsquo;t match the total amount refunded for the payment. This safeguard is there to prevent two processes from creating refunds without awareness of each other.</li>
-</ul><p>- <code>number_of_refunds_exceeded</code> if five or more refunds have already been created against the payment.</p></div>
+  <li><p><code>refund_payment_invalid_state</code> error if the linked <a href="#core-endpoints-payments">payment</a> isn&rsquo;t either <code>confirmed</code> or <code>paid_out</code>.</p></li>
+  <li><p><code>total_amount_confirmation_invalid</code> if the confirmation amount doesn&rsquo;t match the total amount refunded for the payment. This safeguard is there to prevent two processes from creating refunds without awareness of each other.</p></li>
+  <li><p><code>number_of_refunds_exceeded</code> if five or more refunds have already been created against the payment.</p></li>
+</ul></div>
 </li>
 </ul>
 <a name="list()">

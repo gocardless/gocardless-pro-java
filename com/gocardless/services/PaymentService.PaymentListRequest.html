@@ -230,7 +230,7 @@ extends <a href="../../../com/gocardless/http/ListRequest.html" title="class in 
 <tr class="altColor">
 <td class="colFirst"><code><a href="../../../com/gocardless/services/PaymentService.PaymentListRequest.html" title="class in com.gocardless.services">PaymentService.PaymentListRequest</a>&lt;<a href="../../../com/gocardless/services/PaymentService.PaymentListRequest.html" title="type parameter in PaymentService.PaymentListRequest">S</a>&gt;</code></td>
 <td class="colLast"><code><strong><a href="../../../com/gocardless/services/PaymentService.PaymentListRequest.html#withStatus(com.gocardless.services.PaymentService.PaymentListRequest.Status)">withStatus</a></strong>(<a href="../../../com/gocardless/services/PaymentService.PaymentListRequest.Status.html" title="enum in com.gocardless.services">PaymentService.PaymentListRequest.Status</a>&nbsp;status)</code>
-<div class="block">One of:  <code>pending_customer_approval</code>: we&rsquo;re waiting for the customer to approve this payment <code>pending_submission</code>: the payment has been created, but not yet submitted to the banks <code>submitted</code>: the payment has been submitted to the banks</div>
+<div class="block">One of:  <code>pending_customer_approval</code>: we&rsquo;re waiting for the customer to approve this payment <code>pending_submission</code>: the payment has been created, but not yet submitted to the banks <code>submitted</code>: the payment has been submitted to the banks <code>confirmed</code>: the payment has been confirmed as collected <code>paid_out</code>: the payment has been included in a <a href="#core-endpoints-payouts">payout</a> <code>cancelled</code>: the payment has been cancelled <code>customer_approval_denied</code>: the customer has denied approval for the payment.</div>
 </td>
 </tr>
 <tr class="rowColor">
@@ -394,18 +394,7 @@ extends <a href="../../../com/gocardless/http/ListRequest.html" title="class in 
 <li class="blockList">
 <h4>withStatus</h4>
 <pre>public&nbsp;<a href="../../../com/gocardless/services/PaymentService.PaymentListRequest.html" title="class in com.gocardless.services">PaymentService.PaymentListRequest</a>&lt;<a href="../../../com/gocardless/services/PaymentService.PaymentListRequest.html" title="type parameter in PaymentService.PaymentListRequest">S</a>&gt;&nbsp;withStatus(<a href="../../../com/gocardless/services/PaymentService.PaymentListRequest.Status.html" title="enum in com.gocardless.services">PaymentService.PaymentListRequest.Status</a>&nbsp;status)</pre>
-<div class="block"><p>One of: <ul> <li><code>pending_customer_approval</code>: we&rsquo;re waiting for the customer to approve this payment</li> <li><code>pending_submission</code>: the payment has been created, but not yet submitted to the banks</li> <li><code>submitted</code>: the payment has been submitted to the banks</li></p>
-<li>`confirmed`: the payment has been confirmed as collected</li>
-<li>`paid_out`:  the payment
-has been included in a [payout](#core-endpoints-payouts)</li>
-<li>`cancelled`: the payment has
-been cancelled</li>
-<li>`customer_approval_denied`: the customer has denied approval for the
-payment. You should contact the customer directly</li>
-<li>`failed`: the payment failed to be
-processed. Note that payments can fail after being confirmed if the failure message is sent late
-by the banks.</li>
-<li>`charged_back`: the payment has been charged back</li><p></ul></p></div>
+<div class="block"><p>One of: <ul> <li><code>pending_customer_approval</code>: we&rsquo;re waiting for the customer to approve this payment</li> <li><code>pending_submission</code>: the payment has been created, but not yet submitted to the banks</li> <li><code>submitted</code>: the payment has been submitted to the banks</li> <li><code>confirmed</code>: the payment has been confirmed as collected</li> <li><code>paid_out</code>: the payment has been included in a <a href="#core-endpoints-payouts">payout</a></li> <li><code>cancelled</code>: the payment has been cancelled</li> <li><code>customer_approval_denied</code>: the customer has denied approval for the payment. You should contact the customer directly</li> <li><code>failed</code>: the payment failed to be processed. Note that payments can fail after being confirmed if the failure message is sent late by the banks.</li> <li><code>charged_back</code>: the payment has been charged back</li> </ul></p></div>
 </li>
 </ul>
 <a name="withSubscription(java.lang.String)">

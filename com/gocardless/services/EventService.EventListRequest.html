@@ -372,10 +372,7 @@ extends <a href="../../../com/gocardless/http/ListRequest.html" title="class in 
 <li class="blockList">
 <h4>withInclude</h4>
 <pre>public&nbsp;<a href="../../../com/gocardless/services/EventService.EventListRequest.html" title="class in com.gocardless.services">EventService.EventListRequest</a>&lt;<a href="../../../com/gocardless/services/EventService.EventListRequest.html" title="type parameter in EventService.EventListRequest">S</a>&gt;&nbsp;withInclude(<a href="../../../com/gocardless/services/EventService.EventListRequest.Include.html" title="enum in com.gocardless.services">EventService.EventListRequest.Include</a>&nbsp;include)</pre>
-<div class="block"><p>Includes linked resources in the response. Must be used with the <code>resource_type</code> parameter specified. The include should be one of: <ul> <li><code>payment</code></li> <li><code>mandate</code></li></p>
-<li>`payout`</li>
-<li>`refund`</li>
-<li>`subscription`</li><p></ul></p></div>
+<div class="block"><p>Includes linked resources in the response. Must be used with the <code>resource_type</code> parameter specified. The include should be one of: <ul> <li><code>payment</code></li> <li><code>mandate</code></li> <li><code>payout</code></li> <li><code>refund</code></li> <li><code>subscription</code></li> </ul></p></div>
 </li>
 </ul>
 <a name="withLimit(java.lang.Integer)">
@@ -445,15 +442,7 @@ extends <a href="../../../com/gocardless/http/ListRequest.html" title="class in 
 <li class="blockList">
 <h4>withResourceType</h4>
 <pre>public&nbsp;<a href="../../../com/gocardless/services/EventService.EventListRequest.html" title="class in com.gocardless.services">EventService.EventListRequest</a>&lt;<a href="../../../com/gocardless/services/EventService.EventListRequest.html" title="type parameter in EventService.EventListRequest">S</a>&gt;&nbsp;withResourceType(<a href="../../../com/gocardless/services/EventService.EventListRequest.ResourceType.html" title="enum in com.gocardless.services">EventService.EventListRequest.ResourceType</a>&nbsp;resourceType)</pre>
-<div class="block"><p>Type of resource that you&rsquo;d like to get all events for. Cannot be used together with the <code>payment</code>, <code>mandate</code>, <code>subscription</code>, <code>refund</code> or <code>payout</code> parameter. The type can be one of:</p>
-<ul>
-<li>`payments`</li>
-<li>`mandates`</li>
-<li>`payouts`</li>
-<li>`subscriptions`</li>
-
-<li>`refunds`</li>
-</ul></div>
+<div class="block"><p>Type of resource that you&rsquo;d like to get all events for. Cannot be used together with the <code>payment</code>, <code>mandate</code>, <code>subscription</code>, <code>refund</code> or <code>payout</code> parameter. The type can be one of: <ul> <li><code>payments</code></li> <li><code>mandates</code></li> <li><code>payouts</code></li> <li><code>subscriptions</code></li> <li><code>refunds</code></li> </ul></p></div>
 </li>
 </ul>
 <a name="withSubscription(java.lang.String)">

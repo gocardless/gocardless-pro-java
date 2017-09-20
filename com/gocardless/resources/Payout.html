@@ -200,7 +200,7 @@ extends <a href="http://docs.oracle.com/javase/7/docs/api/java/lang/Object.html?
 <tr class="rowColor">
 <td class="colFirst"><code><a href="../../../com/gocardless/resources/Payout.Status.html" title="enum in com.gocardless.resources">Payout.Status</a></code></td>
 <td class="colLast"><code><strong><a href="../../../com/gocardless/resources/Payout.html#getStatus()">getStatus</a></strong>()</code>
-<div class="block">One of:  <code>pending</code>: the payout has been created, but not yet sent to the banks</div>
+<div class="block">One of:  <code>pending</code>: the payout has been created, but not yet sent to the banks <code>paid</code>: the payout has been sent to the banks </div>
 </td>
 </tr>
 </table>
@@ -242,10 +242,7 @@ extends <a href="http://docs.oracle.com/javase/7/docs/api/java/lang/Object.html?
 <li class="blockList">
 <h4>getArrivalDate</h4>
 <pre>public&nbsp;<a href="http://docs.oracle.com/javase/7/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</a>&nbsp;getArrivalDate()</pre>
-<div class="block"><p>Date the payout is due to arrive in the creditor&rsquo;s bank account. One of: <ul></p>
-<li>`yyyy-mm-dd`: the payout has been paid and is due to arrive in the creditor's bank
-  account
-on this day</li><p><li><code>null</code>: the payout hasn&rsquo;t been paid yet</li> </ul></p></div>
+<div class="block"><p>Date the payout is due to arrive in the creditor&rsquo;s bank account. One of: <ul>  <li><code>yyyy-mm-dd</code>: the payout has been paid and is due to arrive in the creditor&rsquo;s bank  account on this day</li>  <li><code>null</code>: the payout hasn&rsquo;t been paid yet</li> </ul></p></div>
 </li>
 </ul>
 <a name="getCreatedAt()">
@@ -324,8 +321,7 @@ on this day</li><p><li><code>null</code>: the payout hasn&rsquo;t been paid yet<
 <li class="blockList">
 <h4>getStatus</h4>
 <pre>public&nbsp;<a href="../../../com/gocardless/resources/Payout.Status.html" title="enum in com.gocardless.resources">Payout.Status</a>&nbsp;getStatus()</pre>
-<div class="block"><p>One of: <ul> <li><code>pending</code>: the payout has been created, but not yet sent to the banks</li></p>
-<li>`paid`: the payout has been sent to the banks</li><p></ul></p></div>
+<div class="block"><p>One of: <ul> <li><code>pending</code>: the payout has been created, but not yet sent to the banks</li> <li><code>paid</code>: the payout has been sent to the banks</li> </ul></p></div>
 </li>
 </ul>
 </li>

@@ -110,10 +110,12 @@
 <pre>public static final class <span class="strong">RefundService.RefundCreateRequest</span>
 extends <a href="../../../com/gocardless/http/IdempotentPostRequest.html" title="class in com.gocardless.http">IdempotentPostRequest</a>&lt;<a href="../../../com/gocardless/resources/Refund.html" title="class in com.gocardless.resources">Refund</a>&gt;</pre>
 <div class="block"><p>Request class for <a href="../../../com/gocardless/services/RefundService.html#create()"><code>RefundService.create()</code></a>.</p><p>Creates a new refund object.</p><p>This fails with:<a name="refund_payment_invalid_state"></a><a
-name="total_amount_confirmation_invalid"></a><a name="number_of_refunds_exceeded"></a></p><p>- <code>refund_payment_invalid_state</code> error if the linked <a href="#core-endpoints-payments">payment</a> isn&rsquo;t either <code>confirmed</code> or <code>paid_out</code>.</p>
+name="total_amount_confirmation_invalid"></a><a name="number_of_refunds_exceeded"></a></p>
 <ul>
-  <li><code>total_amount_confirmation_invalid</code> if the confirmation amount doesn&rsquo;t match the total amount refunded for the payment. This safeguard is there to prevent two processes from creating refunds without awareness of each other.</li>
-</ul><p>- <code>number_of_refunds_exceeded</code> if five or more refunds have already been created against the payment.</p></div>
+  <li><p><code>refund_payment_invalid_state</code> error if the linked <a href="#core-endpoints-payments">payment</a> isn&rsquo;t either <code>confirmed</code> or <code>paid_out</code>.</p></li>
+  <li><p><code>total_amount_confirmation_invalid</code> if the confirmation amount doesn&rsquo;t match the total amount refunded for the payment. This safeguard is there to prevent two processes from creating refunds without awareness of each other.</p></li>
+  <li><p><code>number_of_refunds_exceeded</code> if five or more refunds have already been created against the payment.</p></li>
+</ul></div>
 </li>
 </ul>
 </div>

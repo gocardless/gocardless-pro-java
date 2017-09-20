@@ -381,17 +381,7 @@ extends <a href="http://docs.oracle.com/javase/7/docs/api/java/lang/Object.html?
 <li class="blockList">
 <h4>getVerificationStatus</h4>
 <pre>public&nbsp;<a href="../../../com/gocardless/resources/Creditor.VerificationStatus.html" title="enum in com.gocardless.resources">Creditor.VerificationStatus</a>&nbsp;getVerificationStatus()</pre>
-<div class="block"><p>The creditor&rsquo;s verification status, indicating whether they can yet receive payouts. For more details on handling verification as a partner, see our <a href="/getting-started/partners/helping-your-users-get-verified/">&ldquo;Helping your users get verified&rdquo; guide</a>. One of: <ul></p>
-<li>`successful`: The creditor's account is fully verified, and they can receive payouts. Once a
-creditor has been successfully verified, they may in the future require further verification - for
-example, if they change their payout bank account, we will have to check that they own the new
-bank account before they can receive payouts again.</li>
-<li>`in_review`: The creditor has
-provided all of the information currently requested, and it is awaiting review by GoCardless
-before they can be verified and receive payouts.</li>
-<li>`action_required`: The creditor needs
-to provide further information to verify their account so they can receive payouts, and should
-visit the verification flow.</li><p></ul></p></div>
+<div class="block"><p>The creditor&rsquo;s verification status, indicating whether they can yet receive payouts. For more details on handling verification as a partner, see our <a href="/getting-started/partners/helping-your-users-get-verified/">&ldquo;Helping your users get verified&rdquo; guide</a>. One of: <ul> <li><code>successful</code>: The creditor&rsquo;s account is fully verified, and they can receive payouts. Once a creditor has been successfully verified, they may in the future require further verification - for example, if they change their payout bank account, we will have to check that they own the new bank account before they can receive payouts again.</li> <li><code>in_review</code>: The creditor has provided all of the information currently requested, and it is awaiting review by GoCardless before they can be verified and receive payouts.</li> <li><code>action_required</code>: The creditor needs to provide further information to verify their account so they can receive payouts, and should visit the verification flow.</li> </ul></p></div>
 </li>
 </ul>
 </li>

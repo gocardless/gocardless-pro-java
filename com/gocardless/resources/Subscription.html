@@ -95,7 +95,7 @@
 <br>
 <pre>public class <span class="strong">Subscription</span>
 extends <a href="http://docs.oracle.com/javase/7/docs/api/java/lang/Object.html?is-external=true" title="class or interface in java.lang">Object</a></pre>
-<div class="block"><p>Represents a subscription resource returned from the API.</p><p>Subscriptions create <a href="#core-endpoints-payments">payments</a> according to a schedule.</p><p>### Recurrence Rules</p><p>The following rules apply when specifying recurrence:</p>
+<div class="block"><p>Represents a subscription resource returned from the API.</p><p>Subscriptions create <a href="#core-endpoints-payments">payments</a> according to a schedule.</p><h3>Recurrence Rules</h3><p>The following rules apply when specifying recurrence:</p>
 <ul>
   <li>The first payment must be charged within 1 year.</li>
   <li>When neither <code>month</code> nor <code>day_of_month</code> are present, the subscription will recur from the <code>start_date</code> based on the <code>interval_unit</code>.</li>
@@ -105,14 +105,120 @@ extends <a href="http://docs.oracle.com/javase/7/docs/api/java/lang/Object.html?
   <thead>
     <tr>
       <th align="left">interval_unit </th>
-      <th align="left">month</th>
+      <th align="left">month </th>
+      <th align="left">day_of_month</th>
     </tr>
     <tr>
       <th align="left"> </th>
-      <th align="left">day_of_month </th>
     </tr>
   </thead>
-</table><p>:&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash; | :&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&ndash; | | yearly | optional (required if <code>day_of_month</code> provided) | optional (required if <code>month</code> provided) | | monthly | invalid | required<br/> | | weekly | invalid | invalid |</p><p>Examples:</p><p>| interval_unit | interval | month | day_of_month | valid? | | :&mdash;&mdash;&mdash;&mdash;&ndash; | :&mdash;&mdash;&mdash; | :&mdash;&mdash; | :&mdash;&mdash;&mdash;&mdash;- | :&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;- | | yearly | 1 | january | -1 | valid | | yearly | 1<br/> | march | | invalid - missing <code>day_of_month</code> | | monthly  | 6 | | 12 | valid<br/> | | monthly | 6 | august | 12 | invalid - <code>month</code> must be blank<br/> | | weekly | 2 | | | valid<br/> | | weekly | 2 | october | 10 | invalid - <code>month</code> and <code>day_of_month</code> must be blank |</p><h3>Rolling dates</h3><p>When a charge date falls on a non-business day, one of two things will happen:</p>
+</table>
+<table>
+  <tbody>
+    <tr>
+      <td align="left">yearly </td>
+      <td align="left">optional (required if <code>day_of_month</code> provided) </td>
+      <td align="left">optional (required if <code>month</code></td>
+    </tr>
+    <tr>
+      <td align="left">provided) </td>
+    </tr>
+    <tr>
+      <td align="left">monthly </td>
+      <td align="left">invalid </td>
+      <td align="left">required</td>
+    </tr>
+    <tr>
+      <td align="left"> </td>
+    </tr>
+    <tr>
+      <td align="left">weekly </td>
+      <td align="left">invalid </td>
+      <td align="left">invalid</td>
+    </tr>
+    <tr>
+      <td align="left"> </td>
+    </tr>
+  </tbody>
+</table><p>Examples:</p>
+<table>
+  <thead>
+    <tr>
+      <th align="left">interval_unit </th>
+      <th align="left">interval </th>
+      <th align="left">month </th>
+      <th align="left">day_of_month </th>
+      <th align="left">valid?</th>
+    </tr>
+    <tr>
+      <th align="left"> </th>
+    </tr>
+  </thead>
+</table>
+<table>
+  <tbody>
+    <tr>
+      <td align="left">yearly </td>
+      <td align="left">1 </td>
+      <td align="left">january </td>
+      <td align="left">-1 </td>
+      <td align="left">valid</td>
+    </tr>
+    <tr>
+      <td align="left"> </td>
+    </tr>
+    <tr>
+      <td align="left">yearly </td>
+      <td align="left">1 </td>
+      <td align="left">march </td>
+      <td align="left"> </td>
+      <td align="left">invalid - missing <code>day_of_month</code></td>
+    </tr>
+    <tr>
+      <td align="left"> </td>
+    </tr>
+    <tr>
+      <td align="left">monthly </td>
+      <td align="left">6 </td>
+      <td align="left"> </td>
+      <td align="left">12 </td>
+      <td align="left">valid</td>
+    </tr>
+    <tr>
+      <td align="left"> </td>
+    </tr>
+    <tr>
+      <td align="left">monthly </td>
+      <td align="left">6 </td>
+      <td align="left">august </td>
+      <td align="left">12 </td>
+      <td align="left">invalid - <code>month</code> must be blank</td>
+    </tr>
+    <tr>
+      <td align="left"> </td>
+    </tr>
+    <tr>
+      <td align="left">weekly </td>
+      <td align="left">2 </td>
+      <td align="left"> </td>
+      <td align="left"> </td>
+      <td align="left">valid</td>
+    </tr>
+    <tr>
+      <td align="left"> </td>
+    </tr>
+    <tr>
+      <td align="left">weekly </td>
+      <td align="left">2 </td>
+      <td align="left">october </td>
+      <td align="left">10 </td>
+      <td align="left">invalid - <code>month</code> and <code>day_of_month</code></td>
+    </tr>
+    <tr>
+      <td align="left">must be blank </td>
+    </tr>
+  </tbody>
+</table><h3>Rolling dates</h3><p>When a charge date falls on a non-business day, one of two things will happen:</p>
 <ul>
   <li>if the recurrence rule specified <code>-1</code> as the <code>day_of_month</code>, the charge date will be rolled <strong>backwards</strong> to the previous business day (i.e., the last working day of the month).</li>
   <li>otherwise the charge date will be rolled <strong>forwards</strong> to the next business day.</li>
