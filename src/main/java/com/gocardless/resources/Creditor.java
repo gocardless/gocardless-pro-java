@@ -11,9 +11,8 @@ import com.google.gson.annotations.SerializedName;
  * the payment is then paid out. In most cases your organisation will have a single "creditor", but
  * the API also supports collecting payments on behalf of others.
  * 
- * Please get in touch if you
- * wish to use this endpoint. Currently, for Anti Money Laundering reasons, any creditors you add
- * must be directly related to your organisation.
+ * Please get in touch if you wish to use this endpoint. Currently, for Anti Money Laundering
+ * reasons, any creditors you add must be directly related to your organisation.
  */
 public class Creditor {
     private Creditor() {
@@ -120,9 +119,8 @@ public class Creditor {
     /**
      * An array of the scheme identifiers this creditor can create mandates against.
      * 
-     * The support
-     * address, `phone_number` and `email` fields are for customers to contact the merchant for support
-     * purposes. They must be displayed on the payment page, please see our [compliance
+     * The support address, `phone_number` and `email` fields are for customers to contact the merchant
+     * for support purposes. They must be displayed on the payment page, please see our [compliance
      * requirements](#appendix-compliance-requirements) for more details.
      */
     public List<SchemeIdentifier> getSchemeIdentifiers() {
@@ -134,17 +132,14 @@ public class Creditor {
      * details on handling verification as a partner, see our ["Helping your users get verified"
      * guide](/getting-started/partners/helping-your-users-get-verified/). One of:
      * <ul>
-     *
      * <li>`successful`: The creditor's account is fully verified, and they can receive payouts. Once a
      * creditor has been successfully verified, they may in the future require further verification - for
      * example, if they change their payout bank account, we will have to check that they own the new
      * bank account before they can receive payouts again.</li>
-     * <li>`in_review`: The creditor has
-     * provided all of the information currently requested, and it is awaiting review by GoCardless
-     * before they can be verified and receive payouts.</li>
-     * <li>`action_required`: The creditor needs
-     * to provide further information to verify their account so they can receive payouts, and should
-     * visit the verification flow.</li>
+     * <li>`in_review`: The creditor has provided all of the information currently requested, and it is
+     * awaiting review by GoCardless before they can be verified and receive payouts.</li>
+     * <li>`action_required`: The creditor needs to provide further information to verify their account
+     * so they can receive payouts, and should visit the verification flow.</li>
      * </ul>
      */
     public VerificationStatus getVerificationStatus() {
@@ -274,8 +269,7 @@ public class Creditor {
          * The minimum interval, in working days, between the sending of a pre-notification to the customer,
          * and the charge date of a payment using this scheme identifier.
          * 
-         * By default, GoCardless sends
-         * these notifications automatically. Please see our [compliance
+         * By default, GoCardless sends these notifications automatically. Please see our [compliance
          * requirements](#appendix-compliance-requirements) for more details.
          */
         public Integer getMinimumAdvanceNotice() {

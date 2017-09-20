@@ -17,10 +17,10 @@ import com.google.gson.reflect.TypeToken;
  * always belong to a [customer](#core-endpoints-customers), and may be linked to several Direct
  * Debit [mandates](#core-endpoints-mandates).
  * 
- * Note that customer bank accounts must be unique,
- * and so you will encounter a `bank_account_exists` error if you try to create a duplicate bank
- * account. You may wish to handle this by updating the existing record instead, the ID of which will
- * be provided as `links[customer_bank_account]` in the error response.
+ * Note that customer bank accounts must be unique, and so you will encounter a `bank_account_exists`
+ * error if you try to create a duplicate bank account. You may wish to handle this by updating the
+ * existing record instead, the ID of which will be provided as `links[customer_bank_account]` in the
+ * error response.
  */
 public class CustomerBankAccountService {
     private final HttpClient httpClient;
@@ -37,18 +37,15 @@ public class CustomerBankAccountService {
     /**
      * Creates a new customer bank account object.
      * 
-     * There are three different ways to supply bank
-     * account details:
+     * There are three different ways to supply bank account details:
      * 
      * - [Local details](#appendix-local-bank-details)
      * 
      * - IBAN
      * 
-     * - [Customer
-     * Bank Account Tokens](#javascript-flow-create-a-customer-bank-account-token)
+     * - [Customer Bank Account Tokens](#javascript-flow-create-a-customer-bank-account-token)
      * 
-     * For more
-     * information on the different fields required in each country, see [local bank
+     * For more information on the different fields required in each country, see [local bank
      * details](#appendix-local-bank-details).
      */
     public CustomerBankAccountCreateRequest create() {
@@ -85,11 +82,10 @@ public class CustomerBankAccountService {
     /**
      * Immediately cancels all associated mandates and cancellable payments.
      * 
-     * This will return a
-     * `disable_failed` error if the bank account has already been disabled.
+     * This will return a `disable_failed` error if the bank account has already been disabled.
      * 
-     * A disabled bank account
-     * can be re-enabled by creating a new bank account resource with the same details.
+     * A disabled bank account can be re-enabled by creating a new bank account resource with the same
+     * details.
      */
     public CustomerBankAccountDisableRequest disable(String identity) {
         return new CustomerBankAccountDisableRequest(httpClient, identity);
@@ -100,18 +96,15 @@ public class CustomerBankAccountService {
      *
      * Creates a new customer bank account object.
      * 
-     * There are three different ways to supply bank
-     * account details:
+     * There are three different ways to supply bank account details:
      * 
      * - [Local details](#appendix-local-bank-details)
      * 
      * - IBAN
      * 
-     * - [Customer
-     * Bank Account Tokens](#javascript-flow-create-a-customer-bank-account-token)
+     * - [Customer Bank Account Tokens](#javascript-flow-create-a-customer-bank-account-token)
      * 
-     * For more
-     * information on the different fields required in each country, see [local bank
+     * For more information on the different fields required in each country, see [local bank
      * details](#appendix-local-bank-details).
      */
     public static final class CustomerBankAccountCreateRequest extends
@@ -598,11 +591,10 @@ public class CustomerBankAccountService {
      *
      * Immediately cancels all associated mandates and cancellable payments.
      * 
-     * This will return a
-     * `disable_failed` error if the bank account has already been disabled.
+     * This will return a `disable_failed` error if the bank account has already been disabled.
      * 
-     * A disabled bank account
-     * can be re-enabled by creating a new bank account resource with the same details.
+     * A disabled bank account can be re-enabled by creating a new bank account resource with the same
+     * details.
      */
     public static final class CustomerBankAccountDisableRequest extends
             PostRequest<CustomerBankAccount> {

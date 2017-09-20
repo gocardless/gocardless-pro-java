@@ -16,9 +16,8 @@ import com.google.gson.reflect.TypeToken;
  * Refund objects represent (partial) refunds of a [payment](#core-endpoints-payments) back to the
  * [customer](#core-endpoints-customers).
  * 
- * GoCardless will notify you via a
- * [webhook](#appendix-webhooks) whenever a refund is created, and will update the `amount_refunded`
- * property of the payment.
+ * GoCardless will notify you via a [webhook](#appendix-webhooks) whenever a refund is created, and
+ * will update the `amount_refunded` property of the payment.
  */
 public class RefundService {
     private final HttpClient httpClient;
@@ -38,16 +37,14 @@ public class RefundService {
      * This fails with:<a name="refund_payment_invalid_state"></a><a
      * name="total_amount_confirmation_invalid"></a><a name="number_of_refunds_exceeded"></a>
      * 
-     * -
-     * `refund_payment_invalid_state` error if the linked [payment](#core-endpoints-payments) isn't
+     * - `refund_payment_invalid_state` error if the linked [payment](#core-endpoints-payments) isn't
      * either `confirmed` or `paid_out`.
      * 
-     * - `total_amount_confirmation_invalid` if the confirmation
-     * amount doesn't match the total amount refunded for the payment. This safeguard is there to prevent
-     * two processes from creating refunds without awareness of each other.
+     * - `total_amount_confirmation_invalid` if the confirmation amount doesn't match the total amount
+     * refunded for the payment. This safeguard is there to prevent two processes from creating refunds
+     * without awareness of each other.
      * 
-     * -
-     * `number_of_refunds_exceeded` if five or more refunds have already been created against the
+     * - `number_of_refunds_exceeded` if five or more refunds have already been created against the
      * payment.
      * 
      */
@@ -88,16 +85,14 @@ public class RefundService {
      * This fails with:<a name="refund_payment_invalid_state"></a><a
      * name="total_amount_confirmation_invalid"></a><a name="number_of_refunds_exceeded"></a>
      * 
-     * -
-     * `refund_payment_invalid_state` error if the linked [payment](#core-endpoints-payments) isn't
+     * - `refund_payment_invalid_state` error if the linked [payment](#core-endpoints-payments) isn't
      * either `confirmed` or `paid_out`.
      * 
-     * - `total_amount_confirmation_invalid` if the confirmation
-     * amount doesn't match the total amount refunded for the payment. This safeguard is there to prevent
-     * two processes from creating refunds without awareness of each other.
+     * - `total_amount_confirmation_invalid` if the confirmation amount doesn't match the total amount
+     * refunded for the payment. This safeguard is there to prevent two processes from creating refunds
+     * without awareness of each other.
      * 
-     * -
-     * `number_of_refunds_exceeded` if five or more refunds have already been created against the
+     * - `number_of_refunds_exceeded` if five or more refunds have already been created against the
      * payment.
      * 
      */

@@ -18,7 +18,6 @@ import com.google.gson.reflect.TypeToken;
  *
  * Mandates represent the Direct Debit mandate with a [customer](#core-endpoints-customers).
  * 
- *
  * GoCardless will notify you via a [webhook](#appendix-webhooks) whenever the status of a mandate
  * changes.
  */
@@ -70,8 +69,7 @@ public class MandateService {
      * Immediately cancels a mandate and all associated cancellable payments. Any metadata supplied to
      * this endpoint will be stored on the mandate cancellation event it causes.
      * 
-     * This will fail with
-     * a `cancellation_failed` error if the mandate is already cancelled.
+     * This will fail with a `cancellation_failed` error if the mandate is already cancelled.
      */
     public MandateCancelRequest cancel(String identity) {
         return new MandateCancelRequest(httpClient, identity);
@@ -84,10 +82,9 @@ public class MandateService {
      * `reinstated` or `failed` webhook up to two working days later. Any metadata supplied to this
      * endpoint will be stored on the `resubmission_requested` event it causes.
      * 
-     * This will fail with
-     * a `mandate_not_inactive` error if the mandate is already being submitted, or is active.
+     * This will fail with a `mandate_not_inactive` error if the mandate is already being submitted, or
+     * is active.
      * 
-     *
      * Mandates can be resubmitted up to 3 times.
      */
     public MandateReinstateRequest reinstate(String identity) {
@@ -601,8 +598,7 @@ public class MandateService {
      * Immediately cancels a mandate and all associated cancellable payments. Any metadata supplied to
      * this endpoint will be stored on the mandate cancellation event it causes.
      * 
-     * This will fail with
-     * a `cancellation_failed` error if the mandate is already cancelled.
+     * This will fail with a `cancellation_failed` error if the mandate is already cancelled.
      */
     public static final class MandateCancelRequest extends PostRequest<Mandate> {
         @PathParam
@@ -677,10 +673,9 @@ public class MandateService {
      * `reinstated` or `failed` webhook up to two working days later. Any metadata supplied to this
      * endpoint will be stored on the `resubmission_requested` event it causes.
      * 
-     * This will fail with
-     * a `mandate_not_inactive` error if the mandate is already being submitted, or is active.
+     * This will fail with a `mandate_not_inactive` error if the mandate is already being submitted, or
+     * is active.
      * 
-     *
      * Mandates can be resubmitted up to 3 times.
      */
     public static final class MandateReinstateRequest extends PostRequest<Mandate> {

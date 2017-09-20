@@ -16,11 +16,10 @@ import com.google.gson.reflect.TypeToken;
  * Creditor Bank Accounts hold the bank details of a [creditor](#core-endpoints-creditors). These are
  * the bank accounts which your [payouts](#core-endpoints-payouts) will be sent to.
  * 
- * Note that
- * creditor bank accounts must be unique, and so you will encounter a `bank_account_exists` error if
- * you try to create a duplicate bank account. You may wish to handle this by updating the existing
- * record instead, the ID of which will be provided as `links[creditor_bank_account]` in the error
- * response.
+ * Note that creditor bank accounts must be unique, and so you will encounter a `bank_account_exists`
+ * error if you try to create a duplicate bank account. You may wish to handle this by updating the
+ * existing record instead, the ID of which will be provided as `links[creditor_bank_account]` in the
+ * error response.
  */
 public class CreditorBankAccountService {
     private final HttpClient httpClient;
@@ -64,11 +63,9 @@ public class CreditorBankAccountService {
     /**
      * Immediately disables the bank account, no money can be paid out to a disabled account.
      * 
-     * This
-     * will return a `disable_failed` error if the bank account has already been disabled.
+     * This will return a `disable_failed` error if the bank account has already been disabled.
      * 
-     * A
-     * disabled bank account can be re-enabled by creating a new bank account resource with the same
+     * A disabled bank account can be re-enabled by creating a new bank account resource with the same
      * details.
      */
     public CreditorBankAccountDisableRequest disable(String identity) {
@@ -487,11 +484,9 @@ public class CreditorBankAccountService {
      *
      * Immediately disables the bank account, no money can be paid out to a disabled account.
      * 
-     * This
-     * will return a `disable_failed` error if the bank account has already been disabled.
+     * This will return a `disable_failed` error if the bank account has already been disabled.
      * 
-     * A
-     * disabled bank account can be re-enabled by creating a new bank account resource with the same
+     * A disabled bank account can be re-enabled by creating a new bank account resource with the same
      * details.
      */
     public static final class CreditorBankAccountDisableRequest extends

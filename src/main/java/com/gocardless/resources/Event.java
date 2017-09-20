@@ -65,7 +65,6 @@ public class Event {
      * <ul>
      * <li>`payments`</li>
      * <li>`mandates`</li>
-     *
      * <li>`payouts`</li>
      * <li>`refunds`</li>
      * <li>`subscriptions`</li>
@@ -114,13 +113,10 @@ public class Event {
         /**
          * Who initiated the event. One of:
          * <ul>
-         * <li>`bank`: this event was triggered by a report from
-         * the banks</li>
+         * <li>`bank`: this event was triggered by a report from the banks</li>
          * <li>`gocardless`: this event was performed by GoCardless automatically</li>
-         *
          * <li>`api`: this event was triggered by an API endpoint</li>
-         * <li>`customer`: this event was
-         * triggered by a Customer</li>
+         * <li>`customer`: this event was triggered by a Customer</li>
          * </ul>
          */
         public Origin getOrigin() {

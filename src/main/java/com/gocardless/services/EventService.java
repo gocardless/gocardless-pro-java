@@ -142,7 +142,6 @@ public class EventService {
          * <ul>
          * <li>`payment`</li>
          * <li>`mandate`</li>
-         *
          * <li>`payout`</li>
          * <li>`refund`</li>
          * <li>`subscription`</li>
@@ -209,13 +208,11 @@ public class EventService {
         /**
          * Type of resource that you'd like to get all events for. Cannot be used together with the
          * `payment`, `mandate`, `subscription`, `refund` or `payout` parameter. The type can be one of:
-         *
          * <ul>
          * <li>`payments`</li>
          * <li>`mandates`</li>
          * <li>`payouts`</li>
          * <li>`subscriptions`</li>
-         *
          * <li>`refunds`</li>
          * </ul>
          */
