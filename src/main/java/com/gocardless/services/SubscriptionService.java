@@ -105,6 +105,19 @@ public class SubscriptionService {
 
     /**
      * Updates a subscription object.
+     * 
+     * This fails with:
+     * 
+     * - `subscription_not_active` if the subscription is no longer active.
+     * 
+     * - `subscription_already_ended` if the subscription has taken all payments.
+     * 
+     * - `mandate_payments_require_approval` if the amount is being changed and the mandate requires
+     * approval.
+     * 
+     * - `exceeded_max_amendments` error if the amount is being changed and the
+     *   subscription amount has already been changed 10 times.
+     * 
      */
     public SubscriptionUpdateRequest update(String identity) {
         return new SubscriptionUpdateRequest(httpClient, identity);
@@ -602,13 +615,35 @@ public class SubscriptionService {
      * Request class for {@link SubscriptionService#update }.
      *
      * Updates a subscription object.
+     * 
+     * This fails with:
+     * 
+     * - `subscription_not_active` if the subscription is no longer active.
+     * 
+     * - `subscription_already_ended` if the subscription has taken all payments.
+     * 
+     * - `mandate_payments_require_approval` if the amount is being changed and the mandate requires
+     * approval.
+     * 
+     * - `exceeded_max_amendments` error if the amount is being changed and the
+     *   subscription amount has already been changed 10 times.
+     * 
      */
     public static final class SubscriptionUpdateRequest extends PutRequest<Subscription> {
         @PathParam
         private final String identity;
+        private Integer amount;
         private Map<String, String> metadata;
         private String name;
         private String paymentReference;
+
+        /**
+         * Amount in pence (GBP), cents (EUR), or öre (SEK).
+         */
+        public SubscriptionUpdateRequest withAmount(Integer amount) {
+            this.amount = amount;
+            return this;
+        }
 
         /**
          * Key-value store of custom data. Up to 3 keys are permitted, with key names up to 50 characters and
