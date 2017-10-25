@@ -81,7 +81,7 @@
 </div>
 <div class="contentContainer">
 <ul class="inheritance">
-<li><a href="http://docs.oracle.com/javase/7/docs/api/java/lang/Object.html?is-external=true" title="class or interface in java.lang">java.lang.Object</a></li>
+<li>java.lang.Object</li>
 <li>
 <ul class="inheritance">
 <li>com.gocardless.resources.Mandate</li>
@@ -94,7 +94,7 @@
 <hr>
 <br>
 <pre>public class <span class="strong">Mandate</span>
-extends <a href="http://docs.oracle.com/javase/7/docs/api/java/lang/Object.html?is-external=true" title="class or interface in java.lang">Object</a></pre>
+extends java.lang.Object</pre>
 <div class="block"><p>Represents a mandate resource returned from the API.</p><p>Mandates represent the Direct Debit mandate with a <a href="#core-endpoints-customers">customer</a>.</p><p>GoCardless will notify you via a <a href="#appendix-webhooks">webhook</a> whenever the status of a mandate changes.</p></div>
 </li>
 </ul>
@@ -138,13 +138,13 @@ extends <a href="http://docs.oracle.com/javase/7/docs/api/java/lang/Object.html?
 <th class="colLast" scope="col">Method and Description</th>
 </tr>
 <tr class="altColor">
-<td class="colFirst"><code><a href="http://docs.oracle.com/javase/7/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</a></code></td>
+<td class="colFirst"><code>java.lang.String</code></td>
 <td class="colLast"><code><strong><a href="../../../com/gocardless/resources/Mandate.html#getCreatedAt()">getCreatedAt</a></strong>()</code>
 <div class="block">Fixed <a href="#api-usage-time-zones--dates">timestamp</a>, recording when this resource was created.</div>
 </td>
 </tr>
 <tr class="rowColor">
-<td class="colFirst"><code><a href="http://docs.oracle.com/javase/7/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</a></code></td>
+<td class="colFirst"><code>java.lang.String</code></td>
 <td class="colLast"><code><strong><a href="../../../com/gocardless/resources/Mandate.html#getId()">getId</a></strong>()</code>
 <div class="block">Unique identifier, beginning with &ldquo;MD&rdquo;.</div>
 </td>
@@ -154,31 +154,31 @@ extends <a href="http://docs.oracle.com/javase/7/docs/api/java/lang/Object.html?
 <td class="colLast"><code><strong><a href="../../../com/gocardless/resources/Mandate.html#getLinks()">getLinks</a></strong>()</code>&nbsp;</td>
 </tr>
 <tr class="rowColor">
-<td class="colFirst"><code><a href="http://docs.oracle.com/javase/7/docs/api/java/util/Map.html?is-external=true" title="class or interface in java.util">Map</a>&lt;<a href="http://docs.oracle.com/javase/7/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</a>,<a href="http://docs.oracle.com/javase/7/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</a>&gt;</code></td>
+<td class="colFirst"><code>java.util.Map&lt;java.lang.String,java.lang.String&gt;</code></td>
 <td class="colLast"><code><strong><a href="../../../com/gocardless/resources/Mandate.html#getMetadata()">getMetadata</a></strong>()</code>
 <div class="block">Key-value store of custom data.</div>
 </td>
 </tr>
 <tr class="altColor">
-<td class="colFirst"><code><a href="http://docs.oracle.com/javase/7/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</a></code></td>
+<td class="colFirst"><code>java.lang.String</code></td>
 <td class="colLast"><code><strong><a href="../../../com/gocardless/resources/Mandate.html#getNextPossibleChargeDate()">getNextPossibleChargeDate</a></strong>()</code>
 <div class="block">The earliest date a newly created payment for this mandate could be charged.</div>
 </td>
 </tr>
 <tr class="rowColor">
-<td class="colFirst"><code><a href="http://docs.oracle.com/javase/7/docs/api/java/lang/Boolean.html?is-external=true" title="class or interface in java.lang">Boolean</a></code></td>
+<td class="colFirst"><code>java.lang.Boolean</code></td>
 <td class="colLast"><code><strong><a href="../../../com/gocardless/resources/Mandate.html#getPaymentsRequireApproval()">getPaymentsRequireApproval</a></strong>()</code>
 <div class="block">Boolean value showing whether payments and subscriptions under this mandate require approval via an automated email before being processed.</div>
 </td>
 </tr>
 <tr class="altColor">
-<td class="colFirst"><code><a href="http://docs.oracle.com/javase/7/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</a></code></td>
+<td class="colFirst"><code>java.lang.String</code></td>
 <td class="colLast"><code><strong><a href="../../../com/gocardless/resources/Mandate.html#getReference()">getReference</a></strong>()</code>
 <div class="block">Unique reference.</div>
 </td>
 </tr>
 <tr class="rowColor">
-<td class="colFirst"><code><a href="http://docs.oracle.com/javase/7/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</a></code></td>
+<td class="colFirst"><code>java.lang.String</code></td>
 <td class="colLast"><code><strong><a href="../../../com/gocardless/resources/Mandate.html#getScheme()">getScheme</a></strong>()</code>
 <div class="block"><a name="mandates_scheme"></a>Direct Debit scheme to which this mandate and associated payments are submitted.</div>
 </td>
@@ -194,8 +194,8 @@ extends <a href="http://docs.oracle.com/javase/7/docs/api/java/lang/Object.html?
 <li class="blockList"><a name="methods_inherited_from_class_java.lang.Object">
 <!--   -->
 </a>
-<h3>Methods inherited from class&nbsp;java.lang.<a href="http://docs.oracle.com/javase/7/docs/api/java/lang/Object.html?is-external=true" title="class or interface in java.lang">Object</a></h3>
-<code><a href="http://docs.oracle.com/javase/7/docs/api/java/lang/Object.html?is-external=true#equals(java.lang.Object)" title="class or interface in java.lang">equals</a>, <a href="http://docs.oracle.com/javase/7/docs/api/java/lang/Object.html?is-external=true#getClass()" title="class or interface in java.lang">getClass</a>, <a href="http://docs.oracle.com/javase/7/docs/api/java/lang/Object.html?is-external=true#hashCode()" title="class or interface in java.lang">hashCode</a>, <a href="http://docs.oracle.com/javase/7/docs/api/java/lang/Object.html?is-external=true#notify()" title="class or interface in java.lang">notify</a>, <a href="http://docs.oracle.com/javase/7/docs/api/java/lang/Object.html?is-external=true#notifyAll()" title="class or interface in java.lang">notifyAll</a>, <a href="http://docs.oracle.com/javase/7/docs/api/java/lang/Object.html?is-external=true#toString()" title="class or interface in java.lang">toString</a>, <a href="http://docs.oracle.com/javase/7/docs/api/java/lang/Object.html?is-external=true#wait()" title="class or interface in java.lang">wait</a>, <a href="http://docs.oracle.com/javase/7/docs/api/java/lang/Object.html?is-external=true#wait(long)" title="class or interface in java.lang">wait</a>, <a href="http://docs.oracle.com/javase/7/docs/api/java/lang/Object.html?is-external=true#wait(long,%20int)" title="class or interface in java.lang">wait</a></code></li>
+<h3>Methods inherited from class&nbsp;java.lang.Object</h3>
+<code>equals, getClass, hashCode, notify, notifyAll, toString, wait, wait, wait</code></li>
 </ul>
 </li>
 </ul>
@@ -217,7 +217,7 @@ extends <a href="http://docs.oracle.com/javase/7/docs/api/java/lang/Object.html?
 <ul class="blockList">
 <li class="blockList">
 <h4>getCreatedAt</h4>
-<pre>public&nbsp;<a href="http://docs.oracle.com/javase/7/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</a>&nbsp;getCreatedAt()</pre>
+<pre>public&nbsp;java.lang.String&nbsp;getCreatedAt()</pre>
 <div class="block"><p>Fixed <a href="#api-usage-time-zones--dates">timestamp</a>, recording when this resource was created.</p></div>
 </li>
 </ul>
@@ -227,7 +227,7 @@ extends <a href="http://docs.oracle.com/javase/7/docs/api/java/lang/Object.html?
 <ul class="blockList">
 <li class="blockList">
 <h4>getId</h4>
-<pre>public&nbsp;<a href="http://docs.oracle.com/javase/7/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</a>&nbsp;getId()</pre>
+<pre>public&nbsp;java.lang.String&nbsp;getId()</pre>
 <div class="block"><p>Unique identifier, beginning with &ldquo;MD&rdquo;.</p></div>
 </li>
 </ul>
@@ -246,7 +246,7 @@ extends <a href="http://docs.oracle.com/javase/7/docs/api/java/lang/Object.html?
 <ul class="blockList">
 <li class="blockList">
 <h4>getMetadata</h4>
-<pre>public&nbsp;<a href="http://docs.oracle.com/javase/7/docs/api/java/util/Map.html?is-external=true" title="class or interface in java.util">Map</a>&lt;<a href="http://docs.oracle.com/javase/7/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</a>,<a href="http://docs.oracle.com/javase/7/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</a>&gt;&nbsp;getMetadata()</pre>
+<pre>public&nbsp;java.util.Map&lt;java.lang.String,java.lang.String&gt;&nbsp;getMetadata()</pre>
 <div class="block"><p>Key-value store of custom data. Up to 3 keys are permitted, with key names up to 50 characters and values up to 500 characters.</p></div>
 </li>
 </ul>
@@ -256,7 +256,7 @@ extends <a href="http://docs.oracle.com/javase/7/docs/api/java/lang/Object.html?
 <ul class="blockList">
 <li class="blockList">
 <h4>getNextPossibleChargeDate</h4>
-<pre>public&nbsp;<a href="http://docs.oracle.com/javase/7/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</a>&nbsp;getNextPossibleChargeDate()</pre>
+<pre>public&nbsp;java.lang.String&nbsp;getNextPossibleChargeDate()</pre>
 <div class="block"><p>The earliest date a newly created payment for this mandate could be charged.</p></div>
 </li>
 </ul>
@@ -266,7 +266,7 @@ extends <a href="http://docs.oracle.com/javase/7/docs/api/java/lang/Object.html?
 <ul class="blockList">
 <li class="blockList">
 <h4>getPaymentsRequireApproval</h4>
-<pre>public&nbsp;<a href="http://docs.oracle.com/javase/7/docs/api/java/lang/Boolean.html?is-external=true" title="class or interface in java.lang">Boolean</a>&nbsp;getPaymentsRequireApproval()</pre>
+<pre>public&nbsp;java.lang.Boolean&nbsp;getPaymentsRequireApproval()</pre>
 <div class="block"><p>Boolean value showing whether payments and subscriptions under this mandate require approval via an automated email before being processed.</p></div>
 </li>
 </ul>
@@ -276,7 +276,7 @@ extends <a href="http://docs.oracle.com/javase/7/docs/api/java/lang/Object.html?
 <ul class="blockList">
 <li class="blockList">
 <h4>getReference</h4>
-<pre>public&nbsp;<a href="http://docs.oracle.com/javase/7/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</a>&nbsp;getReference()</pre>
+<pre>public&nbsp;java.lang.String&nbsp;getReference()</pre>
 <div class="block"><p>Unique reference. Different schemes have different length and <a href="#appendix-character-sets">character set</a> requirements. GoCardless will generate a unique reference satisfying the different scheme requirements if this field is left blank.</p></div>
 </li>
 </ul>
@@ -286,7 +286,7 @@ extends <a href="http://docs.oracle.com/javase/7/docs/api/java/lang/Object.html?
 <ul class="blockList">
 <li class="blockList">
 <h4>getScheme</h4>
-<pre>public&nbsp;<a href="http://docs.oracle.com/javase/7/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</a>&nbsp;getScheme()</pre>
+<pre>public&nbsp;java.lang.String&nbsp;getScheme()</pre>
 <div class="block"><p><a name="mandates_scheme"></a>Direct Debit scheme to which this mandate and associated payments are submitted. Can be supplied or automatically detected from the customer&rsquo;s bank account. Currently only &ldquo;autogiro&rdquo;, &ldquo;bacs&rdquo;, and &ldquo;sepa_core&rdquo; are supported.</p></div>
 </li>
 </ul>

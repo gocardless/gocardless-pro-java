@@ -81,7 +81,7 @@
 </div>
 <div class="contentContainer">
 <ul class="inheritance">
-<li><a href="http://docs.oracle.com/javase/7/docs/api/java/lang/Object.html?is-external=true" title="class or interface in java.lang">java.lang.Object</a></li>
+<li>java.lang.Object</li>
 <li>
 <ul class="inheritance">
 <li>com.gocardless.services.CustomerBankAccountService</li>
@@ -94,7 +94,7 @@
 <hr>
 <br>
 <pre>public class <span class="strong">CustomerBankAccountService</span>
-extends <a href="http://docs.oracle.com/javase/7/docs/api/java/lang/Object.html?is-external=true" title="class or interface in java.lang">Object</a></pre>
+extends java.lang.Object</pre>
 <div class="block"><p>Service class for working with customer bank account resources.</p><p>Customer Bank Accounts hold the bank details of a <a href="#core-endpoints-customers">customer</a>. They always belong to a <a href="#core-endpoints-customers">customer</a>, and may be linked to several Direct Debit <a href="#core-endpoints-mandates">mandates</a>.</p><p>Note that customer bank accounts must be unique, and so you will encounter a <code>bank_account_exists</code> error if you try to create a duplicate bank account. You may wish to handle this by updating the existing record instead, the ID of which will be provided as <code>links[customer_bank_account]</code> in the error response.</p></div>
 </li>
 </ul>
@@ -179,7 +179,7 @@ extends <a href="http://docs.oracle.com/javase/7/docs/api/java/lang/Object.html?
 <th class="colLast" scope="col">Method and Description</th>
 </tr>
 <tr class="altColor">
-<td class="colFirst"><code><a href="../../../com/gocardless/services/CustomerBankAccountService.CustomerBankAccountListRequest.html" title="class in com.gocardless.services">CustomerBankAccountService.CustomerBankAccountListRequest</a>&lt;<a href="http://docs.oracle.com/javase/7/docs/api/java/lang/Iterable.html?is-external=true" title="class or interface in java.lang">Iterable</a>&lt;<a href="../../../com/gocardless/resources/CustomerBankAccount.html" title="class in com.gocardless.resources">CustomerBankAccount</a>&gt;&gt;</code></td>
+<td class="colFirst"><code><a href="../../../com/gocardless/services/CustomerBankAccountService.CustomerBankAccountListRequest.html" title="class in com.gocardless.services">CustomerBankAccountService.CustomerBankAccountListRequest</a>&lt;java.lang.Iterable&lt;<a href="../../../com/gocardless/resources/CustomerBankAccount.html" title="class in com.gocardless.resources">CustomerBankAccount</a>&gt;&gt;</code></td>
 <td class="colLast"><code><strong><a href="../../../com/gocardless/services/CustomerBankAccountService.html#all()">all</a></strong>()</code>&nbsp;</td>
 </tr>
 <tr class="rowColor">
@@ -190,13 +190,13 @@ extends <a href="http://docs.oracle.com/javase/7/docs/api/java/lang/Object.html?
 </tr>
 <tr class="altColor">
 <td class="colFirst"><code><a href="../../../com/gocardless/services/CustomerBankAccountService.CustomerBankAccountDisableRequest.html" title="class in com.gocardless.services">CustomerBankAccountService.CustomerBankAccountDisableRequest</a></code></td>
-<td class="colLast"><code><strong><a href="../../../com/gocardless/services/CustomerBankAccountService.html#disable(java.lang.String)">disable</a></strong>(<a href="http://docs.oracle.com/javase/7/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</a>&nbsp;identity)</code>
+<td class="colLast"><code><strong><a href="../../../com/gocardless/services/CustomerBankAccountService.html#disable(java.lang.String)">disable</a></strong>(java.lang.String&nbsp;identity)</code>
 <div class="block">Immediately cancels all associated mandates and cancellable payments.</div>
 </td>
 </tr>
 <tr class="rowColor">
 <td class="colFirst"><code><a href="../../../com/gocardless/services/CustomerBankAccountService.CustomerBankAccountGetRequest.html" title="class in com.gocardless.services">CustomerBankAccountService.CustomerBankAccountGetRequest</a></code></td>
-<td class="colLast"><code><strong><a href="../../../com/gocardless/services/CustomerBankAccountService.html#get(java.lang.String)">get</a></strong>(<a href="http://docs.oracle.com/javase/7/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</a>&nbsp;identity)</code>
+<td class="colLast"><code><strong><a href="../../../com/gocardless/services/CustomerBankAccountService.html#get(java.lang.String)">get</a></strong>(java.lang.String&nbsp;identity)</code>
 <div class="block">Retrieves the details of an existing bank account.</div>
 </td>
 </tr>
@@ -208,7 +208,7 @@ extends <a href="http://docs.oracle.com/javase/7/docs/api/java/lang/Object.html?
 </tr>
 <tr class="rowColor">
 <td class="colFirst"><code><a href="../../../com/gocardless/services/CustomerBankAccountService.CustomerBankAccountUpdateRequest.html" title="class in com.gocardless.services">CustomerBankAccountService.CustomerBankAccountUpdateRequest</a></code></td>
-<td class="colLast"><code><strong><a href="../../../com/gocardless/services/CustomerBankAccountService.html#update(java.lang.String)">update</a></strong>(<a href="http://docs.oracle.com/javase/7/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</a>&nbsp;identity)</code>
+<td class="colLast"><code><strong><a href="../../../com/gocardless/services/CustomerBankAccountService.html#update(java.lang.String)">update</a></strong>(java.lang.String&nbsp;identity)</code>
 <div class="block">Updates a customer bank account object.</div>
 </td>
 </tr>
@@ -217,8 +217,8 @@ extends <a href="http://docs.oracle.com/javase/7/docs/api/java/lang/Object.html?
 <li class="blockList"><a name="methods_inherited_from_class_java.lang.Object">
 <!--   -->
 </a>
-<h3>Methods inherited from class&nbsp;java.lang.<a href="http://docs.oracle.com/javase/7/docs/api/java/lang/Object.html?is-external=true" title="class or interface in java.lang">Object</a></h3>
-<code><a href="http://docs.oracle.com/javase/7/docs/api/java/lang/Object.html?is-external=true#equals(java.lang.Object)" title="class or interface in java.lang">equals</a>, <a href="http://docs.oracle.com/javase/7/docs/api/java/lang/Object.html?is-external=true#getClass()" title="class or interface in java.lang">getClass</a>, <a href="http://docs.oracle.com/javase/7/docs/api/java/lang/Object.html?is-external=true#hashCode()" title="class or interface in java.lang">hashCode</a>, <a href="http://docs.oracle.com/javase/7/docs/api/java/lang/Object.html?is-external=true#notify()" title="class or interface in java.lang">notify</a>, <a href="http://docs.oracle.com/javase/7/docs/api/java/lang/Object.html?is-external=true#notifyAll()" title="class or interface in java.lang">notifyAll</a>, <a href="http://docs.oracle.com/javase/7/docs/api/java/lang/Object.html?is-external=true#toString()" title="class or interface in java.lang">toString</a>, <a href="http://docs.oracle.com/javase/7/docs/api/java/lang/Object.html?is-external=true#wait()" title="class or interface in java.lang">wait</a>, <a href="http://docs.oracle.com/javase/7/docs/api/java/lang/Object.html?is-external=true#wait(long)" title="class or interface in java.lang">wait</a>, <a href="http://docs.oracle.com/javase/7/docs/api/java/lang/Object.html?is-external=true#wait(long,%20int)" title="class or interface in java.lang">wait</a></code></li>
+<h3>Methods inherited from class&nbsp;java.lang.Object</h3>
+<code>equals, getClass, hashCode, notify, notifyAll, toString, wait, wait, wait</code></li>
 </ul>
 </li>
 </ul>
@@ -283,7 +283,7 @@ extends <a href="http://docs.oracle.com/javase/7/docs/api/java/lang/Object.html?
 <ul class="blockList">
 <li class="blockList">
 <h4>all</h4>
-<pre>public&nbsp;<a href="../../../com/gocardless/services/CustomerBankAccountService.CustomerBankAccountListRequest.html" title="class in com.gocardless.services">CustomerBankAccountService.CustomerBankAccountListRequest</a>&lt;<a href="http://docs.oracle.com/javase/7/docs/api/java/lang/Iterable.html?is-external=true" title="class or interface in java.lang">Iterable</a>&lt;<a href="../../../com/gocardless/resources/CustomerBankAccount.html" title="class in com.gocardless.resources">CustomerBankAccount</a>&gt;&gt;&nbsp;all()</pre>
+<pre>public&nbsp;<a href="../../../com/gocardless/services/CustomerBankAccountService.CustomerBankAccountListRequest.html" title="class in com.gocardless.services">CustomerBankAccountService.CustomerBankAccountListRequest</a>&lt;java.lang.Iterable&lt;<a href="../../../com/gocardless/resources/CustomerBankAccount.html" title="class in com.gocardless.resources">CustomerBankAccount</a>&gt;&gt;&nbsp;all()</pre>
 </li>
 </ul>
 <a name="get(java.lang.String)">
@@ -292,7 +292,7 @@ extends <a href="http://docs.oracle.com/javase/7/docs/api/java/lang/Object.html?
 <ul class="blockList">
 <li class="blockList">
 <h4>get</h4>
-<pre>public&nbsp;<a href="../../../com/gocardless/services/CustomerBankAccountService.CustomerBankAccountGetRequest.html" title="class in com.gocardless.services">CustomerBankAccountService.CustomerBankAccountGetRequest</a>&nbsp;get(<a href="http://docs.oracle.com/javase/7/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</a>&nbsp;identity)</pre>
+<pre>public&nbsp;<a href="../../../com/gocardless/services/CustomerBankAccountService.CustomerBankAccountGetRequest.html" title="class in com.gocardless.services">CustomerBankAccountService.CustomerBankAccountGetRequest</a>&nbsp;get(java.lang.String&nbsp;identity)</pre>
 <div class="block"><p>Retrieves the details of an existing bank account.</p></div>
 </li>
 </ul>
@@ -302,7 +302,7 @@ extends <a href="http://docs.oracle.com/javase/7/docs/api/java/lang/Object.html?
 <ul class="blockList">
 <li class="blockList">
 <h4>update</h4>
-<pre>public&nbsp;<a href="../../../com/gocardless/services/CustomerBankAccountService.CustomerBankAccountUpdateRequest.html" title="class in com.gocardless.services">CustomerBankAccountService.CustomerBankAccountUpdateRequest</a>&nbsp;update(<a href="http://docs.oracle.com/javase/7/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</a>&nbsp;identity)</pre>
+<pre>public&nbsp;<a href="../../../com/gocardless/services/CustomerBankAccountService.CustomerBankAccountUpdateRequest.html" title="class in com.gocardless.services">CustomerBankAccountService.CustomerBankAccountUpdateRequest</a>&nbsp;update(java.lang.String&nbsp;identity)</pre>
 <div class="block"><p>Updates a customer bank account object. Only the metadata parameter is allowed.</p></div>
 </li>
 </ul>
@@ -312,7 +312,7 @@ extends <a href="http://docs.oracle.com/javase/7/docs/api/java/lang/Object.html?
 <ul class="blockListLast">
 <li class="blockList">
 <h4>disable</h4>
-<pre>public&nbsp;<a href="../../../com/gocardless/services/CustomerBankAccountService.CustomerBankAccountDisableRequest.html" title="class in com.gocardless.services">CustomerBankAccountService.CustomerBankAccountDisableRequest</a>&nbsp;disable(<a href="http://docs.oracle.com/javase/7/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</a>&nbsp;identity)</pre>
+<pre>public&nbsp;<a href="../../../com/gocardless/services/CustomerBankAccountService.CustomerBankAccountDisableRequest.html" title="class in com.gocardless.services">CustomerBankAccountService.CustomerBankAccountDisableRequest</a>&nbsp;disable(java.lang.String&nbsp;identity)</pre>
 <div class="block"><p>Immediately cancels all associated mandates and cancellable payments.</p><p>This will return a <code>disable_failed</code> error if the bank account has already been disabled.</p><p>A disabled bank account can be re-enabled by creating a new bank account resource with the same details.</p></div>
 </li>
 </ul>

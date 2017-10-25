@@ -81,7 +81,7 @@
 </div>
 <div class="contentContainer">
 <ul class="inheritance">
-<li><a href="http://docs.oracle.com/javase/7/docs/api/java/lang/Object.html?is-external=true" title="class or interface in java.lang">java.lang.Object</a></li>
+<li>java.lang.Object</li>
 <li>
 <ul class="inheritance">
 <li>com.gocardless.services.RedirectFlowService</li>
@@ -94,7 +94,7 @@
 <hr>
 <br>
 <pre>public class <span class="strong">RedirectFlowService</span>
-extends <a href="http://docs.oracle.com/javase/7/docs/api/java/lang/Object.html?is-external=true" title="class or interface in java.lang">Object</a></pre>
+extends java.lang.Object</pre>
 <div class="block"><p>Service class for working with redirect flow resources.</p><p>Redirect flows enable you to use GoCardless&rsquo; <a href="https://pay-sandbox.gocardless.com/AL000000AKFPFF">hosted payment pages</a> to set up mandates with your customers. These pages are fully compliant and have been translated into Dutch, French, German, Italian, Portuguese, Spanish and Swedish.</p><p>The overall flow is:</p>
 <ol>
   <li><p>You <a href="#redirect-flows-create-a-redirect-flow">create</a> a redirect flow for your customer, and redirect them to the returned redirect url, e.g. <code>https://pay.gocardless.com/flow/RE123</code>.</p></li>
@@ -173,7 +173,7 @@ extends <a href="http://docs.oracle.com/javase/7/docs/api/java/lang/Object.html?
 </tr>
 <tr class="altColor">
 <td class="colFirst"><code><a href="../../../com/gocardless/services/RedirectFlowService.RedirectFlowCompleteRequest.html" title="class in com.gocardless.services">RedirectFlowService.RedirectFlowCompleteRequest</a></code></td>
-<td class="colLast"><code><strong><a href="../../../com/gocardless/services/RedirectFlowService.html#complete(java.lang.String)">complete</a></strong>(<a href="http://docs.oracle.com/javase/7/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</a>&nbsp;identity)</code>
+<td class="colLast"><code><strong><a href="../../../com/gocardless/services/RedirectFlowService.html#complete(java.lang.String)">complete</a></strong>(java.lang.String&nbsp;identity)</code>
 <div class="block">This creates a <a href="#core-endpoints-customers">customer</a>, <a href="#core-endpoints-customer-bank-accounts">customer bank account</a>, and <a href="#core-endpoints-mandates">mandate</a> using the details supplied by your customer and returns the ID of the created mandate.</div>
 </td>
 </tr>
@@ -185,7 +185,7 @@ extends <a href="http://docs.oracle.com/javase/7/docs/api/java/lang/Object.html?
 </tr>
 <tr class="altColor">
 <td class="colFirst"><code><a href="../../../com/gocardless/services/RedirectFlowService.RedirectFlowGetRequest.html" title="class in com.gocardless.services">RedirectFlowService.RedirectFlowGetRequest</a></code></td>
-<td class="colLast"><code><strong><a href="../../../com/gocardless/services/RedirectFlowService.html#get(java.lang.String)">get</a></strong>(<a href="http://docs.oracle.com/javase/7/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</a>&nbsp;identity)</code>
+<td class="colLast"><code><strong><a href="../../../com/gocardless/services/RedirectFlowService.html#get(java.lang.String)">get</a></strong>(java.lang.String&nbsp;identity)</code>
 <div class="block">Returns all details about a single redirect flow</div>
 </td>
 </tr>
@@ -194,8 +194,8 @@ extends <a href="http://docs.oracle.com/javase/7/docs/api/java/lang/Object.html?
 <li class="blockList"><a name="methods_inherited_from_class_java.lang.Object">
 <!--   -->
 </a>
-<h3>Methods inherited from class&nbsp;java.lang.<a href="http://docs.oracle.com/javase/7/docs/api/java/lang/Object.html?is-external=true" title="class or interface in java.lang">Object</a></h3>
-<code><a href="http://docs.oracle.com/javase/7/docs/api/java/lang/Object.html?is-external=true#equals(java.lang.Object)" title="class or interface in java.lang">equals</a>, <a href="http://docs.oracle.com/javase/7/docs/api/java/lang/Object.html?is-external=true#getClass()" title="class or interface in java.lang">getClass</a>, <a href="http://docs.oracle.com/javase/7/docs/api/java/lang/Object.html?is-external=true#hashCode()" title="class or interface in java.lang">hashCode</a>, <a href="http://docs.oracle.com/javase/7/docs/api/java/lang/Object.html?is-external=true#notify()" title="class or interface in java.lang">notify</a>, <a href="http://docs.oracle.com/javase/7/docs/api/java/lang/Object.html?is-external=true#notifyAll()" title="class or interface in java.lang">notifyAll</a>, <a href="http://docs.oracle.com/javase/7/docs/api/java/lang/Object.html?is-external=true#toString()" title="class or interface in java.lang">toString</a>, <a href="http://docs.oracle.com/javase/7/docs/api/java/lang/Object.html?is-external=true#wait()" title="class or interface in java.lang">wait</a>, <a href="http://docs.oracle.com/javase/7/docs/api/java/lang/Object.html?is-external=true#wait(long)" title="class or interface in java.lang">wait</a>, <a href="http://docs.oracle.com/javase/7/docs/api/java/lang/Object.html?is-external=true#wait(long,%20int)" title="class or interface in java.lang">wait</a></code></li>
+<h3>Methods inherited from class&nbsp;java.lang.Object</h3>
+<code>equals, getClass, hashCode, notify, notifyAll, toString, wait, wait, wait</code></li>
 </ul>
 </li>
 </ul>
@@ -245,7 +245,7 @@ extends <a href="http://docs.oracle.com/javase/7/docs/api/java/lang/Object.html?
 <ul class="blockList">
 <li class="blockList">
 <h4>get</h4>
-<pre>public&nbsp;<a href="../../../com/gocardless/services/RedirectFlowService.RedirectFlowGetRequest.html" title="class in com.gocardless.services">RedirectFlowService.RedirectFlowGetRequest</a>&nbsp;get(<a href="http://docs.oracle.com/javase/7/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</a>&nbsp;identity)</pre>
+<pre>public&nbsp;<a href="../../../com/gocardless/services/RedirectFlowService.RedirectFlowGetRequest.html" title="class in com.gocardless.services">RedirectFlowService.RedirectFlowGetRequest</a>&nbsp;get(java.lang.String&nbsp;identity)</pre>
 <div class="block"><p>Returns all details about a single redirect flow</p></div>
 </li>
 </ul>
@@ -255,7 +255,7 @@ extends <a href="http://docs.oracle.com/javase/7/docs/api/java/lang/Object.html?
 <ul class="blockListLast">
 <li class="blockList">
 <h4>complete</h4>
-<pre>public&nbsp;<a href="../../../com/gocardless/services/RedirectFlowService.RedirectFlowCompleteRequest.html" title="class in com.gocardless.services">RedirectFlowService.RedirectFlowCompleteRequest</a>&nbsp;complete(<a href="http://docs.oracle.com/javase/7/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</a>&nbsp;identity)</pre>
+<pre>public&nbsp;<a href="../../../com/gocardless/services/RedirectFlowService.RedirectFlowCompleteRequest.html" title="class in com.gocardless.services">RedirectFlowService.RedirectFlowCompleteRequest</a>&nbsp;complete(java.lang.String&nbsp;identity)</pre>
 <div class="block"><p>This creates a <a href="#core-endpoints-customers">customer</a>, <a href="#core-endpoints-customer-bank-accounts">customer bank account</a>, and <a href="#core-endpoints-mandates">mandate</a> using the details supplied by your customer and returns the ID of the created mandate.</p><p>This will return a <code>redirect_flow_incomplete</code> error if your customer has not yet been redirected back to your site, and a <code>redirect_flow_already_completed</code> error if your integration has already completed this flow. It will return a <code>bad_request</code> error if the <code>session_token</code> differs to the one supplied when the redirect flow was created.</p></div>
 </li>
 </ul>

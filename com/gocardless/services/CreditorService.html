@@ -81,7 +81,7 @@
 </div>
 <div class="contentContainer">
 <ul class="inheritance">
-<li><a href="http://docs.oracle.com/javase/7/docs/api/java/lang/Object.html?is-external=true" title="class or interface in java.lang">java.lang.Object</a></li>
+<li>java.lang.Object</li>
 <li>
 <ul class="inheritance">
 <li>com.gocardless.services.CreditorService</li>
@@ -94,7 +94,7 @@
 <hr>
 <br>
 <pre>public class <span class="strong">CreditorService</span>
-extends <a href="http://docs.oracle.com/javase/7/docs/api/java/lang/Object.html?is-external=true" title="class or interface in java.lang">Object</a></pre>
+extends java.lang.Object</pre>
 <div class="block"><p>Service class for working with creditor resources.</p><p>Each <a href="#core-endpoints-payments">payment</a> taken through the API is linked to a &ldquo;creditor&rdquo;, to whom the payment is then paid out. In most cases your organisation will have a single &ldquo;creditor&rdquo;, but the API also supports collecting payments on behalf of others.</p><p>Please get in touch if you wish to use this endpoint. Currently, for Anti Money Laundering reasons, any creditors you add must be directly related to your organisation.</p></div>
 </li>
 </ul>
@@ -173,7 +173,7 @@ extends <a href="http://docs.oracle.com/javase/7/docs/api/java/lang/Object.html?
 <th class="colLast" scope="col">Method and Description</th>
 </tr>
 <tr class="altColor">
-<td class="colFirst"><code><a href="../../../com/gocardless/services/CreditorService.CreditorListRequest.html" title="class in com.gocardless.services">CreditorService.CreditorListRequest</a>&lt;<a href="http://docs.oracle.com/javase/7/docs/api/java/lang/Iterable.html?is-external=true" title="class or interface in java.lang">Iterable</a>&lt;<a href="../../../com/gocardless/resources/Creditor.html" title="class in com.gocardless.resources">Creditor</a>&gt;&gt;</code></td>
+<td class="colFirst"><code><a href="../../../com/gocardless/services/CreditorService.CreditorListRequest.html" title="class in com.gocardless.services">CreditorService.CreditorListRequest</a>&lt;java.lang.Iterable&lt;<a href="../../../com/gocardless/resources/Creditor.html" title="class in com.gocardless.resources">Creditor</a>&gt;&gt;</code></td>
 <td class="colLast"><code><strong><a href="../../../com/gocardless/services/CreditorService.html#all()">all</a></strong>()</code>&nbsp;</td>
 </tr>
 <tr class="rowColor">
@@ -184,7 +184,7 @@ extends <a href="http://docs.oracle.com/javase/7/docs/api/java/lang/Object.html?
 </tr>
 <tr class="altColor">
 <td class="colFirst"><code><a href="../../../com/gocardless/services/CreditorService.CreditorGetRequest.html" title="class in com.gocardless.services">CreditorService.CreditorGetRequest</a></code></td>
-<td class="colLast"><code><strong><a href="../../../com/gocardless/services/CreditorService.html#get(java.lang.String)">get</a></strong>(<a href="http://docs.oracle.com/javase/7/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</a>&nbsp;identity)</code>
+<td class="colLast"><code><strong><a href="../../../com/gocardless/services/CreditorService.html#get(java.lang.String)">get</a></strong>(java.lang.String&nbsp;identity)</code>
 <div class="block">Retrieves the details of an existing creditor.</div>
 </td>
 </tr>
@@ -196,7 +196,7 @@ extends <a href="http://docs.oracle.com/javase/7/docs/api/java/lang/Object.html?
 </tr>
 <tr class="altColor">
 <td class="colFirst"><code><a href="../../../com/gocardless/services/CreditorService.CreditorUpdateRequest.html" title="class in com.gocardless.services">CreditorService.CreditorUpdateRequest</a></code></td>
-<td class="colLast"><code><strong><a href="../../../com/gocardless/services/CreditorService.html#update(java.lang.String)">update</a></strong>(<a href="http://docs.oracle.com/javase/7/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</a>&nbsp;identity)</code>
+<td class="colLast"><code><strong><a href="../../../com/gocardless/services/CreditorService.html#update(java.lang.String)">update</a></strong>(java.lang.String&nbsp;identity)</code>
 <div class="block">Updates a creditor object.</div>
 </td>
 </tr>
@@ -205,8 +205,8 @@ extends <a href="http://docs.oracle.com/javase/7/docs/api/java/lang/Object.html?
 <li class="blockList"><a name="methods_inherited_from_class_java.lang.Object">
 <!--   -->
 </a>
-<h3>Methods inherited from class&nbsp;java.lang.<a href="http://docs.oracle.com/javase/7/docs/api/java/lang/Object.html?is-external=true" title="class or interface in java.lang">Object</a></h3>
-<code><a href="http://docs.oracle.com/javase/7/docs/api/java/lang/Object.html?is-external=true#equals(java.lang.Object)" title="class or interface in java.lang">equals</a>, <a href="http://docs.oracle.com/javase/7/docs/api/java/lang/Object.html?is-external=true#getClass()" title="class or interface in java.lang">getClass</a>, <a href="http://docs.oracle.com/javase/7/docs/api/java/lang/Object.html?is-external=true#hashCode()" title="class or interface in java.lang">hashCode</a>, <a href="http://docs.oracle.com/javase/7/docs/api/java/lang/Object.html?is-external=true#notify()" title="class or interface in java.lang">notify</a>, <a href="http://docs.oracle.com/javase/7/docs/api/java/lang/Object.html?is-external=true#notifyAll()" title="class or interface in java.lang">notifyAll</a>, <a href="http://docs.oracle.com/javase/7/docs/api/java/lang/Object.html?is-external=true#toString()" title="class or interface in java.lang">toString</a>, <a href="http://docs.oracle.com/javase/7/docs/api/java/lang/Object.html?is-external=true#wait()" title="class or interface in java.lang">wait</a>, <a href="http://docs.oracle.com/javase/7/docs/api/java/lang/Object.html?is-external=true#wait(long)" title="class or interface in java.lang">wait</a>, <a href="http://docs.oracle.com/javase/7/docs/api/java/lang/Object.html?is-external=true#wait(long,%20int)" title="class or interface in java.lang">wait</a></code></li>
+<h3>Methods inherited from class&nbsp;java.lang.Object</h3>
+<code>equals, getClass, hashCode, notify, notifyAll, toString, wait, wait, wait</code></li>
 </ul>
 </li>
 </ul>
@@ -266,7 +266,7 @@ extends <a href="http://docs.oracle.com/javase/7/docs/api/java/lang/Object.html?
 <ul class="blockList">
 <li class="blockList">
 <h4>all</h4>
-<pre>public&nbsp;<a href="../../../com/gocardless/services/CreditorService.CreditorListRequest.html" title="class in com.gocardless.services">CreditorService.CreditorListRequest</a>&lt;<a href="http://docs.oracle.com/javase/7/docs/api/java/lang/Iterable.html?is-external=true" title="class or interface in java.lang">Iterable</a>&lt;<a href="../../../com/gocardless/resources/Creditor.html" title="class in com.gocardless.resources">Creditor</a>&gt;&gt;&nbsp;all()</pre>
+<pre>public&nbsp;<a href="../../../com/gocardless/services/CreditorService.CreditorListRequest.html" title="class in com.gocardless.services">CreditorService.CreditorListRequest</a>&lt;java.lang.Iterable&lt;<a href="../../../com/gocardless/resources/Creditor.html" title="class in com.gocardless.resources">Creditor</a>&gt;&gt;&nbsp;all()</pre>
 </li>
 </ul>
 <a name="get(java.lang.String)">
@@ -275,7 +275,7 @@ extends <a href="http://docs.oracle.com/javase/7/docs/api/java/lang/Object.html?
 <ul class="blockList">
 <li class="blockList">
 <h4>get</h4>
-<pre>public&nbsp;<a href="../../../com/gocardless/services/CreditorService.CreditorGetRequest.html" title="class in com.gocardless.services">CreditorService.CreditorGetRequest</a>&nbsp;get(<a href="http://docs.oracle.com/javase/7/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</a>&nbsp;identity)</pre>
+<pre>public&nbsp;<a href="../../../com/gocardless/services/CreditorService.CreditorGetRequest.html" title="class in com.gocardless.services">CreditorService.CreditorGetRequest</a>&nbsp;get(java.lang.String&nbsp;identity)</pre>
 <div class="block"><p>Retrieves the details of an existing creditor.</p></div>
 </li>
 </ul>
@@ -285,7 +285,7 @@ extends <a href="http://docs.oracle.com/javase/7/docs/api/java/lang/Object.html?
 <ul class="blockListLast">
 <li class="blockList">
 <h4>update</h4>
-<pre>public&nbsp;<a href="../../../com/gocardless/services/CreditorService.CreditorUpdateRequest.html" title="class in com.gocardless.services">CreditorService.CreditorUpdateRequest</a>&nbsp;update(<a href="http://docs.oracle.com/javase/7/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</a>&nbsp;identity)</pre>
+<pre>public&nbsp;<a href="../../../com/gocardless/services/CreditorService.CreditorUpdateRequest.html" title="class in com.gocardless.services">CreditorService.CreditorUpdateRequest</a>&nbsp;update(java.lang.String&nbsp;identity)</pre>
 <div class="block"><p>Updates a creditor object. Supports all of the fields supported when creating a creditor.</p></div>
 </li>
 </ul>

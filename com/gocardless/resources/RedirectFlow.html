@@ -81,7 +81,7 @@
 </div>
 <div class="contentContainer">
 <ul class="inheritance">
-<li><a href="http://docs.oracle.com/javase/7/docs/api/java/lang/Object.html?is-external=true" title="class or interface in java.lang">java.lang.Object</a></li>
+<li>java.lang.Object</li>
 <li>
 <ul class="inheritance">
 <li>com.gocardless.resources.RedirectFlow</li>
@@ -94,7 +94,7 @@
 <hr>
 <br>
 <pre>public class <span class="strong">RedirectFlow</span>
-extends <a href="http://docs.oracle.com/javase/7/docs/api/java/lang/Object.html?is-external=true" title="class or interface in java.lang">Object</a></pre>
+extends java.lang.Object</pre>
 <div class="block"><p>Represents a redirect flow resource returned from the API.</p><p>Redirect flows enable you to use GoCardless&rsquo; <a href="https://pay-sandbox.gocardless.com/AL000000AKFPFF">hosted payment pages</a> to set up mandates with your customers. These pages are fully compliant and have been translated into Dutch, French, German, Italian, Portuguese, Spanish and Swedish.</p><p>The overall flow is:</p>
 <ol>
   <li><p>You <a href="#redirect-flows-create-a-redirect-flow">create</a> a redirect flow for your customer, and redirect them to the returned redirect url, e.g. <code>https://pay.gocardless.com/flow/RE123</code>.</p></li>
@@ -143,25 +143,25 @@ extends <a href="http://docs.oracle.com/javase/7/docs/api/java/lang/Object.html?
 <th class="colLast" scope="col">Method and Description</th>
 </tr>
 <tr class="altColor">
-<td class="colFirst"><code><a href="http://docs.oracle.com/javase/7/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</a></code></td>
+<td class="colFirst"><code>java.lang.String</code></td>
 <td class="colLast"><code><strong><a href="../../../com/gocardless/resources/RedirectFlow.html#getConfirmationUrl()">getConfirmationUrl</a></strong>()</code>
 <div class="block">The URL of a confirmation page, which you may optionally redirect the customer to rather than use your own page, that confirms in their chosen language that their Direct Debit has been set up successfully.</div>
 </td>
 </tr>
 <tr class="rowColor">
-<td class="colFirst"><code><a href="http://docs.oracle.com/javase/7/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</a></code></td>
+<td class="colFirst"><code>java.lang.String</code></td>
 <td class="colLast"><code><strong><a href="../../../com/gocardless/resources/RedirectFlow.html#getCreatedAt()">getCreatedAt</a></strong>()</code>
 <div class="block">Fixed <a href="#api-usage-time-zones--dates">timestamp</a>, recording when this resource was created.</div>
 </td>
 </tr>
 <tr class="altColor">
-<td class="colFirst"><code><a href="http://docs.oracle.com/javase/7/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</a></code></td>
+<td class="colFirst"><code>java.lang.String</code></td>
 <td class="colLast"><code><strong><a href="../../../com/gocardless/resources/RedirectFlow.html#getDescription()">getDescription</a></strong>()</code>
 <div class="block">A description of the item the customer is paying for.</div>
 </td>
 </tr>
 <tr class="rowColor">
-<td class="colFirst"><code><a href="http://docs.oracle.com/javase/7/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</a></code></td>
+<td class="colFirst"><code>java.lang.String</code></td>
 <td class="colLast"><code><strong><a href="../../../com/gocardless/resources/RedirectFlow.html#getId()">getId</a></strong>()</code>
 <div class="block">Unique identifier, beginning with &ldquo;RE&rdquo;.</div>
 </td>
@@ -171,7 +171,7 @@ extends <a href="http://docs.oracle.com/javase/7/docs/api/java/lang/Object.html?
 <td class="colLast"><code><strong><a href="../../../com/gocardless/resources/RedirectFlow.html#getLinks()">getLinks</a></strong>()</code>&nbsp;</td>
 </tr>
 <tr class="rowColor">
-<td class="colFirst"><code><a href="http://docs.oracle.com/javase/7/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</a></code></td>
+<td class="colFirst"><code>java.lang.String</code></td>
 <td class="colLast"><code><strong><a href="../../../com/gocardless/resources/RedirectFlow.html#getRedirectUrl()">getRedirectUrl</a></strong>()</code>
 <div class="block">The URL of the hosted payment pages for this redirect flow.</div>
 </td>
@@ -183,13 +183,13 @@ extends <a href="http://docs.oracle.com/javase/7/docs/api/java/lang/Object.html?
 </td>
 </tr>
 <tr class="rowColor">
-<td class="colFirst"><code><a href="http://docs.oracle.com/javase/7/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</a></code></td>
+<td class="colFirst"><code>java.lang.String</code></td>
 <td class="colLast"><code><strong><a href="../../../com/gocardless/resources/RedirectFlow.html#getSessionToken()">getSessionToken</a></strong>()</code>
 <div class="block">The customer&rsquo;s session ID must be provided when the redirect flow is set up and again when it is completed.</div>
 </td>
 </tr>
 <tr class="altColor">
-<td class="colFirst"><code><a href="http://docs.oracle.com/javase/7/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</a></code></td>
+<td class="colFirst"><code>java.lang.String</code></td>
 <td class="colLast"><code><strong><a href="../../../com/gocardless/resources/RedirectFlow.html#getSuccessRedirectUrl()">getSuccessRedirectUrl</a></strong>()</code>
 <div class="block">The URL to redirect to upon successful mandate setup.</div>
 </td>
@@ -199,8 +199,8 @@ extends <a href="http://docs.oracle.com/javase/7/docs/api/java/lang/Object.html?
 <li class="blockList"><a name="methods_inherited_from_class_java.lang.Object">
 <!--   -->
 </a>
-<h3>Methods inherited from class&nbsp;java.lang.<a href="http://docs.oracle.com/javase/7/docs/api/java/lang/Object.html?is-external=true" title="class or interface in java.lang">Object</a></h3>
-<code><a href="http://docs.oracle.com/javase/7/docs/api/java/lang/Object.html?is-external=true#equals(java.lang.Object)" title="class or interface in java.lang">equals</a>, <a href="http://docs.oracle.com/javase/7/docs/api/java/lang/Object.html?is-external=true#getClass()" title="class or interface in java.lang">getClass</a>, <a href="http://docs.oracle.com/javase/7/docs/api/java/lang/Object.html?is-external=true#hashCode()" title="class or interface in java.lang">hashCode</a>, <a href="http://docs.oracle.com/javase/7/docs/api/java/lang/Object.html?is-external=true#notify()" title="class or interface in java.lang">notify</a>, <a href="http://docs.oracle.com/javase/7/docs/api/java/lang/Object.html?is-external=true#notifyAll()" title="class or interface in java.lang">notifyAll</a>, <a href="http://docs.oracle.com/javase/7/docs/api/java/lang/Object.html?is-external=true#toString()" title="class or interface in java.lang">toString</a>, <a href="http://docs.oracle.com/javase/7/docs/api/java/lang/Object.html?is-external=true#wait()" title="class or interface in java.lang">wait</a>, <a href="http://docs.oracle.com/javase/7/docs/api/java/lang/Object.html?is-external=true#wait(long)" title="class or interface in java.lang">wait</a>, <a href="http://docs.oracle.com/javase/7/docs/api/java/lang/Object.html?is-external=true#wait(long,%20int)" title="class or interface in java.lang">wait</a></code></li>
+<h3>Methods inherited from class&nbsp;java.lang.Object</h3>
+<code>equals, getClass, hashCode, notify, notifyAll, toString, wait, wait, wait</code></li>
 </ul>
 </li>
 </ul>
@@ -222,7 +222,7 @@ extends <a href="http://docs.oracle.com/javase/7/docs/api/java/lang/Object.html?
 <ul class="blockList">
 <li class="blockList">
 <h4>getConfirmationUrl</h4>
-<pre>public&nbsp;<a href="http://docs.oracle.com/javase/7/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</a>&nbsp;getConfirmationUrl()</pre>
+<pre>public&nbsp;java.lang.String&nbsp;getConfirmationUrl()</pre>
 <div class="block"><p>The URL of a confirmation page, which you may optionally redirect the customer to rather than use your own page, that confirms in their chosen language that their Direct Debit has been set up successfully. Only returned once the customer has set up their mandate via the payment pages and the redirect flow has been <a href="#redirect-flows-complete-a-redirect-flow">completed</a>, and only available for 15 minutes from when you complete the redirect flow. The structure of this URL may change at any time, so you should read it directly from the API response.</p></div>
 </li>
 </ul>
@@ -232,7 +232,7 @@ extends <a href="http://docs.oracle.com/javase/7/docs/api/java/lang/Object.html?
 <ul class="blockList">
 <li class="blockList">
 <h4>getCreatedAt</h4>
-<pre>public&nbsp;<a href="http://docs.oracle.com/javase/7/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</a>&nbsp;getCreatedAt()</pre>
+<pre>public&nbsp;java.lang.String&nbsp;getCreatedAt()</pre>
 <div class="block"><p>Fixed <a href="#api-usage-time-zones--dates">timestamp</a>, recording when this resource was created.</p></div>
 </li>
 </ul>
@@ -242,7 +242,7 @@ extends <a href="http://docs.oracle.com/javase/7/docs/api/java/lang/Object.html?
 <ul class="blockList">
 <li class="blockList">
 <h4>getDescription</h4>
-<pre>public&nbsp;<a href="http://docs.oracle.com/javase/7/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</a>&nbsp;getDescription()</pre>
+<pre>public&nbsp;java.lang.String&nbsp;getDescription()</pre>
 <div class="block"><p>A description of the item the customer is paying for. This will be shown on the hosted payment pages.</p></div>
 </li>
 </ul>
@@ -252,7 +252,7 @@ extends <a href="http://docs.oracle.com/javase/7/docs/api/java/lang/Object.html?
 <ul class="blockList">
 <li class="blockList">
 <h4>getId</h4>
-<pre>public&nbsp;<a href="http://docs.oracle.com/javase/7/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</a>&nbsp;getId()</pre>
+<pre>public&nbsp;java.lang.String&nbsp;getId()</pre>
 <div class="block"><p>Unique identifier, beginning with &ldquo;RE&rdquo;.</p></div>
 </li>
 </ul>
@@ -271,7 +271,7 @@ extends <a href="http://docs.oracle.com/javase/7/docs/api/java/lang/Object.html?
 <ul class="blockList">
 <li class="blockList">
 <h4>getRedirectUrl</h4>
-<pre>public&nbsp;<a href="http://docs.oracle.com/javase/7/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</a>&nbsp;getRedirectUrl()</pre>
+<pre>public&nbsp;java.lang.String&nbsp;getRedirectUrl()</pre>
 <div class="block"><p>The URL of the hosted payment pages for this redirect flow. This is the URL you should redirect your customer to.</p></div>
 </li>
 </ul>
@@ -291,7 +291,7 @@ extends <a href="http://docs.oracle.com/javase/7/docs/api/java/lang/Object.html?
 <ul class="blockList">
 <li class="blockList">
 <h4>getSessionToken</h4>
-<pre>public&nbsp;<a href="http://docs.oracle.com/javase/7/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</a>&nbsp;getSessionToken()</pre>
+<pre>public&nbsp;java.lang.String&nbsp;getSessionToken()</pre>
 <div class="block"><p>The customer&rsquo;s session ID must be provided when the redirect flow is set up and again when it is completed. This allows integrators to ensure that the user who was originally sent to the GoCardless payment pages is the one who has completed them.</p></div>
 </li>
 </ul>
@@ -301,7 +301,7 @@ extends <a href="http://docs.oracle.com/javase/7/docs/api/java/lang/Object.html?
 <ul class="blockListLast">
 <li class="blockList">
 <h4>getSuccessRedirectUrl</h4>
-<pre>public&nbsp;<a href="http://docs.oracle.com/javase/7/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</a>&nbsp;getSuccessRedirectUrl()</pre>
+<pre>public&nbsp;java.lang.String&nbsp;getSuccessRedirectUrl()</pre>
 <div class="block"><p>The URL to redirect to upon successful mandate setup. You must use a URL beginning <code>https</code> in the live environment.</p></div>
 </li>
 </ul>
