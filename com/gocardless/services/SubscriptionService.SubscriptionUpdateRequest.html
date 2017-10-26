@@ -2,13 +2,13 @@
 <!-- NewPage -->
 <html lang="en">
 <head>
-<title>SubscriptionService.SubscriptionUpdateRequest (gocardless-pro 2.6.0 API)</title>
+<title>SubscriptionService.SubscriptionUpdateRequest (gocardless-pro 2.5.0 API)</title>
 <link rel="stylesheet" type="text/css" href="../../../stylesheet.css" title="Style">
 </head>
 <body>
 <script type="text/javascript"><!--
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="SubscriptionService.SubscriptionUpdateRequest (gocardless-pro 2.6.0 API)";
+        parent.document.title="SubscriptionService.SubscriptionUpdateRequest (gocardless-pro 2.5.0 API)";
     }
 //-->
 </script>
@@ -106,6 +106,7 @@
 extends <a href="../../../com/gocardless/http/PutRequest.html" title="class in com.gocardless.http">PutRequest</a>&lt;<a href="../../../com/gocardless/resources/Subscription.html" title="class in com.gocardless.resources">Subscription</a>&gt;</pre>
 <div class="block"><p>Request class for <a href="../../../com/gocardless/services/SubscriptionService.html#update(java.lang.String)"><code>SubscriptionService.update(java.lang.String)</code></a>.</p><p>Updates a subscription object.</p><p>This fails with:</p>
 <ul>
+  <li><p><code>validation_failed</code> if invalid data is provided when attempting to update a subscription.</p></li>
   <li><p><code>subscription_not_active</code> if the subscription is no longer active.</p></li>
   <li><p><code>subscription_already_ended</code> if the subscription has taken all payments.</p></li>
   <li><p><code>mandate_payments_require_approval</code> if the amount is being changed and the mandate requires approval.</p></li>
@@ -137,24 +138,30 @@ extends <a href="../../../com/gocardless/http/PutRequest.html" title="class in c
 </tr>
 <tr class="rowColor">
 <td class="colFirst"><code><a href="../../../com/gocardless/services/SubscriptionService.SubscriptionUpdateRequest.html" title="class in com.gocardless.services">SubscriptionService.SubscriptionUpdateRequest</a></code></td>
+<td class="colLast"><code><strong><a href="../../../com/gocardless/services/SubscriptionService.SubscriptionUpdateRequest.html#withAppFee(java.lang.Integer)">withAppFee</a></strong>(java.lang.Integer&nbsp;appFee)</code>
+<div class="block">The amount to be deducted from the payment as the OAuth app&rsquo;s fee, in pence (GBP), cents (EUR), or öre (SEK).</div>
+</td>
+</tr>
+<tr class="altColor">
+<td class="colFirst"><code><a href="../../../com/gocardless/services/SubscriptionService.SubscriptionUpdateRequest.html" title="class in com.gocardless.services">SubscriptionService.SubscriptionUpdateRequest</a></code></td>
 <td class="colLast"><code><strong><a href="../../../com/gocardless/services/SubscriptionService.SubscriptionUpdateRequest.html#withMetadata(java.util.Map)">withMetadata</a></strong>(java.util.Map&lt;java.lang.String,java.lang.String&gt;&nbsp;metadata)</code>
 <div class="block">Key-value store of custom data.</div>
 </td>
 </tr>
-<tr class="altColor">
+<tr class="rowColor">
 <td class="colFirst"><code><a href="../../../com/gocardless/services/SubscriptionService.SubscriptionUpdateRequest.html" title="class in com.gocardless.services">SubscriptionService.SubscriptionUpdateRequest</a></code></td>
 <td class="colLast"><code><strong><a href="../../../com/gocardless/services/SubscriptionService.SubscriptionUpdateRequest.html#withMetadata(java.lang.String,%20java.lang.String)">withMetadata</a></strong>(java.lang.String&nbsp;key,
             java.lang.String&nbsp;value)</code>
 <div class="block">Key-value store of custom data.</div>
 </td>
 </tr>
-<tr class="rowColor">
+<tr class="altColor">
 <td class="colFirst"><code><a href="../../../com/gocardless/services/SubscriptionService.SubscriptionUpdateRequest.html" title="class in com.gocardless.services">SubscriptionService.SubscriptionUpdateRequest</a></code></td>
 <td class="colLast"><code><strong><a href="../../../com/gocardless/services/SubscriptionService.SubscriptionUpdateRequest.html#withName(java.lang.String)">withName</a></strong>(java.lang.String&nbsp;name)</code>
 <div class="block">Optional name for the subscription.</div>
 </td>
 </tr>
-<tr class="altColor">
+<tr class="rowColor">
 <td class="colFirst"><code><a href="../../../com/gocardless/services/SubscriptionService.SubscriptionUpdateRequest.html" title="class in com.gocardless.services">SubscriptionService.SubscriptionUpdateRequest</a></code></td>
 <td class="colLast"><code><strong><a href="../../../com/gocardless/services/SubscriptionService.SubscriptionUpdateRequest.html#withPaymentReference(java.lang.String)">withPaymentReference</a></strong>(java.lang.String&nbsp;paymentReference)</code>
 <div class="block">An optional payment reference.</div>
@@ -197,6 +204,16 @@ extends <a href="../../../com/gocardless/http/PutRequest.html" title="class in c
 <h4>withAmount</h4>
 <pre>public&nbsp;<a href="../../../com/gocardless/services/SubscriptionService.SubscriptionUpdateRequest.html" title="class in com.gocardless.services">SubscriptionService.SubscriptionUpdateRequest</a>&nbsp;withAmount(java.lang.Integer&nbsp;amount)</pre>
 <div class="block"><p>Amount in pence (GBP), cents (EUR), or öre (SEK).</p></div>
+</li>
+</ul>
+<a name="withAppFee(java.lang.Integer)">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>withAppFee</h4>
+<pre>public&nbsp;<a href="../../../com/gocardless/services/SubscriptionService.SubscriptionUpdateRequest.html" title="class in com.gocardless.services">SubscriptionService.SubscriptionUpdateRequest</a>&nbsp;withAppFee(java.lang.Integer&nbsp;appFee)</pre>
+<div class="block"><p>The amount to be deducted from the payment as the OAuth app&rsquo;s fee, in pence (GBP), cents (EUR), or öre (SEK).</p></div>
 </li>
 </ul>
 <a name="withMetadata(java.util.Map)">

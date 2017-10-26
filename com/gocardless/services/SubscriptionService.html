@@ -2,13 +2,13 @@
 <!-- NewPage -->
 <html lang="en">
 <head>
-<title>SubscriptionService (gocardless-pro 2.6.0 API)</title>
+<title>SubscriptionService (gocardless-pro 2.5.0 API)</title>
 <link rel="stylesheet" type="text/css" href="../../../stylesheet.css" title="Style">
 </head>
 <body>
 <script type="text/javascript"><!--
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="SubscriptionService (gocardless-pro 2.6.0 API)";
+        parent.document.title="SubscriptionService (gocardless-pro 2.5.0 API)";
     }
 //-->
 </script>
@@ -427,6 +427,7 @@ extends java.lang.Object</pre>
 <pre>public&nbsp;<a href="../../../com/gocardless/services/SubscriptionService.SubscriptionUpdateRequest.html" title="class in com.gocardless.services">SubscriptionService.SubscriptionUpdateRequest</a>&nbsp;update(java.lang.String&nbsp;identity)</pre>
 <div class="block"><p>Updates a subscription object.</p><p>This fails with:</p>
 <ul>
+  <li><p><code>validation_failed</code> if invalid data is provided when attempting to update a subscription.</p></li>
   <li><p><code>subscription_not_active</code> if the subscription is no longer active.</p></li>
   <li><p><code>subscription_already_ended</code> if the subscription has taken all payments.</p></li>
   <li><p><code>mandate_payments_require_approval</code> if the amount is being changed and the mandate requires approval.</p></li>
