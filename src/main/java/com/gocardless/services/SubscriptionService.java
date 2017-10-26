@@ -108,6 +108,8 @@ public class SubscriptionService {
      * 
      * This fails with:
      * 
+     * - `validation_failed` if invalid data is provided when attempting to update a subscription.
+     * 
      * - `subscription_not_active` if the subscription is no longer active.
      * 
      * - `subscription_already_ended` if the subscription has taken all payments.
@@ -618,6 +620,8 @@ public class SubscriptionService {
      * 
      * This fails with:
      * 
+     * - `validation_failed` if invalid data is provided when attempting to update a subscription.
+     * 
      * - `subscription_not_active` if the subscription is no longer active.
      * 
      * - `subscription_already_ended` if the subscription has taken all payments.
@@ -633,6 +637,7 @@ public class SubscriptionService {
         @PathParam
         private final String identity;
         private Integer amount;
+        private Integer appFee;
         private Map<String, String> metadata;
         private String name;
         private String paymentReference;
@@ -642,6 +647,15 @@ public class SubscriptionService {
          */
         public SubscriptionUpdateRequest withAmount(Integer amount) {
             this.amount = amount;
+            return this;
+        }
+
+        /**
+         * The amount to be deducted from the payment as the OAuth app's fee, in pence (GBP), cents (EUR), or
+         * öre (SEK).
+         */
+        public SubscriptionUpdateRequest withAppFee(Integer appFee) {
+            this.appFee = appFee;
             return this;
         }
 
