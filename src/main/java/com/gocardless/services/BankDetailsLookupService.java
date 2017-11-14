@@ -6,7 +6,7 @@ import com.gocardless.resources.BankDetailsLookup;
 /**
  * Service class for working with bank details lookup resources.
  *
- * Look up the name and reachability of a bank.
+ * Look up the name and reachability of a bank account.
  */
 public class BankDetailsLookupService {
     private final HttpClient httpClient;
@@ -21,9 +21,13 @@ public class BankDetailsLookupService {
     }
 
     /**
-     * Performs a bank details lookup.
+     * Performs a bank details lookup. As part of the lookup, a modulus check and
+     * reachability check are performed.
      * 
-     * As part of the lookup a modulus check and reachability check are performed.
+     * If your request returns an [error](#api-usage-errors) or the `available_debit_schemes`
+     * attribute is an empty array, you will not be able to collect payments from the
+     * specified bank account. GoCardless may be able to collect payments from an account
+     * even if no `bic` is returned.
      * 
      * Bank account details may be supplied using [local details](#appendix-local-bank-details) or an
      * IBAN.
@@ -38,9 +42,13 @@ public class BankDetailsLookupService {
     /**
      * Request class for {@link BankDetailsLookupService#create }.
      *
-     * Performs a bank details lookup.
+     * Performs a bank details lookup. As part of the lookup, a modulus check and
+     * reachability check are performed.
      * 
-     * As part of the lookup a modulus check and reachability check are performed.
+     * If your request returns an [error](#api-usage-errors) or the `available_debit_schemes`
+     * attribute is an empty array, you will not be able to collect payments from the
+     * specified bank account. GoCardless may be able to collect payments from an account
+     * even if no `bic` is returned.
      * 
      * Bank account details may be supplied using [local details](#appendix-local-bank-details) or an
      * IBAN.

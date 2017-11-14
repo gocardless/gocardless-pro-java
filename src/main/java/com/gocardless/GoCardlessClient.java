@@ -20,6 +20,7 @@ public class GoCardlessClient {
     private final MandatePdfService mandatePdfs;
     private final PaymentService payments;
     private final PayoutService payouts;
+    private final PayoutItemService payoutItems;
     private final RedirectFlowService redirectFlows;
     private final RefundService refunds;
     private final SubscriptionService subscriptions;
@@ -36,6 +37,7 @@ public class GoCardlessClient {
         this.mandatePdfs = new MandatePdfService(httpClient);
         this.payments = new PaymentService(httpClient);
         this.payouts = new PayoutService(httpClient);
+        this.payoutItems = new PayoutItemService(httpClient);
         this.redirectFlows = new RedirectFlowService(httpClient);
         this.refunds = new RefundService(httpClient);
         this.subscriptions = new SubscriptionService(httpClient);
@@ -109,6 +111,13 @@ public class GoCardlessClient {
      */
     public PayoutService payouts() {
         return payouts;
+    }
+
+    /**
+     * A service class for working with payout item resources.
+     */
+    public PayoutItemService payoutItems() {
+        return payoutItems;
     }
 
     /**
