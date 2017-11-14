@@ -1,5 +1,6 @@
 package com.gocardless.services;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -7,6 +8,7 @@ import java.util.Map;
 import com.gocardless.http.*;
 import com.gocardless.resources.Subscription;
 
+import com.google.common.base.Joiner;
 import com.google.common.collect.ImmutableMap;
 import com.google.gson.annotations.SerializedName;
 import com.google.gson.reflect.TypeToken;
@@ -393,6 +395,7 @@ public class SubscriptionService {
         private CreatedAt createdAt;
         private String customer;
         private String mandate;
+        private List<String> status;
 
         /**
          * Cursor pointing to the start of the desired set.
@@ -483,6 +486,25 @@ public class SubscriptionService {
             return this;
         }
 
+        /**
+         * At most four valid status values
+         */
+        public SubscriptionListRequest<S> withStatus(List<String> status) {
+            this.status = status;
+            return this;
+        }
+
+        /**
+         * At most four valid status values
+         */
+        public SubscriptionListRequest<S> withStatus(String status) {
+            if (this.status == null) {
+                this.status = new ArrayList<>();
+            }
+            this.status.add(status);
+            return this;
+        }
+
         private SubscriptionListRequest(HttpClient httpClient,
                 ListRequestExecutor<S, Subscription> executor) {
             super(httpClient, executor);
@@ -500,6 +522,9 @@ public class SubscriptionService {
             }
             if (mandate != null) {
                 params.put("mandate", mandate);
+            }
+            if (status != null) {
+                params.put("status", Joiner.on(",").join(status));
             }
             return params.build();
         }

@@ -357,7 +357,7 @@ public class MandateService {
         }
 
         /**
-         * At most three valid status values
+         * At most four valid status values
          */
         public MandateListRequest<S> withStatus(List<Status> status) {
             this.status = status;
@@ -365,7 +365,7 @@ public class MandateService {
         }
 
         /**
-         * At most three valid status values
+         * At most four valid status values
          */
         public MandateListRequest<S> withStatus(Status status) {
             if (this.status == null) {
