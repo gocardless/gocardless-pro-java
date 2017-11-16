@@ -59,6 +59,7 @@ public class PayoutService {
         private String creditorBankAccount;
         private Currency currency;
         private PayoutType payoutType;
+        private String reference;
         private Status status;
 
         /**
@@ -168,6 +169,14 @@ public class PayoutService {
         }
 
         /**
+         * Reference which appears on the creditor's bank statement.
+         */
+        public PayoutListRequest<S> withReference(String reference) {
+            this.reference = reference;
+            return this;
+        }
+
+        /**
          * One of:
          * <ul>
          * <li>`pending`: the payout has been created, but not yet sent to the banks</li>
@@ -201,6 +210,9 @@ public class PayoutService {
             }
             if (payoutType != null) {
                 params.put("payout_type", payoutType);
+            }
+            if (reference != null) {
+                params.put("reference", reference);
             }
             if (status != null) {
                 params.put("status", status);
