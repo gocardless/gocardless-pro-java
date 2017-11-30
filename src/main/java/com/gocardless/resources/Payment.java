@@ -32,14 +32,14 @@ public class Payment {
     private Status status;
 
     /**
-     * Amount in pence (GBP), cents (EUR), or öre (SEK).
+     * Amount in pence (GBP), cents (EUR), öre (SEK), or øre (DKK).
      */
     public Integer getAmount() {
         return amount;
     }
 
     /**
-     * Amount [refunded](#core-endpoints-refunds) in pence/cents/öre.
+     * Amount [refunded](#core-endpoints-refunds) in pence/cents/öre/øre.
      */
     public Integer getAmountRefunded() {
         return amountRefunded;
@@ -62,8 +62,8 @@ public class Payment {
     }
 
     /**
-     * [ISO 4217](http://en.wikipedia.org/wiki/ISO_4217#Active_codes) currency code. Currently only
-     * "GBP", "EUR", and "SEK" are supported.
+     * [ISO 4217](http://en.wikipedia.org/wiki/ISO_4217#Active_codes) currency code. Currently "GBP",
+     * "EUR", "SEK" and "DKK" are supported.
      */
     public Currency getCurrency() {
         return currency;
@@ -99,10 +99,10 @@ public class Payment {
 
     /**
      * An optional payment reference that will appear on your customer's bank statement. For Bacs
-     * payments this can be up to 10 characters, for SEPA payments the limit is 140 characters, and for
-     * Autogiro payments the limit is 11 characters. <p
-     * class='restricted-notice'><strong>Restricted</strong>: You can only specify a payment reference
-     * for Bacs payments (that is, when collecting from the UK) if you're on the <a
+     * payments this can be up to 10 characters, for SEPA payments the limit is 140 characters, for
+     * Betalingsservice payments the limit is 30 characters and for Autogiro payments the limit is 11
+     * characters. <p class='restricted-notice'><strong>Restricted</strong>: You can only specify a
+     * payment reference for Bacs payments (that is, when collecting from the UK) if you're on the <a
      * href='https://gocardless.com/pricing'>GoCardless Plus or Pro packages</a>.</p>
      */
     public String getReference() {
@@ -133,7 +133,8 @@ public class Payment {
         @SerializedName("GBP")
         GBP, @SerializedName("EUR")
         EUR, @SerializedName("SEK")
-        SEK,
+        SEK, @SerializedName("DKK")
+        DKK,
     }
 
     public enum Status {
