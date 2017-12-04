@@ -17,7 +17,7 @@
     catch(err) {
     }
 //-->
-var methods = {"i0":10,"i1":10,"i2":10,"i3":10,"i4":10,"i5":10,"i6":10,"i7":10,"i8":10,"i9":10,"i10":10,"i11":10,"i12":10,"i13":10};
+var methods = {"i0":10,"i1":10,"i2":10,"i3":10,"i4":10,"i5":10,"i6":10,"i7":10,"i8":10,"i9":10,"i10":10,"i11":10,"i12":10,"i13":10,"i14":10};
 var tabs = {65535:["t0","All Methods"],2:["t2","Instance Methods"],8:["t4","Concrete Methods"]};
 var altColor = "altColor";
 var rowColor = "rowColor";
@@ -174,64 +174,70 @@ extends java.lang.Object</pre>
 </td>
 </tr>
 <tr id="i3" class="rowColor">
+<td class="colFirst"><code>java.lang.Boolean</code></td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../com/gocardless/resources/Creditor.html#getCanCreateRefunds--">getCanCreateRefunds</a></span>()</code>
+<div class="block">Boolean indicating whether the creditor is permitted to create refunds</div>
+</td>
+</tr>
+<tr id="i4" class="altColor">
 <td class="colFirst"><code>java.lang.String</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../com/gocardless/resources/Creditor.html#getCity--">getCity</a></span>()</code>
 <div class="block">The city of the creditor&rsquo;s address.</div>
 </td>
 </tr>
-<tr id="i4" class="altColor">
+<tr id="i5" class="rowColor">
 <td class="colFirst"><code>java.lang.String</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../com/gocardless/resources/Creditor.html#getCountryCode--">getCountryCode</a></span>()</code>
 <div class="block"><a href="http://en.wikipedia.org/wiki/ISO_3166-1_alpha-2#Officially_assigned_code_elements">ISO 3166-1</a> alpha-2 code.</div>
 </td>
 </tr>
-<tr id="i5" class="rowColor">
+<tr id="i6" class="altColor">
 <td class="colFirst"><code>java.lang.String</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../com/gocardless/resources/Creditor.html#getCreatedAt--">getCreatedAt</a></span>()</code>
 <div class="block">Fixed <a href="#api-usage-time-zones--dates">timestamp</a>, recording when this resource was created.</div>
 </td>
 </tr>
-<tr id="i6" class="altColor">
+<tr id="i7" class="rowColor">
 <td class="colFirst"><code>java.lang.String</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../com/gocardless/resources/Creditor.html#getId--">getId</a></span>()</code>
 <div class="block">Unique identifier, beginning with &ldquo;CR&rdquo;.</div>
 </td>
 </tr>
-<tr id="i7" class="rowColor">
+<tr id="i8" class="altColor">
 <td class="colFirst"><code><a href="../../../com/gocardless/resources/Creditor.Links.html" title="class in com.gocardless.resources">Creditor.Links</a></code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../com/gocardless/resources/Creditor.html#getLinks--">getLinks</a></span>()</code>&nbsp;</td>
 </tr>
-<tr id="i8" class="altColor">
+<tr id="i9" class="rowColor">
 <td class="colFirst"><code>java.lang.String</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../com/gocardless/resources/Creditor.html#getLogoUrl--">getLogoUrl</a></span>()</code>
 <div class="block">URL for the creditor&rsquo;s logo, which may be shown on their payment pages.</div>
 </td>
 </tr>
-<tr id="i9" class="rowColor">
+<tr id="i10" class="altColor">
 <td class="colFirst"><code>java.lang.String</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../com/gocardless/resources/Creditor.html#getName--">getName</a></span>()</code>
 <div class="block">The creditor&rsquo;s name.</div>
 </td>
 </tr>
-<tr id="i10" class="altColor">
+<tr id="i11" class="rowColor">
 <td class="colFirst"><code>java.lang.String</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../com/gocardless/resources/Creditor.html#getPostalCode--">getPostalCode</a></span>()</code>
 <div class="block">The creditor&rsquo;s postal code.</div>
 </td>
 </tr>
-<tr id="i11" class="rowColor">
+<tr id="i12" class="altColor">
 <td class="colFirst"><code>java.lang.String</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../com/gocardless/resources/Creditor.html#getRegion--">getRegion</a></span>()</code>
 <div class="block">The creditor&rsquo;s address region, county or department.</div>
 </td>
 </tr>
-<tr id="i12" class="altColor">
+<tr id="i13" class="rowColor">
 <td class="colFirst"><code>java.util.List&lt;<a href="../../../com/gocardless/resources/Creditor.SchemeIdentifier.html" title="class in com.gocardless.resources">Creditor.SchemeIdentifier</a>&gt;</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../com/gocardless/resources/Creditor.html#getSchemeIdentifiers--">getSchemeIdentifiers</a></span>()</code>
 <div class="block">An array of the scheme identifiers this creditor can create mandates against.</div>
 </td>
 </tr>
-<tr id="i13" class="rowColor">
+<tr id="i14" class="altColor">
 <td class="colFirst"><code><a href="../../../com/gocardless/resources/Creditor.VerificationStatus.html" title="enum in com.gocardless.resources">Creditor.VerificationStatus</a></code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../com/gocardless/resources/Creditor.html#getVerificationStatus--">getVerificationStatus</a></span>()</code>
 <div class="block">The creditor&rsquo;s verification status, indicating whether they can yet receive payouts.</div>
@@ -287,6 +293,16 @@ extends java.lang.Object</pre>
 <h4>getAddressLine3</h4>
 <pre>public&nbsp;java.lang.String&nbsp;getAddressLine3()</pre>
 <div class="block"><p>The third line of the creditor&rsquo;s address.</p></div>
+</li>
+</ul>
+<a name="getCanCreateRefunds--">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>getCanCreateRefunds</h4>
+<pre>public&nbsp;java.lang.Boolean&nbsp;getCanCreateRefunds()</pre>
+<div class="block"><p>Boolean indicating whether the creditor is permitted to create refunds</p></div>
 </li>
 </ul>
 <a name="getCity--">
