@@ -22,6 +22,7 @@ public class Creditor {
     private String addressLine1;
     private String addressLine2;
     private String addressLine3;
+    private Boolean canCreateRefunds;
     private String city;
     private String countryCode;
     private String createdAt;
@@ -53,6 +54,13 @@ public class Creditor {
      */
     public String getAddressLine3() {
         return addressLine3;
+    }
+
+    /**
+     * Boolean indicating whether the creditor is permitted to create refunds
+     */
+    public Boolean getCanCreateRefunds() {
+        return canCreateRefunds;
     }
 
     /**

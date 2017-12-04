@@ -415,6 +415,7 @@ public class CreditorService {
         private String addressLine1;
         private String addressLine2;
         private String addressLine3;
+        private Boolean canCreateRefunds;
         private String city;
         private String countryCode;
         private Links links;
@@ -443,6 +444,14 @@ public class CreditorService {
          */
         public CreditorUpdateRequest withAddressLine3(String addressLine3) {
             this.addressLine3 = addressLine3;
+            return this;
+        }
+
+        /**
+         * Boolean indicating whether the creditor is permitted to create refunds
+         */
+        public CreditorUpdateRequest withCanCreateRefunds(Boolean canCreateRefunds) {
+            this.canCreateRefunds = canCreateRefunds;
             return this;
         }
 

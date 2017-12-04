@@ -119,8 +119,8 @@ public class SubscriptionService {
      * - `mandate_payments_require_approval` if the amount is being changed and the mandate requires
      * approval.
      * 
-     * - `exceeded_max_amendments` error if the amount is being changed and the
-     *   subscription amount has already been changed 10 times.
+     * - `number_of_subscription_amendments_exceeded` error if the subscription amount has already been
+     * changed 10 times.
      * 
      */
     public SubscriptionUpdateRequest update(String identity) {
@@ -654,8 +654,8 @@ public class SubscriptionService {
      * - `mandate_payments_require_approval` if the amount is being changed and the mandate requires
      * approval.
      * 
-     * - `exceeded_max_amendments` error if the amount is being changed and the
-     *   subscription amount has already been changed 10 times.
+     * - `number_of_subscription_amendments_exceeded` error if the subscription amount has already been
+     * changed 10 times.
      * 
      */
     public static final class SubscriptionUpdateRequest extends PutRequest<Subscription> {
