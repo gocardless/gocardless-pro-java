@@ -17,7 +17,7 @@
     catch(err) {
     }
 //-->
-var methods = {"i0":10,"i1":10,"i2":10,"i3":10,"i4":10,"i5":10,"i6":10,"i7":10,"i8":10,"i9":10,"i10":10,"i11":10,"i12":10,"i13":10,"i14":10,"i15":10};
+var methods = {"i0":10,"i1":10,"i2":10,"i3":10,"i4":10,"i5":10,"i6":10,"i7":10,"i8":10,"i9":10,"i10":10,"i11":10,"i12":10,"i13":10,"i14":10,"i15":10,"i16":10};
 var tabs = {65535:["t0","All Methods"],2:["t2","Instance Methods"],8:["t4","Concrete Methods"]};
 var altColor = "altColor";
 var rowColor = "rowColor";
@@ -109,7 +109,7 @@ var activeTableTab = "activeTableTab";
 <br>
 <pre>public class <span class="typeNameLabel">Customer</span>
 extends java.lang.Object</pre>
-<div class="block"><p>Represents a customer resource returned from the API.</p><p>Customer objects hold the contact details for a customer. A customer can have several <a href="#core-endpoints-customer-bank-accounts">customer bank accounts</a>, which in turn can have several Direct Debit <a href="#core-endpoints-mandates">mandates</a>.</p><p>Note: the <code>swedish_identity_number</code> field may only be supplied for Swedish customers, and must be supplied if you intend to set up an Autogiro mandate with the customer.</p></div>
+<div class="block"><p>Represents a customer resource returned from the API.</p><p>Customer objects hold the contact details for a customer. A customer can have several <a href="#core-endpoints-customer-bank-accounts">customer bank accounts</a>, which in turn can have several Direct Debit <a href="#core-endpoints-mandates">mandates</a>.</p><p>Notes: - the <code>swedish_identity_number</code> field may only be supplied for Swedish customers, and must be supplied if you intend to set up an Autogiro mandate with the customer. - the <code>danish_identity_number</code> field may only be supplied for Danish customers, and must be supplied if you intend to set up a Betalingsservice mandate with the customer.</p></div>
 </li>
 </ul>
 </div>
@@ -172,53 +172,59 @@ extends java.lang.Object</pre>
 </tr>
 <tr id="i7" class="rowColor">
 <td class="colFirst"><code>java.lang.String</code></td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../com/gocardless/resources/Customer.html#getDanishIdentityNumber--">getDanishIdentityNumber</a></span>()</code>
+<div class="block">For Danish customers only.</div>
+</td>
+</tr>
+<tr id="i8" class="altColor">
+<td class="colFirst"><code>java.lang.String</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../com/gocardless/resources/Customer.html#getEmail--">getEmail</a></span>()</code>
 <div class="block">Customer&rsquo;s email address.</div>
 </td>
 </tr>
-<tr id="i8" class="altColor">
+<tr id="i9" class="rowColor">
 <td class="colFirst"><code>java.lang.String</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../com/gocardless/resources/Customer.html#getFamilyName--">getFamilyName</a></span>()</code>
 <div class="block">Customer&rsquo;s surname.</div>
 </td>
 </tr>
-<tr id="i9" class="rowColor">
+<tr id="i10" class="altColor">
 <td class="colFirst"><code>java.lang.String</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../com/gocardless/resources/Customer.html#getGivenName--">getGivenName</a></span>()</code>
 <div class="block">Customer&rsquo;s first name.</div>
 </td>
 </tr>
-<tr id="i10" class="altColor">
+<tr id="i11" class="rowColor">
 <td class="colFirst"><code>java.lang.String</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../com/gocardless/resources/Customer.html#getId--">getId</a></span>()</code>
 <div class="block">Unique identifier, beginning with &ldquo;CU&rdquo;.</div>
 </td>
 </tr>
-<tr id="i11" class="rowColor">
+<tr id="i12" class="altColor">
 <td class="colFirst"><code>java.lang.String</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../com/gocardless/resources/Customer.html#getLanguage--">getLanguage</a></span>()</code>
 <div class="block"><a href="http://en.wikipedia.org/wiki/List_of_ISO_639-1_codes">ISO 639-1</a> code.</div>
 </td>
 </tr>
-<tr id="i12" class="altColor">
+<tr id="i13" class="rowColor">
 <td class="colFirst"><code>java.util.Map&lt;java.lang.String,java.lang.String&gt;</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../com/gocardless/resources/Customer.html#getMetadata--">getMetadata</a></span>()</code>
 <div class="block">Key-value store of custom data.</div>
 </td>
 </tr>
-<tr id="i13" class="rowColor">
+<tr id="i14" class="altColor">
 <td class="colFirst"><code>java.lang.String</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../com/gocardless/resources/Customer.html#getPostalCode--">getPostalCode</a></span>()</code>
 <div class="block">The customer&rsquo;s postal code.</div>
 </td>
 </tr>
-<tr id="i14" class="altColor">
+<tr id="i15" class="rowColor">
 <td class="colFirst"><code>java.lang.String</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../com/gocardless/resources/Customer.html#getRegion--">getRegion</a></span>()</code>
 <div class="block">The customer&rsquo;s address region, county or department.</div>
 </td>
 </tr>
-<tr id="i15" class="rowColor">
+<tr id="i16" class="altColor">
 <td class="colFirst"><code>java.lang.String</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../com/gocardless/resources/Customer.html#getSwedishIdentityNumber--">getSwedishIdentityNumber</a></span>()</code>
 <div class="block">For Swedish customers only.</div>
@@ -314,6 +320,16 @@ extends java.lang.Object</pre>
 <h4>getCreatedAt</h4>
 <pre>public&nbsp;java.lang.String&nbsp;getCreatedAt()</pre>
 <div class="block"><p>Fixed <a href="#api-usage-time-zones--dates">timestamp</a>, recording when this resource was created.</p></div>
+</li>
+</ul>
+<a name="getDanishIdentityNumber--">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>getDanishIdentityNumber</h4>
+<pre>public&nbsp;java.lang.String&nbsp;getDanishIdentityNumber()</pre>
+<div class="block"><p>For Danish customers only. The civic/company number (CPR or CVR) of the customer. Must be supplied if the customer&rsquo;s bank account is denominated in Danish krone (DKK).</p></div>
 </li>
 </ul>
 <a name="getEmail--">
