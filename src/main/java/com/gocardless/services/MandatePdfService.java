@@ -56,6 +56,7 @@ public class MandatePdfService {
         private String bic;
         private String branchCode;
         private String countryCode;
+        private String danishIdentityNumber;
         private String iban;
         private Links links;
         private String mandateReference;
@@ -114,6 +115,16 @@ public class MandatePdfService {
          */
         public MandatePdfCreateRequest withCountryCode(String countryCode) {
             this.countryCode = countryCode;
+            return this;
+        }
+
+        /**
+         * For Danish customers only. The civic/company number (CPR or CVR) of the customer. Must be supplied
+         * if the customer's bank account is denominated in Danish krone (DKK). Can only be supplied for
+         * Betalingsservice mandates.
+         */
+        public MandatePdfCreateRequest withDanishIdentityNumber(String danishIdentityNumber) {
+            this.danishIdentityNumber = danishIdentityNumber;
             return this;
         }
 

@@ -17,8 +17,11 @@ import com.google.gson.reflect.TypeToken;
  * bank accounts](#core-endpoints-customer-bank-accounts), which in turn can have several Direct
  * Debit [mandates](#core-endpoints-mandates).
  * 
- * Note: the `swedish_identity_number` field may only be supplied for Swedish customers, and must be
+ * Notes:
+ * - the `swedish_identity_number` field may only be supplied for Swedish customers, and must be
  * supplied if you intend to set up an Autogiro mandate with the customer.
+ * - the `danish_identity_number` field may only be supplied for Danish customers, and must be
+ * supplied if you intend to set up a Betalingsservice mandate with the customer.
  */
 public class CustomerService {
     private final HttpClient httpClient;
@@ -76,6 +79,7 @@ public class CustomerService {
         private String city;
         private String companyName;
         private String countryCode;
+        private String danishIdentityNumber;
         private String email;
         private String familyName;
         private String givenName;
@@ -131,6 +135,15 @@ public class CustomerService {
          */
         public CustomerCreateRequest withCountryCode(String countryCode) {
             this.countryCode = countryCode;
+            return this;
+        }
+
+        /**
+         * For Danish customers only. The civic/company number (CPR or CVR) of the customer. Must be supplied
+         * if the customer's bank account is denominated in Danish krone (DKK).
+         */
+        public CustomerCreateRequest withDanishIdentityNumber(String danishIdentityNumber) {
+            this.danishIdentityNumber = danishIdentityNumber;
             return this;
         }
 
@@ -470,6 +483,7 @@ public class CustomerService {
         private String city;
         private String companyName;
         private String countryCode;
+        private String danishIdentityNumber;
         private String email;
         private String familyName;
         private String givenName;
@@ -525,6 +539,15 @@ public class CustomerService {
          */
         public CustomerUpdateRequest withCountryCode(String countryCode) {
             this.countryCode = countryCode;
+            return this;
+        }
+
+        /**
+         * For Danish customers only. The civic/company number (CPR or CVR) of the customer. Must be supplied
+         * if the customer's bank account is denominated in Danish krone (DKK).
+         */
+        public CustomerUpdateRequest withDanishIdentityNumber(String danishIdentityNumber) {
+            this.danishIdentityNumber = danishIdentityNumber;
             return this;
         }
 

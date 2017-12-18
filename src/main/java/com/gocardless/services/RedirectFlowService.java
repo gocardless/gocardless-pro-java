@@ -200,6 +200,18 @@ public class RedirectFlowService {
         }
 
         /**
+         * For Danish customers only. The civic/company number (CPR or CVR) of the customer.
+         */
+        public RedirectFlowCreateRequest withPrefilledCustomerDanishIdentityNumber(
+                String danishIdentityNumber) {
+            if (prefilledCustomer == null) {
+                prefilledCustomer = new PrefilledCustomer();
+            }
+            prefilledCustomer.withDanishIdentityNumber(danishIdentityNumber);
+            return this;
+        }
+
+        /**
          * Customer's email address.
          */
         public RedirectFlowCreateRequest withPrefilledCustomerEmail(String email) {
@@ -344,7 +356,8 @@ public class RedirectFlowService {
         public enum Scheme {
             @SerializedName("autogiro")
             AUTOGIRO, @SerializedName("bacs")
-            BACS, @SerializedName("sepa_core")
+            BACS, @SerializedName("betalingsservice")
+            BETALINGSSERVICE, @SerializedName("sepa_core")
             SEPA_CORE;
             @Override
             public String toString() {
@@ -373,6 +386,7 @@ public class RedirectFlowService {
             private String city;
             private String companyName;
             private String countryCode;
+            private String danishIdentityNumber;
             private String email;
             private String familyName;
             private String givenName;
@@ -427,6 +441,14 @@ public class RedirectFlowService {
              */
             public PrefilledCustomer withCountryCode(String countryCode) {
                 this.countryCode = countryCode;
+                return this;
+            }
+
+            /**
+             * For Danish customers only. The civic/company number (CPR or CVR) of the customer.
+             */
+            public PrefilledCustomer withDanishIdentityNumber(String danishIdentityNumber) {
+                this.danishIdentityNumber = danishIdentityNumber;
                 return this;
             }
 

@@ -9,8 +9,11 @@ import java.util.Map;
  * bank accounts](#core-endpoints-customer-bank-accounts), which in turn can have several Direct
  * Debit [mandates](#core-endpoints-mandates).
  * 
- * Note: the `swedish_identity_number` field may only be supplied for Swedish customers, and must be
+ * Notes:
+ * - the `swedish_identity_number` field may only be supplied for Swedish customers, and must be
  * supplied if you intend to set up an Autogiro mandate with the customer.
+ * - the `danish_identity_number` field may only be supplied for Danish customers, and must be
+ * supplied if you intend to set up a Betalingsservice mandate with the customer.
  */
 public class Customer {
     private Customer() {
@@ -24,6 +27,7 @@ public class Customer {
     private String companyName;
     private String countryCode;
     private String createdAt;
+    private String danishIdentityNumber;
     private String email;
     private String familyName;
     private String givenName;
@@ -82,6 +86,14 @@ public class Customer {
      */
     public String getCreatedAt() {
         return createdAt;
+    }
+
+    /**
+     * For Danish customers only. The civic/company number (CPR or CVR) of the customer. Must be supplied
+     * if the customer's bank account is denominated in Danish krone (DKK).
+     */
+    public String getDanishIdentityNumber() {
+        return danishIdentityNumber;
     }
 
     /**

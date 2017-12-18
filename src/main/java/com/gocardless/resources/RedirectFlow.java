@@ -124,7 +124,8 @@ public class RedirectFlow {
     public enum Scheme {
         @SerializedName("autogiro")
         AUTOGIRO, @SerializedName("bacs")
-        BACS, @SerializedName("sepa_core")
+        BACS, @SerializedName("betalingsservice")
+        BETALINGSSERVICE, @SerializedName("sepa_core")
         SEPA_CORE,
     }
 
