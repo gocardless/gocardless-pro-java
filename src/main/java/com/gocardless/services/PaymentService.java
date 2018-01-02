@@ -244,11 +244,11 @@ public class PaymentService {
         }
 
         public enum Currency {
-            @SerializedName("GBP")
-            GBP, @SerializedName("EUR")
-            EUR, @SerializedName("SEK")
-            SEK, @SerializedName("DKK")
-            DKK;
+            @SerializedName("DKK")
+            DKK, @SerializedName("EUR")
+            EUR, @SerializedName("GBP")
+            GBP, @SerializedName("SEK")
+            SEK;
             @Override
             public String toString() {
                 return name().toLowerCase();
@@ -467,11 +467,11 @@ public class PaymentService {
         }
 
         public enum Currency {
-            @SerializedName("GBP")
-            GBP, @SerializedName("EUR")
-            EUR, @SerializedName("SEK")
-            SEK, @SerializedName("DKK")
-            DKK;
+            @SerializedName("DKK")
+            DKK, @SerializedName("EUR")
+            EUR, @SerializedName("GBP")
+            GBP, @SerializedName("SEK")
+            SEK;
             @Override
             public String toString() {
                 return name().toLowerCase();

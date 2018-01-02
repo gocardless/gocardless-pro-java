@@ -327,15 +327,17 @@ public class Creditor {
         }
 
         public enum Currency {
-            @SerializedName("GBP")
-            GBP, @SerializedName("EUR")
-            EUR, @SerializedName("SEK")
+            @SerializedName("DKK")
+            DKK, @SerializedName("EUR")
+            EUR, @SerializedName("GBP")
+            GBP, @SerializedName("SEK")
             SEK,
         }
 
         public enum Scheme {
             @SerializedName("bacs")
-            BACS, @SerializedName("sepa")
+            BACS, @SerializedName("betalingsservice")
+            BETALINGSSERVICE, @SerializedName("sepa")
             SEPA, @SerializedName("autogiro")
             AUTOGIRO,
         }

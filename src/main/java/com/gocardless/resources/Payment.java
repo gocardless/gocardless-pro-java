@@ -130,11 +130,11 @@ public class Payment {
     }
 
     public enum Currency {
-        @SerializedName("GBP")
-        GBP, @SerializedName("EUR")
-        EUR, @SerializedName("SEK")
-        SEK, @SerializedName("DKK")
-        DKK,
+        @SerializedName("DKK")
+        DKK, @SerializedName("EUR")
+        EUR, @SerializedName("GBP")
+        GBP, @SerializedName("SEK")
+        SEK,
     }
 
     public enum Status {
