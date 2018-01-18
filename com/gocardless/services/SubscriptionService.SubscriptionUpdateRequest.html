@@ -125,6 +125,8 @@ extends <a href="../../../com/gocardless/http/PutRequest.html" title="class in c
   <li><p><code>subscription_already_ended</code> if the subscription has taken all payments.</p></li>
   <li><p><code>mandate_payments_require_approval</code> if the amount is being changed and the mandate requires approval.</p></li>
   <li><p><code>number_of_subscription_amendments_exceeded</code> error if the subscription amount has already been changed 10 times.</p></li>
+  <li><p><code>forbidden</code> if the amount is being changed, and the subscription was created by an app and you are not authenticated as that app, or if the subscription was not created by an app and you are authenticated as an app</p></li>
+  <li><p><code>resource_created_by_another_app</code> if the app fee is being changed, and the subscription was created by an app other than the app you are authenticated as</p></li>
 </ul></div>
 </li>
 </ul>
