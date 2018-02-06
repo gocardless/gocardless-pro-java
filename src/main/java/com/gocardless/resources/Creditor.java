@@ -166,9 +166,18 @@ public class Creditor {
             // blank to prevent instantiation
         }
 
+        private String defaultDkkPayoutAccount;
         private String defaultEurPayoutAccount;
         private String defaultGbpPayoutAccount;
         private String defaultSekPayoutAccount;
+
+        /**
+         * ID of the [bank account](#core-endpoints-creditor-bank-accounts) which is set up to receive
+         * payouts in DKK.
+         */
+        public String getDefaultDkkPayoutAccount() {
+            return defaultDkkPayoutAccount;
+        }
 
         /**
          * ID of the [bank account](#core-endpoints-creditor-bank-accounts) which is set up to receive

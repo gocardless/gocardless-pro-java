@@ -479,6 +479,18 @@ public class CreditorService {
 
         /**
          * ID of the [bank account](#core-endpoints-creditor-bank-accounts) which is set up to receive
+         * payouts in DKK.
+         */
+        public CreditorUpdateRequest withLinksDefaultDkkPayoutAccount(String defaultDkkPayoutAccount) {
+            if (links == null) {
+                links = new Links();
+            }
+            links.withDefaultDkkPayoutAccount(defaultDkkPayoutAccount);
+            return this;
+        }
+
+        /**
+         * ID of the [bank account](#core-endpoints-creditor-bank-accounts) which is set up to receive
          * payouts in EUR.
          */
         public CreditorUpdateRequest withLinksDefaultEurPayoutAccount(String defaultEurPayoutAccount) {
@@ -570,9 +582,19 @@ public class CreditorService {
         }
 
         public static class Links {
+            private String defaultDkkPayoutAccount;
             private String defaultEurPayoutAccount;
             private String defaultGbpPayoutAccount;
             private String defaultSekPayoutAccount;
+
+            /**
+             * ID of the [bank account](#core-endpoints-creditor-bank-accounts) which is set up to receive
+             * payouts in DKK.
+             */
+            public Links withDefaultDkkPayoutAccount(String defaultDkkPayoutAccount) {
+                this.defaultDkkPayoutAccount = defaultDkkPayoutAccount;
+                return this;
+            }
 
             /**
              * ID of the [bank account](#core-endpoints-creditor-bank-accounts) which is set up to receive
