@@ -335,7 +335,7 @@ public class RedirectFlowService {
 
         @Override
         protected String getPathTemplate() {
-            return "/redirect_flows";
+            return "redirect_flows";
         }
 
         @Override
@@ -534,7 +534,7 @@ public class RedirectFlowService {
 
         @Override
         protected String getPathTemplate() {
-            return "/redirect_flows/:identity";
+            return "redirect_flows/:identity";
         }
 
         @Override
@@ -589,7 +589,7 @@ public class RedirectFlowService {
 
         @Override
         protected String getPathTemplate() {
-            return "/redirect_flows/:identity/actions/complete";
+            return "redirect_flows/:identity/actions/complete";
         }
 
         @Override

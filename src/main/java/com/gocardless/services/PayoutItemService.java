@@ -112,7 +112,7 @@ public class PayoutItemService {
 
         @Override
         protected String getPathTemplate() {
-            return "/payout_items";
+            return "payout_items";
         }
 
         @Override

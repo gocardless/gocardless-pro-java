@@ -273,7 +273,7 @@ public class EventService {
 
         @Override
         protected String getPathTemplate() {
-            return "/events";
+            return "events";
         }
 
         @Override
@@ -392,7 +392,7 @@ public class EventService {
 
         @Override
         protected String getPathTemplate() {
-            return "/events/:identity";
+            return "events/:identity";
         }
 
         @Override

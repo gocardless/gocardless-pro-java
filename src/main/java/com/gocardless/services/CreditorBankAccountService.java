@@ -218,7 +218,7 @@ public class CreditorBankAccountService {
 
         @Override
         protected String getPathTemplate() {
-            return "/creditor_bank_accounts";
+            return "creditor_bank_accounts";
         }
 
         @Override
@@ -372,7 +372,7 @@ public class CreditorBankAccountService {
 
         @Override
         protected String getPathTemplate() {
-            return "/creditor_bank_accounts";
+            return "creditor_bank_accounts";
         }
 
         @Override
@@ -465,7 +465,7 @@ public class CreditorBankAccountService {
 
         @Override
         protected String getPathTemplate() {
-            return "/creditor_bank_accounts/:identity";
+            return "creditor_bank_accounts/:identity";
         }
 
         @Override
@@ -508,7 +508,7 @@ public class CreditorBankAccountService {
 
         @Override
         protected String getPathTemplate() {
-            return "/creditor_bank_accounts/:identity/actions/disable";
+            return "creditor_bank_accounts/:identity/actions/disable";
         }
 
         @Override

@@ -195,7 +195,7 @@ public class MandatePdfService {
 
         @Override
         protected String getPathTemplate() {
-            return "/mandate_pdfs";
+            return "mandate_pdfs";
         }
 
         @Override

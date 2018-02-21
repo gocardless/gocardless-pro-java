@@ -222,7 +222,7 @@ public class PayoutService {
 
         @Override
         protected String getPathTemplate() {
-            return "/payouts";
+            return "payouts";
         }
 
         @Override
@@ -347,7 +347,7 @@ public class PayoutService {
 
         @Override
         protected String getPathTemplate() {
-            return "/payouts/:identity";
+            return "payouts/:identity";
         }
 
         @Override

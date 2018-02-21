@@ -225,7 +225,7 @@ public class PaymentService {
 
         @Override
         protected String getPathTemplate() {
-            return "/payments";
+            return "payments";
         }
 
         @Override
@@ -453,7 +453,7 @@ public class PaymentService {
 
         @Override
         protected String getPathTemplate() {
-            return "/payments";
+            return "payments";
         }
 
         @Override
@@ -575,7 +575,7 @@ public class PaymentService {
 
         @Override
         protected String getPathTemplate() {
-            return "/payments/:identity";
+            return "payments/:identity";
         }
 
         @Override
@@ -634,7 +634,7 @@ public class PaymentService {
 
         @Override
         protected String getPathTemplate() {
-            return "/payments/:identity";
+            return "payments/:identity";
         }
 
         @Override
@@ -702,7 +702,7 @@ public class PaymentService {
 
         @Override
         protected String getPathTemplate() {
-            return "/payments/:identity/actions/cancel";
+            return "payments/:identity/actions/cancel";
         }
 
         @Override
@@ -779,7 +779,7 @@ public class PaymentService {
 
         @Override
         protected String getPathTemplate() {
-            return "/payments/:identity/actions/retry";
+            return "payments/:identity/actions/retry";
         }
 
         @Override

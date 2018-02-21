@@ -82,4 +82,14 @@ public class UrlFormatterTest {
         HttpUrl result = urlFormatter.formatUrl(template, pathParams, queryParams);
         assertThat(result.toString()).isEqualTo("http://example.com/foo?bar=1%202%203");
     }
+
+    @Test
+    public void shouldSupportBaseUrlWithPath() {
+        urlFormatter = new UrlFormatter("http://example.com/direct/");
+        String template = "debit/:id";
+        Map<String, String> pathParams = ImmutableMap.of("id", "ID123");
+        Map<String, Object> queryParams = ImmutableMap.<String, Object>of();
+        HttpUrl result = urlFormatter.formatUrl(template, pathParams, queryParams);
+        assertThat(result.toString()).isEqualTo("http://example.com/direct/debit/ID123");
+    }
 }

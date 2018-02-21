@@ -330,7 +330,7 @@ public class SubscriptionService {
 
         @Override
         protected String getPathTemplate() {
-            return "/subscriptions";
+            return "subscriptions";
         }
 
         @Override
@@ -538,7 +538,7 @@ public class SubscriptionService {
 
         @Override
         protected String getPathTemplate() {
-            return "/subscriptions";
+            return "subscriptions";
         }
 
         @Override
@@ -631,7 +631,7 @@ public class SubscriptionService {
 
         @Override
         protected String getPathTemplate() {
-            return "/subscriptions/:identity";
+            return "subscriptions/:identity";
         }
 
         @Override
@@ -754,7 +754,7 @@ public class SubscriptionService {
 
         @Override
         protected String getPathTemplate() {
-            return "/subscriptions/:identity";
+            return "subscriptions/:identity";
         }
 
         @Override
@@ -822,7 +822,7 @@ public class SubscriptionService {
 
         @Override
         protected String getPathTemplate() {
-            return "/subscriptions/:identity/actions/cancel";
+            return "subscriptions/:identity/actions/cancel";
         }
 
         @Override

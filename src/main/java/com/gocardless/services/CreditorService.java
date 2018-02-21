@@ -174,7 +174,7 @@ public class CreditorService {
 
         @Override
         protected String getPathTemplate() {
-            return "/creditors";
+            return "creditors";
         }
 
         @Override
@@ -290,7 +290,7 @@ public class CreditorService {
 
         @Override
         protected String getPathTemplate() {
-            return "/creditors";
+            return "creditors";
         }
 
         @Override
@@ -390,7 +390,7 @@ public class CreditorService {
 
         @Override
         protected String getPathTemplate() {
-            return "/creditors/:identity";
+            return "creditors/:identity";
         }
 
         @Override
@@ -563,7 +563,7 @@ public class CreditorService {
 
         @Override
         protected String getPathTemplate() {
-            return "/creditors/:identity";
+            return "creditors/:identity";
         }
 
         @Override

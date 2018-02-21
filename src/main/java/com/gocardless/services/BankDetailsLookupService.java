@@ -114,7 +114,7 @@ public class BankDetailsLookupService {
 
         @Override
         protected String getPathTemplate() {
-            return "/bank_details_lookups";
+            return "bank_details_lookups";
         }
 
         @Override

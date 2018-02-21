@@ -246,7 +246,7 @@ public class CustomerService {
 
         @Override
         protected String getPathTemplate() {
-            return "/customers";
+            return "customers";
         }
 
         @Override
@@ -362,7 +362,7 @@ public class CustomerService {
 
         @Override
         protected String getPathTemplate() {
-            return "/customers";
+            return "customers";
         }
 
         @Override
@@ -455,7 +455,7 @@ public class CustomerService {
 
         @Override
         protected String getPathTemplate() {
-            return "/customers/:identity";
+            return "customers/:identity";
         }
 
         @Override
@@ -648,7 +648,7 @@ public class CustomerService {
 
         @Override
         protected String getPathTemplate() {
-            return "/customers/:identity";
+            return "customers/:identity";
         }
 
         @Override

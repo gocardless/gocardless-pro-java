@@ -188,7 +188,7 @@ public class MandateService {
 
         @Override
         protected String getPathTemplate() {
-            return "/mandates";
+            return "mandates";
         }
 
         @Override
@@ -406,7 +406,7 @@ public class MandateService {
 
         @Override
         protected String getPathTemplate() {
-            return "/mandates";
+            return "mandates";
         }
 
         @Override
@@ -514,7 +514,7 @@ public class MandateService {
 
         @Override
         protected String getPathTemplate() {
-            return "/mandates/:identity";
+            return "mandates/:identity";
         }
 
         @Override
@@ -573,7 +573,7 @@ public class MandateService {
 
         @Override
         protected String getPathTemplate() {
-            return "/mandates/:identity";
+            return "mandates/:identity";
         }
 
         @Override
@@ -640,7 +640,7 @@ public class MandateService {
 
         @Override
         protected String getPathTemplate() {
-            return "/mandates/:identity/actions/cancel";
+            return "mandates/:identity/actions/cancel";
         }
 
         @Override
@@ -718,7 +718,7 @@ public class MandateService {
 
         @Override
         protected String getPathTemplate() {
-            return "/mandates/:identity/actions/reinstate";
+            return "mandates/:identity/actions/reinstate";
         }
 
         @Override

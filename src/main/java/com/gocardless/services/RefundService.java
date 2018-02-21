@@ -184,7 +184,7 @@ public class RefundService {
 
         @Override
         protected String getPathTemplate() {
-            return "/refunds";
+            return "refunds";
         }
 
         @Override
@@ -324,7 +324,7 @@ public class RefundService {
 
         @Override
         protected String getPathTemplate() {
-            return "/refunds";
+            return "refunds";
         }
 
         @Override
@@ -417,7 +417,7 @@ public class RefundService {
 
         @Override
         protected String getPathTemplate() {
-            return "/refunds/:identity";
+            return "refunds/:identity";
         }
 
         @Override
@@ -476,7 +476,7 @@ public class RefundService {
 
         @Override
         protected String getPathTemplate() {
-            return "/refunds/:identity";
+            return "refunds/:identity";
         }
 
         @Override
