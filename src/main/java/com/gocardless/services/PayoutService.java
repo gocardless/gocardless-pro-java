@@ -144,8 +144,8 @@ public class PayoutService {
         }
 
         /**
-         * [ISO 4217](http://en.wikipedia.org/wiki/ISO_4217#Active_codes) currency code. Currently only
-         * "GBP", "EUR", and "SEK" are supported.
+         * [ISO 4217](http://en.wikipedia.org/wiki/ISO_4217#Active_codes) currency code. Currently "GBP",
+         * "EUR", "SEK" and "DKK" are supported.
          */
         public PayoutListRequest<S> withCurrency(Currency currency) {
             this.currency = currency;
@@ -236,9 +236,10 @@ public class PayoutService {
         }
 
         public enum Currency {
-            @SerializedName("GBP")
-            GBP, @SerializedName("EUR")
-            EUR, @SerializedName("SEK")
+            @SerializedName("DKK")
+            DKK, @SerializedName("EUR")
+            EUR, @SerializedName("GBP")
+            GBP, @SerializedName("SEK")
             SEK;
             @Override
             public String toString() {
