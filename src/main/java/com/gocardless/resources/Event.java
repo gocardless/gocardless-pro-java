@@ -135,7 +135,7 @@ public class Event {
         }
 
         /**
-         * Set when a bank is the origin of the event.
+         * A Direct Debit scheme. Set when a bank is the origin of the event.
          */
         public Scheme getScheme() {
             return scheme;
@@ -152,7 +152,8 @@ public class Event {
         public enum Scheme {
             @SerializedName("autogiro")
             AUTOGIRO, @SerializedName("bacs")
-            BACS, @SerializedName("sepa_core")
+            BACS, @SerializedName("betalingsservice")
+            BETALINGSSERVICE, @SerializedName("sepa_core")
             SEPA_CORE, @SerializedName("sepa_cor1")
             SEPA_COR1,
         }

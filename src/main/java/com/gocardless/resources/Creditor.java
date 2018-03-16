@@ -344,11 +344,11 @@ public class Creditor {
         }
 
         public enum Scheme {
-            @SerializedName("bacs")
+            @SerializedName("autogiro")
+            AUTOGIRO, @SerializedName("bacs")
             BACS, @SerializedName("betalingsservice")
             BETALINGSSERVICE, @SerializedName("sepa")
-            SEPA, @SerializedName("autogiro")
-            AUTOGIRO,
+            SEPA,
         }
     }
 }
