@@ -79,7 +79,15 @@ public class Refund {
             // blank to prevent instantiation
         }
 
+        private String mandate;
         private String payment;
+
+        /**
+         * ID of the [mandate](#core-endpoints-mandates) against which the refund is being made.
+         */
+        public String getMandate() {
+            return mandate;
+        }
 
         /**
          * ID of the [payment](#core-endpoints-payments) against which the refund is being made.
