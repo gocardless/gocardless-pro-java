@@ -17,7 +17,7 @@
     catch(err) {
     }
 //-->
-var methods = {"i0":10,"i1":10,"i2":10,"i3":10,"i4":10,"i5":10,"i6":10,"i7":10};
+var methods = {"i0":10,"i1":10,"i2":10,"i3":10,"i4":10,"i5":10,"i6":10,"i7":10,"i8":10};
 var tabs = {65535:["t0","All Methods"],2:["t2","Instance Methods"],8:["t4","Concrete Methods"]};
 var altColor = "altColor";
 var rowColor = "rowColor";
@@ -183,30 +183,36 @@ name="total_amount_confirmation_invalid"></a><a name="number_of_refunds_exceeded
 </tr>
 <tr id="i3" class="rowColor">
 <td class="colFirst"><code><a href="../../../com/gocardless/services/RefundService.RefundCreateRequest.html" title="class in com.gocardless.services">RefundService.RefundCreateRequest</a></code></td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../com/gocardless/services/RefundService.RefundCreateRequest.html#withLinksMandate-java.util.Map-">withLinksMandate</a></span>(java.util.Map&lt;java.lang.String,java.lang.String&gt;&nbsp;mandate)</code>
+<div class="block"><em>private beta</em> ID of the <a href="#core-endpoints-mandates">mandate</a> against which the refund is being made.</div>
+</td>
+</tr>
+<tr id="i4" class="altColor">
+<td class="colFirst"><code><a href="../../../com/gocardless/services/RefundService.RefundCreateRequest.html" title="class in com.gocardless.services">RefundService.RefundCreateRequest</a></code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../com/gocardless/services/RefundService.RefundCreateRequest.html#withLinksPayment-java.lang.String-">withLinksPayment</a></span>(java.lang.String&nbsp;payment)</code>
 <div class="block">ID of the <a href="#core-endpoints-payments">payment</a> against which the refund is being made.</div>
 </td>
 </tr>
-<tr id="i4" class="altColor">
+<tr id="i5" class="rowColor">
 <td class="colFirst"><code><a href="../../../com/gocardless/services/RefundService.RefundCreateRequest.html" title="class in com.gocardless.services">RefundService.RefundCreateRequest</a></code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../com/gocardless/services/RefundService.RefundCreateRequest.html#withMetadata-java.util.Map-">withMetadata</a></span>(java.util.Map&lt;java.lang.String,java.lang.String&gt;&nbsp;metadata)</code>
 <div class="block">Key-value store of custom data.</div>
 </td>
 </tr>
-<tr id="i5" class="rowColor">
+<tr id="i6" class="altColor">
 <td class="colFirst"><code><a href="../../../com/gocardless/services/RefundService.RefundCreateRequest.html" title="class in com.gocardless.services">RefundService.RefundCreateRequest</a></code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../com/gocardless/services/RefundService.RefundCreateRequest.html#withMetadata-java.lang.String-java.lang.String-">withMetadata</a></span>(java.lang.String&nbsp;key,
             java.lang.String&nbsp;value)</code>
 <div class="block">Key-value store of custom data.</div>
 </td>
 </tr>
-<tr id="i6" class="altColor">
+<tr id="i7" class="rowColor">
 <td class="colFirst"><code><a href="../../../com/gocardless/services/RefundService.RefundCreateRequest.html" title="class in com.gocardless.services">RefundService.RefundCreateRequest</a></code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../com/gocardless/services/RefundService.RefundCreateRequest.html#withReference-java.lang.String-">withReference</a></span>(java.lang.String&nbsp;reference)</code>
 <div class="block">An optional refund reference, displayed on your customer&rsquo;s bank statement.</div>
 </td>
 </tr>
-<tr id="i7" class="rowColor">
+<tr id="i8" class="altColor">
 <td class="colFirst"><code><a href="../../../com/gocardless/services/RefundService.RefundCreateRequest.html" title="class in com.gocardless.services">RefundService.RefundCreateRequest</a></code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../com/gocardless/services/RefundService.RefundCreateRequest.html#withTotalAmountConfirmation-java.lang.Integer-">withTotalAmountConfirmation</a></span>(java.lang.Integer&nbsp;totalAmountConfirmation)</code>
 <div class="block">Total expected refunded amount in pence/cents/öre.</div>
@@ -267,6 +273,16 @@ name="total_amount_confirmation_invalid"></a><a name="number_of_refunds_exceeded
 <pre>public&nbsp;<a href="../../../com/gocardless/services/RefundService.RefundCreateRequest.html" title="class in com.gocardless.services">RefundService.RefundCreateRequest</a>&nbsp;withLinks(<a href="../../../com/gocardless/services/RefundService.RefundCreateRequest.Links.html" title="class in com.gocardless.services">RefundService.RefundCreateRequest.Links</a>&nbsp;links)</pre>
 </li>
 </ul>
+<a name="withLinksMandate-java.util.Map-">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>withLinksMandate</h4>
+<pre>public&nbsp;<a href="../../../com/gocardless/services/RefundService.RefundCreateRequest.html" title="class in com.gocardless.services">RefundService.RefundCreateRequest</a>&nbsp;withLinksMandate(java.util.Map&lt;java.lang.String,java.lang.String&gt;&nbsp;mandate)</pre>
+<div class="block"><p><em>private beta</em> ID of the <a href="#core-endpoints-mandates">mandate</a> against which the refund is being made.</p></div>
+</li>
+</ul>
 <a name="withLinksPayment-java.lang.String-">
 <!--   -->
 </a>
@@ -315,7 +331,7 @@ name="total_amount_confirmation_invalid"></a><a name="number_of_refunds_exceeded
 <li class="blockList">
 <h4>withTotalAmountConfirmation</h4>
 <pre>public&nbsp;<a href="../../../com/gocardless/services/RefundService.RefundCreateRequest.html" title="class in com.gocardless.services">RefundService.RefundCreateRequest</a>&nbsp;withTotalAmountConfirmation(java.lang.Integer&nbsp;totalAmountConfirmation)</pre>
-<div class="block"><p>Total expected refunded amount in pence/cents/öre. If there are other partial refunds against this payment, this value should be the sum of the existing refunds plus the amount of the refund being created.</p></div>
+<div class="block"><p>Total expected refunded amount in pence/cents/öre. If there are other partial refunds against this payment, this value should be the sum of the existing refunds plus the amount of the refund being created.</p><p>Must be supplied if <code>links[payment]</code> is present.</p></div>
 </li>
 </ul>
 <a name="withIdempotencyKey-java.lang.String-">
