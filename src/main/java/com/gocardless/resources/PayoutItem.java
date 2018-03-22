@@ -56,7 +56,9 @@ public class PayoutItem {
      * <li>`payment_paid_out` (credit)</li>
      * <li>`payment_failed` (debit): The payment failed to be processed.</li>
      * <li>`payment_charged_back` (debit): The payment has been charged back.</li>
-     * <li>`payment_refunded` (debit)</li>
+     * <li>`payment_refunded` (debit): The payment has been refunded to the customer.</li>
+     * <li>`refund` (debit): <em>private beta</em> A refund sent to a customer, not linked to a
+     * payment.</li>
      * <li>`gocardless_fee` (credit/debit): The fees that GoCardless charged for a payment. In the case
      * of a payment failure or chargeback, these will appear as credits.</li>
      * <li>`app_fee` (credit/debit): The optional fees that a partner may have taken for a payment. In
@@ -74,7 +76,8 @@ public class PayoutItem {
         PAYMENT_PAID_OUT, @SerializedName("payment_failed")
         PAYMENT_FAILED, @SerializedName("payment_charged_back")
         PAYMENT_CHARGED_BACK, @SerializedName("payment_refunded")
-        PAYMENT_REFUNDED, @SerializedName("gocardless_fee")
+        PAYMENT_REFUNDED, @SerializedName("refund")
+        REFUND, @SerializedName("gocardless_fee")
         GOCARDLESS_FEE, @SerializedName("app_fee")
         APP_FEE, @SerializedName("revenue_share")
         REVENUE_SHARE,
@@ -85,7 +88,15 @@ public class PayoutItem {
             // blank to prevent instantiation
         }
 
+        private String mandate;
         private String payment;
+
+        /**
+         * Unique identifier, beginning with "MD".
+         */
+        public String getMandate() {
+            return mandate;
+        }
 
         /**
          * Unique identifier, beginning with "PM".
