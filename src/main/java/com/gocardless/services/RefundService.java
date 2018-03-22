@@ -117,6 +117,18 @@ public class RefundService {
         }
 
         /**
+         * <em>private beta</em> ID of the [mandate](#core-endpoints-mandates) against which the refund is
+         * being made.
+         */
+        public RefundCreateRequest withLinksMandate(Map<String, String> mandate) {
+            if (links == null) {
+                links = new Links();
+            }
+            links.withMandate(mandate);
+            return this;
+        }
+
+        /**
          * ID of the [payment](#core-endpoints-payments) against which the refund is being made.
          */
         public RefundCreateRequest withLinksPayment(String payment) {
@@ -159,9 +171,12 @@ public class RefundService {
         }
 
         /**
-         * Total expected refunded amount in pence/cents/öre. If there are other partial refunds against this
-         * payment, this value should be the sum of the existing refunds plus the amount of the refund being
-         * created.
+         * Total expected refunded amount in pence/cents/öre. If there are other
+         * partial refunds against this payment, this value should be the sum of the existing
+         * refunds plus the amount of the refund being created.
+         * 
+         * Must be supplied if `links[payment]` is present.
+         * 
          */
         public RefundCreateRequest withTotalAmountConfirmation(Integer totalAmountConfirmation) {
             this.totalAmountConfirmation = totalAmountConfirmation;
@@ -203,7 +218,17 @@ public class RefundService {
         }
 
         public static class Links {
+            private Map<String, String> mandate;
             private String payment;
+
+            /**
+             * <em>private beta</em> ID of the [mandate](#core-endpoints-mandates) against which the refund is
+             * being made.
+             */
+            public Links withMandate(Map<String, String> mandate) {
+                this.mandate = mandate;
+                return this;
+            }
 
             /**
              * ID of the [payment](#core-endpoints-payments) against which the refund is being made.
