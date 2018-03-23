@@ -93,7 +93,8 @@ public class MockHttp extends ExternalResource {
     }
 
     public HttpClient client() {
-        GoCardlessClient client = GoCardlessClient.create("token", getBaseUrl());
+        GoCardlessClient client =
+                GoCardlessClient.newBuilder("token").withBaseUrl(getBaseUrl()).build();
         return TestUtil.getHttpClient(client);
     }
 }

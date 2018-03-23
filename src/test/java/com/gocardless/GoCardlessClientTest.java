@@ -29,7 +29,7 @@ public class GoCardlessClientTest {
 
     @Before
     public void setUp() throws Exception {
-        client = GoCardlessClient.create(ACCESS_TOKEN, http.getBaseUrl());
+        client = GoCardlessClient.newBuilder(ACCESS_TOKEN).withBaseUrl(http.getBaseUrl()).build();
     }
 
     @Test
