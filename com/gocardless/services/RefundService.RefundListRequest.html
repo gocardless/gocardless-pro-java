@@ -17,7 +17,7 @@
     catch(err) {
     }
 //-->
-var methods = {"i0":10,"i1":10,"i2":10,"i3":10,"i4":10,"i5":10,"i6":10,"i7":10,"i8":10};
+var methods = {"i0":10,"i1":10,"i2":10,"i3":10,"i4":10,"i5":10,"i6":10,"i7":10,"i8":10,"i9":10,"i10":10};
 var tabs = {65535:["t0","All Methods"],2:["t2","Instance Methods"],8:["t4","Concrete Methods"]};
 var altColor = "altColor";
 var rowColor = "rowColor";
@@ -141,6 +141,10 @@ extends <a href="../../../com/gocardless/http/ListRequest.html" title="class in 
 <td class="colFirst"><code>static class&nbsp;</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../com/gocardless/services/RefundService.RefundListRequest.CreatedAt.html" title="class in com.gocardless.services">RefundService.RefundListRequest.CreatedAt</a></span></code>&nbsp;</td>
 </tr>
+<tr class="rowColor">
+<td class="colFirst"><code>static class&nbsp;</code></td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../com/gocardless/services/RefundService.RefundListRequest.RefundType.html" title="enum in com.gocardless.services">RefundService.RefundListRequest.RefundType</a></span></code>&nbsp;</td>
+</tr>
 </table>
 <ul class="blockList">
 <li class="blockList"><a name="nested.classes.inherited.from.class.com.gocardless.http.ListRequest">
@@ -211,8 +215,20 @@ extends <a href="../../../com/gocardless/http/ListRequest.html" title="class in 
 </tr>
 <tr id="i8" class="altColor">
 <td class="colFirst"><code><a href="../../../com/gocardless/services/RefundService.RefundListRequest.html" title="class in com.gocardless.services">RefundService.RefundListRequest</a>&lt;<a href="../../../com/gocardless/services/RefundService.RefundListRequest.html" title="type parameter in RefundService.RefundListRequest">S</a>&gt;</code></td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../com/gocardless/services/RefundService.RefundListRequest.html#withMandate-java.lang.String-">withMandate</a></span>(java.lang.String&nbsp;mandate)</code>
+<div class="block">Unique identifier, beginning with &ldquo;MD&rdquo;.</div>
+</td>
+</tr>
+<tr id="i9" class="rowColor">
+<td class="colFirst"><code><a href="../../../com/gocardless/services/RefundService.RefundListRequest.html" title="class in com.gocardless.services">RefundService.RefundListRequest</a>&lt;<a href="../../../com/gocardless/services/RefundService.RefundListRequest.html" title="type parameter in RefundService.RefundListRequest">S</a>&gt;</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../com/gocardless/services/RefundService.RefundListRequest.html#withPayment-java.lang.String-">withPayment</a></span>(java.lang.String&nbsp;payment)</code>
 <div class="block">Unique identifier, beginning with &ldquo;PM&rdquo;.</div>
+</td>
+</tr>
+<tr id="i10" class="altColor">
+<td class="colFirst"><code><a href="../../../com/gocardless/services/RefundService.RefundListRequest.html" title="class in com.gocardless.services">RefundService.RefundListRequest</a>&lt;<a href="../../../com/gocardless/services/RefundService.RefundListRequest.html" title="type parameter in RefundService.RefundListRequest">S</a>&gt;</code></td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../com/gocardless/services/RefundService.RefundListRequest.html#withRefundType-com.gocardless.services.RefundService.RefundListRequest.RefundType-">withRefundType</a></span>(<a href="../../../com/gocardless/services/RefundService.RefundListRequest.RefundType.html" title="enum in com.gocardless.services">RefundService.RefundListRequest.RefundType</a>&nbsp;refundType)</code>
+<div class="block">Whether a refund was issued against a mandate or a payment.</div>
 </td>
 </tr>
 </table>
@@ -323,14 +339,34 @@ extends <a href="../../../com/gocardless/http/ListRequest.html" title="class in 
 <div class="block"><p>Number of records to return.</p></div>
 </li>
 </ul>
+<a name="withMandate-java.lang.String-">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>withMandate</h4>
+<pre>public&nbsp;<a href="../../../com/gocardless/services/RefundService.RefundListRequest.html" title="class in com.gocardless.services">RefundService.RefundListRequest</a>&lt;<a href="../../../com/gocardless/services/RefundService.RefundListRequest.html" title="type parameter in RefundService.RefundListRequest">S</a>&gt;&nbsp;withMandate(java.lang.String&nbsp;mandate)</pre>
+<div class="block"><p>Unique identifier, beginning with &ldquo;MD&rdquo;.</p></div>
+</li>
+</ul>
 <a name="withPayment-java.lang.String-">
 <!--   -->
 </a>
-<ul class="blockListLast">
+<ul class="blockList">
 <li class="blockList">
 <h4>withPayment</h4>
 <pre>public&nbsp;<a href="../../../com/gocardless/services/RefundService.RefundListRequest.html" title="class in com.gocardless.services">RefundService.RefundListRequest</a>&lt;<a href="../../../com/gocardless/services/RefundService.RefundListRequest.html" title="type parameter in RefundService.RefundListRequest">S</a>&gt;&nbsp;withPayment(java.lang.String&nbsp;payment)</pre>
 <div class="block"><p>Unique identifier, beginning with &ldquo;PM&rdquo;.</p></div>
+</li>
+</ul>
+<a name="withRefundType-com.gocardless.services.RefundService.RefundListRequest.RefundType-">
+<!--   -->
+</a>
+<ul class="blockListLast">
+<li class="blockList">
+<h4>withRefundType</h4>
+<pre>public&nbsp;<a href="../../../com/gocardless/services/RefundService.RefundListRequest.html" title="class in com.gocardless.services">RefundService.RefundListRequest</a>&lt;<a href="../../../com/gocardless/services/RefundService.RefundListRequest.html" title="type parameter in RefundService.RefundListRequest">S</a>&gt;&nbsp;withRefundType(<a href="../../../com/gocardless/services/RefundService.RefundListRequest.RefundType.html" title="enum in com.gocardless.services">RefundService.RefundListRequest.RefundType</a>&nbsp;refundType)</pre>
+<div class="block"><p>Whether a refund was issued against a mandate or a payment. One of: <ul>  <li><code>payment</code>: <em>default</em> returns refunds created against payments only</li>  <li><code>mandate</code>: returns refunds created against mandates only</li> </ul></p></div>
 </li>
 </ul>
 </li>
