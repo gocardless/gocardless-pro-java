@@ -8,6 +8,7 @@ import com.gocardless.http.*;
 import com.gocardless.resources.Refund;
 
 import com.google.common.collect.ImmutableMap;
+import com.google.gson.annotations.SerializedName;
 import com.google.gson.reflect.TypeToken;
 
 /**
@@ -247,7 +248,9 @@ public class RefundService {
      */
     public static final class RefundListRequest<S> extends ListRequest<S, Refund> {
         private CreatedAt createdAt;
+        private String mandate;
         private String payment;
+        private RefundType refundType;
 
         /**
          * Cursor pointing to the start of the desired set.
@@ -323,10 +326,30 @@ public class RefundService {
         }
 
         /**
+         * Unique identifier, beginning with "MD".
+         */
+        public RefundListRequest<S> withMandate(String mandate) {
+            this.mandate = mandate;
+            return this;
+        }
+
+        /**
          * Unique identifier, beginning with "PM".
          */
         public RefundListRequest<S> withPayment(String payment) {
             this.payment = payment;
+            return this;
+        }
+
+        /**
+         * Whether a refund was issued against a mandate or a payment. One of:
+         * <ul>
+         *   <li>`payment`: <em>default</em> returns refunds created against payments only</li>
+         *   <li>`mandate`: returns refunds created against mandates only</li>
+         * </ul>
+         */
+        public RefundListRequest<S> withRefundType(RefundType refundType) {
+            this.refundType = refundType;
             return this;
         }
 
@@ -341,8 +364,14 @@ public class RefundService {
             if (createdAt != null) {
                 params.putAll(createdAt.getQueryParams());
             }
+            if (mandate != null) {
+                params.put("mandate", mandate);
+            }
             if (payment != null) {
                 params.put("payment", payment);
+            }
+            if (refundType != null) {
+                params.put("refund_type", refundType);
             }
             return params.build();
         }
@@ -360,6 +389,16 @@ public class RefundService {
         @Override
         protected TypeToken<List<Refund>> getTypeToken() {
             return new TypeToken<List<Refund>>() {};
+        }
+
+        public enum RefundType {
+            @SerializedName("mandate")
+            MANDATE, @SerializedName("payment")
+            PAYMENT;
+            @Override
+            public String toString() {
+                return name().toLowerCase();
+            }
         }
 
         public static class CreatedAt {
