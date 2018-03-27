@@ -14,24 +14,49 @@ With Maven:
 <dependency>
     <groupId>com.gocardless</groupId>
     <artifactId>gocardless-pro</artifactId>
-    <version>2.10.0</version>
+    <version>3.0.0-rc1</version>
 </dependency>
 ```
 
 With Gradle:
 
 ```
-compile 'com.gocardless:gocardless-pro:2.10.0'
+compile 'com.gocardless:gocardless-pro:3.0.0-rc1'
 ```
 
 ## Initializing the client
 
-The client is initialised with an access token.
+The client is initialised with an access token, and is configured to use GoCardless' live environment by default:
 
 ```java
+import com.gocardless.GoCardlessClient;
+
 String accessToken = "AO00000123";
-GoCardlessClient client = GoCardlessClient.create(accessToken);
+
+GoCardlessClient client = GoCardlessClient.newBuilder(accessToken).build();
 ```
+
+Optionally, the client can be customised with an environment, base URL, proxy and/or SSL socket factory
+by calling `.withX` methods on the `Builder`:
+
+```java
+import com.gocardless.GoCardlessClient;
+import java.net.InetSocketAddress;
+import java.net.Proxy;
+
+String accessToken = "AO00000123";
+Proxy proxy = new Proxy(Proxy.Type.HTTP, new InetSocketAddress("127.0.0.1", 8080));
+
+GoCardlessClient client = GoCardlessClient.newBuilder(accessToken)
+    .withEnvironment(GoCardlessClient.Environment.SANDBOX)
+    .withProxy(proxy)
+    .build();
+```
+
+To see the configurable options in full, see the documentation for `GoCardlessClient.Builder`.
+
+If you're upgrading from v2.x, you'll need to update your code for initialising `GoCardlessClient`. See the
+"Upgrading from v2.x to v3.x" section below.
 
 ## Examples
 
@@ -106,6 +131,76 @@ Any errors will result in a `GoCardlessException` being thrown.  If the error is
 * ValidationFailedException
 
 See the [documentation](http://gocardless.github.io/gocardless-pro-java/com/gocardless/errors/package-summary.html) for more details.
+
+## Upgrading from v2.x to v3.x
+
+To upgrade from v2.x, you will need to switch from calling `GoCardlessClient.create` with arguments to
+using the `Builder` returned by `GoCardlessClient.newBuilder()` and its `withX()` and `build()` methods.
+
+If you're only setting an access token and using the default GoCardless environment (live):
+
+```java
+import com.gocardless.GoCardlessClient;
+
+String accessToken = "foo";
+
+// Before
+GoCardlessClient client = GoCardlessClient.create(accessToken)
+
+// After
+GoCardlessClient client = GoCardlessClient.newBuilder(accessToken).build();
+```
+
+If you're customising the environment as well:
+
+```java
+import com.gocardless.GoCardlessClient;
+
+String accessToken = "foo";
+
+// Before
+GoCardlessClient client = GoCardlessClient.create(accessToken, GoCardlessClient.Environment.SANDBOX)
+
+// After
+GoCardlessClient client = GoCardlessClient.newBuilder(accessToken)
+    .withEnvironment(GoCardlessClient.Environment.SANDBOX)
+    .build();
+```
+
+Or, if you're customising the base URL:
+
+```java
+import com.gocardless.GoCardlessClient;
+
+String accessToken = "foo";
+String baseUrl = "https://api.gocardless.com";
+
+// Before
+GoCardlessClient client = GoCardlessClient.create(accessToken, baseUrl)
+
+// After
+GoCardlessClient client = GoCardlessClient.newBuilder(accessToken)
+    .withBaseUrl(baseUrl)
+    .build();
+```
+
+If you were instantiating your own `com.gocardless.http.HttpClient` (which is very unlikely unless you
+were patching the internals of the library), you'll now need to supply an `OkHttpClient` as well as the
+access token and base URL.
+
+```java
+String accessToken = "foo";
+String baseUrl = "https://api.gocardless.com";
+
+// Before
+HttpClient rawClient = new HttpClient(accessToken, baseUrl);
+
+// After
+HttpClient rawClient = new HttpClient(accessToken, baseUrl, new OkHttpClient());
+```
+
+Once you've instantiated the client, everything works exactly the same as before, so you won't need to
+change any of your other code.
 
 ## Compatibility
 

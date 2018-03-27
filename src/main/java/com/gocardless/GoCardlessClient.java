@@ -1,9 +1,15 @@
 package com.gocardless;
 
+import java.net.Proxy;
+
+import javax.net.ssl.SSLSocketFactory;
+
 import com.gocardless.http.HttpClient;
 import com.gocardless.services.*;
 
 import com.google.common.annotations.VisibleForTesting;
+
+import com.squareup.okhttp.OkHttpClient;
 
 /**
  * Entry point into the client.
@@ -24,6 +30,76 @@ public class GoCardlessClient {
     private final RedirectFlowService redirectFlows;
     private final RefundService refunds;
     private final SubscriptionService subscriptions;
+
+    public static final class Builder {
+        private final String accessToken;
+        private String baseUrl;
+        private Proxy proxy;
+        private SSLSocketFactory sslSocketFactory;
+
+        /**
+         * Constructor.  Users of this library will not need to access this constructor directly -
+         * they should use GoCardlessClient.newBuilder() to get an instance. The client
+         * will automatically be configured to use GoCardless' live environment
+         * and the supplied access token.
+         *
+         * @param accessToken the access token to use to access the GoCardless API
+         */
+        private Builder(String accessToken) {
+            this.accessToken = accessToken;
+            this.withEnvironment(Environment.LIVE);
+        }
+
+        /**
+         * Configures the base URL for the client
+         *
+         * @param baseUrl the base URL for the GoCardless API
+         */
+        public Builder withBaseUrl(String baseUrl) {
+            this.baseUrl = baseUrl;
+            return this;
+        }
+
+        /**
+         * Configures the GoCardless environment for the client
+         *
+         * @param environment the GoCardless environment to connect to
+         */
+        public Builder withEnvironment(Environment environment) {
+            return this.withBaseUrl(environment.getBaseUrl());
+        }
+
+        /**
+         * Configures the proxy to use for HTTP requests made by the client
+         *
+         * @param proxy the proxy to use for HTTP requests made by the client
+         */
+        public Builder withProxy(Proxy proxy) {
+            this.proxy = proxy;
+            return this;
+        }
+
+        /**
+         * Configures the SSL socket factory to be used when making HTTP requests
+         *
+         * @param sslSocketFactory the SSL socket factory to be used when making HTTP requests
+         */
+        public Builder withSslSocketFactory(SSLSocketFactory sslSocketFactory) {
+            this.sslSocketFactory = sslSocketFactory;
+            return this;
+        }
+
+        /**
+         * Builds a configured instance of the GoCardlessClient
+         */
+        public GoCardlessClient build() {
+            OkHttpClient rawClient = new OkHttpClient();
+            rawClient.setProxy(proxy);
+            rawClient.setSslSocketFactory(sslSocketFactory);
+            HttpClient client = new HttpClient(accessToken, baseUrl, rawClient);
+            return new GoCardlessClient(client);
+        }
+    }
 
     private GoCardlessClient(HttpClient httpClient) {
         this.httpClient = httpClient;
@@ -165,32 +241,14 @@ public class GoCardlessClient {
     }
 
     /**
-     * Creates an instance of the client in the live environment.
+     * Returns a builder which can be used to configure and instantiate a GoCardlessClient instance.
+     * The client will automatically be configured to use GoCardless' live environment
+     * and the supplied access token.
      *
-     * @param accessToken the access token
+     * @param accessToken the access token to use to access the GoCardless API
      */
-    public static GoCardlessClient create(String accessToken) {
-        return create(accessToken, Environment.LIVE);
-    }
-
-    /**
-     * Creates an instance of the client in a specified environment.
-     *
-     * @param accessToken the access token
-     * @param environment the environment
-     */
-    public static GoCardlessClient create(String accessToken, Environment environment) {
-        return create(accessToken, environment.getBaseUrl());
-    }
-
-    /**
-     * Creates an instance of the client running against a custom URL.
-     *
-     * @param accessToken the access token
-     * @param baseUrl the base URL of the API
-     */
-    public static GoCardlessClient create(String accessToken, String baseUrl) {
-        return new GoCardlessClient(new HttpClient(accessToken, baseUrl));
+    public static Builder newBuilder(String accessToken) {
+        return new Builder(accessToken);
     }
 
     @VisibleForTesting
