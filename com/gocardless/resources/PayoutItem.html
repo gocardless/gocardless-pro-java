@@ -148,7 +148,7 @@ who have used the API.</p></div>
 <tr class="altColor">
 <td class="colFirst"><code>java.lang.String</code></td>
 <td class="colLast"><code><strong><a href="../../../com/gocardless/resources/PayoutItem.html#getAmount()">getAmount</a></strong>()</code>
-<div class="block">The positive (credit) or negative (debit) value of the item, in fractional currency; either pence (GBP), cents (EUR), or öre (SEK), to one decimal place.</div>
+<div class="block">The positive (credit) or negative (debit) value of the item, in fractional currency; either pence (GBP), cents (AUD/EUR), or öre (SEK), to one decimal place.</div>
 </td>
 </tr>
 <tr class="rowColor">
@@ -190,7 +190,7 @@ who have used the API.</p></div>
 <li class="blockList">
 <h4>getAmount</h4>
 <pre>public&nbsp;java.lang.String&nbsp;getAmount()</pre>
-<div class="block"><p>The positive (credit) or negative (debit) value of the item, in fractional currency; either pence (GBP), cents (EUR), or öre (SEK), to one decimal place. <p class="notice">For accuracy, we store some of our fees to greater precision than we can actually pay out (for example, a GoCardless fee we record might come to 0.5 pence, but it is not possible to send a payout via bank transfer including a half penny).<br><br>To calculate the final amount of the payout, we sum all of the items and then round to the nearest currency unit.</p></p></div>
+<div class="block"><p>The positive (credit) or negative (debit) value of the item, in fractional currency; either pence (GBP), cents (AUD/EUR), or öre (SEK), to one decimal place. <p class="notice">For accuracy, we store some of our fees to greater precision than we can actually pay out (for example, a GoCardless fee we record might come to 0.5 pence, but it is not possible to send a payout via bank transfer including a half penny).<br><br>To calculate the final amount of the payout, we sum all of the items and then round to the nearest currency unit.</p></p></div>
 </li>
 </ul>
 <a name="getLinks()">
