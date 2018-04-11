@@ -166,10 +166,19 @@ public class Creditor {
             // blank to prevent instantiation
         }
 
+        private String defaultAudPayoutAccount;
         private String defaultDkkPayoutAccount;
         private String defaultEurPayoutAccount;
         private String defaultGbpPayoutAccount;
         private String defaultSekPayoutAccount;
+
+        /**
+         * ID of the [bank account](#core-endpoints-creditor-bank-accounts) which is set up to receive
+         * payouts in AUD.
+         */
+        public String getDefaultAudPayoutAccount() {
+            return defaultAudPayoutAccount;
+        }
 
         /**
          * ID of the [bank account](#core-endpoints-creditor-bank-accounts) which is set up to receive
@@ -336,7 +345,8 @@ public class Creditor {
         }
 
         public enum Currency {
-            @SerializedName("DKK")
+            @SerializedName("AUD")
+            AUD, @SerializedName("DKK")
             DKK, @SerializedName("EUR")
             EUR, @SerializedName("GBP")
             GBP, @SerializedName("SEK")
@@ -346,7 +356,8 @@ public class Creditor {
         public enum Scheme {
             @SerializedName("autogiro")
             AUTOGIRO, @SerializedName("bacs")
-            BACS, @SerializedName("betalingsservice")
+            BACS, @SerializedName("becs")
+            BECS, @SerializedName("betalingsservice")
             BETALINGSSERVICE, @SerializedName("sepa")
             SEPA,
         }

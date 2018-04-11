@@ -45,7 +45,8 @@ public class BankDetailsLookup {
     public enum AvailableDebitScheme {
         @SerializedName("autogiro")
         AUTOGIRO, @SerializedName("bacs")
-        BACS, @SerializedName("betalingsservice")
+        BACS, @SerializedName("becs")
+        BECS, @SerializedName("betalingsservice")
         BETALINGSSERVICE, @SerializedName("sepa_core")
         SEPA_CORE,
     }

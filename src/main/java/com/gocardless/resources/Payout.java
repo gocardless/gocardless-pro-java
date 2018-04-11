@@ -54,8 +54,8 @@ public class Payout {
     }
 
     /**
-     * [ISO 4217](http://en.wikipedia.org/wiki/ISO_4217#Active_codes) currency code. Currently "GBP",
-     * "EUR", "SEK" and "DKK" are supported.
+     * [ISO 4217](http://en.wikipedia.org/wiki/ISO_4217#Active_codes) currency code. Currently "AUD",
+     * "DKK", GBP", "EUR", and "SEK" are supported.
      */
     public Currency getCurrency() {
         return currency;
@@ -111,7 +111,8 @@ public class Payout {
     }
 
     public enum Currency {
-        @SerializedName("DKK")
+        @SerializedName("AUD")
+        AUD, @SerializedName("DKK")
         DKK, @SerializedName("EUR")
         EUR, @SerializedName("GBP")
         GBP, @SerializedName("SEK")
