@@ -32,7 +32,7 @@ public class Payment {
     private Status status;
 
     /**
-     * Amount in pence (GBP), cents (EUR), öre (SEK), or øre (DKK).
+     * Amount in pence (GBP), cents (AUD/EUR), öre (SEK), or øre (DKK).
      */
     public Integer getAmount() {
         return amount;

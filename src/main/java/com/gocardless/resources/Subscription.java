@@ -82,7 +82,7 @@ public class Subscription {
     private List<UpcomingPayment> upcomingPayments;
 
     /**
-     * Amount in pence (GBP), cents (EUR), öre (SEK), or øre (DKK).
+     * Amount in pence (GBP), cents (AUD/EUR), öre (SEK), or øre (DKK).
      */
     public Integer getAmount() {
         return amount;
