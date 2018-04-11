@@ -167,7 +167,7 @@ public class SubscriptionService {
         private String startDate;
 
         /**
-         * Amount in pence (GBP), cents (EUR), öre (SEK), or øre (DKK).
+         * Amount in pence (GBP), cents (AUD/EUR), öre (SEK), or øre (DKK).
          */
         public SubscriptionCreateRequest withAmount(Integer amount) {
             this.amount = amount;
@@ -175,8 +175,8 @@ public class SubscriptionService {
         }
 
         /**
-         * The amount to be deducted from the payment as the OAuth app's fee, in pence (GBP), cents (EUR),
-         * öre (SEK), or øre (DKK).
+         * The amount to be deducted from the payment as the OAuth app's fee, in pence (GBP), cents
+         * (AUD/EUR), öre (SEK), or øre (DKK).
          */
         public SubscriptionCreateRequest withAppFee(Integer appFee) {
             this.appFee = appFee;
@@ -682,7 +682,7 @@ public class SubscriptionService {
         private String paymentReference;
 
         /**
-         * Amount in pence (GBP), cents (EUR), öre (SEK), or øre (DKK).
+         * Amount in pence (GBP), cents (AUD/EUR), öre (SEK), or øre (DKK).
          */
         public SubscriptionUpdateRequest withAmount(Integer amount) {
             this.amount = amount;
@@ -690,8 +690,8 @@ public class SubscriptionService {
         }
 
         /**
-         * The amount to be deducted from the payment as the OAuth app's fee, in pence (GBP), cents (EUR),
-         * öre (SEK), or øre (DKK).
+         * The amount to be deducted from the payment as the OAuth app's fee, in pence (GBP), cents
+         * (AUD/EUR), öre (SEK), or øre (DKK).
          */
         public SubscriptionUpdateRequest withAppFee(Integer appFee) {
             this.appFee = appFee;

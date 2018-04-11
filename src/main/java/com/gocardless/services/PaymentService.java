@@ -115,7 +115,7 @@ public class PaymentService {
         private String reference;
 
         /**
-         * Amount in pence (GBP), cents (EUR), öre (SEK), or øre (DKK).
+         * Amount in pence (GBP), cents (AUD/EUR), öre (SEK), or øre (DKK).
          */
         public PaymentCreateRequest withAmount(Integer amount) {
             this.amount = amount;
