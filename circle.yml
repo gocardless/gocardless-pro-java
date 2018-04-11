@@ -1,6 +1,8 @@
+machine:
+  java:
+    version: openjdk7
+
 dependencies:
-  pre:
-    - sudo apt-get install openjdk-7-jdk=7u51-2.4.6-1ubuntu4 openjdk-7-jre=7u51-2.4.6-1ubuntu4 openjdk-7-jre-headless=7u51-2.4.6-1ubuntu4
   cache_directories:
     - ~/.gradle
     - .gradle
