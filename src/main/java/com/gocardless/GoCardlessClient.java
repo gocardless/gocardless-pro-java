@@ -23,6 +23,8 @@ public class GoCardlessClient {
     private final CustomerBankAccountService customerBankAccounts;
     private final EventService events;
     private final MandateService mandates;
+    private final MandateImportService mandateImports;
+    private final MandateImportEntryService mandateImportEntries;
     private final MandatePdfService mandatePdfs;
     private final PaymentService payments;
     private final PayoutService payouts;
@@ -110,6 +112,8 @@ public class GoCardlessClient {
         this.customerBankAccounts = new CustomerBankAccountService(httpClient);
         this.events = new EventService(httpClient);
         this.mandates = new MandateService(httpClient);
+        this.mandateImports = new MandateImportService(httpClient);
+        this.mandateImportEntries = new MandateImportEntryService(httpClient);
         this.mandatePdfs = new MandatePdfService(httpClient);
         this.payments = new PaymentService(httpClient);
         this.payouts = new PayoutService(httpClient);
@@ -166,6 +170,20 @@ public class GoCardlessClient {
      */
     public MandateService mandates() {
         return mandates;
+    }
+
+    /**
+     * A service class for working with mandate import resources.
+     */
+    public MandateImportService mandateImports() {
+        return mandateImports;
+    }
+
+    /**
+     * A service class for working with mandate import entry resources.
+     */
+    public MandateImportEntryService mandateImportEntries() {
+        return mandateImportEntries;
     }
 
     /**
