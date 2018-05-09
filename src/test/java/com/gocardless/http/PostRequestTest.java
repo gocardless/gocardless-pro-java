@@ -20,7 +20,7 @@ public class PostRequestTest {
         DummyItem result = request.execute();
         assertThat(result.stringField).isEqualTo("foo");
         assertThat(result.intField).isEqualTo(123);
-        http.assertRequestMade("POST", "/dummy");
+        http.assertRequestMade("POST", "/dummy", ImmutableMap.of("Authorization", "Bearer token"));
     }
 
     @Test
@@ -30,7 +30,8 @@ public class PostRequestTest {
         DummyItem result = request.execute();
         assertThat(result.stringField).isEqualTo("foo");
         assertThat(result.intField).isEqualTo(123);
-        http.assertRequestMade("POST", "/dummy", "fixtures/single.json");
+        http.assertRequestMade("POST", "/dummy", "fixtures/single.json",
+                ImmutableMap.of("Authorization", "Bearer token"));
     }
 
     @Test
@@ -42,7 +43,7 @@ public class PostRequestTest {
         assertThat(result.getHeaders().get("foo")).containsExactly("bar");
         assertThat(result.getResource().stringField).isEqualTo("foo");
         assertThat(result.getResource().intField).isEqualTo(123);
-        http.assertRequestMade("POST", "/dummy");
+        http.assertRequestMade("POST", "/dummy", ImmutableMap.of("Authorization", "Bearer token"));
     }
 
     private class DummyPostRequest extends PostRequest<DummyItem> {

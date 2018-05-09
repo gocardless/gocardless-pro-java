@@ -31,7 +31,8 @@ public class GetRequestTest {
         DummyItem result = request.execute();
         assertThat(result.stringField).isEqualTo("foo");
         assertThat(result.intField).isEqualTo(123);
-        http.assertRequestMade("GET", "/dummy/123");
+        http.assertRequestMade("GET", "/dummy/123",
+                ImmutableMap.of("Authorization", "Bearer token"));
     }
 
     @Test
@@ -42,7 +43,8 @@ public class GetRequestTest {
         assertThat(result.getHeaders().get("foo")).containsExactly("bar");
         assertThat(result.getResource().stringField).isEqualTo("foo");
         assertThat(result.getResource().intField).isEqualTo(123);
-        http.assertRequestMade("GET", "/dummy/123");
+        http.assertRequestMade("GET", "/dummy/123",
+                ImmutableMap.of("Authorization", "Bearer token"));
     }
 
     @Test
@@ -60,7 +62,8 @@ public class GetRequestTest {
         DummyItem result = request.execute();
         assertThat(result.stringField).isEqualTo("foo");
         assertThat(result.intField).isEqualTo(123);
-        http.assertRequestMade("GET", "/dummy/123");
+        http.assertRequestMade("GET", "/dummy/123",
+                ImmutableMap.of("Authorization", "Bearer token"));
     }
 
     @Test
@@ -70,7 +73,8 @@ public class GetRequestTest {
         DummyItem result = request.execute();
         assertThat(result.stringField).isEqualTo("foo");
         assertThat(result.intField).isEqualTo(123);
-        http.assertRequestMade("GET", "/dummy/123");
+        http.assertRequestMade("GET", "/dummy/123",
+                ImmutableMap.of("Authorization", "Bearer token"));
     }
 
     private class DummyGetRequest extends GetRequest<DummyItem> {

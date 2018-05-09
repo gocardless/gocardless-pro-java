@@ -88,6 +88,11 @@ public class MockHttp extends ExternalResource {
         }
     }
 
+    public void assertRequestIncludedHeader(String headerName) throws Exception {
+        RecordedRequest recordedRequest = server.takeRequest();
+        assertThat(recordedRequest.getHeader(headerName)).isNotNull();
+    }
+
     public String getBaseUrl() {
         return String.format("http://localhost:%d", server.getPort());
     }

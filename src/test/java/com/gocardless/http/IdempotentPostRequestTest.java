@@ -23,7 +23,18 @@ public class IdempotentPostRequestTest {
         HttpTestUtil.DummyItem result = request.execute();
         assertThat(result.stringField).isEqualTo("foo");
         assertThat(result.intField).isEqualTo(123);
-        http.assertRequestMade("POST", "/dummy", "fixtures/single.json");
+        http.assertRequestMade("POST", "/dummy", "fixtures/single.json",
+                ImmutableMap.of("Authorization", "Bearer token"));
+    }
+
+    @Test
+    public void shouldPerformPostRequestWithGeneratedIdempotencyKey() throws Exception {
+        http.enqueueResponse(200, "fixtures/single.json");
+        DummyPostRequest request = new DummyPostRequest();
+        HttpTestUtil.DummyItem result = request.execute();
+        assertThat(result.stringField).isEqualTo("foo");
+        assertThat(result.intField).isEqualTo(123);
+        http.assertRequestIncludedHeader("Idempotency-Key");
     }
 
     @Test
@@ -34,8 +45,8 @@ public class IdempotentPostRequestTest {
         HttpTestUtil.DummyItem result = request.execute();
         assertThat(result.stringField).isEqualTo("foo");
         assertThat(result.intField).isEqualTo(123);
-        http.assertRequestMade("POST", "/dummy", "fixtures/single.json",
-                ImmutableMap.of("Idempotency-Key", "i-am-the-one-and-only"));
+        http.assertRequestMade("POST", "/dummy", "fixtures/single.json", ImmutableMap.of(
+                "Authorization", "Bearer token", "Idempotency-Key", "i-am-the-one-and-only"));
     }
 
     @Test
@@ -46,7 +57,8 @@ public class IdempotentPostRequestTest {
         HttpTestUtil.DummyItem result = request.execute();
         assertThat(result.stringField).isEqualTo("foo");
         assertThat(result.intField).isEqualTo(123);
-        http.assertRequestMade("POST", "/dummy", "fixtures/single.json");
+        http.assertRequestMade("POST", "/dummy", "fixtures/single.json",
+                ImmutableMap.of("Authorization", "Bearer token"));
     }
 
     @Test
@@ -57,7 +69,8 @@ public class IdempotentPostRequestTest {
         HttpTestUtil.DummyItem result = request.execute();
         assertThat(result.stringField).isEqualTo("foo");
         assertThat(result.intField).isEqualTo(123);
-        http.assertRequestMade("POST", "/dummy", "fixtures/single.json");
+        http.assertRequestMade("POST", "/dummy", "fixtures/single.json",
+                ImmutableMap.of("Authorization", "Bearer token"));
     }
 
     @Test
@@ -69,8 +82,10 @@ public class IdempotentPostRequestTest {
         HttpTestUtil.DummyItem result = request.execute();
         assertThat(result.stringField).isEqualTo("foo");
         assertThat(result.intField).isEqualTo(123);
-        http.assertRequestMade("POST", "/dummy", "fixtures/single.json");
-        http.assertRequestMade("GET", "/dummy/ID123");
+        http.assertRequestMade("POST", "/dummy", "fixtures/single.json",
+                ImmutableMap.of("Authorization", "Bearer token"));
+        http.assertRequestMade("GET", "/dummy/ID123",
+                ImmutableMap.of("Authorization", "Bearer token"));
     }
 
     @Test

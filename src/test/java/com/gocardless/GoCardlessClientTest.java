@@ -39,7 +39,8 @@ public class GoCardlessClientTest {
         assertThat(customer.getId()).isEqualTo("CU00003068FG73");
         assertThat(customer.getFamilyName()).isEqualTo("Osborne");
         assertThat(customer.getGivenName()).isEqualTo("Frank");
-        http.assertRequestMade("GET", "/customers/CU00003068FG73");
+        http.assertRequestMade("GET", "/customers/CU00003068FG73",
+                ImmutableMap.of("Authorization", "Bearer " + ACCESS_TOKEN));
     }
 
     @Test
@@ -53,7 +54,8 @@ public class GoCardlessClientTest {
         assertThat(customer.getId()).isEqualTo("CU00003068FG73");
         assertThat(customer.getFamilyName()).isEqualTo("Osborne");
         assertThat(customer.getGivenName()).isEqualTo("Frank");
-        http.assertRequestMade("GET", "/customers/CU00003068FG73");
+        http.assertRequestMade("GET", "/customers/CU00003068FG73",
+                ImmutableMap.of("Authorization", "Bearer " + ACCESS_TOKEN));
     }
 
     @Test
@@ -67,7 +69,8 @@ public class GoCardlessClientTest {
         assertThat(customers.get(1).getId()).isEqualTo("CU0000302M1J1J");
         assertThat(customers.get(1).getFamilyName()).isEqualTo("Osborne");
         assertThat(customers.get(1).getGivenName()).isEqualTo("Sarah");
-        http.assertRequestMade("GET", "/customers");
+        http.assertRequestMade("GET", "/customers",
+                ImmutableMap.of("Authorization", "Bearer " + ACCESS_TOKEN));
     }
 
     @Test
@@ -80,7 +83,8 @@ public class GoCardlessClientTest {
         assertThat(mandates.get(0).getLinks().getCreditor()).isEqualTo("CR000035EME9H5");
         assertThat(mandates.get(1).getId()).isEqualTo("MD00001P57AN84");
         assertThat(mandates.get(1).getLinks().getCreditor()).isEqualTo("CR000035EME9H5");
-        http.assertRequestMade("GET", "/mandates?customer=CU00003068FG73");
+        http.assertRequestMade("GET", "/mandates?customer=CU00003068FG73",
+                ImmutableMap.of("Authorization", "Bearer " + ACCESS_TOKEN));
     }
 
     @Test
@@ -91,7 +95,8 @@ public class GoCardlessClientTest {
                         .withStatus(FAILED).execute().getItems();
         assertThat(mandates).hasSize(1);
         assertThat(mandates.get(0).getId()).isEqualTo("MD00001PEYCSQF");
-        http.assertRequestMade("GET", "/mandates?customer=CU00003068FG73&status=active,failed");
+        http.assertRequestMade("GET", "/mandates?customer=CU00003068FG73&status=active,failed",
+                ImmutableMap.of("Authorization", "Bearer " + ACCESS_TOKEN));
     }
 
     @Test
@@ -106,7 +111,19 @@ public class GoCardlessClientTest {
         assertThat(customer.getFamilyName()).isEqualTo("Osborne");
         assertThat(customer.getGivenName()).isEqualTo("Sharon");
         http.assertRequestMade("POST", "/customers",
-                "fixtures/client/create_a_customer_request.json");
+                "fixtures/client/create_a_customer_request.json",
+                ImmutableMap.of("Authorization", "Bearer " + ACCESS_TOKEN));
+    }
+
+    @Test
+    public void shouldCreateACustomerWithAGeneratedIdempotencyKey() throws Exception {
+        http.enqueueResponse(201, "fixtures/client/create_a_customer_response.json");
+        Customer customer =
+                client.customers().create().withFamilyName("Osborne").withGivenName("Sharon")
+                        .withAddressLine1("27 Acer Road").withAddressLine2("Apt 2")
+                        .withCity("London").withPostalCode("E8 3GX").withCountryCode("GB")
+                        .execute();
+        http.assertRequestIncludedHeader("Idempotency-Key");
     }
 
     @Test
@@ -118,7 +135,8 @@ public class GoCardlessClientTest {
         assertThat(customer.getFamilyName()).isEqualTo("Osborne");
         assertThat(customer.getGivenName()).isEqualTo("Ozzy");
         http.assertRequestMade("PUT", "/customers/CU000031FFQ5H3",
-                "fixtures/client/update_a_customer_request.json");
+                "fixtures/client/update_a_customer_request.json",
+                ImmutableMap.of("Authorization", "Bearer " + ACCESS_TOKEN));
     }
 
     @Test
@@ -129,7 +147,8 @@ public class GoCardlessClientTest {
                         .getItems();
         assertThat(result.size()).isEqualTo(1);
         assertThat(result.get(0).getId()).isEqualTo("CU0000321DW2ZH");
-        http.assertRequestMade("GET", "/customers?created_at[gte]=2015-04-13T15:02:40Z");
+        http.assertRequestMade("GET", "/customers?created_at[gte]=2015-04-13T15:02:40Z",
+                ImmutableMap.of("Authorization", "Bearer " + ACCESS_TOKEN));
     }
 
     @Test
@@ -144,7 +163,9 @@ public class GoCardlessClientTest {
         assertThat(payment.getCurrency()).isEqualTo(Payment.Currency.GBP);
         assertThat(payment.getMetadata()).hasSize(1).containsEntry("foo", "bar");
         assertThat(payment.getLinks().getMandate()).isEqualTo("MD00001PEYCSQF");
-        http.assertRequestMade("POST", "/payments", "fixtures/client/create_a_payment_request.json");
+        http.assertRequestMade("POST", "/payments",
+                "fixtures/client/create_a_payment_request.json",
+                ImmutableMap.of("Authorization", "Bearer " + ACCESS_TOKEN));
     }
 
     @Test
@@ -157,7 +178,8 @@ public class GoCardlessClientTest {
         assertThat(page1.getBefore()).isNull();
         assertThat(page1.getAfter()).isNotNull();
         assertThat(page1.getLimit()).isEqualTo(2);
-        http.assertRequestMade("GET", "/mandates?limit=2");
+        http.assertRequestMade("GET", "/mandates?limit=2",
+                ImmutableMap.of("Authorization", "Bearer " + ACCESS_TOKEN));
         http.enqueueResponse(200, "fixtures/client/list_mandates_page_2.json");
         ListResponse<Mandate> page2 =
                 client.mandates().list().withLimit(2).withAfter(page1.getAfter()).execute();
@@ -166,7 +188,8 @@ public class GoCardlessClientTest {
         assertThat(page2.getBefore()).isNotNull();
         assertThat(page2.getAfter()).isNull();
         assertThat(page2.getLimit()).isEqualTo(2);
-        http.assertRequestMade("GET", "/mandates?after=MD00001P57AN84&limit=2");
+        http.assertRequestMade("GET", "/mandates?after=MD00001P57AN84&limit=2",
+                ImmutableMap.of("Authorization", "Bearer " + ACCESS_TOKEN));
     }
 
     @Test
@@ -179,8 +202,10 @@ public class GoCardlessClientTest {
         assertThat(mandates.get(0).getId()).isEqualTo("MD00001PEYCSQF");
         assertThat(mandates.get(1).getId()).isEqualTo("MD00001P57AN84");
         assertThat(mandates.get(2).getId()).isEqualTo("MD00001P1KTRNY");
-        http.assertRequestMade("GET", "/mandates?limit=2");
-        http.assertRequestMade("GET", "/mandates?after=MD00001P57AN84&limit=2");
+        http.assertRequestMade("GET", "/mandates?limit=2",
+                ImmutableMap.of("Authorization", "Bearer " + ACCESS_TOKEN));
+        http.assertRequestMade("GET", "/mandates?after=MD00001P57AN84&limit=2",
+                ImmutableMap.of("Authorization", "Bearer " + ACCESS_TOKEN));
     }
 
     @Test
@@ -190,7 +215,8 @@ public class GoCardlessClientTest {
                 client.mandates().cancel("MD00001P1KTRNY").withMetadata("foo", "bar").execute();
         assertThat(mandate.getNextPossibleChargeDate()).isNull();
         http.assertRequestMade("POST", "/mandates/MD00001P1KTRNY/actions/cancel",
-                "fixtures/client/cancel_a_mandate_request.json");
+                "fixtures/client/cancel_a_mandate_request.json",
+                ImmutableMap.of("Authorization", "Bearer " + ACCESS_TOKEN));
     }
 
     @Test
@@ -201,7 +227,18 @@ public class GoCardlessClientTest {
                         .withIntervalUnit(MONTHLY).withLinksMandate("MD00001PEYCSQF").execute();
         assertThat(subscription.getId()).isNotNull();
         http.assertRequestMade("POST", "/subscriptions",
-                "fixtures/client/create_a_subscription_request.json");
+                "fixtures/client/create_a_subscription_request.json",
+                ImmutableMap.of("Authorization", "Bearer " + ACCESS_TOKEN));
+    }
+
+    @Test
+    public void shouldCreateASubscriptionWithAGeneratedIdempotencyKey() throws Exception {
+        http.enqueueResponse(201, "fixtures/client/create_a_subscription_response.json");
+        Subscription subscription =
+                client.subscriptions().create().withAmount(1000).withCurrency("GBP")
+                        .withIntervalUnit(MONTHLY).withLinksMandate("MD00001PEYCSQF").execute();
+        assertThat(subscription.getId()).isNotNull();
+        http.assertRequestIncludedHeader("Idempotency-Key");
     }
 
     @Test
@@ -212,6 +249,7 @@ public class GoCardlessClientTest {
         List<CreditorBankAccount> bankAccounts = Lists.newArrayList(iterable);
         assertThat(bankAccounts).hasSize(1);
         assertThat(bankAccounts.get(0).getId()).isEqualTo("BA00001NN2B44F");
-        http.assertRequestMade("GET", "/creditor_bank_accounts?enabled=true");
+        http.assertRequestMade("GET", "/creditor_bank_accounts?enabled=true",
+                ImmutableMap.of("Authorization", "Bearer " + ACCESS_TOKEN));
     }
 }

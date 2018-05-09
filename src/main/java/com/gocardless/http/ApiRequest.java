@@ -45,6 +45,8 @@ abstract class ApiRequest<T> {
 
     protected abstract String getEnvelope();
 
+    protected abstract Map<String, String> getHeaders();
+
     protected abstract boolean hasBody();
 
     protected abstract T parseResponse(Reader stream, ResponseParser responseParser);

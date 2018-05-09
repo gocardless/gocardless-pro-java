@@ -1,6 +1,9 @@
 package com.gocardless.http;
 
 import java.io.Reader;
+import java.util.Map;
+
+import com.google.common.collect.ImmutableMap;
 
 /**
  * Base class for GET requests that return a single item.
@@ -48,6 +51,11 @@ public abstract class GetRequest<T> extends ApiRequest<T> {
     @Override
     protected final boolean hasBody() {
         return false;
+    }
+
+    @Override
+    protected final Map<String, String> getHeaders() {
+        return ImmutableMap.<String, String>of();
     }
 
     protected abstract Class<T> getResponseClass();

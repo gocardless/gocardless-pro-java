@@ -2,6 +2,8 @@ package com.gocardless.http;
 
 import com.gocardless.http.HttpTestUtil.DummyItem;
 
+import com.google.common.collect.ImmutableMap;
+
 import org.junit.Rule;
 import org.junit.Test;
 
@@ -18,7 +20,7 @@ public class PutRequestTest {
         DummyItem result = request.execute();
         assertThat(result.stringField).isEqualTo("foo");
         assertThat(result.intField).isEqualTo(123);
-        http.assertRequestMade("PUT", "/dummy");
+        http.assertRequestMade("PUT", "/dummy", ImmutableMap.of("Authorization", "Bearer token"));
     }
 
     @Test
@@ -29,7 +31,7 @@ public class PutRequestTest {
         DummyItem result = request.execute();
         assertThat(result.stringField).isEqualTo("foo");
         assertThat(result.intField).isEqualTo(123);
-        http.assertRequestMade("PUT", "/dummy");
+        http.assertRequestMade("PUT", "/dummy", ImmutableMap.of("Authorization", "Bearer token"));
     }
 
     @Test
@@ -40,7 +42,7 @@ public class PutRequestTest {
         DummyItem result = request.execute();
         assertThat(result.stringField).isEqualTo("foo");
         assertThat(result.intField).isEqualTo(123);
-        http.assertRequestMade("PUT", "/dummy");
+        http.assertRequestMade("PUT", "/dummy", ImmutableMap.of("Authorization", "Bearer token"));
     }
 
     @Test
@@ -50,7 +52,8 @@ public class PutRequestTest {
         DummyItem result = request.execute();
         assertThat(result.stringField).isEqualTo("foo");
         assertThat(result.intField).isEqualTo(123);
-        http.assertRequestMade("PUT", "/dummy", "fixtures/single.json");
+        http.assertRequestMade("PUT", "/dummy", "fixtures/single.json",
+                ImmutableMap.of("Authorization", "Bearer token"));
     }
 
     public void shouldPerformWrappedPutRequest() throws Exception {
@@ -61,7 +64,8 @@ public class PutRequestTest {
         assertThat(result.getHeaders().get("foo")).containsExactly("bar");
         assertThat(result.getResource().stringField).isEqualTo("foo");
         assertThat(result.getResource().intField).isEqualTo(123);
-        http.assertRequestMade("PUT", "/dummy", "fixtures/single.json");
+        http.assertRequestMade("PUT", "/dummy", "fixtures/single.json",
+                ImmutableMap.of("Authorization", "Bearer token"));
     }
 
     private class DummyPutRequest extends PutRequest<DummyItem> {

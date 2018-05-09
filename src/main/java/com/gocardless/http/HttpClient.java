@@ -77,31 +77,19 @@ public class HttpClient {
     }
 
     <T> T execute(ApiRequest<T> apiRequest) {
-        return execute(apiRequest, ImmutableMap.<String, String>of());
-    }
-
-    <T> T execute(ApiRequest<T> apiRequest, Map<String, String> headers) {
-        Request request = buildRequest(apiRequest, headers);
+        Request request = buildRequest(apiRequest);
         Response response = execute(request);
         return parseResponseBody(apiRequest, response);
     }
 
     <T> ApiResponse<T> executeWrapped(ApiRequest<T> apiRequest) {
-        return executeWrapped(apiRequest, ImmutableMap.<String, String>of());
-    }
-
-    <T> ApiResponse<T> executeWrapped(ApiRequest<T> apiRequest, Map<String, String> headers) {
-        Request request = buildRequest(apiRequest, headers);
+        Request request = buildRequest(apiRequest);
         Response response = execute(request);
         T resource = parseResponseBody(apiRequest, response);
         return new ApiResponse<>(resource, response.code(), response.headers().toMultimap());
     }
 
-    <T> T executeWithRetries(ApiRequest<T> apiRequest) {
-        return executeWithRetries(apiRequest, ImmutableMap.<String, String>of());
-    }
-
-    <T> T executeWithRetries(final ApiRequest<T> apiRequest, final Map<String, String> headers) {
+    <T> T executeWithRetries(final ApiRequest<T> apiRequest) {
         Retryer<T> retrier =
                 RetryerBuilder.<T>newBuilder()
                         .retryIfExceptionOfType(GoCardlessNetworkException.class)
@@ -111,7 +99,7 @@ public class HttpClient {
         Callable<T> executeOnce = new Callable<T>() {
             @Override
             public T call() throws Exception {
-                return execute(apiRequest, headers);
+                return execute(apiRequest);
             }
         };
         try {
@@ -122,10 +110,10 @@ public class HttpClient {
         }
     }
 
-    private <T> Request buildRequest(ApiRequest<T> apiRequest, Map<String, String> headers) {
+    private <T> Request buildRequest(ApiRequest<T> apiRequest) {
         HttpUrl url = apiRequest.getUrl(urlFormatter);
         Request.Builder request =
-                new Request.Builder().url(url).headers(Headers.of(headers))
+                new Request.Builder().url(url).headers(Headers.of(apiRequest.getHeaders()))
                         .header("Authorization", credentials).header("User-Agent", USER_AGENT)
                         .method(apiRequest.getMethod(), getBody(apiRequest));
         for (Map.Entry<String, String> entry : HEADERS.entrySet()) {
