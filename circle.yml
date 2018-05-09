@@ -30,5 +30,5 @@ deployment:
       - rm -rf com resources
       - mv build/docs/javadoc/* .
       - git add .
-      - git commit -m "[ci skip] Generate Javadoc"
+      - git diff-index --quiet HEAD || git commit -m "[ci skip] Generate Javadoc"
       - git push origin gh-pages
