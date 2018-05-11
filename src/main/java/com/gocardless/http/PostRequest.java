@@ -1,9 +1,6 @@
 package com.gocardless.http;
 
 import java.io.Reader;
-import java.util.Map;
-
-import com.google.common.collect.ImmutableMap;
 
 /**
  * Base class for POST requests.
@@ -46,11 +43,6 @@ public abstract class PostRequest<T> extends ApiRequest<T> {
     @Override
     protected final String getMethod() {
         return "POST";
-    }
-
-    @Override
-    protected Map<String, String> getHeaders() {
-        return ImmutableMap.<String, String>of();
     }
 
     protected abstract Class<T> getResponseClass();

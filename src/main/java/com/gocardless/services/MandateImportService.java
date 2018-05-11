@@ -119,11 +119,20 @@ public class MandateImportService {
 
         @Override
         protected GetRequest<MandateImport> handleConflict(HttpClient httpClient, String id) {
-            return new MandateImportGetRequest(httpClient, id);
+            MandateImportGetRequest request = new MandateImportGetRequest(httpClient, id);
+            for (Map.Entry<String, String> header : this.getCustomHeaders().entrySet()) {
+                request = request.withHeader(header.getKey(), header.getValue());
+            }
+            return request;
         }
 
         private MandateImportCreateRequest(HttpClient httpClient) {
             super(httpClient);
+        }
+
+        public MandateImportCreateRequest withHeader(String headerName, String headerValue) {
+            this.addHeader(headerName, headerValue);
+            return this;
         }
 
         @Override
@@ -174,6 +183,11 @@ public class MandateImportService {
             this.identity = identity;
         }
 
+        public MandateImportGetRequest withHeader(String headerName, String headerValue) {
+            this.addHeader(headerName, headerValue);
+            return this;
+        }
+
         @Override
         protected Map<String, String> getPathParams() {
             ImmutableMap.Builder<String, String> params = ImmutableMap.builder();
@@ -218,6 +232,11 @@ public class MandateImportService {
         private MandateImportSubmitRequest(HttpClient httpClient, String identity) {
             super(httpClient);
             this.identity = identity;
+        }
+
+        public MandateImportSubmitRequest withHeader(String headerName, String headerValue) {
+            this.addHeader(headerName, headerValue);
+            return this;
         }
 
         @Override
@@ -268,6 +287,11 @@ public class MandateImportService {
         private MandateImportCancelRequest(HttpClient httpClient, String identity) {
             super(httpClient);
             this.identity = identity;
+        }
+
+        public MandateImportCancelRequest withHeader(String headerName, String headerValue) {
+            this.addHeader(headerName, headerValue);
+            return this;
         }
 
         @Override

@@ -16,8 +16,7 @@ public class PostRequestTest {
     @Test
     public void shouldPerformPostRequest() throws Exception {
         http.enqueueResponse(200, "fixtures/single.json");
-        DummyPostRequest request = new DummyPostRequest();
-        DummyItem result = request.execute();
+        DummyItem result = new DummyPostRequest().execute();
         assertThat(result.stringField).isEqualTo("foo");
         assertThat(result.intField).isEqualTo(123);
         http.assertRequestMade("POST", "/dummy", ImmutableMap.of("Authorization", "Bearer token"));
@@ -26,8 +25,7 @@ public class PostRequestTest {
     @Test
     public void shouldPerformPostRequestWithBody() throws Exception {
         http.enqueueResponse(200, "fixtures/single.json");
-        DummyPostRequest request = new DummyPostRequestWithBody();
-        DummyItem result = request.execute();
+        DummyItem result = new DummyPostRequestWithBody().execute();
         assertThat(result.stringField).isEqualTo("foo");
         assertThat(result.intField).isEqualTo(123);
         http.assertRequestMade("POST", "/dummy", "fixtures/single.json",
@@ -37,18 +35,38 @@ public class PostRequestTest {
     @Test
     public void shouldPerformWrappedPostRequest() throws Exception {
         http.enqueueResponse(200, "fixtures/single.json", ImmutableMap.of("foo", "bar"));
-        DummyPostRequest request = new DummyPostRequest();
-        ApiResponse<DummyItem> result = request.executeWrapped();
+        ApiResponse<DummyItem> result =
+                new DummyPostRequest().withHeader("Accept-Language", "fr-FR").executeWrapped();
         assertThat(result.getStatusCode()).isEqualTo(200);
         assertThat(result.getHeaders().get("foo")).containsExactly("bar");
         assertThat(result.getResource().stringField).isEqualTo("foo");
         assertThat(result.getResource().intField).isEqualTo(123);
-        http.assertRequestMade("POST", "/dummy", ImmutableMap.of("Authorization", "Bearer token"));
+        http.assertRequestMade("POST", "/dummy",
+                ImmutableMap.of("Authorization", "Bearer token", "Accept-Language", "fr-FR"));
+    }
+
+    @Test
+    public void shouldPerformWrappedPostRequestWithBody() throws Exception {
+        http.enqueueResponse(200, "fixtures/single.json", ImmutableMap.of("foo", "bar"));
+        ApiResponse<DummyItem> result =
+                new DummyPostRequestWithBody().withHeader("Accept-Language", "fr-FR")
+                        .executeWrapped();
+        assertThat(result.getStatusCode()).isEqualTo(200);
+        assertThat(result.getHeaders().get("foo")).containsExactly("bar");
+        assertThat(result.getResource().stringField).isEqualTo("foo");
+        assertThat(result.getResource().intField).isEqualTo(123);
+        http.assertRequestMade("POST", "/dummy", "fixtures/single.json",
+                ImmutableMap.of("Authorization", "Bearer token", "Accept-Language", "fr-FR"));
     }
 
     private class DummyPostRequest extends PostRequest<DummyItem> {
         public DummyPostRequest() {
             super(http.client());
+        }
+
+        public DummyPostRequest withHeader(String headerName, String headerValue) {
+            this.addHeader(headerName, headerValue);
+            return this;
         }
 
         @Override

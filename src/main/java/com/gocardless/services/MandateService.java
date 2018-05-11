@@ -179,11 +179,20 @@ public class MandateService {
 
         @Override
         protected GetRequest<Mandate> handleConflict(HttpClient httpClient, String id) {
-            return new MandateGetRequest(httpClient, id);
+            MandateGetRequest request = new MandateGetRequest(httpClient, id);
+            for (Map.Entry<String, String> header : this.getCustomHeaders().entrySet()) {
+                request = request.withHeader(header.getKey(), header.getValue());
+            }
+            return request;
         }
 
         private MandateCreateRequest(HttpClient httpClient) {
             super(httpClient);
+        }
+
+        public MandateCreateRequest withHeader(String headerName, String headerValue) {
+            this.addHeader(headerName, headerValue);
+            return this;
         }
 
         @Override
@@ -379,6 +388,11 @@ public class MandateService {
             super(httpClient, executor);
         }
 
+        public MandateListRequest<S> withHeader(String headerName, String headerValue) {
+            this.addHeader(headerName, headerValue);
+            return this;
+        }
+
         @Override
         protected Map<String, Object> getQueryParams() {
             ImmutableMap.Builder<String, Object> params = ImmutableMap.builder();
@@ -505,6 +519,11 @@ public class MandateService {
             this.identity = identity;
         }
 
+        public MandateGetRequest withHeader(String headerName, String headerValue) {
+            this.addHeader(headerName, headerValue);
+            return this;
+        }
+
         @Override
         protected Map<String, String> getPathParams() {
             ImmutableMap.Builder<String, String> params = ImmutableMap.builder();
@@ -562,6 +581,11 @@ public class MandateService {
         private MandateUpdateRequest(HttpClient httpClient, String identity) {
             super(httpClient);
             this.identity = identity;
+        }
+
+        public MandateUpdateRequest withHeader(String headerName, String headerValue) {
+            this.addHeader(headerName, headerValue);
+            return this;
         }
 
         @Override
@@ -629,6 +653,11 @@ public class MandateService {
         private MandateCancelRequest(HttpClient httpClient, String identity) {
             super(httpClient);
             this.identity = identity;
+        }
+
+        public MandateCancelRequest withHeader(String headerName, String headerValue) {
+            this.addHeader(headerName, headerValue);
+            return this;
         }
 
         @Override
@@ -707,6 +736,11 @@ public class MandateService {
         private MandateReinstateRequest(HttpClient httpClient, String identity) {
             super(httpClient);
             this.identity = identity;
+        }
+
+        public MandateReinstateRequest withHeader(String headerName, String headerValue) {
+            this.addHeader(headerName, headerValue);
+            return this;
         }
 
         @Override

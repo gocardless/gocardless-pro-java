@@ -57,11 +57,6 @@ public abstract class ListRequest<S, T> extends ApiRequest<ListResponse<T>> {
     }
 
     @Override
-    protected final Map<String, String> getHeaders() {
-        return ImmutableMap.<String, String>of();
-    }
-
-    @Override
     protected final boolean hasBody() {
         return false;
     }

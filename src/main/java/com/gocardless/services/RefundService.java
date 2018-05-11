@@ -191,11 +191,20 @@ public class RefundService {
 
         @Override
         protected GetRequest<Refund> handleConflict(HttpClient httpClient, String id) {
-            return new RefundGetRequest(httpClient, id);
+            RefundGetRequest request = new RefundGetRequest(httpClient, id);
+            for (Map.Entry<String, String> header : this.getCustomHeaders().entrySet()) {
+                request = request.withHeader(header.getKey(), header.getValue());
+            }
+            return request;
         }
 
         private RefundCreateRequest(HttpClient httpClient) {
             super(httpClient);
+        }
+
+        public RefundCreateRequest withHeader(String headerName, String headerValue) {
+            this.addHeader(headerName, headerValue);
+            return this;
         }
 
         @Override
@@ -357,6 +366,11 @@ public class RefundService {
             super(httpClient, executor);
         }
 
+        public RefundListRequest<S> withHeader(String headerName, String headerValue) {
+            this.addHeader(headerName, headerValue);
+            return this;
+        }
+
         @Override
         protected Map<String, Object> getQueryParams() {
             ImmutableMap.Builder<String, Object> params = ImmutableMap.builder();
@@ -472,6 +486,11 @@ public class RefundService {
             this.identity = identity;
         }
 
+        public RefundGetRequest withHeader(String headerName, String headerValue) {
+            this.addHeader(headerName, headerValue);
+            return this;
+        }
+
         @Override
         protected Map<String, String> getPathParams() {
             ImmutableMap.Builder<String, String> params = ImmutableMap.builder();
@@ -529,6 +548,11 @@ public class RefundService {
         private RefundUpdateRequest(HttpClient httpClient, String identity) {
             super(httpClient);
             this.identity = identity;
+        }
+
+        public RefundUpdateRequest withHeader(String headerName, String headerValue) {
+            this.addHeader(headerName, headerValue);
+            return this;
         }
 
         @Override

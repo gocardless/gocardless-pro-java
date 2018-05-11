@@ -241,11 +241,21 @@ public class CustomerBankAccountService {
 
         @Override
         protected GetRequest<CustomerBankAccount> handleConflict(HttpClient httpClient, String id) {
-            return new CustomerBankAccountGetRequest(httpClient, id);
+            CustomerBankAccountGetRequest request =
+                    new CustomerBankAccountGetRequest(httpClient, id);
+            for (Map.Entry<String, String> header : this.getCustomHeaders().entrySet()) {
+                request = request.withHeader(header.getKey(), header.getValue());
+            }
+            return request;
         }
 
         private CustomerBankAccountCreateRequest(HttpClient httpClient) {
             super(httpClient);
+        }
+
+        public CustomerBankAccountCreateRequest withHeader(String headerName, String headerValue) {
+            this.addHeader(headerName, headerValue);
+            return this;
         }
 
         @Override
@@ -396,6 +406,11 @@ public class CustomerBankAccountService {
             super(httpClient, executor);
         }
 
+        public CustomerBankAccountListRequest<S> withHeader(String headerName, String headerValue) {
+            this.addHeader(headerName, headerValue);
+            return this;
+        }
+
         @Override
         protected Map<String, Object> getQueryParams() {
             ImmutableMap.Builder<String, Object> params = ImmutableMap.builder();
@@ -498,6 +513,11 @@ public class CustomerBankAccountService {
             this.identity = identity;
         }
 
+        public CustomerBankAccountGetRequest withHeader(String headerName, String headerValue) {
+            this.addHeader(headerName, headerValue);
+            return this;
+        }
+
         @Override
         protected Map<String, String> getPathParams() {
             ImmutableMap.Builder<String, String> params = ImmutableMap.builder();
@@ -558,6 +578,11 @@ public class CustomerBankAccountService {
             this.identity = identity;
         }
 
+        public CustomerBankAccountUpdateRequest withHeader(String headerName, String headerValue) {
+            this.addHeader(headerName, headerValue);
+            return this;
+        }
+
         @Override
         protected Map<String, String> getPathParams() {
             ImmutableMap.Builder<String, String> params = ImmutableMap.builder();
@@ -604,6 +629,11 @@ public class CustomerBankAccountService {
         private CustomerBankAccountDisableRequest(HttpClient httpClient, String identity) {
             super(httpClient);
             this.identity = identity;
+        }
+
+        public CustomerBankAccountDisableRequest withHeader(String headerName, String headerValue) {
+            this.addHeader(headerName, headerValue);
+            return this;
         }
 
         @Override

@@ -192,6 +192,11 @@ public class PayoutService {
             super(httpClient, executor);
         }
 
+        public PayoutListRequest<S> withHeader(String headerName, String headerValue) {
+            this.addHeader(headerName, headerValue);
+            return this;
+        }
+
         @Override
         protected Map<String, Object> getQueryParams() {
             ImmutableMap.Builder<String, Object> params = ImmutableMap.builder();
@@ -338,6 +343,11 @@ public class PayoutService {
         private PayoutGetRequest(HttpClient httpClient, String identity) {
             super(httpClient);
             this.identity = identity;
+        }
+
+        public PayoutGetRequest withHeader(String headerName, String headerValue) {
+            this.addHeader(headerName, headerValue);
+            return this;
         }
 
         @Override

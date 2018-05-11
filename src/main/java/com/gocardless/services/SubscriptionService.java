@@ -321,11 +321,20 @@ public class SubscriptionService {
 
         @Override
         protected GetRequest<Subscription> handleConflict(HttpClient httpClient, String id) {
-            return new SubscriptionGetRequest(httpClient, id);
+            SubscriptionGetRequest request = new SubscriptionGetRequest(httpClient, id);
+            for (Map.Entry<String, String> header : this.getCustomHeaders().entrySet()) {
+                request = request.withHeader(header.getKey(), header.getValue());
+            }
+            return request;
         }
 
         private SubscriptionCreateRequest(HttpClient httpClient) {
             super(httpClient);
+        }
+
+        public SubscriptionCreateRequest withHeader(String headerName, String headerValue) {
+            this.addHeader(headerName, headerValue);
+            return this;
         }
 
         @Override
@@ -517,6 +526,11 @@ public class SubscriptionService {
             super(httpClient, executor);
         }
 
+        public SubscriptionListRequest<S> withHeader(String headerName, String headerValue) {
+            this.addHeader(headerName, headerValue);
+            return this;
+        }
+
         @Override
         protected Map<String, Object> getQueryParams() {
             ImmutableMap.Builder<String, Object> params = ImmutableMap.builder();
@@ -620,6 +634,11 @@ public class SubscriptionService {
         private SubscriptionGetRequest(HttpClient httpClient, String identity) {
             super(httpClient);
             this.identity = identity;
+        }
+
+        public SubscriptionGetRequest withHeader(String headerName, String headerValue) {
+            this.addHeader(headerName, headerValue);
+            return this;
         }
 
         @Override
@@ -745,6 +764,11 @@ public class SubscriptionService {
             this.identity = identity;
         }
 
+        public SubscriptionUpdateRequest withHeader(String headerName, String headerValue) {
+            this.addHeader(headerName, headerValue);
+            return this;
+        }
+
         @Override
         protected Map<String, String> getPathParams() {
             ImmutableMap.Builder<String, String> params = ImmutableMap.builder();
@@ -811,6 +835,11 @@ public class SubscriptionService {
         private SubscriptionCancelRequest(HttpClient httpClient, String identity) {
             super(httpClient);
             this.identity = identity;
+        }
+
+        public SubscriptionCancelRequest withHeader(String headerName, String headerValue) {
+            this.addHeader(headerName, headerValue);
+            return this;
         }
 
         @Override

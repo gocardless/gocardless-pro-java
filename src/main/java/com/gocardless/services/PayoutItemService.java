@@ -100,6 +100,11 @@ public class PayoutItemService {
             super(httpClient, executor);
         }
 
+        public PayoutItemListRequest<S> withHeader(String headerName, String headerValue) {
+            this.addHeader(headerName, headerValue);
+            return this;
+        }
+
         @Override
         protected Map<String, Object> getQueryParams() {
             ImmutableMap.Builder<String, Object> params = ImmutableMap.builder();

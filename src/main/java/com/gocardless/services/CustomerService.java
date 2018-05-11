@@ -237,11 +237,20 @@ public class CustomerService {
 
         @Override
         protected GetRequest<Customer> handleConflict(HttpClient httpClient, String id) {
-            return new CustomerGetRequest(httpClient, id);
+            CustomerGetRequest request = new CustomerGetRequest(httpClient, id);
+            for (Map.Entry<String, String> header : this.getCustomHeaders().entrySet()) {
+                request = request.withHeader(header.getKey(), header.getValue());
+            }
+            return request;
         }
 
         private CustomerCreateRequest(HttpClient httpClient) {
             super(httpClient);
+        }
+
+        public CustomerCreateRequest withHeader(String headerName, String headerValue) {
+            this.addHeader(headerName, headerValue);
+            return this;
         }
 
         @Override
@@ -350,6 +359,11 @@ public class CustomerService {
             super(httpClient, executor);
         }
 
+        public CustomerListRequest<S> withHeader(String headerName, String headerValue) {
+            this.addHeader(headerName, headerValue);
+            return this;
+        }
+
         @Override
         protected Map<String, Object> getQueryParams() {
             ImmutableMap.Builder<String, Object> params = ImmutableMap.builder();
@@ -444,6 +458,11 @@ public class CustomerService {
         private CustomerGetRequest(HttpClient httpClient, String identity) {
             super(httpClient);
             this.identity = identity;
+        }
+
+        public CustomerGetRequest withHeader(String headerName, String headerValue) {
+            this.addHeader(headerName, headerValue);
+            return this;
         }
 
         @Override
@@ -637,6 +656,11 @@ public class CustomerService {
         private CustomerUpdateRequest(HttpClient httpClient, String identity) {
             super(httpClient);
             this.identity = identity;
+        }
+
+        public CustomerUpdateRequest withHeader(String headerName, String headerValue) {
+            this.addHeader(headerName, headerValue);
+            return this;
         }
 
         @Override

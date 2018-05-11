@@ -448,6 +448,11 @@ public class MandateImportEntryService {
             super(httpClient);
         }
 
+        public MandateImportEntryCreateRequest withHeader(String headerName, String headerValue) {
+            this.addHeader(headerName, headerValue);
+            return this;
+        }
+
         @Override
         protected String getPathTemplate() {
             return "mandate_import_entries";
@@ -789,6 +794,11 @@ public class MandateImportEntryService {
         private MandateImportEntryListRequest(HttpClient httpClient,
                 ListRequestExecutor<S, MandateImportEntry> executor) {
             super(httpClient, executor);
+        }
+
+        public MandateImportEntryListRequest<S> withHeader(String headerName, String headerValue) {
+            this.addHeader(headerName, headerValue);
+            return this;
         }
 
         @Override

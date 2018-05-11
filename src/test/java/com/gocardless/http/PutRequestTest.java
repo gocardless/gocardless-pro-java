@@ -16,8 +16,7 @@ public class PutRequestTest {
     @Test
     public void shouldPerformPutRequest() throws Exception {
         http.enqueueResponse(200, "fixtures/single.json");
-        DummyPutRequest request = new DummyPutRequest();
-        DummyItem result = request.execute();
+        DummyItem result = new DummyPutRequest().execute();
         assertThat(result.stringField).isEqualTo("foo");
         assertThat(result.intField).isEqualTo(123);
         http.assertRequestMade("PUT", "/dummy", ImmutableMap.of("Authorization", "Bearer token"));
@@ -27,29 +26,32 @@ public class PutRequestTest {
     public void shouldRetryOnNetworkFailure() throws Exception {
         http.enqueueNetworkFailure();
         http.enqueueResponse(200, "fixtures/single.json");
-        DummyPutRequest request = new DummyPutRequest();
-        DummyItem result = request.execute();
+        DummyItem result = new DummyPutRequest().withHeader("Accept-Language", "fr-FR").execute();
         assertThat(result.stringField).isEqualTo("foo");
         assertThat(result.intField).isEqualTo(123);
-        http.assertRequestMade("PUT", "/dummy", ImmutableMap.of("Authorization", "Bearer token"));
+        // The first request isn't "made" at all as the socket doesn't accept the
+        // connection. This tests that we send our headers on the retry.
+        http.assertRequestMade("PUT", "/dummy",
+                ImmutableMap.of("Authorization", "Bearer token", "Accept-Language", "fr-FR"));
     }
 
     @Test
     public void shouldRetryOnInternalError() throws Exception {
         http.enqueueResponse(500, "fixtures/internal_error.json");
         http.enqueueResponse(200, "fixtures/single.json");
-        DummyPutRequest request = new DummyPutRequest();
-        DummyItem result = request.execute();
+        DummyItem result = new DummyPutRequest().withHeader("Accept-Language", "fr-FR").execute();
         assertThat(result.stringField).isEqualTo("foo");
         assertThat(result.intField).isEqualTo(123);
-        http.assertRequestMade("PUT", "/dummy", ImmutableMap.of("Authorization", "Bearer token"));
+        http.assertRequestMade("PUT", "/dummy",
+                ImmutableMap.of("Authorization", "Bearer token", "Accept-Language", "fr-FR"));
+        http.assertRequestMade("PUT", "/dummy",
+                ImmutableMap.of("Authorization", "Bearer token", "Accept-Language", "fr-FR"));
     }
 
     @Test
     public void shouldPerformPutRequestWithBody() throws Exception {
         http.enqueueResponse(200, "fixtures/single.json");
-        DummyPutRequest request = new DummyPutRequestWithBody();
-        DummyItem result = request.execute();
+        DummyItem result = new DummyPutRequestWithBody().execute();
         assertThat(result.stringField).isEqualTo("foo");
         assertThat(result.intField).isEqualTo(123);
         http.assertRequestMade("PUT", "/dummy", "fixtures/single.json",
@@ -58,19 +60,37 @@ public class PutRequestTest {
 
     public void shouldPerformWrappedPutRequest() throws Exception {
         http.enqueueResponse(200, "fixtures/single.json");
-        DummyPutRequest request = new DummyPutRequest();
-        ApiResponse<DummyItem> result = request.executeWrapped();
+        ApiResponse<DummyItem> result =
+                new DummyPutRequest().withHeader("Accept-Language", "fr-FR").executeWrapped();
         assertThat(result.getStatusCode()).isEqualTo(200);
         assertThat(result.getHeaders().get("foo")).containsExactly("bar");
         assertThat(result.getResource().stringField).isEqualTo("foo");
         assertThat(result.getResource().intField).isEqualTo(123);
         http.assertRequestMade("PUT", "/dummy", "fixtures/single.json",
-                ImmutableMap.of("Authorization", "Bearer token"));
+                ImmutableMap.of("Authorization", "Bearer token", "Accept-Language", "fr-FR"));
+    }
+
+    public void shouldPerformWrappedPutRequestWithBody() throws Exception {
+        http.enqueueResponse(200, "fixtures/single.json");
+        ApiResponse<DummyItem> result =
+                new DummyPutRequestWithBody().withHeader("Accept-Language", "fr-FR")
+                        .executeWrapped();
+        assertThat(result.getStatusCode()).isEqualTo(200);
+        assertThat(result.getHeaders().get("foo")).containsExactly("bar");
+        assertThat(result.getResource().stringField).isEqualTo("foo");
+        assertThat(result.getResource().intField).isEqualTo(123);
+        http.assertRequestMade("PUT", "/dummy", "fixtures/single.json",
+                ImmutableMap.of("Authorization", "Bearer token", "Accept-Language", "fr-FR"));
     }
 
     private class DummyPutRequest extends PutRequest<DummyItem> {
         public DummyPutRequest() {
             super(http.client());
+        }
+
+        public DummyPutRequest withHeader(String headerName, String headerValue) {
+            this.addHeader(headerName, headerValue);
+            return this;
         }
 
         @Override

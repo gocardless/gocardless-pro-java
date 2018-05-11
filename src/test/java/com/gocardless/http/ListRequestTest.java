@@ -23,9 +23,7 @@ public class ListRequestTest {
     @Test
     public void shouldPerformListRequest() throws Exception {
         http.enqueueResponse(200, "fixtures/page.json");
-        DummyListRequest<ListResponse<DummyItem>> request =
-                DummyListRequest.pageRequest(http.client());
-        ListResponse<DummyItem> result = request.execute();
+        ListResponse<DummyItem> result = DummyListRequest.pageRequest(http.client()).execute();
         assertThat(result.getItems()).hasSize(2);
         assertThat(result.getItems().get(0).stringField).isEqualTo("foo");
         assertThat(result.getItems().get(0).intField).isEqualTo(123);
@@ -39,54 +37,58 @@ public class ListRequestTest {
     public void shouldRetryOnNetworkFailure() throws Exception {
         http.enqueueNetworkFailure();
         http.enqueueResponse(200, "fixtures/page.json");
-        DummyListRequest<ListResponse<DummyItem>> request =
-                DummyListRequest.pageRequest(http.client());
-        ListResponse<DummyItem> result = request.execute();
+        ListResponse<DummyItem> result =
+                DummyListRequest.pageRequest(http.client()).withHeader("Accept-Language", "fr-FR")
+                        .execute();
         assertThat(result.getItems()).hasSize(2);
         assertThat(result.getItems().get(0).stringField).isEqualTo("foo");
         assertThat(result.getItems().get(0).intField).isEqualTo(123);
         assertThat(result.getItems().get(1).stringField).isEqualTo("bar");
         assertThat(result.getItems().get(1).intField).isEqualTo(456);
+        // The first request isn't "made" at all as the socket doesn't accept the
+        // connection. This tests that we send our headers on the retry.
         http.assertRequestMade("GET", "/dummy?id=123",
-                ImmutableMap.of("Authorization", "Bearer token"));
+                ImmutableMap.of("Authorization", "Bearer token", "Accept-Language", "fr-FR"));
     }
 
     @Test
     public void shouldRetryOnInternalError() throws Exception {
         http.enqueueResponse(500, "fixtures/internal_error.json");
         http.enqueueResponse(200, "fixtures/page.json");
-        DummyListRequest<ListResponse<DummyItem>> request =
-                DummyListRequest.pageRequest(http.client());
-        ListResponse<DummyItem> result = request.execute();
+        ListResponse<DummyItem> result =
+                DummyListRequest.pageRequest(http.client()).withHeader("Accept-Language", "fr-FR")
+                        .execute();
         assertThat(result.getItems()).hasSize(2);
         assertThat(result.getItems().get(0).stringField).isEqualTo("foo");
         assertThat(result.getItems().get(0).intField).isEqualTo(123);
         assertThat(result.getItems().get(1).stringField).isEqualTo("bar");
         assertThat(result.getItems().get(1).intField).isEqualTo(456);
         http.assertRequestMade("GET", "/dummy?id=123",
-                ImmutableMap.of("Authorization", "Bearer token"));
+                ImmutableMap.of("Authorization", "Bearer token", "Accept-Language", "fr-FR"));
+        http.assertRequestMade("GET", "/dummy?id=123",
+                ImmutableMap.of("Authorization", "Bearer token", "Accept-Language", "fr-FR"));
     }
 
     @Test
     public void shouldPerformWrappedListRequest() throws Exception {
         http.enqueueResponse(200, "fixtures/page.json", ImmutableMap.of("foo", "bar"));
-        DummyListRequest<ListResponse<DummyItem>> request =
-                DummyListRequest.pageRequest(http.client());
-        ApiResponse<ListResponse<DummyItem>> result = request.executeWrapped();
+        ApiResponse<ListResponse<DummyItem>> result =
+                DummyListRequest.pageRequest(http.client()).withHeader("Accept-Language", "fr-FR")
+                        .executeWrapped();
         assertThat(result.getStatusCode()).isEqualTo(200);
         assertThat(result.getHeaders().get("foo")).containsExactly("bar");
         assertThat(result.getResource().getItems()).hasSize(2);
         http.assertRequestMade("GET", "/dummy?id=123",
-                ImmutableMap.of("Authorization", "Bearer token"));
+                ImmutableMap.of("Authorization", "Bearer token", "Accept-Language", "fr-FR"));
     }
 
     @Test
     public void shouldBeAbleToIterateThroughList() throws Exception {
         http.enqueueResponse(200, "fixtures/first-page.json");
         http.enqueueResponse(200, "fixtures/last-page.json");
-        DummyListRequest<Iterable<DummyItem>> request =
-                DummyListRequest.iterableRequest(http.client());
-        Iterable<DummyItem> iterable = request.execute();
+        Iterable<DummyItem> iterable =
+                DummyListRequest.iterableRequest(http.client())
+                        .withHeader("Accept-Language", "fr-FR").execute();
         List<DummyItem> result = Lists.newArrayList(iterable);
         assertThat(result).hasSize(3);
         assertThat(result.get(0).stringField).isEqualTo("foo");
@@ -96,9 +98,9 @@ public class ListRequestTest {
         assertThat(result.get(2).stringField).isEqualTo("baz");
         assertThat(result.get(2).intField).isEqualTo(333);
         http.assertRequestMade("GET", "/dummy?id=123",
-                ImmutableMap.of("Authorization", "Bearer token"));
+                ImmutableMap.of("Authorization", "Bearer token", "Accept-Language", "fr-FR"));
         http.assertRequestMade("GET", "/dummy?after=ID123&id=123",
-                ImmutableMap.of("Authorization", "Bearer token"));
+                ImmutableMap.of("Authorization", "Bearer token", "Accept-Language", "fr-FR"));
     }
 
     @Test
@@ -112,6 +114,11 @@ public class ListRequestTest {
     static class DummyListRequest<S> extends ListRequest<S, DummyItem> {
         private DummyListRequest(HttpClient httpClient, ListRequestExecutor<S, DummyItem> executor) {
             super(httpClient, executor);
+        }
+
+        public DummyListRequest<S> withHeader(String headerName, String headerValue) {
+            this.addHeader(headerName, headerValue);
+            return this;
         }
 
         @Override

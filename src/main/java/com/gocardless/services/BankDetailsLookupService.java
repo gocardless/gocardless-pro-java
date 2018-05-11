@@ -112,6 +112,11 @@ public class BankDetailsLookupService {
             super(httpClient);
         }
 
+        public BankDetailsLookupCreateRequest withHeader(String headerName, String headerValue) {
+            this.addHeader(headerName, headerValue);
+            return this;
+        }
+
         @Override
         protected String getPathTemplate() {
             return "bank_details_lookups";

@@ -1,6 +1,5 @@
 package com.gocardless.http;
 
-import java.util.Map;
 import java.util.UUID;
 
 import com.gocardless.errors.ApiError;
@@ -52,14 +51,15 @@ public abstract class IdempotentPostRequest<T> extends PostRequest<T> {
     }
 
     @Override
-    protected final Map<String, String> getHeaders() {
+    protected final ImmutableMap<String, String> getHeaders() {
         String requestIdempotencyKey;
         if (this.idempotencyKey == null) {
             requestIdempotencyKey = UUID.randomUUID().toString();
         } else {
             requestIdempotencyKey = this.idempotencyKey;
         }
-        return ImmutableMap.<String, String>of("Idempotency-Key", requestIdempotencyKey);
+        return ImmutableMap.<String, String>builder().put("Idempotency-Key", requestIdempotencyKey)
+                .putAll(super.getHeaders()).build();
     }
 
     protected abstract GetRequest<T> handleConflict(HttpClient httpClient, String id);

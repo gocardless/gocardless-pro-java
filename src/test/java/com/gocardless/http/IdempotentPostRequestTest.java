@@ -1,5 +1,7 @@
 package com.gocardless.http;
 
+import java.util.Map;
+
 import com.gocardless.errors.ValidationFailedException;
 
 import com.google.common.collect.ImmutableMap;
@@ -19,8 +21,7 @@ public class IdempotentPostRequestTest {
     @Test
     public void shouldPerformPostRequest() throws Exception {
         http.enqueueResponse(200, "fixtures/single.json");
-        DummyPostRequest request = new DummyPostRequest();
-        HttpTestUtil.DummyItem result = request.execute();
+        HttpTestUtil.DummyItem result = new DummyPostRequest().execute();
         assertThat(result.stringField).isEqualTo("foo");
         assertThat(result.intField).isEqualTo(123);
         http.assertRequestMade("POST", "/dummy", "fixtures/single.json",
@@ -30,23 +31,38 @@ public class IdempotentPostRequestTest {
     @Test
     public void shouldPerformPostRequestWithGeneratedIdempotencyKey() throws Exception {
         http.enqueueResponse(200, "fixtures/single.json");
-        DummyPostRequest request = new DummyPostRequest();
-        HttpTestUtil.DummyItem result = request.execute();
+        HttpTestUtil.DummyItem result = new DummyPostRequest().execute();
         assertThat(result.stringField).isEqualTo("foo");
         assertThat(result.intField).isEqualTo(123);
         http.assertRequestIncludedHeader("Idempotency-Key");
     }
 
     @Test
-    public void shouldBeAbleToProvideOwnIdempotencyKey() throws Exception {
+    public void shouldPerformPostRequestWithGeneratedIdempotencyKeyAndCustomHeader()
+            throws Exception {
         http.enqueueResponse(200, "fixtures/single.json");
-        DummyPostRequest request =
-                new DummyPostRequest().withIdempotencyKey("i-am-the-one-and-only");
+        DummyPostRequest request = new DummyPostRequest().withHeader("Accept-Language", "fr-FR");
         HttpTestUtil.DummyItem result = request.execute();
         assertThat(result.stringField).isEqualTo("foo");
         assertThat(result.intField).isEqualTo(123);
+        http.assertRequestIncludedHeader("Idempotency-Key");
+        http.enqueueResponse(200, "fixtures/single.json");
+        request.execute();
+        http.assertRequestIncludedHeader("Accept-Language");
+    }
+
+    @Test
+    public void shouldPerformPostRequestWithSpecifiedIdempotencyKeyAndCustomHeader()
+            throws Exception {
+        http.enqueueResponse(200, "fixtures/single.json");
+        HttpTestUtil.DummyItem result =
+                new DummyPostRequest().withIdempotencyKey("i-am-the-one-and-only")
+                        .withHeader("Accept-Language", "fr-FR").execute();
+        assertThat(result.stringField).isEqualTo("foo");
+        assertThat(result.intField).isEqualTo(123);
         http.assertRequestMade("POST", "/dummy", "fixtures/single.json", ImmutableMap.of(
-                "Authorization", "Bearer token", "Idempotency-Key", "i-am-the-one-and-only"));
+                "Authorization", "Bearer token", "Idempotency-Key", "i-am-the-one-and-only",
+                "Accept-Language", "fr-FR"));
     }
 
     @Test
@@ -54,21 +70,25 @@ public class IdempotentPostRequestTest {
         http.enqueueResponse(503, "fixtures/internal_error.json");
         http.enqueueResponse(200, "fixtures/single.json");
         DummyPostRequest request = new DummyPostRequest();
-        HttpTestUtil.DummyItem result = request.execute();
+        HttpTestUtil.DummyItem result = request.withHeader("Accept-Language", "fr-FR").execute();
         assertThat(result.stringField).isEqualTo("foo");
         assertThat(result.intField).isEqualTo(123);
         http.assertRequestMade("POST", "/dummy", "fixtures/single.json",
-                ImmutableMap.of("Authorization", "Bearer token"));
+                ImmutableMap.of("Authorization", "Bearer token", "Accept-Language", "fr-FR"));
+        http.assertRequestMade("POST", "/dummy", "fixtures/single.json",
+                ImmutableMap.of("Authorization", "Bearer token", "Accept-Language", "fr-FR"));
     }
 
     @Test
     public void shouldRetryRequestWhenServerDoesNotRespond() throws Exception {
         http.enqueueNetworkFailure();
         http.enqueueResponse(200, "fixtures/single.json");
-        DummyPostRequest request = new DummyPostRequest();
-        HttpTestUtil.DummyItem result = request.execute();
+        HttpTestUtil.DummyItem result =
+                new DummyPostRequest().withHeader("Accept-Language", "fr-FR").execute();
         assertThat(result.stringField).isEqualTo("foo");
         assertThat(result.intField).isEqualTo(123);
+        // The first request isn't "made" at all as the socket doesn't accept the
+        // connection. This tests that we send our headers on the retry.
         http.assertRequestMade("POST", "/dummy", "fixtures/single.json",
                 ImmutableMap.of("Authorization", "Bearer token"));
     }
@@ -78,14 +98,14 @@ public class IdempotentPostRequestTest {
         http.enqueueNetworkFailure();
         http.enqueueResponse(409, "fixtures/conflict.json");
         http.enqueueResponse(200, "fixtures/single.json");
-        DummyPostRequest request = new DummyPostRequest();
-        HttpTestUtil.DummyItem result = request.execute();
+        HttpTestUtil.DummyItem result =
+                new DummyPostRequest().withHeader("Accept-Language", "fr-FR").execute();
         assertThat(result.stringField).isEqualTo("foo");
         assertThat(result.intField).isEqualTo(123);
         http.assertRequestMade("POST", "/dummy", "fixtures/single.json",
-                ImmutableMap.of("Authorization", "Bearer token"));
+                ImmutableMap.of("Authorization", "Bearer token", "Accept-Language", "fr-FR"));
         http.assertRequestMade("GET", "/dummy/ID123",
-                ImmutableMap.of("Authorization", "Bearer token"));
+                ImmutableMap.of("Authorization", "Bearer token", "Accept-Language", "fr-FR"));
     }
 
     @Test
@@ -119,6 +139,11 @@ public class IdempotentPostRequestTest {
             return this;
         }
 
+        public DummyPostRequest withHeader(String headerName, String headerValue) {
+            this.addHeader(headerName, headerValue);
+            return this;
+        }
+
         @Override
         protected String getPathTemplate() {
             return "/dummy";
@@ -141,7 +166,11 @@ public class IdempotentPostRequestTest {
 
         @Override
         protected GetRequest<HttpTestUtil.DummyItem> handleConflict(HttpClient httpClient, String id) {
-            return new DummyGetRequest(httpClient, id);
+            DummyGetRequest request = new DummyGetRequest(httpClient, id);
+            for (Map.Entry<String, String> header : this.getCustomHeaders().entrySet()) {
+                request.addHeader(header.getKey(), header.getValue());
+            }
+            return request;
         }
     }
 
@@ -151,6 +180,11 @@ public class IdempotentPostRequestTest {
         public DummyGetRequest(HttpClient httpClient, String id) {
             super(httpClient);
             this.id = id;
+        }
+
+        public DummyGetRequest withHeader(String headerName, String headerValue) {
+            this.addHeader(headerName, headerValue);
+            return this;
         }
 
         @Override

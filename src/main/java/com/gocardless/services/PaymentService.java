@@ -216,11 +216,20 @@ public class PaymentService {
 
         @Override
         protected GetRequest<Payment> handleConflict(HttpClient httpClient, String id) {
-            return new PaymentGetRequest(httpClient, id);
+            PaymentGetRequest request = new PaymentGetRequest(httpClient, id);
+            for (Map.Entry<String, String> header : this.getCustomHeaders().entrySet()) {
+                request = request.withHeader(header.getKey(), header.getValue());
+            }
+            return request;
         }
 
         private PaymentCreateRequest(HttpClient httpClient) {
             super(httpClient);
+        }
+
+        public PaymentCreateRequest withHeader(String headerName, String headerValue) {
+            this.addHeader(headerName, headerValue);
+            return this;
         }
 
         @Override
@@ -424,6 +433,11 @@ public class PaymentService {
             super(httpClient, executor);
         }
 
+        public PaymentListRequest<S> withHeader(String headerName, String headerValue) {
+            this.addHeader(headerName, headerValue);
+            return this;
+        }
+
         @Override
         protected Map<String, Object> getQueryParams() {
             ImmutableMap.Builder<String, Object> params = ImmutableMap.builder();
@@ -568,6 +582,11 @@ public class PaymentService {
             this.identity = identity;
         }
 
+        public PaymentGetRequest withHeader(String headerName, String headerValue) {
+            this.addHeader(headerName, headerValue);
+            return this;
+        }
+
         @Override
         protected Map<String, String> getPathParams() {
             ImmutableMap.Builder<String, String> params = ImmutableMap.builder();
@@ -625,6 +644,11 @@ public class PaymentService {
         private PaymentUpdateRequest(HttpClient httpClient, String identity) {
             super(httpClient);
             this.identity = identity;
+        }
+
+        public PaymentUpdateRequest withHeader(String headerName, String headerValue) {
+            this.addHeader(headerName, headerValue);
+            return this;
         }
 
         @Override
@@ -693,6 +717,11 @@ public class PaymentService {
         private PaymentCancelRequest(HttpClient httpClient, String identity) {
             super(httpClient);
             this.identity = identity;
+        }
+
+        public PaymentCancelRequest withHeader(String headerName, String headerValue) {
+            this.addHeader(headerName, headerValue);
+            return this;
         }
 
         @Override
@@ -770,6 +799,11 @@ public class PaymentService {
         private PaymentRetryRequest(HttpClient httpClient, String identity) {
             super(httpClient);
             this.identity = identity;
+        }
+
+        public PaymentRetryRequest withHeader(String headerName, String headerValue) {
+            this.addHeader(headerName, headerValue);
+            return this;
         }
 
         @Override

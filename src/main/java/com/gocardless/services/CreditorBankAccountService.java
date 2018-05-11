@@ -209,11 +209,21 @@ public class CreditorBankAccountService {
 
         @Override
         protected GetRequest<CreditorBankAccount> handleConflict(HttpClient httpClient, String id) {
-            return new CreditorBankAccountGetRequest(httpClient, id);
+            CreditorBankAccountGetRequest request =
+                    new CreditorBankAccountGetRequest(httpClient, id);
+            for (Map.Entry<String, String> header : this.getCustomHeaders().entrySet()) {
+                request = request.withHeader(header.getKey(), header.getValue());
+            }
+            return request;
         }
 
         private CreditorBankAccountCreateRequest(HttpClient httpClient) {
             super(httpClient);
+        }
+
+        public CreditorBankAccountCreateRequest withHeader(String headerName, String headerValue) {
+            this.addHeader(headerName, headerValue);
+            return this;
         }
 
         @Override
@@ -354,6 +364,11 @@ public class CreditorBankAccountService {
             super(httpClient, executor);
         }
 
+        public CreditorBankAccountListRequest<S> withHeader(String headerName, String headerValue) {
+            this.addHeader(headerName, headerValue);
+            return this;
+        }
+
         @Override
         protected Map<String, Object> getQueryParams() {
             ImmutableMap.Builder<String, Object> params = ImmutableMap.builder();
@@ -456,6 +471,11 @@ public class CreditorBankAccountService {
             this.identity = identity;
         }
 
+        public CreditorBankAccountGetRequest withHeader(String headerName, String headerValue) {
+            this.addHeader(headerName, headerValue);
+            return this;
+        }
+
         @Override
         protected Map<String, String> getPathParams() {
             ImmutableMap.Builder<String, String> params = ImmutableMap.builder();
@@ -497,6 +517,11 @@ public class CreditorBankAccountService {
         private CreditorBankAccountDisableRequest(HttpClient httpClient, String identity) {
             super(httpClient);
             this.identity = identity;
+        }
+
+        public CreditorBankAccountDisableRequest withHeader(String headerName, String headerValue) {
+            this.addHeader(headerName, headerValue);
+            return this;
         }
 
         @Override

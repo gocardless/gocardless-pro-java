@@ -193,6 +193,11 @@ public class MandatePdfService {
             super(httpClient);
         }
 
+        public MandatePdfCreateRequest withHeader(String headerName, String headerValue) {
+            this.addHeader(headerName, headerValue);
+            return this;
+        }
+
         @Override
         protected String getPathTemplate() {
             return "mandate_pdfs";

@@ -326,11 +326,20 @@ public class RedirectFlowService {
 
         @Override
         protected GetRequest<RedirectFlow> handleConflict(HttpClient httpClient, String id) {
-            return new RedirectFlowGetRequest(httpClient, id);
+            RedirectFlowGetRequest request = new RedirectFlowGetRequest(httpClient, id);
+            for (Map.Entry<String, String> header : this.getCustomHeaders().entrySet()) {
+                request = request.withHeader(header.getKey(), header.getValue());
+            }
+            return request;
         }
 
         private RedirectFlowCreateRequest(HttpClient httpClient) {
             super(httpClient);
+        }
+
+        public RedirectFlowCreateRequest withHeader(String headerName, String headerValue) {
+            this.addHeader(headerName, headerValue);
+            return this;
         }
 
         @Override
@@ -526,6 +535,11 @@ public class RedirectFlowService {
             this.identity = identity;
         }
 
+        public RedirectFlowGetRequest withHeader(String headerName, String headerValue) {
+            this.addHeader(headerName, headerValue);
+            return this;
+        }
+
         @Override
         protected Map<String, String> getPathParams() {
             ImmutableMap.Builder<String, String> params = ImmutableMap.builder();
@@ -579,6 +593,11 @@ public class RedirectFlowService {
         private RedirectFlowCompleteRequest(HttpClient httpClient, String identity) {
             super(httpClient);
             this.identity = identity;
+        }
+
+        public RedirectFlowCompleteRequest withHeader(String headerName, String headerValue) {
+            this.addHeader(headerName, headerValue);
+            return this;
         }
 
         @Override
