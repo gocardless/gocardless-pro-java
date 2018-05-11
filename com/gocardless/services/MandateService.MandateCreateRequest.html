@@ -153,44 +153,49 @@ extends <a href="../../../com/gocardless/http/IdempotentPostRequest.html" title=
 </tr>
 <tr class="altColor">
 <td class="colFirst"><code><a href="../../../com/gocardless/services/MandateService.MandateCreateRequest.html" title="class in com.gocardless.services">MandateService.MandateCreateRequest</a></code></td>
-<td class="colLast"><code><strong><a href="../../../com/gocardless/services/MandateService.MandateCreateRequest.html#withIdempotencyKey(java.lang.String)">withIdempotencyKey</a></strong>(java.lang.String&nbsp;idempotencyKey)</code>&nbsp;</td>
+<td class="colLast"><code><strong><a href="../../../com/gocardless/services/MandateService.MandateCreateRequest.html#withHeader(java.lang.String,%20java.lang.String)">withHeader</a></strong>(java.lang.String&nbsp;headerName,
+          java.lang.String&nbsp;headerValue)</code>&nbsp;</td>
 </tr>
 <tr class="rowColor">
 <td class="colFirst"><code><a href="../../../com/gocardless/services/MandateService.MandateCreateRequest.html" title="class in com.gocardless.services">MandateService.MandateCreateRequest</a></code></td>
-<td class="colLast"><code><strong><a href="../../../com/gocardless/services/MandateService.MandateCreateRequest.html#withLinks(com.gocardless.services.MandateService.MandateCreateRequest.Links)">withLinks</a></strong>(<a href="../../../com/gocardless/services/MandateService.MandateCreateRequest.Links.html" title="class in com.gocardless.services">MandateService.MandateCreateRequest.Links</a>&nbsp;links)</code>&nbsp;</td>
+<td class="colLast"><code><strong><a href="../../../com/gocardless/services/MandateService.MandateCreateRequest.html#withIdempotencyKey(java.lang.String)">withIdempotencyKey</a></strong>(java.lang.String&nbsp;idempotencyKey)</code>&nbsp;</td>
 </tr>
 <tr class="altColor">
+<td class="colFirst"><code><a href="../../../com/gocardless/services/MandateService.MandateCreateRequest.html" title="class in com.gocardless.services">MandateService.MandateCreateRequest</a></code></td>
+<td class="colLast"><code><strong><a href="../../../com/gocardless/services/MandateService.MandateCreateRequest.html#withLinks(com.gocardless.services.MandateService.MandateCreateRequest.Links)">withLinks</a></strong>(<a href="../../../com/gocardless/services/MandateService.MandateCreateRequest.Links.html" title="class in com.gocardless.services">MandateService.MandateCreateRequest.Links</a>&nbsp;links)</code>&nbsp;</td>
+</tr>
+<tr class="rowColor">
 <td class="colFirst"><code><a href="../../../com/gocardless/services/MandateService.MandateCreateRequest.html" title="class in com.gocardless.services">MandateService.MandateCreateRequest</a></code></td>
 <td class="colLast"><code><strong><a href="../../../com/gocardless/services/MandateService.MandateCreateRequest.html#withLinksCreditor(java.lang.String)">withLinksCreditor</a></strong>(java.lang.String&nbsp;creditor)</code>
 <div class="block">ID of the associated <a href="#core-endpoints-creditors">creditor</a>.</div>
 </td>
 </tr>
-<tr class="rowColor">
+<tr class="altColor">
 <td class="colFirst"><code><a href="../../../com/gocardless/services/MandateService.MandateCreateRequest.html" title="class in com.gocardless.services">MandateService.MandateCreateRequest</a></code></td>
 <td class="colLast"><code><strong><a href="../../../com/gocardless/services/MandateService.MandateCreateRequest.html#withLinksCustomerBankAccount(java.lang.String)">withLinksCustomerBankAccount</a></strong>(java.lang.String&nbsp;customerBankAccount)</code>
 <div class="block">ID of the associated <a href="#core-endpoints-customer-bank-accounts">customer bank account</a> which the mandate is created and submits payments against.</div>
 </td>
 </tr>
-<tr class="altColor">
+<tr class="rowColor">
 <td class="colFirst"><code><a href="../../../com/gocardless/services/MandateService.MandateCreateRequest.html" title="class in com.gocardless.services">MandateService.MandateCreateRequest</a></code></td>
 <td class="colLast"><code><strong><a href="../../../com/gocardless/services/MandateService.MandateCreateRequest.html#withMetadata(java.util.Map)">withMetadata</a></strong>(java.util.Map&lt;java.lang.String,java.lang.String&gt;&nbsp;metadata)</code>
 <div class="block">Key-value store of custom data.</div>
 </td>
 </tr>
-<tr class="rowColor">
+<tr class="altColor">
 <td class="colFirst"><code><a href="../../../com/gocardless/services/MandateService.MandateCreateRequest.html" title="class in com.gocardless.services">MandateService.MandateCreateRequest</a></code></td>
 <td class="colLast"><code><strong><a href="../../../com/gocardless/services/MandateService.MandateCreateRequest.html#withMetadata(java.lang.String,%20java.lang.String)">withMetadata</a></strong>(java.lang.String&nbsp;key,
             java.lang.String&nbsp;value)</code>
 <div class="block">Key-value store of custom data.</div>
 </td>
 </tr>
-<tr class="altColor">
+<tr class="rowColor">
 <td class="colFirst"><code><a href="../../../com/gocardless/services/MandateService.MandateCreateRequest.html" title="class in com.gocardless.services">MandateService.MandateCreateRequest</a></code></td>
 <td class="colLast"><code><strong><a href="../../../com/gocardless/services/MandateService.MandateCreateRequest.html#withReference(java.lang.String)">withReference</a></strong>(java.lang.String&nbsp;reference)</code>
 <div class="block">Unique reference.</div>
 </td>
 </tr>
-<tr class="rowColor">
+<tr class="altColor">
 <td class="colFirst"><code><a href="../../../com/gocardless/services/MandateService.MandateCreateRequest.html" title="class in com.gocardless.services">MandateService.MandateCreateRequest</a></code></td>
 <td class="colLast"><code><strong><a href="../../../com/gocardless/services/MandateService.MandateCreateRequest.html#withScheme(java.lang.String)">withScheme</a></strong>(java.lang.String&nbsp;scheme)</code>
 <div class="block"><a name="mandates_scheme"></a>Direct Debit scheme to which this mandate and associated payments are submitted.</div>
@@ -305,10 +310,20 @@ extends <a href="../../../com/gocardless/http/IdempotentPostRequest.html" title=
 <a name="withIdempotencyKey(java.lang.String)">
 <!--   -->
 </a>
-<ul class="blockListLast">
+<ul class="blockList">
 <li class="blockList">
 <h4>withIdempotencyKey</h4>
 <pre>public&nbsp;<a href="../../../com/gocardless/services/MandateService.MandateCreateRequest.html" title="class in com.gocardless.services">MandateService.MandateCreateRequest</a>&nbsp;withIdempotencyKey(java.lang.String&nbsp;idempotencyKey)</pre>
+</li>
+</ul>
+<a name="withHeader(java.lang.String, java.lang.String)">
+<!--   -->
+</a>
+<ul class="blockListLast">
+<li class="blockList">
+<h4>withHeader</h4>
+<pre>public&nbsp;<a href="../../../com/gocardless/services/MandateService.MandateCreateRequest.html" title="class in com.gocardless.services">MandateService.MandateCreateRequest</a>&nbsp;withHeader(java.lang.String&nbsp;headerName,
+                                             java.lang.String&nbsp;headerValue)</pre>
 </li>
 </ul>
 </li>

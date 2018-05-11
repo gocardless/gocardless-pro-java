@@ -190,39 +190,44 @@ extends <a href="../../../com/gocardless/http/PostRequest.html" title="class in 
 </tr>
 <tr class="rowColor">
 <td class="colFirst"><code><a href="../../../com/gocardless/services/MandatePdfService.MandatePdfCreateRequest.html" title="class in com.gocardless.services">MandatePdfService.MandatePdfCreateRequest</a></code></td>
+<td class="colLast"><code><strong><a href="../../../com/gocardless/services/MandatePdfService.MandatePdfCreateRequest.html#withHeader(java.lang.String,%20java.lang.String)">withHeader</a></strong>(java.lang.String&nbsp;headerName,
+          java.lang.String&nbsp;headerValue)</code>&nbsp;</td>
+</tr>
+<tr class="altColor">
+<td class="colFirst"><code><a href="../../../com/gocardless/services/MandatePdfService.MandatePdfCreateRequest.html" title="class in com.gocardless.services">MandatePdfService.MandatePdfCreateRequest</a></code></td>
 <td class="colLast"><code><strong><a href="../../../com/gocardless/services/MandatePdfService.MandatePdfCreateRequest.html#withIban(java.lang.String)">withIban</a></strong>(java.lang.String&nbsp;iban)</code>
 <div class="block">International Bank Account Number.</div>
 </td>
 </tr>
-<tr class="altColor">
+<tr class="rowColor">
 <td class="colFirst"><code><a href="../../../com/gocardless/services/MandatePdfService.MandatePdfCreateRequest.html" title="class in com.gocardless.services">MandatePdfService.MandatePdfCreateRequest</a></code></td>
 <td class="colLast"><code><strong><a href="../../../com/gocardless/services/MandatePdfService.MandatePdfCreateRequest.html#withLinks(com.gocardless.services.MandatePdfService.MandatePdfCreateRequest.Links)">withLinks</a></strong>(<a href="../../../com/gocardless/services/MandatePdfService.MandatePdfCreateRequest.Links.html" title="class in com.gocardless.services">MandatePdfService.MandatePdfCreateRequest.Links</a>&nbsp;links)</code>&nbsp;</td>
 </tr>
-<tr class="rowColor">
+<tr class="altColor">
 <td class="colFirst"><code><a href="../../../com/gocardless/services/MandatePdfService.MandatePdfCreateRequest.html" title="class in com.gocardless.services">MandatePdfService.MandatePdfCreateRequest</a></code></td>
 <td class="colLast"><code><strong><a href="../../../com/gocardless/services/MandatePdfService.MandatePdfCreateRequest.html#withLinksMandate(java.lang.String)">withLinksMandate</a></strong>(java.lang.String&nbsp;mandate)</code>
 <div class="block">ID of an existing <a href="#core-endpoints-mandates">mandate</a> to build the PDF from.</div>
 </td>
 </tr>
-<tr class="altColor">
+<tr class="rowColor">
 <td class="colFirst"><code><a href="../../../com/gocardless/services/MandatePdfService.MandatePdfCreateRequest.html" title="class in com.gocardless.services">MandatePdfService.MandatePdfCreateRequest</a></code></td>
 <td class="colLast"><code><strong><a href="../../../com/gocardless/services/MandatePdfService.MandatePdfCreateRequest.html#withMandateReference(java.lang.String)">withMandateReference</a></strong>(java.lang.String&nbsp;mandateReference)</code>
 <div class="block">Unique 6 to 18 character reference.</div>
 </td>
 </tr>
-<tr class="rowColor">
+<tr class="altColor">
 <td class="colFirst"><code><a href="../../../com/gocardless/services/MandatePdfService.MandatePdfCreateRequest.html" title="class in com.gocardless.services">MandatePdfService.MandatePdfCreateRequest</a></code></td>
 <td class="colLast"><code><strong><a href="../../../com/gocardless/services/MandatePdfService.MandatePdfCreateRequest.html#withScheme(java.lang.String)">withScheme</a></strong>(java.lang.String&nbsp;scheme)</code>
 <div class="block">Direct Debit scheme.</div>
 </td>
 </tr>
-<tr class="altColor">
+<tr class="rowColor">
 <td class="colFirst"><code><a href="../../../com/gocardless/services/MandatePdfService.MandatePdfCreateRequest.html" title="class in com.gocardless.services">MandatePdfService.MandatePdfCreateRequest</a></code></td>
 <td class="colLast"><code><strong><a href="../../../com/gocardless/services/MandatePdfService.MandatePdfCreateRequest.html#withSignatureDate(java.lang.String)">withSignatureDate</a></strong>(java.lang.String&nbsp;signatureDate)</code>
 <div class="block">If provided, a form will be generated with this date and no signature field.</div>
 </td>
 </tr>
-<tr class="rowColor">
+<tr class="altColor">
 <td class="colFirst"><code><a href="../../../com/gocardless/services/MandatePdfService.MandatePdfCreateRequest.html" title="class in com.gocardless.services">MandatePdfService.MandatePdfCreateRequest</a></code></td>
 <td class="colLast"><code><strong><a href="../../../com/gocardless/services/MandatePdfService.MandatePdfCreateRequest.html#withSwedishIdentityNumber(java.lang.String)">withSwedishIdentityNumber</a></strong>(java.lang.String&nbsp;swedishIdentityNumber)</code>
 <div class="block">For Swedish customers only.</div>
@@ -389,11 +394,21 @@ extends <a href="../../../com/gocardless/http/PostRequest.html" title="class in 
 <a name="withSwedishIdentityNumber(java.lang.String)">
 <!--   -->
 </a>
-<ul class="blockListLast">
+<ul class="blockList">
 <li class="blockList">
 <h4>withSwedishIdentityNumber</h4>
 <pre>public&nbsp;<a href="../../../com/gocardless/services/MandatePdfService.MandatePdfCreateRequest.html" title="class in com.gocardless.services">MandatePdfService.MandatePdfCreateRequest</a>&nbsp;withSwedishIdentityNumber(java.lang.String&nbsp;swedishIdentityNumber)</pre>
 <div class="block"><p>For Swedish customers only. The civic/company number (personnummer, samordningsnummer, or organisationsnummer) of the customer. Can only be supplied for Autogiro mandates.</p></div>
+</li>
+</ul>
+<a name="withHeader(java.lang.String, java.lang.String)">
+<!--   -->
+</a>
+<ul class="blockListLast">
+<li class="blockList">
+<h4>withHeader</h4>
+<pre>public&nbsp;<a href="../../../com/gocardless/services/MandatePdfService.MandatePdfCreateRequest.html" title="class in com.gocardless.services">MandatePdfService.MandatePdfCreateRequest</a>&nbsp;withHeader(java.lang.String&nbsp;headerName,
+                                                   java.lang.String&nbsp;headerValue)</pre>
 </li>
 </ul>
 </li>

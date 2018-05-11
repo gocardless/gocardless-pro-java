@@ -225,23 +225,28 @@ extends <a href="../../../com/gocardless/http/ListRequest.html" title="class in 
 </tr>
 <tr class="altColor">
 <td class="colFirst"><code><a href="../../../com/gocardless/services/PayoutService.PayoutListRequest.html" title="class in com.gocardless.services">PayoutService.PayoutListRequest</a>&lt;<a href="../../../com/gocardless/services/PayoutService.PayoutListRequest.html" title="type parameter in PayoutService.PayoutListRequest">S</a>&gt;</code></td>
+<td class="colLast"><code><strong><a href="../../../com/gocardless/services/PayoutService.PayoutListRequest.html#withHeader(java.lang.String,%20java.lang.String)">withHeader</a></strong>(java.lang.String&nbsp;headerName,
+          java.lang.String&nbsp;headerValue)</code>&nbsp;</td>
+</tr>
+<tr class="rowColor">
+<td class="colFirst"><code><a href="../../../com/gocardless/services/PayoutService.PayoutListRequest.html" title="class in com.gocardless.services">PayoutService.PayoutListRequest</a>&lt;<a href="../../../com/gocardless/services/PayoutService.PayoutListRequest.html" title="type parameter in PayoutService.PayoutListRequest">S</a>&gt;</code></td>
 <td class="colLast"><code><strong><a href="../../../com/gocardless/services/PayoutService.PayoutListRequest.html#withLimit(java.lang.Integer)">withLimit</a></strong>(java.lang.Integer&nbsp;limit)</code>
 <div class="block">Number of records to return.</div>
 </td>
 </tr>
-<tr class="rowColor">
+<tr class="altColor">
 <td class="colFirst"><code><a href="../../../com/gocardless/services/PayoutService.PayoutListRequest.html" title="class in com.gocardless.services">PayoutService.PayoutListRequest</a>&lt;<a href="../../../com/gocardless/services/PayoutService.PayoutListRequest.html" title="type parameter in PayoutService.PayoutListRequest">S</a>&gt;</code></td>
 <td class="colLast"><code><strong><a href="../../../com/gocardless/services/PayoutService.PayoutListRequest.html#withPayoutType(com.gocardless.services.PayoutService.PayoutListRequest.PayoutType)">withPayoutType</a></strong>(<a href="../../../com/gocardless/services/PayoutService.PayoutListRequest.PayoutType.html" title="enum in com.gocardless.services">PayoutService.PayoutListRequest.PayoutType</a>&nbsp;payoutType)</code>
 <div class="block">Whether a payout contains merchant revenue or partner fees.</div>
 </td>
 </tr>
-<tr class="altColor">
+<tr class="rowColor">
 <td class="colFirst"><code><a href="../../../com/gocardless/services/PayoutService.PayoutListRequest.html" title="class in com.gocardless.services">PayoutService.PayoutListRequest</a>&lt;<a href="../../../com/gocardless/services/PayoutService.PayoutListRequest.html" title="type parameter in PayoutService.PayoutListRequest">S</a>&gt;</code></td>
 <td class="colLast"><code><strong><a href="../../../com/gocardless/services/PayoutService.PayoutListRequest.html#withReference(java.lang.String)">withReference</a></strong>(java.lang.String&nbsp;reference)</code>
 <div class="block">Reference which appears on the creditor&rsquo;s bank statement.</div>
 </td>
 </tr>
-<tr class="rowColor">
+<tr class="altColor">
 <td class="colFirst"><code><a href="../../../com/gocardless/services/PayoutService.PayoutListRequest.html" title="class in com.gocardless.services">PayoutService.PayoutListRequest</a>&lt;<a href="../../../com/gocardless/services/PayoutService.PayoutListRequest.html" title="type parameter in PayoutService.PayoutListRequest">S</a>&gt;</code></td>
 <td class="colLast"><code><strong><a href="../../../com/gocardless/services/PayoutService.PayoutListRequest.html#withStatus(com.gocardless.services.PayoutService.PayoutListRequest.Status)">withStatus</a></strong>(<a href="../../../com/gocardless/services/PayoutService.PayoutListRequest.Status.html" title="enum in com.gocardless.services">PayoutService.PayoutListRequest.Status</a>&nbsp;status)</code>
 <div class="block">One of:  <code>pending</code>: the payout has been created, but not yet sent to the banks <code>paid</code>: the payout has been sent to the banks </div>
@@ -408,11 +413,21 @@ extends <a href="../../../com/gocardless/http/ListRequest.html" title="class in 
 <a name="withStatus(com.gocardless.services.PayoutService.PayoutListRequest.Status)">
 <!--   -->
 </a>
-<ul class="blockListLast">
+<ul class="blockList">
 <li class="blockList">
 <h4>withStatus</h4>
 <pre>public&nbsp;<a href="../../../com/gocardless/services/PayoutService.PayoutListRequest.html" title="class in com.gocardless.services">PayoutService.PayoutListRequest</a>&lt;<a href="../../../com/gocardless/services/PayoutService.PayoutListRequest.html" title="type parameter in PayoutService.PayoutListRequest">S</a>&gt;&nbsp;withStatus(<a href="../../../com/gocardless/services/PayoutService.PayoutListRequest.Status.html" title="enum in com.gocardless.services">PayoutService.PayoutListRequest.Status</a>&nbsp;status)</pre>
 <div class="block"><p>One of: <ul> <li><code>pending</code>: the payout has been created, but not yet sent to the banks</li> <li><code>paid</code>: the payout has been sent to the banks</li> </ul></p></div>
+</li>
+</ul>
+<a name="withHeader(java.lang.String, java.lang.String)">
+<!--   -->
+</a>
+<ul class="blockListLast">
+<li class="blockList">
+<h4>withHeader</h4>
+<pre>public&nbsp;<a href="../../../com/gocardless/services/PayoutService.PayoutListRequest.html" title="class in com.gocardless.services">PayoutService.PayoutListRequest</a>&lt;<a href="../../../com/gocardless/services/PayoutService.PayoutListRequest.html" title="type parameter in PayoutService.PayoutListRequest">S</a>&gt;&nbsp;withHeader(java.lang.String&nbsp;headerName,
+                                            java.lang.String&nbsp;headerValue)</pre>
 </li>
 </ul>
 </li>

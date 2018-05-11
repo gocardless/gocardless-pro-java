@@ -129,6 +129,11 @@ extends <a href="../../../com/gocardless/http/PostRequest.html" title="class in 
 </tr>
 <tr class="altColor">
 <td class="colFirst"><code><a href="../../../com/gocardless/services/RedirectFlowService.RedirectFlowCompleteRequest.html" title="class in com.gocardless.services">RedirectFlowService.RedirectFlowCompleteRequest</a></code></td>
+<td class="colLast"><code><strong><a href="../../../com/gocardless/services/RedirectFlowService.RedirectFlowCompleteRequest.html#withHeader(java.lang.String,%20java.lang.String)">withHeader</a></strong>(java.lang.String&nbsp;headerName,
+          java.lang.String&nbsp;headerValue)</code>&nbsp;</td>
+</tr>
+<tr class="rowColor">
+<td class="colFirst"><code><a href="../../../com/gocardless/services/RedirectFlowService.RedirectFlowCompleteRequest.html" title="class in com.gocardless.services">RedirectFlowService.RedirectFlowCompleteRequest</a></code></td>
 <td class="colLast"><code><strong><a href="../../../com/gocardless/services/RedirectFlowService.RedirectFlowCompleteRequest.html#withSessionToken(java.lang.String)">withSessionToken</a></strong>(java.lang.String&nbsp;sessionToken)</code>
 <div class="block">The customer&rsquo;s session ID must be provided when the redirect flow is set up and again when it is completed.</div>
 </td>
@@ -165,11 +170,21 @@ extends <a href="../../../com/gocardless/http/PostRequest.html" title="class in 
 <a name="withSessionToken(java.lang.String)">
 <!--   -->
 </a>
-<ul class="blockListLast">
+<ul class="blockList">
 <li class="blockList">
 <h4>withSessionToken</h4>
 <pre>public&nbsp;<a href="../../../com/gocardless/services/RedirectFlowService.RedirectFlowCompleteRequest.html" title="class in com.gocardless.services">RedirectFlowService.RedirectFlowCompleteRequest</a>&nbsp;withSessionToken(java.lang.String&nbsp;sessionToken)</pre>
 <div class="block"><p>The customer&rsquo;s session ID must be provided when the redirect flow is set up and again when it is completed. This allows integrators to ensure that the user who was originally sent to the GoCardless payment pages is the one who has completed them.</p></div>
+</li>
+</ul>
+<a name="withHeader(java.lang.String, java.lang.String)">
+<!--   -->
+</a>
+<ul class="blockListLast">
+<li class="blockList">
+<h4>withHeader</h4>
+<pre>public&nbsp;<a href="../../../com/gocardless/services/RedirectFlowService.RedirectFlowCompleteRequest.html" title="class in com.gocardless.services">RedirectFlowService.RedirectFlowCompleteRequest</a>&nbsp;withHeader(java.lang.String&nbsp;headerName,
+                                                         java.lang.String&nbsp;headerValue)</pre>
 </li>
 </ul>
 </li>

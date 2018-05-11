@@ -165,44 +165,49 @@ name="total_amount_confirmation_invalid"></a><a name="number_of_refunds_exceeded
 </tr>
 <tr class="rowColor">
 <td class="colFirst"><code><a href="../../../com/gocardless/services/RefundService.RefundCreateRequest.html" title="class in com.gocardless.services">RefundService.RefundCreateRequest</a></code></td>
-<td class="colLast"><code><strong><a href="../../../com/gocardless/services/RefundService.RefundCreateRequest.html#withIdempotencyKey(java.lang.String)">withIdempotencyKey</a></strong>(java.lang.String&nbsp;idempotencyKey)</code>&nbsp;</td>
+<td class="colLast"><code><strong><a href="../../../com/gocardless/services/RefundService.RefundCreateRequest.html#withHeader(java.lang.String,%20java.lang.String)">withHeader</a></strong>(java.lang.String&nbsp;headerName,
+          java.lang.String&nbsp;headerValue)</code>&nbsp;</td>
 </tr>
 <tr class="altColor">
 <td class="colFirst"><code><a href="../../../com/gocardless/services/RefundService.RefundCreateRequest.html" title="class in com.gocardless.services">RefundService.RefundCreateRequest</a></code></td>
-<td class="colLast"><code><strong><a href="../../../com/gocardless/services/RefundService.RefundCreateRequest.html#withLinks(com.gocardless.services.RefundService.RefundCreateRequest.Links)">withLinks</a></strong>(<a href="../../../com/gocardless/services/RefundService.RefundCreateRequest.Links.html" title="class in com.gocardless.services">RefundService.RefundCreateRequest.Links</a>&nbsp;links)</code>&nbsp;</td>
+<td class="colLast"><code><strong><a href="../../../com/gocardless/services/RefundService.RefundCreateRequest.html#withIdempotencyKey(java.lang.String)">withIdempotencyKey</a></strong>(java.lang.String&nbsp;idempotencyKey)</code>&nbsp;</td>
 </tr>
 <tr class="rowColor">
+<td class="colFirst"><code><a href="../../../com/gocardless/services/RefundService.RefundCreateRequest.html" title="class in com.gocardless.services">RefundService.RefundCreateRequest</a></code></td>
+<td class="colLast"><code><strong><a href="../../../com/gocardless/services/RefundService.RefundCreateRequest.html#withLinks(com.gocardless.services.RefundService.RefundCreateRequest.Links)">withLinks</a></strong>(<a href="../../../com/gocardless/services/RefundService.RefundCreateRequest.Links.html" title="class in com.gocardless.services">RefundService.RefundCreateRequest.Links</a>&nbsp;links)</code>&nbsp;</td>
+</tr>
+<tr class="altColor">
 <td class="colFirst"><code><a href="../../../com/gocardless/services/RefundService.RefundCreateRequest.html" title="class in com.gocardless.services">RefundService.RefundCreateRequest</a></code></td>
 <td class="colLast"><code><strong><a href="../../../com/gocardless/services/RefundService.RefundCreateRequest.html#withLinksMandate(java.util.Map)">withLinksMandate</a></strong>(java.util.Map&lt;java.lang.String,java.lang.String&gt;&nbsp;mandate)</code>
 <div class="block"><em>private beta</em> ID of the <a href="#core-endpoints-mandates">mandate</a> against which the refund is being made.</div>
 </td>
 </tr>
-<tr class="altColor">
+<tr class="rowColor">
 <td class="colFirst"><code><a href="../../../com/gocardless/services/RefundService.RefundCreateRequest.html" title="class in com.gocardless.services">RefundService.RefundCreateRequest</a></code></td>
 <td class="colLast"><code><strong><a href="../../../com/gocardless/services/RefundService.RefundCreateRequest.html#withLinksPayment(java.lang.String)">withLinksPayment</a></strong>(java.lang.String&nbsp;payment)</code>
 <div class="block">ID of the <a href="#core-endpoints-payments">payment</a> against which the refund is being made.</div>
 </td>
 </tr>
-<tr class="rowColor">
+<tr class="altColor">
 <td class="colFirst"><code><a href="../../../com/gocardless/services/RefundService.RefundCreateRequest.html" title="class in com.gocardless.services">RefundService.RefundCreateRequest</a></code></td>
 <td class="colLast"><code><strong><a href="../../../com/gocardless/services/RefundService.RefundCreateRequest.html#withMetadata(java.util.Map)">withMetadata</a></strong>(java.util.Map&lt;java.lang.String,java.lang.String&gt;&nbsp;metadata)</code>
 <div class="block">Key-value store of custom data.</div>
 </td>
 </tr>
-<tr class="altColor">
+<tr class="rowColor">
 <td class="colFirst"><code><a href="../../../com/gocardless/services/RefundService.RefundCreateRequest.html" title="class in com.gocardless.services">RefundService.RefundCreateRequest</a></code></td>
 <td class="colLast"><code><strong><a href="../../../com/gocardless/services/RefundService.RefundCreateRequest.html#withMetadata(java.lang.String,%20java.lang.String)">withMetadata</a></strong>(java.lang.String&nbsp;key,
             java.lang.String&nbsp;value)</code>
 <div class="block">Key-value store of custom data.</div>
 </td>
 </tr>
-<tr class="rowColor">
+<tr class="altColor">
 <td class="colFirst"><code><a href="../../../com/gocardless/services/RefundService.RefundCreateRequest.html" title="class in com.gocardless.services">RefundService.RefundCreateRequest</a></code></td>
 <td class="colLast"><code><strong><a href="../../../com/gocardless/services/RefundService.RefundCreateRequest.html#withReference(java.lang.String)">withReference</a></strong>(java.lang.String&nbsp;reference)</code>
 <div class="block">An optional refund reference, displayed on your customer&rsquo;s bank statement.</div>
 </td>
 </tr>
-<tr class="altColor">
+<tr class="rowColor">
 <td class="colFirst"><code><a href="../../../com/gocardless/services/RefundService.RefundCreateRequest.html" title="class in com.gocardless.services">RefundService.RefundCreateRequest</a></code></td>
 <td class="colLast"><code><strong><a href="../../../com/gocardless/services/RefundService.RefundCreateRequest.html#withTotalAmountConfirmation(java.lang.Integer)">withTotalAmountConfirmation</a></strong>(java.lang.Integer&nbsp;totalAmountConfirmation)</code>
 <div class="block">Total expected refunded amount in pence/cents/öre.</div>
@@ -327,10 +332,20 @@ name="total_amount_confirmation_invalid"></a><a name="number_of_refunds_exceeded
 <a name="withIdempotencyKey(java.lang.String)">
 <!--   -->
 </a>
-<ul class="blockListLast">
+<ul class="blockList">
 <li class="blockList">
 <h4>withIdempotencyKey</h4>
 <pre>public&nbsp;<a href="../../../com/gocardless/services/RefundService.RefundCreateRequest.html" title="class in com.gocardless.services">RefundService.RefundCreateRequest</a>&nbsp;withIdempotencyKey(java.lang.String&nbsp;idempotencyKey)</pre>
+</li>
+</ul>
+<a name="withHeader(java.lang.String, java.lang.String)">
+<!--   -->
+</a>
+<ul class="blockListLast">
+<li class="blockList">
+<h4>withHeader</h4>
+<pre>public&nbsp;<a href="../../../com/gocardless/services/RefundService.RefundCreateRequest.html" title="class in com.gocardless.services">RefundService.RefundCreateRequest</a>&nbsp;withHeader(java.lang.String&nbsp;headerName,
+                                           java.lang.String&nbsp;headerValue)</pre>
 </li>
 </ul>
 </li>

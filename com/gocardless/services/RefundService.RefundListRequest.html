@@ -199,23 +199,28 @@ extends <a href="../../../com/gocardless/http/ListRequest.html" title="class in 
 </tr>
 <tr class="rowColor">
 <td class="colFirst"><code><a href="../../../com/gocardless/services/RefundService.RefundListRequest.html" title="class in com.gocardless.services">RefundService.RefundListRequest</a>&lt;<a href="../../../com/gocardless/services/RefundService.RefundListRequest.html" title="type parameter in RefundService.RefundListRequest">S</a>&gt;</code></td>
+<td class="colLast"><code><strong><a href="../../../com/gocardless/services/RefundService.RefundListRequest.html#withHeader(java.lang.String,%20java.lang.String)">withHeader</a></strong>(java.lang.String&nbsp;headerName,
+          java.lang.String&nbsp;headerValue)</code>&nbsp;</td>
+</tr>
+<tr class="altColor">
+<td class="colFirst"><code><a href="../../../com/gocardless/services/RefundService.RefundListRequest.html" title="class in com.gocardless.services">RefundService.RefundListRequest</a>&lt;<a href="../../../com/gocardless/services/RefundService.RefundListRequest.html" title="type parameter in RefundService.RefundListRequest">S</a>&gt;</code></td>
 <td class="colLast"><code><strong><a href="../../../com/gocardless/services/RefundService.RefundListRequest.html#withLimit(java.lang.Integer)">withLimit</a></strong>(java.lang.Integer&nbsp;limit)</code>
 <div class="block">Number of records to return.</div>
 </td>
 </tr>
-<tr class="altColor">
+<tr class="rowColor">
 <td class="colFirst"><code><a href="../../../com/gocardless/services/RefundService.RefundListRequest.html" title="class in com.gocardless.services">RefundService.RefundListRequest</a>&lt;<a href="../../../com/gocardless/services/RefundService.RefundListRequest.html" title="type parameter in RefundService.RefundListRequest">S</a>&gt;</code></td>
 <td class="colLast"><code><strong><a href="../../../com/gocardless/services/RefundService.RefundListRequest.html#withMandate(java.lang.String)">withMandate</a></strong>(java.lang.String&nbsp;mandate)</code>
 <div class="block">Unique identifier, beginning with &ldquo;MD&rdquo;.</div>
 </td>
 </tr>
-<tr class="rowColor">
+<tr class="altColor">
 <td class="colFirst"><code><a href="../../../com/gocardless/services/RefundService.RefundListRequest.html" title="class in com.gocardless.services">RefundService.RefundListRequest</a>&lt;<a href="../../../com/gocardless/services/RefundService.RefundListRequest.html" title="type parameter in RefundService.RefundListRequest">S</a>&gt;</code></td>
 <td class="colLast"><code><strong><a href="../../../com/gocardless/services/RefundService.RefundListRequest.html#withPayment(java.lang.String)">withPayment</a></strong>(java.lang.String&nbsp;payment)</code>
 <div class="block">Unique identifier, beginning with &ldquo;PM&rdquo;.</div>
 </td>
 </tr>
-<tr class="altColor">
+<tr class="rowColor">
 <td class="colFirst"><code><a href="../../../com/gocardless/services/RefundService.RefundListRequest.html" title="class in com.gocardless.services">RefundService.RefundListRequest</a>&lt;<a href="../../../com/gocardless/services/RefundService.RefundListRequest.html" title="type parameter in RefundService.RefundListRequest">S</a>&gt;</code></td>
 <td class="colLast"><code><strong><a href="../../../com/gocardless/services/RefundService.RefundListRequest.html#withRefundType(com.gocardless.services.RefundService.RefundListRequest.RefundType)">withRefundType</a></strong>(<a href="../../../com/gocardless/services/RefundService.RefundListRequest.RefundType.html" title="enum in com.gocardless.services">RefundService.RefundListRequest.RefundType</a>&nbsp;refundType)</code>
 <div class="block">Whether a refund was issued against a mandate or a payment.</div>
@@ -352,11 +357,21 @@ extends <a href="../../../com/gocardless/http/ListRequest.html" title="class in 
 <a name="withRefundType(com.gocardless.services.RefundService.RefundListRequest.RefundType)">
 <!--   -->
 </a>
-<ul class="blockListLast">
+<ul class="blockList">
 <li class="blockList">
 <h4>withRefundType</h4>
 <pre>public&nbsp;<a href="../../../com/gocardless/services/RefundService.RefundListRequest.html" title="class in com.gocardless.services">RefundService.RefundListRequest</a>&lt;<a href="../../../com/gocardless/services/RefundService.RefundListRequest.html" title="type parameter in RefundService.RefundListRequest">S</a>&gt;&nbsp;withRefundType(<a href="../../../com/gocardless/services/RefundService.RefundListRequest.RefundType.html" title="enum in com.gocardless.services">RefundService.RefundListRequest.RefundType</a>&nbsp;refundType)</pre>
 <div class="block"><p>Whether a refund was issued against a mandate or a payment. One of: <ul>  <li><code>payment</code>: <em>default</em> returns refunds created against payments only</li>  <li><code>mandate</code>: returns refunds created against mandates only</li> </ul></p></div>
+</li>
+</ul>
+<a name="withHeader(java.lang.String, java.lang.String)">
+<!--   -->
+</a>
+<ul class="blockListLast">
+<li class="blockList">
+<h4>withHeader</h4>
+<pre>public&nbsp;<a href="../../../com/gocardless/services/RefundService.RefundListRequest.html" title="class in com.gocardless.services">RefundService.RefundListRequest</a>&lt;<a href="../../../com/gocardless/services/RefundService.RefundListRequest.html" title="type parameter in RefundService.RefundListRequest">S</a>&gt;&nbsp;withHeader(java.lang.String&nbsp;headerName,
+                                            java.lang.String&nbsp;headerValue)</pre>
 </li>
 </ul>
 </li>
