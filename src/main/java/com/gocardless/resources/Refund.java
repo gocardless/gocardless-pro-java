@@ -67,8 +67,8 @@ public class Refund {
 
     /**
      * An optional refund reference, displayed on your customer's bank statement. This can be up to 18
-     * characters long for Bacs payments, 140 characters for SEPA payments, or 25 characters for Autogiro
-     * payments.
+     * characters long for Bacs or BECS payments, 140 characters for SEPA payments, or 25 characters for
+     * Autogiro payments.
      */
     public String getReference() {
         return reference;
