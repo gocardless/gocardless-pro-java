@@ -108,7 +108,18 @@
 <br>
 <pre>public static final class <span class="strong">MandatePdfService.MandatePdfCreateRequest</span>
 extends <a href="../../../com/gocardless/http/PostRequest.html" title="class in com.gocardless.http">PostRequest</a>&lt;<a href="../../../com/gocardless/resources/MandatePdf.html" title="class in com.gocardless.resources">MandatePdf</a>&gt;</pre>
-<div class="block"><p>Request class for <a href="../../../com/gocardless/services/MandatePdfService.html#create()"><code>MandatePdfService.create()</code></a>.</p><p>Generates a PDF mandate and returns its temporary URL.</p><p>Customer and bank account details can be left blank (for a blank mandate), provided manually, or inferred from the ID of an existing <a href="#core-endpoints-mandates">mandate</a>.</p><p>To generate a PDF mandate in a foreign language, set your <code>Accept-Language</code> header to the relevant <a href="http://en.wikipedia.org/wiki/List_of_ISO_639-1_codes#Partial_ISO_639_table">ISO 639-1</a> language code. Supported languages are Dutch, English, French, German, Italian, Portuguese, Spanish and Swedish.</p></div>
+<div class="block"><p>Request class for <a href="../../../com/gocardless/services/MandatePdfService.html#create()"><code>MandatePdfService.create()</code></a>.</p><p>Generates a PDF mandate and returns its temporary URL.</p><p>Customer and bank account details can be left blank (for a blank mandate), provided manually, or inferred from the ID of an existing <a href="#core-endpoints-mandates">mandate</a>.</p><p>By default, we&rsquo;ll generate PDF mandates in English.</p><p>To generate a PDF mandate in another language, set the <code>Accept-Language</code> header when creating the PDF mandate to the relevant <a href="http://en.wikipedia.org/wiki/List_of_ISO_639-1_codes">ISO 639-1</a> language code supported for the scheme.</p>
+<table>
+  <thead>
+    <tr>
+      <th align="left">Scheme </th>
+      <th align="left">Supported languages</th>
+    </tr>
+    <tr>
+      <th align="left"> </th>
+    </tr>
+  </thead>
+</table><p>:&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;- | | Autogiro | English (<code>en</code>), Swedish (<code>sv</code>)<br/> | | Bacs | English (<code>en</code>)<br/> | | Becs | English (<code>en</code>)<br/> | | Betalingsservice | Danish (<code>da</code>), English (<code>en</code>)<br/> | | SEPA Core | Danish (<code>da</code>), Dutch (<code>nl</code>), English (<code>en</code>), French (<code>fr</code>), German (<code>de</code>), Italian (<code>it</code>), Portuguese (<code>pt</code>), Spanish (<code>es</code>), Swedish (<code>sv</code>) |</p></div>
 </li>
 </ul>
 </div>
