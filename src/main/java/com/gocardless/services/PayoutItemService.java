@@ -24,11 +24,6 @@ import com.google.gson.reflect.TypeToken;
  * The Payout Items API allows you to view, on a per-payout basis, the credit and debit
  * items that make up that payout's amount.
  * 
- * <p class="beta-notice"><strong>Beta</strong>:	The Payout Items API is in beta, and is
- * subject to <a href="#overview-backwards-compatibility">backwards incompatible changes</a>
- * with 30 days' notice. Before making any breaking changes, we will contact all integrators
- * who have used the API.</p>
- * 
  */
 public class PayoutItemService {
     private final HttpClient httpClient;
