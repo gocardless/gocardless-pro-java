@@ -27,10 +27,27 @@ public class MandatePdfService {
      * Customer and bank account details can be left blank (for a blank mandate), provided manually, or
      * inferred from the ID of an existing [mandate](#core-endpoints-mandates).
      * 
-     * To generate a PDF mandate in a foreign language, set your `Accept-Language` header to the relevant
-     * [ISO 639-1](http://en.wikipedia.org/wiki/List_of_ISO_639-1_codes#Partial_ISO_639_table) language
-     * code. Supported languages are Dutch, English, French, German, Italian, Portuguese, Spanish and
-     * Swedish.
+     * By default, we'll generate PDF mandates in English.
+     * 
+     * To generate a PDF mandate in another language, set the `Accept-Language` header when creating the
+     * PDF mandate to the relevant [ISO 639-1](http://en.wikipedia.org/wiki/List_of_ISO_639-1_codes)
+     * language code supported for the scheme.
+     * 
+     * | Scheme           | Supported languages                                                          
+     *                                                                |
+     * | :--------------- |
+     * :-------------------------------------------------------------------------------------------------------------------------------------------
+     * |
+     * | Autogiro         | English (`en`), Swedish (`sv`)                                               
+     *                                                                |
+     * | Bacs             | English (`en`)                                                               
+     *                                                                |
+     * | Becs             | English (`en`)                                                               
+     *                                                                |
+     * | Betalingsservice | Danish (`da`), English (`en`)                                                
+     *                                                                |
+     * | SEPA Core        | Danish (`da`), Dutch (`nl`), English (`en`), French (`fr`), German (`de`),
+     * Italian (`it`), Portuguese (`pt`), Spanish (`es`), Swedish (`sv`) |
      */
     public MandatePdfCreateRequest create() {
         return new MandatePdfCreateRequest(httpClient);
@@ -44,10 +61,27 @@ public class MandatePdfService {
      * Customer and bank account details can be left blank (for a blank mandate), provided manually, or
      * inferred from the ID of an existing [mandate](#core-endpoints-mandates).
      * 
-     * To generate a PDF mandate in a foreign language, set your `Accept-Language` header to the relevant
-     * [ISO 639-1](http://en.wikipedia.org/wiki/List_of_ISO_639-1_codes#Partial_ISO_639_table) language
-     * code. Supported languages are Dutch, English, French, German, Italian, Portuguese, Spanish and
-     * Swedish.
+     * By default, we'll generate PDF mandates in English.
+     * 
+     * To generate a PDF mandate in another language, set the `Accept-Language` header when creating the
+     * PDF mandate to the relevant [ISO 639-1](http://en.wikipedia.org/wiki/List_of_ISO_639-1_codes)
+     * language code supported for the scheme.
+     * 
+     * | Scheme           | Supported languages                                                          
+     *                                                                |
+     * | :--------------- |
+     * :-------------------------------------------------------------------------------------------------------------------------------------------
+     * |
+     * | Autogiro         | English (`en`), Swedish (`sv`)                                               
+     *                                                                |
+     * | Bacs             | English (`en`)                                                               
+     *                                                                |
+     * | Becs             | English (`en`)                                                               
+     *                                                                |
+     * | Betalingsservice | Danish (`da`), English (`en`)                                                
+     *                                                                |
+     * | SEPA Core        | Danish (`da`), Dutch (`nl`), English (`en`), French (`fr`), German (`de`),
+     * Italian (`it`), Portuguese (`pt`), Spanish (`es`), Swedish (`sv`) |
      */
     public static final class MandatePdfCreateRequest extends PostRequest<MandatePdf> {
         private String accountHolderName;
