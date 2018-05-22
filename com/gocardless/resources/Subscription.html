@@ -287,88 +287,94 @@ extends java.lang.Object</pre>
 </td>
 </tr>
 <tr class="rowColor">
+<td class="colFirst"><code>java.lang.Integer</code></td>
+<td class="colLast"><code><strong><a href="../../../com/gocardless/resources/Subscription.html#getAppFee()">getAppFee</a></strong>()</code>
+<div class="block">The amount to be deducted from each payment as an app fee, to be paid to the partner integration which created the subscription, in pence (GBP), cents (AUD/EUR), öre (SEK), or øre (DKK).</div>
+</td>
+</tr>
+<tr class="altColor">
 <td class="colFirst"><code>java.lang.String</code></td>
 <td class="colLast"><code><strong><a href="../../../com/gocardless/resources/Subscription.html#getCreatedAt()">getCreatedAt</a></strong>()</code>
 <div class="block">Fixed <a href="#api-usage-time-zones--dates">timestamp</a>, recording when this resource was created.</div>
 </td>
 </tr>
-<tr class="altColor">
+<tr class="rowColor">
 <td class="colFirst"><code>java.lang.String</code></td>
 <td class="colLast"><code><strong><a href="../../../com/gocardless/resources/Subscription.html#getCurrency()">getCurrency</a></strong>()</code>
 <div class="block"><a href="http://en.wikipedia.org/wiki/ISO_4217">ISO 4217</a> currency code.</div>
 </td>
 </tr>
-<tr class="rowColor">
+<tr class="altColor">
 <td class="colFirst"><code>java.lang.Integer</code></td>
 <td class="colLast"><code><strong><a href="../../../com/gocardless/resources/Subscription.html#getDayOfMonth()">getDayOfMonth</a></strong>()</code>
 <div class="block">As per RFC 2445.</div>
 </td>
 </tr>
-<tr class="altColor">
+<tr class="rowColor">
 <td class="colFirst"><code>java.lang.String</code></td>
 <td class="colLast"><code><strong><a href="../../../com/gocardless/resources/Subscription.html#getEndDate()">getEndDate</a></strong>()</code>
 <div class="block">Date on or after which no further payments should be created.</div>
 </td>
 </tr>
-<tr class="rowColor">
+<tr class="altColor">
 <td class="colFirst"><code>java.lang.String</code></td>
 <td class="colLast"><code><strong><a href="../../../com/gocardless/resources/Subscription.html#getId()">getId</a></strong>()</code>
 <div class="block">Unique identifier, beginning with &ldquo;SB&rdquo;.</div>
 </td>
 </tr>
-<tr class="altColor">
+<tr class="rowColor">
 <td class="colFirst"><code>java.lang.Integer</code></td>
 <td class="colLast"><code><strong><a href="../../../com/gocardless/resources/Subscription.html#getInterval()">getInterval</a></strong>()</code>
 <div class="block">Number of <code>interval_units</code> between customer charge dates.</div>
 </td>
 </tr>
-<tr class="rowColor">
+<tr class="altColor">
 <td class="colFirst"><code><a href="../../../com/gocardless/resources/Subscription.IntervalUnit.html" title="enum in com.gocardless.resources">Subscription.IntervalUnit</a></code></td>
 <td class="colLast"><code><strong><a href="../../../com/gocardless/resources/Subscription.html#getIntervalUnit()">getIntervalUnit</a></strong>()</code>
 <div class="block">The unit of time between customer charge dates.</div>
 </td>
 </tr>
-<tr class="altColor">
+<tr class="rowColor">
 <td class="colFirst"><code><a href="../../../com/gocardless/resources/Subscription.Links.html" title="class in com.gocardless.resources">Subscription.Links</a></code></td>
 <td class="colLast"><code><strong><a href="../../../com/gocardless/resources/Subscription.html#getLinks()">getLinks</a></strong>()</code>&nbsp;</td>
 </tr>
-<tr class="rowColor">
+<tr class="altColor">
 <td class="colFirst"><code>java.util.Map&lt;java.lang.String,java.lang.String&gt;</code></td>
 <td class="colLast"><code><strong><a href="../../../com/gocardless/resources/Subscription.html#getMetadata()">getMetadata</a></strong>()</code>
 <div class="block">Key-value store of custom data.</div>
 </td>
 </tr>
-<tr class="altColor">
+<tr class="rowColor">
 <td class="colFirst"><code><a href="../../../com/gocardless/resources/Subscription.Month.html" title="enum in com.gocardless.resources">Subscription.Month</a></code></td>
 <td class="colLast"><code><strong><a href="../../../com/gocardless/resources/Subscription.html#getMonth()">getMonth</a></strong>()</code>
 <div class="block">Name of the month on which to charge a customer.</div>
 </td>
 </tr>
-<tr class="rowColor">
+<tr class="altColor">
 <td class="colFirst"><code>java.lang.String</code></td>
 <td class="colLast"><code><strong><a href="../../../com/gocardless/resources/Subscription.html#getName()">getName</a></strong>()</code>
 <div class="block">Optional name for the subscription.</div>
 </td>
 </tr>
-<tr class="altColor">
+<tr class="rowColor">
 <td class="colFirst"><code>java.lang.String</code></td>
 <td class="colLast"><code><strong><a href="../../../com/gocardless/resources/Subscription.html#getPaymentReference()">getPaymentReference</a></strong>()</code>
 <div class="block">An optional payment reference.</div>
 </td>
 </tr>
-<tr class="rowColor">
+<tr class="altColor">
 <td class="colFirst"><code>java.lang.String</code></td>
 <td class="colLast"><code><strong><a href="../../../com/gocardless/resources/Subscription.html#getStartDate()">getStartDate</a></strong>()</code>
 <div class="block">The date on which the first payment should be charged.</div>
 </td>
 </tr>
-<tr class="altColor">
+<tr class="rowColor">
 <td class="colFirst"><code><a href="../../../com/gocardless/resources/Subscription.Status.html" title="enum in com.gocardless.resources">Subscription.Status</a></code></td>
 <td class="colLast"><code><strong><a href="../../../com/gocardless/resources/Subscription.html#getStatus()">getStatus</a></strong>()</code>
 <div class="block">One of:  <code>pending_customer_approval</code>: the subscription is waiting for customer approval before becoming active <code>customer_approval_denied</code>: the customer did not approve the subscription <code>active</code>: the subscription is currently active and will continue to create payments <code>finished</code>: all of the payments scheduled for creation under this subscription have been created <code>cancelled</code>: the subscription has been cancelled and will no longer create payments </div>
 </td>
 </tr>
-<tr class="rowColor">
+<tr class="altColor">
 <td class="colFirst"><code>java.util.List&lt;<a href="../../../com/gocardless/resources/Subscription.UpcomingPayment.html" title="class in com.gocardless.resources">Subscription.UpcomingPayment</a>&gt;</code></td>
 <td class="colLast"><code><strong><a href="../../../com/gocardless/resources/Subscription.html#getUpcomingPayments()">getUpcomingPayments</a></strong>()</code>
 <div class="block">Up to 10 upcoming payments with the amount, in pence, and charge date for each.</div>
@@ -404,6 +410,16 @@ extends java.lang.Object</pre>
 <h4>getAmount</h4>
 <pre>public&nbsp;java.lang.Integer&nbsp;getAmount()</pre>
 <div class="block"><p>Amount in pence (GBP), cents (AUD/EUR), öre (SEK), or øre (DKK).</p></div>
+</li>
+</ul>
+<a name="getAppFee()">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>getAppFee</h4>
+<pre>public&nbsp;java.lang.Integer&nbsp;getAppFee()</pre>
+<div class="block"><p>The amount to be deducted from each payment as an app fee, to be paid to the partner integration which created the subscription, in pence (GBP), cents (AUD/EUR), öre (SEK), or øre (DKK).</p></div>
 </li>
 </ul>
 <a name="getCreatedAt()">
