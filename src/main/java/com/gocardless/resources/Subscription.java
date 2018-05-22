@@ -65,6 +65,7 @@ public class Subscription {
     }
 
     private Integer amount;
+    private Integer appFee;
     private String createdAt;
     private String currency;
     private Integer dayOfMonth;
@@ -86,6 +87,14 @@ public class Subscription {
      */
     public Integer getAmount() {
         return amount;
+    }
+
+    /**
+     * The amount to be deducted from each payment as an app fee, to be paid to the partner integration
+     * which created the subscription, in pence (GBP), cents (AUD/EUR), öre (SEK), or øre (DKK).
+     */
+    public Integer getAppFee() {
+        return appFee;
     }
 
     /**

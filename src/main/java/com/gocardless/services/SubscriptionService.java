@@ -175,8 +175,8 @@ public class SubscriptionService {
         }
 
         /**
-         * The amount to be deducted from the payment as the OAuth app's fee, in pence (GBP), cents
-         * (AUD/EUR), öre (SEK), or øre (DKK).
+         * The amount to be deducted from each payment as an app fee, to be paid to the partner integration
+         * which created the subscription, in pence (GBP), cents (AUD/EUR), öre (SEK), or øre (DKK).
          */
         public SubscriptionCreateRequest withAppFee(Integer appFee) {
             this.appFee = appFee;
@@ -709,8 +709,8 @@ public class SubscriptionService {
         }
 
         /**
-         * The amount to be deducted from the payment as the OAuth app's fee, in pence (GBP), cents
-         * (AUD/EUR), öre (SEK), or øre (DKK).
+         * The amount to be deducted from each payment as an app fee, to be paid to the partner integration
+         * which created the subscription, in pence (GBP), cents (AUD/EUR), öre (SEK), or øre (DKK).
          */
         public SubscriptionUpdateRequest withAppFee(Integer appFee) {
             this.appFee = appFee;
