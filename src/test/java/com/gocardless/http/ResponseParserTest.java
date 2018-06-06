@@ -112,9 +112,11 @@ public class ResponseParserTest {
         ApiError error1 = exception.getErrors().get(0);
         assertThat(error1.getMessage()).isEqualTo("must be a number");
         assertThat(error1.getField()).isEqualTo("branch_code");
+        assertThat(error1.getRequestPointer()).isEqualTo("/customer_bank_accounts/branch_code");
         ApiError error2 = exception.getErrors().get(1);
         assertThat(error2.getMessage()).isEqualTo("is the wrong length (should be 8 characters)");
         assertThat(error2.getField()).isEqualTo("branch_code");
+        assertThat(error2.getRequestPointer()).isEqualTo("/customer_bank_accounts/branch_code");
     }
 
     @Test

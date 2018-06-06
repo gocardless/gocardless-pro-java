@@ -13,12 +13,15 @@ public class ApiError {
     private final String message;
     private final String reason;
     private final String field;
+    private final String requestPointer;
     private final Map<String, String> links;
 
-    private ApiError(String message, String reason, String field, Map<String, String> links) {
+    private ApiError(String message, String reason, String field, String requestPointer,
+            Map<String, String> links) {
         this.message = message;
         this.reason = reason;
         this.field = field;
+        this.requestPointer = requestPointer;
         this.links = links;
     }
 
@@ -41,6 +44,14 @@ public class ApiError {
      */
     public String getField() {
         return field;
+    }
+
+    /**
+     * Returns the request pointer, indicating the exact field of the request that
+     * triggered the validation error
+     */
+    public String getRequestPointer() {
+        return requestPointer;
     }
 
     /**
