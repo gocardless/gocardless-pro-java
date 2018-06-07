@@ -1,7 +1,5 @@
 package com.gocardless.http;
 
-import java.io.Reader;
-
 /**
  * Base class for GET requests that return a single item.
  *
@@ -36,8 +34,8 @@ public abstract class GetRequest<T> extends ApiRequest<T> {
     }
 
     @Override
-    protected T parseResponse(Reader stream, ResponseParser responseParser) {
-        return responseParser.parseSingle(stream, getEnvelope(), getResponseClass());
+    protected T parseResponse(String responseBody, ResponseParser responseParser) {
+        return responseParser.parseSingle(responseBody, getEnvelope(), getResponseClass());
     }
 
     @Override

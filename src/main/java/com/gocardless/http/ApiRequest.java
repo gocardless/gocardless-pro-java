@@ -1,6 +1,5 @@
 package com.gocardless.http;
 
-import java.io.Reader;
 import java.util.Map;
 
 import com.google.common.collect.ImmutableMap;
@@ -68,5 +67,5 @@ abstract class ApiRequest<T> {
 
     protected abstract boolean hasBody();
 
-    protected abstract T parseResponse(Reader stream, ResponseParser responseParser);
+    protected abstract T parseResponse(String responseBody, ResponseParser responseParser);
 }

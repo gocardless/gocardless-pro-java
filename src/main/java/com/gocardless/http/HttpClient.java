@@ -1,7 +1,6 @@
 package com.gocardless.http;
 
 import java.io.IOException;
-import java.io.Reader;
 import java.util.Map;
 import java.util.concurrent.Callable;
 import java.util.concurrent.ExecutionException;
@@ -148,16 +147,18 @@ public class HttpClient {
     }
 
     private <T> T parseResponseBody(ApiRequest<T> request, Response response) {
-        try (Reader stream = response.body().charStream()) {
-            return request.parseResponse(stream, responseParser);
+        try {
+            String responseBody = response.body().string();
+            return request.parseResponse(responseBody, responseParser);
         } catch (IOException e) {
             throw new GoCardlessNetworkException("Failed to read response body", e);
         }
     }
 
     private GoCardlessException handleErrorResponse(Response response) {
-        try (Reader stream = response.body().charStream()) {
-            return responseParser.parseError(stream);
+        try {
+            String responseBody = response.body().string();
+            return responseParser.parseError(responseBody);
         } catch (IOException e) {
             throw new GoCardlessNetworkException("Failed to read response body", e);
         }

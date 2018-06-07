@@ -1,11 +1,11 @@
 package com.gocardless.http;
 
-import java.io.Reader;
 import java.util.List;
 
 import com.gocardless.errors.ApiErrorResponse;
 import com.gocardless.errors.GoCardlessApiException;
 import com.gocardless.errors.GoCardlessErrorMapper;
+import com.gocardless.errors.MalformedResponseException;
 
 import com.google.common.collect.ImmutableList;
 import com.google.gson.*;
@@ -18,14 +18,19 @@ final class ResponseParser {
         this.gson = gson;
     }
 
-    <T> T parseSingle(Reader stream, String envelope, Class<T> clazz) {
-        JsonElement json = new JsonParser().parse(stream);
+    <T> T parseSingle(String responseBody, String envelope, Class<T> clazz) {
+        JsonElement json;
+        try {
+            json = new JsonParser().parse(responseBody);
+        } catch (JsonSyntaxException e) {
+            throw new MalformedResponseException(responseBody);
+        }
         JsonObject object = json.getAsJsonObject().getAsJsonObject(envelope);
         return gson.fromJson(object, clazz);
     }
 
-    <T> ListResponse<T> parsePage(Reader stream, String envelope, TypeToken<List<T>> clazz) {
-        JsonObject json = new JsonParser().parse(stream).getAsJsonObject();
+    <T> ListResponse<T> parsePage(String responseBody, String envelope, TypeToken<List<T>> clazz) {
+        JsonObject json = new JsonParser().parse(responseBody).getAsJsonObject();
         JsonArray array = json.getAsJsonArray(envelope);
         List<T> items = gson.fromJson(array, clazz.getType());
         JsonObject metaJson = json.getAsJsonObject("meta");
@@ -33,8 +38,8 @@ final class ResponseParser {
         return new ListResponse<>(ImmutableList.copyOf(items), meta);
     }
 
-    GoCardlessApiException parseError(Reader stream) {
-        ApiErrorResponse error = parseSingle(stream, "error", ApiErrorResponse.class);
+    GoCardlessApiException parseError(String responseBody) {
+        ApiErrorResponse error = parseSingle(responseBody, "error", ApiErrorResponse.class);
         return GoCardlessErrorMapper.toException(error);
     }
 }
