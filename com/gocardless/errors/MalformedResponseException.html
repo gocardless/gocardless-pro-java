@@ -2,14 +2,14 @@
 <!-- NewPage -->
 <html lang="en">
 <head>
-<title>ValidationFailedException (gocardless-pro 3.5.0 API)</title>
+<title>MalformedResponseException (gocardless-pro 3.5.0 API)</title>
 <link rel="stylesheet" type="text/css" href="../../../stylesheet.css" title="Style">
 </head>
 <body>
 <script type="text/javascript"><!--
     try {
         if (location.href.indexOf('is-external=true') == -1) {
-            parent.document.title="ValidationFailedException (gocardless-pro 3.5.0 API)";
+            parent.document.title="MalformedResponseException (gocardless-pro 3.5.0 API)";
         }
     }
     catch(err) {
@@ -37,12 +37,12 @@
 </div>
 <div class="subNav">
 <ul class="navList">
-<li><a href="../../../com/gocardless/errors/MalformedResponseException.html" title="class in com.gocardless.errors"><span class="strong">Prev Class</span></a></li>
-<li>Next Class</li>
+<li><a href="../../../com/gocardless/errors/InvalidStateException.html" title="class in com.gocardless.errors"><span class="strong">Prev Class</span></a></li>
+<li><a href="../../../com/gocardless/errors/ValidationFailedException.html" title="class in com.gocardless.errors"><span class="strong">Next Class</span></a></li>
 </ul>
 <ul class="navList">
-<li><a href="../../../index.html?com/gocardless/errors/ValidationFailedException.html" target="_top">Frames</a></li>
-<li><a href="ValidationFailedException.html" target="_top">No Frames</a></li>
+<li><a href="../../../index.html?com/gocardless/errors/MalformedResponseException.html" target="_top">Frames</a></li>
+<li><a href="MalformedResponseException.html" target="_top">No Frames</a></li>
 </ul>
 <ul class="navList" id="allclasses_navbar_top">
 <li><a href="../../../allclasses-noframe.html">All Classes</a></li>
@@ -64,14 +64,14 @@
 <li>Summary:&nbsp;</li>
 <li>Nested&nbsp;|&nbsp;</li>
 <li>Field&nbsp;|&nbsp;</li>
-<li>Constr&nbsp;|&nbsp;</li>
-<li><a href="#methods_inherited_from_class_com.gocardless.errors.GoCardlessApiException">Method</a></li>
+<li><a href="#constructor_summary">Constr</a>&nbsp;|&nbsp;</li>
+<li><a href="#method_summary">Method</a></li>
 </ul>
 <ul class="subNavList">
 <li>Detail:&nbsp;</li>
 <li>Field&nbsp;|&nbsp;</li>
-<li>Constr&nbsp;|&nbsp;</li>
-<li>Method</li>
+<li><a href="#constructor_detail">Constr</a>&nbsp;|&nbsp;</li>
+<li><a href="#method_detail">Method</a></li>
 </ul>
 </div>
 <a name="skip-navbar_top">
@@ -81,7 +81,7 @@
 <!-- ======== START OF CLASS DATA ======== -->
 <div class="header">
 <div class="subTitle">com.gocardless.errors</div>
-<h2 title="Class ValidationFailedException" class="title">Class ValidationFailedException</h2>
+<h2 title="Class MalformedResponseException" class="title">Class MalformedResponseException</h2>
 </div>
 <div class="contentContainer">
 <ul class="inheritance">
@@ -100,12 +100,7 @@
 <li><a href="../../../com/gocardless/GoCardlessException.html" title="class in com.gocardless">com.gocardless.GoCardlessException</a></li>
 <li>
 <ul class="inheritance">
-<li><a href="../../../com/gocardless/errors/GoCardlessApiException.html" title="class in com.gocardless.errors">com.gocardless.errors.GoCardlessApiException</a></li>
-<li>
-<ul class="inheritance">
-<li>com.gocardless.errors.ValidationFailedException</li>
-</ul>
-</li>
+<li>com.gocardless.errors.MalformedResponseException</li>
 </ul>
 </li>
 </ul>
@@ -126,35 +121,56 @@
 </dl>
 <hr>
 <br>
-<pre>public class <span class="strong">ValidationFailedException</span>
-extends <a href="../../../com/gocardless/errors/GoCardlessApiException.html" title="class in com.gocardless.errors">GoCardlessApiException</a></pre>
-<div class="block"><p>Exception thrown when the parameters submitted with your request were invalid.</p></div>
-<dl><dt><span class="strong">See Also:</span></dt><dd><a href="../../../serialized-form.html#com.gocardless.errors.ValidationFailedException">Serialized Form</a></dd></dl>
+<pre>public class <span class="strong">MalformedResponseException</span>
+extends <a href="../../../com/gocardless/GoCardlessException.html" title="class in com.gocardless">GoCardlessException</a></pre>
+<div class="block"><p>Exception thrown when a response is returned from the API which isn&rsquo;t valid JSON (for example, an HTML error page returned from a load balancer)</p></div>
+<dl><dt><span class="strong">See Also:</span></dt><dd><a href="../../../serialized-form.html#com.gocardless.errors.MalformedResponseException">Serialized Form</a></dd></dl>
 </li>
 </ul>
 </div>
 <div class="summary">
 <ul class="blockList">
 <li class="blockList">
+<!-- ======== CONSTRUCTOR SUMMARY ======== -->
+<ul class="blockList">
+<li class="blockList"><a name="constructor_summary">
+<!--   -->
+</a>
+<h3>Constructor Summary</h3>
+<table class="overviewSummary" border="0" cellpadding="3" cellspacing="0" summary="Constructor Summary table, listing constructors, and an explanation">
+<caption><span>Constructors</span><span class="tabEnd">&nbsp;</span></caption>
+<tr>
+<th class="colOne" scope="col">Constructor and Description</th>
+</tr>
+<tr class="altColor">
+<td class="colOne"><code><strong><a href="../../../com/gocardless/errors/MalformedResponseException.html#MalformedResponseException(java.lang.String)">MalformedResponseException</a></strong>(java.lang.String&nbsp;responseBody)</code>&nbsp;</td>
+</tr>
+</table>
+</li>
+</ul>
 <!-- ========== METHOD SUMMARY =========== -->
 <ul class="blockList">
 <li class="blockList"><a name="method_summary">
 <!--   -->
 </a>
 <h3>Method Summary</h3>
-<ul class="blockList">
-<li class="blockList"><a name="methods_inherited_from_class_com.gocardless.errors.GoCardlessApiException">
-<!--   -->
-</a>
-<h3>Methods inherited from class&nbsp;com.gocardless.errors.<a href="../../../com/gocardless/errors/GoCardlessApiException.html" title="class in com.gocardless.errors">GoCardlessApiException</a></h3>
-<code><a href="../../../com/gocardless/errors/GoCardlessApiException.html#getCode()">getCode</a>, <a href="../../../com/gocardless/errors/GoCardlessApiException.html#getDocumentationUrl()">getDocumentationUrl</a>, <a href="../../../com/gocardless/errors/GoCardlessApiException.html#getErrorMessage()">getErrorMessage</a>, <a href="../../../com/gocardless/errors/GoCardlessApiException.html#getErrors()">getErrors</a>, <a href="../../../com/gocardless/errors/GoCardlessApiException.html#getRequestId()">getRequestId</a>, <a href="../../../com/gocardless/errors/GoCardlessApiException.html#getType()">getType</a>, <a href="../../../com/gocardless/errors/GoCardlessApiException.html#toString()">toString</a></code></li>
-</ul>
+<table class="overviewSummary" border="0" cellpadding="3" cellspacing="0" summary="Method Summary table, listing methods, and an explanation">
+<caption><span>Methods</span><span class="tabEnd">&nbsp;</span></caption>
+<tr>
+<th class="colFirst" scope="col">Modifier and Type</th>
+<th class="colLast" scope="col">Method and Description</th>
+</tr>
+<tr class="altColor">
+<td class="colFirst"><code>java.lang.String</code></td>
+<td class="colLast"><code><strong><a href="../../../com/gocardless/errors/MalformedResponseException.html#getResponseBody()">getResponseBody</a></strong>()</code>&nbsp;</td>
+</tr>
+</table>
 <ul class="blockList">
 <li class="blockList"><a name="methods_inherited_from_class_java.lang.Throwable">
 <!--   -->
 </a>
 <h3>Methods inherited from class&nbsp;java.lang.Throwable</h3>
-<code>addSuppressed, fillInStackTrace, getCause, getLocalizedMessage, getMessage, getStackTrace, getSuppressed, initCause, printStackTrace, printStackTrace, printStackTrace, setStackTrace</code></li>
+<code>addSuppressed, fillInStackTrace, getCause, getLocalizedMessage, getMessage, getStackTrace, getSuppressed, initCause, printStackTrace, printStackTrace, printStackTrace, setStackTrace, toString</code></li>
 </ul>
 <ul class="blockList">
 <li class="blockList"><a name="methods_inherited_from_class_java.lang.Object">
@@ -162,6 +178,46 @@ extends <a href="../../../com/gocardless/errors/GoCardlessApiException.html" tit
 </a>
 <h3>Methods inherited from class&nbsp;java.lang.Object</h3>
 <code>equals, getClass, hashCode, notify, notifyAll, wait, wait, wait</code></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="details">
+<ul class="blockList">
+<li class="blockList">
+<!-- ========= CONSTRUCTOR DETAIL ======== -->
+<ul class="blockList">
+<li class="blockList"><a name="constructor_detail">
+<!--   -->
+</a>
+<h3>Constructor Detail</h3>
+<a name="MalformedResponseException(java.lang.String)">
+<!--   -->
+</a>
+<ul class="blockListLast">
+<li class="blockList">
+<h4>MalformedResponseException</h4>
+<pre>public&nbsp;MalformedResponseException(java.lang.String&nbsp;responseBody)</pre>
+</li>
+</ul>
+</li>
+</ul>
+<!-- ============ METHOD DETAIL ========== -->
+<ul class="blockList">
+<li class="blockList"><a name="method_detail">
+<!--   -->
+</a>
+<h3>Method Detail</h3>
+<a name="getResponseBody()">
+<!--   -->
+</a>
+<ul class="blockListLast">
+<li class="blockList">
+<h4>getResponseBody</h4>
+<pre>public&nbsp;java.lang.String&nbsp;getResponseBody()</pre>
+</li>
 </ul>
 </li>
 </ul>
@@ -192,12 +248,12 @@ hljs.initHighlightingOnLoad();
 </div>
 <div class="subNav">
 <ul class="navList">
-<li><a href="../../../com/gocardless/errors/MalformedResponseException.html" title="class in com.gocardless.errors"><span class="strong">Prev Class</span></a></li>
-<li>Next Class</li>
+<li><a href="../../../com/gocardless/errors/InvalidStateException.html" title="class in com.gocardless.errors"><span class="strong">Prev Class</span></a></li>
+<li><a href="../../../com/gocardless/errors/ValidationFailedException.html" title="class in com.gocardless.errors"><span class="strong">Next Class</span></a></li>
 </ul>
 <ul class="navList">
-<li><a href="../../../index.html?com/gocardless/errors/ValidationFailedException.html" target="_top">Frames</a></li>
-<li><a href="ValidationFailedException.html" target="_top">No Frames</a></li>
+<li><a href="../../../index.html?com/gocardless/errors/MalformedResponseException.html" target="_top">Frames</a></li>
+<li><a href="MalformedResponseException.html" target="_top">No Frames</a></li>
 </ul>
 <ul class="navList" id="allclasses_navbar_bottom">
 <li><a href="../../../allclasses-noframe.html">All Classes</a></li>
@@ -219,14 +275,14 @@ hljs.initHighlightingOnLoad();
 <li>Summary:&nbsp;</li>
 <li>Nested&nbsp;|&nbsp;</li>
 <li>Field&nbsp;|&nbsp;</li>
-<li>Constr&nbsp;|&nbsp;</li>
-<li><a href="#methods_inherited_from_class_com.gocardless.errors.GoCardlessApiException">Method</a></li>
+<li><a href="#constructor_summary">Constr</a>&nbsp;|&nbsp;</li>
+<li><a href="#method_summary">Method</a></li>
 </ul>
 <ul class="subNavList">
 <li>Detail:&nbsp;</li>
 <li>Field&nbsp;|&nbsp;</li>
-<li>Constr&nbsp;|&nbsp;</li>
-<li>Method</li>
+<li><a href="#constructor_detail">Constr</a>&nbsp;|&nbsp;</li>
+<li><a href="#method_detail">Method</a></li>
 </ul>
 </div>
 <a name="skip-navbar_bottom">
