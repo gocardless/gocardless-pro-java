@@ -378,53 +378,13 @@ public class MandateImportEntryService {
             return this;
         }
 
-        /**
-         * Related resources
-         */
         public MandateImportEntryCreateRequest withLinks(Links links) {
             this.links = links;
             return this;
         }
 
         /**
-         * The ID of the customer which was created when the mandate import was processed.
-         */
-        public MandateImportEntryCreateRequest withLinksCustomer(String customer) {
-            if (links == null) {
-                links = new Links();
-            }
-            links.withCustomer(customer);
-            return this;
-        }
-
-        /**
-         * The ID of the customer bank account which was created when the mandate import
-         * was processed.
-         */
-        public MandateImportEntryCreateRequest withLinksCustomerBankAccount(
-                String customerBankAccount) {
-            if (links == null) {
-                links = new Links();
-            }
-            links.withCustomerBankAccount(customerBankAccount);
-            return this;
-        }
-
-        /**
-         * The ID of the mandate which was created when the mandate import was processed.
-         */
-        public MandateImportEntryCreateRequest withLinksMandate(String mandate) {
-            if (links == null) {
-                links = new Links();
-            }
-            links.withMandate(mandate);
-            return this;
-        }
-
-        /**
-         * The ID of the mandate import. This is returned when you
-         * [create a Mandate Import](#mandate-imports-create-a-new-mandate-import).
-         * 
+         * Unique identifier, beginning with "IM".
          */
         public MandateImportEntryCreateRequest withLinksMandateImport(String mandateImport) {
             if (links == null) {
@@ -703,40 +663,10 @@ public class MandateImportEntryService {
         }
 
         public static class Links {
-            private String customer;
-            private String customerBankAccount;
-            private String mandate;
             private String mandateImport;
 
             /**
-             * The ID of the customer which was created when the mandate import was processed.
-             */
-            public Links withCustomer(String customer) {
-                this.customer = customer;
-                return this;
-            }
-
-            /**
-             * The ID of the customer bank account which was created when the mandate import
-             * was processed.
-             */
-            public Links withCustomerBankAccount(String customerBankAccount) {
-                this.customerBankAccount = customerBankAccount;
-                return this;
-            }
-
-            /**
-             * The ID of the mandate which was created when the mandate import was processed.
-             */
-            public Links withMandate(String mandate) {
-                this.mandate = mandate;
-                return this;
-            }
-
-            /**
-             * The ID of the mandate import. This is returned when you
-             * [create a Mandate Import](#mandate-imports-create-a-new-mandate-import).
-             * 
+             * Unique identifier, beginning with "IM".
              */
             public Links withMandateImport(String mandateImport) {
                 this.mandateImport = mandateImport;
