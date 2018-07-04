@@ -12,6 +12,9 @@ import java.util.Map;
  * error if you try to create a duplicate bank account. You may wish to handle this by updating the
  * existing record instead, the ID of which will be provided as `links[creditor_bank_account]` in the
  * error response.
+ * 
+ * <p class="restricted-notice"><strong>Restricted</strong>: This API is not available for
+ * partner integrations.</p>
  */
 public class CreditorBankAccount {
     private CreditorBankAccount() {
