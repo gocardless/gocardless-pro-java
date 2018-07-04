@@ -367,7 +367,7 @@ class='deprecated-notice'><strong>Deprecated</strong>: This field will be remove
 <li class="blockList">
 <h4>withInterval</h4>
 <pre>public&nbsp;<a href="../../../com/gocardless/services/SubscriptionService.SubscriptionCreateRequest.html" title="class in com.gocardless.services">SubscriptionService.SubscriptionCreateRequest</a>&nbsp;withInterval(java.lang.Integer&nbsp;interval)</pre>
-<div class="block"><p>Number of <code>interval_units</code> between customer charge dates. Must result in at least one charge date per year. Defaults to <code>1</code>.</p></div>
+<div class="block"><p>Number of <code>interval_units</code> between customer charge dates. Must be greater than or equal to <code>1</code>. Must result in at least one charge date per year. Defaults to <code>1</code>.</p></div>
 </li>
 </ul>
 <a name="withIntervalUnit(com.gocardless.services.SubscriptionService.SubscriptionCreateRequest.IntervalUnit)">
