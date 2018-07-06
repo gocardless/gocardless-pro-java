@@ -1490,9 +1490,19 @@
 <dd>
 <div class="block">Exception thrown when there is an error with the request you made.</div>
 </dd>
+<dt><a href="./com/gocardless/errors/InvalidSignatureException.html" title="class in com.gocardless.errors"><span class="strong">InvalidSignatureException</span></a> - Exception in <a href="./com/gocardless/errors/package-summary.html">com.gocardless.errors</a></dt>
+<dd>
+<div class="block">Exception thrown when the signature included in a webhook doesn&rsquo;t match one computed using the webhook endpoint&rsquo;s secret and the request body, indicating that the webhook is not genuinely from GoCardless</div>
+</dd>
+<dt><span class="strong"><a href="./com/gocardless/errors/InvalidSignatureException.html#InvalidSignatureException()">InvalidSignatureException()</a></span> - Constructor for exception com.gocardless.errors.<a href="./com/gocardless/errors/InvalidSignatureException.html" title="class in com.gocardless.errors">InvalidSignatureException</a></dt>
+<dd>&nbsp;</dd>
 <dt><a href="./com/gocardless/errors/InvalidStateException.html" title="class in com.gocardless.errors"><span class="strong">InvalidStateException</span></a> - Exception in <a href="./com/gocardless/errors/package-summary.html">com.gocardless.errors</a></dt>
 <dd>
 <div class="block">Exception thrown when the action you are trying to perform is invalid due to the state of the resource you are requesting it on.</div>
+</dd>
+<dt><span class="strong"><a href="./com/gocardless/Webhook.html#isValidSignature(java.lang.String,%20java.lang.String,%20java.lang.String)">isValidSignature(String, String, String)</a></span> - Static method in class com.gocardless.<a href="./com/gocardless/Webhook.html" title="class in com.gocardless">Webhook</a></dt>
+<dd>
+<div class="block">Validates that a webhook was genuinely sent by GoCardless by computing its signature using the body and your webhook endpoint secret, and comparing that with the signature included in the <code>Webhook-Signature</code> header.</div>
 </dd>
 <dt><span class="strong"><a href="./com/gocardless/http/ListRequest.html#iteratingExecutor()">iteratingExecutor()</a></span> - Static method in class com.gocardless.http.<a href="./com/gocardless/http/ListRequest.html" title="class in com.gocardless.http">ListRequest</a></dt>
 <dd>&nbsp;</dd>
@@ -1752,6 +1762,12 @@
 <dl>
 <dt><span class="strong"><a href="./com/gocardless/http/ListRequest.html#pagingExecutor()">pagingExecutor()</a></span> - Static method in class com.gocardless.http.<a href="./com/gocardless/http/ListRequest.html" title="class in com.gocardless.http">ListRequest</a></dt>
 <dd>&nbsp;</dd>
+<dt><span class="strong"><a href="./com/gocardless/http/WebhookParser.html#parse(java.lang.String)">parse(String)</a></span> - Static method in class com.gocardless.http.<a href="./com/gocardless/http/WebhookParser.html" title="class in com.gocardless.http">WebhookParser</a></dt>
+<dd>&nbsp;</dd>
+<dt><span class="strong"><a href="./com/gocardless/Webhook.html#parse(java.lang.String,%20java.lang.String,%20java.lang.String)">parse(String, String, String)</a></span> - Static method in class com.gocardless.<a href="./com/gocardless/Webhook.html" title="class in com.gocardless">Webhook</a></dt>
+<dd>
+<div class="block">Validates that a webhook was genuinely sent by GoCardless using <code>isValidSignature</code>, and then parses it into an array of <code>com.gocardless.resources.Event</code> objects representing each event included in the webhook.</div>
+</dd>
 <dt><a href="./com/gocardless/http/PathParam.html" title="annotation in com.gocardless.http"><span class="strong">PathParam</span></a> - Annotation Type in <a href="./com/gocardless/http/package-summary.html">com.gocardless.http</a></dt>
 <dd>
 <div class="block">Marks a field as a parameter used to construct the path for a request.</div>
@@ -2467,6 +2483,12 @@ the order they are declared.</div>
 </a>
 <h2 class="title">W</h2>
 <dl>
+<dt><a href="./com/gocardless/Webhook.html" title="class in com.gocardless"><span class="strong">Webhook</span></a> - Class in <a href="./com/gocardless/package-summary.html">com.gocardless</a></dt>
+<dd>
+<div class="block">Class containing a collection of functions for validating and parsing GoCardless webhooks</div>
+</dd>
+<dt><a href="./com/gocardless/http/WebhookParser.html" title="class in com.gocardless.http"><span class="strong">WebhookParser</span></a> - Class in <a href="./com/gocardless/http/package-summary.html">com.gocardless.http</a></dt>
+<dd>&nbsp;</dd>
 <dt><span class="strong"><a href="./com/gocardless/services/CreditorBankAccountService.CreditorBankAccountCreateRequest.html#withAccountHolderName(java.lang.String)">withAccountHolderName(String)</a></span> - Method in class com.gocardless.services.<a href="./com/gocardless/services/CreditorBankAccountService.CreditorBankAccountCreateRequest.html" title="class in com.gocardless.services">CreditorBankAccountService.CreditorBankAccountCreateRequest</a></dt>
 <dd>
 <div class="block">Name of the account holder, as known by the bank.</div>

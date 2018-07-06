@@ -99,7 +99,9 @@
 <br>
 <pre>public class <span class="strong">CreditorBankAccountService</span>
 extends java.lang.Object</pre>
-<div class="block"><p>Service class for working with creditor bank account resources.</p><p>Creditor Bank Accounts hold the bank details of a <a href="#core-endpoints-creditors">creditor</a>. These are the bank accounts which your <a href="#core-endpoints-payouts">payouts</a> will be sent to.</p><p>Note that creditor bank accounts must be unique, and so you will encounter a <code>bank_account_exists</code> error if you try to create a duplicate bank account. You may wish to handle this by updating the existing record instead, the ID of which will be provided as <code>links[creditor_bank_account]</code> in the error response.</p></div>
+<div class="block"><p>Service class for working with creditor bank account resources.</p><p>Creditor Bank Accounts hold the bank details of a <a href="#core-endpoints-creditors">creditor</a>. These are the bank accounts which your <a href="#core-endpoints-payouts">payouts</a> will be sent to.</p><p>Note that creditor bank accounts must be unique, and so you will encounter a <code>bank_account_exists</code> error if you try to create a duplicate bank account. You may wish to handle this by updating the existing record instead, the ID of which will be provided as <code>links[creditor_bank_account]</code> in the error response.</p>
+<p class="restricted-notice"><strong>Restricted</strong>: This API is not available for
+partner integrations.</p></div>
 </li>
 </ul>
 </div>
