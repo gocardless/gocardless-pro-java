@@ -168,6 +168,64 @@ Any errors will result in a `GoCardlessException` being thrown.  If the error is
 
 See the [documentation](http://gocardless.github.io/gocardless-pro-java/com/gocardless/errors/package-summary.html) for more details.
 
+### Handling webhooks
+
+GoCardless supports webhooks, allowing you to receive real-time notifications when things happen in your account, so you can take automatic actions in response, for example:
+
+* When a customer cancels their mandate with the bank, suspend their club membership
+* When a payment fails due to lack of funds, mark their invoice as unpaid
+* When a customer’s subscription generates a new payment, log it in their “past payments” list
+
+The client allows you to validate that a webhook you receive is genuinely from GoCardless, and to parse it into `com.gocardless.resources.Event` objects which are easy to work with:
+
+```java
+package myintegration;
+
+// Use the POM file at
+// https://raw.githubusercontent.com/gocardless/gocardless-pro-java-maven-example/master/pom.xml
+
+import java.util.List;
+import com.gocardless.Webhook;
+import com.gocardless.errors.InvalidSignatureException;
+import com.gocardless.resources.Event;
+import org.springframework.http.HttpStatus;
+import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestHeader;
+import org.springframework.http.ResponseEntity;
+
+public class WebhookHandler {
+    @PostMapping("/")
+    public ResponseEntity<String> handlePost(
+            @RequestHeader("Webhook-Signature") String signatureHeader,
+            @RequestBody String requestBody) {
+        /*
+         * When you create a webhook endpoint, you can specify a secret. When GoCardless
+         * sends you a webhook, it'll sign the body using that secret. Since only you and
+         * GoCardless know the secret, you can check the signature and ensure that the
+         * webhook is truly from GoCardless.
+         *
+         * We recommend storing your webhook endpoint secret in an environment variable
+         * for security, but you could include it as a string directly in your code.
+         */
+        String webhookEndpointSecret = System.getenv("GOCARDLESS_WEBHOOK_ENDPOINT_SECRET");
+
+        try {
+            List<Event> events = Webhook.parse(requestBody, signatureHeader, webhookEndpointSecret)
+
+            // Work through your list of events...
+
+            return new ResponseEntity<String>("OK", HttpStatus.OK);
+        } catch(InvalidSignatureException e) {
+            return new ResponseEntity<String>("Incorrect Signature", HttpStatus.BAD_REQUEST);
+        }
+    }
+}
+```
+
+For more details on working with webhooks, see our ["Getting started" guide](https://developer.gocardless.com/getting-started/api/introduction/?lang=java).
+
 ## Upgrading from v2.x to v3.x
 
 To upgrade from v2.x, you will need to switch from calling `GoCardlessClient.create` with arguments to

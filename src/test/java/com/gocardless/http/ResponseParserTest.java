@@ -7,6 +7,7 @@ import java.util.List;
 import com.gocardless.errors.*;
 import com.gocardless.http.HttpTestUtil.DummyItem;
 
+import com.google.common.collect.ImmutableList;
 import com.google.common.io.Resources;
 import com.google.gson.reflect.TypeToken;
 
@@ -38,6 +39,19 @@ public class ResponseParserTest {
         DummyItem result = parser.parseSingle(responseBody, "items", DummyItem.class);
         assertThat(result.stringField).isEqualTo("foo");
         assertThat(result.intField).isEqualTo(123);
+    }
+
+    @Test
+    public void shouldParseMultiple() throws IOException {
+        URL resource = Resources.getResource("fixtures/page.json");
+        String responseBody = Resources.toString(resource, UTF_8);
+        ImmutableList<DummyItem> result =
+                parser.parseMultiple(responseBody, "items", new TypeToken<List<DummyItem>>() {});
+        assertThat(result).hasSize(2);
+        assertThat(result.get(0).stringField).isEqualTo("foo");
+        assertThat(result.get(0).intField).isEqualTo(123);
+        assertThat(result.get(1).stringField).isEqualTo("bar");
+        assertThat(result.get(1).intField).isEqualTo(456);
     }
 
     @Test

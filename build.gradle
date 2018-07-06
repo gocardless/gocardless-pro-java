@@ -27,6 +27,7 @@ dependencies {
     compile 'com.google.code.gson:gson:2.8.0'
     compile 'com.google.guava:guava:20.0'
     compile 'org.slf4j:slf4j-api:1.7.21'
+    compile 'commons-codec:commons-codec:1.11'
 
     compile('com.github.rholder:guava-retrying:2.0.0') {
       exclude group: 'com.google.guava', module: 'guava'
