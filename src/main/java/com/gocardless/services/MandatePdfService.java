@@ -86,14 +86,20 @@ public class MandatePdfService {
     public static final class MandatePdfCreateRequest extends PostRequest<MandatePdf> {
         private String accountHolderName;
         private String accountNumber;
+        private String addressLine1;
+        private String addressLine2;
+        private String addressLine3;
         private String bankCode;
         private String bic;
         private String branchCode;
+        private String city;
         private String countryCode;
         private String danishIdentityNumber;
         private String iban;
         private Links links;
         private String mandateReference;
+        private String postalCode;
+        private String region;
         private String scheme;
         private String signatureDate;
         private String swedishIdentityNumber;
@@ -113,6 +119,30 @@ public class MandatePdfService {
          */
         public MandatePdfCreateRequest withAccountNumber(String accountNumber) {
             this.accountNumber = accountNumber;
+            return this;
+        }
+
+        /**
+         * The first line of the customer's address.
+         */
+        public MandatePdfCreateRequest withAddressLine1(String addressLine1) {
+            this.addressLine1 = addressLine1;
+            return this;
+        }
+
+        /**
+         * The second line of the customer's address.
+         */
+        public MandatePdfCreateRequest withAddressLine2(String addressLine2) {
+            this.addressLine2 = addressLine2;
+            return this;
+        }
+
+        /**
+         * The third line of the customer's address.
+         */
+        public MandatePdfCreateRequest withAddressLine3(String addressLine3) {
+            this.addressLine3 = addressLine3;
             return this;
         }
 
@@ -140,6 +170,14 @@ public class MandatePdfService {
          */
         public MandatePdfCreateRequest withBranchCode(String branchCode) {
             this.branchCode = branchCode;
+            return this;
+        }
+
+        /**
+         * The city of the customer's address.
+         */
+        public MandatePdfCreateRequest withCity(String city) {
+            this.city = city;
             return this;
         }
 
@@ -193,6 +231,22 @@ public class MandatePdfService {
          */
         public MandatePdfCreateRequest withMandateReference(String mandateReference) {
             this.mandateReference = mandateReference;
+            return this;
+        }
+
+        /**
+         * The customer's postal code.
+         */
+        public MandatePdfCreateRequest withPostalCode(String postalCode) {
+            this.postalCode = postalCode;
+            return this;
+        }
+
+        /**
+         * The customer's address region, county or department.
+         */
+        public MandatePdfCreateRequest withRegion(String region) {
+            this.region = region;
             return this;
         }
 
