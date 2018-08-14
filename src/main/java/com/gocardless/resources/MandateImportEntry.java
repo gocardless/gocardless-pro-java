@@ -22,7 +22,7 @@ package com.gocardless.resources;
  * fields to find the mandate, customer and customer bank account that have been imported.
  * 
  * <p class="restricted-notice"><strong>Restricted</strong>: This API is currently
- * only available for approved partners - please <a href="mailto:help@gocardless.com">get
+ * only available for approved integrators - please <a href="mailto:help@gocardless.com">get
  * in touch</a> if you would like to use this API.</p>
  * 
  */
