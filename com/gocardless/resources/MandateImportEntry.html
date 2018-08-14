@@ -101,7 +101,7 @@
 extends java.lang.Object</pre>
 <div class="block"><p>Represents a mandate import entry resource returned from the API.</p><p>Mandate Import Entries are added to a <a href="#core-endpoints-mandate-imports">Mandate Import</a>. Each entry corresponds to one mandate to be imported into GoCardless.</p><p>To import a mandate you will need: <ol>  <li>Identifying information about the customer (name/company and address)</li>  <li>Bank account details, consisting of an account holder name and  either an IBAN or <a href="#appendix-local-bank-details">local bank details</a></li>  <li>Amendment details (SEPA only)</li> </ol></p><p>We suggest you provide a <code>record_identifier</code> (which is unique within the context of a single mandate import) to help you to identify mandates that have been created once the import has been processed by GoCardless. You can <a href="#mandate-import-entries-list-all-mandate-import-entries">list the mandate import entries</a>, match them up in your system using the <code>record_identifier</code>, and look at the <code>links</code> fields to find the mandate, customer and customer bank account that have been imported.</p>
 <p class="restricted-notice"><strong>Restricted</strong>: This API is currently
-only available for approved partners - please <a href="mailto:help@gocardless.com">get
+only available for approved integrators - please <a href="mailto:help@gocardless.com">get
 in touch</a> if you would like to use this API.</p></div>
 </li>
 </ul>
