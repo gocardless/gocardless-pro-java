@@ -108,7 +108,7 @@
 <br>
 <pre>public static final class <span class="strong">MandateImportService.MandateImportSubmitRequest</span>
 extends <a href="../../../com/gocardless/http/PostRequest.html" title="class in com.gocardless.http">PostRequest</a>&lt;<a href="../../../com/gocardless/resources/MandateImport.html" title="class in com.gocardless.resources">MandateImport</a>&gt;</pre>
-<div class="block"><p>Request class for <a href="../../../com/gocardless/services/MandateImportService.html#submit(java.lang.String)"><code>MandateImportService.submit(java.lang.String)</code></a>.</p><p>Submits the mandate import, which allows it to be processed by a member of the GoCardless team. Once the import has been submitted, it can no longer have entries added to it.</p></div>
+<div class="block"><p>Request class for <a href="../../../com/gocardless/services/MandateImportService.html#submit(java.lang.String)"><code>MandateImportService.submit(java.lang.String)</code></a>.</p><p>Submits the mandate import, which allows it to be processed by a member of the GoCardless team. Once the import has been submitted, it can no longer have entries added to it.</p><p>In our sandbox environment, to aid development, we automatically process mandate imports approximately 10 seconds after they are submitted. This will allow you to test both the &ldquo;submitted&rdquo; response and wait for the webhook to confirm the processing has begun.</p></div>
 </li>
 </ul>
 </div>

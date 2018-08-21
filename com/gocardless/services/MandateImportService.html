@@ -280,7 +280,7 @@ in touch</a> if you would like to use this API.</p></div>
 <li class="blockList">
 <h4>submit</h4>
 <pre>public&nbsp;<a href="../../../com/gocardless/services/MandateImportService.MandateImportSubmitRequest.html" title="class in com.gocardless.services">MandateImportService.MandateImportSubmitRequest</a>&nbsp;submit(java.lang.String&nbsp;identity)</pre>
-<div class="block"><p>Submits the mandate import, which allows it to be processed by a member of the GoCardless team. Once the import has been submitted, it can no longer have entries added to it.</p></div>
+<div class="block"><p>Submits the mandate import, which allows it to be processed by a member of the GoCardless team. Once the import has been submitted, it can no longer have entries added to it.</p><p>In our sandbox environment, to aid development, we automatically process mandate imports approximately 10 seconds after they are submitted. This will allow you to test both the &ldquo;submitted&rdquo; response and wait for the webhook to confirm the processing has begun.</p></div>
 </li>
 </ul>
 <a name="cancel(java.lang.String)">
@@ -290,7 +290,7 @@ in touch</a> if you would like to use this API.</p></div>
 <li class="blockList">
 <h4>cancel</h4>
 <pre>public&nbsp;<a href="../../../com/gocardless/services/MandateImportService.MandateImportCancelRequest.html" title="class in com.gocardless.services">MandateImportService.MandateImportCancelRequest</a>&nbsp;cancel(java.lang.String&nbsp;identity)</pre>
-<div class="block"><p>Cancels the mandate import, which aborts the import process and stops the mandates being set up in GoCardless. Once the import has been cancelled, it can no longer have entries added to it. Mandate imports which have already been submitted cannot be cancelled.</p></div>
+<div class="block"><p>Cancels the mandate import, which aborts the import process and stops the mandates being set up in GoCardless. Once the import has been cancelled, it can no longer have entries added to it. Mandate imports which have already been submitted or processed cannot be cancelled.</p></div>
 </li>
 </ul>
 </li>
