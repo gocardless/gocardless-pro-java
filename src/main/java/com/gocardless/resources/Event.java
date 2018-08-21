@@ -1,5 +1,6 @@
 package com.gocardless.resources;
 
+import java.util.List;
 import java.util.Map;
 
 import com.google.gson.annotations.SerializedName;
@@ -17,6 +18,7 @@ public class Event {
 
     private String action;
     private String createdAt;
+    private List<CustomerNotification> customerNotifications;
     private Details details;
     private String id;
     private Links links;
@@ -35,6 +37,16 @@ public class Event {
      */
     public String getCreatedAt() {
         return createdAt;
+    }
+
+    /**
+     * Present only in webhooks when an integrator is authorised to send their own
+     * notifications. See [here](/getting-started/api/handling-customer-notifications/)
+     * for further information.
+     * 
+     */
+    public List<CustomerNotification> getCustomerNotifications() {
+        return customerNotifications;
     }
 
     public Details getDetails() {
@@ -81,6 +93,51 @@ public class Event {
         PAYOUTS, @SerializedName("refunds")
         REFUNDS, @SerializedName("subscriptions")
         SUBSCRIPTIONS,
+    }
+
+    public static class CustomerNotification {
+        private CustomerNotification() {
+            // blank to prevent instantiation
+        }
+
+        private String deadline;
+        private String id;
+        private Boolean mandatory;
+        private Type type;
+
+        /**
+         * Time after which GoCardless will send the notification by email.
+         */
+        public String getDeadline() {
+            return deadline;
+        }
+
+        /**
+         * The id of the notification.
+         */
+        public String getId() {
+            return id;
+        }
+
+        /**
+         * Whether or not the notification must be sent.
+         */
+        public Boolean getMandatory() {
+            return mandatory;
+        }
+
+        /**
+         * The type of notification the customer shall receive.
+         */
+        public Type getType() {
+            return type;
+        }
+
+        public enum Type {
+            @SerializedName("payment_created")
+            PAYMENT_CREATED, @SerializedName("mandate_created")
+            MANDATE_CREATED,
+        }
     }
 
     public static class Details {

@@ -21,6 +21,7 @@ public class GoCardlessClient {
     private final CreditorBankAccountService creditorBankAccounts;
     private final CustomerService customers;
     private final CustomerBankAccountService customerBankAccounts;
+    private final CustomerNotificationService customerNotifications;
     private final EventService events;
     private final MandateService mandates;
     private final MandateImportService mandateImports;
@@ -110,6 +111,7 @@ public class GoCardlessClient {
         this.creditorBankAccounts = new CreditorBankAccountService(httpClient);
         this.customers = new CustomerService(httpClient);
         this.customerBankAccounts = new CustomerBankAccountService(httpClient);
+        this.customerNotifications = new CustomerNotificationService(httpClient);
         this.events = new EventService(httpClient);
         this.mandates = new MandateService(httpClient);
         this.mandateImports = new MandateImportService(httpClient);
@@ -156,6 +158,13 @@ public class GoCardlessClient {
      */
     public CustomerBankAccountService customerBankAccounts() {
         return customerBankAccounts;
+    }
+
+    /**
+     * A service class for working with customer notification resources.
+     */
+    public CustomerNotificationService customerNotifications() {
+        return customerNotifications;
     }
 
     /**
