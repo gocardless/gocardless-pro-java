@@ -37,8 +37,8 @@
 </div>
 <div class="subNav">
 <ul class="navList">
-<li><a href="../../../com/gocardless/resources/CustomerBankAccount.Links.html" title="class in com.gocardless.resources"><span class="strong">Prev Class</span></a></li>
-<li><a href="../../../com/gocardless/resources/Event.Details.html" title="class in com.gocardless.resources"><span class="strong">Next Class</span></a></li>
+<li><a href="../../../com/gocardless/resources/CustomerNotification.Type.html" title="enum in com.gocardless.resources"><span class="strong">Prev Class</span></a></li>
+<li><a href="../../../com/gocardless/resources/Event.CustomerNotification.html" title="class in com.gocardless.resources"><span class="strong">Next Class</span></a></li>
 </ul>
 <ul class="navList">
 <li><a href="../../../index.html?com/gocardless/resources/Event.html" target="_top">Frames</a></li>
@@ -120,13 +120,17 @@ extends java.lang.Object</pre>
 </tr>
 <tr class="altColor">
 <td class="colFirst"><code>static class&nbsp;</code></td>
-<td class="colLast"><code><strong><a href="../../../com/gocardless/resources/Event.Details.html" title="class in com.gocardless.resources">Event.Details</a></strong></code>&nbsp;</td>
+<td class="colLast"><code><strong><a href="../../../com/gocardless/resources/Event.CustomerNotification.html" title="class in com.gocardless.resources">Event.CustomerNotification</a></strong></code>&nbsp;</td>
 </tr>
 <tr class="rowColor">
 <td class="colFirst"><code>static class&nbsp;</code></td>
-<td class="colLast"><code><strong><a href="../../../com/gocardless/resources/Event.Links.html" title="class in com.gocardless.resources">Event.Links</a></strong></code>&nbsp;</td>
+<td class="colLast"><code><strong><a href="../../../com/gocardless/resources/Event.Details.html" title="class in com.gocardless.resources">Event.Details</a></strong></code>&nbsp;</td>
 </tr>
 <tr class="altColor">
+<td class="colFirst"><code>static class&nbsp;</code></td>
+<td class="colLast"><code><strong><a href="../../../com/gocardless/resources/Event.Links.html" title="class in com.gocardless.resources">Event.Links</a></strong></code>&nbsp;</td>
+</tr>
+<tr class="rowColor">
 <td class="colFirst"><code>static class&nbsp;</code></td>
 <td class="colLast"><code><strong><a href="../../../com/gocardless/resources/Event.ResourceType.html" title="enum in com.gocardless.resources">Event.ResourceType</a></strong></code>&nbsp;</td>
 </tr>
@@ -158,26 +162,32 @@ extends java.lang.Object</pre>
 </td>
 </tr>
 <tr class="altColor">
+<td class="colFirst"><code>java.util.List&lt;<a href="../../../com/gocardless/resources/Event.CustomerNotification.html" title="class in com.gocardless.resources">Event.CustomerNotification</a>&gt;</code></td>
+<td class="colLast"><code><strong><a href="../../../com/gocardless/resources/Event.html#getCustomerNotifications()">getCustomerNotifications</a></strong>()</code>
+<div class="block">Present only in webhooks when an integrator is authorised to send their own notifications.</div>
+</td>
+</tr>
+<tr class="rowColor">
 <td class="colFirst"><code><a href="../../../com/gocardless/resources/Event.Details.html" title="class in com.gocardless.resources">Event.Details</a></code></td>
 <td class="colLast"><code><strong><a href="../../../com/gocardless/resources/Event.html#getDetails()">getDetails</a></strong>()</code>&nbsp;</td>
 </tr>
-<tr class="rowColor">
+<tr class="altColor">
 <td class="colFirst"><code>java.lang.String</code></td>
 <td class="colLast"><code><strong><a href="../../../com/gocardless/resources/Event.html#getId()">getId</a></strong>()</code>
 <div class="block">Unique identifier, beginning with &ldquo;EV&rdquo;.</div>
 </td>
 </tr>
-<tr class="altColor">
+<tr class="rowColor">
 <td class="colFirst"><code><a href="../../../com/gocardless/resources/Event.Links.html" title="class in com.gocardless.resources">Event.Links</a></code></td>
 <td class="colLast"><code><strong><a href="../../../com/gocardless/resources/Event.html#getLinks()">getLinks</a></strong>()</code>&nbsp;</td>
 </tr>
-<tr class="rowColor">
+<tr class="altColor">
 <td class="colFirst"><code>java.util.Map&lt;java.lang.String,java.lang.String&gt;</code></td>
 <td class="colLast"><code><strong><a href="../../../com/gocardless/resources/Event.html#getMetadata()">getMetadata</a></strong>()</code>
 <div class="block">If the <code>details[origin]</code> is <code>api</code>, this will contain any metadata you specified when triggering this event.</div>
 </td>
 </tr>
-<tr class="altColor">
+<tr class="rowColor">
 <td class="colFirst"><code><a href="../../../com/gocardless/resources/Event.ResourceType.html" title="enum in com.gocardless.resources">Event.ResourceType</a></code></td>
 <td class="colLast"><code><strong><a href="../../../com/gocardless/resources/Event.html#getResourceType()">getResourceType</a></strong>()</code>
 <div class="block">The resource type for this event.</div>
@@ -223,6 +233,16 @@ extends java.lang.Object</pre>
 <h4>getCreatedAt</h4>
 <pre>public&nbsp;java.lang.String&nbsp;getCreatedAt()</pre>
 <div class="block"><p>Fixed <a href="#api-usage-time-zones--dates">timestamp</a>, recording when this resource was created.</p></div>
+</li>
+</ul>
+<a name="getCustomerNotifications()">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>getCustomerNotifications</h4>
+<pre>public&nbsp;java.util.List&lt;<a href="../../../com/gocardless/resources/Event.CustomerNotification.html" title="class in com.gocardless.resources">Event.CustomerNotification</a>&gt;&nbsp;getCustomerNotifications()</pre>
+<div class="block"><p>Present only in webhooks when an integrator is authorised to send their own notifications. See <a href="/getting-started/api/handling-customer-notifications/">here</a> for further information.</p></div>
 </li>
 </ul>
 <a name="getDetails()">
@@ -302,8 +322,8 @@ hljs.initHighlightingOnLoad();
 </div>
 <div class="subNav">
 <ul class="navList">
-<li><a href="../../../com/gocardless/resources/CustomerBankAccount.Links.html" title="class in com.gocardless.resources"><span class="strong">Prev Class</span></a></li>
-<li><a href="../../../com/gocardless/resources/Event.Details.html" title="class in com.gocardless.resources"><span class="strong">Next Class</span></a></li>
+<li><a href="../../../com/gocardless/resources/CustomerNotification.Type.html" title="enum in com.gocardless.resources"><span class="strong">Prev Class</span></a></li>
+<li><a href="../../../com/gocardless/resources/Event.CustomerNotification.html" title="class in com.gocardless.resources"><span class="strong">Next Class</span></a></li>
 </ul>
 <ul class="navList">
 <li><a href="../../../index.html?com/gocardless/resources/Event.html" target="_top">Frames</a></li>

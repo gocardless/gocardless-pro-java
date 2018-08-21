@@ -376,6 +376,32 @@
 <dd>
 <div class="block">Request class for <a href="./com/gocardless/services/CustomerBankAccountService.html#update(java.lang.String)"><code>CustomerBankAccountService.update(java.lang.String)</code></a>.</div>
 </dd>
+<dt><a href="./com/gocardless/resources/CustomerNotification.html" title="class in com.gocardless.resources"><span class="strong">CustomerNotification</span></a> - Class in <a href="./com/gocardless/resources/package-summary.html">com.gocardless.resources</a></dt>
+<dd>
+<div class="block">Represents a customer notification resource returned from the API.</div>
+</dd>
+<dt><a href="./com/gocardless/resources/CustomerNotification.ActionTaken.html" title="enum in com.gocardless.resources"><span class="strong">CustomerNotification.ActionTaken</span></a> - Enum in <a href="./com/gocardless/resources/package-summary.html">com.gocardless.resources</a></dt>
+<dd>&nbsp;</dd>
+<dt><a href="./com/gocardless/resources/CustomerNotification.Links.html" title="class in com.gocardless.resources"><span class="strong">CustomerNotification.Links</span></a> - Class in <a href="./com/gocardless/resources/package-summary.html">com.gocardless.resources</a></dt>
+<dd>&nbsp;</dd>
+<dt><a href="./com/gocardless/resources/CustomerNotification.Type.html" title="enum in com.gocardless.resources"><span class="strong">CustomerNotification.Type</span></a> - Enum in <a href="./com/gocardless/resources/package-summary.html">com.gocardless.resources</a></dt>
+<dd>&nbsp;</dd>
+<dt><span class="strong"><a href="./com/gocardless/GoCardlessClient.html#customerNotifications()">customerNotifications()</a></span> - Method in class com.gocardless.<a href="./com/gocardless/GoCardlessClient.html" title="class in com.gocardless">GoCardlessClient</a></dt>
+<dd>
+<div class="block">A service class for working with customer notification resources.</div>
+</dd>
+<dt><a href="./com/gocardless/services/CustomerNotificationService.html" title="class in com.gocardless.services"><span class="strong">CustomerNotificationService</span></a> - Class in <a href="./com/gocardless/services/package-summary.html">com.gocardless.services</a></dt>
+<dd>
+<div class="block">Service class for working with customer notification resources.</div>
+</dd>
+<dt><span class="strong"><a href="./com/gocardless/services/CustomerNotificationService.html#CustomerNotificationService(com.gocardless.http.HttpClient)">CustomerNotificationService(HttpClient)</a></span> - Constructor for class com.gocardless.services.<a href="./com/gocardless/services/CustomerNotificationService.html" title="class in com.gocardless.services">CustomerNotificationService</a></dt>
+<dd>
+<div class="block">Constructor.</div>
+</dd>
+<dt><a href="./com/gocardless/services/CustomerNotificationService.CustomerNotificationHandleRequest.html" title="class in com.gocardless.services"><span class="strong">CustomerNotificationService.CustomerNotificationHandleRequest</span></a> - Class in <a href="./com/gocardless/services/package-summary.html">com.gocardless.services</a></dt>
+<dd>
+<div class="block">Request class for <a href="./com/gocardless/services/CustomerNotificationService.html#handle(java.lang.String)"><code>CustomerNotificationService.handle(java.lang.String)</code></a>.</div>
+</dd>
 <dt><span class="strong"><a href="./com/gocardless/GoCardlessClient.html#customers()">customers()</a></span> - Method in class com.gocardless.<a href="./com/gocardless/GoCardlessClient.html" title="class in com.gocardless">GoCardlessClient</a></dt>
 <dd>
 <div class="block">A service class for working with customer resources.</div>
@@ -436,6 +462,10 @@
 <dd>
 <div class="block">Represents a event resource returned from the API.</div>
 </dd>
+<dt><a href="./com/gocardless/resources/Event.CustomerNotification.html" title="class in com.gocardless.resources"><span class="strong">Event.CustomerNotification</span></a> - Class in <a href="./com/gocardless/resources/package-summary.html">com.gocardless.resources</a></dt>
+<dd>&nbsp;</dd>
+<dt><a href="./com/gocardless/resources/Event.CustomerNotification.Type.html" title="enum in com.gocardless.resources"><span class="strong">Event.CustomerNotification.Type</span></a> - Enum in <a href="./com/gocardless/resources/package-summary.html">com.gocardless.resources</a></dt>
+<dd>&nbsp;</dd>
 <dt><a href="./com/gocardless/resources/Event.Details.html" title="class in com.gocardless.resources"><span class="strong">Event.Details</span></a> - Class in <a href="./com/gocardless/resources/package-summary.html">com.gocardless.resources</a></dt>
 <dd>&nbsp;</dd>
 <dt><a href="./com/gocardless/resources/Event.Details.Origin.html" title="enum in com.gocardless.resources"><span class="strong">Event.Details.Origin</span></a> - Enum in <a href="./com/gocardless/resources/package-summary.html">com.gocardless.resources</a></dt>
@@ -587,6 +617,18 @@
 <dt><span class="strong"><a href="./com/gocardless/resources/Event.html#getAction()">getAction()</a></span> - Method in class com.gocardless.resources.<a href="./com/gocardless/resources/Event.html" title="class in com.gocardless.resources">Event</a></dt>
 <dd>
 <div class="block">What has happened to the resource.</div>
+</dd>
+<dt><span class="strong"><a href="./com/gocardless/resources/CustomerNotification.html#getActionTaken()">getActionTaken()</a></span> - Method in class com.gocardless.resources.<a href="./com/gocardless/resources/CustomerNotification.html" title="class in com.gocardless.resources">CustomerNotification</a></dt>
+<dd>
+<div class="block">The action that was taken on the notification:   <code>handled</code> means the integrator sent the notification themselves </div>
+</dd>
+<dt><span class="strong"><a href="./com/gocardless/resources/CustomerNotification.html#getActionTakenAt()">getActionTakenAt()</a></span> - Method in class com.gocardless.resources.<a href="./com/gocardless/resources/CustomerNotification.html" title="class in com.gocardless.resources">CustomerNotification</a></dt>
+<dd>
+<div class="block">Fixed <a href="./com/gocardless/resources/#api-usage-time-zones--dates">timestamp</a>, recording when this action was taken.</div>
+</dd>
+<dt><span class="strong"><a href="./com/gocardless/resources/CustomerNotification.html#getActionTakenBy()">getActionTakenBy()</a></span> - Method in class com.gocardless.resources.<a href="./com/gocardless/resources/CustomerNotification.html" title="class in com.gocardless.resources">CustomerNotification</a></dt>
+<dd>
+<div class="block">A string identifying the integrator who was able to handle this notification.</div>
 </dd>
 <dt><span class="strong"><a href="./com/gocardless/resources/Creditor.html#getAddressLine1()">getAddressLine1()</a></span> - Method in class com.gocardless.resources.<a href="./com/gocardless/resources/Creditor.html" title="class in com.gocardless.resources">Creditor</a></dt>
 <dd>
@@ -860,6 +902,10 @@
 <dd>
 <div class="block">ID of the <a href="./com/gocardless/resources/#core-endpoints-customers">customer</a> that owns this bank account.</div>
 </dd>
+<dt><span class="strong"><a href="./com/gocardless/resources/CustomerNotification.Links.html#getCustomer()">getCustomer()</a></span> - Method in class com.gocardless.resources.<a href="./com/gocardless/resources/CustomerNotification.Links.html" title="class in com.gocardless.resources">CustomerNotification.Links</a></dt>
+<dd>
+<div class="block">The customer who should be contacted with this notification.</div>
+</dd>
 <dt><span class="strong"><a href="./com/gocardless/resources/Mandate.Links.html#getCustomer()">getCustomer()</a></span> - Method in class com.gocardless.resources.<a href="./com/gocardless/resources/Mandate.Links.html" title="class in com.gocardless.resources">Mandate.Links</a></dt>
 <dd>
 <div class="block">ID of the associated <a href="./com/gocardless/resources/#core-endpoints-customers">customer</a></div>
@@ -884,6 +930,10 @@
 <dd>
 <div class="block">ID of <a href="./com/gocardless/resources/#core-endpoints-customer-bank-accounts">customer bank account</a> created by this redirect flow.<br/>**Note**: this property will not be present until the redirect flow has been successfully completed.</div>
 </dd>
+<dt><span class="strong"><a href="./com/gocardless/resources/Event.html#getCustomerNotifications()">getCustomerNotifications()</a></span> - Method in class com.gocardless.resources.<a href="./com/gocardless/resources/Event.html" title="class in com.gocardless.resources">Event</a></dt>
+<dd>
+<div class="block">Present only in webhooks when an integrator is authorised to send their own notifications.</div>
+</dd>
 <dt><span class="strong"><a href="./com/gocardless/resources/Customer.html#getDanishIdentityNumber()">getDanishIdentityNumber()</a></span> - Method in class com.gocardless.resources.<a href="./com/gocardless/resources/Customer.html" title="class in com.gocardless.resources">Customer</a></dt>
 <dd>
 <div class="block">For Danish customers only.</div>
@@ -891,6 +941,10 @@
 <dt><span class="strong"><a href="./com/gocardless/resources/Subscription.html#getDayOfMonth()">getDayOfMonth()</a></span> - Method in class com.gocardless.resources.<a href="./com/gocardless/resources/Subscription.html" title="class in com.gocardless.resources">Subscription</a></dt>
 <dd>
 <div class="block">As per RFC 2445.</div>
+</dd>
+<dt><span class="strong"><a href="./com/gocardless/resources/Event.CustomerNotification.html#getDeadline()">getDeadline()</a></span> - Method in class com.gocardless.resources.<a href="./com/gocardless/resources/Event.CustomerNotification.html" title="class in com.gocardless.resources">Event.CustomerNotification</a></dt>
+<dd>
+<div class="block">Time after which GoCardless will send the notification by email.</div>
 </dd>
 <dt><span class="strong"><a href="./com/gocardless/resources/Payout.html#getDeductedFees()">getDeductedFees()</a></span> - Method in class com.gocardless.resources.<a href="./com/gocardless/resources/Payout.html" title="class in com.gocardless.resources">Payout</a></dt>
 <dd>
@@ -962,6 +1016,10 @@
 <dd>
 <div class="block">Returns a list of errors.</div>
 </dd>
+<dt><span class="strong"><a href="./com/gocardless/resources/CustomerNotification.Links.html#getEvent()">getEvent()</a></span> - Method in class com.gocardless.resources.<a href="./com/gocardless/resources/CustomerNotification.Links.html" title="class in com.gocardless.resources">CustomerNotification.Links</a></dt>
+<dd>
+<div class="block">The event that triggered the notification to be scheduled.</div>
+</dd>
 <dt><span class="strong"><a href="./com/gocardless/resources/MandatePdf.html#getExpiresAt()">getExpiresAt()</a></span> - Method in class com.gocardless.resources.<a href="./com/gocardless/resources/MandatePdf.html" title="class in com.gocardless.resources">MandatePdf</a></dt>
 <dd>
 <div class="block">The date and time at which the <code>url</code> will expire (10 minutes after the original request).</div>
@@ -995,6 +1053,14 @@
 <dt><span class="strong"><a href="./com/gocardless/resources/CustomerBankAccount.html#getId()">getId()</a></span> - Method in class com.gocardless.resources.<a href="./com/gocardless/resources/CustomerBankAccount.html" title="class in com.gocardless.resources">CustomerBankAccount</a></dt>
 <dd>
 <div class="block">Unique identifier, beginning with &ldquo;BA&rdquo;.</div>
+</dd>
+<dt><span class="strong"><a href="./com/gocardless/resources/CustomerNotification.html#getId()">getId()</a></span> - Method in class com.gocardless.resources.<a href="./com/gocardless/resources/CustomerNotification.html" title="class in com.gocardless.resources">CustomerNotification</a></dt>
+<dd>
+<div class="block">The id of the notification.</div>
+</dd>
+<dt><span class="strong"><a href="./com/gocardless/resources/Event.CustomerNotification.html#getId()">getId()</a></span> - Method in class com.gocardless.resources.<a href="./com/gocardless/resources/Event.CustomerNotification.html" title="class in com.gocardless.resources">Event.CustomerNotification</a></dt>
+<dd>
+<div class="block">The id of the notification.</div>
 </dd>
 <dt><span class="strong"><a href="./com/gocardless/resources/Event.html#getId()">getId()</a></span> - Method in class com.gocardless.resources.<a href="./com/gocardless/resources/Event.html" title="class in com.gocardless.resources">Event</a></dt>
 <dd>
@@ -1058,6 +1124,8 @@
 <dd>&nbsp;</dd>
 <dt><span class="strong"><a href="./com/gocardless/resources/CustomerBankAccount.html#getLinks()">getLinks()</a></span> - Method in class com.gocardless.resources.<a href="./com/gocardless/resources/CustomerBankAccount.html" title="class in com.gocardless.resources">CustomerBankAccount</a></dt>
 <dd>&nbsp;</dd>
+<dt><span class="strong"><a href="./com/gocardless/resources/CustomerNotification.html#getLinks()">getLinks()</a></span> - Method in class com.gocardless.resources.<a href="./com/gocardless/resources/CustomerNotification.html" title="class in com.gocardless.resources">CustomerNotification</a></dt>
+<dd>&nbsp;</dd>
 <dt><span class="strong"><a href="./com/gocardless/resources/Event.html#getLinks()">getLinks()</a></span> - Method in class com.gocardless.resources.<a href="./com/gocardless/resources/Event.html" title="class in com.gocardless.resources">Event</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="strong"><a href="./com/gocardless/resources/Mandate.html#getLinks()">getLinks()</a></span> - Method in class com.gocardless.resources.<a href="./com/gocardless/resources/Mandate.html" title="class in com.gocardless.resources">Mandate</a></dt>
@@ -1081,6 +1149,10 @@
 <dt><span class="strong"><a href="./com/gocardless/resources/Creditor.html#getLogoUrl()">getLogoUrl()</a></span> - Method in class com.gocardless.resources.<a href="./com/gocardless/resources/Creditor.html" title="class in com.gocardless.resources">Creditor</a></dt>
 <dd>
 <div class="block">URL for the creditor&rsquo;s logo, which may be shown on their payment pages.</div>
+</dd>
+<dt><span class="strong"><a href="./com/gocardless/resources/CustomerNotification.Links.html#getMandate()">getMandate()</a></span> - Method in class com.gocardless.resources.<a href="./com/gocardless/resources/CustomerNotification.Links.html" title="class in com.gocardless.resources">CustomerNotification.Links</a></dt>
+<dd>
+<div class="block">The identifier of the related mandate.</div>
 </dd>
 <dt><span class="strong"><a href="./com/gocardless/resources/Event.Links.html#getMandate()">getMandate()</a></span> - Method in class com.gocardless.resources.<a href="./com/gocardless/resources/Event.Links.html" title="class in com.gocardless.resources">Event.Links</a></dt>
 <dd>
@@ -1113,6 +1185,10 @@
 <dt><span class="strong"><a href="./com/gocardless/resources/MandateImportEntry.Links.html#getMandateImport()">getMandateImport()</a></span> - Method in class com.gocardless.resources.<a href="./com/gocardless/resources/MandateImportEntry.Links.html" title="class in com.gocardless.resources">MandateImportEntry.Links</a></dt>
 <dd>
 <div class="block">The ID of the mandate import.</div>
+</dd>
+<dt><span class="strong"><a href="./com/gocardless/resources/Event.CustomerNotification.html#getMandatory()">getMandatory()</a></span> - Method in class com.gocardless.resources.<a href="./com/gocardless/resources/Event.CustomerNotification.html" title="class in com.gocardless.resources">Event.CustomerNotification</a></dt>
+<dd>
+<div class="block">Whether or not the notification must be sent.</div>
 </dd>
 <dt><span class="strong"><a href="./com/gocardless/errors/ApiError.html#getMessage()">getMessage()</a></span> - Method in class com.gocardless.errors.<a href="./com/gocardless/errors/ApiError.html" title="class in com.gocardless.errors">ApiError</a></dt>
 <dd>
@@ -1197,6 +1273,10 @@
 <dt><span class="strong"><a href="./com/gocardless/resources/Event.Links.html#getParentEvent()">getParentEvent()</a></span> - Method in class com.gocardless.resources.<a href="./com/gocardless/resources/Event.Links.html" title="class in com.gocardless.resources">Event.Links</a></dt>
 <dd>
 <div class="block">If this event was caused by another, this is the ID of the cause.</div>
+</dd>
+<dt><span class="strong"><a href="./com/gocardless/resources/CustomerNotification.Links.html#getPayment()">getPayment()</a></span> - Method in class com.gocardless.resources.<a href="./com/gocardless/resources/CustomerNotification.Links.html" title="class in com.gocardless.resources">CustomerNotification.Links</a></dt>
+<dd>
+<div class="block">The identifier of the related payment.</div>
 </dd>
 <dt><span class="strong"><a href="./com/gocardless/resources/Event.Links.html#getPayment()">getPayment()</a></span> - Method in class com.gocardless.resources.<a href="./com/gocardless/resources/Event.Links.html" title="class in com.gocardless.resources">Event.Links</a></dt>
 <dd>
@@ -1306,6 +1386,10 @@
 <dd>
 <div class="block">An optional refund reference, displayed on your customer&rsquo;s bank statement.</div>
 </dd>
+<dt><span class="strong"><a href="./com/gocardless/resources/CustomerNotification.Links.html#getRefund()">getRefund()</a></span> - Method in class com.gocardless.resources.<a href="./com/gocardless/resources/CustomerNotification.Links.html" title="class in com.gocardless.resources">CustomerNotification.Links</a></dt>
+<dd>
+<div class="block">The identifier of the related refund.</div>
+</dd>
 <dt><span class="strong"><a href="./com/gocardless/resources/Event.Links.html#getRefund()">getRefund()</a></span> - Method in class com.gocardless.resources.<a href="./com/gocardless/resources/Event.Links.html" title="class in com.gocardless.resources">Event.Links</a></dt>
 <dd>
 <div class="block">If <code>resource_type</code> is <code>refunds</code>, this is the ID of the <a href="./com/gocardless/resources/#core-endpoints-refunds">refund</a> which has been updated.</div>
@@ -1396,6 +1480,10 @@
 </dd>
 <dt><span class="strong"><a href="./com/gocardless/http/ApiResponse.html#getStatusCode()">getStatusCode()</a></span> - Method in class com.gocardless.http.<a href="./com/gocardless/http/ApiResponse.html" title="class in com.gocardless.http">ApiResponse</a></dt>
 <dd>&nbsp;</dd>
+<dt><span class="strong"><a href="./com/gocardless/resources/CustomerNotification.Links.html#getSubscription()">getSubscription()</a></span> - Method in class com.gocardless.resources.<a href="./com/gocardless/resources/CustomerNotification.Links.html" title="class in com.gocardless.resources">CustomerNotification.Links</a></dt>
+<dd>
+<div class="block">The identifier of the related subscription.</div>
+</dd>
 <dt><span class="strong"><a href="./com/gocardless/resources/Event.Links.html#getSubscription()">getSubscription()</a></span> - Method in class com.gocardless.resources.<a href="./com/gocardless/resources/Event.Links.html" title="class in com.gocardless.resources">Event.Links</a></dt>
 <dd>
 <div class="block">If <code>resource_type</code> is <code>subscription</code>, this is the ID of the <a href="./com/gocardless/resources/#core-endpoints-subscriptions">subscription</a> which has been updated.</div>
@@ -1415,6 +1503,14 @@
 <dt><span class="strong"><a href="./com/gocardless/errors/GoCardlessApiException.html#getType()">getType()</a></span> - Method in exception com.gocardless.errors.<a href="./com/gocardless/errors/GoCardlessApiException.html" title="class in com.gocardless.errors">GoCardlessApiException</a></dt>
 <dd>
 <div class="block">Returns the type of the error.</div>
+</dd>
+<dt><span class="strong"><a href="./com/gocardless/resources/CustomerNotification.html#getType()">getType()</a></span> - Method in class com.gocardless.resources.<a href="./com/gocardless/resources/CustomerNotification.html" title="class in com.gocardless.resources">CustomerNotification</a></dt>
+<dd>
+<div class="block">The type of notification the customer shall receive.</div>
+</dd>
+<dt><span class="strong"><a href="./com/gocardless/resources/Event.CustomerNotification.html#getType()">getType()</a></span> - Method in class com.gocardless.resources.<a href="./com/gocardless/resources/Event.CustomerNotification.html" title="class in com.gocardless.resources">Event.CustomerNotification</a></dt>
+<dd>
+<div class="block">The type of notification the customer shall receive.</div>
 </dd>
 <dt><span class="strong"><a href="./com/gocardless/resources/PayoutItem.html#getType()">getType()</a></span> - Method in class com.gocardless.resources.<a href="./com/gocardless/resources/PayoutItem.html" title="class in com.gocardless.resources">PayoutItem</a></dt>
 <dd>
@@ -1470,6 +1566,10 @@
 </a>
 <h2 class="title">H</h2>
 <dl>
+<dt><span class="strong"><a href="./com/gocardless/services/CustomerNotificationService.html#handle(java.lang.String)">handle(String)</a></span> - Method in class com.gocardless.services.<a href="./com/gocardless/services/CustomerNotificationService.html" title="class in com.gocardless.services">CustomerNotificationService</a></dt>
+<dd>
+<div class="block">&ldquo;Handling&rdquo; a notification means that you have sent the notification yourself (and don&rsquo;t want GoCardless to send it).</div>
+</dd>
 <dt><a href="./com/gocardless/http/HttpClient.html" title="class in com.gocardless.http"><span class="strong">HttpClient</span></a> - Class in <a href="./com/gocardless/http/package-summary.html">com.gocardless.http</a></dt>
 <dd>
 <div class="block">An HTTP client that can execute <code>ApiRequest</code>s.</div>
@@ -2186,6 +2286,18 @@
 <dd>
 <div class="block">Returns the enum constant of this type with the specified name.</div>
 </dd>
+<dt><span class="strong"><a href="./com/gocardless/resources/CustomerNotification.ActionTaken.html#valueOf(java.lang.String)">valueOf(String)</a></span> - Static method in enum com.gocardless.resources.<a href="./com/gocardless/resources/CustomerNotification.ActionTaken.html" title="enum in com.gocardless.resources">CustomerNotification.ActionTaken</a></dt>
+<dd>
+<div class="block">Returns the enum constant of this type with the specified name.</div>
+</dd>
+<dt><span class="strong"><a href="./com/gocardless/resources/CustomerNotification.Type.html#valueOf(java.lang.String)">valueOf(String)</a></span> - Static method in enum com.gocardless.resources.<a href="./com/gocardless/resources/CustomerNotification.Type.html" title="enum in com.gocardless.resources">CustomerNotification.Type</a></dt>
+<dd>
+<div class="block">Returns the enum constant of this type with the specified name.</div>
+</dd>
+<dt><span class="strong"><a href="./com/gocardless/resources/Event.CustomerNotification.Type.html#valueOf(java.lang.String)">valueOf(String)</a></span> - Static method in enum com.gocardless.resources.<a href="./com/gocardless/resources/Event.CustomerNotification.Type.html" title="enum in com.gocardless.resources">Event.CustomerNotification.Type</a></dt>
+<dd>
+<div class="block">Returns the enum constant of this type with the specified name.</div>
+</dd>
 <dt><span class="strong"><a href="./com/gocardless/resources/Event.Details.Origin.html#valueOf(java.lang.String)">valueOf(String)</a></span> - Static method in enum com.gocardless.resources.<a href="./com/gocardless/resources/Event.Details.Origin.html" title="enum in com.gocardless.resources">Event.Details.Origin</a></dt>
 <dd>
 <div class="block">Returns the enum constant of this type with the specified name.</div>
@@ -2328,6 +2440,21 @@ the order they are declared.</div>
 the order they are declared.</div>
 </dd>
 <dt><span class="strong"><a href="./com/gocardless/resources/Creditor.VerificationStatus.html#values()">values()</a></span> - Static method in enum com.gocardless.resources.<a href="./com/gocardless/resources/Creditor.VerificationStatus.html" title="enum in com.gocardless.resources">Creditor.VerificationStatus</a></dt>
+<dd>
+<div class="block">Returns an array containing the constants of this enum type, in
+the order they are declared.</div>
+</dd>
+<dt><span class="strong"><a href="./com/gocardless/resources/CustomerNotification.ActionTaken.html#values()">values()</a></span> - Static method in enum com.gocardless.resources.<a href="./com/gocardless/resources/CustomerNotification.ActionTaken.html" title="enum in com.gocardless.resources">CustomerNotification.ActionTaken</a></dt>
+<dd>
+<div class="block">Returns an array containing the constants of this enum type, in
+the order they are declared.</div>
+</dd>
+<dt><span class="strong"><a href="./com/gocardless/resources/CustomerNotification.Type.html#values()">values()</a></span> - Static method in enum com.gocardless.resources.<a href="./com/gocardless/resources/CustomerNotification.Type.html" title="enum in com.gocardless.resources">CustomerNotification.Type</a></dt>
+<dd>
+<div class="block">Returns an array containing the constants of this enum type, in
+the order they are declared.</div>
+</dd>
+<dt><span class="strong"><a href="./com/gocardless/resources/Event.CustomerNotification.Type.html#values()">values()</a></span> - Static method in enum com.gocardless.resources.<a href="./com/gocardless/resources/Event.CustomerNotification.Type.html" title="enum in com.gocardless.resources">Event.CustomerNotification.Type</a></dt>
 <dd>
 <div class="block">Returns an array containing the constants of this enum type, in
 the order they are declared.</div>
@@ -3462,6 +3589,8 @@ the order they are declared.</div>
 <dt><span class="strong"><a href="./com/gocardless/services/CustomerBankAccountService.CustomerBankAccountListRequest.html#withHeader(java.lang.String,%20java.lang.String)">withHeader(String, String)</a></span> - Method in class com.gocardless.services.<a href="./com/gocardless/services/CustomerBankAccountService.CustomerBankAccountListRequest.html" title="class in com.gocardless.services">CustomerBankAccountService.CustomerBankAccountListRequest</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="strong"><a href="./com/gocardless/services/CustomerBankAccountService.CustomerBankAccountUpdateRequest.html#withHeader(java.lang.String,%20java.lang.String)">withHeader(String, String)</a></span> - Method in class com.gocardless.services.<a href="./com/gocardless/services/CustomerBankAccountService.CustomerBankAccountUpdateRequest.html" title="class in com.gocardless.services">CustomerBankAccountService.CustomerBankAccountUpdateRequest</a></dt>
+<dd>&nbsp;</dd>
+<dt><span class="strong"><a href="./com/gocardless/services/CustomerNotificationService.CustomerNotificationHandleRequest.html#withHeader(java.lang.String,%20java.lang.String)">withHeader(String, String)</a></span> - Method in class com.gocardless.services.<a href="./com/gocardless/services/CustomerNotificationService.CustomerNotificationHandleRequest.html" title="class in com.gocardless.services">CustomerNotificationService.CustomerNotificationHandleRequest</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="strong"><a href="./com/gocardless/services/CustomerService.CustomerCreateRequest.html#withHeader(java.lang.String,%20java.lang.String)">withHeader(String, String)</a></span> - Method in class com.gocardless.services.<a href="./com/gocardless/services/CustomerService.CustomerCreateRequest.html" title="class in com.gocardless.services">CustomerService.CustomerCreateRequest</a></dt>
 <dd>&nbsp;</dd>

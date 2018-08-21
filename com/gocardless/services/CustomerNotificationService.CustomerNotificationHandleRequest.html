@@ -2,14 +2,14 @@
 <!-- NewPage -->
 <html lang="en">
 <head>
-<title>CustomerBankAccount.Links (gocardless-pro 3.7.0 API)</title>
+<title>CustomerNotificationService.CustomerNotificationHandleRequest (gocardless-pro 3.7.0 API)</title>
 <link rel="stylesheet" type="text/css" href="../../../stylesheet.css" title="Style">
 </head>
 <body>
 <script type="text/javascript"><!--
     try {
         if (location.href.indexOf('is-external=true') == -1) {
-            parent.document.title="CustomerBankAccount.Links (gocardless-pro 3.7.0 API)";
+            parent.document.title="CustomerNotificationService.CustomerNotificationHandleRequest (gocardless-pro 3.7.0 API)";
         }
     }
     catch(err) {
@@ -37,12 +37,12 @@
 </div>
 <div class="subNav">
 <ul class="navList">
-<li><a href="../../../com/gocardless/resources/CustomerBankAccount.html" title="class in com.gocardless.resources"><span class="strong">Prev Class</span></a></li>
-<li><a href="../../../com/gocardless/resources/CustomerNotification.html" title="class in com.gocardless.resources"><span class="strong">Next Class</span></a></li>
+<li><a href="../../../com/gocardless/services/CustomerNotificationService.html" title="class in com.gocardless.services"><span class="strong">Prev Class</span></a></li>
+<li><a href="../../../com/gocardless/services/CustomerService.html" title="class in com.gocardless.services"><span class="strong">Next Class</span></a></li>
 </ul>
 <ul class="navList">
-<li><a href="../../../index.html?com/gocardless/resources/CustomerBankAccount.Links.html" target="_top">Frames</a></li>
-<li><a href="CustomerBankAccount.Links.html" target="_top">No Frames</a></li>
+<li><a href="../../../index.html?com/gocardless/services/CustomerNotificationService.CustomerNotificationHandleRequest.html" target="_top">Frames</a></li>
+<li><a href="CustomerNotificationService.CustomerNotificationHandleRequest.html" target="_top">No Frames</a></li>
 </ul>
 <ul class="navList" id="allclasses_navbar_top">
 <li><a href="../../../allclasses-noframe.html">All Classes</a></li>
@@ -80,15 +80,20 @@
 <!-- ========= END OF TOP NAVBAR ========= -->
 <!-- ======== START OF CLASS DATA ======== -->
 <div class="header">
-<div class="subTitle">com.gocardless.resources</div>
-<h2 title="Class CustomerBankAccount.Links" class="title">Class CustomerBankAccount.Links</h2>
+<div class="subTitle">com.gocardless.services</div>
+<h2 title="Class CustomerNotificationService.CustomerNotificationHandleRequest" class="title">Class CustomerNotificationService.CustomerNotificationHandleRequest</h2>
 </div>
 <div class="contentContainer">
 <ul class="inheritance">
 <li>java.lang.Object</li>
 <li>
 <ul class="inheritance">
-<li>com.gocardless.resources.CustomerBankAccount.Links</li>
+<li><a href="../../../com/gocardless/http/PostRequest.html" title="class in com.gocardless.http">com.gocardless.http.PostRequest</a>&lt;<a href="../../../com/gocardless/resources/CustomerNotification.html" title="class in com.gocardless.resources">CustomerNotification</a>&gt;</li>
+<li>
+<ul class="inheritance">
+<li>com.gocardless.services.CustomerNotificationService.CustomerNotificationHandleRequest</li>
+</ul>
+</li>
 </ul>
 </li>
 </ul>
@@ -97,12 +102,13 @@
 <li class="blockList">
 <dl>
 <dt>Enclosing class:</dt>
-<dd><a href="../../../com/gocardless/resources/CustomerBankAccount.html" title="class in com.gocardless.resources">CustomerBankAccount</a></dd>
+<dd><a href="../../../com/gocardless/services/CustomerNotificationService.html" title="class in com.gocardless.services">CustomerNotificationService</a></dd>
 </dl>
 <hr>
 <br>
-<pre>public static class <span class="strong">CustomerBankAccount.Links</span>
-extends java.lang.Object</pre>
+<pre>public static final class <span class="strong">CustomerNotificationService.CustomerNotificationHandleRequest</span>
+extends <a href="../../../com/gocardless/http/PostRequest.html" title="class in com.gocardless.http">PostRequest</a>&lt;<a href="../../../com/gocardless/resources/CustomerNotification.html" title="class in com.gocardless.resources">CustomerNotification</a>&gt;</pre>
+<div class="block"><p>Request class for <a href="../../../com/gocardless/services/CustomerNotificationService.html#handle(java.lang.String)"><code>CustomerNotificationService.handle(java.lang.String)</code></a>.</p><p>&ldquo;Handling&rdquo; a notification means that you have sent the notification yourself (and don&rsquo;t want GoCardless to send it). If the notification has already been actioned, or the deadline to notify has passed, this endpoint will return an <code>already_actioned</code> error and you should not take further action.</p></div>
 </li>
 </ul>
 </div>
@@ -122,12 +128,18 @@ extends java.lang.Object</pre>
 <th class="colLast" scope="col">Method and Description</th>
 </tr>
 <tr class="altColor">
-<td class="colFirst"><code>java.lang.String</code></td>
-<td class="colLast"><code><strong><a href="../../../com/gocardless/resources/CustomerBankAccount.Links.html#getCustomer()">getCustomer</a></strong>()</code>
-<div class="block">ID of the <a href="#core-endpoints-customers">customer</a> that owns this bank account.</div>
-</td>
+<td class="colFirst"><code><a href="../../../com/gocardless/services/CustomerNotificationService.CustomerNotificationHandleRequest.html" title="class in com.gocardless.services">CustomerNotificationService.CustomerNotificationHandleRequest</a></code></td>
+<td class="colLast"><code><strong><a href="../../../com/gocardless/services/CustomerNotificationService.CustomerNotificationHandleRequest.html#withHeader(java.lang.String,%20java.lang.String)">withHeader</a></strong>(java.lang.String&nbsp;headerName,
+          java.lang.String&nbsp;headerValue)</code>&nbsp;</td>
 </tr>
 </table>
+<ul class="blockList">
+<li class="blockList"><a name="methods_inherited_from_class_com.gocardless.http.PostRequest">
+<!--   -->
+</a>
+<h3>Methods inherited from class&nbsp;com.gocardless.http.<a href="../../../com/gocardless/http/PostRequest.html" title="class in com.gocardless.http">PostRequest</a></h3>
+<code><a href="../../../com/gocardless/http/PostRequest.html#execute()">execute</a>, <a href="../../../com/gocardless/http/PostRequest.html#executeWrapped()">executeWrapped</a></code></li>
+</ul>
 <ul class="blockList">
 <li class="blockList"><a name="methods_inherited_from_class_java.lang.Object">
 <!--   -->
@@ -149,14 +161,14 @@ extends java.lang.Object</pre>
 <!--   -->
 </a>
 <h3>Method Detail</h3>
-<a name="getCustomer()">
+<a name="withHeader(java.lang.String, java.lang.String)">
 <!--   -->
 </a>
 <ul class="blockListLast">
 <li class="blockList">
-<h4>getCustomer</h4>
-<pre>public&nbsp;java.lang.String&nbsp;getCustomer()</pre>
-<div class="block"><p>ID of the <a href="#core-endpoints-customers">customer</a> that owns this bank account.</p></div>
+<h4>withHeader</h4>
+<pre>public&nbsp;<a href="../../../com/gocardless/services/CustomerNotificationService.CustomerNotificationHandleRequest.html" title="class in com.gocardless.services">CustomerNotificationService.CustomerNotificationHandleRequest</a>&nbsp;withHeader(java.lang.String&nbsp;headerName,
+                                                                       java.lang.String&nbsp;headerValue)</pre>
 </li>
 </ul>
 </li>
@@ -188,12 +200,12 @@ hljs.initHighlightingOnLoad();
 </div>
 <div class="subNav">
 <ul class="navList">
-<li><a href="../../../com/gocardless/resources/CustomerBankAccount.html" title="class in com.gocardless.resources"><span class="strong">Prev Class</span></a></li>
-<li><a href="../../../com/gocardless/resources/CustomerNotification.html" title="class in com.gocardless.resources"><span class="strong">Next Class</span></a></li>
+<li><a href="../../../com/gocardless/services/CustomerNotificationService.html" title="class in com.gocardless.services"><span class="strong">Prev Class</span></a></li>
+<li><a href="../../../com/gocardless/services/CustomerService.html" title="class in com.gocardless.services"><span class="strong">Next Class</span></a></li>
 </ul>
 <ul class="navList">
-<li><a href="../../../index.html?com/gocardless/resources/CustomerBankAccount.Links.html" target="_top">Frames</a></li>
-<li><a href="CustomerBankAccount.Links.html" target="_top">No Frames</a></li>
+<li><a href="../../../index.html?com/gocardless/services/CustomerNotificationService.CustomerNotificationHandleRequest.html" target="_top">Frames</a></li>
+<li><a href="CustomerNotificationService.CustomerNotificationHandleRequest.html" target="_top">No Frames</a></li>
 </ul>
 <ul class="navList" id="allclasses_navbar_bottom">
 <li><a href="../../../allclasses-noframe.html">All Classes</a></li>

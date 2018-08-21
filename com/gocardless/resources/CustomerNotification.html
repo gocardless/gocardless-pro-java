@@ -2,14 +2,14 @@
 <!-- NewPage -->
 <html lang="en">
 <head>
-<title>Event.Details (gocardless-pro 3.7.0 API)</title>
+<title>CustomerNotification (gocardless-pro 3.7.0 API)</title>
 <link rel="stylesheet" type="text/css" href="../../../stylesheet.css" title="Style">
 </head>
 <body>
 <script type="text/javascript"><!--
     try {
         if (location.href.indexOf('is-external=true') == -1) {
-            parent.document.title="Event.Details (gocardless-pro 3.7.0 API)";
+            parent.document.title="CustomerNotification (gocardless-pro 3.7.0 API)";
         }
     }
     catch(err) {
@@ -37,12 +37,12 @@
 </div>
 <div class="subNav">
 <ul class="navList">
-<li><a href="../../../com/gocardless/resources/Event.CustomerNotification.Type.html" title="enum in com.gocardless.resources"><span class="strong">Prev Class</span></a></li>
-<li><a href="../../../com/gocardless/resources/Event.Details.Origin.html" title="enum in com.gocardless.resources"><span class="strong">Next Class</span></a></li>
+<li><a href="../../../com/gocardless/resources/CustomerBankAccount.Links.html" title="class in com.gocardless.resources"><span class="strong">Prev Class</span></a></li>
+<li><a href="../../../com/gocardless/resources/CustomerNotification.ActionTaken.html" title="enum in com.gocardless.resources"><span class="strong">Next Class</span></a></li>
 </ul>
 <ul class="navList">
-<li><a href="../../../index.html?com/gocardless/resources/Event.Details.html" target="_top">Frames</a></li>
-<li><a href="Event.Details.html" target="_top">No Frames</a></li>
+<li><a href="../../../index.html?com/gocardless/resources/CustomerNotification.html" target="_top">Frames</a></li>
+<li><a href="CustomerNotification.html" target="_top">No Frames</a></li>
 </ul>
 <ul class="navList" id="allclasses_navbar_top">
 <li><a href="../../../allclasses-noframe.html">All Classes</a></li>
@@ -81,28 +81,25 @@
 <!-- ======== START OF CLASS DATA ======== -->
 <div class="header">
 <div class="subTitle">com.gocardless.resources</div>
-<h2 title="Class Event.Details" class="title">Class Event.Details</h2>
+<h2 title="Class CustomerNotification" class="title">Class CustomerNotification</h2>
 </div>
 <div class="contentContainer">
 <ul class="inheritance">
 <li>java.lang.Object</li>
 <li>
 <ul class="inheritance">
-<li>com.gocardless.resources.Event.Details</li>
+<li>com.gocardless.resources.CustomerNotification</li>
 </ul>
 </li>
 </ul>
 <div class="description">
 <ul class="blockList">
 <li class="blockList">
-<dl>
-<dt>Enclosing class:</dt>
-<dd><a href="../../../com/gocardless/resources/Event.html" title="class in com.gocardless.resources">Event</a></dd>
-</dl>
 <hr>
 <br>
-<pre>public static class <span class="strong">Event.Details</span>
+<pre>public class <span class="strong">CustomerNotification</span>
 extends java.lang.Object</pre>
+<div class="block"><p>Represents a customer notification resource returned from the API.</p><p>Customer Notifications represent the notification which is due to be sent to a customer after an event has happened. The event, the resource and the customer to be notified are all identified in the <code>links</code> property.</p><p>Note that these are ephemeral records - once the notification has been actioned in some way, it is no longer visible using this API.</p></div>
 </li>
 </ul>
 </div>
@@ -123,11 +120,15 @@ extends java.lang.Object</pre>
 </tr>
 <tr class="altColor">
 <td class="colFirst"><code>static class&nbsp;</code></td>
-<td class="colLast"><code><strong><a href="../../../com/gocardless/resources/Event.Details.Origin.html" title="enum in com.gocardless.resources">Event.Details.Origin</a></strong></code>&nbsp;</td>
+<td class="colLast"><code><strong><a href="../../../com/gocardless/resources/CustomerNotification.ActionTaken.html" title="enum in com.gocardless.resources">CustomerNotification.ActionTaken</a></strong></code>&nbsp;</td>
 </tr>
 <tr class="rowColor">
 <td class="colFirst"><code>static class&nbsp;</code></td>
-<td class="colLast"><code><strong><a href="../../../com/gocardless/resources/Event.Details.Scheme.html" title="enum in com.gocardless.resources">Event.Details.Scheme</a></strong></code>&nbsp;</td>
+<td class="colLast"><code><strong><a href="../../../com/gocardless/resources/CustomerNotification.Links.html" title="class in com.gocardless.resources">CustomerNotification.Links</a></strong></code>&nbsp;</td>
+</tr>
+<tr class="altColor">
+<td class="colFirst"><code>static class&nbsp;</code></td>
+<td class="colLast"><code><strong><a href="../../../com/gocardless/resources/CustomerNotification.Type.html" title="enum in com.gocardless.resources">CustomerNotification.Type</a></strong></code>&nbsp;</td>
 </tr>
 </table>
 </li>
@@ -145,33 +146,37 @@ extends java.lang.Object</pre>
 <th class="colLast" scope="col">Method and Description</th>
 </tr>
 <tr class="altColor">
-<td class="colFirst"><code>java.lang.String</code></td>
-<td class="colLast"><code><strong><a href="../../../com/gocardless/resources/Event.Details.html#getCause()">getCause</a></strong>()</code>
-<div class="block">What triggered the event.</div>
+<td class="colFirst"><code><a href="../../../com/gocardless/resources/CustomerNotification.ActionTaken.html" title="enum in com.gocardless.resources">CustomerNotification.ActionTaken</a></code></td>
+<td class="colLast"><code><strong><a href="../../../com/gocardless/resources/CustomerNotification.html#getActionTaken()">getActionTaken</a></strong>()</code>
+<div class="block">The action that was taken on the notification:   <code>handled</code> means the integrator sent the notification themselves </div>
 </td>
 </tr>
 <tr class="rowColor">
 <td class="colFirst"><code>java.lang.String</code></td>
-<td class="colLast"><code><strong><a href="../../../com/gocardless/resources/Event.Details.html#getDescription()">getDescription</a></strong>()</code>
-<div class="block">Human readable description of the cause.</div>
+<td class="colLast"><code><strong><a href="../../../com/gocardless/resources/CustomerNotification.html#getActionTakenAt()">getActionTakenAt</a></strong>()</code>
+<div class="block">Fixed <a href="#api-usage-time-zones--dates">timestamp</a>, recording when this action was taken.</div>
 </td>
 </tr>
 <tr class="altColor">
-<td class="colFirst"><code><a href="../../../com/gocardless/resources/Event.Details.Origin.html" title="enum in com.gocardless.resources">Event.Details.Origin</a></code></td>
-<td class="colLast"><code><strong><a href="../../../com/gocardless/resources/Event.Details.html#getOrigin()">getOrigin</a></strong>()</code>
-<div class="block">Who initiated the event.</div>
+<td class="colFirst"><code>java.lang.String</code></td>
+<td class="colLast"><code><strong><a href="../../../com/gocardless/resources/CustomerNotification.html#getActionTakenBy()">getActionTakenBy</a></strong>()</code>
+<div class="block">A string identifying the integrator who was able to handle this notification.</div>
 </td>
 </tr>
 <tr class="rowColor">
 <td class="colFirst"><code>java.lang.String</code></td>
-<td class="colLast"><code><strong><a href="../../../com/gocardless/resources/Event.Details.html#getReasonCode()">getReasonCode</a></strong>()</code>
-<div class="block">Set when a <code>bank</code> is the origin of the event.</div>
+<td class="colLast"><code><strong><a href="../../../com/gocardless/resources/CustomerNotification.html#getId()">getId</a></strong>()</code>
+<div class="block">The id of the notification.</div>
 </td>
 </tr>
 <tr class="altColor">
-<td class="colFirst"><code><a href="../../../com/gocardless/resources/Event.Details.Scheme.html" title="enum in com.gocardless.resources">Event.Details.Scheme</a></code></td>
-<td class="colLast"><code><strong><a href="../../../com/gocardless/resources/Event.Details.html#getScheme()">getScheme</a></strong>()</code>
-<div class="block">A Direct Debit scheme.</div>
+<td class="colFirst"><code><a href="../../../com/gocardless/resources/CustomerNotification.Links.html" title="class in com.gocardless.resources">CustomerNotification.Links</a></code></td>
+<td class="colLast"><code><strong><a href="../../../com/gocardless/resources/CustomerNotification.html#getLinks()">getLinks</a></strong>()</code>&nbsp;</td>
+</tr>
+<tr class="rowColor">
+<td class="colFirst"><code><a href="../../../com/gocardless/resources/CustomerNotification.Type.html" title="enum in com.gocardless.resources">CustomerNotification.Type</a></code></td>
+<td class="colLast"><code><strong><a href="../../../com/gocardless/resources/CustomerNotification.html#getType()">getType</a></strong>()</code>
+<div class="block">The type of notification the customer shall receive.</div>
 </td>
 </tr>
 </table>
@@ -196,54 +201,63 @@ extends java.lang.Object</pre>
 <!--   -->
 </a>
 <h3>Method Detail</h3>
-<a name="getCause()">
+<a name="getActionTaken()">
 <!--   -->
 </a>
 <ul class="blockList">
 <li class="blockList">
-<h4>getCause</h4>
-<pre>public&nbsp;java.lang.String&nbsp;getCause()</pre>
-<div class="block"><p>What triggered the event. <em>Note:</em> <code>cause</code> is our simplified and predictable key indicating what triggered the event.</p></div>
+<h4>getActionTaken</h4>
+<pre>public&nbsp;<a href="../../../com/gocardless/resources/CustomerNotification.ActionTaken.html" title="enum in com.gocardless.resources">CustomerNotification.ActionTaken</a>&nbsp;getActionTaken()</pre>
+<div class="block"><p>The action that was taken on the notification: <ul>  <li><code>handled</code> means the integrator sent the notification themselves</li> </ul></p></div>
 </li>
 </ul>
-<a name="getDescription()">
+<a name="getActionTakenAt()">
 <!--   -->
 </a>
 <ul class="blockList">
 <li class="blockList">
-<h4>getDescription</h4>
-<pre>public&nbsp;java.lang.String&nbsp;getDescription()</pre>
-<div class="block"><p>Human readable description of the cause. <em>Note:</em> Changes to event descriptions are not considered breaking.</p></div>
+<h4>getActionTakenAt</h4>
+<pre>public&nbsp;java.lang.String&nbsp;getActionTakenAt()</pre>
+<div class="block"><p>Fixed <a href="#api-usage-time-zones--dates">timestamp</a>, recording when this action was taken.</p></div>
 </li>
 </ul>
-<a name="getOrigin()">
+<a name="getActionTakenBy()">
 <!--   -->
 </a>
 <ul class="blockList">
 <li class="blockList">
-<h4>getOrigin</h4>
-<pre>public&nbsp;<a href="../../../com/gocardless/resources/Event.Details.Origin.html" title="enum in com.gocardless.resources">Event.Details.Origin</a>&nbsp;getOrigin()</pre>
-<div class="block"><p>Who initiated the event. One of: <ul> <li><code>bank</code>: this event was triggered by a report from the banks</li> <li><code>gocardless</code>: this event was performed by GoCardless automatically</li> <li><code>api</code>: this event was triggered by an API endpoint</li> <li><code>customer</code>: this event was triggered by a Customer</li> </ul></p></div>
+<h4>getActionTakenBy</h4>
+<pre>public&nbsp;java.lang.String&nbsp;getActionTakenBy()</pre>
+<div class="block"><p>A string identifying the integrator who was able to handle this notification.</p></div>
 </li>
 </ul>
-<a name="getReasonCode()">
+<a name="getId()">
 <!--   -->
 </a>
 <ul class="blockList">
 <li class="blockList">
-<h4>getReasonCode</h4>
-<pre>public&nbsp;java.lang.String&nbsp;getReasonCode()</pre>
-<div class="block"><p>Set when a <code>bank</code> is the origin of the event. This is the reason code received in the report from the customer&rsquo;s bank. See the <a href="https://gocardless.com/direct-debit/receiving-messages">GoCardless Direct Debit guide</a> for information on the meanings of different reason codes. <em>Note:</em> <code>reason_code</code> is payment scheme-specific and can be inconsistent between banks.</p></div>
+<h4>getId</h4>
+<pre>public&nbsp;java.lang.String&nbsp;getId()</pre>
+<div class="block"><p>The id of the notification.</p></div>
 </li>
 </ul>
-<a name="getScheme()">
+<a name="getLinks()">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>getLinks</h4>
+<pre>public&nbsp;<a href="../../../com/gocardless/resources/CustomerNotification.Links.html" title="class in com.gocardless.resources">CustomerNotification.Links</a>&nbsp;getLinks()</pre>
+</li>
+</ul>
+<a name="getType()">
 <!--   -->
 </a>
 <ul class="blockListLast">
 <li class="blockList">
-<h4>getScheme</h4>
-<pre>public&nbsp;<a href="../../../com/gocardless/resources/Event.Details.Scheme.html" title="enum in com.gocardless.resources">Event.Details.Scheme</a>&nbsp;getScheme()</pre>
-<div class="block"><p>A Direct Debit scheme. Set when a bank is the origin of the event.</p></div>
+<h4>getType</h4>
+<pre>public&nbsp;<a href="../../../com/gocardless/resources/CustomerNotification.Type.html" title="enum in com.gocardless.resources">CustomerNotification.Type</a>&nbsp;getType()</pre>
+<div class="block"><p>The type of notification the customer shall receive.</p></div>
 </li>
 </ul>
 </li>
@@ -275,12 +289,12 @@ hljs.initHighlightingOnLoad();
 </div>
 <div class="subNav">
 <ul class="navList">
-<li><a href="../../../com/gocardless/resources/Event.CustomerNotification.Type.html" title="enum in com.gocardless.resources"><span class="strong">Prev Class</span></a></li>
-<li><a href="../../../com/gocardless/resources/Event.Details.Origin.html" title="enum in com.gocardless.resources"><span class="strong">Next Class</span></a></li>
+<li><a href="../../../com/gocardless/resources/CustomerBankAccount.Links.html" title="class in com.gocardless.resources"><span class="strong">Prev Class</span></a></li>
+<li><a href="../../../com/gocardless/resources/CustomerNotification.ActionTaken.html" title="enum in com.gocardless.resources"><span class="strong">Next Class</span></a></li>
 </ul>
 <ul class="navList">
-<li><a href="../../../index.html?com/gocardless/resources/Event.Details.html" target="_top">Frames</a></li>
-<li><a href="Event.Details.html" target="_top">No Frames</a></li>
+<li><a href="../../../index.html?com/gocardless/resources/CustomerNotification.html" target="_top">Frames</a></li>
+<li><a href="CustomerNotification.html" target="_top">No Frames</a></li>
 </ul>
 <ul class="navList" id="allclasses_navbar_bottom">
 <li><a href="../../../allclasses-noframe.html">All Classes</a></li>
