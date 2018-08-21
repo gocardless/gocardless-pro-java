@@ -76,6 +76,11 @@ public class MandateImportService {
      * Submits the mandate import, which allows it to be processed by a member of the
      * GoCardless team. Once the import has been submitted, it can no longer have entries
      * added to it.
+     * 
+     * In our sandbox environment, to aid development, we automatically process mandate
+     * imports approximately 10 seconds after they are submitted. This will allow you to
+     * test both the "submitted" response and wait for the webhook to confirm the
+     * processing has begun.
      */
     public MandateImportSubmitRequest submit(String identity) {
         return new MandateImportSubmitRequest(httpClient, identity);
@@ -84,8 +89,8 @@ public class MandateImportService {
     /**
      * Cancels the mandate import, which aborts the import process and stops the mandates
      * being set up in GoCardless. Once the import has been cancelled, it can no longer have
-     * entries added to it. Mandate imports which have already been submitted cannot be
-     * cancelled.
+     * entries added to it. Mandate imports which have already been submitted or processed
+     * cannot be cancelled.
      */
     public MandateImportCancelRequest cancel(String identity) {
         return new MandateImportCancelRequest(httpClient, identity);
@@ -224,6 +229,11 @@ public class MandateImportService {
      * Submits the mandate import, which allows it to be processed by a member of the
      * GoCardless team. Once the import has been submitted, it can no longer have entries
      * added to it.
+     * 
+     * In our sandbox environment, to aid development, we automatically process mandate
+     * imports approximately 10 seconds after they are submitted. This will allow you to
+     * test both the "submitted" response and wait for the webhook to confirm the
+     * processing has begun.
      */
     public static final class MandateImportSubmitRequest extends PostRequest<MandateImport> {
         @PathParam
@@ -277,8 +287,8 @@ public class MandateImportService {
      *
      * Cancels the mandate import, which aborts the import process and stops the mandates
      * being set up in GoCardless. Once the import has been cancelled, it can no longer have
-     * entries added to it. Mandate imports which have already been submitted cannot be
-     * cancelled.
+     * entries added to it. Mandate imports which have already been submitted or processed
+     * cannot be cancelled.
      */
     public static final class MandateImportCancelRequest extends PostRequest<MandateImport> {
         @PathParam
