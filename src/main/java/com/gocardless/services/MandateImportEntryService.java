@@ -281,6 +281,18 @@ public class MandateImportEntryService {
         }
 
         /**
+         * [ISO 3166-1](http://en.wikipedia.org/wiki/ISO_3166-1_alpha-2#Officially_assigned_code_elements)
+         * alpha-2 code.
+         */
+        public MandateImportEntryCreateRequest withCustomerCountryCode(String countryCode) {
+            if (customer == null) {
+                customer = new Customer();
+            }
+            customer.withCountryCode(countryCode);
+            return this;
+        }
+
+        /**
          * For Danish customers only. The civic/company number (CPR or CVR) of the customer. Must be supplied
          * if the customer's bank account is denominated in Danish krone (DKK).
          */
@@ -540,6 +552,7 @@ public class MandateImportEntryService {
             private String addressLine3;
             private String city;
             private String companyName;
+            private String countryCode;
             private String danishIdentityNumber;
             private String email;
             private String familyName;
@@ -587,6 +600,15 @@ public class MandateImportEntryService {
              */
             public Customer withCompanyName(String companyName) {
                 this.companyName = companyName;
+                return this;
+            }
+
+            /**
+             * [ISO 3166-1](http://en.wikipedia.org/wiki/ISO_3166-1_alpha-2#Officially_assigned_code_elements)
+             * alpha-2 code.
+             */
+            public Customer withCountryCode(String countryCode) {
+                this.countryCode = countryCode;
                 return this;
             }
 
