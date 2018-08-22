@@ -97,7 +97,8 @@ public class Customer {
     }
 
     /**
-     * Customer's email address.
+     * Customer's email address. Required in most cases, as this allows GoCardless to send notifications
+     * to this customer.
      */
     public String getEmail() {
         return email;
