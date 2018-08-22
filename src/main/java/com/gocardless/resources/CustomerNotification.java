@@ -12,6 +12,10 @@ import com.google.gson.annotations.SerializedName;
  * Note that these are ephemeral records - once the notification has been actioned in some
  * way, it is no longer visible using this API.
  * 
+ * <p class="restricted-notice"><strong>Restricted</strong>: This API is currently
+ * only available for approved integrators - please <a href="mailto:help@gocardless.com">get
+ * in touch</a> if you would like to use this API.</p>
+ * 
  */
 public class CustomerNotification {
     private CustomerNotification() {
@@ -26,10 +30,8 @@ public class CustomerNotification {
     private Type type;
 
     /**
-     * The action that was taken on the notification:
-     * <ul>
-     *   <li>`handled` means the integrator sent the notification themselves</li>
-     * </ul>
+     * The action that was taken on the notification. Currently this can only be `handled`,
+     * which means the integrator sent the notification themselves.
      * 
      */
     public ActionTaken getActionTaken() {
