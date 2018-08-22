@@ -99,7 +99,10 @@
 <br>
 <pre>public class <span class="strong">CustomerNotification</span>
 extends java.lang.Object</pre>
-<div class="block"><p>Represents a customer notification resource returned from the API.</p><p>Customer Notifications represent the notification which is due to be sent to a customer after an event has happened. The event, the resource and the customer to be notified are all identified in the <code>links</code> property.</p><p>Note that these are ephemeral records - once the notification has been actioned in some way, it is no longer visible using this API.</p></div>
+<div class="block"><p>Represents a customer notification resource returned from the API.</p><p>Customer Notifications represent the notification which is due to be sent to a customer after an event has happened. The event, the resource and the customer to be notified are all identified in the <code>links</code> property.</p><p>Note that these are ephemeral records - once the notification has been actioned in some way, it is no longer visible using this API.</p>
+<p class="restricted-notice"><strong>Restricted</strong>: This API is currently
+only available for approved integrators - please <a href="mailto:help@gocardless.com">get
+in touch</a> if you would like to use this API.</p></div>
 </li>
 </ul>
 </div>
@@ -148,7 +151,7 @@ extends java.lang.Object</pre>
 <tr class="altColor">
 <td class="colFirst"><code><a href="../../../com/gocardless/resources/CustomerNotification.ActionTaken.html" title="enum in com.gocardless.resources">CustomerNotification.ActionTaken</a></code></td>
 <td class="colLast"><code><strong><a href="../../../com/gocardless/resources/CustomerNotification.html#getActionTaken()">getActionTaken</a></strong>()</code>
-<div class="block">The action that was taken on the notification:   <code>handled</code> means the integrator sent the notification themselves </div>
+<div class="block">The action that was taken on the notification.</div>
 </td>
 </tr>
 <tr class="rowColor">
@@ -208,7 +211,7 @@ extends java.lang.Object</pre>
 <li class="blockList">
 <h4>getActionTaken</h4>
 <pre>public&nbsp;<a href="../../../com/gocardless/resources/CustomerNotification.ActionTaken.html" title="enum in com.gocardless.resources">CustomerNotification.ActionTaken</a>&nbsp;getActionTaken()</pre>
-<div class="block"><p>The action that was taken on the notification: <ul>  <li><code>handled</code> means the integrator sent the notification themselves</li> </ul></p></div>
+<div class="block"><p>The action that was taken on the notification. Currently this can only be <code>handled</code>, which means the integrator sent the notification themselves.</p></div>
 </li>
 </ul>
 <a name="getActionTakenAt()">
