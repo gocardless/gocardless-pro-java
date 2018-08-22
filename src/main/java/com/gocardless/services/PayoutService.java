@@ -145,7 +145,7 @@ public class PayoutService {
 
         /**
          * [ISO 4217](http://en.wikipedia.org/wiki/ISO_4217#Active_codes) currency code. Currently "AUD",
-         * "DKK", GBP", "EUR", and "SEK" are supported.
+         * "DKK", "EUR", "GBP", "NZD" and "SEK" are supported.
          */
         public PayoutListRequest<S> withCurrency(Currency currency) {
             this.currency = currency;
@@ -245,7 +245,8 @@ public class PayoutService {
             AUD, @SerializedName("DKK")
             DKK, @SerializedName("EUR")
             EUR, @SerializedName("GBP")
-            GBP, @SerializedName("SEK")
+            GBP, @SerializedName("NZD")
+            NZD, @SerializedName("SEK")
             SEK;
             @Override
             public String toString() {

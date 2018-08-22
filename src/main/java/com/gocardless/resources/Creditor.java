@@ -349,7 +349,8 @@ public class Creditor {
             AUD, @SerializedName("DKK")
             DKK, @SerializedName("EUR")
             EUR, @SerializedName("GBP")
-            GBP, @SerializedName("SEK")
+            GBP, @SerializedName("NZD")
+            NZD, @SerializedName("SEK")
             SEK,
         }
 
@@ -357,7 +358,8 @@ public class Creditor {
             @SerializedName("autogiro")
             AUTOGIRO, @SerializedName("bacs")
             BACS, @SerializedName("becs")
-            BECS, @SerializedName("betalingsservice")
+            BECS, @SerializedName("becs_nz")
+            BECS_NZ, @SerializedName("betalingsservice")
             BETALINGSSERVICE, @SerializedName("sepa")
             SEPA,
         }

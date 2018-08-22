@@ -46,7 +46,8 @@ public class BankDetailsLookup {
         @SerializedName("autogiro")
         AUTOGIRO, @SerializedName("bacs")
         BACS, @SerializedName("becs")
-        BECS, @SerializedName("betalingsservice")
+        BECS, @SerializedName("becs_nz")
+        BECS_NZ, @SerializedName("betalingsservice")
         BETALINGSSERVICE, @SerializedName("sepa_core")
         SEPA_CORE,
     }
