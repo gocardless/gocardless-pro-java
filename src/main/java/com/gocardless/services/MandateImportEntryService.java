@@ -294,7 +294,8 @@ public class MandateImportEntryService {
         }
 
         /**
-         * Customer's email address.
+         * Customer's email address. Required in most cases, as this allows GoCardless to send notifications
+         * to this customer.
          */
         public MandateImportEntryCreateRequest withCustomerEmail(String email) {
             if (customer == null) {
@@ -599,7 +600,8 @@ public class MandateImportEntryService {
             }
 
             /**
-             * Customer's email address.
+             * Customer's email address. Required in most cases, as this allows GoCardless to send notifications
+             * to this customer.
              */
             public Customer withEmail(String email) {
                 this.email = email;
