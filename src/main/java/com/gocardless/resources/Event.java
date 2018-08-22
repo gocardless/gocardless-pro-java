@@ -210,7 +210,8 @@ public class Event {
             @SerializedName("autogiro")
             AUTOGIRO, @SerializedName("bacs")
             BACS, @SerializedName("becs")
-            BECS, @SerializedName("betalingsservice")
+            BECS, @SerializedName("becs_nz")
+            BECS_NZ, @SerializedName("betalingsservice")
             BETALINGSSERVICE, @SerializedName("sepa_core")
             SEPA_CORE, @SerializedName("sepa_cor1")
             SEPA_COR1,
