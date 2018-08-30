@@ -489,6 +489,18 @@ public class CreditorService {
 
         /**
          * ID of the [bank account](#core-endpoints-creditor-bank-accounts) which is set up to receive
+         * payouts in AUD.
+         */
+        public CreditorUpdateRequest withLinksDefaultAudPayoutAccount(String defaultAudPayoutAccount) {
+            if (links == null) {
+                links = new Links();
+            }
+            links.withDefaultAudPayoutAccount(defaultAudPayoutAccount);
+            return this;
+        }
+
+        /**
+         * ID of the [bank account](#core-endpoints-creditor-bank-accounts) which is set up to receive
          * payouts in DKK.
          */
         public CreditorUpdateRequest withLinksDefaultDkkPayoutAccount(String defaultDkkPayoutAccount) {
@@ -597,10 +609,20 @@ public class CreditorService {
         }
 
         public static class Links {
+            private String defaultAudPayoutAccount;
             private String defaultDkkPayoutAccount;
             private String defaultEurPayoutAccount;
             private String defaultGbpPayoutAccount;
             private String defaultSekPayoutAccount;
+
+            /**
+             * ID of the [bank account](#core-endpoints-creditor-bank-accounts) which is set up to receive
+             * payouts in AUD.
+             */
+            public Links withDefaultAudPayoutAccount(String defaultAudPayoutAccount) {
+                this.defaultAudPayoutAccount = defaultAudPayoutAccount;
+                return this;
+            }
 
             /**
              * ID of the [bank account](#core-endpoints-creditor-bank-accounts) which is set up to receive
