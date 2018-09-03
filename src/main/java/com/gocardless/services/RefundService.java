@@ -121,7 +121,7 @@ public class RefundService {
          * <em>private beta</em> ID of the [mandate](#core-endpoints-mandates) against which the refund is
          * being made.
          */
-        public RefundCreateRequest withLinksMandate(Map<String, String> mandate) {
+        public RefundCreateRequest withLinksMandate(String mandate) {
             if (links == null) {
                 links = new Links();
             }
@@ -228,14 +228,14 @@ public class RefundService {
         }
 
         public static class Links {
-            private Map<String, String> mandate;
+            private String mandate;
             private String payment;
 
             /**
              * <em>private beta</em> ID of the [mandate](#core-endpoints-mandates) against which the refund is
              * being made.
              */
-            public Links withMandate(Map<String, String> mandate) {
+            public Links withMandate(String mandate) {
                 this.mandate = mandate;
                 return this;
             }
