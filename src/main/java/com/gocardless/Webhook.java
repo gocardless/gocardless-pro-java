@@ -7,6 +7,7 @@ import com.gocardless.errors.InvalidSignatureException;
 import com.gocardless.http.WebhookParser;
 import com.gocardless.resources.Event;
 
+import org.apache.commons.codec.digest.HmacAlgorithms;
 import org.apache.commons.codec.digest.HmacUtils;
 
 /**
@@ -53,7 +54,9 @@ public class Webhook {
      */
     public static boolean isValidSignature(String requestBody, String signatureHeader,
             String webhookEndpointSecret) {
-        String computedSignature = HmacUtils.hmacSha256Hex(webhookEndpointSecret, requestBody);
+        String computedSignature =
+                new HmacUtils(HmacAlgorithms.HMAC_SHA_256, webhookEndpointSecret)
+                        .hmacHex(requestBody);
         return MessageDigest.isEqual(signatureHeader.getBytes(), computedSignature.getBytes());
     }
 }
