@@ -74,8 +74,8 @@ signing {
 gradle.taskGraph.whenReady { taskGraph ->
     if (taskGraph.allTasks.any { it instanceof Sign }) {
         def keyId
-        def password
-               // Gradle is running as a daemon - prompt user to enter passwords via popup UI (#770)
+        def keyPw
+        // Gradle is running as a daemon - prompt user to enter passwords via popup UI (#770)
         new SwingBuilder().edt {
             dialog(modal: true, title: 'Enter credentials', alwaysOnTop: true, resizable: true,
                     locationRelativeTo: null, pack: true, show: true
@@ -94,7 +94,7 @@ gradle.taskGraph.whenReady { taskGraph ->
             }
         }
         allprojects { ext."signing.keyId" = keyId }
-        allprojects { ext."signing.password" = password }
+        allprojects { ext."signing.password" = keyPw }
     }
 }
 
