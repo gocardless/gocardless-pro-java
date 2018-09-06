@@ -537,6 +537,18 @@ public class CreditorService {
 
         /**
          * ID of the [bank account](#core-endpoints-creditor-bank-accounts) which is set up to receive
+         * payouts in NZD.
+         */
+        public CreditorUpdateRequest withLinksDefaultNzdPayoutAccount(String defaultNzdPayoutAccount) {
+            if (links == null) {
+                links = new Links();
+            }
+            links.withDefaultNzdPayoutAccount(defaultNzdPayoutAccount);
+            return this;
+        }
+
+        /**
+         * ID of the [bank account](#core-endpoints-creditor-bank-accounts) which is set up to receive
          * payouts in SEK.
          */
         public CreditorUpdateRequest withLinksDefaultSekPayoutAccount(String defaultSekPayoutAccount) {
@@ -613,6 +625,7 @@ public class CreditorService {
             private String defaultDkkPayoutAccount;
             private String defaultEurPayoutAccount;
             private String defaultGbpPayoutAccount;
+            private String defaultNzdPayoutAccount;
             private String defaultSekPayoutAccount;
 
             /**
@@ -648,6 +661,15 @@ public class CreditorService {
              */
             public Links withDefaultGbpPayoutAccount(String defaultGbpPayoutAccount) {
                 this.defaultGbpPayoutAccount = defaultGbpPayoutAccount;
+                return this;
+            }
+
+            /**
+             * ID of the [bank account](#core-endpoints-creditor-bank-accounts) which is set up to receive
+             * payouts in NZD.
+             */
+            public Links withDefaultNzdPayoutAccount(String defaultNzdPayoutAccount) {
+                this.defaultNzdPayoutAccount = defaultNzdPayoutAccount;
                 return this;
             }
 

@@ -170,6 +170,7 @@ public class Creditor {
         private String defaultDkkPayoutAccount;
         private String defaultEurPayoutAccount;
         private String defaultGbpPayoutAccount;
+        private String defaultNzdPayoutAccount;
         private String defaultSekPayoutAccount;
 
         /**
@@ -202,6 +203,14 @@ public class Creditor {
          */
         public String getDefaultGbpPayoutAccount() {
             return defaultGbpPayoutAccount;
+        }
+
+        /**
+         * ID of the [bank account](#core-endpoints-creditor-bank-accounts) which is set up to receive
+         * payouts in NZD.
+         */
+        public String getDefaultNzdPayoutAccount() {
+            return defaultNzdPayoutAccount;
         }
 
         /**
