@@ -6,6 +6,8 @@ sourceCompatibility = 1.7
 group = ' com.gocardless'
 version = '3.7.1'
 
+import groovy.swing.SwingBuilder
+
 buildscript {
     repositories {
         mavenCentral()
@@ -71,11 +73,26 @@ signing {
 
 gradle.taskGraph.whenReady { taskGraph ->
     if (taskGraph.allTasks.any { it instanceof Sign }) {
-        Console console = System.console()
-
-        def keyId = console.readLine("Enter GPG key ID: ")
-        def password = console.readPassword("Enter private key password: ")
-
+        def keyId
+        def password
+               // Gradle is running as a daemon - prompt user to enter passwords via popup UI (#770)
+        new SwingBuilder().edt {
+            dialog(modal: true, title: 'Enter credentials', alwaysOnTop: true, resizable: true,
+                    locationRelativeTo: null, pack: true, show: true
+            ) {
+                vbox {
+                    label(text: "Key Id:")
+                    textField id: "keyIdText", input = textField()
+                    label(text: "Password:")
+                    textField id: "passwordText", input = passwordField()
+                    button(defaultButton: true, text: 'OK', actionPerformed: {
+                        keyId = keyIdText.text;
+                        keyPw = passwordText.text;
+                        dispose();
+                    })
+                }
+            }
+        }
         allprojects { ext."signing.keyId" = keyId }
         allprojects { ext."signing.password" = password }
     }
