@@ -10,6 +10,8 @@ import java.util.Map;
  * Debit [mandates](#core-endpoints-mandates).
  * 
  * Notes:
+ * - the `phone_number` field may only be supplied for New Zealand customers, and must be supplied if
+ * you intend to set up an BECS NZ mandate with the customer.
  * - the `swedish_identity_number` field may only be supplied for Swedish customers, and must be
  * supplied if you intend to set up an Autogiro mandate with the customer.
  * - the `danish_identity_number` field may only be supplied for Danish customers, and must be
@@ -34,6 +36,7 @@ public class Customer {
     private String id;
     private String language;
     private Map<String, String> metadata;
+    private String phoneNumber;
     private String postalCode;
     private String region;
     private String swedishIdentityNumber;
@@ -142,6 +145,14 @@ public class Customer {
      */
     public Map<String, String> getMetadata() {
         return metadata;
+    }
+
+    /**
+     * Required for New Zealand customers only. Must be supplied if the customer's bank account is
+     * denominated in New Zealand Dollars (NZD).
+     */
+    public String getPhoneNumber() {
+        return phoneNumber;
     }
 
     /**

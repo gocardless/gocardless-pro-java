@@ -98,6 +98,7 @@ public class MandatePdfService {
         private String iban;
         private Links links;
         private String mandateReference;
+        private String phoneNumber;
         private String postalCode;
         private String region;
         private String scheme;
@@ -231,6 +232,15 @@ public class MandatePdfService {
          */
         public MandatePdfCreateRequest withMandateReference(String mandateReference) {
             this.mandateReference = mandateReference;
+            return this;
+        }
+
+        /**
+         * Required for New Zealand customers only. Must be supplied if the customer's bank account is
+         * denominated in New Zealand Dollars (NZD).
+         */
+        public MandatePdfCreateRequest withPhoneNumber(String phoneNumber) {
+            this.phoneNumber = phoneNumber;
             return this;
         }
 
