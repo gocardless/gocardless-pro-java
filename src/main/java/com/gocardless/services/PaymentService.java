@@ -115,7 +115,7 @@ public class PaymentService {
         private String reference;
 
         /**
-         * Amount in pence (GBP), cents (AUD/EUR), öre (SEK), or øre (DKK).
+         * Amount, in the lowest denomination for the currency (e.g. pence in GBP, cents in EUR).
          */
         public PaymentCreateRequest withAmount(Integer amount) {
             this.amount = amount;
@@ -123,7 +123,8 @@ public class PaymentService {
         }
 
         /**
-         * The amount to be deducted from the payment as the OAuth app's fee, in pence/cents/öre/øre.
+         * The amount to be deducted from the payment as the OAuth app's fee, in the lowest denomination for
+         * the currency (e.g. pence in GBP, cents in EUR).
          */
         public PaymentCreateRequest withAppFee(Integer appFee) {
             this.appFee = appFee;
