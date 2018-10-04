@@ -256,6 +256,18 @@ public class RedirectFlowService {
         }
 
         /**
+         * Required for New Zealand customers only. Must be supplied if the customer's bank account is
+         * denominated in New Zealand Dollars (NZD).
+         */
+        public RedirectFlowCreateRequest withPrefilledCustomerPhoneNumber(String phoneNumber) {
+            if (prefilledCustomer == null) {
+                prefilledCustomer = new PrefilledCustomer();
+            }
+            prefilledCustomer.withPhoneNumber(phoneNumber);
+            return this;
+        }
+
+        /**
          * The customer's postal code.
          */
         public RedirectFlowCreateRequest withPrefilledCustomerPostalCode(String postalCode) {
@@ -402,6 +414,7 @@ public class RedirectFlowService {
             private String familyName;
             private String givenName;
             private String language;
+            private String phoneNumber;
             private String postalCode;
             private String region;
             private String swedishIdentityNumber;
@@ -492,6 +505,15 @@ public class RedirectFlowService {
              */
             public PrefilledCustomer withLanguage(String language) {
                 this.language = language;
+                return this;
+            }
+
+            /**
+             * Required for New Zealand customers only. Must be supplied if the customer's bank account is
+             * denominated in New Zealand Dollars (NZD).
+             */
+            public PrefilledCustomer withPhoneNumber(String phoneNumber) {
+                this.phoneNumber = phoneNumber;
                 return this;
             }
 

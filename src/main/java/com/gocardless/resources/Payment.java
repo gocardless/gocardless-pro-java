@@ -32,14 +32,15 @@ public class Payment {
     private Status status;
 
     /**
-     * Amount in pence (GBP), cents (AUD/EUR), öre (SEK), or øre (DKK).
+     * Amount, in the lowest denomination for the currency (e.g. pence in GBP, cents in EUR).
      */
     public Integer getAmount() {
         return amount;
     }
 
     /**
-     * Amount [refunded](#core-endpoints-refunds) in pence/cents/öre/øre.
+     * Amount [refunded](#core-endpoints-refunds), in the lowest denomination for the currency (e.g.
+     * pence in GBP, cents in EUR).
      */
     public Integer getAmountRefunded() {
         return amountRefunded;

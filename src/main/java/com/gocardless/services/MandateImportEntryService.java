@@ -355,6 +355,18 @@ public class MandateImportEntryService {
         }
 
         /**
+         * Required for New Zealand customers only. Must be supplied if the customer's bank account is
+         * denominated in New Zealand Dollars (NZD).
+         */
+        public MandateImportEntryCreateRequest withCustomerPhoneNumber(String phoneNumber) {
+            if (customer == null) {
+                customer = new Customer();
+            }
+            customer.withPhoneNumber(phoneNumber);
+            return this;
+        }
+
+        /**
          * The customer's postal code. Required if mandate import scheme is `bacs`.
          * 
          */
@@ -558,6 +570,7 @@ public class MandateImportEntryService {
             private String familyName;
             private String givenName;
             private String language;
+            private String phoneNumber;
             private String postalCode;
             private String region;
             private String swedishIdentityNumber;
@@ -655,6 +668,15 @@ public class MandateImportEntryService {
              */
             public Customer withLanguage(String language) {
                 this.language = language;
+                return this;
+            }
+
+            /**
+             * Required for New Zealand customers only. Must be supplied if the customer's bank account is
+             * denominated in New Zealand Dollars (NZD).
+             */
+            public Customer withPhoneNumber(String phoneNumber) {
+                this.phoneNumber = phoneNumber;
                 return this;
             }
 
