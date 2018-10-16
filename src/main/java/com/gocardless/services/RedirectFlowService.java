@@ -256,8 +256,7 @@ public class RedirectFlowService {
         }
 
         /**
-         * Required for New Zealand customers only. Must be supplied if the customer's bank account is
-         * denominated in New Zealand Dollars (NZD).
+         * For New Zealand customers only.
          */
         public RedirectFlowCreateRequest withPrefilledCustomerPhoneNumber(String phoneNumber) {
             if (prefilledCustomer == null) {
@@ -509,8 +508,7 @@ public class RedirectFlowService {
             }
 
             /**
-             * Required for New Zealand customers only. Must be supplied if the customer's bank account is
-             * denominated in New Zealand Dollars (NZD).
+             * For New Zealand customers only.
              */
             public PrefilledCustomer withPhoneNumber(String phoneNumber) {
                 this.phoneNumber = phoneNumber;
