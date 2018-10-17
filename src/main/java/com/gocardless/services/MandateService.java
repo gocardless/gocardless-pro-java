@@ -165,7 +165,6 @@ public class MandateService {
         /**
          * <a name="mandates_scheme"></a>Direct Debit scheme to which this mandate and associated payments
          * are submitted. Can be supplied or automatically detected from the customer's bank account.
-         * Currently "autogiro", "bacs", "becs", "betalingsservice", and "sepa_core" are supported.
          */
         public MandateCreateRequest withScheme(String scheme) {
             this.scheme = scheme;
