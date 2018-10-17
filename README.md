@@ -14,7 +14,7 @@ With Maven:
 <dependency>
     <groupId>com.gocardless</groupId>
     <artifactId>gocardless-pro</artifactId>
-    <version>3.7.2</version>
+    <version>3.7.1</version>
 </dependency>
 ```
 
@@ -73,7 +73,7 @@ System.out.println(mandate.getReference());
 
 To fetch items in a collection, there are two options:
 
-- Fetching items one page at a time:
+* Fetching items one page at a time:
 
 ```java
 ListResponse<Customer> firstPage = client.customers().list().execute();
@@ -85,7 +85,7 @@ String cursor = firstPage.getAfter();
 ListResponse<Customer> nextPage = client.customers().list().withAfter(cursor).execute();
 ```
 
-- Iterating through all of the items in a collection:
+* Iterating through all of the items in a collection:
 
 ```java
 for (Customer customer : client.customers().all().execute()) {
@@ -128,7 +128,7 @@ automatically by the library, so we'll automatically retry these too.
 
 If you want to override this behaviour
 (for example, to provide your own retry mechanism), then you can use the `executeWrapped`
-method in place of `execute`. This returns an `ApiResponse` object, which also gives
+method in place of `execute`.  This returns an `ApiResponse` object, which also gives
 access to the response status code and headers.
 
 ### Setting custom headers
@@ -159,12 +159,12 @@ using the same headers, and will return it to you.
 
 ### Handling errors
 
-Any errors will result in a `GoCardlessException` being thrown. If the error is due to an error response from the API, then an appropriate subclass of `GoCardlessApiException` will be thrown, providing more information about the nature of the error. This will be one of:
+Any errors will result in a `GoCardlessException` being thrown.  If the error is due to an error response from the API, then an appropriate subclass of `GoCardlessApiException` will be thrown, providing more information about the nature of the error.  This will be one of:
 
-- GoCardlessInternalException
-- InvalidApiUsageException
-- InvalidStateException
-- ValidationFailedException
+* GoCardlessInternalException
+* InvalidApiUsageException
+* InvalidStateException
+* ValidationFailedException
 
 See the [documentation](http://gocardless.github.io/gocardless-pro-java/com/gocardless/errors/package-summary.html) for more details.
 
@@ -172,9 +172,9 @@ See the [documentation](http://gocardless.github.io/gocardless-pro-java/com/goca
 
 GoCardless supports webhooks, allowing you to receive real-time notifications when things happen in your account, so you can take automatic actions in response, for example:
 
-- When a customer cancels their mandate with the bank, suspend their club membership
-- When a payment fails due to lack of funds, mark their invoice as unpaid
-- When a customer’s subscription generates a new payment, log it in their “past payments” list
+* When a customer cancels their mandate with the bank, suspend their club membership
+* When a payment fails due to lack of funds, mark their invoice as unpaid
+* When a customer’s subscription generates a new payment, log it in their “past payments” list
 
 The client allows you to validate that a webhook you receive is genuinely from GoCardless, and to parse it into `com.gocardless.resources.Event` objects which are easy to work with:
 
@@ -302,7 +302,7 @@ This library requires JDK version 7 or above.
 
 ## Logging
 
-All requests are logged at `INFO` level using [SLF4J](http://www.slf4j.org/). Logs will only be sent if you have an SLF4J binding on your classpath - we recommend using [Logback](http://logback.qos.ch/).
+All requests are logged at `INFO` level using [SLF4J](http://www.slf4j.org/).  Logs will only be sent if you have an SLF4J binding on your classpath - we recommend using [Logback](http://logback.qos.ch/).
 
 ## Documentation
 
@@ -310,4 +310,4 @@ Full Javadoc can be found [here](http://gocardless.github.io/gocardless-pro-java
 
 ## Contributing
 
-This client is auto-generated from Crank, a toolchain that we hope to soon open source. Issues should for now be reported on this repository. **Please do not modify the source code yourself, your changes will be overridden!**
+This client is auto-generated from Crank, a toolchain that we hope to soon open source. Issues should for now be reported on this repository.  __Please do not modify the source code yourself, your changes will be overridden!__
