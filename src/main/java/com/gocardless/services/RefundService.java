@@ -35,11 +35,8 @@ public class RefundService {
     /**
      * Creates a new refund object.
      * 
-     * This fails with:<a name="refund_payment_invalid_state"></a><a
-     * name="total_amount_confirmation_invalid"></a><a name="number_of_refunds_exceeded"></a>
-     * 
-     * - `refund_payment_invalid_state` error if the linked [payment](#core-endpoints-payments) isn't
-     * either `confirmed` or `paid_out`.
+     * This fails with:<a name="total_amount_confirmation_invalid"></a><a
+     * name="number_of_refunds_exceeded"></a>
      * 
      * - `total_amount_confirmation_invalid` if the confirmation amount doesn't match the total amount
      * refunded for the payment. This safeguard is there to prevent two processes from creating refunds
@@ -83,11 +80,8 @@ public class RefundService {
      *
      * Creates a new refund object.
      * 
-     * This fails with:<a name="refund_payment_invalid_state"></a><a
-     * name="total_amount_confirmation_invalid"></a><a name="number_of_refunds_exceeded"></a>
-     * 
-     * - `refund_payment_invalid_state` error if the linked [payment](#core-endpoints-payments) isn't
-     * either `confirmed` or `paid_out`.
+     * This fails with:<a name="total_amount_confirmation_invalid"></a><a
+     * name="number_of_refunds_exceeded"></a>
      * 
      * - `total_amount_confirmation_invalid` if the confirmation amount doesn't match the total amount
      * refunded for the payment. This safeguard is there to prevent two processes from creating refunds
