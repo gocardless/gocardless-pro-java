@@ -212,7 +212,8 @@ public class Event {
             BACS, @SerializedName("becs")
             BECS, @SerializedName("becs_nz")
             BECS_NZ, @SerializedName("betalingsservice")
-            BETALINGSSERVICE, @SerializedName("sepa_core")
+            BETALINGSSERVICE, @SerializedName("pad")
+            PAD, @SerializedName("sepa_core")
             SEPA_CORE, @SerializedName("sepa_cor1")
             SEPA_COR1,
         }
