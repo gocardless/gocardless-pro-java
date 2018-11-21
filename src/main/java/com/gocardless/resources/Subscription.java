@@ -83,7 +83,7 @@ public class Subscription {
     private List<UpcomingPayment> upcomingPayments;
 
     /**
-     * Amount in pence (GBP), cents (AUD/EUR), öre (SEK), or øre (DKK).
+     * Amount in the lowest denomination for the currency (e.g. pence in GBP, cents in EUR).
      */
     public Integer getAmount() {
         return amount;
@@ -91,7 +91,8 @@ public class Subscription {
 
     /**
      * The amount to be deducted from each payment as an app fee, to be paid to the partner integration
-     * which created the subscription, in pence (GBP), cents (AUD/EUR), öre (SEK), or øre (DKK).
+     * which created the subscription, in the lowest denomination for the currency (e.g. pence in GBP,
+     * cents in EUR).
      */
     public Integer getAppFee() {
         return appFee;

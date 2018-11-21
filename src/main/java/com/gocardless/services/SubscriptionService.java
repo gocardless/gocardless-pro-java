@@ -167,7 +167,7 @@ public class SubscriptionService {
         private String startDate;
 
         /**
-         * Amount in pence (GBP), cents (AUD/EUR), öre (SEK), or øre (DKK).
+         * Amount in the lowest denomination for the currency (e.g. pence in GBP, cents in EUR).
          */
         public SubscriptionCreateRequest withAmount(Integer amount) {
             this.amount = amount;
@@ -176,7 +176,8 @@ public class SubscriptionService {
 
         /**
          * The amount to be deducted from each payment as an app fee, to be paid to the partner integration
-         * which created the subscription, in pence (GBP), cents (AUD/EUR), öre (SEK), or øre (DKK).
+         * which created the subscription, in the lowest denomination for the currency (e.g. pence in GBP,
+         * cents in EUR).
          */
         public SubscriptionCreateRequest withAppFee(Integer appFee) {
             this.appFee = appFee;
@@ -701,7 +702,7 @@ public class SubscriptionService {
         private String paymentReference;
 
         /**
-         * Amount in pence (GBP), cents (AUD/EUR), öre (SEK), or øre (DKK).
+         * Amount in the lowest denomination for the currency (e.g. pence in GBP, cents in EUR).
          */
         public SubscriptionUpdateRequest withAmount(Integer amount) {
             this.amount = amount;
@@ -710,7 +711,8 @@ public class SubscriptionService {
 
         /**
          * The amount to be deducted from each payment as an app fee, to be paid to the partner integration
-         * which created the subscription, in pence (GBP), cents (AUD/EUR), öre (SEK), or øre (DKK).
+         * which created the subscription, in the lowest denomination for the currency (e.g. pence in GBP,
+         * cents in EUR).
          */
         public SubscriptionUpdateRequest withAppFee(Integer appFee) {
             this.appFee = appFee;
