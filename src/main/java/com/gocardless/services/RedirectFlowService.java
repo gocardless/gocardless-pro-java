@@ -13,8 +13,8 @@ import com.google.gson.annotations.SerializedName;
  *
  * Redirect flows enable you to use GoCardless' [hosted payment
  * pages](https://pay-sandbox.gocardless.com/AL000000AKFPFF) to set up mandates with your customers.
- * These pages are fully compliant and have been translated into Dutch, French, German, Italian,
- * Portuguese, Spanish and Swedish.
+ * These pages are fully compliant and have been translated into Danish, Dutch, French, German,
+ * Italian, Norwegian, Portuguese, Slovak, Spanish and Swedish.
  * 
  * The overall flow is:
  * 
