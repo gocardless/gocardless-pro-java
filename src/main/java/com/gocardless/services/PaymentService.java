@@ -143,7 +143,7 @@ public class PaymentService {
 
         /**
          * [ISO 4217](http://en.wikipedia.org/wiki/ISO_4217#Active_codes) currency code. Currently "AUD",
-         * "CAD", "DKK", "EUR", "GBP", "NZD" and "SEK" are supported.
+         * "CAD", "DKK", "EUR", "GBP", "NZD", "SEK" and "USD" are supported.
          */
         public PaymentCreateRequest withCurrency(Currency currency) {
             this.currency = currency;
@@ -262,7 +262,8 @@ public class PaymentService {
             EUR, @SerializedName("GBP")
             GBP, @SerializedName("NZD")
             NZD, @SerializedName("SEK")
-            SEK;
+            SEK, @SerializedName("USD")
+            USD;
             @Override
             public String toString() {
                 return name().toLowerCase();
@@ -288,6 +289,7 @@ public class PaymentService {
      * Returns a [cursor-paginated](#api-usage-cursor-pagination) list of your payments.
      */
     public static final class PaymentListRequest<S> extends ListRequest<S, Payment> {
+        private ChargeDate chargeDate;
         private CreatedAt createdAt;
         private String creditor;
         private Currency currency;
@@ -309,6 +311,59 @@ public class PaymentService {
          */
         public PaymentListRequest<S> withBefore(String before) {
             setBefore(before);
+            return this;
+        }
+
+        public PaymentListRequest<S> withChargeDate(ChargeDate chargeDate) {
+            this.chargeDate = chargeDate;
+            return this;
+        }
+
+        /**
+         * Limit to records where the payment was or will be collected from the customer's bank account after
+         * the specified date.
+         */
+        public PaymentListRequest<S> withChargeDateGt(String gt) {
+            if (chargeDate == null) {
+                chargeDate = new ChargeDate();
+            }
+            chargeDate.withGt(gt);
+            return this;
+        }
+
+        /**
+         * Limit to records where the payment was or will be collected from the customer's bank account on or
+         * after the specified date.
+         */
+        public PaymentListRequest<S> withChargeDateGte(String gte) {
+            if (chargeDate == null) {
+                chargeDate = new ChargeDate();
+            }
+            chargeDate.withGte(gte);
+            return this;
+        }
+
+        /**
+         * Limit to records where the payment was or will be collected from the customer's bank account
+         * before the specified date.
+         */
+        public PaymentListRequest<S> withChargeDateLt(String lt) {
+            if (chargeDate == null) {
+                chargeDate = new ChargeDate();
+            }
+            chargeDate.withLt(lt);
+            return this;
+        }
+
+        /**
+         * Limit to records where the payment was or will be collected from the customer's bank account on or
+         * before the specified date.
+         */
+        public PaymentListRequest<S> withChargeDateLte(String lte) {
+            if (chargeDate == null) {
+                chargeDate = new ChargeDate();
+            }
+            chargeDate.withLte(lte);
             return this;
         }
 
@@ -372,7 +427,7 @@ public class PaymentService {
 
         /**
          * [ISO 4217](http://en.wikipedia.org/wiki/ISO_4217#Active_codes) currency code. Currently "AUD",
-         * "CAD", "DKK", "EUR", "GBP", "NZD" and "SEK" are supported.
+         * "CAD", "DKK", "EUR", "GBP", "NZD", "SEK" and "USD" are supported.
          */
         public PaymentListRequest<S> withCurrency(Currency currency) {
             this.currency = currency;
@@ -397,7 +452,8 @@ public class PaymentService {
         }
 
         /**
-         * Unique identifier, beginning with "MD".
+         * Unique identifier, beginning with "MD". Note that this prefix may not apply to mandates created
+         * before 2016.
          */
         public PaymentListRequest<S> withMandate(String mandate) {
             this.mandate = mandate;
@@ -446,6 +502,9 @@ public class PaymentService {
         protected Map<String, Object> getQueryParams() {
             ImmutableMap.Builder<String, Object> params = ImmutableMap.builder();
             params.putAll(super.getQueryParams());
+            if (chargeDate != null) {
+                params.putAll(chargeDate.getQueryParams());
+            }
             if (createdAt != null) {
                 params.putAll(createdAt.getQueryParams());
             }
@@ -493,7 +552,8 @@ public class PaymentService {
             EUR, @SerializedName("GBP")
             GBP, @SerializedName("NZD")
             NZD, @SerializedName("SEK")
-            SEK;
+            SEK, @SerializedName("USD")
+            USD;
             @Override
             public String toString() {
                 return name().toLowerCase();
@@ -514,6 +574,66 @@ public class PaymentService {
             @Override
             public String toString() {
                 return name().toLowerCase();
+            }
+        }
+
+        public static class ChargeDate {
+            private String gt;
+            private String gte;
+            private String lt;
+            private String lte;
+
+            /**
+             * Limit to records where the payment was or will be collected from the customer's bank account after
+             * the specified date.
+             */
+            public ChargeDate withGt(String gt) {
+                this.gt = gt;
+                return this;
+            }
+
+            /**
+             * Limit to records where the payment was or will be collected from the customer's bank account on or
+             * after the specified date.
+             */
+            public ChargeDate withGte(String gte) {
+                this.gte = gte;
+                return this;
+            }
+
+            /**
+             * Limit to records where the payment was or will be collected from the customer's bank account
+             * before the specified date.
+             */
+            public ChargeDate withLt(String lt) {
+                this.lt = lt;
+                return this;
+            }
+
+            /**
+             * Limit to records where the payment was or will be collected from the customer's bank account on or
+             * before the specified date.
+             */
+            public ChargeDate withLte(String lte) {
+                this.lte = lte;
+                return this;
+            }
+
+            public Map<String, Object> getQueryParams() {
+                ImmutableMap.Builder<String, Object> params = ImmutableMap.builder();
+                if (gt != null) {
+                    params.put("charge_date[gt]", gt);
+                }
+                if (gte != null) {
+                    params.put("charge_date[gte]", gte);
+                }
+                if (lt != null) {
+                    params.put("charge_date[lt]", lt);
+                }
+                if (lte != null) {
+                    params.put("charge_date[lte]", lte);
+                }
+                return params.build();
             }
         }
 

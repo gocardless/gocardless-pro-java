@@ -54,6 +54,8 @@ public class PayoutItem {
      * <li>`payment_refunded` (debit): The payment has been refunded to the customer.</li>
      * <li>`refund` (debit): <em>private beta</em> A refund sent to a customer, not linked to a
      * payment.</li>
+     * <li>`refund_funds_returned` (credit): The refund could not be sent to the customer, and the funds
+     * have been returned to you.</li>
      * <li>`gocardless_fee` (credit/debit): The fees that GoCardless charged for a payment. In the case
      * of a payment failure or chargeback, these will appear as credits.</li>
      * <li>`app_fee` (credit/debit): The optional fees that a partner may have taken for a payment. In
@@ -89,7 +91,8 @@ public class PayoutItem {
         private String payment;
 
         /**
-         * Unique identifier, beginning with "MD".
+         * Unique identifier, beginning with "MD". Note that this prefix may not apply to mandates created
+         * before 2016.
          */
         public String getMandate() {
             return mandate;

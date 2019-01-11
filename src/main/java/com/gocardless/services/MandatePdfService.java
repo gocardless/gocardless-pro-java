@@ -38,6 +38,8 @@ public class MandatePdfService {
      * | :--------------- |
      * :-------------------------------------------------------------------------------------------------------------------------------------------
      * |
+     * | ACH              | English (`en`)                                                               
+     *                                                                |
      * | Autogiro         | English (`en`), Swedish (`sv`)                                               
      *                                                                |
      * | Bacs             | English (`en`)                                                               
@@ -76,6 +78,8 @@ public class MandatePdfService {
      * | :--------------- |
      * :-------------------------------------------------------------------------------------------------------------------------------------------
      * |
+     * | ACH              | English (`en`)                                                               
+     *                                                                |
      * | Autogiro         | English (`en`), Swedish (`sv`)                                               
      *                                                                |
      * | Bacs             | English (`en`)                                                               
@@ -94,6 +98,7 @@ public class MandatePdfService {
     public static final class MandatePdfCreateRequest extends PostRequest<MandatePdf> {
         private String accountHolderName;
         private String accountNumber;
+        private String accountType;
         private String addressLine1;
         private String addressLine2;
         private String addressLine3;
@@ -106,11 +111,14 @@ public class MandatePdfService {
         private String iban;
         private Links links;
         private String mandateReference;
+        private String payerIpAddress;
         private String phoneNumber;
         private String postalCode;
         private String region;
         private String scheme;
         private String signatureDate;
+        private Integer subscriptionAmount;
+        private String subscriptionFrequency;
         private String swedishIdentityNumber;
 
         /**
@@ -128,6 +136,16 @@ public class MandatePdfService {
          */
         public MandatePdfCreateRequest withAccountNumber(String accountNumber) {
             this.accountNumber = accountNumber;
+            return this;
+        }
+
+        /**
+         * Bank account type. Required for USD-denominated bank accounts. Must not be provided for bank
+         * accounts in other currencies. See [local details](#local-bank-details-united-states) for more
+         * information.
+         */
+        public MandatePdfCreateRequest withAccountType(String accountType) {
+            this.accountType = accountType;
             return this;
         }
 
@@ -244,6 +262,17 @@ public class MandatePdfService {
         }
 
         /**
+         * For American customers only. IP address of the computer used by the customer to set up the
+         * mandate. This is required in order to create compliant Mandate PDFs according to the ACH scheme
+         * rules.
+         */
+        public MandatePdfCreateRequest withPayerIpAddress(String payerIpAddress) {
+            this.payerIpAddress = payerIpAddress;
+            return this;
+        }
+
+        /**
+         * [ITU E.123](https://en.wikipedia.org/wiki/E.123) formatted phone number, including country code.
          * Required for New Zealand customers only. Must be supplied if the customer's bank account is
          * denominated in New Zealand Dollars (NZD).
          */
@@ -283,6 +312,25 @@ public class MandatePdfService {
          */
         public MandatePdfCreateRequest withSignatureDate(String signatureDate) {
             this.signatureDate = signatureDate;
+            return this;
+        }
+
+        /**
+         * For American customers only. Subscription amount being authorised by the mandate. In the lowest
+         * denomination for the currency (cents in USD). Is required if `subscription_frequency` has been
+         * provided.
+         */
+        public MandatePdfCreateRequest withSubscriptionAmount(Integer subscriptionAmount) {
+            this.subscriptionAmount = subscriptionAmount;
+            return this;
+        }
+
+        /**
+         * For American customers only. Frequency of the subscription being authorised by the mandate. One of
+         * `weekly`, `monthly` or `yearly`. Is required if `subscription_amount` has been provided.
+         */
+        public MandatePdfCreateRequest withSubscriptionFrequency(String subscriptionFrequency) {
+            this.subscriptionFrequency = subscriptionFrequency;
             return this;
         }
 

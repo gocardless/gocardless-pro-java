@@ -35,7 +35,8 @@ public class Mandate {
     }
 
     /**
-     * Unique identifier, beginning with "MD".
+     * Unique identifier, beginning with "MD". Note that this prefix may not apply to mandates created
+     * before 2016.
      */
     public String getId() {
         return id;

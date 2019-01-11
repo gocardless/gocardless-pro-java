@@ -167,6 +167,7 @@ public class Creditor {
         }
 
         private String defaultAudPayoutAccount;
+        private String defaultCadPayoutAccount;
         private String defaultDkkPayoutAccount;
         private String defaultEurPayoutAccount;
         private String defaultGbpPayoutAccount;
@@ -179,6 +180,14 @@ public class Creditor {
          */
         public String getDefaultAudPayoutAccount() {
             return defaultAudPayoutAccount;
+        }
+
+        /**
+         * ID of the [bank account](#core-endpoints-creditor-bank-accounts) which is set up to receive
+         * payouts in CAD.
+         */
+        public String getDefaultCadPayoutAccount() {
+            return defaultCadPayoutAccount;
         }
 
         /**
@@ -361,11 +370,13 @@ public class Creditor {
             EUR, @SerializedName("GBP")
             GBP, @SerializedName("NZD")
             NZD, @SerializedName("SEK")
-            SEK,
+            SEK, @SerializedName("USD")
+            USD,
         }
 
         public enum Scheme {
-            @SerializedName("autogiro")
+            @SerializedName("ach")
+            ACH, @SerializedName("autogiro")
             AUTOGIRO, @SerializedName("bacs")
             BACS, @SerializedName("becs")
             BECS, @SerializedName("becs_nz")

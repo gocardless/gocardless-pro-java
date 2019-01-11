@@ -84,6 +84,7 @@ public class CreditorBankAccountService {
             IdempotentPostRequest<CreditorBankAccount> {
         private String accountHolderName;
         private String accountNumber;
+        private String accountType;
         private String bankCode;
         private String branchCode;
         private String countryCode;
@@ -109,6 +110,16 @@ public class CreditorBankAccountService {
          */
         public CreditorBankAccountCreateRequest withAccountNumber(String accountNumber) {
             this.accountNumber = accountNumber;
+            return this;
+        }
+
+        /**
+         * Bank account type. Required for USD-denominated bank accounts. Must not be provided for bank
+         * accounts in other currencies. See [local details](#local-bank-details-united-states) for more
+         * information.
+         */
+        public CreditorBankAccountCreateRequest withAccountType(String accountType) {
+            this.accountType = accountType;
             return this;
         }
 

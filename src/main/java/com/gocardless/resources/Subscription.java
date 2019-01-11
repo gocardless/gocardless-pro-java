@@ -107,7 +107,7 @@ public class Subscription {
 
     /**
      * [ISO 4217](http://en.wikipedia.org/wiki/ISO_4217) currency code. Currently `GBP`, `EUR`, `SEK`,
-     * and `DKK` are supported.
+     * `DKK`, `AUD`, `NZD` and `CAD` are supported.
      */
     public String getCurrency() {
         return currency;
@@ -192,9 +192,9 @@ public class Subscription {
     }
 
     /**
-     * The date on which the first payment should be charged. Must be within one year of creation and on
-     * or after the [mandate](#core-endpoints-mandates)'s `next_possible_charge_date`. When blank, this
-     * will be set as the mandate's `next_possible_charge_date`.
+     * The date on which the first payment should be charged. Must be on or after the
+     * [mandate](#core-endpoints-mandates)'s `next_possible_charge_date`. When blank, this will be set as
+     * the mandate's `next_possible_charge_date`.
      */
     public String getStartDate() {
         return startDate;
