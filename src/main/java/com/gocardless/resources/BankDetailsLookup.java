@@ -43,7 +43,8 @@ public class BankDetailsLookup {
     }
 
     public enum AvailableDebitScheme {
-        @SerializedName("autogiro")
+        @SerializedName("ach")
+        ACH, @SerializedName("autogiro")
         AUTOGIRO, @SerializedName("bacs")
         BACS, @SerializedName("becs")
         BECS, @SerializedName("becs_nz")

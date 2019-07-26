@@ -16,14 +16,6 @@ import com.google.gson.reflect.TypeToken;
  * Customer objects hold the contact details for a customer. A customer can have several [customer
  * bank accounts](#core-endpoints-customer-bank-accounts), which in turn can have several Direct
  * Debit [mandates](#core-endpoints-mandates).
- * 
- * Notes:
- * - the `phone_number` field may only be supplied for New Zealand customers, and must be supplied if
- * you intend to set up an BECS NZ mandate with the customer.
- * - the `swedish_identity_number` field may only be supplied for Swedish customers, and must be
- * supplied if you intend to set up an Autogiro mandate with the customer.
- * - the `danish_identity_number` field may only be supplied for Danish customers, and must be
- * supplied if you intend to set up a Betalingsservice mandate with the customer.
  */
 public class CustomerService {
     private final HttpClient httpClient;
@@ -67,6 +59,18 @@ public class CustomerService {
      */
     public CustomerUpdateRequest update(String identity) {
         return new CustomerUpdateRequest(httpClient, identity);
+    }
+
+    /**
+     * Removed customers will not appear in search results or lists of customers (in our API
+     * or exports), and it will not be possible to load an individually removed customer by
+     * ID.
+     * 
+     * <p class="restricted-notice"><strong>The action of removing a customer cannot be
+     * reversed, so please use with care.</strong></p>
+     */
+    public CustomerRemoveRequest remove(String identity) {
+        return new CustomerRemoveRequest(httpClient, identity);
     }
 
     /**
@@ -212,6 +216,7 @@ public class CustomerService {
         }
 
         /**
+         * [ITU E.123](https://en.wikipedia.org/wiki/E.123) formatted phone number, including country code.
          * Required for New Zealand customers only. Must be supplied if the customer's bank account is
          * denominated in New Zealand Dollars (NZD).
          */
@@ -649,6 +654,7 @@ public class CustomerService {
         }
 
         /**
+         * [ITU E.123](https://en.wikipedia.org/wiki/E.123) formatted phone number, including country code.
          * Required for New Zealand customers only. Must be supplied if the customer's bank account is
          * denominated in New Zealand Dollars (NZD).
          */
@@ -718,6 +724,63 @@ public class CustomerService {
         @Override
         protected boolean hasBody() {
             return true;
+        }
+    }
+
+    /**
+     * Request class for {@link CustomerService#remove }.
+     *
+     * Removed customers will not appear in search results or lists of customers (in our API
+     * or exports), and it will not be possible to load an individually removed customer by
+     * ID.
+     * 
+     * <p class="restricted-notice"><strong>The action of removing a customer cannot be
+     * reversed, so please use with care.</strong></p>
+     */
+    public static final class CustomerRemoveRequest extends DeleteRequest<Customer> {
+        @PathParam
+        private final String identity;
+
+        private CustomerRemoveRequest(HttpClient httpClient, String identity) {
+            super(httpClient);
+            this.identity = identity;
+        }
+
+        public CustomerRemoveRequest withHeader(String headerName, String headerValue) {
+            this.addHeader(headerName, headerValue);
+            return this;
+        }
+
+        @Override
+        protected Map<String, String> getPathParams() {
+            ImmutableMap.Builder<String, String> params = ImmutableMap.builder();
+            params.put("identity", identity);
+            return params.build();
+        }
+
+        @Override
+        protected String getPathTemplate() {
+            return "customers/:identity";
+        }
+
+        @Override
+        protected String getEnvelope() {
+            return "customers";
+        }
+
+        @Override
+        protected Class<Customer> getResponseClass() {
+            return Customer.class;
+        }
+
+        @Override
+        protected boolean hasBody() {
+            return true;
+        }
+
+        @Override
+        protected String getRequestEnvelope() {
+            return "data";
         }
     }
 }

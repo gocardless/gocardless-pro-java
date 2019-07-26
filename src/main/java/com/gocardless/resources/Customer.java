@@ -8,14 +8,6 @@ import java.util.Map;
  * Customer objects hold the contact details for a customer. A customer can have several [customer
  * bank accounts](#core-endpoints-customer-bank-accounts), which in turn can have several Direct
  * Debit [mandates](#core-endpoints-mandates).
- * 
- * Notes:
- * - the `phone_number` field may only be supplied for New Zealand customers, and must be supplied if
- * you intend to set up an BECS NZ mandate with the customer.
- * - the `swedish_identity_number` field may only be supplied for Swedish customers, and must be
- * supplied if you intend to set up an Autogiro mandate with the customer.
- * - the `danish_identity_number` field may only be supplied for Danish customers, and must be
- * supplied if you intend to set up a Betalingsservice mandate with the customer.
  */
 public class Customer {
     private Customer() {
@@ -151,6 +143,7 @@ public class Customer {
     }
 
     /**
+     * [ITU E.123](https://en.wikipedia.org/wiki/E.123) formatted phone number, including country code.
      * Required for New Zealand customers only. Must be supplied if the customer's bank account is
      * denominated in New Zealand Dollars (NZD).
      */

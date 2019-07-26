@@ -99,6 +99,7 @@ public class MandateService {
     public static final class MandateCreateRequest extends IdempotentPostRequest<Mandate> {
         private Links links;
         private Map<String, String> metadata;
+        private String payerIpAddress;
         private String reference;
         private String scheme;
 
@@ -149,6 +150,16 @@ public class MandateService {
                 metadata = new HashMap<>();
             }
             metadata.put(key, value);
+            return this;
+        }
+
+        /**
+         * For ACH customers only. Required for ACH customers. A string containing the IP address of the
+         * payer to whom the mandate belongs (i.e. as a result of their completion of a mandate setup flow in
+         * their browser).
+         */
+        public MandateCreateRequest withPayerIpAddress(String payerIpAddress) {
+            this.payerIpAddress = payerIpAddress;
             return this;
         }
 

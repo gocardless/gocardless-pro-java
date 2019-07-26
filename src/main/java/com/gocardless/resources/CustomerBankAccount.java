@@ -2,6 +2,8 @@ package com.gocardless.resources;
 
 import java.util.Map;
 
+import com.google.gson.annotations.SerializedName;
+
 /**
  * Represents a customer bank account resource returned from the API.
  *
@@ -21,6 +23,7 @@ public class CustomerBankAccount {
 
     private String accountHolderName;
     private String accountNumberEnding;
+    private AccountType accountType;
     private String bankName;
     private String countryCode;
     private String createdAt;
@@ -44,6 +47,15 @@ public class CustomerBankAccount {
      */
     public String getAccountNumberEnding() {
         return accountNumberEnding;
+    }
+
+    /**
+     * Bank account type. Required for USD-denominated bank accounts. Must not be provided for bank
+     * accounts in other currencies. See [local details](#local-bank-details-united-states) for more
+     * information.
+     */
+    public AccountType getAccountType() {
+        return accountType;
     }
 
     /**
@@ -100,6 +112,12 @@ public class CustomerBankAccount {
      */
     public Map<String, String> getMetadata() {
         return metadata;
+    }
+
+    public enum AccountType {
+        @SerializedName("savings")
+        SAVINGS, @SerializedName("checking")
+        CHECKING,
     }
 
     public static class Links {

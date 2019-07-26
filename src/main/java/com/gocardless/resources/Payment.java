@@ -64,7 +64,7 @@ public class Payment {
 
     /**
      * [ISO 4217](http://en.wikipedia.org/wiki/ISO_4217#Active_codes) currency code. Currently "AUD",
-     * "CAD", "DKK", "EUR", "GBP", "NZD" and "SEK" are supported.
+     * "CAD", "DKK", "EUR", "GBP", "NZD", "SEK" and "USD" are supported.
      */
     public Currency getCurrency() {
         return currency;
@@ -139,7 +139,8 @@ public class Payment {
         EUR, @SerializedName("GBP")
         GBP, @SerializedName("NZD")
         NZD, @SerializedName("SEK")
-        SEK,
+        SEK, @SerializedName("USD")
+        USD,
     }
 
     public enum Status {

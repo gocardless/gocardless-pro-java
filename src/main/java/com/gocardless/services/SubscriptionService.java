@@ -194,7 +194,7 @@ public class SubscriptionService {
 
         /**
          * [ISO 4217](http://en.wikipedia.org/wiki/ISO_4217) currency code. Currently `GBP`, `EUR`, `SEK`,
-         * and `DKK` are supported.
+         * `DKK`, `AUD`, `NZD` and `CAD` are supported.
          */
         public SubscriptionCreateRequest withCurrency(String currency) {
             this.currency = currency;
@@ -306,9 +306,9 @@ public class SubscriptionService {
         }
 
         /**
-         * The date on which the first payment should be charged. Must be within one year of creation and on
-         * or after the [mandate](#core-endpoints-mandates)'s `next_possible_charge_date`. When blank, this
-         * will be set as the mandate's `next_possible_charge_date`.
+         * The date on which the first payment should be charged. Must be on or after the
+         * [mandate](#core-endpoints-mandates)'s `next_possible_charge_date`. When blank, this will be set as
+         * the mandate's `next_possible_charge_date`.
          */
         public SubscriptionCreateRequest withStartDate(String startDate) {
             this.startDate = startDate;
@@ -496,7 +496,8 @@ public class SubscriptionService {
         }
 
         /**
-         * Unique identifier, beginning with "MD".
+         * Unique identifier, beginning with "MD". Note that this prefix may not apply to mandates created
+         * before 2016.
          */
         public SubscriptionListRequest<S> withMandate(String mandate) {
             this.mandate = mandate;
