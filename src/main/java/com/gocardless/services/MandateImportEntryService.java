@@ -145,9 +145,9 @@ public class MandateImportEntryService {
         }
 
         /**
-         * Name of the account holder, as known by the bank. Usually this matches the name of the linked
-         * [customer](#core-endpoints-customers). This field will be transliterated, upcased and truncated to
-         * 18 characters.
+         * Name of the account holder, as known by the bank. Usually this is the same as the name stored with
+         * the linked [creditor](#core-endpoints-creditors). This field will be transliterated, upcased and
+         * truncated to 18 characters.
          */
         public MandateImportEntryCreateRequest withBankAccountAccountHolderName(
                 String accountHolderName) {
@@ -171,7 +171,7 @@ public class MandateImportEntryService {
         }
 
         /**
-         * Bank code - see [local details](#appendix-local-bank-details) for more information.  Alternatively
+         * Bank code - see [local details](#appendix-local-bank-details) for more information. Alternatively
          * you can provide an `iban`.
          */
         public MandateImportEntryCreateRequest withBankAccountBankCode(String bankCode) {
@@ -195,8 +195,9 @@ public class MandateImportEntryService {
         }
 
         /**
-         * [ISO 3166-1](http://en.wikipedia.org/wiki/ISO_3166-1_alpha-2#Officially_assigned_code_elements)
-         * alpha-2 code. Defaults to the country code of the `iban` if supplied, otherwise is required.
+         * [ISO 3166-1 alpha-2
+         * code](http://en.wikipedia.org/wiki/ISO_3166-1_alpha-2#Officially_assigned_code_elements). Defaults
+         * to the country code of the `iban` if supplied, otherwise is required.
          */
         public MandateImportEntryCreateRequest withBankAccountCountryCode(String countryCode) {
             if (bankAccount == null) {
@@ -284,8 +285,8 @@ public class MandateImportEntryService {
         }
 
         /**
-         * [ISO 3166-1](http://en.wikipedia.org/wiki/ISO_3166-1_alpha-2#Officially_assigned_code_elements)
-         * alpha-2 code.
+         * [ISO 3166-1 alpha-2
+         * code.](http://en.wikipedia.org/wiki/ISO_3166-1_alpha-2#Officially_assigned_code_elements)
          */
         public MandateImportEntryCreateRequest withCustomerCountryCode(String countryCode) {
             if (customer == null) {
@@ -506,9 +507,9 @@ public class MandateImportEntryService {
             private String iban;
 
             /**
-             * Name of the account holder, as known by the bank. Usually this matches the name of the linked
-             * [customer](#core-endpoints-customers). This field will be transliterated, upcased and truncated to
-             * 18 characters.
+             * Name of the account holder, as known by the bank. Usually this is the same as the name stored with
+             * the linked [creditor](#core-endpoints-creditors). This field will be transliterated, upcased and
+             * truncated to 18 characters.
              */
             public BankAccount withAccountHolderName(String accountHolderName) {
                 this.accountHolderName = accountHolderName;
@@ -525,7 +526,7 @@ public class MandateImportEntryService {
             }
 
             /**
-             * Bank code - see [local details](#appendix-local-bank-details) for more information.  Alternatively
+             * Bank code - see [local details](#appendix-local-bank-details) for more information. Alternatively
              * you can provide an `iban`.
              */
             public BankAccount withBankCode(String bankCode) {
@@ -543,8 +544,9 @@ public class MandateImportEntryService {
             }
 
             /**
-             * [ISO 3166-1](http://en.wikipedia.org/wiki/ISO_3166-1_alpha-2#Officially_assigned_code_elements)
-             * alpha-2 code. Defaults to the country code of the `iban` if supplied, otherwise is required.
+             * [ISO 3166-1 alpha-2
+             * code](http://en.wikipedia.org/wiki/ISO_3166-1_alpha-2#Officially_assigned_code_elements). Defaults
+             * to the country code of the `iban` if supplied, otherwise is required.
              */
             public BankAccount withCountryCode(String countryCode) {
                 this.countryCode = countryCode;
@@ -624,8 +626,8 @@ public class MandateImportEntryService {
             }
 
             /**
-             * [ISO 3166-1](http://en.wikipedia.org/wiki/ISO_3166-1_alpha-2#Officially_assigned_code_elements)
-             * alpha-2 code.
+             * [ISO 3166-1 alpha-2
+             * code.](http://en.wikipedia.org/wiki/ISO_3166-1_alpha-2#Officially_assigned_code_elements)
              */
             public Customer withCountryCode(String countryCode) {
                 this.countryCode = countryCode;

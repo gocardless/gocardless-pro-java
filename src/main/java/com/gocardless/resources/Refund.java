@@ -25,7 +25,7 @@ public class Refund {
     private String reference;
 
     /**
-     * Amount in pence/cents/öre.
+     * Amount in minor unit (e.g. pence in GBP, cents in EUR).
      */
     public Integer getAmount() {
         return amount;
@@ -66,9 +66,14 @@ public class Refund {
     }
 
     /**
-     * An optional refund reference, displayed on your customer's bank statement. This can be up to 18
-     * characters long for Bacs or BECS payments, 140 characters for SEPA payments, or 25 characters for
-     * Autogiro payments.
+     * An optional reference that will appear on your customer's bank statement. The character limit for
+     * this reference is dependent on the scheme.<br /> <strong>ACH</strong> - 10 characters<br />
+     * <strong>Autogiro</strong> - 11 characters<br /> <strong>Bacs</strong> - 10 characters<br />
+     * <strong>BECS</strong> - 30 characters<br /> <strong>BECS NZ</strong> - 12 characters<br />
+     * <strong>Betalingsservice</strong> - 30 characters<br /> <strong>PAD</strong> - 12 characters<br />
+     * <strong>SEPA</strong> - 140 characters <p class='restricted-notice'><strong>Restricted</strong>:
+     * You can only specify a payment reference for Bacs payments (that is, when collecting from the UK)
+     * if you're on the <a href='https://gocardless.com/pricing'>GoCardless Plus or Pro packages</a>.</p>
      */
     public String getReference() {
         return reference;

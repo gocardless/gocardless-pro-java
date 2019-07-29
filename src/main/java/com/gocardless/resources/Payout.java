@@ -26,7 +26,7 @@ public class Payout {
     private Status status;
 
     /**
-     * Amount in pence or cents.
+     * Amount in minor unit (e.g. pence in GBP, cents in EUR).
      */
     public Integer getAmount() {
         return amount;
@@ -62,7 +62,8 @@ public class Payout {
     }
 
     /**
-     * Fees that have already been deducted from the payout amount in pence or cents.
+     * Fees that have already been deducted from the payout amount in minor unit (e.g. pence in GBP,
+     * cents in EUR).
      * 
      * For each `late_failure_settled` or `chargeback_settled` action, we refund the transaction fees in
      * a payout. This means that a payout can have a negative `deducted_fees`. This field is calculated

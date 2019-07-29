@@ -166,7 +166,9 @@ public class Subscription {
     }
 
     /**
-     * Name of the month on which to charge a customer. Must be lowercase.
+     * Name of the month on which to charge a customer. Must be lowercase. Only applies
+     * when the interval_unit is `yearly`.
+     * 
      */
     public Month getMonth() {
         return month;
@@ -217,7 +219,7 @@ public class Subscription {
     }
 
     /**
-     * Up to 10 upcoming payments with the amount, in pence, and charge date for each.
+     * Up to 10 upcoming payments with their amounts and charge dates.
      */
     public List<UpcomingPayment> getUpcomingPayments() {
         return upcomingPayments;
@@ -280,7 +282,7 @@ public class Subscription {
         private String chargeDate;
 
         /**
-         * The amount of this payment, in pence.
+         * The amount of this payment, in minor unit (e.g. pence in GBP, cents in EUR).
          */
         public Integer getAmount() {
             return amount;

@@ -71,8 +71,8 @@ public class Creditor {
     }
 
     /**
-     * [ISO 3166-1](http://en.wikipedia.org/wiki/ISO_3166-1_alpha-2#Officially_assigned_code_elements)
-     * alpha-2 code.
+     * [ISO 3166-1 alpha-2
+     * code.](http://en.wikipedia.org/wiki/ISO_3166-1_alpha-2#Officially_assigned_code_elements)
      */
     public String getCountryCode() {
         return countryCode;
@@ -288,8 +288,8 @@ public class Creditor {
         }
 
         /**
-         * The support [ISO 3166-1 country
-         * code](http://en.wikipedia.org/wiki/ISO_3166-1_alpha-2#Officially_assigned_code_elements).
+         * [ISO 3166-1 alpha-2
+         * code.](http://en.wikipedia.org/wiki/ISO_3166-1_alpha-2#Officially_assigned_code_elements)
          */
         public String getCountryCode() {
             return countryCode;

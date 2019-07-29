@@ -34,9 +34,9 @@ public class CustomerBankAccount {
     private Map<String, String> metadata;
 
     /**
-     * Name of the account holder, as known by the bank. Usually this matches the name of the linked
-     * [customer](#core-endpoints-customers). This field will be transliterated, upcased and truncated to
-     * 18 characters.
+     * Name of the account holder, as known by the bank. Usually this is the same as the name stored with
+     * the linked [creditor](#core-endpoints-creditors). This field will be transliterated, upcased and
+     * truncated to 18 characters.
      */
     public String getAccountHolderName() {
         return accountHolderName;
@@ -66,8 +66,9 @@ public class CustomerBankAccount {
     }
 
     /**
-     * [ISO 3166-1](http://en.wikipedia.org/wiki/ISO_3166-1_alpha-2#Officially_assigned_code_elements)
-     * alpha-2 code. Defaults to the country code of the `iban` if supplied, otherwise is required.
+     * [ISO 3166-1 alpha-2
+     * code](http://en.wikipedia.org/wiki/ISO_3166-1_alpha-2#Officially_assigned_code_elements). Defaults
+     * to the country code of the `iban` if supplied, otherwise is required.
      */
     public String getCountryCode() {
         return countryCode;
@@ -81,8 +82,8 @@ public class CustomerBankAccount {
     }
 
     /**
-     * [ISO 4217](http://en.wikipedia.org/wiki/ISO_4217#Active_codes) currency code, defaults to national
-     * currency of `country_code`.
+     * [ISO 4217](http://en.wikipedia.org/wiki/ISO_4217#Active_codes) currency code. Currently "AUD",
+     * "CAD", "DKK", "EUR", "GBP", "NZD", "SEK" and "USD" are supported.
      */
     public String getCurrency() {
         return currency;
