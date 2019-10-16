@@ -2,6 +2,8 @@ package com.gocardless.resources;
 
 import java.util.Map;
 
+import com.google.gson.annotations.SerializedName;
+
 /**
  * Represents a refund resource returned from the API.
  *
@@ -19,6 +21,7 @@ public class Refund {
     private Integer amount;
     private String createdAt;
     private String currency;
+    private Fx fx;
     private String id;
     private Links links;
     private Map<String, String> metadata;
@@ -44,6 +47,10 @@ public class Refund {
      */
     public String getCurrency() {
         return currency;
+    }
+
+    public Fx getFx() {
+        return fx;
     }
 
     /**
@@ -77,6 +84,64 @@ public class Refund {
      */
     public String getReference() {
         return reference;
+    }
+
+    public static class Fx {
+        private Fx() {
+            // blank to prevent instantiation
+        }
+
+        private Integer estimatedExchangeRate;
+        private Integer exchangeRate;
+        private Integer fxAmount;
+        private FxCurrency fxCurrency;
+
+        /**
+         * Estimated rate that will be used in the foreign exchange of the `amount` into the `fx_currency`.
+         * This will vary based on the prevailing market rate until the moment that it is paid out.
+         * Present only before a resource is paid out.
+         */
+        public Integer getEstimatedExchangeRate() {
+            return estimatedExchangeRate;
+        }
+
+        /**
+         * Rate used in the foreign exchange of the `amount` into the `fx_currency`.
+         * Present only after a resource is paid out.
+         */
+        public Integer getExchangeRate() {
+            return exchangeRate;
+        }
+
+        /**
+         * Amount that was paid out in the `fx_currency` after foreign exchange.
+         * Present only after the resource has been paid out.
+         */
+        public Integer getFxAmount() {
+            return fxAmount;
+        }
+
+        /**
+         * [ISO 4217](http://en.wikipedia.org/wiki/ISO_4217#Active_codes) code for the currency in which
+         * amounts will be paid out (after foreign exchange). Currently "AUD", "CAD", "DKK", "EUR", "GBP",
+         * "NZD", "SEK" and "USD" are supported. Present only if payouts will be (or were) made via foreign
+         * exchange.
+         */
+        public FxCurrency getFxCurrency() {
+            return fxCurrency;
+        }
+
+        public enum FxCurrency {
+            @SerializedName("AUD")
+            AUD, @SerializedName("CAD")
+            CAD, @SerializedName("DKK")
+            DKK, @SerializedName("EUR")
+            EUR, @SerializedName("GBP")
+            GBP, @SerializedName("NZD")
+            NZD, @SerializedName("SEK")
+            SEK, @SerializedName("USD")
+            USD,
+        }
     }
 
     public static class Links {

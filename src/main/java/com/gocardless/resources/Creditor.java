@@ -26,6 +26,7 @@ public class Creditor {
     private String city;
     private String countryCode;
     private String createdAt;
+    private FxPayoutCurrency fxPayoutCurrency;
     private String id;
     private Links links;
     private String logoUrl;
@@ -83,6 +84,16 @@ public class Creditor {
      */
     public String getCreatedAt() {
         return createdAt;
+    }
+
+    /**
+     * [ISO 4217](http://en.wikipedia.org/wiki/ISO_4217#Active_codes) code for the currency in which
+     * amounts will be paid out (after foreign exchange). Currently "AUD", "CAD", "DKK", "EUR", "GBP",
+     * "NZD", "SEK" and "USD" are supported. Present only if payouts will be (or were) made via foreign
+     * exchange.
+     */
+    public FxPayoutCurrency getFxPayoutCurrency() {
+        return fxPayoutCurrency;
     }
 
     /**
@@ -152,6 +163,18 @@ public class Creditor {
      */
     public VerificationStatus getVerificationStatus() {
         return verificationStatus;
+    }
+
+    public enum FxPayoutCurrency {
+        @SerializedName("AUD")
+        AUD, @SerializedName("CAD")
+        CAD, @SerializedName("DKK")
+        DKK, @SerializedName("EUR")
+        EUR, @SerializedName("GBP")
+        GBP, @SerializedName("NZD")
+        NZD, @SerializedName("SEK")
+        SEK, @SerializedName("USD")
+        USD,
     }
 
     public enum VerificationStatus {
