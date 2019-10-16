@@ -75,6 +75,15 @@ public class UrlFormatterTest {
     }
 
     @Test
+    public void shouldEncodePathParam() {
+        String template = "/foo/:bar";
+        Map<String, String> pathParams = ImmutableMap.of("bar", "bar/lah");
+        Map<String, Object> queryParams = ImmutableMap.of();
+        HttpUrl result = urlFormatter.formatUrl(template, pathParams, queryParams);
+        assertThat(result.toString()).isEqualTo("http://example.com/foo/bar%2Flah");
+    }
+
+    @Test
     public void shouldEncodeQueryParam() {
         String template = "/foo";
         Map<String, String> pathParams = ImmutableMap.of();

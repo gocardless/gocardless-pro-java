@@ -4,6 +4,8 @@ import java.util.Map;
 
 import com.squareup.okhttp.HttpUrl;
 
+import static com.google.common.net.UrlEscapers.urlPathSegmentEscaper;
+
 final class UrlFormatter {
     private final HttpUrl baseUrl;
 
@@ -15,7 +17,9 @@ final class UrlFormatter {
             Map<String, Object> queryParams) {
         String path = template;
         for (Map.Entry<String, String> entry : pathParams.entrySet()) {
-            path = path.replace(":" + entry.getKey(), entry.getValue());
+            path =
+                    path.replace(":" + entry.getKey(),
+                            urlPathSegmentEscaper().escape(entry.getValue()));
         }
         HttpUrl.Builder builder = baseUrl.resolve(path).newBuilder();
         for (Map.Entry<String, Object> param : queryParams.entrySet()) {
