@@ -25,6 +25,7 @@ public class Payment {
     private String createdAt;
     private Currency currency;
     private String description;
+    private Fx fx;
     private String id;
     private Links links;
     private Map<String, String> metadata;
@@ -79,6 +80,10 @@ public class Payment {
         return description;
     }
 
+    public Fx getFx() {
+        return fx;
+    }
+
     /**
      * Unique identifier, beginning with "PM".
      */
@@ -99,13 +104,14 @@ public class Payment {
     }
 
     /**
-     * An optional payment reference that will appear on your customer's bank statement. For Bacs
-     * payments this can be up to 10 characters, for SEPA payments the limit is 140 characters, for
-     * Autogiro payments the limit is 11 characters, for Betalingsservice or BECS payments the limit is
-     * 30 characters and for BECS NZ or PAD the limit is 12 characters. <p
-     * class='restricted-notice'><strong>Restricted</strong>: You can only specify a payment reference
-     * for Bacs payments (that is, when collecting from the UK) if you're on the <a
-     * href='https://gocardless.com/pricing'>GoCardless Plus or Pro packages</a>.</p>
+     * An optional reference that will appear on your customer's bank statement. The character limit for
+     * this reference is dependent on the scheme.<br /> <strong>ACH</strong> - 10 characters<br />
+     * <strong>Autogiro</strong> - 11 characters<br /> <strong>Bacs</strong> - 10 characters<br />
+     * <strong>BECS</strong> - 30 characters<br /> <strong>BECS NZ</strong> - 12 characters<br />
+     * <strong>Betalingsservice</strong> - 30 characters<br /> <strong>PAD</strong> - 12 characters<br />
+     * <strong>SEPA</strong> - 140 characters <p class='restricted-notice'><strong>Restricted</strong>:
+     * You can only specify a payment reference for Bacs payments (that is, when collecting from the UK)
+     * if you're on the <a href='https://gocardless.com/pricing'>GoCardless Plus or Pro packages</a>.</p>
      */
     public String getReference() {
         return reference;
@@ -154,6 +160,64 @@ public class Payment {
         CUSTOMER_APPROVAL_DENIED, @SerializedName("failed")
         FAILED, @SerializedName("charged_back")
         CHARGED_BACK,
+    }
+
+    public static class Fx {
+        private Fx() {
+            // blank to prevent instantiation
+        }
+
+        private Integer estimatedExchangeRate;
+        private Integer exchangeRate;
+        private Integer fxAmount;
+        private FxCurrency fxCurrency;
+
+        /**
+         * Estimated rate that will be used in the foreign exchange of the `amount` into the `fx_currency`.
+         * This will vary based on the prevailing market rate until the moment that it is paid out.
+         * Present only before a resource is paid out.
+         */
+        public Integer getEstimatedExchangeRate() {
+            return estimatedExchangeRate;
+        }
+
+        /**
+         * Rate used in the foreign exchange of the `amount` into the `fx_currency`.
+         * Present only after a resource is paid out.
+         */
+        public Integer getExchangeRate() {
+            return exchangeRate;
+        }
+
+        /**
+         * Amount that was paid out in the `fx_currency` after foreign exchange.
+         * Present only after the resource has been paid out.
+         */
+        public Integer getFxAmount() {
+            return fxAmount;
+        }
+
+        /**
+         * [ISO 4217](http://en.wikipedia.org/wiki/ISO_4217#Active_codes) code for the currency in which
+         * amounts will be paid out (after foreign exchange). Currently "AUD", "CAD", "DKK", "EUR", "GBP",
+         * "NZD", "SEK" and "USD" are supported. Present only if payouts will be (or were) made via foreign
+         * exchange.
+         */
+        public FxCurrency getFxCurrency() {
+            return fxCurrency;
+        }
+
+        public enum FxCurrency {
+            @SerializedName("AUD")
+            AUD, @SerializedName("CAD")
+            CAD, @SerializedName("DKK")
+            DKK, @SerializedName("EUR")
+            EUR, @SerializedName("GBP")
+            GBP, @SerializedName("NZD")
+            NZD, @SerializedName("SEK")
+            SEK, @SerializedName("USD")
+            USD,
+        }
     }
 
     public static class Links {

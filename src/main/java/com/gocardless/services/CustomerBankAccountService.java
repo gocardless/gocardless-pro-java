@@ -121,9 +121,9 @@ public class CustomerBankAccountService {
         private Map<String, String> metadata;
 
         /**
-         * Name of the account holder, as known by the bank. Usually this matches the name of the linked
-         * [customer](#core-endpoints-customers). This field will be transliterated, upcased and truncated to
-         * 18 characters.
+         * Name of the account holder, as known by the bank. Usually this is the same as the name stored with
+         * the linked [creditor](#core-endpoints-creditors). This field will be transliterated, upcased and
+         * truncated to 18 characters.
          */
         public CustomerBankAccountCreateRequest withAccountHolderName(String accountHolderName) {
             this.accountHolderName = accountHolderName;
@@ -150,7 +150,7 @@ public class CustomerBankAccountService {
         }
 
         /**
-         * Bank code - see [local details](#appendix-local-bank-details) for more information.  Alternatively
+         * Bank code - see [local details](#appendix-local-bank-details) for more information. Alternatively
          * you can provide an `iban`.
          */
         public CustomerBankAccountCreateRequest withBankCode(String bankCode) {
@@ -168,8 +168,9 @@ public class CustomerBankAccountService {
         }
 
         /**
-         * [ISO 3166-1](http://en.wikipedia.org/wiki/ISO_3166-1_alpha-2#Officially_assigned_code_elements)
-         * alpha-2 code. Defaults to the country code of the `iban` if supplied, otherwise is required.
+         * [ISO 3166-1 alpha-2
+         * code](http://en.wikipedia.org/wiki/ISO_3166-1_alpha-2#Officially_assigned_code_elements). Defaults
+         * to the country code of the `iban` if supplied, otherwise is required.
          */
         public CustomerBankAccountCreateRequest withCountryCode(String countryCode) {
             this.countryCode = countryCode;
@@ -177,8 +178,8 @@ public class CustomerBankAccountService {
         }
 
         /**
-         * [ISO 4217](http://en.wikipedia.org/wiki/ISO_4217#Active_codes) currency code, defaults to national
-         * currency of `country_code`.
+         * [ISO 4217](http://en.wikipedia.org/wiki/ISO_4217#Active_codes) currency code. Currently "AUD",
+         * "CAD", "DKK", "EUR", "GBP", "NZD", "SEK" and "USD" are supported.
          */
         public CustomerBankAccountCreateRequest withCurrency(String currency) {
             this.currency = currency;

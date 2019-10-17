@@ -277,7 +277,9 @@ public class SubscriptionService {
         }
 
         /**
-         * Name of the month on which to charge a customer. Must be lowercase.
+         * Name of the month on which to charge a customer. Must be lowercase. Only applies
+         * when the interval_unit is `yearly`.
+         * 
          */
         public SubscriptionCreateRequest withMonth(Month month) {
             this.month = month;

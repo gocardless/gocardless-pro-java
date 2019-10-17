@@ -188,8 +188,8 @@ public class RedirectFlowService {
         }
 
         /**
-         * [ISO 3166-1](http://en.wikipedia.org/wiki/ISO_3166-1_alpha-2#Officially_assigned_code_elements)
-         * alpha-2 code.
+         * [ISO 3166-1 alpha-2
+         * code.](http://en.wikipedia.org/wiki/ISO_3166-1_alpha-2#Officially_assigned_code_elements)
          */
         public RedirectFlowCreateRequest withPrefilledCustomerCountryCode(String countryCode) {
             if (prefilledCustomer == null) {
@@ -461,8 +461,8 @@ public class RedirectFlowService {
             }
 
             /**
-             * [ISO 3166-1](http://en.wikipedia.org/wiki/ISO_3166-1_alpha-2#Officially_assigned_code_elements)
-             * alpha-2 code.
+             * [ISO 3166-1 alpha-2
+             * code.](http://en.wikipedia.org/wiki/ISO_3166-1_alpha-2#Officially_assigned_code_elements)
              */
             public PrefilledCustomer withCountryCode(String countryCode) {
                 this.countryCode = countryCode;
