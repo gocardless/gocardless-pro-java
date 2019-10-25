@@ -167,25 +167,25 @@ public class Payment {
             // blank to prevent instantiation
         }
 
-        private Integer estimatedExchangeRate;
-        private Integer exchangeRate;
+        private String estimatedExchangeRate;
+        private String exchangeRate;
         private Integer fxAmount;
         private FxCurrency fxCurrency;
 
         /**
          * Estimated rate that will be used in the foreign exchange of the `amount` into the `fx_currency`.
          * This will vary based on the prevailing market rate until the moment that it is paid out.
-         * Present only before a resource is paid out.
+         * Present only before a resource is paid out. Has upto 10 decimal places.
          */
-        public Integer getEstimatedExchangeRate() {
+        public String getEstimatedExchangeRate() {
             return estimatedExchangeRate;
         }
 
         /**
          * Rate used in the foreign exchange of the `amount` into the `fx_currency`.
-         * Present only after a resource is paid out.
+         * Present only after a resource is paid out. Has upto 10 decimal places.
          */
-        public Integer getExchangeRate() {
+        public String getExchangeRate() {
             return exchangeRate;
         }
 
