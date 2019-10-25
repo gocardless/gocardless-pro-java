@@ -99,7 +99,7 @@ public class Refund {
         /**
          * Estimated rate that will be used in the foreign exchange of the `amount` into the `fx_currency`.
          * This will vary based on the prevailing market rate until the moment that it is paid out.
-         * Present only before a resource is paid out. Has upto 10 decimal places.
+         * Present only before a resource is paid out. Has up to 10 decimal places.
          */
         public String getEstimatedExchangeRate() {
             return estimatedExchangeRate;
@@ -107,7 +107,7 @@ public class Refund {
 
         /**
          * Rate used in the foreign exchange of the `amount` into the `fx_currency`.
-         * Present only after a resource is paid out. Has upto 10 decimal places.
+         * Present only after a resource is paid out. Has up to 10 decimal places.
          */
         public String getExchangeRate() {
             return exchangeRate;
