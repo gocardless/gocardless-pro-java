@@ -80,7 +80,9 @@ public class CustomerNotification {
         @SerializedName("payment_created")
         PAYMENT_CREATED, @SerializedName("mandate_created")
         MANDATE_CREATED, @SerializedName("subscription_created")
-        SUBSCRIPTION_CREATED,
+        SUBSCRIPTION_CREATED, @SerializedName("instalment_schedule_created")
+        INSTALMENT_SCHEDULE_CREATED, @SerializedName("instalment_schedule_cancelled")
+        INSTALMENT_SCHEDULE_CANCELLED,
     }
 
     public static class Links {
