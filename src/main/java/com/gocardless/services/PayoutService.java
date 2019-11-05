@@ -14,8 +14,9 @@ import com.google.gson.reflect.TypeToken;
  * Service class for working with payout resources.
  *
  * Payouts represent transfers from GoCardless to a [creditor](#core-endpoints-creditors). Each
- * payout contains the funds collected from one or many [payments](#core-endpoints-payments). Payouts
- * are created automatically after a payment has been successfully collected.
+ * payout contains the funds collected from one or many [payments](#core-endpoints-payments). All the
+ * payments in a payout will have been collected in the same currency. Payouts are created
+ * automatically after a payment has been successfully collected.
  */
 public class PayoutService {
     private final HttpClient httpClient;
