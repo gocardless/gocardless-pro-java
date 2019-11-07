@@ -8,6 +8,7 @@ import com.gocardless.http.*;
 import com.gocardless.resources.Customer;
 
 import com.google.common.collect.ImmutableMap;
+import com.google.gson.annotations.SerializedName;
 import com.google.gson.reflect.TypeToken;
 
 /**
@@ -303,6 +304,7 @@ public class CustomerService {
      */
     public static final class CustomerListRequest<S> extends ListRequest<S, Customer> {
         private CreatedAt createdAt;
+        private Currency currency;
 
         /**
          * Cursor pointing to the start of the desired set.
@@ -370,6 +372,15 @@ public class CustomerService {
         }
 
         /**
+         * [ISO 4217](http://en.wikipedia.org/wiki/ISO_4217#Active_codes) currency code. Currently "AUD",
+         * "CAD", "DKK", "EUR", "GBP", "NZD", "SEK" and "USD" are supported.
+         */
+        public CustomerListRequest<S> withCurrency(Currency currency) {
+            this.currency = currency;
+            return this;
+        }
+
+        /**
          * Number of records to return.
          */
         public CustomerListRequest<S> withLimit(Integer limit) {
@@ -393,6 +404,9 @@ public class CustomerService {
             if (createdAt != null) {
                 params.putAll(createdAt.getQueryParams());
             }
+            if (currency != null) {
+                params.put("currency", currency);
+            }
             return params.build();
         }
 
@@ -409,6 +423,22 @@ public class CustomerService {
         @Override
         protected TypeToken<List<Customer>> getTypeToken() {
             return new TypeToken<List<Customer>>() {};
+        }
+
+        public enum Currency {
+            @SerializedName("AUD")
+            AUD, @SerializedName("CAD")
+            CAD, @SerializedName("DKK")
+            DKK, @SerializedName("EUR")
+            EUR, @SerializedName("GBP")
+            GBP, @SerializedName("NZD")
+            NZD, @SerializedName("SEK")
+            SEK, @SerializedName("USD")
+            USD;
+            @Override
+            public String toString() {
+                return name().toLowerCase();
+            }
         }
 
         public static class CreatedAt {
