@@ -196,6 +196,7 @@ public class Creditor {
         private String defaultGbpPayoutAccount;
         private String defaultNzdPayoutAccount;
         private String defaultSekPayoutAccount;
+        private String defaultUsdPayoutAccount;
 
         /**
          * ID of the [bank account](#core-endpoints-creditor-bank-accounts) which is set up to receive
@@ -251,6 +252,14 @@ public class Creditor {
          */
         public String getDefaultSekPayoutAccount() {
             return defaultSekPayoutAccount;
+        }
+
+        /**
+         * ID of the [bank account](#core-endpoints-creditor-bank-accounts) which is set up to receive
+         * payouts in USD.
+         */
+        public String getDefaultUsdPayoutAccount() {
+            return defaultUsdPayoutAccount;
         }
     }
 
