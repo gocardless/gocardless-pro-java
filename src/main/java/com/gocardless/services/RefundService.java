@@ -163,7 +163,8 @@ public class RefundService {
          * <strong>Betalingsservice</strong> - 30 characters<br /> <strong>PAD</strong> - 12 characters<br />
          * <strong>SEPA</strong> - 140 characters <p class='restricted-notice'><strong>Restricted</strong>:
          * You can only specify a payment reference for Bacs payments (that is, when collecting from the UK)
-         * if you're on the <a href='https://gocardless.com/pricing'>GoCardless Plus or Pro packages</a>.</p>
+         * if you're on the <a href='https://gocardless.com/pricing'>GoCardless Plus, Pro or Enterprise
+         * packages</a>.</p>
          */
         public RefundCreateRequest withReference(String reference) {
             this.reference = reference;
