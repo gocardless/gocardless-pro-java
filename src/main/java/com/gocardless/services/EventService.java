@@ -145,6 +145,7 @@ public class EventService {
          * <li>`payout`</li>
          * <li>`refund`</li>
          * <li>`subscription`</li>
+         * <li>`instalment_schedule`</li>
          * </ul>
          */
         public EventListRequest<S> withInclude(Include include) {
@@ -207,12 +208,14 @@ public class EventService {
 
         /**
          * Type of resource that you'd like to get all events for. Cannot be used together with the
-         * `payment`, `mandate`, `subscription`, `refund` or `payout` parameter. The type can be one of:
+         * `payment`, `mandate`, `subscription`, `instalment_schedule`, `refund` or `payout` parameter. The
+         * type can be one of:
          * <ul>
          * <li>`payments`</li>
          * <li>`mandates`</li>
          * <li>`payouts`</li>
          * <li>`subscriptions`</li>
+         * <li>`instalment_schedules`</li>
          * <li>`refunds`</li>
          * </ul>
          */
@@ -297,7 +300,8 @@ public class EventService {
             MANDATE, @SerializedName("payout")
             PAYOUT, @SerializedName("refund")
             REFUND, @SerializedName("subscription")
-            SUBSCRIPTION;
+            SUBSCRIPTION, @SerializedName("instalment_schedule")
+            INSTALMENT_SCHEDULE;
             @Override
             public String toString() {
                 return name().toLowerCase();
@@ -310,7 +314,8 @@ public class EventService {
             MANDATES, @SerializedName("payouts")
             PAYOUTS, @SerializedName("refunds")
             REFUNDS, @SerializedName("subscriptions")
-            SUBSCRIPTIONS;
+            SUBSCRIPTIONS, @SerializedName("instalment_schedules")
+            INSTALMENT_SCHEDULES;
             @Override
             public String toString() {
                 return name().toLowerCase();
