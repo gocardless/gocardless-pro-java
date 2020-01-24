@@ -112,6 +112,7 @@ public class Payout {
      * <ul>
      * <li>`pending`: the payout has been created, but not yet sent to the banks</li>
      * <li>`paid`: the payout has been sent to the banks</li>
+     * <li>`bounced`: the payout bounced when sent, the payout can be retried.</li>
      * </ul>
      */
     public Status getStatus() {
@@ -139,7 +140,8 @@ public class Payout {
     public enum Status {
         @SerializedName("pending")
         PENDING, @SerializedName("paid")
-        PAID,
+        PAID, @SerializedName("bounced")
+        BOUNCED,
     }
 
     public static class Fx {
