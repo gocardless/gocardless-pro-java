@@ -227,6 +227,7 @@ public class Payment {
         }
 
         private String creditor;
+        private String instalmentSchedule;
         private String mandate;
         private String payout;
         private String subscription;
@@ -236,6 +237,15 @@ public class Payment {
          */
         public String getCreditor() {
             return creditor;
+        }
+
+        /**
+         * ID of [instalment_schedule](#core-endpoints-instalment-schedules) from which this payment was
+         * created.<br/>**Note**: this property will only be present if this payment is part of an instalment
+         * schedule.
+         */
+        public String getInstalmentSchedule() {
+            return instalmentSchedule;
         }
 
         /**
