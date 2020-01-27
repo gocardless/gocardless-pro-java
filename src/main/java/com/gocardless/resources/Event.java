@@ -243,8 +243,8 @@ public class Event {
         private String subscription;
 
         /**
-         * If `resource_type` is `instalment_schedule`, this is the ID of the instalment schedule which has
-         * been updated.
+         * If `resource_type` is `instalment_schedule`, this is the ID of the [instalment
+         * schedule](#core-endpoints-instalment-schedules) which has been updated.
          */
         public String getInstalmentSchedule() {
             return instalmentSchedule;
