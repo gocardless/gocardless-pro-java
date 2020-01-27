@@ -144,8 +144,6 @@ public class Customer {
 
     /**
      * [ITU E.123](https://en.wikipedia.org/wiki/E.123) formatted phone number, including country code.
-     * Required for New Zealand customers only. Must be supplied if the customer's bank account is
-     * denominated in New Zealand Dollars (NZD).
      */
     public String getPhoneNumber() {
         return phoneNumber;
