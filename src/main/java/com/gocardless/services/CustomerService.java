@@ -8,6 +8,7 @@ import com.gocardless.http.*;
 import com.gocardless.resources.Customer;
 
 import com.google.common.collect.ImmutableMap;
+import com.google.gson.annotations.SerializedName;
 import com.google.gson.reflect.TypeToken;
 
 /**
@@ -217,8 +218,6 @@ public class CustomerService {
 
         /**
          * [ITU E.123](https://en.wikipedia.org/wiki/E.123) formatted phone number, including country code.
-         * Required for New Zealand customers only. Must be supplied if the customer's bank account is
-         * denominated in New Zealand Dollars (NZD).
          */
         public CustomerCreateRequest withPhoneNumber(String phoneNumber) {
             this.phoneNumber = phoneNumber;
@@ -234,7 +233,8 @@ public class CustomerService {
         }
 
         /**
-         * The customer's address region, county or department.
+         * The customer's address region, county or department. For US customers a 2 letter state code ([ISO
+         * 3166-2:US](https://en.wikipedia.org/wiki/ISO_3166-2:US) e.g CA) is required.
          */
         public CustomerCreateRequest withRegion(String region) {
             this.region = region;
@@ -302,6 +302,7 @@ public class CustomerService {
      */
     public static final class CustomerListRequest<S> extends ListRequest<S, Customer> {
         private CreatedAt createdAt;
+        private Currency currency;
 
         /**
          * Cursor pointing to the start of the desired set.
@@ -369,6 +370,15 @@ public class CustomerService {
         }
 
         /**
+         * [ISO 4217](http://en.wikipedia.org/wiki/ISO_4217#Active_codes) currency code. Currently "AUD",
+         * "CAD", "DKK", "EUR", "GBP", "NZD", "SEK" and "USD" are supported.
+         */
+        public CustomerListRequest<S> withCurrency(Currency currency) {
+            this.currency = currency;
+            return this;
+        }
+
+        /**
          * Number of records to return.
          */
         public CustomerListRequest<S> withLimit(Integer limit) {
@@ -392,6 +402,9 @@ public class CustomerService {
             if (createdAt != null) {
                 params.putAll(createdAt.getQueryParams());
             }
+            if (currency != null) {
+                params.put("currency", currency);
+            }
             return params.build();
         }
 
@@ -408,6 +421,22 @@ public class CustomerService {
         @Override
         protected TypeToken<List<Customer>> getTypeToken() {
             return new TypeToken<List<Customer>>() {};
+        }
+
+        public enum Currency {
+            @SerializedName("AUD")
+            AUD, @SerializedName("CAD")
+            CAD, @SerializedName("DKK")
+            DKK, @SerializedName("EUR")
+            EUR, @SerializedName("GBP")
+            GBP, @SerializedName("NZD")
+            NZD, @SerializedName("SEK")
+            SEK, @SerializedName("USD")
+            USD;
+            @Override
+            public String toString() {
+                return name().toLowerCase();
+            }
         }
 
         public static class CreatedAt {
@@ -655,8 +684,6 @@ public class CustomerService {
 
         /**
          * [ITU E.123](https://en.wikipedia.org/wiki/E.123) formatted phone number, including country code.
-         * Required for New Zealand customers only. Must be supplied if the customer's bank account is
-         * denominated in New Zealand Dollars (NZD).
          */
         public CustomerUpdateRequest withPhoneNumber(String phoneNumber) {
             this.phoneNumber = phoneNumber;
@@ -672,7 +699,8 @@ public class CustomerService {
         }
 
         /**
-         * The customer's address region, county or department.
+         * The customer's address region, county or department. For US customers a 2 letter state code ([ISO
+         * 3166-2:US](https://en.wikipedia.org/wiki/ISO_3166-2:US) e.g CA) is required.
          */
         public CustomerUpdateRequest withRegion(String region) {
             this.region = region;

@@ -14,8 +14,9 @@ import com.google.gson.reflect.TypeToken;
  * Service class for working with payout resources.
  *
  * Payouts represent transfers from GoCardless to a [creditor](#core-endpoints-creditors). Each
- * payout contains the funds collected from one or many [payments](#core-endpoints-payments). Payouts
- * are created automatically after a payment has been successfully collected.
+ * payout contains the funds collected from one or many [payments](#core-endpoints-payments). All the
+ * payments in a payout will have been collected in the same currency. Payouts are created
+ * automatically after a payment has been successfully collected.
  */
 public class PayoutService {
     private final HttpClient httpClient;
@@ -181,6 +182,7 @@ public class PayoutService {
          * <ul>
          * <li>`pending`: the payout has been created, but not yet sent to the banks</li>
          * <li>`paid`: the payout has been sent to the banks</li>
+         * <li>`bounced`: the payout bounced when sent, the payout can be retried.</li>
          * </ul>
          */
         public PayoutListRequest<S> withStatus(Status status) {
@@ -269,7 +271,8 @@ public class PayoutService {
         public enum Status {
             @SerializedName("pending")
             PENDING, @SerializedName("paid")
-            PAID;
+            PAID, @SerializedName("bounced")
+            BOUNCED;
             @Override
             public String toString() {
                 return name().toLowerCase();

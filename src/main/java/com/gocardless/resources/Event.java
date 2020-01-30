@@ -80,6 +80,7 @@ public class Event {
      * <li>`payouts`</li>
      * <li>`refunds`</li>
      * <li>`subscriptions`</li>
+     * <li>`instalment_schedules`</li>
      * </ul>
      */
     public ResourceType getResourceType() {
@@ -92,7 +93,8 @@ public class Event {
         MANDATES, @SerializedName("payouts")
         PAYOUTS, @SerializedName("refunds")
         REFUNDS, @SerializedName("subscriptions")
-        SUBSCRIPTIONS,
+        SUBSCRIPTIONS, @SerializedName("instalment_schedules")
+        INSTALMENT_SCHEDULES,
     }
 
     public static class CustomerNotification {
@@ -137,7 +139,9 @@ public class Event {
             @SerializedName("payment_created")
             PAYMENT_CREATED, @SerializedName("mandate_created")
             MANDATE_CREATED, @SerializedName("subscription_created")
-            SUBSCRIPTION_CREATED,
+            SUBSCRIPTION_CREATED, @SerializedName("instalment_schedule_created")
+            INSTALMENT_SCHEDULE_CREATED, @SerializedName("instalment_schedule_cancelled")
+            INSTALMENT_SCHEDULE_CANCELLED,
         }
     }
 
@@ -226,6 +230,7 @@ public class Event {
             // blank to prevent instantiation
         }
 
+        private String instalmentSchedule;
         private String mandate;
         private String newCustomerBankAccount;
         private String newMandate;
@@ -236,6 +241,14 @@ public class Event {
         private String previousCustomerBankAccount;
         private String refund;
         private String subscription;
+
+        /**
+         * If `resource_type` is `instalment_schedule`, this is the ID of the [instalment
+         * schedule](#core-endpoints-instalment-schedules) which has been updated.
+         */
+        public String getInstalmentSchedule() {
+            return instalmentSchedule;
+        }
 
         /**
          * If `resource_type` is `mandates`, this is the ID of the [mandate](#core-endpoints-mandates) which

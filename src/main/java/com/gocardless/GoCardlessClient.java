@@ -23,6 +23,7 @@ public class GoCardlessClient {
     private final CustomerBankAccountService customerBankAccounts;
     private final CustomerNotificationService customerNotifications;
     private final EventService events;
+    private final InstalmentScheduleService instalmentSchedules;
     private final MandateService mandates;
     private final MandateImportService mandateImports;
     private final MandateImportEntryService mandateImportEntries;
@@ -113,6 +114,7 @@ public class GoCardlessClient {
         this.customerBankAccounts = new CustomerBankAccountService(httpClient);
         this.customerNotifications = new CustomerNotificationService(httpClient);
         this.events = new EventService(httpClient);
+        this.instalmentSchedules = new InstalmentScheduleService(httpClient);
         this.mandates = new MandateService(httpClient);
         this.mandateImports = new MandateImportService(httpClient);
         this.mandateImportEntries = new MandateImportEntryService(httpClient);
@@ -172,6 +174,13 @@ public class GoCardlessClient {
      */
     public EventService events() {
         return events;
+    }
+
+    /**
+     * A service class for working with instalment schedule resources.
+     */
+    public InstalmentScheduleService instalmentSchedules() {
+        return instalmentSchedules;
     }
 
     /**

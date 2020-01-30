@@ -26,6 +26,7 @@ public class Refund {
     private Links links;
     private Map<String, String> metadata;
     private String reference;
+    private Status status;
 
     /**
      * Amount in minor unit (e.g. pence in GBP, cents in EUR).
@@ -80,10 +81,38 @@ public class Refund {
      * <strong>Betalingsservice</strong> - 30 characters<br /> <strong>PAD</strong> - 12 characters<br />
      * <strong>SEPA</strong> - 140 characters <p class='restricted-notice'><strong>Restricted</strong>:
      * You can only specify a payment reference for Bacs payments (that is, when collecting from the UK)
-     * if you're on the <a href='https://gocardless.com/pricing'>GoCardless Plus or Pro packages</a>.</p>
+     * if you're on the <a href='https://gocardless.com/pricing'>GoCardless Plus, Pro or Enterprise
+     * packages</a>.</p>
      */
     public String getReference() {
         return reference;
+    }
+
+    /**
+     * One of:
+     * <ul>
+     * <li>`created`: the refund has been created</li>
+     * <li>`pending_submission`: the refund has been created, but not yet submitted to the banks</li>
+     * <li>`submitted`: the refund has been submitted to the banks</li>
+     * <li>`paid`:  the refund has been included in a [payout](#core-endpoints-payouts)</li>
+     * <li>`cancelled`: the refund has been cancelled</li>
+     * <li>`bounced`: the refund has failed to be paid</li>
+     * <li>`funds_returned`: the refund has had its funds returned</li>
+     * </ul>
+     */
+    public Status getStatus() {
+        return status;
+    }
+
+    public enum Status {
+        @SerializedName("created")
+        CREATED, @SerializedName("pending_submission")
+        PENDING_SUBMISSION, @SerializedName("submitted")
+        SUBMITTED, @SerializedName("paid")
+        PAID, @SerializedName("cancelled")
+        CANCELLED, @SerializedName("bounced")
+        BOUNCED, @SerializedName("funds_returned")
+        FUNDS_RETURNED,
     }
 
     public static class Fx {

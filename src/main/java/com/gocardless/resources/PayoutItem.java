@@ -63,6 +63,9 @@ public class PayoutItem {
      * <li>`revenue_share` (credit/debit): A share of the fees that GoCardless collected which some
      * partner integrations receive when their users take payments. Only shown in partner payouts. In the
      * case of a payment failure or chargeback, these will appear as credits.</li>
+     * <li>`surcharge_fee` (credit/debit): GoCardless deducted a surcharge fee as the payment failed or
+     * was charged back, or refunded a surcharge fee as the bank or customer cancelled the
+     * chargeback.</li>
      * </ul>
      * 
      */
@@ -79,7 +82,8 @@ public class PayoutItem {
         REFUND, @SerializedName("gocardless_fee")
         GOCARDLESS_FEE, @SerializedName("app_fee")
         APP_FEE, @SerializedName("revenue_share")
-        REVENUE_SHARE,
+        REVENUE_SHARE, @SerializedName("surcharge_fee")
+        SURCHARGE_FEE,
     }
 
     public static class Links {

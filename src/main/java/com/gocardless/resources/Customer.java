@@ -144,8 +144,6 @@ public class Customer {
 
     /**
      * [ITU E.123](https://en.wikipedia.org/wiki/E.123) formatted phone number, including country code.
-     * Required for New Zealand customers only. Must be supplied if the customer's bank account is
-     * denominated in New Zealand Dollars (NZD).
      */
     public String getPhoneNumber() {
         return phoneNumber;
@@ -159,7 +157,8 @@ public class Customer {
     }
 
     /**
-     * The customer's address region, county or department.
+     * The customer's address region, county or department. For US customers a 2 letter state code ([ISO
+     * 3166-2:US](https://en.wikipedia.org/wiki/ISO_3166-2:US) e.g CA) is required.
      */
     public String getRegion() {
         return region;

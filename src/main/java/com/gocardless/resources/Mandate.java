@@ -55,7 +55,8 @@ public class Mandate {
     }
 
     /**
-     * The earliest date a newly created payment for this mandate could be charged.
+     * The earliest date that can be used as a `charge_date` on any newly created payment for this
+     * mandate. This value will change over time.
      */
     public String getNextPossibleChargeDate() {
         return nextPossibleChargeDate;

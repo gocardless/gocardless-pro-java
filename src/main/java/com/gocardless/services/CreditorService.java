@@ -572,6 +572,18 @@ public class CreditorService {
         }
 
         /**
+         * ID of the [bank account](#core-endpoints-creditor-bank-accounts) which is set up to receive
+         * payouts in USD.
+         */
+        public CreditorUpdateRequest withLinksDefaultUsdPayoutAccount(String defaultUsdPayoutAccount) {
+            if (links == null) {
+                links = new Links();
+            }
+            links.withDefaultUsdPayoutAccount(defaultUsdPayoutAccount);
+            return this;
+        }
+
+        /**
          * The creditor's name.
          */
         public CreditorUpdateRequest withName(String name) {
@@ -640,6 +652,7 @@ public class CreditorService {
             private String defaultGbpPayoutAccount;
             private String defaultNzdPayoutAccount;
             private String defaultSekPayoutAccount;
+            private String defaultUsdPayoutAccount;
 
             /**
              * ID of the [bank account](#core-endpoints-creditor-bank-accounts) which is set up to receive
@@ -701,6 +714,15 @@ public class CreditorService {
              */
             public Links withDefaultSekPayoutAccount(String defaultSekPayoutAccount) {
                 this.defaultSekPayoutAccount = defaultSekPayoutAccount;
+                return this;
+            }
+
+            /**
+             * ID of the [bank account](#core-endpoints-creditor-bank-accounts) which is set up to receive
+             * payouts in USD.
+             */
+            public Links withDefaultUsdPayoutAccount(String defaultUsdPayoutAccount) {
+                this.defaultUsdPayoutAccount = defaultUsdPayoutAccount;
                 return this;
             }
         }

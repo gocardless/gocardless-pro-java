@@ -360,8 +360,6 @@ public class MandateImportEntryService {
 
         /**
          * [ITU E.123](https://en.wikipedia.org/wiki/E.123) formatted phone number, including country code.
-         * Required for New Zealand customers only. Must be supplied if the customer's bank account is
-         * denominated in New Zealand Dollars (NZD).
          */
         public MandateImportEntryCreateRequest withCustomerPhoneNumber(String phoneNumber) {
             if (customer == null) {
@@ -384,7 +382,8 @@ public class MandateImportEntryService {
         }
 
         /**
-         * The customer's address region, county or department.
+         * The customer's address region, county or department. For US customers a 2 letter state code ([ISO
+         * 3166-2:US](https://en.wikipedia.org/wiki/ISO_3166-2:US) e.g CA) is required.
          */
         public MandateImportEntryCreateRequest withCustomerRegion(String region) {
             if (customer == null) {
@@ -682,8 +681,6 @@ public class MandateImportEntryService {
 
             /**
              * [ITU E.123](https://en.wikipedia.org/wiki/E.123) formatted phone number, including country code.
-             * Required for New Zealand customers only. Must be supplied if the customer's bank account is
-             * denominated in New Zealand Dollars (NZD).
              */
             public Customer withPhoneNumber(String phoneNumber) {
                 this.phoneNumber = phoneNumber;
@@ -700,7 +697,8 @@ public class MandateImportEntryService {
             }
 
             /**
-             * The customer's address region, county or department.
+             * The customer's address region, county or department. For US customers a 2 letter state code ([ISO
+             * 3166-2:US](https://en.wikipedia.org/wiki/ISO_3166-2:US) e.g CA) is required.
              */
             public Customer withRegion(String region) {
                 this.region = region;

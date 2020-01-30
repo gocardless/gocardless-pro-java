@@ -26,10 +26,13 @@ public class Creditor {
     private String city;
     private String countryCode;
     private String createdAt;
+    private Boolean customPaymentPagesEnabled;
     private FxPayoutCurrency fxPayoutCurrency;
     private String id;
     private Links links;
     private String logoUrl;
+    private Boolean mandateImportsEnabled;
+    private Boolean merchantResponsibleForNotifications;
     private String name;
     private String postalCode;
     private String region;
@@ -87,6 +90,15 @@ public class Creditor {
     }
 
     /**
+     * Boolean value indicating whether creditor has the [Custom Payment
+     * Pages](https://support.gocardless.com/hc/en-gb/articles/115003734705-Custom-payment-pages)
+     * functionality enabled.
+     */
+    public Boolean getCustomPaymentPagesEnabled() {
+        return customPaymentPagesEnabled;
+    }
+
+    /**
      * [ISO 4217](http://en.wikipedia.org/wiki/ISO_4217#Active_codes) code for the currency in which
      * amounts will be paid out (after foreign exchange). Currently "AUD", "CAD", "DKK", "EUR", "GBP",
      * "NZD", "SEK" and "USD" are supported. Present only if payouts will be (or were) made via foreign
@@ -112,6 +124,25 @@ public class Creditor {
      */
     public String getLogoUrl() {
         return logoUrl;
+    }
+
+    /**
+     * Boolean value indicating whether creditor has the [Mandate
+     * Imports](#core-endpoints-mandate-imports) functionality enabled.
+     */
+    public Boolean getMandateImportsEnabled() {
+        return mandateImportsEnabled;
+    }
+
+    /**
+     * Boolean value indicating whether the organisation is responsible for sending all customer
+     * notifications (note this is separate from the functionality described
+     * [here](https://developer.gocardless.com/getting-started/api/handling-customer-notifications/). If
+     * you are a partner app, and this value is true, you should not send notifications on behalf of this
+     * organisation.
+     */
+    public Boolean getMerchantResponsibleForNotifications() {
+        return merchantResponsibleForNotifications;
     }
 
     /**
@@ -196,6 +227,7 @@ public class Creditor {
         private String defaultGbpPayoutAccount;
         private String defaultNzdPayoutAccount;
         private String defaultSekPayoutAccount;
+        private String defaultUsdPayoutAccount;
 
         /**
          * ID of the [bank account](#core-endpoints-creditor-bank-accounts) which is set up to receive
@@ -251,6 +283,14 @@ public class Creditor {
          */
         public String getDefaultSekPayoutAccount() {
             return defaultSekPayoutAccount;
+        }
+
+        /**
+         * ID of the [bank account](#core-endpoints-creditor-bank-accounts) which is set up to receive
+         * payouts in USD.
+         */
+        public String getDefaultUsdPayoutAccount() {
+            return defaultUsdPayoutAccount;
         }
     }
 

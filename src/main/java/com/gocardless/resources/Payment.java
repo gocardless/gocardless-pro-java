@@ -111,7 +111,8 @@ public class Payment {
      * <strong>Betalingsservice</strong> - 30 characters<br /> <strong>PAD</strong> - 12 characters<br />
      * <strong>SEPA</strong> - 140 characters <p class='restricted-notice'><strong>Restricted</strong>:
      * You can only specify a payment reference for Bacs payments (that is, when collecting from the UK)
-     * if you're on the <a href='https://gocardless.com/pricing'>GoCardless Plus or Pro packages</a>.</p>
+     * if you're on the <a href='https://gocardless.com/pricing'>GoCardless Plus, Pro or Enterprise
+     * packages</a>.</p>
      */
     public String getReference() {
         return reference;
@@ -226,6 +227,7 @@ public class Payment {
         }
 
         private String creditor;
+        private String instalmentSchedule;
         private String mandate;
         private String payout;
         private String subscription;
@@ -235,6 +237,15 @@ public class Payment {
          */
         public String getCreditor() {
             return creditor;
+        }
+
+        /**
+         * ID of [instalment_schedule](#core-endpoints-instalment-schedules) from which this payment was
+         * created.<br/>**Note**: this property will only be present if this payment is part of an instalment
+         * schedule.
+         */
+        public String getInstalmentSchedule() {
+            return instalmentSchedule;
         }
 
         /**
