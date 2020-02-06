@@ -78,6 +78,7 @@ public class Subscription {
     private Month month;
     private String name;
     private String paymentReference;
+    private Boolean retryIfPossible;
     private String startDate;
     private Status status;
     private List<UpcomingPayment> upcomingPayments;
@@ -191,6 +192,14 @@ public class Subscription {
      */
     public String getPaymentReference() {
         return paymentReference;
+    }
+
+    /**
+     * On failure, automatically retry payments using [Optimise Smart Payment
+     * Retries](#optimise-smart-payment-retries). Default is `false`.
+     */
+    public Boolean getRetryIfPossible() {
+        return retryIfPossible;
     }
 
     /**
