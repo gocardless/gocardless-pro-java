@@ -113,6 +113,7 @@ public class PaymentService {
         private Links links;
         private Map<String, String> metadata;
         private String reference;
+        private Boolean retryIfPossible;
 
         /**
          * Amount, in the lowest denomination for the currency (e.g. pence in GBP, cents in EUR).
@@ -210,6 +211,15 @@ public class PaymentService {
          */
         public PaymentCreateRequest withReference(String reference) {
             this.reference = reference;
+            return this;
+        }
+
+        /**
+         * On failure, automatically retry the payment using [Optimise Smart Payment
+         * Retries](#optimise-smart-payment-retries). Default is `false`.
+         */
+        public PaymentCreateRequest withRetryIfPossible(Boolean retryIfPossible) {
+            this.retryIfPossible = retryIfPossible;
             return this;
         }
 
@@ -747,6 +757,7 @@ public class PaymentService {
         @PathParam
         private final String identity;
         private Map<String, String> metadata;
+        private Boolean retryIfPossible;
 
         /**
          * Key-value store of custom data. Up to 3 keys are permitted, with key names up to 50 characters and
@@ -766,6 +777,15 @@ public class PaymentService {
                 metadata = new HashMap<>();
             }
             metadata.put(key, value);
+            return this;
+        }
+
+        /**
+         * On failure, automatically retry the payment using [Optimise Smart Payment
+         * Retries](#optimise-smart-payment-retries). Default is `false`.
+         */
+        public PaymentUpdateRequest withRetryIfPossible(Boolean retryIfPossible) {
+            this.retryIfPossible = retryIfPossible;
             return this;
         }
 

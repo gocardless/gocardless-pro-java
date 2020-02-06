@@ -111,6 +111,7 @@ public class InstalmentScheduleService {
         private Map<String, String> metadata;
         private String name;
         private String paymentReference;
+        private Boolean retryIfPossible;
         private Integer totalAmount;
 
         /**
@@ -198,6 +199,15 @@ public class InstalmentScheduleService {
          */
         public InstalmentScheduleCreateRequest withPaymentReference(String paymentReference) {
             this.paymentReference = paymentReference;
+            return this;
+        }
+
+        /**
+         * On failure, automatically retry payments using [Optimise Smart Payment
+         * Retries](#optimise-smart-payment-retries). Default is `false`.
+         */
+        public InstalmentScheduleCreateRequest withRetryIfPossible(Boolean retryIfPossible) {
+            this.retryIfPossible = retryIfPossible;
             return this;
         }
 

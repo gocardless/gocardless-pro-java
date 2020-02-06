@@ -30,6 +30,7 @@ public class Payment {
     private Links links;
     private Map<String, String> metadata;
     private String reference;
+    private Boolean retryIfPossible;
     private Status status;
 
     /**
@@ -116,6 +117,14 @@ public class Payment {
      */
     public String getReference() {
         return reference;
+    }
+
+    /**
+     * On failure, automatically retry the payment using [Optimise Smart Payment
+     * Retries](#optimise-smart-payment-retries). Default is `false`.
+     */
+    public Boolean getRetryIfPossible() {
+        return retryIfPossible;
     }
 
     /**
