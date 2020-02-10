@@ -155,6 +155,7 @@ public class Event {
         private Origin origin;
         private String reasonCode;
         private Scheme scheme;
+        private Boolean willAttemptRetry;
 
         /**
          * What triggered the event. _Note:_ `cause` is our simplified and predictable key indicating what
@@ -201,6 +202,13 @@ public class Event {
          */
         public Scheme getScheme() {
             return scheme;
+        }
+
+        /**
+         * Whether the payment will be retried automatically. Set on a payment failed event.
+         */
+        public Boolean getWillAttemptRetry() {
+            return willAttemptRetry;
         }
 
         public enum Origin {
