@@ -81,6 +81,7 @@ public class Event {
      * <li>`refunds`</li>
      * <li>`subscriptions`</li>
      * <li>`instalment_schedules`</li>
+     * <li>`creditors`</li>
      * </ul>
      */
     public ResourceType getResourceType() {
@@ -94,7 +95,8 @@ public class Event {
         PAYOUTS, @SerializedName("refunds")
         REFUNDS, @SerializedName("subscriptions")
         SUBSCRIPTIONS, @SerializedName("instalment_schedules")
-        INSTALMENT_SCHEDULES,
+        INSTALMENT_SCHEDULES, @SerializedName("creditors")
+        CREDITORS,
     }
 
     public static class CustomerNotification {
@@ -238,6 +240,7 @@ public class Event {
             // blank to prevent instantiation
         }
 
+        private String creditor;
         private String instalmentSchedule;
         private String mandate;
         private String newCustomerBankAccount;
@@ -249,6 +252,14 @@ public class Event {
         private String previousCustomerBankAccount;
         private String refund;
         private String subscription;
+
+        /**
+         * If `resource_type` is `creditor`, this is the ID of the [creditor](#core-endpoints-creditors)
+         * which has been updated.
+         */
+        public String getCreditor() {
+            return creditor;
+        }
 
         /**
          * If `resource_type` is `instalment_schedule`, this is the ID of the [instalment
