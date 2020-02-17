@@ -139,9 +139,11 @@ public class Event {
 
         public enum Type {
             @SerializedName("payment_created")
-            PAYMENT_CREATED, @SerializedName("mandate_created")
+            PAYMENT_CREATED, @SerializedName("payment_cancelled")
+            PAYMENT_CANCELLED, @SerializedName("mandate_created")
             MANDATE_CREATED, @SerializedName("subscription_created")
-            SUBSCRIPTION_CREATED, @SerializedName("instalment_schedule_created")
+            SUBSCRIPTION_CREATED, @SerializedName("subscription_cancelled")
+            SUBSCRIPTION_CANCELLED, @SerializedName("instalment_schedule_created")
             INSTALMENT_SCHEDULE_CREATED, @SerializedName("instalment_schedule_cancelled")
             INSTALMENT_SCHEDULE_CANCELLED,
         }
