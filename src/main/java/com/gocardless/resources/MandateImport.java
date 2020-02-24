@@ -44,7 +44,7 @@ public class MandateImport {
 
     private String createdAt;
     private String id;
-    private String scheme;
+    private Scheme scheme;
     private Status status;
 
     /**
@@ -65,7 +65,7 @@ public class MandateImport {
      * The scheme of the mandates to be imported.<br>All mandates in a single mandate
      * import must be for the same scheme.
      */
-    public String getScheme() {
+    public Scheme getScheme() {
         return scheme;
     }
 
@@ -87,6 +87,18 @@ public class MandateImport {
      */
     public Status getStatus() {
         return status;
+    }
+
+    public enum Scheme {
+        @SerializedName("ach")
+        ACH, @SerializedName("autogiro")
+        AUTOGIRO, @SerializedName("bacs")
+        BACS, @SerializedName("becs")
+        BECS, @SerializedName("becs_nz")
+        BECS_NZ, @SerializedName("betalingsservice")
+        BETALINGSSERVICE, @SerializedName("pad")
+        PAD, @SerializedName("sepa_core")
+        SEPA_CORE,
     }
 
     public enum Status {
