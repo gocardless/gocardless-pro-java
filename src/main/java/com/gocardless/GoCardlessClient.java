@@ -40,6 +40,7 @@ public class GoCardlessClient {
         private String baseUrl;
         private Proxy proxy;
         private SSLSocketFactory sslSocketFactory;
+        private boolean errorOnIdempotencyConflict;
 
         /**
          * Constructor.  Users of this library will not need to access this constructor directly -
@@ -94,13 +95,25 @@ public class GoCardlessClient {
         }
 
         /**
+         * Configures the behaviour on an Idempotency Conflict error
+         *
+         * @param errorOnIdempotencyConflict true to raise an error upon
+         * conflict, false to fetch the conflicting resource instead.
+         */
+        public Builder withErrorOnIdempotencyConflict(boolean errorOnIdempotencyConflict) {
+            this.errorOnIdempotencyConflict = errorOnIdempotencyConflict;
+            return this;
+        }
+
+        /**
          * Builds a configured instance of the GoCardlessClient
          */
         public GoCardlessClient build() {
             OkHttpClient rawClient = new OkHttpClient();
             rawClient.setProxy(proxy);
             rawClient.setSslSocketFactory(sslSocketFactory);
-            HttpClient client = new HttpClient(accessToken, baseUrl, rawClient);
+            HttpClient client =
+                    new HttpClient(accessToken, baseUrl, rawClient, errorOnIdempotencyConflict);
             return new GoCardlessClient(client);
         }
     }

@@ -55,6 +55,7 @@ public class HttpClient {
     private final ResponseParser responseParser;
     private final RequestWriter requestWriter;
     private final String credentials;
+    private final boolean errorOnIdempotencyConflict;
 
     /**
      * Constructor.  Users of this library should not need to access this class directly - you should instantiate
@@ -65,7 +66,8 @@ public class HttpClient {
      * @param rawClient the OkHttpClient instance to use to make requests (which will be configured
      *                  to log requests with LoggingInterceptor).
      */
-    public HttpClient(String accessToken, String baseUrl, OkHttpClient rawClient) {
+    public HttpClient(String accessToken, String baseUrl, OkHttpClient rawClient,
+            boolean errorOnIdempotencyConflict) {
         this.rawClient = rawClient;
         rawClient.interceptors().add(new LoggingInterceptor());
         this.urlFormatter = new UrlFormatter(baseUrl);
@@ -73,6 +75,11 @@ public class HttpClient {
         this.responseParser = new ResponseParser(gson);
         this.requestWriter = new RequestWriter(gson);
         this.credentials = String.format("Bearer %s", accessToken);
+        this.errorOnIdempotencyConflict = errorOnIdempotencyConflict;
+    }
+
+    public boolean isErrorOnIdempotencyConflict() {
+        return this.errorOnIdempotencyConflict;
     }
 
     <T> T execute(ApiRequest<T> apiRequest) {
