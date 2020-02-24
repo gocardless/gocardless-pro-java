@@ -37,7 +37,7 @@ public abstract class IdempotentPostRequest<T> extends PostRequest<T> {
             return getHttpClient().executeWithRetries(this);
         } catch (InvalidStateException e) {
             Optional<ApiError> conflictError = Iterables.tryFind(e.getErrors(), CONFLICT_ERROR);
-            if (conflictError.isPresent()) {
+            if (conflictError.isPresent() && !getHttpClient().isErrorOnIdempotencyConflict()) {
                 String id = conflictError.get().getLinks().get("conflicting_resource_id");
                 return handleConflict(getHttpClient(), id).execute();
             } else {

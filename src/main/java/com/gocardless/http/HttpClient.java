@@ -34,7 +34,7 @@ public class HttpClient {
     private static final String DISALLOWED_USER_AGENT_CHARACTERS =
             "[^\\w!#$%&'\\*\\+\\-\\.\\^`\\|~]";
     private static final String USER_AGENT = String.format(
-            "gocardless-pro-java/3.13.0 java/%s %s/%s %s/%s",
+            "gocardless-pro-java/3.13.1 java/%s %s/%s %s/%s",
             cleanUserAgentToken(System.getProperty("java.vm.specification.version")),
             cleanUserAgentToken(System.getProperty("java.vm.name")),
             cleanUserAgentToken(System.getProperty("java.version")),
@@ -47,7 +47,7 @@ public class HttpClient {
         ImmutableMap.Builder<String, String> builder = ImmutableMap.builder();
         builder.put("GoCardless-Version", "2015-07-06");
         builder.put("GoCardless-Client-Library", "gocardless-pro-java");
-        builder.put("GoCardless-Client-Version", "3.13.0");
+        builder.put("GoCardless-Client-Version", "3.13.1");
         HEADERS = builder.build();
     }
     private final OkHttpClient rawClient;
@@ -55,6 +55,7 @@ public class HttpClient {
     private final ResponseParser responseParser;
     private final RequestWriter requestWriter;
     private final String credentials;
+    private final boolean errorOnIdempotencyConflict;
 
     /**
      * Constructor.  Users of this library should not need to access this class directly - you should instantiate
@@ -65,7 +66,8 @@ public class HttpClient {
      * @param rawClient the OkHttpClient instance to use to make requests (which will be configured
      *                  to log requests with LoggingInterceptor).
      */
-    public HttpClient(String accessToken, String baseUrl, OkHttpClient rawClient) {
+    public HttpClient(String accessToken, String baseUrl, OkHttpClient rawClient,
+            boolean errorOnIdempotencyConflict) {
         this.rawClient = rawClient;
         rawClient.interceptors().add(new LoggingInterceptor());
         this.urlFormatter = new UrlFormatter(baseUrl);
@@ -73,6 +75,11 @@ public class HttpClient {
         this.responseParser = new ResponseParser(gson);
         this.requestWriter = new RequestWriter(gson);
         this.credentials = String.format("Bearer %s", accessToken);
+        this.errorOnIdempotencyConflict = errorOnIdempotencyConflict;
+    }
+
+    public boolean isErrorOnIdempotencyConflict() {
+        return this.errorOnIdempotencyConflict;
     }
 
     <T> T execute(ApiRequest<T> apiRequest) {
