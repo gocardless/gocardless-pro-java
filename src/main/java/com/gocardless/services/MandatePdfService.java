@@ -218,9 +218,8 @@ public class MandatePdfService {
         }
 
         /**
-         * For Danish customers only. The civic/company number (CPR or CVR) of the customer. Must be supplied
-         * if the customer's bank account is denominated in Danish krone (DKK). Can only be supplied for
-         * Betalingsservice mandates.
+         * For Danish customers only. The civic/company number (CPR or CVR) of the customer. Should only be
+         * supplied for Betalingsservice mandates.
          */
         public MandatePdfCreateRequest withDanishIdentityNumber(String danishIdentityNumber) {
             this.danishIdentityNumber = danishIdentityNumber;
@@ -272,7 +271,7 @@ public class MandatePdfService {
         }
 
         /**
-         * [ITU E.123](https://en.wikipedia.org/wiki/E.123) formatted phone number, including country code.
+         * The customer phone number. Should only be provided for BECS NZ mandates.
          */
         public MandatePdfCreateRequest withPhoneNumber(String phoneNumber) {
             this.phoneNumber = phoneNumber;
@@ -335,7 +334,7 @@ public class MandatePdfService {
 
         /**
          * For Swedish customers only. The civic/company number (personnummer, samordningsnummer, or
-         * organisationsnummer) of the customer. Can only be supplied for Autogiro mandates.
+         * organisationsnummer) of the customer. Should only be supplied for Autogiro mandates.
          */
         public MandatePdfCreateRequest withSwedishIdentityNumber(String swedishIdentityNumber) {
             this.swedishIdentityNumber = swedishIdentityNumber;
