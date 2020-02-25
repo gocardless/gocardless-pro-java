@@ -19,6 +19,7 @@ public class GoCardlessClient {
     private final BankDetailsLookupService bankDetailsLookups;
     private final CreditorService creditors;
     private final CreditorBankAccountService creditorBankAccounts;
+    private final CurrencyExchangeRateService currencyExchangeRates;
     private final CustomerService customers;
     private final CustomerBankAccountService customerBankAccounts;
     private final CustomerNotificationService customerNotifications;
@@ -123,6 +124,7 @@ public class GoCardlessClient {
         this.bankDetailsLookups = new BankDetailsLookupService(httpClient);
         this.creditors = new CreditorService(httpClient);
         this.creditorBankAccounts = new CreditorBankAccountService(httpClient);
+        this.currencyExchangeRates = new CurrencyExchangeRateService(httpClient);
         this.customers = new CustomerService(httpClient);
         this.customerBankAccounts = new CustomerBankAccountService(httpClient);
         this.customerNotifications = new CustomerNotificationService(httpClient);
@@ -159,6 +161,13 @@ public class GoCardlessClient {
      */
     public CreditorBankAccountService creditorBankAccounts() {
         return creditorBankAccounts;
+    }
+
+    /**
+     * A service class for working with currency exchange rate resources.
+     */
+    public CurrencyExchangeRateService currencyExchangeRates() {
+        return currencyExchangeRates;
     }
 
     /**
