@@ -41,11 +41,28 @@ public class InstalmentScheduleService {
     }
 
     /**
-     * Creates a new instalment schedule object, along with the associated payments.
+     * Creates a new instalment schedule object, along with the associated payments. This
+     * API is recommended if you know the specific dates you wish to charge. Otherwise,
+     * please check out the [scheduling version](#instalment-schedules-create-with-schedule).
      * 
-     * The `instalments` property can either be an array of payment properties (`amount`
-     * and `charge_date`) or a schedule object with `interval`, `interval_unit` and
-     * `amounts`.
+     * The `instalments` property is an array of payment properties (`amount` and
+     * `charge_date`).
+     * 
+     * It can take quite a while to create the associated payments, so the API will return
+     * the status as `pending` initially. When processing has completed, a subsequent GET
+     * request for the instalment schedule will either have the status `success` and link
+     * to the created payments, or the status `error` and detailed information about the
+     * failures.
+     */
+    public InstalmentScheduleCreateWithDatesRequest createWithDates() {
+        return new InstalmentScheduleCreateWithDatesRequest(httpClient);
+    }
+
+    /**
+     * Creates a new instalment schedule object, along with the associated payments. This
+     * API is recommended if you wish to use the GoCardless scheduling logic. For finer
+     * control over the individual dates, please check out the [alternative
+     * version](#instalment-schedules-create-with-dates).
      * 
      * It can take quite a while to create the associated payments, so the API will return
      * the status as `pending` initially. When processing has completed, a subsequent
@@ -53,8 +70,8 @@ public class InstalmentScheduleService {
      * the created payments, or the status `error` and detailed information about the
      * failures.
      */
-    public InstalmentScheduleCreateRequest create() {
-        return new InstalmentScheduleCreateRequest(httpClient);
+    public InstalmentScheduleCreateWithScheduleRequest createWithSchedule() {
+        return new InstalmentScheduleCreateWithScheduleRequest(httpClient);
     }
 
     /**
@@ -88,25 +105,26 @@ public class InstalmentScheduleService {
     }
 
     /**
-     * Request class for {@link InstalmentScheduleService#create }.
+     * Request class for {@link InstalmentScheduleService#createWithDates }.
      *
-     * Creates a new instalment schedule object, along with the associated payments.
+     * Creates a new instalment schedule object, along with the associated payments. This
+     * API is recommended if you know the specific dates you wish to charge. Otherwise,
+     * please check out the [scheduling version](#instalment-schedules-create-with-schedule).
      * 
-     * The `instalments` property can either be an array of payment properties (`amount`
-     * and `charge_date`) or a schedule object with `interval`, `interval_unit` and
-     * `amounts`.
+     * The `instalments` property is an array of payment properties (`amount` and
+     * `charge_date`).
      * 
      * It can take quite a while to create the associated payments, so the API will return
-     * the status as `pending` initially. When processing has completed, a subsequent
-     * GET request for the instalment schedule will either have the status `success` and link to
-     * the created payments, or the status `error` and detailed information about the
+     * the status as `pending` initially. When processing has completed, a subsequent GET
+     * request for the instalment schedule will either have the status `success` and link
+     * to the created payments, or the status `error` and detailed information about the
      * failures.
      */
-    public static final class InstalmentScheduleCreateRequest extends
+    public static final class InstalmentScheduleCreateWithDatesRequest extends
             IdempotentPostRequest<InstalmentSchedule> {
         private Integer appFee;
         private Currency currency;
-        private Map<String, String> instalments;
+        private List<Instalments> instalments;
         private Links links;
         private Map<String, String> metadata;
         private String name;
@@ -119,7 +137,7 @@ public class InstalmentScheduleService {
          * which created the subscription, in the lowest denomination for the currency (e.g. pence in GBP,
          * cents in EUR).
          */
-        public InstalmentScheduleCreateRequest withAppFee(Integer appFee) {
+        public InstalmentScheduleCreateWithDatesRequest withAppFee(Integer appFee) {
             this.appFee = appFee;
             return this;
         }
@@ -128,17 +146,32 @@ public class InstalmentScheduleService {
          * [ISO 4217](http://en.wikipedia.org/wiki/ISO_4217#Active_codes) currency code. Currently "AUD",
          * "CAD", "DKK", "EUR", "GBP", "NZD", "SEK" and "USD" are supported.
          */
-        public InstalmentScheduleCreateRequest withCurrency(Currency currency) {
+        public InstalmentScheduleCreateWithDatesRequest withCurrency(Currency currency) {
             this.currency = currency;
             return this;
         }
 
-        public InstalmentScheduleCreateRequest withInstalments(Map<String, String> instalments) {
+        /**
+         * An explicit array of instalment payments, each specifying at least an `amount` and `charge_date`.
+         */
+        public InstalmentScheduleCreateWithDatesRequest withInstalments(
+                List<Instalments> instalments) {
             this.instalments = instalments;
             return this;
         }
 
-        public InstalmentScheduleCreateRequest withLinks(Links links) {
+        /**
+         * An explicit array of instalment payments, each specifying at least an `amount` and `charge_date`.
+         */
+        public InstalmentScheduleCreateWithDatesRequest withInstalments(Instalments instalments) {
+            if (this.instalments == null) {
+                this.instalments = new ArrayList<>();
+            }
+            this.instalments.add(instalments);
+            return this;
+        }
+
+        public InstalmentScheduleCreateWithDatesRequest withLinks(Links links) {
             this.links = links;
             return this;
         }
@@ -147,7 +180,7 @@ public class InstalmentScheduleService {
          * ID of the associated [mandate](#core-endpoints-mandates) which the instalment schedule will create
          * payments against.
          */
-        public InstalmentScheduleCreateRequest withLinksMandate(String mandate) {
+        public InstalmentScheduleCreateWithDatesRequest withLinksMandate(String mandate) {
             if (links == null) {
                 links = new Links();
             }
@@ -159,7 +192,7 @@ public class InstalmentScheduleService {
          * Key-value store of custom data. Up to 3 keys are permitted, with key names up to 50 characters and
          * values up to 500 characters.
          */
-        public InstalmentScheduleCreateRequest withMetadata(Map<String, String> metadata) {
+        public InstalmentScheduleCreateWithDatesRequest withMetadata(Map<String, String> metadata) {
             this.metadata = metadata;
             return this;
         }
@@ -168,7 +201,7 @@ public class InstalmentScheduleService {
          * Key-value store of custom data. Up to 3 keys are permitted, with key names up to 50 characters and
          * values up to 500 characters.
          */
-        public InstalmentScheduleCreateRequest withMetadata(String key, String value) {
+        public InstalmentScheduleCreateWithDatesRequest withMetadata(String key, String value) {
             if (metadata == null) {
                 metadata = new HashMap<>();
             }
@@ -179,9 +212,8 @@ public class InstalmentScheduleService {
         /**
          * Name of the instalment schedule, up to 100 chars. This name will also be
          * copied to the payments of the instalment schedule if you use schedule-based creation.
-         * 
          */
-        public InstalmentScheduleCreateRequest withName(String name) {
+        public InstalmentScheduleCreateWithDatesRequest withName(String name) {
             this.name = name;
             return this;
         }
@@ -197,7 +229,7 @@ public class InstalmentScheduleService {
          * if you're on the <a href='https://gocardless.com/pricing'>GoCardless Plus, Pro or Enterprise
          * packages</a>.</p>
          */
-        public InstalmentScheduleCreateRequest withPaymentReference(String paymentReference) {
+        public InstalmentScheduleCreateWithDatesRequest withPaymentReference(String paymentReference) {
             this.paymentReference = paymentReference;
             return this;
         }
@@ -206,23 +238,23 @@ public class InstalmentScheduleService {
          * On failure, automatically retry payments using [Optimise Smart Payment
          * Retries](#optimise-smart-payment-retries). Default is `false`.
          */
-        public InstalmentScheduleCreateRequest withRetryIfPossible(Boolean retryIfPossible) {
+        public InstalmentScheduleCreateWithDatesRequest withRetryIfPossible(Boolean retryIfPossible) {
             this.retryIfPossible = retryIfPossible;
             return this;
         }
 
         /**
          * The total amount of the instalment schedule, defined as the sum of all individual
-         * payments. If the requested payment amounts do not sum up correctly, a validation
-         * error will be returned.
-         * 
+         * payments, in the lowest denomination for the currency (e.g. pence in GBP, cents in
+         * EUR). If the requested payment amounts do not sum up correctly, a validation error
+         * will be returned.
          */
-        public InstalmentScheduleCreateRequest withTotalAmount(Integer totalAmount) {
+        public InstalmentScheduleCreateWithDatesRequest withTotalAmount(Integer totalAmount) {
             this.totalAmount = totalAmount;
             return this;
         }
 
-        public InstalmentScheduleCreateRequest withIdempotencyKey(String idempotencyKey) {
+        public InstalmentScheduleCreateWithDatesRequest withIdempotencyKey(String idempotencyKey) {
             super.setIdempotencyKey(idempotencyKey);
             return this;
         }
@@ -236,11 +268,12 @@ public class InstalmentScheduleService {
             return request;
         }
 
-        private InstalmentScheduleCreateRequest(HttpClient httpClient) {
+        private InstalmentScheduleCreateWithDatesRequest(HttpClient httpClient) {
             super(httpClient);
         }
 
-        public InstalmentScheduleCreateRequest withHeader(String headerName, String headerValue) {
+        public InstalmentScheduleCreateWithDatesRequest withHeader(String headerName,
+                String headerValue) {
             this.addHeader(headerName, headerValue);
             return this;
         }
@@ -265,6 +298,11 @@ public class InstalmentScheduleService {
             return true;
         }
 
+        @Override
+        protected String getRequestEnvelope() {
+            return "data";
+        }
+
         public enum Currency {
             @SerializedName("AUD")
             AUD, @SerializedName("CAD")
@@ -278,6 +316,368 @@ public class InstalmentScheduleService {
             @Override
             public String toString() {
                 return name().toLowerCase();
+            }
+        }
+
+        public static class Instalments {
+            private Integer amount;
+            private String chargeDate;
+            private String description;
+
+            /**
+             * Amount, in the lowest denomination for the currency (e.g. pence in GBP, cents in EUR).
+             */
+            public Instalments withAmount(Integer amount) {
+                this.amount = amount;
+                return this;
+            }
+
+            /**
+             * A future date on which the payment should be collected. If the date
+             * is before the next_possible_charge_date on the
+             * [mandate](#core-endpoints-mandates), it will be automatically rolled
+             * forwards to that date.
+             */
+            public Instalments withChargeDate(String chargeDate) {
+                this.chargeDate = chargeDate;
+                return this;
+            }
+
+            /**
+             * A human-readable description of the payment. This will be included in the notification email
+             * GoCardless sends to your customer if your organisation does not send its own notifications (see
+             * [compliance requirements](#appendix-compliance-requirements)).
+             */
+            public Instalments withDescription(String description) {
+                this.description = description;
+                return this;
+            }
+        }
+
+        public static class Links {
+            private String mandate;
+
+            /**
+             * ID of the associated [mandate](#core-endpoints-mandates) which the instalment schedule will create
+             * payments against.
+             */
+            public Links withMandate(String mandate) {
+                this.mandate = mandate;
+                return this;
+            }
+        }
+    }
+
+    /**
+     * Request class for {@link InstalmentScheduleService#createWithSchedule }.
+     *
+     * Creates a new instalment schedule object, along with the associated payments. This
+     * API is recommended if you wish to use the GoCardless scheduling logic. For finer
+     * control over the individual dates, please check out the [alternative
+     * version](#instalment-schedules-create-with-dates).
+     * 
+     * It can take quite a while to create the associated payments, so the API will return
+     * the status as `pending` initially. When processing has completed, a subsequent
+     * GET request for the instalment schedule will either have the status `success` and link to
+     * the created payments, or the status `error` and detailed information about the
+     * failures.
+     */
+    public static final class InstalmentScheduleCreateWithScheduleRequest extends
+            IdempotentPostRequest<InstalmentSchedule> {
+        private Integer appFee;
+        private Currency currency;
+        private Instalments instalments;
+        private Links links;
+        private Map<String, String> metadata;
+        private String name;
+        private String paymentReference;
+        private Boolean retryIfPossible;
+        private Integer totalAmount;
+
+        /**
+         * The amount to be deducted from each payment as an app fee, to be paid to the partner integration
+         * which created the subscription, in the lowest denomination for the currency (e.g. pence in GBP,
+         * cents in EUR).
+         */
+        public InstalmentScheduleCreateWithScheduleRequest withAppFee(Integer appFee) {
+            this.appFee = appFee;
+            return this;
+        }
+
+        /**
+         * [ISO 4217](http://en.wikipedia.org/wiki/ISO_4217#Active_codes) currency code. Currently "AUD",
+         * "CAD", "DKK", "EUR", "GBP", "NZD", "SEK" and "USD" are supported.
+         */
+        public InstalmentScheduleCreateWithScheduleRequest withCurrency(Currency currency) {
+            this.currency = currency;
+            return this;
+        }
+
+        /**
+         * Frequency of the payments you want to create, together with an array of payment
+         * amounts to be collected, with a specified start date for the first payment.
+         * 
+         */
+        public InstalmentScheduleCreateWithScheduleRequest withInstalments(Instalments instalments) {
+            this.instalments = instalments;
+            return this;
+        }
+
+        /**
+         * List of amounts of each instalment, in the lowest denomination for the
+         * currency (e.g. pence in GBP, cents in EUR).
+         * 
+         */
+        public InstalmentScheduleCreateWithScheduleRequest withInstalmentsAmounts(
+                List<Integer> amounts) {
+            if (instalments == null) {
+                instalments = new Instalments();
+            }
+            instalments.withAmounts(amounts);
+            return this;
+        }
+
+        /**
+         * Number of `interval_units` between charge dates. Must be greater than or
+         * equal to `1`.
+         * 
+         */
+        public InstalmentScheduleCreateWithScheduleRequest withInstalmentsInterval(Integer interval) {
+            if (instalments == null) {
+                instalments = new Instalments();
+            }
+            instalments.withInterval(interval);
+            return this;
+        }
+
+        /**
+         * The unit of time between customer charge dates. One of `weekly`, `monthly` or `yearly`.
+         */
+        public InstalmentScheduleCreateWithScheduleRequest withInstalmentsIntervalUnit(
+                Instalments.IntervalUnit intervalUnit) {
+            if (instalments == null) {
+                instalments = new Instalments();
+            }
+            instalments.withIntervalUnit(intervalUnit);
+            return this;
+        }
+
+        /**
+         * The date on which the first payment should be charged. Must be on or after the
+         * [mandate](#core-endpoints-mandates)'s `next_possible_charge_date`. When blank, this will be set as
+         * the mandate's `next_possible_charge_date`.
+         */
+        public InstalmentScheduleCreateWithScheduleRequest withInstalmentsStartDate(String startDate) {
+            if (instalments == null) {
+                instalments = new Instalments();
+            }
+            instalments.withStartDate(startDate);
+            return this;
+        }
+
+        public InstalmentScheduleCreateWithScheduleRequest withLinks(Links links) {
+            this.links = links;
+            return this;
+        }
+
+        /**
+         * ID of the associated [mandate](#core-endpoints-mandates) which the instalment schedule will create
+         * payments against.
+         */
+        public InstalmentScheduleCreateWithScheduleRequest withLinksMandate(String mandate) {
+            if (links == null) {
+                links = new Links();
+            }
+            links.withMandate(mandate);
+            return this;
+        }
+
+        /**
+         * Key-value store of custom data. Up to 3 keys are permitted, with key names up to 50 characters and
+         * values up to 500 characters.
+         */
+        public InstalmentScheduleCreateWithScheduleRequest withMetadata(Map<String, String> metadata) {
+            this.metadata = metadata;
+            return this;
+        }
+
+        /**
+         * Key-value store of custom data. Up to 3 keys are permitted, with key names up to 50 characters and
+         * values up to 500 characters.
+         */
+        public InstalmentScheduleCreateWithScheduleRequest withMetadata(String key, String value) {
+            if (metadata == null) {
+                metadata = new HashMap<>();
+            }
+            metadata.put(key, value);
+            return this;
+        }
+
+        /**
+         * Name of the instalment schedule, up to 100 chars. This name will also be
+         * copied to the payments of the instalment schedule if you use schedule-based creation.
+         */
+        public InstalmentScheduleCreateWithScheduleRequest withName(String name) {
+            this.name = name;
+            return this;
+        }
+
+        /**
+         * An optional reference that will appear on your customer's bank statement. The character limit for
+         * this reference is dependent on the scheme.<br /> <strong>ACH</strong> - 10 characters<br />
+         * <strong>Autogiro</strong> - 11 characters<br /> <strong>Bacs</strong> - 10 characters<br />
+         * <strong>BECS</strong> - 30 characters<br /> <strong>BECS NZ</strong> - 12 characters<br />
+         * <strong>Betalingsservice</strong> - 30 characters<br /> <strong>PAD</strong> - 12 characters<br />
+         * <strong>SEPA</strong> - 140 characters <p class='restricted-notice'><strong>Restricted</strong>:
+         * You can only specify a payment reference for Bacs payments (that is, when collecting from the UK)
+         * if you're on the <a href='https://gocardless.com/pricing'>GoCardless Plus, Pro or Enterprise
+         * packages</a>.</p>
+         */
+        public InstalmentScheduleCreateWithScheduleRequest withPaymentReference(
+                String paymentReference) {
+            this.paymentReference = paymentReference;
+            return this;
+        }
+
+        /**
+         * On failure, automatically retry payments using [Optimise Smart Payment
+         * Retries](#optimise-smart-payment-retries). Default is `false`.
+         */
+        public InstalmentScheduleCreateWithScheduleRequest withRetryIfPossible(
+                Boolean retryIfPossible) {
+            this.retryIfPossible = retryIfPossible;
+            return this;
+        }
+
+        /**
+         * The total amount of the instalment schedule, defined as the sum of all individual
+         * payments, in the lowest denomination for the currency (e.g. pence in GBP, cents in
+         * EUR). If the requested payment amounts do not sum up correctly, a validation error
+         * will be returned.
+         */
+        public InstalmentScheduleCreateWithScheduleRequest withTotalAmount(Integer totalAmount) {
+            this.totalAmount = totalAmount;
+            return this;
+        }
+
+        public InstalmentScheduleCreateWithScheduleRequest withIdempotencyKey(String idempotencyKey) {
+            super.setIdempotencyKey(idempotencyKey);
+            return this;
+        }
+
+        @Override
+        protected GetRequest<InstalmentSchedule> handleConflict(HttpClient httpClient, String id) {
+            InstalmentScheduleGetRequest request = new InstalmentScheduleGetRequest(httpClient, id);
+            for (Map.Entry<String, String> header : this.getCustomHeaders().entrySet()) {
+                request = request.withHeader(header.getKey(), header.getValue());
+            }
+            return request;
+        }
+
+        private InstalmentScheduleCreateWithScheduleRequest(HttpClient httpClient) {
+            super(httpClient);
+        }
+
+        public InstalmentScheduleCreateWithScheduleRequest withHeader(String headerName,
+                String headerValue) {
+            this.addHeader(headerName, headerValue);
+            return this;
+        }
+
+        @Override
+        protected String getPathTemplate() {
+            return "instalment_schedules";
+        }
+
+        @Override
+        protected String getEnvelope() {
+            return "instalment_schedules";
+        }
+
+        @Override
+        protected Class<InstalmentSchedule> getResponseClass() {
+            return InstalmentSchedule.class;
+        }
+
+        @Override
+        protected boolean hasBody() {
+            return true;
+        }
+
+        @Override
+        protected String getRequestEnvelope() {
+            return "data";
+        }
+
+        public enum Currency {
+            @SerializedName("AUD")
+            AUD, @SerializedName("CAD")
+            CAD, @SerializedName("DKK")
+            DKK, @SerializedName("EUR")
+            EUR, @SerializedName("GBP")
+            GBP, @SerializedName("NZD")
+            NZD, @SerializedName("SEK")
+            SEK, @SerializedName("USD")
+            USD;
+            @Override
+            public String toString() {
+                return name().toLowerCase();
+            }
+        }
+
+        public static class Instalments {
+            private List<Integer> amounts;
+            private Integer interval;
+            private IntervalUnit intervalUnit;
+            private String startDate;
+
+            /**
+             * List of amounts of each instalment, in the lowest denomination for the
+             * currency (e.g. pence in GBP, cents in EUR).
+             * 
+             */
+            public Instalments withAmounts(List<Integer> amounts) {
+                this.amounts = amounts;
+                return this;
+            }
+
+            /**
+             * Number of `interval_units` between charge dates. Must be greater than or
+             * equal to `1`.
+             * 
+             */
+            public Instalments withInterval(Integer interval) {
+                this.interval = interval;
+                return this;
+            }
+
+            /**
+             * The unit of time between customer charge dates. One of `weekly`, `monthly` or `yearly`.
+             */
+            public Instalments withIntervalUnit(IntervalUnit intervalUnit) {
+                this.intervalUnit = intervalUnit;
+                return this;
+            }
+
+            /**
+             * The date on which the first payment should be charged. Must be on or after the
+             * [mandate](#core-endpoints-mandates)'s `next_possible_charge_date`. When blank, this will be set as
+             * the mandate's `next_possible_charge_date`.
+             */
+            public Instalments withStartDate(String startDate) {
+                this.startDate = startDate;
+                return this;
+            }
+
+            public enum IntervalUnit {
+                @SerializedName("weekly")
+                WEEKLY, @SerializedName("monthly")
+                MONTHLY, @SerializedName("yearly")
+                YEARLY;
+                @Override
+                public String toString() {
+                    return name().toLowerCase();
+                }
             }
         }
 
