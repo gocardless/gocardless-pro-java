@@ -137,9 +137,8 @@ public class Creditor {
     /**
      * Boolean value indicating whether the organisation is responsible for sending all customer
      * notifications (note this is separate from the functionality described
-     * [here](https://developer.gocardless.com/getting-started/api/handling-customer-notifications/). If
-     * you are a partner app, and this value is true, you should not send notifications on behalf of this
-     * organisation.
+     * [here](/getting-started/api/handling-customer-notifications/)). If you are a partner app, and this
+     * value is true, you should not send notifications on behalf of this organisation.
      */
     public Boolean getMerchantResponsibleForNotifications() {
         return merchantResponsibleForNotifications;
