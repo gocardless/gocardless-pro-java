@@ -66,6 +66,7 @@ public class Subscription {
 
     private Integer amount;
     private Integer appFee;
+    private Integer count;
     private String createdAt;
     private String currency;
     private Integer dayOfMonth;
@@ -97,6 +98,13 @@ public class Subscription {
      */
     public Integer getAppFee() {
         return appFee;
+    }
+
+    /**
+     * The total number of payments that should be taken by this subscription.
+     */
+    public Integer getCount() {
+        return count;
     }
 
     /**

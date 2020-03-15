@@ -75,7 +75,6 @@ public class InstalmentSchedule {
     /**
      * Name of the instalment schedule, up to 100 chars. This name will also be
      * copied to the payments of the instalment schedule if you use schedule-based creation.
-     * 
      */
     public String getName() {
         return name;
@@ -109,9 +108,9 @@ public class InstalmentSchedule {
 
     /**
      * The total amount of the instalment schedule, defined as the sum of all individual
-     * payments. If the requested payment amounts do not sum up correctly, a validation
-     * error will be returned.
-     * 
+     * payments, in the lowest denomination for the currency (e.g. pence in GBP, cents in
+     * EUR). If the requested payment amounts do not sum up correctly, a validation error
+     * will be returned.
      */
     public Integer getTotalAmount() {
         return totalAmount;

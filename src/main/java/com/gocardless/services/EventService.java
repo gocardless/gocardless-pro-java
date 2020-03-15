@@ -14,7 +14,8 @@ import com.google.gson.reflect.TypeToken;
  * Service class for working with event resources.
  *
  * Events are stored for all webhooks. An event refers to a resource which has been updated, for
- * example a payment which has been collected, or a mandate which has been transferred.
+ * example a payment which has been collected, or a mandate which has been transferred. See
+ * [here](#event-actions) for a complete list of event types.
  */
 public class EventService {
     private final HttpClient httpClient;
@@ -312,14 +313,15 @@ public class EventService {
         }
 
         public enum ResourceType {
-            @SerializedName("payments")
-            PAYMENTS, @SerializedName("mandates")
-            MANDATES, @SerializedName("payouts")
+            @SerializedName("creditors")
+            CREDITORS, @SerializedName("instalment_schedules")
+            INSTALMENT_SCHEDULES, @SerializedName("mandates")
+            MANDATES, @SerializedName("payments")
+            PAYMENTS, @SerializedName("payouts")
             PAYOUTS, @SerializedName("refunds")
             REFUNDS, @SerializedName("subscriptions")
-            SUBSCRIPTIONS, @SerializedName("instalment_schedules")
-            INSTALMENT_SCHEDULES, @SerializedName("creditors")
-            CREDITORS;
+            SUBSCRIPTIONS, @SerializedName("organisations")
+            ORGANISATIONS;
             @Override
             public String toString() {
                 return name().toLowerCase();
