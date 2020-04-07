@@ -1,5 +1,6 @@
 package com.gocardless.services;
 
+import java.util.HashMap;
 import java.util.Map;
 
 import com.gocardless.http.*;
@@ -90,6 +91,7 @@ public class RedirectFlowService {
     public static final class RedirectFlowCreateRequest extends IdempotentPostRequest<RedirectFlow> {
         private String description;
         private Links links;
+        private Map<String, String> metadata;
         private PrefilledCustomer prefilledCustomer;
         private Scheme scheme;
         private String sessionToken;
@@ -119,6 +121,27 @@ public class RedirectFlowService {
                 links = new Links();
             }
             links.withCreditor(creditor);
+            return this;
+        }
+
+        /**
+         * Key-value store of custom data. Up to 3 keys are permitted, with key names up to 50 characters and
+         * values up to 500 characters.
+         */
+        public RedirectFlowCreateRequest withMetadata(Map<String, String> metadata) {
+            this.metadata = metadata;
+            return this;
+        }
+
+        /**
+         * Key-value store of custom data. Up to 3 keys are permitted, with key names up to 50 characters and
+         * values up to 500 characters.
+         */
+        public RedirectFlowCreateRequest withMetadata(String key, String value) {
+            if (metadata == null) {
+                metadata = new HashMap<>();
+            }
+            metadata.put(key, value);
             return this;
         }
 
