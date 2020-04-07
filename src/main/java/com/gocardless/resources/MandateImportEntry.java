@@ -21,10 +21,9 @@ package com.gocardless.resources;
  * match them up in your system using the `record_identifier`, and look at the `links`
  * fields to find the mandate, customer and customer bank account that have been imported.
  * 
- * <p class="restricted-notice"><strong>Restricted</strong>: This API is currently
- * only available for approved integrators - please <a href="mailto:help@gocardless.com">get
- * in touch</a> if you would like to use this API.</p>
- * 
+ * <p class="restricted-notice"><strong>Restricted</strong>: This API is currently only available for
+ * approved integrators - please <a href="mailto:help@gocardless.com">get in touch</a> if you would
+ * like to use this API.</p>
  */
 public class MandateImportEntry {
     private MandateImportEntry() {
@@ -51,7 +50,8 @@ public class MandateImportEntry {
 
     /**
      * A unique identifier for this entry, which you can use (once the import has been
-     * processed by GoCardless) to identify the records that have been created.
+     * processed by GoCardless) to identify the records that have been created. Limited
+     * to 255 characters.
      * 
      */
     public String getRecordIdentifier() {
