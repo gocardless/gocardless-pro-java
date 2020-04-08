@@ -67,8 +67,8 @@ public class CustomerService {
      * or exports), and it will not be possible to load an individually removed customer by
      * ID.
      * 
-     * <p class="restricted-notice"><strong>The action of removing a customer cannot be
-     * reversed, so please use with care.</strong></p>
+     * <p class="restricted-notice"><strong>The action of removing a customer cannot be reversed, so
+     * please use with care.</strong></p>
      */
     public CustomerRemoveRequest remove(String identity) {
         return new CustomerRemoveRequest(httpClient, identity);
@@ -762,8 +762,8 @@ public class CustomerService {
      * or exports), and it will not be possible to load an individually removed customer by
      * ID.
      * 
-     * <p class="restricted-notice"><strong>The action of removing a customer cannot be
-     * reversed, so please use with care.</strong></p>
+     * <p class="restricted-notice"><strong>The action of removing a customer cannot be reversed, so
+     * please use with care.</strong></p>
      */
     public static final class CustomerRemoveRequest extends DeleteRequest<Customer> {
         @PathParam

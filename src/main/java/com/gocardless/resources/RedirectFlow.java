@@ -1,5 +1,7 @@
 package com.gocardless.resources;
 
+import java.util.Map;
+
 import com.google.gson.annotations.SerializedName;
 
 /**
@@ -44,6 +46,7 @@ public class RedirectFlow {
     private String description;
     private String id;
     private Links links;
+    private Map<String, String> metadata;
     private String redirectUrl;
     private Scheme scheme;
     private String sessionToken;
@@ -85,6 +88,14 @@ public class RedirectFlow {
 
     public Links getLinks() {
         return links;
+    }
+
+    /**
+     * Key-value store of custom data. Up to 3 keys are permitted, with key names up to 50 characters and
+     * values up to 500 characters.
+     */
+    public Map<String, String> getMetadata() {
+        return metadata;
     }
 
     /**

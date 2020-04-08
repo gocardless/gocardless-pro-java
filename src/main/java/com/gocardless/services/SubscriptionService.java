@@ -23,40 +23,44 @@ import com.google.gson.reflect.TypeToken;
  * The following rules apply when specifying recurrence:
  * 
  * - The first payment must be charged within 1 year.
- * - When neither `month` nor `day_of_month` are present, the subscription will recur from the
- * `start_date` based on the `interval_unit`.
- * - If `month` or `day_of_month` are present, the recurrence rules will be applied from the
- * `start_date`, and the following validations apply:
+ * - If `day_of_month` and `start_date` are not provided `start_date` will be the
+ * [mandate](#core-endpoints-mandates)'s `next_possible_charge_date` and the subscription will then
+ * recur based on the `interval` & `interval_unit`
+ * - If `month` or `day_of_month` are present the following validations apply:
  * 
- * | interval_unit   | month                                          | day_of_month                 
- *           |
- * | :-------------- | :--------------------------------------------- |
- * :-------------------------------------- |
- * | yearly          | optional (required if `day_of_month` provided) | optional (required if `month`
- * provided) |
- * | monthly         | invalid                                        | required                     
- *           |
- * | weekly          | invalid                                        | invalid                      
- *           |
+ * | __interval_unit__ | __month__                                      | __day_of_month__           
+ *                |
+ * | :---------------- | :--------------------------------------------- |
+ * :----------------------------------------- |
+ * | yearly            | optional (required if `day_of_month` provided) | optional (invalid if
+ * `month` not provided) |
+ * | monthly           | invalid                                        | optional                   
+ *                |
+ * | weekly            | invalid                                        | invalid                    
+ *                |
  * 
  * Examples:
  * 
- * | interval_unit   | interval   | month   | day_of_month   | valid?                                
- *             |
- * | :-------------- | :--------- | :------ | :------------- |
+ * | __interval_unit__ | __interval__ | __month__ | __day_of_month__ | valid?                        
+ *                     |
+ * | :---------------- | :----------- | :-------- | :--------------- |
  * :------------------------------------------------- |
- * | yearly          | 1          | january | -1             | valid                                 
- *             |
- * | yearly          | 1          | march   |                | invalid - missing `day_of_month`      
- *             |
- * | monthly         | 6          |         | 12             | valid                                 
- *             |
- * | monthly         | 6          | august  | 12             | invalid - `month` must be blank       
- *             |
- * | weekly          | 2          |         |                | valid                                 
- *             |
- * | weekly          | 2          | october | 10             | invalid - `month` and `day_of_month`
- * must be blank |
+ * | yearly            | 1            | january   | -1               | valid                         
+ *                     |
+ * | monthly           | 6            |           |                  | valid                         
+ *                     |
+ * | monthly           | 6            |           | 12               | valid                         
+ *                     |
+ * | weekly            | 2            |           |                  | valid                         
+ *                     |
+ * | yearly            | 1            | march     |                  | invalid - missing
+ * `day_of_month`                   |
+ * | yearly            | 1            |           | 2                | invalid - missing `month`     
+ *                     |
+ * | monthly           | 6            | august    | 12               | invalid - `month` must be
+ * blank                    |
+ * | weekly            | 2            | october   | 10               | invalid - `month` and
+ * `day_of_month` must be blank |
  * 
  * ### Rolling dates
  * 
@@ -132,6 +136,66 @@ public class SubscriptionService {
      */
     public SubscriptionUpdateRequest update(String identity) {
         return new SubscriptionUpdateRequest(httpClient, identity);
+    }
+
+    /**
+     * Pause a subscription object.
+     * No payments will be created until it is resumed.
+     * 
+     * This can only be used when a subscription collecting a fixed number of payments (created using
+     * `count`)
+     * or when they continue forever (created without `count` or `end_date`)
+     * 
+     * When `pause_cycles` is omitted the subscription is paused until the [resume
+     * endpoint](#subscriptions-resume-a-subscription) is called.
+     * If the subscription is collecting a fixed number of payments, `end_date` will be set to `nil`.
+     * When paused indefinitely, `upcoming_payments` will be empty.
+     * 
+     * When `pause_cycles` is provided the subscription will be paused for the number of cycles
+     * requested.
+     * If the subscription is collecting a fixed number of payments, `end_date` will be set to a new
+     * value.
+     * When paused for a number of cycles, `upcoming_payments` will still contain the upcoming charge
+     * dates.
+     * 
+     * This fails with:
+     * 
+     * - `forbidden` if the subscription was created by an app and you are not authenticated as that app,
+     * or if the subscription was not created by an app and you are authenticated as an app
+     * 
+     * - `validation_failed` if invalid data is provided when attempting to pause a subscription.
+     * 
+     * - `subscription_not_active` if the subscription is no longer active.
+     * 
+     * - `subscription_already_ended` if the subscription has taken all payments.
+     * 
+     * - `pause_cycles_must_be_greater_than_or_equal_to` if the provided value for `pause_cycles` cannot
+     * be satisfied.
+     * 
+     */
+    public SubscriptionPauseRequest pause(String identity) {
+        return new SubscriptionPauseRequest(httpClient, identity);
+    }
+
+    /**
+     * Resume a subscription object.
+     * Payments will start to be created again based on the subscriptions recurrence rules.
+     * 
+     * This fails with:
+     * 
+     * - `forbidden` if the subscription was created by an app and you are not authenticated as that app,
+     * or if the subscription was not created by an app and you are authenticated as an app
+     * 
+     * - `validation_failed` if invalid data is provided when attempting to resume a subscription.
+     * 
+     * - `subscription_not_paused` if the subscription is not paused.
+     * 
+     * - `subscription_already_scheduled_to_resume` if a subscription already has a scheduled resume
+     * date.
+     * 
+     */
+    public SubscriptionResumeRequest resume(String identity) {
+        return new SubscriptionResumeRequest(httpClient, identity);
     }
 
     /**
@@ -212,10 +276,12 @@ public class SubscriptionService {
         }
 
         /**
-         * Date on or after which no further payments should be created. If this field is blank and `count`
-         * is not specified, the subscription will continue forever. <p
-         * class='deprecated-notice'><strong>Deprecated</strong>: This field will be removed in a future API
-         * version. Use `count` to specify a number of payments instead. </p>
+         * Date on or after which no further payments should be created.
+         * 
+         * If this field is blank and `count` is not specified, the subscription will continue forever.
+         * 
+         * <p class="deprecated-notice"><strong>Deprecated</strong>: This field will be removed in a future
+         * API version. Use `count` to specify a number of payments instead.</p>
          */
         public SubscriptionCreateRequest withEndDate(String endDate) {
             this.endDate = endDate;
@@ -297,10 +363,11 @@ public class SubscriptionService {
         }
 
         /**
-         * An optional payment reference. This will be set as the reference on each payment created and will
-         * appear on your customer's bank statement. See the documentation for the [create payment
-         * endpoint](#payments-create-a-payment) for more details. <p
-         * class='restricted-notice'><strong>Restricted</strong>: You need your own Service User Number to
+         * An optional payment reference. This will be set as the reference on each payment
+         * created and will appear on your customer's bank statement. See the documentation for
+         * the [create payment endpoint](#payments-create-a-payment) for more details.
+         * 
+         * <p class="restricted-notice"><strong>Restricted</strong>: You need your own Service User Number to
          * specify a payment reference for Bacs payments.</p>
          */
         public SubscriptionCreateRequest withPaymentReference(String paymentReference) {
@@ -763,10 +830,11 @@ public class SubscriptionService {
         }
 
         /**
-         * An optional payment reference. This will be set as the reference on each payment created and will
-         * appear on your customer's bank statement. See the documentation for the [create payment
-         * endpoint](#payments-create-a-payment) for more details. <p
-         * class='restricted-notice'><strong>Restricted</strong>: You need your own Service User Number to
+         * An optional payment reference. This will be set as the reference on each payment
+         * created and will appear on your customer's bank statement. See the documentation for
+         * the [create payment endpoint](#payments-create-a-payment) for more details.
+         * 
+         * <p class="restricted-notice"><strong>Restricted</strong>: You need your own Service User Number to
          * specify a payment reference for Bacs payments.</p>
          */
         public SubscriptionUpdateRequest withPaymentReference(String paymentReference) {
@@ -809,6 +877,210 @@ public class SubscriptionService {
         @Override
         protected boolean hasBody() {
             return true;
+        }
+    }
+
+    /**
+     * Request class for {@link SubscriptionService#pause }.
+     *
+     * Pause a subscription object.
+     * No payments will be created until it is resumed.
+     * 
+     * This can only be used when a subscription collecting a fixed number of payments (created using
+     * `count`)
+     * or when they continue forever (created without `count` or `end_date`)
+     * 
+     * When `pause_cycles` is omitted the subscription is paused until the [resume
+     * endpoint](#subscriptions-resume-a-subscription) is called.
+     * If the subscription is collecting a fixed number of payments, `end_date` will be set to `nil`.
+     * When paused indefinitely, `upcoming_payments` will be empty.
+     * 
+     * When `pause_cycles` is provided the subscription will be paused for the number of cycles
+     * requested.
+     * If the subscription is collecting a fixed number of payments, `end_date` will be set to a new
+     * value.
+     * When paused for a number of cycles, `upcoming_payments` will still contain the upcoming charge
+     * dates.
+     * 
+     * This fails with:
+     * 
+     * - `forbidden` if the subscription was created by an app and you are not authenticated as that app,
+     * or if the subscription was not created by an app and you are authenticated as an app
+     * 
+     * - `validation_failed` if invalid data is provided when attempting to pause a subscription.
+     * 
+     * - `subscription_not_active` if the subscription is no longer active.
+     * 
+     * - `subscription_already_ended` if the subscription has taken all payments.
+     * 
+     * - `pause_cycles_must_be_greater_than_or_equal_to` if the provided value for `pause_cycles` cannot
+     * be satisfied.
+     * 
+     */
+    public static final class SubscriptionPauseRequest extends PostRequest<Subscription> {
+        @PathParam
+        private final String identity;
+        private Map<String, String> metadata;
+        private Integer pauseCycles;
+
+        /**
+         * Key-value store of custom data. Up to 3 keys are permitted, with key names up to 50 characters and
+         * values up to 500 characters.
+         */
+        public SubscriptionPauseRequest withMetadata(Map<String, String> metadata) {
+            this.metadata = metadata;
+            return this;
+        }
+
+        /**
+         * Key-value store of custom data. Up to 3 keys are permitted, with key names up to 50 characters and
+         * values up to 500 characters.
+         */
+        public SubscriptionPauseRequest withMetadata(String key, String value) {
+            if (metadata == null) {
+                metadata = new HashMap<>();
+            }
+            metadata.put(key, value);
+            return this;
+        }
+
+        /**
+         * The number of cycles to pause a subscription for. A cycle is one duration of `interval` and
+         * `interval_unit`.
+         */
+        public SubscriptionPauseRequest withPauseCycles(Integer pauseCycles) {
+            this.pauseCycles = pauseCycles;
+            return this;
+        }
+
+        private SubscriptionPauseRequest(HttpClient httpClient, String identity) {
+            super(httpClient);
+            this.identity = identity;
+        }
+
+        public SubscriptionPauseRequest withHeader(String headerName, String headerValue) {
+            this.addHeader(headerName, headerValue);
+            return this;
+        }
+
+        @Override
+        protected Map<String, String> getPathParams() {
+            ImmutableMap.Builder<String, String> params = ImmutableMap.builder();
+            params.put("identity", identity);
+            return params.build();
+        }
+
+        @Override
+        protected String getPathTemplate() {
+            return "subscriptions/:identity/actions/pause";
+        }
+
+        @Override
+        protected String getEnvelope() {
+            return "subscriptions";
+        }
+
+        @Override
+        protected Class<Subscription> getResponseClass() {
+            return Subscription.class;
+        }
+
+        @Override
+        protected boolean hasBody() {
+            return true;
+        }
+
+        @Override
+        protected String getRequestEnvelope() {
+            return "data";
+        }
+    }
+
+    /**
+     * Request class for {@link SubscriptionService#resume }.
+     *
+     * Resume a subscription object.
+     * Payments will start to be created again based on the subscriptions recurrence rules.
+     * 
+     * This fails with:
+     * 
+     * - `forbidden` if the subscription was created by an app and you are not authenticated as that app,
+     * or if the subscription was not created by an app and you are authenticated as an app
+     * 
+     * - `validation_failed` if invalid data is provided when attempting to resume a subscription.
+     * 
+     * - `subscription_not_paused` if the subscription is not paused.
+     * 
+     * - `subscription_already_scheduled_to_resume` if a subscription already has a scheduled resume
+     * date.
+     * 
+     */
+    public static final class SubscriptionResumeRequest extends PostRequest<Subscription> {
+        @PathParam
+        private final String identity;
+        private Map<String, String> metadata;
+
+        /**
+         * Key-value store of custom data. Up to 3 keys are permitted, with key names up to 50 characters and
+         * values up to 500 characters.
+         */
+        public SubscriptionResumeRequest withMetadata(Map<String, String> metadata) {
+            this.metadata = metadata;
+            return this;
+        }
+
+        /**
+         * Key-value store of custom data. Up to 3 keys are permitted, with key names up to 50 characters and
+         * values up to 500 characters.
+         */
+        public SubscriptionResumeRequest withMetadata(String key, String value) {
+            if (metadata == null) {
+                metadata = new HashMap<>();
+            }
+            metadata.put(key, value);
+            return this;
+        }
+
+        private SubscriptionResumeRequest(HttpClient httpClient, String identity) {
+            super(httpClient);
+            this.identity = identity;
+        }
+
+        public SubscriptionResumeRequest withHeader(String headerName, String headerValue) {
+            this.addHeader(headerName, headerValue);
+            return this;
+        }
+
+        @Override
+        protected Map<String, String> getPathParams() {
+            ImmutableMap.Builder<String, String> params = ImmutableMap.builder();
+            params.put("identity", identity);
+            return params.build();
+        }
+
+        @Override
+        protected String getPathTemplate() {
+            return "subscriptions/:identity/actions/resume";
+        }
+
+        @Override
+        protected String getEnvelope() {
+            return "subscriptions";
+        }
+
+        @Override
+        protected Class<Subscription> getResponseClass() {
+            return Subscription.class;
+        }
+
+        @Override
+        protected boolean hasBody() {
+            return true;
+        }
+
+        @Override
+        protected String getRequestEnvelope() {
+            return "data";
         }
     }
 

@@ -35,13 +35,13 @@ import com.google.gson.annotations.SerializedName;
  * [checking the current status](#mandate-imports-get-a-mandate-import) of the mandate import and
  * [linking up the mandates to your system](#mandate-import-entries-list-all-mandate-import-entries).
  * 
- * <p class="notice">Note that all Mandate Imports have an upper limit of 30,000 entries, so
- * we recommend you split your import into several smaller imports if you're planning to
- * exceed this threshold.</p>
+ * <p class="notice">Note that all Mandate Imports have an upper limit of 30,000 entries, so we
+ * recommend you split your import into several smaller imports if you're planning to exceed this
+ * threshold.</p>
  * 
- * <p class="restricted-notice"><strong>Restricted</strong>: This API is currently
- * only available for approved integrators - please <a href="mailto:help@gocardless.com">get
- * in touch</a> if you would like to use this API.</p>
+ * <p class="restricted-notice"><strong>Restricted</strong>: This API is currently only available for
+ * approved integrators - please <a href="mailto:help@gocardless.com">get in touch</a> if you would
+ * like to use this API.</p>
  */
 public class MandateImportService {
     private final HttpClient httpClient;
