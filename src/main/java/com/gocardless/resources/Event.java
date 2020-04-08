@@ -156,12 +156,23 @@ public class Event {
             // blank to prevent instantiation
         }
 
+        private String bankAccountId;
         private String cause;
+        private String currency;
         private String description;
         private Origin origin;
+        private String property;
         private String reasonCode;
         private Scheme scheme;
         private Boolean willAttemptRetry;
+
+        /**
+         * When we send a creditor `new_payout_currency_added` webhook, we also send the bank account id of
+         * the new account
+         */
+        public String getBankAccountId() {
+            return bankAccountId;
+        }
 
         /**
          * What triggered the event. _Note:_ `cause` is our simplified and predictable key indicating what
@@ -169,6 +180,14 @@ public class Event {
          */
         public String getCause() {
             return cause;
+        }
+
+        /**
+         * When we send a creditor `new_payout_currency_added` webhook, we also send the currency of the new
+         * account
+         */
+        public String getCurrency() {
+            return currency;
         }
 
         /**
@@ -190,6 +209,14 @@ public class Event {
          */
         public Origin getOrigin() {
             return origin;
+        }
+
+        /**
+         * When we send a creditor `creditor_updated` webhook, this tells you which property on the creditor
+         * has been updated
+         */
+        public String getProperty() {
+            return property;
         }
 
         /**
