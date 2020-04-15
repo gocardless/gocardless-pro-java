@@ -235,8 +235,8 @@ public class InstalmentScheduleService {
         }
 
         /**
-         * On failure, automatically retry payments using [Optimise Smart Payment
-         * Retries](#optimise-smart-payment-retries). Default is `false`.
+         * On failure, automatically retry payments using [intelligent
+         * retries](#success-intelligent-retries). Default is `false`.
          */
         public InstalmentScheduleCreateWithDatesRequest withRetryIfPossible(Boolean retryIfPossible) {
             this.retryIfPossible = retryIfPossible;
@@ -540,8 +540,8 @@ public class InstalmentScheduleService {
         }
 
         /**
-         * On failure, automatically retry payments using [Optimise Smart Payment
-         * Retries](#optimise-smart-payment-retries). Default is `false`.
+         * On failure, automatically retry payments using [intelligent
+         * retries](#success-intelligent-retries). Default is `false`.
          */
         public InstalmentScheduleCreateWithScheduleRequest withRetryIfPossible(
                 Boolean retryIfPossible) {

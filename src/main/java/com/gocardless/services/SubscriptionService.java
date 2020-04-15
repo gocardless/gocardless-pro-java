@@ -376,8 +376,8 @@ public class SubscriptionService {
         }
 
         /**
-         * On failure, automatically retry payments using [Optimise Smart Payment
-         * Retries](#optimise-smart-payment-retries). Default is `false`.
+         * On failure, automatically retry payments using [intelligent
+         * retries](#success-intelligent-retries). Default is `false`.
          */
         public SubscriptionCreateRequest withRetryIfPossible(Boolean retryIfPossible) {
             this.retryIfPossible = retryIfPossible;
