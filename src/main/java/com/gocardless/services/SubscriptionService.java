@@ -180,6 +180,8 @@ public class SubscriptionService {
     /**
      * Resume a subscription object.
      * Payments will start to be created again based on the subscriptions recurrence rules.
+     * The `charge_date` on the next payment will be the same as the subscriptions
+     * `earliest_charge_date_after_resume`
      * 
      * This fails with:
      * 
@@ -189,9 +191,6 @@ public class SubscriptionService {
      * - `validation_failed` if invalid data is provided when attempting to resume a subscription.
      * 
      * - `subscription_not_paused` if the subscription is not paused.
-     * 
-     * - `subscription_already_scheduled_to_resume` if a subscription already has a scheduled resume
-     * date.
      * 
      */
     public SubscriptionResumeRequest resume(String identity) {
@@ -1001,6 +1000,8 @@ public class SubscriptionService {
      *
      * Resume a subscription object.
      * Payments will start to be created again based on the subscriptions recurrence rules.
+     * The `charge_date` on the next payment will be the same as the subscriptions
+     * `earliest_charge_date_after_resume`
      * 
      * This fails with:
      * 
@@ -1010,9 +1011,6 @@ public class SubscriptionService {
      * - `validation_failed` if invalid data is provided when attempting to resume a subscription.
      * 
      * - `subscription_not_paused` if the subscription is not paused.
-     * 
-     * - `subscription_already_scheduled_to_resume` if a subscription already has a scheduled resume
-     * date.
      * 
      */
     public static final class SubscriptionResumeRequest extends PostRequest<Subscription> {
