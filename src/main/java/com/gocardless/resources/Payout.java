@@ -1,5 +1,7 @@
 package com.gocardless.resources;
 
+import java.util.Map;
+
 import com.google.gson.annotations.SerializedName;
 
 /**
@@ -23,6 +25,7 @@ public class Payout {
     private Fx fx;
     private String id;
     private Links links;
+    private Map<String, String> metadata;
     private PayoutType payoutType;
     private String reference;
     private Status status;
@@ -91,6 +94,14 @@ public class Payout {
 
     public Links getLinks() {
         return links;
+    }
+
+    /**
+     * Key-value store of custom data. Up to 3 keys are permitted, with key names up to 50 characters and
+     * values up to 500 characters.
+     */
+    public Map<String, String> getMetadata() {
+        return metadata;
     }
 
     /**

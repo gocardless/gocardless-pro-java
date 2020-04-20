@@ -1,5 +1,6 @@
 package com.gocardless.services;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -50,6 +51,13 @@ public class PayoutService {
     }
 
     /**
+     * Updates a payout object. This accepts only the metadata parameter.
+     */
+    public PayoutUpdateRequest update(String identity) {
+        return new PayoutUpdateRequest(httpClient, identity);
+    }
+
+    /**
      * Request class for {@link PayoutService#list }.
      *
      * Returns a [cursor-paginated](#api-usage-cursor-pagination) list of your payouts.
@@ -59,6 +67,7 @@ public class PayoutService {
         private String creditor;
         private String creditorBankAccount;
         private Currency currency;
+        private Map<String, String> metadata;
         private PayoutType payoutType;
         private String reference;
         private Status status;
@@ -162,6 +171,27 @@ public class PayoutService {
         }
 
         /**
+         * Key-value store of custom data. Up to 3 keys are permitted, with key names up to 50 characters and
+         * values up to 500 characters.
+         */
+        public PayoutListRequest<S> withMetadata(Map<String, String> metadata) {
+            this.metadata = metadata;
+            return this;
+        }
+
+        /**
+         * Key-value store of custom data. Up to 3 keys are permitted, with key names up to 50 characters and
+         * values up to 500 characters.
+         */
+        public PayoutListRequest<S> withMetadata(String key, String value) {
+            if (metadata == null) {
+                metadata = new HashMap<>();
+            }
+            metadata.put(key, value);
+            return this;
+        }
+
+        /**
          * Whether a payout contains merchant revenue or partner fees.
          */
         public PayoutListRequest<S> withPayoutType(PayoutType payoutType) {
@@ -214,6 +244,9 @@ public class PayoutService {
             }
             if (currency != null) {
                 params.put("currency", currency);
+            }
+            if (metadata != null) {
+                params.put("metadata", metadata);
             }
             if (payoutType != null) {
                 params.put("payout_type", payoutType);
@@ -376,6 +409,75 @@ public class PayoutService {
         @Override
         protected Class<Payout> getResponseClass() {
             return Payout.class;
+        }
+    }
+
+    /**
+     * Request class for {@link PayoutService#update }.
+     *
+     * Updates a payout object. This accepts only the metadata parameter.
+     */
+    public static final class PayoutUpdateRequest extends PutRequest<Payout> {
+        @PathParam
+        private final String identity;
+        private Map<String, String> metadata;
+
+        /**
+         * Key-value store of custom data. Up to 3 keys are permitted, with key names up to 50 characters and
+         * values up to 500 characters.
+         */
+        public PayoutUpdateRequest withMetadata(Map<String, String> metadata) {
+            this.metadata = metadata;
+            return this;
+        }
+
+        /**
+         * Key-value store of custom data. Up to 3 keys are permitted, with key names up to 50 characters and
+         * values up to 500 characters.
+         */
+        public PayoutUpdateRequest withMetadata(String key, String value) {
+            if (metadata == null) {
+                metadata = new HashMap<>();
+            }
+            metadata.put(key, value);
+            return this;
+        }
+
+        private PayoutUpdateRequest(HttpClient httpClient, String identity) {
+            super(httpClient);
+            this.identity = identity;
+        }
+
+        public PayoutUpdateRequest withHeader(String headerName, String headerValue) {
+            this.addHeader(headerName, headerValue);
+            return this;
+        }
+
+        @Override
+        protected Map<String, String> getPathParams() {
+            ImmutableMap.Builder<String, String> params = ImmutableMap.builder();
+            params.put("identity", identity);
+            return params.build();
+        }
+
+        @Override
+        protected String getPathTemplate() {
+            return "payouts/:identity";
+        }
+
+        @Override
+        protected String getEnvelope() {
+            return "payouts";
+        }
+
+        @Override
+        protected Class<Payout> getResponseClass() {
+            return Payout.class;
+        }
+
+        @Override
+        protected boolean hasBody() {
+            return true;
         }
     }
 }
