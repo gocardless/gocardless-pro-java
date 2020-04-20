@@ -220,8 +220,8 @@ public class Subscription {
     }
 
     /**
-     * On failure, automatically retry payments using [Optimise Smart Payment
-     * Retries](#optimise-smart-payment-retries). Default is `false`.
+     * On failure, automatically retry payments using [intelligent
+     * retries](#success-intelligent-retries). Default is `false`.
      */
     public Boolean getRetryIfPossible() {
         return retryIfPossible;
