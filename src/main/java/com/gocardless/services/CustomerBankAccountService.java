@@ -8,6 +8,7 @@ import com.gocardless.http.*;
 import com.gocardless.resources.CustomerBankAccount;
 
 import com.google.common.collect.ImmutableMap;
+import com.google.gson.annotations.SerializedName;
 import com.google.gson.reflect.TypeToken;
 
 /**
@@ -111,7 +112,7 @@ public class CustomerBankAccountService {
             IdempotentPostRequest<CustomerBankAccount> {
         private String accountHolderName;
         private String accountNumber;
-        private String accountType;
+        private AccountType accountType;
         private String bankCode;
         private String branchCode;
         private String countryCode;
@@ -144,7 +145,7 @@ public class CustomerBankAccountService {
          * accounts in other currencies. See [local details](#local-bank-details-united-states) for more
          * information.
          */
-        public CustomerBankAccountCreateRequest withAccountType(String accountType) {
+        public CustomerBankAccountCreateRequest withAccountType(AccountType accountType) {
             this.accountType = accountType;
             return this;
         }
@@ -288,6 +289,16 @@ public class CustomerBankAccountService {
         @Override
         protected boolean hasBody() {
             return true;
+        }
+
+        public enum AccountType {
+            @SerializedName("savings")
+            SAVINGS, @SerializedName("checking")
+            CHECKING;
+            @Override
+            public String toString() {
+                return name().toLowerCase();
+            }
         }
 
         public static class Links {

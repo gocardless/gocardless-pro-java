@@ -158,9 +158,8 @@ public class RedirectFlowService {
         }
 
         /**
-         * Bank account type. Required for USD-denominated bank accounts. Must not be provided for bank
-         * accounts in other currencies. See [local details](#local-bank-details-united-states) for more
-         * information.
+         * Bank account type for USD-denominated bank accounts. Must not be provided for bank accounts in
+         * other currencies. See [local details](#local-bank-details-united-states) for more information.
          */
         public RedirectFlowCreateRequest withPrefilledBankAccountAccountType(
                 PrefilledBankAccount.AccountType accountType) {
@@ -457,9 +456,8 @@ public class RedirectFlowService {
             private AccountType accountType;
 
             /**
-             * Bank account type. Required for USD-denominated bank accounts. Must not be provided for bank
-             * accounts in other currencies. See [local details](#local-bank-details-united-states) for more
-             * information.
+             * Bank account type for USD-denominated bank accounts. Must not be provided for bank accounts in
+             * other currencies. See [local details](#local-bank-details-united-states) for more information.
              */
             public PrefilledBankAccount withAccountType(AccountType accountType) {
                 this.accountType = accountType;
