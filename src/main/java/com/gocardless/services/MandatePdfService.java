@@ -3,6 +3,8 @@ package com.gocardless.services;
 import com.gocardless.http.*;
 import com.gocardless.resources.MandatePdf;
 
+import com.google.gson.annotations.SerializedName;
+
 /**
  * Service class for working with mandate pdf resources.
  *
@@ -98,7 +100,7 @@ public class MandatePdfService {
     public static final class MandatePdfCreateRequest extends PostRequest<MandatePdf> {
         private String accountHolderName;
         private String accountNumber;
-        private String accountType;
+        private AccountType accountType;
         private String addressLine1;
         private String addressLine2;
         private String addressLine3;
@@ -144,7 +146,7 @@ public class MandatePdfService {
          * accounts in other currencies. See [local details](#local-bank-details-united-states) for more
          * information.
          */
-        public MandatePdfCreateRequest withAccountType(String accountType) {
+        public MandatePdfCreateRequest withAccountType(AccountType accountType) {
             this.accountType = accountType;
             return this;
         }
@@ -287,8 +289,9 @@ public class MandatePdfService {
         }
 
         /**
-         * The customer's address region, county or department. For US customers a 2 letter state code ([ISO
-         * 3166-2:US](https://en.wikipedia.org/wiki/ISO_3166-2:US) e.g CA) is required.
+         * The customer's address region, county or department. For US customers a 2 letter
+         * [ISO3166-2:US](https://en.wikipedia.org/wiki/ISO_3166-2:US) state code is required (e.g. `CA` for
+         * California).
          */
         public MandatePdfCreateRequest withRegion(String region) {
             this.region = region;
@@ -368,6 +371,16 @@ public class MandatePdfService {
         @Override
         protected boolean hasBody() {
             return true;
+        }
+
+        public enum AccountType {
+            @SerializedName("savings")
+            SAVINGS, @SerializedName("checking")
+            CHECKING;
+            @Override
+            public String toString() {
+                return name().toLowerCase();
+            }
         }
 
         public static class Links {

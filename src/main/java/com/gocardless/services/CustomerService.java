@@ -233,8 +233,9 @@ public class CustomerService {
         }
 
         /**
-         * The customer's address region, county or department. For US customers a 2 letter state code ([ISO
-         * 3166-2:US](https://en.wikipedia.org/wiki/ISO_3166-2:US) e.g CA) is required.
+         * The customer's address region, county or department. For US customers a 2 letter
+         * [ISO3166-2:US](https://en.wikipedia.org/wiki/ISO_3166-2:US) state code is required (e.g. `CA` for
+         * California).
          */
         public CustomerCreateRequest withRegion(String region) {
             this.region = region;
@@ -699,8 +700,9 @@ public class CustomerService {
         }
 
         /**
-         * The customer's address region, county or department. For US customers a 2 letter state code ([ISO
-         * 3166-2:US](https://en.wikipedia.org/wiki/ISO_3166-2:US) e.g CA) is required.
+         * The customer's address region, county or department. For US customers a 2 letter
+         * [ISO3166-2:US](https://en.wikipedia.org/wiki/ISO_3166-2:US) state code is required (e.g. `CA` for
+         * California).
          */
         public CustomerUpdateRequest withRegion(String region) {
             this.region = region;

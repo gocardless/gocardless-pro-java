@@ -95,6 +95,13 @@ public class InstalmentScheduleService {
     }
 
     /**
+     * Updates an instalment schedule. This accepts only the metadata parameter.
+     */
+    public InstalmentScheduleUpdateRequest update(String identity) {
+        return new InstalmentScheduleUpdateRequest(httpClient, identity);
+    }
+
+    /**
      * Immediately cancels an instalment schedule; no further payments will be collected for it.
      * 
      * This will fail with a `cancellation_failed` error if the instalment schedule is already cancelled
@@ -970,6 +977,76 @@ public class InstalmentScheduleService {
         @Override
         protected Class<InstalmentSchedule> getResponseClass() {
             return InstalmentSchedule.class;
+        }
+    }
+
+    /**
+     * Request class for {@link InstalmentScheduleService#update }.
+     *
+     * Updates an instalment schedule. This accepts only the metadata parameter.
+     */
+    public static final class InstalmentScheduleUpdateRequest extends
+            PutRequest<InstalmentSchedule> {
+        @PathParam
+        private final String identity;
+        private Map<String, String> metadata;
+
+        /**
+         * Key-value store of custom data. Up to 3 keys are permitted, with key names up to 50 characters and
+         * values up to 500 characters.
+         */
+        public InstalmentScheduleUpdateRequest withMetadata(Map<String, String> metadata) {
+            this.metadata = metadata;
+            return this;
+        }
+
+        /**
+         * Key-value store of custom data. Up to 3 keys are permitted, with key names up to 50 characters and
+         * values up to 500 characters.
+         */
+        public InstalmentScheduleUpdateRequest withMetadata(String key, String value) {
+            if (metadata == null) {
+                metadata = new HashMap<>();
+            }
+            metadata.put(key, value);
+            return this;
+        }
+
+        private InstalmentScheduleUpdateRequest(HttpClient httpClient, String identity) {
+            super(httpClient);
+            this.identity = identity;
+        }
+
+        public InstalmentScheduleUpdateRequest withHeader(String headerName, String headerValue) {
+            this.addHeader(headerName, headerValue);
+            return this;
+        }
+
+        @Override
+        protected Map<String, String> getPathParams() {
+            ImmutableMap.Builder<String, String> params = ImmutableMap.builder();
+            params.put("identity", identity);
+            return params.build();
+        }
+
+        @Override
+        protected String getPathTemplate() {
+            return "instalment_schedules/:identity";
+        }
+
+        @Override
+        protected String getEnvelope() {
+            return "instalment_schedules";
+        }
+
+        @Override
+        protected Class<InstalmentSchedule> getResponseClass() {
+            return InstalmentSchedule.class;
+        }
+
+        @Override
+        protected boolean hasBody() {
+            return true;
         }
     }
 

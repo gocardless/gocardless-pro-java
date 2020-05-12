@@ -92,6 +92,7 @@ public class RedirectFlowService {
         private String description;
         private Links links;
         private Map<String, String> metadata;
+        private PrefilledBankAccount prefilledBankAccount;
         private PrefilledCustomer prefilledCustomer;
         private Scheme scheme;
         private String sessionToken;
@@ -146,9 +147,33 @@ public class RedirectFlowService {
         }
 
         /**
-         * Information used to prefill the payment page so your customer doesn't have to re-type details you
-         * already hold about them. It will be stored unvalidated and the customer will be able to review and
-         * amend it before completing the form.
+         * Bank account information used to prefill the payment page so your customer doesn't have to re-type
+         * details you already hold about them. It will be stored unvalidated and the customer will be able
+         * to review and amend it before completing the form.
+         */
+        public RedirectFlowCreateRequest withPrefilledBankAccount(
+                PrefilledBankAccount prefilledBankAccount) {
+            this.prefilledBankAccount = prefilledBankAccount;
+            return this;
+        }
+
+        /**
+         * Bank account type for USD-denominated bank accounts. Must not be provided for bank accounts in
+         * other currencies. See [local details](#local-bank-details-united-states) for more information.
+         */
+        public RedirectFlowCreateRequest withPrefilledBankAccountAccountType(
+                PrefilledBankAccount.AccountType accountType) {
+            if (prefilledBankAccount == null) {
+                prefilledBankAccount = new PrefilledBankAccount();
+            }
+            prefilledBankAccount.withAccountType(accountType);
+            return this;
+        }
+
+        /**
+         * Customer information used to prefill the payment page so your customer doesn't have to re-type
+         * details you already hold about them. It will be stored unvalidated and the customer will be able
+         * to review and amend it before completing the form.
          */
         public RedirectFlowCreateRequest withPrefilledCustomer(PrefilledCustomer prefilledCustomer) {
             this.prefilledCustomer = prefilledCustomer;
@@ -200,7 +225,8 @@ public class RedirectFlowService {
         }
 
         /**
-         * Customer's company name.
+         * Customer's company name. Company name should only be provided if `given_name` and `family_name`
+         * are null.
          */
         public RedirectFlowCreateRequest withPrefilledCustomerCompanyName(String companyName) {
             if (prefilledCustomer == null) {
@@ -426,6 +452,29 @@ public class RedirectFlowService {
             }
         }
 
+        public static class PrefilledBankAccount {
+            private AccountType accountType;
+
+            /**
+             * Bank account type for USD-denominated bank accounts. Must not be provided for bank accounts in
+             * other currencies. See [local details](#local-bank-details-united-states) for more information.
+             */
+            public PrefilledBankAccount withAccountType(AccountType accountType) {
+                this.accountType = accountType;
+                return this;
+            }
+
+            public enum AccountType {
+                @SerializedName("savings")
+                SAVINGS, @SerializedName("checking")
+                CHECKING;
+                @Override
+                public String toString() {
+                    return name().toLowerCase();
+                }
+            }
+        }
+
         public static class PrefilledCustomer {
             private String addressLine1;
             private String addressLine2;
@@ -476,7 +525,8 @@ public class RedirectFlowService {
             }
 
             /**
-             * Customer's company name.
+             * Customer's company name. Company name should only be provided if `given_name` and `family_name`
+             * are null.
              */
             public PrefilledCustomer withCompanyName(String companyName) {
                 this.companyName = companyName;
