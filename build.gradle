@@ -1,6 +1,7 @@
 apply plugin: 'java'
 apply plugin: 'maven'
 apply plugin: 'signing'
+apply plugin: 'maven-publish'
 
 sourceCompatibility = 1.7
 group = ' com.gocardless'
@@ -71,32 +72,32 @@ signing {
     sign configurations.archives
 }
 
-gradle.taskGraph.whenReady { taskGraph ->
-    if (taskGraph.allTasks.any { it instanceof Sign }) {
-        def keyId
-        def keyPw
-        // Gradle is running as a daemon - prompt user to enter passwords via popup UI (#770)
-        new SwingBuilder().edt {
-            dialog(modal: true, title: 'Enter credentials', alwaysOnTop: true, resizable: true,
-                    locationRelativeTo: null, pack: true, show: true
-            ) {
-                vbox {
-                    label(text: "Key Id:")
-                    textField id: "keyIdText", input = textField()
-                    label(text: "Password:")
-                    textField id: "passwordText", input = passwordField()
-                    button(defaultButton: true, text: 'OK', actionPerformed: {
-                        keyId = keyIdText.text;
-                        keyPw = passwordText.text;
-                        dispose();
-                    })
-                }
-            }
-        }
-        allprojects { ext."signing.keyId" = keyId }
-        allprojects { ext."signing.password" = keyPw }
-    }
-}
+// gradle.taskGraph.whenReady { taskGraph ->
+//     if (taskGraph.allTasks.any { it instanceof Sign }) {
+//         def keyId
+//         def keyPw
+//         // Gradle is running as a daemon - prompt user to enter passwords via popup UI (#770)
+//         new SwingBuilder().edt {
+//             dialog(modal: true, title: 'Enter credentials', alwaysOnTop: true, resizable: true,
+//                     locationRelativeTo: null, pack: true, show: true
+//             ) {
+//                 vbox {
+//                     label(text: "Key Id:")
+//                     textField id: "keyIdText", input = textField()
+//                     label(text: "Password:")
+//                     textField id: "passwordText", input = passwordField()
+//                     button(defaultButton: true, text: 'OK', actionPerformed: {
+//                         keyId = keyIdText.text;
+//                         keyPw = passwordText.text;
+//                         dispose();
+//                     })
+//                 }
+//             }
+//         }
+//         allprojects { ext."signing.keyId" = keyId }
+//         allprojects { ext."signing.password" = keyPw }
+//     }
+// }
 
 uploadArchives {
     repositories {
@@ -144,4 +145,23 @@ uploadArchives {
             }
         }
     }
+}
+
+publishing {
+  publications {
+    maven(MavenPublication) {
+      groupId = 'com.gocardless'
+      artifactId = 'gocardless-pro'
+    }
+  }
+  repositories {
+    maven {
+      name "OSSRH"
+      url "https://oss.sonatype.org/service/local/staging/deploy/maven2/"
+      credentials {
+        username System.getenv("MAVEN_USERNAME")
+        password System.getenv("MAVEN_PASSWORD")
+      }
+    }
+  }
 }
