@@ -160,6 +160,7 @@ public class Event {
         private String cause;
         private String currency;
         private String description;
+        private String notRetriedReason;
         private Origin origin;
         private String property;
         private String reasonCode;
@@ -196,6 +197,20 @@ public class Event {
          */
         public String getDescription() {
             return description;
+        }
+
+        /**
+         * When will_attempt_retry is set to false, this field will contain
+         * the reason the payment was not retried. This can be one of:
+         * <ul>
+         * <li>`failure_filter_applied`: The payment won't be intelligently retried as
+         *   there is a high likelihood of failure on retry.</li>
+         * <li>`other`: The payment won't be intelligently retried due to any other
+         *   reason.</li>
+         * </ul>
+         */
+        public String getNotRetriedReason() {
+            return notRetriedReason;
         }
 
         /**
