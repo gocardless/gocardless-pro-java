@@ -779,6 +779,7 @@ public class SubscriptionService {
         private Map<String, String> metadata;
         private String name;
         private String paymentReference;
+        private Boolean retryIfPossible;
 
         /**
          * Amount in the lowest denomination for the currency (e.g. pence in GBP, cents in EUR).
@@ -838,6 +839,15 @@ public class SubscriptionService {
          */
         public SubscriptionUpdateRequest withPaymentReference(String paymentReference) {
             this.paymentReference = paymentReference;
+            return this;
+        }
+
+        /**
+         * On failure, automatically retry payments using [intelligent
+         * retries](#success-intelligent-retries). Default is `false`.
+         */
+        public SubscriptionUpdateRequest withRetryIfPossible(Boolean retryIfPossible) {
+            this.retryIfPossible = retryIfPossible;
             return this;
         }
 
