@@ -231,10 +231,11 @@ public class InstalmentScheduleService {
          * <strong>Autogiro</strong> - 11 characters<br /> <strong>Bacs</strong> - 10 characters<br />
          * <strong>BECS</strong> - 30 characters<br /> <strong>BECS NZ</strong> - 12 characters<br />
          * <strong>Betalingsservice</strong> - 30 characters<br /> <strong>PAD</strong> - 12 characters<br />
-         * <strong>SEPA</strong> - 140 characters <p class='restricted-notice'><strong>Restricted</strong>:
-         * You can only specify a payment reference for Bacs payments (that is, when collecting from the UK)
-         * if you're on the <a href='https://gocardless.com/pricing'>GoCardless Plus, Pro or Enterprise
-         * packages</a>.</p>
+         * <strong>SEPA</strong> - 140 characters<br /> Note that this reference must be unique (for each
+         * merchant) for the BECS scheme as it is a scheme requirement. <p
+         * class='restricted-notice'><strong>Restricted</strong>: You can only specify a payment reference
+         * for Bacs payments (that is, when collecting from the UK) if you're on the <a
+         * href='https://gocardless.com/pricing'>GoCardless Plus, Pro or Enterprise packages</a>.</p>
          */
         public InstalmentScheduleCreateWithDatesRequest withPaymentReference(String paymentReference) {
             this.paymentReference = paymentReference;
@@ -535,10 +536,11 @@ public class InstalmentScheduleService {
          * <strong>Autogiro</strong> - 11 characters<br /> <strong>Bacs</strong> - 10 characters<br />
          * <strong>BECS</strong> - 30 characters<br /> <strong>BECS NZ</strong> - 12 characters<br />
          * <strong>Betalingsservice</strong> - 30 characters<br /> <strong>PAD</strong> - 12 characters<br />
-         * <strong>SEPA</strong> - 140 characters <p class='restricted-notice'><strong>Restricted</strong>:
-         * You can only specify a payment reference for Bacs payments (that is, when collecting from the UK)
-         * if you're on the <a href='https://gocardless.com/pricing'>GoCardless Plus, Pro or Enterprise
-         * packages</a>.</p>
+         * <strong>SEPA</strong> - 140 characters<br /> Note that this reference must be unique (for each
+         * merchant) for the BECS scheme as it is a scheme requirement. <p
+         * class='restricted-notice'><strong>Restricted</strong>: You can only specify a payment reference
+         * for Bacs payments (that is, when collecting from the UK) if you're on the <a
+         * href='https://gocardless.com/pricing'>GoCardless Plus, Pro or Enterprise packages</a>.</p>
          */
         public InstalmentScheduleCreateWithScheduleRequest withPaymentReference(
                 String paymentReference) {

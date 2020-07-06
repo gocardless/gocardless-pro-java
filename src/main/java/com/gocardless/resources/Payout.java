@@ -29,6 +29,7 @@ public class Payout {
     private PayoutType payoutType;
     private String reference;
     private Status status;
+    private String taxCurrency;
 
     /**
      * Amount in minor unit (e.g. pence in GBP, cents in EUR).
@@ -68,7 +69,7 @@ public class Payout {
 
     /**
      * Fees that have already been deducted from the payout amount in minor unit (e.g. pence in GBP,
-     * cents in EUR).
+     * cents in EUR), inclusive of tax if applicable.
      * 
      * For each `late_failure_settled` or `chargeback_settled` action, we refund the transaction fees in
      * a payout. This means that a payout can have a negative `deducted_fees` value.
@@ -128,6 +129,15 @@ public class Payout {
      */
     public Status getStatus() {
         return status;
+    }
+
+    /**
+     * [ISO 4217](http://en.wikipedia.org/wiki/ISO_4217#Active_codes) code for the currency in which tax
+     * is paid out to the tax authorities of your tax jurisdiction. Currently “EUR”, “GBP”, for French or
+     * British merchants, this will be `null` if tax is not applicable <em>beta</em>
+     */
+    public String getTaxCurrency() {
+        return taxCurrency;
     }
 
     public enum Currency {

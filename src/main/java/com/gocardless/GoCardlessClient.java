@@ -35,6 +35,7 @@ public class GoCardlessClient {
     private final RedirectFlowService redirectFlows;
     private final RefundService refunds;
     private final SubscriptionService subscriptions;
+    private final TaxRateService taxRates;
 
     public static final class Builder {
         private final String accessToken;
@@ -140,6 +141,7 @@ public class GoCardlessClient {
         this.redirectFlows = new RedirectFlowService(httpClient);
         this.refunds = new RefundService(httpClient);
         this.subscriptions = new SubscriptionService(httpClient);
+        this.taxRates = new TaxRateService(httpClient);
     }
 
     /**
@@ -273,6 +275,13 @@ public class GoCardlessClient {
      */
     public SubscriptionService subscriptions() {
         return subscriptions;
+    }
+
+    /**
+     * A service class for working with tax rate resources.
+     */
+    public TaxRateService taxRates() {
+        return taxRates;
     }
 
     /**
