@@ -148,7 +148,7 @@ public class SubscriptionService {
      * 
      * When `pause_cycles` is omitted the subscription is paused until the [resume
      * endpoint](#subscriptions-resume-a-subscription) is called.
-     * If the subscription is collecting a fixed number of payments, `end_date` will be set to `nil`.
+     * If the subscription is collecting a fixed number of payments, `end_date` will be set to `null`.
      * When paused indefinitely, `upcoming_payments` will be empty.
      * 
      * When `pause_cycles` is provided the subscription will be paused for the number of cycles
@@ -257,8 +257,8 @@ public class SubscriptionService {
         }
 
         /**
-         * [ISO 4217](http://en.wikipedia.org/wiki/ISO_4217) currency code. Currently `GBP`, `EUR`, `SEK`,
-         * `DKK`, `AUD`, `NZD` and `CAD` are supported.
+         * [ISO 4217](http://en.wikipedia.org/wiki/ISO_4217#Active_codes) currency code. Currently "AUD",
+         * "CAD", "DKK", "EUR", "GBP", "NZD", "SEK" and "USD" are supported.
          */
         public SubscriptionCreateRequest withCurrency(String currency) {
             this.currency = currency;
@@ -901,7 +901,7 @@ public class SubscriptionService {
      * 
      * When `pause_cycles` is omitted the subscription is paused until the [resume
      * endpoint](#subscriptions-resume-a-subscription) is called.
-     * If the subscription is collecting a fixed number of payments, `end_date` will be set to `nil`.
+     * If the subscription is collecting a fixed number of payments, `end_date` will be set to `null`.
      * When paused indefinitely, `upcoming_payments` will be empty.
      * 
      * When `pause_cycles` is provided the subscription will be paused for the number of cycles
