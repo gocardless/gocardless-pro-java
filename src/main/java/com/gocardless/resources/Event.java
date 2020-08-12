@@ -78,6 +78,7 @@ public class Event {
      * <ul>
      * <li>`payments`</li>
      * <li>`mandates`</li>
+     * <li>`payer_authorisations`</li>
      * <li>`payouts`</li>
      * <li>`refunds`</li>
      * <li>`subscriptions`</li>
@@ -93,7 +94,8 @@ public class Event {
         @SerializedName("creditors")
         CREDITORS, @SerializedName("instalment_schedules")
         INSTALMENT_SCHEDULES, @SerializedName("mandates")
-        MANDATES, @SerializedName("payments")
+        MANDATES, @SerializedName("payer_authorisations")
+        PAYER_AUTHORISATIONS, @SerializedName("payments")
         PAYMENTS, @SerializedName("payouts")
         PAYOUTS, @SerializedName("refunds")
         REFUNDS, @SerializedName("subscriptions")
@@ -287,12 +289,15 @@ public class Event {
         }
 
         private String creditor;
+        private String customer;
+        private String customerBankAccount;
         private String instalmentSchedule;
         private String mandate;
         private String newCustomerBankAccount;
         private String newMandate;
         private String organisation;
         private String parentEvent;
+        private String payerAuthorisation;
         private String payment;
         private String payout;
         private String previousCustomerBankAccount;
@@ -305,6 +310,20 @@ public class Event {
          */
         public String getCreditor() {
             return creditor;
+        }
+
+        /**
+         * ID of a [customer](#core-endpoints-customers).
+         */
+        public String getCustomer() {
+            return customer;
+        }
+
+        /**
+         * ID of a [customer bank account](#core-endpoints-customer-bank-accounts).
+         */
+        public String getCustomerBankAccount() {
+            return customerBankAccount;
         }
 
         /**
@@ -354,6 +373,13 @@ public class Event {
          */
         public String getParentEvent() {
             return parentEvent;
+        }
+
+        /**
+         * ID of a Payer Authorisation.
+         */
+        public String getPayerAuthorisation() {
+            return payerAuthorisation;
         }
 
         /**

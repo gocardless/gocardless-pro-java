@@ -58,6 +58,7 @@ public class EventService {
         private Include include;
         private String mandate;
         private String parentEvent;
+        private String payerAuthorisation;
         private String payment;
         private String payout;
         private String refund;
@@ -143,6 +144,7 @@ public class EventService {
          * <ul>
          * <li>`payment`</li>
          * <li>`mandate`</li>
+         * <li>`payer_authorisation`</li>
          * <li>`payout`</li>
          * <li>`refund`</li>
          * <li>`subscription`</li>
@@ -182,6 +184,14 @@ public class EventService {
         }
 
         /**
+         * ID of a Payer Authorisation.
+         */
+        public EventListRequest<S> withPayerAuthorisation(String payerAuthorisation) {
+            this.payerAuthorisation = payerAuthorisation;
+            return this;
+        }
+
+        /**
          * ID of a [payment](#core-endpoints-payments). If specified, this endpoint will return all events
          * for the given payment.
          */
@@ -210,11 +220,12 @@ public class EventService {
 
         /**
          * Type of resource that you'd like to get all events for. Cannot be used together with the
-         * `payment`, `mandate`, `subscription`, `instalment_schedule`, `creditor`, `refund` or `payout`
-         * parameter. The type can be one of:
+         * `payment`,    `payer_authorisation`, `mandate`, `subscription`, `instalment_schedule`, `creditor`,
+         * `refund` or `payout` parameter. The type can be one of:
          * <ul>
          * <li>`payments`</li>
          * <li>`mandates`</li>
+         * <li>`payer_authorisations`</li>
          * <li>`payouts`</li>
          * <li>`subscriptions`</li>
          * <li>`instalment_schedules`</li>
@@ -264,6 +275,9 @@ public class EventService {
             if (parentEvent != null) {
                 params.put("parent_event", parentEvent);
             }
+            if (payerAuthorisation != null) {
+                params.put("payer_authorisation", payerAuthorisation);
+            }
             if (payment != null) {
                 params.put("payment", payment);
             }
@@ -305,7 +319,8 @@ public class EventService {
             REFUND, @SerializedName("subscription")
             SUBSCRIPTION, @SerializedName("instalment_schedule")
             INSTALMENT_SCHEDULE, @SerializedName("creditor")
-            CREDITOR;
+            CREDITOR, @SerializedName("payer_authorisation")
+            PAYER_AUTHORISATION;
             @Override
             public String toString() {
                 return name().toLowerCase();
@@ -316,7 +331,8 @@ public class EventService {
             @SerializedName("creditors")
             CREDITORS, @SerializedName("instalment_schedules")
             INSTALMENT_SCHEDULES, @SerializedName("mandates")
-            MANDATES, @SerializedName("payments")
+            MANDATES, @SerializedName("payer_authorisations")
+            PAYER_AUTHORISATIONS, @SerializedName("payments")
             PAYMENTS, @SerializedName("payouts")
             PAYOUTS, @SerializedName("refunds")
             REFUNDS, @SerializedName("subscriptions")
