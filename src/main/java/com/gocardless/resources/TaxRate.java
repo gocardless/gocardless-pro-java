@@ -4,6 +4,8 @@ package com.gocardless.resources;
  * Represents a tax rate resource returned from the API.
  *
  * Tax rates from tax authority.
+ * 
+ * We also maintain a [static list of the tax rates for each jurisdiction](#appendix-tax-rates).
  */
 public class TaxRate {
     private TaxRate() {
