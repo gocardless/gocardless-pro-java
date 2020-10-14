@@ -226,7 +226,8 @@ public class MandateImportEntryService {
         }
 
         /**
-         * The first line of the customer's address. Required if mandate import scheme is `bacs`.
+         * The first line of the customer's address. Required if mandate import scheme is either `bacs` or
+         * `sepa`.
          * 
          */
         public MandateImportEntryCreateRequest withCustomerAddressLine1(String addressLine1) {
@@ -370,7 +371,7 @@ public class MandateImportEntryService {
         }
 
         /**
-         * The customer's postal code. Required if mandate import scheme is `bacs`.
+         * The customer's postal code. Required if mandate import scheme is either `bacs` or `sepa`.
          * 
          */
         public MandateImportEntryCreateRequest withCustomerPostalCode(String postalCode) {
@@ -584,7 +585,8 @@ public class MandateImportEntryService {
             private String swedishIdentityNumber;
 
             /**
-             * The first line of the customer's address. Required if mandate import scheme is `bacs`.
+             * The first line of the customer's address. Required if mandate import scheme is either `bacs` or
+             * `sepa`.
              * 
              */
             public Customer withAddressLine1(String addressLine1) {
@@ -691,7 +693,7 @@ public class MandateImportEntryService {
             }
 
             /**
-             * The customer's postal code. Required if mandate import scheme is `bacs`.
+             * The customer's postal code. Required if mandate import scheme is either `bacs` or `sepa`.
              * 
              */
             public Customer withPostalCode(String postalCode) {

@@ -107,6 +107,7 @@ public class PayoutItem {
 
         private String mandate;
         private String payment;
+        private String refund;
 
         /**
          * Unique identifier, beginning with "MD". Note that this prefix may not apply to mandates created
@@ -121,6 +122,13 @@ public class PayoutItem {
          */
         public String getPayment() {
             return payment;
+        }
+
+        /**
+         * Unique identifier, beginning with "RF".
+         */
+        public String getRefund() {
+            return refund;
         }
     }
 
