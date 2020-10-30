@@ -184,7 +184,7 @@ public class EventService {
         }
 
         /**
-         * ID of a Payer Authorisation.
+         * ID of a [payer authorisation](#core-endpoints-payer-authorisations).
          */
         public EventListRequest<S> withPayerAuthorisation(String payerAuthorisation) {
             this.payerAuthorisation = payerAuthorisation;

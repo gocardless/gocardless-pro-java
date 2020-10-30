@@ -376,7 +376,7 @@ public class Event {
         }
 
         /**
-         * ID of a Payer Authorisation.
+         * ID of a [payer authorisation](#core-endpoints-payer-authorisations).
          */
         public String getPayerAuthorisation() {
             return payerAuthorisation;

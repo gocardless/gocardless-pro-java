@@ -29,6 +29,7 @@ public class GoCardlessClient {
     private final MandateImportService mandateImports;
     private final MandateImportEntryService mandateImportEntries;
     private final MandatePdfService mandatePdfs;
+    private final PayerAuthorisationService payerAuthorisations;
     private final PaymentService payments;
     private final PayoutService payouts;
     private final PayoutItemService payoutItems;
@@ -135,6 +136,7 @@ public class GoCardlessClient {
         this.mandateImports = new MandateImportService(httpClient);
         this.mandateImportEntries = new MandateImportEntryService(httpClient);
         this.mandatePdfs = new MandatePdfService(httpClient);
+        this.payerAuthorisations = new PayerAuthorisationService(httpClient);
         this.payments = new PaymentService(httpClient);
         this.payouts = new PayoutService(httpClient);
         this.payoutItems = new PayoutItemService(httpClient);
@@ -233,6 +235,13 @@ public class GoCardlessClient {
      */
     public MandatePdfService mandatePdfs() {
         return mandatePdfs;
+    }
+
+    /**
+     * A service class for working with payer authorisation resources.
+     */
+    public PayerAuthorisationService payerAuthorisations() {
+        return payerAuthorisations;
     }
 
     /**
