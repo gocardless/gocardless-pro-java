@@ -280,7 +280,7 @@ public class PaymentService {
             USD;
             @Override
             public String toString() {
-                return name().toLowerCase();
+                return name();
             }
         }
 
@@ -570,7 +570,7 @@ public class PaymentService {
             USD;
             @Override
             public String toString() {
-                return name().toLowerCase();
+                return name();
             }
         }
 
