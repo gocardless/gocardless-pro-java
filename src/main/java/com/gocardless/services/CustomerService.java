@@ -436,7 +436,7 @@ public class CustomerService {
             USD;
             @Override
             public String toString() {
-                return name().toLowerCase();
+                return name();
             }
         }
 

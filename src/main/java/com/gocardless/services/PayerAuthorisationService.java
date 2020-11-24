@@ -80,7 +80,7 @@ public class PayerAuthorisationService {
     }
 
     /**
-     * Updates a Payer Authorisation. Updates the Payer Authorisation with the request data.Can be
+     * Updates a Payer Authorisation. Updates the Payer Authorisation with the request data. Can be
      * invoked as many times as needed. Only fields present in the request will be modified. An empty
      * array of incomplete_fields means that the resource is valid. This endpoint has been designed this
      * way so you do not need to save any payer data on your servers or the browser while still being
@@ -93,7 +93,7 @@ public class PayerAuthorisationService {
     }
 
     /**
-     * Submits all the data previously pushed to this PayerAuthorisation for verification.This time, a
+     * Submits all the data previously pushed to this PayerAuthorisation for verification. This time, a
      * 200 HTTP status is returned if the resource is valid and a 422 error response in case of
      * validation errors. After it is successfully submitted, the Payer Authorisation can no longer be
      * edited.
@@ -110,7 +110,7 @@ public class PayerAuthorisationService {
      *   The main use of the confirm endpoint is to enable integrators to acknowledge the end of the
      * setup process. 
      *   They might want to make the payers go through some other steps after they go through our flow or
-     * make them go through the necessary verification mechanism(upcomming feature). 
+     * make them go through the necessary verification mechanism (upcoming feature).
      * </p>
      */
     public PayerAuthorisationConfirmRequest confirm(String identity) {
@@ -935,7 +935,7 @@ public class PayerAuthorisationService {
     /**
      * Request class for {@link PayerAuthorisationService#update }.
      *
-     * Updates a Payer Authorisation. Updates the Payer Authorisation with the request data.Can be
+     * Updates a Payer Authorisation. Updates the Payer Authorisation with the request data. Can be
      * invoked as many times as needed. Only fields present in the request will be modified. An empty
      * array of incomplete_fields means that the resource is valid. This endpoint has been designed this
      * way so you do not need to save any payer data on your servers or the browser while still being
@@ -1705,7 +1705,7 @@ public class PayerAuthorisationService {
     /**
      * Request class for {@link PayerAuthorisationService#submit }.
      *
-     * Submits all the data previously pushed to this PayerAuthorisation for verification.This time, a
+     * Submits all the data previously pushed to this PayerAuthorisation for verification. This time, a
      * 200 HTTP status is returned if the resource is valid and a 422 error response in case of
      * validation errors. After it is successfully submitted, the Payer Authorisation can no longer be
      * edited.
@@ -1763,7 +1763,7 @@ public class PayerAuthorisationService {
      *   The main use of the confirm endpoint is to enable integrators to acknowledge the end of the
      * setup process. 
      *   They might want to make the payers go through some other steps after they go through our flow or
-     * make them go through the necessary verification mechanism(upcomming feature). 
+     * make them go through the necessary verification mechanism (upcoming feature).
      * </p>
      */
     public static final class PayerAuthorisationConfirmRequest extends

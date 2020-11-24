@@ -323,7 +323,7 @@ public class InstalmentScheduleService {
             USD;
             @Override
             public String toString() {
-                return name().toLowerCase();
+                return name();
             }
         }
 
@@ -630,7 +630,7 @@ public class InstalmentScheduleService {
             USD;
             @Override
             public String toString() {
-                return name().toLowerCase();
+                return name();
             }
         }
 
