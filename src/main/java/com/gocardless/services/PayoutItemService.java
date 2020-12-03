@@ -7,6 +7,7 @@ import com.gocardless.http.*;
 import com.gocardless.resources.PayoutItem;
 
 import com.google.common.collect.ImmutableMap;
+import com.google.gson.annotations.SerializedName;
 import com.google.gson.reflect.TypeToken;
 
 /**
@@ -56,6 +57,7 @@ public class PayoutItemService {
      * 
      */
     public static final class PayoutItemListRequest<S> extends ListRequest<S, PayoutItem> {
+        private Include2020TaxCutover include2020TaxCutover;
         private String payout;
 
         /**
@@ -71,6 +73,16 @@ public class PayoutItemService {
          */
         public PayoutItemListRequest<S> withBefore(String before) {
             setBefore(before);
+            return this;
+        }
+
+        /**
+         * Boolean value indicating whether the API should return tax data for the cutover period of April to
+         * August 2020. Defaults to false.
+         */
+        public PayoutItemListRequest<S> withInclude2020TaxCutover(
+                Include2020TaxCutover include2020TaxCutover) {
+            this.include2020TaxCutover = include2020TaxCutover;
             return this;
         }
 
@@ -104,6 +116,9 @@ public class PayoutItemService {
         protected Map<String, Object> getQueryParams() {
             ImmutableMap.Builder<String, Object> params = ImmutableMap.builder();
             params.putAll(super.getQueryParams());
+            if (include2020TaxCutover != null) {
+                params.put("include_2020_tax_cutover", include2020TaxCutover);
+            }
             if (payout != null) {
                 params.put("payout", payout);
             }
@@ -123,6 +138,16 @@ public class PayoutItemService {
         @Override
         protected TypeToken<List<PayoutItem>> getTypeToken() {
             return new TypeToken<List<PayoutItem>>() {};
+        }
+
+        public enum Include2020TaxCutover {
+            @SerializedName("true")
+            TRUE, @SerializedName("false")
+            FALSE;
+            @Override
+            public String toString() {
+                return name().toLowerCase();
+            }
         }
     }
 }
