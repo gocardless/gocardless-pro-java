@@ -212,6 +212,19 @@ public class PayerAuthorisationService {
         }
 
         /**
+         * The last few digits of the account number. Currently 4 digits for NZD bank accounts and 2 digits
+         * for other currencies.
+         */
+        public PayerAuthorisationCreateRequest withBankAccountAccountNumberEnding(
+                String accountNumberEnding) {
+            if (bankAccount == null) {
+                bankAccount = new BankAccount();
+            }
+            bankAccount.withAccountNumberEnding(accountNumberEnding);
+            return this;
+        }
+
+        /**
          * Account number suffix (only for bank accounts denominated in NZD) - see [local
          * details](#local-bank-details-new-zealand) for more information.
          */
@@ -604,6 +617,7 @@ public class PayerAuthorisationService {
         public static class BankAccount {
             private String accountHolderName;
             private String accountNumber;
+            private String accountNumberEnding;
             private String accountNumberSuffix;
             private AccountType accountType;
             private String bankCode;
@@ -630,6 +644,15 @@ public class PayerAuthorisationService {
              */
             public BankAccount withAccountNumber(String accountNumber) {
                 this.accountNumber = accountNumber;
+                return this;
+            }
+
+            /**
+             * The last few digits of the account number. Currently 4 digits for NZD bank accounts and 2 digits
+             * for other currencies.
+             */
+            public BankAccount withAccountNumberEnding(String accountNumberEnding) {
+                this.accountNumberEnding = accountNumberEnding;
                 return this;
             }
 
@@ -984,6 +1007,19 @@ public class PayerAuthorisationService {
                 bankAccount = new BankAccount();
             }
             bankAccount.withAccountNumber(accountNumber);
+            return this;
+        }
+
+        /**
+         * The last few digits of the account number. Currently 4 digits for NZD bank accounts and 2 digits
+         * for other currencies.
+         */
+        public PayerAuthorisationUpdateRequest withBankAccountAccountNumberEnding(
+                String accountNumberEnding) {
+            if (bankAccount == null) {
+                bankAccount = new BankAccount();
+            }
+            bankAccount.withAccountNumberEnding(accountNumberEnding);
             return this;
         }
 
@@ -1374,6 +1410,7 @@ public class PayerAuthorisationService {
         public static class BankAccount {
             private String accountHolderName;
             private String accountNumber;
+            private String accountNumberEnding;
             private String accountNumberSuffix;
             private AccountType accountType;
             private String bankCode;
@@ -1400,6 +1437,15 @@ public class PayerAuthorisationService {
              */
             public BankAccount withAccountNumber(String accountNumber) {
                 this.accountNumber = accountNumber;
+                return this;
+            }
+
+            /**
+             * The last few digits of the account number. Currently 4 digits for NZD bank accounts and 2 digits
+             * for other currencies.
+             */
+            public BankAccount withAccountNumberEnding(String accountNumberEnding) {
+                this.accountNumberEnding = accountNumberEnding;
                 return this;
             }
 

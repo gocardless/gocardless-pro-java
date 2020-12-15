@@ -145,6 +145,7 @@ public class PayerAuthorisation {
 
         private String accountHolderName;
         private String accountNumber;
+        private String accountNumberEnding;
         private String accountNumberSuffix;
         private AccountType accountType;
         private String bankCode;
@@ -170,6 +171,14 @@ public class PayerAuthorisation {
          */
         public String getAccountNumber() {
             return accountNumber;
+        }
+
+        /**
+         * The last few digits of the account number. Currently 4 digits for NZD bank accounts and 2 digits
+         * for other currencies.
+         */
+        public String getAccountNumberEnding() {
+            return accountNumberEnding;
         }
 
         /**
