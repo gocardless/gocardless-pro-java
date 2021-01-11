@@ -40,6 +40,8 @@ import com.google.gson.annotations.SerializedName;
  * incomplete data is provided.
  *   We return the list of incomplete data in the `incomplete_fields` along with the resources in the
  * body of the response.
+ *   The bank account details(account_number, bank_code & branch_code) must be sent together rather
+ * than splitting across different request for both `create` and `update` endpoints.
  *   <br><br>
  *   The API is designed to be flexible and allows you to collect information in multiple steps
  * without storing any sensitive data in the browser or in your servers.
@@ -145,6 +147,7 @@ public class PayerAuthorisation {
 
         private String accountHolderName;
         private String accountNumber;
+        private String accountNumberEnding;
         private String accountNumberSuffix;
         private AccountType accountType;
         private String bankCode;
@@ -170,6 +173,14 @@ public class PayerAuthorisation {
          */
         public String getAccountNumber() {
             return accountNumber;
+        }
+
+        /**
+         * The last few digits of the account number. Currently 4 digits for NZD bank accounts and 2 digits
+         * for other currencies.
+         */
+        public String getAccountNumberEnding() {
+            return accountNumberEnding;
         }
 
         /**
