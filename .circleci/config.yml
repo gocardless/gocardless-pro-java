@@ -1,4 +1,4 @@
-version: 2
+version: 2.1
 
 orbs:
   circleci-maven-release-orb: sonatype-nexus-community/circleci-maven-release-orb@0.0.15
@@ -31,6 +31,13 @@ references:
       - store_artifacts:
           path: ~/junit
 
+  release-args: &release-args
+    ssh-fingerprints: "17:c1:df:85:9d:58:46:61:96:58:d8:2b:16:9e:e1:07"
+    context: rso-base
+    filters:
+      branches:
+        only: master
+
 jobs:
   test_library_jdk7:
     <<: *default_test_job
@@ -48,8 +55,6 @@ jobs:
       - image: openjdk:9
 
 workflows:
-  version: 2
-
   build:
     jobs:
       - test_library_jdk7
@@ -66,8 +71,5 @@ workflows:
       - circleci-maven-release-orb/run-maven-release:
           requires:
             - approve-release
-          ssh-fingerprints: "60:a1:dc:aa:6a:40:00:84:11:47:ca:e1:b7:73:fd:93"
-          filters:
-            branches:
-              only: master
+          <<: *release-args
 
