@@ -136,9 +136,8 @@ uploadArchives {
 
                 developers {
                     developer {
-                        id 'matt-thomson'
-                        name 'Matt Thomson'
-                        email 'mattthomson@gocardless.com'
+                        name 'GoCardless Ltd'
+                        email 'client-libraries@gocardless.com'
                     }
                 }
             }
