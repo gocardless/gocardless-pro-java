@@ -304,6 +304,8 @@ public class CustomerService {
     public static final class CustomerListRequest<S> extends ListRequest<S, Customer> {
         private CreatedAt createdAt;
         private Currency currency;
+        private SortDirection sortDirection;
+        private SortField sortField;
 
         /**
          * Cursor pointing to the start of the desired set.
@@ -387,6 +389,22 @@ public class CustomerService {
             return this;
         }
 
+        /**
+         * The direction to sort in.
+         */
+        public CustomerListRequest<S> withSortDirection(SortDirection sortDirection) {
+            this.sortDirection = sortDirection;
+            return this;
+        }
+
+        /**
+         * Field by which to sort records.
+         */
+        public CustomerListRequest<S> withSortField(SortField sortField) {
+            this.sortField = sortField;
+            return this;
+        }
+
         private CustomerListRequest(HttpClient httpClient, ListRequestExecutor<S, Customer> executor) {
             super(httpClient, executor);
         }
@@ -405,6 +423,12 @@ public class CustomerService {
             }
             if (currency != null) {
                 params.put("currency", currency);
+            }
+            if (sortDirection != null) {
+                params.put("sort_direction", sortDirection);
+            }
+            if (sortField != null) {
+                params.put("sort_field", sortField);
             }
             return params.build();
         }
@@ -437,6 +461,27 @@ public class CustomerService {
             @Override
             public String toString() {
                 return name();
+            }
+        }
+
+        public enum SortDirection {
+            @SerializedName("asc")
+            ASC, @SerializedName("desc")
+            DESC;
+            @Override
+            public String toString() {
+                return name().toLowerCase();
+            }
+        }
+
+        public enum SortField {
+            @SerializedName("name")
+            NAME, @SerializedName("company_name")
+            COMPANY_NAME, @SerializedName("created_at")
+            CREATED_AT;
+            @Override
+            public String toString() {
+                return name().toLowerCase();
             }
         }
 

@@ -309,6 +309,8 @@ public class PaymentService {
         private Currency currency;
         private String customer;
         private String mandate;
+        private SortDirection sortDirection;
+        private SortField sortField;
         private Status status;
         private String subscription;
 
@@ -475,6 +477,22 @@ public class PaymentService {
         }
 
         /**
+         * The direction to sort in.
+         */
+        public PaymentListRequest<S> withSortDirection(SortDirection sortDirection) {
+            this.sortDirection = sortDirection;
+            return this;
+        }
+
+        /**
+         * Field by which to sort records.
+         */
+        public PaymentListRequest<S> withSortField(SortField sortField) {
+            this.sortField = sortField;
+            return this;
+        }
+
+        /**
          * One of:
          * <ul>
          * <li>`pending_customer_approval`: we're waiting for the customer to approve this payment</li>
@@ -534,6 +552,12 @@ public class PaymentService {
             if (mandate != null) {
                 params.put("mandate", mandate);
             }
+            if (sortDirection != null) {
+                params.put("sort_direction", sortDirection);
+            }
+            if (sortField != null) {
+                params.put("sort_field", sortField);
+            }
             if (status != null) {
                 params.put("status", status);
             }
@@ -571,6 +595,26 @@ public class PaymentService {
             @Override
             public String toString() {
                 return name();
+            }
+        }
+
+        public enum SortDirection {
+            @SerializedName("asc")
+            ASC, @SerializedName("desc")
+            DESC;
+            @Override
+            public String toString() {
+                return name().toLowerCase();
+            }
+        }
+
+        public enum SortField {
+            @SerializedName("charge_date")
+            CHARGE_DATE, @SerializedName("amount")
+            AMOUNT;
+            @Override
+            public String toString() {
+                return name().toLowerCase();
             }
         }
 
