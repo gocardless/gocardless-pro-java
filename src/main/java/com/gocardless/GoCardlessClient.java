@@ -37,6 +37,7 @@ public class GoCardlessClient {
     private final RefundService refunds;
     private final SubscriptionService subscriptions;
     private final TaxRateService taxRates;
+    private final WebhookService webhooks;
 
     public static final class Builder {
         private final String accessToken;
@@ -144,6 +145,7 @@ public class GoCardlessClient {
         this.refunds = new RefundService(httpClient);
         this.subscriptions = new SubscriptionService(httpClient);
         this.taxRates = new TaxRateService(httpClient);
+        this.webhooks = new WebhookService(httpClient);
     }
 
     /**
@@ -291,6 +293,13 @@ public class GoCardlessClient {
      */
     public TaxRateService taxRates() {
         return taxRates;
+    }
+
+    /**
+     * A service class for working with webhook resources.
+     */
+    public WebhookService webhooks() {
+        return webhooks;
     }
 
     /**
