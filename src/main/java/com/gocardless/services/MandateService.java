@@ -260,6 +260,7 @@ public class MandateService {
         private String customer;
         private String customerBankAccount;
         private String reference;
+        private List<String> scheme;
         private List<Status> status;
 
         /**
@@ -376,6 +377,25 @@ public class MandateService {
         }
 
         /**
+         * Scheme you'd like to retrieve mandates for
+         */
+        public MandateListRequest<S> withScheme(List<String> scheme) {
+            this.scheme = scheme;
+            return this;
+        }
+
+        /**
+         * Scheme you'd like to retrieve mandates for
+         */
+        public MandateListRequest<S> withScheme(String scheme) {
+            if (this.scheme == null) {
+                this.scheme = new ArrayList<>();
+            }
+            this.scheme.add(scheme);
+            return this;
+        }
+
+        /**
          * At most four valid status values
          */
         public MandateListRequest<S> withStatus(List<Status> status) {
@@ -421,6 +441,9 @@ public class MandateService {
             }
             if (reference != null) {
                 params.put("reference", reference);
+            }
+            if (scheme != null) {
+                params.put("scheme", Joiner.on(",").join(scheme));
             }
             if (status != null) {
                 params.put("status", Joiner.on(",").join(status));
