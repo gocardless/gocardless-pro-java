@@ -98,6 +98,8 @@ public class Mandate {
      * <li>`failed`: the mandate could not be created</li>
      * <li>`cancelled`: the mandate has been cancelled</li>
      * <li>`expired`: the mandate has expired due to dormancy</li>
+     * <li>`consumed`: the mandate has been consumed and cannot be reused (note that this only applies to
+     * schemes that are per-payment authorised)</li>
      * </ul>
      */
     public Status getStatus() {
@@ -112,7 +114,8 @@ public class Mandate {
         ACTIVE, @SerializedName("failed")
         FAILED, @SerializedName("cancelled")
         CANCELLED, @SerializedName("expired")
-        EXPIRED,
+        EXPIRED, @SerializedName("consumed")
+        CONSUMED,
     }
 
     public static class Links {

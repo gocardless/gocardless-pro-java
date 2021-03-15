@@ -474,7 +474,8 @@ public class MandateService {
             ACTIVE, @SerializedName("failed")
             FAILED, @SerializedName("cancelled")
             CANCELLED, @SerializedName("expired")
-            EXPIRED;
+            EXPIRED, @SerializedName("consumed")
+            CONSUMED;
             @Override
             public String toString() {
                 return name().toLowerCase();
