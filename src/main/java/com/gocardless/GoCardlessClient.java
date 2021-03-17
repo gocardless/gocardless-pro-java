@@ -35,6 +35,7 @@ public class GoCardlessClient {
     private final PayoutItemService payoutItems;
     private final RedirectFlowService redirectFlows;
     private final RefundService refunds;
+    private final ScenarioSimulatorService scenarioSimulators;
     private final SubscriptionService subscriptions;
     private final TaxRateService taxRates;
     private final WebhookService webhooks;
@@ -143,6 +144,7 @@ public class GoCardlessClient {
         this.payoutItems = new PayoutItemService(httpClient);
         this.redirectFlows = new RedirectFlowService(httpClient);
         this.refunds = new RefundService(httpClient);
+        this.scenarioSimulators = new ScenarioSimulatorService(httpClient);
         this.subscriptions = new SubscriptionService(httpClient);
         this.taxRates = new TaxRateService(httpClient);
         this.webhooks = new WebhookService(httpClient);
@@ -279,6 +281,13 @@ public class GoCardlessClient {
      */
     public RefundService refunds() {
         return refunds;
+    }
+
+    /**
+     * A service class for working with scenario simulator resources.
+     */
+    public ScenarioSimulatorService scenarioSimulators() {
+        return scenarioSimulators;
     }
 
     /**
