@@ -12,18 +12,7 @@ public class ScenarioSimulator {
         // blank to prevent instantiation
     }
 
-    private String description;
     private String id;
-    private String name;
-    private String resourceType;
-
-    /**
-     * A short description of what the simulator does and anything you should know about using it (e.g.
-     * what state the resource should be in).
-     */
-    public String getDescription() {
-        return description;
-    }
 
     /**
      * The unique identifier of the simulator, used to initiate simulations. One of:
@@ -47,19 +36,5 @@ public class ScenarioSimulator {
      */
     public String getId() {
         return id;
-    }
-
-    /**
-     * The name of the simulator, suitable for displaying to the user, translated into their language
-     */
-    public String getName() {
-        return name;
-    }
-
-    /**
-     * The type of resource which the simulator operates on
-     */
-    public String getResourceType() {
-        return resourceType;
     }
 }

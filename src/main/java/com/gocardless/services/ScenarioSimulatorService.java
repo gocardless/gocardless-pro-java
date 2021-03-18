@@ -1,13 +1,12 @@
 package com.gocardless.services;
 
-import java.util.List;
 import java.util.Map;
 
 import com.gocardless.http.*;
 import com.gocardless.resources.ScenarioSimulator;
 
 import com.google.common.collect.ImmutableMap;
-import com.google.gson.reflect.TypeToken;
+import com.google.gson.annotations.SerializedName;
 
 /**
  * Service class for working with scenario simulator resources.
@@ -29,63 +28,10 @@ public class ScenarioSimulatorService {
     }
 
     /**
-     * Returns a list of all the available scenario simulators
-     */
-    public ScenarioSimulatorListRequest<ListResponse<ScenarioSimulator>> list() {
-        return new ScenarioSimulatorListRequest<>(httpClient,
-                ListRequest.<ScenarioSimulator>pagingExecutor());
-    }
-
-    public ScenarioSimulatorListRequest<Iterable<ScenarioSimulator>> all() {
-        return new ScenarioSimulatorListRequest<>(httpClient,
-                ListRequest.<ScenarioSimulator>iteratingExecutor());
-    }
-
-    /**
      * Runs the specific scenario simulator against the specific resource
      */
     public ScenarioSimulatorRunRequest run(String identity) {
         return new ScenarioSimulatorRunRequest(httpClient, identity);
-    }
-
-    /**
-     * Request class for {@link ScenarioSimulatorService#list }.
-     *
-     * Returns a list of all the available scenario simulators
-     */
-    public static final class ScenarioSimulatorListRequest<S> extends
-            ListRequest<S, ScenarioSimulator> {
-        private ScenarioSimulatorListRequest(HttpClient httpClient,
-                ListRequestExecutor<S, ScenarioSimulator> executor) {
-            super(httpClient, executor);
-        }
-
-        public ScenarioSimulatorListRequest<S> withHeader(String headerName, String headerValue) {
-            this.addHeader(headerName, headerValue);
-            return this;
-        }
-
-        @Override
-        protected Map<String, Object> getQueryParams() {
-            ImmutableMap.Builder<String, Object> params = ImmutableMap.builder();
-            params.putAll(super.getQueryParams());
-            return params.build();
-        }
-
-        @Override
-        protected String getPathTemplate() {
-            return "scenario_simulators";
-        }
-
-        @Override
-        protected String getEnvelope() {
-            return "scenario_simulators";
-        }
-
-        @Override
-        protected TypeToken<List<ScenarioSimulator>> getTypeToken() {
-            return new TypeToken<List<ScenarioSimulator>>() {};
-        }
     }
 
     /**
@@ -96,7 +42,18 @@ public class ScenarioSimulatorService {
     public static final class ScenarioSimulatorRunRequest extends PostRequest<ScenarioSimulator> {
         @PathParam
         private final String identity;
+        private Currency currency;
         private Links links;
+
+        /**
+         * [ISO 4217](http://en.wikipedia.org/wiki/ISO_4217#Active_codes) currency code.
+         * Currently "AUD", "CAD", "DKK", "EUR", "GBP", "NZD", "SEK" and "USD" are supported.
+         * Only required when simulating `payout_create`
+         */
+        public ScenarioSimulatorRunRequest withCurrency(Currency currency) {
+            this.currency = currency;
+            return this;
+        }
 
         public ScenarioSimulatorRunRequest withLinks(Links links) {
             this.links = links;
@@ -155,6 +112,22 @@ public class ScenarioSimulatorService {
         @Override
         protected String getRequestEnvelope() {
             return "data";
+        }
+
+        public enum Currency {
+            @SerializedName("AUD")
+            AUD, @SerializedName("CAD")
+            CAD, @SerializedName("DKK")
+            DKK, @SerializedName("EUR")
+            EUR, @SerializedName("GBP")
+            GBP, @SerializedName("NZD")
+            NZD, @SerializedName("SEK")
+            SEK, @SerializedName("USD")
+            USD;
+            @Override
+            public String toString() {
+                return name();
+            }
         }
 
         public static class Links {
