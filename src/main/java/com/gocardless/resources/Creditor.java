@@ -443,7 +443,8 @@ public class Creditor {
             BACS, @SerializedName("becs")
             BECS, @SerializedName("becs_nz")
             BECS_NZ, @SerializedName("betalingsservice")
-            BETALINGSSERVICE, @SerializedName("pad")
+            BETALINGSSERVICE, @SerializedName("faster_payments")
+            FASTER_PAYMENTS, @SerializedName("pad")
             PAD, @SerializedName("sepa")
             SEPA,
         }
