@@ -1,0 +1,134 @@
+package com.gocardless.resources;
+
+import com.google.gson.annotations.SerializedName;
+
+/**
+ * Represents a bank authorisation resource returned from the API.
+ *
+ * Bank Authorisations can be used to authorise Billing Requests. Authorisations
+ * are created against a specific bank, usually the bank that provides the payer's
+ * account.
+ * 
+ * Creation of Bank Authorisations is only permitted from GoCardless hosted UIs
+ * (see Billing Request Flows) to ensure we meet regulatory requirements for
+ * checkout flows. The exceptions are integrators with the custom payment pages
+ * upgrade, who have been audited to check their flows meet requirements.
+ */
+public class BankAuthorisation {
+    private BankAuthorisation() {
+        // blank to prevent instantiation
+    }
+
+    private AuthorisationType authorisationType;
+    private String createdAt;
+    private String expiresAt;
+    private String id;
+    private String lastVisitedAt;
+    private Links links;
+    private String redirectUri;
+    private String shortUrl;
+    private String url;
+
+    /**
+     * Type of authorisation, can be either 'mandate' or 'payment'.
+     */
+    public AuthorisationType getAuthorisationType() {
+        return authorisationType;
+    }
+
+    /**
+     * Timestamp when the flow was created
+     */
+    public String getCreatedAt() {
+        return createdAt;
+    }
+
+    /**
+     * Timestamp when the url will expire. Each authorisation url currently lasts for 15 minutes, but
+     * this can vary by bank.
+     */
+    public String getExpiresAt() {
+        return expiresAt;
+    }
+
+    /**
+     * Unique identifier, beginning with "BAU".
+     */
+    public String getId() {
+        return id;
+    }
+
+    /**
+     * Fixed [timestamp](#api-usage-time-zones--dates), recording when the authorisation URL has been
+     * visited.
+     */
+    public String getLastVisitedAt() {
+        return lastVisitedAt;
+    }
+
+    public Links getLinks() {
+        return links;
+    }
+
+    /**
+     * URL that the payer can be redirected to after authorising the payment.
+     */
+    public String getRedirectUri() {
+        return redirectUri;
+    }
+
+    /**
+     * Short URL that redirects via GoCardless to the original URL, more suitable for encoding in a QR
+     * code
+     */
+    public String getShortUrl() {
+        return shortUrl;
+    }
+
+    /**
+     * URL for an oauth flow that will allow the user to authorise the payment
+     */
+    public String getUrl() {
+        return url;
+    }
+
+    public enum AuthorisationType {
+        @SerializedName("mandate")
+        MANDATE, @SerializedName("payment")
+        PAYMENT,
+    }
+
+    public static class Links {
+        private Links() {
+            // blank to prevent instantiation
+        }
+
+        private String billingRequest;
+        private String institution;
+        private String paymentRequest;
+
+        /**
+         * ID of the [billing request](#core-endpoints-billing-requests) against which this authorisation was
+         * created.
+         */
+        public String getBillingRequest() {
+            return billingRequest;
+        }
+
+        /**
+         * ID of the [institution](#core-endpoints-institutions) against which this authorisation was
+         * created.
+         */
+        public String getInstitution() {
+            return institution;
+        }
+
+        /**
+         * ID of the [payment request](#core-endpoints-payment-requests) against which this authorisation was
+         * created.
+         */
+        public String getPaymentRequest() {
+            return paymentRequest;
+        }
+    }
+}
