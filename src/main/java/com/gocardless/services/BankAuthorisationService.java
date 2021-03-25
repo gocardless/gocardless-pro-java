@@ -136,8 +136,7 @@ public class BankAuthorisationService {
         }
 
         /**
-         * ID of the [payment request](#core-endpoints-payment-requests) against which this authorisation was
-         * created.
+         * ID of the payment request against which this authorisation was created.
          */
         public BankAuthorisationCreateRequest withLinksPaymentRequest(String paymentRequest) {
             if (links == null) {
@@ -222,8 +221,7 @@ public class BankAuthorisationService {
             }
 
             /**
-             * ID of the [payment request](#core-endpoints-payment-requests) against which this authorisation was
-             * created.
+             * ID of the payment request against which this authorisation was created.
              */
             public Links withPaymentRequest(String paymentRequest) {
                 this.paymentRequest = paymentRequest;

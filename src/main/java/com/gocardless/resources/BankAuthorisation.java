@@ -124,8 +124,7 @@ public class BankAuthorisation {
         }
 
         /**
-         * ID of the [payment request](#core-endpoints-payment-requests) against which this authorisation was
-         * created.
+         * ID of the payment request against which this authorisation was created.
          */
         public String getPaymentRequest() {
             return paymentRequest;
