@@ -17,6 +17,7 @@ import com.squareup.okhttp.OkHttpClient;
 public class GoCardlessClient {
     private final HttpClient httpClient;
     private final BankDetailsLookupService bankDetailsLookups;
+    private final BillingRequestService billingRequests;
     private final CreditorService creditors;
     private final CreditorBankAccountService creditorBankAccounts;
     private final CurrencyExchangeRateService currencyExchangeRates;
@@ -126,6 +127,7 @@ public class GoCardlessClient {
     private GoCardlessClient(HttpClient httpClient) {
         this.httpClient = httpClient;
         this.bankDetailsLookups = new BankDetailsLookupService(httpClient);
+        this.billingRequests = new BillingRequestService(httpClient);
         this.creditors = new CreditorService(httpClient);
         this.creditorBankAccounts = new CreditorBankAccountService(httpClient);
         this.currencyExchangeRates = new CurrencyExchangeRateService(httpClient);
@@ -155,6 +157,13 @@ public class GoCardlessClient {
      */
     public BankDetailsLookupService bankDetailsLookups() {
         return bankDetailsLookups;
+    }
+
+    /**
+     * A service class for working with billing request resources.
+     */
+    public BillingRequestService billingRequests() {
+        return billingRequests;
     }
 
     /**
