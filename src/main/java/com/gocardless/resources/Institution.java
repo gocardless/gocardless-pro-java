@@ -4,7 +4,7 @@ package com.gocardless.resources;
  * Represents a institution resource returned from the API.
  *
  * Institutions that are supported when creating [Bank
- * Authorisations](#core-endpoints-bank-authorisations).
+ * Authorisations](#billing-requests-bank-authorisations).
  */
 public class Institution {
     private Institution() {

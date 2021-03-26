@@ -46,7 +46,8 @@ public class BillingRequestFlowService {
         }
 
         /**
-         * ID of the [billing request](#core-endpoints-billing-requests) against which this flow was created.
+         * ID of the [billing request](#billing-requests-billing-requests) against which this flow was
+         * created.
          */
         public BillingRequestFlowCreateRequest withLinksBillingRequest(String billingRequest) {
             if (links == null) {
@@ -106,7 +107,8 @@ public class BillingRequestFlowService {
             private String billingRequest;
 
             /**
-             * ID of the [billing request](#core-endpoints-billing-requests) against which this flow was created.
+             * ID of the [billing request](#billing-requests-billing-requests) against which this flow was
+             * created.
              */
             public Links withBillingRequest(String billingRequest) {
                 this.billingRequest = billingRequest;

@@ -223,7 +223,7 @@ public class BillingRequest {
             private String mandate;
 
             /**
-             * (Optional) ID of the [bank authorisation](#core-endpoints-bank-authorisations) that was used to
+             * (Optional) ID of the [bank authorisation](#billing-requests-bank-authorisations) that was used to
              * verify this mandate request.
              * 
              */
@@ -303,7 +303,7 @@ public class BillingRequest {
             private String payment;
 
             /**
-             * (Optional) ID of the [bank authorisation](#core-endpoints-bank-authorisations) that was used to
+             * (Optional) ID of the [bank authorisation](#billing-requests-bank-authorisations) that was used to
              * verify this payment request.
              */
             public String getBankAuthorisation() {

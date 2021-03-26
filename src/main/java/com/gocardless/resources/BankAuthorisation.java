@@ -108,15 +108,15 @@ public class BankAuthorisation {
         private String paymentRequest;
 
         /**
-         * ID of the [billing request](#core-endpoints-billing-requests) against which this authorisation was
-         * created.
+         * ID of the [billing request](#billing-requests-billing-requests) against which this authorisation
+         * was created.
          */
         public String getBillingRequest() {
             return billingRequest;
         }
 
         /**
-         * ID of the [institution](#core-endpoints-institutions) against which this authorisation was
+         * ID of the [institution](#billing-requests-institutions) against which this authorisation was
          * created.
          */
         public String getInstitution() {

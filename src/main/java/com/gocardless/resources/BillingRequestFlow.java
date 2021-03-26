@@ -58,7 +58,8 @@ public class BillingRequestFlow {
         private String billingRequest;
 
         /**
-         * ID of the [billing request](#core-endpoints-billing-requests) against which this flow was created.
+         * ID of the [billing request](#billing-requests-billing-requests) against which this flow was
+         * created.
          */
         public String getBillingRequest() {
             return billingRequest;

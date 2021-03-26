@@ -112,8 +112,8 @@ public class BankAuthorisationService {
         }
 
         /**
-         * ID of the [billing request](#core-endpoints-billing-requests) against which this authorisation was
-         * created.
+         * ID of the [billing request](#billing-requests-billing-requests) against which this authorisation
+         * was created.
          */
         public BankAuthorisationCreateRequest withLinksBillingRequest(String billingRequest) {
             if (links == null) {
@@ -124,7 +124,7 @@ public class BankAuthorisationService {
         }
 
         /**
-         * ID of the [institution](#core-endpoints-institutions) against which this authorisation was
+         * ID of the [institution](#billing-requests-institutions) against which this authorisation was
          * created.
          */
         public BankAuthorisationCreateRequest withLinksInstitution(String institution) {
@@ -203,8 +203,8 @@ public class BankAuthorisationService {
             private String paymentRequest;
 
             /**
-             * ID of the [billing request](#core-endpoints-billing-requests) against which this authorisation was
-             * created.
+             * ID of the [billing request](#billing-requests-billing-requests) against which this authorisation
+             * was created.
              */
             public Links withBillingRequest(String billingRequest) {
                 this.billingRequest = billingRequest;
@@ -212,7 +212,7 @@ public class BankAuthorisationService {
             }
 
             /**
-             * ID of the [institution](#core-endpoints-institutions) against which this authorisation was
+             * ID of the [institution](#billing-requests-institutions) against which this authorisation was
              * created.
              */
             public Links withInstitution(String institution) {

@@ -13,7 +13,7 @@ import com.google.gson.reflect.TypeToken;
  * Service class for working with institution resources.
  *
  * Institutions that are supported when creating [Bank
- * Authorisations](#core-endpoints-bank-authorisations).
+ * Authorisations](#billing-requests-bank-authorisations).
  */
 public class InstitutionService {
     private final HttpClient httpClient;
