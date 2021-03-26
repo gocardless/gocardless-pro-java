@@ -19,6 +19,7 @@ public class GoCardlessClient {
     private final BankAuthorisationService bankAuthorisations;
     private final BankDetailsLookupService bankDetailsLookups;
     private final BillingRequestService billingRequests;
+    private final BillingRequestFlowService billingRequestFlows;
     private final CreditorService creditors;
     private final CreditorBankAccountService creditorBankAccounts;
     private final CurrencyExchangeRateService currencyExchangeRates;
@@ -131,6 +132,7 @@ public class GoCardlessClient {
         this.bankAuthorisations = new BankAuthorisationService(httpClient);
         this.bankDetailsLookups = new BankDetailsLookupService(httpClient);
         this.billingRequests = new BillingRequestService(httpClient);
+        this.billingRequestFlows = new BillingRequestFlowService(httpClient);
         this.creditors = new CreditorService(httpClient);
         this.creditorBankAccounts = new CreditorBankAccountService(httpClient);
         this.currencyExchangeRates = new CurrencyExchangeRateService(httpClient);
@@ -175,6 +177,13 @@ public class GoCardlessClient {
      */
     public BillingRequestService billingRequests() {
         return billingRequests;
+    }
+
+    /**
+     * A service class for working with billing request flow resources.
+     */
+    public BillingRequestFlowService billingRequestFlows() {
+        return billingRequestFlows;
     }
 
     /**
