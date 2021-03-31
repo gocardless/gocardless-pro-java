@@ -118,9 +118,9 @@ public class RefundService {
         }
 
         /**
-         *  ID of the [mandate](#core-endpoints-mandates) against which the refund is being made.
-         * <span class="restricted-notice"><strong>Restricted</strong>: You must request access to Mandate
-         * Refunds by contacting <a href="mailto:support@gocardless.com">our support team</a>.</span>
+         *  ID of the [mandate](#core-endpoints-mandates) against which the refund is being made. <br /> <p
+         * class="restricted-notice"><strong>Restricted</strong>: You must request access to Mandate Refunds
+         * by contacting <a href="mailto:support@gocardless.com">our support team</a>.</p>
          */
         public RefundCreateRequest withLinksMandate(String mandate) {
             if (links == null) {
@@ -180,9 +180,10 @@ public class RefundService {
         }
 
         /**
-         *  Total expected refunded amount in minor unit (e.g. pence/cents/öre). If there are other partial
-         * refunds against this payment, this value should be the sum of the existing refunds plus the amount
-         * of the refund being created.
+         * Total expected refunded amount in minor unit (e.g. pence/cents/öre). If there are
+         * other partial refunds against this payment, this value should be the sum of the
+         * existing refunds plus the amount of the refund being created.
+         * <br />
          * Must be supplied if `links[payment]` is present.
          */
         public RefundCreateRequest withTotalAmountConfirmation(Integer totalAmountConfirmation) {
@@ -238,9 +239,9 @@ public class RefundService {
             private String payment;
 
             /**
-             *  ID of the [mandate](#core-endpoints-mandates) against which the refund is being made.
-             * <span class="restricted-notice"><strong>Restricted</strong>: You must request access to Mandate
-             * Refunds by contacting <a href="mailto:support@gocardless.com">our support team</a>.</span>
+             *  ID of the [mandate](#core-endpoints-mandates) against which the refund is being made. <br /> <p
+             * class="restricted-notice"><strong>Restricted</strong>: You must request access to Mandate Refunds
+             * by contacting <a href="mailto:support@gocardless.com">our support team</a>.</p>
              */
             public Links withMandate(String mandate) {
                 this.mandate = mandate;

@@ -65,8 +65,7 @@ public class PayoutItem {
      * <li>`payment_failed` (debit): The payment failed to be processed.</li>
      * <li>`payment_charged_back` (debit): The payment has been charged back.</li>
      * <li>`payment_refunded` (debit): The payment has been refunded to the customer.</li>
-     * <li>`refund` (debit): <em>private beta</em> A refund sent to a customer, not linked to a
-     * payment.</li>
+     * <li>`refund` (debit): A refund sent to a customer, not linked to a payment.</li>
      * <li>`refund_funds_returned` (credit): The refund could not be sent to the customer, and the funds
      * have been returned to you.</li>
      * <li>`gocardless_fee` (credit/debit): The fees that GoCardless charged for a payment. In the case
