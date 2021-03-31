@@ -156,6 +156,8 @@ public class BillingRequest {
         private String customer;
         private String customerBankAccount;
         private String customerBillingDetail;
+        private String mandateBankAuthorisation;
+        private String paymentBankAuthorisation;
 
         /**
          * ID of the [customer](#core-endpoints-customers) that will be used for this request
@@ -177,6 +179,22 @@ public class BillingRequest {
          */
         public String getCustomerBillingDetail() {
             return customerBillingDetail;
+        }
+
+        /**
+         * (Optional) ID of the [mandate bank authorisation](#billing-requests-bank-authorisations) that was
+         * used to verify this request.
+         */
+        public String getMandateBankAuthorisation() {
+            return mandateBankAuthorisation;
+        }
+
+        /**
+         * (Optional) ID of the [payment bank authorisation](#billing-requests-bank-authorisations) that was
+         * used to verify this request.
+         */
+        public String getPaymentBankAuthorisation() {
+            return paymentBankAuthorisation;
         }
     }
 
@@ -219,17 +237,7 @@ public class BillingRequest {
                 // blank to prevent instantiation
             }
 
-            private String bankAuthorisation;
             private String mandate;
-
-            /**
-             * (Optional) ID of the [bank authorisation](#billing-requests-bank-authorisations) that was used to
-             * verify this mandate request.
-             * 
-             */
-            public String getBankAuthorisation() {
-                return bankAuthorisation;
-            }
 
             /**
              * (Optional) ID of the [mandate](#core-endpoints-mandates) that was created from this mandate
@@ -299,16 +307,7 @@ public class BillingRequest {
                 // blank to prevent instantiation
             }
 
-            private String bankAuthorisation;
             private String payment;
-
-            /**
-             * (Optional) ID of the [bank authorisation](#billing-requests-bank-authorisations) that was used to
-             * verify this payment request.
-             */
-            public String getBankAuthorisation() {
-                return bankAuthorisation;
-            }
 
             /**
              * (Optional) ID of the [payment](#core-endpoints-payments) that was created from this payment
