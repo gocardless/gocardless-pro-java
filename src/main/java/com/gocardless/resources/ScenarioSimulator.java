@@ -54,11 +54,16 @@ public class ScenarioSimulator {
      * the banks and set up successfully. It must start in the `pending_submission` state. Not compatible
      * with ACH, BECS, BECS_NZ and SEPA mandates, which are submitted and activated with their first
      * payment.</li>
-     * <li>`mandate_customer_approval_granted`: Transitions a mandate through to `pending_submission`. It
-     * must start in the `pending_customer_approval` state. Compatible only with Bacs and SEPA mandates,
-     * which support customer signatures on the mandate. All payments associated with the mandate will be
-     * transitioned to `pending_submission`. All subscriptions associated with the mandate will become
-     * `active`.</li>
+     * <li>`mandate_customer_approval_granted`: Transitions a mandate through to `pending_submission`, as
+     * if the customer approved the mandate creation. It must start in the `pending_customer_approval`
+     * state. Compatible only with Bacs and SEPA mandates, which support customer signatures on the
+     * mandate. All payments associated with the mandate will be transitioned to `pending_submission`.
+     * All subscriptions associated with the mandate will become `active`.</li>
+     * <li>`mandate_customer_approval_skipped`: Transitions a mandate through to `pending_submission`, as
+     * if the customer skipped the mandate approval during the mandate creation process. It must start in
+     * the `pending_customer_approval` state. Compatible only with Bacs and SEPA mandates, which support
+     * customer signatures on the mandate. All payments associated with the mandate will be transitioned
+     * to `pending_submission`. All subscriptions associated with the mandate will become `active`.</li>
      * <li>`mandate_failed`: Transitions a mandate through to `failed`, having been submitted to the
      * banks but found to be invalid (for example due to invalid bank details). It must start in the
      * `pending_submission` or `submitted` states. Not compatible with ACH, BECS, BECS_NZ and SEPA
