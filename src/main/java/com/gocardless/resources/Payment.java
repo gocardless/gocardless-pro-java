@@ -267,7 +267,7 @@ public class Payment {
         }
 
         /**
-         * ID of [payout](#core-endpoints-payouts) which contains the funds from this payment.<br/>**Note**:
+         * ID of [payout](#core-endpoints-payouts) which contains the funds from this payment.<br/>_Note_:
          * this property will not be present until the payment has been successfully collected.
          */
         public String getPayout() {
@@ -276,8 +276,7 @@ public class Payment {
 
         /**
          * ID of [subscription](#core-endpoints-subscriptions) from which this payment was
-         * created.<br/>**Note**: this property will only be present if this payment is part of a
-         * subscription.
+         * created.<br/>_Note_: this property will only be present if this payment is part of a subscription.
          */
         public String getSubscription() {
             return subscription;
