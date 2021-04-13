@@ -147,9 +147,8 @@ public class BillingRequest {
             @SerializedName("choose_currency")
             CHOOSE_CURRENCY, @SerializedName("collect_customer_details")
             COLLECT_CUSTOMER_DETAILS, @SerializedName("collect_bank_account_details")
-            COLLECT_BANK_ACCOUNT_DETAILS, @SerializedName("payment_bank_authorisation")
-            PAYMENT_BANK_AUTHORISATION, @SerializedName("mandate_bank_authorisation")
-            MANDATE_BANK_AUTHORISATION,
+            COLLECT_BANK_ACCOUNT_DETAILS, @SerializedName("bank_authorisation")
+            BANK_AUTHORISATION,
         }
     }
 
@@ -158,11 +157,18 @@ public class BillingRequest {
             // blank to prevent instantiation
         }
 
+        private String bankAuthorisation;
         private String customer;
         private String customerBankAccount;
         private String customerBillingDetail;
-        private String mandateBankAuthorisation;
-        private String paymentBankAuthorisation;
+
+        /**
+         * (Optional) ID of the [bank authorisation](#billing-requests-bank-authorisations) that was used to
+         * verify this request.
+         */
+        public String getBankAuthorisation() {
+            return bankAuthorisation;
+        }
 
         /**
          * ID of the [customer](#core-endpoints-customers) that will be used for this request
@@ -184,22 +190,6 @@ public class BillingRequest {
          */
         public String getCustomerBillingDetail() {
             return customerBillingDetail;
-        }
-
-        /**
-         * (Optional) ID of the [mandate bank authorisation](#billing-requests-bank-authorisations) that was
-         * used to verify this request.
-         */
-        public String getMandateBankAuthorisation() {
-            return mandateBankAuthorisation;
-        }
-
-        /**
-         * (Optional) ID of the [payment bank authorisation](#billing-requests-bank-authorisations) that was
-         * used to verify this request.
-         */
-        public String getPaymentBankAuthorisation() {
-            return paymentBankAuthorisation;
         }
     }
 
