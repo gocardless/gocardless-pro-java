@@ -472,8 +472,9 @@ public class InstalmentScheduleService {
 
         /**
          * The date on which the first payment should be charged. Must be on or after the
-         * [mandate](#core-endpoints-mandates)'s `next_possible_charge_date`. When blank, this will be set as
-         * the mandate's `next_possible_charge_date`.
+         * [mandate](#core-endpoints-mandates)'s `next_possible_charge_date`. When left blank and `month` or
+         * `day_of_month` are provided, this will be set to the date of the first payment. If created without
+         * `month` or `day_of_month` this will be set as the mandate's `next_possible_charge_date`
          */
         public InstalmentScheduleCreateWithScheduleRequest withInstalmentsStartDate(String startDate) {
             if (instalments == null) {
@@ -670,8 +671,9 @@ public class InstalmentScheduleService {
 
             /**
              * The date on which the first payment should be charged. Must be on or after the
-             * [mandate](#core-endpoints-mandates)'s `next_possible_charge_date`. When blank, this will be set as
-             * the mandate's `next_possible_charge_date`.
+             * [mandate](#core-endpoints-mandates)'s `next_possible_charge_date`. When left blank and `month` or
+             * `day_of_month` are provided, this will be set to the date of the first payment. If created without
+             * `month` or `day_of_month` this will be set as the mandate's `next_possible_charge_date`
              */
             public Instalments withStartDate(String startDate) {
                 this.startDate = startDate;
