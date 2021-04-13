@@ -35,7 +35,11 @@ public abstract class DeleteRequest<T> extends ApiRequest<T> {
 
     @Override
     protected T parseResponse(String responseBody, ResponseParser responseParser) {
-        return responseParser.parseSingle(responseBody, getEnvelope(), getResponseClass());
+        if (responseBody == null || responseBody.trim().isEmpty()) {
+            return null;
+        } else {
+            return responseParser.parseSingle(responseBody, getEnvelope(), getResponseClass());
+        }
     }
 
     @Override

@@ -14,7 +14,7 @@ import com.google.gson.reflect.TypeToken;
 /**
  * Service class for working with billing request resources.
  *
- * 
+ * Billing Requests
  */
 public class BillingRequestService {
     private final HttpClient httpClient;

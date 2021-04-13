@@ -5,6 +5,11 @@ import java.util.Map;
 
 import com.google.gson.annotations.SerializedName;
 
+/**
+ * Represents a billing request resource returned from the API.
+ *
+ * Billing Requests
+ */
 public class BillingRequest {
     private BillingRequest() {
         // blank to prevent instantiation
