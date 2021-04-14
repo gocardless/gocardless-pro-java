@@ -92,6 +92,18 @@ public class ScenarioSimulator {
      * <li>`payout_create`: Creates a payout containing payments in `confirmed`, `failed` &
      * `charged_back` states; refunds in `submitted` & `bounced`; and all related fees. Can only be used
      * with a positive total payout balance and when some eligible items exist.</li>
+     * <li>`billing_request_fulfilled`: Authorises the billing request, fulfils it, and moves the
+     * associated payment to `failed`. The billing request must be in the `pending` state, with all
+     * actions completed except for `bank_authorisation`. Only billing requests with a `payment_request`
+     * are supported.</li>
+     * <li>`billing_request_fulfilled_and_payment_failed`: Authorises the billing request, fulfils it,
+     * and moves the associated payment to `failed`. The billing request must be in the `pending` state,
+     * with all actions completed except for `bank_authorisation`. Only billing requests with a
+     * `payment_request` are supported.</li>
+     * <li>`billing_request_fulfilled_and_payment_paid_out`: Authorises the billing request, fulfils it,
+     * and moves the associated payment to `paid_out`. The billing request must be in the `pending`
+     * state, with all actions completed except for `bank_authorisation`. Only billing requests with a
+     * `payment_request` are supported.</li>
      * </ul>
      */
     public String getId() {
