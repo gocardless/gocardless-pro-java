@@ -48,7 +48,7 @@ public class BillingRequest {
     }
 
     /**
-     * Unique identifier, beginning with "PY".
+     * Unique identifier, beginning with "BRQ".
      */
     public String getId() {
         return id;
