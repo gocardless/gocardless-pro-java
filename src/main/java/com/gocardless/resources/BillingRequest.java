@@ -34,7 +34,7 @@ public class BillingRequest {
     }
 
     /**
-     * Should the billing request be fulfilled as soon as it's ready
+     * Should the billing request be fulfilled as soon as it's ready (true by default)
      */
     public Boolean getAutoFulfil() {
         return autoFulfil;

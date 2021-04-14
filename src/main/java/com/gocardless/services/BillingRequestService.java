@@ -229,7 +229,7 @@ public class BillingRequestService {
         private PaymentRequest paymentRequest;
 
         /**
-         * Should the billing request be fulfilled as soon as it's ready
+         * Should the billing request be fulfilled as soon as it's ready (true by default)
          */
         public BillingRequestCreateRequest withAutoFulfil(Boolean autoFulfil) {
             this.autoFulfil = autoFulfil;
