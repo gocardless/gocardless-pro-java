@@ -6,7 +6,6 @@ import com.gocardless.http.*;
 import com.gocardless.resources.ScenarioSimulator;
 
 import com.google.common.collect.ImmutableMap;
-import com.google.gson.annotations.SerializedName;
 
 /**
  * Service class for working with scenario simulator resources.
@@ -42,18 +41,7 @@ public class ScenarioSimulatorService {
     public static final class ScenarioSimulatorRunRequest extends PostRequest<ScenarioSimulator> {
         @PathParam
         private final String identity;
-        private Currency currency;
         private Links links;
-
-        /**
-         * [ISO 4217](http://en.wikipedia.org/wiki/ISO_4217#Active_codes) currency code.
-         * Currently "AUD", "CAD", "DKK", "EUR", "GBP", "NZD", "SEK" and "USD" are supported.
-         * Only required when simulating `payout_create`
-         */
-        public ScenarioSimulatorRunRequest withCurrency(Currency currency) {
-            this.currency = currency;
-            return this;
-        }
 
         public ScenarioSimulatorRunRequest withLinks(Links links) {
             this.links = links;
@@ -113,22 +101,6 @@ public class ScenarioSimulatorService {
         @Override
         protected String getRequestEnvelope() {
             return "data";
-        }
-
-        public enum Currency {
-            @SerializedName("AUD")
-            AUD, @SerializedName("CAD")
-            CAD, @SerializedName("DKK")
-            DKK, @SerializedName("EUR")
-            EUR, @SerializedName("GBP")
-            GBP, @SerializedName("NZD")
-            NZD, @SerializedName("SEK")
-            SEK, @SerializedName("USD")
-            USD;
-            @Override
-            public String toString() {
-                return name();
-            }
         }
 
         public static class Links {

@@ -89,9 +89,6 @@ public class ScenarioSimulator {
      * <li>`refund_bounced`: Transitions a refund to `bounced`. It must start in either the
      * `pending_submission`, `submitted`, or `paid` state.</li>
      * <li>`payout_bounced`: Transitions a payout to `bounced`. It must start in the `paid` state.</li>
-     * <li>`payout_create`: Creates a payout containing payments in `confirmed`, `failed` &
-     * `charged_back` states; refunds in `submitted` & `bounced`; and all related fees. Can only be used
-     * with a positive total payout balance and when some eligible items exist.</li>
      * <li>`billing_request_fulfilled`: Authorises the billing request, fulfils it, and moves the
      * associated payment to `failed`. The billing request must be in the `pending` state, with all
      * actions completed except for `bank_authorisation`. Only billing requests with a `payment_request`
