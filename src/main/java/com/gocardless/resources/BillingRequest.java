@@ -113,6 +113,7 @@ public class BillingRequest {
         private List<String> completesActions;
         private Boolean required;
         private List<String> requiresActions;
+        private Status status;
         private Type type;
 
         /**
@@ -137,10 +138,23 @@ public class BillingRequest {
         }
 
         /**
+         * Status of the action
+         */
+        public Status getStatus() {
+            return status;
+        }
+
+        /**
          * Unique identifier for the action.
          */
         public Type getType() {
             return type;
+        }
+
+        public enum Status {
+            @SerializedName("pending")
+            PENDING, @SerializedName("completed")
+            COMPLETED,
         }
 
         public enum Type {
