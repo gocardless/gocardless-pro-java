@@ -48,9 +48,19 @@ public class BillingRequestFlowService {
      */
     public static final class BillingRequestFlowCreateRequest extends
             PostRequest<BillingRequestFlow> {
+        private Boolean autoFulfil;
         private Links links;
-        private Boolean lockExistingDetails;
+        private Boolean lockBankAccountDetails;
+        private Boolean lockCustomerDetails;
         private String redirectUri;
+
+        /**
+         * Fulfil the Billing Request on completion of the flow (true by default)
+         */
+        public BillingRequestFlowCreateRequest withAutoFulfil(Boolean autoFulfil) {
+            this.autoFulfil = autoFulfil;
+            return this;
+        }
 
         public BillingRequestFlowCreateRequest withLinks(Links links) {
             this.links = links;
@@ -70,11 +80,19 @@ public class BillingRequestFlowService {
         }
 
         /**
-         * If true, the payer will not be able to edit their existing details (e.g. customer and bank
-         * account) within the billing request flow.
+         * If true, the payer will not be able to change their bank account within the flow
          */
-        public BillingRequestFlowCreateRequest withLockExistingDetails(Boolean lockExistingDetails) {
-            this.lockExistingDetails = lockExistingDetails;
+        public BillingRequestFlowCreateRequest withLockBankAccountDetails(
+                Boolean lockBankAccountDetails) {
+            this.lockBankAccountDetails = lockBankAccountDetails;
+            return this;
+        }
+
+        /**
+         * If true, the payer will not be able to edit their customer details within the flow
+         */
+        public BillingRequestFlowCreateRequest withLockCustomerDetails(Boolean lockCustomerDetails) {
+            this.lockCustomerDetails = lockCustomerDetails;
             return this;
         }
 

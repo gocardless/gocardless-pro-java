@@ -13,10 +13,13 @@ public class BillingRequestFlow {
     }
 
     private String authorisationUrl;
+    private Boolean autoFulfil;
     private String createdAt;
     private String expiresAt;
     private String id;
     private Links links;
+    private Boolean lockBankAccountDetails;
+    private Boolean lockCustomerDetails;
     private String redirectUri;
     private String sessionToken;
 
@@ -25,6 +28,13 @@ public class BillingRequestFlow {
      */
     public String getAuthorisationUrl() {
         return authorisationUrl;
+    }
+
+    /**
+     * Fulfil the Billing Request on completion of the flow (true by default)
+     */
+    public Boolean getAutoFulfil() {
+        return autoFulfil;
     }
 
     /**
@@ -53,6 +63,20 @@ public class BillingRequestFlow {
     }
 
     /**
+     * If true, the payer will not be able to change their bank account within the flow
+     */
+    public Boolean getLockBankAccountDetails() {
+        return lockBankAccountDetails;
+    }
+
+    /**
+     * If true, the payer will not be able to edit their customer details within the flow
+     */
+    public Boolean getLockCustomerDetails() {
+        return lockCustomerDetails;
+    }
+
+    /**
      * URL that the payer can be redirected to after completing the request flow.
      */
     public String getRedirectUri() {
@@ -60,7 +84,7 @@ public class BillingRequestFlow {
     }
 
     /**
-     * Session token populated in response from the exchange token action
+     * Session token populated when responding to the initalise action
      */
     public String getSessionToken() {
         return sessionToken;
