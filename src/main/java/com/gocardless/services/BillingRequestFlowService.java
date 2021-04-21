@@ -1,7 +1,11 @@
 package com.gocardless.services;
 
+import java.util.Map;
+
 import com.gocardless.http.*;
 import com.gocardless.resources.BillingRequestFlow;
+
+import com.google.common.collect.ImmutableMap;
 
 /**
  * Service class for working with billing request flow resources.
@@ -27,6 +31,14 @@ public class BillingRequestFlowService {
      */
     public BillingRequestFlowCreateRequest create() {
         return new BillingRequestFlowCreateRequest(httpClient);
+    }
+
+    /**
+     * Returns the flow having generated a fresh session token which can be used to power
+     * integrations that manipulate the flow.
+     */
+    public BillingRequestFlowInitialiseRequest initialise(String identity) {
+        return new BillingRequestFlowInitialiseRequest(httpClient, identity);
     }
 
     /**
@@ -114,6 +126,60 @@ public class BillingRequestFlowService {
                 this.billingRequest = billingRequest;
                 return this;
             }
+        }
+    }
+
+    /**
+     * Request class for {@link BillingRequestFlowService#initialise }.
+     *
+     * Returns the flow having generated a fresh session token which can be used to power
+     * integrations that manipulate the flow.
+     */
+    public static final class BillingRequestFlowInitialiseRequest extends
+            PostRequest<BillingRequestFlow> {
+        @PathParam
+        private final String identity;
+
+        private BillingRequestFlowInitialiseRequest(HttpClient httpClient, String identity) {
+            super(httpClient);
+            this.identity = identity;
+        }
+
+        public BillingRequestFlowInitialiseRequest withHeader(String headerName, String headerValue) {
+            this.addHeader(headerName, headerValue);
+            return this;
+        }
+
+        @Override
+        protected Map<String, String> getPathParams() {
+            ImmutableMap.Builder<String, String> params = ImmutableMap.builder();
+            params.put("identity", identity);
+            return params.build();
+        }
+
+        @Override
+        protected String getPathTemplate() {
+            return "billing_request_flows/:identity/actions/initialise";
+        }
+
+        @Override
+        protected String getEnvelope() {
+            return "billing_request_flows";
+        }
+
+        @Override
+        protected Class<BillingRequestFlow> getResponseClass() {
+            return BillingRequestFlow.class;
+        }
+
+        @Override
+        protected boolean hasBody() {
+            return true;
+        }
+
+        @Override
+        protected String getRequestEnvelope() {
+            return "data";
         }
     }
 }

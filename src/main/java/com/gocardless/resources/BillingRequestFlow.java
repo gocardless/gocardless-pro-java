@@ -15,8 +15,10 @@ public class BillingRequestFlow {
     private String authorisationUrl;
     private String createdAt;
     private String expiresAt;
+    private String id;
     private Links links;
     private String redirectUri;
+    private String sessionToken;
 
     /**
      * URL for a GC-controlled flow which will allow the payer to fulfil the billing request
@@ -39,6 +41,13 @@ public class BillingRequestFlow {
         return expiresAt;
     }
 
+    /**
+     * Unique identifier, beginning with "BRF".
+     */
+    public String getId() {
+        return id;
+    }
+
     public Links getLinks() {
         return links;
     }
@@ -48,6 +57,13 @@ public class BillingRequestFlow {
      */
     public String getRedirectUri() {
         return redirectUri;
+    }
+
+    /**
+     * Session token populated in response from the exchange token action
+     */
+    public String getSessionToken() {
+        return sessionToken;
     }
 
     public static class Links {
