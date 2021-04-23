@@ -73,15 +73,15 @@ public class BillingRequestService {
 
     /**
      * If the billing request has a pending
-     * <code>collect_bank_account_details</code> action, this endpoint can be
+     * <code>collect_bank_account</code> action, this endpoint can be
      * used to collect the details in order to complete it.
      * 
      * The endpoint takes the same payload as Customer Bank Accounts, but check
      * the bank account is valid for the billing request scheme before creating
      * and attaching it.
      */
-    public BillingRequestCollectBankAccountDetailsRequest collectBankAccountDetails(String identity) {
-        return new BillingRequestCollectBankAccountDetailsRequest(httpClient, identity);
+    public BillingRequestCollectBankAccountRequest collectBankAccount(String identity) {
+        return new BillingRequestCollectBankAccountRequest(httpClient, identity);
     }
 
     /**
@@ -956,17 +956,17 @@ public class BillingRequestService {
     }
 
     /**
-     * Request class for {@link BillingRequestService#collectBankAccountDetails }.
+     * Request class for {@link BillingRequestService#collectBankAccount }.
      *
      * If the billing request has a pending
-     * <code>collect_bank_account_details</code> action, this endpoint can be
+     * <code>collect_bank_account</code> action, this endpoint can be
      * used to collect the details in order to complete it.
      * 
      * The endpoint takes the same payload as Customer Bank Accounts, but check
      * the bank account is valid for the billing request scheme before creating
      * and attaching it.
      */
-    public static final class BillingRequestCollectBankAccountDetailsRequest extends
+    public static final class BillingRequestCollectBankAccountRequest extends
             PostRequest<BillingRequest> {
         @PathParam
         private final String identity;
@@ -986,7 +986,7 @@ public class BillingRequestService {
          * truncated to 18 characters. This field is required unless the request includes a [customer bank
          * account token](#javascript-flow-customer-bank-account-tokens).
          */
-        public BillingRequestCollectBankAccountDetailsRequest withAccountHolderName(
+        public BillingRequestCollectBankAccountRequest withAccountHolderName(
                 String accountHolderName) {
             this.accountHolderName = accountHolderName;
             return this;
@@ -996,7 +996,7 @@ public class BillingRequestService {
          * Bank account number - see [local details](#appendix-local-bank-details) for more information.
          * Alternatively you can provide an `iban`.
          */
-        public BillingRequestCollectBankAccountDetailsRequest withAccountNumber(String accountNumber) {
+        public BillingRequestCollectBankAccountRequest withAccountNumber(String accountNumber) {
             this.accountNumber = accountNumber;
             return this;
         }
@@ -1006,8 +1006,7 @@ public class BillingRequestService {
          * accounts in other currencies. See [local details](#local-bank-details-united-states) for more
          * information.
          */
-        public BillingRequestCollectBankAccountDetailsRequest withAccountType(
-                AccountType accountType) {
+        public BillingRequestCollectBankAccountRequest withAccountType(AccountType accountType) {
             this.accountType = accountType;
             return this;
         }
@@ -1016,7 +1015,7 @@ public class BillingRequestService {
          * Bank code - see [local details](#appendix-local-bank-details) for more information. Alternatively
          * you can provide an `iban`.
          */
-        public BillingRequestCollectBankAccountDetailsRequest withBankCode(String bankCode) {
+        public BillingRequestCollectBankAccountRequest withBankCode(String bankCode) {
             this.bankCode = bankCode;
             return this;
         }
@@ -1025,7 +1024,7 @@ public class BillingRequestService {
          * Branch code - see [local details](#appendix-local-bank-details) for more information.
          * Alternatively you can provide an `iban`.
          */
-        public BillingRequestCollectBankAccountDetailsRequest withBranchCode(String branchCode) {
+        public BillingRequestCollectBankAccountRequest withBranchCode(String branchCode) {
             this.branchCode = branchCode;
             return this;
         }
@@ -1035,7 +1034,7 @@ public class BillingRequestService {
          * code](http://en.wikipedia.org/wiki/ISO_3166-1_alpha-2#Officially_assigned_code_elements). Defaults
          * to the country code of the `iban` if supplied, otherwise is required.
          */
-        public BillingRequestCollectBankAccountDetailsRequest withCountryCode(String countryCode) {
+        public BillingRequestCollectBankAccountRequest withCountryCode(String countryCode) {
             this.countryCode = countryCode;
             return this;
         }
@@ -1044,7 +1043,7 @@ public class BillingRequestService {
          * [ISO 4217](http://en.wikipedia.org/wiki/ISO_4217#Active_codes) currency code. Currently "AUD",
          * "CAD", "DKK", "EUR", "GBP", "NZD", "SEK" and "USD" are supported.
          */
-        public BillingRequestCollectBankAccountDetailsRequest withCurrency(String currency) {
+        public BillingRequestCollectBankAccountRequest withCurrency(String currency) {
             this.currency = currency;
             return this;
         }
@@ -1054,7 +1053,7 @@ public class BillingRequestService {
          * details](#appendix-local-bank-details). IBANs are not accepted for Swedish bank accounts
          * denominated in SEK - you must supply [local details](#local-bank-details-sweden).
          */
-        public BillingRequestCollectBankAccountDetailsRequest withIban(String iban) {
+        public BillingRequestCollectBankAccountRequest withIban(String iban) {
             this.iban = iban;
             return this;
         }
@@ -1063,8 +1062,7 @@ public class BillingRequestService {
          * Key-value store of custom data. Up to 3 keys are permitted, with key names up to 50 characters and
          * values up to 500 characters.
          */
-        public BillingRequestCollectBankAccountDetailsRequest withMetadata(
-                Map<String, String> metadata) {
+        public BillingRequestCollectBankAccountRequest withMetadata(Map<String, String> metadata) {
             this.metadata = metadata;
             return this;
         }
@@ -1073,7 +1071,7 @@ public class BillingRequestService {
          * Key-value store of custom data. Up to 3 keys are permitted, with key names up to 50 characters and
          * values up to 500 characters.
          */
-        public BillingRequestCollectBankAccountDetailsRequest withMetadata(String key, String value) {
+        public BillingRequestCollectBankAccountRequest withMetadata(String key, String value) {
             if (metadata == null) {
                 metadata = new HashMap<>();
             }
@@ -1081,13 +1079,12 @@ public class BillingRequestService {
             return this;
         }
 
-        private BillingRequestCollectBankAccountDetailsRequest(HttpClient httpClient,
-                String identity) {
+        private BillingRequestCollectBankAccountRequest(HttpClient httpClient, String identity) {
             super(httpClient);
             this.identity = identity;
         }
 
-        public BillingRequestCollectBankAccountDetailsRequest withHeader(String headerName,
+        public BillingRequestCollectBankAccountRequest withHeader(String headerName,
                 String headerValue) {
             this.addHeader(headerName, headerValue);
             return this;
@@ -1102,7 +1099,7 @@ public class BillingRequestService {
 
         @Override
         protected String getPathTemplate() {
-            return "billing_requests/:identity/actions/collect_bank_account_details";
+            return "billing_requests/:identity/actions/collect_bank_account";
         }
 
         @Override
