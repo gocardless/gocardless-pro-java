@@ -222,19 +222,10 @@ public class BillingRequestService {
      */
     public static final class BillingRequestCreateRequest extends
             IdempotentPostRequest<BillingRequest> {
-        private Boolean autoFulfil;
         private Links links;
         private MandateRequest mandateRequest;
         private Map<String, String> metadata;
         private PaymentRequest paymentRequest;
-
-        /**
-         * Should the billing request be fulfilled as soon as it's ready (true by default)
-         */
-        public BillingRequestCreateRequest withAutoFulfil(Boolean autoFulfil) {
-            this.autoFulfil = autoFulfil;
-            return this;
-        }
 
         public BillingRequestCreateRequest withLinks(Links links) {
             this.links = links;
