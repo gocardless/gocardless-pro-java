@@ -18,7 +18,7 @@ public class BillingRequestFlow {
     private String expiresAt;
     private String id;
     private Links links;
-    private Boolean lockBankAccountDetails;
+    private Boolean lockBankAccount;
     private Boolean lockCustomerDetails;
     private String redirectUri;
     private String sessionToken;
@@ -65,8 +65,8 @@ public class BillingRequestFlow {
     /**
      * If true, the payer will not be able to change their bank account within the flow
      */
-    public Boolean getLockBankAccountDetails() {
-        return lockBankAccountDetails;
+    public Boolean getLockBankAccount() {
+        return lockBankAccount;
     }
 
     /**

@@ -50,7 +50,7 @@ public class BillingRequestFlowService {
             PostRequest<BillingRequestFlow> {
         private Boolean autoFulfil;
         private Links links;
-        private Boolean lockBankAccountDetails;
+        private Boolean lockBankAccount;
         private Boolean lockCustomerDetails;
         private String redirectUri;
 
@@ -82,9 +82,8 @@ public class BillingRequestFlowService {
         /**
          * If true, the payer will not be able to change their bank account within the flow
          */
-        public BillingRequestFlowCreateRequest withLockBankAccountDetails(
-                Boolean lockBankAccountDetails) {
-            this.lockBankAccountDetails = lockBankAccountDetails;
+        public BillingRequestFlowCreateRequest withLockBankAccount(Boolean lockBankAccount) {
+            this.lockBankAccount = lockBankAccount;
             return this;
         }
 
