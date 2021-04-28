@@ -66,8 +66,8 @@ public class ScenarioSimulator {
      * to `pending_submission`. All subscriptions associated with the mandate will become `active`.</li>
      * <li>`mandate_failed`: Transitions a mandate through to `failed`, having been submitted to the
      * banks but found to be invalid (for example due to invalid bank details). It must start in the
-     * `pending_submission` or `submitted` states. Not compatible with ACH, BECS, BECS_NZ and SEPA
-     * mandates, which are submitted with their first payment.</li>
+     * `pending_submission` or `submitted` states. Not compatible with SEPA mandates, which are submitted
+     * with their first payment.</li>
      * <li>`mandate_expired`: Transitions a mandate through to `expired`, having been submitted to the
      * banks, set up successfully and then expired because no collection attempts were made against it
      * for longer than the scheme's dormancy period (13 months for Bacs, 3 years for SEPA, 15 months for
