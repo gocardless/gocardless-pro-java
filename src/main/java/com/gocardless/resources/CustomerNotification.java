@@ -65,6 +65,16 @@ public class CustomerNotification {
 
     /**
      * The type of notification the customer shall receive.
+     * One of:
+     * <ul>
+     * <li>`payment_created`</li>
+     * <li>`payment_cancelled`</li>
+     * <li>`mandate_created`</li>
+     * <li>`subscription_created`</li>
+     * <li>`subscription_cancelled`</li>
+     * <li>`instalment_schedule_created`</li>
+     * <li>`instalment_schedule_cancelled`</li>
+     * </ul>
      */
     public Type getType() {
         return type;

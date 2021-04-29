@@ -391,6 +391,11 @@ public class CustomerService {
 
         /**
          * The direction to sort in.
+         * One of:
+         * <ul>
+         * <li>`asc`</li>
+         * <li>`desc`</li>
+         * </ul>
          */
         public CustomerListRequest<S> withSortDirection(SortDirection sortDirection) {
             this.sortDirection = sortDirection;
@@ -399,6 +404,12 @@ public class CustomerService {
 
         /**
          * Field by which to sort records.
+         * One of:
+         * <ul>
+         * <li>`name`</li>
+         * <li>`company_name`</li>
+         * <li>`created_at`</li>
+         * </ul>
          */
         public CustomerListRequest<S> withSortField(SortField sortField) {
             this.sortField = sortField;

@@ -478,6 +478,11 @@ public class PaymentService {
 
         /**
          * The direction to sort in.
+         * One of:
+         * <ul>
+         * <li>`asc`</li>
+         * <li>`desc`</li>
+         * </ul>
          */
         public PaymentListRequest<S> withSortDirection(SortDirection sortDirection) {
             this.sortDirection = sortDirection;
@@ -486,6 +491,11 @@ public class PaymentService {
 
         /**
          * Field by which to sort records.
+         * One of:
+         * <ul>
+         * <li>`charge_date`</li>
+         * <li>`amount`</li>
+         * </ul>
          */
         public PaymentListRequest<S> withSortField(SortField sortField) {
             this.sortField = sortField;

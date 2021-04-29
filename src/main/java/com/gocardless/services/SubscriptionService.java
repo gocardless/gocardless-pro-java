@@ -142,10 +142,10 @@ public class SubscriptionService {
      * Pause a subscription object.
      * No payments will be created until it is resumed.
      * 
-     * This can only be used when a subscription collecting a fixed number of payments (created using
+     * This can only be used when a subscription is collecting a fixed number of payments (created using
      * `count`),
      * when they continue forever (created without `count` or `end_date`) or
-     * the subscription is paused for a number of cycles.
+     * the subscription is already paused for a number of cycles.
      * 
      * When `pause_cycles` is omitted the subscription is paused until the [resume
      * endpoint](#subscriptions-resume-a-subscription) is called.
@@ -369,7 +369,7 @@ public class SubscriptionService {
          * An optional payment reference. This will be set as the reference on each payment
          * created and will appear on your customer's bank statement. See the documentation for
          * the [create payment endpoint](#payments-create-a-payment) for more details.
-         * 
+         * <br />
          * <p class="restricted-notice"><strong>Restricted</strong>: You need your own Service User Number to
          * specify a payment reference for Bacs payments.</p>
          */
@@ -856,7 +856,7 @@ public class SubscriptionService {
          * An optional payment reference. This will be set as the reference on each payment
          * created and will appear on your customer's bank statement. See the documentation for
          * the [create payment endpoint](#payments-create-a-payment) for more details.
-         * 
+         * <br />
          * <p class="restricted-notice"><strong>Restricted</strong>: You need your own Service User Number to
          * specify a payment reference for Bacs payments.</p>
          */
@@ -918,10 +918,10 @@ public class SubscriptionService {
      * Pause a subscription object.
      * No payments will be created until it is resumed.
      * 
-     * This can only be used when a subscription collecting a fixed number of payments (created using
+     * This can only be used when a subscription is collecting a fixed number of payments (created using
      * `count`),
      * when they continue forever (created without `count` or `end_date`) or
-     * the subscription is paused for a number of cycles.
+     * the subscription is already paused for a number of cycles.
      * 
      * When `pause_cycles` is omitted the subscription is paused until the [resume
      * endpoint](#subscriptions-resume-a-subscription) is called.
