@@ -28,28 +28,38 @@ public class HttpClient {
      * The maximum number of times that a request can be retried.
      */
     public static final int MAX_RETRIES = 3;
+
     /**
      * See http://tools.ietf.org/html/rfc7230#section-3.2.6.
      */
-    private static final String DISALLOWED_USER_AGENT_CHARACTERS =
-            "[^\\w!#$%&'\\*\\+\\-\\.\\^`\\|~]";
+    private static final String DISALLOWED_USER_AGENT_CHARACTERS = "[^\\w!#$%&'\\*\\+\\-\\.\\^`\\|~]";
+
     private static final String USER_AGENT = String.format(
             "gocardless-pro-java/4.7.0 java/%s %s/%s %s/%s",
             cleanUserAgentToken(System.getProperty("java.vm.specification.version")),
             cleanUserAgentToken(System.getProperty("java.vm.name")),
             cleanUserAgentToken(System.getProperty("java.version")),
             cleanUserAgentToken(System.getProperty("os.name")),
-            cleanUserAgentToken(System.getProperty("os.version")));
+            cleanUserAgentToken(System.getProperty("os.version"))
+    );
     private static final RequestBody EMPTY_BODY = RequestBody.create(null, new byte[0]);
+
     private static final MediaType MEDIA_TYPE = MediaType.parse("application/json");
     private static final Map<String, String> HEADERS;
+
     static {
         ImmutableMap.Builder<String, String> builder = ImmutableMap.builder();
-        builder.put("GoCardless-Version", "2015-07-06");
+
+        
+            builder.put("GoCardless-Version", "2015-07-06");
+        
+
         builder.put("GoCardless-Client-Library", "gocardless-pro-java");
         builder.put("GoCardless-Client-Version", "4.7.0");
+
         HEADERS = builder.build();
     }
+
     private final OkHttpClient rawClient;
     private final UrlFormatter urlFormatter;
     private final ResponseParser responseParser;
@@ -66,11 +76,13 @@ public class HttpClient {
      * @param rawClient the OkHttpClient instance to use to make requests (which will be configured
      *                  to log requests with LoggingInterceptor).
      */
-    public HttpClient(String accessToken, String baseUrl, OkHttpClient rawClient,
-            boolean errorOnIdempotencyConflict) {
+    public HttpClient(String accessToken, String baseUrl, OkHttpClient rawClient, boolean errorOnIdempotencyConflict) {
         this.rawClient = rawClient;
+
         rawClient.interceptors().add(new LoggingInterceptor());
+
         this.urlFormatter = new UrlFormatter(baseUrl);
+
         Gson gson = GsonFactory.build();
         this.responseParser = new ResponseParser(gson);
         this.requestWriter = new RequestWriter(gson);
@@ -79,35 +91,38 @@ public class HttpClient {
     }
 
     public boolean isErrorOnIdempotencyConflict() {
-        return this.errorOnIdempotencyConflict;
+      return this.errorOnIdempotencyConflict;
     }
 
     <T> T execute(ApiRequest<T> apiRequest) {
         Request request = buildRequest(apiRequest);
         Response response = execute(request);
+
         return parseResponseBody(apiRequest, response);
     }
 
     <T> ApiResponse<T> executeWrapped(ApiRequest<T> apiRequest) {
         Request request = buildRequest(apiRequest);
         Response response = execute(request);
+
         T resource = parseResponseBody(apiRequest, response);
         return new ApiResponse<>(resource, response.code(), response.headers().toMultimap());
     }
 
     <T> T executeWithRetries(final ApiRequest<T> apiRequest) {
-        Retryer<T> retrier =
-                RetryerBuilder.<T>newBuilder()
-                        .retryIfExceptionOfType(GoCardlessNetworkException.class)
-                        .retryIfExceptionOfType(GoCardlessInternalException.class)
-                        .withWaitStrategy(WaitStrategies.fixedWait(500, MILLISECONDS))
-                        .withStopStrategy(StopStrategies.stopAfterAttempt(MAX_RETRIES)).build();
+        Retryer<T> retrier = RetryerBuilder.<T>newBuilder()
+                .retryIfExceptionOfType(GoCardlessNetworkException.class)
+                .retryIfExceptionOfType(GoCardlessInternalException.class)
+                .withWaitStrategy(WaitStrategies.fixedWait(500, MILLISECONDS))
+                .withStopStrategy(StopStrategies.stopAfterAttempt(MAX_RETRIES)).build();
+
         Callable<T> executeOnce = new Callable<T>() {
             @Override
             public T call() throws Exception {
                 return execute(apiRequest);
             }
         };
+
         try {
             return retrier.call(executeOnce);
         } catch (ExecutionException | RetryException e) {
@@ -118,13 +133,17 @@ public class HttpClient {
 
     private <T> Request buildRequest(ApiRequest<T> apiRequest) {
         HttpUrl url = apiRequest.getUrl(urlFormatter);
-        Request.Builder request =
-                new Request.Builder().url(url).headers(Headers.of(apiRequest.getHeaders()))
-                        .header("Authorization", credentials).header("User-Agent", USER_AGENT)
-                        .method(apiRequest.getMethod(), getBody(apiRequest));
+        Request.Builder request = new Request.Builder()
+                .url(url)
+                .headers(Headers.of(apiRequest.getHeaders()))
+                .header("Authorization", credentials)
+                .header("User-Agent", USER_AGENT)
+                .method(apiRequest.getMethod(), getBody(apiRequest));
+
         for (Map.Entry<String, String> entry : HEADERS.entrySet()) {
             request = request.header(entry.getKey(), entry.getValue());
         }
+
         return request.build();
     }
 
@@ -136,20 +155,25 @@ public class HttpClient {
                 return EMPTY_BODY;
             }
         }
+
         String json = requestWriter.write(request, request.getRequestEnvelope());
+
         return RequestBody.create(MEDIA_TYPE, json);
     }
 
     private Response execute(Request request) {
         Response response;
+
         try {
             response = rawClient.newCall(request).execute();
         } catch (IOException e) {
             throw new GoCardlessNetworkException("Failed to execute request", e);
         }
+
         if (!response.isSuccessful()) {
             throw handleErrorResponse(response);
         }
+
         return response;
     }
 

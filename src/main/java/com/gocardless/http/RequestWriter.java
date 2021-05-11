@@ -13,6 +13,7 @@ final class RequestWriter {
     public <T> String write(T object, String envelope) {
         JsonObject result = new JsonObject();
         result.add(envelope, gson.toJsonTree(object));
+
         return gson.toJson(result);
     }
 }

@@ -13,6 +13,7 @@ public class GoCardlessApiException extends GoCardlessException {
 
     GoCardlessApiException(ApiErrorResponse error) {
         super(error.toString());
+
         this.error = error;
     }
 

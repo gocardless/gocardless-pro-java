@@ -21,6 +21,7 @@ public class GoCardlessErrorMapper {
             case VALIDATION_FAILED:
                 return new ValidationFailedException(error);
         }
+
         throw new IllegalStateException("Unknown error type: " + error.getType());
     }
 }

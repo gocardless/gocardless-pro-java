@@ -14,7 +14,8 @@ import org.apache.commons.codec.digest.HmacUtils;
  * Class containing a collection of functions for validating and parsing GoCardless webhooks
  */
 public class Webhook {
-    private Webhook() {}
+    private Webhook() {
+    }
 
     /**
      * Validates that a webhook was genuinely sent by GoCardless using `isValidSignature`,
@@ -31,13 +32,12 @@ public class Webhook {
      *     signature header specified does not match the signature computed using the
      *     request body and webhook endpoint secret
      */
-    public static List<Event> parse(String requestBody, String signatureHeader,
-            String webhookEndpointSecret) {
-        if (isValidSignature(requestBody, signatureHeader, webhookEndpointSecret)) {
-            return WebhookParser.parse(requestBody);
-        } else {
-            throw new InvalidSignatureException();
-        }
+    public static List<Event> parse(String requestBody, String signatureHeader, String webhookEndpointSecret) {
+      if (isValidSignature(requestBody, signatureHeader, webhookEndpointSecret)) {
+          return WebhookParser.parse(requestBody);
+      } else {
+          throw new InvalidSignatureException();
+      }
     }
 
     /**
@@ -52,11 +52,10 @@ public class Webhook {
      *     as configured in your GoCardless Dashboard
      * @return whether the webhook's signature is valid
      */
-    public static boolean isValidSignature(String requestBody, String signatureHeader,
-            String webhookEndpointSecret) {
-        String computedSignature =
-                new HmacUtils(HmacAlgorithms.HMAC_SHA_256, webhookEndpointSecret)
-                        .hmacHex(requestBody);
+    public static boolean isValidSignature(String requestBody, String signatureHeader, String webhookEndpointSecret) {
+        String computedSignature = new HmacUtils(HmacAlgorithms.HMAC_SHA_256, webhookEndpointSecret).
+                hmacHex(requestBody);
+
         return MessageDigest.isEqual(signatureHeader.getBytes(), computedSignature.getBytes());
     }
 }

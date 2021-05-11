@@ -18,6 +18,7 @@ public abstract class IdempotentPostRequest<T> extends PostRequest<T> {
             return error.getReason().equals("idempotent_creation_conflict");
         }
     };
+
     private transient String idempotencyKey;
 
     protected IdempotentPostRequest(HttpClient httpClient) {
@@ -58,8 +59,11 @@ public abstract class IdempotentPostRequest<T> extends PostRequest<T> {
         } else {
             requestIdempotencyKey = this.idempotencyKey;
         }
-        return ImmutableMap.<String, String>builder().put("Idempotency-Key", requestIdempotencyKey)
-                .putAll(super.getHeaders()).build();
+
+        return ImmutableMap.<String, String>builder()
+            .put("Idempotency-Key", requestIdempotencyKey)
+            .putAll(super.getHeaders())
+            .build();
     }
 
     protected abstract GetRequest<T> handleConflict(HttpClient httpClient, String id);

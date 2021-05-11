@@ -13,8 +13,10 @@ public class HttpTestUtil {
     public static boolean jsonMatchesFixture(String actual, String fixturePath) throws IOException {
         JsonParser parser = new JsonParser();
         String expectedJson = Resources.toString(getResource(fixturePath), UTF_8);
+
         JsonElement result = parser.parse(actual);
         JsonElement expected = parser.parse(expectedJson);
+
         return result.equals(expected);
     }
 

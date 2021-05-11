@@ -13,8 +13,10 @@ final class GsonFactory {
     }
 
     static Gson build() {
-        return new GsonBuilder().setFieldNamingPolicy(LOWER_CASE_WITH_UNDERSCORES)
-                .addSerializationExclusionStrategy(new PathParamExclusionStrategy()).create();
+      return new GsonBuilder()
+              .setFieldNamingPolicy(LOWER_CASE_WITH_UNDERSCORES)
+              .addSerializationExclusionStrategy(new PathParamExclusionStrategy())
+              .create();
     }
 
     private static class PathParamExclusionStrategy implements ExclusionStrategy {

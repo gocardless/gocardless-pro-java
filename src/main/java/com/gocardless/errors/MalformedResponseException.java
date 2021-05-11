@@ -10,8 +10,8 @@ public class MalformedResponseException extends GoCardlessException {
     private final String responseBody;
 
     public MalformedResponseException(String responseBody) {
-        super("Malformed response received from server");
-        this.responseBody = responseBody;
+      super("Malformed response received from server");
+      this.responseBody = responseBody;
     }
 
     public String getResponseBody() {

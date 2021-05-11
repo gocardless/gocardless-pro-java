@@ -7,6 +7,7 @@ import com.google.common.collect.ImmutableList;
 
 public class ApiErrorResponse {
     private static final Joiner JOINER = Joiner.on(", ");
+
     private final String message;
     private final ErrorType type;
     private final String documentationUrl;
@@ -14,8 +15,12 @@ public class ApiErrorResponse {
     private final int code;
     private final List<ApiError> errors;
 
-    private ApiErrorResponse(String message, ErrorType type, String documentationUrl,
-            String requestId, int code, List<ApiError> errors) {
+    private ApiErrorResponse(String message,
+                             ErrorType type,
+                             String documentationUrl,
+                             String requestId,
+                             int code,
+                             List<ApiError> errors) {
         this.message = message;
         this.type = type;
         this.documentationUrl = documentationUrl;
@@ -48,6 +53,7 @@ public class ApiErrorResponse {
         if (errors == null) {
             return ImmutableList.of();
         }
+
         return ImmutableList.copyOf(errors);
     }
 

@@ -45,13 +45,14 @@ public class MockHttp extends ExternalResource {
         enqueueResponse(statusCode, fixturePath, ImmutableMap.<String, String>of());
     }
 
-    public void enqueueResponse(int statusCode, String fixturePath, Map<String, String> headers)
-            throws Exception {
+    public void enqueueResponse(int statusCode, String fixturePath, Map<String, String> headers) throws Exception {
         String body = Resources.toString(Resources.getResource(fixturePath), UTF_8);
         MockResponse response = new MockResponse().setBody(body).setResponseCode(statusCode);
+
         for (Map.Entry<String, String> header : headers.entrySet()) {
             response.setHeader(header.getKey(), header.getValue());
         }
+
         server.enqueue(response);
     }
 
@@ -67,24 +68,23 @@ public class MockHttp extends ExternalResource {
         assertRequestMade(method, path, fixturePath, ImmutableMap.<String, String>of());
     }
 
-    public void assertRequestMade(String method, String path, Map<String, String> headers)
-            throws Exception {
+    public void assertRequestMade(String method, String path, Map<String, String> headers) throws Exception {
         assertRequestMade(method, path, null, headers);
     }
 
-    public void assertRequestMade(String method, String path, String fixturePath,
-            Map<String, String> headers) throws Exception {
+    public void assertRequestMade(String method, String path, String fixturePath, Map<String, String> headers) throws Exception {
         RecordedRequest recordedRequest = server.takeRequest();
         assertThat(recordedRequest.getMethod()).isEqualTo(method);
         assertThat(recordedRequest.getPath()).isEqualTo(path);
+
         for (Map.Entry<String, String> header : headers.entrySet()) {
             assertThat(recordedRequest.getHeader(header.getKey())).isEqualTo(header.getValue());
         }
+
         if (fixturePath == null) {
             assertThat(recordedRequest.getBodySize()).isEqualTo(0);
         } else {
-            assertThat(jsonMatchesFixture(recordedRequest.getBody().readUtf8(), fixturePath))
-                    .isTrue();
+            assertThat(jsonMatchesFixture(recordedRequest.getBody().readUtf8(), fixturePath)).isTrue();
         }
     }
 
@@ -98,8 +98,8 @@ public class MockHttp extends ExternalResource {
     }
 
     public HttpClient client() {
-        GoCardlessClient client =
-                GoCardlessClient.newBuilder("token").withBaseUrl(getBaseUrl()).build();
+        GoCardlessClient client = GoCardlessClient.newBuilder("token").withBaseUrl(getBaseUrl()).build();
+
         return TestUtil.getHttpClient(client);
     }
 }
