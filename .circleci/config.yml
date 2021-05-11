@@ -1,8 +1,5 @@
 version: 2
 
-orbs:
-  circleci-maven-release-orb: sonatype-nexus-community/circleci-maven-release-orb@0.0.15
-
 references:
   test_library: &test_library
     run:
@@ -55,19 +52,4 @@ workflows:
       - test_library_jdk7
       - test_library_jdk8
       - test_library_jdk9
-
-  release-master:
-    jobs:
-      - approve-release:
-          type: approval
-          filters:
-            branches:
-              only: master
-      - circleci-maven-release-orb/run-maven-release:
-          requires:
-            - approve-release
-          ssh-fingerprints: "60:a1:dc:aa:6a:40:00:84:11:47:ca:e1:b7:73:fd:93"
-          filters:
-            branches:
-              only: master
 
