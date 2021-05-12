@@ -14,6 +14,12 @@ import java.util.Map;
 /**
  * Service class for working with payer authorisation resources.
  *
+ * <p class="warning">
+ * Payer Authorisations is deprecated in favour of
+ * <a href="https://developer.gocardless.com/getting-started/billing-requests/overview/"> Billing
+ * Requests</a>. Please consider using Billing Requests to build any future integrations.
+ * </p>
+ * 
  * Payer Authorisation resource acts as a wrapper for creating customer, bank account and mandate
  * details in a single request. PayerAuthorisation API enables the integrators to build their own
  * custom payment pages.
