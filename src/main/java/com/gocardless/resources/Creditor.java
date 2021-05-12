@@ -2,7 +2,6 @@ package com.gocardless.resources;
 
 import com.google.gson.annotations.SerializedName;
 import java.util.List;
-import java.util.Map;
 
 /**
  * Represents a creditor resource returned from the API.

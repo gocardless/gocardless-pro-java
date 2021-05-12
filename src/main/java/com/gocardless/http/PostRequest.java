@@ -1,9 +1,5 @@
 package com.gocardless.http;
 
-import com.google.common.collect.ImmutableMap;
-import java.io.Reader;
-import java.util.Map;
-
 /**
  * Base class for POST requests.
  *

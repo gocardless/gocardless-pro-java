@@ -3,7 +3,6 @@ package com.gocardless.http;
 import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.Maps;
 import com.squareup.okhttp.HttpUrl;
-import java.io.Reader;
 import java.util.Map;
 
 /**

@@ -3,8 +3,6 @@ package com.gocardless;
 import com.gocardless.errors.InvalidSignatureException;
 import com.gocardless.http.WebhookParser;
 import com.gocardless.resources.Event;
-import com.google.common.collect.ImmutableList;
-import com.google.gson.Gson;
 import java.security.MessageDigest;
 import java.util.List;
 import org.apache.commons.codec.digest.HmacAlgorithms;

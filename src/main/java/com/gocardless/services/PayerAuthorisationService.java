@@ -2,13 +2,8 @@ package com.gocardless.services;
 
 import com.gocardless.http.*;
 import com.gocardless.resources.PayerAuthorisation;
-import com.google.common.base.Joiner;
 import com.google.common.collect.ImmutableMap;
 import com.google.gson.annotations.SerializedName;
-import com.google.gson.reflect.TypeToken;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 /**

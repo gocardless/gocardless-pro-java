@@ -1,6 +1,5 @@
 package com.gocardless;
 
-import static com.gocardless.GoCardlessClient.Environment.SANDBOX;
 import static com.gocardless.services.MandateService.MandateListRequest.Status.ACTIVE;
 import static com.gocardless.services.MandateService.MandateListRequest.Status.FAILED;
 import static com.gocardless.services.SubscriptionService.SubscriptionCreateRequest.IntervalUnit.MONTHLY;

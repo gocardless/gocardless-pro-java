@@ -3,8 +3,6 @@ package com.gocardless.http;
 import static com.google.common.base.Charsets.UTF_8;
 import static com.google.common.io.Resources.getResource;
 
-import com.gocardless.GoCardlessClient;
-import com.google.common.base.Predicate;
 import com.google.common.io.Resources;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonParser;

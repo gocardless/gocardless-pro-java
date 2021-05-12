@@ -1,15 +1,11 @@
 package com.gocardless.http;
 
-import static com.google.common.base.Charsets.UTF_8;
 import static org.assertj.core.api.Assertions.assertThat;
 
 import com.gocardless.resources.Event;
 import com.google.common.collect.ImmutableList;
-import com.google.common.io.Resources;
 import java.io.IOException;
-import java.net.URL;
 import org.junit.Test;
-import org.junit.rules.ExpectedException;
 
 public class WebhookParserTest {
     @Test

@@ -7,7 +7,6 @@ import com.gocardless.errors.MalformedResponseException;
 import com.google.common.collect.ImmutableList;
 import com.google.gson.*;
 import com.google.gson.reflect.TypeToken;
-import java.io.Reader;
 import java.util.List;
 
 final class ResponseParser {

@@ -1,9 +1,5 @@
 package com.gocardless.resources;
 
-import com.google.gson.annotations.SerializedName;
-import java.util.List;
-import java.util.Map;
-
 /**
  * Represents a billing request flow resource returned from the API.
  *

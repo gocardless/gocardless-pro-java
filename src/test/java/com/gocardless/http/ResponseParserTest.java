@@ -10,7 +10,6 @@ import com.google.common.collect.ImmutableList;
 import com.google.common.io.Resources;
 import com.google.gson.reflect.TypeToken;
 import java.io.IOException;
-import java.io.Reader;
 import java.net.URL;
 import java.util.List;
 import org.junit.Before;

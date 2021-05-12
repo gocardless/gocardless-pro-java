@@ -2,8 +2,6 @@ package com.gocardless.http;
 
 import com.google.common.collect.ImmutableMap;
 import com.google.gson.reflect.TypeToken;
-import java.io.Reader;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 

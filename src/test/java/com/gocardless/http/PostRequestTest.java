@@ -4,8 +4,6 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 import com.gocardless.http.HttpTestUtil.DummyItem;
 import com.google.common.collect.ImmutableMap;
-import java.util.Map;
-import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
 

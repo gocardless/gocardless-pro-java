@@ -5,7 +5,6 @@ import static org.assertj.core.api.Assertions.assertThat;
 import com.gocardless.errors.InvalidSignatureException;
 import com.gocardless.resources.Event;
 import java.io.IOException;
-import java.net.URL;
 import java.util.List;
 import org.junit.Rule;
 import org.junit.Test;

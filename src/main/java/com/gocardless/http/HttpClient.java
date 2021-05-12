@@ -10,7 +10,6 @@ import com.google.common.collect.ImmutableMap;
 import com.google.gson.Gson;
 import com.squareup.okhttp.*;
 import java.io.IOException;
-import java.io.Reader;
 import java.util.Map;
 import java.util.concurrent.Callable;
 import java.util.concurrent.ExecutionException;

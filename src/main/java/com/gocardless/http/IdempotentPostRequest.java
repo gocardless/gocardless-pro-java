@@ -7,7 +7,6 @@ import com.google.common.base.Predicate;
 import com.google.common.base.Throwables;
 import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.Iterables;
-import java.util.Map;
 import java.util.UUID;
 
 public abstract class IdempotentPostRequest<T> extends PostRequest<T> {

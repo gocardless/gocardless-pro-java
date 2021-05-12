@@ -3,11 +3,8 @@ package com.gocardless.http;
 import static org.assertj.core.api.Assertions.assertThat;
 
 import com.gocardless.errors.InvalidApiUsageException;
-import com.gocardless.http.ApiResponse;
 import com.gocardless.http.HttpTestUtil.DummyItem;
 import com.google.common.collect.ImmutableMap;
-import java.util.Map;
-import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
