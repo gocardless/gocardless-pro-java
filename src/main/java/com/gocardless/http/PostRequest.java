@@ -1,5 +1,9 @@
 package com.gocardless.http;
 
+import com.google.common.collect.ImmutableMap;
+import java.io.Reader;
+import java.util.Map;
+
 /**
  * Base class for POST requests.
  *
@@ -24,8 +28,7 @@ public abstract class PostRequest<T> extends ApiRequest<T> {
     /**
      * Executes this request.
      *
-     * Returns a {@link com.gocardless.http.ApiResponse} that wraps the
-     * response entity.
+     * Returns a {@link com.gocardless.http.ApiResponse} that wraps the response entity.
      *
      * @throws com.gocardless.GoCardlessException
      */

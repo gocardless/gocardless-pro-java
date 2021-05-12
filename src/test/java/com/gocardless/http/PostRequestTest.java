@@ -1,13 +1,13 @@
 package com.gocardless.http;
 
+import static org.assertj.core.api.Assertions.assertThat;
+
 import com.gocardless.http.HttpTestUtil.DummyItem;
-
 import com.google.common.collect.ImmutableMap;
-
+import java.util.Map;
+import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
-
-import static org.assertj.core.api.Assertions.assertThat;
 
 public class PostRequestTest {
     @Rule
@@ -16,57 +16,46 @@ public class PostRequestTest {
     @Test
     public void shouldPerformPostRequest() throws Exception {
         http.enqueueResponse(200, "fixtures/single.json");
-
         DummyItem result = new DummyPostRequest().execute();
-
         assertThat(result.stringField).isEqualTo("foo");
         assertThat(result.intField).isEqualTo(123);
-
         http.assertRequestMade("POST", "/dummy", ImmutableMap.of("Authorization", "Bearer token"));
     }
 
     @Test
     public void shouldPerformPostRequestWithBody() throws Exception {
         http.enqueueResponse(200, "fixtures/single.json");
-
         DummyItem result = new DummyPostRequestWithBody().execute();
-
         assertThat(result.stringField).isEqualTo("foo");
         assertThat(result.intField).isEqualTo(123);
-
-        http.assertRequestMade("POST", "/dummy", "fixtures/single.json", ImmutableMap.of("Authorization", "Bearer token"));
+        http.assertRequestMade("POST", "/dummy", "fixtures/single.json",
+                ImmutableMap.of("Authorization", "Bearer token"));
     }
 
     @Test
     public void shouldPerformWrappedPostRequest() throws Exception {
         http.enqueueResponse(200, "fixtures/single.json", ImmutableMap.of("foo", "bar"));
-
-        ApiResponse<DummyItem> result = new DummyPostRequest()
-            .withHeader("Accept-Language", "fr-FR")
-            .executeWrapped();
-
+        ApiResponse<DummyItem> result =
+                new DummyPostRequest().withHeader("Accept-Language", "fr-FR").executeWrapped();
         assertThat(result.getStatusCode()).isEqualTo(200);
         assertThat(result.getHeaders().get("foo")).containsExactly("bar");
         assertThat(result.getResource().stringField).isEqualTo("foo");
         assertThat(result.getResource().intField).isEqualTo(123);
-
-        http.assertRequestMade("POST", "/dummy", ImmutableMap.of("Authorization", "Bearer token", "Accept-Language", "fr-FR"));
+        http.assertRequestMade("POST", "/dummy",
+                ImmutableMap.of("Authorization", "Bearer token", "Accept-Language", "fr-FR"));
     }
 
     @Test
     public void shouldPerformWrappedPostRequestWithBody() throws Exception {
         http.enqueueResponse(200, "fixtures/single.json", ImmutableMap.of("foo", "bar"));
-
         ApiResponse<DummyItem> result = new DummyPostRequestWithBody()
-            .withHeader("Accept-Language", "fr-FR")
-            .executeWrapped();
-
+                .withHeader("Accept-Language", "fr-FR").executeWrapped();
         assertThat(result.getStatusCode()).isEqualTo(200);
         assertThat(result.getHeaders().get("foo")).containsExactly("bar");
         assertThat(result.getResource().stringField).isEqualTo("foo");
         assertThat(result.getResource().intField).isEqualTo(123);
-
-        http.assertRequestMade("POST", "/dummy", "fixtures/single.json", ImmutableMap.of("Authorization", "Bearer token", "Accept-Language", "fr-FR"));
+        http.assertRequestMade("POST", "/dummy", "fixtures/single.json",
+                ImmutableMap.of("Authorization", "Bearer token", "Accept-Language", "fr-FR"));
     }
 
     private class DummyPostRequest extends PostRequest<DummyItem> {

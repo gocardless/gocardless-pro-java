@@ -1,11 +1,11 @@
 package com.gocardless.http;
 
+import static com.google.gson.FieldNamingPolicy.LOWER_CASE_WITH_UNDERSCORES;
+
 import com.google.gson.ExclusionStrategy;
 import com.google.gson.FieldAttributes;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-
-import static com.google.gson.FieldNamingPolicy.LOWER_CASE_WITH_UNDERSCORES;
 
 final class GsonFactory {
     private GsonFactory() {
@@ -13,10 +13,8 @@ final class GsonFactory {
     }
 
     static Gson build() {
-      return new GsonBuilder()
-              .setFieldNamingPolicy(LOWER_CASE_WITH_UNDERSCORES)
-              .addSerializationExclusionStrategy(new PathParamExclusionStrategy())
-              .create();
+        return new GsonBuilder().setFieldNamingPolicy(LOWER_CASE_WITH_UNDERSCORES)
+                .addSerializationExclusionStrategy(new PathParamExclusionStrategy()).create();
     }
 
     private static class PathParamExclusionStrategy implements ExclusionStrategy {

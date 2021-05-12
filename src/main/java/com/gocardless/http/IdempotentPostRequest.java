@@ -1,15 +1,14 @@
 package com.gocardless.http;
 
-import java.util.UUID;
-
 import com.gocardless.errors.ApiError;
 import com.gocardless.errors.InvalidStateException;
-
 import com.google.common.base.Optional;
 import com.google.common.base.Predicate;
 import com.google.common.base.Throwables;
 import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.Iterables;
+import java.util.Map;
+import java.util.UUID;
 
 public abstract class IdempotentPostRequest<T> extends PostRequest<T> {
     private static final Predicate<ApiError> CONFLICT_ERROR = new Predicate<ApiError>() {
@@ -18,7 +17,6 @@ public abstract class IdempotentPostRequest<T> extends PostRequest<T> {
             return error.getReason().equals("idempotent_creation_conflict");
         }
     };
-
     private transient String idempotencyKey;
 
     protected IdempotentPostRequest(HttpClient httpClient) {
@@ -59,11 +57,8 @@ public abstract class IdempotentPostRequest<T> extends PostRequest<T> {
         } else {
             requestIdempotencyKey = this.idempotencyKey;
         }
-
-        return ImmutableMap.<String, String>builder()
-            .put("Idempotency-Key", requestIdempotencyKey)
-            .putAll(super.getHeaders())
-            .build();
+        return ImmutableMap.<String, String>builder().put("Idempotency-Key", requestIdempotencyKey)
+                .putAll(super.getHeaders()).build();
     }
 
     protected abstract GetRequest<T> handleConflict(HttpClient httpClient, String id);

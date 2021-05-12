@@ -1,19 +1,16 @@
 package com.gocardless.errors;
 
+import com.gocardless.GoCardlessException;
 import java.util.List;
 
-import com.gocardless.GoCardlessException;
-
 /**
- * Base class for exceptions that are thrown as a result of error responses from
- * the API.
+ * Base class for exceptions that are thrown as a result of error responses from the API.
  */
 public class GoCardlessApiException extends GoCardlessException {
     private final ApiErrorResponse error;
 
     GoCardlessApiException(ApiErrorResponse error) {
         super(error.toString());
-
         this.error = error;
     }
 
@@ -39,8 +36,8 @@ public class GoCardlessApiException extends GoCardlessException {
     }
 
     /**
-     * Returns the ID of the request.  This can be used to help the support
-     * team find your error quickly.
+     * Returns the ID of the request. This can be used to help the support team find your error
+     * quickly.
      */
     public String getRequestId() {
         return error.getRequestId();

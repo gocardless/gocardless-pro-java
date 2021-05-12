@@ -1,10 +1,9 @@
 package com.gocardless.http;
 
-import java.util.List;
-import java.util.Map;
-
 import com.google.common.collect.ImmutableListMultimap;
 import com.google.common.collect.Multimap;
+import java.util.List;
+import java.util.Map;
 
 /**
  * Base class for API responses.
@@ -35,11 +34,10 @@ public class ApiResponse<T> {
     }
 
     private static Multimap<String, String> buildHeaderMap(Map<String, List<String>> headers) {
-      ImmutableListMultimap.Builder<String, String> builder = ImmutableListMultimap.builder();
-      for (Map.Entry<String, List<String>> entry : headers.entrySet()) {
-          builder.putAll(entry.getKey(), entry.getValue());
-      }
-
-      return builder.build();
+        ImmutableListMultimap.Builder<String, String> builder = ImmutableListMultimap.builder();
+        for (Map.Entry<String, List<String>> entry : headers.entrySet()) {
+            builder.putAll(entry.getKey(), entry.getValue());
+        }
+        return builder.build();
     }
 }
