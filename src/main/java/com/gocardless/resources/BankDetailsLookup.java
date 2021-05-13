@@ -1,8 +1,7 @@
 package com.gocardless.resources;
 
-import java.util.List;
-
 import com.google.gson.annotations.SerializedName;
+import java.util.List;
 
 /**
  * Represents a bank details lookup resource returned from the API.
@@ -19,8 +18,8 @@ public class BankDetailsLookup {
     private String bic;
 
     /**
-     * Array of [schemes](#mandates_scheme) supported for this bank account. This will be an empty array
-     * if the bank account is not reachable by any schemes.
+     * Array of [schemes](#mandates_scheme) supported for this bank account. This will be an empty
+     * array if the bank account is not reachable by any schemes.
      */
     public List<AvailableDebitScheme> getAvailableDebitSchemes() {
         return availableDebitSchemes;
@@ -36,9 +35,11 @@ public class BankDetailsLookup {
     /**
      * ISO 9362 SWIFT BIC of the bank with which the account is held.
      * 
-     * <p class="notice">Even if no BIC is returned for an account, GoCardless may still be able to
-     * collect payments from it - you should refer to the `available_debit_schemes` attribute to
-     * determine reachability.</p>
+     * <p class="notice">
+     * Even if no BIC is returned for an account, GoCardless may still be able to collect payments
+     * from it - you should refer to the `available_debit_schemes` attribute to determine
+     * reachability.
+     * </p>
      */
     public String getBic() {
         return bic;

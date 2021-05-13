@@ -1,17 +1,15 @@
 package com.gocardless.services;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
 import com.gocardless.http.*;
 import com.gocardless.resources.Subscription;
-
 import com.google.common.base.Joiner;
 import com.google.common.collect.ImmutableMap;
 import com.google.gson.annotations.SerializedName;
 import com.google.gson.reflect.TypeToken;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 /**
  * Service class for working with subscription resources.
@@ -22,62 +20,41 @@ import com.google.gson.reflect.TypeToken;
  * 
  * The following rules apply when specifying recurrence:
  * 
- * - The first payment must be charged within 1 year.
- * - If `day_of_month` and `start_date` are not provided `start_date` will be the
- * [mandate](#core-endpoints-mandates)'s `next_possible_charge_date` and the subscription will then
- * recur based on the `interval` & `interval_unit`
- * - If `month` or `day_of_month` are present the following validations apply:
+ * - The first payment must be charged within 1 year. - If `day_of_month` and `start_date` are not
+ * provided `start_date` will be the [mandate](#core-endpoints-mandates)'s
+ * `next_possible_charge_date` and the subscription will then recur based on the `interval` &
+ * `interval_unit` - If `month` or `day_of_month` are present the following validations apply:
  * 
- * | __interval_unit__ | __month__                                      | __day_of_month__           
- *                |
- * | :---------------- | :--------------------------------------------- |
- * :----------------------------------------- |
- * | yearly            | optional (required if `day_of_month` provided) | optional (invalid if
- * `month` not provided) |
- * | monthly           | invalid                                        | optional                   
- *                |
- * | weekly            | invalid                                        | invalid                    
- *                |
+ * | __interval_unit__ | __month__ | __day_of_month__ | | :---------------- |
+ * :--------------------------------------------- | :----------------------------------------- | |
+ * yearly | optional (required if `day_of_month` provided) | optional (invalid if `month` not
+ * provided) | | monthly | invalid | optional | | weekly | invalid | invalid |
  * 
  * Examples:
  * 
- * | __interval_unit__ | __interval__ | __month__ | __day_of_month__ | valid?                        
- *                     |
- * | :---------------- | :----------- | :-------- | :--------------- |
- * :------------------------------------------------- |
- * | yearly            | 1            | january   | -1               | valid                         
- *                     |
- * | monthly           | 6            |           |                  | valid                         
- *                     |
- * | monthly           | 6            |           | 12               | valid                         
- *                     |
- * | weekly            | 2            |           |                  | valid                         
- *                     |
- * | yearly            | 1            | march     |                  | invalid - missing
- * `day_of_month`                   |
- * | yearly            | 1            |           | 2                | invalid - missing `month`     
- *                     |
- * | monthly           | 6            | august    | 12               | invalid - `month` must be
- * blank                    |
- * | weekly            | 2            | october   | 10               | invalid - `month` and
- * `day_of_month` must be blank |
+ * | __interval_unit__ | __interval__ | __month__ | __day_of_month__ | valid? | | :----------------
+ * | :----------- | :-------- | :--------------- |
+ * :------------------------------------------------- | | yearly | 1 | january | -1 | valid | |
+ * monthly | 6 | | | valid | | monthly | 6 | | 12 | valid | | weekly | 2 | | | valid | | yearly | 1
+ * | march | | invalid - missing `day_of_month` | | yearly | 1 | | 2 | invalid - missing `month` | |
+ * monthly | 6 | august | 12 | invalid - `month` must be blank | | weekly | 2 | october | 10 |
+ * invalid - `month` and `day_of_month` must be blank |
  * 
  * ### Rolling dates
  * 
  * When a charge date falls on a non-business day, one of two things will happen:
  * 
  * - if the recurrence rule specified `-1` as the `day_of_month`, the charge date will be rolled
- * __backwards__ to the previous business day (i.e., the last working day of the month).
- * - otherwise the charge date will be rolled __forwards__ to the next business day.
+ * __backwards__ to the previous business day (i.e., the last working day of the month). - otherwise
+ * the charge date will be rolled __forwards__ to the next business day.
  * 
  */
 public class SubscriptionService {
     private final HttpClient httpClient;
 
     /**
-     * Constructor.  Users of this library should have no need to call this - an instance
-     * of this class can be obtained by calling
-      {@link com.gocardless.GoCardlessClient#subscriptions() }.
+     * Constructor. Users of this library should have no need to call this - an instance of this
+     * class can be obtained by calling {@link com.gocardless.GoCardlessClient#subscriptions() }.
      */
     public SubscriptionService(HttpClient httpClient) {
         this.httpClient = httpClient;
@@ -94,7 +71,8 @@ public class SubscriptionService {
      * Returns a [cursor-paginated](#api-usage-cursor-pagination) list of your subscriptions.
      */
     public SubscriptionListRequest<ListResponse<Subscription>> list() {
-        return new SubscriptionListRequest<>(httpClient, ListRequest.<Subscription>pagingExecutor());
+        return new SubscriptionListRequest<>(httpClient,
+                ListRequest.<Subscription>pagingExecutor());
     }
 
     public SubscriptionListRequest<Iterable<Subscription>> all() {
@@ -123,12 +101,12 @@ public class SubscriptionService {
      * - `mandate_payments_require_approval` if the amount is being changed and the mandate requires
      * approval.
      * 
-     * - `number_of_subscription_amendments_exceeded` error if the subscription amount has already been
-     * changed 10 times.
+     * - `number_of_subscription_amendments_exceeded` error if the subscription amount has already
+     * been changed 10 times.
      * 
-     * - `forbidden` if the amount is being changed, and the subscription was created by an app and you
-     * are not authenticated as that app, or if the subscription was not created by an app and you are
-     * authenticated as an app
+     * - `forbidden` if the amount is being changed, and the subscription was created by an app and
+     * you are not authenticated as that app, or if the subscription was not created by an app and
+     * you are authenticated as an app
      * 
      * - `resource_created_by_another_app` if the app fee is being changed, and the subscription was
      * created by an app other than the app you are authenticated as
@@ -139,38 +117,38 @@ public class SubscriptionService {
     }
 
     /**
-     * Pause a subscription object.
-     * No payments will be created until it is resumed.
+     * Pause a subscription object. No payments will be created until it is resumed.
      * 
-     * This can only be used when a subscription collecting a fixed number of payments (created using
-     * `count`)
-     * or when they continue forever (created without `count` or `end_date`)
+     * This can only be used when a subscription is collecting a fixed number of payments (created
+     * using `count`), when they continue forever (created without `count` or `end_date`) or the
+     * subscription is already paused for a number of cycles.
      * 
      * When `pause_cycles` is omitted the subscription is paused until the [resume
-     * endpoint](#subscriptions-resume-a-subscription) is called.
-     * If the subscription is collecting a fixed number of payments, `end_date` will be set to `null`.
-     * When paused indefinitely, `upcoming_payments` will be empty.
+     * endpoint](#subscriptions-resume-a-subscription) is called. If the subscription is collecting
+     * a fixed number of payments, `end_date` will be set to `null`. When paused indefinitely,
+     * `upcoming_payments` will be empty.
      * 
      * When `pause_cycles` is provided the subscription will be paused for the number of cycles
-     * requested.
-     * If the subscription is collecting a fixed number of payments, `end_date` will be set to a new
-     * value.
-     * When paused for a number of cycles, `upcoming_payments` will still contain the upcoming charge
-     * dates.
+     * requested. If the subscription is collecting a fixed number of payments, `end_date` will be
+     * set to a new value. When paused for a number of cycles, `upcoming_payments` will still
+     * contain the upcoming charge dates.
      * 
      * This fails with:
      * 
-     * - `forbidden` if the subscription was created by an app and you are not authenticated as that app,
-     * or if the subscription was not created by an app and you are authenticated as an app
+     * - `forbidden` if the subscription was created by an app and you are not authenticated as that
+     * app, or if the subscription was not created by an app and you are authenticated as an app
      * 
      * - `validation_failed` if invalid data is provided when attempting to pause a subscription.
      * 
-     * - `subscription_not_active` if the subscription is no longer active.
+     * - `subscription_paused_cannot_update_cycles` if the subscription is already paused for a
+     * number of cycles and the request provides a value for `pause_cycle`.
+     * 
+     * - `subscription_cannot_be_paused` if the subscription cannot be paused.
      * 
      * - `subscription_already_ended` if the subscription has taken all payments.
      * 
-     * - `pause_cycles_must_be_greater_than_or_equal_to` if the provided value for `pause_cycles` cannot
-     * be satisfied.
+     * - `pause_cycles_must_be_greater_than_or_equal_to` if the provided value for `pause_cycles`
+     * cannot be satisfied.
      * 
      */
     public SubscriptionPauseRequest pause(String identity) {
@@ -178,15 +156,14 @@ public class SubscriptionService {
     }
 
     /**
-     * Resume a subscription object.
-     * Payments will start to be created again based on the subscriptions recurrence rules.
-     * The `charge_date` on the next payment will be the same as the subscriptions
-     * `earliest_charge_date_after_resume`
+     * Resume a subscription object. Payments will start to be created again based on the
+     * subscriptions recurrence rules. The `charge_date` on the next payment will be the same as the
+     * subscriptions `earliest_charge_date_after_resume`
      * 
      * This fails with:
      * 
-     * - `forbidden` if the subscription was created by an app and you are not authenticated as that app,
-     * or if the subscription was not created by an app and you are authenticated as an app
+     * - `forbidden` if the subscription was created by an app and you are not authenticated as that
+     * app, or if the subscription was not created by an app and you are authenticated as an app
      * 
      * - `validation_failed` if invalid data is provided when attempting to resume a subscription.
      * 
@@ -213,7 +190,8 @@ public class SubscriptionService {
      *
      * Creates a new subscription object
      */
-    public static final class SubscriptionCreateRequest extends IdempotentPostRequest<Subscription> {
+    public static final class SubscriptionCreateRequest
+            extends IdempotentPostRequest<Subscription> {
         private Integer amount;
         private Integer appFee;
         private Integer count;
@@ -239,9 +217,9 @@ public class SubscriptionService {
         }
 
         /**
-         * The amount to be deducted from each payment as an app fee, to be paid to the partner integration
-         * which created the subscription, in the lowest denomination for the currency (e.g. pence in GBP,
-         * cents in EUR).
+         * The amount to be deducted from each payment as an app fee, to be paid to the partner
+         * integration which created the subscription, in the lowest denomination for the currency
+         * (e.g. pence in GBP, cents in EUR).
          */
         public SubscriptionCreateRequest withAppFee(Integer appFee) {
             this.appFee = appFee;
@@ -257,8 +235,8 @@ public class SubscriptionService {
         }
 
         /**
-         * [ISO 4217](http://en.wikipedia.org/wiki/ISO_4217#Active_codes) currency code. Currently "AUD",
-         * "CAD", "DKK", "EUR", "GBP", "NZD", "SEK" and "USD" are supported.
+         * [ISO 4217](http://en.wikipedia.org/wiki/ISO_4217#Active_codes) currency code. Currently
+         * "AUD", "CAD", "DKK", "EUR", "GBP", "NZD", "SEK" and "USD" are supported.
          */
         public SubscriptionCreateRequest withCurrency(String currency) {
             this.currency = currency;
@@ -266,8 +244,8 @@ public class SubscriptionService {
         }
 
         /**
-         * As per RFC 2445. The day of the month to charge customers on. `1`-`28` or `-1` to indicate the
-         * last day of the month.
+         * As per RFC 2445. The day of the month to charge customers on. `1`-`28` or `-1` to
+         * indicate the last day of the month.
          */
         public SubscriptionCreateRequest withDayOfMonth(Integer dayOfMonth) {
             this.dayOfMonth = dayOfMonth;
@@ -275,12 +253,13 @@ public class SubscriptionService {
         }
 
         /**
-         * Date on or after which no further payments should be created.
-         * 
-         * If this field is blank and `count` is not specified, the subscription will continue forever.
-         * 
-         * <p class="deprecated-notice"><strong>Deprecated</strong>: This field will be removed in a future
-         * API version. Use `count` to specify a number of payments instead.</p>
+         * Date on or after which no further payments should be created. <br />
+         * If this field is blank and `count` is not specified, the subscription will continue
+         * forever. <br />
+         * <p class="deprecated-notice">
+         * <strong>Deprecated</strong>: This field will be removed in a future API version. Use
+         * `count` to specify a number of payments instead.
+         * </p>
          */
         public SubscriptionCreateRequest withEndDate(String endDate) {
             this.endDate = endDate;
@@ -288,8 +267,8 @@ public class SubscriptionService {
         }
 
         /**
-         * Number of `interval_units` between customer charge dates. Must be greater than or equal to `1`.
-         * Must result in at least one charge date per year. Defaults to `1`.
+         * Number of `interval_units` between customer charge dates. Must be greater than or equal
+         * to `1`. Must result in at least one charge date per year. Defaults to `1`.
          */
         public SubscriptionCreateRequest withInterval(Integer interval) {
             this.interval = interval;
@@ -310,8 +289,8 @@ public class SubscriptionService {
         }
 
         /**
-         * ID of the associated [mandate](#core-endpoints-mandates) which the subscription will create
-         * payments against.
+         * ID of the associated [mandate](#core-endpoints-mandates) which the subscription will
+         * create payments against.
          */
         public SubscriptionCreateRequest withLinksMandate(String mandate) {
             if (links == null) {
@@ -322,8 +301,8 @@ public class SubscriptionService {
         }
 
         /**
-         * Key-value store of custom data. Up to 3 keys are permitted, with key names up to 50 characters and
-         * values up to 500 characters.
+         * Key-value store of custom data. Up to 3 keys are permitted, with key names up to 50
+         * characters and values up to 500 characters.
          */
         public SubscriptionCreateRequest withMetadata(Map<String, String> metadata) {
             this.metadata = metadata;
@@ -331,8 +310,8 @@ public class SubscriptionService {
         }
 
         /**
-         * Key-value store of custom data. Up to 3 keys are permitted, with key names up to 50 characters and
-         * values up to 500 characters.
+         * Key-value store of custom data. Up to 3 keys are permitted, with key names up to 50
+         * characters and values up to 500 characters.
          */
         public SubscriptionCreateRequest withMetadata(String key, String value) {
             if (metadata == null) {
@@ -343,8 +322,8 @@ public class SubscriptionService {
         }
 
         /**
-         * Name of the month on which to charge a customer. Must be lowercase. Only applies
-         * when the interval_unit is `yearly`.
+         * Name of the month on which to charge a customer. Must be lowercase. Only applies when the
+         * interval_unit is `yearly`.
          * 
          */
         public SubscriptionCreateRequest withMonth(Month month) {
@@ -353,8 +332,8 @@ public class SubscriptionService {
         }
 
         /**
-         * Optional name for the subscription. This will be set as the description on each payment created.
-         * Must not exceed 255 characters.
+         * Optional name for the subscription. This will be set as the description on each payment
+         * created. Must not exceed 255 characters.
          */
         public SubscriptionCreateRequest withName(String name) {
             this.name = name;
@@ -362,12 +341,13 @@ public class SubscriptionService {
         }
 
         /**
-         * An optional payment reference. This will be set as the reference on each payment
-         * created and will appear on your customer's bank statement. See the documentation for
-         * the [create payment endpoint](#payments-create-a-payment) for more details.
-         * 
-         * <p class="restricted-notice"><strong>Restricted</strong>: You need your own Service User Number to
-         * specify a payment reference for Bacs payments.</p>
+         * An optional payment reference. This will be set as the reference on each payment created
+         * and will appear on your customer's bank statement. See the documentation for the [create
+         * payment endpoint](#payments-create-a-payment) for more details. <br />
+         * <p class="restricted-notice">
+         * <strong>Restricted</strong>: You need your own Service User Number to specify a payment
+         * reference for Bacs payments.
+         * </p>
          */
         public SubscriptionCreateRequest withPaymentReference(String paymentReference) {
             this.paymentReference = paymentReference;
@@ -385,8 +365,10 @@ public class SubscriptionService {
 
         /**
          * The date on which the first payment should be charged. Must be on or after the
-         * [mandate](#core-endpoints-mandates)'s `next_possible_charge_date`. When blank, this will be set as
-         * the mandate's `next_possible_charge_date`.
+         * [mandate](#core-endpoints-mandates)'s `next_possible_charge_date`. When left blank and
+         * `month` or `day_of_month` are provided, this will be set to the date of the first
+         * payment. If created without `month` or `day_of_month` this will be set as the mandate's
+         * `next_possible_charge_date`
          */
         public SubscriptionCreateRequest withStartDate(String startDate) {
             this.startDate = startDate;
@@ -441,6 +423,7 @@ public class SubscriptionService {
             WEEKLY, @SerializedName("monthly")
             MONTHLY, @SerializedName("yearly")
             YEARLY;
+
             @Override
             public String toString() {
                 return name().toLowerCase();
@@ -461,6 +444,7 @@ public class SubscriptionService {
             OCTOBER, @SerializedName("november")
             NOVEMBER, @SerializedName("december")
             DECEMBER;
+
             @Override
             public String toString() {
                 return name().toLowerCase();
@@ -471,8 +455,8 @@ public class SubscriptionService {
             private String mandate;
 
             /**
-             * ID of the associated [mandate](#core-endpoints-mandates) which the subscription will create
-             * payments against.
+             * ID of the associated [mandate](#core-endpoints-mandates) which the subscription will
+             * create payments against.
              */
             public Links withMandate(String mandate) {
                 this.mandate = mandate;
@@ -574,8 +558,8 @@ public class SubscriptionService {
         }
 
         /**
-         * Unique identifier, beginning with "MD". Note that this prefix may not apply to mandates created
-         * before 2016.
+         * Unique identifier, beginning with "MD". Note that this prefix may not apply to mandates
+         * created before 2016.
          */
         public SubscriptionListRequest<S> withMandate(String mandate) {
             this.mandate = mandate;
@@ -583,7 +567,16 @@ public class SubscriptionService {
         }
 
         /**
-         * At most four valid status values
+         * Upto 5 of:
+         * <ul>
+         * <li>`pending_customer_approval`</li>
+         * <li>`customer_approval_denied`</li>
+         * <li>`active`</li>
+         * <li>`finished`</li>
+         * <li>`cancelled`</li>
+         * <li>`paused`</li>
+         * </ul>
+         * Omit entirely to include subscriptions in all states.
          */
         public SubscriptionListRequest<S> withStatus(List<String> status) {
             this.status = status;
@@ -591,7 +584,16 @@ public class SubscriptionService {
         }
 
         /**
-         * At most four valid status values
+         * Upto 5 of:
+         * <ul>
+         * <li>`pending_customer_approval`</li>
+         * <li>`customer_approval_denied`</li>
+         * <li>`active`</li>
+         * <li>`finished`</li>
+         * <li>`cancelled`</li>
+         * <li>`paused`</li>
+         * </ul>
+         * Omit entirely to include subscriptions in all states.
          */
         public SubscriptionListRequest<S> withStatus(String status) {
             if (this.status == null) {
@@ -760,12 +762,12 @@ public class SubscriptionService {
      * - `mandate_payments_require_approval` if the amount is being changed and the mandate requires
      * approval.
      * 
-     * - `number_of_subscription_amendments_exceeded` error if the subscription amount has already been
-     * changed 10 times.
+     * - `number_of_subscription_amendments_exceeded` error if the subscription amount has already
+     * been changed 10 times.
      * 
-     * - `forbidden` if the amount is being changed, and the subscription was created by an app and you
-     * are not authenticated as that app, or if the subscription was not created by an app and you are
-     * authenticated as an app
+     * - `forbidden` if the amount is being changed, and the subscription was created by an app and
+     * you are not authenticated as that app, or if the subscription was not created by an app and
+     * you are authenticated as an app
      * 
      * - `resource_created_by_another_app` if the app fee is being changed, and the subscription was
      * created by an app other than the app you are authenticated as
@@ -790,9 +792,9 @@ public class SubscriptionService {
         }
 
         /**
-         * The amount to be deducted from each payment as an app fee, to be paid to the partner integration
-         * which created the subscription, in the lowest denomination for the currency (e.g. pence in GBP,
-         * cents in EUR).
+         * The amount to be deducted from each payment as an app fee, to be paid to the partner
+         * integration which created the subscription, in the lowest denomination for the currency
+         * (e.g. pence in GBP, cents in EUR).
          */
         public SubscriptionUpdateRequest withAppFee(Integer appFee) {
             this.appFee = appFee;
@@ -800,8 +802,8 @@ public class SubscriptionService {
         }
 
         /**
-         * Key-value store of custom data. Up to 3 keys are permitted, with key names up to 50 characters and
-         * values up to 500 characters.
+         * Key-value store of custom data. Up to 3 keys are permitted, with key names up to 50
+         * characters and values up to 500 characters.
          */
         public SubscriptionUpdateRequest withMetadata(Map<String, String> metadata) {
             this.metadata = metadata;
@@ -809,8 +811,8 @@ public class SubscriptionService {
         }
 
         /**
-         * Key-value store of custom data. Up to 3 keys are permitted, with key names up to 50 characters and
-         * values up to 500 characters.
+         * Key-value store of custom data. Up to 3 keys are permitted, with key names up to 50
+         * characters and values up to 500 characters.
          */
         public SubscriptionUpdateRequest withMetadata(String key, String value) {
             if (metadata == null) {
@@ -821,8 +823,8 @@ public class SubscriptionService {
         }
 
         /**
-         * Optional name for the subscription. This will be set as the description on each payment created.
-         * Must not exceed 255 characters.
+         * Optional name for the subscription. This will be set as the description on each payment
+         * created. Must not exceed 255 characters.
          */
         public SubscriptionUpdateRequest withName(String name) {
             this.name = name;
@@ -830,12 +832,13 @@ public class SubscriptionService {
         }
 
         /**
-         * An optional payment reference. This will be set as the reference on each payment
-         * created and will appear on your customer's bank statement. See the documentation for
-         * the [create payment endpoint](#payments-create-a-payment) for more details.
-         * 
-         * <p class="restricted-notice"><strong>Restricted</strong>: You need your own Service User Number to
-         * specify a payment reference for Bacs payments.</p>
+         * An optional payment reference. This will be set as the reference on each payment created
+         * and will appear on your customer's bank statement. See the documentation for the [create
+         * payment endpoint](#payments-create-a-payment) for more details. <br />
+         * <p class="restricted-notice">
+         * <strong>Restricted</strong>: You need your own Service User Number to specify a payment
+         * reference for Bacs payments.
+         * </p>
          */
         public SubscriptionUpdateRequest withPaymentReference(String paymentReference) {
             this.paymentReference = paymentReference;
@@ -892,38 +895,38 @@ public class SubscriptionService {
     /**
      * Request class for {@link SubscriptionService#pause }.
      *
-     * Pause a subscription object.
-     * No payments will be created until it is resumed.
+     * Pause a subscription object. No payments will be created until it is resumed.
      * 
-     * This can only be used when a subscription collecting a fixed number of payments (created using
-     * `count`)
-     * or when they continue forever (created without `count` or `end_date`)
+     * This can only be used when a subscription is collecting a fixed number of payments (created
+     * using `count`), when they continue forever (created without `count` or `end_date`) or the
+     * subscription is already paused for a number of cycles.
      * 
      * When `pause_cycles` is omitted the subscription is paused until the [resume
-     * endpoint](#subscriptions-resume-a-subscription) is called.
-     * If the subscription is collecting a fixed number of payments, `end_date` will be set to `null`.
-     * When paused indefinitely, `upcoming_payments` will be empty.
+     * endpoint](#subscriptions-resume-a-subscription) is called. If the subscription is collecting
+     * a fixed number of payments, `end_date` will be set to `null`. When paused indefinitely,
+     * `upcoming_payments` will be empty.
      * 
      * When `pause_cycles` is provided the subscription will be paused for the number of cycles
-     * requested.
-     * If the subscription is collecting a fixed number of payments, `end_date` will be set to a new
-     * value.
-     * When paused for a number of cycles, `upcoming_payments` will still contain the upcoming charge
-     * dates.
+     * requested. If the subscription is collecting a fixed number of payments, `end_date` will be
+     * set to a new value. When paused for a number of cycles, `upcoming_payments` will still
+     * contain the upcoming charge dates.
      * 
      * This fails with:
      * 
-     * - `forbidden` if the subscription was created by an app and you are not authenticated as that app,
-     * or if the subscription was not created by an app and you are authenticated as an app
+     * - `forbidden` if the subscription was created by an app and you are not authenticated as that
+     * app, or if the subscription was not created by an app and you are authenticated as an app
      * 
      * - `validation_failed` if invalid data is provided when attempting to pause a subscription.
      * 
-     * - `subscription_not_active` if the subscription is no longer active.
+     * - `subscription_paused_cannot_update_cycles` if the subscription is already paused for a
+     * number of cycles and the request provides a value for `pause_cycle`.
+     * 
+     * - `subscription_cannot_be_paused` if the subscription cannot be paused.
      * 
      * - `subscription_already_ended` if the subscription has taken all payments.
      * 
-     * - `pause_cycles_must_be_greater_than_or_equal_to` if the provided value for `pause_cycles` cannot
-     * be satisfied.
+     * - `pause_cycles_must_be_greater_than_or_equal_to` if the provided value for `pause_cycles`
+     * cannot be satisfied.
      * 
      */
     public static final class SubscriptionPauseRequest extends PostRequest<Subscription> {
@@ -933,8 +936,8 @@ public class SubscriptionService {
         private Integer pauseCycles;
 
         /**
-         * Key-value store of custom data. Up to 3 keys are permitted, with key names up to 50 characters and
-         * values up to 500 characters.
+         * Key-value store of custom data. Up to 3 keys are permitted, with key names up to 50
+         * characters and values up to 500 characters.
          */
         public SubscriptionPauseRequest withMetadata(Map<String, String> metadata) {
             this.metadata = metadata;
@@ -942,8 +945,8 @@ public class SubscriptionService {
         }
 
         /**
-         * Key-value store of custom data. Up to 3 keys are permitted, with key names up to 50 characters and
-         * values up to 500 characters.
+         * Key-value store of custom data. Up to 3 keys are permitted, with key names up to 50
+         * characters and values up to 500 characters.
          */
         public SubscriptionPauseRequest withMetadata(String key, String value) {
             if (metadata == null) {
@@ -954,8 +957,8 @@ public class SubscriptionService {
         }
 
         /**
-         * The number of cycles to pause a subscription for. A cycle is one duration of `interval` and
-         * `interval_unit`.
+         * The number of cycles to pause a subscription for. A cycle is one duration of `interval`
+         * and `interval_unit`.
          */
         public SubscriptionPauseRequest withPauseCycles(Integer pauseCycles) {
             this.pauseCycles = pauseCycles;
@@ -1008,15 +1011,14 @@ public class SubscriptionService {
     /**
      * Request class for {@link SubscriptionService#resume }.
      *
-     * Resume a subscription object.
-     * Payments will start to be created again based on the subscriptions recurrence rules.
-     * The `charge_date` on the next payment will be the same as the subscriptions
-     * `earliest_charge_date_after_resume`
+     * Resume a subscription object. Payments will start to be created again based on the
+     * subscriptions recurrence rules. The `charge_date` on the next payment will be the same as the
+     * subscriptions `earliest_charge_date_after_resume`
      * 
      * This fails with:
      * 
-     * - `forbidden` if the subscription was created by an app and you are not authenticated as that app,
-     * or if the subscription was not created by an app and you are authenticated as an app
+     * - `forbidden` if the subscription was created by an app and you are not authenticated as that
+     * app, or if the subscription was not created by an app and you are authenticated as an app
      * 
      * - `validation_failed` if invalid data is provided when attempting to resume a subscription.
      * 
@@ -1029,8 +1031,8 @@ public class SubscriptionService {
         private Map<String, String> metadata;
 
         /**
-         * Key-value store of custom data. Up to 3 keys are permitted, with key names up to 50 characters and
-         * values up to 500 characters.
+         * Key-value store of custom data. Up to 3 keys are permitted, with key names up to 50
+         * characters and values up to 500 characters.
          */
         public SubscriptionResumeRequest withMetadata(Map<String, String> metadata) {
             this.metadata = metadata;
@@ -1038,8 +1040,8 @@ public class SubscriptionService {
         }
 
         /**
-         * Key-value store of custom data. Up to 3 keys are permitted, with key names up to 50 characters and
-         * values up to 500 characters.
+         * Key-value store of custom data. Up to 3 keys are permitted, with key names up to 50
+         * characters and values up to 500 characters.
          */
         public SubscriptionResumeRequest withMetadata(String key, String value) {
             if (metadata == null) {
@@ -1107,8 +1109,8 @@ public class SubscriptionService {
         private Map<String, String> metadata;
 
         /**
-         * Key-value store of custom data. Up to 3 keys are permitted, with key names up to 50 characters and
-         * values up to 500 characters.
+         * Key-value store of custom data. Up to 3 keys are permitted, with key names up to 50
+         * characters and values up to 500 characters.
          */
         public SubscriptionCancelRequest withMetadata(Map<String, String> metadata) {
             this.metadata = metadata;
@@ -1116,8 +1118,8 @@ public class SubscriptionService {
         }
 
         /**
-         * Key-value store of custom data. Up to 3 keys are permitted, with key names up to 50 characters and
-         * values up to 500 characters.
+         * Key-value store of custom data. Up to 3 keys are permitted, with key names up to 50
+         * characters and values up to 500 characters.
          */
         public SubscriptionCancelRequest withMetadata(String key, String value) {
             if (metadata == null) {

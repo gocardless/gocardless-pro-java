@@ -1,9 +1,8 @@
 package com.gocardless.resources;
 
+import com.google.gson.annotations.SerializedName;
 import java.util.List;
 import java.util.Map;
-
-import com.google.gson.annotations.SerializedName;
 
 /**
  * Represents a subscription resource returned from the API.
@@ -14,53 +13,33 @@ import com.google.gson.annotations.SerializedName;
  * 
  * The following rules apply when specifying recurrence:
  * 
- * - The first payment must be charged within 1 year.
- * - If `day_of_month` and `start_date` are not provided `start_date` will be the
- * [mandate](#core-endpoints-mandates)'s `next_possible_charge_date` and the subscription will then
- * recur based on the `interval` & `interval_unit`
- * - If `month` or `day_of_month` are present the following validations apply:
+ * - The first payment must be charged within 1 year. - If `day_of_month` and `start_date` are not
+ * provided `start_date` will be the [mandate](#core-endpoints-mandates)'s
+ * `next_possible_charge_date` and the subscription will then recur based on the `interval` &
+ * `interval_unit` - If `month` or `day_of_month` are present the following validations apply:
  * 
- * | __interval_unit__ | __month__                                      | __day_of_month__           
- *                |
- * | :---------------- | :--------------------------------------------- |
- * :----------------------------------------- |
- * | yearly            | optional (required if `day_of_month` provided) | optional (invalid if
- * `month` not provided) |
- * | monthly           | invalid                                        | optional                   
- *                |
- * | weekly            | invalid                                        | invalid                    
- *                |
+ * | __interval_unit__ | __month__ | __day_of_month__ | | :---------------- |
+ * :--------------------------------------------- | :----------------------------------------- | |
+ * yearly | optional (required if `day_of_month` provided) | optional (invalid if `month` not
+ * provided) | | monthly | invalid | optional | | weekly | invalid | invalid |
  * 
  * Examples:
  * 
- * | __interval_unit__ | __interval__ | __month__ | __day_of_month__ | valid?                        
- *                     |
- * | :---------------- | :----------- | :-------- | :--------------- |
- * :------------------------------------------------- |
- * | yearly            | 1            | january   | -1               | valid                         
- *                     |
- * | monthly           | 6            |           |                  | valid                         
- *                     |
- * | monthly           | 6            |           | 12               | valid                         
- *                     |
- * | weekly            | 2            |           |                  | valid                         
- *                     |
- * | yearly            | 1            | march     |                  | invalid - missing
- * `day_of_month`                   |
- * | yearly            | 1            |           | 2                | invalid - missing `month`     
- *                     |
- * | monthly           | 6            | august    | 12               | invalid - `month` must be
- * blank                    |
- * | weekly            | 2            | october   | 10               | invalid - `month` and
- * `day_of_month` must be blank |
+ * | __interval_unit__ | __interval__ | __month__ | __day_of_month__ | valid? | | :----------------
+ * | :----------- | :-------- | :--------------- |
+ * :------------------------------------------------- | | yearly | 1 | january | -1 | valid | |
+ * monthly | 6 | | | valid | | monthly | 6 | | 12 | valid | | weekly | 2 | | | valid | | yearly | 1
+ * | march | | invalid - missing `day_of_month` | | yearly | 1 | | 2 | invalid - missing `month` | |
+ * monthly | 6 | august | 12 | invalid - `month` must be blank | | weekly | 2 | october | 10 |
+ * invalid - `month` and `day_of_month` must be blank |
  * 
  * ### Rolling dates
  * 
  * When a charge date falls on a non-business day, one of two things will happen:
  * 
  * - if the recurrence rule specified `-1` as the `day_of_month`, the charge date will be rolled
- * __backwards__ to the previous business day (i.e., the last working day of the month).
- * - otherwise the charge date will be rolled __forwards__ to the next business day.
+ * __backwards__ to the previous business day (i.e., the last working day of the month). - otherwise
+ * the charge date will be rolled __forwards__ to the next business day.
  * 
  */
 public class Subscription {
@@ -97,9 +76,9 @@ public class Subscription {
     }
 
     /**
-     * The amount to be deducted from each payment as an app fee, to be paid to the partner integration
-     * which created the subscription, in the lowest denomination for the currency (e.g. pence in GBP,
-     * cents in EUR).
+     * The amount to be deducted from each payment as an app fee, to be paid to the partner
+     * integration which created the subscription, in the lowest denomination for the currency (e.g.
+     * pence in GBP, cents in EUR).
      */
     public Integer getAppFee() {
         return appFee;
@@ -120,37 +99,38 @@ public class Subscription {
     }
 
     /**
-     * [ISO 4217](http://en.wikipedia.org/wiki/ISO_4217#Active_codes) currency code. Currently "AUD",
-     * "CAD", "DKK", "EUR", "GBP", "NZD", "SEK" and "USD" are supported.
+     * [ISO 4217](http://en.wikipedia.org/wiki/ISO_4217#Active_codes) currency code. Currently
+     * "AUD", "CAD", "DKK", "EUR", "GBP", "NZD", "SEK" and "USD" are supported.
      */
     public String getCurrency() {
         return currency;
     }
 
     /**
-     * As per RFC 2445. The day of the month to charge customers on. `1`-`28` or `-1` to indicate the
-     * last day of the month.
+     * As per RFC 2445. The day of the month to charge customers on. `1`-`28` or `-1` to indicate
+     * the last day of the month.
      */
     public Integer getDayOfMonth() {
         return dayOfMonth;
     }
 
     /**
-     * The earliest date that will be used as a `charge_date` on payments
-     * created for this subscription if it is resumed. Only present for `paused` subscriptions.
-     * This value will change over time.
+     * The earliest date that will be used as a `charge_date` on payments created for this
+     * subscription if it is resumed. Only present for `paused` subscriptions. This value will
+     * change over time.
      */
     public String getEarliestChargeDateAfterResume() {
         return earliestChargeDateAfterResume;
     }
 
     /**
-     * Date on or after which no further payments should be created.
-     * 
+     * Date on or after which no further payments should be created. <br />
      * If this field is blank and `count` is not specified, the subscription will continue forever.
-     * 
-     * <p class="deprecated-notice"><strong>Deprecated</strong>: This field will be removed in a future
-     * API version. Use `count` to specify a number of payments instead.</p>
+     * <br />
+     * <p class="deprecated-notice">
+     * <strong>Deprecated</strong>: This field will be removed in a future API version. Use `count`
+     * to specify a number of payments instead.
+     * </p>
      */
     public String getEndDate() {
         return endDate;
@@ -164,8 +144,8 @@ public class Subscription {
     }
 
     /**
-     * Number of `interval_units` between customer charge dates. Must be greater than or equal to `1`.
-     * Must result in at least one charge date per year. Defaults to `1`.
+     * Number of `interval_units` between customer charge dates. Must be greater than or equal to
+     * `1`. Must result in at least one charge date per year. Defaults to `1`.
      */
     public Integer getInterval() {
         return interval;
@@ -183,16 +163,16 @@ public class Subscription {
     }
 
     /**
-     * Key-value store of custom data. Up to 3 keys are permitted, with key names up to 50 characters and
-     * values up to 500 characters.
+     * Key-value store of custom data. Up to 3 keys are permitted, with key names up to 50
+     * characters and values up to 500 characters.
      */
     public Map<String, String> getMetadata() {
         return metadata;
     }
 
     /**
-     * Name of the month on which to charge a customer. Must be lowercase. Only applies
-     * when the interval_unit is `yearly`.
+     * Name of the month on which to charge a customer. Must be lowercase. Only applies when the
+     * interval_unit is `yearly`.
      * 
      */
     public Month getMonth() {
@@ -200,20 +180,21 @@ public class Subscription {
     }
 
     /**
-     * Optional name for the subscription. This will be set as the description on each payment created.
-     * Must not exceed 255 characters.
+     * Optional name for the subscription. This will be set as the description on each payment
+     * created. Must not exceed 255 characters.
      */
     public String getName() {
         return name;
     }
 
     /**
-     * An optional payment reference. This will be set as the reference on each payment
-     * created and will appear on your customer's bank statement. See the documentation for
-     * the [create payment endpoint](#payments-create-a-payment) for more details.
-     * 
-     * <p class="restricted-notice"><strong>Restricted</strong>: You need your own Service User Number to
-     * specify a payment reference for Bacs payments.</p>
+     * An optional payment reference. This will be set as the reference on each payment created and
+     * will appear on your customer's bank statement. See the documentation for the [create payment
+     * endpoint](#payments-create-a-payment) for more details. <br />
+     * <p class="restricted-notice">
+     * <strong>Restricted</strong>: You need your own Service User Number to specify a payment
+     * reference for Bacs payments.
+     * </p>
      */
     public String getPaymentReference() {
         return paymentReference;
@@ -229,8 +210,10 @@ public class Subscription {
 
     /**
      * The date on which the first payment should be charged. Must be on or after the
-     * [mandate](#core-endpoints-mandates)'s `next_possible_charge_date`. When blank, this will be set as
-     * the mandate's `next_possible_charge_date`.
+     * [mandate](#core-endpoints-mandates)'s `next_possible_charge_date`. When left blank and
+     * `month` or `day_of_month` are provided, this will be set to the date of the first payment. If
+     * created without `month` or `day_of_month` this will be set as the mandate's
+     * `next_possible_charge_date`
      */
     public String getStartDate() {
         return startDate;
@@ -239,8 +222,8 @@ public class Subscription {
     /**
      * One of:
      * <ul>
-     * <li>`pending_customer_approval`: the subscription is waiting for customer approval before becoming
-     * active</li>
+     * <li>`pending_customer_approval`: the subscription is waiting for customer approval before
+     * becoming active</li>
      * <li>`customer_approval_denied`: the customer did not approve the subscription</li>
      * <li>`active`: the subscription is currently active and will continue to create payments</li>
      * <li>`finished`: all of the payments scheduled for creation under this subscription have been
@@ -301,8 +284,8 @@ public class Subscription {
         private String mandate;
 
         /**
-         * ID of the associated [mandate](#core-endpoints-mandates) which the subscription will create
-         * payments against.
+         * ID of the associated [mandate](#core-endpoints-mandates) which the subscription will
+         * create payments against.
          */
         public String getMandate() {
             return mandate;

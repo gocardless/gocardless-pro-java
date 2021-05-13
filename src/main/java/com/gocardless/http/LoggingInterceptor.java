@@ -1,14 +1,11 @@
 package com.gocardless.http;
 
-import java.io.IOException;
-
 import com.google.common.base.Stopwatch;
-
-import com.squareup.okhttp.Interceptor.Chain;
 import com.squareup.okhttp.Interceptor;
+import com.squareup.okhttp.Interceptor.Chain;
 import com.squareup.okhttp.Request;
 import com.squareup.okhttp.Response;
-
+import java.io.IOException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

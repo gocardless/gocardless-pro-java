@@ -1,15 +1,13 @@
 package com.gocardless.services;
 
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
 import com.gocardless.http.*;
 import com.gocardless.resources.CustomerBankAccount;
-
 import com.google.common.collect.ImmutableMap;
 import com.google.gson.annotations.SerializedName;
 import com.google.gson.reflect.TypeToken;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 /**
  * Service class for working with customer bank account resources.
@@ -18,18 +16,18 @@ import com.google.gson.reflect.TypeToken;
  * always belong to a [customer](#core-endpoints-customers), and may be linked to several Direct
  * Debit [mandates](#core-endpoints-mandates).
  * 
- * Note that customer bank accounts must be unique, and so you will encounter a `bank_account_exists`
- * error if you try to create a duplicate bank account. You may wish to handle this by updating the
- * existing record instead, the ID of which will be provided as `links[customer_bank_account]` in the
- * error response.
+ * Note that customer bank accounts must be unique, and so you will encounter a
+ * `bank_account_exists` error if you try to create a duplicate bank account. You may wish to handle
+ * this by updating the existing record instead, the ID of which will be provided as
+ * `links[customer_bank_account]` in the error response.
  */
 public class CustomerBankAccountService {
     private final HttpClient httpClient;
 
     /**
-     * Constructor.  Users of this library should have no need to call this - an instance
-     * of this class can be obtained by calling
-      {@link com.gocardless.GoCardlessClient#customerBankAccounts() }.
+     * Constructor. Users of this library should have no need to call this - an instance of this
+     * class can be obtained by calling
+     * {@link com.gocardless.GoCardlessClient#customerBankAccounts() }.
      */
     public CustomerBankAccountService(HttpClient httpClient) {
         this.httpClient = httpClient;
@@ -85,8 +83,8 @@ public class CustomerBankAccountService {
      * 
      * This will return a `disable_failed` error if the bank account has already been disabled.
      * 
-     * A disabled bank account can be re-enabled by creating a new bank account resource with the same
-     * details.
+     * A disabled bank account can be re-enabled by creating a new bank account resource with the
+     * same details.
      */
     public CustomerBankAccountDisableRequest disable(String identity) {
         return new CustomerBankAccountDisableRequest(httpClient, identity);
@@ -108,8 +106,8 @@ public class CustomerBankAccountService {
      * For more information on the different fields required in each country, see [local bank
      * details](#appendix-local-bank-details).
      */
-    public static final class CustomerBankAccountCreateRequest extends
-            IdempotentPostRequest<CustomerBankAccount> {
+    public static final class CustomerBankAccountCreateRequest
+            extends IdempotentPostRequest<CustomerBankAccount> {
         private String accountHolderName;
         private String accountNumber;
         private AccountType accountType;
@@ -122,10 +120,11 @@ public class CustomerBankAccountService {
         private Map<String, String> metadata;
 
         /**
-         * Name of the account holder, as known by the bank. Usually this is the same as the name stored with
-         * the linked [creditor](#core-endpoints-creditors). This field will be transliterated, upcased and
-         * truncated to 18 characters. This field is required unless the request includes a [customer bank
-         * account token](#javascript-flow-customer-bank-account-tokens).
+         * Name of the account holder, as known by the bank. Usually this is the same as the name
+         * stored with the linked [creditor](#core-endpoints-creditors). This field will be
+         * transliterated, upcased and truncated to 18 characters. This field is required unless the
+         * request includes a [customer bank account
+         * token](#javascript-flow-customer-bank-account-tokens).
          */
         public CustomerBankAccountCreateRequest withAccountHolderName(String accountHolderName) {
             this.accountHolderName = accountHolderName;
@@ -133,8 +132,8 @@ public class CustomerBankAccountService {
         }
 
         /**
-         * Bank account number - see [local details](#appendix-local-bank-details) for more information.
-         * Alternatively you can provide an `iban`.
+         * Bank account number - see [local details](#appendix-local-bank-details) for more
+         * information. Alternatively you can provide an `iban`.
          */
         public CustomerBankAccountCreateRequest withAccountNumber(String accountNumber) {
             this.accountNumber = accountNumber;
@@ -142,9 +141,9 @@ public class CustomerBankAccountService {
         }
 
         /**
-         * Bank account type. Required for USD-denominated bank accounts. Must not be provided for bank
-         * accounts in other currencies. See [local details](#local-bank-details-united-states) for more
-         * information.
+         * Bank account type. Required for USD-denominated bank accounts. Must not be provided for
+         * bank accounts in other currencies. See [local details](#local-bank-details-united-states)
+         * for more information.
          */
         public CustomerBankAccountCreateRequest withAccountType(AccountType accountType) {
             this.accountType = accountType;
@@ -152,8 +151,8 @@ public class CustomerBankAccountService {
         }
 
         /**
-         * Bank code - see [local details](#appendix-local-bank-details) for more information. Alternatively
-         * you can provide an `iban`.
+         * Bank code - see [local details](#appendix-local-bank-details) for more information.
+         * Alternatively you can provide an `iban`.
          */
         public CustomerBankAccountCreateRequest withBankCode(String bankCode) {
             this.bankCode = bankCode;
@@ -171,8 +170,8 @@ public class CustomerBankAccountService {
 
         /**
          * [ISO 3166-1 alpha-2
-         * code](http://en.wikipedia.org/wiki/ISO_3166-1_alpha-2#Officially_assigned_code_elements). Defaults
-         * to the country code of the `iban` if supplied, otherwise is required.
+         * code](http://en.wikipedia.org/wiki/ISO_3166-1_alpha-2#Officially_assigned_code_elements).
+         * Defaults to the country code of the `iban` if supplied, otherwise is required.
          */
         public CustomerBankAccountCreateRequest withCountryCode(String countryCode) {
             this.countryCode = countryCode;
@@ -180,8 +179,8 @@ public class CustomerBankAccountService {
         }
 
         /**
-         * [ISO 4217](http://en.wikipedia.org/wiki/ISO_4217#Active_codes) currency code. Currently "AUD",
-         * "CAD", "DKK", "EUR", "GBP", "NZD", "SEK" and "USD" are supported.
+         * [ISO 4217](http://en.wikipedia.org/wiki/ISO_4217#Active_codes) currency code. Currently
+         * "AUD", "CAD", "DKK", "EUR", "GBP", "NZD", "SEK" and "USD" are supported.
          */
         public CustomerBankAccountCreateRequest withCurrency(String currency) {
             this.currency = currency;
@@ -215,8 +214,8 @@ public class CustomerBankAccountService {
         }
 
         /**
-         * ID of a [customer bank account token](#javascript-flow-customer-bank-account-tokens) to use in
-         * place of bank account parameters.
+         * ID of a [customer bank account token](#javascript-flow-customer-bank-account-tokens) to
+         * use in place of bank account parameters.
          */
         public CustomerBankAccountCreateRequest withLinksCustomerBankAccountToken(
                 String customerBankAccountToken) {
@@ -228,8 +227,8 @@ public class CustomerBankAccountService {
         }
 
         /**
-         * Key-value store of custom data. Up to 3 keys are permitted, with key names up to 50 characters and
-         * values up to 500 characters.
+         * Key-value store of custom data. Up to 3 keys are permitted, with key names up to 50
+         * characters and values up to 500 characters.
          */
         public CustomerBankAccountCreateRequest withMetadata(Map<String, String> metadata) {
             this.metadata = metadata;
@@ -237,8 +236,8 @@ public class CustomerBankAccountService {
         }
 
         /**
-         * Key-value store of custom data. Up to 3 keys are permitted, with key names up to 50 characters and
-         * values up to 500 characters.
+         * Key-value store of custom data. Up to 3 keys are permitted, with key names up to 50
+         * characters and values up to 500 characters.
          */
         public CustomerBankAccountCreateRequest withMetadata(String key, String value) {
             if (metadata == null) {
@@ -296,6 +295,7 @@ public class CustomerBankAccountService {
             @SerializedName("savings")
             SAVINGS, @SerializedName("checking")
             CHECKING;
+
             @Override
             public String toString() {
                 return name().toLowerCase();
@@ -315,8 +315,8 @@ public class CustomerBankAccountService {
             }
 
             /**
-             * ID of a [customer bank account token](#javascript-flow-customer-bank-account-tokens) to use in
-             * place of bank account parameters.
+             * ID of a [customer bank account token](#javascript-flow-customer-bank-account-tokens)
+             * to use in place of bank account parameters.
              */
             public Links withCustomerBankAccountToken(String customerBankAccountToken) {
                 this.customerBankAccountToken = customerBankAccountToken;
@@ -330,8 +330,8 @@ public class CustomerBankAccountService {
      *
      * Returns a [cursor-paginated](#api-usage-cursor-pagination) list of your bank accounts.
      */
-    public static final class CustomerBankAccountListRequest<S> extends
-            ListRequest<S, CustomerBankAccount> {
+    public static final class CustomerBankAccountListRequest<S>
+            extends ListRequest<S, CustomerBankAccount> {
         private CreatedAt createdAt;
         private String customer;
         private Boolean enabled;
@@ -528,7 +528,8 @@ public class CustomerBankAccountService {
      *
      * Retrieves the details of an existing bank account.
      */
-    public static final class CustomerBankAccountGetRequest extends GetRequest<CustomerBankAccount> {
+    public static final class CustomerBankAccountGetRequest
+            extends GetRequest<CustomerBankAccount> {
         @PathParam
         private final String identity;
 
@@ -570,15 +571,15 @@ public class CustomerBankAccountService {
      *
      * Updates a customer bank account object. Only the metadata parameter is allowed.
      */
-    public static final class CustomerBankAccountUpdateRequest extends
-            PutRequest<CustomerBankAccount> {
+    public static final class CustomerBankAccountUpdateRequest
+            extends PutRequest<CustomerBankAccount> {
         @PathParam
         private final String identity;
         private Map<String, String> metadata;
 
         /**
-         * Key-value store of custom data. Up to 3 keys are permitted, with key names up to 50 characters and
-         * values up to 500 characters.
+         * Key-value store of custom data. Up to 3 keys are permitted, with key names up to 50
+         * characters and values up to 500 characters.
          */
         public CustomerBankAccountUpdateRequest withMetadata(Map<String, String> metadata) {
             this.metadata = metadata;
@@ -586,8 +587,8 @@ public class CustomerBankAccountService {
         }
 
         /**
-         * Key-value store of custom data. Up to 3 keys are permitted, with key names up to 50 characters and
-         * values up to 500 characters.
+         * Key-value store of custom data. Up to 3 keys are permitted, with key names up to 50
+         * characters and values up to 500 characters.
          */
         public CustomerBankAccountUpdateRequest withMetadata(String key, String value) {
             if (metadata == null) {
@@ -642,11 +643,11 @@ public class CustomerBankAccountService {
      * 
      * This will return a `disable_failed` error if the bank account has already been disabled.
      * 
-     * A disabled bank account can be re-enabled by creating a new bank account resource with the same
-     * details.
+     * A disabled bank account can be re-enabled by creating a new bank account resource with the
+     * same details.
      */
-    public static final class CustomerBankAccountDisableRequest extends
-            PostRequest<CustomerBankAccount> {
+    public static final class CustomerBankAccountDisableRequest
+            extends PostRequest<CustomerBankAccount> {
         @PathParam
         private final String identity;
 

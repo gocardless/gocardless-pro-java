@@ -1,14 +1,11 @@
 package com.gocardless.http;
 
-import java.io.IOException;
+import static org.assertj.core.api.Assertions.assertThat;
 
 import com.gocardless.resources.Event;
-
 import com.google.common.collect.ImmutableList;
-
+import java.io.IOException;
 import org.junit.Test;
-
-import static org.assertj.core.api.Assertions.assertThat;
 
 public class WebhookParserTest {
     @Test

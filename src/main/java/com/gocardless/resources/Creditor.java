@@ -1,8 +1,7 @@
 package com.gocardless.resources;
 
-import java.util.List;
-
 import com.google.gson.annotations.SerializedName;
+import java.util.List;
 
 /**
  * Represents a creditor resource returned from the API.
@@ -100,9 +99,9 @@ public class Creditor {
 
     /**
      * [ISO 4217](http://en.wikipedia.org/wiki/ISO_4217#Active_codes) code for the currency in which
-     * amounts will be paid out (after foreign exchange). Currently "AUD", "CAD", "DKK", "EUR", "GBP",
-     * "NZD", "SEK" and "USD" are supported. Present only if payouts will be (or were) made via foreign
-     * exchange.
+     * amounts will be paid out (after foreign exchange). Currently "AUD", "CAD", "DKK", "EUR",
+     * "GBP", "NZD", "SEK" and "USD" are supported. Present only if payouts will be (or were) made
+     * via foreign exchange.
      */
     public FxPayoutCurrency getFxPayoutCurrency() {
         return fxPayoutCurrency;
@@ -137,8 +136,8 @@ public class Creditor {
     /**
      * Boolean value indicating whether the organisation is responsible for sending all customer
      * notifications (note this is separate from the functionality described
-     * [here](/getting-started/api/handling-customer-notifications/)). If you are a partner app, and this
-     * value is true, you should not send notifications on behalf of this organisation.
+     * [here](/getting-started/api/handling-customer-notifications/)). If you are a partner app, and
+     * this value is true, you should not send notifications on behalf of this organisation.
      */
     public Boolean getMerchantResponsibleForNotifications() {
         return merchantResponsibleForNotifications;
@@ -168,9 +167,9 @@ public class Creditor {
     /**
      * An array of the scheme identifiers this creditor can create mandates against.
      * 
-     * The support address, `phone_number` and `email` fields are for customers to contact the merchant
-     * for support purposes. They must be displayed on the payment page, please see our [compliance
-     * requirements](#appendix-compliance-requirements) for more details.
+     * The support address, `phone_number` and `email` fields are for customers to contact the
+     * merchant for support purposes. They must be displayed on the payment page, please see our
+     * [compliance requirements](#appendix-compliance-requirements) for more details.
      */
     public List<SchemeIdentifier> getSchemeIdentifiers() {
         return schemeIdentifiers;
@@ -181,14 +180,14 @@ public class Creditor {
      * details on handling verification as a partner, see our ["Helping your users get verified"
      * guide](/getting-started/partners/helping-your-users-get-verified/). One of:
      * <ul>
-     * <li>`successful`: The creditor's account is fully verified, and they can receive payouts. Once a
-     * creditor has been successfully verified, they may in the future require further verification - for
-     * example, if they change their payout bank account, we will have to check that they own the new
-     * bank account before they can receive payouts again.</li>
-     * <li>`in_review`: The creditor has provided all of the information currently requested, and it is
-     * awaiting review by GoCardless before they can be verified and receive payouts.</li>
-     * <li>`action_required`: The creditor needs to provide further information to verify their account
-     * so they can receive payouts, and should visit the verification flow.</li>
+     * <li>`successful`: The creditor's account is fully verified, and they can receive payouts.
+     * Once a creditor has been successfully verified, they may in the future require further
+     * verification - for example, if they change their payout bank account, we will have to check
+     * that they own the new bank account before they can receive payouts again.</li>
+     * <li>`in_review`: The creditor has provided all of the information currently requested, and it
+     * is awaiting review by GoCardless before they can be verified and receive payouts.</li>
+     * <li>`action_required`: The creditor needs to provide further information to verify their
+     * account so they can receive payouts, and should visit the verification flow.</li>
      * </ul>
      */
     public VerificationStatus getVerificationStatus() {
@@ -229,64 +228,64 @@ public class Creditor {
         private String defaultUsdPayoutAccount;
 
         /**
-         * ID of the [bank account](#core-endpoints-creditor-bank-accounts) which is set up to receive
-         * payouts in AUD.
+         * ID of the [bank account](#core-endpoints-creditor-bank-accounts) which is set up to
+         * receive payouts in AUD.
          */
         public String getDefaultAudPayoutAccount() {
             return defaultAudPayoutAccount;
         }
 
         /**
-         * ID of the [bank account](#core-endpoints-creditor-bank-accounts) which is set up to receive
-         * payouts in CAD.
+         * ID of the [bank account](#core-endpoints-creditor-bank-accounts) which is set up to
+         * receive payouts in CAD.
          */
         public String getDefaultCadPayoutAccount() {
             return defaultCadPayoutAccount;
         }
 
         /**
-         * ID of the [bank account](#core-endpoints-creditor-bank-accounts) which is set up to receive
-         * payouts in DKK.
+         * ID of the [bank account](#core-endpoints-creditor-bank-accounts) which is set up to
+         * receive payouts in DKK.
          */
         public String getDefaultDkkPayoutAccount() {
             return defaultDkkPayoutAccount;
         }
 
         /**
-         * ID of the [bank account](#core-endpoints-creditor-bank-accounts) which is set up to receive
-         * payouts in EUR.
+         * ID of the [bank account](#core-endpoints-creditor-bank-accounts) which is set up to
+         * receive payouts in EUR.
          */
         public String getDefaultEurPayoutAccount() {
             return defaultEurPayoutAccount;
         }
 
         /**
-         * ID of the [bank account](#core-endpoints-creditor-bank-accounts) which is set up to receive
-         * payouts in GBP.
+         * ID of the [bank account](#core-endpoints-creditor-bank-accounts) which is set up to
+         * receive payouts in GBP.
          */
         public String getDefaultGbpPayoutAccount() {
             return defaultGbpPayoutAccount;
         }
 
         /**
-         * ID of the [bank account](#core-endpoints-creditor-bank-accounts) which is set up to receive
-         * payouts in NZD.
+         * ID of the [bank account](#core-endpoints-creditor-bank-accounts) which is set up to
+         * receive payouts in NZD.
          */
         public String getDefaultNzdPayoutAccount() {
             return defaultNzdPayoutAccount;
         }
 
         /**
-         * ID of the [bank account](#core-endpoints-creditor-bank-accounts) which is set up to receive
-         * payouts in SEK.
+         * ID of the [bank account](#core-endpoints-creditor-bank-accounts) which is set up to
+         * receive payouts in SEK.
          */
         public String getDefaultSekPayoutAccount() {
             return defaultSekPayoutAccount;
         }
 
         /**
-         * ID of the [bank account](#core-endpoints-creditor-bank-accounts) which is set up to receive
-         * payouts in USD.
+         * ID of the [bank account](#core-endpoints-creditor-bank-accounts) which is set up to
+         * receive payouts in USD.
          */
         public String getDefaultUsdPayoutAccount() {
             return defaultUsdPayoutAccount;
@@ -372,11 +371,11 @@ public class Creditor {
         }
 
         /**
-         * The minimum interval, in working days, between the sending of a pre-notification to the customer,
-         * and the charge date of a payment using this scheme identifier.
+         * The minimum interval, in working days, between the sending of a pre-notification to the
+         * customer, and the charge date of a payment using this scheme identifier.
          * 
-         * By default, GoCardless sends these notifications automatically. Please see our [compliance
-         * requirements](#appendix-compliance-requirements) for more details.
+         * By default, GoCardless sends these notifications automatically. Please see our
+         * [compliance requirements](#appendix-compliance-requirements) for more details.
          */
         public Integer getMinimumAdvanceNotice() {
             return minimumAdvanceNotice;
@@ -443,7 +442,8 @@ public class Creditor {
             BACS, @SerializedName("becs")
             BECS, @SerializedName("becs_nz")
             BECS_NZ, @SerializedName("betalingsservice")
-            BETALINGSSERVICE, @SerializedName("pad")
+            BETALINGSSERVICE, @SerializedName("faster_payments")
+            FASTER_PAYMENTS, @SerializedName("pad")
             PAD, @SerializedName("sepa")
             SEPA,
         }

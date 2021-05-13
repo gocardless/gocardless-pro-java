@@ -1,14 +1,12 @@
 package com.gocardless.services;
 
-import java.util.List;
-import java.util.Map;
-
 import com.gocardless.http.*;
 import com.gocardless.resources.Event;
-
 import com.google.common.collect.ImmutableMap;
 import com.google.gson.annotations.SerializedName;
 import com.google.gson.reflect.TypeToken;
+import java.util.List;
+import java.util.Map;
 
 /**
  * Service class for working with event resources.
@@ -21,9 +19,8 @@ public class EventService {
     private final HttpClient httpClient;
 
     /**
-     * Constructor.  Users of this library should have no need to call this - an instance
-     * of this class can be obtained by calling
-      {@link com.gocardless.GoCardlessClient#events() }.
+     * Constructor. Users of this library should have no need to call this - an instance of this
+     * class can be obtained by calling {@link com.gocardless.GoCardlessClient#events() }.
      */
     public EventService(HttpClient httpClient) {
         this.httpClient = httpClient;
@@ -54,6 +51,7 @@ public class EventService {
      */
     public static final class EventListRequest<S> extends ListRequest<S, Event> {
         private String action;
+        private String billingRequest;
         private CreatedAt createdAt;
         private Include include;
         private String mandate;
@@ -86,6 +84,15 @@ public class EventService {
          */
         public EventListRequest<S> withBefore(String before) {
             setBefore(before);
+            return this;
+        }
+
+        /**
+         * ID of a [billing request](#billing-requests-billing-requests). If specified, this
+         * endpoint will return all events for the given billing request.
+         */
+        public EventListRequest<S> withBillingRequest(String billingRequest) {
+            this.billingRequest = billingRequest;
             return this;
         }
 
@@ -139,8 +146,8 @@ public class EventService {
         }
 
         /**
-         * Includes linked resources in the response. Must be used with the `resource_type` parameter
-         * specified. The include should be one of:
+         * Includes linked resources in the response. Must be used with the `resource_type`
+         * parameter specified. The include should be one of:
          * <ul>
          * <li>`payment`</li>
          * <li>`mandate`</li>
@@ -166,8 +173,8 @@ public class EventService {
         }
 
         /**
-         * ID of a [mandate](#core-endpoints-mandates). If specified, this endpoint will return all events
-         * for the given mandate.
+         * ID of a [mandate](#core-endpoints-mandates). If specified, this endpoint will return all
+         * events for the given mandate.
          */
         public EventListRequest<S> withMandate(String mandate) {
             this.mandate = mandate;
@@ -175,8 +182,8 @@ public class EventService {
         }
 
         /**
-         * ID of an event. If specified, this endpoint will return all events whose parent_event is the given
-         * event ID.
+         * ID of an event. If specified, this endpoint will return all events whose parent_event is
+         * the given event ID.
          */
         public EventListRequest<S> withParentEvent(String parentEvent) {
             this.parentEvent = parentEvent;
@@ -192,8 +199,8 @@ public class EventService {
         }
 
         /**
-         * ID of a [payment](#core-endpoints-payments). If specified, this endpoint will return all events
-         * for the given payment.
+         * ID of a [payment](#core-endpoints-payments). If specified, this endpoint will return all
+         * events for the given payment.
          */
         public EventListRequest<S> withPayment(String payment) {
             this.payment = payment;
@@ -201,8 +208,8 @@ public class EventService {
         }
 
         /**
-         * ID of a [payout](#core-endpoints-payouts). If specified, this endpoint will return all events for
-         * the given payout.
+         * ID of a [payout](#core-endpoints-payouts). If specified, this endpoint will return all
+         * events for the given payout.
          */
         public EventListRequest<S> withPayout(String payout) {
             this.payout = payout;
@@ -210,8 +217,8 @@ public class EventService {
         }
 
         /**
-         * ID of a [refund](#core-endpoints-refunds). If specified, this endpoint will return all events for
-         * the given refund.
+         * ID of a [refund](#core-endpoints-refunds). If specified, this endpoint will return all
+         * events for the given refund.
          */
         public EventListRequest<S> withRefund(String refund) {
             this.refund = refund;
@@ -220,17 +227,18 @@ public class EventService {
 
         /**
          * Type of resource that you'd like to get all events for. Cannot be used together with the
-         * `payment`,    `payer_authorisation`, `mandate`, `subscription`, `instalment_schedule`, `creditor`,
-         * `refund` or `payout` parameter. The type can be one of:
+         * `payment`, `payer_authorisation`, `mandate`, `subscription`, `instalment_schedule`,
+         * `creditor`, `refund` or `payout` parameter. The type can be one of:
          * <ul>
-         * <li>`payments`</li>
+         * <li>`billing_requests`</li>
+         * <li>`creditors`</li>
+         * <li>`instalment_schedules`</li>
          * <li>`mandates`</li>
          * <li>`payer_authorisations`</li>
+         * <li>`payments`</li>
          * <li>`payouts`</li>
-         * <li>`subscriptions`</li>
-         * <li>`instalment_schedules`</li>
-         * <li>`creditors`</li>
          * <li>`refunds`</li>
+         * <li>`subscriptions`</li>
          * </ul>
          */
         public EventListRequest<S> withResourceType(ResourceType resourceType) {
@@ -239,8 +247,8 @@ public class EventService {
         }
 
         /**
-         * ID of a [subscription](#core-endpoints-subscriptions). If specified, this endpoint will return all
-         * events for the given subscription.
+         * ID of a [subscription](#core-endpoints-subscriptions). If specified, this endpoint will
+         * return all events for the given subscription.
          */
         public EventListRequest<S> withSubscription(String subscription) {
             this.subscription = subscription;
@@ -262,6 +270,9 @@ public class EventService {
             params.putAll(super.getQueryParams());
             if (action != null) {
                 params.put("action", action);
+            }
+            if (billingRequest != null) {
+                params.put("billing_request", billingRequest);
             }
             if (createdAt != null) {
                 params.putAll(createdAt.getQueryParams());
@@ -321,6 +332,7 @@ public class EventService {
             INSTALMENT_SCHEDULE, @SerializedName("creditor")
             CREDITOR, @SerializedName("payer_authorisation")
             PAYER_AUTHORISATION;
+
             @Override
             public String toString() {
                 return name().toLowerCase();
@@ -328,16 +340,18 @@ public class EventService {
         }
 
         public enum ResourceType {
-            @SerializedName("creditors")
+            @SerializedName("billing_requests")
+            BILLING_REQUESTS, @SerializedName("creditors")
             CREDITORS, @SerializedName("instalment_schedules")
             INSTALMENT_SCHEDULES, @SerializedName("mandates")
-            MANDATES, @SerializedName("payer_authorisations")
+            MANDATES, @SerializedName("organisations")
+            ORGANISATIONS, @SerializedName("payer_authorisations")
             PAYER_AUTHORISATIONS, @SerializedName("payments")
             PAYMENTS, @SerializedName("payouts")
             PAYOUTS, @SerializedName("refunds")
             REFUNDS, @SerializedName("subscriptions")
-            SUBSCRIPTIONS, @SerializedName("organisations")
-            ORGANISATIONS;
+            SUBSCRIPTIONS;
+
             @Override
             public String toString() {
                 return name().toLowerCase();

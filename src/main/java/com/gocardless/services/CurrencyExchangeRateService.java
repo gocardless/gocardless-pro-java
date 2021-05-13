@@ -1,13 +1,11 @@
 package com.gocardless.services;
 
-import java.util.List;
-import java.util.Map;
-
 import com.gocardless.http.*;
 import com.gocardless.resources.CurrencyExchangeRate;
-
 import com.google.common.collect.ImmutableMap;
 import com.google.gson.reflect.TypeToken;
+import java.util.List;
+import java.util.Map;
 
 /**
  * Service class for working with currency exchange rate resources.
@@ -18,9 +16,9 @@ public class CurrencyExchangeRateService {
     private final HttpClient httpClient;
 
     /**
-     * Constructor.  Users of this library should have no need to call this - an instance
-     * of this class can be obtained by calling
-      {@link com.gocardless.GoCardlessClient#currencyExchangeRates() }.
+     * Constructor. Users of this library should have no need to call this - an instance of this
+     * class can be obtained by calling
+     * {@link com.gocardless.GoCardlessClient#currencyExchangeRates() }.
      */
     public CurrencyExchangeRateService(HttpClient httpClient) {
         this.httpClient = httpClient;
@@ -44,8 +42,8 @@ public class CurrencyExchangeRateService {
      *
      * Returns a [cursor-paginated](#api-usage-cursor-pagination) list of all exchange rates.
      */
-    public static final class CurrencyExchangeRateListRequest<S> extends
-            ListRequest<S, CurrencyExchangeRate> {
+    public static final class CurrencyExchangeRateListRequest<S>
+            extends ListRequest<S, CurrencyExchangeRate> {
         private CreatedAt createdAt;
         private String source;
         private String target;
@@ -144,7 +142,8 @@ public class CurrencyExchangeRateService {
             super(httpClient, executor);
         }
 
-        public CurrencyExchangeRateListRequest<S> withHeader(String headerName, String headerValue) {
+        public CurrencyExchangeRateListRequest<S> withHeader(String headerName,
+                String headerValue) {
             this.addHeader(headerName, headerValue);
             return this;
         }

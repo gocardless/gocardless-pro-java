@@ -1,9 +1,8 @@
 package com.gocardless.http;
 
-import java.util.List;
-
 import com.google.common.collect.AbstractIterator;
 import com.google.common.collect.Lists;
+import java.util.List;
 
 class PaginatingIterator<T> extends AbstractIterator<T> {
     private final ListRequest<?, T> request;

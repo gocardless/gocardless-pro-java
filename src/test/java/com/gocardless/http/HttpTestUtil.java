@@ -1,13 +1,12 @@
 package com.gocardless.http;
 
-import java.io.IOException;
+import static com.google.common.base.Charsets.UTF_8;
+import static com.google.common.io.Resources.getResource;
 
 import com.google.common.io.Resources;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonParser;
-
-import static com.google.common.base.Charsets.UTF_8;
-import static com.google.common.io.Resources.getResource;
+import java.io.IOException;
 
 public class HttpTestUtil {
     public static boolean jsonMatchesFixture(String actual, String fixturePath) throws IOException {

@@ -1,13 +1,11 @@
 package com.gocardless.http;
 
+import static org.assertj.core.api.Assertions.assertThat;
+
 import com.gocardless.http.HttpTestUtil.DummyItem;
-
 import com.google.common.collect.ImmutableMap;
-
 import org.junit.Rule;
 import org.junit.Test;
-
-import static org.assertj.core.api.Assertions.assertThat;
 
 public class PostRequestTest {
     @Rule
@@ -48,9 +46,8 @@ public class PostRequestTest {
     @Test
     public void shouldPerformWrappedPostRequestWithBody() throws Exception {
         http.enqueueResponse(200, "fixtures/single.json", ImmutableMap.of("foo", "bar"));
-        ApiResponse<DummyItem> result =
-                new DummyPostRequestWithBody().withHeader("Accept-Language", "fr-FR")
-                        .executeWrapped();
+        ApiResponse<DummyItem> result = new DummyPostRequestWithBody()
+                .withHeader("Accept-Language", "fr-FR").executeWrapped();
         assertThat(result.getStatusCode()).isEqualTo(200);
         assertThat(result.getHeaders().get("foo")).containsExactly("bar");
         assertThat(result.getResource().stringField).isEqualTo("foo");

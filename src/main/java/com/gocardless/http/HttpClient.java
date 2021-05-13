@@ -1,22 +1,18 @@
 package com.gocardless.http;
 
+import static java.util.concurrent.TimeUnit.MILLISECONDS;
+
+import com.github.rholder.retry.*;
+import com.gocardless.GoCardlessException;
+import com.gocardless.errors.GoCardlessInternalException;
+import com.google.common.base.Throwables;
+import com.google.common.collect.ImmutableMap;
+import com.google.gson.Gson;
+import com.squareup.okhttp.*;
 import java.io.IOException;
 import java.util.Map;
 import java.util.concurrent.Callable;
 import java.util.concurrent.ExecutionException;
-
-import com.github.rholder.retry.*;
-
-import com.gocardless.GoCardlessException;
-import com.gocardless.errors.GoCardlessInternalException;
-
-import com.google.common.base.Throwables;
-import com.google.common.collect.ImmutableMap;
-import com.google.gson.Gson;
-
-import com.squareup.okhttp.*;
-
-import static java.util.concurrent.TimeUnit.MILLISECONDS;
 
 /**
  * An HTTP client that can execute {@link ApiRequest}s.
@@ -33,13 +29,13 @@ public class HttpClient {
      */
     private static final String DISALLOWED_USER_AGENT_CHARACTERS =
             "[^\\w!#$%&'\\*\\+\\-\\.\\^`\\|~]";
-    private static final String USER_AGENT = String.format(
-            "gocardless-pro-java/4.7.0 java/%s %s/%s %s/%s",
-            cleanUserAgentToken(System.getProperty("java.vm.specification.version")),
-            cleanUserAgentToken(System.getProperty("java.vm.name")),
-            cleanUserAgentToken(System.getProperty("java.version")),
-            cleanUserAgentToken(System.getProperty("os.name")),
-            cleanUserAgentToken(System.getProperty("os.version")));
+    private static final String USER_AGENT =
+            String.format("gocardless-pro-java/4.8.0 java/%s %s/%s %s/%s",
+                    cleanUserAgentToken(System.getProperty("java.vm.specification.version")),
+                    cleanUserAgentToken(System.getProperty("java.vm.name")),
+                    cleanUserAgentToken(System.getProperty("java.version")),
+                    cleanUserAgentToken(System.getProperty("os.name")),
+                    cleanUserAgentToken(System.getProperty("os.version")));
     private static final RequestBody EMPTY_BODY = RequestBody.create(null, new byte[0]);
     private static final MediaType MEDIA_TYPE = MediaType.parse("application/json");
     private static final Map<String, String> HEADERS;
@@ -47,7 +43,7 @@ public class HttpClient {
         ImmutableMap.Builder<String, String> builder = ImmutableMap.builder();
         builder.put("GoCardless-Version", "2015-07-06");
         builder.put("GoCardless-Client-Library", "gocardless-pro-java");
-        builder.put("GoCardless-Client-Version", "4.7.0");
+        builder.put("GoCardless-Client-Version", "4.8.0");
         HEADERS = builder.build();
     }
     private final OkHttpClient rawClient;
@@ -58,13 +54,14 @@ public class HttpClient {
     private final boolean errorOnIdempotencyConflict;
 
     /**
-     * Constructor.  Users of this library should not need to access this class directly - you should instantiate
-     * a GoCardlessClient and its underlying HttpClient using GoCardlessClient.newBuilder().
+     * Constructor. Users of this library should not need to access this class directly - you should
+     * instantiate a GoCardlessClient and its underlying HttpClient using
+     * GoCardlessClient.newBuilder().
      *
      * @param accessToken the access token.
      * @param baseUrl base URI to make requests against.
      * @param rawClient the OkHttpClient instance to use to make requests (which will be configured
-     *                  to log requests with LoggingInterceptor).
+     *        to log requests with LoggingInterceptor).
      */
     public HttpClient(String accessToken, String baseUrl, OkHttpClient rawClient,
             boolean errorOnIdempotencyConflict) {
@@ -96,12 +93,11 @@ public class HttpClient {
     }
 
     <T> T executeWithRetries(final ApiRequest<T> apiRequest) {
-        Retryer<T> retrier =
-                RetryerBuilder.<T>newBuilder()
-                        .retryIfExceptionOfType(GoCardlessNetworkException.class)
-                        .retryIfExceptionOfType(GoCardlessInternalException.class)
-                        .withWaitStrategy(WaitStrategies.fixedWait(500, MILLISECONDS))
-                        .withStopStrategy(StopStrategies.stopAfterAttempt(MAX_RETRIES)).build();
+        Retryer<T> retrier = RetryerBuilder.<T>newBuilder()
+                .retryIfExceptionOfType(GoCardlessNetworkException.class)
+                .retryIfExceptionOfType(GoCardlessInternalException.class)
+                .withWaitStrategy(WaitStrategies.fixedWait(500, MILLISECONDS))
+                .withStopStrategy(StopStrategies.stopAfterAttempt(MAX_RETRIES)).build();
         Callable<T> executeOnce = new Callable<T>() {
             @Override
             public T call() throws Exception {

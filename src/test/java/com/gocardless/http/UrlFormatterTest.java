@@ -1,15 +1,12 @@
 package com.gocardless.http;
 
-import java.util.Map;
+import static org.assertj.core.api.Assertions.assertThat;
 
 import com.google.common.collect.ImmutableMap;
-
 import com.squareup.okhttp.HttpUrl;
-
+import java.util.Map;
 import org.junit.Before;
 import org.junit.Test;
-
-import static org.assertj.core.api.Assertions.assertThat;
 
 public class UrlFormatterTest {
     private UrlFormatter urlFormatter;

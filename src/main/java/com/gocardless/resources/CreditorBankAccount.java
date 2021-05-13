@@ -1,22 +1,22 @@
 package com.gocardless.resources;
 
-import java.util.Map;
-
 import com.google.gson.annotations.SerializedName;
+import java.util.Map;
 
 /**
  * Represents a creditor bank account resource returned from the API.
  *
- * Creditor Bank Accounts hold the bank details of a [creditor](#core-endpoints-creditors). These are
- * the bank accounts which your [payouts](#core-endpoints-payouts) will be sent to.
+ * Creditor Bank Accounts hold the bank details of a [creditor](#core-endpoints-creditors). These
+ * are the bank accounts which your [payouts](#core-endpoints-payouts) will be sent to.
  * 
- * Note that creditor bank accounts must be unique, and so you will encounter a `bank_account_exists`
- * error if you try to create a duplicate bank account. You may wish to handle this by updating the
- * existing record instead, the ID of which will be provided as `links[creditor_bank_account]` in the
- * error response.
+ * Note that creditor bank accounts must be unique, and so you will encounter a
+ * `bank_account_exists` error if you try to create a duplicate bank account. You may wish to handle
+ * this by updating the existing record instead, the ID of which will be provided as
+ * `links[creditor_bank_account]` in the error response.
  * 
- * <p class="restricted-notice"><strong>Restricted</strong>: This API is not available for partner
- * integrations.</p>
+ * <p class="restricted-notice">
+ * <strong>Restricted</strong>: This API is not available for partner integrations.
+ * </p>
  */
 public class CreditorBankAccount {
     private CreditorBankAccount() {
@@ -36,17 +36,17 @@ public class CreditorBankAccount {
     private Map<String, String> metadata;
 
     /**
-     * Name of the account holder, as known by the bank. Usually this is the same as the name stored with
-     * the linked [creditor](#core-endpoints-creditors). This field will be transliterated, upcased and
-     * truncated to 18 characters.
+     * Name of the account holder, as known by the bank. Usually this is the same as the name stored
+     * with the linked [creditor](#core-endpoints-creditors). This field will be transliterated,
+     * upcased and truncated to 18 characters.
      */
     public String getAccountHolderName() {
         return accountHolderName;
     }
 
     /**
-     * The last few digits of the account number. Currently 4 digits for NZD bank accounts and 2 digits
-     * for other currencies.
+     * The last few digits of the account number. Currently 4 digits for NZD bank accounts and 2
+     * digits for other currencies.
      */
     public String getAccountNumberEnding() {
         return accountNumberEnding;
@@ -70,8 +70,8 @@ public class CreditorBankAccount {
 
     /**
      * [ISO 3166-1 alpha-2
-     * code](http://en.wikipedia.org/wiki/ISO_3166-1_alpha-2#Officially_assigned_code_elements). Defaults
-     * to the country code of the `iban` if supplied, otherwise is required.
+     * code](http://en.wikipedia.org/wiki/ISO_3166-1_alpha-2#Officially_assigned_code_elements).
+     * Defaults to the country code of the `iban` if supplied, otherwise is required.
      */
     public String getCountryCode() {
         return countryCode;
@@ -85,8 +85,8 @@ public class CreditorBankAccount {
     }
 
     /**
-     * [ISO 4217](http://en.wikipedia.org/wiki/ISO_4217#Active_codes) currency code. Currently "AUD",
-     * "CAD", "DKK", "EUR", "GBP", "NZD", "SEK" and "USD" are supported.
+     * [ISO 4217](http://en.wikipedia.org/wiki/ISO_4217#Active_codes) currency code. Currently
+     * "AUD", "CAD", "DKK", "EUR", "GBP", "NZD", "SEK" and "USD" are supported.
      */
     public String getCurrency() {
         return currency;
@@ -111,8 +111,8 @@ public class CreditorBankAccount {
     }
 
     /**
-     * Key-value store of custom data. Up to 3 keys are permitted, with key names up to 50 characters and
-     * values up to 500 characters.
+     * Key-value store of custom data. Up to 3 keys are permitted, with key names up to 50
+     * characters and values up to 500 characters.
      */
     public Map<String, String> getMetadata() {
         return metadata;

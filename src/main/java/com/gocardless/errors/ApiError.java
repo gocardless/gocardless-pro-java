@@ -1,9 +1,8 @@
 package com.gocardless.errors;
 
-import java.util.Map;
-
 import com.google.common.base.Joiner;
 import com.google.common.collect.ImmutableMap;
+import java.util.Map;
 
 /**
  * Representation of an individual error handling an API request.
@@ -47,8 +46,8 @@ public class ApiError {
     }
 
     /**
-     * Returns the request pointer, indicating the exact field of the request that
-     * triggered the validation error
+     * Returns the request pointer, indicating the exact field of the request that triggered the
+     * validation error
      */
     public String getRequestPointer() {
         return requestPointer;

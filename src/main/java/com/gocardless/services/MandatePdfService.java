@@ -2,7 +2,6 @@ package com.gocardless.services;
 
 import com.gocardless.http.*;
 import com.gocardless.resources.MandatePdf;
-
 import com.google.gson.annotations.SerializedName;
 
 /**
@@ -15,9 +14,8 @@ public class MandatePdfService {
     private final HttpClient httpClient;
 
     /**
-     * Constructor.  Users of this library should have no need to call this - an instance
-     * of this class can be obtained by calling
-      {@link com.gocardless.GoCardlessClient#mandatePdfs() }.
+     * Constructor. Users of this library should have no need to call this - an instance of this
+     * class can be obtained by calling {@link com.gocardless.GoCardlessClient#mandatePdfs() }.
      */
     public MandatePdfService(HttpClient httpClient) {
         this.httpClient = httpClient;
@@ -26,36 +24,23 @@ public class MandatePdfService {
     /**
      * Generates a PDF mandate and returns its temporary URL.
      * 
-     * Customer and bank account details can be left blank (for a blank mandate), provided manually, or
-     * inferred from the ID of an existing [mandate](#core-endpoints-mandates).
+     * Customer and bank account details can be left blank (for a blank mandate), provided manually,
+     * or inferred from the ID of an existing [mandate](#core-endpoints-mandates).
      * 
      * By default, we'll generate PDF mandates in English.
      * 
-     * To generate a PDF mandate in another language, set the `Accept-Language` header when creating the
-     * PDF mandate to the relevant [ISO 639-1](http://en.wikipedia.org/wiki/List_of_ISO_639-1_codes)
-     * language code supported for the scheme.
+     * To generate a PDF mandate in another language, set the `Accept-Language` header when creating
+     * the PDF mandate to the relevant [ISO
+     * 639-1](http://en.wikipedia.org/wiki/List_of_ISO_639-1_codes) language code supported for the
+     * scheme.
      * 
-     * | Scheme           | Supported languages                                                          
-     *                                                                |
-     * | :--------------- |
+     * | Scheme | Supported languages | | :--------------- |
      * :-------------------------------------------------------------------------------------------------------------------------------------------
-     * |
-     * | ACH              | English (`en`)                                                               
-     *                                                                |
-     * | Autogiro         | English (`en`), Swedish (`sv`)                                               
-     *                                                                |
-     * | Bacs             | English (`en`)                                                               
-     *                                                                |
-     * | BECS             | English (`en`)                                                               
-     *                                                                |
-     * | BECS NZ          | English (`en`)                                                               
-     *                                                                |
-     * | Betalingsservice | Danish (`da`), English (`en`)                                                
-     *                                                                |
-     * | PAD              | English (`en`)                                                               
-     *                                                                |
-     * | SEPA Core        | Danish (`da`), Dutch (`nl`), English (`en`), French (`fr`), German (`de`),
-     * Italian (`it`), Portuguese (`pt`), Spanish (`es`), Swedish (`sv`) |
+     * | | ACH | English (`en`) | | Autogiro | English (`en`), Swedish (`sv`) | | Bacs | English
+     * (`en`) | | BECS | English (`en`) | | BECS NZ | English (`en`) | | Betalingsservice | Danish
+     * (`da`), English (`en`) | | PAD | English (`en`) | | SEPA Core | Danish (`da`), Dutch (`nl`),
+     * English (`en`), French (`fr`), German (`de`), Italian (`it`), Portuguese (`pt`), Spanish
+     * (`es`), Swedish (`sv`) |
      */
     public MandatePdfCreateRequest create() {
         return new MandatePdfCreateRequest(httpClient);
@@ -66,36 +51,23 @@ public class MandatePdfService {
      *
      * Generates a PDF mandate and returns its temporary URL.
      * 
-     * Customer and bank account details can be left blank (for a blank mandate), provided manually, or
-     * inferred from the ID of an existing [mandate](#core-endpoints-mandates).
+     * Customer and bank account details can be left blank (for a blank mandate), provided manually,
+     * or inferred from the ID of an existing [mandate](#core-endpoints-mandates).
      * 
      * By default, we'll generate PDF mandates in English.
      * 
-     * To generate a PDF mandate in another language, set the `Accept-Language` header when creating the
-     * PDF mandate to the relevant [ISO 639-1](http://en.wikipedia.org/wiki/List_of_ISO_639-1_codes)
-     * language code supported for the scheme.
+     * To generate a PDF mandate in another language, set the `Accept-Language` header when creating
+     * the PDF mandate to the relevant [ISO
+     * 639-1](http://en.wikipedia.org/wiki/List_of_ISO_639-1_codes) language code supported for the
+     * scheme.
      * 
-     * | Scheme           | Supported languages                                                          
-     *                                                                |
-     * | :--------------- |
+     * | Scheme | Supported languages | | :--------------- |
      * :-------------------------------------------------------------------------------------------------------------------------------------------
-     * |
-     * | ACH              | English (`en`)                                                               
-     *                                                                |
-     * | Autogiro         | English (`en`), Swedish (`sv`)                                               
-     *                                                                |
-     * | Bacs             | English (`en`)                                                               
-     *                                                                |
-     * | BECS             | English (`en`)                                                               
-     *                                                                |
-     * | BECS NZ          | English (`en`)                                                               
-     *                                                                |
-     * | Betalingsservice | Danish (`da`), English (`en`)                                                
-     *                                                                |
-     * | PAD              | English (`en`)                                                               
-     *                                                                |
-     * | SEPA Core        | Danish (`da`), Dutch (`nl`), English (`en`), French (`fr`), German (`de`),
-     * Italian (`it`), Portuguese (`pt`), Spanish (`es`), Swedish (`sv`) |
+     * | | ACH | English (`en`) | | Autogiro | English (`en`), Swedish (`sv`) | | Bacs | English
+     * (`en`) | | BECS | English (`en`) | | BECS NZ | English (`en`) | | Betalingsservice | Danish
+     * (`da`), English (`en`) | | PAD | English (`en`) | | SEPA Core | Danish (`da`), Dutch (`nl`),
+     * English (`en`), French (`fr`), German (`de`), Italian (`it`), Portuguese (`pt`), Spanish
+     * (`es`), Swedish (`sv`) |
      */
     public static final class MandatePdfCreateRequest extends PostRequest<MandatePdf> {
         private String accountHolderName;
@@ -133,8 +105,8 @@ public class MandatePdfService {
         }
 
         /**
-         * Bank account number - see [local details](#appendix-local-bank-details) for more information.
-         * Alternatively you can provide an `iban`.
+         * Bank account number - see [local details](#appendix-local-bank-details) for more
+         * information. Alternatively you can provide an `iban`.
          */
         public MandatePdfCreateRequest withAccountNumber(String accountNumber) {
             this.accountNumber = accountNumber;
@@ -142,9 +114,9 @@ public class MandatePdfService {
         }
 
         /**
-         * Bank account type. Required for USD-denominated bank accounts. Must not be provided for bank
-         * accounts in other currencies. See [local details](#local-bank-details-united-states) for more
-         * information.
+         * Bank account type. Required for USD-denominated bank accounts. Must not be provided for
+         * bank accounts in other currencies. See [local details](#local-bank-details-united-states)
+         * for more information.
          */
         public MandatePdfCreateRequest withAccountType(AccountType accountType) {
             this.accountType = accountType;
@@ -176,8 +148,8 @@ public class MandatePdfService {
         }
 
         /**
-         * Bank code - see [local details](#appendix-local-bank-details) for more information. Alternatively
-         * you can provide an `iban`.
+         * Bank code - see [local details](#appendix-local-bank-details) for more information.
+         * Alternatively you can provide an `iban`.
          */
         public MandatePdfCreateRequest withBankCode(String bankCode) {
             this.bankCode = bankCode;
@@ -211,7 +183,8 @@ public class MandatePdfService {
         }
 
         /**
-         * [ISO 3166-1](http://en.wikipedia.org/wiki/ISO_3166-1_alpha-2#Officially_assigned_code_elements)
+         * [ISO
+         * 3166-1](http://en.wikipedia.org/wiki/ISO_3166-1_alpha-2#Officially_assigned_code_elements)
          * alpha-2 code. Required if providing local details.
          */
         public MandatePdfCreateRequest withCountryCode(String countryCode) {
@@ -220,8 +193,8 @@ public class MandatePdfService {
         }
 
         /**
-         * For Danish customers only. The civic/company number (CPR or CVR) of the customer. Should only be
-         * supplied for Betalingsservice mandates.
+         * For Danish customers only. The civic/company number (CPR or CVR) of the customer. Should
+         * only be supplied for Betalingsservice mandates.
          */
         public MandatePdfCreateRequest withDanishIdentityNumber(String danishIdentityNumber) {
             this.danishIdentityNumber = danishIdentityNumber;
@@ -243,8 +216,9 @@ public class MandatePdfService {
         }
 
         /**
-         * ID of an existing [mandate](#core-endpoints-mandates) to build the PDF from. The customer's bank
-         * details will be censored in the generated PDF. No other parameters may be provided alongside this.
+         * ID of an existing [mandate](#core-endpoints-mandates) to build the PDF from. The
+         * customer's bank details will be censored in the generated PDF. No other parameters may be
+         * provided alongside this.
          */
         public MandatePdfCreateRequest withLinksMandate(String mandate) {
             if (links == null) {
@@ -263,9 +237,9 @@ public class MandatePdfService {
         }
 
         /**
-         * For American customers only. IP address of the computer used by the customer to set up the
-         * mandate. This is required in order to create compliant Mandate PDFs according to the ACH scheme
-         * rules.
+         * For American customers only. IP address of the computer used by the customer to set up
+         * the mandate. This is required in order to create compliant Mandate PDFs according to the
+         * ACH scheme rules.
          */
         public MandatePdfCreateRequest withPayerIpAddress(String payerIpAddress) {
             this.payerIpAddress = payerIpAddress;
@@ -290,8 +264,8 @@ public class MandatePdfService {
 
         /**
          * The customer's address region, county or department. For US customers a 2 letter
-         * [ISO3166-2:US](https://en.wikipedia.org/wiki/ISO_3166-2:US) state code is required (e.g. `CA` for
-         * California).
+         * [ISO3166-2:US](https://en.wikipedia.org/wiki/ISO_3166-2:US) state code is required (e.g.
+         * `CA` for California).
          */
         public MandatePdfCreateRequest withRegion(String region) {
             this.region = region;
@@ -299,9 +273,9 @@ public class MandatePdfService {
         }
 
         /**
-         * Direct Debit scheme. Can be supplied or automatically detected from the bank account details
-         * provided. If you do not provide a scheme, you must provide either a mandate, an `iban`, or [local
-         * details](#appendix-local-bank-details) including a `country_code`.
+         * Direct Debit scheme. Can be supplied or automatically detected from the bank account
+         * details provided. If you do not provide a scheme, you must provide either a mandate, an
+         * `iban`, or [local details](#appendix-local-bank-details) including a `country_code`.
          */
         public MandatePdfCreateRequest withScheme(String scheme) {
             this.scheme = scheme;
@@ -317,9 +291,9 @@ public class MandatePdfService {
         }
 
         /**
-         * For American customers only. Subscription amount being authorised by the mandate. In the lowest
-         * denomination for the currency (cents in USD). Is required if `subscription_frequency` has been
-         * provided.
+         * For American customers only. Subscription amount being authorised by the mandate. In the
+         * lowest denomination for the currency (cents in USD). Is required if
+         * `subscription_frequency` has been provided.
          */
         public MandatePdfCreateRequest withSubscriptionAmount(Integer subscriptionAmount) {
             this.subscriptionAmount = subscriptionAmount;
@@ -327,8 +301,9 @@ public class MandatePdfService {
         }
 
         /**
-         * For American customers only. Frequency of the subscription being authorised by the mandate. One of
-         * `weekly`, `monthly` or `yearly`. Is required if `subscription_amount` has been provided.
+         * For American customers only. Frequency of the subscription being authorised by the
+         * mandate. One of `weekly`, `monthly` or `yearly`. Is required if `subscription_amount` has
+         * been provided.
          */
         public MandatePdfCreateRequest withSubscriptionFrequency(String subscriptionFrequency) {
             this.subscriptionFrequency = subscriptionFrequency;
@@ -377,6 +352,7 @@ public class MandatePdfService {
             @SerializedName("savings")
             SAVINGS, @SerializedName("checking")
             CHECKING;
+
             @Override
             public String toString() {
                 return name().toLowerCase();
@@ -387,8 +363,9 @@ public class MandatePdfService {
             private String mandate;
 
             /**
-             * ID of an existing [mandate](#core-endpoints-mandates) to build the PDF from. The customer's bank
-             * details will be censored in the generated PDF. No other parameters may be provided alongside this.
+             * ID of an existing [mandate](#core-endpoints-mandates) to build the PDF from. The
+             * customer's bank details will be censored in the generated PDF. No other parameters
+             * may be provided alongside this.
              */
             public Links withMandate(String mandate) {
                 this.mandate = mandate;

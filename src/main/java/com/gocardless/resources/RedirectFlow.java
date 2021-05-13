@@ -1,8 +1,7 @@
 package com.gocardless.resources;
 
-import java.util.Map;
-
 import com.google.gson.annotations.SerializedName;
+import java.util.Map;
 
 /**
  * Represents a redirect flow resource returned from the API.
@@ -28,9 +27,9 @@ import com.google.gson.annotations.SerializedName;
  * [subscription](#core-endpoints-subscriptions) or [payment](#core-endpoints-payments) at this
  * point.
  * 
- * Once you have [completed](#redirect-flows-complete-a-redirect-flow) the redirect flow via the API,
- * you should display a confirmation page to your customer, confirming that their Direct Debit has
- * been set up. You can build your own page, or redirect to the one we provide in the
+ * Once you have [completed](#redirect-flows-complete-a-redirect-flow) the redirect flow via the
+ * API, you should display a confirmation page to your customer, confirming that their Direct Debit
+ * has been set up. You can build your own page, or redirect to the one we provide in the
  * `confirmation_url` attribute of the redirect flow.
  * 
  * Redirect flows expire 30 minutes after they are first created. You cannot complete an expired
@@ -53,12 +52,12 @@ public class RedirectFlow {
     private String successRedirectUrl;
 
     /**
-     * The URL of a confirmation page, which you may optionally redirect the customer to rather than use
-     * your own page, that confirms in their chosen language that their Direct Debit has been set up
-     * successfully. Only returned once the customer has set up their mandate via the payment pages and
-     * the redirect flow has been [completed](#redirect-flows-complete-a-redirect-flow), and only
-     * available for 15 minutes from when you complete the redirect flow. The structure of this URL may
-     * change at any time, so you should read it directly from the API response.
+     * The URL of a confirmation page, which you may optionally redirect the customer to rather than
+     * use your own page, that confirms in their chosen language that their Direct Debit has been
+     * set up successfully. Only returned once the customer has set up their mandate via the payment
+     * pages and the redirect flow has been [completed](#redirect-flows-complete-a-redirect-flow),
+     * and only available for 15 minutes from when you complete the redirect flow. The structure of
+     * this URL may change at any time, so you should read it directly from the API response.
      */
     public String getConfirmationUrl() {
         return confirmationUrl;
@@ -72,8 +71,8 @@ public class RedirectFlow {
     }
 
     /**
-     * A description of the item the customer is paying for. This will be shown on the hosted payment
-     * pages.
+     * A description of the item the customer is paying for. This will be shown on the hosted
+     * payment pages.
      */
     public String getDescription() {
         return description;
@@ -91,33 +90,33 @@ public class RedirectFlow {
     }
 
     /**
-     * Key-value store of custom data. Up to 3 keys are permitted, with key names up to 50 characters and
-     * values up to 500 characters.
+     * Key-value store of custom data. Up to 3 keys are permitted, with key names up to 50
+     * characters and values up to 500 characters.
      */
     public Map<String, String> getMetadata() {
         return metadata;
     }
 
     /**
-     * The URL of the hosted payment pages for this redirect flow. This is the URL you should redirect
-     * your customer to.
+     * The URL of the hosted payment pages for this redirect flow. This is the URL you should
+     * redirect your customer to.
      */
     public String getRedirectUrl() {
         return redirectUrl;
     }
 
     /**
-     * The Direct Debit scheme of the mandate. If specified, the payment pages will only allow the set-up
-     * of a mandate for the specified scheme. It is recommended that you leave this blank so the most
-     * appropriate scheme is picked based on the customer's bank account.
+     * The Direct Debit scheme of the mandate. If specified, the payment pages will only allow the
+     * set-up of a mandate for the specified scheme. It is recommended that you leave this blank so
+     * the most appropriate scheme is picked based on the customer's bank account.
      */
     public Scheme getScheme() {
         return scheme;
     }
 
     /**
-     * The customer's session ID must be provided when the redirect flow is set up and again when it is
-     * completed. This allows integrators to ensure that the user who was originally sent to the
+     * The customer's session ID must be provided when the redirect flow is set up and again when it
+     * is completed. This allows integrators to ensure that the user who was originally sent to the
      * GoCardless payment pages is the one who has completed them.
      */
     public String getSessionToken() {
@@ -125,8 +124,8 @@ public class RedirectFlow {
     }
 
     /**
-     * The URL to redirect to upon successful mandate setup. You must use a URL beginning `https` in the
-     * live environment.
+     * The URL to redirect to upon successful mandate setup. You must use a URL beginning `https` in
+     * the live environment.
      */
     public String getSuccessRedirectUrl() {
         return successRedirectUrl;
@@ -155,33 +154,36 @@ public class RedirectFlow {
         private String mandate;
 
         /**
-         * The [creditor](#core-endpoints-creditors) for whom the mandate will be created. The `name` of the
-         * creditor will be displayed on the payment page.
+         * The [creditor](#core-endpoints-creditors) for whom the mandate will be created. The
+         * `name` of the creditor will be displayed on the payment page.
          */
         public String getCreditor() {
             return creditor;
         }
 
         /**
-         * ID of [customer](#core-endpoints-customers) created by this redirect flow.<br/>**Note**: this
-         * property will not be present until the redirect flow has been successfully completed.
+         * ID of [customer](#core-endpoints-customers) created by this redirect flow.<br/>
+         * **Note**: this property will not be present until the redirect flow has been successfully
+         * completed.
          */
         public String getCustomer() {
             return customer;
         }
 
         /**
-         * ID of [customer bank account](#core-endpoints-customer-bank-accounts) created by this redirect
-         * flow.<br/>**Note**: this property will not be present until the redirect flow has been
-         * successfully completed.
+         * ID of [customer bank account](#core-endpoints-customer-bank-accounts) created by this
+         * redirect flow.<br/>
+         * **Note**: this property will not be present until the redirect flow has been successfully
+         * completed.
          */
         public String getCustomerBankAccount() {
             return customerBankAccount;
         }
 
         /**
-         * ID of [mandate](#core-endpoints-mandates) created by this redirect flow.<br/>**Note**: this
-         * property will not be present until the redirect flow has been successfully completed.
+         * ID of [mandate](#core-endpoints-mandates) created by this redirect flow.<br/>
+         * **Note**: this property will not be present until the redirect flow has been successfully
+         * completed.
          */
         public String getMandate() {
             return mandate;

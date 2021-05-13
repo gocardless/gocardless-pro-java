@@ -1,10 +1,9 @@
 package com.gocardless.http;
 
-import java.util.List;
-import java.util.Map;
-
 import com.google.common.collect.ImmutableMap;
 import com.google.gson.reflect.TypeToken;
+import java.util.List;
+import java.util.Map;
 
 /**
  * Base class for GET requests that return multiple items.
@@ -36,8 +35,7 @@ public abstract class ListRequest<S, T> extends ApiRequest<ListResponse<T>> {
     /**
      * Executes this request.
      *
-     * Returns a {@link com.gocardless.http.ApiResponse} that wraps the
-     * response entity.
+     * Returns a {@link com.gocardless.http.ApiResponse} that wraps the response entity.
      *
      * @throws com.gocardless.GoCardlessException
      */

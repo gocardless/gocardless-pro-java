@@ -1,17 +1,14 @@
 package com.gocardless.http;
 
-import java.util.List;
+import static org.assertj.core.api.Assertions.assertThat;
 
 import com.gocardless.http.HttpTestUtil.DummyItem;
 import com.gocardless.http.ListRequestTest.DummyListRequest;
-
 import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.Lists;
-
+import java.util.List;
 import org.junit.Rule;
 import org.junit.Test;
-
-import static org.assertj.core.api.Assertions.assertThat;
 
 public class PaginatingIterableTest {
     @Rule

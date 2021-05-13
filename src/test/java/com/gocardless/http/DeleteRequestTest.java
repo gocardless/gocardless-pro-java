@@ -1,13 +1,11 @@
 package com.gocardless.http;
 
+import static org.assertj.core.api.Assertions.assertThat;
+
 import com.gocardless.http.HttpTestUtil.DummyItem;
-
 import com.google.common.collect.ImmutableMap;
-
 import org.junit.Rule;
 import org.junit.Test;
-
-import static org.assertj.core.api.Assertions.assertThat;
 
 public class DeleteRequestTest {
     @Rule
@@ -19,7 +17,8 @@ public class DeleteRequestTest {
         DummyItem result = new DummyDeleteRequest().execute();
         assertThat(result.stringField).isEqualTo("foo");
         assertThat(result.intField).isEqualTo(123);
-        http.assertRequestMade("DELETE", "/dummy", ImmutableMap.of("Authorization", "Bearer token"));
+        http.assertRequestMade("DELETE", "/dummy",
+                ImmutableMap.of("Authorization", "Bearer token"));
     }
 
     @Test
@@ -74,9 +73,8 @@ public class DeleteRequestTest {
 
     public void shouldPerformWrappedDeleteRequestWithBody() throws Exception {
         http.enqueueResponse(200, "fixtures/single.json");
-        ApiResponse<DummyItem> result =
-                new DummyDeleteRequestWithBody().withHeader("Accept-Language", "fr-FR")
-                        .executeWrapped();
+        ApiResponse<DummyItem> result = new DummyDeleteRequestWithBody()
+                .withHeader("Accept-Language", "fr-FR").executeWrapped();
         assertThat(result.getStatusCode()).isEqualTo(200);
         assertThat(result.getHeaders().get("foo")).containsExactly("bar");
         assertThat(result.getResource().stringField).isEqualTo("foo");

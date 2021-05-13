@@ -1,10 +1,9 @@
 package com.gocardless.http;
 
-import java.util.List;
-import java.util.Map;
-
 import com.google.common.collect.ImmutableListMultimap;
 import com.google.common.collect.Multimap;
+import java.util.List;
+import java.util.Map;
 
 /**
  * Base class for API responses.

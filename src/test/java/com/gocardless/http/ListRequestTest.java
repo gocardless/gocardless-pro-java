@@ -1,18 +1,15 @@
 package com.gocardless.http;
 
-import java.util.List;
+import static org.assertj.core.api.Assertions.assertThat;
 
 import com.gocardless.http.HttpTestUtil.DummyItem;
-
 import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.Lists;
 import com.google.gson.reflect.TypeToken;
-
+import java.util.List;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
-
-import static org.assertj.core.api.Assertions.assertThat;
 
 public class ListRequestTest {
     @Rule
@@ -37,9 +34,8 @@ public class ListRequestTest {
     public void shouldRetryOnNetworkFailure() throws Exception {
         http.enqueueNetworkFailure();
         http.enqueueResponse(200, "fixtures/page.json");
-        ListResponse<DummyItem> result =
-                DummyListRequest.pageRequest(http.client()).withHeader("Accept-Language", "fr-FR")
-                        .execute();
+        ListResponse<DummyItem> result = DummyListRequest.pageRequest(http.client())
+                .withHeader("Accept-Language", "fr-FR").execute();
         assertThat(result.getItems()).hasSize(2);
         assertThat(result.getItems().get(0).stringField).isEqualTo("foo");
         assertThat(result.getItems().get(0).intField).isEqualTo(123);
@@ -55,9 +51,8 @@ public class ListRequestTest {
     public void shouldRetryOnInternalError() throws Exception {
         http.enqueueResponse(500, "fixtures/internal_error.json");
         http.enqueueResponse(200, "fixtures/page.json");
-        ListResponse<DummyItem> result =
-                DummyListRequest.pageRequest(http.client()).withHeader("Accept-Language", "fr-FR")
-                        .execute();
+        ListResponse<DummyItem> result = DummyListRequest.pageRequest(http.client())
+                .withHeader("Accept-Language", "fr-FR").execute();
         assertThat(result.getItems()).hasSize(2);
         assertThat(result.getItems().get(0).stringField).isEqualTo("foo");
         assertThat(result.getItems().get(0).intField).isEqualTo(123);
@@ -72,9 +67,8 @@ public class ListRequestTest {
     @Test
     public void shouldPerformWrappedListRequest() throws Exception {
         http.enqueueResponse(200, "fixtures/page.json", ImmutableMap.of("foo", "bar"));
-        ApiResponse<ListResponse<DummyItem>> result =
-                DummyListRequest.pageRequest(http.client()).withHeader("Accept-Language", "fr-FR")
-                        .executeWrapped();
+        ApiResponse<ListResponse<DummyItem>> result = DummyListRequest.pageRequest(http.client())
+                .withHeader("Accept-Language", "fr-FR").executeWrapped();
         assertThat(result.getStatusCode()).isEqualTo(200);
         assertThat(result.getHeaders().get("foo")).containsExactly("bar");
         assertThat(result.getResource().getItems()).hasSize(2);
@@ -86,9 +80,8 @@ public class ListRequestTest {
     public void shouldBeAbleToIterateThroughList() throws Exception {
         http.enqueueResponse(200, "fixtures/first-page.json");
         http.enqueueResponse(200, "fixtures/last-page.json");
-        Iterable<DummyItem> iterable =
-                DummyListRequest.iterableRequest(http.client())
-                        .withHeader("Accept-Language", "fr-FR").execute();
+        Iterable<DummyItem> iterable = DummyListRequest.iterableRequest(http.client())
+                .withHeader("Accept-Language", "fr-FR").execute();
         List<DummyItem> result = Lists.newArrayList(iterable);
         assertThat(result).hasSize(3);
         assertThat(result.get(0).stringField).isEqualTo("foo");
@@ -112,7 +105,8 @@ public class ListRequestTest {
     }
 
     static class DummyListRequest<S> extends ListRequest<S, DummyItem> {
-        private DummyListRequest(HttpClient httpClient, ListRequestExecutor<S, DummyItem> executor) {
+        private DummyListRequest(HttpClient httpClient,
+                ListRequestExecutor<S, DummyItem> executor) {
             super(httpClient, executor);
         }
 

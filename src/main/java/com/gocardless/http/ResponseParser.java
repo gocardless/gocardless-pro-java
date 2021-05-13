@@ -1,15 +1,13 @@
 package com.gocardless.http;
 
-import java.util.List;
-
 import com.gocardless.errors.ApiErrorResponse;
 import com.gocardless.errors.GoCardlessApiException;
 import com.gocardless.errors.GoCardlessErrorMapper;
 import com.gocardless.errors.MalformedResponseException;
-
 import com.google.common.collect.ImmutableList;
 import com.google.gson.*;
 import com.google.gson.reflect.TypeToken;
+import java.util.List;
 
 final class ResponseParser {
     private final Gson gson;

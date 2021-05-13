@@ -1,44 +1,42 @@
 package com.gocardless.services;
 
-import java.util.Map;
-
 import com.gocardless.http.*;
 import com.gocardless.resources.CustomerNotification;
-
 import com.google.common.collect.ImmutableMap;
+import java.util.Map;
 
 /**
  * Service class for working with customer notification resources.
  *
- * Customer Notifications represent the notification which is due to be sent to a customer
- * after an event has happened. The event, the resource and the customer to be notified
- * are all identified in the `links` property.
+ * Customer Notifications represent the notification which is due to be sent to a customer after an
+ * event has happened. The event, the resource and the customer to be notified are all identified in
+ * the `links` property.
  * 
- * Note that these are ephemeral records - once the notification has been actioned in some
- * way, it is no longer visible using this API.
+ * Note that these are ephemeral records - once the notification has been actioned in some way, it
+ * is no longer visible using this API.
  * 
- * <p class="restricted-notice"><strong>Restricted</strong>: This API is currently only available for
- * approved integrators - please <a href="mailto:help@gocardless.com">get in touch</a> if you would
- * like to use this API.</p>
+ * <p class="restricted-notice">
+ * <strong>Restricted</strong>: This API is currently only available for approved integrators -
+ * please <a href="mailto:help@gocardless.com">get in touch</a> if you would like to use this API.
+ * </p>
  */
 public class CustomerNotificationService {
     private final HttpClient httpClient;
 
     /**
-     * Constructor.  Users of this library should have no need to call this - an instance
-     * of this class can be obtained by calling
-      {@link com.gocardless.GoCardlessClient#customerNotifications() }.
+     * Constructor. Users of this library should have no need to call this - an instance of this
+     * class can be obtained by calling
+     * {@link com.gocardless.GoCardlessClient#customerNotifications() }.
      */
     public CustomerNotificationService(HttpClient httpClient) {
         this.httpClient = httpClient;
     }
 
     /**
-     * "Handling" a notification means that you have sent the notification yourself (and
-     * don't want GoCardless to send it).
-     * If the notification has already been actioned, or the deadline to notify has passed,
-     * this endpoint will return an `already_actioned` error and you should not take
-     * further action. This endpoint takes no additional parameters.
+     * "Handling" a notification means that you have sent the notification yourself (and don't want
+     * GoCardless to send it). If the notification has already been actioned, or the deadline to
+     * notify has passed, this endpoint will return an `already_actioned` error and you should not
+     * take further action. This endpoint takes no additional parameters.
      * 
      */
     public CustomerNotificationHandleRequest handle(String identity) {
@@ -48,15 +46,14 @@ public class CustomerNotificationService {
     /**
      * Request class for {@link CustomerNotificationService#handle }.
      *
-     * "Handling" a notification means that you have sent the notification yourself (and
-     * don't want GoCardless to send it).
-     * If the notification has already been actioned, or the deadline to notify has passed,
-     * this endpoint will return an `already_actioned` error and you should not take
-     * further action. This endpoint takes no additional parameters.
+     * "Handling" a notification means that you have sent the notification yourself (and don't want
+     * GoCardless to send it). If the notification has already been actioned, or the deadline to
+     * notify has passed, this endpoint will return an `already_actioned` error and you should not
+     * take further action. This endpoint takes no additional parameters.
      * 
      */
-    public static final class CustomerNotificationHandleRequest extends
-            PostRequest<CustomerNotification> {
+    public static final class CustomerNotificationHandleRequest
+            extends PostRequest<CustomerNotification> {
         @PathParam
         private final String identity;
 

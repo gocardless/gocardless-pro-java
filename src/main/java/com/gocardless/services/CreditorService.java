@@ -1,14 +1,12 @@
 package com.gocardless.services;
 
+import com.gocardless.http.*;
+import com.gocardless.resources.Creditor;
+import com.google.common.collect.ImmutableMap;
+import com.google.gson.reflect.TypeToken;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
-import com.gocardless.http.*;
-import com.gocardless.resources.Creditor;
-
-import com.google.common.collect.ImmutableMap;
-import com.google.gson.reflect.TypeToken;
 
 /**
  * Service class for working with creditor resources.
@@ -24,9 +22,8 @@ public class CreditorService {
     private final HttpClient httpClient;
 
     /**
-     * Constructor.  Users of this library should have no need to call this - an instance
-     * of this class can be obtained by calling
-      {@link com.gocardless.GoCardlessClient#creditors() }.
+     * Constructor. Users of this library should have no need to call this - an instance of this
+     * class can be obtained by calling {@link com.gocardless.GoCardlessClient#creditors() }.
      */
     public CreditorService(HttpClient httpClient) {
         this.httpClient = httpClient;
@@ -283,7 +280,8 @@ public class CreditorService {
             return this;
         }
 
-        private CreditorListRequest(HttpClient httpClient, ListRequestExecutor<S, Creditor> executor) {
+        private CreditorListRequest(HttpClient httpClient,
+                ListRequestExecutor<S, Creditor> executor) {
             super(httpClient, executor);
         }
 
@@ -488,10 +486,11 @@ public class CreditorService {
         }
 
         /**
-         * ID of the [bank account](#core-endpoints-creditor-bank-accounts) which is set up to receive
-         * payouts in AUD.
+         * ID of the [bank account](#core-endpoints-creditor-bank-accounts) which is set up to
+         * receive payouts in AUD.
          */
-        public CreditorUpdateRequest withLinksDefaultAudPayoutAccount(String defaultAudPayoutAccount) {
+        public CreditorUpdateRequest withLinksDefaultAudPayoutAccount(
+                String defaultAudPayoutAccount) {
             if (links == null) {
                 links = new Links();
             }
@@ -500,10 +499,11 @@ public class CreditorService {
         }
 
         /**
-         * ID of the [bank account](#core-endpoints-creditor-bank-accounts) which is set up to receive
-         * payouts in CAD.
+         * ID of the [bank account](#core-endpoints-creditor-bank-accounts) which is set up to
+         * receive payouts in CAD.
          */
-        public CreditorUpdateRequest withLinksDefaultCadPayoutAccount(String defaultCadPayoutAccount) {
+        public CreditorUpdateRequest withLinksDefaultCadPayoutAccount(
+                String defaultCadPayoutAccount) {
             if (links == null) {
                 links = new Links();
             }
@@ -512,10 +512,11 @@ public class CreditorService {
         }
 
         /**
-         * ID of the [bank account](#core-endpoints-creditor-bank-accounts) which is set up to receive
-         * payouts in DKK.
+         * ID of the [bank account](#core-endpoints-creditor-bank-accounts) which is set up to
+         * receive payouts in DKK.
          */
-        public CreditorUpdateRequest withLinksDefaultDkkPayoutAccount(String defaultDkkPayoutAccount) {
+        public CreditorUpdateRequest withLinksDefaultDkkPayoutAccount(
+                String defaultDkkPayoutAccount) {
             if (links == null) {
                 links = new Links();
             }
@@ -524,10 +525,11 @@ public class CreditorService {
         }
 
         /**
-         * ID of the [bank account](#core-endpoints-creditor-bank-accounts) which is set up to receive
-         * payouts in EUR.
+         * ID of the [bank account](#core-endpoints-creditor-bank-accounts) which is set up to
+         * receive payouts in EUR.
          */
-        public CreditorUpdateRequest withLinksDefaultEurPayoutAccount(String defaultEurPayoutAccount) {
+        public CreditorUpdateRequest withLinksDefaultEurPayoutAccount(
+                String defaultEurPayoutAccount) {
             if (links == null) {
                 links = new Links();
             }
@@ -536,10 +538,11 @@ public class CreditorService {
         }
 
         /**
-         * ID of the [bank account](#core-endpoints-creditor-bank-accounts) which is set up to receive
-         * payouts in GBP.
+         * ID of the [bank account](#core-endpoints-creditor-bank-accounts) which is set up to
+         * receive payouts in GBP.
          */
-        public CreditorUpdateRequest withLinksDefaultGbpPayoutAccount(String defaultGbpPayoutAccount) {
+        public CreditorUpdateRequest withLinksDefaultGbpPayoutAccount(
+                String defaultGbpPayoutAccount) {
             if (links == null) {
                 links = new Links();
             }
@@ -548,10 +551,11 @@ public class CreditorService {
         }
 
         /**
-         * ID of the [bank account](#core-endpoints-creditor-bank-accounts) which is set up to receive
-         * payouts in NZD.
+         * ID of the [bank account](#core-endpoints-creditor-bank-accounts) which is set up to
+         * receive payouts in NZD.
          */
-        public CreditorUpdateRequest withLinksDefaultNzdPayoutAccount(String defaultNzdPayoutAccount) {
+        public CreditorUpdateRequest withLinksDefaultNzdPayoutAccount(
+                String defaultNzdPayoutAccount) {
             if (links == null) {
                 links = new Links();
             }
@@ -560,10 +564,11 @@ public class CreditorService {
         }
 
         /**
-         * ID of the [bank account](#core-endpoints-creditor-bank-accounts) which is set up to receive
-         * payouts in SEK.
+         * ID of the [bank account](#core-endpoints-creditor-bank-accounts) which is set up to
+         * receive payouts in SEK.
          */
-        public CreditorUpdateRequest withLinksDefaultSekPayoutAccount(String defaultSekPayoutAccount) {
+        public CreditorUpdateRequest withLinksDefaultSekPayoutAccount(
+                String defaultSekPayoutAccount) {
             if (links == null) {
                 links = new Links();
             }
@@ -572,10 +577,11 @@ public class CreditorService {
         }
 
         /**
-         * ID of the [bank account](#core-endpoints-creditor-bank-accounts) which is set up to receive
-         * payouts in USD.
+         * ID of the [bank account](#core-endpoints-creditor-bank-accounts) which is set up to
+         * receive payouts in USD.
          */
-        public CreditorUpdateRequest withLinksDefaultUsdPayoutAccount(String defaultUsdPayoutAccount) {
+        public CreditorUpdateRequest withLinksDefaultUsdPayoutAccount(
+                String defaultUsdPayoutAccount) {
             if (links == null) {
                 links = new Links();
             }
@@ -655,8 +661,8 @@ public class CreditorService {
             private String defaultUsdPayoutAccount;
 
             /**
-             * ID of the [bank account](#core-endpoints-creditor-bank-accounts) which is set up to receive
-             * payouts in AUD.
+             * ID of the [bank account](#core-endpoints-creditor-bank-accounts) which is set up to
+             * receive payouts in AUD.
              */
             public Links withDefaultAudPayoutAccount(String defaultAudPayoutAccount) {
                 this.defaultAudPayoutAccount = defaultAudPayoutAccount;
@@ -664,8 +670,8 @@ public class CreditorService {
             }
 
             /**
-             * ID of the [bank account](#core-endpoints-creditor-bank-accounts) which is set up to receive
-             * payouts in CAD.
+             * ID of the [bank account](#core-endpoints-creditor-bank-accounts) which is set up to
+             * receive payouts in CAD.
              */
             public Links withDefaultCadPayoutAccount(String defaultCadPayoutAccount) {
                 this.defaultCadPayoutAccount = defaultCadPayoutAccount;
@@ -673,8 +679,8 @@ public class CreditorService {
             }
 
             /**
-             * ID of the [bank account](#core-endpoints-creditor-bank-accounts) which is set up to receive
-             * payouts in DKK.
+             * ID of the [bank account](#core-endpoints-creditor-bank-accounts) which is set up to
+             * receive payouts in DKK.
              */
             public Links withDefaultDkkPayoutAccount(String defaultDkkPayoutAccount) {
                 this.defaultDkkPayoutAccount = defaultDkkPayoutAccount;
@@ -682,8 +688,8 @@ public class CreditorService {
             }
 
             /**
-             * ID of the [bank account](#core-endpoints-creditor-bank-accounts) which is set up to receive
-             * payouts in EUR.
+             * ID of the [bank account](#core-endpoints-creditor-bank-accounts) which is set up to
+             * receive payouts in EUR.
              */
             public Links withDefaultEurPayoutAccount(String defaultEurPayoutAccount) {
                 this.defaultEurPayoutAccount = defaultEurPayoutAccount;
@@ -691,8 +697,8 @@ public class CreditorService {
             }
 
             /**
-             * ID of the [bank account](#core-endpoints-creditor-bank-accounts) which is set up to receive
-             * payouts in GBP.
+             * ID of the [bank account](#core-endpoints-creditor-bank-accounts) which is set up to
+             * receive payouts in GBP.
              */
             public Links withDefaultGbpPayoutAccount(String defaultGbpPayoutAccount) {
                 this.defaultGbpPayoutAccount = defaultGbpPayoutAccount;
@@ -700,8 +706,8 @@ public class CreditorService {
             }
 
             /**
-             * ID of the [bank account](#core-endpoints-creditor-bank-accounts) which is set up to receive
-             * payouts in NZD.
+             * ID of the [bank account](#core-endpoints-creditor-bank-accounts) which is set up to
+             * receive payouts in NZD.
              */
             public Links withDefaultNzdPayoutAccount(String defaultNzdPayoutAccount) {
                 this.defaultNzdPayoutAccount = defaultNzdPayoutAccount;
@@ -709,8 +715,8 @@ public class CreditorService {
             }
 
             /**
-             * ID of the [bank account](#core-endpoints-creditor-bank-accounts) which is set up to receive
-             * payouts in SEK.
+             * ID of the [bank account](#core-endpoints-creditor-bank-accounts) which is set up to
+             * receive payouts in SEK.
              */
             public Links withDefaultSekPayoutAccount(String defaultSekPayoutAccount) {
                 this.defaultSekPayoutAccount = defaultSekPayoutAccount;
@@ -718,8 +724,8 @@ public class CreditorService {
             }
 
             /**
-             * ID of the [bank account](#core-endpoints-creditor-bank-accounts) which is set up to receive
-             * payouts in USD.
+             * ID of the [bank account](#core-endpoints-creditor-bank-accounts) which is set up to
+             * receive payouts in USD.
              */
             public Links withDefaultUsdPayoutAccount(String defaultUsdPayoutAccount) {
                 this.defaultUsdPayoutAccount = defaultUsdPayoutAccount;

@@ -8,8 +8,7 @@ import java.lang.annotation.Target;
 /**
  * Marks a field as a parameter used to construct the path for a request.
  *
- * Fields marked with this annotation will not be serialized as JSON when
- * making HTTP requests.
+ * Fields marked with this annotation will not be serialized as JSON when making HTTP requests.
  */
 @Retention(RetentionPolicy.RUNTIME)
 @Target(ElementType.FIELD)

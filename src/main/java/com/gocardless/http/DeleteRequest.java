@@ -24,8 +24,7 @@ public abstract class DeleteRequest<T> extends ApiRequest<T> {
     /**
      * Executes this request.
      *
-     * Returns a {@link com.gocardless.http.ApiResponse} that wraps the
-     * response entity.
+     * Returns a {@link com.gocardless.http.ApiResponse} that wraps the response entity.
      *
      * @throws com.gocardless.GoCardlessException
      */
@@ -35,7 +34,11 @@ public abstract class DeleteRequest<T> extends ApiRequest<T> {
 
     @Override
     protected T parseResponse(String responseBody, ResponseParser responseParser) {
-        return responseParser.parseSingle(responseBody, getEnvelope(), getResponseClass());
+        if (responseBody == null || responseBody.trim().isEmpty()) {
+            return null;
+        } else {
+            return responseParser.parseSingle(responseBody, getEnvelope(), getResponseClass());
+        }
     }
 
     @Override

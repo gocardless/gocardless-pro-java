@@ -1,13 +1,11 @@
 package com.gocardless.http;
 
+import static org.assertj.core.api.Assertions.assertThat;
+
 import com.gocardless.http.HttpTestUtil.DummyItem;
-
 import com.google.common.collect.ImmutableMap;
-
 import org.junit.Rule;
 import org.junit.Test;
-
-import static org.assertj.core.api.Assertions.assertThat;
 
 public class PutRequestTest {
     @Rule
@@ -72,9 +70,8 @@ public class PutRequestTest {
 
     public void shouldPerformWrappedPutRequestWithBody() throws Exception {
         http.enqueueResponse(200, "fixtures/single.json");
-        ApiResponse<DummyItem> result =
-                new DummyPutRequestWithBody().withHeader("Accept-Language", "fr-FR")
-                        .executeWrapped();
+        ApiResponse<DummyItem> result = new DummyPutRequestWithBody()
+                .withHeader("Accept-Language", "fr-FR").executeWrapped();
         assertThat(result.getStatusCode()).isEqualTo(200);
         assertThat(result.getHeaders().get("foo")).containsExactly("bar");
         assertThat(result.getResource().stringField).isEqualTo("foo");

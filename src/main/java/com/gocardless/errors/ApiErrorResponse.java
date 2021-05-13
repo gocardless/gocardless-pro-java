@@ -1,9 +1,8 @@
 package com.gocardless.errors;
 
-import java.util.List;
-
 import com.google.common.base.Joiner;
 import com.google.common.collect.ImmutableList;
+import java.util.List;
 
 public class ApiErrorResponse {
     private static final Joiner JOINER = Joiner.on(", ");

@@ -1,27 +1,20 @@
 package com.gocardless.http;
 
-import java.io.IOException;
-import java.util.Map;
+import static com.gocardless.http.HttpTestUtil.jsonMatchesFixture;
+import static com.google.common.base.Charsets.UTF_8;
+import static com.squareup.okhttp.mockwebserver.SocketPolicy.DISCONNECT_AT_START;
+import static org.assertj.core.api.Assertions.assertThat;
 
 import com.gocardless.GoCardlessClient;
 import com.gocardless.TestUtil;
-
 import com.google.common.collect.ImmutableMap;
 import com.google.common.io.Resources;
-
 import com.squareup.okhttp.mockwebserver.MockResponse;
 import com.squareup.okhttp.mockwebserver.MockWebServer;
 import com.squareup.okhttp.mockwebserver.RecordedRequest;
-
+import java.io.IOException;
+import java.util.Map;
 import org.junit.rules.ExternalResource;
-
-import static com.gocardless.http.HttpTestUtil.jsonMatchesFixture;
-
-import static com.google.common.base.Charsets.UTF_8;
-
-import static com.squareup.okhttp.mockwebserver.SocketPolicy.DISCONNECT_AT_START;
-
-import static org.assertj.core.api.Assertions.assertThat;
 
 public class MockHttp extends ExternalResource {
     private MockWebServer server;

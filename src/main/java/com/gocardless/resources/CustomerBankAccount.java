@@ -1,8 +1,7 @@
 package com.gocardless.resources;
 
-import java.util.Map;
-
 import com.google.gson.annotations.SerializedName;
+import java.util.Map;
 
 /**
  * Represents a customer bank account resource returned from the API.
@@ -11,10 +10,10 @@ import com.google.gson.annotations.SerializedName;
  * always belong to a [customer](#core-endpoints-customers), and may be linked to several Direct
  * Debit [mandates](#core-endpoints-mandates).
  * 
- * Note that customer bank accounts must be unique, and so you will encounter a `bank_account_exists`
- * error if you try to create a duplicate bank account. You may wish to handle this by updating the
- * existing record instead, the ID of which will be provided as `links[customer_bank_account]` in the
- * error response.
+ * Note that customer bank accounts must be unique, and so you will encounter a
+ * `bank_account_exists` error if you try to create a duplicate bank account. You may wish to handle
+ * this by updating the existing record instead, the ID of which will be provided as
+ * `links[customer_bank_account]` in the error response.
  */
 public class CustomerBankAccount {
     private CustomerBankAccount() {
@@ -34,18 +33,18 @@ public class CustomerBankAccount {
     private Map<String, String> metadata;
 
     /**
-     * Name of the account holder, as known by the bank. Usually this is the same as the name stored with
-     * the linked [creditor](#core-endpoints-creditors). This field will be transliterated, upcased and
-     * truncated to 18 characters. This field is required unless the request includes a [customer bank
-     * account token](#javascript-flow-customer-bank-account-tokens).
+     * Name of the account holder, as known by the bank. Usually this is the same as the name stored
+     * with the linked [creditor](#core-endpoints-creditors). This field will be transliterated,
+     * upcased and truncated to 18 characters. This field is required unless the request includes a
+     * [customer bank account token](#javascript-flow-customer-bank-account-tokens).
      */
     public String getAccountHolderName() {
         return accountHolderName;
     }
 
     /**
-     * The last few digits of the account number. Currently 4 digits for NZD bank accounts and 2 digits
-     * for other currencies.
+     * The last few digits of the account number. Currently 4 digits for NZD bank accounts and 2
+     * digits for other currencies.
      */
     public String getAccountNumberEnding() {
         return accountNumberEnding;
@@ -69,8 +68,8 @@ public class CustomerBankAccount {
 
     /**
      * [ISO 3166-1 alpha-2
-     * code](http://en.wikipedia.org/wiki/ISO_3166-1_alpha-2#Officially_assigned_code_elements). Defaults
-     * to the country code of the `iban` if supplied, otherwise is required.
+     * code](http://en.wikipedia.org/wiki/ISO_3166-1_alpha-2#Officially_assigned_code_elements).
+     * Defaults to the country code of the `iban` if supplied, otherwise is required.
      */
     public String getCountryCode() {
         return countryCode;
@@ -84,8 +83,8 @@ public class CustomerBankAccount {
     }
 
     /**
-     * [ISO 4217](http://en.wikipedia.org/wiki/ISO_4217#Active_codes) currency code. Currently "AUD",
-     * "CAD", "DKK", "EUR", "GBP", "NZD", "SEK" and "USD" are supported.
+     * [ISO 4217](http://en.wikipedia.org/wiki/ISO_4217#Active_codes) currency code. Currently
+     * "AUD", "CAD", "DKK", "EUR", "GBP", "NZD", "SEK" and "USD" are supported.
      */
     public String getCurrency() {
         return currency;
@@ -110,8 +109,8 @@ public class CustomerBankAccount {
     }
 
     /**
-     * Key-value store of custom data. Up to 3 keys are permitted, with key names up to 50 characters and
-     * values up to 500 characters.
+     * Key-value store of custom data. Up to 3 keys are permitted, with key names up to 50
+     * characters and values up to 500 characters.
      */
     public Map<String, String> getMetadata() {
         return metadata;

@@ -1,4 +1,5 @@
 version: 2
+
 references:
   test_library: &test_library
     run:
@@ -25,7 +26,7 @@ references:
       - store_test_results:
           path: ~/junit
       - store_artifacts:
-          path: ~/junit 
+          path: ~/junit
 
 jobs:
   test_library_jdk7:
@@ -45,8 +46,10 @@ jobs:
 
 workflows:
   version: 2
+
   build:
     jobs:
       - test_library_jdk7
       - test_library_jdk8
       - test_library_jdk9
+

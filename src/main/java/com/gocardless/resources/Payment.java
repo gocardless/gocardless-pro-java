@@ -1,8 +1,7 @@
 package com.gocardless.resources;
 
-import java.util.Map;
-
 import com.google.gson.annotations.SerializedName;
+import java.util.Map;
 
 /**
  * Represents a payment resource returned from the API.
@@ -50,9 +49,9 @@ public class Payment {
 
     /**
      * A future date on which the payment should be collected. If not specified, the payment will be
-     * collected as soon as possible. If the value is before the [mandate](#core-endpoints-mandates)'s
-     * `next_possible_charge_date` creation will fail. If the value is not a working day it will be
-     * rolled forwards to the next available one.
+     * collected as soon as possible. If the value is before the
+     * [mandate](#core-endpoints-mandates)'s `next_possible_charge_date` creation will fail. If the
+     * value is not a working day it will be rolled forwards to the next available one.
      */
     public String getChargeDate() {
         return chargeDate;
@@ -66,8 +65,8 @@ public class Payment {
     }
 
     /**
-     * [ISO 4217](http://en.wikipedia.org/wiki/ISO_4217#Active_codes) currency code. Currently "AUD",
-     * "CAD", "DKK", "EUR", "GBP", "NZD", "SEK" and "USD" are supported.
+     * [ISO 4217](http://en.wikipedia.org/wiki/ISO_4217#Active_codes) currency code. Currently
+     * "AUD", "CAD", "DKK", "EUR", "GBP", "NZD", "SEK" and "USD" are supported.
      */
     public Currency getCurrency() {
         return currency;
@@ -75,8 +74,8 @@ public class Payment {
 
     /**
      * A human-readable description of the payment. This will be included in the notification email
-     * GoCardless sends to your customer if your organisation does not send its own notifications (see
-     * [compliance requirements](#appendix-compliance-requirements)).
+     * GoCardless sends to your customer if your organisation does not send its own notifications
+     * (see [compliance requirements](#appendix-compliance-requirements)).
      */
     public String getDescription() {
         return description;
@@ -98,24 +97,31 @@ public class Payment {
     }
 
     /**
-     * Key-value store of custom data. Up to 3 keys are permitted, with key names up to 50 characters and
-     * values up to 500 characters.
+     * Key-value store of custom data. Up to 3 keys are permitted, with key names up to 50
+     * characters and values up to 500 characters.
      */
     public Map<String, String> getMetadata() {
         return metadata;
     }
 
     /**
-     * An optional reference that will appear on your customer's bank statement. The character limit for
-     * this reference is dependent on the scheme.<br /> <strong>ACH</strong> - 10 characters<br />
-     * <strong>Autogiro</strong> - 11 characters<br /> <strong>Bacs</strong> - 10 characters<br />
-     * <strong>BECS</strong> - 30 characters<br /> <strong>BECS NZ</strong> - 12 characters<br />
-     * <strong>Betalingsservice</strong> - 30 characters<br /> <strong>PAD</strong> - 12 characters<br />
-     * <strong>SEPA</strong> - 140 characters<br /> Note that this reference must be unique (for each
-     * merchant) for the BECS scheme as it is a scheme requirement. <p
-     * class='restricted-notice'><strong>Restricted</strong>: You can only specify a payment reference
-     * for Bacs payments (that is, when collecting from the UK) if you're on the <a
-     * href='https://gocardless.com/pricing'>GoCardless Plus, Pro or Enterprise packages</a>.</p>
+     * An optional reference that will appear on your customer's bank statement. The character limit
+     * for this reference is dependent on the scheme.<br />
+     * <strong>ACH</strong> - 10 characters<br />
+     * <strong>Autogiro</strong> - 11 characters<br />
+     * <strong>Bacs</strong> - 10 characters<br />
+     * <strong>BECS</strong> - 30 characters<br />
+     * <strong>BECS NZ</strong> - 12 characters<br />
+     * <strong>Betalingsservice</strong> - 30 characters<br />
+     * <strong>PAD</strong> - 12 characters<br />
+     * <strong>SEPA</strong> - 140 characters<br />
+     * Note that this reference must be unique (for each merchant) for the BECS scheme as it is a
+     * scheme requirement.
+     * <p class='restricted-notice'>
+     * <strong>Restricted</strong>: You can only specify a payment reference for Bacs payments (that
+     * is, when collecting from the UK) if you're on the
+     * <a href='https://gocardless.com/pricing'>GoCardless Plus, Pro or Enterprise packages</a>.
+     * </p>
      */
     public String getReference() {
         return reference;
@@ -133,10 +139,11 @@ public class Payment {
      * One of:
      * <ul>
      * <li>`pending_customer_approval`: we're waiting for the customer to approve this payment</li>
-     * <li>`pending_submission`: the payment has been created, but not yet submitted to the banks</li>
+     * <li>`pending_submission`: the payment has been created, but not yet submitted to the
+     * banks</li>
      * <li>`submitted`: the payment has been submitted to the banks</li>
      * <li>`confirmed`: the payment has been confirmed as collected</li>
-     * <li>`paid_out`:  the payment has been included in a [payout](#core-endpoints-payouts)</li>
+     * <li>`paid_out`: the payment has been included in a [payout](#core-endpoints-payouts)</li>
      * <li>`cancelled`: the payment has been cancelled</li>
      * <li>`customer_approval_denied`: the customer has denied approval for the payment. You should
      * contact the customer directly</li>
@@ -185,35 +192,35 @@ public class Payment {
         private FxCurrency fxCurrency;
 
         /**
-         * Estimated rate that will be used in the foreign exchange of the `amount` into the `fx_currency`.
-         * This will vary based on the prevailing market rate until the moment that it is paid out.
-         * Present only before a resource is paid out. Has up to 10 decimal places.
+         * Estimated rate that will be used in the foreign exchange of the `amount` into the
+         * `fx_currency`. This will vary based on the prevailing market rate until the moment that
+         * it is paid out. Present only before a resource is paid out. Has up to 10 decimal places.
          */
         public String getEstimatedExchangeRate() {
             return estimatedExchangeRate;
         }
 
         /**
-         * Rate used in the foreign exchange of the `amount` into the `fx_currency`.
-         * Present only after a resource is paid out. Has up to 10 decimal places.
+         * Rate used in the foreign exchange of the `amount` into the `fx_currency`. Present only
+         * after a resource is paid out. Has up to 10 decimal places.
          */
         public String getExchangeRate() {
             return exchangeRate;
         }
 
         /**
-         * Amount that was paid out in the `fx_currency` after foreign exchange.
-         * Present only after the resource has been paid out.
+         * Amount that was paid out in the `fx_currency` after foreign exchange. Present only after
+         * the resource has been paid out.
          */
         public Integer getFxAmount() {
             return fxAmount;
         }
 
         /**
-         * [ISO 4217](http://en.wikipedia.org/wiki/ISO_4217#Active_codes) code for the currency in which
-         * amounts will be paid out (after foreign exchange). Currently "AUD", "CAD", "DKK", "EUR", "GBP",
-         * "NZD", "SEK" and "USD" are supported. Present only if payouts will be (or were) made via foreign
-         * exchange.
+         * [ISO 4217](http://en.wikipedia.org/wiki/ISO_4217#Active_codes) code for the currency in
+         * which amounts will be paid out (after foreign exchange). Currently "AUD", "CAD", "DKK",
+         * "EUR", "GBP", "NZD", "SEK" and "USD" are supported. Present only if payouts will be (or
+         * were) made via foreign exchange.
          */
         public FxCurrency getFxCurrency() {
             return fxCurrency;
@@ -251,8 +258,9 @@ public class Payment {
         }
 
         /**
-         * ID of [instalment_schedule](#core-endpoints-instalment-schedules) from which this payment was
-         * created.<br/>**Note**: this property will only be present if this payment is part of an instalment
+         * ID of [instalment_schedule](#core-endpoints-instalment-schedules) from which this payment
+         * was created.<br/>
+         * **Note**: this property will only be present if this payment is part of an instalment
          * schedule.
          */
         public String getInstalmentSchedule() {
@@ -260,15 +268,17 @@ public class Payment {
         }
 
         /**
-         * ID of the [mandate](#core-endpoints-mandates) against which this payment should be collected.
+         * ID of the [mandate](#core-endpoints-mandates) against which this payment should be
+         * collected.
          */
         public String getMandate() {
             return mandate;
         }
 
         /**
-         * ID of [payout](#core-endpoints-payouts) which contains the funds from this payment.<br/>**Note**:
-         * this property will not be present until the payment has been successfully collected.
+         * ID of [payout](#core-endpoints-payouts) which contains the funds from this payment.<br/>
+         * _Note_: this property will not be present until the payment has been successfully
+         * collected.
          */
         public String getPayout() {
             return payout;
@@ -276,8 +286,8 @@ public class Payment {
 
         /**
          * ID of [subscription](#core-endpoints-subscriptions) from which this payment was
-         * created.<br/>**Note**: this property will only be present if this payment is part of a
-         * subscription.
+         * created.<br/>
+         * _Note_: this property will only be present if this payment is part of a subscription.
          */
         public String getSubscription() {
             return subscription;

@@ -1,13 +1,11 @@
 package com.gocardless.services;
 
-import java.util.List;
-import java.util.Map;
-
 import com.gocardless.http.*;
 import com.gocardless.resources.TaxRate;
-
 import com.google.common.collect.ImmutableMap;
 import com.google.gson.reflect.TypeToken;
+import java.util.List;
+import java.util.Map;
 
 /**
  * Service class for working with tax rate resources.
@@ -20,9 +18,8 @@ public class TaxRateService {
     private final HttpClient httpClient;
 
     /**
-     * Constructor.  Users of this library should have no need to call this - an instance
-     * of this class can be obtained by calling
-      {@link com.gocardless.GoCardlessClient#taxRates() }.
+     * Constructor. Users of this library should have no need to call this - an instance of this
+     * class can be obtained by calling {@link com.gocardless.GoCardlessClient#taxRates() }.
      */
     public TaxRateService(HttpClient httpClient) {
         this.httpClient = httpClient;
@@ -78,7 +75,8 @@ public class TaxRateService {
             return this;
         }
 
-        private TaxRateListRequest(HttpClient httpClient, ListRequestExecutor<S, TaxRate> executor) {
+        private TaxRateListRequest(HttpClient httpClient,
+                ListRequestExecutor<S, TaxRate> executor) {
             super(httpClient, executor);
         }
 

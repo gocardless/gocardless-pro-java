@@ -1,13 +1,11 @@
 package com.gocardless.services;
 
-import java.util.HashMap;
-import java.util.Map;
-
 import com.gocardless.http.*;
 import com.gocardless.resources.RedirectFlow;
-
 import com.google.common.collect.ImmutableMap;
 import com.google.gson.annotations.SerializedName;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * Service class for working with redirect flow resources.
@@ -33,9 +31,9 @@ import com.google.gson.annotations.SerializedName;
  * [subscription](#core-endpoints-subscriptions) or [payment](#core-endpoints-payments) at this
  * point.
  * 
- * Once you have [completed](#redirect-flows-complete-a-redirect-flow) the redirect flow via the API,
- * you should display a confirmation page to your customer, confirming that their Direct Debit has
- * been set up. You can build your own page, or redirect to the one we provide in the
+ * Once you have [completed](#redirect-flows-complete-a-redirect-flow) the redirect flow via the
+ * API, you should display a confirmation page to your customer, confirming that their Direct Debit
+ * has been set up. You can build your own page, or redirect to the one we provide in the
  * `confirmation_url` attribute of the redirect flow.
  * 
  * Redirect flows expire 30 minutes after they are first created. You cannot complete an expired
@@ -45,17 +43,16 @@ public class RedirectFlowService {
     private final HttpClient httpClient;
 
     /**
-     * Constructor.  Users of this library should have no need to call this - an instance
-     * of this class can be obtained by calling
-      {@link com.gocardless.GoCardlessClient#redirectFlows() }.
+     * Constructor. Users of this library should have no need to call this - an instance of this
+     * class can be obtained by calling {@link com.gocardless.GoCardlessClient#redirectFlows() }.
      */
     public RedirectFlowService(HttpClient httpClient) {
         this.httpClient = httpClient;
     }
 
     /**
-     * Creates a redirect flow object which can then be used to redirect your customer to the GoCardless
-     * hosted payment pages.
+     * Creates a redirect flow object which can then be used to redirect your customer to the
+     * GoCardless hosted payment pages.
      */
     public RedirectFlowCreateRequest create() {
         return new RedirectFlowCreateRequest(httpClient);
@@ -70,13 +67,13 @@ public class RedirectFlowService {
 
     /**
      * This creates a [customer](#core-endpoints-customers), [customer bank
-     * account](#core-endpoints-customer-bank-accounts), and [mandate](#core-endpoints-mandates) using
-     * the details supplied by your customer and returns the ID of the created mandate.
+     * account](#core-endpoints-customer-bank-accounts), and [mandate](#core-endpoints-mandates)
+     * using the details supplied by your customer and returns the ID of the created mandate.
      * 
-     * This will return a `redirect_flow_incomplete` error if your customer has not yet been redirected
-     * back to your site, and a `redirect_flow_already_completed` error if your integration has already
-     * completed this flow. It will return a `bad_request` error if the `session_token` differs to the
-     * one supplied when the redirect flow was created.
+     * This will return a `redirect_flow_incomplete` error if your customer has not yet been
+     * redirected back to your site, and a `redirect_flow_already_completed` error if your
+     * integration has already completed this flow. It will return a `bad_request` error if the
+     * `session_token` differs to the one supplied when the redirect flow was created.
      */
     public RedirectFlowCompleteRequest complete(String identity) {
         return new RedirectFlowCompleteRequest(httpClient, identity);
@@ -85,10 +82,11 @@ public class RedirectFlowService {
     /**
      * Request class for {@link RedirectFlowService#create }.
      *
-     * Creates a redirect flow object which can then be used to redirect your customer to the GoCardless
-     * hosted payment pages.
+     * Creates a redirect flow object which can then be used to redirect your customer to the
+     * GoCardless hosted payment pages.
      */
-    public static final class RedirectFlowCreateRequest extends IdempotentPostRequest<RedirectFlow> {
+    public static final class RedirectFlowCreateRequest
+            extends IdempotentPostRequest<RedirectFlow> {
         private String description;
         private Links links;
         private Map<String, String> metadata;
@@ -99,8 +97,8 @@ public class RedirectFlowService {
         private String successRedirectUrl;
 
         /**
-         * A description of the item the customer is paying for. This will be shown on the hosted payment
-         * pages.
+         * A description of the item the customer is paying for. This will be shown on the hosted
+         * payment pages.
          */
         public RedirectFlowCreateRequest withDescription(String description) {
             this.description = description;
@@ -113,9 +111,9 @@ public class RedirectFlowService {
         }
 
         /**
-         * The [creditor](#core-endpoints-creditors) for whom the mandate will be created. The `name` of the
-         * creditor will be displayed on the payment page. Required if your account manages multiple
-         * creditors.
+         * The [creditor](#core-endpoints-creditors) for whom the mandate will be created. The
+         * `name` of the creditor will be displayed on the payment page. Required if your account
+         * manages multiple creditors.
          */
         public RedirectFlowCreateRequest withLinksCreditor(String creditor) {
             if (links == null) {
@@ -126,8 +124,8 @@ public class RedirectFlowService {
         }
 
         /**
-         * Key-value store of custom data. Up to 3 keys are permitted, with key names up to 50 characters and
-         * values up to 500 characters.
+         * Key-value store of custom data. Up to 3 keys are permitted, with key names up to 50
+         * characters and values up to 500 characters.
          */
         public RedirectFlowCreateRequest withMetadata(Map<String, String> metadata) {
             this.metadata = metadata;
@@ -135,8 +133,8 @@ public class RedirectFlowService {
         }
 
         /**
-         * Key-value store of custom data. Up to 3 keys are permitted, with key names up to 50 characters and
-         * values up to 500 characters.
+         * Key-value store of custom data. Up to 3 keys are permitted, with key names up to 50
+         * characters and values up to 500 characters.
          */
         public RedirectFlowCreateRequest withMetadata(String key, String value) {
             if (metadata == null) {
@@ -147,9 +145,9 @@ public class RedirectFlowService {
         }
 
         /**
-         * Bank account information used to prefill the payment page so your customer doesn't have to re-type
-         * details you already hold about them. It will be stored unvalidated and the customer will be able
-         * to review and amend it before completing the form.
+         * Bank account information used to prefill the payment page so your customer doesn't have
+         * to re-type details you already hold about them. It will be stored unvalidated and the
+         * customer will be able to review and amend it before completing the form.
          */
         public RedirectFlowCreateRequest withPrefilledBankAccount(
                 PrefilledBankAccount prefilledBankAccount) {
@@ -158,8 +156,9 @@ public class RedirectFlowService {
         }
 
         /**
-         * Bank account type for USD-denominated bank accounts. Must not be provided for bank accounts in
-         * other currencies. See [local details](#local-bank-details-united-states) for more information.
+         * Bank account type for USD-denominated bank accounts. Must not be provided for bank
+         * accounts in other currencies. See [local details](#local-bank-details-united-states) for
+         * more information.
          */
         public RedirectFlowCreateRequest withPrefilledBankAccountAccountType(
                 PrefilledBankAccount.AccountType accountType) {
@@ -171,11 +170,12 @@ public class RedirectFlowService {
         }
 
         /**
-         * Customer information used to prefill the payment page so your customer doesn't have to re-type
-         * details you already hold about them. It will be stored unvalidated and the customer will be able
-         * to review and amend it before completing the form.
+         * Customer information used to prefill the payment page so your customer doesn't have to
+         * re-type details you already hold about them. It will be stored unvalidated and the
+         * customer will be able to review and amend it before completing the form.
          */
-        public RedirectFlowCreateRequest withPrefilledCustomer(PrefilledCustomer prefilledCustomer) {
+        public RedirectFlowCreateRequest withPrefilledCustomer(
+                PrefilledCustomer prefilledCustomer) {
             this.prefilledCustomer = prefilledCustomer;
             return this;
         }
@@ -225,8 +225,8 @@ public class RedirectFlowService {
         }
 
         /**
-         * Customer's company name. Company name should only be provided if `given_name` and `family_name`
-         * are null.
+         * Customer's company name. Company name should only be provided if `given_name` and
+         * `family_name` are null.
          */
         public RedirectFlowCreateRequest withPrefilledCustomerCompanyName(String companyName) {
             if (prefilledCustomer == null) {
@@ -351,9 +351,9 @@ public class RedirectFlowService {
         }
 
         /**
-         * The Direct Debit scheme of the mandate. If specified, the payment pages will only allow the set-up
-         * of a mandate for the specified scheme. It is recommended that you leave this blank so the most
-         * appropriate scheme is picked based on the customer's bank account.
+         * The Direct Debit scheme of the mandate. If specified, the payment pages will only allow
+         * the set-up of a mandate for the specified scheme. It is recommended that you leave this
+         * blank so the most appropriate scheme is picked based on the customer's bank account.
          */
         public RedirectFlowCreateRequest withScheme(Scheme scheme) {
             this.scheme = scheme;
@@ -361,9 +361,9 @@ public class RedirectFlowService {
         }
 
         /**
-         * The customer's session ID must be provided when the redirect flow is set up and again when it is
-         * completed. This allows integrators to ensure that the user who was originally sent to the
-         * GoCardless payment pages is the one who has completed them.
+         * The customer's session ID must be provided when the redirect flow is set up and again
+         * when it is completed. This allows integrators to ensure that the user who was originally
+         * sent to the GoCardless payment pages is the one who has completed them.
          */
         public RedirectFlowCreateRequest withSessionToken(String sessionToken) {
             this.sessionToken = sessionToken;
@@ -371,8 +371,8 @@ public class RedirectFlowService {
         }
 
         /**
-         * The URL to redirect to upon successful mandate setup. You must use a URL beginning `https` in the
-         * live environment.
+         * The URL to redirect to upon successful mandate setup. You must use a URL beginning
+         * `https` in the live environment.
          */
         public RedirectFlowCreateRequest withSuccessRedirectUrl(String successRedirectUrl) {
             this.successRedirectUrl = successRedirectUrl;
@@ -432,6 +432,7 @@ public class RedirectFlowService {
             BETALINGSSERVICE, @SerializedName("pad")
             PAD, @SerializedName("sepa_core")
             SEPA_CORE;
+
             @Override
             public String toString() {
                 return name().toLowerCase();
@@ -442,9 +443,9 @@ public class RedirectFlowService {
             private String creditor;
 
             /**
-             * The [creditor](#core-endpoints-creditors) for whom the mandate will be created. The `name` of the
-             * creditor will be displayed on the payment page. Required if your account manages multiple
-             * creditors.
+             * The [creditor](#core-endpoints-creditors) for whom the mandate will be created. The
+             * `name` of the creditor will be displayed on the payment page. Required if your
+             * account manages multiple creditors.
              */
             public Links withCreditor(String creditor) {
                 this.creditor = creditor;
@@ -456,8 +457,9 @@ public class RedirectFlowService {
             private AccountType accountType;
 
             /**
-             * Bank account type for USD-denominated bank accounts. Must not be provided for bank accounts in
-             * other currencies. See [local details](#local-bank-details-united-states) for more information.
+             * Bank account type for USD-denominated bank accounts. Must not be provided for bank
+             * accounts in other currencies. See [local details](#local-bank-details-united-states)
+             * for more information.
              */
             public PrefilledBankAccount withAccountType(AccountType accountType) {
                 this.accountType = accountType;
@@ -468,6 +470,7 @@ public class RedirectFlowService {
                 @SerializedName("savings")
                 SAVINGS, @SerializedName("checking")
                 CHECKING;
+
                 @Override
                 public String toString() {
                     return name().toLowerCase();
@@ -525,8 +528,8 @@ public class RedirectFlowService {
             }
 
             /**
-             * Customer's company name. Company name should only be provided if `given_name` and `family_name`
-             * are null.
+             * Customer's company name. Company name should only be provided if `given_name` and
+             * `family_name` are null.
              */
             public PrefilledCustomer withCompanyName(String companyName) {
                 this.companyName = companyName;
@@ -607,8 +610,8 @@ public class RedirectFlowService {
             }
 
             /**
-             * For Swedish customers only. The civic/company number (personnummer, samordningsnummer, or
-             * organisationsnummer) of the customer.
+             * For Swedish customers only. The civic/company number (personnummer,
+             * samordningsnummer, or organisationsnummer) of the customer.
              */
             public PrefilledCustomer withSwedishIdentityNumber(String swedishIdentityNumber) {
                 this.swedishIdentityNumber = swedishIdentityNumber;
@@ -663,13 +666,13 @@ public class RedirectFlowService {
      * Request class for {@link RedirectFlowService#complete }.
      *
      * This creates a [customer](#core-endpoints-customers), [customer bank
-     * account](#core-endpoints-customer-bank-accounts), and [mandate](#core-endpoints-mandates) using
-     * the details supplied by your customer and returns the ID of the created mandate.
+     * account](#core-endpoints-customer-bank-accounts), and [mandate](#core-endpoints-mandates)
+     * using the details supplied by your customer and returns the ID of the created mandate.
      * 
-     * This will return a `redirect_flow_incomplete` error if your customer has not yet been redirected
-     * back to your site, and a `redirect_flow_already_completed` error if your integration has already
-     * completed this flow. It will return a `bad_request` error if the `session_token` differs to the
-     * one supplied when the redirect flow was created.
+     * This will return a `redirect_flow_incomplete` error if your customer has not yet been
+     * redirected back to your site, and a `redirect_flow_already_completed` error if your
+     * integration has already completed this flow. It will return a `bad_request` error if the
+     * `session_token` differs to the one supplied when the redirect flow was created.
      */
     public static final class RedirectFlowCompleteRequest extends PostRequest<RedirectFlow> {
         @PathParam
@@ -677,9 +680,9 @@ public class RedirectFlowService {
         private String sessionToken;
 
         /**
-         * The customer's session ID must be provided when the redirect flow is set up and again when it is
-         * completed. This allows integrators to ensure that the user who was originally sent to the
-         * GoCardless payment pages is the one who has completed them.
+         * The customer's session ID must be provided when the redirect flow is set up and again
+         * when it is completed. This allows integrators to ensure that the user who was originally
+         * sent to the GoCardless payment pages is the one who has completed them.
          */
         public RedirectFlowCompleteRequest withSessionToken(String sessionToken) {
             this.sessionToken = sessionToken;

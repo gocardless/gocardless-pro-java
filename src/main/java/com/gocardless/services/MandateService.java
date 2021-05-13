@@ -1,17 +1,15 @@
 package com.gocardless.services;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
 import com.gocardless.http.*;
 import com.gocardless.resources.Mandate;
-
 import com.google.common.base.Joiner;
 import com.google.common.collect.ImmutableMap;
 import com.google.gson.annotations.SerializedName;
 import com.google.gson.reflect.TypeToken;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 /**
  * Service class for working with mandate resources.
@@ -25,9 +23,8 @@ public class MandateService {
     private final HttpClient httpClient;
 
     /**
-     * Constructor.  Users of this library should have no need to call this - an instance
-     * of this class can be obtained by calling
-      {@link com.gocardless.GoCardlessClient#mandates() }.
+     * Constructor. Users of this library should have no need to call this - an instance of this
+     * class can be obtained by calling {@link com.gocardless.GoCardlessClient#mandates() }.
      */
     public MandateService(HttpClient httpClient) {
         this.httpClient = httpClient;
@@ -66,8 +63,8 @@ public class MandateService {
     }
 
     /**
-     * Immediately cancels a mandate and all associated cancellable payments. Any metadata supplied to
-     * this endpoint will be stored on the mandate cancellation event it causes.
+     * Immediately cancels a mandate and all associated cancellable payments. Any metadata supplied
+     * to this endpoint will be stored on the mandate cancellation event it causes.
      * 
      * This will fail with a `cancellation_failed` error if the mandate is already cancelled.
      */
@@ -76,14 +73,14 @@ public class MandateService {
     }
 
     /**
-     * <a name="mandate_not_inactive"></a>Reinstates a cancelled or expired mandate to the banks. You
-     * will receive a `resubmission_requested` webhook, but after that reinstating the mandate follows
-     * the same process as its initial creation, so you will receive a `submitted` webhook, followed by a
-     * `reinstated` or `failed` webhook up to two working days later. Any metadata supplied to this
-     * endpoint will be stored on the `resubmission_requested` event it causes.
+     * <a name="mandate_not_inactive"></a>Reinstates a cancelled or expired mandate to the banks.
+     * You will receive a `resubmission_requested` webhook, but after that reinstating the mandate
+     * follows the same process as its initial creation, so you will receive a `submitted` webhook,
+     * followed by a `reinstated` or `failed` webhook up to two working days later. Any metadata
+     * supplied to this endpoint will be stored on the `resubmission_requested` event it causes.
      * 
-     * This will fail with a `mandate_not_inactive` error if the mandate is already being submitted, or
-     * is active.
+     * This will fail with a `mandate_not_inactive` error if the mandate is already being submitted,
+     * or is active.
      * 
      * Mandates can be resubmitted up to 10 times.
      */
@@ -109,8 +106,8 @@ public class MandateService {
         }
 
         /**
-         * ID of the associated [creditor](#core-endpoints-creditors). Only required if your account manages
-         * multiple creditors.
+         * ID of the associated [creditor](#core-endpoints-creditors). Only required if your account
+         * manages multiple creditors.
          */
         public MandateCreateRequest withLinksCreditor(String creditor) {
             if (links == null) {
@@ -121,8 +118,8 @@ public class MandateService {
         }
 
         /**
-         * ID of the associated [customer bank account](#core-endpoints-customer-bank-accounts) which the
-         * mandate is created and submits payments against.
+         * ID of the associated [customer bank account](#core-endpoints-customer-bank-accounts)
+         * which the mandate is created and submits payments against.
          */
         public MandateCreateRequest withLinksCustomerBankAccount(String customerBankAccount) {
             if (links == null) {
@@ -133,8 +130,8 @@ public class MandateService {
         }
 
         /**
-         * Key-value store of custom data. Up to 3 keys are permitted, with key names up to 50 characters and
-         * values up to 500 characters.
+         * Key-value store of custom data. Up to 3 keys are permitted, with key names up to 50
+         * characters and values up to 500 characters.
          */
         public MandateCreateRequest withMetadata(Map<String, String> metadata) {
             this.metadata = metadata;
@@ -142,8 +139,8 @@ public class MandateService {
         }
 
         /**
-         * Key-value store of custom data. Up to 3 keys are permitted, with key names up to 50 characters and
-         * values up to 500 characters.
+         * Key-value store of custom data. Up to 3 keys are permitted, with key names up to 50
+         * characters and values up to 500 characters.
          */
         public MandateCreateRequest withMetadata(String key, String value) {
             if (metadata == null) {
@@ -154,9 +151,9 @@ public class MandateService {
         }
 
         /**
-         * For ACH customers only. Required for ACH customers. A string containing the IP address of the
-         * payer to whom the mandate belongs (i.e. as a result of their completion of a mandate setup flow in
-         * their browser).
+         * For ACH customers only. Required for ACH customers. A string containing the IP address of
+         * the payer to whom the mandate belongs (i.e. as a result of their completion of a mandate
+         * setup flow in their browser).
          */
         public MandateCreateRequest withPayerIpAddress(String payerIpAddress) {
             this.payerIpAddress = payerIpAddress;
@@ -174,8 +171,9 @@ public class MandateService {
         }
 
         /**
-         * <a name="mandates_scheme"></a>Direct Debit scheme to which this mandate and associated payments
-         * are submitted. Can be supplied or automatically detected from the customer's bank account.
+         * <a name="mandates_scheme"></a>Direct Debit scheme to which this mandate and associated
+         * payments are submitted. Can be supplied or automatically detected from the customer's
+         * bank account.
          */
         public MandateCreateRequest withScheme(String scheme) {
             this.scheme = scheme;
@@ -230,8 +228,8 @@ public class MandateService {
             private String customerBankAccount;
 
             /**
-             * ID of the associated [creditor](#core-endpoints-creditors). Only required if your account manages
-             * multiple creditors.
+             * ID of the associated [creditor](#core-endpoints-creditors). Only required if your
+             * account manages multiple creditors.
              */
             public Links withCreditor(String creditor) {
                 this.creditor = creditor;
@@ -239,8 +237,8 @@ public class MandateService {
             }
 
             /**
-             * ID of the associated [customer bank account](#core-endpoints-customer-bank-accounts) which the
-             * mandate is created and submits payments against.
+             * ID of the associated [customer bank account](#core-endpoints-customer-bank-accounts)
+             * which the mandate is created and submits payments against.
              */
             public Links withCustomerBankAccount(String customerBankAccount) {
                 this.customerBankAccount = customerBankAccount;
@@ -260,6 +258,7 @@ public class MandateService {
         private String customer;
         private String customerBankAccount;
         private String reference;
+        private List<String> scheme;
         private List<Status> status;
 
         /**
@@ -328,8 +327,8 @@ public class MandateService {
         }
 
         /**
-         * ID of a [creditor](#core-endpoints-creditors). If specified, this endpoint will return all
-         * mandates for the given creditor. Cannot be used in conjunction with `customer` or
+         * ID of a [creditor](#core-endpoints-creditors). If specified, this endpoint will return
+         * all mandates for the given creditor. Cannot be used in conjunction with `customer` or
          * `customer_bank_account`
          */
         public MandateListRequest<S> withCreditor(String creditor) {
@@ -338,9 +337,9 @@ public class MandateService {
         }
 
         /**
-         * ID of a [customer](#core-endpoints-customers). If specified, this endpoint will return all
-         * mandates for the given customer. Cannot be used in conjunction with `customer_bank_account` or
-         * `creditor`
+         * ID of a [customer](#core-endpoints-customers). If specified, this endpoint will return
+         * all mandates for the given customer. Cannot be used in conjunction with
+         * `customer_bank_account` or `creditor`
          */
         public MandateListRequest<S> withCustomer(String customer) {
             this.customer = customer;
@@ -348,9 +347,9 @@ public class MandateService {
         }
 
         /**
-         * ID of a [customer bank account](#core-endpoints-customer-bank-accounts). If specified, this
-         * endpoint will return all mandates for the given bank account. Cannot be used in conjunction with
-         * `customer` or `creditor`
+         * ID of a [customer bank account](#core-endpoints-customer-bank-accounts). If specified,
+         * this endpoint will return all mandates for the given bank account. Cannot be used in
+         * conjunction with `customer` or `creditor`
          */
         public MandateListRequest<S> withCustomerBankAccount(String customerBankAccount) {
             this.customerBankAccount = customerBankAccount;
@@ -376,6 +375,25 @@ public class MandateService {
         }
 
         /**
+         * Scheme you'd like to retrieve mandates for
+         */
+        public MandateListRequest<S> withScheme(List<String> scheme) {
+            this.scheme = scheme;
+            return this;
+        }
+
+        /**
+         * Scheme you'd like to retrieve mandates for
+         */
+        public MandateListRequest<S> withScheme(String scheme) {
+            if (this.scheme == null) {
+                this.scheme = new ArrayList<>();
+            }
+            this.scheme.add(scheme);
+            return this;
+        }
+
+        /**
          * At most four valid status values
          */
         public MandateListRequest<S> withStatus(List<Status> status) {
@@ -394,7 +412,8 @@ public class MandateService {
             return this;
         }
 
-        private MandateListRequest(HttpClient httpClient, ListRequestExecutor<S, Mandate> executor) {
+        private MandateListRequest(HttpClient httpClient,
+                ListRequestExecutor<S, Mandate> executor) {
             super(httpClient, executor);
         }
 
@@ -421,6 +440,9 @@ public class MandateService {
             }
             if (reference != null) {
                 params.put("reference", reference);
+            }
+            if (scheme != null) {
+                params.put("scheme", Joiner.on(",").join(scheme));
             }
             if (status != null) {
                 params.put("status", Joiner.on(",").join(status));
@@ -451,7 +473,9 @@ public class MandateService {
             ACTIVE, @SerializedName("failed")
             FAILED, @SerializedName("cancelled")
             CANCELLED, @SerializedName("expired")
-            EXPIRED;
+            EXPIRED, @SerializedName("consumed")
+            CONSUMED;
+
             @Override
             public String toString() {
                 return name().toLowerCase();
@@ -568,8 +592,8 @@ public class MandateService {
         private Map<String, String> metadata;
 
         /**
-         * Key-value store of custom data. Up to 3 keys are permitted, with key names up to 50 characters and
-         * values up to 500 characters.
+         * Key-value store of custom data. Up to 3 keys are permitted, with key names up to 50
+         * characters and values up to 500 characters.
          */
         public MandateUpdateRequest withMetadata(Map<String, String> metadata) {
             this.metadata = metadata;
@@ -577,8 +601,8 @@ public class MandateService {
         }
 
         /**
-         * Key-value store of custom data. Up to 3 keys are permitted, with key names up to 50 characters and
-         * values up to 500 characters.
+         * Key-value store of custom data. Up to 3 keys are permitted, with key names up to 50
+         * characters and values up to 500 characters.
          */
         public MandateUpdateRequest withMetadata(String key, String value) {
             if (metadata == null) {
@@ -629,8 +653,8 @@ public class MandateService {
     /**
      * Request class for {@link MandateService#cancel }.
      *
-     * Immediately cancels a mandate and all associated cancellable payments. Any metadata supplied to
-     * this endpoint will be stored on the mandate cancellation event it causes.
+     * Immediately cancels a mandate and all associated cancellable payments. Any metadata supplied
+     * to this endpoint will be stored on the mandate cancellation event it causes.
      * 
      * This will fail with a `cancellation_failed` error if the mandate is already cancelled.
      */
@@ -640,8 +664,8 @@ public class MandateService {
         private Map<String, String> metadata;
 
         /**
-         * Key-value store of custom data. Up to 3 keys are permitted, with key names up to 50 characters and
-         * values up to 500 characters.
+         * Key-value store of custom data. Up to 3 keys are permitted, with key names up to 50
+         * characters and values up to 500 characters.
          */
         public MandateCancelRequest withMetadata(Map<String, String> metadata) {
             this.metadata = metadata;
@@ -649,8 +673,8 @@ public class MandateService {
         }
 
         /**
-         * Key-value store of custom data. Up to 3 keys are permitted, with key names up to 50 characters and
-         * values up to 500 characters.
+         * Key-value store of custom data. Up to 3 keys are permitted, with key names up to 50
+         * characters and values up to 500 characters.
          */
         public MandateCancelRequest withMetadata(String key, String value) {
             if (metadata == null) {
@@ -706,14 +730,14 @@ public class MandateService {
     /**
      * Request class for {@link MandateService#reinstate }.
      *
-     * <a name="mandate_not_inactive"></a>Reinstates a cancelled or expired mandate to the banks. You
-     * will receive a `resubmission_requested` webhook, but after that reinstating the mandate follows
-     * the same process as its initial creation, so you will receive a `submitted` webhook, followed by a
-     * `reinstated` or `failed` webhook up to two working days later. Any metadata supplied to this
-     * endpoint will be stored on the `resubmission_requested` event it causes.
+     * <a name="mandate_not_inactive"></a>Reinstates a cancelled or expired mandate to the banks.
+     * You will receive a `resubmission_requested` webhook, but after that reinstating the mandate
+     * follows the same process as its initial creation, so you will receive a `submitted` webhook,
+     * followed by a `reinstated` or `failed` webhook up to two working days later. Any metadata
+     * supplied to this endpoint will be stored on the `resubmission_requested` event it causes.
      * 
-     * This will fail with a `mandate_not_inactive` error if the mandate is already being submitted, or
-     * is active.
+     * This will fail with a `mandate_not_inactive` error if the mandate is already being submitted,
+     * or is active.
      * 
      * Mandates can be resubmitted up to 10 times.
      */
@@ -723,8 +747,8 @@ public class MandateService {
         private Map<String, String> metadata;
 
         /**
-         * Key-value store of custom data. Up to 3 keys are permitted, with key names up to 50 characters and
-         * values up to 500 characters.
+         * Key-value store of custom data. Up to 3 keys are permitted, with key names up to 50
+         * characters and values up to 500 characters.
          */
         public MandateReinstateRequest withMetadata(Map<String, String> metadata) {
             this.metadata = metadata;
@@ -732,8 +756,8 @@ public class MandateService {
         }
 
         /**
-         * Key-value store of custom data. Up to 3 keys are permitted, with key names up to 50 characters and
-         * values up to 500 characters.
+         * Key-value store of custom data. Up to 3 keys are permitted, with key names up to 50
+         * characters and values up to 500 characters.
          */
         public MandateReinstateRequest withMetadata(String key, String value) {
             if (metadata == null) {

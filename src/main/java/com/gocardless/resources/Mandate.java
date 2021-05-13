@@ -1,8 +1,7 @@
 package com.gocardless.resources;
 
-import java.util.Map;
-
 import com.google.gson.annotations.SerializedName;
+import java.util.Map;
 
 /**
  * Represents a mandate resource returned from the API.
@@ -35,8 +34,8 @@ public class Mandate {
     }
 
     /**
-     * Unique identifier, beginning with "MD". Note that this prefix may not apply to mandates created
-     * before 2016.
+     * Unique identifier, beginning with "MD". Note that this prefix may not apply to mandates
+     * created before 2016.
      */
     public String getId() {
         return id;
@@ -47,8 +46,8 @@ public class Mandate {
     }
 
     /**
-     * Key-value store of custom data. Up to 3 keys are permitted, with key names up to 50 characters and
-     * values up to 500 characters.
+     * Key-value store of custom data. Up to 3 keys are permitted, with key names up to 50
+     * characters and values up to 500 characters.
      */
     public Map<String, String> getMetadata() {
         return metadata;
@@ -63,8 +62,8 @@ public class Mandate {
     }
 
     /**
-     * Boolean value showing whether payments and subscriptions under this mandate require approval via
-     * an automated email before being processed.
+     * Boolean value showing whether payments and subscriptions under this mandate require approval
+     * via an automated email before being processed.
      */
     public Boolean getPaymentsRequireApproval() {
         return paymentsRequireApproval;
@@ -80,8 +79,9 @@ public class Mandate {
     }
 
     /**
-     * <a name="mandates_scheme"></a>Direct Debit scheme to which this mandate and associated payments
-     * are submitted. Can be supplied or automatically detected from the customer's bank account.
+     * <a name="mandates_scheme"></a>Direct Debit scheme to which this mandate and associated
+     * payments are submitted. Can be supplied or automatically detected from the customer's bank
+     * account.
      */
     public String getScheme() {
         return scheme;
@@ -90,14 +90,17 @@ public class Mandate {
     /**
      * One of:
      * <ul>
-     * <li>`pending_customer_approval`: the mandate has not yet been signed by the second customer</li>
+     * <li>`pending_customer_approval`: the mandate has not yet been signed by the second
+     * customer</li>
      * <li>`pending_submission`: the mandate has not yet been submitted to the customer's bank</li>
-     * <li>`submitted`: the mandate has been submitted to the customer's bank but has not been processed
-     * yet</li>
+     * <li>`submitted`: the mandate has been submitted to the customer's bank but has not been
+     * processed yet</li>
      * <li>`active`: the mandate has been successfully set up by the customer's bank</li>
      * <li>`failed`: the mandate could not be created</li>
      * <li>`cancelled`: the mandate has been cancelled</li>
      * <li>`expired`: the mandate has expired due to dormancy</li>
+     * <li>`consumed`: the mandate has been consumed and cannot be reused (note that this only
+     * applies to schemes that are per-payment authorised)</li>
      * </ul>
      */
     public Status getStatus() {
@@ -112,7 +115,8 @@ public class Mandate {
         ACTIVE, @SerializedName("failed")
         FAILED, @SerializedName("cancelled")
         CANCELLED, @SerializedName("expired")
-        EXPIRED,
+        EXPIRED, @SerializedName("consumed")
+        CONSUMED,
     }
 
     public static class Links {
@@ -140,8 +144,8 @@ public class Mandate {
         }
 
         /**
-         * ID of the associated [customer bank account](#core-endpoints-customer-bank-accounts) which the
-         * mandate is created and submits payments against.
+         * ID of the associated [customer bank account](#core-endpoints-customer-bank-accounts)
+         * which the mandate is created and submits payments against.
          */
         public String getCustomerBankAccount() {
             return customerBankAccount;

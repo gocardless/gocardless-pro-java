@@ -1,15 +1,13 @@
 package com.gocardless.services;
 
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
 import com.gocardless.http.*;
 import com.gocardless.resources.Payment;
-
 import com.google.common.collect.ImmutableMap;
 import com.google.gson.annotations.SerializedName;
 import com.google.gson.reflect.TypeToken;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 /**
  * Service class for working with payment resources.
@@ -25,9 +23,8 @@ public class PaymentService {
     private final HttpClient httpClient;
 
     /**
-     * Constructor.  Users of this library should have no need to call this - an instance
-     * of this class can be obtained by calling
-      {@link com.gocardless.GoCardlessClient#payments() }.
+     * Constructor. Users of this library should have no need to call this - an instance of this
+     * class can be obtained by calling {@link com.gocardless.GoCardlessClient#payments() }.
      */
     public PaymentService(HttpClient httpClient) {
         this.httpClient = httpClient;
@@ -36,9 +33,10 @@ public class PaymentService {
     /**
      * <a name="mandate_is_inactive"></a>Creates a new payment object.
      * 
-     * This fails with a `mandate_is_inactive` error if the linked [mandate](#core-endpoints-mandates) is
-     * cancelled or has failed. Payments can be created against mandates with status of:
-     * `pending_customer_approval`, `pending_submission`, `submitted`, and `active`.
+     * This fails with a `mandate_is_inactive` error if the linked
+     * [mandate](#core-endpoints-mandates) is cancelled or has failed. Payments can be created
+     * against mandates with status of: `pending_customer_approval`, `pending_submission`,
+     * `submitted`, and `active`.
      */
     public PaymentCreateRequest create() {
         return new PaymentCreateRequest(httpClient);
@@ -70,8 +68,8 @@ public class PaymentService {
     }
 
     /**
-     * Cancels the payment if it has not already been submitted to the banks. Any metadata supplied to
-     * this endpoint will be stored on the payment cancellation event it causes.
+     * Cancels the payment if it has not already been submitted to the banks. Any metadata supplied
+     * to this endpoint will be stored on the payment cancellation event it causes.
      * 
      * This will fail with a `cancellation_failed` error unless the payment's status is
      * `pending_submission`.
@@ -81,11 +79,11 @@ public class PaymentService {
     }
 
     /**
-     * <a name="retry_failed"></a>Retries a failed payment if the underlying mandate is active. You will
-     * receive a `resubmission_requested` webhook, but after that retrying the payment follows the same
-     * process as its initial creation, so you will receive a `submitted` webhook, followed by a
-     * `confirmed` or `failed` event. Any metadata supplied to this endpoint will be stored against the
-     * payment submission event it causes.
+     * <a name="retry_failed"></a>Retries a failed payment if the underlying mandate is active. You
+     * will receive a `resubmission_requested` webhook, but after that retrying the payment follows
+     * the same process as its initial creation, so you will receive a `submitted` webhook, followed
+     * by a `confirmed` or `failed` event. Any metadata supplied to this endpoint will be stored
+     * against the payment submission event it causes.
      * 
      * This will return a `retry_failed` error if the payment has not failed.
      * 
@@ -100,9 +98,10 @@ public class PaymentService {
      *
      * <a name="mandate_is_inactive"></a>Creates a new payment object.
      * 
-     * This fails with a `mandate_is_inactive` error if the linked [mandate](#core-endpoints-mandates) is
-     * cancelled or has failed. Payments can be created against mandates with status of:
-     * `pending_customer_approval`, `pending_submission`, `submitted`, and `active`.
+     * This fails with a `mandate_is_inactive` error if the linked
+     * [mandate](#core-endpoints-mandates) is cancelled or has failed. Payments can be created
+     * against mandates with status of: `pending_customer_approval`, `pending_submission`,
+     * `submitted`, and `active`.
      */
     public static final class PaymentCreateRequest extends IdempotentPostRequest<Payment> {
         private Integer amount;
@@ -124,8 +123,8 @@ public class PaymentService {
         }
 
         /**
-         * The amount to be deducted from the payment as the OAuth app's fee, in the lowest denomination for
-         * the currency (e.g. pence in GBP, cents in EUR).
+         * The amount to be deducted from the payment as the OAuth app's fee, in the lowest
+         * denomination for the currency (e.g. pence in GBP, cents in EUR).
          */
         public PaymentCreateRequest withAppFee(Integer appFee) {
             this.appFee = appFee;
@@ -133,10 +132,10 @@ public class PaymentService {
         }
 
         /**
-         * A future date on which the payment should be collected. If not specified, the payment will be
-         * collected as soon as possible. If the value is before the [mandate](#core-endpoints-mandates)'s
-         * `next_possible_charge_date` creation will fail. If the value is not a working day it will be
-         * rolled forwards to the next available one.
+         * A future date on which the payment should be collected. If not specified, the payment
+         * will be collected as soon as possible. If the value is before the
+         * [mandate](#core-endpoints-mandates)'s `next_possible_charge_date` creation will fail. If
+         * the value is not a working day it will be rolled forwards to the next available one.
          */
         public PaymentCreateRequest withChargeDate(String chargeDate) {
             this.chargeDate = chargeDate;
@@ -144,8 +143,8 @@ public class PaymentService {
         }
 
         /**
-         * [ISO 4217](http://en.wikipedia.org/wiki/ISO_4217#Active_codes) currency code. Currently "AUD",
-         * "CAD", "DKK", "EUR", "GBP", "NZD", "SEK" and "USD" are supported.
+         * [ISO 4217](http://en.wikipedia.org/wiki/ISO_4217#Active_codes) currency code. Currently
+         * "AUD", "CAD", "DKK", "EUR", "GBP", "NZD", "SEK" and "USD" are supported.
          */
         public PaymentCreateRequest withCurrency(Currency currency) {
             this.currency = currency;
@@ -153,9 +152,9 @@ public class PaymentService {
         }
 
         /**
-         * A human-readable description of the payment. This will be included in the notification email
-         * GoCardless sends to your customer if your organisation does not send its own notifications (see
-         * [compliance requirements](#appendix-compliance-requirements)).
+         * A human-readable description of the payment. This will be included in the notification
+         * email GoCardless sends to your customer if your organisation does not send its own
+         * notifications (see [compliance requirements](#appendix-compliance-requirements)).
          */
         public PaymentCreateRequest withDescription(String description) {
             this.description = description;
@@ -168,7 +167,8 @@ public class PaymentService {
         }
 
         /**
-         * ID of the [mandate](#core-endpoints-mandates) against which this payment should be collected.
+         * ID of the [mandate](#core-endpoints-mandates) against which this payment should be
+         * collected.
          */
         public PaymentCreateRequest withLinksMandate(String mandate) {
             if (links == null) {
@@ -179,8 +179,8 @@ public class PaymentService {
         }
 
         /**
-         * Key-value store of custom data. Up to 3 keys are permitted, with key names up to 50 characters and
-         * values up to 500 characters.
+         * Key-value store of custom data. Up to 3 keys are permitted, with key names up to 50
+         * characters and values up to 500 characters.
          */
         public PaymentCreateRequest withMetadata(Map<String, String> metadata) {
             this.metadata = metadata;
@@ -188,8 +188,8 @@ public class PaymentService {
         }
 
         /**
-         * Key-value store of custom data. Up to 3 keys are permitted, with key names up to 50 characters and
-         * values up to 500 characters.
+         * Key-value store of custom data. Up to 3 keys are permitted, with key names up to 50
+         * characters and values up to 500 characters.
          */
         public PaymentCreateRequest withMetadata(String key, String value) {
             if (metadata == null) {
@@ -200,16 +200,23 @@ public class PaymentService {
         }
 
         /**
-         * An optional reference that will appear on your customer's bank statement. The character limit for
-         * this reference is dependent on the scheme.<br /> <strong>ACH</strong> - 10 characters<br />
-         * <strong>Autogiro</strong> - 11 characters<br /> <strong>Bacs</strong> - 10 characters<br />
-         * <strong>BECS</strong> - 30 characters<br /> <strong>BECS NZ</strong> - 12 characters<br />
-         * <strong>Betalingsservice</strong> - 30 characters<br /> <strong>PAD</strong> - 12 characters<br />
-         * <strong>SEPA</strong> - 140 characters<br /> Note that this reference must be unique (for each
-         * merchant) for the BECS scheme as it is a scheme requirement. <p
-         * class='restricted-notice'><strong>Restricted</strong>: You can only specify a payment reference
-         * for Bacs payments (that is, when collecting from the UK) if you're on the <a
-         * href='https://gocardless.com/pricing'>GoCardless Plus, Pro or Enterprise packages</a>.</p>
+         * An optional reference that will appear on your customer's bank statement. The character
+         * limit for this reference is dependent on the scheme.<br />
+         * <strong>ACH</strong> - 10 characters<br />
+         * <strong>Autogiro</strong> - 11 characters<br />
+         * <strong>Bacs</strong> - 10 characters<br />
+         * <strong>BECS</strong> - 30 characters<br />
+         * <strong>BECS NZ</strong> - 12 characters<br />
+         * <strong>Betalingsservice</strong> - 30 characters<br />
+         * <strong>PAD</strong> - 12 characters<br />
+         * <strong>SEPA</strong> - 140 characters<br />
+         * Note that this reference must be unique (for each merchant) for the BECS scheme as it is
+         * a scheme requirement.
+         * <p class='restricted-notice'>
+         * <strong>Restricted</strong>: You can only specify a payment reference for Bacs payments
+         * (that is, when collecting from the UK) if you're on the
+         * <a href='https://gocardless.com/pricing'>GoCardless Plus, Pro or Enterprise packages</a>.
+         * </p>
          */
         public PaymentCreateRequest withReference(String reference) {
             this.reference = reference;
@@ -278,6 +285,7 @@ public class PaymentService {
             NZD, @SerializedName("SEK")
             SEK, @SerializedName("USD")
             USD;
+
             @Override
             public String toString() {
                 return name();
@@ -288,7 +296,8 @@ public class PaymentService {
             private String mandate;
 
             /**
-             * ID of the [mandate](#core-endpoints-mandates) against which this payment should be collected.
+             * ID of the [mandate](#core-endpoints-mandates) against which this payment should be
+             * collected.
              */
             public Links withMandate(String mandate) {
                 this.mandate = mandate;
@@ -309,6 +318,8 @@ public class PaymentService {
         private Currency currency;
         private String customer;
         private String mandate;
+        private SortDirection sortDirection;
+        private SortField sortField;
         private Status status;
         private String subscription;
 
@@ -334,8 +345,8 @@ public class PaymentService {
         }
 
         /**
-         * Limit to records where the payment was or will be collected from the customer's bank account after
-         * the specified date.
+         * Limit to records where the payment was or will be collected from the customer's bank
+         * account after the specified date.
          */
         public PaymentListRequest<S> withChargeDateGt(String gt) {
             if (chargeDate == null) {
@@ -346,8 +357,8 @@ public class PaymentService {
         }
 
         /**
-         * Limit to records where the payment was or will be collected from the customer's bank account on or
-         * after the specified date.
+         * Limit to records where the payment was or will be collected from the customer's bank
+         * account on or after the specified date.
          */
         public PaymentListRequest<S> withChargeDateGte(String gte) {
             if (chargeDate == null) {
@@ -358,8 +369,8 @@ public class PaymentService {
         }
 
         /**
-         * Limit to records where the payment was or will be collected from the customer's bank account
-         * before the specified date.
+         * Limit to records where the payment was or will be collected from the customer's bank
+         * account before the specified date.
          */
         public PaymentListRequest<S> withChargeDateLt(String lt) {
             if (chargeDate == null) {
@@ -370,8 +381,8 @@ public class PaymentService {
         }
 
         /**
-         * Limit to records where the payment was or will be collected from the customer's bank account on or
-         * before the specified date.
+         * Limit to records where the payment was or will be collected from the customer's bank
+         * account on or before the specified date.
          */
         public PaymentListRequest<S> withChargeDateLte(String lte) {
             if (chargeDate == null) {
@@ -440,8 +451,8 @@ public class PaymentService {
         }
 
         /**
-         * [ISO 4217](http://en.wikipedia.org/wiki/ISO_4217#Active_codes) currency code. Currently "AUD",
-         * "CAD", "DKK", "EUR", "GBP", "NZD", "SEK" and "USD" are supported.
+         * [ISO 4217](http://en.wikipedia.org/wiki/ISO_4217#Active_codes) currency code. Currently
+         * "AUD", "CAD", "DKK", "EUR", "GBP", "NZD", "SEK" and "USD" are supported.
          */
         public PaymentListRequest<S> withCurrency(Currency currency) {
             this.currency = currency;
@@ -466,8 +477,8 @@ public class PaymentService {
         }
 
         /**
-         * Unique identifier, beginning with "MD". Note that this prefix may not apply to mandates created
-         * before 2016.
+         * Unique identifier, beginning with "MD". Note that this prefix may not apply to mandates
+         * created before 2016.
          */
         public PaymentListRequest<S> withMandate(String mandate) {
             this.mandate = mandate;
@@ -475,16 +486,42 @@ public class PaymentService {
         }
 
         /**
+         * The direction to sort in. One of:
+         * <ul>
+         * <li>`asc`</li>
+         * <li>`desc`</li>
+         * </ul>
+         */
+        public PaymentListRequest<S> withSortDirection(SortDirection sortDirection) {
+            this.sortDirection = sortDirection;
+            return this;
+        }
+
+        /**
+         * Field by which to sort records. One of:
+         * <ul>
+         * <li>`charge_date`</li>
+         * <li>`amount`</li>
+         * </ul>
+         */
+        public PaymentListRequest<S> withSortField(SortField sortField) {
+            this.sortField = sortField;
+            return this;
+        }
+
+        /**
          * One of:
          * <ul>
-         * <li>`pending_customer_approval`: we're waiting for the customer to approve this payment</li>
-         * <li>`pending_submission`: the payment has been created, but not yet submitted to the banks</li>
+         * <li>`pending_customer_approval`: we're waiting for the customer to approve this
+         * payment</li>
+         * <li>`pending_submission`: the payment has been created, but not yet submitted to the
+         * banks</li>
          * <li>`submitted`: the payment has been submitted to the banks</li>
          * <li>`confirmed`: the payment has been confirmed as collected</li>
-         * <li>`paid_out`:  the payment has been included in a [payout](#core-endpoints-payouts)</li>
+         * <li>`paid_out`: the payment has been included in a [payout](#core-endpoints-payouts)</li>
          * <li>`cancelled`: the payment has been cancelled</li>
-         * <li>`customer_approval_denied`: the customer has denied approval for the payment. You should
-         * contact the customer directly</li>
+         * <li>`customer_approval_denied`: the customer has denied approval for the payment. You
+         * should contact the customer directly</li>
          * <li>`failed`: the payment failed to be processed. Note that payments can fail after being
          * confirmed if the failure message is sent late by the banks.</li>
          * <li>`charged_back`: the payment has been charged back</li>
@@ -503,7 +540,8 @@ public class PaymentService {
             return this;
         }
 
-        private PaymentListRequest(HttpClient httpClient, ListRequestExecutor<S, Payment> executor) {
+        private PaymentListRequest(HttpClient httpClient,
+                ListRequestExecutor<S, Payment> executor) {
             super(httpClient, executor);
         }
 
@@ -533,6 +571,12 @@ public class PaymentService {
             }
             if (mandate != null) {
                 params.put("mandate", mandate);
+            }
+            if (sortDirection != null) {
+                params.put("sort_direction", sortDirection);
+            }
+            if (sortField != null) {
+                params.put("sort_field", sortField);
             }
             if (status != null) {
                 params.put("status", status);
@@ -568,9 +612,32 @@ public class PaymentService {
             NZD, @SerializedName("SEK")
             SEK, @SerializedName("USD")
             USD;
+
             @Override
             public String toString() {
                 return name();
+            }
+        }
+
+        public enum SortDirection {
+            @SerializedName("asc")
+            ASC, @SerializedName("desc")
+            DESC;
+
+            @Override
+            public String toString() {
+                return name().toLowerCase();
+            }
+        }
+
+        public enum SortField {
+            @SerializedName("charge_date")
+            CHARGE_DATE, @SerializedName("amount")
+            AMOUNT;
+
+            @Override
+            public String toString() {
+                return name().toLowerCase();
             }
         }
 
@@ -585,6 +652,7 @@ public class PaymentService {
             CUSTOMER_APPROVAL_DENIED, @SerializedName("failed")
             FAILED, @SerializedName("charged_back")
             CHARGED_BACK;
+
             @Override
             public String toString() {
                 return name().toLowerCase();
@@ -598,8 +666,8 @@ public class PaymentService {
             private String lte;
 
             /**
-             * Limit to records where the payment was or will be collected from the customer's bank account after
-             * the specified date.
+             * Limit to records where the payment was or will be collected from the customer's bank
+             * account after the specified date.
              */
             public ChargeDate withGt(String gt) {
                 this.gt = gt;
@@ -607,8 +675,8 @@ public class PaymentService {
             }
 
             /**
-             * Limit to records where the payment was or will be collected from the customer's bank account on or
-             * after the specified date.
+             * Limit to records where the payment was or will be collected from the customer's bank
+             * account on or after the specified date.
              */
             public ChargeDate withGte(String gte) {
                 this.gte = gte;
@@ -616,8 +684,8 @@ public class PaymentService {
             }
 
             /**
-             * Limit to records where the payment was or will be collected from the customer's bank account
-             * before the specified date.
+             * Limit to records where the payment was or will be collected from the customer's bank
+             * account before the specified date.
              */
             public ChargeDate withLt(String lt) {
                 this.lt = lt;
@@ -625,8 +693,8 @@ public class PaymentService {
             }
 
             /**
-             * Limit to records where the payment was or will be collected from the customer's bank account on or
-             * before the specified date.
+             * Limit to records where the payment was or will be collected from the customer's bank
+             * account on or before the specified date.
              */
             public ChargeDate withLte(String lte) {
                 this.lte = lte;
@@ -762,8 +830,8 @@ public class PaymentService {
         private Boolean retryIfPossible;
 
         /**
-         * Key-value store of custom data. Up to 3 keys are permitted, with key names up to 50 characters and
-         * values up to 500 characters.
+         * Key-value store of custom data. Up to 3 keys are permitted, with key names up to 50
+         * characters and values up to 500 characters.
          */
         public PaymentUpdateRequest withMetadata(Map<String, String> metadata) {
             this.metadata = metadata;
@@ -771,8 +839,8 @@ public class PaymentService {
         }
 
         /**
-         * Key-value store of custom data. Up to 3 keys are permitted, with key names up to 50 characters and
-         * values up to 500 characters.
+         * Key-value store of custom data. Up to 3 keys are permitted, with key names up to 50
+         * characters and values up to 500 characters.
          */
         public PaymentUpdateRequest withMetadata(String key, String value) {
             if (metadata == null) {
@@ -832,8 +900,8 @@ public class PaymentService {
     /**
      * Request class for {@link PaymentService#cancel }.
      *
-     * Cancels the payment if it has not already been submitted to the banks. Any metadata supplied to
-     * this endpoint will be stored on the payment cancellation event it causes.
+     * Cancels the payment if it has not already been submitted to the banks. Any metadata supplied
+     * to this endpoint will be stored on the payment cancellation event it causes.
      * 
      * This will fail with a `cancellation_failed` error unless the payment's status is
      * `pending_submission`.
@@ -844,8 +912,8 @@ public class PaymentService {
         private Map<String, String> metadata;
 
         /**
-         * Key-value store of custom data. Up to 3 keys are permitted, with key names up to 50 characters and
-         * values up to 500 characters.
+         * Key-value store of custom data. Up to 3 keys are permitted, with key names up to 50
+         * characters and values up to 500 characters.
          */
         public PaymentCancelRequest withMetadata(Map<String, String> metadata) {
             this.metadata = metadata;
@@ -853,8 +921,8 @@ public class PaymentService {
         }
 
         /**
-         * Key-value store of custom data. Up to 3 keys are permitted, with key names up to 50 characters and
-         * values up to 500 characters.
+         * Key-value store of custom data. Up to 3 keys are permitted, with key names up to 50
+         * characters and values up to 500 characters.
          */
         public PaymentCancelRequest withMetadata(String key, String value) {
             if (metadata == null) {
@@ -910,11 +978,11 @@ public class PaymentService {
     /**
      * Request class for {@link PaymentService#retry }.
      *
-     * <a name="retry_failed"></a>Retries a failed payment if the underlying mandate is active. You will
-     * receive a `resubmission_requested` webhook, but after that retrying the payment follows the same
-     * process as its initial creation, so you will receive a `submitted` webhook, followed by a
-     * `confirmed` or `failed` event. Any metadata supplied to this endpoint will be stored against the
-     * payment submission event it causes.
+     * <a name="retry_failed"></a>Retries a failed payment if the underlying mandate is active. You
+     * will receive a `resubmission_requested` webhook, but after that retrying the payment follows
+     * the same process as its initial creation, so you will receive a `submitted` webhook, followed
+     * by a `confirmed` or `failed` event. Any metadata supplied to this endpoint will be stored
+     * against the payment submission event it causes.
      * 
      * This will return a `retry_failed` error if the payment has not failed.
      * 
@@ -927,10 +995,10 @@ public class PaymentService {
         private Map<String, String> metadata;
 
         /**
-         * A future date on which the payment should be collected. If not specified, the payment will be
-         * collected as soon as possible. If the value is before the [mandate](#core-endpoints-mandates)'s
-         * `next_possible_charge_date` creation will fail. If the value is not a working day it will be
-         * rolled forwards to the next available one.
+         * A future date on which the payment should be collected. If not specified, the payment
+         * will be collected as soon as possible. If the value is before the
+         * [mandate](#core-endpoints-mandates)'s `next_possible_charge_date` creation will fail. If
+         * the value is not a working day it will be rolled forwards to the next available one.
          */
         public PaymentRetryRequest withChargeDate(String chargeDate) {
             this.chargeDate = chargeDate;
@@ -938,8 +1006,8 @@ public class PaymentService {
         }
 
         /**
-         * Key-value store of custom data. Up to 3 keys are permitted, with key names up to 50 characters and
-         * values up to 500 characters.
+         * Key-value store of custom data. Up to 3 keys are permitted, with key names up to 50
+         * characters and values up to 500 characters.
          */
         public PaymentRetryRequest withMetadata(Map<String, String> metadata) {
             this.metadata = metadata;
@@ -947,8 +1015,8 @@ public class PaymentService {
         }
 
         /**
-         * Key-value store of custom data. Up to 3 keys are permitted, with key names up to 50 characters and
-         * values up to 500 characters.
+         * Key-value store of custom data. Up to 3 keys are permitted, with key names up to 50
+         * characters and values up to 500 characters.
          */
         public PaymentRetryRequest withMetadata(String key, String value) {
             if (metadata == null) {

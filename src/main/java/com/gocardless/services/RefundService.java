@@ -1,15 +1,13 @@
 package com.gocardless.services;
 
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
 import com.gocardless.http.*;
 import com.gocardless.resources.Refund;
-
 import com.google.common.collect.ImmutableMap;
 import com.google.gson.annotations.SerializedName;
 import com.google.gson.reflect.TypeToken;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 /**
  * Service class for working with refund resources.
@@ -24,9 +22,8 @@ public class RefundService {
     private final HttpClient httpClient;
 
     /**
-     * Constructor.  Users of this library should have no need to call this - an instance
-     * of this class can be obtained by calling
-      {@link com.gocardless.GoCardlessClient#refunds() }.
+     * Constructor. Users of this library should have no need to call this - an instance of this
+     * class can be obtained by calling {@link com.gocardless.GoCardlessClient#refunds() }.
      */
     public RefundService(HttpClient httpClient) {
         this.httpClient = httpClient;
@@ -35,12 +32,12 @@ public class RefundService {
     /**
      * Creates a new refund object.
      * 
-     * This fails with:<a name="total_amount_confirmation_invalid"></a><a
-     * name="number_of_refunds_exceeded"></a><a name="available_refund_amount_insufficient"></a>
+     * This fails with:<a name="total_amount_confirmation_invalid"></a><a name=
+     * "number_of_refunds_exceeded"></a><a name="available_refund_amount_insufficient"></a>
      * 
-     * - `total_amount_confirmation_invalid` if the confirmation amount doesn't match the total amount
-     * refunded for the payment. This safeguard is there to prevent two processes from creating refunds
-     * without awareness of each other.
+     * - `total_amount_confirmation_invalid` if the confirmation amount doesn't match the total
+     * amount refunded for the payment. This safeguard is there to prevent two processes from
+     * creating refunds without awareness of each other.
      * 
      * - `number_of_refunds_exceeded` if five or more refunds have already been created against the
      * payment.
@@ -83,12 +80,12 @@ public class RefundService {
      *
      * Creates a new refund object.
      * 
-     * This fails with:<a name="total_amount_confirmation_invalid"></a><a
-     * name="number_of_refunds_exceeded"></a><a name="available_refund_amount_insufficient"></a>
+     * This fails with:<a name="total_amount_confirmation_invalid"></a><a name=
+     * "number_of_refunds_exceeded"></a><a name="available_refund_amount_insufficient"></a>
      * 
-     * - `total_amount_confirmation_invalid` if the confirmation amount doesn't match the total amount
-     * refunded for the payment. This safeguard is there to prevent two processes from creating refunds
-     * without awareness of each other.
+     * - `total_amount_confirmation_invalid` if the confirmation amount doesn't match the total
+     * amount refunded for the payment. This safeguard is there to prevent two processes from
+     * creating refunds without awareness of each other.
      * 
      * - `number_of_refunds_exceeded` if five or more refunds have already been created against the
      * payment.
@@ -118,8 +115,12 @@ public class RefundService {
         }
 
         /**
-         * <em>private beta</em> ID of the [mandate](#core-endpoints-mandates) against which the refund is
-         * being made.
+         * ID of the [mandate](#core-endpoints-mandates) against which the refund is being made.
+         * <br />
+         * <p class="restricted-notice">
+         * <strong>Restricted</strong>: You must request access to Mandate Refunds by contacting
+         * <a href="mailto:support@gocardless.com">our support team</a>.
+         * </p>
          */
         public RefundCreateRequest withLinksMandate(String mandate) {
             if (links == null) {
@@ -141,8 +142,8 @@ public class RefundService {
         }
 
         /**
-         * Key-value store of custom data. Up to 3 keys are permitted, with key names up to 50 characters and
-         * values up to 500 characters.
+         * Key-value store of custom data. Up to 3 keys are permitted, with key names up to 50
+         * characters and values up to 500 characters.
          */
         public RefundCreateRequest withMetadata(Map<String, String> metadata) {
             this.metadata = metadata;
@@ -150,8 +151,8 @@ public class RefundService {
         }
 
         /**
-         * Key-value store of custom data. Up to 3 keys are permitted, with key names up to 50 characters and
-         * values up to 500 characters.
+         * Key-value store of custom data. Up to 3 keys are permitted, with key names up to 50
+         * characters and values up to 500 characters.
          */
         public RefundCreateRequest withMetadata(String key, String value) {
             if (metadata == null) {
@@ -162,16 +163,23 @@ public class RefundService {
         }
 
         /**
-         * An optional reference that will appear on your customer's bank statement. The character limit for
-         * this reference is dependent on the scheme.<br /> <strong>ACH</strong> - 10 characters<br />
-         * <strong>Autogiro</strong> - 11 characters<br /> <strong>Bacs</strong> - 10 characters<br />
-         * <strong>BECS</strong> - 30 characters<br /> <strong>BECS NZ</strong> - 12 characters<br />
-         * <strong>Betalingsservice</strong> - 30 characters<br /> <strong>PAD</strong> - 12 characters<br />
-         * <strong>SEPA</strong> - 140 characters<br /> Note that this reference must be unique (for each
-         * merchant) for the BECS scheme as it is a scheme requirement. <p
-         * class='restricted-notice'><strong>Restricted</strong>: You can only specify a payment reference
-         * for Bacs payments (that is, when collecting from the UK) if you're on the <a
-         * href='https://gocardless.com/pricing'>GoCardless Plus, Pro or Enterprise packages</a>.</p>
+         * An optional reference that will appear on your customer's bank statement. The character
+         * limit for this reference is dependent on the scheme.<br />
+         * <strong>ACH</strong> - 10 characters<br />
+         * <strong>Autogiro</strong> - 11 characters<br />
+         * <strong>Bacs</strong> - 10 characters<br />
+         * <strong>BECS</strong> - 30 characters<br />
+         * <strong>BECS NZ</strong> - 12 characters<br />
+         * <strong>Betalingsservice</strong> - 30 characters<br />
+         * <strong>PAD</strong> - 12 characters<br />
+         * <strong>SEPA</strong> - 140 characters<br />
+         * Note that this reference must be unique (for each merchant) for the BECS scheme as it is
+         * a scheme requirement.
+         * <p class='restricted-notice'>
+         * <strong>Restricted</strong>: You can only specify a payment reference for Bacs payments
+         * (that is, when collecting from the UK) if you're on the
+         * <a href='https://gocardless.com/pricing'>GoCardless Plus, Pro or Enterprise packages</a>.
+         * </p>
          */
         public RefundCreateRequest withReference(String reference) {
             this.reference = reference;
@@ -179,12 +187,10 @@ public class RefundService {
         }
 
         /**
-         * Total expected refunded amount in minor unit (e.g. pence/cents/öre). If there are
-         * other partial refunds against this payment, this value should be the sum of the
-         * existing refunds plus the amount of the refund being created.
-         * 
+         * Total expected refunded amount in minor unit (e.g. pence/cents/öre). If there are other
+         * partial refunds against this payment, this value should be the sum of the existing
+         * refunds plus the amount of the refund being created. <br />
          * Must be supplied if `links[payment]` is present.
-         * 
          */
         public RefundCreateRequest withTotalAmountConfirmation(Integer totalAmountConfirmation) {
             this.totalAmountConfirmation = totalAmountConfirmation;
@@ -239,8 +245,12 @@ public class RefundService {
             private String payment;
 
             /**
-             * <em>private beta</em> ID of the [mandate](#core-endpoints-mandates) against which the refund is
-             * being made.
+             * ID of the [mandate](#core-endpoints-mandates) against which the refund is being made.
+             * <br />
+             * <p class="restricted-notice">
+             * <strong>Restricted</strong>: You must request access to Mandate Refunds by contacting
+             * <a href="mailto:support@gocardless.com">our support team</a>.
+             * </p>
              */
             public Links withMandate(String mandate) {
                 this.mandate = mandate;
@@ -342,8 +352,8 @@ public class RefundService {
         }
 
         /**
-         * Unique identifier, beginning with "MD". Note that this prefix may not apply to mandates created
-         * before 2016.
+         * Unique identifier, beginning with "MD". Note that this prefix may not apply to mandates
+         * created before 2016.
          */
         public RefundListRequest<S> withMandate(String mandate) {
             this.mandate = mandate;
@@ -361,8 +371,8 @@ public class RefundService {
         /**
          * Whether a refund was issued against a mandate or a payment. One of:
          * <ul>
-         *   <li>`payment`: <em>default</em> returns refunds created against payments only</li>
-         *   <li>`mandate`: returns refunds created against mandates only</li>
+         * <li>`payment`: <em>default</em> returns refunds created against payments only</li>
+         * <li>`mandate`: returns refunds created against mandates only</li>
          * </ul>
          */
         public RefundListRequest<S> withRefundType(RefundType refundType) {
@@ -417,6 +427,7 @@ public class RefundService {
             @SerializedName("mandate")
             MANDATE, @SerializedName("payment")
             PAYMENT;
+
             @Override
             public String toString() {
                 return name().toLowerCase();
@@ -533,8 +544,8 @@ public class RefundService {
         private Map<String, String> metadata;
 
         /**
-         * Key-value store of custom data. Up to 3 keys are permitted, with key names up to 50 characters and
-         * values up to 500 characters.
+         * Key-value store of custom data. Up to 3 keys are permitted, with key names up to 50
+         * characters and values up to 500 characters.
          */
         public RefundUpdateRequest withMetadata(Map<String, String> metadata) {
             this.metadata = metadata;
@@ -542,8 +553,8 @@ public class RefundService {
         }
 
         /**
-         * Key-value store of custom data. Up to 3 keys are permitted, with key names up to 50 characters and
-         * values up to 500 characters.
+         * Key-value store of custom data. Up to 3 keys are permitted, with key names up to 50
+         * characters and values up to 500 characters.
          */
         public RefundUpdateRequest withMetadata(String key, String value) {
             if (metadata == null) {

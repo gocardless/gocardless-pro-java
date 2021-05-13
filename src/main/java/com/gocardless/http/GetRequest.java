@@ -24,8 +24,7 @@ public abstract class GetRequest<T> extends ApiRequest<T> {
     /**
      * Executes this request.
      *
-     * Returns a {@link com.gocardless.http.ApiResponse} that wraps the
-     * response entity.
+     * Returns a {@link com.gocardless.http.ApiResponse} that wraps the response entity.
      *
      * @throws com.gocardless.GoCardlessException
      */

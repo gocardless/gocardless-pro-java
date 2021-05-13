@@ -1,21 +1,20 @@
 package com.gocardless.resources;
 
+import com.google.gson.annotations.SerializedName;
 import java.util.List;
 import java.util.Map;
-
-import com.google.gson.annotations.SerializedName;
 
 /**
  * Represents a instalment schedule resource returned from the API.
  *
  * Instalment schedules are objects which represent a collection of related payments, with the
- * intention to collect the `total_amount` specified. The API supports both schedule-based
- * creation (similar to subscriptions) as well as explicit selection of differing payment
- * amounts and charge dates.
+ * intention to collect the `total_amount` specified. The API supports both schedule-based creation
+ * (similar to subscriptions) as well as explicit selection of differing payment amounts and charge
+ * dates.
  * 
- * Unlike subscriptions, the payments are created immediately, so the instalment schedule
- * cannot be modified once submitted and instead can only be cancelled (which will cancel
- * any of the payments which have not yet been submitted).
+ * Unlike subscriptions, the payments are created immediately, so the instalment schedule cannot be
+ * modified once submitted and instead can only be cancelled (which will cancel any of the payments
+ * which have not yet been submitted).
  * 
  * Customers will receive a single notification about the complete schedule of collection.
  * 
@@ -43,8 +42,8 @@ public class InstalmentSchedule {
     }
 
     /**
-     * [ISO 4217](http://en.wikipedia.org/wiki/ISO_4217#Active_codes) currency code. Currently "AUD",
-     * "CAD", "DKK", "EUR", "GBP", "NZD", "SEK" and "USD" are supported.
+     * [ISO 4217](http://en.wikipedia.org/wiki/ISO_4217#Active_codes) currency code. Currently
+     * "AUD", "CAD", "DKK", "EUR", "GBP", "NZD", "SEK" and "USD" are supported.
      */
     public Currency getCurrency() {
         return currency;
@@ -65,25 +64,24 @@ public class InstalmentSchedule {
     }
 
     /**
-     * Key-value store of custom data. Up to 3 keys are permitted, with key names up to 50 characters and
-     * values up to 500 characters.
+     * Key-value store of custom data. Up to 3 keys are permitted, with key names up to 50
+     * characters and values up to 500 characters.
      */
     public Map<String, String> getMetadata() {
         return metadata;
     }
 
     /**
-     * Name of the instalment schedule, up to 100 chars. This name will also be
-     * copied to the payments of the instalment schedule if you use schedule-based creation.
+     * Name of the instalment schedule, up to 100 chars. This name will also be copied to the
+     * payments of the instalment schedule if you use schedule-based creation.
      */
     public String getName() {
         return name;
     }
 
     /**
-     * If the status is `creation_failed`, this property will be populated with validation
-     * failures from the individual payments, arranged by the index of the payment that
-     * failed.
+     * If the status is `creation_failed`, this property will be populated with validation failures
+     * from the individual payments, arranged by the index of the payment that failed.
      * 
      */
     public Map<String, String> getPaymentErrors() {
@@ -107,10 +105,9 @@ public class InstalmentSchedule {
     }
 
     /**
-     * The total amount of the instalment schedule, defined as the sum of all individual
-     * payments, in the lowest denomination for the currency (e.g. pence in GBP, cents in
-     * EUR). If the requested payment amounts do not sum up correctly, a validation error
-     * will be returned.
+     * The total amount of the instalment schedule, defined as the sum of all individual payments,
+     * in the lowest denomination for the currency (e.g. pence in GBP, cents in EUR). If the
+     * requested payment amounts do not sum up correctly, a validation error will be returned.
      */
     public Integer getTotalAmount() {
         return totalAmount;
@@ -160,8 +157,8 @@ public class InstalmentSchedule {
         }
 
         /**
-         * ID of the associated [mandate](#core-endpoints-mandates) which the instalment schedule will create
-         * payments against.
+         * ID of the associated [mandate](#core-endpoints-mandates) which the instalment schedule
+         * will create payments against.
          */
         public String getMandate() {
             return mandate;

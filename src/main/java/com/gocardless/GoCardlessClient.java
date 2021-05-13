@@ -1,22 +1,21 @@
 package com.gocardless;
 
-import java.net.Proxy;
-
-import javax.net.ssl.SSLSocketFactory;
-
 import com.gocardless.http.HttpClient;
 import com.gocardless.services.*;
-
 import com.google.common.annotations.VisibleForTesting;
-
 import com.squareup.okhttp.OkHttpClient;
+import java.net.Proxy;
+import javax.net.ssl.SSLSocketFactory;
 
 /**
  * Entry point into the client.
  */
 public class GoCardlessClient {
     private final HttpClient httpClient;
+    private final BankAuthorisationService bankAuthorisations;
     private final BankDetailsLookupService bankDetailsLookups;
+    private final BillingRequestService billingRequests;
+    private final BillingRequestFlowService billingRequestFlows;
     private final CreditorService creditors;
     private final CreditorBankAccountService creditorBankAccounts;
     private final CurrencyExchangeRateService currencyExchangeRates;
@@ -25,6 +24,7 @@ public class GoCardlessClient {
     private final CustomerNotificationService customerNotifications;
     private final EventService events;
     private final InstalmentScheduleService instalmentSchedules;
+    private final InstitutionService institutions;
     private final MandateService mandates;
     private final MandateImportService mandateImports;
     private final MandateImportEntryService mandateImportEntries;
@@ -35,8 +35,10 @@ public class GoCardlessClient {
     private final PayoutItemService payoutItems;
     private final RedirectFlowService redirectFlows;
     private final RefundService refunds;
+    private final ScenarioSimulatorService scenarioSimulators;
     private final SubscriptionService subscriptions;
     private final TaxRateService taxRates;
+    private final WebhookService webhooks;
 
     public static final class Builder {
         private final String accessToken;
@@ -46,10 +48,10 @@ public class GoCardlessClient {
         private boolean errorOnIdempotencyConflict;
 
         /**
-         * Constructor.  Users of this library will not need to access this constructor directly -
-         * they should use GoCardlessClient.newBuilder() to get an instance. The client
-         * will automatically be configured to use GoCardless' live environment
-         * and the supplied access token.
+         * Constructor. Users of this library will not need to access this constructor directly -
+         * they should use GoCardlessClient.newBuilder() to get an instance. The client will
+         * automatically be configured to use GoCardless' live environment and the supplied access
+         * token.
          *
          * @param accessToken the access token to use to access the GoCardless API
          */
@@ -100,8 +102,8 @@ public class GoCardlessClient {
         /**
          * Configures the behaviour on an Idempotency Conflict error
          *
-         * @param errorOnIdempotencyConflict true to raise an error upon
-         * conflict, false to fetch the conflicting resource instead.
+         * @param errorOnIdempotencyConflict true to raise an error upon conflict, false to fetch
+         *        the conflicting resource instead.
          */
         public Builder withErrorOnIdempotencyConflict(boolean errorOnIdempotencyConflict) {
             this.errorOnIdempotencyConflict = errorOnIdempotencyConflict;
@@ -123,7 +125,10 @@ public class GoCardlessClient {
 
     private GoCardlessClient(HttpClient httpClient) {
         this.httpClient = httpClient;
+        this.bankAuthorisations = new BankAuthorisationService(httpClient);
         this.bankDetailsLookups = new BankDetailsLookupService(httpClient);
+        this.billingRequests = new BillingRequestService(httpClient);
+        this.billingRequestFlows = new BillingRequestFlowService(httpClient);
         this.creditors = new CreditorService(httpClient);
         this.creditorBankAccounts = new CreditorBankAccountService(httpClient);
         this.currencyExchangeRates = new CurrencyExchangeRateService(httpClient);
@@ -132,6 +137,7 @@ public class GoCardlessClient {
         this.customerNotifications = new CustomerNotificationService(httpClient);
         this.events = new EventService(httpClient);
         this.instalmentSchedules = new InstalmentScheduleService(httpClient);
+        this.institutions = new InstitutionService(httpClient);
         this.mandates = new MandateService(httpClient);
         this.mandateImports = new MandateImportService(httpClient);
         this.mandateImportEntries = new MandateImportEntryService(httpClient);
@@ -142,8 +148,17 @@ public class GoCardlessClient {
         this.payoutItems = new PayoutItemService(httpClient);
         this.redirectFlows = new RedirectFlowService(httpClient);
         this.refunds = new RefundService(httpClient);
+        this.scenarioSimulators = new ScenarioSimulatorService(httpClient);
         this.subscriptions = new SubscriptionService(httpClient);
         this.taxRates = new TaxRateService(httpClient);
+        this.webhooks = new WebhookService(httpClient);
+    }
+
+    /**
+     * A service class for working with bank authorisation resources.
+     */
+    public BankAuthorisationService bankAuthorisations() {
+        return bankAuthorisations;
     }
 
     /**
@@ -151,6 +166,20 @@ public class GoCardlessClient {
      */
     public BankDetailsLookupService bankDetailsLookups() {
         return bankDetailsLookups;
+    }
+
+    /**
+     * A service class for working with billing request resources.
+     */
+    public BillingRequestService billingRequests() {
+        return billingRequests;
+    }
+
+    /**
+     * A service class for working with billing request flow resources.
+     */
+    public BillingRequestFlowService billingRequestFlows() {
+        return billingRequestFlows;
     }
 
     /**
@@ -207,6 +236,13 @@ public class GoCardlessClient {
      */
     public InstalmentScheduleService instalmentSchedules() {
         return instalmentSchedules;
+    }
+
+    /**
+     * A service class for working with institution resources.
+     */
+    public InstitutionService institutions() {
+        return institutions;
     }
 
     /**
@@ -280,6 +316,13 @@ public class GoCardlessClient {
     }
 
     /**
+     * A service class for working with scenario simulator resources.
+     */
+    public ScenarioSimulatorService scenarioSimulators() {
+        return scenarioSimulators;
+    }
+
+    /**
      * A service class for working with subscription resources.
      */
     public SubscriptionService subscriptions() {
@@ -294,6 +337,13 @@ public class GoCardlessClient {
     }
 
     /**
+     * A service class for working with webhook resources.
+     */
+    public WebhookService webhooks() {
+        return webhooks;
+    }
+
+    /**
      * Available environments for this client.
      */
     public enum Environment {
@@ -305,6 +355,7 @@ public class GoCardlessClient {
          * Sandbox environment (base URL https://api-sandbox.gocardless.com).
          */
         SANDBOX;
+
         private String getBaseUrl() {
             switch (this) {
                 case LIVE:
@@ -318,8 +369,8 @@ public class GoCardlessClient {
 
     /**
      * Returns a builder which can be used to configure and instantiate a GoCardlessClient instance.
-     * The client will automatically be configured to use GoCardless' live environment
-     * and the supplied access token.
+     * The client will automatically be configured to use GoCardless' live environment and the
+     * supplied access token.
      *
      * @param accessToken the access token to use to access the GoCardless API
      */

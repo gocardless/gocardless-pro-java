@@ -22,8 +22,9 @@ public class MandatePdf {
     }
 
     /**
-     * The URL at which this mandate PDF can be viewed until it expires at the date and time specified by
-     * `expires_at`. You should not store this URL or rely on its structure remaining the same.
+     * The URL at which this mandate PDF can be viewed until it expires at the date and time
+     * specified by `expires_at`. You should not store this URL or rely on its structure remaining
+     * the same.
      */
     public String getUrl() {
         return url;

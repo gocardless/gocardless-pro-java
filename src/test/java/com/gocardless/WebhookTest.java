@@ -1,16 +1,14 @@
 package com.gocardless;
 
-import java.io.IOException;
-import java.util.List;
+import static org.assertj.core.api.Assertions.assertThat;
 
 import com.gocardless.errors.InvalidSignatureException;
 import com.gocardless.resources.Event;
-
+import java.io.IOException;
+import java.util.List;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
-
-import static org.assertj.core.api.Assertions.assertThat;
 
 public class WebhookTest {
     @Rule

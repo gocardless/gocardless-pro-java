@@ -1,8 +1,8 @@
 package com.gocardless.errors;
 
 /**
- * Provides a mapping between API error responses and exceptions.  Users of this
- * library will not need to use this class.
+ * Provides a mapping between API error responses and exceptions. Users of this library will not
+ * need to use this class.
  */
 public class GoCardlessErrorMapper {
     /**

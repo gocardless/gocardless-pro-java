@@ -5,16 +5,17 @@ import com.google.gson.annotations.SerializedName;
 /**
  * Represents a customer notification resource returned from the API.
  *
- * Customer Notifications represent the notification which is due to be sent to a customer
- * after an event has happened. The event, the resource and the customer to be notified
- * are all identified in the `links` property.
+ * Customer Notifications represent the notification which is due to be sent to a customer after an
+ * event has happened. The event, the resource and the customer to be notified are all identified in
+ * the `links` property.
  * 
- * Note that these are ephemeral records - once the notification has been actioned in some
- * way, it is no longer visible using this API.
+ * Note that these are ephemeral records - once the notification has been actioned in some way, it
+ * is no longer visible using this API.
  * 
- * <p class="restricted-notice"><strong>Restricted</strong>: This API is currently only available for
- * approved integrators - please <a href="mailto:help@gocardless.com">get in touch</a> if you would
- * like to use this API.</p>
+ * <p class="restricted-notice">
+ * <strong>Restricted</strong>: This API is currently only available for approved integrators -
+ * please <a href="mailto:help@gocardless.com">get in touch</a> if you would like to use this API.
+ * </p>
  */
 public class CustomerNotification {
     private CustomerNotification() {
@@ -29,8 +30,8 @@ public class CustomerNotification {
     private Type type;
 
     /**
-     * The action that was taken on the notification. Currently this can only be `handled`,
-     * which means the integrator sent the notification themselves.
+     * The action that was taken on the notification. Currently this can only be `handled`, which
+     * means the integrator sent the notification themselves.
      * 
      */
     public ActionTaken getActionTaken() {
@@ -38,8 +39,7 @@ public class CustomerNotification {
     }
 
     /**
-     * Fixed [timestamp](#api-usage-time-zones--dates), recording when this
-     * action was taken.
+     * Fixed [timestamp](#api-usage-time-zones--dates), recording when this action was taken.
      */
     public String getActionTakenAt() {
         return actionTakenAt;
@@ -64,7 +64,16 @@ public class CustomerNotification {
     }
 
     /**
-     * The type of notification the customer shall receive.
+     * The type of notification the customer shall receive. One of:
+     * <ul>
+     * <li>`payment_created`</li>
+     * <li>`payment_cancelled`</li>
+     * <li>`mandate_created`</li>
+     * <li>`subscription_created`</li>
+     * <li>`subscription_cancelled`</li>
+     * <li>`instalment_schedule_created`</li>
+     * <li>`instalment_schedule_cancelled`</li>
+     * </ul>
      */
     public Type getType() {
         return type;

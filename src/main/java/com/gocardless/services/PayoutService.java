@@ -1,31 +1,28 @@
 package com.gocardless.services;
 
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
 import com.gocardless.http.*;
 import com.gocardless.resources.Payout;
-
 import com.google.common.collect.ImmutableMap;
 import com.google.gson.annotations.SerializedName;
 import com.google.gson.reflect.TypeToken;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 /**
  * Service class for working with payout resources.
  *
  * Payouts represent transfers from GoCardless to a [creditor](#core-endpoints-creditors). Each
- * payout contains the funds collected from one or many [payments](#core-endpoints-payments). All the
- * payments in a payout will have been collected in the same currency. Payouts are created
+ * payout contains the funds collected from one or many [payments](#core-endpoints-payments). All
+ * the payments in a payout will have been collected in the same currency. Payouts are created
  * automatically after a payment has been successfully collected.
  */
 public class PayoutService {
     private final HttpClient httpClient;
 
     /**
-     * Constructor.  Users of this library should have no need to call this - an instance
-     * of this class can be obtained by calling
-      {@link com.gocardless.GoCardlessClient#payouts() }.
+     * Constructor. Users of this library should have no need to call this - an instance of this
+     * class can be obtained by calling {@link com.gocardless.GoCardlessClient#payouts() }.
      */
     public PayoutService(HttpClient httpClient) {
         this.httpClient = httpClient;
@@ -43,8 +40,8 @@ public class PayoutService {
     }
 
     /**
-     * Retrieves the details of a single payout. For an example of how to reconcile the transactions in a
-     * payout, see [this guide](#events-reconciling-payouts-with-events).
+     * Retrieves the details of a single payout. For an example of how to reconcile the transactions
+     * in a payout, see [this guide](#events-reconciling-payouts-with-events).
      */
     public PayoutGetRequest get(String identity) {
         return new PayoutGetRequest(httpClient, identity);
@@ -154,8 +151,8 @@ public class PayoutService {
         }
 
         /**
-         * [ISO 4217](http://en.wikipedia.org/wiki/ISO_4217#Active_codes) currency code. Currently "AUD",
-         * "CAD", "DKK", "EUR", "GBP", "NZD", "SEK" and "USD" are supported.
+         * [ISO 4217](http://en.wikipedia.org/wiki/ISO_4217#Active_codes) currency code. Currently
+         * "AUD", "CAD", "DKK", "EUR", "GBP", "NZD", "SEK" and "USD" are supported.
          */
         public PayoutListRequest<S> withCurrency(Currency currency) {
             this.currency = currency;
@@ -171,8 +168,8 @@ public class PayoutService {
         }
 
         /**
-         * Key-value store of custom data. Up to 3 keys are permitted, with key names up to 50 characters and
-         * values up to 500 characters.
+         * Key-value store of custom data. Up to 3 keys are permitted, with key names up to 50
+         * characters and values up to 500 characters.
          */
         public PayoutListRequest<S> withMetadata(Map<String, String> metadata) {
             this.metadata = metadata;
@@ -180,8 +177,8 @@ public class PayoutService {
         }
 
         /**
-         * Key-value store of custom data. Up to 3 keys are permitted, with key names up to 50 characters and
-         * values up to 500 characters.
+         * Key-value store of custom data. Up to 3 keys are permitted, with key names up to 50
+         * characters and values up to 500 characters.
          */
         public PayoutListRequest<S> withMetadata(String key, String value) {
             if (metadata == null) {
@@ -210,8 +207,10 @@ public class PayoutService {
         /**
          * One of:
          * <ul>
-         * <li>`pending`: the payout has been created, but not yet sent to the banks</li>
-         * <li>`paid`: the payout has been sent to the banks</li>
+         * <li>`pending`: the payout has been created, but not yet sent to your bank or it is in the
+         * process of being exchanged through our FX provider.</li>
+         * <li>`paid`: the payout has been sent to the your bank. FX payouts will become `paid`
+         * after we emit the `fx_rate_confirmed` webhook.</li>
          * <li>`bounced`: the payout bounced when sent, the payout can be retried.</li>
          * </ul>
          */
@@ -285,6 +284,7 @@ public class PayoutService {
             NZD, @SerializedName("SEK")
             SEK, @SerializedName("USD")
             USD;
+
             @Override
             public String toString() {
                 return name();
@@ -295,6 +295,7 @@ public class PayoutService {
             @SerializedName("merchant")
             MERCHANT, @SerializedName("partner")
             PARTNER;
+
             @Override
             public String toString() {
                 return name().toLowerCase();
@@ -306,6 +307,7 @@ public class PayoutService {
             PENDING, @SerializedName("paid")
             PAID, @SerializedName("bounced")
             BOUNCED;
+
             @Override
             public String toString() {
                 return name().toLowerCase();
@@ -372,8 +374,8 @@ public class PayoutService {
     /**
      * Request class for {@link PayoutService#get }.
      *
-     * Retrieves the details of a single payout. For an example of how to reconcile the transactions in a
-     * payout, see [this guide](#events-reconciling-payouts-with-events).
+     * Retrieves the details of a single payout. For an example of how to reconcile the transactions
+     * in a payout, see [this guide](#events-reconciling-payouts-with-events).
      */
     public static final class PayoutGetRequest extends GetRequest<Payout> {
         @PathParam
@@ -423,8 +425,8 @@ public class PayoutService {
         private Map<String, String> metadata;
 
         /**
-         * Key-value store of custom data. Up to 3 keys are permitted, with key names up to 50 characters and
-         * values up to 500 characters.
+         * Key-value store of custom data. Up to 3 keys are permitted, with key names up to 50
+         * characters and values up to 500 characters.
          */
         public PayoutUpdateRequest withMetadata(Map<String, String> metadata) {
             this.metadata = metadata;
@@ -432,8 +434,8 @@ public class PayoutService {
         }
 
         /**
-         * Key-value store of custom data. Up to 3 keys are permitted, with key names up to 50 characters and
-         * values up to 500 characters.
+         * Key-value store of custom data. Up to 3 keys are permitted, with key names up to 50
+         * characters and values up to 500 characters.
          */
         public PayoutUpdateRequest withMetadata(String key, String value) {
             if (metadata == null) {

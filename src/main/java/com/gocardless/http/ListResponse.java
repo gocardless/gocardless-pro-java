@@ -24,16 +24,16 @@ public class ListResponse<T> {
     }
 
     /**
-     * Returns a cursor that can be used to get the page after this one.  If null, then
-     * this is the last page.
+     * Returns a cursor that can be used to get the page after this one. If null, then this is the
+     * last page.
      */
     public String getAfter() {
         return meta.getCursors().getAfter();
     }
 
     /**
-     * Returns a cursor that can be used to get the page before this one.  If null, then
-     * this is the first page.
+     * Returns a cursor that can be used to get the page before this one. If null, then this is the
+     * first page.
      */
     public String getBefore() {
         return meta.getCursors().getBefore();

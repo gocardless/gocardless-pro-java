@@ -1,16 +1,13 @@
 package com.gocardless.http;
 
-import java.util.Map;
+import static org.assertj.core.api.Assertions.assertThat;
 
 import com.gocardless.errors.ValidationFailedException;
-
 import com.google.common.collect.ImmutableMap;
-
+import java.util.Map;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
-
-import static org.assertj.core.api.Assertions.assertThat;
 
 public class IdempotentPostRequestTest {
     @Rule
@@ -60,9 +57,9 @@ public class IdempotentPostRequestTest {
                         .withHeader("Accept-Language", "fr-FR").execute();
         assertThat(result.stringField).isEqualTo("foo");
         assertThat(result.intField).isEqualTo(123);
-        http.assertRequestMade("POST", "/dummy", "fixtures/single.json", ImmutableMap.of(
-                "Authorization", "Bearer token", "Idempotency-Key", "i-am-the-one-and-only",
-                "Accept-Language", "fr-FR"));
+        http.assertRequestMade("POST", "/dummy", "fixtures/single.json",
+                ImmutableMap.of("Authorization", "Bearer token", "Idempotency-Key",
+                        "i-am-the-one-and-only", "Accept-Language", "fr-FR"));
     }
 
     @Test
@@ -165,7 +162,8 @@ public class IdempotentPostRequestTest {
         }
 
         @Override
-        protected GetRequest<HttpTestUtil.DummyItem> handleConflict(HttpClient httpClient, String id) {
+        protected GetRequest<HttpTestUtil.DummyItem> handleConflict(HttpClient httpClient,
+                String id) {
             DummyGetRequest request = new DummyGetRequest(httpClient, id);
             for (Map.Entry<String, String> header : this.getCustomHeaders().entrySet()) {
                 request.addHeader(header.getKey(), header.getValue());
