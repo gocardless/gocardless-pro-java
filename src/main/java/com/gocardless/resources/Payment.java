@@ -165,7 +165,8 @@ public class Payment {
         GBP, @SerializedName("NZD")
         NZD, @SerializedName("SEK")
         SEK, @SerializedName("USD")
-        USD,
+        USD, @SerializedName("unknown")
+        UNKNOWN
     }
 
     public enum Status {
@@ -178,7 +179,8 @@ public class Payment {
         CANCELLED, @SerializedName("customer_approval_denied")
         CUSTOMER_APPROVAL_DENIED, @SerializedName("failed")
         FAILED, @SerializedName("charged_back")
-        CHARGED_BACK,
+        CHARGED_BACK, @SerializedName("unknown")
+        UNKNOWN
     }
 
     public static class Fx {
@@ -235,7 +237,8 @@ public class Payment {
             GBP, @SerializedName("NZD")
             NZD, @SerializedName("SEK")
             SEK, @SerializedName("USD")
-            USD,
+            USD, @SerializedName("unknown")
+            UNKNOWN
         }
     }
 

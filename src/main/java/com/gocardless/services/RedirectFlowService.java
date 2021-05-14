@@ -431,7 +431,8 @@ public class RedirectFlowService {
             BECS_NZ, @SerializedName("betalingsservice")
             BETALINGSSERVICE, @SerializedName("pad")
             PAD, @SerializedName("sepa_core")
-            SEPA_CORE;
+            SEPA_CORE, @SerializedName("unknown")
+            UNKNOWN;
 
             @Override
             public String toString() {
@@ -469,7 +470,8 @@ public class RedirectFlowService {
             public enum AccountType {
                 @SerializedName("savings")
                 SAVINGS, @SerializedName("checking")
-                CHECKING;
+                CHECKING, @SerializedName("unknown")
+                UNKNOWN;
 
                 @Override
                 public String toString() {

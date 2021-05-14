@@ -121,7 +121,8 @@ public class CreditorBankAccount {
     public enum AccountType {
         @SerializedName("savings")
         SAVINGS, @SerializedName("checking")
-        CHECKING,
+        CHECKING, @SerializedName("unknown")
+        UNKNOWN
     }
 
     public static class Links {

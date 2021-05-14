@@ -85,7 +85,8 @@ public class BankAuthorisation {
     public enum AuthorisationType {
         @SerializedName("mandate")
         MANDATE, @SerializedName("payment")
-        PAYMENT,
+        PAYMENT, @SerializedName("unknown")
+        UNKNOWN
     }
 
     public static class Links {

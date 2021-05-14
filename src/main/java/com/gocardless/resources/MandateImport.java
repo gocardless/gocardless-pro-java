@@ -94,7 +94,8 @@ public class MandateImport {
         BECS_NZ, @SerializedName("betalingsservice")
         BETALINGSSERVICE, @SerializedName("pad")
         PAD, @SerializedName("sepa_core")
-        SEPA_CORE,
+        SEPA_CORE, @SerializedName("unknown")
+        UNKNOWN
     }
 
     public enum Status {
@@ -103,6 +104,7 @@ public class MandateImport {
         SUBMITTED, @SerializedName("cancelled")
         CANCELLED, @SerializedName("processing")
         PROCESSING, @SerializedName("processed")
-        PROCESSED,
+        PROCESSED, @SerializedName("unknown")
+        UNKNOWN
     }
 }

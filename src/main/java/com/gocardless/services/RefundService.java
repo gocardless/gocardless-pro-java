@@ -426,7 +426,8 @@ public class RefundService {
         public enum RefundType {
             @SerializedName("mandate")
             MANDATE, @SerializedName("payment")
-            PAYMENT;
+            PAYMENT, @SerializedName("unknown")
+            UNKNOWN;
 
             @Override
             public String toString() {

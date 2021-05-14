@@ -120,7 +120,8 @@ public class Refund {
         PAID, @SerializedName("cancelled")
         CANCELLED, @SerializedName("bounced")
         BOUNCED, @SerializedName("funds_returned")
-        FUNDS_RETURNED,
+        FUNDS_RETURNED, @SerializedName("unknown")
+        UNKNOWN
     }
 
     public static class Fx {
@@ -177,7 +178,8 @@ public class Refund {
             GBP, @SerializedName("NZD")
             NZD, @SerializedName("SEK")
             SEK, @SerializedName("USD")
-            USD,
+            USD, @SerializedName("unknown")
+            UNKNOWN
         }
     }
 

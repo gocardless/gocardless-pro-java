@@ -294,7 +294,8 @@ public class CustomerBankAccountService {
         public enum AccountType {
             @SerializedName("savings")
             SAVINGS, @SerializedName("checking")
-            CHECKING;
+            CHECKING, @SerializedName("unknown")
+            UNKNOWN;
 
             @Override
             public String toString() {

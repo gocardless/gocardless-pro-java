@@ -331,7 +331,8 @@ public class EventService {
             SUBSCRIPTION, @SerializedName("instalment_schedule")
             INSTALMENT_SCHEDULE, @SerializedName("creditor")
             CREDITOR, @SerializedName("payer_authorisation")
-            PAYER_AUTHORISATION;
+            PAYER_AUTHORISATION, @SerializedName("unknown")
+            UNKNOWN;
 
             @Override
             public String toString() {
@@ -350,7 +351,8 @@ public class EventService {
             PAYMENTS, @SerializedName("payouts")
             PAYOUTS, @SerializedName("refunds")
             REFUNDS, @SerializedName("subscriptions")
-            SUBSCRIPTIONS;
+            SUBSCRIPTIONS, @SerializedName("unknown")
+            UNKNOWN;
 
             @Override
             public String toString() {

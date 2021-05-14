@@ -148,20 +148,23 @@ public class Payout {
         GBP, @SerializedName("NZD")
         NZD, @SerializedName("SEK")
         SEK, @SerializedName("USD")
-        USD,
+        USD, @SerializedName("unknown")
+        UNKNOWN
     }
 
     public enum PayoutType {
         @SerializedName("merchant")
         MERCHANT, @SerializedName("partner")
-        PARTNER,
+        PARTNER, @SerializedName("unknown")
+        UNKNOWN
     }
 
     public enum Status {
         @SerializedName("pending")
         PENDING, @SerializedName("paid")
         PAID, @SerializedName("bounced")
-        BOUNCED,
+        BOUNCED, @SerializedName("unknown")
+        UNKNOWN
     }
 
     public static class Fx {
@@ -218,7 +221,8 @@ public class Payout {
             GBP, @SerializedName("NZD")
             NZD, @SerializedName("SEK")
             SEK, @SerializedName("USD")
-            USD,
+            USD, @SerializedName("unknown")
+            UNKNOWN
         }
     }
 

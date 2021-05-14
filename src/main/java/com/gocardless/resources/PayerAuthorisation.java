@@ -137,7 +137,8 @@ public class PayerAuthorisation {
         SUBMITTED, @SerializedName("confirmed")
         CONFIRMED, @SerializedName("completed")
         COMPLETED, @SerializedName("failed")
-        FAILED,
+        FAILED, @SerializedName("unknown")
+        UNKNOWN
     }
 
     /**
@@ -260,7 +261,8 @@ public class PayerAuthorisation {
         public enum AccountType {
             @SerializedName("savings")
             SAVINGS, @SerializedName("checking")
-            CHECKING,
+            CHECKING, @SerializedName("unknown")
+            UNKNOWN
         }
     }
 
@@ -535,7 +537,8 @@ public class PayerAuthorisation {
             BECS_NZ, @SerializedName("betalingsservice")
             BETALINGSSERVICE, @SerializedName("pad")
             PAD, @SerializedName("sepa_core")
-            SEPA_CORE,
+            SEPA_CORE, @SerializedName("unknown")
+            UNKNOWN
         }
     }
 }

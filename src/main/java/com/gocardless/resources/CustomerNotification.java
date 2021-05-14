@@ -81,7 +81,8 @@ public class CustomerNotification {
 
     public enum ActionTaken {
         @SerializedName("handled")
-        HANDLED,
+        HANDLED, @SerializedName("unknown")
+        UNKNOWN
     }
 
     public enum Type {
@@ -92,7 +93,8 @@ public class CustomerNotification {
         SUBSCRIPTION_CREATED, @SerializedName("subscription_cancelled")
         SUBSCRIPTION_CANCELLED, @SerializedName("instalment_schedule_created")
         INSTALMENT_SCHEDULE_CREATED, @SerializedName("instalment_schedule_cancelled")
-        INSTALMENT_SCHEDULE_CANCELLED,
+        INSTALMENT_SCHEDULE_CANCELLED, @SerializedName("unknown")
+        UNKNOWN
     }
 
     public static class Links {

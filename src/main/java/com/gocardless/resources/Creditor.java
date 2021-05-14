@@ -203,14 +203,16 @@ public class Creditor {
         GBP, @SerializedName("NZD")
         NZD, @SerializedName("SEK")
         SEK, @SerializedName("USD")
-        USD,
+        USD, @SerializedName("unknown")
+        UNKNOWN
     }
 
     public enum VerificationStatus {
         @SerializedName("successful")
         SUCCESSFUL, @SerializedName("in_review")
         IN_REVIEW, @SerializedName("action_required")
-        ACTION_REQUIRED,
+        ACTION_REQUIRED, @SerializedName("unknown")
+        UNKNOWN
     }
 
     public static class Links {
@@ -432,7 +434,8 @@ public class Creditor {
             GBP, @SerializedName("NZD")
             NZD, @SerializedName("SEK")
             SEK, @SerializedName("USD")
-            USD,
+            USD, @SerializedName("unknown")
+            UNKNOWN
         }
 
         public enum Scheme {
@@ -445,7 +448,8 @@ public class Creditor {
             BETALINGSSERVICE, @SerializedName("faster_payments")
             FASTER_PAYMENTS, @SerializedName("pad")
             PAD, @SerializedName("sepa")
-            SEPA,
+            SEPA, @SerializedName("unknown")
+            UNKNOWN
         }
     }
 }

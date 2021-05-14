@@ -139,7 +139,8 @@ public class PayoutItemService {
         public enum Include2020TaxCutover {
             @SerializedName("true")
             TRUE, @SerializedName("false")
-            FALSE;
+            FALSE, @SerializedName("unknown")
+            UNKNOWN;
 
             @Override
             public String toString() {
