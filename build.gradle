@@ -121,6 +121,10 @@ signing {
 }
 
 nexusStaging {
+    // increase the delayBetweenRetriesInMillis , default is 2000(2s) which is very less
+    // generally it takes about 3 minutes for the state to go from open to closed
+    delayBetweenRetriesInMillis = 40000
+
     username = System.getenv("MAVEN_USERNAME")
     password = System.getenv("MAVEN_PASSWORD")
 }
