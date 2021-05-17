@@ -5,7 +5,7 @@ apply plugin: 'maven-publish'
 apply plugin: 'io.codearte.nexus-staging'
 
 sourceCompatibility = 1.7
-group = ' com.gocardless'
+group = 'com.gocardless'
 version = '4.9.0'
 
 buildscript {
