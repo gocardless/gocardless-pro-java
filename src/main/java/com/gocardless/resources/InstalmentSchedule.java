@@ -122,7 +122,8 @@ public class InstalmentSchedule {
         GBP, @SerializedName("NZD")
         NZD, @SerializedName("SEK")
         SEK, @SerializedName("USD")
-        USD,
+        USD, @SerializedName("unknown")
+        UNKNOWN
     }
 
     public enum Status {
@@ -132,7 +133,8 @@ public class InstalmentSchedule {
         CREATION_FAILED, @SerializedName("completed")
         COMPLETED, @SerializedName("cancelled")
         CANCELLED, @SerializedName("errored")
-        ERRORED,
+        ERRORED, @SerializedName("unknown")
+        UNKNOWN
     }
 
     /**

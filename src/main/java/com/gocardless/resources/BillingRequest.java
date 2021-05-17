@@ -93,7 +93,8 @@ public class BillingRequest {
         PENDING, @SerializedName("ready_to_fulfil")
         READY_TO_FULFIL, @SerializedName("fulfilled")
         FULFILLED, @SerializedName("cancelled")
-        CANCELLED,
+        CANCELLED, @SerializedName("unknown")
+        UNKNOWN
     }
 
     public static class Action {
@@ -145,7 +146,8 @@ public class BillingRequest {
         public enum Status {
             @SerializedName("pending")
             PENDING, @SerializedName("completed")
-            COMPLETED,
+            COMPLETED, @SerializedName("unknown")
+            UNKNOWN
         }
 
         public enum Type {
@@ -153,7 +155,8 @@ public class BillingRequest {
             CHOOSE_CURRENCY, @SerializedName("collect_customer_details")
             COLLECT_CUSTOMER_DETAILS, @SerializedName("collect_bank_account")
             COLLECT_BANK_ACCOUNT, @SerializedName("bank_authorisation")
-            BANK_AUTHORISATION,
+            BANK_AUTHORISATION, @SerializedName("unknown")
+            UNKNOWN
         }
     }
 
@@ -564,7 +567,8 @@ public class BillingRequest {
             public enum AccountType {
                 @SerializedName("savings")
                 SAVINGS, @SerializedName("checking")
-                CHECKING,
+                CHECKING, @SerializedName("unknown")
+                UNKNOWN
             }
 
             public static class Links {

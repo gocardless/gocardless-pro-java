@@ -247,7 +247,8 @@ public class Subscription {
         @SerializedName("weekly")
         WEEKLY, @SerializedName("monthly")
         MONTHLY, @SerializedName("yearly")
-        YEARLY,
+        YEARLY, @SerializedName("unknown")
+        UNKNOWN
     }
 
     public enum Month {
@@ -263,7 +264,8 @@ public class Subscription {
         SEPTEMBER, @SerializedName("october")
         OCTOBER, @SerializedName("november")
         NOVEMBER, @SerializedName("december")
-        DECEMBER,
+        DECEMBER, @SerializedName("unknown")
+        UNKNOWN
     }
 
     public enum Status {
@@ -273,7 +275,8 @@ public class Subscription {
         ACTIVE, @SerializedName("finished")
         FINISHED, @SerializedName("cancelled")
         CANCELLED, @SerializedName("paused")
-        PAUSED,
+        PAUSED, @SerializedName("unknown")
+        UNKNOWN
     }
 
     public static class Links {

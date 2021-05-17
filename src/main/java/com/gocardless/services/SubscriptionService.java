@@ -422,7 +422,8 @@ public class SubscriptionService {
             @SerializedName("weekly")
             WEEKLY, @SerializedName("monthly")
             MONTHLY, @SerializedName("yearly")
-            YEARLY;
+            YEARLY, @SerializedName("unknown")
+            UNKNOWN;
 
             @Override
             public String toString() {
@@ -443,7 +444,8 @@ public class SubscriptionService {
             SEPTEMBER, @SerializedName("october")
             OCTOBER, @SerializedName("november")
             NOVEMBER, @SerializedName("december")
-            DECEMBER;
+            DECEMBER, @SerializedName("unknown")
+            UNKNOWN;
 
             @Override
             public String toString() {

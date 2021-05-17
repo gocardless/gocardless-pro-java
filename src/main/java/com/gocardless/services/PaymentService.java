@@ -284,7 +284,8 @@ public class PaymentService {
             GBP, @SerializedName("NZD")
             NZD, @SerializedName("SEK")
             SEK, @SerializedName("USD")
-            USD;
+            USD, @SerializedName("unknown")
+            UNKNOWN;
 
             @Override
             public String toString() {
@@ -611,7 +612,8 @@ public class PaymentService {
             GBP, @SerializedName("NZD")
             NZD, @SerializedName("SEK")
             SEK, @SerializedName("USD")
-            USD;
+            USD, @SerializedName("unknown")
+            UNKNOWN;
 
             @Override
             public String toString() {
@@ -622,7 +624,8 @@ public class PaymentService {
         public enum SortDirection {
             @SerializedName("asc")
             ASC, @SerializedName("desc")
-            DESC;
+            DESC, @SerializedName("unknown")
+            UNKNOWN;
 
             @Override
             public String toString() {
@@ -633,7 +636,8 @@ public class PaymentService {
         public enum SortField {
             @SerializedName("charge_date")
             CHARGE_DATE, @SerializedName("amount")
-            AMOUNT;
+            AMOUNT, @SerializedName("unknown")
+            UNKNOWN;
 
             @Override
             public String toString() {
@@ -651,7 +655,8 @@ public class PaymentService {
             CANCELLED, @SerializedName("customer_approval_denied")
             CUSTOMER_APPROVAL_DENIED, @SerializedName("failed")
             FAILED, @SerializedName("charged_back")
-            CHARGED_BACK;
+            CHARGED_BACK, @SerializedName("unknown")
+            UNKNOWN;
 
             @Override
             public String toString() {

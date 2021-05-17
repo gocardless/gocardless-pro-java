@@ -14,7 +14,8 @@ final class GsonFactory {
 
     static Gson build() {
         return new GsonBuilder().setFieldNamingPolicy(LOWER_CASE_WITH_UNDERSCORES)
-                .addSerializationExclusionStrategy(new PathParamExclusionStrategy()).create();
+                .addSerializationExclusionStrategy(new PathParamExclusionStrategy())
+                .registerTypeAdapterFactory(new GCEnumTypeAdapterFactory()).create();
     }
 
     private static class PathParamExclusionStrategy implements ExclusionStrategy {

@@ -98,7 +98,8 @@ public class PayoutItem {
         GOCARDLESS_FEE, @SerializedName("app_fee")
         APP_FEE, @SerializedName("revenue_share")
         REVENUE_SHARE, @SerializedName("surcharge_fee")
-        SURCHARGE_FEE,
+        SURCHARGE_FEE, @SerializedName("unknown")
+        UNKNOWN
     }
 
     public static class Links {
@@ -212,7 +213,8 @@ public class PayoutItem {
             GBP, @SerializedName("NZD")
             NZD, @SerializedName("SEK")
             SEK, @SerializedName("USD")
-            USD,
+            USD, @SerializedName("unknown")
+            UNKNOWN
         }
     }
 }

@@ -116,7 +116,8 @@ public class Mandate {
         FAILED, @SerializedName("cancelled")
         CANCELLED, @SerializedName("expired")
         EXPIRED, @SerializedName("consumed")
-        CONSUMED,
+        CONSUMED, @SerializedName("unknown")
+        UNKNOWN
     }
 
     public static class Links {

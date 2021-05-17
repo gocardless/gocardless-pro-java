@@ -101,7 +101,8 @@ public class Event {
         PAYMENTS, @SerializedName("payouts")
         PAYOUTS, @SerializedName("refunds")
         REFUNDS, @SerializedName("subscriptions")
-        SUBSCRIPTIONS,
+        SUBSCRIPTIONS, @SerializedName("unknown")
+        UNKNOWN
     }
 
     public static class CustomerNotification {
@@ -159,7 +160,8 @@ public class Event {
             SUBSCRIPTION_CREATED, @SerializedName("subscription_cancelled")
             SUBSCRIPTION_CANCELLED, @SerializedName("instalment_schedule_created")
             INSTALMENT_SCHEDULE_CREATED, @SerializedName("instalment_schedule_cancelled")
-            INSTALMENT_SCHEDULE_CANCELLED,
+            INSTALMENT_SCHEDULE_CANCELLED, @SerializedName("unknown")
+            UNKNOWN
         }
     }
 
@@ -275,7 +277,8 @@ public class Event {
             BANK, @SerializedName("api")
             API, @SerializedName("gocardless")
             GOCARDLESS, @SerializedName("customer")
-            CUSTOMER,
+            CUSTOMER, @SerializedName("unknown")
+            UNKNOWN
         }
 
         public enum Scheme {
@@ -288,7 +291,8 @@ public class Event {
             BETALINGSSERVICE, @SerializedName("pad")
             PAD, @SerializedName("sepa_core")
             SEPA_CORE, @SerializedName("sepa_cor1")
-            SEPA_COR1,
+            SEPA_COR1, @SerializedName("unknown")
+            UNKNOWN
         }
     }
 

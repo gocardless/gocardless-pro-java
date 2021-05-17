@@ -324,7 +324,8 @@ public class InstalmentScheduleService {
             GBP, @SerializedName("NZD")
             NZD, @SerializedName("SEK")
             SEK, @SerializedName("USD")
-            USD;
+            USD, @SerializedName("unknown")
+            UNKNOWN;
 
             @Override
             public String toString() {
@@ -645,7 +646,8 @@ public class InstalmentScheduleService {
             GBP, @SerializedName("NZD")
             NZD, @SerializedName("SEK")
             SEK, @SerializedName("USD")
-            USD;
+            USD, @SerializedName("unknown")
+            UNKNOWN;
 
             @Override
             public String toString() {
@@ -704,7 +706,8 @@ public class InstalmentScheduleService {
                 @SerializedName("weekly")
                 WEEKLY, @SerializedName("monthly")
                 MONTHLY, @SerializedName("yearly")
-                YEARLY;
+                YEARLY, @SerializedName("unknown")
+                UNKNOWN;
 
                 @Override
                 public String toString() {
@@ -899,7 +902,8 @@ public class InstalmentScheduleService {
             CREATION_FAILED, @SerializedName("completed")
             COMPLETED, @SerializedName("cancelled")
             CANCELLED, @SerializedName("errored")
-            ERRORED;
+            ERRORED, @SerializedName("unknown")
+            UNKNOWN;
 
             @Override
             public String toString() {

@@ -283,7 +283,8 @@ public class PayoutService {
             GBP, @SerializedName("NZD")
             NZD, @SerializedName("SEK")
             SEK, @SerializedName("USD")
-            USD;
+            USD, @SerializedName("unknown")
+            UNKNOWN;
 
             @Override
             public String toString() {
@@ -294,7 +295,8 @@ public class PayoutService {
         public enum PayoutType {
             @SerializedName("merchant")
             MERCHANT, @SerializedName("partner")
-            PARTNER;
+            PARTNER, @SerializedName("unknown")
+            UNKNOWN;
 
             @Override
             public String toString() {
@@ -306,7 +308,8 @@ public class PayoutService {
             @SerializedName("pending")
             PENDING, @SerializedName("paid")
             PAID, @SerializedName("bounced")
-            BOUNCED;
+            BOUNCED, @SerializedName("unknown")
+            UNKNOWN;
 
             @Override
             public String toString() {

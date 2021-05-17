@@ -467,7 +467,8 @@ public class CustomerService {
             GBP, @SerializedName("NZD")
             NZD, @SerializedName("SEK")
             SEK, @SerializedName("USD")
-            USD;
+            USD, @SerializedName("unknown")
+            UNKNOWN;
 
             @Override
             public String toString() {
@@ -478,7 +479,8 @@ public class CustomerService {
         public enum SortDirection {
             @SerializedName("asc")
             ASC, @SerializedName("desc")
-            DESC;
+            DESC, @SerializedName("unknown")
+            UNKNOWN;
 
             @Override
             public String toString() {
@@ -490,7 +492,8 @@ public class CustomerService {
             @SerializedName("name")
             NAME, @SerializedName("company_name")
             COMPANY_NAME, @SerializedName("created_at")
-            CREATED_AT;
+            CREATED_AT, @SerializedName("unknown")
+            UNKNOWN;
 
             @Override
             public String toString() {
