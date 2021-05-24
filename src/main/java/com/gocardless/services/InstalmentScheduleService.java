@@ -310,11 +310,6 @@ public class InstalmentScheduleService {
             return true;
         }
 
-        @Override
-        protected String getRequestEnvelope() {
-            return "data";
-        }
-
         public enum Currency {
             @SerializedName("AUD")
             AUD, @SerializedName("CAD")
@@ -630,11 +625,6 @@ public class InstalmentScheduleService {
         @Override
         protected boolean hasBody() {
             return true;
-        }
-
-        @Override
-        protected String getRequestEnvelope() {
-            return "data";
         }
 
         public enum Currency {
