@@ -7,7 +7,7 @@ import java.util.Map;
 /**
  * Represents a payer authorisation resource returned from the API.
  *
- * <p class="warning">
+ * <p class="restricted-notice">
  * Payer Authorisations is deprecated in favour of
  * <a href="https://developer.gocardless.com/getting-started/billing-requests/overview/"> Billing
  * Requests</a>. Please consider using Billing Requests to build any future integrations.
