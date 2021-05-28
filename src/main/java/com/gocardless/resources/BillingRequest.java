@@ -170,6 +170,10 @@ public class BillingRequest {
         private String customer;
         private String customerBankAccount;
         private String customerBillingDetail;
+        private String mandateRequest;
+        private String mandateRequestMandate;
+        private String paymentRequest;
+        private String paymentRequestPayment;
 
         /**
          * (Optional) ID of the [bank authorisation](#billing-requests-bank-authorisations) that was
@@ -206,6 +210,36 @@ public class BillingRequest {
          */
         public String getCustomerBillingDetail() {
             return customerBillingDetail;
+        }
+
+        /**
+         * (Optional) ID of the associated mandate request
+         */
+        public String getMandateRequest() {
+            return mandateRequest;
+        }
+
+        /**
+         * (Optional) ID of the [mandate](#core-endpoints-mandates) that was created from this
+         * mandate request. this mandate request.
+         */
+        public String getMandateRequestMandate() {
+            return mandateRequestMandate;
+        }
+
+        /**
+         * (Optional) ID of the associated payment request
+         */
+        public String getPaymentRequest() {
+            return paymentRequest;
+        }
+
+        /**
+         * (Optional) ID of the [payment](#core-endpoints-payments) that was created from this
+         * payment request.
+         */
+        public String getPaymentRequestPayment() {
+            return paymentRequestPayment;
         }
     }
 
