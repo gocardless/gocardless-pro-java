@@ -306,6 +306,7 @@ public class BillingRequest {
         }
 
         private Integer amount;
+        private Integer appFee;
         private String currency;
         private String description;
         private Links links;
@@ -316,6 +317,15 @@ public class BillingRequest {
          */
         public Integer getAmount() {
             return amount;
+        }
+
+        /**
+         * The amount to be deducted from the payment as an app fee, to be paid to the partner
+         * integration which created the billing request, in the lowest denomination for the
+         * currency (e.g. pence in GBP, cents in EUR).
+         */
+        public Integer getAppFee() {
+            return appFee;
         }
 
         /**
