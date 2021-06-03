@@ -6,7 +6,7 @@ apply plugin: 'io.codearte.nexus-staging'
 
 sourceCompatibility = 1.7
 group = 'com.gocardless'
-version = '4.9.1'
+version = '4.9.2'
 
 buildscript {
     repositories {
