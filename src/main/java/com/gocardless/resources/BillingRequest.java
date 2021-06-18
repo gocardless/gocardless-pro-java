@@ -649,6 +649,7 @@ public class BillingRequest {
             private String createdAt;
             private String danishIdentityNumber;
             private String id;
+            private String ipAddress;
             private String postalCode;
             private String region;
             private List<String> schemes;
@@ -711,6 +712,15 @@ public class BillingRequest {
              */
             public String getId() {
                 return id;
+            }
+
+            /**
+             * For ACH customers only. Required for ACH customers. A string containing the IP
+             * address of the payer to whom the mandate belongs (i.e. as a result of their
+             * completion of a mandate setup flow in their browser).
+             */
+            public String getIpAddress() {
+                return ipAddress;
             }
 
             /**
