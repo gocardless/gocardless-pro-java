@@ -102,11 +102,19 @@ public class BillingRequest {
             // blank to prevent instantiation
         }
 
+        private BankAuthorisation bankAuthorisation;
         private List<String> completesActions;
         private Boolean required;
         private List<String> requiresActions;
         private Status status;
         private Type type;
+
+        /**
+         * Describes the behaviour of bank authorisations, for the bank_authorisation action
+         */
+        public BankAuthorisation getBankAuthorisation() {
+            return bankAuthorisation;
+        }
 
         /**
          * Which other action types this action can complete.
@@ -157,6 +165,57 @@ public class BillingRequest {
             COLLECT_BANK_ACCOUNT, @SerializedName("bank_authorisation")
             BANK_AUTHORISATION, @SerializedName("unknown")
             UNKNOWN
+        }
+
+        /**
+         * Represents a bank authorisation resource returned from the API.
+         *
+         * Describes the behaviour of bank authorisations, for the bank_authorisation action
+         */
+        public static class BankAuthorisation {
+            private BankAuthorisation() {
+                // blank to prevent instantiation
+            }
+
+            private Adapter adapter;
+            private AuthorisationType authorisationType;
+            private Boolean requiresInstitution;
+
+            /**
+             * Which authorisation adapter will be used to power these authorisations (GoCardless
+             * internal use only)
+             */
+            public Adapter getAdapter() {
+                return adapter;
+            }
+
+            /**
+             * What type of bank authorisations are supported on this billing request
+             */
+            public AuthorisationType getAuthorisationType() {
+                return authorisationType;
+            }
+
+            /**
+             * Whether an institution is a required field when creating this bank authorisation
+             */
+            public Boolean getRequiresInstitution() {
+                return requiresInstitution;
+            }
+
+            public enum Adapter {
+                @SerializedName("open_banking_gateway_pis")
+                OPEN_BANKING_GATEWAY_PIS, @SerializedName("plaid_ais")
+                PLAID_AIS, @SerializedName("unknown")
+                UNKNOWN
+            }
+
+            public enum AuthorisationType {
+                @SerializedName("payment")
+                PAYMENT, @SerializedName("mandate")
+                MANDATE, @SerializedName("unknown")
+                UNKNOWN
+            }
         }
     }
 
