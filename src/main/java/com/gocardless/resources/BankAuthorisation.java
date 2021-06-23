@@ -17,6 +17,7 @@ public class BankAuthorisation {
     }
 
     private AuthorisationType authorisationType;
+    private String authorisedAt;
     private String createdAt;
     private String expiresAt;
     private String id;
@@ -30,6 +31,13 @@ public class BankAuthorisation {
      */
     public AuthorisationType getAuthorisationType() {
         return authorisationType;
+    }
+
+    /**
+     * Fixed [timestamp](#api-usage-time-zones--dates), recording when the user has been authorised.
+     */
+    public String getAuthorisedAt() {
+        return authorisedAt;
     }
 
     /**
