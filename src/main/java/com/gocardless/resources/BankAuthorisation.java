@@ -9,9 +9,7 @@ import com.google.gson.annotations.SerializedName;
  * a specific bank, usually the bank that provides the payer's account.
  * 
  * Creation of Bank Authorisations is only permitted from GoCardless hosted UIs (see Billing Request
- * Flows) to ensure we meet regulatory requirements for checkout flows. The exceptions are
- * integrators with the custom payment pages upgrade, who have been audited to check their flows
- * meet requirements.
+ * Flows) to ensure we meet regulatory requirements for checkout flows.
  */
 public class BankAuthorisation {
     private BankAuthorisation() {
@@ -19,6 +17,7 @@ public class BankAuthorisation {
     }
 
     private AuthorisationType authorisationType;
+    private String authorisedAt;
     private String createdAt;
     private String expiresAt;
     private String id;
@@ -32,6 +31,13 @@ public class BankAuthorisation {
      */
     public AuthorisationType getAuthorisationType() {
         return authorisationType;
+    }
+
+    /**
+     * Fixed [timestamp](#api-usage-time-zones--dates), recording when the user has been authorised.
+     */
+    public String getAuthorisedAt() {
+        return authorisedAt;
     }
 
     /**

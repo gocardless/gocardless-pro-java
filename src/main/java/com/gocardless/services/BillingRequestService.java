@@ -996,6 +996,7 @@ public class BillingRequestService {
         private final String identity;
         private String accountHolderName;
         private String accountNumber;
+        private String accountNumberSuffix;
         private AccountType accountType;
         private String bankCode;
         private String branchCode;
@@ -1023,6 +1024,16 @@ public class BillingRequestService {
          */
         public BillingRequestCollectBankAccountRequest withAccountNumber(String accountNumber) {
             this.accountNumber = accountNumber;
+            return this;
+        }
+
+        /**
+         * Account number suffix (only for bank accounts denominated in NZD) - see [local
+         * details](#local-bank-details-new-zealand) for more information.
+         */
+        public BillingRequestCollectBankAccountRequest withAccountNumberSuffix(
+                String accountNumberSuffix) {
+            this.accountNumberSuffix = accountNumberSuffix;
             return this;
         }
 

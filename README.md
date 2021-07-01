@@ -14,14 +14,14 @@ With Maven:
 <dependency>
     <groupId>com.gocardless</groupId>
     <artifactId>gocardless-pro</artifactId>
-    <version>4.9.1</version>
+    <version>4.9.2</version>
 </dependency>
 ```
 
 With Gradle:
 
 ```
-compile 'com.gocardless:gocardless-pro:4.9.1'
+compile 'com.gocardless:gocardless-pro:4.9.2'
 ```
 
 ## Initializing the client

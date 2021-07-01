@@ -102,11 +102,19 @@ public class BillingRequest {
             // blank to prevent instantiation
         }
 
+        private BankAuthorisation bankAuthorisation;
         private List<String> completesActions;
         private Boolean required;
         private List<String> requiresActions;
         private Status status;
         private Type type;
+
+        /**
+         * Describes the behaviour of bank authorisations, for the bank_authorisation action
+         */
+        public BankAuthorisation getBankAuthorisation() {
+            return bankAuthorisation;
+        }
 
         /**
          * Which other action types this action can complete.
@@ -158,6 +166,57 @@ public class BillingRequest {
             BANK_AUTHORISATION, @SerializedName("unknown")
             UNKNOWN
         }
+
+        /**
+         * Represents a bank authorisation resource returned from the API.
+         *
+         * Describes the behaviour of bank authorisations, for the bank_authorisation action
+         */
+        public static class BankAuthorisation {
+            private BankAuthorisation() {
+                // blank to prevent instantiation
+            }
+
+            private Adapter adapter;
+            private AuthorisationType authorisationType;
+            private Boolean requiresInstitution;
+
+            /**
+             * Which authorisation adapter will be used to power these authorisations (GoCardless
+             * internal use only)
+             */
+            public Adapter getAdapter() {
+                return adapter;
+            }
+
+            /**
+             * What type of bank authorisations are supported on this billing request
+             */
+            public AuthorisationType getAuthorisationType() {
+                return authorisationType;
+            }
+
+            /**
+             * Whether an institution is a required field when creating this bank authorisation
+             */
+            public Boolean getRequiresInstitution() {
+                return requiresInstitution;
+            }
+
+            public enum Adapter {
+                @SerializedName("open_banking_gateway_pis")
+                OPEN_BANKING_GATEWAY_PIS, @SerializedName("plaid_ais")
+                PLAID_AIS, @SerializedName("unknown")
+                UNKNOWN
+            }
+
+            public enum AuthorisationType {
+                @SerializedName("payment")
+                PAYMENT, @SerializedName("mandate")
+                MANDATE, @SerializedName("unknown")
+                UNKNOWN
+            }
+        }
     }
 
     public static class Links {
@@ -170,6 +229,10 @@ public class BillingRequest {
         private String customer;
         private String customerBankAccount;
         private String customerBillingDetail;
+        private String mandateRequest;
+        private String mandateRequestMandate;
+        private String paymentRequest;
+        private String paymentRequestPayment;
 
         /**
          * (Optional) ID of the [bank authorisation](#billing-requests-bank-authorisations) that was
@@ -206,6 +269,36 @@ public class BillingRequest {
          */
         public String getCustomerBillingDetail() {
             return customerBillingDetail;
+        }
+
+        /**
+         * (Optional) ID of the associated mandate request
+         */
+        public String getMandateRequest() {
+            return mandateRequest;
+        }
+
+        /**
+         * (Optional) ID of the [mandate](#core-endpoints-mandates) that was created from this
+         * mandate request. this mandate request.
+         */
+        public String getMandateRequestMandate() {
+            return mandateRequestMandate;
+        }
+
+        /**
+         * (Optional) ID of the associated payment request
+         */
+        public String getPaymentRequest() {
+            return paymentRequest;
+        }
+
+        /**
+         * (Optional) ID of the [payment](#core-endpoints-payments) that was created from this
+         * payment request.
+         */
+        public String getPaymentRequestPayment() {
+            return paymentRequestPayment;
         }
     }
 
@@ -272,6 +365,7 @@ public class BillingRequest {
         }
 
         private Integer amount;
+        private Integer appFee;
         private String currency;
         private String description;
         private Links links;
@@ -282,6 +376,15 @@ public class BillingRequest {
          */
         public Integer getAmount() {
             return amount;
+        }
+
+        /**
+         * The amount to be deducted from the payment as an app fee, to be paid to the partner
+         * integration which created the billing request, in the lowest denomination for the
+         * currency (e.g. pence in GBP, cents in EUR).
+         */
+        public Integer getAppFee() {
+            return appFee;
         }
 
         /**
@@ -605,6 +708,7 @@ public class BillingRequest {
             private String createdAt;
             private String danishIdentityNumber;
             private String id;
+            private String ipAddress;
             private String postalCode;
             private String region;
             private List<String> schemes;
@@ -667,6 +771,15 @@ public class BillingRequest {
              */
             public String getId() {
                 return id;
+            }
+
+            /**
+             * For ACH customers only. Required for ACH customers. A string containing the IP
+             * address of the payer to whom the mandate belongs (i.e. as a result of their
+             * completion of a mandate setup flow in their browser).
+             */
+            public String getIpAddress() {
+                return ipAddress;
             }
 
             /**
