@@ -103,6 +103,7 @@ public class BillingRequest {
         }
 
         private BankAuthorisation bankAuthorisation;
+        private CollectCustomerDetails collectCustomerDetails;
         private List<String> completesActions;
         private Boolean required;
         private List<String> requiresActions;
@@ -114,6 +115,13 @@ public class BillingRequest {
          */
         public BankAuthorisation getBankAuthorisation() {
             return bankAuthorisation;
+        }
+
+        /**
+         * Additional parameters to help complete the collect_customer_details action
+         */
+        public CollectCustomerDetails getCollectCustomerDetails() {
+            return collectCustomerDetails;
         }
 
         /**
@@ -215,6 +223,26 @@ public class BillingRequest {
                 PAYMENT, @SerializedName("mandate")
                 MANDATE, @SerializedName("unknown")
                 UNKNOWN
+            }
+        }
+
+        /**
+         * Represents a collect customer detail resource returned from the API.
+         *
+         * Additional parameters to help complete the collect_customer_details action
+         */
+        public static class CollectCustomerDetails {
+            private CollectCustomerDetails() {
+                // blank to prevent instantiation
+            }
+
+            private String defaultCountryCode;
+
+            /**
+             * Default customer country code, as determined by scheme and payer location
+             */
+            public String getDefaultCountryCode() {
+                return defaultCountryCode;
             }
         }
     }
