@@ -171,7 +171,8 @@ public class BillingRequest {
             CHOOSE_CURRENCY, @SerializedName("collect_customer_details")
             COLLECT_CUSTOMER_DETAILS, @SerializedName("collect_bank_account")
             COLLECT_BANK_ACCOUNT, @SerializedName("bank_authorisation")
-            BANK_AUTHORISATION, @SerializedName("unknown")
+            BANK_AUTHORISATION, @SerializedName("confirm_payer_details")
+            CONFIRM_PAYER_DETAILS, @SerializedName("unknown")
             UNKNOWN
         }
 
