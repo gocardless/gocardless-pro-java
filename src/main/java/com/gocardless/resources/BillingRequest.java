@@ -344,6 +344,7 @@ public class BillingRequest {
         private String currency;
         private Links links;
         private String scheme;
+        private Verify verify;
 
         /**
          * [ISO 4217](http://en.wikipedia.org/wiki/ISO_4217#Active_codes) currency code. Currently
@@ -363,6 +364,32 @@ public class BillingRequest {
          */
         public String getScheme() {
             return scheme;
+        }
+
+        /**
+         * Verification preference for the mandate. One of:
+         * <ul>
+         * <li>`minimum`: only verify if absolutely required, such as when part of scheme rules</li>
+         * <li>`recommended`: in addition to minimum, use the GoCardless risk engine to decide an
+         * appropriate level of verification</li>
+         * <li>`when_available`: if verification mechanisms are available, use them</li>
+         * <li>`always`: as `when_available`, but fail to create the Billing Request if a mechanism
+         * isn't available</li>
+         * </ul>
+         * 
+         * If not provided, the `recommended` level is chosen.
+         */
+        public Verify getVerify() {
+            return verify;
+        }
+
+        public enum Verify {
+            @SerializedName("minimum")
+            MINIMUM, @SerializedName("recommended")
+            RECOMMENDED, @SerializedName("when_available")
+            WHEN_AVAILABLE, @SerializedName("always")
+            ALWAYS, @SerializedName("unknown")
+            UNKNOWN
         }
 
         public static class Links {
