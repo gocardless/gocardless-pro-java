@@ -173,6 +173,7 @@ public class BillingRequestTemplateService {
         private String mandateRequestCurrency;
         private Map<String, String> mandateRequestMetadata;
         private String mandateRequestScheme;
+        private Map<String, String> mandateRequestVerify;
         private Map<String, String> metadata;
         private String name;
         private Integer paymentRequestAmount;
@@ -222,6 +223,12 @@ public class BillingRequestTemplateService {
         public BillingRequestTemplateCreateRequest withMandateRequestScheme(
                 String mandateRequestScheme) {
             this.mandateRequestScheme = mandateRequestScheme;
+            return this;
+        }
+
+        public BillingRequestTemplateCreateRequest withMandateRequestVerify(
+                Map<String, String> mandateRequestVerify) {
+            this.mandateRequestVerify = mandateRequestVerify;
             return this;
         }
 
