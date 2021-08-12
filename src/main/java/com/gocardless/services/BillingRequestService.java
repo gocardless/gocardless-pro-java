@@ -86,6 +86,14 @@ public class BillingRequestService {
     }
 
     /**
+     * This is needed when you have mandate_request. As a scheme compliance rule we are required to
+     * allow the payer to crosscheck the details entered by them and confirm it.
+     */
+    public BillingRequestConfirmPayerDetailsRequest confirmPayerDetails(String identity) {
+        return new BillingRequestConfirmPayerDetailsRequest(httpClient, identity);
+    }
+
+    /**
      * Immediately cancels a billing request, causing all billing request flows to expire.
      */
     public BillingRequestCancelRequest cancel(String identity) {
@@ -996,6 +1004,7 @@ public class BillingRequestService {
         private final String identity;
         private String accountHolderName;
         private String accountNumber;
+        private String accountNumberSuffix;
         private AccountType accountType;
         private String bankCode;
         private String branchCode;
@@ -1023,6 +1032,16 @@ public class BillingRequestService {
          */
         public BillingRequestCollectBankAccountRequest withAccountNumber(String accountNumber) {
             this.accountNumber = accountNumber;
+            return this;
+        }
+
+        /**
+         * Account number suffix (only for bank accounts denominated in NZD) - see [local
+         * details](#local-bank-details-new-zealand) for more information.
+         */
+        public BillingRequestCollectBankAccountRequest withAccountNumberSuffix(
+                String accountNumberSuffix) {
+            this.accountNumberSuffix = accountNumberSuffix;
             return this;
         }
 
@@ -1212,6 +1231,83 @@ public class BillingRequestService {
         @Override
         protected String getPathTemplate() {
             return "billing_requests/:identity/actions/fulfil";
+        }
+
+        @Override
+        protected String getEnvelope() {
+            return "billing_requests";
+        }
+
+        @Override
+        protected Class<BillingRequest> getResponseClass() {
+            return BillingRequest.class;
+        }
+
+        @Override
+        protected boolean hasBody() {
+            return true;
+        }
+
+        @Override
+        protected String getRequestEnvelope() {
+            return "data";
+        }
+    }
+
+    /**
+     * Request class for {@link BillingRequestService#confirmPayerDetails }.
+     *
+     * This is needed when you have mandate_request. As a scheme compliance rule we are required to
+     * allow the payer to crosscheck the details entered by them and confirm it.
+     */
+    public static final class BillingRequestConfirmPayerDetailsRequest
+            extends PostRequest<BillingRequest> {
+        @PathParam
+        private final String identity;
+        private Map<String, String> metadata;
+
+        /**
+         * Key-value store of custom data. Up to 3 keys are permitted, with key names up to 50
+         * characters and values up to 500 characters.
+         */
+        public BillingRequestConfirmPayerDetailsRequest withMetadata(Map<String, String> metadata) {
+            this.metadata = metadata;
+            return this;
+        }
+
+        /**
+         * Key-value store of custom data. Up to 3 keys are permitted, with key names up to 50
+         * characters and values up to 500 characters.
+         */
+        public BillingRequestConfirmPayerDetailsRequest withMetadata(String key, String value) {
+            if (metadata == null) {
+                metadata = new HashMap<>();
+            }
+            metadata.put(key, value);
+            return this;
+        }
+
+        private BillingRequestConfirmPayerDetailsRequest(HttpClient httpClient, String identity) {
+            super(httpClient);
+            this.identity = identity;
+        }
+
+        public BillingRequestConfirmPayerDetailsRequest withHeader(String headerName,
+                String headerValue) {
+            this.addHeader(headerName, headerValue);
+            return this;
+        }
+
+        @Override
+        protected Map<String, String> getPathParams() {
+            ImmutableMap.Builder<String, String> params = ImmutableMap.builder();
+            params.put("identity", identity);
+            return params.build();
+        }
+
+        @Override
+        protected String getPathTemplate() {
+            return "billing_requests/:identity/actions/confirm_payer_details";
         }
 
         @Override

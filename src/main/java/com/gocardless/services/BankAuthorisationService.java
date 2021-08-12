@@ -12,9 +12,7 @@ import java.util.Map;
  * a specific bank, usually the bank that provides the payer's account.
  * 
  * Creation of Bank Authorisations is only permitted from GoCardless hosted UIs (see Billing Request
- * Flows) to ensure we meet regulatory requirements for checkout flows. The exceptions are
- * integrators with the custom payment pages upgrade, who have been audited to check their flows
- * meet requirements.
+ * Flows) to ensure we meet regulatory requirements for checkout flows.
  */
 public class BankAuthorisationService {
     private final HttpClient httpClient;
