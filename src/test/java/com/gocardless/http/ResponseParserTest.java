@@ -152,4 +152,55 @@ public class ResponseParserTest {
         String responseBody = Resources.toString(resource, UTF_8);
         parser.parseError(responseBody);
     }
+
+    @Test
+    public void shouldHandleAuthenticationError() throws IOException {
+        URL resource = Resources.getResource("fixtures/unauthorized_error.json");
+        String responseBody = Resources.toString(resource, UTF_8);
+        GoCardlessApiException exception = parser.parseError(responseBody);
+        assertThat(exception).isInstanceOf(AuthenticationException.class);
+        assertThat(exception.getMessage()).isEqualTo("Unauthorized");
+        assertThat(exception.getDocumentationUrl())
+                .isEqualTo("https://developer.gocardless.com/api-reference#unauthorized");
+        assertThat(exception.getRequestId()).isEqualTo("bd271b37-a2f5-47c8-b461-040dfe0e9cb1");
+        assertThat(exception.getCode()).isEqualTo(401);
+        assertThat(exception.getErrors()).hasSize(1);
+        ApiError error1 = exception.getErrors().get(0);
+        assertThat(error1.getMessage()).isEqualTo("Unauthorized");
+        assertThat(error1.getReason()).isEqualTo("unauthorized");
+    }
+
+    @Test
+    public void shouldHandleRateLimitError() throws IOException {
+        URL resource = Resources.getResource("fixtures/rate_limit_exceeded.json");
+        String responseBody = Resources.toString(resource, UTF_8);
+        GoCardlessApiException exception = parser.parseError(responseBody);
+        assertThat(exception).isInstanceOf(RateLimitException.class);
+        assertThat(exception.getMessage()).isEqualTo("Rate limit exceeded");
+        assertThat(exception.getDocumentationUrl())
+                .isEqualTo("https://developer.gocardless.com/api-reference#rate_limit_exceeded");
+        assertThat(exception.getRequestId()).isEqualTo("bd271b37-a2f5-47c8-b461-040dfe0e9cb1");
+        assertThat(exception.getCode()).isEqualTo(429);
+        assertThat(exception.getErrors()).hasSize(1);
+        ApiError error1 = exception.getErrors().get(0);
+        assertThat(error1.getMessage()).isEqualTo("Rate limit exceeded");
+        assertThat(error1.getReason()).isEqualTo("rate_limit_exceeded");
+    }
+
+    @Test
+    public void shouldHandlePermissionException() throws IOException {
+        URL resource = Resources.getResource("fixtures/insufficient_permission.json");
+        String responseBody = Resources.toString(resource, UTF_8);
+        GoCardlessApiException exception = parser.parseError(responseBody);
+        assertThat(exception).isInstanceOf(PermissionException.class);
+        assertThat(exception.getMessage()).isEqualTo("Insufficient permissions");
+        assertThat(exception.getDocumentationUrl()).isEqualTo(
+                "https://developer.gocardless.com/api-reference#insufficient_permissions");
+        assertThat(exception.getRequestId()).isEqualTo("bd271b37-a2f5-47c8-b461-040dfe0e9cb1");
+        assertThat(exception.getCode()).isEqualTo(403);
+        assertThat(exception.getErrors()).hasSize(1);
+        ApiError error1 = exception.getErrors().get(0);
+        assertThat(error1.getMessage()).isEqualTo("Insufficient permissions");
+        assertThat(error1.getReason()).isEqualTo("insufficient_permissions");
+    }
 }

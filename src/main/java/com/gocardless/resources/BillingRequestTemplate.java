@@ -1,5 +1,6 @@
 package com.gocardless.resources;
 
+import com.google.gson.annotations.SerializedName;
 import java.util.Map;
 
 /**
@@ -18,7 +19,7 @@ public class BillingRequestTemplate {
     private String mandateRequestCurrency;
     private Map<String, String> mandateRequestMetadata;
     private String mandateRequestScheme;
-    private Map<String, String> mandateRequestVerify;
+    private MandateRequestVerify mandateRequestVerify;
     private Map<String, String> metadata;
     private String name;
     private Integer paymentRequestAmount;
@@ -59,6 +60,11 @@ public class BillingRequestTemplate {
         return mandateRequestCurrency;
     }
 
+    /**
+     * Key-value store of custom data that will be applied to the mandate created when this request
+     * is fulfilled. Up to 3 keys are permitted, with key names up to 50 characters and values up to
+     * 500 characters.
+     */
     public Map<String, String> getMandateRequestMetadata() {
         return mandateRequestMetadata;
     }
@@ -71,7 +77,20 @@ public class BillingRequestTemplate {
         return mandateRequestScheme;
     }
 
-    public Map<String, String> getMandateRequestVerify() {
+    /**
+     * Verification preference for the mandate. One of:
+     * <ul>
+     * <li>`minimum`: only verify if absolutely required, such as when part of scheme rules</li>
+     * <li>`recommended`: in addition to minimum, use the GoCardless risk engine to decide an
+     * appropriate level of verification</li>
+     * <li>`when_available`: if verification mechanisms are available, use them</li>
+     * <li>`always`: as `when_available`, but fail to create the Billing Request if a mechanism
+     * isn't available</li>
+     * </ul>
+     * 
+     * If not provided, the `recommended` level is chosen.
+     */
+    public MandateRequestVerify getMandateRequestVerify() {
         return mandateRequestVerify;
     }
 
@@ -115,6 +134,11 @@ public class BillingRequestTemplate {
         return paymentRequestDescription;
     }
 
+    /**
+     * Key-value store of custom data that will be applied to the payment created when this request
+     * is fulfilled. Up to 3 keys are permitted, with key names up to 50 characters and values up to
+     * 500 characters.
+     */
     public Map<String, String> getPaymentRequestMetadata() {
         return paymentRequestMetadata;
     }
@@ -140,5 +164,14 @@ public class BillingRequestTemplate {
      */
     public String getUpdatedAt() {
         return updatedAt;
+    }
+
+    public enum MandateRequestVerify {
+        @SerializedName("minimum")
+        MINIMUM, @SerializedName("recommended")
+        RECOMMENDED, @SerializedName("when_available")
+        WHEN_AVAILABLE, @SerializedName("always")
+        ALWAYS, @SerializedName("unknown")
+        UNKNOWN
     }
 }

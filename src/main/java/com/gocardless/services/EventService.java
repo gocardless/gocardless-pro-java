@@ -157,6 +157,7 @@ public class EventService {
          * <li>`subscription`</li>
          * <li>`instalment_schedule`</li>
          * <li>`creditor`</li>
+         * <li>`billing_request`<\li>
          * </ul>
          */
         public EventListRequest<S> withInclude(Include include) {
@@ -331,7 +332,8 @@ public class EventService {
             SUBSCRIPTION, @SerializedName("instalment_schedule")
             INSTALMENT_SCHEDULE, @SerializedName("creditor")
             CREDITOR, @SerializedName("payer_authorisation")
-            PAYER_AUTHORISATION, @SerializedName("unknown")
+            PAYER_AUTHORISATION, @SerializedName("billing_request")
+            BILLING_REQUEST, @SerializedName("unknown")
             UNKNOWN;
 
             @Override
