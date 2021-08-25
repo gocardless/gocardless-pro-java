@@ -1,23 +1,26 @@
-apply plugin: 'java'
-apply plugin: 'maven'
-apply plugin: 'signing'
-apply plugin: 'maven-publish'
-apply plugin: 'io.codearte.nexus-staging'
-
-sourceCompatibility = 1.7
-group = 'com.gocardless'
-version = '4.9.2'
-
 buildscript {
     repositories {
         mavenCentral()
+        maven { url 'https://plugins.gradle.org/m2/' }
     }
 
     dependencies {
         classpath 'ch.raffael.pegdown-doclet:pegdown-doclet:1.2.1'
-        classpath "io.codearte.gradle.nexus:gradle-nexus-staging-plugin:0.11.0"
     }
 }
+
+plugins {
+    id "java"
+    id "signing"
+    id "maven-publish"
+    id "io.github.gradle-nexus.publish-plugin" version "1.1.0"
+    id "com.diffplug.spotless" version "5.12.5"
+}
+
+sourceCompatibility = 1.8
+targetCompatibility = 1.8
+group = 'com.gocardless'
+version = '5.0.0'
 
 apply plugin: 'ch.raffael.pegdown-doclet'
 
@@ -26,19 +29,19 @@ repositories {
 }
 
 dependencies {
-    compile 'com.squareup.okhttp:okhttp:2.7.5'
-    compile 'com.google.code.gson:gson:2.8.0'
-    compile 'com.google.guava:guava:20.0'
-    compile 'org.slf4j:slf4j-api:1.7.21'
-    compile 'commons-codec:commons-codec:1.11'
+    implementation("com.squareup.okhttp3:okhttp:4.9.1")
+    implementation 'com.google.code.gson:gson:2.8.7'
+    implementation("com.google.guava:guava:30.1.1-jre")
+    implementation 'org.slf4j:slf4j-api:2.0.0-alpha1'
+    implementation 'commons-codec:commons-codec:1.15'
 
-    compile('com.github.rholder:guava-retrying:2.0.0') {
+    implementation('com.github.rholder:guava-retrying:2.0.0') {
       exclude group: 'com.google.guava', module: 'guava'
     }
 
-    testCompile 'junit:junit:4.12'
-    testCompile 'org.assertj:assertj-core:2.6.0'
-    testCompile 'com.squareup.okhttp:mockwebserver:2.7.5'
+    testImplementation 'junit:junit:4.13.2'
+    testImplementation 'org.assertj:assertj-core:3.19.0'
+    testImplementation 'com.squareup.okhttp3:mockwebserver:4.9.1'
 }
 
 javadoc {
@@ -46,7 +49,7 @@ javadoc {
     options.noTimestamp = true
 
     options.links = [
-      'http://docs.oracle.com/javase/7/docs/api/'
+      'http://docs.oracle.com/javase/8/docs/api/'
     ]
 }
 
@@ -120,11 +123,23 @@ signing {
     sign publishing.publications.mavenJava
 }
 
-nexusStaging {
-    // increase the delayBetweenRetriesInMillis , default is 2000(2s) which is very less
-    // generally it takes about 3 minutes for the state to go from open to closed
-    delayBetweenRetriesInMillis = 40000
+nexusPublishing {
+    repositories {
+        sonatype {
+            //only for users registered in Sonatype after 24 Feb 2021
+            nexusUrl.set(uri("https://s01.oss.sonatype.org/service/local/staging/deploy/maven2/"))
+            snapshotRepositoryUrl.set(uri("https://s01.oss.sonatype.org/content/repositories/snapshots/"))
 
-    username = System.getenv("MAVEN_USERNAME")
-    password = System.getenv("MAVEN_PASSWORD")
+            username = System.getenv("MAVEN_USERNAME")
+            password = System.getenv("MAVEN_PASSWORD")
+        }
+    }
+}
+
+spotless {
+    java {
+        importOrder()
+        removeUnusedImports()
+        eclipse().configFile("format.xml")
+    }
 }

@@ -1,11 +1,13 @@
 package com.gocardless;
 
 import com.gocardless.http.HttpClient;
+import com.gocardless.http.LoggingInterceptor;
 import com.gocardless.services.*;
 import com.google.common.annotations.VisibleForTesting;
-import com.squareup.okhttp.OkHttpClient;
 import java.net.Proxy;
 import javax.net.ssl.SSLSocketFactory;
+import javax.net.ssl.X509TrustManager;
+import okhttp3.OkHttpClient;
 
 /**
  * Entry point into the client.
@@ -46,6 +48,7 @@ public class GoCardlessClient {
         private String baseUrl;
         private Proxy proxy;
         private SSLSocketFactory sslSocketFactory;
+        private X509TrustManager trustManager;
         private boolean errorOnIdempotencyConflict;
 
         /**
@@ -95,8 +98,10 @@ public class GoCardlessClient {
          *
          * @param sslSocketFactory the SSL socket factory to be used when making HTTP requests
          */
-        public Builder withSslSocketFactory(SSLSocketFactory sslSocketFactory) {
+        public Builder withSslSocketFactoryAndTrustManager(SSLSocketFactory sslSocketFactory,
+                X509TrustManager trustManager) {
             this.sslSocketFactory = sslSocketFactory;
+            this.trustManager = trustManager;
             return this;
         }
 
@@ -115,9 +120,12 @@ public class GoCardlessClient {
          * Builds a configured instance of the GoCardlessClient
          */
         public GoCardlessClient build() {
-            OkHttpClient rawClient = new OkHttpClient();
-            rawClient.setProxy(proxy);
-            rawClient.setSslSocketFactory(sslSocketFactory);
+            OkHttpClient.Builder rawClientBuilder = new OkHttpClient.Builder().proxy(proxy);
+            if (sslSocketFactory != null && trustManager != null) {
+                rawClientBuilder.sslSocketFactory(sslSocketFactory, trustManager);
+            }
+            OkHttpClient rawClient =
+                    rawClientBuilder.addInterceptor(new LoggingInterceptor()).build();
             HttpClient client =
                     new HttpClient(accessToken, baseUrl, rawClient, errorOnIdempotencyConflict);
             return new GoCardlessClient(client);

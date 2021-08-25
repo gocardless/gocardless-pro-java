@@ -48,7 +48,7 @@ public class GoCardlessClientTest {
         ApiResponse<Customer> response = client.customers().get("CU00003068FG73")
                 .withHeader("Accept-Language", "fr-FR").executeWrapped();
         assertThat(response.getStatusCode()).isEqualTo(200);
-        assertThat(response.getHeaders().get("RateLimit-Limit")).containsExactly("1000");
+        assertThat(response.getHeaders().get("ratelimit-limit")).containsExactly("1000");
         Customer customer = response.getResource();
         assertThat(customer.getId()).isEqualTo("CU00003068FG73");
         assertThat(customer.getFamilyName()).isEqualTo("Osborne");
@@ -96,7 +96,7 @@ public class GoCardlessClientTest {
         assertThat(mandates).hasSize(1);
         assertThat(mandates.get(0).getId()).isEqualTo("MD00001PEYCSQF");
         assertThat(mandates.get(0).getStatus()).isEqualTo(Mandate.Status.ACTIVE);
-        http.assertRequestMade("GET", "/mandates?customer=CU00003068FG73&status=active,failed",
+        http.assertRequestMade("GET", "/mandates?customer=CU00003068FG73&status=active%2Cfailed",
                 ImmutableMap.of("Authorization", "Bearer " + ACCESS_TOKEN));
     }
 
@@ -167,7 +167,7 @@ public class GoCardlessClientTest {
                 .execute().getItems();
         assertThat(result.size()).isEqualTo(1);
         assertThat(result.get(0).getId()).isEqualTo("CU0000321DW2ZH");
-        http.assertRequestMade("GET", "/customers?created_at[gte]=2015-04-13T15:02:40Z",
+        http.assertRequestMade("GET", "/customers?created_at%5Bgte%5D=2015-04-13T15%3A02%3A40Z",
                 ImmutableMap.of("Authorization", "Bearer " + ACCESS_TOKEN));
     }
 

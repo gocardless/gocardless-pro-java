@@ -53,8 +53,8 @@ public class GetRequestTest {
         DummyItem result = new DummyGetRequest().withHeader("Accept-Language", "fr-FR").execute();
         assertThat(result.stringField).isEqualTo("foo");
         assertThat(result.intField).isEqualTo(123);
-        // The first request isn't "made" at all as the socket doesn't accept the
-        // connection. This tests that we send our headers on the retry.
+        http.takeRequest();
+        // This tests that we send our headers on the retry.
         http.assertRequestMade("GET", "/dummy/123",
                 ImmutableMap.of("Authorization", "Bearer token", "Accept-Language", "fr-FR"));
     }

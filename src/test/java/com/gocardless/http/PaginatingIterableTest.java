@@ -73,6 +73,7 @@ public class PaginatingIterableTest {
         assertThat(items.get(1).intField).isEqualTo(222);
         assertThat(items.get(2).stringField).isEqualTo("baz");
         assertThat(items.get(2).intField).isEqualTo(333);
+        http.takeRequest();
         http.assertRequestMade("GET", "/dummy?limit=2&id=123",
                 ImmutableMap.of("Authorization", "Bearer token"));
         http.assertRequestMade("GET", "/dummy?after=ID123&limit=2&id=123",

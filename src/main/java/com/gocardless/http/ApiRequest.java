@@ -2,8 +2,8 @@ package com.gocardless.http;
 
 import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.Maps;
-import com.squareup.okhttp.HttpUrl;
 import java.util.Map;
+import okhttp3.HttpUrl;
 
 /**
  * Base class for API requests.

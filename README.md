@@ -14,14 +14,14 @@ With Maven:
 <dependency>
     <groupId>com.gocardless</groupId>
     <artifactId>gocardless-pro</artifactId>
-    <version>4.9.2</version>
+    <version>5.0.0</version>
 </dependency>
 ```
 
 With Gradle:
 
 ```
-compile 'com.gocardless:gocardless-pro:4.9.2'
+compile 'com.gocardless:gocardless-pro:5.0.0'
 ```
 
 ## Initializing the client
@@ -56,7 +56,7 @@ GoCardlessClient client = GoCardlessClient.newBuilder(accessToken)
 To see the configurable options in full, see the documentation for `GoCardlessClient.Builder`.
 
 If you're upgrading from v2.x, you'll need to update your code for initialising `GoCardlessClient`. See the
-"Upgrading from v2.x to v3.x" section below.
+"Upgrading from v2.x to v3.x or above" section below.
 
 ## Examples
 
@@ -212,7 +212,7 @@ public class WebhookHandler {
         String webhookEndpointSecret = System.getenv("GOCARDLESS_WEBHOOK_ENDPOINT_SECRET");
 
         try {
-            List<Event> events = Webhook.parse(requestBody, signatureHeader, webhookEndpointSecret)
+            List<Event> events = Webhook.parse(requestBody, signatureHeader, webhookEndpointSecret);
 
             // Work through your list of events...
 
@@ -226,7 +226,44 @@ public class WebhookHandler {
 
 For more details on working with webhooks, see our ["Getting started" guide](https://developer.gocardless.com/getting-started/api/introduction/?lang=java).
 
-## Upgrading from v2.x to v3.x
+## Upgrading from v4.x to v5.x or above
+
+### Breaking Changes
+
+- Stop support for apps using Java 7, supports apps using only Java 8 and above
+- Response Header names are all in lower case now
+- GoCardless client initiation method `withsslSocketFactory` replaced with `withSslSocketFactoryAndTrustManager`
+
+```java
+import com.gocardless.GoCardlessClient;
+import javax.net.ssl.SSLSocketFactory;
+import javax.net.ssl.TrustManager;
+import javax.net.ssl.TrustManagerFactory;
+import javax.net.ssl.X509TrustManager;
+import java.security.KeyStore;
+
+String accessToken = "AO00000123";
+TrustManagerFactory trustManagerFactory = TrustManagerFactory.getInstance(
+TrustManagerFactory.getDefaultAlgorithm());
+trustManagerFactory.init((KeyStore) null);
+TrustManager[] trustManagers = trustManagerFactory.getTrustManagers();
+if (trustManagers.length != 1 || !(trustManagers[0] instanceof X509TrustManager)) {
+    throw new IllegalStateException("Unexpected default trust managers:"
+        + Arrays.toString(trustManagers));
+}
+X509TrustManager trustManager = (X509TrustManager) trustManagers[0];
+
+SSLContext sslContext = SSLContext.getInstance("TLS");
+sslContext.init(null, new TrustManager[] { trustManager }, null);
+SSLSocketFactory sslSocketFactory = sslContext.getSocketFactory();
+
+
+GoCardlessClient client = GoCardlessClient.newBuilder(accessToken)
+    .withSslSocketFactoryAndTrustManager(sslSocketFactory, trustManager)
+    .build();
+```
+
+## Upgrading from v2.x to v3.x or above
 
 To upgrade from v2.x, you will need to switch from calling `GoCardlessClient.create` with arguments to
 using the `Builder` returned by `GoCardlessClient.newBuilder()` and its `withX()` and `build()` methods.
@@ -298,7 +335,7 @@ change any of your other code.
 
 ## Compatibility
 
-This library requires JDK version 7 or above.
+This library requires JDK version 8 or above.
 
 ## Logging
 
