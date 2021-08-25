@@ -11,6 +11,14 @@ public class GoCardlessErrorMapper {
      * @param error the error response to map
      */
     public static GoCardlessApiException toException(ApiErrorResponse error) {
+        switch (error.getCode()) {
+            case 401:
+                return new AuthenticationException(error);
+            case 403:
+                return new PermissionException(error);
+            case 429:
+                return new RateLimitException(error);
+        }
         switch (error.getType()) {
             case GOCARDLESS:
                 return new GoCardlessInternalException(error);

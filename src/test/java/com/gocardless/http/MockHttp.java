@@ -2,18 +2,18 @@ package com.gocardless.http;
 
 import static com.gocardless.http.HttpTestUtil.jsonMatchesFixture;
 import static com.google.common.base.Charsets.UTF_8;
-import static com.squareup.okhttp.mockwebserver.SocketPolicy.DISCONNECT_AT_START;
 import static org.assertj.core.api.Assertions.assertThat;
 
 import com.gocardless.GoCardlessClient;
 import com.gocardless.TestUtil;
 import com.google.common.collect.ImmutableMap;
 import com.google.common.io.Resources;
-import com.squareup.okhttp.mockwebserver.MockResponse;
-import com.squareup.okhttp.mockwebserver.MockWebServer;
-import com.squareup.okhttp.mockwebserver.RecordedRequest;
 import java.io.IOException;
 import java.util.Map;
+import okhttp3.mockwebserver.MockResponse;
+import okhttp3.mockwebserver.MockWebServer;
+import okhttp3.mockwebserver.RecordedRequest;
+import okhttp3.mockwebserver.SocketPolicy;
 import org.junit.rules.ExternalResource;
 
 public class MockHttp extends ExternalResource {
@@ -49,7 +49,7 @@ public class MockHttp extends ExternalResource {
     }
 
     public void enqueueNetworkFailure() {
-        server.enqueue(new MockResponse().setSocketPolicy(DISCONNECT_AT_START));
+        server.enqueue(new MockResponse().setSocketPolicy(SocketPolicy.DISCONNECT_AT_START));
     }
 
     public void assertRequestMade(String method, String path) throws Exception {
@@ -84,6 +84,10 @@ public class MockHttp extends ExternalResource {
     public void assertRequestIncludedHeader(String headerName) throws Exception {
         RecordedRequest recordedRequest = server.takeRequest();
         assertThat(recordedRequest.getHeader(headerName)).isNotNull();
+    }
+
+    public void takeRequest() throws Exception {
+        server.takeRequest();
     }
 
     public String getBaseUrl() {

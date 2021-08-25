@@ -8,11 +8,11 @@ import com.gocardless.errors.GoCardlessInternalException;
 import com.google.common.base.Throwables;
 import com.google.common.collect.ImmutableMap;
 import com.google.gson.Gson;
-import com.squareup.okhttp.*;
 import java.io.IOException;
 import java.util.Map;
 import java.util.concurrent.Callable;
 import java.util.concurrent.ExecutionException;
+import okhttp3.*;
 
 /**
  * An HTTP client that can execute {@link ApiRequest}s.
@@ -30,7 +30,7 @@ public class HttpClient {
     private static final String DISALLOWED_USER_AGENT_CHARACTERS =
             "[^\\w!#$%&'\\*\\+\\-\\.\\^`\\|~]";
     private static final String USER_AGENT =
-            String.format("gocardless-pro-java/4.9.2 java/%s %s/%s %s/%s",
+            String.format("gocardless-pro-java/5.0.0 java/%s %s/%s %s/%s",
                     cleanUserAgentToken(System.getProperty("java.vm.specification.version")),
                     cleanUserAgentToken(System.getProperty("java.vm.name")),
                     cleanUserAgentToken(System.getProperty("java.version")),
@@ -43,7 +43,7 @@ public class HttpClient {
         ImmutableMap.Builder<String, String> builder = ImmutableMap.builder();
         builder.put("GoCardless-Version", "2015-07-06");
         builder.put("GoCardless-Client-Library", "gocardless-pro-java");
-        builder.put("GoCardless-Client-Version", "4.9.2");
+        builder.put("GoCardless-Client-Version", "5.0.0");
         HEADERS = builder.build();
     }
     private final OkHttpClient rawClient;
@@ -66,7 +66,6 @@ public class HttpClient {
     public HttpClient(String accessToken, String baseUrl, OkHttpClient rawClient,
             boolean errorOnIdempotencyConflict) {
         this.rawClient = rawClient;
-        rawClient.interceptors().add(new LoggingInterceptor());
         this.urlFormatter = new UrlFormatter(baseUrl);
         Gson gson = GsonFactory.build();
         this.responseParser = new ResponseParser(gson);

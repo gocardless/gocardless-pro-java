@@ -41,8 +41,8 @@ public class ListRequestTest {
         assertThat(result.getItems().get(0).intField).isEqualTo(123);
         assertThat(result.getItems().get(1).stringField).isEqualTo("bar");
         assertThat(result.getItems().get(1).intField).isEqualTo(456);
-        // The first request isn't "made" at all as the socket doesn't accept the
-        // connection. This tests that we send our headers on the retry.
+        http.takeRequest();
+        // This tests that we send our headers on the retry.
         http.assertRequestMade("GET", "/dummy?id=123",
                 ImmutableMap.of("Authorization", "Bearer token", "Accept-Language", "fr-FR"));
     }

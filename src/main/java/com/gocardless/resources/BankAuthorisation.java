@@ -102,7 +102,6 @@ public class BankAuthorisation {
 
         private String billingRequest;
         private String institution;
-        private String paymentRequest;
 
         /**
          * ID of the [billing request](#billing-requests-billing-requests) against which this
@@ -118,13 +117,6 @@ public class BankAuthorisation {
          */
         public String getInstitution() {
             return institution;
-        }
-
-        /**
-         * ID of the payment request against which this authorisation was created.
-         */
-        public String getPaymentRequest() {
-            return paymentRequest;
         }
     }
 }

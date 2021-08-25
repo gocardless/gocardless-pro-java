@@ -2,8 +2,8 @@ package com.gocardless.http;
 
 import static com.google.common.net.UrlEscapers.urlPathSegmentEscaper;
 
-import com.squareup.okhttp.HttpUrl;
 import java.util.Map;
+import okhttp3.HttpUrl;
 
 final class UrlFormatter {
     private final HttpUrl baseUrl;

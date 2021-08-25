@@ -1,0 +1,15 @@
+{
+  "error": {
+    "documentation_url": "https://developer.gocardless.com/api-reference#insufficient_permissions",
+    "type": "invalid_api_usage",
+    "code": 403,
+    "message": "Insufficient permissions",
+    "errors": [
+      {
+        "reason": "insufficient_permissions",
+        "message": "Insufficient permissions"
+      }
+    ],
+    "request_id": "bd271b37-a2f5-47c8-b461-040dfe0e9cb1"
+  }
+}

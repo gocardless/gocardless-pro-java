@@ -29,11 +29,6 @@ references:
           path: ~/junit
 
 jobs:
-  test_library_jdk7:
-    <<: *default_test_job
-    docker:
-      - image: openjdk:7
-
   test_library_jdk8:
     <<: *default_test_job
     docker:
@@ -44,12 +39,17 @@ jobs:
     docker:
       - image: openjdk:9
 
+  test_library_jdk11:
+    <<: *default_test_job
+    docker:
+      - image: openjdk:11
+
 workflows:
   version: 2
 
   build:
     jobs:
-      - test_library_jdk7
       - test_library_jdk8
       - test_library_jdk9
+      - test_library_jdk11
 

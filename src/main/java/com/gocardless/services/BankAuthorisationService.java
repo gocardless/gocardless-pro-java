@@ -131,17 +131,6 @@ public class BankAuthorisationService {
         }
 
         /**
-         * ID of the payment request against which this authorisation was created.
-         */
-        public BankAuthorisationCreateRequest withLinksPaymentRequest(String paymentRequest) {
-            if (links == null) {
-                links = new Links();
-            }
-            links.withPaymentRequest(paymentRequest);
-            return this;
-        }
-
-        /**
          * URL that the payer can be redirected to after authorising the payment.
          */
         public BankAuthorisationCreateRequest withRedirectUri(String redirectUri) {
@@ -195,7 +184,6 @@ public class BankAuthorisationService {
         public static class Links {
             private String billingRequest;
             private String institution;
-            private String paymentRequest;
 
             /**
              * ID of the [billing request](#billing-requests-billing-requests) against which this
@@ -212,14 +200,6 @@ public class BankAuthorisationService {
              */
             public Links withInstitution(String institution) {
                 this.institution = institution;
-                return this;
-            }
-
-            /**
-             * ID of the payment request against which this authorisation was created.
-             */
-            public Links withPaymentRequest(String paymentRequest) {
-                this.paymentRequest = paymentRequest;
                 return this;
             }
         }

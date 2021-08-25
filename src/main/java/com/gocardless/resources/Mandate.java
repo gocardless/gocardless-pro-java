@@ -101,6 +101,7 @@ public class Mandate {
      * <li>`expired`: the mandate has expired due to dormancy</li>
      * <li>`consumed`: the mandate has been consumed and cannot be reused (note that this only
      * applies to schemes that are per-payment authorised)</li>
+     * <li>`blocked`: the mandate has been blocked and payments cannot be created</li>
      * </ul>
      */
     public Status getStatus() {
@@ -116,7 +117,8 @@ public class Mandate {
         FAILED, @SerializedName("cancelled")
         CANCELLED, @SerializedName("expired")
         EXPIRED, @SerializedName("consumed")
-        CONSUMED, @SerializedName("unknown")
+        CONSUMED, @SerializedName("blocked")
+        BLOCKED, @SerializedName("unknown")
         UNKNOWN
     }
 

@@ -29,8 +29,8 @@ public class DeleteRequestTest {
                 new DummyDeleteRequest().withHeader("Accept-Language", "fr-FR").execute();
         assertThat(result.stringField).isEqualTo("foo");
         assertThat(result.intField).isEqualTo(123);
-        // The first request isn't "made" at all as the socket doesn't accept the
-        // connection. This tests that we send our headers on the retry.
+        http.takeRequest();
+        // This tests that we send our headers on the retry.
         http.assertRequestMade("DELETE", "/dummy",
                 ImmutableMap.of("Authorization", "Bearer token", "Accept-Language", "fr-FR"));
     }
