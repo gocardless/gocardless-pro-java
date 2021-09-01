@@ -142,6 +142,7 @@ public class Event {
          * <li>`payment_created`</li>
          * <li>`payment_cancelled`</li>
          * <li>`mandate_created`</li>
+         * <li>`mandate_blocked`</li>
          * <li>`subscription_created`</li>
          * <li>`subscription_cancelled`</li>
          * <li>`instalment_schedule_created`</li>
@@ -156,7 +157,8 @@ public class Event {
             @SerializedName("payment_created")
             PAYMENT_CREATED, @SerializedName("payment_cancelled")
             PAYMENT_CANCELLED, @SerializedName("mandate_created")
-            MANDATE_CREATED, @SerializedName("subscription_created")
+            MANDATE_CREATED, @SerializedName("mandate_blocked")
+            MANDATE_BLOCKED, @SerializedName("subscription_created")
             SUBSCRIPTION_CREATED, @SerializedName("subscription_cancelled")
             SUBSCRIPTION_CANCELLED, @SerializedName("instalment_schedule_created")
             INSTALMENT_SCHEDULE_CREATED, @SerializedName("instalment_schedule_cancelled")
