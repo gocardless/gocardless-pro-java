@@ -344,6 +344,19 @@ public class BillingRequestService {
         }
 
         /**
+         * The amount to be deducted from the payment as an app fee, to be paid to the partner
+         * integration which created the billing request, in the lowest denomination for the
+         * currency (e.g. pence in GBP, cents in EUR).
+         */
+        public BillingRequestCreateRequest withPaymentRequestAppFee(Integer appFee) {
+            if (paymentRequest == null) {
+                paymentRequest = new PaymentRequest();
+            }
+            paymentRequest.withAppFee(appFee);
+            return this;
+        }
+
+        /**
          * [ISO 4217](http://en.wikipedia.org/wiki/ISO_4217#Active_codes) currency code. Currently
          * only "GBP" is supported as we only have one scheme that is per_payment_authorised.
          */
@@ -471,6 +484,7 @@ public class BillingRequestService {
 
         public static class PaymentRequest {
             private Integer amount;
+            private Integer appFee;
             private String currency;
             private String description;
 
@@ -479,6 +493,16 @@ public class BillingRequestService {
              */
             public PaymentRequest withAmount(Integer amount) {
                 this.amount = amount;
+                return this;
+            }
+
+            /**
+             * The amount to be deducted from the payment as an app fee, to be paid to the partner
+             * integration which created the billing request, in the lowest denomination for the
+             * currency (e.g. pence in GBP, cents in EUR).
+             */
+            public PaymentRequest withAppFee(Integer appFee) {
+                this.appFee = appFee;
                 return this;
             }
 
