@@ -20,7 +20,7 @@ plugins {
 sourceCompatibility = 1.8
 targetCompatibility = 1.8
 group = 'com.gocardless'
-version = '5.0.0'
+version = '5.0.1'
 
 apply plugin: 'ch.raffael.pegdown-doclet'
 
@@ -32,7 +32,7 @@ dependencies {
     implementation("com.squareup.okhttp3:okhttp:4.9.1")
     implementation 'com.google.code.gson:gson:2.8.7'
     implementation("com.google.guava:guava:30.1.1-jre")
-    implementation 'org.slf4j:slf4j-api:2.0.0-alpha1'
+    implementation 'org.slf4j:slf4j-api:1.7.32'
     implementation 'commons-codec:commons-codec:1.15'
 
     implementation('com.github.rholder:guava-retrying:2.0.0') {
