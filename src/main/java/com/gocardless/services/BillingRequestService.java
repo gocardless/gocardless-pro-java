@@ -295,8 +295,8 @@ public class BillingRequestService {
         }
 
         /**
-         * A Direct Debit scheme. Currently "ach", "autogiro", "bacs", "becs", "becs_nz",
-         * "betalingsservice", "pad" and "sepa_core" are supported.
+         * A Direct Debit scheme. Currently "ach", "bacs", "becs", "becs_nz", "betalingsservice",
+         * "pad" and "sepa_core" are supported.
          */
         public BillingRequestCreateRequest withMandateRequestScheme(String scheme) {
             if (mandateRequest == null) {
@@ -473,7 +473,7 @@ public class BillingRequestService {
             }
 
             /**
-             * A Direct Debit scheme. Currently "ach", "autogiro", "bacs", "becs", "becs_nz",
+             * A Direct Debit scheme. Currently "ach", "bacs", "becs", "becs_nz",
              * "betalingsservice", "pad" and "sepa_core" are supported.
              */
             public MandateRequest withScheme(String scheme) {

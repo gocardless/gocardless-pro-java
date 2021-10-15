@@ -245,8 +245,8 @@ public class BillingRequestTemplateService {
         }
 
         /**
-         * A Direct Debit scheme. Currently "ach", "autogiro", "bacs", "becs", "becs_nz",
-         * "betalingsservice", "pad" and "sepa_core" are supported.
+         * A Direct Debit scheme. Currently "ach", "bacs", "becs", "becs_nz", "betalingsservice",
+         * "pad" and "sepa_core" are supported.
          */
         public BillingRequestTemplateCreateRequest withMandateRequestScheme(
                 String mandateRequestScheme) {
@@ -359,8 +359,8 @@ public class BillingRequestTemplateService {
         }
 
         /**
-         * A Direct Debit scheme. Currently "ach", "autogiro", "bacs", "becs", "becs_nz",
-         * "betalingsservice", "pad" and "sepa_core" are supported.
+         * A Direct Debit scheme. Currently "ach", "bacs", "becs", "becs_nz", "betalingsservice",
+         * "pad" and "sepa_core" are supported.
          */
         public BillingRequestTemplateCreateRequest withPaymentRequestScheme(
                 String paymentRequestScheme) {
@@ -509,8 +509,8 @@ public class BillingRequestTemplateService {
         }
 
         /**
-         * A Direct Debit scheme. Currently "ach", "autogiro", "bacs", "becs", "becs_nz",
-         * "betalingsservice", "pad" and "sepa_core" are supported.
+         * A Direct Debit scheme. Currently "ach", "bacs", "becs", "becs_nz", "betalingsservice",
+         * "pad" and "sepa_core" are supported.
          */
         public BillingRequestTemplateUpdateRequest withMandateRequestScheme(
                 String mandateRequestScheme) {
@@ -623,8 +623,8 @@ public class BillingRequestTemplateService {
         }
 
         /**
-         * A Direct Debit scheme. Currently "ach", "autogiro", "bacs", "becs", "becs_nz",
-         * "betalingsservice", "pad" and "sepa_core" are supported.
+         * A Direct Debit scheme. Currently "ach", "bacs", "becs", "becs_nz", "betalingsservice",
+         * "pad" and "sepa_core" are supported.
          */
         public BillingRequestTemplateUpdateRequest withPaymentRequestScheme(
                 String paymentRequestScheme) {
