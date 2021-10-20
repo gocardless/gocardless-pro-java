@@ -235,6 +235,7 @@ public class Event {
          * <li>`gocardless`: this event was performed by GoCardless automatically</li>
          * <li>`api`: this event was triggered by an API endpoint</li>
          * <li>`customer`: this event was triggered by a Customer</li>
+         * <li>`payer`: this event was triggered by a Payer</li>
          * </ul>
          */
         public Origin getOrigin() {
@@ -279,7 +280,8 @@ public class Event {
             BANK, @SerializedName("api")
             API, @SerializedName("gocardless")
             GOCARDLESS, @SerializedName("customer")
-            CUSTOMER, @SerializedName("unknown")
+            CUSTOMER, @SerializedName("payer")
+            PAYER, @SerializedName("unknown")
             UNKNOWN
         }
 
@@ -303,21 +305,47 @@ public class Event {
             // blank to prevent instantiation
         }
 
+        private String bankAuthorisation;
+        private String billingRequest;
+        private String billingRequestFlow;
         private String creditor;
         private String customer;
         private String customerBankAccount;
         private String instalmentSchedule;
         private String mandate;
+        private String mandateRequestMandate;
         private String newCustomerBankAccount;
         private String newMandate;
         private String organisation;
         private String parentEvent;
         private String payerAuthorisation;
         private String payment;
+        private String paymentRequestPayment;
         private String payout;
         private String previousCustomerBankAccount;
         private String refund;
         private String subscription;
+
+        /**
+         * ID of a [bank authorisation](#billing-requests-bank-authorisations).
+         */
+        public String getBankAuthorisation() {
+            return bankAuthorisation;
+        }
+
+        /**
+         * ID of a [billing request](#billing-requests-billing-requests).
+         */
+        public String getBillingRequest() {
+            return billingRequest;
+        }
+
+        /**
+         * ID of a [billing request flow](#billing-requests-billing-request-flows).
+         */
+        public String getBillingRequestFlow() {
+            return billingRequestFlow;
+        }
 
         /**
          * If `resource_type` is `creditor`, this is the ID of the
@@ -355,6 +383,14 @@ public class Event {
          */
         public String getMandate() {
             return mandate;
+        }
+
+        /**
+         * If `resource_type` is `billing_requests`, this is the ID of the
+         * [mandate](#core-endpoints-mandates) which has been created.
+         */
+        public String getMandateRequestMandate() {
+            return mandateRequestMandate;
         }
 
         /**
@@ -405,6 +441,14 @@ public class Event {
          */
         public String getPayment() {
             return payment;
+        }
+
+        /**
+         * If `resource_type` is `billing_requests`, this is the ID of the
+         * [payment](#core-endpoints-payments) which has been created for Instant Bank Payment.
+         */
+        public String getPaymentRequestPayment() {
+            return paymentRequestPayment;
         }
 
         /**
