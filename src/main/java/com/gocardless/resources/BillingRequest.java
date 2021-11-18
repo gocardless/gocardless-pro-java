@@ -353,8 +353,7 @@ public class BillingRequest {
         private Verify verify;
 
         /**
-         * [ISO 4217](http://en.wikipedia.org/wiki/ISO_4217#Active_codes) currency code. Currently
-         * only "GBP" is supported as we only have one scheme that is per_payment_authorised.
+         * [ISO 4217](http://en.wikipedia.org/wiki/ISO_4217#Active_codes) currency code.
          */
         public String getCurrency() {
             return currency;
@@ -450,8 +449,7 @@ public class BillingRequest {
         }
 
         /**
-         * [ISO 4217](http://en.wikipedia.org/wiki/ISO_4217#Active_codes) currency code. Currently
-         * only "GBP" is supported as we only have one scheme that is per_payment_authorised.
+         * [ISO 4217](http://en.wikipedia.org/wiki/ISO_4217#Active_codes) currency code.
          */
         public String getCurrency() {
             return currency;

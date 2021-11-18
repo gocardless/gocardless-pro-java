@@ -283,8 +283,7 @@ public class BillingRequestService {
         }
 
         /**
-         * [ISO 4217](http://en.wikipedia.org/wiki/ISO_4217#Active_codes) currency code. Currently
-         * only "GBP" is supported as we only have one scheme that is per_payment_authorised.
+         * [ISO 4217](http://en.wikipedia.org/wiki/ISO_4217#Active_codes) currency code.
          */
         public BillingRequestCreateRequest withMandateRequestCurrency(String currency) {
             if (mandateRequest == null) {
@@ -357,8 +356,7 @@ public class BillingRequestService {
         }
 
         /**
-         * [ISO 4217](http://en.wikipedia.org/wiki/ISO_4217#Active_codes) currency code. Currently
-         * only "GBP" is supported as we only have one scheme that is per_payment_authorised.
+         * [ISO 4217](http://en.wikipedia.org/wiki/ISO_4217#Active_codes) currency code.
          */
         public BillingRequestCreateRequest withPaymentRequestCurrency(String currency) {
             if (paymentRequest == null) {
@@ -464,8 +462,6 @@ public class BillingRequestService {
 
             /**
              * [ISO 4217](http://en.wikipedia.org/wiki/ISO_4217#Active_codes) currency code.
-             * Currently only "GBP" is supported as we only have one scheme that is
-             * per_payment_authorised.
              */
             public MandateRequest withCurrency(String currency) {
                 this.currency = currency;
@@ -508,8 +504,6 @@ public class BillingRequestService {
 
             /**
              * [ISO 4217](http://en.wikipedia.org/wiki/ISO_4217#Active_codes) currency code.
-             * Currently only "GBP" is supported as we only have one scheme that is
-             * per_payment_authorised.
              */
             public PaymentRequest withCurrency(String currency) {
                 this.currency = currency;

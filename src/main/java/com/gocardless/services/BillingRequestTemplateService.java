@@ -210,8 +210,7 @@ public class BillingRequestTemplateService {
         }
 
         /**
-         * [ISO 4217](http://en.wikipedia.org/wiki/ISO_4217#Active_codes) currency code. Currently
-         * only "GBP" is supported as we only have one scheme that is per_payment_authorised.
+         * [ISO 4217](http://en.wikipedia.org/wiki/ISO_4217#Active_codes) currency code.
          */
         public BillingRequestTemplateCreateRequest withMandateRequestCurrency(
                 String mandateRequestCurrency) {
@@ -313,8 +312,7 @@ public class BillingRequestTemplateService {
         }
 
         /**
-         * [ISO 4217](http://en.wikipedia.org/wiki/ISO_4217#Active_codes) currency code. Currently
-         * only "GBP" is supported as we only have one scheme that is per_payment_authorised.
+         * [ISO 4217](http://en.wikipedia.org/wiki/ISO_4217#Active_codes) currency code.
          */
         public BillingRequestTemplateCreateRequest withPaymentRequestCurrency(
                 String paymentRequestCurrency) {
@@ -474,8 +472,7 @@ public class BillingRequestTemplateService {
         private String redirectUri;
 
         /**
-         * [ISO 4217](http://en.wikipedia.org/wiki/ISO_4217#Active_codes) currency code. Currently
-         * only "GBP" is supported as we only have one scheme that is per_payment_authorised.
+         * [ISO 4217](http://en.wikipedia.org/wiki/ISO_4217#Active_codes) currency code.
          */
         public BillingRequestTemplateUpdateRequest withMandateRequestCurrency(
                 String mandateRequestCurrency) {
@@ -577,8 +574,7 @@ public class BillingRequestTemplateService {
         }
 
         /**
-         * [ISO 4217](http://en.wikipedia.org/wiki/ISO_4217#Active_codes) currency code. Currently
-         * only "GBP" is supported as we only have one scheme that is per_payment_authorised.
+         * [ISO 4217](http://en.wikipedia.org/wiki/ISO_4217#Active_codes) currency code.
          */
         public BillingRequestTemplateUpdateRequest withPaymentRequestCurrency(
                 String paymentRequestCurrency) {
