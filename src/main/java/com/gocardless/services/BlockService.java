@@ -72,14 +72,6 @@ public class BlockService {
     }
 
     /**
-     * Creates new blocks for a given reference. By default blocks will be active. Returns 201 if at
-     * least one block was created. Returns 200 if there were no new blocks created.
-     */
-    public BlockBlockByRefRequest blockByRef() {
-        return new BlockBlockByRefRequest(httpClient);
-    }
-
-    /**
      * Request class for {@link BlockService#create }.
      *
      * Creates a new Block of a given type. By default it will be active.
@@ -445,102 +437,6 @@ public class BlockService {
         @Override
         protected boolean hasBody() {
             return false;
-        }
-    }
-
-    /**
-     * Request class for {@link BlockService#blockByRef }.
-     *
-     * Creates new blocks for a given reference. By default blocks will be active. Returns 201 if at
-     * least one block was created. Returns 200 if there were no new blocks created.
-     */
-    public static final class BlockBlockByRefRequest extends PostRequest<Block> {
-        private Boolean active;
-        private String reasonDescription;
-        private String reasonType;
-        private String referenceType;
-        private String referenceValue;
-
-        /**
-         * Shows if the block is active or disabled. Only active blocks will be used when deciding
-         * if a mandate should be blocked.
-         */
-        public BlockBlockByRefRequest withActive(Boolean active) {
-            this.active = active;
-            return this;
-        }
-
-        /**
-         * This field is required if the reason_type is other. It should be a description of the
-         * reason for why you wish to block this payer and why it does not align with the given
-         * reason_types. This is intended to help us improve our knowledge of types of fraud.
-         */
-        public BlockBlockByRefRequest withReasonDescription(String reasonDescription) {
-            this.reasonDescription = reasonDescription;
-            return this;
-        }
-
-        /**
-         * The reason you wish to block this payer, can currently be one of 'identity_fraud',
-         * 'no_intent_to_pay', 'unfair_chargeback'. If the reason isn't captured by one of the above
-         * then 'other' can be selected but you must provide a reason description.
-         */
-        public BlockBlockByRefRequest withReasonType(String reasonType) {
-            this.reasonType = reasonType;
-            return this;
-        }
-
-        /**
-         * Type of entity we will seek to get the associated emails and bank accounts to create
-         * blocks from. This can currently be one of 'customer' or 'mandate'.
-         */
-        public BlockBlockByRefRequest withReferenceType(String referenceType) {
-            this.referenceType = referenceType;
-            return this;
-        }
-
-        /**
-         * This field is a reference to the entity you wish to block based on its emails and bank
-         * accounts. This may be the ID of a customer or a mandate. This means in order to block by
-         * reference the entity must have already been created as a resource.
-         */
-        public BlockBlockByRefRequest withReferenceValue(String referenceValue) {
-            this.referenceValue = referenceValue;
-            return this;
-        }
-
-        private BlockBlockByRefRequest(HttpClient httpClient) {
-            super(httpClient);
-        }
-
-        public BlockBlockByRefRequest withHeader(String headerName, String headerValue) {
-            this.addHeader(headerName, headerValue);
-            return this;
-        }
-
-        @Override
-        protected String getPathTemplate() {
-            return "block_by_ref";
-        }
-
-        @Override
-        protected String getEnvelope() {
-            return "blocks";
-        }
-
-        @Override
-        protected Class<Block> getResponseClass() {
-            return Block.class;
-        }
-
-        @Override
-        protected boolean hasBody() {
-            return true;
-        }
-
-        @Override
-        protected String getRequestEnvelope() {
-            return "data";
         }
     }
 }
