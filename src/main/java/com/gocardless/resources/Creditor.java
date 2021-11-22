@@ -448,7 +448,9 @@ public class Creditor {
             BETALINGSSERVICE, @SerializedName("faster_payments")
             FASTER_PAYMENTS, @SerializedName("pad")
             PAD, @SerializedName("sepa")
-            SEPA, @SerializedName("unknown")
+            SEPA, @SerializedName("sepa_credit_transfer")
+            SEPA_CREDIT_TRANSFER, @SerializedName("sepa_instant_credit_transfer")
+            SEPA_INSTANT_CREDIT_TRANSFER, @SerializedName("unknown")
             UNKNOWN
         }
     }
