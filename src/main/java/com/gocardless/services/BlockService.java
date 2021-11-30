@@ -454,7 +454,7 @@ public class BlockService {
      * Creates new blocks for a given reference. By default blocks will be active. Returns 201 if at
      * least one block was created. Returns 200 if there were no new blocks created.
      */
-    public static final class BlockBlockByRefRequest extends PostRequest<Block> {
+    public static final class BlockBlockByRefRequest extends ArrayRequest<Block> {
         private Boolean active;
         private String reasonDescription;
         private String reasonType;
@@ -510,7 +510,7 @@ public class BlockService {
         }
 
         private BlockBlockByRefRequest(HttpClient httpClient) {
-            super(httpClient);
+            super(httpClient, "POST");
         }
 
         public BlockBlockByRefRequest withHeader(String headerName, String headerValue) {
@@ -529,18 +529,13 @@ public class BlockService {
         }
 
         @Override
-        protected Class<Block> getResponseClass() {
-            return Block.class;
+        protected TypeToken<List<Block>> getTypeToken() {
+            return new TypeToken<List<Block>>() {};
         }
 
         @Override
         protected boolean hasBody() {
             return true;
-        }
-
-        @Override
-        protected String getRequestEnvelope() {
-            return "data";
         }
     }
 }
