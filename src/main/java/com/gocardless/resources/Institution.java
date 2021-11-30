@@ -11,10 +11,20 @@ public class Institution {
         // blank to prevent instantiation
     }
 
+    private String countryCode;
     private String iconUrl;
     private String id;
     private String logoUrl;
     private String name;
+
+    /**
+     * [ISO
+     * 3166-1](http://en.wikipedia.org/wiki/ISO_3166-1_alpha-2#Officially_assigned_code_elements)
+     * alpha-2 code. The country code of the institution.
+     */
+    public String getCountryCode() {
+        return countryCode;
+    }
 
     /**
      * A URL pointing to the icon for this institution

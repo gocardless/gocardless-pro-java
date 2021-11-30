@@ -157,7 +157,7 @@ public class EventService {
          * <li>`subscription`</li>
          * <li>`instalment_schedule`</li>
          * <li>`creditor`</li>
-         * <li>`billing_request`<\li>
+         * <li>`billing_request`</li>
          * </ul>
          */
         public EventListRequest<S> withInclude(Include include) {

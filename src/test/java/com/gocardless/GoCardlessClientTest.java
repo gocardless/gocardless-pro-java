@@ -300,4 +300,20 @@ public class GoCardlessClientTest {
         http.assertRequestMade("GET", "/creditor_bank_accounts?enabled=true",
                 ImmutableMap.of("Authorization", "Bearer " + ACCESS_TOKEN));
     }
+
+    @Test
+    public void shouldCreateBlocksByRef() throws Exception {
+        http.enqueueResponse(201, "fixtures/client/create_blocks_by_ref_response.json");
+        Iterable<Block> iterable = client.blocks().blockByRef().withReferenceType("customer")
+                .withReferenceValue("CU123").withReasonType("no_intent_to_pay").execute();
+        List<Block> blocks = Lists.newArrayList(iterable);
+        assertThat(blocks).hasSize(2);
+        assertThat(blocks.get(0).getId()).isEqualTo("BLC123");
+        assertThat(blocks.get(0).getBlockType()).isEqualTo(Block.BlockType.EMAIL);
+        assertThat(blocks.get(1).getId()).isEqualTo("BLC456");
+        assertThat(blocks.get(1).getBlockType()).isEqualTo(Block.BlockType.BANK_ACCOUNT);
+        http.assertRequestMade("POST", "/block_by_ref",
+                "fixtures/client/create_blocks_by_ref_request.json",
+                ImmutableMap.of("Authorization", "Bearer " + ACCESS_TOKEN));
+    }
 }

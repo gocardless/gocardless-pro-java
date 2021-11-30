@@ -77,7 +77,9 @@ public class BillingRequestFlowService {
         }
 
         /**
-         * If true, the payer will not be able to change their bank account within the flow
+         * If true, the payer will not be able to change their bank account within the flow. If the
+         * bank_account details are collected as part of bank_authorisation then GC will set this
+         * value to true mid flow
          */
         public BillingRequestFlowCreateRequest withLockBankAccount(Boolean lockBankAccount) {
             this.lockBankAccount = lockBankAccount;
@@ -85,7 +87,9 @@ public class BillingRequestFlowService {
         }
 
         /**
-         * If true, the payer will not be able to edit their customer details within the flow
+         * If true, the payer will not be able to edit their customer details within the flow. If
+         * the customer details are collected as part of bank_authorisation then GC will set this
+         * value to true mid flow
          */
         public BillingRequestFlowCreateRequest withLockCustomerDetails(
                 Boolean lockCustomerDetails) {
