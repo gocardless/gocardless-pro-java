@@ -52,7 +52,8 @@ public class BillingRequestFlowService {
         private String redirectUri;
 
         /**
-         * Fulfil the Billing Request on completion of the flow (true by default)
+         * (Experimental feature) Fulfil the Billing Request on completion of the flow (true by
+         * default). Disabling the auto_fulfil is not allowed currently.
          */
         public BillingRequestFlowCreateRequest withAutoFulfil(Boolean autoFulfil) {
             this.autoFulfil = autoFulfil;
