@@ -46,6 +46,7 @@ public class BillingRequestFlowService {
     public static final class BillingRequestFlowCreateRequest
             extends PostRequest<BillingRequestFlow> {
         private Boolean autoFulfil;
+        private String exitUri;
         private Links links;
         private Boolean lockBankAccount;
         private Boolean lockCustomerDetails;
@@ -57,6 +58,14 @@ public class BillingRequestFlowService {
          */
         public BillingRequestFlowCreateRequest withAutoFulfil(Boolean autoFulfil) {
             this.autoFulfil = autoFulfil;
+            return this;
+        }
+
+        /**
+         * URL that the payer can be taken to if there isn't a way to progress ahead in flow.
+         */
+        public BillingRequestFlowCreateRequest withExitUri(String exitUri) {
+            this.exitUri = exitUri;
             return this;
         }
 
