@@ -46,16 +46,26 @@ public class BillingRequestFlowService {
     public static final class BillingRequestFlowCreateRequest
             extends PostRequest<BillingRequestFlow> {
         private Boolean autoFulfil;
+        private String exitUri;
         private Links links;
         private Boolean lockBankAccount;
         private Boolean lockCustomerDetails;
         private String redirectUri;
 
         /**
-         * Fulfil the Billing Request on completion of the flow (true by default)
+         * (Experimental feature) Fulfil the Billing Request on completion of the flow (true by
+         * default). Disabling the auto_fulfil is not allowed currently.
          */
         public BillingRequestFlowCreateRequest withAutoFulfil(Boolean autoFulfil) {
             this.autoFulfil = autoFulfil;
+            return this;
+        }
+
+        /**
+         * URL that the payer can be taken to if there isn't a way to progress ahead in flow.
+         */
+        public BillingRequestFlowCreateRequest withExitUri(String exitUri) {
+            this.exitUri = exitUri;
             return this;
         }
 

@@ -11,13 +11,20 @@ import java.util.Map;
  * @param <T> the type of the item returned by this request.
  */
 public abstract class ListRequest<S, T> extends ApiRequest<ListResponse<T>> {
-    private final ListRequestExecutor<S, T> executor;
+    private final transient ListRequestExecutor<S, T> executor;
+    private final transient String method;
     private String after;
     private String before;
     private Integer limit;
 
     protected ListRequest(HttpClient httpClient, ListRequestExecutor<S, T> executor) {
+        this(httpClient, executor, "GET");
+    }
+
+    protected ListRequest(HttpClient httpClient, ListRequestExecutor<S, T> executor,
+            String method) {
         super(httpClient);
+        this.method = method;
         this.executor = executor;
     }
 
@@ -50,11 +57,11 @@ public abstract class ListRequest<S, T> extends ApiRequest<ListResponse<T>> {
 
     @Override
     protected final String getMethod() {
-        return "GET";
+        return this.method;
     }
 
     @Override
-    protected final boolean hasBody() {
+    protected boolean hasBody() {
         return false;
     }
 

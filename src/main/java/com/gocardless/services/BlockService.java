@@ -75,8 +75,8 @@ public class BlockService {
      * Creates new blocks for a given reference. By default blocks will be active. Returns 201 if at
      * least one block was created. Returns 200 if there were no new blocks created.
      */
-    public BlockBlockByRefRequest blockByRef() {
-        return new BlockBlockByRefRequest(httpClient);
+    public BlockBlockByRefRequest<Iterable<Block>> blockByRef() {
+        return new BlockBlockByRefRequest<>(httpClient, ListRequest.<Block>iteratingExecutor());
     }
 
     /**
@@ -454,7 +454,7 @@ public class BlockService {
      * Creates new blocks for a given reference. By default blocks will be active. Returns 201 if at
      * least one block was created. Returns 200 if there were no new blocks created.
      */
-    public static final class BlockBlockByRefRequest extends ArrayRequest<Block> {
+    public static final class BlockBlockByRefRequest<S> extends ListRequest<S, Block> {
         private Boolean active;
         private String reasonDescription;
         private String reasonType;
@@ -465,7 +465,7 @@ public class BlockService {
          * Shows if the block is active or disabled. Only active blocks will be used when deciding
          * if a mandate should be blocked.
          */
-        public BlockBlockByRefRequest withActive(Boolean active) {
+        public BlockBlockByRefRequest<S> withActive(Boolean active) {
             this.active = active;
             return this;
         }
@@ -475,7 +475,7 @@ public class BlockService {
          * reason for why you wish to block this payer and why it does not align with the given
          * reason_types. This is intended to help us improve our knowledge of types of fraud.
          */
-        public BlockBlockByRefRequest withReasonDescription(String reasonDescription) {
+        public BlockBlockByRefRequest<S> withReasonDescription(String reasonDescription) {
             this.reasonDescription = reasonDescription;
             return this;
         }
@@ -485,7 +485,7 @@ public class BlockService {
          * 'no_intent_to_pay', 'unfair_chargeback'. If the reason isn't captured by one of the above
          * then 'other' can be selected but you must provide a reason description.
          */
-        public BlockBlockByRefRequest withReasonType(String reasonType) {
+        public BlockBlockByRefRequest<S> withReasonType(String reasonType) {
             this.reasonType = reasonType;
             return this;
         }
@@ -494,7 +494,7 @@ public class BlockService {
          * Type of entity we will seek to get the associated emails and bank accounts to create
          * blocks from. This can currently be one of 'customer' or 'mandate'.
          */
-        public BlockBlockByRefRequest withReferenceType(String referenceType) {
+        public BlockBlockByRefRequest<S> withReferenceType(String referenceType) {
             this.referenceType = referenceType;
             return this;
         }
@@ -504,16 +504,17 @@ public class BlockService {
          * accounts. This may be the ID of a customer or a mandate. This means in order to block by
          * reference the entity must have already been created as a resource.
          */
-        public BlockBlockByRefRequest withReferenceValue(String referenceValue) {
+        public BlockBlockByRefRequest<S> withReferenceValue(String referenceValue) {
             this.referenceValue = referenceValue;
             return this;
         }
 
-        private BlockBlockByRefRequest(HttpClient httpClient) {
-            super(httpClient, "POST");
+        private BlockBlockByRefRequest(HttpClient httpClient,
+                ListRequestExecutor<S, Block> executor) {
+            super(httpClient, executor, "POST");
         }
 
-        public BlockBlockByRefRequest withHeader(String headerName, String headerValue) {
+        public BlockBlockByRefRequest<S> withHeader(String headerName, String headerValue) {
             this.addHeader(headerName, headerValue);
             return this;
         }

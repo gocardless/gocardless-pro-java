@@ -14,6 +14,7 @@ public class BillingRequestFlow {
     private String authorisationUrl;
     private Boolean autoFulfil;
     private String createdAt;
+    private String exitUri;
     private String expiresAt;
     private String id;
     private Links links;
@@ -30,7 +31,8 @@ public class BillingRequestFlow {
     }
 
     /**
-     * Fulfil the Billing Request on completion of the flow (true by default)
+     * (Experimental feature) Fulfil the Billing Request on completion of the flow (true by
+     * default). Disabling the auto_fulfil is not allowed currently.
      */
     public Boolean getAutoFulfil() {
         return autoFulfil;
@@ -41,6 +43,13 @@ public class BillingRequestFlow {
      */
     public String getCreatedAt() {
         return createdAt;
+    }
+
+    /**
+     * URL that the payer can be taken to if there isn't a way to progress ahead in flow.
+     */
+    public String getExitUri() {
+        return exitUri;
     }
 
     /**
