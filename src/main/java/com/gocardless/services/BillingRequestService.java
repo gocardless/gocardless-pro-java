@@ -356,7 +356,9 @@ public class BillingRequestService {
         }
 
         /**
-         * [ISO 4217](http://en.wikipedia.org/wiki/ISO_4217#Active_codes) currency code.
+         * [ISO 4217](http://en.wikipedia.org/wiki/ISO_4217#Active_codes) currency code. `GBP` and
+         * `EUR` supported; `GBP` with your customers in the UK and for `EUR` with your customers in
+         * Germany only.
          */
         public BillingRequestCreateRequest withPaymentRequestCurrency(String currency) {
             if (paymentRequest == null) {
@@ -376,6 +378,21 @@ public class BillingRequestService {
                 paymentRequest = new PaymentRequest();
             }
             paymentRequest.withDescription(description);
+            return this;
+        }
+
+        /**
+         * (Optional) A scheme used for Open Banking payments. Currently `faster_payments` is
+         * supported in the UK (GBP) and `sepa_credit_transfer` and `sepa_instant_credit_transfer`
+         * are supported in Germany (EUR). In Germany, `sepa_credit_transfer` is used as the
+         * default. Please be aware that `sepa_instant_credit_transfer` may incur an additional fee
+         * for your customer.
+         */
+        public BillingRequestCreateRequest withPaymentRequestScheme(String scheme) {
+            if (paymentRequest == null) {
+                paymentRequest = new PaymentRequest();
+            }
+            paymentRequest.withScheme(scheme);
             return this;
         }
 
@@ -483,6 +500,7 @@ public class BillingRequestService {
             private Integer appFee;
             private String currency;
             private String description;
+            private String scheme;
 
             /**
              * Amount in minor unit (e.g. pence in GBP, cents in EUR).
@@ -503,7 +521,9 @@ public class BillingRequestService {
             }
 
             /**
-             * [ISO 4217](http://en.wikipedia.org/wiki/ISO_4217#Active_codes) currency code.
+             * [ISO 4217](http://en.wikipedia.org/wiki/ISO_4217#Active_codes) currency code. `GBP`
+             * and `EUR` supported; `GBP` with your customers in the UK and for `EUR` with your
+             * customers in Germany only.
              */
             public PaymentRequest withCurrency(String currency) {
                 this.currency = currency;
@@ -517,6 +537,18 @@ public class BillingRequestService {
              */
             public PaymentRequest withDescription(String description) {
                 this.description = description;
+                return this;
+            }
+
+            /**
+             * (Optional) A scheme used for Open Banking payments. Currently `faster_payments` is
+             * supported in the UK (GBP) and `sepa_credit_transfer` and
+             * `sepa_instant_credit_transfer` are supported in Germany (EUR). In Germany,
+             * `sepa_credit_transfer` is used as the default. Please be aware that
+             * `sepa_instant_credit_transfer` may incur an additional fee for your customer.
+             */
+            public PaymentRequest withScheme(String scheme) {
+                this.scheme = scheme;
                 return this;
             }
         }

@@ -312,7 +312,9 @@ public class BillingRequestTemplateService {
         }
 
         /**
-         * [ISO 4217](http://en.wikipedia.org/wiki/ISO_4217#Active_codes) currency code.
+         * [ISO 4217](http://en.wikipedia.org/wiki/ISO_4217#Active_codes) currency code. `GBP` and
+         * `EUR` supported; `GBP` with your customers in the UK and for `EUR` with your customers in
+         * Germany only.
          */
         public BillingRequestTemplateCreateRequest withPaymentRequestCurrency(
                 String paymentRequestCurrency) {
@@ -357,8 +359,11 @@ public class BillingRequestTemplateService {
         }
 
         /**
-         * A Direct Debit scheme. Currently "ach", "bacs", "becs", "becs_nz", "betalingsservice",
-         * "pad" and "sepa_core" are supported.
+         * (Optional) A scheme used for Open Banking payments. Currently `faster_payments` is
+         * supported in the UK (GBP) and `sepa_credit_transfer` and `sepa_instant_credit_transfer`
+         * are supported in Germany (EUR). In Germany, `sepa_credit_transfer` is used as the
+         * default. Please be aware that `sepa_instant_credit_transfer` may incur an additional fee
+         * for your customer.
          */
         public BillingRequestTemplateCreateRequest withPaymentRequestScheme(
                 String paymentRequestScheme) {
@@ -574,7 +579,9 @@ public class BillingRequestTemplateService {
         }
 
         /**
-         * [ISO 4217](http://en.wikipedia.org/wiki/ISO_4217#Active_codes) currency code.
+         * [ISO 4217](http://en.wikipedia.org/wiki/ISO_4217#Active_codes) currency code. `GBP` and
+         * `EUR` supported; `GBP` with your customers in the UK and for `EUR` with your customers in
+         * Germany only.
          */
         public BillingRequestTemplateUpdateRequest withPaymentRequestCurrency(
                 String paymentRequestCurrency) {
@@ -619,8 +626,11 @@ public class BillingRequestTemplateService {
         }
 
         /**
-         * A Direct Debit scheme. Currently "ach", "bacs", "becs", "becs_nz", "betalingsservice",
-         * "pad" and "sepa_core" are supported.
+         * (Optional) A scheme used for Open Banking payments. Currently `faster_payments` is
+         * supported in the UK (GBP) and `sepa_credit_transfer` and `sepa_instant_credit_transfer`
+         * are supported in Germany (EUR). In Germany, `sepa_credit_transfer` is used as the
+         * default. Please be aware that `sepa_instant_credit_transfer` may incur an additional fee
+         * for your customer.
          */
         public BillingRequestTemplateUpdateRequest withPaymentRequestScheme(
                 String paymentRequestScheme) {
