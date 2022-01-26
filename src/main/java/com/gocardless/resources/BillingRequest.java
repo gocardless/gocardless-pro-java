@@ -349,6 +349,7 @@ public class BillingRequest {
 
         private String currency;
         private Links links;
+        private Map<String, String> metadata;
         private String scheme;
         private Verify verify;
 
@@ -361,6 +362,14 @@ public class BillingRequest {
 
         public Links getLinks() {
             return links;
+        }
+
+        /**
+         * Key-value store of custom data. Up to 3 keys are permitted, with key names up to 50
+         * characters and values up to 500 characters.
+         */
+        public Map<String, String> getMetadata() {
+            return metadata;
         }
 
         /**
@@ -430,6 +439,7 @@ public class BillingRequest {
         private String currency;
         private String description;
         private Links links;
+        private Map<String, String> metadata;
         private String scheme;
 
         /**
@@ -468,6 +478,14 @@ public class BillingRequest {
 
         public Links getLinks() {
             return links;
+        }
+
+        /**
+         * Key-value store of custom data. Up to 3 keys are permitted, with key names up to 50
+         * characters and values up to 500 characters.
+         */
+        public Map<String, String> getMetadata() {
+            return metadata;
         }
 
         /**

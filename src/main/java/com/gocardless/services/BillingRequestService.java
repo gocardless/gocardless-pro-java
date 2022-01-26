@@ -294,6 +294,19 @@ public class BillingRequestService {
         }
 
         /**
+         * Key-value store of custom data. Up to 3 keys are permitted, with key names up to 50
+         * characters and values up to 500 characters.
+         */
+        public BillingRequestCreateRequest withMandateRequestMetadata(
+                Map<String, String> metadata) {
+            if (mandateRequest == null) {
+                mandateRequest = new MandateRequest();
+            }
+            mandateRequest.withMetadata(metadata);
+            return this;
+        }
+
+        /**
          * A Direct Debit scheme. Currently "ach", "bacs", "becs", "becs_nz", "betalingsservice",
          * "pad" and "sepa_core" are supported.
          */
@@ -378,6 +391,19 @@ public class BillingRequestService {
                 paymentRequest = new PaymentRequest();
             }
             paymentRequest.withDescription(description);
+            return this;
+        }
+
+        /**
+         * Key-value store of custom data. Up to 3 keys are permitted, with key names up to 50
+         * characters and values up to 500 characters.
+         */
+        public BillingRequestCreateRequest withPaymentRequestMetadata(
+                Map<String, String> metadata) {
+            if (paymentRequest == null) {
+                paymentRequest = new PaymentRequest();
+            }
+            paymentRequest.withMetadata(metadata);
             return this;
         }
 
@@ -475,6 +501,7 @@ public class BillingRequestService {
 
         public static class MandateRequest {
             private String currency;
+            private Map<String, String> metadata;
             private String scheme;
 
             /**
@@ -482,6 +509,15 @@ public class BillingRequestService {
              */
             public MandateRequest withCurrency(String currency) {
                 this.currency = currency;
+                return this;
+            }
+
+            /**
+             * Key-value store of custom data. Up to 3 keys are permitted, with key names up to 50
+             * characters and values up to 500 characters.
+             */
+            public MandateRequest withMetadata(Map<String, String> metadata) {
+                this.metadata = metadata;
                 return this;
             }
 
@@ -500,6 +536,7 @@ public class BillingRequestService {
             private Integer appFee;
             private String currency;
             private String description;
+            private Map<String, String> metadata;
             private String scheme;
 
             /**
@@ -537,6 +574,15 @@ public class BillingRequestService {
              */
             public PaymentRequest withDescription(String description) {
                 this.description = description;
+                return this;
+            }
+
+            /**
+             * Key-value store of custom data. Up to 3 keys are permitted, with key names up to 50
+             * characters and values up to 500 characters.
+             */
+            public PaymentRequest withMetadata(Map<String, String> metadata) {
+                this.metadata = metadata;
                 return this;
             }
 
