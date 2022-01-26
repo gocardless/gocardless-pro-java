@@ -54,6 +54,7 @@ public class EventService {
         private String billingRequest;
         private CreatedAt createdAt;
         private Include include;
+        private String instalmentSchedule;
         private String mandate;
         private String parentEvent;
         private String payerAuthorisation;
@@ -162,6 +163,15 @@ public class EventService {
          */
         public EventListRequest<S> withInclude(Include include) {
             this.include = include;
+            return this;
+        }
+
+        /**
+         * ID of an [instalment schedule](#core-endpoints-instalment-schedules). If specified, this
+         * endpoint will return all events for the given instalment schedule.
+         */
+        public EventListRequest<S> withInstalmentSchedule(String instalmentSchedule) {
+            this.instalmentSchedule = instalmentSchedule;
             return this;
         }
 
@@ -280,6 +290,9 @@ public class EventService {
             }
             if (include != null) {
                 params.put("include", include);
+            }
+            if (instalmentSchedule != null) {
+                params.put("instalment_schedule", instalmentSchedule);
             }
             if (mandate != null) {
                 params.put("mandate", mandate);
