@@ -157,10 +157,21 @@ public class RedirectFlow {
             // blank to prevent instantiation
         }
 
+        private String billingRequest;
         private String creditor;
         private String customer;
         private String customerBankAccount;
         private String mandate;
+
+        /**
+         * ID of [billing request](#billing-requests-billing-requests) that a redirect flow can
+         * create.<br />
+         * **Note**: The redirect flow will only create a billing request in the event the redirect
+         * flow is eligible to send the payer down this new and improved flow
+         */
+        public String getBillingRequest() {
+            return billingRequest;
+        }
 
         /**
          * The [creditor](#core-endpoints-creditors) for whom the mandate will be created. The
