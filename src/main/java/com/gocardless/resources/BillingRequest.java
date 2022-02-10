@@ -178,7 +178,8 @@ public class BillingRequest {
             COLLECT_CUSTOMER_DETAILS, @SerializedName("collect_bank_account")
             COLLECT_BANK_ACCOUNT, @SerializedName("bank_authorisation")
             BANK_AUTHORISATION, @SerializedName("confirm_payer_details")
-            CONFIRM_PAYER_DETAILS, @SerializedName("unknown")
+            CONFIRM_PAYER_DETAILS, @SerializedName("select_institution")
+            SELECT_INSTITUTION, @SerializedName("unknown")
             UNKNOWN
         }
 
@@ -221,7 +222,8 @@ public class BillingRequest {
             public enum Adapter {
                 @SerializedName("open_banking_gateway_pis")
                 OPEN_BANKING_GATEWAY_PIS, @SerializedName("plaid_ais")
-                PLAID_AIS, @SerializedName("unknown")
+                PLAID_AIS, @SerializedName("open_banking_gateway_ais")
+                OPEN_BANKING_GATEWAY_AIS, @SerializedName("unknown")
                 UNKNOWN
             }
 
