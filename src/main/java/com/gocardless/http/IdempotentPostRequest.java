@@ -53,6 +53,7 @@ public abstract class IdempotentPostRequest<T> extends PostRequest<T> {
         String requestIdempotencyKey;
         if (this.idempotencyKey == null) {
             requestIdempotencyKey = UUID.randomUUID().toString();
+            this.setIdempotencyKey(requestIdempotencyKey);
         } else {
             requestIdempotencyKey = this.idempotencyKey;
         }

@@ -125,6 +125,43 @@ public class IdempotentPostRequestTest {
         request.execute();
     }
 
+    @Test
+    public void shouldUseSameIdempotencyKeyForFurtherRequestsIfSet() throws Exception {
+        http.enqueueResponse(503, "fixtures/internal_error.json");
+        http.enqueueResponse(200, "fixtures/single.json");
+        HttpTestUtil.DummyItem result =
+                new DummyPostRequest().withHeader("Accept-Language", "fr-FR")
+                        .withIdempotencyKey("i-am-the-one-and-only").execute();
+        assertThat(result.stringField).isEqualTo("foo");
+        assertThat(result.intField).isEqualTo(123);
+        // This tests that we send our headers on the retry.
+        http.assertRequestMade("POST", "/dummy", "fixtures/single.json",
+                ImmutableMap.of("Authorization", "Bearer token", "Idempotency-Key",
+                        "i-am-the-one-and-only", "Accept-Language", "fr-FR"));
+        http.assertRequestMade("POST", "/dummy", "fixtures/single.json",
+                ImmutableMap.of("Authorization", "Bearer token", "Idempotency-Key",
+                        "i-am-the-one-and-only", "Accept-Language", "fr-FR"));
+    }
+
+    @Test
+    public void shouldUseSameIdempotencyKeyForFurtherRequestsIfNotSet() throws Exception {
+        http.enqueueResponse(503, "fixtures/internal_error.json");
+        http.enqueueResponse(200, "fixtures/single.json");
+        DummyPostRequest request = new DummyPostRequest().withHeader("Accept-Language", "fr-FR");
+        HttpTestUtil.DummyItem result = request.execute();
+        assertThat(result.stringField).isEqualTo("foo");
+        assertThat(result.intField).isEqualTo(123);
+        // This tests that we send our headers on the retry.
+        Map<String, String> headers = request.getHeaders();
+        String idempotencyKey = headers.get("Idempotency-Key");
+        http.assertRequestMade("POST", "/dummy", "fixtures/single.json",
+                ImmutableMap.of("Authorization", "Bearer token", "Idempotency-Key", idempotencyKey,
+                        "Accept-Language", "fr-FR"));
+        http.assertRequestMade("POST", "/dummy", "fixtures/single.json",
+                ImmutableMap.of("Authorization", "Bearer token", "Idempotency-Key", idempotencyKey,
+                        "Accept-Language", "fr-FR"));
+    }
+
     private class DummyPostRequest extends IdempotentPostRequest<HttpTestUtil.DummyItem> {
         private int intField = 123;
         private String stringField = "foo";
