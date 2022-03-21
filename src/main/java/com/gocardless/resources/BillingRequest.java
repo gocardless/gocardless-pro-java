@@ -178,7 +178,8 @@ public class BillingRequest {
             COLLECT_CUSTOMER_DETAILS, @SerializedName("collect_bank_account")
             COLLECT_BANK_ACCOUNT, @SerializedName("bank_authorisation")
             BANK_AUTHORISATION, @SerializedName("confirm_payer_details")
-            CONFIRM_PAYER_DETAILS, @SerializedName("unknown")
+            CONFIRM_PAYER_DETAILS, @SerializedName("select_institution")
+            SELECT_INSTITUTION, @SerializedName("unknown")
             UNKNOWN
         }
 
@@ -221,7 +222,8 @@ public class BillingRequest {
             public enum Adapter {
                 @SerializedName("open_banking_gateway_pis")
                 OPEN_BANKING_GATEWAY_PIS, @SerializedName("plaid_ais")
-                PLAID_AIS, @SerializedName("unknown")
+                PLAID_AIS, @SerializedName("open_banking_gateway_ais")
+                OPEN_BANKING_GATEWAY_AIS, @SerializedName("unknown")
                 UNKNOWN
             }
 
@@ -349,6 +351,7 @@ public class BillingRequest {
 
         private String currency;
         private Links links;
+        private Map<String, String> metadata;
         private String scheme;
         private Verify verify;
 
@@ -361,6 +364,14 @@ public class BillingRequest {
 
         public Links getLinks() {
             return links;
+        }
+
+        /**
+         * Key-value store of custom data. Up to 3 keys are permitted, with key names up to 50
+         * characters and values up to 500 characters.
+         */
+        public Map<String, String> getMetadata() {
+            return metadata;
         }
 
         /**
@@ -430,6 +441,7 @@ public class BillingRequest {
         private String currency;
         private String description;
         private Links links;
+        private Map<String, String> metadata;
         private String scheme;
 
         /**
@@ -449,7 +461,9 @@ public class BillingRequest {
         }
 
         /**
-         * [ISO 4217](http://en.wikipedia.org/wiki/ISO_4217#Active_codes) currency code.
+         * [ISO 4217](http://en.wikipedia.org/wiki/ISO_4217#Active_codes) currency code. `GBP` and
+         * `EUR` supported; `GBP` with your customers in the UK and for `EUR` with your customers in
+         * Germany only.
          */
         public String getCurrency() {
             return currency;
@@ -469,8 +483,19 @@ public class BillingRequest {
         }
 
         /**
-         * A Direct Debit scheme. Currently "ach", "bacs", "becs", "becs_nz", "betalingsservice",
-         * "pad" and "sepa_core" are supported.
+         * Key-value store of custom data. Up to 3 keys are permitted, with key names up to 50
+         * characters and values up to 500 characters.
+         */
+        public Map<String, String> getMetadata() {
+            return metadata;
+        }
+
+        /**
+         * (Optional) A scheme used for Open Banking payments. Currently `faster_payments` is
+         * supported in the UK (GBP) and `sepa_credit_transfer` and `sepa_instant_credit_transfer`
+         * are supported in Germany (EUR). In Germany, `sepa_credit_transfer` is used as the
+         * default. Please be aware that `sepa_instant_credit_transfer` may incur an additional fee
+         * for your customer.
          */
         public String getScheme() {
             return scheme;

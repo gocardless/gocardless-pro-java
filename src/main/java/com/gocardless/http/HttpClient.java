@@ -5,6 +5,7 @@ import static java.util.concurrent.TimeUnit.MILLISECONDS;
 import com.github.rholder.retry.*;
 import com.gocardless.GoCardlessException;
 import com.gocardless.errors.GoCardlessInternalException;
+import com.google.common.annotations.VisibleForTesting;
 import com.google.common.base.Throwables;
 import com.google.common.collect.ImmutableMap;
 import com.google.gson.Gson;
@@ -25,12 +26,16 @@ public class HttpClient {
      */
     public static final int MAX_RETRIES = 3;
     /**
+     * The amount of time to wait before retrying a failed request in milli seconds
+     */
+    public static final long WAIT_BETWEEN_RETRIES_IN_MILLI_SECONDS = 500;
+    /**
      * See http://tools.ietf.org/html/rfc7230#section-3.2.6.
      */
     private static final String DISALLOWED_USER_AGENT_CHARACTERS =
             "[^\\w!#$%&'\\*\\+\\-\\.\\^`\\|~]";
     private static final String USER_AGENT =
-            String.format("gocardless-pro-java/5.2.0 java/%s %s/%s %s/%s",
+            String.format("gocardless-pro-java/5.3.0 java/%s %s/%s %s/%s",
                     cleanUserAgentToken(System.getProperty("java.vm.specification.version")),
                     cleanUserAgentToken(System.getProperty("java.vm.name")),
                     cleanUserAgentToken(System.getProperty("java.version")),
@@ -43,7 +48,7 @@ public class HttpClient {
         ImmutableMap.Builder<String, String> builder = ImmutableMap.builder();
         builder.put("GoCardless-Version", "2015-07-06");
         builder.put("GoCardless-Client-Library", "gocardless-pro-java");
-        builder.put("GoCardless-Client-Version", "5.2.0");
+        builder.put("GoCardless-Client-Version", "5.3.0");
         HEADERS = builder.build();
     }
     private final OkHttpClient rawClient;
@@ -52,6 +57,8 @@ public class HttpClient {
     private final RequestWriter requestWriter;
     private final String credentials;
     private final boolean errorOnIdempotencyConflict;
+    private final int maxNoOfRetries;
+    private final long waitBetweenRetriesInMilliSeconds;
 
     /**
      * Constructor. Users of this library should not need to access this class directly - you should
@@ -64,7 +71,8 @@ public class HttpClient {
      *        to log requests with LoggingInterceptor).
      */
     public HttpClient(String accessToken, String baseUrl, OkHttpClient rawClient,
-            boolean errorOnIdempotencyConflict) {
+            boolean errorOnIdempotencyConflict, int maxNoOfRetries,
+            long waitBetweenRetriesInMilliSeconds) {
         this.rawClient = rawClient;
         this.urlFormatter = new UrlFormatter(baseUrl);
         Gson gson = GsonFactory.build();
@@ -72,10 +80,17 @@ public class HttpClient {
         this.requestWriter = new RequestWriter(gson);
         this.credentials = String.format("Bearer %s", accessToken);
         this.errorOnIdempotencyConflict = errorOnIdempotencyConflict;
+        this.maxNoOfRetries = maxNoOfRetries;
+        this.waitBetweenRetriesInMilliSeconds = waitBetweenRetriesInMilliSeconds;
     }
 
     public boolean isErrorOnIdempotencyConflict() {
         return this.errorOnIdempotencyConflict;
+    }
+
+    @VisibleForTesting
+    public int getMaxNoOfRetries() {
+        return this.maxNoOfRetries;
     }
 
     <T> T execute(ApiRequest<T> apiRequest) {
@@ -95,8 +110,9 @@ public class HttpClient {
         Retryer<T> retrier = RetryerBuilder.<T>newBuilder()
                 .retryIfExceptionOfType(GoCardlessNetworkException.class)
                 .retryIfExceptionOfType(GoCardlessInternalException.class)
-                .withWaitStrategy(WaitStrategies.fixedWait(500, MILLISECONDS))
-                .withStopStrategy(StopStrategies.stopAfterAttempt(MAX_RETRIES)).build();
+                .withWaitStrategy(WaitStrategies.fixedWait(this.waitBetweenRetriesInMilliSeconds,
+                        MILLISECONDS))
+                .withStopStrategy(StopStrategies.stopAfterAttempt(this.maxNoOfRetries)).build();
         Callable<T> executeOnce = new Callable<T>() {
             @Override
             public T call() throws Exception {
