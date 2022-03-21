@@ -51,6 +51,9 @@ public class GoCardlessClient {
         private SSLSocketFactory sslSocketFactory;
         private X509TrustManager trustManager;
         private boolean errorOnIdempotencyConflict;
+        private int maxNoOfRetries = HttpClient.MAX_RETRIES;
+        private long waitBetweenRetriesInMilliSeconds =
+                HttpClient.WAIT_BETWEEN_RETRIES_IN_MILLI_SECONDS;
 
         /**
          * Constructor. Users of this library will not need to access this constructor directly -
@@ -118,6 +121,32 @@ public class GoCardlessClient {
         }
 
         /**
+         * Configures the maximum number of times the client should retry in case of a failure
+         *
+         * @param maxNoOfRetries The maximum number of times that a request can be retried. maximum
+         *        is 3 times
+         */
+        public Builder withMaxNoOfRetries(int maxNoOfRetries) {
+            if (maxNoOfRetries > this.maxNoOfRetries) {
+                return this;
+            }
+            this.maxNoOfRetries = maxNoOfRetries;
+            return this;
+        }
+
+        /**
+         * Configures the fixed wait strategy time the client should wait before retrying a failed
+         * request
+         *
+         * @param maxNoOfRetries The amount of time to wait before retrying a failed request in
+         *        milli seconds
+         */
+        public Builder withWaitBetweenRetriesInMilliSeconds(long waitBetweenRetriesInMilliSeconds) {
+            this.waitBetweenRetriesInMilliSeconds = waitBetweenRetriesInMilliSeconds;
+            return this;
+        }
+
+        /**
          * Builds a configured instance of the GoCardlessClient
          */
         public GoCardlessClient build() {
@@ -127,8 +156,8 @@ public class GoCardlessClient {
             }
             OkHttpClient rawClient =
                     rawClientBuilder.addInterceptor(new LoggingInterceptor()).build();
-            HttpClient client =
-                    new HttpClient(accessToken, baseUrl, rawClient, errorOnIdempotencyConflict);
+            HttpClient client = new HttpClient(accessToken, baseUrl, rawClient,
+                    errorOnIdempotencyConflict, maxNoOfRetries, waitBetweenRetriesInMilliSeconds);
             return new GoCardlessClient(client);
         }
     }

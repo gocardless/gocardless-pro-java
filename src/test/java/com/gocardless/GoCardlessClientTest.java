@@ -6,6 +6,8 @@ import static com.gocardless.services.SubscriptionService.SubscriptionCreateRequ
 import static org.assertj.core.api.Assertions.assertThat;
 
 import com.gocardless.http.ApiResponse;
+import com.gocardless.http.GoCardlessNetworkException;
+import com.gocardless.http.HttpClient;
 import com.gocardless.http.ListResponse;
 import com.gocardless.http.MockHttp;
 import com.gocardless.resources.*;
@@ -18,6 +20,7 @@ import java.util.List;
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
+import org.junit.rules.ExpectedException;
 
 public class GoCardlessClientTest {
     private static final String ACCESS_TOKEN = "access-token";
@@ -315,5 +318,35 @@ public class GoCardlessClientTest {
         http.assertRequestMade("POST", "/block_by_ref",
                 "fixtures/client/create_blocks_by_ref_request.json",
                 ImmutableMap.of("Authorization", "Bearer " + ACCESS_TOKEN));
+    }
+
+    @Test
+    public void shouldDoCustomNoOfRetries() {
+        int noOfRetries = 2;
+        for (int i = 0; i < noOfRetries; i++) {
+            http.enqueueNetworkFailure();
+        }
+        client = GoCardlessClient.newBuilder(ACCESS_TOKEN).withBaseUrl(http.getBaseUrl())
+                .withMaxNoOfRetries(noOfRetries).build();
+        ExpectedException.none().expect(GoCardlessNetworkException.class);
+        client.customers().create().withHeader("Accept-Language", "fr-FR").withFamilyName("Osborne")
+                .withGivenName("Sharon").withAddressLine1("27 Acer Road").withAddressLine2("Apt 2")
+                .withCity("London").withPostalCode("E8 3GX").withCountryCode("GB");
+        assertThat(client.getHttpClient().getMaxNoOfRetries()).isEqualTo(noOfRetries);
+    }
+
+    @Test
+    public void shouldDoMaxNoOfRetries() {
+        int noOfRetries = 5;
+        for (int i = 0; i < noOfRetries; i++) {
+            http.enqueueNetworkFailure();
+        }
+        client = GoCardlessClient.newBuilder(ACCESS_TOKEN).withBaseUrl(http.getBaseUrl())
+                .withMaxNoOfRetries(noOfRetries).build();
+        ExpectedException.none().expect(GoCardlessNetworkException.class);
+        client.customers().create().withHeader("Accept-Language", "fr-FR").withFamilyName("Osborne")
+                .withGivenName("Sharon").withAddressLine1("27 Acer Road").withAddressLine2("Apt 2")
+                .withCity("London").withPostalCode("E8 3GX").withCountryCode("GB");
+        assertThat(client.getHttpClient().getMaxNoOfRetries()).isEqualTo(HttpClient.MAX_RETRIES);
     }
 }

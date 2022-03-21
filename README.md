@@ -36,8 +36,8 @@ String accessToken = "AO00000123";
 GoCardlessClient client = GoCardlessClient.newBuilder(accessToken).build();
 ```
 
-Optionally, the client can be customised with an environment, base URL, proxy and/or SSL socket factory
-by calling `.withX` methods on the `Builder`:
+Optionally, the client can be customised with an environment, base URL, proxy and/or SSL socket factory, custom no of retries,
+wait time between retries by calling `.withX` methods on the `Builder`, max no of allowed retries are 3 :
 
 ```java
 import com.gocardless.GoCardlessClient;
@@ -49,6 +49,8 @@ Proxy proxy = new Proxy(Proxy.Type.HTTP, new InetSocketAddress("127.0.0.1", 8080
 
 GoCardlessClient client = GoCardlessClient.newBuilder(accessToken)
     .withEnvironment(GoCardlessClient.Environment.SANDBOX)
+    .withMaxNoOfRetries(2)
+    .withWaitBetweenRetriesInMilliSeconds(200)
     .withProxy(proxy)
     .build();
 ```
