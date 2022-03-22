@@ -97,7 +97,7 @@ public class BillingRequestFlow {
     }
 
     /**
-     * Session token populated when responding to the initalise action
+     * Session token populated when responding to the initialise action
      */
     public String getSessionToken() {
         return sessionToken;

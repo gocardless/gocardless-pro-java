@@ -6,7 +6,10 @@ import java.util.List;
  * Represents a institution resource returned from the API.
  *
  * Institutions that are supported when creating [Bank
- * Authorisations](#billing-requests-bank-authorisations).
+ * Authorisations](#billing-requests-bank-authorisations) for a particular country or purpose.
+ * 
+ * Not all institutions support both Payment Initiation (PIS) and Account Information (AIS)
+ * services.
  */
 public class Institution {
     private Institution() {
