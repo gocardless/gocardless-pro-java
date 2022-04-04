@@ -1,7 +1,5 @@
 package com.gocardless.resources;
 
-import java.util.List;
-
 /**
  * Represents a institution resource returned from the API.
  *
@@ -21,7 +19,6 @@ public class Institution {
     private String id;
     private String logoUrl;
     private String name;
-    private List<String> roles;
 
     /**
      * [ISO
@@ -58,12 +55,5 @@ public class Institution {
      */
     public String getName() {
         return name;
-    }
-
-    /**
-     * Assigned roles for an institution
-     */
-    public List<String> getRoles() {
-        return roles;
     }
 }
