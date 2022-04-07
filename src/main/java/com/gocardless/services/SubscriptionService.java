@@ -960,7 +960,7 @@ public class SubscriptionService {
 
         /**
          * The number of cycles to pause a subscription for. A cycle is one duration of `interval`
-         * and `interval_unit`.
+         * and `interval_unit`. This should be a non zero positive value.
          */
         public SubscriptionPauseRequest withPauseCycles(Integer pauseCycles) {
             this.pauseCycles = pauseCycles;
