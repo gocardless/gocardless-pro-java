@@ -115,6 +115,14 @@ public class BillingRequestService {
     }
 
     /**
+     * Triggers a fallback from the open-banking flow to direct debit. Note, the billing request
+     * must have fallback enabled.
+     */
+    public BillingRequestFallbackRequest fallback(String identity) {
+        return new BillingRequestFallbackRequest(httpClient, identity);
+    }
+
+    /**
      * Request class for {@link BillingRequestService#list }.
      *
      * Returns a [cursor-paginated](#api-usage-cursor-pagination) list of your billing requests.
@@ -229,10 +237,19 @@ public class BillingRequestService {
      */
     public static final class BillingRequestCreateRequest
             extends IdempotentPostRequest<BillingRequest> {
+        private Boolean fallbackEnabled;
         private Links links;
         private MandateRequest mandateRequest;
         private Map<String, String> metadata;
         private PaymentRequest paymentRequest;
+
+        /**
+         * If true, this billing request can fallback from instant payment to direct debit.
+         */
+        public BillingRequestCreateRequest withFallbackEnabled(Boolean fallbackEnabled) {
+            this.fallbackEnabled = fallbackEnabled;
+            return this;
+        }
 
         public BillingRequestCreateRequest withLinks(Links links) {
             this.links = links;
@@ -1632,6 +1649,59 @@ public class BillingRequestService {
         @Override
         protected String getPathTemplate() {
             return "billing_requests/:identity/actions/notify";
+        }
+
+        @Override
+        protected String getEnvelope() {
+            return "billing_requests";
+        }
+
+        @Override
+        protected Class<BillingRequest> getResponseClass() {
+            return BillingRequest.class;
+        }
+
+        @Override
+        protected boolean hasBody() {
+            return true;
+        }
+
+        @Override
+        protected String getRequestEnvelope() {
+            return "data";
+        }
+    }
+
+    /**
+     * Request class for {@link BillingRequestService#fallback }.
+     *
+     * Triggers a fallback from the open-banking flow to direct debit. Note, the billing request
+     * must have fallback enabled.
+     */
+    public static final class BillingRequestFallbackRequest extends PostRequest<BillingRequest> {
+        @PathParam
+        private final String identity;
+
+        private BillingRequestFallbackRequest(HttpClient httpClient, String identity) {
+            super(httpClient);
+            this.identity = identity;
+        }
+
+        public BillingRequestFallbackRequest withHeader(String headerName, String headerValue) {
+            this.addHeader(headerName, headerValue);
+            return this;
+        }
+
+        @Override
+        protected Map<String, String> getPathParams() {
+            ImmutableMap.Builder<String, String> params = ImmutableMap.builder();
+            params.put("identity", identity);
+            return params.build();
+        }
+
+        @Override
+        protected String getPathTemplate() {
+            return "billing_requests/:identity/actions/fallback";
         }
 
         @Override

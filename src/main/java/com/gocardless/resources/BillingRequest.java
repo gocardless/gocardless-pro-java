@@ -22,6 +22,7 @@ public class BillingRequest {
 
     private List<Action> actions;
     private String createdAt;
+    private Boolean fallbackEnabled;
     private String id;
     private Links links;
     private MandateRequest mandateRequest;
@@ -42,6 +43,13 @@ public class BillingRequest {
      */
     public String getCreatedAt() {
         return createdAt;
+    }
+
+    /**
+     * If true, this billing request can fallback from instant payment to direct debit.
+     */
+    public Boolean getFallbackEnabled() {
+        return fallbackEnabled;
     }
 
     /**
