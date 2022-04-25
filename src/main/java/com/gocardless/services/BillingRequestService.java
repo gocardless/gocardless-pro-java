@@ -32,7 +32,7 @@ public class BillingRequestService {
     }
 
     /**
-     * Returns a [cursor-paginated](#api-usage-cursor-pagination) list of your billing_requests.
+     * Returns a [cursor-paginated](#api-usage-cursor-pagination) list of your billing requests.
      */
     public BillingRequestListRequest<ListResponse<BillingRequest>> list() {
         return new BillingRequestListRequest<>(httpClient,
@@ -92,8 +92,8 @@ public class BillingRequestService {
     }
 
     /**
-     * This is needed when you have mandate_request. As a scheme compliance rule we are required to
-     * allow the payer to crosscheck the details entered by them and confirm it.
+     * This is needed when you have a mandate request. As a scheme compliance rule we are required
+     * to allow the payer to crosscheck the details entered by them and confirm it.
      */
     public BillingRequestConfirmPayerDetailsRequest confirmPayerDetails(String identity) {
         return new BillingRequestConfirmPayerDetailsRequest(httpClient, identity);
@@ -115,9 +115,17 @@ public class BillingRequestService {
     }
 
     /**
+     * Triggers a fallback from the open-banking flow to direct debit. Note, the billing request
+     * must have fallback enabled.
+     */
+    public BillingRequestFallbackRequest fallback(String identity) {
+        return new BillingRequestFallbackRequest(httpClient, identity);
+    }
+
+    /**
      * Request class for {@link BillingRequestService#list }.
      *
-     * Returns a [cursor-paginated](#api-usage-cursor-pagination) list of your billing_requests.
+     * Returns a [cursor-paginated](#api-usage-cursor-pagination) list of your billing requests.
      */
     public static final class BillingRequestListRequest<S> extends ListRequest<S, BillingRequest> {
         private String createdAt;
@@ -169,10 +177,10 @@ public class BillingRequestService {
         /**
          * One of:
          * <ul>
-         * <li>`pending`: the billing_request is pending and can be used</li>
-         * <li>`ready_to_fulfil`: the billing_request is ready to fulfil</li>
-         * <li>`fulfilled`: the billing_request has been fulfilled and a payment created</li>
-         * <li>`cancelled`: the billing_request has been cancelled and cannot be used</li>
+         * <li>`pending`: the billing request is pending and can be used</li>
+         * <li>`ready_to_fulfil`: the billing request is ready to fulfil</li>
+         * <li>`fulfilled`: the billing request has been fulfilled and a payment created</li>
+         * <li>`cancelled`: the billing request has been cancelled and cannot be used</li>
          * </ul>
          */
         public BillingRequestListRequest<S> withStatus(String status) {
@@ -229,10 +237,19 @@ public class BillingRequestService {
      */
     public static final class BillingRequestCreateRequest
             extends IdempotentPostRequest<BillingRequest> {
+        private Boolean fallbackEnabled;
         private Links links;
         private MandateRequest mandateRequest;
         private Map<String, String> metadata;
         private PaymentRequest paymentRequest;
+
+        /**
+         * If true, this billing request can fallback from instant payment to direct debit.
+         */
+        public BillingRequestCreateRequest withFallbackEnabled(Boolean fallbackEnabled) {
+            this.fallbackEnabled = fallbackEnabled;
+            return this;
+        }
 
         public BillingRequestCreateRequest withLinks(Links links) {
             this.links = links;
@@ -315,6 +332,37 @@ public class BillingRequestService {
                 mandateRequest = new MandateRequest();
             }
             mandateRequest.withScheme(scheme);
+            return this;
+        }
+
+        /**
+         * Verification preference for the mandate. One of:
+         * <ul>
+         * <li>`minimum`: only verify if absolutely required, such as when part of scheme rules</li>
+         * <li>`recommended`: in addition to `minimum`, use the GoCardless payment intelligence
+         * solution to decide if a payer should be verified</li>
+         * <li>`when_available`: if verification mechanisms are available, use them</li>
+         * <li>`always`: as `when_available`, but fail to create the Billing Request if a mechanism
+         * isn't available</li>
+         * </ul>
+         * 
+         * By default, all Billing Requests use the `recommended` verification preference. It uses
+         * GoCardless payment intelligence solution to determine if a payer is fraudulent or not.
+         * The verification mechanism is based on the response and the payer may be asked to verify
+         * themselves. If the feature is not available, `recommended` behaves like `minimum`.
+         * 
+         * If you never wish to take advantage of our reduced risk products and Verified Mandates as
+         * they are released in new schemes, please use the `minimum` verification preference.
+         * 
+         * See [Billing Requests: Creating Verified
+         * Mandates](https://developer.gocardless.com/getting-started/billing-requests/verified-mandates/)
+         * for more information.
+         */
+        public BillingRequestCreateRequest withMandateRequestVerify(MandateRequest.Verify verify) {
+            if (mandateRequest == null) {
+                mandateRequest = new MandateRequest();
+            }
+            mandateRequest.withVerify(verify);
             return this;
         }
 
@@ -503,6 +551,7 @@ public class BillingRequestService {
             private String currency;
             private Map<String, String> metadata;
             private String scheme;
+            private Verify verify;
 
             /**
              * [ISO 4217](http://en.wikipedia.org/wiki/ISO_4217#Active_codes) currency code.
@@ -528,6 +577,51 @@ public class BillingRequestService {
             public MandateRequest withScheme(String scheme) {
                 this.scheme = scheme;
                 return this;
+            }
+
+            /**
+             * Verification preference for the mandate. One of:
+             * <ul>
+             * <li>`minimum`: only verify if absolutely required, such as when part of scheme
+             * rules</li>
+             * <li>`recommended`: in addition to `minimum`, use the GoCardless payment intelligence
+             * solution to decide if a payer should be verified</li>
+             * <li>`when_available`: if verification mechanisms are available, use them</li>
+             * <li>`always`: as `when_available`, but fail to create the Billing Request if a
+             * mechanism isn't available</li>
+             * </ul>
+             * 
+             * By default, all Billing Requests use the `recommended` verification preference. It
+             * uses GoCardless payment intelligence solution to determine if a payer is fraudulent
+             * or not. The verification mechanism is based on the response and the payer may be
+             * asked to verify themselves. If the feature is not available, `recommended` behaves
+             * like `minimum`.
+             * 
+             * If you never wish to take advantage of our reduced risk products and Verified
+             * Mandates as they are released in new schemes, please use the `minimum` verification
+             * preference.
+             * 
+             * See [Billing Requests: Creating Verified
+             * Mandates](https://developer.gocardless.com/getting-started/billing-requests/verified-mandates/)
+             * for more information.
+             */
+            public MandateRequest withVerify(Verify verify) {
+                this.verify = verify;
+                return this;
+            }
+
+            public enum Verify {
+                @SerializedName("minimum")
+                MINIMUM, @SerializedName("recommended")
+                RECOMMENDED, @SerializedName("when_available")
+                WHEN_AVAILABLE, @SerializedName("always")
+                ALWAYS, @SerializedName("unknown")
+                UNKNOWN;
+
+                @Override
+                public String toString() {
+                    return name().toLowerCase();
+                }
             }
         }
 
@@ -1359,8 +1453,8 @@ public class BillingRequestService {
     /**
      * Request class for {@link BillingRequestService#confirmPayerDetails }.
      *
-     * This is needed when you have mandate_request. As a scheme compliance rule we are required to
-     * allow the payer to crosscheck the details entered by them and confirm it.
+     * This is needed when you have a mandate request. As a scheme compliance rule we are required
+     * to allow the payer to crosscheck the details entered by them and confirm it.
      */
     public static final class BillingRequestConfirmPayerDetailsRequest
             extends PostRequest<BillingRequest> {
@@ -1555,6 +1649,59 @@ public class BillingRequestService {
         @Override
         protected String getPathTemplate() {
             return "billing_requests/:identity/actions/notify";
+        }
+
+        @Override
+        protected String getEnvelope() {
+            return "billing_requests";
+        }
+
+        @Override
+        protected Class<BillingRequest> getResponseClass() {
+            return BillingRequest.class;
+        }
+
+        @Override
+        protected boolean hasBody() {
+            return true;
+        }
+
+        @Override
+        protected String getRequestEnvelope() {
+            return "data";
+        }
+    }
+
+    /**
+     * Request class for {@link BillingRequestService#fallback }.
+     *
+     * Triggers a fallback from the open-banking flow to direct debit. Note, the billing request
+     * must have fallback enabled.
+     */
+    public static final class BillingRequestFallbackRequest extends PostRequest<BillingRequest> {
+        @PathParam
+        private final String identity;
+
+        private BillingRequestFallbackRequest(HttpClient httpClient, String identity) {
+            super(httpClient);
+            this.identity = identity;
+        }
+
+        public BillingRequestFallbackRequest withHeader(String headerName, String headerValue) {
+            this.addHeader(headerName, headerValue);
+            return this;
+        }
+
+        @Override
+        protected Map<String, String> getPathParams() {
+            ImmutableMap.Builder<String, String> params = ImmutableMap.builder();
+            params.put("identity", identity);
+            return params.build();
+        }
+
+        @Override
+        protected String getPathTemplate() {
+            return "billing_requests/:identity/actions/fallback";
         }
 
         @Override

@@ -1,12 +1,13 @@
 package com.gocardless.resources;
 
-import java.util.List;
-
 /**
  * Represents a institution resource returned from the API.
  *
  * Institutions that are supported when creating [Bank
- * Authorisations](#billing-requests-bank-authorisations).
+ * Authorisations](#billing-requests-bank-authorisations) for a particular country or purpose.
+ * 
+ * Not all institutions support both Payment Initiation (PIS) and Account Information (AIS)
+ * services.
  */
 public class Institution {
     private Institution() {
@@ -18,7 +19,6 @@ public class Institution {
     private String id;
     private String logoUrl;
     private String name;
-    private List<String> roles;
 
     /**
      * [ISO
@@ -55,12 +55,5 @@ public class Institution {
      */
     public String getName() {
         return name;
-    }
-
-    /**
-     * Assigned roles for an institution
-     */
-    public List<String> getRoles() {
-        return roles;
     }
 }

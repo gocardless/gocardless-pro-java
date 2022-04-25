@@ -11,7 +11,10 @@ import java.util.Map;
  * Service class for working with institution resources.
  *
  * Institutions that are supported when creating [Bank
- * Authorisations](#billing-requests-bank-authorisations).
+ * Authorisations](#billing-requests-bank-authorisations) for a particular country or purpose.
+ * 
+ * Not all institutions support both Payment Initiation (PIS) and Account Information (AIS)
+ * services.
  */
 public class InstitutionService {
     private final HttpClient httpClient;
@@ -25,7 +28,7 @@ public class InstitutionService {
     }
 
     /**
-     * Returns a list of all supported institutions.
+     * Returns a list of supported institutions.
      */
     public InstitutionListRequest<ListResponse<Institution>> list() {
         return new InstitutionListRequest<>(httpClient, ListRequest.<Institution>pagingExecutor());
@@ -39,7 +42,7 @@ public class InstitutionService {
     /**
      * Request class for {@link InstitutionService#list }.
      *
-     * Returns a list of all supported institutions.
+     * Returns a list of supported institutions.
      */
     public static final class InstitutionListRequest<S> extends ListRequest<S, Institution> {
         private String countryCode;
