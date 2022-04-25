@@ -46,7 +46,8 @@ public class BillingRequest {
     }
 
     /**
-     * If true, this billing request can fallback from instant payment to direct debit.
+     * (Optional) If true, this billing request can fallback from instant payment to direct debit.
+     * Should not be set if GoCardless payment intelligence feature is used.
      */
     public Boolean getFallbackEnabled() {
         return fallbackEnabled;
