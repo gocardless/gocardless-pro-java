@@ -251,6 +251,10 @@ public class BillingRequestService {
         /**
          * (Optional) If true, this billing request can fallback from instant payment to direct
          * debit. Should not be set if GoCardless payment intelligence feature is used.
+         * 
+         * See [Billing Requests: Retain customers with
+         * Fallbacks](https://developer.gocardless.com/getting-started/billing-requests/retain-customers-with-fallbacks/)
+         * for more information.
          */
         public BillingRequestCreateRequest withFallbackEnabled(Boolean fallbackEnabled) {
             this.fallbackEnabled = fallbackEnabled;
