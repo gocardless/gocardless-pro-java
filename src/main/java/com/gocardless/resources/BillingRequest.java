@@ -98,6 +98,7 @@ public class BillingRequest {
      * One of:
      * <ul>
      * <li>`pending`: the billing request is pending and can be used</li>
+     * <li>`authorised_with_bank`: the billing request is authorised with bank</li>
      * <li>`ready_to_fulfil`: the billing request is ready to fulfil</li>
      * <li>`fulfilled`: the billing request has been fulfilled and a payment created</li>
      * <li>`cancelled`: the billing request has been cancelled and cannot be used</li>
@@ -109,7 +110,8 @@ public class BillingRequest {
 
     public enum Status {
         @SerializedName("pending")
-        PENDING, @SerializedName("ready_to_fulfil")
+        PENDING, @SerializedName("authorised_with_bank")
+        AUTHORISED_WITH_BANK, @SerializedName("ready_to_fulfil")
         READY_TO_FULFIL, @SerializedName("fulfilled")
         FULFILLED, @SerializedName("cancelled")
         CANCELLED, @SerializedName("unknown")
