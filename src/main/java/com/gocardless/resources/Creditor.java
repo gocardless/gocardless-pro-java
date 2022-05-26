@@ -450,7 +450,8 @@ public class Creditor {
             PAD, @SerializedName("sepa")
             SEPA, @SerializedName("sepa_credit_transfer")
             SEPA_CREDIT_TRANSFER, @SerializedName("sepa_instant_credit_transfer")
-            SEPA_INSTANT_CREDIT_TRANSFER, @SerializedName("unknown")
+            SEPA_INSTANT_CREDIT_TRANSFER, @SerializedName("pay_to")
+            PAY_TO, @SerializedName("unknown")
             UNKNOWN
         }
     }
