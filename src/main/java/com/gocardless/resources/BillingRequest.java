@@ -123,6 +123,7 @@ public class BillingRequest {
             // blank to prevent instantiation
         }
 
+        private List<String> availableCurrencies;
         private BankAuthorisation bankAuthorisation;
         private CollectCustomerDetails collectCustomerDetails;
         private List<String> completesActions;
@@ -130,6 +131,13 @@ public class BillingRequest {
         private List<String> requiresActions;
         private Status status;
         private Type type;
+
+        /**
+         * List of currencies the current mandate supports
+         */
+        public List<String> getAvailableCurrencies() {
+            return availableCurrencies;
+        }
 
         /**
          * Describes the behaviour of bank authorisations, for the bank_authorisation action
@@ -196,6 +204,26 @@ public class BillingRequest {
             CONFIRM_PAYER_DETAILS, @SerializedName("select_institution")
             SELECT_INSTITUTION, @SerializedName("unknown")
             UNKNOWN
+        }
+
+        /**
+         * Represents a available currency resource returned from the API.
+         *
+         * List of currencies the current mandate supports
+         */
+        public static class AvailableCurrencies {
+            private AvailableCurrencies() {
+                // blank to prevent instantiation
+            }
+
+            private String currency;
+
+            /**
+             * [ISO 4217](http://en.wikipedia.org/wiki/ISO_4217#Active_codes) currency code.
+             */
+            public String getCurrency() {
+                return currency;
+            }
         }
 
         /**
