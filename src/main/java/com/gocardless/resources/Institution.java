@@ -14,11 +14,21 @@ public class Institution {
         // blank to prevent instantiation
     }
 
+    private Boolean bankRedirect;
     private String countryCode;
     private String iconUrl;
     private String id;
     private String logoUrl;
     private String name;
+
+    /**
+     * Flag to show if the institution supports redirection to its authorisation flow or if a
+     * provider's one is being used. The bank authorisation screen on the UI is visible based on
+     * this property.
+     */
+    public Boolean getBankRedirect() {
+        return bankRedirect;
+    }
 
     /**
      * [ISO
