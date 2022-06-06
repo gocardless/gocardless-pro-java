@@ -267,7 +267,8 @@ public class BillingRequest {
                 OPEN_BANKING_GATEWAY_PIS, @SerializedName("plaid_ais")
                 PLAID_AIS, @SerializedName("open_banking_gateway_ais")
                 OPEN_BANKING_GATEWAY_AIS, @SerializedName("bankid_ais")
-                BANKID_AIS, @SerializedName("unknown")
+                BANKID_AIS, @SerializedName("bank_pay_recurring")
+                BANK_PAY_RECURRING, @SerializedName("unknown")
                 UNKNOWN
             }
 
