@@ -19,6 +19,7 @@ public class BillingRequestFlow {
     private String id;
     private Links links;
     private Boolean lockBankAccount;
+    private Boolean lockCurrency;
     private Boolean lockCustomerDetails;
     private String redirectUri;
     private String sessionToken;
@@ -78,6 +79,13 @@ public class BillingRequestFlow {
      */
     public Boolean getLockBankAccount() {
         return lockBankAccount;
+    }
+
+    /**
+     * If true, the payer will not be able to edit their currency after its been set for the flow.
+     */
+    public Boolean getLockCurrency() {
+        return lockCurrency;
     }
 
     /**

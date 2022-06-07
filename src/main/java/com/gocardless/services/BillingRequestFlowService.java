@@ -49,6 +49,7 @@ public class BillingRequestFlowService {
         private String exitUri;
         private Links links;
         private Boolean lockBankAccount;
+        private Boolean lockCurrency;
         private Boolean lockCustomerDetails;
         private String redirectUri;
         private Boolean showRedirectButtons;
@@ -94,6 +95,15 @@ public class BillingRequestFlowService {
          */
         public BillingRequestFlowCreateRequest withLockBankAccount(Boolean lockBankAccount) {
             this.lockBankAccount = lockBankAccount;
+            return this;
+        }
+
+        /**
+         * If true, the payer will not be able to edit their currency after its been set for the
+         * flow.
+         */
+        public BillingRequestFlowCreateRequest withLockCurrency(Boolean lockCurrency) {
+            this.lockCurrency = lockCurrency;
             return this;
         }
 
