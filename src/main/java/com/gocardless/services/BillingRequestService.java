@@ -97,6 +97,15 @@ public class BillingRequestService {
     }
 
     /**
+     * This will allow for the updating of the currency and subsequently the scheme if needed for a
+     * billing request this will only be available for mandate only flows, it will not support
+     * payments requests or plans
+     */
+    public BillingRequestChooseCurrencyRequest chooseCurrency(String identity) {
+        return new BillingRequestChooseCurrencyRequest(httpClient, identity);
+    }
+
+    /**
      * This is needed when you have a mandate request. As a scheme compliance rule we are required
      * to allow the payer to crosscheck the details entered by them and confirm it.
      */
@@ -1443,6 +1452,94 @@ public class BillingRequestService {
         @Override
         protected String getPathTemplate() {
             return "billing_requests/:identity/actions/fulfil";
+        }
+
+        @Override
+        protected String getEnvelope() {
+            return "billing_requests";
+        }
+
+        @Override
+        protected Class<BillingRequest> getResponseClass() {
+            return BillingRequest.class;
+        }
+
+        @Override
+        protected boolean hasBody() {
+            return true;
+        }
+
+        @Override
+        protected String getRequestEnvelope() {
+            return "data";
+        }
+    }
+
+    /**
+     * Request class for {@link BillingRequestService#chooseCurrency }.
+     *
+     * This will allow for the updating of the currency and subsequently the scheme if needed for a
+     * billing request this will only be available for mandate only flows, it will not support
+     * payments requests or plans
+     */
+    public static final class BillingRequestChooseCurrencyRequest
+            extends PostRequest<BillingRequest> {
+        @PathParam
+        private final String identity;
+        private String currency;
+        private Map<String, String> metadata;
+
+        /**
+         * [ISO 4217](http://en.wikipedia.org/wiki/ISO_4217#Active_codes) currency code. Currently
+         * "AUD", "CAD", "DKK", "EUR", "GBP", "NZD", "SEK" and "USD" are supported.
+         */
+        public BillingRequestChooseCurrencyRequest withCurrency(String currency) {
+            this.currency = currency;
+            return this;
+        }
+
+        /**
+         * Key-value store of custom data. Up to 3 keys are permitted, with key names up to 50
+         * characters and values up to 500 characters.
+         */
+        public BillingRequestChooseCurrencyRequest withMetadata(Map<String, String> metadata) {
+            this.metadata = metadata;
+            return this;
+        }
+
+        /**
+         * Key-value store of custom data. Up to 3 keys are permitted, with key names up to 50
+         * characters and values up to 500 characters.
+         */
+        public BillingRequestChooseCurrencyRequest withMetadata(String key, String value) {
+            if (metadata == null) {
+                metadata = new HashMap<>();
+            }
+            metadata.put(key, value);
+            return this;
+        }
+
+        private BillingRequestChooseCurrencyRequest(HttpClient httpClient, String identity) {
+            super(httpClient);
+            this.identity = identity;
+        }
+
+        public BillingRequestChooseCurrencyRequest withHeader(String headerName,
+                String headerValue) {
+            this.addHeader(headerName, headerValue);
+            return this;
+        }
+
+        @Override
+        protected Map<String, String> getPathParams() {
+            ImmutableMap.Builder<String, String> params = ImmutableMap.builder();
+            params.put("identity", identity);
+            return params.build();
+        }
+
+        @Override
+        protected String getPathTemplate() {
+            return "billing_requests/:identity/actions/choose_currency";
         }
 
         @Override
