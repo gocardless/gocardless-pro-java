@@ -313,6 +313,7 @@ public class BillingRequest {
         private String customerBillingDetail;
         private String mandateRequest;
         private String mandateRequestMandate;
+        private String organisation;
         private String paymentRequest;
         private String paymentRequestPayment;
 
@@ -366,6 +367,13 @@ public class BillingRequest {
          */
         public String getMandateRequestMandate() {
             return mandateRequestMandate;
+        }
+
+        /**
+         * ID of the associated organisation.
+         */
+        public String getOrganisation() {
+            return organisation;
         }
 
         /**
