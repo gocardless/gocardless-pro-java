@@ -953,6 +953,20 @@ public class BillingRequestService {
         }
 
         /**
+         * For ACH customers only. Required for ACH customers. A string containing the IP address of
+         * the payer to whom the mandate belongs (i.e. as a result of their completion of a mandate
+         * setup flow in their browser).
+         */
+        public BillingRequestCollectCustomerDetailsRequest withCustomerBillingDetailIpAddress(
+                String ipAddress) {
+            if (customerBillingDetail == null) {
+                customerBillingDetail = new CustomerBillingDetail();
+            }
+            customerBillingDetail.withIpAddress(ipAddress);
+            return this;
+        }
+
+        /**
          * The customer's postal code.
          */
         public BillingRequestCollectCustomerDetailsRequest withCustomerBillingDetailPostalCode(
@@ -1120,6 +1134,7 @@ public class BillingRequestService {
             private String city;
             private String countryCode;
             private String danishIdentityNumber;
+            private String ipAddress;
             private String postalCode;
             private String region;
             private String swedishIdentityNumber;
@@ -1171,6 +1186,16 @@ public class BillingRequestService {
              */
             public CustomerBillingDetail withDanishIdentityNumber(String danishIdentityNumber) {
                 this.danishIdentityNumber = danishIdentityNumber;
+                return this;
+            }
+
+            /**
+             * For ACH customers only. Required for ACH customers. A string containing the IP
+             * address of the payer to whom the mandate belongs (i.e. as a result of their
+             * completion of a mandate setup flow in their browser).
+             */
+            public CustomerBillingDetail withIpAddress(String ipAddress) {
+                this.ipAddress = ipAddress;
                 return this;
             }
 
