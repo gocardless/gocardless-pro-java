@@ -12,8 +12,10 @@ import java.util.Map;
  * Service class for working with event resources.
  *
  * Events are stored for all webhooks. An event refers to a resource which has been updated, for
- * example a payment which has been collected, or a mandate which has been transferred. See
- * [here](#event-actions) for a complete list of event types.
+ * example a payment which has been collected, or a mandate which has been transferred. Event
+ * creation is an asynchronous process, so it can take some time between an action occurring and its
+ * corresponding event getting included in API responses. See [here](#event-actions) for a complete
+ * list of event types.
  */
 public class EventService {
     private final HttpClient httpClient;

@@ -19,6 +19,7 @@ public class BillingRequestFlow {
     private String id;
     private Links links;
     private Boolean lockBankAccount;
+    private Boolean lockCurrency;
     private Boolean lockCustomerDetails;
     private String redirectUri;
     private String sessionToken;
@@ -78,6 +79,15 @@ public class BillingRequestFlow {
      */
     public Boolean getLockBankAccount() {
         return lockBankAccount;
+    }
+
+    /**
+     * If true, the payer will not be able to change their currency/scheme manually within the flow.
+     * Note that this only applies to the mandate only flows - currency/scheme can never be changed
+     * when there is a specified subscription or payment.
+     */
+    public Boolean getLockCurrency() {
+        return lockCurrency;
     }
 
     /**

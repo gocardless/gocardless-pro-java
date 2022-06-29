@@ -49,6 +49,7 @@ public class BillingRequestFlowService {
         private String exitUri;
         private Links links;
         private Boolean lockBankAccount;
+        private Boolean lockCurrency;
         private Boolean lockCustomerDetails;
         private String redirectUri;
         private Boolean showRedirectButtons;
@@ -94,6 +95,16 @@ public class BillingRequestFlowService {
          */
         public BillingRequestFlowCreateRequest withLockBankAccount(Boolean lockBankAccount) {
             this.lockBankAccount = lockBankAccount;
+            return this;
+        }
+
+        /**
+         * If true, the payer will not be able to change their currency/scheme manually within the
+         * flow. Note that this only applies to the mandate only flows - currency/scheme can never
+         * be changed when there is a specified subscription or payment.
+         */
+        public BillingRequestFlowCreateRequest withLockCurrency(Boolean lockCurrency) {
+            this.lockCurrency = lockCurrency;
             return this;
         }
 

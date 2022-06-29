@@ -46,7 +46,12 @@ public class BillingRequest {
     }
 
     /**
-     * If true, this billing request can fallback from instant payment to direct debit.
+     * (Optional) If true, this billing request can fallback from instant payment to direct debit.
+     * Should not be set if GoCardless payment intelligence feature is used.
+     * 
+     * See [Billing Requests: Retain customers with
+     * Fallbacks](https://developer.gocardless.com/getting-started/billing-requests/retain-customers-with-fallbacks/)
+     * for more information.
      */
     public Boolean getFallbackEnabled() {
         return fallbackEnabled;
@@ -94,6 +99,7 @@ public class BillingRequest {
      * <ul>
      * <li>`pending`: the billing request is pending and can be used</li>
      * <li>`ready_to_fulfil`: the billing request is ready to fulfil</li>
+     * <li>`fulfilling`: the billing request is currently undergoing fulfilment</li>
      * <li>`fulfilled`: the billing request has been fulfilled and a payment created</li>
      * <li>`cancelled`: the billing request has been cancelled and cannot be used</li>
      * </ul>
@@ -105,7 +111,8 @@ public class BillingRequest {
     public enum Status {
         @SerializedName("pending")
         PENDING, @SerializedName("ready_to_fulfil")
-        READY_TO_FULFIL, @SerializedName("fulfilled")
+        READY_TO_FULFIL, @SerializedName("fulfilling")
+        FULFILLING, @SerializedName("fulfilled")
         FULFILLED, @SerializedName("cancelled")
         CANCELLED, @SerializedName("unknown")
         UNKNOWN
@@ -116,6 +123,7 @@ public class BillingRequest {
             // blank to prevent instantiation
         }
 
+        private List<String> availableCurrencies;
         private BankAuthorisation bankAuthorisation;
         private CollectCustomerDetails collectCustomerDetails;
         private List<String> completesActions;
@@ -123,6 +131,13 @@ public class BillingRequest {
         private List<String> requiresActions;
         private Status status;
         private Type type;
+
+        /**
+         * List of currencies the current mandate supports
+         */
+        public List<String> getAvailableCurrencies() {
+            return availableCurrencies;
+        }
 
         /**
          * Describes the behaviour of bank authorisations, for the bank_authorisation action
@@ -192,6 +207,26 @@ public class BillingRequest {
         }
 
         /**
+         * Represents a available currency resource returned from the API.
+         *
+         * List of currencies the current mandate supports
+         */
+        public static class AvailableCurrencies {
+            private AvailableCurrencies() {
+                // blank to prevent instantiation
+            }
+
+            private String currency;
+
+            /**
+             * [ISO 4217](http://en.wikipedia.org/wiki/ISO_4217#Active_codes) currency code.
+             */
+            public String getCurrency() {
+                return currency;
+            }
+        }
+
+        /**
          * Represents a bank authorisation resource returned from the API.
          *
          * Describes the behaviour of bank authorisations, for the bank_authorisation action
@@ -232,7 +267,8 @@ public class BillingRequest {
                 OPEN_BANKING_GATEWAY_PIS, @SerializedName("plaid_ais")
                 PLAID_AIS, @SerializedName("open_banking_gateway_ais")
                 OPEN_BANKING_GATEWAY_AIS, @SerializedName("bankid_ais")
-                BANKID_AIS, @SerializedName("unknown")
+                BANKID_AIS, @SerializedName("bank_pay_recurring")
+                BANK_PAY_RECURRING, @SerializedName("unknown")
                 UNKNOWN
             }
 
@@ -277,6 +313,7 @@ public class BillingRequest {
         private String customerBillingDetail;
         private String mandateRequest;
         private String mandateRequestMandate;
+        private String organisation;
         private String paymentRequest;
         private String paymentRequestPayment;
 
@@ -330,6 +367,13 @@ public class BillingRequest {
          */
         public String getMandateRequestMandate() {
             return mandateRequestMandate;
+        }
+
+        /**
+         * ID of the associated organisation.
+         */
+        public String getOrganisation() {
+            return organisation;
         }
 
         /**

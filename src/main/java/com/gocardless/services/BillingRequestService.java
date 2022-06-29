@@ -78,6 +78,11 @@ public class BillingRequestService {
      * 
      * The endpoint takes the same payload as Customer Bank Accounts, but check the bank account is
      * valid for the billing request scheme before creating and attaching it.
+     * 
+     * _ACH scheme_ For compliance reasons, an extra validation step is done using a third-party
+     * provider to make sure the customer's bank account can accept Direct Debit. If a bank account
+     * is discovered to be closed or invalid, the customer is requested to adjust the account
+     * number/routing number and succeed in this check to continue with the flow.
      */
     public BillingRequestCollectBankAccountRequest collectBankAccount(String identity) {
         return new BillingRequestCollectBankAccountRequest(httpClient, identity);
@@ -89,6 +94,15 @@ public class BillingRequestService {
      */
     public BillingRequestFulfilRequest fulfil(String identity) {
         return new BillingRequestFulfilRequest(httpClient, identity);
+    }
+
+    /**
+     * This will allow for the updating of the currency and subsequently the scheme if needed for a
+     * billing request this will only be available for mandate only flows, it will not support
+     * payments requests or plans
+     */
+    public BillingRequestChooseCurrencyRequest chooseCurrency(String identity) {
+        return new BillingRequestChooseCurrencyRequest(httpClient, identity);
     }
 
     /**
@@ -179,6 +193,7 @@ public class BillingRequestService {
          * <ul>
          * <li>`pending`: the billing request is pending and can be used</li>
          * <li>`ready_to_fulfil`: the billing request is ready to fulfil</li>
+         * <li>`fulfilling`: the billing request is currently undergoing fulfilment</li>
          * <li>`fulfilled`: the billing request has been fulfilled and a payment created</li>
          * <li>`cancelled`: the billing request has been cancelled and cannot be used</li>
          * </ul>
@@ -244,7 +259,12 @@ public class BillingRequestService {
         private PaymentRequest paymentRequest;
 
         /**
-         * If true, this billing request can fallback from instant payment to direct debit.
+         * (Optional) If true, this billing request can fallback from instant payment to direct
+         * debit. Should not be set if GoCardless payment intelligence feature is used.
+         * 
+         * See [Billing Requests: Retain customers with
+         * Fallbacks](https://developer.gocardless.com/getting-started/billing-requests/retain-customers-with-fallbacks/)
+         * for more information.
          */
         public BillingRequestCreateRequest withFallbackEnabled(Boolean fallbackEnabled) {
             this.fallbackEnabled = fallbackEnabled;
@@ -933,6 +953,20 @@ public class BillingRequestService {
         }
 
         /**
+         * For ACH customers only. Required for ACH customers. A string containing the IP address of
+         * the payer to whom the mandate belongs (i.e. as a result of their completion of a mandate
+         * setup flow in their browser).
+         */
+        public BillingRequestCollectCustomerDetailsRequest withCustomerBillingDetailIpAddress(
+                String ipAddress) {
+            if (customerBillingDetail == null) {
+                customerBillingDetail = new CustomerBillingDetail();
+            }
+            customerBillingDetail.withIpAddress(ipAddress);
+            return this;
+        }
+
+        /**
          * The customer's postal code.
          */
         public BillingRequestCollectCustomerDetailsRequest withCustomerBillingDetailPostalCode(
@@ -1100,6 +1134,7 @@ public class BillingRequestService {
             private String city;
             private String countryCode;
             private String danishIdentityNumber;
+            private String ipAddress;
             private String postalCode;
             private String region;
             private String swedishIdentityNumber;
@@ -1155,6 +1190,16 @@ public class BillingRequestService {
             }
 
             /**
+             * For ACH customers only. Required for ACH customers. A string containing the IP
+             * address of the payer to whom the mandate belongs (i.e. as a result of their
+             * completion of a mandate setup flow in their browser).
+             */
+            public CustomerBillingDetail withIpAddress(String ipAddress) {
+                this.ipAddress = ipAddress;
+                return this;
+            }
+
+            /**
              * The customer's postal code.
              */
             public CustomerBillingDetail withPostalCode(String postalCode) {
@@ -1193,6 +1238,11 @@ public class BillingRequestService {
      * 
      * The endpoint takes the same payload as Customer Bank Accounts, but check the bank account is
      * valid for the billing request scheme before creating and attaching it.
+     * 
+     * _ACH scheme_ For compliance reasons, an extra validation step is done using a third-party
+     * provider to make sure the customer's bank account can accept Direct Debit. If a bank account
+     * is discovered to be closed or invalid, the customer is requested to adjust the account
+     * number/routing number and succeed in this check to continue with the flow.
      */
     public static final class BillingRequestCollectBankAccountRequest
             extends PostRequest<BillingRequest> {
@@ -1427,6 +1477,94 @@ public class BillingRequestService {
         @Override
         protected String getPathTemplate() {
             return "billing_requests/:identity/actions/fulfil";
+        }
+
+        @Override
+        protected String getEnvelope() {
+            return "billing_requests";
+        }
+
+        @Override
+        protected Class<BillingRequest> getResponseClass() {
+            return BillingRequest.class;
+        }
+
+        @Override
+        protected boolean hasBody() {
+            return true;
+        }
+
+        @Override
+        protected String getRequestEnvelope() {
+            return "data";
+        }
+    }
+
+    /**
+     * Request class for {@link BillingRequestService#chooseCurrency }.
+     *
+     * This will allow for the updating of the currency and subsequently the scheme if needed for a
+     * billing request this will only be available for mandate only flows, it will not support
+     * payments requests or plans
+     */
+    public static final class BillingRequestChooseCurrencyRequest
+            extends PostRequest<BillingRequest> {
+        @PathParam
+        private final String identity;
+        private String currency;
+        private Map<String, String> metadata;
+
+        /**
+         * [ISO 4217](http://en.wikipedia.org/wiki/ISO_4217#Active_codes) currency code. Currently
+         * "AUD", "CAD", "DKK", "EUR", "GBP", "NZD", "SEK" and "USD" are supported.
+         */
+        public BillingRequestChooseCurrencyRequest withCurrency(String currency) {
+            this.currency = currency;
+            return this;
+        }
+
+        /**
+         * Key-value store of custom data. Up to 3 keys are permitted, with key names up to 50
+         * characters and values up to 500 characters.
+         */
+        public BillingRequestChooseCurrencyRequest withMetadata(Map<String, String> metadata) {
+            this.metadata = metadata;
+            return this;
+        }
+
+        /**
+         * Key-value store of custom data. Up to 3 keys are permitted, with key names up to 50
+         * characters and values up to 500 characters.
+         */
+        public BillingRequestChooseCurrencyRequest withMetadata(String key, String value) {
+            if (metadata == null) {
+                metadata = new HashMap<>();
+            }
+            metadata.put(key, value);
+            return this;
+        }
+
+        private BillingRequestChooseCurrencyRequest(HttpClient httpClient, String identity) {
+            super(httpClient);
+            this.identity = identity;
+        }
+
+        public BillingRequestChooseCurrencyRequest withHeader(String headerName,
+                String headerValue) {
+            this.addHeader(headerName, headerValue);
+            return this;
+        }
+
+        @Override
+        protected Map<String, String> getPathParams() {
+            ImmutableMap.Builder<String, String> params = ImmutableMap.builder();
+            params.put("identity", identity);
+            return params.build();
+        }
+
+        @Override
+        protected String getPathTemplate() {
+            return "billing_requests/:identity/actions/choose_currency";
         }
 
         @Override
