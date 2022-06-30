@@ -245,7 +245,7 @@ public class BillingRequestTemplateService {
 
         /**
          * A Direct Debit scheme. Currently "ach", "bacs", "becs", "becs_nz", "betalingsservice",
-         * "pad" and "sepa_core" are supported.
+         * "pad", "pay_to" and "sepa_core" are supported.
          */
         public BillingRequestTemplateCreateRequest withMandateRequestScheme(
                 String mandateRequestScheme) {
@@ -522,7 +522,7 @@ public class BillingRequestTemplateService {
 
         /**
          * A Direct Debit scheme. Currently "ach", "bacs", "becs", "becs_nz", "betalingsservice",
-         * "pad" and "sepa_core" are supported.
+         * "pad", "pay_to" and "sepa_core" are supported.
          */
         public BillingRequestTemplateUpdateRequest withMandateRequestScheme(
                 String mandateRequestScheme) {

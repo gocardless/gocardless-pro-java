@@ -429,7 +429,7 @@ public class BillingRequest {
 
         /**
          * A Direct Debit scheme. Currently "ach", "bacs", "becs", "becs_nz", "betalingsservice",
-         * "pad" and "sepa_core" are supported.
+         * "pad", "pay_to" and "sepa_core" are supported.
          */
         public String getScheme() {
             return scheme;
