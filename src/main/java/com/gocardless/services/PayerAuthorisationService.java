@@ -959,7 +959,8 @@ public class PayerAuthorisationService {
                 BECS_NZ, @SerializedName("betalingsservice")
                 BETALINGSSERVICE, @SerializedName("pad")
                 PAD, @SerializedName("sepa_core")
-                SEPA_CORE, @SerializedName("unknown")
+                SEPA_CORE, @SerializedName("pay_to")
+                PAY_TO, @SerializedName("unknown")
                 UNKNOWN;
 
                 @Override
@@ -1763,7 +1764,8 @@ public class PayerAuthorisationService {
                 BECS_NZ, @SerializedName("betalingsservice")
                 BETALINGSSERVICE, @SerializedName("pad")
                 PAD, @SerializedName("sepa_core")
-                SEPA_CORE, @SerializedName("unknown")
+                SEPA_CORE, @SerializedName("pay_to")
+                PAY_TO, @SerializedName("unknown")
                 UNKNOWN;
 
                 @Override

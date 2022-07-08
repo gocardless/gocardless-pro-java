@@ -297,7 +297,8 @@ public class Event {
             BETALINGSSERVICE, @SerializedName("pad")
             PAD, @SerializedName("sepa_core")
             SEPA_CORE, @SerializedName("sepa_cor1")
-            SEPA_COR1, @SerializedName("unknown")
+            SEPA_COR1, @SerializedName("pay_to")
+            PAY_TO, @SerializedName("unknown")
             UNKNOWN
         }
     }

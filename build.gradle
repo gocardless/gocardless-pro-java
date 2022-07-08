@@ -20,7 +20,7 @@ plugins {
 sourceCompatibility = 1.8
 targetCompatibility = 1.8
 group = 'com.gocardless'
-version = '5.5.0'
+version = '5.6.0'
 
 apply plugin: 'ch.raffael.pegdown-doclet'
 

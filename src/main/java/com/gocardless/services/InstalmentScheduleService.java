@@ -230,6 +230,7 @@ public class InstalmentScheduleService {
          * <strong>BECS NZ</strong> - 12 characters<br />
          * <strong>Betalingsservice</strong> - 30 characters<br />
          * <strong>PAD</strong> - scheme doesn't offer references<br />
+         * <strong>PayTo</strong> - 18 characters<br />
          * <strong>SEPA</strong> - 140 characters<br />
          * Note that this reference must be unique (for each merchant) for the BECS scheme as it is
          * a scheme requirement.
@@ -546,6 +547,7 @@ public class InstalmentScheduleService {
          * <strong>BECS NZ</strong> - 12 characters<br />
          * <strong>Betalingsservice</strong> - 30 characters<br />
          * <strong>PAD</strong> - scheme doesn't offer references<br />
+         * <strong>PayTo</strong> - 18 characters<br />
          * <strong>SEPA</strong> - 140 characters<br />
          * Note that this reference must be unique (for each merchant) for the BECS scheme as it is
          * a scheme requirement.

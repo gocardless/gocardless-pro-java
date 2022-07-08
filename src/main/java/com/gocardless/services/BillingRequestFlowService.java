@@ -3,6 +3,7 @@ package com.gocardless.services;
 import com.gocardless.http.*;
 import com.gocardless.resources.BillingRequestFlow;
 import com.google.common.collect.ImmutableMap;
+import com.google.gson.annotations.SerializedName;
 import java.util.Map;
 
 /**
@@ -51,6 +52,8 @@ public class BillingRequestFlowService {
         private Boolean lockBankAccount;
         private Boolean lockCurrency;
         private Boolean lockCustomerDetails;
+        private PrefilledBankAccount prefilledBankAccount;
+        private PrefilledCustomer prefilledCustomer;
         private String redirectUri;
         private Boolean showRedirectButtons;
 
@@ -120,6 +123,218 @@ public class BillingRequestFlowService {
         }
 
         /**
+         * Bank account information used to prefill the payment page so your customer doesn't have
+         * to re-type details you already hold about them. It will be stored unvalidated and the
+         * customer will be able to review and amend it before completing the form.
+         */
+        public BillingRequestFlowCreateRequest withPrefilledBankAccount(
+                PrefilledBankAccount prefilledBankAccount) {
+            this.prefilledBankAccount = prefilledBankAccount;
+            return this;
+        }
+
+        /**
+         * Bank account type for USD-denominated bank accounts. Must not be provided for bank
+         * accounts in other currencies. See [local details](#local-bank-details-united-states) for
+         * more information.
+         */
+        public BillingRequestFlowCreateRequest withPrefilledBankAccountAccountType(
+                PrefilledBankAccount.AccountType accountType) {
+            if (prefilledBankAccount == null) {
+                prefilledBankAccount = new PrefilledBankAccount();
+            }
+            prefilledBankAccount.withAccountType(accountType);
+            return this;
+        }
+
+        /**
+         * Customer information used to prefill the payment page so your customer doesn't have to
+         * re-type details you already hold about them. It will be stored unvalidated and the
+         * customer will be able to review and amend it before completing the form.
+         */
+        public BillingRequestFlowCreateRequest withPrefilledCustomer(
+                PrefilledCustomer prefilledCustomer) {
+            this.prefilledCustomer = prefilledCustomer;
+            return this;
+        }
+
+        /**
+         * The first line of the customer's address.
+         */
+        public BillingRequestFlowCreateRequest withPrefilledCustomerAddressLine1(
+                String addressLine1) {
+            if (prefilledCustomer == null) {
+                prefilledCustomer = new PrefilledCustomer();
+            }
+            prefilledCustomer.withAddressLine1(addressLine1);
+            return this;
+        }
+
+        /**
+         * The second line of the customer's address.
+         */
+        public BillingRequestFlowCreateRequest withPrefilledCustomerAddressLine2(
+                String addressLine2) {
+            if (prefilledCustomer == null) {
+                prefilledCustomer = new PrefilledCustomer();
+            }
+            prefilledCustomer.withAddressLine2(addressLine2);
+            return this;
+        }
+
+        /**
+         * The third line of the customer's address.
+         */
+        public BillingRequestFlowCreateRequest withPrefilledCustomerAddressLine3(
+                String addressLine3) {
+            if (prefilledCustomer == null) {
+                prefilledCustomer = new PrefilledCustomer();
+            }
+            prefilledCustomer.withAddressLine3(addressLine3);
+            return this;
+        }
+
+        /**
+         * The city of the customer's address.
+         */
+        public BillingRequestFlowCreateRequest withPrefilledCustomerCity(String city) {
+            if (prefilledCustomer == null) {
+                prefilledCustomer = new PrefilledCustomer();
+            }
+            prefilledCustomer.withCity(city);
+            return this;
+        }
+
+        /**
+         * Customer's company name. Company name should only be provided if `given_name` and
+         * `family_name` are null.
+         */
+        public BillingRequestFlowCreateRequest withPrefilledCustomerCompanyName(
+                String companyName) {
+            if (prefilledCustomer == null) {
+                prefilledCustomer = new PrefilledCustomer();
+            }
+            prefilledCustomer.withCompanyName(companyName);
+            return this;
+        }
+
+        /**
+         * [ISO 3166-1 alpha-2
+         * code.](http://en.wikipedia.org/wiki/ISO_3166-1_alpha-2#Officially_assigned_code_elements)
+         */
+        public BillingRequestFlowCreateRequest withPrefilledCustomerCountryCode(
+                String countryCode) {
+            if (prefilledCustomer == null) {
+                prefilledCustomer = new PrefilledCustomer();
+            }
+            prefilledCustomer.withCountryCode(countryCode);
+            return this;
+        }
+
+        /**
+         * For Danish customers only. The civic/company number (CPR or CVR) of the customer.
+         */
+        public BillingRequestFlowCreateRequest withPrefilledCustomerDanishIdentityNumber(
+                String danishIdentityNumber) {
+            if (prefilledCustomer == null) {
+                prefilledCustomer = new PrefilledCustomer();
+            }
+            prefilledCustomer.withDanishIdentityNumber(danishIdentityNumber);
+            return this;
+        }
+
+        /**
+         * Customer's email address.
+         */
+        public BillingRequestFlowCreateRequest withPrefilledCustomerEmail(String email) {
+            if (prefilledCustomer == null) {
+                prefilledCustomer = new PrefilledCustomer();
+            }
+            prefilledCustomer.withEmail(email);
+            return this;
+        }
+
+        /**
+         * Customer's surname.
+         */
+        public BillingRequestFlowCreateRequest withPrefilledCustomerFamilyName(String familyName) {
+            if (prefilledCustomer == null) {
+                prefilledCustomer = new PrefilledCustomer();
+            }
+            prefilledCustomer.withFamilyName(familyName);
+            return this;
+        }
+
+        /**
+         * Customer's first name.
+         */
+        public BillingRequestFlowCreateRequest withPrefilledCustomerGivenName(String givenName) {
+            if (prefilledCustomer == null) {
+                prefilledCustomer = new PrefilledCustomer();
+            }
+            prefilledCustomer.withGivenName(givenName);
+            return this;
+        }
+
+        /**
+         * [ISO 639-1](http://en.wikipedia.org/wiki/List_of_ISO_639-1_codes) code.
+         */
+        public BillingRequestFlowCreateRequest withPrefilledCustomerLanguage(String language) {
+            if (prefilledCustomer == null) {
+                prefilledCustomer = new PrefilledCustomer();
+            }
+            prefilledCustomer.withLanguage(language);
+            return this;
+        }
+
+        /**
+         * For New Zealand customers only.
+         */
+        public BillingRequestFlowCreateRequest withPrefilledCustomerPhoneNumber(
+                String phoneNumber) {
+            if (prefilledCustomer == null) {
+                prefilledCustomer = new PrefilledCustomer();
+            }
+            prefilledCustomer.withPhoneNumber(phoneNumber);
+            return this;
+        }
+
+        /**
+         * The customer's postal code.
+         */
+        public BillingRequestFlowCreateRequest withPrefilledCustomerPostalCode(String postalCode) {
+            if (prefilledCustomer == null) {
+                prefilledCustomer = new PrefilledCustomer();
+            }
+            prefilledCustomer.withPostalCode(postalCode);
+            return this;
+        }
+
+        /**
+         * The customer's address region, county or department.
+         */
+        public BillingRequestFlowCreateRequest withPrefilledCustomerRegion(String region) {
+            if (prefilledCustomer == null) {
+                prefilledCustomer = new PrefilledCustomer();
+            }
+            prefilledCustomer.withRegion(region);
+            return this;
+        }
+
+        /**
+         * For Swedish customers only. The civic/company number (personnummer, samordningsnummer, or
+         * organisationsnummer) of the customer.
+         */
+        public BillingRequestFlowCreateRequest withPrefilledCustomerSwedishIdentityNumber(
+                String swedishIdentityNumber) {
+            if (prefilledCustomer == null) {
+                prefilledCustomer = new PrefilledCustomer();
+            }
+            prefilledCustomer.withSwedishIdentityNumber(swedishIdentityNumber);
+            return this;
+        }
+
+        /**
          * URL that the payer can be redirected to after completing the request flow.
          */
         public BillingRequestFlowCreateRequest withRedirectUri(String redirectUri) {
@@ -178,6 +393,173 @@ public class BillingRequestFlowService {
              */
             public Links withBillingRequest(String billingRequest) {
                 this.billingRequest = billingRequest;
+                return this;
+            }
+        }
+
+        public static class PrefilledBankAccount {
+            private AccountType accountType;
+
+            /**
+             * Bank account type for USD-denominated bank accounts. Must not be provided for bank
+             * accounts in other currencies. See [local details](#local-bank-details-united-states)
+             * for more information.
+             */
+            public PrefilledBankAccount withAccountType(AccountType accountType) {
+                this.accountType = accountType;
+                return this;
+            }
+
+            public enum AccountType {
+                @SerializedName("savings")
+                SAVINGS, @SerializedName("checking")
+                CHECKING, @SerializedName("unknown")
+                UNKNOWN;
+
+                @Override
+                public String toString() {
+                    return name().toLowerCase();
+                }
+            }
+        }
+
+        public static class PrefilledCustomer {
+            private String addressLine1;
+            private String addressLine2;
+            private String addressLine3;
+            private String city;
+            private String companyName;
+            private String countryCode;
+            private String danishIdentityNumber;
+            private String email;
+            private String familyName;
+            private String givenName;
+            private String language;
+            private String phoneNumber;
+            private String postalCode;
+            private String region;
+            private String swedishIdentityNumber;
+
+            /**
+             * The first line of the customer's address.
+             */
+            public PrefilledCustomer withAddressLine1(String addressLine1) {
+                this.addressLine1 = addressLine1;
+                return this;
+            }
+
+            /**
+             * The second line of the customer's address.
+             */
+            public PrefilledCustomer withAddressLine2(String addressLine2) {
+                this.addressLine2 = addressLine2;
+                return this;
+            }
+
+            /**
+             * The third line of the customer's address.
+             */
+            public PrefilledCustomer withAddressLine3(String addressLine3) {
+                this.addressLine3 = addressLine3;
+                return this;
+            }
+
+            /**
+             * The city of the customer's address.
+             */
+            public PrefilledCustomer withCity(String city) {
+                this.city = city;
+                return this;
+            }
+
+            /**
+             * Customer's company name. Company name should only be provided if `given_name` and
+             * `family_name` are null.
+             */
+            public PrefilledCustomer withCompanyName(String companyName) {
+                this.companyName = companyName;
+                return this;
+            }
+
+            /**
+             * [ISO 3166-1 alpha-2
+             * code.](http://en.wikipedia.org/wiki/ISO_3166-1_alpha-2#Officially_assigned_code_elements)
+             */
+            public PrefilledCustomer withCountryCode(String countryCode) {
+                this.countryCode = countryCode;
+                return this;
+            }
+
+            /**
+             * For Danish customers only. The civic/company number (CPR or CVR) of the customer.
+             */
+            public PrefilledCustomer withDanishIdentityNumber(String danishIdentityNumber) {
+                this.danishIdentityNumber = danishIdentityNumber;
+                return this;
+            }
+
+            /**
+             * Customer's email address.
+             */
+            public PrefilledCustomer withEmail(String email) {
+                this.email = email;
+                return this;
+            }
+
+            /**
+             * Customer's surname.
+             */
+            public PrefilledCustomer withFamilyName(String familyName) {
+                this.familyName = familyName;
+                return this;
+            }
+
+            /**
+             * Customer's first name.
+             */
+            public PrefilledCustomer withGivenName(String givenName) {
+                this.givenName = givenName;
+                return this;
+            }
+
+            /**
+             * [ISO 639-1](http://en.wikipedia.org/wiki/List_of_ISO_639-1_codes) code.
+             */
+            public PrefilledCustomer withLanguage(String language) {
+                this.language = language;
+                return this;
+            }
+
+            /**
+             * For New Zealand customers only.
+             */
+            public PrefilledCustomer withPhoneNumber(String phoneNumber) {
+                this.phoneNumber = phoneNumber;
+                return this;
+            }
+
+            /**
+             * The customer's postal code.
+             */
+            public PrefilledCustomer withPostalCode(String postalCode) {
+                this.postalCode = postalCode;
+                return this;
+            }
+
+            /**
+             * The customer's address region, county or department.
+             */
+            public PrefilledCustomer withRegion(String region) {
+                this.region = region;
+                return this;
+            }
+
+            /**
+             * For Swedish customers only. The civic/company number (personnummer,
+             * samordningsnummer, or organisationsnummer) of the customer.
+             */
+            public PrefilledCustomer withSwedishIdentityNumber(String swedishIdentityNumber) {
+                this.swedishIdentityNumber = swedishIdentityNumber;
                 return this;
             }
         }

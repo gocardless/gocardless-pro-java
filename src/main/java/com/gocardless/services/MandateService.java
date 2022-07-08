@@ -475,7 +475,8 @@ public class MandateService {
             CANCELLED, @SerializedName("expired")
             EXPIRED, @SerializedName("consumed")
             CONSUMED, @SerializedName("blocked")
-            BLOCKED, @SerializedName("unknown")
+            BLOCKED, @SerializedName("suspended_by_payer")
+            SUSPENDED_BY_PAYER, @SerializedName("unknown")
             UNKNOWN;
 
             @Override

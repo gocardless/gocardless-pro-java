@@ -1,5 +1,7 @@
 package com.gocardless.resources;
 
+import com.google.gson.annotations.SerializedName;
+
 /**
  * Represents a billing request flow resource returned from the API.
  *
@@ -21,6 +23,8 @@ public class BillingRequestFlow {
     private Boolean lockBankAccount;
     private Boolean lockCurrency;
     private Boolean lockCustomerDetails;
+    private PrefilledBankAccount prefilledBankAccount;
+    private PrefilledCustomer prefilledCustomer;
     private String redirectUri;
     private String sessionToken;
     private Boolean showRedirectButtons;
@@ -100,6 +104,24 @@ public class BillingRequestFlow {
     }
 
     /**
+     * Bank account information used to prefill the payment page so your customer doesn't have to
+     * re-type details you already hold about them. It will be stored unvalidated and the customer
+     * will be able to review and amend it before completing the form.
+     */
+    public PrefilledBankAccount getPrefilledBankAccount() {
+        return prefilledBankAccount;
+    }
+
+    /**
+     * Customer information used to prefill the payment page so your customer doesn't have to
+     * re-type details you already hold about them. It will be stored unvalidated and the customer
+     * will be able to review and amend it before completing the form.
+     */
+    public PrefilledCustomer getPrefilledCustomer() {
+        return prefilledCustomer;
+    }
+
+    /**
      * URL that the payer can be redirected to after completing the request flow.
      */
     public String getRedirectUri() {
@@ -137,6 +159,174 @@ public class BillingRequestFlow {
          */
         public String getBillingRequest() {
             return billingRequest;
+        }
+    }
+
+    /**
+     * Represents a prefilled bank account resource returned from the API.
+     *
+     * Bank account information used to prefill the payment page so your customer doesn't have to
+     * re-type details you already hold about them. It will be stored unvalidated and the customer
+     * will be able to review and amend it before completing the form.
+     */
+    public static class PrefilledBankAccount {
+        private PrefilledBankAccount() {
+            // blank to prevent instantiation
+        }
+
+        private AccountType accountType;
+
+        /**
+         * Bank account type for USD-denominated bank accounts. Must not be provided for bank
+         * accounts in other currencies. See [local details](#local-bank-details-united-states) for
+         * more information.
+         */
+        public AccountType getAccountType() {
+            return accountType;
+        }
+
+        public enum AccountType {
+            @SerializedName("savings")
+            SAVINGS, @SerializedName("checking")
+            CHECKING, @SerializedName("unknown")
+            UNKNOWN
+        }
+    }
+
+    /**
+     * Represents a prefilled customer resource returned from the API.
+     *
+     * Customer information used to prefill the payment page so your customer doesn't have to
+     * re-type details you already hold about them. It will be stored unvalidated and the customer
+     * will be able to review and amend it before completing the form.
+     */
+    public static class PrefilledCustomer {
+        private PrefilledCustomer() {
+            // blank to prevent instantiation
+        }
+
+        private String addressLine1;
+        private String addressLine2;
+        private String addressLine3;
+        private String city;
+        private String companyName;
+        private String countryCode;
+        private String danishIdentityNumber;
+        private String email;
+        private String familyName;
+        private String givenName;
+        private String language;
+        private String phoneNumber;
+        private String postalCode;
+        private String region;
+        private String swedishIdentityNumber;
+
+        /**
+         * The first line of the customer's address.
+         */
+        public String getAddressLine1() {
+            return addressLine1;
+        }
+
+        /**
+         * The second line of the customer's address.
+         */
+        public String getAddressLine2() {
+            return addressLine2;
+        }
+
+        /**
+         * The third line of the customer's address.
+         */
+        public String getAddressLine3() {
+            return addressLine3;
+        }
+
+        /**
+         * The city of the customer's address.
+         */
+        public String getCity() {
+            return city;
+        }
+
+        /**
+         * Customer's company name. Company name should only be provided if `given_name` and
+         * `family_name` are null.
+         */
+        public String getCompanyName() {
+            return companyName;
+        }
+
+        /**
+         * [ISO 3166-1 alpha-2
+         * code.](http://en.wikipedia.org/wiki/ISO_3166-1_alpha-2#Officially_assigned_code_elements)
+         */
+        public String getCountryCode() {
+            return countryCode;
+        }
+
+        /**
+         * For Danish customers only. The civic/company number (CPR or CVR) of the customer.
+         */
+        public String getDanishIdentityNumber() {
+            return danishIdentityNumber;
+        }
+
+        /**
+         * Customer's email address.
+         */
+        public String getEmail() {
+            return email;
+        }
+
+        /**
+         * Customer's surname.
+         */
+        public String getFamilyName() {
+            return familyName;
+        }
+
+        /**
+         * Customer's first name.
+         */
+        public String getGivenName() {
+            return givenName;
+        }
+
+        /**
+         * [ISO 639-1](http://en.wikipedia.org/wiki/List_of_ISO_639-1_codes) code.
+         */
+        public String getLanguage() {
+            return language;
+        }
+
+        /**
+         * For New Zealand customers only.
+         */
+        public String getPhoneNumber() {
+            return phoneNumber;
+        }
+
+        /**
+         * The customer's postal code.
+         */
+        public String getPostalCode() {
+            return postalCode;
+        }
+
+        /**
+         * The customer's address region, county or department.
+         */
+        public String getRegion() {
+            return region;
+        }
+
+        /**
+         * For Swedish customers only. The civic/company number (personnummer, samordningsnummer, or
+         * organisationsnummer) of the customer.
+         */
+        public String getSwedishIdentityNumber() {
+            return swedishIdentityNumber;
         }
     }
 }
