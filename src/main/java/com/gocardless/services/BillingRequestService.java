@@ -344,6 +344,19 @@ public class BillingRequestService {
         }
 
         /**
+         * Unique reference. Different schemes have different length and [character
+         * set](#appendix-character-sets) requirements. GoCardless will generate a unique reference
+         * satisfying the different scheme requirements if this field is left blank.
+         */
+        public BillingRequestCreateRequest withMandateRequestReference(String reference) {
+            if (mandateRequest == null) {
+                mandateRequest = new MandateRequest();
+            }
+            mandateRequest.withReference(reference);
+            return this;
+        }
+
+        /**
          * A Direct Debit scheme. Currently "ach", "bacs", "becs", "becs_nz", "betalingsservice",
          * "pad", "pay_to" and "sepa_core" are supported.
          */
@@ -570,6 +583,7 @@ public class BillingRequestService {
         public static class MandateRequest {
             private String currency;
             private Map<String, String> metadata;
+            private String reference;
             private String scheme;
             private Verify verify;
 
@@ -587,6 +601,16 @@ public class BillingRequestService {
              */
             public MandateRequest withMetadata(Map<String, String> metadata) {
                 this.metadata = metadata;
+                return this;
+            }
+
+            /**
+             * Unique reference. Different schemes have different length and [character
+             * set](#appendix-character-sets) requirements. GoCardless will generate a unique
+             * reference satisfying the different scheme requirements if this field is left blank.
+             */
+            public MandateRequest withReference(String reference) {
+                this.reference = reference;
                 return this;
             }
 
