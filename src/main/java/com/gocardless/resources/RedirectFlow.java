@@ -33,7 +33,7 @@ import java.util.Map;
  * `confirmation_url` attribute of the redirect flow.
  * 
  * Redirect flows expire 30 minutes after they are first created. You cannot complete an expired
- * redirect flow.
+ * redirect flow. For an integrator this is shorter and they will expire after 10 minutes.
  */
 public class RedirectFlow {
     private RedirectFlow() {
