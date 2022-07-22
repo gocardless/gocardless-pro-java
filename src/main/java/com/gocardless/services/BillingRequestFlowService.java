@@ -288,18 +288,6 @@ public class BillingRequestFlowService {
         }
 
         /**
-         * For New Zealand customers only.
-         */
-        public BillingRequestFlowCreateRequest withPrefilledCustomerPhoneNumber(
-                String phoneNumber) {
-            if (prefilledCustomer == null) {
-                prefilledCustomer = new PrefilledCustomer();
-            }
-            prefilledCustomer.withPhoneNumber(phoneNumber);
-            return this;
-        }
-
-        /**
          * The customer's postal code.
          */
         public BillingRequestFlowCreateRequest withPrefilledCustomerPostalCode(String postalCode) {
@@ -435,7 +423,6 @@ public class BillingRequestFlowService {
             private String familyName;
             private String givenName;
             private String language;
-            private String phoneNumber;
             private String postalCode;
             private String region;
             private String swedishIdentityNumber;
@@ -527,14 +514,6 @@ public class BillingRequestFlowService {
              */
             public PrefilledCustomer withLanguage(String language) {
                 this.language = language;
-                return this;
-            }
-
-            /**
-             * For New Zealand customers only.
-             */
-            public PrefilledCustomer withPhoneNumber(String phoneNumber) {
-                this.phoneNumber = phoneNumber;
                 return this;
             }
 

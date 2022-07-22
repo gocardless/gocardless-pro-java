@@ -216,7 +216,6 @@ public class BillingRequestFlow {
         private String familyName;
         private String givenName;
         private String language;
-        private String phoneNumber;
         private String postalCode;
         private String region;
         private String swedishIdentityNumber;
@@ -298,13 +297,6 @@ public class BillingRequestFlow {
          */
         public String getLanguage() {
             return language;
-        }
-
-        /**
-         * For New Zealand customers only.
-         */
-        public String getPhoneNumber() {
-            return phoneNumber;
         }
 
         /**
