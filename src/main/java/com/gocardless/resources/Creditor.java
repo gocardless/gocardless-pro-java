@@ -90,8 +90,7 @@ public class Creditor {
 
     /**
      * Boolean value indicating whether creditor has the [Custom Payment
-     * Pages](https://support.gocardless.com/hc/en-gb/articles/115003734705-Custom-payment-pages)
-     * functionality enabled.
+     * Pages](https://hub.gocardless.com/s/article/Custom-payment-pages) functionality enabled.
      */
     public Boolean getCustomPaymentPagesEnabled() {
         return customPaymentPagesEnabled;
