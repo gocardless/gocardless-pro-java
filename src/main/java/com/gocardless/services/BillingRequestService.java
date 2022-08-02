@@ -98,8 +98,9 @@ public class BillingRequestService {
 
     /**
      * This will allow for the updating of the currency and subsequently the scheme if needed for a
-     * billing request this will only be available for mandate only flows, it will not support
-     * payments requests or plans
+     * Billing Request. This will only be available for mandate only flows which do not have the
+     * lock_currency flag set to true on the Billing Request Flow. It will also not support any
+     * request which has a payments request.
      */
     public BillingRequestChooseCurrencyRequest chooseCurrency(String identity) {
         return new BillingRequestChooseCurrencyRequest(httpClient, identity);
@@ -357,8 +358,10 @@ public class BillingRequestService {
         }
 
         /**
-         * A Direct Debit scheme. Currently "ach", "bacs", "becs", "becs_nz", "betalingsservice",
-         * "pad", "pay_to" and "sepa_core" are supported.
+         * A Direct Debit scheme. Currently "ach", "autogiro", "bacs", "becs", "becs_nz",
+         * "betalingsservice", "pad", "pay_to" and "sepa_core" are supported. Optional for mandate
+         * only requests - if left blank, the payer will be able to select the currency/scheme to
+         * pay with from a list of your available schemes.
          */
         public BillingRequestCreateRequest withMandateRequestScheme(String scheme) {
             if (mandateRequest == null) {
@@ -615,8 +618,10 @@ public class BillingRequestService {
             }
 
             /**
-             * A Direct Debit scheme. Currently "ach", "bacs", "becs", "becs_nz",
-             * "betalingsservice", "pad", "pay_to" and "sepa_core" are supported.
+             * A Direct Debit scheme. Currently "ach", "autogiro", "bacs", "becs", "becs_nz",
+             * "betalingsservice", "pad", "pay_to" and "sepa_core" are supported. Optional for
+             * mandate only requests - if left blank, the payer will be able to select the
+             * currency/scheme to pay with from a list of your available schemes.
              */
             public MandateRequest withScheme(String scheme) {
                 this.scheme = scheme;
@@ -1528,8 +1533,9 @@ public class BillingRequestService {
      * Request class for {@link BillingRequestService#chooseCurrency }.
      *
      * This will allow for the updating of the currency and subsequently the scheme if needed for a
-     * billing request this will only be available for mandate only flows, it will not support
-     * payments requests or plans
+     * Billing Request. This will only be available for mandate only flows which do not have the
+     * lock_currency flag set to true on the Billing Request Flow. It will also not support any
+     * request which has a payments request.
      */
     public static final class BillingRequestChooseCurrencyRequest
             extends PostRequest<BillingRequest> {
