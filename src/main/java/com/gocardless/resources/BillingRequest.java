@@ -197,7 +197,8 @@ public class BillingRequest {
 
         public enum Type {
             @SerializedName("choose_currency")
-            CHOOSE_CURRENCY, @SerializedName("collect_customer_details")
+            CHOOSE_CURRENCY, @SerializedName("collect_amount")
+            COLLECT_AMOUNT, @SerializedName("collect_customer_details")
             COLLECT_CUSTOMER_DETAILS, @SerializedName("collect_bank_account")
             COLLECT_BANK_ACCOUNT, @SerializedName("bank_authorisation")
             BANK_AUTHORISATION, @SerializedName("confirm_payer_details")
