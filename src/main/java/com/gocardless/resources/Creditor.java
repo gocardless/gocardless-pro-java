@@ -18,6 +18,7 @@ public class Creditor {
         // blank to prevent instantiation
     }
 
+    private Boolean activated;
     private String addressLine1;
     private String addressLine2;
     private String addressLine3;
@@ -37,6 +38,13 @@ public class Creditor {
     private String region;
     private List<SchemeIdentifier> schemeIdentifiers;
     private VerificationStatus verificationStatus;
+
+    /**
+     * Boolean value indicating whether the creditor is activated in the product.
+     */
+    public Boolean getActivated() {
+        return activated;
+    }
 
     /**
      * The first line of the creditor's address.
