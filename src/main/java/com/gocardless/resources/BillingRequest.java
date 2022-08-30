@@ -403,11 +403,19 @@ public class BillingRequest {
             // blank to prevent instantiation
         }
 
+        private ConsentParameters consentParameters;
         private String currency;
         private Links links;
         private Map<String, String> metadata;
         private String scheme;
         private Verify verify;
+
+        /**
+         * (Optional) Payto and VRP Scheme specific information
+         */
+        public ConsentParameters getConsentParameters() {
+            return consentParameters;
+        }
 
         /**
          * [ISO 4217](http://en.wikipedia.org/wiki/ISO_4217#Active_codes) currency code.
@@ -472,6 +480,105 @@ public class BillingRequest {
             WHEN_AVAILABLE, @SerializedName("always")
             ALWAYS, @SerializedName("unknown")
             UNKNOWN
+        }
+
+        /**
+         * Represents a consent parameter resource returned from the API.
+         *
+         * (Optional) Payto and VRP Scheme specific information
+         */
+        public static class ConsentParameters {
+            private ConsentParameters() {
+                // blank to prevent instantiation
+            }
+
+            private String endDate;
+            private MandatePurposeCode mandatePurposeCode;
+            private Integer maxAmountPerPayment;
+            private Integer maxAmountPerPeriod;
+            private Integer maxPaymentsPerPeriod;
+            private Period period;
+            private String startDate;
+
+            /**
+             * The latest date at which payments can be taken, must occur after start_date if
+             * present
+             */
+            public String getEndDate() {
+                return endDate;
+            }
+
+            /**
+             * Specifies the high-level purpose of the mandate based on a set of pre-defined
+             * categories. PayTo specific
+             */
+            public MandatePurposeCode getMandatePurposeCode() {
+                return mandatePurposeCode;
+            }
+
+            /**
+             * The maximum amount that can be charged for a single payment
+             */
+            public Integer getMaxAmountPerPayment() {
+                return maxAmountPerPayment;
+            }
+
+            /**
+             * The maximum total amount that can be charged for all payments in this period
+             */
+            public Integer getMaxAmountPerPeriod() {
+                return maxAmountPerPeriod;
+            }
+
+            /**
+             * The maximum total amount that can be charged for all payments in this period
+             */
+            public Integer getMaxPaymentsPerPeriod() {
+                return maxPaymentsPerPeriod;
+            }
+
+            /**
+             * The repeating period for this mandate
+             */
+            public Period getPeriod() {
+                return period;
+            }
+
+            /**
+             * The date from which payments can be taken
+             */
+            public String getStartDate() {
+                return startDate;
+            }
+
+            public enum MandatePurposeCode {
+                @SerializedName("MORT")
+                MORT, @SerializedName("UTIL")
+                UTIL, @SerializedName("LOAN")
+                LOAN, @SerializedName("DEPD")
+                DEPD, @SerializedName("GAMP")
+                GAMP, @SerializedName("RETL")
+                RETL, @SerializedName("SALA")
+                SALA, @SerializedName("PERS")
+                PERS, @SerializedName("GOVT")
+                GOVT, @SerializedName("PENS")
+                PENS, @SerializedName("TAXS")
+                TAXS, @SerializedName("OTHR")
+                OTHR, @SerializedName("unknown")
+                UNKNOWN
+            }
+
+            public enum Period {
+                @SerializedName("Day")
+                DAY, @SerializedName("Week")
+                WEEK, @SerializedName("Fortnight")
+                FORTNIGHT, @SerializedName("Month")
+                MONTH, @SerializedName("Half_year")
+                HALF_YEAR, @SerializedName("Annual")
+                ANNUAL, @SerializedName("Adhoc")
+                ADHOC, @SerializedName("unknown")
+                UNKNOWN
+            }
         }
 
         public static class Links {
