@@ -169,8 +169,7 @@ public class PayoutService {
 
         /**
          * Key-value store of custom data. Up to 3 keys are permitted, with key names up to 50
-         * characters and values up to 500 characters. _Note:_ This should not be used for storing
-         * PII data.
+         * characters and values up to 500 characters.
          */
         public PayoutListRequest<S> withMetadata(Map<String, String> metadata) {
             this.metadata = metadata;
@@ -179,8 +178,7 @@ public class PayoutService {
 
         /**
          * Key-value store of custom data. Up to 3 keys are permitted, with key names up to 50
-         * characters and values up to 500 characters. _Note:_ This should not be used for storing
-         * PII data.
+         * characters and values up to 500 characters.
          */
         public PayoutListRequest<S> withMetadata(String key, String value) {
             if (metadata == null) {
