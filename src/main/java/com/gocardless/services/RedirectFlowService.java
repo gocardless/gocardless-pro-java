@@ -125,7 +125,8 @@ public class RedirectFlowService {
 
         /**
          * Key-value store of custom data. Up to 3 keys are permitted, with key names up to 50
-         * characters and values up to 500 characters.
+         * characters and values up to 500 characters. _Note:_ This should not be used for storing
+         * PII data.
          */
         public RedirectFlowCreateRequest withMetadata(Map<String, String> metadata) {
             this.metadata = metadata;
@@ -134,7 +135,8 @@ public class RedirectFlowService {
 
         /**
          * Key-value store of custom data. Up to 3 keys are permitted, with key names up to 50
-         * characters and values up to 500 characters.
+         * characters and values up to 500 characters. _Note:_ This should not be used for storing
+         * PII data.
          */
         public RedirectFlowCreateRequest withMetadata(String key, String value) {
             if (metadata == null) {
