@@ -218,14 +218,12 @@ public class Mandate {
         }
 
         public enum Period {
-            @SerializedName("Day")
-            DAY, @SerializedName("Week")
-            WEEK, @SerializedName("Fortnight")
-            FORTNIGHT, @SerializedName("Month")
-            MONTH, @SerializedName("Half_year")
-            HALF_YEAR, @SerializedName("Annual")
-            ANNUAL, @SerializedName("Adhoc")
-            ADHOC, @SerializedName("unknown")
+            @SerializedName("day")
+            DAY, @SerializedName("week")
+            WEEK, @SerializedName("month")
+            MONTH, @SerializedName("year")
+            YEAR, @SerializedName("flexible")
+            FLEXIBLE, @SerializedName("unknown")
             UNKNOWN
         }
     }
