@@ -552,19 +552,19 @@ public class BillingRequest {
             }
 
             public enum MandatePurposeCode {
-                @SerializedName("MORT")
-                MORT, @SerializedName("UTIL")
-                UTIL, @SerializedName("LOAN")
-                LOAN, @SerializedName("DEPD")
-                DEPD, @SerializedName("GAMP")
-                GAMP, @SerializedName("RETL")
-                RETL, @SerializedName("SALA")
-                SALA, @SerializedName("PERS")
-                PERS, @SerializedName("GOVT")
-                GOVT, @SerializedName("PENS")
-                PENS, @SerializedName("TAXS")
-                TAXS, @SerializedName("OTHR")
-                OTHR, @SerializedName("unknown")
+                @SerializedName("mortgage")
+                MORTGAGE, @SerializedName("utility")
+                UTILITY, @SerializedName("loan")
+                LOAN, @SerializedName("dependant_support")
+                DEPENDANT_SUPPORT, @SerializedName("gambling")
+                GAMBLING, @SerializedName("retail")
+                RETAIL, @SerializedName("salary")
+                SALARY, @SerializedName("personal")
+                PERSONAL, @SerializedName("government")
+                GOVERNMENT, @SerializedName("pension")
+                PENSION, @SerializedName("tax")
+                TAX, @SerializedName("other")
+                OTHER, @SerializedName("unknown")
                 UNKNOWN
             }
 
