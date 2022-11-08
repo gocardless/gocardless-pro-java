@@ -1,0 +1,79 @@
+name: gocardless/gocardless-pro-java/build
+on:
+  push:
+    branches:
+    - master
+env:
+  GITHUB_EMAIL: xxxx.com
+  GITHUB_USERNAME: xxxxobot
+  GPG_PASSPHRASE: xxxxc
+  SECRING_GPG_ASC_BASE64: xxxxLQo=
+  SONATYPE_PASSWORD: xxxx1mur
+  SONATYPE_USERNAME: xxxxebot
+jobs:
+  test_library_jdk8:
+    runs-on: ubuntu-latest
+    container:
+      image: openjdk:8
+    steps:
+    - uses: actions/checkout@v2
+    - name: Test
+      run: |-
+        export TERM=${TERM:-dumb}
+        ./install_crypto_deps.sh
+        ./gradlew test
+    - name: Save test results
+      run: |-
+        mkdir -p ~/junit
+        find . -type f -regex "$OUT_DIR/build/test-results/test/.*xml" -exec cp {} ~/junit/ \;
+      if: always()
+    - uses: actions/upload-artifact@v2
+      with:
+        path: "~/junit"
+    - uses: actions/upload-artifact@v2
+      with:
+        path: "~/junit"
+  test_library_jdk9:
+    runs-on: ubuntu-latest
+    container:
+      image: openjdk:9
+    steps:
+    - uses: actions/checkout@v2
+    - name: Test
+      run: |-
+        export TERM=${TERM:-dumb}
+        ./install_crypto_deps.sh
+        ./gradlew test
+    - name: Save test results
+      run: |-
+        mkdir -p ~/junit
+        find . -type f -regex "$OUT_DIR/build/test-results/test/.*xml" -exec cp {} ~/junit/ \;
+      if: always()
+    - uses: actions/upload-artifact@v2
+      with:
+        path: "~/junit"
+    - uses: actions/upload-artifact@v2
+      with:
+        path: "~/junit"
+  test_library_jdk11:
+    runs-on: ubuntu-latest
+    container:
+      image: openjdk:11
+    steps:
+    - uses: actions/checkout@v2
+    - name: Test
+      run: |-
+        export TERM=${TERM:-dumb}
+        ./install_crypto_deps.sh
+        ./gradlew test
+    - name: Save test results
+      run: |-
+        mkdir -p ~/junit
+        find . -type f -regex "$OUT_DIR/build/test-results/test/.*xml" -exec cp {} ~/junit/ \;
+      if: always()
+    - uses: actions/upload-artifact@v2
+      with:
+        path: "~/junit"
+    - uses: actions/upload-artifact@v2
+      with:
+        path: "~/junit"
