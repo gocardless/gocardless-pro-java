@@ -454,11 +454,11 @@ public class Creditor {
             BECS_NZ, @SerializedName("betalingsservice")
             BETALINGSSERVICE, @SerializedName("faster_payments")
             FASTER_PAYMENTS, @SerializedName("pad")
-            PAD, @SerializedName("sepa")
+            PAD, @SerializedName("pay_to")
+            PAY_TO, @SerializedName("sepa")
             SEPA, @SerializedName("sepa_credit_transfer")
             SEPA_CREDIT_TRANSFER, @SerializedName("sepa_instant_credit_transfer")
-            SEPA_INSTANT_CREDIT_TRANSFER, @SerializedName("pay_to")
-            PAY_TO, @SerializedName("unknown")
+            SEPA_INSTANT_CREDIT_TRANSFER, @SerializedName("unknown")
             UNKNOWN
         }
     }

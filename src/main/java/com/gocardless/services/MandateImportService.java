@@ -100,8 +100,8 @@ public class MandateImportService {
         private Scheme scheme;
 
         /**
-         * A Direct Debit scheme. Currently "ach", "autogiro", "bacs", "becs", "becs_nz",
-         * "betalingsservice", "pad" and "sepa_core" are supported.
+         * A bank payment scheme. Currently "ach", "autogiro", "bacs", "becs", "becs_nz",
+         * "betalingsservice", "faster_payments", "pad", "pay_to" and "sepa_core" are supported.
          */
         public MandateImportCreateRequest withScheme(Scheme scheme) {
             this.scheme = scheme;
@@ -158,10 +158,11 @@ public class MandateImportService {
             BACS, @SerializedName("becs")
             BECS, @SerializedName("becs_nz")
             BECS_NZ, @SerializedName("betalingsservice")
-            BETALINGSSERVICE, @SerializedName("pad")
-            PAD, @SerializedName("sepa_core")
-            SEPA_CORE, @SerializedName("pay_to")
-            PAY_TO, @SerializedName("unknown")
+            BETALINGSSERVICE, @SerializedName("faster_payments")
+            FASTER_PAYMENTS, @SerializedName("pad")
+            PAD, @SerializedName("pay_to")
+            PAY_TO, @SerializedName("sepa_core")
+            SEPA_CORE, @SerializedName("unknown")
             UNKNOWN;
 
             @Override

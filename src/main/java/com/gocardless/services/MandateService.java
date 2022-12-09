@@ -171,7 +171,7 @@ public class MandateService {
         }
 
         /**
-         * <a name="mandates_scheme"></a>Direct Debit scheme to which this mandate and associated
+         * <a name="mandates_scheme"></a>Bank payment scheme to which this mandate and associated
          * payments are submitted. Can be supplied or automatically detected from the customer's
          * bank account.
          */
@@ -257,6 +257,7 @@ public class MandateService {
         private String creditor;
         private String customer;
         private String customerBankAccount;
+        private String mandateType;
         private String reference;
         private List<String> scheme;
         private List<Status> status;
@@ -365,6 +366,14 @@ public class MandateService {
         }
 
         /**
+         * Mandate type
+         */
+        public MandateListRequest<S> withMandateType(String mandateType) {
+            this.mandateType = mandateType;
+            return this;
+        }
+
+        /**
          * Unique reference. Different schemes have different length and [character
          * set](#appendix-character-sets) requirements. GoCardless will generate a unique reference
          * satisfying the different scheme requirements if this field is left blank.
@@ -437,6 +446,9 @@ public class MandateService {
             }
             if (customerBankAccount != null) {
                 params.put("customer_bank_account", customerBankAccount);
+            }
+            if (mandateType != null) {
+                params.put("mandate_type", mandateType);
             }
             if (reference != null) {
                 params.put("reference", reference);

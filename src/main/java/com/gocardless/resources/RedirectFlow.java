@@ -147,10 +147,11 @@ public class RedirectFlow {
         BACS, @SerializedName("becs")
         BECS, @SerializedName("becs_nz")
         BECS_NZ, @SerializedName("betalingsservice")
-        BETALINGSSERVICE, @SerializedName("pad")
-        PAD, @SerializedName("sepa_core")
-        SEPA_CORE, @SerializedName("pay_to")
-        PAY_TO, @SerializedName("unknown")
+        BETALINGSSERVICE, @SerializedName("faster_payments")
+        FASTER_PAYMENTS, @SerializedName("pad")
+        PAD, @SerializedName("pay_to")
+        PAY_TO, @SerializedName("sepa_core")
+        SEPA_CORE, @SerializedName("unknown")
         UNKNOWN
     }
 
