@@ -19,6 +19,7 @@ public class BillingRequestFlow {
     private String exitUri;
     private String expiresAt;
     private String id;
+    private String language;
     private Links links;
     private Boolean lockBankAccount;
     private Boolean lockCurrency;
@@ -72,6 +73,14 @@ public class BillingRequestFlow {
         return id;
     }
 
+    /**
+     * Sets the default language of the Billing Request Flow and the customer. [ISO
+     * 639-1](https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes) code.
+     */
+    public String getLanguage() {
+        return language;
+    }
+
     public Links getLinks() {
         return links;
     }
@@ -79,7 +88,11 @@ public class BillingRequestFlow {
     /**
      * If true, the payer will not be able to change their bank account within the flow. If the
      * bank_account details are collected as part of bank_authorisation then GC will set this value
-     * to true mid flow
+     * to true mid flow.
+     * 
+     * You can only lock bank account if these have already been completed as a part of the billing
+     * request.
+     * 
      */
     public Boolean getLockBankAccount() {
         return lockBankAccount;
@@ -97,7 +110,11 @@ public class BillingRequestFlow {
     /**
      * If true, the payer will not be able to edit their customer details within the flow. If the
      * customer details are collected as part of bank_authorisation then GC will set this value to
-     * true mid flow
+     * true mid flow.
+     * 
+     * You can only lock customer details if these have already been completed as a part of the
+     * billing request.
+     * 
      */
     public Boolean getLockCustomerDetails() {
         return lockCustomerDetails;
@@ -215,7 +232,6 @@ public class BillingRequestFlow {
         private String email;
         private String familyName;
         private String givenName;
-        private String language;
         private String postalCode;
         private String region;
         private String swedishIdentityNumber;
@@ -290,13 +306,6 @@ public class BillingRequestFlow {
          */
         public String getGivenName() {
             return givenName;
-        }
-
-        /**
-         * [ISO 639-1](http://en.wikipedia.org/wiki/List_of_ISO_639-1_codes) code.
-         */
-        public String getLanguage() {
-            return language;
         }
 
         /**

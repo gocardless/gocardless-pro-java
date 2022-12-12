@@ -115,7 +115,7 @@ public class Event {
         private String deadline;
         private String id;
         private Boolean mandatory;
-        private Type type;
+        private String type;
 
         /**
          * Time after which GoCardless will send the notification by email.
@@ -139,33 +139,11 @@ public class Event {
         }
 
         /**
-         * The type of notification the customer shall receive. One of:
-         * <ul>
-         * <li>`payment_created`</li>
-         * <li>`payment_cancelled`</li>
-         * <li>`mandate_created`</li>
-         * <li>`mandate_blocked`</li>
-         * <li>`subscription_created`</li>
-         * <li>`subscription_cancelled`</li>
-         * <li>`instalment_schedule_created`</li>
-         * <li>`instalment_schedule_cancelled`</li>
-         * </ul>
+         * See [here](#core-endpoints-customer-notifications) for a complete list of customer
+         * notification types.
          */
-        public Type getType() {
+        public String getType() {
             return type;
-        }
-
-        public enum Type {
-            @SerializedName("payment_created")
-            PAYMENT_CREATED, @SerializedName("payment_cancelled")
-            PAYMENT_CANCELLED, @SerializedName("mandate_created")
-            MANDATE_CREATED, @SerializedName("mandate_blocked")
-            MANDATE_BLOCKED, @SerializedName("subscription_created")
-            SUBSCRIPTION_CREATED, @SerializedName("subscription_cancelled")
-            SUBSCRIPTION_CANCELLED, @SerializedName("instalment_schedule_created")
-            INSTALMENT_SCHEDULE_CREATED, @SerializedName("instalment_schedule_cancelled")
-            INSTALMENT_SCHEDULE_CANCELLED, @SerializedName("unknown")
-            UNKNOWN
         }
     }
 
@@ -264,7 +242,7 @@ public class Event {
         }
 
         /**
-         * A Direct Debit scheme. Set when a bank is the origin of the event.
+         * A bank payment scheme. Set when a bank is the origin of the event.
          */
         public Scheme getScheme() {
             return scheme;
@@ -294,11 +272,12 @@ public class Event {
             BACS, @SerializedName("becs")
             BECS, @SerializedName("becs_nz")
             BECS_NZ, @SerializedName("betalingsservice")
-            BETALINGSSERVICE, @SerializedName("pad")
-            PAD, @SerializedName("sepa_core")
+            BETALINGSSERVICE, @SerializedName("faster_payments")
+            FASTER_PAYMENTS, @SerializedName("pad")
+            PAD, @SerializedName("pay_to")
+            PAY_TO, @SerializedName("sepa_core")
             SEPA_CORE, @SerializedName("sepa_cor1")
-            SEPA_COR1, @SerializedName("pay_to")
-            PAY_TO, @SerializedName("unknown")
+            SEPA_COR1, @SerializedName("unknown")
             UNKNOWN
         }
     }

@@ -98,8 +98,9 @@ public class BillingRequestService {
 
     /**
      * This will allow for the updating of the currency and subsequently the scheme if needed for a
-     * billing request this will only be available for mandate only flows, it will not support
-     * payments requests or plans
+     * Billing Request. This will only be available for mandate only flows which do not have the
+     * lock_currency flag set to true on the Billing Request Flow. It will also not support any
+     * request which has a payments request.
      */
     public BillingRequestChooseCurrencyRequest chooseCurrency(String identity) {
         return new BillingRequestChooseCurrencyRequest(httpClient, identity);
@@ -320,6 +321,18 @@ public class BillingRequestService {
         }
 
         /**
+         * Constraints that will apply to the mandate_request. (Optional) Specifically for PayTo and
+         * VRP.
+         */
+        public BillingRequestCreateRequest withMandateRequestConstraints(Constraints constraints) {
+            if (mandateRequest == null) {
+                mandateRequest = new MandateRequest();
+            }
+            mandateRequest.withConstraints(constraints);
+            return this;
+        }
+
+        /**
          * [ISO 4217](http://en.wikipedia.org/wiki/ISO_4217#Active_codes) currency code.
          */
         public BillingRequestCreateRequest withMandateRequestCurrency(String currency) {
@@ -327,6 +340,19 @@ public class BillingRequestService {
                 mandateRequest = new MandateRequest();
             }
             mandateRequest.withCurrency(currency);
+            return this;
+        }
+
+        /**
+         * A human-readable description of the payment and/or mandate. This will be displayed to the
+         * payer when authorising the billing request.
+         * 
+         */
+        public BillingRequestCreateRequest withMandateRequestDescription(String description) {
+            if (mandateRequest == null) {
+                mandateRequest = new MandateRequest();
+            }
+            mandateRequest.withDescription(description);
             return this;
         }
 
@@ -357,8 +383,10 @@ public class BillingRequestService {
         }
 
         /**
-         * A Direct Debit scheme. Currently "ach", "bacs", "becs", "becs_nz", "betalingsservice",
-         * "pad", "pay_to" and "sepa_core" are supported.
+         * A bank payment scheme. Currently "ach", "autogiro", "bacs", "becs", "becs_nz",
+         * "betalingsservice", "faster_payments", "pad", "pay_to" and "sepa_core" are supported.
+         * Optional for mandate only requests - if left blank, the payer will be able to select the
+         * currency/scheme to pay with from a list of your available schemes.
          */
         public BillingRequestCreateRequest withMandateRequestScheme(String scheme) {
             if (mandateRequest == null) {
@@ -463,8 +491,8 @@ public class BillingRequestService {
         }
 
         /**
-         * A human-readable description of the payment. This will be displayed to the payer when
-         * authorising the billing request.
+         * A human-readable description of the payment and/or mandate. This will be displayed to the
+         * payer when authorising the billing request.
          * 
          */
         public BillingRequestCreateRequest withPaymentRequestDescription(String description) {
@@ -580,18 +608,196 @@ public class BillingRequestService {
             }
         }
 
+        public static class PeriodicLimits {
+            private Alignment alignment;
+            private Integer maxPayments;
+            private Integer maxTotalAmount;
+            private Period period;
+
+            /**
+             * The alignment of the period.
+             * 
+             * `calendar` - this will finish on the end of the current period. For example this will
+             * expire on the Monday for the current week or the January for the next year.
+             * 
+             * `creation_date` - this will finish on the next instance of the current period. For
+             * example Monthly it will expire on the same day of the next month, or yearly the same
+             * day of the next year.
+             * 
+             */
+            public PeriodicLimits withAlignment(Alignment alignment) {
+                this.alignment = alignment;
+                return this;
+            }
+
+            /**
+             * The maximum number of payments that can be collected in this periodic limit
+             */
+            public PeriodicLimits withMaxPayments(Integer maxPayments) {
+                this.maxPayments = maxPayments;
+                return this;
+            }
+
+            /**
+             * The maximum total amount that can be charged for all payments in this periodic limit
+             */
+            public PeriodicLimits withMaxTotalAmount(Integer maxTotalAmount) {
+                this.maxTotalAmount = maxTotalAmount;
+                return this;
+            }
+
+            /**
+             * The repeating period for this mandate
+             */
+            public PeriodicLimits withPeriod(Period period) {
+                this.period = period;
+                return this;
+            }
+
+            public Map<String, Object> getQueryParams() {
+                ImmutableMap.Builder<String, Object> params = ImmutableMap.builder();
+                if (alignment != null) {
+                    params.put("periodic_limits[alignment]", alignment);
+                }
+                if (maxPayments != null) {
+                    params.put("periodic_limits[max_payments]", maxPayments);
+                }
+                if (maxTotalAmount != null) {
+                    params.put("periodic_limits[max_total_amount]", maxTotalAmount);
+                }
+                if (period != null) {
+                    params.put("periodic_limits[period]", period);
+                }
+                return params.build();
+            }
+
+            public enum Alignment {
+                @SerializedName("calendar")
+                CALENDAR, @SerializedName("creation_date")
+                CREATION_DATE, @SerializedName("unknown")
+                UNKNOWN;
+
+                @Override
+                public String toString() {
+                    return name().toLowerCase();
+                }
+            }
+
+            public enum Period {
+                @SerializedName("day")
+                DAY, @SerializedName("week")
+                WEEK, @SerializedName("month")
+                MONTH, @SerializedName("year")
+                YEAR, @SerializedName("flexible")
+                FLEXIBLE, @SerializedName("unknown")
+                UNKNOWN;
+
+                @Override
+                public String toString() {
+                    return name().toLowerCase();
+                }
+            }
+        }
+
+        public static class Constraints {
+            private String endDate;
+            private Integer maxAmountPerPayment;
+            private List<PeriodicLimits> periodicLimits;
+            private String startDate;
+
+            /**
+             * The latest date at which payments can be taken, must occur after start_date if
+             * present
+             * 
+             * This is an optional field and if it is not supplied the agreement will be considered
+             * open and will not have an end date. Keep in mind the end date must take into account
+             * how long it will take the user to set up this agreement via the BillingRequest.
+             * 
+             */
+            public Constraints withEndDate(String endDate) {
+                this.endDate = endDate;
+                return this;
+            }
+
+            /**
+             * The maximum amount that can be charged for a single payment
+             */
+            public Constraints withMaxAmountPerPayment(Integer maxAmountPerPayment) {
+                this.maxAmountPerPayment = maxAmountPerPayment;
+                return this;
+            }
+
+            /**
+             * List of periodic limits and constraints which apply to them
+             */
+            public Constraints withPeriodicLimits(List<PeriodicLimits> periodicLimits) {
+                this.periodicLimits = periodicLimits;
+                return this;
+            }
+
+            /**
+             * The date from which payments can be taken.
+             * 
+             * This is an optional field and if it is not supplied the start date will be set to the
+             * day authorisation happens.
+             * 
+             */
+            public Constraints withStartDate(String startDate) {
+                this.startDate = startDate;
+                return this;
+            }
+
+            public Map<String, Object> getQueryParams() {
+                ImmutableMap.Builder<String, Object> params = ImmutableMap.builder();
+                if (endDate != null) {
+                    params.put("constraints[end_date]", endDate);
+                }
+                if (maxAmountPerPayment != null) {
+                    params.put("constraints[max_amount_per_payment]", maxAmountPerPayment);
+                }
+                if (periodicLimits != null) {
+                    params.put("constraints[periodic_limits]", periodicLimits);
+                }
+                if (startDate != null) {
+                    params.put("constraints[start_date]", startDate);
+                }
+                return params.build();
+            }
+        }
+
         public static class MandateRequest {
+            private Constraints constraints;
             private String currency;
+            private String description;
             private Map<String, String> metadata;
             private String reference;
             private String scheme;
             private Verify verify;
 
             /**
+             * Constraints that will apply to the mandate_request. (Optional) Specifically for PayTo
+             * and VRP.
+             */
+            public MandateRequest withConstraints(Constraints constraints) {
+                this.constraints = constraints;
+                return this;
+            }
+
+            /**
              * [ISO 4217](http://en.wikipedia.org/wiki/ISO_4217#Active_codes) currency code.
              */
             public MandateRequest withCurrency(String currency) {
                 this.currency = currency;
+                return this;
+            }
+
+            /**
+             * A human-readable description of the payment and/or mandate. This will be displayed to
+             * the payer when authorising the billing request.
+             * 
+             */
+            public MandateRequest withDescription(String description) {
+                this.description = description;
                 return this;
             }
 
@@ -615,8 +821,10 @@ public class BillingRequestService {
             }
 
             /**
-             * A Direct Debit scheme. Currently "ach", "bacs", "becs", "becs_nz",
-             * "betalingsservice", "pad", "pay_to" and "sepa_core" are supported.
+             * A bank payment scheme. Currently "ach", "autogiro", "bacs", "becs", "becs_nz",
+             * "betalingsservice", "faster_payments", "pad", "pay_to" and "sepa_core" are supported.
+             * Optional for mandate only requests - if left blank, the payer will be able to select
+             * the currency/scheme to pay with from a list of your available schemes.
              */
             public MandateRequest withScheme(String scheme) {
                 this.scheme = scheme;
@@ -706,8 +914,8 @@ public class BillingRequestService {
             }
 
             /**
-             * A human-readable description of the payment. This will be displayed to the payer when
-             * authorising the billing request.
+             * A human-readable description of the payment and/or mandate. This will be displayed to
+             * the payer when authorising the billing request.
              * 
              */
             public PaymentRequest withDescription(String description) {
@@ -1528,8 +1736,9 @@ public class BillingRequestService {
      * Request class for {@link BillingRequestService#chooseCurrency }.
      *
      * This will allow for the updating of the currency and subsequently the scheme if needed for a
-     * billing request this will only be available for mandate only flows, it will not support
-     * payments requests or plans
+     * Billing Request. This will only be available for mandate only flows which do not have the
+     * lock_currency flag set to true on the Billing Request Flow. It will also not support any
+     * request which has a payments request.
      */
     public static final class BillingRequestChooseCurrencyRequest
             extends PostRequest<BillingRequest> {

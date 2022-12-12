@@ -51,9 +51,8 @@ public class PayoutItem {
     /**
      * An array of tax items <em>beta</em>
      * 
-     * _Note_: VAT applies to transaction and surcharge fees for merchants operating in the
-     * <a href="https://gocardless.com/legal/vat-faqs">UK</a> and
-     * <a href="https://gocardless.com/fr-fr/legal/faq-tva">France</a>.
+     * _Note_: VAT applies to transaction and surcharge fees for merchants operating in the UK and
+     * France.
      */
     public List<Taxis> getTaxes() {
         return taxes;
@@ -113,7 +112,8 @@ public class PayoutItem {
 
         /**
          * Unique identifier, beginning with "MD". Note that this prefix may not apply to mandates
-         * created before 2016.
+         * created before 2016. Present only for the items of type `payment_refunded`, `refund` and
+         * `refund_funds_returned`.
          */
         public String getMandate() {
             return mandate;
@@ -127,7 +127,8 @@ public class PayoutItem {
         }
 
         /**
-         * Unique identifier, beginning with "RF".
+         * Unique identifier, beginning with "RF". Present only for the items of type
+         * `payment_refunded`, `refund` and `refund_funds_returned`.
          */
         public String getRefund() {
             return refund;

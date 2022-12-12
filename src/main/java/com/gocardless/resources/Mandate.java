@@ -1,6 +1,7 @@
 package com.gocardless.resources;
 
 import com.google.gson.annotations.SerializedName;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -16,6 +17,7 @@ public class Mandate {
         // blank to prevent instantiation
     }
 
+    private ConsentParameters consentParameters;
     private String createdAt;
     private String id;
     private Links links;
@@ -25,6 +27,13 @@ public class Mandate {
     private String reference;
     private String scheme;
     private Status status;
+
+    /**
+     * (Optional) Payto and VRP Scheme specific information
+     */
+    public ConsentParameters getConsentParameters() {
+        return consentParameters;
+    }
 
     /**
      * Fixed [timestamp](#api-usage-time-zones--dates), recording when this resource was created.
@@ -79,7 +88,7 @@ public class Mandate {
     }
 
     /**
-     * <a name="mandates_scheme"></a>Direct Debit scheme to which this mandate and associated
+     * <a name="mandates_scheme"></a>Bank payment scheme to which this mandate and associated
      * payments are submitted. Can be supplied or automatically detected from the customer's bank
      * account.
      */
@@ -122,6 +131,91 @@ public class Mandate {
         BLOCKED, @SerializedName("suspended_by_payer")
         SUSPENDED_BY_PAYER, @SerializedName("unknown")
         UNKNOWN
+    }
+
+    /**
+     * Represents a consent parameter resource returned from the API.
+     *
+     * (Optional) Payto and VRP Scheme specific information
+     */
+    public static class ConsentParameters {
+        private ConsentParameters() {
+            // blank to prevent instantiation
+        }
+
+        private String endDate;
+        private Integer maxAmountPerPayment;
+        private List<Period> periods;
+        private String startDate;
+
+        /**
+         * The latest date at which payments can be taken, must occur after start_date if present
+         */
+        public String getEndDate() {
+            return endDate;
+        }
+
+        /**
+         * The maximum amount that can be charged for a single payment
+         */
+        public Integer getMaxAmountPerPayment() {
+            return maxAmountPerPayment;
+        }
+
+        /**
+         * Frequency configuration
+         */
+        public List<Period> getPeriods() {
+            return periods;
+        }
+
+        /**
+         * The date from which payments can be taken
+         */
+        public String getStartDate() {
+            return startDate;
+        }
+
+        public static class Period {
+            private Period() {
+                // blank to prevent instantiation
+            }
+
+            private Integer maxAmountPerPeriod;
+            private Integer maxPaymentsPerPeriod;
+            private PeriodPeriod period;
+
+            /**
+             * The maximum total amount that can be charged for all payments in this period
+             */
+            public Integer getMaxAmountPerPeriod() {
+                return maxAmountPerPeriod;
+            }
+
+            /**
+             * The maximum number of payments that can be collected in this period
+             */
+            public Integer getMaxPaymentsPerPeriod() {
+                return maxPaymentsPerPeriod;
+            }
+
+            /**
+             * The repeating period for this mandate
+             */
+            public PeriodPeriod getPeriod() {
+                return period;
+            }
+
+            public enum PeriodPeriod {
+                @SerializedName("day")
+                DAY, @SerializedName("week")
+                WEEK, @SerializedName("month")
+                MONTH, @SerializedName("year")
+                YEAR, @SerializedName("flexible")
+                FLEXIBLE, @SerializedName("unknown")
+                UNKNOWN
+            }
+        }
     }
 
     public static class Links {

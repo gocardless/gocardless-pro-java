@@ -229,6 +229,7 @@ public class InstalmentScheduleService {
          * <strong>BECS</strong> - 30 characters<br />
          * <strong>BECS NZ</strong> - 12 characters<br />
          * <strong>Betalingsservice</strong> - 30 characters<br />
+         * <strong>Faster Payments</strong> - 18 characters<br />
          * <strong>PAD</strong> - scheme doesn't offer references<br />
          * <strong>PayTo</strong> - 18 characters<br />
          * <strong>SEPA</strong> - 140 characters<br />
@@ -238,6 +239,9 @@ public class InstalmentScheduleService {
          * <strong>Restricted</strong>: You can only specify a payment reference for Bacs payments
          * (that is, when collecting from the UK) if you're on the
          * <a href='https://gocardless.com/pricing'>GoCardless Plus, Pro or Enterprise packages</a>.
+         * </p>
+         * <p class='restricted-notice'>
+         * <strong>Restricted</strong>: You can not specify a payment reference for Faster Payments.
          * </p>
          */
         public InstalmentScheduleCreateWithDatesRequest withPaymentReference(
@@ -546,6 +550,7 @@ public class InstalmentScheduleService {
          * <strong>BECS</strong> - 30 characters<br />
          * <strong>BECS NZ</strong> - 12 characters<br />
          * <strong>Betalingsservice</strong> - 30 characters<br />
+         * <strong>Faster Payments</strong> - 18 characters<br />
          * <strong>PAD</strong> - scheme doesn't offer references<br />
          * <strong>PayTo</strong> - 18 characters<br />
          * <strong>SEPA</strong> - 140 characters<br />
@@ -555,6 +560,9 @@ public class InstalmentScheduleService {
          * <strong>Restricted</strong>: You can only specify a payment reference for Bacs payments
          * (that is, when collecting from the UK) if you're on the
          * <a href='https://gocardless.com/pricing'>GoCardless Plus, Pro or Enterprise packages</a>.
+         * </p>
+         * <p class='restricted-notice'>
+         * <strong>Restricted</strong>: You can not specify a payment reference for Faster Payments.
          * </p>
          */
         public InstalmentScheduleCreateWithScheduleRequest withPaymentReference(

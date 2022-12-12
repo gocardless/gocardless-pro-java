@@ -48,6 +48,7 @@ public class BillingRequestFlowService {
             extends PostRequest<BillingRequestFlow> {
         private Boolean autoFulfil;
         private String exitUri;
+        private String language;
         private Links links;
         private Boolean lockBankAccount;
         private Boolean lockCurrency;
@@ -74,6 +75,15 @@ public class BillingRequestFlowService {
             return this;
         }
 
+        /**
+         * Sets the default language of the Billing Request Flow and the customer. [ISO
+         * 639-1](https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes) code.
+         */
+        public BillingRequestFlowCreateRequest withLanguage(String language) {
+            this.language = language;
+            return this;
+        }
+
         public BillingRequestFlowCreateRequest withLinks(Links links) {
             this.links = links;
             return this;
@@ -94,7 +104,11 @@ public class BillingRequestFlowService {
         /**
          * If true, the payer will not be able to change their bank account within the flow. If the
          * bank_account details are collected as part of bank_authorisation then GC will set this
-         * value to true mid flow
+         * value to true mid flow.
+         * 
+         * You can only lock bank account if these have already been completed as a part of the
+         * billing request.
+         * 
          */
         public BillingRequestFlowCreateRequest withLockBankAccount(Boolean lockBankAccount) {
             this.lockBankAccount = lockBankAccount;
@@ -114,7 +128,11 @@ public class BillingRequestFlowService {
         /**
          * If true, the payer will not be able to edit their customer details within the flow. If
          * the customer details are collected as part of bank_authorisation then GC will set this
-         * value to true mid flow
+         * value to true mid flow.
+         * 
+         * You can only lock customer details if these have already been completed as a part of the
+         * billing request.
+         * 
          */
         public BillingRequestFlowCreateRequest withLockCustomerDetails(
                 Boolean lockCustomerDetails) {
@@ -277,17 +295,6 @@ public class BillingRequestFlowService {
         }
 
         /**
-         * [ISO 639-1](http://en.wikipedia.org/wiki/List_of_ISO_639-1_codes) code.
-         */
-        public BillingRequestFlowCreateRequest withPrefilledCustomerLanguage(String language) {
-            if (prefilledCustomer == null) {
-                prefilledCustomer = new PrefilledCustomer();
-            }
-            prefilledCustomer.withLanguage(language);
-            return this;
-        }
-
-        /**
          * The customer's postal code.
          */
         public BillingRequestFlowCreateRequest withPrefilledCustomerPostalCode(String postalCode) {
@@ -422,7 +429,6 @@ public class BillingRequestFlowService {
             private String email;
             private String familyName;
             private String givenName;
-            private String language;
             private String postalCode;
             private String region;
             private String swedishIdentityNumber;
@@ -506,14 +512,6 @@ public class BillingRequestFlowService {
              */
             public PrefilledCustomer withGivenName(String givenName) {
                 this.givenName = givenName;
-                return this;
-            }
-
-            /**
-             * [ISO 639-1](http://en.wikipedia.org/wiki/List_of_ISO_639-1_codes) code.
-             */
-            public PrefilledCustomer withLanguage(String language) {
-                this.language = language;
                 return this;
             }
 

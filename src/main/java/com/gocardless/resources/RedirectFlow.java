@@ -99,7 +99,8 @@ public class RedirectFlow {
 
     /**
      * Key-value store of custom data. Up to 3 keys are permitted, with key names up to 50
-     * characters and values up to 500 characters.
+     * characters and values up to 500 characters. _Note:_ This should not be used for storing PII
+     * data.
      */
     public Map<String, String> getMetadata() {
         return metadata;
@@ -146,10 +147,11 @@ public class RedirectFlow {
         BACS, @SerializedName("becs")
         BECS, @SerializedName("becs_nz")
         BECS_NZ, @SerializedName("betalingsservice")
-        BETALINGSSERVICE, @SerializedName("pad")
-        PAD, @SerializedName("sepa_core")
-        SEPA_CORE, @SerializedName("pay_to")
-        PAY_TO, @SerializedName("unknown")
+        BETALINGSSERVICE, @SerializedName("faster_payments")
+        FASTER_PAYMENTS, @SerializedName("pad")
+        PAD, @SerializedName("pay_to")
+        PAY_TO, @SerializedName("sepa_core")
+        SEPA_CORE, @SerializedName("unknown")
         UNKNOWN
     }
 

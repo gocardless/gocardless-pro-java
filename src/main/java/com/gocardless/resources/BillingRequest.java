@@ -197,7 +197,8 @@ public class BillingRequest {
 
         public enum Type {
             @SerializedName("choose_currency")
-            CHOOSE_CURRENCY, @SerializedName("collect_customer_details")
+            CHOOSE_CURRENCY, @SerializedName("collect_amount")
+            COLLECT_AMOUNT, @SerializedName("collect_customer_details")
             COLLECT_CUSTOMER_DETAILS, @SerializedName("collect_bank_account")
             COLLECT_BANK_ACCOUNT, @SerializedName("bank_authorisation")
             BANK_AUTHORISATION, @SerializedName("confirm_payer_details")
@@ -402,17 +403,36 @@ public class BillingRequest {
             // blank to prevent instantiation
         }
 
+        private Constraints constraints;
         private String currency;
+        private String description;
         private Links links;
         private Map<String, String> metadata;
         private String scheme;
         private Verify verify;
 
         /**
+         * Constraints that will apply to the mandate_request. (Optional) Specifically for PayTo and
+         * VRP.
+         */
+        public Constraints getConstraints() {
+            return constraints;
+        }
+
+        /**
          * [ISO 4217](http://en.wikipedia.org/wiki/ISO_4217#Active_codes) currency code.
          */
         public String getCurrency() {
             return currency;
+        }
+
+        /**
+         * A human-readable description of the payment and/or mandate. This will be displayed to the
+         * payer when authorising the billing request.
+         * 
+         */
+        public String getDescription() {
+            return description;
         }
 
         public Links getLinks() {
@@ -428,8 +448,10 @@ public class BillingRequest {
         }
 
         /**
-         * A Direct Debit scheme. Currently "ach", "bacs", "becs", "becs_nz", "betalingsservice",
-         * "pad", "pay_to" and "sepa_core" are supported.
+         * A bank payment scheme. Currently "ach", "autogiro", "bacs", "becs", "becs_nz",
+         * "betalingsservice", "faster_payments", "pad", "pay_to" and "sepa_core" are supported.
+         * Optional for mandate only requests - if left blank, the payer will be able to select the
+         * currency/scheme to pay with from a list of your available schemes.
          */
         public String getScheme() {
             return scheme;
@@ -469,6 +491,126 @@ public class BillingRequest {
             WHEN_AVAILABLE, @SerializedName("always")
             ALWAYS, @SerializedName("unknown")
             UNKNOWN
+        }
+
+        /**
+         * Represents a constraint resource returned from the API.
+         *
+         * Constraints that will apply to the mandate_request. (Optional) Specifically for PayTo and
+         * VRP.
+         */
+        public static class Constraints {
+            private Constraints() {
+                // blank to prevent instantiation
+            }
+
+            private String endDate;
+            private Integer maxAmountPerPayment;
+            private List<PeriodicLimit> periodicLimits;
+            private String startDate;
+
+            /**
+             * The latest date at which payments can be taken, must occur after start_date if
+             * present
+             * 
+             * This is an optional field and if it is not supplied the agreement will be considered
+             * open and will not have an end date. Keep in mind the end date must take into account
+             * how long it will take the user to set up this agreement via the BillingRequest.
+             * 
+             */
+            public String getEndDate() {
+                return endDate;
+            }
+
+            /**
+             * The maximum amount that can be charged for a single payment
+             */
+            public Integer getMaxAmountPerPayment() {
+                return maxAmountPerPayment;
+            }
+
+            /**
+             * List of periodic limits and constraints which apply to them
+             */
+            public List<PeriodicLimit> getPeriodicLimits() {
+                return periodicLimits;
+            }
+
+            /**
+             * The date from which payments can be taken.
+             * 
+             * This is an optional field and if it is not supplied the start date will be set to the
+             * day authorisation happens.
+             * 
+             */
+            public String getStartDate() {
+                return startDate;
+            }
+
+            public static class PeriodicLimit {
+                private PeriodicLimit() {
+                    // blank to prevent instantiation
+                }
+
+                private Alignment alignment;
+                private Integer maxPayments;
+                private Integer maxTotalAmount;
+                private Period period;
+
+                /**
+                 * The alignment of the period.
+                 * 
+                 * `calendar` - this will finish on the end of the current period. For example this
+                 * will expire on the Monday for the current week or the January for the next year.
+                 * 
+                 * `creation_date` - this will finish on the next instance of the current period.
+                 * For example Monthly it will expire on the same day of the next month, or yearly
+                 * the same day of the next year.
+                 * 
+                 */
+                public Alignment getAlignment() {
+                    return alignment;
+                }
+
+                /**
+                 * The maximum number of payments that can be collected in this periodic limit
+                 */
+                public Integer getMaxPayments() {
+                    return maxPayments;
+                }
+
+                /**
+                 * The maximum total amount that can be charged for all payments in this periodic
+                 * limit
+                 */
+                public Integer getMaxTotalAmount() {
+                    return maxTotalAmount;
+                }
+
+                /**
+                 * The repeating period for this mandate
+                 */
+                public Period getPeriod() {
+                    return period;
+                }
+
+                public enum Alignment {
+                    @SerializedName("calendar")
+                    CALENDAR, @SerializedName("creation_date")
+                    CREATION_DATE, @SerializedName("unknown")
+                    UNKNOWN
+                }
+
+                public enum Period {
+                    @SerializedName("day")
+                    DAY, @SerializedName("week")
+                    WEEK, @SerializedName("month")
+                    MONTH, @SerializedName("year")
+                    YEAR, @SerializedName("flexible")
+                    FLEXIBLE, @SerializedName("unknown")
+                    UNKNOWN
+                }
+            }
         }
 
         public static class Links {
@@ -533,8 +675,8 @@ public class BillingRequest {
         }
 
         /**
-         * A human-readable description of the payment. This will be displayed to the payer when
-         * authorising the billing request.
+         * A human-readable description of the payment and/or mandate. This will be displayed to the
+         * payer when authorising the billing request.
          * 
          */
         public String getDescription() {

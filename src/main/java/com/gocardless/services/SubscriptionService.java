@@ -68,7 +68,9 @@ public class SubscriptionService {
     }
 
     /**
-     * Returns a [cursor-paginated](#api-usage-cursor-pagination) list of your subscriptions.
+     * Returns a [cursor-paginated](#api-usage-cursor-pagination) list of your subscriptions. Please
+     * note if the subscriptions are related to customers who have been removed, they will not be
+     * shown in the response.
      */
     public SubscriptionListRequest<ListResponse<Subscription>> list() {
         return new SubscriptionListRequest<>(httpClient,
@@ -470,7 +472,9 @@ public class SubscriptionService {
     /**
      * Request class for {@link SubscriptionService#list }.
      *
-     * Returns a [cursor-paginated](#api-usage-cursor-pagination) list of your subscriptions.
+     * Returns a [cursor-paginated](#api-usage-cursor-pagination) list of your subscriptions. Please
+     * note if the subscriptions are related to customers who have been removed, they will not be
+     * shown in the response.
      */
     public static final class SubscriptionListRequest<S> extends ListRequest<S, Subscription> {
         private CreatedAt createdAt;

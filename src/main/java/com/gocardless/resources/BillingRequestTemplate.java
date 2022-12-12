@@ -17,6 +17,7 @@ public class BillingRequestTemplate {
     private String createdAt;
     private String id;
     private String mandateRequestCurrency;
+    private String mandateRequestDescription;
     private Map<String, String> mandateRequestMetadata;
     private String mandateRequestScheme;
     private MandateRequestVerify mandateRequestVerify;
@@ -60,6 +61,15 @@ public class BillingRequestTemplate {
     }
 
     /**
+     * A human-readable description of the payment and/or mandate. This will be displayed to the
+     * payer when authorising the billing request.
+     * 
+     */
+    public String getMandateRequestDescription() {
+        return mandateRequestDescription;
+    }
+
+    /**
      * Key-value store of custom data that will be applied to the mandate created when this request
      * is fulfilled. Up to 3 keys are permitted, with key names up to 50 characters and values up to
      * 500 characters.
@@ -69,8 +79,10 @@ public class BillingRequestTemplate {
     }
 
     /**
-     * A Direct Debit scheme. Currently "ach", "bacs", "becs", "becs_nz", "betalingsservice", "pad",
-     * "pay_to" and "sepa_core" are supported.
+     * A bank payment scheme. Currently "ach", "autogiro", "bacs", "becs", "becs_nz",
+     * "betalingsservice", "faster_payments", "pad", "pay_to" and "sepa_core" are supported.
+     * Optional for mandate only requests - if left blank, the payer will be able to select the
+     * currency/scheme to pay with from a list of your available schemes.
      */
     public String getMandateRequestScheme() {
         return mandateRequestScheme;
@@ -136,8 +148,8 @@ public class BillingRequestTemplate {
     }
 
     /**
-     * A human-readable description of the payment. This will be displayed to the payer when
-     * authorising the billing request.
+     * A human-readable description of the payment and/or mandate. This will be displayed to the
+     * payer when authorising the billing request.
      * 
      */
     public String getPaymentRequestDescription() {

@@ -18,6 +18,7 @@ public class Creditor {
         // blank to prevent instantiation
     }
 
+    private Boolean activated;
     private String addressLine1;
     private String addressLine2;
     private String addressLine3;
@@ -37,6 +38,13 @@ public class Creditor {
     private String region;
     private List<SchemeIdentifier> schemeIdentifiers;
     private VerificationStatus verificationStatus;
+
+    /**
+     * Boolean value indicating whether the creditor is activated in the product.
+     */
+    public Boolean getActivated() {
+        return activated;
+    }
 
     /**
      * The first line of the creditor's address.
@@ -90,8 +98,7 @@ public class Creditor {
 
     /**
      * Boolean value indicating whether creditor has the [Custom Payment
-     * Pages](https://support.gocardless.com/hc/en-gb/articles/115003734705-Custom-payment-pages)
-     * functionality enabled.
+     * Pages](https://hub.gocardless.com/s/article/Custom-payment-pages) functionality enabled.
      */
     public Boolean getCustomPaymentPagesEnabled() {
         return customPaymentPagesEnabled;
@@ -447,11 +454,11 @@ public class Creditor {
             BECS_NZ, @SerializedName("betalingsservice")
             BETALINGSSERVICE, @SerializedName("faster_payments")
             FASTER_PAYMENTS, @SerializedName("pad")
-            PAD, @SerializedName("sepa")
+            PAD, @SerializedName("pay_to")
+            PAY_TO, @SerializedName("sepa")
             SEPA, @SerializedName("sepa_credit_transfer")
             SEPA_CREDIT_TRANSFER, @SerializedName("sepa_instant_credit_transfer")
-            SEPA_INSTANT_CREDIT_TRANSFER, @SerializedName("pay_to")
-            PAY_TO, @SerializedName("unknown")
+            SEPA_INSTANT_CREDIT_TRANSFER, @SerializedName("unknown")
             UNKNOWN
         }
     }
