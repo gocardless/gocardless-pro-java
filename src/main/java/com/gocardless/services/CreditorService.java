@@ -3,6 +3,7 @@ package com.gocardless.services;
 import com.gocardless.http.*;
 import com.gocardless.resources.Creditor;
 import com.google.common.collect.ImmutableMap;
+import com.google.gson.annotations.SerializedName;
 import com.google.gson.reflect.TypeToken;
 import java.util.HashMap;
 import java.util.List;
@@ -72,6 +73,7 @@ public class CreditorService {
         private String addressLine3;
         private String city;
         private String countryCode;
+        private CreditorType creditorType;
         private Map<String, String> links;
         private String name;
         private String postalCode;
@@ -115,6 +117,14 @@ public class CreditorService {
          */
         public CreditorCreateRequest withCountryCode(String countryCode) {
             this.countryCode = countryCode;
+            return this;
+        }
+
+        /**
+         * The type of business of the creditor
+         */
+        public CreditorCreateRequest withCreditorType(CreditorType creditorType) {
+            this.creditorType = creditorType;
             return this;
         }
 
@@ -196,6 +206,21 @@ public class CreditorService {
         @Override
         protected boolean hasBody() {
             return true;
+        }
+
+        public enum CreditorType {
+            @SerializedName("company")
+            COMPANY, @SerializedName("individual")
+            INDIVIDUAL, @SerializedName("charity")
+            CHARITY, @SerializedName("partnership")
+            PARTNERSHIP, @SerializedName("trust")
+            TRUST, @SerializedName("unknown")
+            UNKNOWN;
+
+            @Override
+            public String toString() {
+                return name().toLowerCase();
+            }
         }
     }
 

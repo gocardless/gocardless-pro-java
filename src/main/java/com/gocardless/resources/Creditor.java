@@ -26,6 +26,7 @@ public class Creditor {
     private String city;
     private String countryCode;
     private String createdAt;
+    private CreditorType creditorType;
     private Boolean customPaymentPagesEnabled;
     private FxPayoutCurrency fxPayoutCurrency;
     private String id;
@@ -94,6 +95,13 @@ public class Creditor {
      */
     public String getCreatedAt() {
         return createdAt;
+    }
+
+    /**
+     * The type of business of the creditor
+     */
+    public CreditorType getCreditorType() {
+        return creditorType;
     }
 
     /**
@@ -199,6 +207,16 @@ public class Creditor {
      */
     public VerificationStatus getVerificationStatus() {
         return verificationStatus;
+    }
+
+    public enum CreditorType {
+        @SerializedName("company")
+        COMPANY, @SerializedName("individual")
+        INDIVIDUAL, @SerializedName("charity")
+        CHARITY, @SerializedName("partnership")
+        PARTNERSHIP, @SerializedName("trust")
+        TRUST, @SerializedName("unknown")
+        UNKNOWN
     }
 
     public enum FxPayoutCurrency {
