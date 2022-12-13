@@ -98,7 +98,8 @@ public class Creditor {
     }
 
     /**
-     * The type of business of the creditor
+     * The type of business of the creditor. Currently, `individual`, `company`, `charity`,
+     * `partnership`, and `trust` are supported.
      */
     public CreditorType getCreditorType() {
         return creditorType;

@@ -121,7 +121,8 @@ public class CreditorService {
         }
 
         /**
-         * The type of business of the creditor
+         * The type of business of the creditor. Currently, `individual`, `company`, `charity`,
+         * `partnership`, and `trust` are supported.
          */
         public CreditorCreateRequest withCreditorType(CreditorType creditorType) {
             this.creditorType = creditorType;
