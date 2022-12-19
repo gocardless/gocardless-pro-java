@@ -536,7 +536,7 @@ public class BlockService {
 
         @Override
         protected String getPathTemplate() {
-            return "block_by_ref";
+            return "blocks/block_by_ref";
         }
 
         @Override
