@@ -315,7 +315,7 @@ public class GoCardlessClientTest {
         assertThat(blocks.get(0).getBlockType()).isEqualTo(Block.BlockType.EMAIL);
         assertThat(blocks.get(1).getId()).isEqualTo("BLC456");
         assertThat(blocks.get(1).getBlockType()).isEqualTo(Block.BlockType.BANK_ACCOUNT);
-        http.assertRequestMade("POST", "/block_by_ref",
+        http.assertRequestMade("POST", "/blocks/block_by_ref",
                 "fixtures/client/create_blocks_by_ref_request.json",
                 ImmutableMap.of("Authorization", "Bearer " + ACCESS_TOKEN));
     }
