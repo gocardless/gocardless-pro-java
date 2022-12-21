@@ -17,6 +17,7 @@ public class Mandate {
         // blank to prevent instantiation
     }
 
+    private AuthorisationSource authorisationSource;
     private ConsentParameters consentParameters;
     private String createdAt;
     private String id;
@@ -27,6 +28,20 @@ public class Mandate {
     private String reference;
     private String scheme;
     private Status status;
+
+    /**
+     * This field is ACH specific, sometimes referred to as [SEC
+     * code](https://www.moderntreasury.com/learn/sec-codes).
+     * 
+     * This is the way that the payer gives authorisation to the merchant. web: Authorisation is
+     * Internet Initiated or via Mobile Entry (maps to SEC code: WEB) telephone: Authorisation is
+     * provided orally over telephone (maps to SEC code: TEL) paper: Authorisation is provided in
+     * writing and signed, or similarly authenticated (maps to SEC code: PPD)
+     * 
+     */
+    public AuthorisationSource getAuthorisationSource() {
+        return authorisationSource;
+    }
 
     /**
      * (Optional) Payto and VRP Scheme specific information
@@ -116,6 +131,14 @@ public class Mandate {
      */
     public Status getStatus() {
         return status;
+    }
+
+    public enum AuthorisationSource {
+        @SerializedName("web")
+        WEB, @SerializedName("telephone")
+        TELEPHONE, @SerializedName("paper")
+        PAPER, @SerializedName("unknown")
+        UNKNOWN
     }
 
     public enum Status {
