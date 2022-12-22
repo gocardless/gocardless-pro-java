@@ -403,6 +403,7 @@ public class BillingRequest {
             // blank to prevent instantiation
         }
 
+        private AuthorisationSource authorisationSource;
         private Constraints constraints;
         private String currency;
         private String description;
@@ -410,6 +411,20 @@ public class BillingRequest {
         private Map<String, String> metadata;
         private String scheme;
         private Verify verify;
+
+        /**
+         * This field is ACH specific, sometimes referred to as [SEC
+         * code](https://www.moderntreasury.com/learn/sec-codes).
+         * 
+         * This is the way that the payer gives authorisation to the merchant. web: Authorisation is
+         * Internet Initiated or via Mobile Entry (maps to SEC code: WEB) telephone: Authorisation
+         * is provided orally over telephone (maps to SEC code: TEL) paper: Authorisation is
+         * provided in writing and signed, or similarly authenticated (maps to SEC code: PPD)
+         * 
+         */
+        public AuthorisationSource getAuthorisationSource() {
+            return authorisationSource;
+        }
 
         /**
          * Constraints that will apply to the mandate_request. (Optional) Specifically for PayTo and
@@ -482,6 +497,14 @@ public class BillingRequest {
          */
         public Verify getVerify() {
             return verify;
+        }
+
+        public enum AuthorisationSource {
+            @SerializedName("web")
+            WEB, @SerializedName("telephone")
+            TELEPHONE, @SerializedName("paper")
+            PAPER, @SerializedName("unknown")
+            UNKNOWN
         }
 
         public enum Verify {
