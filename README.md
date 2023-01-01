@@ -350,3 +350,4 @@ Full Javadoc can be found [here](http://gocardless.github.io/gocardless-pro-java
 ## Contributing
 
 This client is auto-generated from Crank, a toolchain that we hope to soon open source. Issues should for now be reported on this repository.  __Please do not modify the source code yourself, your changes will be overridden!__
+test
