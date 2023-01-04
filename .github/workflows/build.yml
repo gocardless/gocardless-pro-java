@@ -2,7 +2,7 @@ name: gocardless/gocardless-pro-java/build
 on:
   push:
     branches:
-    - master
+    - convert-gocardless-gocardless-pro-java-to-actions-20221108-154811
 env:
   GITHUB_EMAIL: xxxx.com
   GITHUB_USERNAME: xxxxobot
