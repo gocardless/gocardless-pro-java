@@ -2,7 +2,7 @@ name: gocardless/gocardless-pro-java/build
 on:
   push:
     branches:
-    - convert-gocardless-gocardless-pro-java-to-actions-20221108-154811
+    - master
 jobs:
   test_library_jdk8:
     runs-on: ubuntu-latest
