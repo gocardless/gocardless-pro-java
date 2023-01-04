@@ -3,13 +3,6 @@ on:
   push:
     branches:
     - convert-gocardless-gocardless-pro-java-to-actions-20221108-154811
-env:
-  GITHUB_EMAIL: xxxx.com
-  GITHUB_USERNAME: xxxxobot
-  GPG_PASSPHRASE: xxxxc
-  SECRING_GPG_ASC_BASE64: xxxxLQo=
-  SONATYPE_PASSWORD: xxxx1mur
-  SONATYPE_USERNAME: xxxxebot
 jobs:
   test_library_jdk8:
     runs-on: ubuntu-latest
