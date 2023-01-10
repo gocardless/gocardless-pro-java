@@ -545,6 +545,10 @@ public class PayerAuthorisationService {
          * For ACH customers only. Required for ACH customers. A string containing the IP address of
          * the payer to whom the mandate belongs (i.e. as a result of their completion of a mandate
          * setup flow in their browser).
+         * 
+         * Not required for creating offline mandates where `authorisation_source` is set to
+         * telephone or paper.
+         * 
          */
         public PayerAuthorisationCreateRequest withMandatePayerIpAddress(String payerIpAddress) {
             if (mandate == null) {
@@ -925,6 +929,10 @@ public class PayerAuthorisationService {
              * For ACH customers only. Required for ACH customers. A string containing the IP
              * address of the payer to whom the mandate belongs (i.e. as a result of their
              * completion of a mandate setup flow in their browser).
+             * 
+             * Not required for creating offline mandates where `authorisation_source` is set to
+             * telephone or paper.
+             * 
              */
             public Mandate withPayerIpAddress(String payerIpAddress) {
                 this.payerIpAddress = payerIpAddress;
@@ -1357,6 +1365,10 @@ public class PayerAuthorisationService {
          * For ACH customers only. Required for ACH customers. A string containing the IP address of
          * the payer to whom the mandate belongs (i.e. as a result of their completion of a mandate
          * setup flow in their browser).
+         * 
+         * Not required for creating offline mandates where `authorisation_source` is set to
+         * telephone or paper.
+         * 
          */
         public PayerAuthorisationUpdateRequest withMandatePayerIpAddress(String payerIpAddress) {
             if (mandate == null) {
@@ -1731,6 +1743,10 @@ public class PayerAuthorisationService {
              * For ACH customers only. Required for ACH customers. A string containing the IP
              * address of the payer to whom the mandate belongs (i.e. as a result of their
              * completion of a mandate setup flow in their browser).
+             * 
+             * Not required for creating offline mandates where `authorisation_source` is set to
+             * telephone or paper.
+             * 
              */
             public Mandate withPayerIpAddress(String payerIpAddress) {
                 this.payerIpAddress = payerIpAddress;
