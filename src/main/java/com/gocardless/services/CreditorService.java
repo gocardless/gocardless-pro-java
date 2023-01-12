@@ -68,48 +68,10 @@ public class CreditorService {
      * Creates a new creditor.
      */
     public static final class CreditorCreateRequest extends IdempotentPostRequest<Creditor> {
-        private String addressLine1;
-        private String addressLine2;
-        private String addressLine3;
-        private String city;
         private String countryCode;
         private CreditorType creditorType;
         private Map<String, String> links;
         private String name;
-        private String postalCode;
-        private String region;
-
-        /**
-         * The first line of the creditor's address.
-         */
-        public CreditorCreateRequest withAddressLine1(String addressLine1) {
-            this.addressLine1 = addressLine1;
-            return this;
-        }
-
-        /**
-         * The second line of the creditor's address.
-         */
-        public CreditorCreateRequest withAddressLine2(String addressLine2) {
-            this.addressLine2 = addressLine2;
-            return this;
-        }
-
-        /**
-         * The third line of the creditor's address.
-         */
-        public CreditorCreateRequest withAddressLine3(String addressLine3) {
-            this.addressLine3 = addressLine3;
-            return this;
-        }
-
-        /**
-         * The city of the creditor's address.
-         */
-        public CreditorCreateRequest withCity(String city) {
-            this.city = city;
-            return this;
-        }
 
         /**
          * [ISO 3166-1 alpha-2
@@ -147,22 +109,6 @@ public class CreditorService {
          */
         public CreditorCreateRequest withName(String name) {
             this.name = name;
-            return this;
-        }
-
-        /**
-         * The creditor's postal code.
-         */
-        public CreditorCreateRequest withPostalCode(String postalCode) {
-            this.postalCode = postalCode;
-            return this;
-        }
-
-        /**
-         * The creditor's address region, county or department.
-         */
-        public CreditorCreateRequest withRegion(String region) {
-            this.region = region;
             return this;
         }
 
