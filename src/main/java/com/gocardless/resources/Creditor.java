@@ -331,8 +331,10 @@ public class Creditor {
         private Boolean canSpecifyMandateReference;
         private String city;
         private String countryCode;
+        private String createdAt;
         private Currency currency;
         private String email;
+        private String id;
         private Integer minimumAdvanceNotice;
         private String name;
         private String phoneNumber;
@@ -340,23 +342,24 @@ public class Creditor {
         private String reference;
         private String region;
         private Scheme scheme;
+        private Status status;
 
         /**
-         * The first line of the support address.
+         * The first line of the scheme identifier's support address.
          */
         public String getAddressLine1() {
             return addressLine1;
         }
 
         /**
-         * The second line of the support address.
+         * The second line of the scheme identifier's support address.
          */
         public String getAddressLine2() {
             return addressLine2;
         }
 
         /**
-         * The third line of the support address.
+         * The third line of the scheme identifier's support address.
          */
         public String getAddressLine3() {
             return addressLine3;
@@ -370,7 +373,7 @@ public class Creditor {
         }
 
         /**
-         * The city of the support address.
+         * The city of the scheme identifier's support address.
          */
         public String getCity() {
             return city;
@@ -385,6 +388,14 @@ public class Creditor {
         }
 
         /**
+         * Fixed [timestamp](#api-usage-time-zones--dates), recording when this resource was
+         * created.
+         */
+        public String getCreatedAt() {
+            return createdAt;
+        }
+
+        /**
          * The currency of the scheme identifier.
          */
         public Currency getCurrency() {
@@ -392,10 +403,17 @@ public class Creditor {
         }
 
         /**
-         * The support email address.
+         * Scheme identifier's support email address.
          */
         public String getEmail() {
             return email;
+        }
+
+        /**
+         * Unique identifier, usually beginning with "SU".
+         */
+        public String getId() {
+            return id;
         }
 
         /**
@@ -417,14 +435,14 @@ public class Creditor {
         }
 
         /**
-         * The support phone number.
+         * Scheme identifier's support phone number.
          */
         public String getPhoneNumber() {
             return phoneNumber;
         }
 
         /**
-         * The support postal code.
+         * The scheme identifier's support postal code.
          */
         public String getPostalCode() {
             return postalCode;
@@ -438,7 +456,7 @@ public class Creditor {
         }
 
         /**
-         * The support address region, county or department.
+         * The scheme identifier's support address region, county or department.
          */
         public String getRegion() {
             return region;
@@ -449,6 +467,14 @@ public class Creditor {
          */
         public Scheme getScheme() {
             return scheme;
+        }
+
+        /**
+         * The status of the scheme identifier. Only `active` scheme identifiers will be applied to
+         * a creditor and used against payments.
+         */
+        public Status getStatus() {
+            return status;
         }
 
         public enum Currency {
@@ -478,6 +504,13 @@ public class Creditor {
             SEPA, @SerializedName("sepa_credit_transfer")
             SEPA_CREDIT_TRANSFER, @SerializedName("sepa_instant_credit_transfer")
             SEPA_INSTANT_CREDIT_TRANSFER, @SerializedName("unknown")
+            UNKNOWN
+        }
+
+        public enum Status {
+            @SerializedName("pending")
+            PENDING, @SerializedName("active")
+            ACTIVE, @SerializedName("unknown")
             UNKNOWN
         }
     }
