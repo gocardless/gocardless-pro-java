@@ -160,7 +160,7 @@ public class Creditor {
     }
 
     /**
-     * The creditor's name.
+     * The creditor's trading name.
      */
     public String getName() {
         return name;

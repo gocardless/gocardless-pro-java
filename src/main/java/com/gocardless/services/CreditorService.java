@@ -105,7 +105,7 @@ public class CreditorService {
         }
 
         /**
-         * The creditor's name.
+         * The creditor's trading name.
          */
         public CreditorCreateRequest withName(String name) {
             this.name = name;
@@ -562,7 +562,7 @@ public class CreditorService {
         }
 
         /**
-         * The creditor's name.
+         * The creditor's trading name.
          */
         public CreditorUpdateRequest withName(String name) {
             this.name = name;
