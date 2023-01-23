@@ -428,7 +428,8 @@ public class Creditor {
         }
 
         /**
-         * The name which appears on customers' bank statements.
+         * The name which appears on customers' bank statements. This should usually be the
+         * merchant's trading name.
          */
         public String getName() {
             return name;

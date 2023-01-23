@@ -3,6 +3,7 @@ package com.gocardless.services;
 import com.gocardless.http.*;
 import com.gocardless.resources.SchemeIdentifier;
 import com.google.common.collect.ImmutableMap;
+import com.google.gson.annotations.SerializedName;
 import com.google.gson.reflect.TypeToken;
 import java.util.List;
 import java.util.Map;
@@ -10,6 +11,8 @@ import java.util.Map;
 /**
  * Service class for working with schemeentifier resources.
  *
+ * This represents a scheme identifier (e.g. a SUN in Bacs or a CID in SEPA). Scheme identifiers are
+ * used to specify the beneficiary name that appears on customers' bank statements.
  * 
  */
 public class SchemeIdentifierService {
@@ -22,6 +25,18 @@ public class SchemeIdentifierService {
      */
     public SchemeIdentifierService(HttpClient httpClient) {
         this.httpClient = httpClient;
+    }
+
+    /**
+     * Creates a new scheme identifier. The scheme identifier must be [applied to a
+     * creditor](#creditors-apply-a-scheme-identifier) before payments are taken using it. The
+     * scheme identifier must also have the `status` of active before it can be used. For some
+     * schemes e.g. faster_payments this will happen instantly. For other schemes e.g. bacs this can
+     * take several days.
+     * 
+     */
+    public SchemeIdentifierCreateRequest create() {
+        return new SchemeIdentifierCreateRequest(httpClient);
     }
 
     /**
@@ -42,6 +57,104 @@ public class SchemeIdentifierService {
      */
     public SchemeIdentifierGetRequest get(String identity) {
         return new SchemeIdentifierGetRequest(httpClient, identity);
+    }
+
+    /**
+     * Request class for {@link SchemeIdentifierService#create }.
+     *
+     * Creates a new scheme identifier. The scheme identifier must be [applied to a
+     * creditor](#creditors-apply-a-scheme-identifier) before payments are taken using it. The
+     * scheme identifier must also have the `status` of active before it can be used. For some
+     * schemes e.g. faster_payments this will happen instantly. For other schemes e.g. bacs this can
+     * take several days.
+     * 
+     */
+    public static final class SchemeIdentifierCreateRequest
+            extends IdempotentPostRequest<SchemeIdentifier> {
+        private String name;
+        private Scheme scheme;
+
+        /**
+         * The name which appears on customers' bank statements. This should usually be the
+         * merchant's trading name.
+         */
+        public SchemeIdentifierCreateRequest withName(String name) {
+            this.name = name;
+            return this;
+        }
+
+        /**
+         * The scheme which this scheme identifier applies to.
+         */
+        public SchemeIdentifierCreateRequest withScheme(Scheme scheme) {
+            this.scheme = scheme;
+            return this;
+        }
+
+        public SchemeIdentifierCreateRequest withIdempotencyKey(String idempotencyKey) {
+            super.setIdempotencyKey(idempotencyKey);
+            return this;
+        }
+
+        @Override
+        protected GetRequest<SchemeIdentifier> handleConflict(HttpClient httpClient, String id) {
+            SchemeIdentifierGetRequest request = new SchemeIdentifierGetRequest(httpClient, id);
+            for (Map.Entry<String, String> header : this.getCustomHeaders().entrySet()) {
+                request = request.withHeader(header.getKey(), header.getValue());
+            }
+            return request;
+        }
+
+        private SchemeIdentifierCreateRequest(HttpClient httpClient) {
+            super(httpClient);
+        }
+
+        public SchemeIdentifierCreateRequest withHeader(String headerName, String headerValue) {
+            this.addHeader(headerName, headerValue);
+            return this;
+        }
+
+        @Override
+        protected String getPathTemplate() {
+            return "scheme_identifiers";
+        }
+
+        @Override
+        protected String getEnvelope() {
+            return "scheme_identifiers";
+        }
+
+        @Override
+        protected Class<SchemeIdentifier> getResponseClass() {
+            return SchemeIdentifier.class;
+        }
+
+        @Override
+        protected boolean hasBody() {
+            return true;
+        }
+
+        public enum Scheme {
+            @SerializedName("ach")
+            ACH, @SerializedName("autogiro")
+            AUTOGIRO, @SerializedName("bacs")
+            BACS, @SerializedName("becs")
+            BECS, @SerializedName("becs_nz")
+            BECS_NZ, @SerializedName("betalingsservice")
+            BETALINGSSERVICE, @SerializedName("faster_payments")
+            FASTER_PAYMENTS, @SerializedName("pad")
+            PAD, @SerializedName("pay_to")
+            PAY_TO, @SerializedName("sepa")
+            SEPA, @SerializedName("sepa_credit_transfer")
+            SEPA_CREDIT_TRANSFER, @SerializedName("sepa_instant_credit_transfer")
+            SEPA_INSTANT_CREDIT_TRANSFER, @SerializedName("unknown")
+            UNKNOWN;
+
+            @Override
+            public String toString() {
+                return name().toLowerCase();
+            }
+        }
     }
 
     /**

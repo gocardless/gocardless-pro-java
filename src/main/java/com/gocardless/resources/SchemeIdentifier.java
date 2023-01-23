@@ -2,6 +2,13 @@ package com.gocardless.resources;
 
 import com.google.gson.annotations.SerializedName;
 
+/**
+ * Represents a schemeentifier resource returned from the API.
+ *
+ * This represents a scheme identifier (e.g. a SUN in Bacs or a CID in SEPA). Scheme identifiers are
+ * used to specify the beneficiary name that appears on customers' bank statements.
+ * 
+ */
 public class SchemeIdentifier {
     private SchemeIdentifier() {
         // blank to prevent instantiation
@@ -109,7 +116,8 @@ public class SchemeIdentifier {
     }
 
     /**
-     * The name which appears on customers' bank statements.
+     * The name which appears on customers' bank statements. This should usually be the merchant's
+     * trading name.
      */
     public String getName() {
         return name;
