@@ -2,10 +2,8 @@ package com.gocardless.services;
 
 import com.gocardless.http.*;
 import com.gocardless.resources.VerificationDetail;
-import com.google.common.collect.ImmutableMap;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
 /**
  * Service class for working with verification detail resources.
@@ -30,8 +28,8 @@ public class VerificationDetailService {
      * details for a creditor, their creditor_type must be company and their country_code must be
      * GB.
      */
-    public VerificationDetailCreateRequest create(String identity) {
-        return new VerificationDetailCreateRequest(httpClient, identity);
+    public VerificationDetailCreateRequest create() {
+        return new VerificationDetailCreateRequest(httpClient);
     }
 
     /**
@@ -44,8 +42,6 @@ public class VerificationDetailService {
      */
     public static final class VerificationDetailCreateRequest
             extends PostRequest<VerificationDetail> {
-        @PathParam
-        private final String identity;
         private String addressLine1;
         private String addressLine2;
         private String addressLine3;
@@ -147,9 +143,8 @@ public class VerificationDetailService {
             return this;
         }
 
-        private VerificationDetailCreateRequest(HttpClient httpClient, String identity) {
+        private VerificationDetailCreateRequest(HttpClient httpClient) {
             super(httpClient);
-            this.identity = identity;
         }
 
         public VerificationDetailCreateRequest withHeader(String headerName, String headerValue) {
@@ -158,15 +153,8 @@ public class VerificationDetailService {
         }
 
         @Override
-        protected Map<String, String> getPathParams() {
-            ImmutableMap.Builder<String, String> params = ImmutableMap.builder();
-            params.put("identity", identity);
-            return params.build();
-        }
-
-        @Override
         protected String getPathTemplate() {
-            return "verification_details/:identity";
+            return "verification_details";
         }
 
         @Override
