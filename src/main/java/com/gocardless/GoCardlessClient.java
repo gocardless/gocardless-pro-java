@@ -43,6 +43,7 @@ public class GoCardlessClient {
     private final SchemeIdentifierService schemeIdentifiers;
     private final SubscriptionService subscriptions;
     private final TaxRateService taxRates;
+    private final VerificationDetailService verificationDetails;
     private final WebhookService webhooks;
 
     public static final class Builder {
@@ -194,6 +195,7 @@ public class GoCardlessClient {
         this.schemeIdentifiers = new SchemeIdentifierService(httpClient);
         this.subscriptions = new SubscriptionService(httpClient);
         this.taxRates = new TaxRateService(httpClient);
+        this.verificationDetails = new VerificationDetailService(httpClient);
         this.webhooks = new WebhookService(httpClient);
     }
 
@@ -398,6 +400,13 @@ public class GoCardlessClient {
      */
     public TaxRateService taxRates() {
         return taxRates;
+    }
+
+    /**
+     * A service class for working with verification detail resources.
+     */
+    public VerificationDetailService verificationDetails() {
+        return verificationDetails;
     }
 
     /**
