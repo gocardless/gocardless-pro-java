@@ -1,8 +1,6 @@
 name: gocardless/gocardless-pro-java/build
-on:
-  push:
-    branches:
-    - master
+on: push
+
 jobs:
   test_library_jdk8:
     runs-on: ubuntu-latest

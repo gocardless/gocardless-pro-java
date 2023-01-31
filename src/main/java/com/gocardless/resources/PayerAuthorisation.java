@@ -506,6 +506,10 @@ public class PayerAuthorisation {
          * For ACH customers only. Required for ACH customers. A string containing the IP address of
          * the payer to whom the mandate belongs (i.e. as a result of their completion of a mandate
          * setup flow in their browser).
+         * 
+         * Not required for creating offline mandates where `authorisation_source` is set to
+         * telephone or paper.
+         * 
          */
         public String getPayerIpAddress() {
             return payerIpAddress;

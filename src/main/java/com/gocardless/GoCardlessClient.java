@@ -40,8 +40,10 @@ public class GoCardlessClient {
     private final RedirectFlowService redirectFlows;
     private final RefundService refunds;
     private final ScenarioSimulatorService scenarioSimulators;
+    private final SchemeIdentifierService schemeIdentifiers;
     private final SubscriptionService subscriptions;
     private final TaxRateService taxRates;
+    private final VerificationDetailService verificationDetails;
     private final WebhookService webhooks;
 
     public static final class Builder {
@@ -190,8 +192,10 @@ public class GoCardlessClient {
         this.redirectFlows = new RedirectFlowService(httpClient);
         this.refunds = new RefundService(httpClient);
         this.scenarioSimulators = new ScenarioSimulatorService(httpClient);
+        this.schemeIdentifiers = new SchemeIdentifierService(httpClient);
         this.subscriptions = new SubscriptionService(httpClient);
         this.taxRates = new TaxRateService(httpClient);
+        this.verificationDetails = new VerificationDetailService(httpClient);
         this.webhooks = new WebhookService(httpClient);
     }
 
@@ -378,6 +382,13 @@ public class GoCardlessClient {
     }
 
     /**
+     * A service class for working with schemeentifier resources.
+     */
+    public SchemeIdentifierService schemeIdentifiers() {
+        return schemeIdentifiers;
+    }
+
+    /**
      * A service class for working with subscription resources.
      */
     public SubscriptionService subscriptions() {
@@ -389,6 +400,13 @@ public class GoCardlessClient {
      */
     public TaxRateService taxRates() {
         return taxRates;
+    }
+
+    /**
+     * A service class for working with verification detail resources.
+     */
+    public VerificationDetailService verificationDetails() {
+        return verificationDetails;
     }
 
     /**

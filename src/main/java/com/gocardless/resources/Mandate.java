@@ -28,6 +28,7 @@ public class Mandate {
     private String reference;
     private String scheme;
     private Status status;
+    private String verifiedAt;
 
     /**
      * This field is ACH specific, sometimes referred to as [SEC
@@ -131,6 +132,13 @@ public class Mandate {
      */
     public Status getStatus() {
         return status;
+    }
+
+    /**
+     * [Timestamp](#api-usage-time-zones--dates) recording when this mandate was verified.
+     */
+    public String getVerifiedAt() {
+        return verifiedAt;
     }
 
     public enum AuthorisationSource {

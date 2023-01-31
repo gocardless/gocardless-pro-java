@@ -63,53 +63,26 @@ public class CreditorService {
     }
 
     /**
+     * Applies a [scheme identifier](#core-endpoints-scheme-identifiers) to a creditor. If the
+     * creditor already has a scheme identifier for the scheme, it will be replaced, and any
+     * mandates attached to it transferred asynchronously. For some schemes, the application of the
+     * scheme identifier will be performed asynchronously.
+     * 
+     */
+    public CreditorApplySchemeIdentifierRequest applySchemeIdentifier(String identity) {
+        return new CreditorApplySchemeIdentifierRequest(httpClient, identity);
+    }
+
+    /**
      * Request class for {@link CreditorService#create }.
      *
      * Creates a new creditor.
      */
     public static final class CreditorCreateRequest extends IdempotentPostRequest<Creditor> {
-        private String addressLine1;
-        private String addressLine2;
-        private String addressLine3;
-        private String city;
         private String countryCode;
         private CreditorType creditorType;
         private Map<String, String> links;
         private String name;
-        private String postalCode;
-        private String region;
-
-        /**
-         * The first line of the creditor's address.
-         */
-        public CreditorCreateRequest withAddressLine1(String addressLine1) {
-            this.addressLine1 = addressLine1;
-            return this;
-        }
-
-        /**
-         * The second line of the creditor's address.
-         */
-        public CreditorCreateRequest withAddressLine2(String addressLine2) {
-            this.addressLine2 = addressLine2;
-            return this;
-        }
-
-        /**
-         * The third line of the creditor's address.
-         */
-        public CreditorCreateRequest withAddressLine3(String addressLine3) {
-            this.addressLine3 = addressLine3;
-            return this;
-        }
-
-        /**
-         * The city of the creditor's address.
-         */
-        public CreditorCreateRequest withCity(String city) {
-            this.city = city;
-            return this;
-        }
 
         /**
          * [ISO 3166-1 alpha-2
@@ -143,26 +116,10 @@ public class CreditorService {
         }
 
         /**
-         * The creditor's name.
+         * The creditor's trading name.
          */
         public CreditorCreateRequest withName(String name) {
             this.name = name;
-            return this;
-        }
-
-        /**
-         * The creditor's postal code.
-         */
-        public CreditorCreateRequest withPostalCode(String postalCode) {
-            this.postalCode = postalCode;
-            return this;
-        }
-
-        /**
-         * The creditor's address region, county or department.
-         */
-        public CreditorCreateRequest withRegion(String region) {
-            this.region = region;
             return this;
         }
 
@@ -616,7 +573,7 @@ public class CreditorService {
         }
 
         /**
-         * The creditor's name.
+         * The creditor's trading name.
          */
         public CreditorUpdateRequest withName(String name) {
             this.name = name;
@@ -755,6 +712,96 @@ public class CreditorService {
              */
             public Links withDefaultUsdPayoutAccount(String defaultUsdPayoutAccount) {
                 this.defaultUsdPayoutAccount = defaultUsdPayoutAccount;
+                return this;
+            }
+        }
+    }
+
+    /**
+     * Request class for {@link CreditorService#applySchemeIdentifier }.
+     *
+     * Applies a [scheme identifier](#core-endpoints-scheme-identifiers) to a creditor. If the
+     * creditor already has a scheme identifier for the scheme, it will be replaced, and any
+     * mandates attached to it transferred asynchronously. For some schemes, the application of the
+     * scheme identifier will be performed asynchronously.
+     * 
+     */
+    public static final class CreditorApplySchemeIdentifierRequest extends PostRequest<Creditor> {
+        @PathParam
+        private final String identity;
+        private Links links;
+
+        /**
+         * The ID of the scheme identifier to apply
+         */
+        public CreditorApplySchemeIdentifierRequest withLinks(Links links) {
+            this.links = links;
+            return this;
+        }
+
+        /**
+         * Unique identifier, usually beginning with "SU".
+         */
+        public CreditorApplySchemeIdentifierRequest withLinksSchemeIdentifier(
+                String schemeIdentifier) {
+            if (links == null) {
+                links = new Links();
+            }
+            links.withSchemeIdentifier(schemeIdentifier);
+            return this;
+        }
+
+        private CreditorApplySchemeIdentifierRequest(HttpClient httpClient, String identity) {
+            super(httpClient);
+            this.identity = identity;
+        }
+
+        public CreditorApplySchemeIdentifierRequest withHeader(String headerName,
+                String headerValue) {
+            this.addHeader(headerName, headerValue);
+            return this;
+        }
+
+        @Override
+        protected Map<String, String> getPathParams() {
+            ImmutableMap.Builder<String, String> params = ImmutableMap.builder();
+            params.put("identity", identity);
+            return params.build();
+        }
+
+        @Override
+        protected String getPathTemplate() {
+            return "creditors/:identity/actions/apply_scheme_identifier";
+        }
+
+        @Override
+        protected String getEnvelope() {
+            return "creditors";
+        }
+
+        @Override
+        protected Class<Creditor> getResponseClass() {
+            return Creditor.class;
+        }
+
+        @Override
+        protected boolean hasBody() {
+            return true;
+        }
+
+        @Override
+        protected String getRequestEnvelope() {
+            return "data";
+        }
+
+        public static class Links {
+            private String schemeIdentifier;
+
+            /**
+             * Unique identifier, usually beginning with "SU".
+             */
+            public Links withSchemeIdentifier(String schemeIdentifier) {
+                this.schemeIdentifier = schemeIdentifier;
                 return this;
             }
         }
