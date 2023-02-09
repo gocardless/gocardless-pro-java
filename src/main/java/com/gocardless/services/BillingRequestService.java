@@ -258,6 +258,7 @@ public class BillingRequestService {
         private MandateRequest mandateRequest;
         private Map<String, String> metadata;
         private PaymentRequest paymentRequest;
+        private PurposeCode purposeCode;
 
         /**
          * (Optional) If true, this billing request can fallback from instant payment to direct
@@ -550,6 +551,15 @@ public class BillingRequestService {
             return this;
         }
 
+        /**
+         * Specifies the high-level purpose of a mandate and/or payment using a set of pre-defined
+         * categories. Required for the PayTo scheme, optional for all others.
+         */
+        public BillingRequestCreateRequest withPurposeCode(PurposeCode purposeCode) {
+            this.purposeCode = purposeCode;
+            return this;
+        }
+
         public BillingRequestCreateRequest withIdempotencyKey(String idempotencyKey) {
             super.setIdempotencyKey(idempotencyKey);
             return this;
@@ -591,6 +601,28 @@ public class BillingRequestService {
         @Override
         protected boolean hasBody() {
             return true;
+        }
+
+        public enum PurposeCode {
+            @SerializedName("mortgage")
+            MORTGAGE, @SerializedName("utility")
+            UTILITY, @SerializedName("loan")
+            LOAN, @SerializedName("dependant_support")
+            DEPENDANT_SUPPORT, @SerializedName("gambling")
+            GAMBLING, @SerializedName("retail")
+            RETAIL, @SerializedName("salary")
+            SALARY, @SerializedName("personal")
+            PERSONAL, @SerializedName("government")
+            GOVERNMENT, @SerializedName("pension")
+            PENSION, @SerializedName("tax")
+            TAX, @SerializedName("other")
+            OTHER, @SerializedName("unknown")
+            UNKNOWN;
+
+            @Override
+            public String toString() {
+                return name().toLowerCase();
+            }
         }
 
         public static class Links {

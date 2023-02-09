@@ -2,8 +2,11 @@ package com.gocardless.services;
 
 import com.gocardless.http.*;
 import com.gocardless.resources.VerificationDetail;
+import com.google.common.collect.ImmutableMap;
+import com.google.gson.reflect.TypeToken;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Service class for working with verification detail resources.
@@ -23,6 +26,19 @@ public class VerificationDetailService {
     }
 
     /**
+     * Returns a list of verification details belonging to a creditor.
+     */
+    public VerificationDetailListRequest<ListResponse<VerificationDetail>> list() {
+        return new VerificationDetailListRequest<>(httpClient,
+                ListRequest.<VerificationDetail>pagingExecutor());
+    }
+
+    public VerificationDetailListRequest<Iterable<VerificationDetail>> all() {
+        return new VerificationDetailListRequest<>(httpClient,
+                ListRequest.<VerificationDetail>iteratingExecutor());
+    }
+
+    /**
      * Verification details represent any information needed by GoCardless to verify a creditor.
      * Currently, only UK-based companies are supported. In other words, to submit verification
      * details for a creditor, their creditor_type must be company and their country_code must be
@@ -30,6 +46,83 @@ public class VerificationDetailService {
      */
     public VerificationDetailCreateRequest create() {
         return new VerificationDetailCreateRequest(httpClient);
+    }
+
+    /**
+     * Request class for {@link VerificationDetailService#list }.
+     *
+     * Returns a list of verification details belonging to a creditor.
+     */
+    public static final class VerificationDetailListRequest<S>
+            extends ListRequest<S, VerificationDetail> {
+        private String creditor;
+
+        /**
+         * Cursor pointing to the start of the desired set.
+         */
+        public VerificationDetailListRequest<S> withAfter(String after) {
+            setAfter(after);
+            return this;
+        }
+
+        /**
+         * Cursor pointing to the end of the desired set.
+         */
+        public VerificationDetailListRequest<S> withBefore(String before) {
+            setBefore(before);
+            return this;
+        }
+
+        /**
+         * Unique identifier, beginning with "CR".
+         */
+        public VerificationDetailListRequest<S> withCreditor(String creditor) {
+            this.creditor = creditor;
+            return this;
+        }
+
+        /**
+         * Number of records to return.
+         */
+        public VerificationDetailListRequest<S> withLimit(Integer limit) {
+            setLimit(limit);
+            return this;
+        }
+
+        private VerificationDetailListRequest(HttpClient httpClient,
+                ListRequestExecutor<S, VerificationDetail> executor) {
+            super(httpClient, executor);
+        }
+
+        public VerificationDetailListRequest<S> withHeader(String headerName, String headerValue) {
+            this.addHeader(headerName, headerValue);
+            return this;
+        }
+
+        @Override
+        protected Map<String, Object> getQueryParams() {
+            ImmutableMap.Builder<String, Object> params = ImmutableMap.builder();
+            params.putAll(super.getQueryParams());
+            if (creditor != null) {
+                params.put("creditor", creditor);
+            }
+            return params.build();
+        }
+
+        @Override
+        protected String getPathTemplate() {
+            return "verification_details";
+        }
+
+        @Override
+        protected String getEnvelope() {
+            return "verification_details";
+        }
+
+        @Override
+        protected TypeToken<List<VerificationDetail>> getTypeToken() {
+            return new TypeToken<List<VerificationDetail>>() {};
+        }
     }
 
     /**

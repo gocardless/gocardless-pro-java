@@ -28,6 +28,7 @@ public class BillingRequest {
     private MandateRequest mandateRequest;
     private Map<String, String> metadata;
     private PaymentRequest paymentRequest;
+    private PurposeCode purposeCode;
     private Resources resources;
     private Status status;
 
@@ -90,6 +91,14 @@ public class BillingRequest {
         return paymentRequest;
     }
 
+    /**
+     * Specifies the high-level purpose of a mandate and/or payment using a set of pre-defined
+     * categories. Required for the PayTo scheme, optional for all others.
+     */
+    public PurposeCode getPurposeCode() {
+        return purposeCode;
+    }
+
     public Resources getResources() {
         return resources;
     }
@@ -106,6 +115,23 @@ public class BillingRequest {
      */
     public Status getStatus() {
         return status;
+    }
+
+    public enum PurposeCode {
+        @SerializedName("mortgage")
+        MORTGAGE, @SerializedName("utility")
+        UTILITY, @SerializedName("loan")
+        LOAN, @SerializedName("dependant_support")
+        DEPENDANT_SUPPORT, @SerializedName("gambling")
+        GAMBLING, @SerializedName("retail")
+        RETAIL, @SerializedName("salary")
+        SALARY, @SerializedName("personal")
+        PERSONAL, @SerializedName("government")
+        GOVERNMENT, @SerializedName("pension")
+        PENSION, @SerializedName("tax")
+        TAX, @SerializedName("other")
+        OTHER, @SerializedName("unknown")
+        UNKNOWN
     }
 
     public enum Status {
