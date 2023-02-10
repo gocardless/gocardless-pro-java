@@ -20,6 +20,7 @@ public class VerificationDetail {
     private String description;
     private List<Director> directors;
     private Links links;
+    private String name;
     private String postalCode;
 
     /**
@@ -73,6 +74,13 @@ public class VerificationDetail {
 
     public Links getLinks() {
         return links;
+    }
+
+    /**
+     * The company's legal name.
+     */
+    public String getName() {
+        return name;
     }
 
     /**

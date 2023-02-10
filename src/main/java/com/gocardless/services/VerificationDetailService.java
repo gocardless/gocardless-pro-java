@@ -143,6 +143,7 @@ public class VerificationDetailService {
         private String description;
         private List<Directors> directors;
         private Links links;
+        private String name;
         private String postalCode;
 
         /**
@@ -225,6 +226,14 @@ public class VerificationDetailService {
                 links = new Links();
             }
             links.withCreditor(creditor);
+            return this;
+        }
+
+        /**
+         * The company's legal name.
+         */
+        public VerificationDetailCreateRequest withName(String name) {
+            this.name = name;
             return this;
         }
 
