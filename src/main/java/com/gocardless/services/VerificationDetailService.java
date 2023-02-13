@@ -32,6 +32,13 @@ public class VerificationDetailService {
     }
 
     /**
+     * Creates a new verification detail
+     */
+    public VerificationDetailCreateRequest create() {
+        return new VerificationDetailCreateRequest(httpClient);
+    }
+
+    /**
      * Returns a list of verification details belonging to a creditor.
      */
     public VerificationDetailListRequest<ListResponse<VerificationDetail>> list() {
@@ -42,90 +49,6 @@ public class VerificationDetailService {
     public VerificationDetailListRequest<Iterable<VerificationDetail>> all() {
         return new VerificationDetailListRequest<>(httpClient,
                 ListRequest.<VerificationDetail>iteratingExecutor());
-    }
-
-    /**
-     * Creates a new verification detail
-     */
-    public VerificationDetailCreateRequest create() {
-        return new VerificationDetailCreateRequest(httpClient);
-    }
-
-    /**
-     * Request class for {@link VerificationDetailService#list }.
-     *
-     * Returns a list of verification details belonging to a creditor.
-     */
-    public static final class VerificationDetailListRequest<S>
-            extends ListRequest<S, VerificationDetail> {
-        private String creditor;
-
-        /**
-         * Cursor pointing to the start of the desired set.
-         */
-        public VerificationDetailListRequest<S> withAfter(String after) {
-            setAfter(after);
-            return this;
-        }
-
-        /**
-         * Cursor pointing to the end of the desired set.
-         */
-        public VerificationDetailListRequest<S> withBefore(String before) {
-            setBefore(before);
-            return this;
-        }
-
-        /**
-         * Unique identifier, beginning with "CR".
-         */
-        public VerificationDetailListRequest<S> withCreditor(String creditor) {
-            this.creditor = creditor;
-            return this;
-        }
-
-        /**
-         * Number of records to return.
-         */
-        public VerificationDetailListRequest<S> withLimit(Integer limit) {
-            setLimit(limit);
-            return this;
-        }
-
-        private VerificationDetailListRequest(HttpClient httpClient,
-                ListRequestExecutor<S, VerificationDetail> executor) {
-            super(httpClient, executor);
-        }
-
-        public VerificationDetailListRequest<S> withHeader(String headerName, String headerValue) {
-            this.addHeader(headerName, headerValue);
-            return this;
-        }
-
-        @Override
-        protected Map<String, Object> getQueryParams() {
-            ImmutableMap.Builder<String, Object> params = ImmutableMap.builder();
-            params.putAll(super.getQueryParams());
-            if (creditor != null) {
-                params.put("creditor", creditor);
-            }
-            return params.build();
-        }
-
-        @Override
-        protected String getPathTemplate() {
-            return "verification_details";
-        }
-
-        @Override
-        protected String getEnvelope() {
-            return "verification_details";
-        }
-
-        @Override
-        protected TypeToken<List<VerificationDetail>> getTypeToken() {
-            return new TypeToken<List<VerificationDetail>>() {};
-        }
     }
 
     /**
@@ -351,6 +274,83 @@ public class VerificationDetailService {
                 this.creditor = creditor;
                 return this;
             }
+        }
+    }
+
+    /**
+     * Request class for {@link VerificationDetailService#list }.
+     *
+     * Returns a list of verification details belonging to a creditor.
+     */
+    public static final class VerificationDetailListRequest<S>
+            extends ListRequest<S, VerificationDetail> {
+        private String creditor;
+
+        /**
+         * Cursor pointing to the start of the desired set.
+         */
+        public VerificationDetailListRequest<S> withAfter(String after) {
+            setAfter(after);
+            return this;
+        }
+
+        /**
+         * Cursor pointing to the end of the desired set.
+         */
+        public VerificationDetailListRequest<S> withBefore(String before) {
+            setBefore(before);
+            return this;
+        }
+
+        /**
+         * Unique identifier, beginning with "CR".
+         */
+        public VerificationDetailListRequest<S> withCreditor(String creditor) {
+            this.creditor = creditor;
+            return this;
+        }
+
+        /**
+         * Number of records to return.
+         */
+        public VerificationDetailListRequest<S> withLimit(Integer limit) {
+            setLimit(limit);
+            return this;
+        }
+
+        private VerificationDetailListRequest(HttpClient httpClient,
+                ListRequestExecutor<S, VerificationDetail> executor) {
+            super(httpClient, executor);
+        }
+
+        public VerificationDetailListRequest<S> withHeader(String headerName, String headerValue) {
+            this.addHeader(headerName, headerValue);
+            return this;
+        }
+
+        @Override
+        protected Map<String, Object> getQueryParams() {
+            ImmutableMap.Builder<String, Object> params = ImmutableMap.builder();
+            params.putAll(super.getQueryParams());
+            if (creditor != null) {
+                params.put("creditor", creditor);
+            }
+            return params.build();
+        }
+
+        @Override
+        protected String getPathTemplate() {
+            return "verification_details";
+        }
+
+        @Override
+        protected String getEnvelope() {
+            return "verification_details";
+        }
+
+        @Override
+        protected TypeToken<List<VerificationDetail>> getTypeToken() {
+            return new TypeToken<List<VerificationDetail>>() {};
         }
     }
 }
