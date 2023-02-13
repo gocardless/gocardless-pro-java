@@ -11,7 +11,13 @@ import java.util.Map;
 /**
  * Service class for working with verification detail resources.
  *
- * Details of a creditor that are required for verification
+ * Verification details represent any information needed by GoCardless to verify a creditor.
+ * 
+ * <p class="restricted-notice">
+ * <strong>Restricted</strong>: These endpoints are restricted to customers who want to collect
+ * their merchant's verification details and pass them to GoCardless via our API. Please [get in
+ * touch](mailto:help@gocardless.com) if you wish to enable this feature on your account.
+ * </p>
  */
 public class VerificationDetailService {
     private final HttpClient httpClient;
@@ -39,10 +45,7 @@ public class VerificationDetailService {
     }
 
     /**
-     * Verification details represent any information needed by GoCardless to verify a creditor.
-     * Currently, only UK-based companies are supported. In other words, to submit verification
-     * details for a creditor, their creditor_type must be company and their country_code must be
-     * GB.
+     * Creates a new verification detail
      */
     public VerificationDetailCreateRequest create() {
         return new VerificationDetailCreateRequest(httpClient);
@@ -128,10 +131,7 @@ public class VerificationDetailService {
     /**
      * Request class for {@link VerificationDetailService#create }.
      *
-     * Verification details represent any information needed by GoCardless to verify a creditor.
-     * Currently, only UK-based companies are supported. In other words, to submit verification
-     * details for a creditor, their creditor_type must be company and their country_code must be
-     * GB.
+     * Creates a new verification detail
      */
     public static final class VerificationDetailCreateRequest
             extends PostRequest<VerificationDetail> {
