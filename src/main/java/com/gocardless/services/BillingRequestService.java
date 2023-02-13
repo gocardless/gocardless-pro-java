@@ -32,30 +32,10 @@ public class BillingRequestService {
     }
 
     /**
-     * Returns a [cursor-paginated](#api-usage-cursor-pagination) list of your billing requests.
-     */
-    public BillingRequestListRequest<ListResponse<BillingRequest>> list() {
-        return new BillingRequestListRequest<>(httpClient,
-                ListRequest.<BillingRequest>pagingExecutor());
-    }
-
-    public BillingRequestListRequest<Iterable<BillingRequest>> all() {
-        return new BillingRequestListRequest<>(httpClient,
-                ListRequest.<BillingRequest>iteratingExecutor());
-    }
-
-    /**
       * 
      */
     public BillingRequestCreateRequest create() {
         return new BillingRequestCreateRequest(httpClient);
-    }
-
-    /**
-     * Fetches a billing request
-     */
-    public BillingRequestGetRequest get(String identity) {
-        return new BillingRequestGetRequest(httpClient, identity);
     }
 
     /**
@@ -89,24 +69,6 @@ public class BillingRequestService {
     }
 
     /**
-     * If a billing request is ready to be fulfilled, call this endpoint to cause it to fulfil,
-     * executing the payment.
-     */
-    public BillingRequestFulfilRequest fulfil(String identity) {
-        return new BillingRequestFulfilRequest(httpClient, identity);
-    }
-
-    /**
-     * This will allow for the updating of the currency and subsequently the scheme if needed for a
-     * Billing Request. This will only be available for mandate only flows which do not have the
-     * lock_currency flag set to true on the Billing Request Flow. It will also not support any
-     * request which has a payments request.
-     */
-    public BillingRequestChooseCurrencyRequest chooseCurrency(String identity) {
-        return new BillingRequestChooseCurrencyRequest(httpClient, identity);
-    }
-
-    /**
      * This is needed when you have a mandate request. As a scheme compliance rule we are required
      * to allow the payer to crosscheck the details entered by them and confirm it.
      */
@@ -115,10 +77,38 @@ public class BillingRequestService {
     }
 
     /**
+     * If a billing request is ready to be fulfilled, call this endpoint to cause it to fulfil,
+     * executing the payment.
+     */
+    public BillingRequestFulfilRequest fulfil(String identity) {
+        return new BillingRequestFulfilRequest(httpClient, identity);
+    }
+
+    /**
      * Immediately cancels a billing request, causing all billing request flows to expire.
      */
     public BillingRequestCancelRequest cancel(String identity) {
         return new BillingRequestCancelRequest(httpClient, identity);
+    }
+
+    /**
+     * Returns a [cursor-paginated](#api-usage-cursor-pagination) list of your billing requests.
+     */
+    public BillingRequestListRequest<ListResponse<BillingRequest>> list() {
+        return new BillingRequestListRequest<>(httpClient,
+                ListRequest.<BillingRequest>pagingExecutor());
+    }
+
+    public BillingRequestListRequest<Iterable<BillingRequest>> all() {
+        return new BillingRequestListRequest<>(httpClient,
+                ListRequest.<BillingRequest>iteratingExecutor());
+    }
+
+    /**
+     * Fetches a billing request
+     */
+    public BillingRequestGetRequest get(String identity) {
+        return new BillingRequestGetRequest(httpClient, identity);
     }
 
     /**
@@ -138,112 +128,13 @@ public class BillingRequestService {
     }
 
     /**
-     * Request class for {@link BillingRequestService#list }.
-     *
-     * Returns a [cursor-paginated](#api-usage-cursor-pagination) list of your billing requests.
+     * This will allow for the updating of the currency and subsequently the scheme if needed for a
+     * Billing Request. This will only be available for mandate only flows which do not have the
+     * lock_currency flag set to true on the Billing Request Flow. It will also not support any
+     * request which has a payments request.
      */
-    public static final class BillingRequestListRequest<S> extends ListRequest<S, BillingRequest> {
-        private String createdAt;
-        private String customer;
-        private String status;
-
-        /**
-         * Cursor pointing to the start of the desired set.
-         */
-        public BillingRequestListRequest<S> withAfter(String after) {
-            setAfter(after);
-            return this;
-        }
-
-        /**
-         * Cursor pointing to the end of the desired set.
-         */
-        public BillingRequestListRequest<S> withBefore(String before) {
-            setBefore(before);
-            return this;
-        }
-
-        /**
-         * Fixed [timestamp](#api-usage-time-zones--dates), recording when this resource was
-         * created.
-         */
-        public BillingRequestListRequest<S> withCreatedAt(String createdAt) {
-            this.createdAt = createdAt;
-            return this;
-        }
-
-        /**
-         * ID of a [customer](#core-endpoints-customers). If specified, this endpoint will return
-         * all requests for the given customer.
-         */
-        public BillingRequestListRequest<S> withCustomer(String customer) {
-            this.customer = customer;
-            return this;
-        }
-
-        /**
-         * Number of records to return.
-         */
-        public BillingRequestListRequest<S> withLimit(Integer limit) {
-            setLimit(limit);
-            return this;
-        }
-
-        /**
-         * One of:
-         * <ul>
-         * <li>`pending`: the billing request is pending and can be used</li>
-         * <li>`ready_to_fulfil`: the billing request is ready to fulfil</li>
-         * <li>`fulfilling`: the billing request is currently undergoing fulfilment</li>
-         * <li>`fulfilled`: the billing request has been fulfilled and a payment created</li>
-         * <li>`cancelled`: the billing request has been cancelled and cannot be used</li>
-         * </ul>
-         */
-        public BillingRequestListRequest<S> withStatus(String status) {
-            this.status = status;
-            return this;
-        }
-
-        private BillingRequestListRequest(HttpClient httpClient,
-                ListRequestExecutor<S, BillingRequest> executor) {
-            super(httpClient, executor);
-        }
-
-        public BillingRequestListRequest<S> withHeader(String headerName, String headerValue) {
-            this.addHeader(headerName, headerValue);
-            return this;
-        }
-
-        @Override
-        protected Map<String, Object> getQueryParams() {
-            ImmutableMap.Builder<String, Object> params = ImmutableMap.builder();
-            params.putAll(super.getQueryParams());
-            if (createdAt != null) {
-                params.put("created_at", createdAt);
-            }
-            if (customer != null) {
-                params.put("customer", customer);
-            }
-            if (status != null) {
-                params.put("status", status);
-            }
-            return params.build();
-        }
-
-        @Override
-        protected String getPathTemplate() {
-            return "billing_requests";
-        }
-
-        @Override
-        protected String getEnvelope() {
-            return "billing_requests";
-        }
-
-        @Override
-        protected TypeToken<List<BillingRequest>> getTypeToken() {
-            return new TypeToken<List<BillingRequest>>() {};
-        }
+    public BillingRequestChooseCurrencyRequest chooseCurrency(String identity) {
+        return new BillingRequestChooseCurrencyRequest(httpClient, identity);
     }
 
     /**
@@ -1028,48 +919,6 @@ public class BillingRequestService {
     }
 
     /**
-     * Request class for {@link BillingRequestService#get }.
-     *
-     * Fetches a billing request
-     */
-    public static final class BillingRequestGetRequest extends GetRequest<BillingRequest> {
-        @PathParam
-        private final String identity;
-
-        private BillingRequestGetRequest(HttpClient httpClient, String identity) {
-            super(httpClient);
-            this.identity = identity;
-        }
-
-        public BillingRequestGetRequest withHeader(String headerName, String headerValue) {
-            this.addHeader(headerName, headerValue);
-            return this;
-        }
-
-        @Override
-        protected Map<String, String> getPathParams() {
-            ImmutableMap.Builder<String, String> params = ImmutableMap.builder();
-            params.put("identity", identity);
-            return params.build();
-        }
-
-        @Override
-        protected String getPathTemplate() {
-            return "billing_requests/:identity";
-        }
-
-        @Override
-        protected String getEnvelope() {
-            return "billing_requests";
-        }
-
-        @Override
-        protected Class<BillingRequest> getResponseClass() {
-            return BillingRequest.class;
-        }
-    }
-
-    /**
      * Request class for {@link BillingRequestService#collectCustomerDetails }.
      *
      * If the billing request has a pending <code>collect_customer_details</code> action, this
@@ -1747,170 +1596,6 @@ public class BillingRequestService {
     }
 
     /**
-     * Request class for {@link BillingRequestService#fulfil }.
-     *
-     * If a billing request is ready to be fulfilled, call this endpoint to cause it to fulfil,
-     * executing the payment.
-     */
-    public static final class BillingRequestFulfilRequest extends PostRequest<BillingRequest> {
-        @PathParam
-        private final String identity;
-        private Map<String, String> metadata;
-
-        /**
-         * Key-value store of custom data. Up to 3 keys are permitted, with key names up to 50
-         * characters and values up to 500 characters.
-         */
-        public BillingRequestFulfilRequest withMetadata(Map<String, String> metadata) {
-            this.metadata = metadata;
-            return this;
-        }
-
-        /**
-         * Key-value store of custom data. Up to 3 keys are permitted, with key names up to 50
-         * characters and values up to 500 characters.
-         */
-        public BillingRequestFulfilRequest withMetadata(String key, String value) {
-            if (metadata == null) {
-                metadata = new HashMap<>();
-            }
-            metadata.put(key, value);
-            return this;
-        }
-
-        private BillingRequestFulfilRequest(HttpClient httpClient, String identity) {
-            super(httpClient);
-            this.identity = identity;
-        }
-
-        public BillingRequestFulfilRequest withHeader(String headerName, String headerValue) {
-            this.addHeader(headerName, headerValue);
-            return this;
-        }
-
-        @Override
-        protected Map<String, String> getPathParams() {
-            ImmutableMap.Builder<String, String> params = ImmutableMap.builder();
-            params.put("identity", identity);
-            return params.build();
-        }
-
-        @Override
-        protected String getPathTemplate() {
-            return "billing_requests/:identity/actions/fulfil";
-        }
-
-        @Override
-        protected String getEnvelope() {
-            return "billing_requests";
-        }
-
-        @Override
-        protected Class<BillingRequest> getResponseClass() {
-            return BillingRequest.class;
-        }
-
-        @Override
-        protected boolean hasBody() {
-            return true;
-        }
-
-        @Override
-        protected String getRequestEnvelope() {
-            return "data";
-        }
-    }
-
-    /**
-     * Request class for {@link BillingRequestService#chooseCurrency }.
-     *
-     * This will allow for the updating of the currency and subsequently the scheme if needed for a
-     * Billing Request. This will only be available for mandate only flows which do not have the
-     * lock_currency flag set to true on the Billing Request Flow. It will also not support any
-     * request which has a payments request.
-     */
-    public static final class BillingRequestChooseCurrencyRequest
-            extends PostRequest<BillingRequest> {
-        @PathParam
-        private final String identity;
-        private String currency;
-        private Map<String, String> metadata;
-
-        /**
-         * [ISO 4217](http://en.wikipedia.org/wiki/ISO_4217#Active_codes) currency code. Currently
-         * "AUD", "CAD", "DKK", "EUR", "GBP", "NZD", "SEK" and "USD" are supported.
-         */
-        public BillingRequestChooseCurrencyRequest withCurrency(String currency) {
-            this.currency = currency;
-            return this;
-        }
-
-        /**
-         * Key-value store of custom data. Up to 3 keys are permitted, with key names up to 50
-         * characters and values up to 500 characters.
-         */
-        public BillingRequestChooseCurrencyRequest withMetadata(Map<String, String> metadata) {
-            this.metadata = metadata;
-            return this;
-        }
-
-        /**
-         * Key-value store of custom data. Up to 3 keys are permitted, with key names up to 50
-         * characters and values up to 500 characters.
-         */
-        public BillingRequestChooseCurrencyRequest withMetadata(String key, String value) {
-            if (metadata == null) {
-                metadata = new HashMap<>();
-            }
-            metadata.put(key, value);
-            return this;
-        }
-
-        private BillingRequestChooseCurrencyRequest(HttpClient httpClient, String identity) {
-            super(httpClient);
-            this.identity = identity;
-        }
-
-        public BillingRequestChooseCurrencyRequest withHeader(String headerName,
-                String headerValue) {
-            this.addHeader(headerName, headerValue);
-            return this;
-        }
-
-        @Override
-        protected Map<String, String> getPathParams() {
-            ImmutableMap.Builder<String, String> params = ImmutableMap.builder();
-            params.put("identity", identity);
-            return params.build();
-        }
-
-        @Override
-        protected String getPathTemplate() {
-            return "billing_requests/:identity/actions/choose_currency";
-        }
-
-        @Override
-        protected String getEnvelope() {
-            return "billing_requests";
-        }
-
-        @Override
-        protected Class<BillingRequest> getResponseClass() {
-            return BillingRequest.class;
-        }
-
-        @Override
-        protected boolean hasBody() {
-            return true;
-        }
-
-        @Override
-        protected String getRequestEnvelope() {
-            return "data";
-        }
-    }
-
-    /**
      * Request class for {@link BillingRequestService#confirmPayerDetails }.
      *
      * This is needed when you have a mandate request. As a scheme compliance rule we are required
@@ -1964,6 +1649,81 @@ public class BillingRequestService {
         @Override
         protected String getPathTemplate() {
             return "billing_requests/:identity/actions/confirm_payer_details";
+        }
+
+        @Override
+        protected String getEnvelope() {
+            return "billing_requests";
+        }
+
+        @Override
+        protected Class<BillingRequest> getResponseClass() {
+            return BillingRequest.class;
+        }
+
+        @Override
+        protected boolean hasBody() {
+            return true;
+        }
+
+        @Override
+        protected String getRequestEnvelope() {
+            return "data";
+        }
+    }
+
+    /**
+     * Request class for {@link BillingRequestService#fulfil }.
+     *
+     * If a billing request is ready to be fulfilled, call this endpoint to cause it to fulfil,
+     * executing the payment.
+     */
+    public static final class BillingRequestFulfilRequest extends PostRequest<BillingRequest> {
+        @PathParam
+        private final String identity;
+        private Map<String, String> metadata;
+
+        /**
+         * Key-value store of custom data. Up to 3 keys are permitted, with key names up to 50
+         * characters and values up to 500 characters.
+         */
+        public BillingRequestFulfilRequest withMetadata(Map<String, String> metadata) {
+            this.metadata = metadata;
+            return this;
+        }
+
+        /**
+         * Key-value store of custom data. Up to 3 keys are permitted, with key names up to 50
+         * characters and values up to 500 characters.
+         */
+        public BillingRequestFulfilRequest withMetadata(String key, String value) {
+            if (metadata == null) {
+                metadata = new HashMap<>();
+            }
+            metadata.put(key, value);
+            return this;
+        }
+
+        private BillingRequestFulfilRequest(HttpClient httpClient, String identity) {
+            super(httpClient);
+            this.identity = identity;
+        }
+
+        public BillingRequestFulfilRequest withHeader(String headerName, String headerValue) {
+            this.addHeader(headerName, headerValue);
+            return this;
+        }
+
+        @Override
+        protected Map<String, String> getPathParams() {
+            ImmutableMap.Builder<String, String> params = ImmutableMap.builder();
+            params.put("identity", identity);
+            return params.build();
+        }
+
+        @Override
+        protected String getPathTemplate() {
+            return "billing_requests/:identity/actions/fulfil";
         }
 
         @Override
@@ -2058,6 +1818,157 @@ public class BillingRequestService {
         @Override
         protected String getRequestEnvelope() {
             return "data";
+        }
+    }
+
+    /**
+     * Request class for {@link BillingRequestService#list }.
+     *
+     * Returns a [cursor-paginated](#api-usage-cursor-pagination) list of your billing requests.
+     */
+    public static final class BillingRequestListRequest<S> extends ListRequest<S, BillingRequest> {
+        private String createdAt;
+        private String customer;
+        private String status;
+
+        /**
+         * Cursor pointing to the start of the desired set.
+         */
+        public BillingRequestListRequest<S> withAfter(String after) {
+            setAfter(after);
+            return this;
+        }
+
+        /**
+         * Cursor pointing to the end of the desired set.
+         */
+        public BillingRequestListRequest<S> withBefore(String before) {
+            setBefore(before);
+            return this;
+        }
+
+        /**
+         * Fixed [timestamp](#api-usage-time-zones--dates), recording when this resource was
+         * created.
+         */
+        public BillingRequestListRequest<S> withCreatedAt(String createdAt) {
+            this.createdAt = createdAt;
+            return this;
+        }
+
+        /**
+         * ID of a [customer](#core-endpoints-customers). If specified, this endpoint will return
+         * all requests for the given customer.
+         */
+        public BillingRequestListRequest<S> withCustomer(String customer) {
+            this.customer = customer;
+            return this;
+        }
+
+        /**
+         * Number of records to return.
+         */
+        public BillingRequestListRequest<S> withLimit(Integer limit) {
+            setLimit(limit);
+            return this;
+        }
+
+        /**
+         * One of:
+         * <ul>
+         * <li>`pending`: the billing request is pending and can be used</li>
+         * <li>`ready_to_fulfil`: the billing request is ready to fulfil</li>
+         * <li>`fulfilling`: the billing request is currently undergoing fulfilment</li>
+         * <li>`fulfilled`: the billing request has been fulfilled and a payment created</li>
+         * <li>`cancelled`: the billing request has been cancelled and cannot be used</li>
+         * </ul>
+         */
+        public BillingRequestListRequest<S> withStatus(String status) {
+            this.status = status;
+            return this;
+        }
+
+        private BillingRequestListRequest(HttpClient httpClient,
+                ListRequestExecutor<S, BillingRequest> executor) {
+            super(httpClient, executor);
+        }
+
+        public BillingRequestListRequest<S> withHeader(String headerName, String headerValue) {
+            this.addHeader(headerName, headerValue);
+            return this;
+        }
+
+        @Override
+        protected Map<String, Object> getQueryParams() {
+            ImmutableMap.Builder<String, Object> params = ImmutableMap.builder();
+            params.putAll(super.getQueryParams());
+            if (createdAt != null) {
+                params.put("created_at", createdAt);
+            }
+            if (customer != null) {
+                params.put("customer", customer);
+            }
+            if (status != null) {
+                params.put("status", status);
+            }
+            return params.build();
+        }
+
+        @Override
+        protected String getPathTemplate() {
+            return "billing_requests";
+        }
+
+        @Override
+        protected String getEnvelope() {
+            return "billing_requests";
+        }
+
+        @Override
+        protected TypeToken<List<BillingRequest>> getTypeToken() {
+            return new TypeToken<List<BillingRequest>>() {};
+        }
+    }
+
+    /**
+     * Request class for {@link BillingRequestService#get }.
+     *
+     * Fetches a billing request
+     */
+    public static final class BillingRequestGetRequest extends GetRequest<BillingRequest> {
+        @PathParam
+        private final String identity;
+
+        private BillingRequestGetRequest(HttpClient httpClient, String identity) {
+            super(httpClient);
+            this.identity = identity;
+        }
+
+        public BillingRequestGetRequest withHeader(String headerName, String headerValue) {
+            this.addHeader(headerName, headerValue);
+            return this;
+        }
+
+        @Override
+        protected Map<String, String> getPathParams() {
+            ImmutableMap.Builder<String, String> params = ImmutableMap.builder();
+            params.put("identity", identity);
+            return params.build();
+        }
+
+        @Override
+        protected String getPathTemplate() {
+            return "billing_requests/:identity";
+        }
+
+        @Override
+        protected String getEnvelope() {
+            return "billing_requests";
+        }
+
+        @Override
+        protected Class<BillingRequest> getResponseClass() {
+            return BillingRequest.class;
         }
     }
 
@@ -2162,6 +2073,95 @@ public class BillingRequestService {
         @Override
         protected String getPathTemplate() {
             return "billing_requests/:identity/actions/fallback";
+        }
+
+        @Override
+        protected String getEnvelope() {
+            return "billing_requests";
+        }
+
+        @Override
+        protected Class<BillingRequest> getResponseClass() {
+            return BillingRequest.class;
+        }
+
+        @Override
+        protected boolean hasBody() {
+            return true;
+        }
+
+        @Override
+        protected String getRequestEnvelope() {
+            return "data";
+        }
+    }
+
+    /**
+     * Request class for {@link BillingRequestService#chooseCurrency }.
+     *
+     * This will allow for the updating of the currency and subsequently the scheme if needed for a
+     * Billing Request. This will only be available for mandate only flows which do not have the
+     * lock_currency flag set to true on the Billing Request Flow. It will also not support any
+     * request which has a payments request.
+     */
+    public static final class BillingRequestChooseCurrencyRequest
+            extends PostRequest<BillingRequest> {
+        @PathParam
+        private final String identity;
+        private String currency;
+        private Map<String, String> metadata;
+
+        /**
+         * [ISO 4217](http://en.wikipedia.org/wiki/ISO_4217#Active_codes) currency code. Currently
+         * "AUD", "CAD", "DKK", "EUR", "GBP", "NZD", "SEK" and "USD" are supported.
+         */
+        public BillingRequestChooseCurrencyRequest withCurrency(String currency) {
+            this.currency = currency;
+            return this;
+        }
+
+        /**
+         * Key-value store of custom data. Up to 3 keys are permitted, with key names up to 50
+         * characters and values up to 500 characters.
+         */
+        public BillingRequestChooseCurrencyRequest withMetadata(Map<String, String> metadata) {
+            this.metadata = metadata;
+            return this;
+        }
+
+        /**
+         * Key-value store of custom data. Up to 3 keys are permitted, with key names up to 50
+         * characters and values up to 500 characters.
+         */
+        public BillingRequestChooseCurrencyRequest withMetadata(String key, String value) {
+            if (metadata == null) {
+                metadata = new HashMap<>();
+            }
+            metadata.put(key, value);
+            return this;
+        }
+
+        private BillingRequestChooseCurrencyRequest(HttpClient httpClient, String identity) {
+            super(httpClient);
+            this.identity = identity;
+        }
+
+        public BillingRequestChooseCurrencyRequest withHeader(String headerName,
+                String headerValue) {
+            this.addHeader(headerName, headerValue);
+            return this;
+        }
+
+        @Override
+        protected Map<String, String> getPathParams() {
+            ImmutableMap.Builder<String, String> params = ImmutableMap.builder();
+            params.put("identity", identity);
+            return params.build();
+        }
+
+        @Override
+        protected String getPathTemplate() {
+            return "billing_requests/:identity/actions/choose_currency";
         }
 
         @Override

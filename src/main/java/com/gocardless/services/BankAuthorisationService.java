@@ -27,13 +27,6 @@ public class BankAuthorisationService {
     }
 
     /**
-     * Fetches a bank authorisation
-     */
-    public BankAuthorisationGetRequest get(String identity) {
-        return new BankAuthorisationGetRequest(httpClient, identity);
-    }
-
-    /**
      * Create a Bank Authorisation.
      */
     public BankAuthorisationCreateRequest create() {
@@ -41,45 +34,10 @@ public class BankAuthorisationService {
     }
 
     /**
-     * Request class for {@link BankAuthorisationService#get }.
-     *
-     * Fetches a bank authorisation
+     * Get a single bank authorisation.
      */
-    public static final class BankAuthorisationGetRequest extends GetRequest<BankAuthorisation> {
-        @PathParam
-        private final String identity;
-
-        private BankAuthorisationGetRequest(HttpClient httpClient, String identity) {
-            super(httpClient);
-            this.identity = identity;
-        }
-
-        public BankAuthorisationGetRequest withHeader(String headerName, String headerValue) {
-            this.addHeader(headerName, headerValue);
-            return this;
-        }
-
-        @Override
-        protected Map<String, String> getPathParams() {
-            ImmutableMap.Builder<String, String> params = ImmutableMap.builder();
-            params.put("identity", identity);
-            return params.build();
-        }
-
-        @Override
-        protected String getPathTemplate() {
-            return "bank_authorisations/:identity";
-        }
-
-        @Override
-        protected String getEnvelope() {
-            return "bank_authorisations";
-        }
-
-        @Override
-        protected Class<BankAuthorisation> getResponseClass() {
-            return BankAuthorisation.class;
-        }
+    public BankAuthorisationGetRequest get(String identity) {
+        return new BankAuthorisationGetRequest(httpClient, identity);
     }
 
     /**
@@ -213,6 +171,48 @@ public class BankAuthorisationService {
                 this.institution = institution;
                 return this;
             }
+        }
+    }
+
+    /**
+     * Request class for {@link BankAuthorisationService#get }.
+     *
+     * Get a single bank authorisation.
+     */
+    public static final class BankAuthorisationGetRequest extends GetRequest<BankAuthorisation> {
+        @PathParam
+        private final String identity;
+
+        private BankAuthorisationGetRequest(HttpClient httpClient, String identity) {
+            super(httpClient);
+            this.identity = identity;
+        }
+
+        public BankAuthorisationGetRequest withHeader(String headerName, String headerValue) {
+            this.addHeader(headerName, headerValue);
+            return this;
+        }
+
+        @Override
+        protected Map<String, String> getPathParams() {
+            ImmutableMap.Builder<String, String> params = ImmutableMap.builder();
+            params.put("identity", identity);
+            return params.build();
+        }
+
+        @Override
+        protected String getPathTemplate() {
+            return "bank_authorisations/:identity";
+        }
+
+        @Override
+        protected String getEnvelope() {
+            return "bank_authorisations";
+        }
+
+        @Override
+        protected Class<BankAuthorisation> getResponseClass() {
+            return BankAuthorisation.class;
         }
     }
 }
