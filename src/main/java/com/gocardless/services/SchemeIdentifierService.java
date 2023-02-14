@@ -45,6 +45,9 @@ public class SchemeIdentifierService {
      * | 16 characters | `a-zA-Z0-9/?:().,'+-` | yes | | faster_payments | 18 characters |
      * `a-zA-Z0-9/?:().,'+-` | yes |
      * 
+     * The validation error that gets returned for an invalid name will contain a suggested name in
+     * the metadata that is guaranteed to pass name validations.
+     * 
      */
     public SchemeIdentifierCreateRequest create() {
         return new SchemeIdentifierCreateRequest(httpClient);
@@ -89,6 +92,9 @@ public class SchemeIdentifierService {
      * `a-zA-Z0-9/.&-` | yes | | sepa_core | 70 characters | `a-zA-Z0-9/?:().,+&<>'"` | yes | | ach
      * | 16 characters | `a-zA-Z0-9/?:().,'+-` | yes | | faster_payments | 18 characters |
      * `a-zA-Z0-9/?:().,'+-` | yes |
+     * 
+     * The validation error that gets returned for an invalid name will contain a suggested name in
+     * the metadata that is guaranteed to pass name validations.
      * 
      */
     public static final class SchemeIdentifierCreateRequest
