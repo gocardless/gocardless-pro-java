@@ -306,6 +306,7 @@ public class Event {
         private String payout;
         private String previousCustomerBankAccount;
         private String refund;
+        private String schemeIdentifier;
         private String subscription;
 
         /**
@@ -456,6 +457,14 @@ public class Event {
          */
         public String getRefund() {
             return refund;
+        }
+
+        /**
+         * If `resource_type` is `scheme_identifiers`. This is the ID of the
+         * [scheme_identifier](#core-endpoints-scheme-identifiers) which has been updated.
+         */
+        public String getSchemeIdentifier() {
+            return schemeIdentifier;
         }
 
         /**
