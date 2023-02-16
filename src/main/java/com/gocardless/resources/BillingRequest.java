@@ -564,7 +564,7 @@ public class BillingRequest {
              * 
              * This is an optional field and if it is not supplied the agreement will be considered
              * open and will not have an end date. Keep in mind the end date must take into account
-             * how long it will take the user to set up this agreement via the BillingRequest.
+             * how long it will take the user to set up this agreement via the Billing Request.
              * 
              */
             public String getEndDate() {
