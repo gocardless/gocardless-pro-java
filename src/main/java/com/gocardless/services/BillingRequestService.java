@@ -2272,7 +2272,7 @@ public class BillingRequestService {
 
         @Override
         protected String getPathTemplate() {
-            return "billing_requests/:identity/actions/list_institutions";
+            return "billing_requests/:identity/list_institutions";
         }
 
         @Override
