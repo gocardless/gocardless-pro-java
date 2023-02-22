@@ -116,6 +116,8 @@ public class BillingRequestService {
     /**
      * Notifies the customer linked to the billing request, asking them to authorise it. Currently,
      * the customer can only be notified by email.
+     * 
+     * This endpoint is currently supported only for Instant Bank Pay Billing Requests.
      */
     public BillingRequestNotifyRequest notify(String identity) {
         return new BillingRequestNotifyRequest(httpClient, identity);
@@ -1988,6 +1990,8 @@ public class BillingRequestService {
      *
      * Notifies the customer linked to the billing request, asking them to authorise it. Currently,
      * the customer can only be notified by email.
+     * 
+     * This endpoint is currently supported only for Instant Bank Pay Billing Requests.
      */
     public static final class BillingRequestNotifyRequest extends PostRequest<BillingRequest> {
         @PathParam
