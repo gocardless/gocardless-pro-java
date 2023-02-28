@@ -85,6 +85,7 @@ public class Event {
      * <li>`payments`</li>
      * <li>`payouts`</li>
      * <li>`refunds`</li>
+     * <li>`scheme_identifiers`</li>
      * <li>`subscriptions`</li>
      * </ul>
      */
@@ -102,7 +103,8 @@ public class Event {
         PAYER_AUTHORISATIONS, @SerializedName("payments")
         PAYMENTS, @SerializedName("payouts")
         PAYOUTS, @SerializedName("refunds")
-        REFUNDS, @SerializedName("subscriptions")
+        REFUNDS, @SerializedName("scheme_identifiers")
+        SCHEME_IDENTIFIERS, @SerializedName("subscriptions")
         SUBSCRIPTIONS, @SerializedName("unknown")
         UNKNOWN
     }

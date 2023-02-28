@@ -55,6 +55,7 @@ public class EventService {
         private String action;
         private String billingRequest;
         private CreatedAt createdAt;
+        private String creditor;
         private Include include;
         private String instalmentSchedule;
         private String mandate;
@@ -64,6 +65,7 @@ public class EventService {
         private String payout;
         private String refund;
         private ResourceType resourceType;
+        private String schemeIdentifier;
         private String subscription;
 
         /**
@@ -149,18 +151,28 @@ public class EventService {
         }
 
         /**
+         * ID of an [creditor](#core-endpoints-creditors). If specified, this endpoint will return
+         * all events for the given creditor.
+         */
+        public EventListRequest<S> withCreditor(String creditor) {
+            this.creditor = creditor;
+            return this;
+        }
+
+        /**
          * Includes linked resources in the response. Must be used with the `resource_type`
          * parameter specified. The include should be one of:
          * <ul>
-         * <li>`payment`</li>
+         * <li>`billing_request`</li>
+         * <li>`creditor`</li>
+         * <li>`instalment_schedule`</li>
          * <li>`mandate`</li>
          * <li>`payer_authorisation`</li>
+         * <li>`payment`</li>
          * <li>`payout`</li>
          * <li>`refund`</li>
+         * <li>`scheme_identifier`</li>
          * <li>`subscription`</li>
-         * <li>`instalment_schedule`</li>
-         * <li>`creditor`</li>
-         * <li>`billing_request`</li>
          * </ul>
          */
         public EventListRequest<S> withInclude(Include include) {
@@ -240,8 +252,9 @@ public class EventService {
 
         /**
          * Type of resource that you'd like to get all events for. Cannot be used together with the
-         * `payment`, `payer_authorisation`, `mandate`, `subscription`, `instalment_schedule`,
-         * `creditor`, `refund` or `payout` parameter. The type can be one of:
+         * `billing_request`, `creditor`, `instalment_schedule`, `mandate`, `payer_authorisation`,
+         * `payment`, `payout`, `refund`, `scheme_identifier` or `subscription` parameters. The type
+         * can be one of:
          * <ul>
          * <li>`billing_requests`</li>
          * <li>`creditors`</li>
@@ -251,11 +264,21 @@ public class EventService {
          * <li>`payments`</li>
          * <li>`payouts`</li>
          * <li>`refunds`</li>
+         * <li>`scheme_identifiers`</li>
          * <li>`subscriptions`</li>
          * </ul>
          */
         public EventListRequest<S> withResourceType(ResourceType resourceType) {
             this.resourceType = resourceType;
+            return this;
+        }
+
+        /**
+         * ID of a [scheme identifier](#core-endpoints-scheme-identifiers). If specified, this
+         * endpoint will return all events for the given scheme identifier.
+         */
+        public EventListRequest<S> withSchemeIdentifier(String schemeIdentifier) {
+            this.schemeIdentifier = schemeIdentifier;
             return this;
         }
 
@@ -290,6 +313,9 @@ public class EventService {
             if (createdAt != null) {
                 params.putAll(createdAt.getQueryParams());
             }
+            if (creditor != null) {
+                params.put("creditor", creditor);
+            }
             if (include != null) {
                 params.put("include", include);
             }
@@ -317,6 +343,9 @@ public class EventService {
             if (resourceType != null) {
                 params.put("resource_type", resourceType);
             }
+            if (schemeIdentifier != null) {
+                params.put("scheme_identifier", schemeIdentifier);
+            }
             if (subscription != null) {
                 params.put("subscription", subscription);
             }
@@ -339,16 +368,17 @@ public class EventService {
         }
 
         public enum Include {
-            @SerializedName("payment")
-            PAYMENT, @SerializedName("mandate")
-            MANDATE, @SerializedName("payout")
+            @SerializedName("billing_request")
+            BILLING_REQUEST, @SerializedName("creditor")
+            CREDITOR, @SerializedName("instalment_schedule")
+            INSTALMENT_SCHEDULE, @SerializedName("mandate")
+            MANDATE, @SerializedName("payer_authorisation")
+            PAYER_AUTHORISATION, @SerializedName("payment")
+            PAYMENT, @SerializedName("payout")
             PAYOUT, @SerializedName("refund")
-            REFUND, @SerializedName("subscription")
-            SUBSCRIPTION, @SerializedName("instalment_schedule")
-            INSTALMENT_SCHEDULE, @SerializedName("creditor")
-            CREDITOR, @SerializedName("payer_authorisation")
-            PAYER_AUTHORISATION, @SerializedName("billing_request")
-            BILLING_REQUEST, @SerializedName("unknown")
+            REFUND, @SerializedName("scheme_identifier")
+            SCHEME_IDENTIFIER, @SerializedName("subscription")
+            SUBSCRIPTION, @SerializedName("unknown")
             UNKNOWN;
 
             @Override
@@ -367,7 +397,8 @@ public class EventService {
             PAYER_AUTHORISATIONS, @SerializedName("payments")
             PAYMENTS, @SerializedName("payouts")
             PAYOUTS, @SerializedName("refunds")
-            REFUNDS, @SerializedName("subscriptions")
+            REFUNDS, @SerializedName("scheme_identifiers")
+            SCHEME_IDENTIFIERS, @SerializedName("subscriptions")
             SUBSCRIPTIONS, @SerializedName("unknown")
             UNKNOWN;
 
