@@ -140,6 +140,13 @@ public class BillingRequestService {
     }
 
     /**
+     * Creates an Institution object and attaches it to the Billing Request
+     */
+    public BillingRequestSelectInstitutionRequest selectInstitution(String identity) {
+        return new BillingRequestSelectInstitutionRequest(httpClient, identity);
+    }
+
+    /**
      * Request class for {@link BillingRequestService#create }.
      *
      * 
@@ -2166,6 +2173,80 @@ public class BillingRequestService {
         @Override
         protected String getPathTemplate() {
             return "billing_requests/:identity/actions/choose_currency";
+        }
+
+        @Override
+        protected String getEnvelope() {
+            return "billing_requests";
+        }
+
+        @Override
+        protected Class<BillingRequest> getResponseClass() {
+            return BillingRequest.class;
+        }
+
+        @Override
+        protected boolean hasBody() {
+            return true;
+        }
+
+        @Override
+        protected String getRequestEnvelope() {
+            return "data";
+        }
+    }
+
+    /**
+     * Request class for {@link BillingRequestService#selectInstitution }.
+     *
+     * Creates an Institution object and attaches it to the Billing Request
+     */
+    public static final class BillingRequestSelectInstitutionRequest
+            extends PostRequest<BillingRequest> {
+        @PathParam
+        private final String identity;
+        private String countryCode;
+        private String institution;
+
+        /**
+         * [ISO
+         * 3166-1](http://en.wikipedia.org/wiki/ISO_3166-1_alpha-2#Officially_assigned_code_elements)
+         * alpha-2 code. The country code of the institution.
+         */
+        public BillingRequestSelectInstitutionRequest withCountryCode(String countryCode) {
+            this.countryCode = countryCode;
+            return this;
+        }
+
+        /**
+         * The unique identifier for this institution
+         */
+        public BillingRequestSelectInstitutionRequest withInstitution(String institution) {
+            this.institution = institution;
+            return this;
+        }
+
+        private BillingRequestSelectInstitutionRequest(HttpClient httpClient, String identity) {
+            super(httpClient);
+            this.identity = identity;
+        }
+
+        public BillingRequestSelectInstitutionRequest withHeader(String headerName,
+                String headerValue) {
+            this.addHeader(headerName, headerValue);
+            return this;
+        }
+
+        @Override
+        protected Map<String, String> getPathParams() {
+            ImmutableMap.Builder<String, String> params = ImmutableMap.builder();
+            params.put("identity", identity);
+            return params.build();
+        }
+
+        @Override
+        protected String getPathTemplate() {
+            return "billing_requests/:identity/actions/select_institution";
         }
 
         @Override
