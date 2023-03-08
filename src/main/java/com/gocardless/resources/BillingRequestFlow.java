@@ -24,6 +24,7 @@ public class BillingRequestFlow {
     private Boolean lockBankAccount;
     private Boolean lockCurrency;
     private Boolean lockCustomerDetails;
+    private Options options;
     private PrefilledBankAccount prefilledBankAccount;
     private PrefilledCustomer prefilledCustomer;
     private String redirectUri;
@@ -121,6 +122,13 @@ public class BillingRequestFlow {
     }
 
     /**
+     * Options used to pass configurational parameters to billing request flow
+     */
+    public Options getOptions() {
+        return options;
+    }
+
+    /**
      * Bank account information used to prefill the payment page so your customer doesn't have to
      * re-type details you already hold about them. It will be stored unvalidated and the customer
      * will be able to review and amend it before completing the form.
@@ -176,6 +184,29 @@ public class BillingRequestFlow {
          */
         public String getBillingRequest() {
             return billingRequest;
+        }
+    }
+
+    /**
+     * Represents a option resource returned from the API.
+     *
+     * Options used to pass configurational parameters to billing request flow
+     */
+    public static class Options {
+        private Options() {
+            // blank to prevent instantiation
+        }
+
+        private Boolean showSuccessRedirectButton;
+
+        /**
+         * If true, we will show redirect button on success page.
+         * 
+         * If false, we will automatically redirect user to the given redirect_uri
+         * 
+         */
+        public Boolean getShowSuccessRedirectButton() {
+            return showSuccessRedirectButton;
         }
     }
 

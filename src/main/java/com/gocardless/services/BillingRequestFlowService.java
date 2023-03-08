@@ -53,6 +53,7 @@ public class BillingRequestFlowService {
         private Boolean lockBankAccount;
         private Boolean lockCurrency;
         private Boolean lockCustomerDetails;
+        private Options options;
         private PrefilledBankAccount prefilledBankAccount;
         private PrefilledCustomer prefilledCustomer;
         private String redirectUri;
@@ -137,6 +138,29 @@ public class BillingRequestFlowService {
         public BillingRequestFlowCreateRequest withLockCustomerDetails(
                 Boolean lockCustomerDetails) {
             this.lockCustomerDetails = lockCustomerDetails;
+            return this;
+        }
+
+        /**
+         * Options used to pass configurational parameters to billing request flow
+         */
+        public BillingRequestFlowCreateRequest withOptions(Options options) {
+            this.options = options;
+            return this;
+        }
+
+        /**
+         * If true, we will show redirect button on success page.
+         * 
+         * If false, we will automatically redirect user to the given redirect_uri
+         * 
+         */
+        public BillingRequestFlowCreateRequest withOptionsShowSuccessRedirectButton(
+                Boolean showSuccessRedirectButton) {
+            if (options == null) {
+                options = new Options();
+            }
+            options.withShowSuccessRedirectButton(showSuccessRedirectButton);
             return this;
         }
 
@@ -388,6 +412,21 @@ public class BillingRequestFlowService {
              */
             public Links withBillingRequest(String billingRequest) {
                 this.billingRequest = billingRequest;
+                return this;
+            }
+        }
+
+        public static class Options {
+            private Boolean showSuccessRedirectButton;
+
+            /**
+             * If true, we will show redirect button on success page.
+             * 
+             * If false, we will automatically redirect user to the given redirect_uri
+             * 
+             */
+            public Options withShowSuccessRedirectButton(Boolean showSuccessRedirectButton) {
+                this.showSuccessRedirectButton = showSuccessRedirectButton;
                 return this;
             }
         }
