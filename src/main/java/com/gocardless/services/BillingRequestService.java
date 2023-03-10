@@ -453,7 +453,9 @@ public class BillingRequestService {
 
         /**
          * Specifies the high-level purpose of a mandate and/or payment using a set of pre-defined
-         * categories. Required for the PayTo scheme, optional for all others.
+         * categories. Required for the PayTo scheme, optional for all others. Currently `mortgage`,
+         * `utility`, `loan`, `dependant_support`, `gambling`, `retail`, `salary`, `personal`,
+         * `government`, `pension`, `tax` and `other` are supported.
          */
         public BillingRequestCreateRequest withPurposeCode(PurposeCode purposeCode) {
             this.purposeCode = purposeCode;
