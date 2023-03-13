@@ -77,18 +77,6 @@ public class BankAuthorisationService {
         }
 
         /**
-         * ID of the [institution](#billing-requests-institutions) against which this authorisation
-         * was created.
-         */
-        public BankAuthorisationCreateRequest withLinksInstitution(String institution) {
-            if (links == null) {
-                links = new Links();
-            }
-            links.withInstitution(institution);
-            return this;
-        }
-
-        /**
          * URL that the payer can be redirected to after authorising the payment.
          * 
          * On completion of bank authorisation, the query parameter of either `outcome=success` or
@@ -99,6 +87,9 @@ public class BankAuthorisationService {
          * 
          * The `redirect_uri` you provide should handle the `outcome` query parameter for displaying
          * the result of the bank authorisation as outlined above.
+         * 
+         * The BillingRequestFlow ID will also be appended to the `redirect_uri` as query parameter
+         * `id=BRF123`.
          * 
          * Defaults to `https://pay.gocardless.com/billing/static/thankyou`.
          */
@@ -152,7 +143,6 @@ public class BankAuthorisationService {
 
         public static class Links {
             private String billingRequest;
-            private String institution;
 
             /**
              * ID of the [billing request](#billing-requests-billing-requests) against which this
@@ -160,15 +150,6 @@ public class BankAuthorisationService {
              */
             public Links withBillingRequest(String billingRequest) {
                 this.billingRequest = billingRequest;
-                return this;
-            }
-
-            /**
-             * ID of the [institution](#billing-requests-institutions) against which this
-             * authorisation was created.
-             */
-            public Links withInstitution(String institution) {
-                this.institution = institution;
                 return this;
             }
         }

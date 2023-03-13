@@ -85,6 +85,7 @@ public class Event {
      * <li>`payments`</li>
      * <li>`payouts`</li>
      * <li>`refunds`</li>
+     * <li>`scheme_identifiers`</li>
      * <li>`subscriptions`</li>
      * </ul>
      */
@@ -102,7 +103,8 @@ public class Event {
         PAYER_AUTHORISATIONS, @SerializedName("payments")
         PAYMENTS, @SerializedName("payouts")
         PAYOUTS, @SerializedName("refunds")
-        REFUNDS, @SerializedName("subscriptions")
+        REFUNDS, @SerializedName("scheme_identifiers")
+        SCHEME_IDENTIFIERS, @SerializedName("subscriptions")
         SUBSCRIPTIONS, @SerializedName("unknown")
         UNKNOWN
     }
@@ -306,6 +308,7 @@ public class Event {
         private String payout;
         private String previousCustomerBankAccount;
         private String refund;
+        private String schemeIdentifier;
         private String subscription;
 
         /**
@@ -456,6 +459,14 @@ public class Event {
          */
         public String getRefund() {
             return refund;
+        }
+
+        /**
+         * If `resource_type` is `scheme_identifiers`, this is the ID of the
+         * [scheme_identifier](#core-endpoints-scheme-identifiers) which has been updated.
+         */
+        public String getSchemeIdentifier() {
+            return schemeIdentifier;
         }
 
         /**

@@ -34,6 +34,20 @@ public class SchemeIdentifierService {
      * schemes e.g. faster_payments this will happen instantly. For other schemes e.g. bacs this can
      * take several days.
      * 
+     * ### Scheme identifier name validations
+     * 
+     * Each scheme has different rules for the length and permitted characters in the scheme
+     * identifier name field. The rules are:
+     * 
+     * | __scheme__ | __maximum length__ | __allowed characters__ | __spaces__ | | :-------------- |
+     * :----------------- | :----------------------- | :--------- | | bacs | 18 characters |
+     * `a-zA-Z0-9/.&-` | yes | | sepa_core | 70 characters | `a-zA-Z0-9/?:().,+&<>'"` | yes | | ach
+     * | 16 characters | `a-zA-Z0-9/?:().,'+-` | yes | | faster_payments | 18 characters |
+     * `a-zA-Z0-9/?:().,'+-` | yes |
+     * 
+     * The validation error that gets returned for an invalid name will contain a suggested name in
+     * the metadata that is guaranteed to pass name validations.
+     * 
      */
     public SchemeIdentifierCreateRequest create() {
         return new SchemeIdentifierCreateRequest(httpClient);
@@ -67,6 +81,20 @@ public class SchemeIdentifierService {
      * scheme identifier must also have the `status` of active before it can be used. For some
      * schemes e.g. faster_payments this will happen instantly. For other schemes e.g. bacs this can
      * take several days.
+     * 
+     * ### Scheme identifier name validations
+     * 
+     * Each scheme has different rules for the length and permitted characters in the scheme
+     * identifier name field. The rules are:
+     * 
+     * | __scheme__ | __maximum length__ | __allowed characters__ | __spaces__ | | :-------------- |
+     * :----------------- | :----------------------- | :--------- | | bacs | 18 characters |
+     * `a-zA-Z0-9/.&-` | yes | | sepa_core | 70 characters | `a-zA-Z0-9/?:().,+&<>'"` | yes | | ach
+     * | 16 characters | `a-zA-Z0-9/?:().,'+-` | yes | | faster_payments | 18 characters |
+     * `a-zA-Z0-9/?:().,'+-` | yes |
+     * 
+     * The validation error that gets returned for an invalid name will contain a suggested name in
+     * the metadata that is guaranteed to pass name validations.
      * 
      */
     public static final class SchemeIdentifierCreateRequest

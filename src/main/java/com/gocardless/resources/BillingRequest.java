@@ -93,7 +93,9 @@ public class BillingRequest {
 
     /**
      * Specifies the high-level purpose of a mandate and/or payment using a set of pre-defined
-     * categories. Required for the PayTo scheme, optional for all others.
+     * categories. Required for the PayTo scheme, optional for all others. Currently `mortgage`,
+     * `utility`, `loan`, `dependant_support`, `gambling`, `retail`, `salary`, `personal`,
+     * `government`, `pension`, `tax` and `other` are supported.
      */
     public PurposeCode getPurposeCode() {
         return purposeCode;
@@ -318,12 +320,34 @@ public class BillingRequest {
             }
 
             private String defaultCountryCode;
+            private IncompleteFields incompleteFields;
 
             /**
              * Default customer country code, as determined by scheme and payer location
              */
             public String getDefaultCountryCode() {
                 return defaultCountryCode;
+            }
+
+            public IncompleteFields getIncompleteFields() {
+                return incompleteFields;
+            }
+
+            public static class IncompleteFields {
+                private IncompleteFields() {
+                    // blank to prevent instantiation
+                }
+
+                private List<String> customer;
+                private List<String> customerBillingDetail;
+
+                public List<String> getCustomer() {
+                    return customer;
+                }
+
+                public List<String> getCustomerBillingDetail() {
+                    return customerBillingDetail;
+                }
             }
         }
     }
@@ -564,7 +588,7 @@ public class BillingRequest {
              * 
              * This is an optional field and if it is not supplied the agreement will be considered
              * open and will not have an end date. Keep in mind the end date must take into account
-             * how long it will take the user to set up this agreement via the BillingRequest.
+             * how long it will take the user to set up this agreement via the Billing Request.
              * 
              */
             public String getEndDate() {

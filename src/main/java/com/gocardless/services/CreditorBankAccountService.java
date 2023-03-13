@@ -209,8 +209,8 @@ public class CreditorBankAccountService {
         }
 
         /**
-         * Defaults to `false`. When this is set to `true`, it will cause this bank account to be
-         * set as the account that GoCardless will pay out to.
+         * Defaults to `true`. When this is set to `true`, it will cause this bank account to be set
+         * as the account that GoCardless will pay out to.
          */
         public CreditorBankAccountCreateRequest withSetAsDefaultPayoutAccount(
                 Boolean setAsDefaultPayoutAccount) {
