@@ -21,7 +21,7 @@ With Maven:
 With Gradle:
 
 ```
-compile 'com.gocardless:gocardless-pro:5.14.2'
+implementation 'com.gocardless:gocardless-pro:5.14.2'
 ```
 
 ## Initializing the client
