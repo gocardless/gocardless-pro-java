@@ -320,12 +320,34 @@ public class BillingRequest {
             }
 
             private String defaultCountryCode;
+            private IncompleteFields incompleteFields;
 
             /**
              * Default customer country code, as determined by scheme and payer location
              */
             public String getDefaultCountryCode() {
                 return defaultCountryCode;
+            }
+
+            public IncompleteFields getIncompleteFields() {
+                return incompleteFields;
+            }
+
+            public static class IncompleteFields {
+                private IncompleteFields() {
+                    // blank to prevent instantiation
+                }
+
+                private List<String> customer;
+                private List<String> customerBillingDetail;
+
+                public List<String> getCustomer() {
+                    return customer;
+                }
+
+                public List<String> getCustomerBillingDetail() {
+                    return customerBillingDetail;
+                }
             }
         }
     }
