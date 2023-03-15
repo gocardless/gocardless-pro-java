@@ -3,6 +3,7 @@
         "address_line1": "27 Acer Road",
         "address_line2": "Apt 2",
         "city": "London",
+        "email": "test-email@gmail.com",
         "country_code": "GB",
         "family_name": "Osborne",
         "given_name": "Sharon",
