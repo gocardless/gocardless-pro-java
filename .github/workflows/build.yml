@@ -34,7 +34,7 @@ jobs:
       run: |-
         export TERM=${TERM:-dumb}
         ./install_crypto_deps.sh
-        ./gradlew test
+        ./gradlew test  --stacktrace
     - name: Save test results
       run: |-
         mkdir -p ~/junit
