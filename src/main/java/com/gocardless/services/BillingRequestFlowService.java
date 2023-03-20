@@ -57,6 +57,7 @@ public class BillingRequestFlowService {
         private PrefilledCustomer prefilledCustomer;
         private String redirectUri;
         private Boolean showRedirectButtons;
+        private Boolean showSuccessRedirectButton;
 
         /**
          * (Experimental feature) Fulfil the Billing Request on completion of the flow (true by
@@ -347,6 +348,16 @@ public class BillingRequestFlowService {
         public BillingRequestFlowCreateRequest withShowRedirectButtons(
                 Boolean showRedirectButtons) {
             this.showRedirectButtons = showRedirectButtons;
+            return this;
+        }
+
+        /**
+         * If true, the payer will be able to see redirect action buttons on Success page. These
+         * action buttons will provide a way to redirect payer to the given redirect_uri.
+         */
+        public BillingRequestFlowCreateRequest withShowSuccessRedirectButton(
+                Boolean showSuccessRedirectButton) {
+            this.showSuccessRedirectButton = showSuccessRedirectButton;
             return this;
         }
 

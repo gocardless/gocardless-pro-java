@@ -29,6 +29,7 @@ public class BillingRequestFlow {
     private String redirectUri;
     private String sessionToken;
     private Boolean showRedirectButtons;
+    private Boolean showSuccessRedirectButton;
 
     /**
      * URL for a GC-controlled flow which will allow the payer to fulfil the billing request
@@ -161,6 +162,14 @@ public class BillingRequestFlow {
      */
     public Boolean getShowRedirectButtons() {
         return showRedirectButtons;
+    }
+
+    /**
+     * If true, the payer will be able to see redirect action buttons on Success page. These action
+     * buttons will provide a way to redirect payer to the given redirect_uri.
+     */
+    public Boolean getShowSuccessRedirectButton() {
+        return showSuccessRedirectButton;
     }
 
     public static class Links {
