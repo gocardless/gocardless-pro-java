@@ -14,14 +14,14 @@ With Maven:
 <dependency>
     <groupId>com.gocardless</groupId>
     <artifactId>gocardless-pro</artifactId>
-    <version>6.0.0</version>
+    <version>5.15.0</version>
 </dependency>
 ```
 
 With Gradle:
 
 ```
-implementation 'com.gocardless:gocardless-pro:6.0.0'
+implementation 'com.gocardless:gocardless-pro:5.15.0'
 ```
 
 ## Initializing the client
@@ -337,7 +337,7 @@ change any of your other code.
 
 ## Compatibility
 
-This library requires JDK version 17 or above.
+This library requires JDK version 8 or above.
 
 ## Logging
 
