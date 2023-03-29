@@ -21,6 +21,7 @@ public class BillingRequest {
     }
 
     private List<Action> actions;
+    private Boolean autoFulfil;
     private String createdAt;
     private Boolean fallbackEnabled;
     private String id;
@@ -37,6 +38,13 @@ public class BillingRequest {
      */
     public List<Action> getActions() {
         return actions;
+    }
+
+    /**
+     * Should the billing request be fulfilled as soon as it's ready (true by default)
+     */
+    public Boolean getAutoFulfil() {
+        return autoFulfil;
     }
 
     /**
