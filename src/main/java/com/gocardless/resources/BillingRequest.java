@@ -267,6 +267,7 @@ public class BillingRequest {
 
             private Adapter adapter;
             private AuthorisationType authorisationType;
+            private Boolean requiresInstitution;
 
             /**
              * Which authorisation adapter will be used to power these authorisations (GoCardless
@@ -281,6 +282,13 @@ public class BillingRequest {
              */
             public AuthorisationType getAuthorisationType() {
                 return authorisationType;
+            }
+
+            /**
+             * Whether an institution is a required field when creating this bank authorisation
+             */
+            public Boolean getRequiresInstitution() {
+                return requiresInstitution;
             }
 
             public enum Adapter {
