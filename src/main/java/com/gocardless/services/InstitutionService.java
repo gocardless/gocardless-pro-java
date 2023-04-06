@@ -129,8 +129,19 @@ public class InstitutionService {
             extends ListRequest<S, Institution> {
         @PathParam
         private final String identity;
+        private String countryCode;
         private List<String> ids;
         private String search;
+
+        /**
+         * [ISO
+         * 3166-1](http://en.wikipedia.org/wiki/ISO_3166-1_alpha-2#Officially_assigned_code_elements)
+         * alpha-2 code. The country code of the institution.
+         */
+        public InstitutionListForBillingRequestRequest<S> withCountryCode(String countryCode) {
+            this.countryCode = countryCode;
+            return this;
+        }
 
         /**
          * ID(s) of the institution(s) to retrieve. More than one ID can be specified using a
@@ -184,6 +195,9 @@ public class InstitutionService {
         protected Map<String, Object> getQueryParams() {
             ImmutableMap.Builder<String, Object> params = ImmutableMap.builder();
             params.putAll(super.getQueryParams());
+            if (countryCode != null) {
+                params.put("country_code", countryCode);
+            }
             if (ids != null) {
                 params.put("ids", Joiner.on(",").join(ids));
             }
