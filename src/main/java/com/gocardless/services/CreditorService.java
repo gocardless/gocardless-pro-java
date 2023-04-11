@@ -63,10 +63,15 @@ public class CreditorService {
     }
 
     /**
-     * Applies a [scheme identifier](#core-endpoints-scheme-identifiers) to a creditor. If the
-     * creditor already has a scheme identifier for the scheme, it will be replaced, and any
-     * mandates attached to it transferred asynchronously. For some schemes, the application of the
-     * scheme identifier will be performed asynchronously.
+     * Applies a [scheme identifier](#core-endpoints-scheme-identifiers) to a creditor.
+     * 
+     * If the scheme identifier has a `pending` status, it will be applied asynchronously once it
+     * becomes `active`.
+     * 
+     * If the creditor already has a scheme identifier for the scheme, it will be replaced, and any
+     * mandates attached to it transferred asynchronously. On Bacs and SEPA, if payments were about
+     * to be submitted, they will be delayed. To minimise this delay, we recommend that you apply
+     * the new scheme identifier after the daily payment submission time (4 PM Europe/London time).
      * 
      */
     public CreditorApplySchemeIdentifierRequest applySchemeIdentifier(String identity) {
@@ -720,10 +725,15 @@ public class CreditorService {
     /**
      * Request class for {@link CreditorService#applySchemeIdentifier }.
      *
-     * Applies a [scheme identifier](#core-endpoints-scheme-identifiers) to a creditor. If the
-     * creditor already has a scheme identifier for the scheme, it will be replaced, and any
-     * mandates attached to it transferred asynchronously. For some schemes, the application of the
-     * scheme identifier will be performed asynchronously.
+     * Applies a [scheme identifier](#core-endpoints-scheme-identifiers) to a creditor.
+     * 
+     * If the scheme identifier has a `pending` status, it will be applied asynchronously once it
+     * becomes `active`.
+     * 
+     * If the creditor already has a scheme identifier for the scheme, it will be replaced, and any
+     * mandates attached to it transferred asynchronously. On Bacs and SEPA, if payments were about
+     * to be submitted, they will be delayed. To minimise this delay, we recommend that you apply
+     * the new scheme identifier after the daily payment submission time (4 PM Europe/London time).
      * 
      */
     public static final class CreditorApplySchemeIdentifierRequest extends PostRequest<Creditor> {

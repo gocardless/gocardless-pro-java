@@ -1008,8 +1008,8 @@ public class BillingRequestService {
          * language for notification emails sent by GoCardless if your organisation does not send
          * its own (see [compliance requirements](#appendix-compliance-requirements)). Currently
          * only "en", "fr", "de", "pt", "es", "it", "nl", "da", "nb", "sl", "sv" are supported. If
-         * this is not provided, the language will be chosen based on the `country_code` (if
-         * supplied) or default to "en".
+         * this is not provided and a customer was linked during billing request creation, the
+         * linked customer language will be used. Otherwise, the language is default to "en".
          */
         public BillingRequestCollectCustomerDetailsRequest withCustomerLanguage(String language) {
             if (customer == null) {
@@ -1277,8 +1277,9 @@ public class BillingRequestService {
              * language for notification emails sent by GoCardless if your organisation does not
              * send its own (see [compliance requirements](#appendix-compliance-requirements)).
              * Currently only "en", "fr", "de", "pt", "es", "it", "nl", "da", "nb", "sl", "sv" are
-             * supported. If this is not provided, the language will be chosen based on the
-             * `country_code` (if supplied) or default to "en".
+             * supported. If this is not provided and a customer was linked during billing request
+             * creation, the linked customer language will be used. Otherwise, the language is
+             * default to "en".
              */
             public Customer withLanguage(String language) {
                 this.language = language;
