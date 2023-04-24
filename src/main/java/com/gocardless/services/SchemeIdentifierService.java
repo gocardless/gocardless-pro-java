@@ -200,6 +200,8 @@ public class SchemeIdentifierService {
      */
     public static final class SchemeIdentifierListRequest<S>
             extends ListRequest<S, SchemeIdentifier> {
+        private String creditor;
+
         /**
          * Cursor pointing to the start of the desired set.
          */
@@ -213,6 +215,14 @@ public class SchemeIdentifierService {
          */
         public SchemeIdentifierListRequest<S> withBefore(String before) {
             setBefore(before);
+            return this;
+        }
+
+        /**
+         * Unique identifier, beginning with "CR".
+         */
+        public SchemeIdentifierListRequest<S> withCreditor(String creditor) {
+            this.creditor = creditor;
             return this;
         }
 
@@ -238,6 +248,9 @@ public class SchemeIdentifierService {
         protected Map<String, Object> getQueryParams() {
             ImmutableMap.Builder<String, Object> params = ImmutableMap.builder();
             params.putAll(super.getQueryParams());
+            if (creditor != null) {
+                params.put("creditor", creditor);
+            }
             return params.build();
         }
 
