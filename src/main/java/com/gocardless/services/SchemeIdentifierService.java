@@ -42,9 +42,9 @@ public class SchemeIdentifierService {
      * 
      * | __scheme__ | __maximum length__ | __special characters allowed__ | | :---------------- |
      * :----------------- | :-------------------------------------------------- | | `bacs` | 18
-     * characters | `/` `.` `&` `-` | | `sepa_core` | 70 characters | `/` `?` `:` `(` `)` `.` `,`
-     * `+` `&` `<` `>` `'` `"` | | `ach` | 16 characters | `/` `?` `:` `(` `)` `.` `,` `'` `+` `-` |
-     * | `faster_payments` | 18 characters | `/` `?` `:` `(` `)` `.` `,` `'` `+` `-` |
+     * characters | `/` `.` `&` `-` | | `sepa` | 70 characters | `/` `?` `:` `(` `)` `.` `,` `+` `&`
+     * `<` `>` `'` `"` | | `ach` | 16 characters | `/` `?` `:` `(` `)` `.` `,` `'` `+` `-` | |
+     * `faster_payments` | 18 characters | `/` `?` `:` `(` `)` `.` `,` `'` `+` `-` |
      * 
      * The validation error that gets returned for an invalid name will contain a suggested name in
      * the metadata that is guaranteed to pass name validations.
@@ -94,9 +94,9 @@ public class SchemeIdentifierService {
      * 
      * | __scheme__ | __maximum length__ | __special characters allowed__ | | :---------------- |
      * :----------------- | :-------------------------------------------------- | | `bacs` | 18
-     * characters | `/` `.` `&` `-` | | `sepa_core` | 70 characters | `/` `?` `:` `(` `)` `.` `,`
-     * `+` `&` `<` `>` `'` `"` | | `ach` | 16 characters | `/` `?` `:` `(` `)` `.` `,` `'` `+` `-` |
-     * | `faster_payments` | 18 characters | `/` `?` `:` `(` `)` `.` `,` `'` `+` `-` |
+     * characters | `/` `.` `&` `-` | | `sepa` | 70 characters | `/` `?` `:` `(` `)` `.` `,` `+` `&`
+     * `<` `>` `'` `"` | | `ach` | 16 characters | `/` `?` `:` `(` `)` `.` `,` `'` `+` `-` | |
+     * `faster_payments` | 18 characters | `/` `?` `:` `(` `)` `.` `,` `'` `+` `-` |
      * 
      * The validation error that gets returned for an invalid name will contain a suggested name in
      * the metadata that is guaranteed to pass name validations.
