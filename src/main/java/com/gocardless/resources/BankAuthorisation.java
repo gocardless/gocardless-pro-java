@@ -23,6 +23,7 @@ public class BankAuthorisation {
     private String id;
     private String lastVisitedAt;
     private Links links;
+    private String qrCodeUrl;
     private String redirectUri;
     private String url;
 
@@ -72,6 +73,15 @@ public class BankAuthorisation {
 
     public Links getLinks() {
         return links;
+    }
+
+    /**
+     * URL to a QR code PNG image of the bank authorisation url. This QR code can be used as an
+     * alternative to providing the `url` to the payer to allow them to authorise with their mobile
+     * devices.
+     */
+    public String getQrCodeUrl() {
+        return qrCodeUrl;
     }
 
     /**
