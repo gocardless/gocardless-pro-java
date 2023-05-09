@@ -84,10 +84,24 @@ public class CreditorService {
      * Creates a new creditor.
      */
     public static final class CreditorCreateRequest extends IdempotentPostRequest<Creditor> {
+        private String bankReferencePrefix;
         private String countryCode;
         private CreditorType creditorType;
         private Map<String, String> links;
         private String name;
+
+        /**
+         * Prefix for the bank reference of payouts sent to this creditor. For instance, if the
+         * creditor's `bank_reference_prefix` was `ACME`, the bank reference of a payout sent to
+         * that creditor could be `ACME-8G7Q8`.
+         * 
+         * This prefix is also used for refunds in EUR and GBP.
+         * 
+         */
+        public CreditorCreateRequest withBankReferencePrefix(String bankReferencePrefix) {
+            this.bankReferencePrefix = bankReferencePrefix;
+            return this;
+        }
 
         /**
          * [ISO 3166-1 alpha-2
@@ -420,6 +434,7 @@ public class CreditorService {
         private String addressLine1;
         private String addressLine2;
         private String addressLine3;
+        private String bankReferencePrefix;
         private String city;
         private String countryCode;
         private Links links;
@@ -448,6 +463,19 @@ public class CreditorService {
          */
         public CreditorUpdateRequest withAddressLine3(String addressLine3) {
             this.addressLine3 = addressLine3;
+            return this;
+        }
+
+        /**
+         * Prefix for the bank reference of payouts sent to this creditor. For instance, if the
+         * creditor's `bank_reference_prefix` was `ACME`, the bank reference of a payout sent to
+         * that creditor could be `ACME-8G7Q8`.
+         * 
+         * This prefix is also used for refunds in EUR and GBP.
+         * 
+         */
+        public CreditorUpdateRequest withBankReferencePrefix(String bankReferencePrefix) {
+            this.bankReferencePrefix = bankReferencePrefix;
             return this;
         }
 
