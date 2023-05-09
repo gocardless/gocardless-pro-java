@@ -107,8 +107,26 @@ public class SchemeIdentifierService {
      */
     public static final class SchemeIdentifierCreateRequest
             extends IdempotentPostRequest<SchemeIdentifier> {
+        private Links links;
         private String name;
         private Scheme scheme;
+
+        public SchemeIdentifierCreateRequest withLinks(Links links) {
+            this.links = links;
+            return this;
+        }
+
+        /**
+         * <em>required</em> ID of the associated [creditor](#core-endpoints-creditors).
+         * 
+         */
+        public SchemeIdentifierCreateRequest withLinksCreditor(String creditor) {
+            if (links == null) {
+                links = new Links();
+            }
+            links.withCreditor(creditor);
+            return this;
+        }
 
         /**
          * The name which appears on customers' bank statements. This should usually be the
@@ -189,6 +207,19 @@ public class SchemeIdentifierService {
             @Override
             public String toString() {
                 return name().toLowerCase();
+            }
+        }
+
+        public static class Links {
+            private String creditor;
+
+            /**
+             * <em>required</em> ID of the associated [creditor](#core-endpoints-creditors).
+             * 
+             */
+            public Links withCreditor(String creditor) {
+                this.creditor = creditor;
+                return this;
             }
         }
     }
