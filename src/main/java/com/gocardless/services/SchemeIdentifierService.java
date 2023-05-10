@@ -42,9 +42,9 @@ public class SchemeIdentifierService {
      * 
      * | __scheme__ | __maximum length__ | __special characters allowed__ | | :---------------- |
      * :----------------- | :-------------------------------------------------- | | `bacs` | 18
-     * characters | `/` `.` `&` `-` | | `sepa_core` | 70 characters | `/` `?` `:` `(` `)` `.` `,`
-     * `+` `&` `<` `>` `'` `"` | | `ach` | 16 characters | `/` `?` `:` `(` `)` `.` `,` `'` `+` `-` |
-     * | `faster_payments` | 18 characters | `/` `?` `:` `(` `)` `.` `,` `'` `+` `-` |
+     * characters | `/` `.` `&` `-` | | `sepa` | 70 characters | `/` `?` `:` `(` `)` `.` `,` `+` `&`
+     * `<` `>` `'` `"` | | `ach` | 16 characters | `/` `?` `:` `(` `)` `.` `,` `'` `+` `-` | |
+     * `faster_payments` | 18 characters | `/` `?` `:` `(` `)` `.` `,` `'` `+` `-` |
      * 
      * The validation error that gets returned for an invalid name will contain a suggested name in
      * the metadata that is guaranteed to pass name validations.
@@ -94,9 +94,9 @@ public class SchemeIdentifierService {
      * 
      * | __scheme__ | __maximum length__ | __special characters allowed__ | | :---------------- |
      * :----------------- | :-------------------------------------------------- | | `bacs` | 18
-     * characters | `/` `.` `&` `-` | | `sepa_core` | 70 characters | `/` `?` `:` `(` `)` `.` `,`
-     * `+` `&` `<` `>` `'` `"` | | `ach` | 16 characters | `/` `?` `:` `(` `)` `.` `,` `'` `+` `-` |
-     * | `faster_payments` | 18 characters | `/` `?` `:` `(` `)` `.` `,` `'` `+` `-` |
+     * characters | `/` `.` `&` `-` | | `sepa` | 70 characters | `/` `?` `:` `(` `)` `.` `,` `+` `&`
+     * `<` `>` `'` `"` | | `ach` | 16 characters | `/` `?` `:` `(` `)` `.` `,` `'` `+` `-` | |
+     * `faster_payments` | 18 characters | `/` `?` `:` `(` `)` `.` `,` `'` `+` `-` |
      * 
      * The validation error that gets returned for an invalid name will contain a suggested name in
      * the metadata that is guaranteed to pass name validations.
@@ -107,8 +107,26 @@ public class SchemeIdentifierService {
      */
     public static final class SchemeIdentifierCreateRequest
             extends IdempotentPostRequest<SchemeIdentifier> {
+        private Links links;
         private String name;
         private Scheme scheme;
+
+        public SchemeIdentifierCreateRequest withLinks(Links links) {
+            this.links = links;
+            return this;
+        }
+
+        /**
+         * <em>required</em> ID of the associated [creditor](#core-endpoints-creditors).
+         * 
+         */
+        public SchemeIdentifierCreateRequest withLinksCreditor(String creditor) {
+            if (links == null) {
+                links = new Links();
+            }
+            links.withCreditor(creditor);
+            return this;
+        }
 
         /**
          * The name which appears on customers' bank statements. This should usually be the
@@ -191,6 +209,19 @@ public class SchemeIdentifierService {
                 return name().toLowerCase();
             }
         }
+
+        public static class Links {
+            private String creditor;
+
+            /**
+             * <em>required</em> ID of the associated [creditor](#core-endpoints-creditors).
+             * 
+             */
+            public Links withCreditor(String creditor) {
+                this.creditor = creditor;
+                return this;
+            }
+        }
     }
 
     /**
@@ -200,6 +231,8 @@ public class SchemeIdentifierService {
      */
     public static final class SchemeIdentifierListRequest<S>
             extends ListRequest<S, SchemeIdentifier> {
+        private String creditor;
+
         /**
          * Cursor pointing to the start of the desired set.
          */
@@ -213,6 +246,14 @@ public class SchemeIdentifierService {
          */
         public SchemeIdentifierListRequest<S> withBefore(String before) {
             setBefore(before);
+            return this;
+        }
+
+        /**
+         * Unique identifier, beginning with "CR".
+         */
+        public SchemeIdentifierListRequest<S> withCreditor(String creditor) {
+            this.creditor = creditor;
             return this;
         }
 
@@ -238,6 +279,9 @@ public class SchemeIdentifierService {
         protected Map<String, Object> getQueryParams() {
             ImmutableMap.Builder<String, Object> params = ImmutableMap.builder();
             params.putAll(super.getQueryParams());
+            if (creditor != null) {
+                params.put("creditor", creditor);
+            }
             return params.build();
         }
 

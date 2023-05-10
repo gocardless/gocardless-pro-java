@@ -33,6 +33,7 @@ public class GoCardlessClient {
     private final MandateImportService mandateImports;
     private final MandateImportEntryService mandateImportEntries;
     private final MandatePdfService mandatePdfs;
+    private final NegativeBalanceLimitService negativeBalanceLimits;
     private final PayerAuthorisationService payerAuthorisations;
     private final PaymentService payments;
     private final PayoutService payouts;
@@ -185,6 +186,7 @@ public class GoCardlessClient {
         this.mandateImports = new MandateImportService(httpClient);
         this.mandateImportEntries = new MandateImportEntryService(httpClient);
         this.mandatePdfs = new MandatePdfService(httpClient);
+        this.negativeBalanceLimits = new NegativeBalanceLimitService(httpClient);
         this.payerAuthorisations = new PayerAuthorisationService(httpClient);
         this.payments = new PaymentService(httpClient);
         this.payouts = new PayoutService(httpClient);
@@ -330,6 +332,13 @@ public class GoCardlessClient {
      */
     public MandatePdfService mandatePdfs() {
         return mandatePdfs;
+    }
+
+    /**
+     * A service class for working with negative balance limit resources.
+     */
+    public NegativeBalanceLimitService negativeBalanceLimits() {
+        return negativeBalanceLimits;
     }
 
     /**

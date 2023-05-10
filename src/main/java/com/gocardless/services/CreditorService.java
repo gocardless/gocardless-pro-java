@@ -63,31 +63,29 @@ public class CreditorService {
     }
 
     /**
-     * Applies a [scheme identifier](#core-endpoints-scheme-identifiers) to a creditor.
-     * 
-     * If the scheme identifier has a `pending` status, it will be applied asynchronously once it
-     * becomes `active`.
-     * 
-     * If the creditor already has a scheme identifier for the scheme, it will be replaced, and any
-     * mandates attached to it transferred asynchronously. On Bacs and SEPA, if payments were about
-     * to be submitted, they will be delayed. To minimise this delay, we recommend that you apply
-     * the new scheme identifier after the daily payment submission time (4 PM Europe/London time).
-     * 
-     */
-    public CreditorApplySchemeIdentifierRequest applySchemeIdentifier(String identity) {
-        return new CreditorApplySchemeIdentifierRequest(httpClient, identity);
-    }
-
-    /**
      * Request class for {@link CreditorService#create }.
      *
      * Creates a new creditor.
      */
     public static final class CreditorCreateRequest extends IdempotentPostRequest<Creditor> {
+        private String bankReferencePrefix;
         private String countryCode;
         private CreditorType creditorType;
         private Map<String, String> links;
         private String name;
+
+        /**
+         * Prefix for the bank reference of payouts sent to this creditor. For instance, if the
+         * creditor's `bank_reference_prefix` was `ACME`, the bank reference of a payout sent to
+         * that creditor could be `ACME-8G7Q8`.
+         * 
+         * This prefix is also used for refunds in EUR and GBP.
+         * 
+         */
+        public CreditorCreateRequest withBankReferencePrefix(String bankReferencePrefix) {
+            this.bankReferencePrefix = bankReferencePrefix;
+            return this;
+        }
 
         /**
          * [ISO 3166-1 alpha-2
@@ -420,6 +418,7 @@ public class CreditorService {
         private String addressLine1;
         private String addressLine2;
         private String addressLine3;
+        private String bankReferencePrefix;
         private String city;
         private String countryCode;
         private Links links;
@@ -448,6 +447,19 @@ public class CreditorService {
          */
         public CreditorUpdateRequest withAddressLine3(String addressLine3) {
             this.addressLine3 = addressLine3;
+            return this;
+        }
+
+        /**
+         * Prefix for the bank reference of payouts sent to this creditor. For instance, if the
+         * creditor's `bank_reference_prefix` was `ACME`, the bank reference of a payout sent to
+         * that creditor could be `ACME-8G7Q8`.
+         * 
+         * This prefix is also used for refunds in EUR and GBP.
+         * 
+         */
+        public CreditorUpdateRequest withBankReferencePrefix(String bankReferencePrefix) {
+            this.bankReferencePrefix = bankReferencePrefix;
             return this;
         }
 
@@ -717,101 +729,6 @@ public class CreditorService {
              */
             public Links withDefaultUsdPayoutAccount(String defaultUsdPayoutAccount) {
                 this.defaultUsdPayoutAccount = defaultUsdPayoutAccount;
-                return this;
-            }
-        }
-    }
-
-    /**
-     * Request class for {@link CreditorService#applySchemeIdentifier }.
-     *
-     * Applies a [scheme identifier](#core-endpoints-scheme-identifiers) to a creditor.
-     * 
-     * If the scheme identifier has a `pending` status, it will be applied asynchronously once it
-     * becomes `active`.
-     * 
-     * If the creditor already has a scheme identifier for the scheme, it will be replaced, and any
-     * mandates attached to it transferred asynchronously. On Bacs and SEPA, if payments were about
-     * to be submitted, they will be delayed. To minimise this delay, we recommend that you apply
-     * the new scheme identifier after the daily payment submission time (4 PM Europe/London time).
-     * 
-     */
-    public static final class CreditorApplySchemeIdentifierRequest extends PostRequest<Creditor> {
-        @PathParam
-        private final String identity;
-        private Links links;
-
-        /**
-         * The ID of the scheme identifier to apply
-         */
-        public CreditorApplySchemeIdentifierRequest withLinks(Links links) {
-            this.links = links;
-            return this;
-        }
-
-        /**
-         * Unique identifier, usually beginning with "SU".
-         */
-        public CreditorApplySchemeIdentifierRequest withLinksSchemeIdentifier(
-                String schemeIdentifier) {
-            if (links == null) {
-                links = new Links();
-            }
-            links.withSchemeIdentifier(schemeIdentifier);
-            return this;
-        }
-
-        private CreditorApplySchemeIdentifierRequest(HttpClient httpClient, String identity) {
-            super(httpClient);
-            this.identity = identity;
-        }
-
-        public CreditorApplySchemeIdentifierRequest withHeader(String headerName,
-                String headerValue) {
-            this.addHeader(headerName, headerValue);
-            return this;
-        }
-
-        @Override
-        protected Map<String, String> getPathParams() {
-            ImmutableMap.Builder<String, String> params = ImmutableMap.builder();
-            params.put("identity", identity);
-            return params.build();
-        }
-
-        @Override
-        protected String getPathTemplate() {
-            return "creditors/:identity/actions/apply_scheme_identifier";
-        }
-
-        @Override
-        protected String getEnvelope() {
-            return "creditors";
-        }
-
-        @Override
-        protected Class<Creditor> getResponseClass() {
-            return Creditor.class;
-        }
-
-        @Override
-        protected boolean hasBody() {
-            return true;
-        }
-
-        @Override
-        protected String getRequestEnvelope() {
-            return "data";
-        }
-
-        public static class Links {
-            private String schemeIdentifier;
-
-            /**
-             * Unique identifier, usually beginning with "SU".
-             */
-            public Links withSchemeIdentifier(String schemeIdentifier) {
-                this.schemeIdentifier = schemeIdentifier;
                 return this;
             }
         }

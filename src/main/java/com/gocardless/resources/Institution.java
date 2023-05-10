@@ -14,7 +14,7 @@ public class Institution {
         // blank to prevent instantiation
     }
 
-    private Boolean bankRedirect;
+    private Boolean autocompletesCollectBankAccount;
     private String countryCode;
     private String iconUrl;
     private String id;
@@ -22,12 +22,12 @@ public class Institution {
     private String name;
 
     /**
-     * Flag to show if the institution supports redirection to its authorisation flow or if a
-     * provider's one is being used. The bank authorisation screen on the UI is visible based on
-     * this property.
+     * Flag to show if selecting this institution in the select_institution action can auto-complete
+     * the collect_bank_account action. The bank can return the payer's bank account details to
+     * GoCardless.
      */
-    public Boolean getBankRedirect() {
-        return bankRedirect;
+    public Boolean getAutocompletesCollectBankAccount() {
+        return autocompletesCollectBankAccount;
     }
 
     /**
