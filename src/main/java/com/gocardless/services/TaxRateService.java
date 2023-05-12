@@ -75,6 +75,14 @@ public class TaxRateService {
             return this;
         }
 
+        /**
+         * Number of records to return.
+         */
+        public TaxRateListRequest<S> withLimit(Integer limit) {
+            setLimit(limit);
+            return this;
+        }
+
         private TaxRateListRequest(HttpClient httpClient,
                 ListRequestExecutor<S, TaxRate> executor) {
             super(httpClient, executor);
