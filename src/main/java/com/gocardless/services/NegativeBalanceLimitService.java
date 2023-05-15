@@ -11,8 +11,10 @@ import java.util.Map;
 /**
  * Service class for working with negative balance limit resources.
  *
- * The negative balance limit for a creditor. If the creditor would exceed this limit, we will not
- * allow the creation of refunds.
+ * The negative balance limit is a threshold for the creditor balance beyond which refunds are not
+ * permitted. The default limit is zero — refunds are not permitted if the creditor has a negative
+ * balance. The limit can be changed on a per-creditor basis.
+ * 
  */
 public class NegativeBalanceLimitService {
     private final HttpClient httpClient;
@@ -55,7 +57,6 @@ public class NegativeBalanceLimitService {
     public static final class NegativeBalanceLimitListRequest<S>
             extends ListRequest<S, NegativeBalanceLimit> {
         private Active active;
-        private CreatedAt createdAt;
         private String creditor;
         private Currency currency;
 
@@ -80,55 +81,6 @@ public class NegativeBalanceLimitService {
          */
         public NegativeBalanceLimitListRequest<S> withBefore(String before) {
             setBefore(before);
-            return this;
-        }
-
-        public NegativeBalanceLimitListRequest<S> withCreatedAt(CreatedAt createdAt) {
-            this.createdAt = createdAt;
-            return this;
-        }
-
-        /**
-         * Limit to records created after the specified date-time.
-         */
-        public NegativeBalanceLimitListRequest<S> withCreatedAtGt(String gt) {
-            if (createdAt == null) {
-                createdAt = new CreatedAt();
-            }
-            createdAt.withGt(gt);
-            return this;
-        }
-
-        /**
-         * Limit to records created on or after the specified date-time.
-         */
-        public NegativeBalanceLimitListRequest<S> withCreatedAtGte(String gte) {
-            if (createdAt == null) {
-                createdAt = new CreatedAt();
-            }
-            createdAt.withGte(gte);
-            return this;
-        }
-
-        /**
-         * Limit to records created before the specified date-time.
-         */
-        public NegativeBalanceLimitListRequest<S> withCreatedAtLt(String lt) {
-            if (createdAt == null) {
-                createdAt = new CreatedAt();
-            }
-            createdAt.withLt(lt);
-            return this;
-        }
-
-        /**
-         * Limit to records created on or before the specified date-time.
-         */
-        public NegativeBalanceLimitListRequest<S> withCreatedAtLte(String lte) {
-            if (createdAt == null) {
-                createdAt = new CreatedAt();
-            }
-            createdAt.withLte(lte);
             return this;
         }
 
@@ -174,9 +126,6 @@ public class NegativeBalanceLimitService {
             params.putAll(super.getQueryParams());
             if (active != null) {
                 params.put("active", active);
-            }
-            if (createdAt != null) {
-                params.putAll(createdAt.getQueryParams());
             }
             if (creditor != null) {
                 params.put("creditor", creditor);
@@ -229,62 +178,6 @@ public class NegativeBalanceLimitService {
             @Override
             public String toString() {
                 return name();
-            }
-        }
-
-        public static class CreatedAt {
-            private String gt;
-            private String gte;
-            private String lt;
-            private String lte;
-
-            /**
-             * Limit to records created after the specified date-time.
-             */
-            public CreatedAt withGt(String gt) {
-                this.gt = gt;
-                return this;
-            }
-
-            /**
-             * Limit to records created on or after the specified date-time.
-             */
-            public CreatedAt withGte(String gte) {
-                this.gte = gte;
-                return this;
-            }
-
-            /**
-             * Limit to records created before the specified date-time.
-             */
-            public CreatedAt withLt(String lt) {
-                this.lt = lt;
-                return this;
-            }
-
-            /**
-             * Limit to records created on or before the specified date-time.
-             */
-            public CreatedAt withLte(String lte) {
-                this.lte = lte;
-                return this;
-            }
-
-            public Map<String, Object> getQueryParams() {
-                ImmutableMap.Builder<String, Object> params = ImmutableMap.builder();
-                if (gt != null) {
-                    params.put("created_at[gt]", gt);
-                }
-                if (gte != null) {
-                    params.put("created_at[gte]", gte);
-                }
-                if (lt != null) {
-                    params.put("created_at[lt]", lt);
-                }
-                if (lte != null) {
-                    params.put("created_at[lte]", lte);
-                }
-                return params.build();
             }
         }
     }
