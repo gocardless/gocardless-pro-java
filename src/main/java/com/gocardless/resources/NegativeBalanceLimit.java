@@ -15,20 +15,12 @@ public class NegativeBalanceLimit {
         // blank to prevent instantiation
     }
 
-    private Boolean active;
     private Integer balanceLimit;
     private String createdAt;
     private Currency currency;
     private String id;
     private Links links;
     private String updatedAt;
-
-    /**
-     * Whether or not this limit is currently active
-     */
-    public Boolean getActive() {
-        return active;
-    }
 
     /**
      * The limit amount in pence (e.g. 10000 for a -100 GBP limit).
