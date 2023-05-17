@@ -21,7 +21,6 @@ public class NegativeBalanceLimit {
     private Currency currency;
     private String id;
     private Links links;
-    private String reason;
     private String updatedAt;
 
     /**
@@ -62,13 +61,6 @@ public class NegativeBalanceLimit {
 
     public Links getLinks() {
         return links;
-    }
-
-    /**
-     * the reason this limit was created
-     */
-    public String getReason() {
-        return reason;
     }
 
     /**

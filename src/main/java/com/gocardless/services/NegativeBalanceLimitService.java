@@ -193,7 +193,6 @@ public class NegativeBalanceLimitService {
         private Integer balanceLimit;
         private Currency currency;
         private Links links;
-        private String reason;
 
         /**
          * The limit amount in pence (e.g. 10000 for a -100 GBP limit).
@@ -225,14 +224,6 @@ public class NegativeBalanceLimitService {
                 links = new Links();
             }
             links.withCreditor(creditor);
-            return this;
-        }
-
-        /**
-         * the reason this limit was created
-         */
-        public NegativeBalanceLimitCreateRequest withReason(String reason) {
-            this.reason = reason;
             return this;
         }
 
