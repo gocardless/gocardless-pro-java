@@ -20,7 +20,6 @@ public class NegativeBalanceLimit {
     private Currency currency;
     private String id;
     private Links links;
-    private String updatedAt;
 
     /**
      * The limit amount in pence (e.g. 10000 for a -100 GBP limit).
@@ -53,13 +52,6 @@ public class NegativeBalanceLimit {
 
     public Links getLinks() {
         return links;
-    }
-
-    /**
-     * Fixed [timestamp](#api-usage-time-zones--dates), recording when this limit was last updated.
-     */
-    public String getUpdatedAt() {
-        return updatedAt;
     }
 
     public enum Currency {
