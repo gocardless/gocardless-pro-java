@@ -584,7 +584,8 @@ public class BillingRequestService {
             }
 
             /**
-             * The maximum number of payments that can be collected in this periodic limit
+             * (Optional) The maximum number of payments that can be collected in this periodic
+             * limit.
              */
             public PeriodicLimits withMaxPayments(Integer maxPayments) {
                 this.maxPayments = maxPayments;
@@ -592,7 +593,9 @@ public class BillingRequestService {
             }
 
             /**
-             * The maximum total amount that can be charged for all payments in this periodic limit
+             * The maximum total amount that can be charged for all payments in this periodic limit.
+             * Required for VRP.
+             * 
              */
             public PeriodicLimits withMaxTotalAmount(Integer maxTotalAmount) {
                 this.maxTotalAmount = maxTotalAmount;
@@ -673,7 +676,7 @@ public class BillingRequestService {
             }
 
             /**
-             * The maximum amount that can be charged for a single payment
+             * The maximum amount that can be charged for a single payment. Required for VRP.
              */
             public Constraints withMaxAmountPerPayment(Integer maxAmountPerPayment) {
                 this.maxAmountPerPayment = maxAmountPerPayment;

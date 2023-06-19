@@ -588,7 +588,7 @@ public class BillingRequest {
             }
 
             /**
-             * The maximum amount that can be charged for a single payment
+             * The maximum amount that can be charged for a single payment. Required for VRP.
              */
             public Integer getMaxAmountPerPayment() {
                 return maxAmountPerPayment;
@@ -638,7 +638,8 @@ public class BillingRequest {
                 }
 
                 /**
-                 * The maximum number of payments that can be collected in this periodic limit
+                 * (Optional) The maximum number of payments that can be collected in this periodic
+                 * limit.
                  */
                 public Integer getMaxPayments() {
                     return maxPayments;
@@ -646,7 +647,8 @@ public class BillingRequest {
 
                 /**
                  * The maximum total amount that can be charged for all payments in this periodic
-                 * limit
+                 * limit. Required for VRP.
+                 * 
                  */
                 public Integer getMaxTotalAmount() {
                     return maxTotalAmount;
