@@ -27,7 +27,7 @@ public class Customer {
     private String givenName;
     private String id;
     private String language;
-    private Map<String, String> metadata;
+    private Map<String, Object> metadata;
     private String phoneNumber;
     private String postalCode;
     private String region;
@@ -138,7 +138,7 @@ public class Customer {
      * Key-value store of custom data. Up to 3 keys are permitted, with key names up to 50
      * characters and values up to 500 characters.
      */
-    public Map<String, String> getMetadata() {
+    public Map<String, Object> getMetadata() {
         return metadata;
     }
 

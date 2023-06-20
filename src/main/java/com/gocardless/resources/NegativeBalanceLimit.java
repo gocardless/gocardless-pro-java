@@ -15,21 +15,11 @@ public class NegativeBalanceLimit {
         // blank to prevent instantiation
     }
 
-    private Boolean active;
     private Integer balanceLimit;
     private String createdAt;
     private Currency currency;
     private String id;
     private Links links;
-    private String reason;
-    private String updatedAt;
-
-    /**
-     * Whether or not this limit is currently active
-     */
-    public Boolean getActive() {
-        return active;
-    }
 
     /**
      * The limit amount in pence (e.g. 10000 for a -100 GBP limit).
@@ -62,20 +52,6 @@ public class NegativeBalanceLimit {
 
     public Links getLinks() {
         return links;
-    }
-
-    /**
-     * the reason this limit was created
-     */
-    public String getReason() {
-        return reason;
-    }
-
-    /**
-     * Fixed [timestamp](#api-usage-time-zones--dates), recording when this limit was last updated.
-     */
-    public String getUpdatedAt() {
-        return updatedAt;
     }
 
     public enum Currency {

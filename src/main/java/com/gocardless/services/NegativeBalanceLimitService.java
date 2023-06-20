@@ -42,8 +42,9 @@ public class NegativeBalanceLimitService {
     }
 
     /**
-     * Creates a new negative balance limit, which also deactivates the existing limit (if present)
-     * for that currency and creditor combination.
+     * Creates a new negative balance limit, which replaces the existing limit (if present) for that
+     * currency and creditor combination.
+     * 
      */
     public NegativeBalanceLimitCreateRequest create() {
         return new NegativeBalanceLimitCreateRequest(httpClient);
@@ -56,17 +57,8 @@ public class NegativeBalanceLimitService {
      */
     public static final class NegativeBalanceLimitListRequest<S>
             extends ListRequest<S, NegativeBalanceLimit> {
-        private Active active;
         private String creditor;
         private Currency currency;
-
-        /**
-         * Whether or not this limit is currently active
-         */
-        public NegativeBalanceLimitListRequest<S> withActive(Active active) {
-            this.active = active;
-            return this;
-        }
 
         /**
          * Cursor pointing to the start of the desired set.
@@ -124,9 +116,6 @@ public class NegativeBalanceLimitService {
         protected Map<String, Object> getQueryParams() {
             ImmutableMap.Builder<String, Object> params = ImmutableMap.builder();
             params.putAll(super.getQueryParams());
-            if (active != null) {
-                params.put("active", active);
-            }
             if (creditor != null) {
                 params.put("creditor", creditor);
             }
@@ -151,18 +140,6 @@ public class NegativeBalanceLimitService {
             return new TypeToken<List<NegativeBalanceLimit>>() {};
         }
 
-        public enum Active {
-            @SerializedName("true")
-            TRUE, @SerializedName("false")
-            FALSE, @SerializedName("unknown")
-            UNKNOWN;
-
-            @Override
-            public String toString() {
-                return name().toLowerCase();
-            }
-        }
-
         public enum Currency {
             @SerializedName("AUD")
             AUD, @SerializedName("CAD")
@@ -185,15 +162,15 @@ public class NegativeBalanceLimitService {
     /**
      * Request class for {@link NegativeBalanceLimitService#create }.
      *
-     * Creates a new negative balance limit, which also deactivates the existing limit (if present)
-     * for that currency and creditor combination.
+     * Creates a new negative balance limit, which replaces the existing limit (if present) for that
+     * currency and creditor combination.
+     * 
      */
     public static final class NegativeBalanceLimitCreateRequest
             extends PostRequest<NegativeBalanceLimit> {
         private Integer balanceLimit;
         private Currency currency;
         private Links links;
-        private String reason;
 
         /**
          * The limit amount in pence (e.g. 10000 for a -100 GBP limit).
@@ -225,14 +202,6 @@ public class NegativeBalanceLimitService {
                 links = new Links();
             }
             links.withCreditor(creditor);
-            return this;
-        }
-
-        /**
-         * the reason this limit was created
-         */
-        public NegativeBalanceLimitCreateRequest withReason(String reason) {
-            this.reason = reason;
             return this;
         }
 

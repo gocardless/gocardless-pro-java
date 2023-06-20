@@ -162,7 +162,7 @@ public class PayerAuthorisation {
         private String countryCode;
         private String currency;
         private String iban;
-        private Map<String, String> metadata;
+        private Map<String, Object> metadata;
 
         /**
          * Name of the account holder, as known by the bank. Usually this is the same as the name
@@ -254,7 +254,7 @@ public class PayerAuthorisation {
          * Key-value store of custom data. Up to 3 keys are permitted, with key names up to 50
          * characters and values up to 500 characters.
          */
-        public Map<String, String> getMetadata() {
+        public Map<String, Object> getMetadata() {
             return metadata;
         }
 
@@ -287,7 +287,7 @@ public class PayerAuthorisation {
         private String familyName;
         private String givenName;
         private String locale;
-        private Map<String, String> metadata;
+        private Map<String, Object> metadata;
         private String postalCode;
         private String region;
         private String swedishIdentityNumber;
@@ -381,7 +381,7 @@ public class PayerAuthorisation {
          * Key-value store of custom data. Up to 3 keys are permitted, with key names up to 50
          * characters and values up to 500 characters.
          */
-        public Map<String, String> getMetadata() {
+        public Map<String, Object> getMetadata() {
             return metadata;
         }
 
@@ -489,7 +489,7 @@ public class PayerAuthorisation {
             // blank to prevent instantiation
         }
 
-        private Map<String, String> metadata;
+        private Map<String, Object> metadata;
         private String payerIpAddress;
         private String reference;
         private Scheme scheme;
@@ -498,7 +498,7 @@ public class PayerAuthorisation {
          * Key-value store of custom data. Up to 3 keys are permitted, with key names up to 50
          * characters and values up to 500 characters.
          */
-        public Map<String, String> getMetadata() {
+        public Map<String, Object> getMetadata() {
             return metadata;
         }
 

@@ -31,12 +31,6 @@ public class InstitutionService {
 
     /**
      * Returns a list of supported institutions.
-     * 
-     * <p class="deprecated-notice">
-     * <strong>Deprecated</strong>: This list institutions endpoint is no longer supported. We
-     * strongly recommend using the [List Institutions For Billing
-     * Request](#institutions-list-institutions-for-billing-request) instead.
-     * </p>
      */
     public InstitutionListRequest<ListResponse<Institution>> list() {
         return new InstitutionListRequest<>(httpClient, ListRequest.<Institution>pagingExecutor());
@@ -62,12 +56,6 @@ public class InstitutionService {
      * Request class for {@link InstitutionService#list }.
      *
      * Returns a list of supported institutions.
-     * 
-     * <p class="deprecated-notice">
-     * <strong>Deprecated</strong>: This list institutions endpoint is no longer supported. We
-     * strongly recommend using the [List Institutions For Billing
-     * Request](#institutions-list-institutions-for-billing-request) instead.
-     * </p>
      */
     public static final class InstitutionListRequest<S> extends ListRequest<S, Institution> {
         private String countryCode;
