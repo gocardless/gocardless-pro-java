@@ -23,7 +23,7 @@ public class Refund {
     private Fx fx;
     private String id;
     private Links links;
-    private Map<String, String> metadata;
+    private Map<String, Object> metadata;
     private String reference;
     private Status status;
 
@@ -68,7 +68,7 @@ public class Refund {
      * Key-value store of custom data. Up to 3 keys are permitted, with key names up to 50
      * characters and values up to 500 characters.
      */
-    public Map<String, String> getMetadata() {
+    public Map<String, Object> getMetadata() {
         return metadata;
     }
 

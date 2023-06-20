@@ -26,7 +26,7 @@ public class BillingRequest {
     private String id;
     private Links links;
     private MandateRequest mandateRequest;
-    private Map<String, String> metadata;
+    private Map<String, Object> metadata;
     private PaymentRequest paymentRequest;
     private PurposeCode purposeCode;
     private Resources resources;
@@ -80,7 +80,7 @@ public class BillingRequest {
      * Key-value store of custom data. Up to 3 keys are permitted, with key names up to 50
      * characters and values up to 500 characters.
      */
-    public Map<String, String> getMetadata() {
+    public Map<String, Object> getMetadata() {
         return metadata;
     }
 
@@ -450,7 +450,7 @@ public class BillingRequest {
         private String currency;
         private String description;
         private Links links;
-        private Map<String, String> metadata;
+        private Map<String, Object> metadata;
         private String scheme;
         private Verify verify;
 
@@ -500,7 +500,7 @@ public class BillingRequest {
          * Key-value store of custom data. Up to 3 keys are permitted, with key names up to 50
          * characters and values up to 500 characters.
          */
-        public Map<String, String> getMetadata() {
+        public Map<String, Object> getMetadata() {
             return metadata;
         }
 
@@ -713,7 +713,7 @@ public class BillingRequest {
         private String currency;
         private String description;
         private Links links;
-        private Map<String, String> metadata;
+        private Map<String, Object> metadata;
         private String scheme;
 
         /**
@@ -758,7 +758,7 @@ public class BillingRequest {
          * Key-value store of custom data. Up to 3 keys are permitted, with key names up to 50
          * characters and values up to 500 characters.
          */
-        public Map<String, String> getMetadata() {
+        public Map<String, Object> getMetadata() {
             return metadata;
         }
 
@@ -837,7 +837,7 @@ public class BillingRequest {
             private String givenName;
             private String id;
             private String language;
-            private Map<String, String> metadata;
+            private Map<String, Object> metadata;
             private String phoneNumber;
 
             /**
@@ -903,7 +903,7 @@ public class BillingRequest {
              * Key-value store of custom data. Up to 3 keys are permitted, with key names up to 50
              * characters and values up to 500 characters.
              */
-            public Map<String, String> getMetadata() {
+            public Map<String, Object> getMetadata() {
                 return metadata;
             }
 
@@ -936,7 +936,7 @@ public class BillingRequest {
             private Boolean enabled;
             private String id;
             private Links links;
-            private Map<String, String> metadata;
+            private Map<String, Object> metadata;
 
             /**
              * Name of the account holder, as known by the bank. Usually this is the same as the
@@ -1020,7 +1020,7 @@ public class BillingRequest {
              * Key-value store of custom data. Up to 3 keys are permitted, with key names up to 50
              * characters and values up to 500 characters.
              */
-            public Map<String, String> getMetadata() {
+            public Map<String, Object> getMetadata() {
                 return metadata;
             }
 

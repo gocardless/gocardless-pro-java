@@ -22,7 +22,7 @@ public class Mandate {
     private String createdAt;
     private String id;
     private Links links;
-    private Map<String, String> metadata;
+    private Map<String, Object> metadata;
     private String nextPossibleChargeDate;
     private Boolean paymentsRequireApproval;
     private String reference;
@@ -74,7 +74,7 @@ public class Mandate {
      * Key-value store of custom data. Up to 3 keys are permitted, with key names up to 50
      * characters and values up to 500 characters.
      */
-    public Map<String, String> getMetadata() {
+    public Map<String, Object> getMetadata() {
         return metadata;
     }
 

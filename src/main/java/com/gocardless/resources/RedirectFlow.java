@@ -53,7 +53,7 @@ public class RedirectFlow {
     private String id;
     private Links links;
     private String mandateReference;
-    private Map<String, String> metadata;
+    private Map<String, Object> metadata;
     private String redirectUrl;
     private Scheme scheme;
     private String sessionToken;
@@ -109,7 +109,7 @@ public class RedirectFlow {
      * characters and values up to 500 characters. _Note:_ This should not be used for storing PII
      * data.
      */
-    public Map<String, String> getMetadata() {
+    public Map<String, Object> getMetadata() {
         return metadata;
     }
 

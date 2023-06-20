@@ -34,7 +34,7 @@ public class CustomerBankAccount {
     private Boolean enabled;
     private String id;
     private Links links;
-    private Map<String, String> metadata;
+    private Map<String, Object> metadata;
 
     /**
      * Name of the account holder, as known by the bank. Usually this is the same as the name stored
@@ -116,7 +116,7 @@ public class CustomerBankAccount {
      * Key-value store of custom data. Up to 3 keys are permitted, with key names up to 50
      * characters and values up to 500 characters.
      */
-    public Map<String, String> getMetadata() {
+    public Map<String, Object> getMetadata() {
         return metadata;
     }
 

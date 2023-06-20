@@ -24,7 +24,7 @@ public class Event {
     private Details details;
     private String id;
     private Links links;
-    private Map<String, String> metadata;
+    private Map<String, Object> metadata;
     private ResourceType resourceType;
 
     /**
@@ -70,7 +70,7 @@ public class Event {
      * If the `details[origin]` is `api`, this will contain any metadata you specified when
      * triggering this event. In other cases it will be an empty object.
      */
-    public Map<String, String> getMetadata() {
+    public Map<String, Object> getMetadata() {
         return metadata;
     }
 
