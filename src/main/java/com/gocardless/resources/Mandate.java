@@ -20,6 +20,7 @@ public class Mandate {
     private AuthorisationSource authorisationSource;
     private ConsentParameters consentParameters;
     private String createdAt;
+    private FundsSettlement fundsSettlement;
     private String id;
     private Links links;
     private Map<String, Object> metadata;
@@ -56,6 +57,18 @@ public class Mandate {
      */
     public String getCreatedAt() {
         return createdAt;
+    }
+
+    /**
+     * This field will decide how GoCardless handles settlement of funds from the customer.
+     * 
+     * - `managed` will be moved through GoCardless' account, batched, and payed out. - `direct`
+     * will be a direct transfer from the payer's account to the merchant where invoicing will be
+     * handled separately.
+     * 
+     */
+    public FundsSettlement getFundsSettlement() {
+        return fundsSettlement;
     }
 
     /**
@@ -146,6 +159,13 @@ public class Mandate {
         WEB, @SerializedName("telephone")
         TELEPHONE, @SerializedName("paper")
         PAPER, @SerializedName("unknown")
+        UNKNOWN
+    }
+
+    public enum FundsSettlement {
+        @SerializedName("managed")
+        MANAGED, @SerializedName("direct")
+        DIRECT, @SerializedName("unknown")
         UNKNOWN
     }
 
