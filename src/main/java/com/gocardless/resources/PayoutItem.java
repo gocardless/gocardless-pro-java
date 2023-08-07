@@ -98,7 +98,8 @@ public class PayoutItem {
         GOCARDLESS_FEE, @SerializedName("app_fee")
         APP_FEE, @SerializedName("revenue_share")
         REVENUE_SHARE, @SerializedName("surcharge_fee")
-        SURCHARGE_FEE, @SerializedName("unknown")
+        SURCHARGE_FEE, @SerializedName("refund_funds_returned")
+        REFUND_FUNDS_RETURNED, @SerializedName("unknown")
         UNKNOWN
     }
 
