@@ -13,8 +13,7 @@ import java.util.Map;
  * <p class="deprecated-notice">
  * <strong>Deprecated</strong>: Redirect Flows are our legacy APIs for setting up mandates and will
  * no longer be supported in the future. We strongly recommend using the [Billing Request
- * flow](#billing-requests) instead. From <b>June 13th 2023</b>, we will no longer allow new
- * merchants to create Redirect Flows.
+ * flow](#billing-requests) instead.
  * </p>
  * 
  * Redirect flows enable you to use GoCardless' [hosted payment
