@@ -155,6 +155,7 @@ public class BillingRequest {
         private BankAuthorisation bankAuthorisation;
         private CollectCustomerDetails collectCustomerDetails;
         private List<String> completesActions;
+        private InstitutionGuessStatus institutionGuessStatus;
         private Boolean required;
         private List<String> requiresActions;
         private Status status;
@@ -189,6 +190,24 @@ public class BillingRequest {
         }
 
         /**
+         * Describes whether we inferred the institution from the provided bank account details.
+         * 
+         * <ul>
+         * <li>`not_needed`: we won't attempt to infer the institution as it is not needed. Either
+         * because it was manually selected or the billing request does not support this
+         * feature</li>
+         * <li>`pending`: we are waiting on the bank details in order to infer the institution</li>
+         * <li>`failed`: we weren't able to infer the institution</li>
+         * <li>`success`: we inferred the institution and added it to the resources of a Billing
+         * Request</li>
+         * </ul>
+         * 
+         */
+        public InstitutionGuessStatus getInstitutionGuessStatus() {
+            return institutionGuessStatus;
+        }
+
+        /**
          * Informs you whether the action is required to fulfil the billing request or not.
          */
         public Boolean getRequired() {
@@ -214,6 +233,15 @@ public class BillingRequest {
          */
         public Type getType() {
             return type;
+        }
+
+        public enum InstitutionGuessStatus {
+            @SerializedName("not_needed")
+            NOT_NEEDED, @SerializedName("pending")
+            PENDING, @SerializedName("failed")
+            FAILED, @SerializedName("success")
+            SUCCESS, @SerializedName("unknown")
+            UNKNOWN
         }
 
         public enum Status {
