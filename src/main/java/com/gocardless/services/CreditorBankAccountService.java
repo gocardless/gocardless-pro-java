@@ -373,7 +373,8 @@ public class CreditorBankAccountService {
         }
 
         /**
-         * Boolean value showing whether the bank account is enabled or disabled
+         * If `true`, only return enabled bank accounts. If `false`, only return disabled bank
+         * accounts.
          */
         public CreditorBankAccountListRequest<S> withEnabled(Boolean enabled) {
             this.enabled = enabled;
