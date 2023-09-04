@@ -190,17 +190,12 @@ public class BillingRequest {
         }
 
         /**
-         * Describes whether we inferred the institution from the provided bank account details.
-         * 
-         * <ul>
-         * <li>`not_needed`: we won't attempt to infer the institution as it is not needed. Either
-         * because it was manually selected or the billing request does not support this
-         * feature</li>
-         * <li>`pending`: we are waiting on the bank details in order to infer the institution</li>
-         * <li>`failed`: we weren't able to infer the institution</li>
-         * <li>`success`: we inferred the institution and added it to the resources of a Billing
-         * Request</li>
-         * </ul>
+         * Describes whether we inferred the institution from the provided bank account details. One
+         * of: - `not_needed`: we won't attempt to infer the institution as it is not needed. Either
+         * because it was manually selected or the billing request does not support this feature -
+         * `pending`: we are waiting on the bank details in order to infer the institution -
+         * `failed`: we weren't able to infer the institution - `success`: we inferred the
+         * institution and added it to the resources of a Billing Request
          * 
          */
         public InstitutionGuessStatus getInstitutionGuessStatus() {
