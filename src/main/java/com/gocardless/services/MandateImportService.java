@@ -97,7 +97,27 @@ public class MandateImportService {
      */
     public static final class MandateImportCreateRequest
             extends IdempotentPostRequest<MandateImport> {
+        private Links links;
         private Scheme scheme;
+
+        /**
+         * Related resources
+         */
+        public MandateImportCreateRequest withLinks(Links links) {
+            this.links = links;
+            return this;
+        }
+
+        /**
+         * ID of the associated creditor. Only required if your account manages multiple creditors.
+         */
+        public MandateImportCreateRequest withLinksCreditor(String creditor) {
+            if (links == null) {
+                links = new Links();
+            }
+            links.withCreditor(creditor);
+            return this;
+        }
 
         /**
          * A bank payment scheme. Currently "ach", "autogiro", "bacs", "becs", "becs_nz",
@@ -168,6 +188,19 @@ public class MandateImportService {
             @Override
             public String toString() {
                 return name().toLowerCase();
+            }
+        }
+
+        public static class Links {
+            private String creditor;
+
+            /**
+             * ID of the associated creditor. Only required if your account manages multiple
+             * creditors.
+             */
+            public Links withCreditor(String creditor) {
+                this.creditor = creditor;
+                return this;
             }
         }
     }
