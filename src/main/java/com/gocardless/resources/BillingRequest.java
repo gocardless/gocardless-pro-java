@@ -380,6 +380,7 @@ public class BillingRequest {
         private String mandateRequest;
         private String mandateRequestMandate;
         private String organisation;
+        private String paymentProvider;
         private String paymentRequest;
         private String paymentRequestPayment;
 
@@ -440,6 +441,13 @@ public class BillingRequest {
          */
         public String getOrganisation() {
             return organisation;
+        }
+
+        /**
+         * (Optional) ID of the associated payment provider
+         */
+        public String getPaymentProvider() {
+            return paymentProvider;
         }
 
         /**
