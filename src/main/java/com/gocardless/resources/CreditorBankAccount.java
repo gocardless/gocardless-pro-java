@@ -34,6 +34,7 @@ public class CreditorBankAccount {
     private String id;
     private Links links;
     private Map<String, Object> metadata;
+    private VerificationStatus verificationStatus;
 
     /**
      * Name of the account holder, as known by the bank. Usually this is the same as the name stored
@@ -118,10 +119,26 @@ public class CreditorBankAccount {
         return metadata;
     }
 
+    /**
+     * Verification status of the Bank Account. Can be one of `pending`, `in_review` or `successful`
+     */
+    public VerificationStatus getVerificationStatus() {
+        return verificationStatus;
+    }
+
     public enum AccountType {
         @SerializedName("savings")
         SAVINGS, @SerializedName("checking")
         CHECKING, @SerializedName("unknown")
+        UNKNOWN
+    }
+
+    public enum VerificationStatus {
+        @SerializedName("pending")
+        PENDING, @SerializedName("in_review")
+        IN_REVIEW, @SerializedName("successful")
+        SUCCESSFUL, @SerializedName("could_not_verify")
+        COULD_NOT_VERIFY, @SerializedName("unknown")
         UNKNOWN
     }
 
