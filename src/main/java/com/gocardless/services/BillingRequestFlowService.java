@@ -47,6 +47,7 @@ public class BillingRequestFlowService {
     public static final class BillingRequestFlowCreateRequest
             extends PostRequest<BillingRequestFlow> {
         private Boolean autoFulfil;
+        private Boolean customerDetailsCaptured;
         private String exitUri;
         private String language;
         private Links links;
@@ -65,6 +66,15 @@ public class BillingRequestFlowService {
          */
         public BillingRequestFlowCreateRequest withAutoFulfil(Boolean autoFulfil) {
             this.autoFulfil = autoFulfil;
+            return this;
+        }
+
+        /**
+         * Identifies whether a Billing Request belongs to a specific customer
+         */
+        public BillingRequestFlowCreateRequest withCustomerDetailsCaptured(
+                Boolean customerDetailsCaptured) {
+            this.customerDetailsCaptured = customerDetailsCaptured;
             return this;
         }
 
