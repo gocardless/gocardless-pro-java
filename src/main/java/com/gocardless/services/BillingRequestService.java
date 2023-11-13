@@ -59,6 +59,9 @@ public class BillingRequestService {
      * The endpoint takes the same payload as Customer Bank Accounts, but check the bank account is
      * valid for the billing request scheme before creating and attaching it.
      * 
+     * If the scheme is PayTo and the pay_id is available, this can be included in the payload along
+     * with the country_code.
+     * 
      * _ACH scheme_ For compliance reasons, an extra validation step is done using a third-party
      * provider to make sure the customer's bank account can accept Direct Debit. If a bank account
      * is discovered to be closed or invalid, the customer is requested to adjust the account
@@ -1424,6 +1427,9 @@ public class BillingRequestService {
      * The endpoint takes the same payload as Customer Bank Accounts, but check the bank account is
      * valid for the billing request scheme before creating and attaching it.
      * 
+     * If the scheme is PayTo and the pay_id is available, this can be included in the payload along
+     * with the country_code.
+     * 
      * _ACH scheme_ For compliance reasons, an extra validation step is done using a third-party
      * provider to make sure the customer's bank account can accept Direct Debit. If a bank account
      * is discovered to be closed or invalid, the customer is requested to adjust the account
@@ -1443,6 +1449,7 @@ public class BillingRequestService {
         private String currency;
         private String iban;
         private Map<String, String> metadata;
+        private String payId;
 
         /**
          * Name of the account holder, as known by the bank. Usually this is the same as the name
@@ -1551,6 +1558,15 @@ public class BillingRequestService {
                 metadata = new HashMap<>();
             }
             metadata.put(key, value);
+            return this;
+        }
+
+        /**
+         * A unique record such as an email address, mobile number or company number, that can be
+         * used to make and accept payments.
+         */
+        public BillingRequestCollectBankAccountRequest withPayId(String payId) {
+            this.payId = payId;
             return this;
         }
 
