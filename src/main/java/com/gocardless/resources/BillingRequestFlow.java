@@ -16,6 +16,7 @@ public class BillingRequestFlow {
     private String authorisationUrl;
     private Boolean autoFulfil;
     private String createdAt;
+    private Boolean customerDetailsCaptured;
     private String exitUri;
     private String expiresAt;
     private String id;
@@ -51,6 +52,13 @@ public class BillingRequestFlow {
      */
     public String getCreatedAt() {
         return createdAt;
+    }
+
+    /**
+     * Identifies whether a Billing Request belongs to a specific customer
+     */
+    public Boolean getCustomerDetailsCaptured() {
+        return customerDetailsCaptured;
     }
 
     /**
