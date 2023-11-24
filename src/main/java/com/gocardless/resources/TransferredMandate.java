@@ -10,34 +10,36 @@ public class TransferredMandate {
         // blank to prevent instantiation
     }
 
-    private String encryptedData;
-    private String key;
-    private String kid;
+    private String encryptedCustomerBankDetails;
+    private String encryptedDecryptionKey;
     private Links links;
+    private String publicKeyId;
 
     /**
-     * Encrypted bank account details
+     * Encrypted customer bank account details, containing: `iban`, `account_holder_name`,
+     * `swift_bank_code`, `swift_branch_code`, `swift_account_number`
      */
-    public String getEncryptedData() {
-        return encryptedData;
+    public String getEncryptedCustomerBankDetails() {
+        return encryptedCustomerBankDetails;
     }
 
     /**
-     * Encrypted AES key
+     * Random AES-256 key used to encrypt bank account details, itself encrypted with your public
+     * key.
      */
-    public String getKey() {
-        return key;
-    }
-
-    /**
-     * Public key id used to encrypt AES key
-     */
-    public String getKid() {
-        return kid;
+    public String getEncryptedDecryptionKey() {
+        return encryptedDecryptionKey;
     }
 
     public Links getLinks() {
         return links;
+    }
+
+    /**
+     * The ID of an RSA-2048 public key, from your JWKS, used to encrypt the AES key.
+     */
+    public String getPublicKeyId() {
+        return publicKeyId;
     }
 
     public static class Links {

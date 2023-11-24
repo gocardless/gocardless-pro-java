@@ -3,7 +3,6 @@ package com.gocardless.services;
 import com.gocardless.http.*;
 import com.gocardless.resources.TransferredMandate;
 import com.google.common.collect.ImmutableMap;
-import java.util.HashMap;
 import java.util.Map;
 
 /**
@@ -24,7 +23,7 @@ public class TransferredMandateService {
     }
 
     /**
-     * Returns encrypted bank details for the transferred mandate
+     * Returns new customer bank details for a mandate that's been recently transferred
      */
     public TransferredMandateTransferredMandatesRequest transferredMandates(String identity) {
         return new TransferredMandateTransferredMandatesRequest(httpClient, identity);
@@ -33,35 +32,12 @@ public class TransferredMandateService {
     /**
      * Request class for {@link TransferredMandateService#transferredMandates }.
      *
-     * Returns encrypted bank details for the transferred mandate
+     * Returns new customer bank details for a mandate that's been recently transferred
      */
     public static final class TransferredMandateTransferredMandatesRequest
             extends GetRequest<TransferredMandate> {
         @PathParam
         private final String identity;
-        private Map<String, String> metadata;
-
-        /**
-         * Key-value store of custom data. Up to 3 keys are permitted, with key names up to 50
-         * characters and values up to 500 characters.
-         */
-        public TransferredMandateTransferredMandatesRequest withMetadata(
-                Map<String, String> metadata) {
-            this.metadata = metadata;
-            return this;
-        }
-
-        /**
-         * Key-value store of custom data. Up to 3 keys are permitted, with key names up to 50
-         * characters and values up to 500 characters.
-         */
-        public TransferredMandateTransferredMandatesRequest withMetadata(String key, String value) {
-            if (metadata == null) {
-                metadata = new HashMap<>();
-            }
-            metadata.put(key, value);
-            return this;
-        }
 
         private TransferredMandateTransferredMandatesRequest(HttpClient httpClient,
                 String identity) {
@@ -83,23 +59,13 @@ public class TransferredMandateService {
         }
 
         @Override
-        protected Map<String, Object> getQueryParams() {
-            ImmutableMap.Builder<String, Object> params = ImmutableMap.builder();
-            params.putAll(super.getQueryParams());
-            if (metadata != null) {
-                params.put("metadata", metadata);
-            }
-            return params.build();
-        }
-
-        @Override
         protected String getPathTemplate() {
-            return "transferred_mandate/:identity";
+            return "transferred_mandates/:identity";
         }
 
         @Override
         protected String getEnvelope() {
-            return "transferred_mandate";
+            return "transferred_mandates";
         }
 
         @Override
