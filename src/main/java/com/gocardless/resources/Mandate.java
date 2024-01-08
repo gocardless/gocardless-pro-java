@@ -25,6 +25,7 @@ public class Mandate {
     private Links links;
     private Map<String, Object> metadata;
     private String nextPossibleChargeDate;
+    private String nextPossibleStandardAchChargeDate;
     private Boolean paymentsRequireApproval;
     private String reference;
     private String scheme;
@@ -97,6 +98,17 @@ public class Mandate {
      */
     public String getNextPossibleChargeDate() {
         return nextPossibleChargeDate;
+    }
+
+    /**
+     * If this is an an ACH mandate, the earliest date that can be used as a `charge_date` on any
+     * newly created payment to be charged through standard ACH, rather than Faster ACH. This value
+     * will change over time.
+     * 
+     * It is only present in the API response for ACH mandates.
+     */
+    public String getNextPossibleStandardAchChargeDate() {
+        return nextPossibleStandardAchChargeDate;
     }
 
     /**

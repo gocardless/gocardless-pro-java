@@ -24,6 +24,7 @@ public class Payment {
     private String createdAt;
     private Currency currency;
     private String description;
+    private Boolean fasterAch;
     private Fx fx;
     private String id;
     private Links links;
@@ -79,6 +80,15 @@ public class Payment {
      */
     public String getDescription() {
         return description;
+    }
+
+    /**
+     * This field indicates whether the ACH payment is processed through Faster ACH or standard ACH.
+     * 
+     * It is only present in the API response for ACH payments.
+     */
+    public Boolean getFasterAch() {
+        return fasterAch;
     }
 
     public Fx getFx() {
