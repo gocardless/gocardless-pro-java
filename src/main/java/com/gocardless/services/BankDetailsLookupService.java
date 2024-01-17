@@ -74,21 +74,11 @@ public class BankDetailsLookupService {
      */
     public static final class BankDetailsLookupCreateRequest
             extends PostRequest<BankDetailsLookup> {
-        private String accountHolderName;
         private String accountNumber;
         private String bankCode;
         private String branchCode;
         private String countryCode;
         private String iban;
-
-        /**
-         * The account holder name associated with the account number (if available). If provided
-         * and the country code is GB, a payer name verification will be performed.
-         */
-        public BankDetailsLookupCreateRequest withAccountHolderName(String accountHolderName) {
-            this.accountHolderName = accountHolderName;
-            return this;
-        }
 
         /**
          * Bank account number - see [local details](#appendix-local-bank-details) for more
