@@ -1637,6 +1637,7 @@ public class BillingRequestService {
         @PathParam
         private final String identity;
         private Map<String, String> metadata;
+        private Boolean payerRequestedDualSignature;
 
         /**
          * Key-value store of custom data. Up to 3 keys are permitted, with key names up to 50
@@ -1656,6 +1657,19 @@ public class BillingRequestService {
                 metadata = new HashMap<>();
             }
             metadata.put(key, value);
+            return this;
+        }
+
+        /**
+         * This attribute can be set to true if the payer has indicated that multiple signatures are
+         * required for the mandate. As long as every other Billing Request actions have been
+         * completed, the payer will receive an email notification containing instructions on how to
+         * complete the additional signature. The dual signature flow can only be completed using
+         * GoCardless branded pages.
+         */
+        public BillingRequestConfirmPayerDetailsRequest withPayerRequestedDualSignature(
+                Boolean payerRequestedDualSignature) {
+            this.payerRequestedDualSignature = payerRequestedDualSignature;
             return this;
         }
 

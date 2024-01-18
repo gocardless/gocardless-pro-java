@@ -89,6 +89,7 @@ public class MandateImportEntryService {
         private BankAccount bankAccount;
         private Customer customer;
         private Links links;
+        private Mandate mandate;
         private String recordIdentifier;
 
         public MandateImportEntryCreateRequest withAmendment(Amendment amendment) {
@@ -427,6 +428,24 @@ public class MandateImportEntryService {
             return this;
         }
 
+        public MandateImportEntryCreateRequest withMandate(Mandate mandate) {
+            this.mandate = mandate;
+            return this;
+        }
+
+        /**
+         * Unique reference. Different schemes have different length and [character
+         * set](#appendix-character-sets) requirements. GoCardless will generate a unique reference
+         * satisfying the different scheme requirements if this field is left blank.
+         */
+        public MandateImportEntryCreateRequest withMandateReference(String reference) {
+            if (mandate == null) {
+                mandate = new Mandate();
+            }
+            mandate.withReference(reference);
+            return this;
+        }
+
         /**
          * A unique identifier for this entry, which you can use (once the import has been processed
          * by GoCardless) to identify the records that have been created. Limited to 255 characters.
@@ -737,6 +756,20 @@ public class MandateImportEntryService {
              */
             public Links withMandateImport(String mandateImport) {
                 this.mandateImport = mandateImport;
+                return this;
+            }
+        }
+
+        public static class Mandate {
+            private String reference;
+
+            /**
+             * Unique reference. Different schemes have different length and [character
+             * set](#appendix-character-sets) requirements. GoCardless will generate a unique
+             * reference satisfying the different scheme requirements if this field is left blank.
+             */
+            public Mandate withReference(String reference) {
+                this.reference = reference;
                 return this;
             }
         }

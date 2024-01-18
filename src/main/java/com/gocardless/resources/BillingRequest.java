@@ -482,6 +482,7 @@ public class BillingRequest {
         private String description;
         private Links links;
         private Map<String, Object> metadata;
+        private Boolean payerRequestedDualSignature;
         private String scheme;
         private Verify verify;
 
@@ -533,6 +534,17 @@ public class BillingRequest {
          */
         public Map<String, Object> getMetadata() {
             return metadata;
+        }
+
+        /**
+         * This attribute can be set to true if the payer has indicated that multiple signatures are
+         * required for the mandate. As long as every other Billing Request actions have been
+         * completed, the payer will receive an email notification containing instructions on how to
+         * complete the additional signature. The dual signature flow can only be completed using
+         * GoCardless branded pages.
+         */
+        public Boolean getPayerRequestedDualSignature() {
+            return payerRequestedDualSignature;
         }
 
         /**
