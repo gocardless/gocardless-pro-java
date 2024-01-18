@@ -4,6 +4,7 @@
         "address_line2": "Apt 2",
         "city": "London",
         "country_code": "GB",
+        "email": "test-email@gmail.com",
         "family_name": "Osborne",
         "given_name": "Sharon",
         "postal_code": "E8 3GX"
