@@ -52,7 +52,7 @@ public class LogoService {
         }
 
         /**
-         * ID of the creditor the payer theme belongs to
+         * ID of the creditor the logo belongs to
          */
         public LogoCreateForCreditorRequest withLinksCreditor(String creditor) {
             if (links == null) {
@@ -95,7 +95,7 @@ public class LogoService {
             private String creditor;
 
             /**
-             * ID of the creditor the payer theme belongs to
+             * ID of the creditor the logo belongs to
              */
             public Links withCreditor(String creditor) {
                 this.creditor = creditor;
