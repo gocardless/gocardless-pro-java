@@ -24,6 +24,10 @@ public class BankDetailsLookupService {
      * Performs a bank details lookup. As part of the lookup, a modulus check and reachability check
      * are performed.
      * 
+     * For UK-based bank accounts, where an account holder name is provided (and an account number,
+     * a sort code or an iban are already present), we verify that the account holder name and bank
+     * account number match the details held by the relevant bank.
+     * 
      * If your request returns an [error](#api-usage-errors) or the `available_debit_schemes`
      * attribute is an empty array, you will not be able to collect payments from the specified bank
      * account. GoCardless may be able to collect payments from an account even if no `bic` is
@@ -50,6 +54,10 @@ public class BankDetailsLookupService {
      * Performs a bank details lookup. As part of the lookup, a modulus check and reachability check
      * are performed.
      * 
+     * For UK-based bank accounts, where an account holder name is provided (and an account number,
+     * a sort code or an iban are already present), we verify that the account holder name and bank
+     * account number match the details held by the relevant bank.
+     * 
      * If your request returns an [error](#api-usage-errors) or the `available_debit_schemes`
      * attribute is an empty array, you will not be able to collect payments from the specified bank
      * account. GoCardless may be able to collect payments from an account even if no `bic` is
@@ -68,11 +76,21 @@ public class BankDetailsLookupService {
      */
     public static final class BankDetailsLookupCreateRequest
             extends PostRequest<BankDetailsLookup> {
+        private String accountHolderName;
         private String accountNumber;
         private String bankCode;
         private String branchCode;
         private String countryCode;
         private String iban;
+
+        /**
+         * The account holder name associated with the account number (if available). If provided
+         * and the country code is GB, a payer name verification will be performed.
+         */
+        public BankDetailsLookupCreateRequest withAccountHolderName(String accountHolderName) {
+            this.accountHolderName = accountHolderName;
+            return this;
+        }
 
         /**
          * Bank account number - see [local details](#appendix-local-bank-details) for more

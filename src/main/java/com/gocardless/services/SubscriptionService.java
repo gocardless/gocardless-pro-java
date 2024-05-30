@@ -47,7 +47,6 @@ import java.util.Map;
  * - if the recurrence rule specified `-1` as the `day_of_month`, the charge date will be rolled
  * __backwards__ to the previous business day (i.e., the last working day of the month). - otherwise
  * the charge date will be rolled __forwards__ to the next business day.
- * 
  */
 public class SubscriptionService {
     private final HttpClient httpClient;
@@ -151,7 +150,6 @@ public class SubscriptionService {
      * 
      * - `pause_cycles_must_be_greater_than_or_equal_to` if the provided value for `pause_cycles`
      * cannot be satisfied.
-     * 
      */
     public SubscriptionPauseRequest pause(String identity) {
         return new SubscriptionPauseRequest(httpClient, identity);
@@ -941,7 +939,6 @@ public class SubscriptionService {
      * 
      * - `pause_cycles_must_be_greater_than_or_equal_to` if the provided value for `pause_cycles`
      * cannot be satisfied.
-     * 
      */
     public static final class SubscriptionPauseRequest extends PostRequest<Subscription> {
         @PathParam
@@ -972,7 +969,11 @@ public class SubscriptionService {
 
         /**
          * The number of cycles to pause a subscription for. A cycle is one duration of `interval`
-         * and `interval_unit`. This should be a non zero positive value.
+         * and `interval_unit`. This should be a non zero positive value. For AUD subscriptions with
+         * `interval_unit: weekly` the minimum value varies between `3` & `4` because of the
+         * [mandatory minimum waiting period](#subscriptions-resume-a-subscription). For NZD
+         * subscriptions with `interval_unit: weekly` the minimum value is `2` because of the
+         * [mandatory minimum waiting period](#subscriptions-resume-a-subscription).
          */
         public SubscriptionPauseRequest withPauseCycles(Integer pauseCycles) {
             this.pauseCycles = pauseCycles;

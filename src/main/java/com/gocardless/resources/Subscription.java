@@ -40,7 +40,6 @@ import java.util.Map;
  * - if the recurrence rule specified `-1` as the `day_of_month`, the charge date will be rolled
  * __backwards__ to the previous business day (i.e., the last working day of the month). - otherwise
  * the charge date will be rolled __forwards__ to the next business day.
- * 
  */
 public class Subscription {
     private Subscription() {
