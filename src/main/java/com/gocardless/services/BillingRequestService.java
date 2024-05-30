@@ -66,6 +66,11 @@ public class BillingRequestService {
      * provider to make sure the customer's bank account can accept Direct Debit. If a bank account
      * is discovered to be closed or invalid, the customer is requested to adjust the account
      * number/routing number and succeed in this check to continue with the flow.
+     * 
+     * _BACS scheme_ [Payer Name
+     * Verification](https://hub.gocardless.com/s/article/Introduction-to-Payer-Name-Verification?language=en_GB)
+     * is enabled by default for UK based bank accounts, meaning we verify the account holder name
+     * and bank account number match the details held by the relevant bank.
      */
     public BillingRequestCollectBankAccountRequest collectBankAccount(String identity) {
         return new BillingRequestCollectBankAccountRequest(httpClient, identity);
@@ -423,6 +428,23 @@ public class BillingRequestService {
                 paymentRequest = new PaymentRequest();
             }
             paymentRequest.withDescription(description);
+            return this;
+        }
+
+        /**
+         * This field will decide how GoCardless handles settlement of funds from the customer.
+         * 
+         * - `managed` will be moved through GoCardless' account, batched, and payed out. - `direct`
+         * will be a direct transfer from the payer's account to the merchant where invoicing will
+         * be handled separately.
+         * 
+         */
+        public BillingRequestCreateRequest withPaymentRequestFundsSettlement(
+                PaymentRequest.FundsSettlement fundsSettlement) {
+            if (paymentRequest == null) {
+                paymentRequest = new PaymentRequest();
+            }
+            paymentRequest.withFundsSettlement(fundsSettlement);
             return this;
         }
 
@@ -871,6 +893,7 @@ public class BillingRequestService {
             private Integer appFee;
             private String currency;
             private String description;
+            private FundsSettlement fundsSettlement;
             private Map<String, String> metadata;
             private String scheme;
 
@@ -913,6 +936,19 @@ public class BillingRequestService {
             }
 
             /**
+             * This field will decide how GoCardless handles settlement of funds from the customer.
+             * 
+             * - `managed` will be moved through GoCardless' account, batched, and payed out. -
+             * `direct` will be a direct transfer from the payer's account to the merchant where
+             * invoicing will be handled separately.
+             * 
+             */
+            public PaymentRequest withFundsSettlement(FundsSettlement fundsSettlement) {
+                this.fundsSettlement = fundsSettlement;
+                return this;
+            }
+
+            /**
              * Key-value store of custom data. Up to 3 keys are permitted, with key names up to 50
              * characters and values up to 500 characters.
              */
@@ -931,6 +967,18 @@ public class BillingRequestService {
             public PaymentRequest withScheme(String scheme) {
                 this.scheme = scheme;
                 return this;
+            }
+
+            public enum FundsSettlement {
+                @SerializedName("managed")
+                MANAGED, @SerializedName("direct")
+                DIRECT, @SerializedName("unknown")
+                UNKNOWN;
+
+                @Override
+                public String toString() {
+                    return name().toLowerCase();
+                }
             }
         }
     }
@@ -1434,6 +1482,11 @@ public class BillingRequestService {
      * provider to make sure the customer's bank account can accept Direct Debit. If a bank account
      * is discovered to be closed or invalid, the customer is requested to adjust the account
      * number/routing number and succeed in this check to continue with the flow.
+     * 
+     * _BACS scheme_ [Payer Name
+     * Verification](https://hub.gocardless.com/s/article/Introduction-to-Payer-Name-Verification?language=en_GB)
+     * is enabled by default for UK based bank accounts, meaning we verify the account holder name
+     * and bank account number match the details held by the relevant bank.
      */
     public static final class BillingRequestCollectBankAccountRequest
             extends PostRequest<BillingRequest> {
