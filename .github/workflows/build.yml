@@ -41,3 +41,4 @@ jobs:
         with:
           name: test_library_jdk${{ matrix.jdk-version }}_junit
           path: "~/junit"
+          retention-days: 7
