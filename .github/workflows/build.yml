@@ -1,70 +1,43 @@
-name: gocardless/gocardless-pro-java/build
-on: push
+name: build & test
+
+on:
+  push:
+    branches: [master]
+  pull_request:
+    types: [opened, reopened, synchronize]
 
 jobs:
-  test_library_jdk8:
+  test:
     runs-on: ubuntu-latest
-    container:
-      image: openjdk:8
+    strategy:
+      fail-fast: false
+      matrix:
+        jdk-version: [ 8, 9, 11 ]
     steps:
-    - uses: actions/checkout@v2
-    - name: Test
-      run: |-
-        export TERM=${TERM:-dumb}
-        ./install_crypto_deps.sh
-        ./gradlew test
-    - name: Save test results
-      run: |-
-        mkdir -p ~/junit
-        find . -type f -regex "$OUT_DIR/build/test-results/test/.*xml" -exec cp {} ~/junit/ \;
-      if: always()
-    - uses: actions/upload-artifact@v2
-      with:
-        path: "~/junit"
-    - uses: actions/upload-artifact@v2
-      with:
-        path: "~/junit"
-  test_library_jdk9:
-    runs-on: ubuntu-latest
-    container:
-      image: openjdk:9
-    steps:
-    - uses: actions/checkout@v2
-    - name: Test
-      run: |-
-        export TERM=${TERM:-dumb}
-        ./install_crypto_deps.sh
-        ./gradlew test
-    - name: Save test results
-      run: |-
-        mkdir -p ~/junit
-        find . -type f -regex "$OUT_DIR/build/test-results/test/.*xml" -exec cp {} ~/junit/ \;
-      if: always()
-    - uses: actions/upload-artifact@v2
-      with:
-        path: "~/junit"
-    - uses: actions/upload-artifact@v2
-      with:
-        path: "~/junit"
-  test_library_jdk11:
-    runs-on: ubuntu-latest
-    container:
-      image: openjdk:11
-    steps:
-    - uses: actions/checkout@v2
-    - name: Test
-      run: |-
-        export TERM=${TERM:-dumb}
-        ./install_crypto_deps.sh
-        ./gradlew test
-    - name: Save test results
-      run: |-
-        mkdir -p ~/junit
-        find . -type f -regex "$OUT_DIR/build/test-results/test/.*xml" -exec cp {} ~/junit/ \;
-      if: always()
-    - uses: actions/upload-artifact@v2
-      with:
-        path: "~/junit"
-    - uses: actions/upload-artifact@v2
-      with:
-        path: "~/junit"
+      - uses: actions/checkout@v4
+      - uses: actions/setup-java@v2
+        with:
+          java-version: "${{ matrix.jdk-version }}"
+          distribution: adopt
+      - name: Verify java installed properly
+        run: java -version
+      - name: Grant execute permission for gradlew
+        run: chmod +x gradlew
+      # test
+      - name: Test
+        run: |-
+          export TERM=${TERM:-dumb}
+          ./gradlew test
+      # test build
+      - name: Build with Gradle
+        run: ./gradlew build
+      - name: Save test results
+        if: always()
+        run: |-
+          mkdir -p ~/junit
+          find . -type f -regex "./build/test-results/test/.*xml" -exec cp {} ~/junit/ \;
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: test_library_jdk${{ matrix.jdk-version }}_junit
+          path: "~/junit"
