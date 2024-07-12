@@ -61,6 +61,7 @@ public class Subscription {
     private Map<String, Object> metadata;
     private Month month;
     private String name;
+    private Boolean parentPlanPaused;
     private String paymentReference;
     private Boolean retryIfPossible;
     private String startDate;
@@ -184,6 +185,13 @@ public class Subscription {
      */
     public String getName() {
         return name;
+    }
+
+    /**
+     * Whether the parent plan of this subscription is paused.
+     */
+    public Boolean getParentPlanPaused() {
+        return parentPlanPaused;
     }
 
     /**

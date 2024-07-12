@@ -27,3 +27,5 @@ out/
 ## Visual Studio Code
 ##############################
 .vscode/
+
+tmp-push-files-checkout/

@@ -3,6 +3,7 @@ package com.gocardless.services;
 import com.gocardless.http.*;
 import com.gocardless.resources.MandateImportEntry;
 import com.google.common.collect.ImmutableMap;
+import com.google.gson.annotations.SerializedName;
 import com.google.gson.reflect.TypeToken;
 import java.util.List;
 import java.util.Map;
@@ -172,6 +173,20 @@ public class MandateImportEntryService {
         }
 
         /**
+         * Bank account type. Required for USD-denominated bank accounts. Must not be provided for
+         * bank accounts in other currencies. See [local details](#local-bank-details-united-states)
+         * for more information.
+         */
+        public MandateImportEntryCreateRequest withBankAccountAccountType(
+                BankAccount.AccountType accountType) {
+            if (bankAccount == null) {
+                bankAccount = new BankAccount();
+            }
+            bankAccount.withAccountType(accountType);
+            return this;
+        }
+
+        /**
          * Bank code - see [local details](#appendix-local-bank-details) for more information.
          * Alternatively you can provide an `iban`.
          */
@@ -218,6 +233,19 @@ public class MandateImportEntryService {
                 bankAccount = new BankAccount();
             }
             bankAccount.withIban(iban);
+            return this;
+        }
+
+        /**
+         * Key-value store of custom data. Up to 3 keys are permitted, with key names up to 50
+         * characters and values up to 500 characters.
+         */
+        public MandateImportEntryCreateRequest withBankAccountMetadata(
+                Map<String, String> metadata) {
+            if (bankAccount == null) {
+                bankAccount = new BankAccount();
+            }
+            bankAccount.withMetadata(metadata);
             return this;
         }
 
@@ -362,6 +390,18 @@ public class MandateImportEntryService {
         }
 
         /**
+         * Key-value store of custom data. Up to 3 keys are permitted, with key names up to 50
+         * characters and values up to 500 characters.
+         */
+        public MandateImportEntryCreateRequest withCustomerMetadata(Map<String, String> metadata) {
+            if (customer == null) {
+                customer = new Customer();
+            }
+            customer.withMetadata(metadata);
+            return this;
+        }
+
+        /**
          * [ITU E.123](https://en.wikipedia.org/wiki/E.123) formatted phone number, including
          * country code.
          */
@@ -430,6 +470,18 @@ public class MandateImportEntryService {
 
         public MandateImportEntryCreateRequest withMandate(Mandate mandate) {
             this.mandate = mandate;
+            return this;
+        }
+
+        /**
+         * Key-value store of custom data. Up to 3 keys are permitted, with key names up to 50
+         * characters and values up to 500 characters.
+         */
+        public MandateImportEntryCreateRequest withMandateMetadata(Map<String, String> metadata) {
+            if (mandate == null) {
+                mandate = new Mandate();
+            }
+            mandate.withMetadata(metadata);
             return this;
         }
 
@@ -523,10 +575,12 @@ public class MandateImportEntryService {
         public static class BankAccount {
             private String accountHolderName;
             private String accountNumber;
+            private AccountType accountType;
             private String bankCode;
             private String branchCode;
             private String countryCode;
             private String iban;
+            private Map<String, String> metadata;
 
             /**
              * Name of the account holder, as known by the bank. Usually this is the same as the
@@ -546,6 +600,16 @@ public class MandateImportEntryService {
              */
             public BankAccount withAccountNumber(String accountNumber) {
                 this.accountNumber = accountNumber;
+                return this;
+            }
+
+            /**
+             * Bank account type. Required for USD-denominated bank accounts. Must not be provided
+             * for bank accounts in other currencies. See [local
+             * details](#local-bank-details-united-states) for more information.
+             */
+            public BankAccount withAccountType(AccountType accountType) {
+                this.accountType = accountType;
                 return this;
             }
 
@@ -587,6 +651,27 @@ public class MandateImportEntryService {
                 this.iban = iban;
                 return this;
             }
+
+            /**
+             * Key-value store of custom data. Up to 3 keys are permitted, with key names up to 50
+             * characters and values up to 500 characters.
+             */
+            public BankAccount withMetadata(Map<String, String> metadata) {
+                this.metadata = metadata;
+                return this;
+            }
+
+            public enum AccountType {
+                @SerializedName("savings")
+                SAVINGS, @SerializedName("checking")
+                CHECKING, @SerializedName("unknown")
+                UNKNOWN;
+
+                @Override
+                public String toString() {
+                    return name().toLowerCase();
+                }
+            }
         }
 
         public static class Customer {
@@ -601,6 +686,7 @@ public class MandateImportEntryService {
             private String familyName;
             private String givenName;
             private String language;
+            private Map<String, String> metadata;
             private String phoneNumber;
             private String postalCode;
             private String region;
@@ -708,6 +794,15 @@ public class MandateImportEntryService {
             }
 
             /**
+             * Key-value store of custom data. Up to 3 keys are permitted, with key names up to 50
+             * characters and values up to 500 characters.
+             */
+            public Customer withMetadata(Map<String, String> metadata) {
+                this.metadata = metadata;
+                return this;
+            }
+
+            /**
              * [ITU E.123](https://en.wikipedia.org/wiki/E.123) formatted phone number, including
              * country code.
              */
@@ -761,7 +856,17 @@ public class MandateImportEntryService {
         }
 
         public static class Mandate {
+            private Map<String, String> metadata;
             private String reference;
+
+            /**
+             * Key-value store of custom data. Up to 3 keys are permitted, with key names up to 50
+             * characters and values up to 500 characters.
+             */
+            public Mandate withMetadata(Map<String, String> metadata) {
+                this.metadata = metadata;
+                return this;
+            }
 
             /**
              * Unique reference. Different schemes have different length and [character
