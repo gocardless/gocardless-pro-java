@@ -29,11 +29,14 @@ public class GoCardlessClient {
     private final EventService events;
     private final InstalmentScheduleService instalmentSchedules;
     private final InstitutionService institutions;
+    private final LogoService logos;
     private final MandateService mandates;
     private final MandateImportService mandateImports;
     private final MandateImportEntryService mandateImportEntries;
     private final MandatePdfService mandatePdfs;
+    private final NegativeBalanceLimitService negativeBalanceLimits;
     private final PayerAuthorisationService payerAuthorisations;
+    private final PayerThemeService payerThemes;
     private final PaymentService payments;
     private final PayoutService payouts;
     private final PayoutItemService payoutItems;
@@ -43,6 +46,7 @@ public class GoCardlessClient {
     private final SchemeIdentifierService schemeIdentifiers;
     private final SubscriptionService subscriptions;
     private final TaxRateService taxRates;
+    private final TransferredMandateService transferredMandates;
     private final VerificationDetailService verificationDetails;
     private final WebhookService webhooks;
 
@@ -181,11 +185,14 @@ public class GoCardlessClient {
         this.events = new EventService(httpClient);
         this.instalmentSchedules = new InstalmentScheduleService(httpClient);
         this.institutions = new InstitutionService(httpClient);
+        this.logos = new LogoService(httpClient);
         this.mandates = new MandateService(httpClient);
         this.mandateImports = new MandateImportService(httpClient);
         this.mandateImportEntries = new MandateImportEntryService(httpClient);
         this.mandatePdfs = new MandatePdfService(httpClient);
+        this.negativeBalanceLimits = new NegativeBalanceLimitService(httpClient);
         this.payerAuthorisations = new PayerAuthorisationService(httpClient);
+        this.payerThemes = new PayerThemeService(httpClient);
         this.payments = new PaymentService(httpClient);
         this.payouts = new PayoutService(httpClient);
         this.payoutItems = new PayoutItemService(httpClient);
@@ -195,6 +202,7 @@ public class GoCardlessClient {
         this.schemeIdentifiers = new SchemeIdentifierService(httpClient);
         this.subscriptions = new SubscriptionService(httpClient);
         this.taxRates = new TaxRateService(httpClient);
+        this.transferredMandates = new TransferredMandateService(httpClient);
         this.verificationDetails = new VerificationDetailService(httpClient);
         this.webhooks = new WebhookService(httpClient);
     }
@@ -305,6 +313,13 @@ public class GoCardlessClient {
     }
 
     /**
+     * A service class for working with logo resources.
+     */
+    public LogoService logos() {
+        return logos;
+    }
+
+    /**
      * A service class for working with mandate resources.
      */
     public MandateService mandates() {
@@ -333,10 +348,24 @@ public class GoCardlessClient {
     }
 
     /**
+     * A service class for working with negative balance limit resources.
+     */
+    public NegativeBalanceLimitService negativeBalanceLimits() {
+        return negativeBalanceLimits;
+    }
+
+    /**
      * A service class for working with payer authorisation resources.
      */
     public PayerAuthorisationService payerAuthorisations() {
         return payerAuthorisations;
+    }
+
+    /**
+     * A service class for working with payer theme resources.
+     */
+    public PayerThemeService payerThemes() {
+        return payerThemes;
     }
 
     /**
@@ -400,6 +429,13 @@ public class GoCardlessClient {
      */
     public TaxRateService taxRates() {
         return taxRates;
+    }
+
+    /**
+     * A service class for working with transferred mandate resources.
+     */
+    public TransferredMandateService transferredMandates() {
+        return transferredMandates;
     }
 
     /**

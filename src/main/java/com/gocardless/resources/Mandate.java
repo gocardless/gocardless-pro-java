@@ -20,10 +20,12 @@ public class Mandate {
     private AuthorisationSource authorisationSource;
     private ConsentParameters consentParameters;
     private String createdAt;
+    private FundsSettlement fundsSettlement;
     private String id;
     private Links links;
-    private Map<String, String> metadata;
+    private Map<String, Object> metadata;
     private String nextPossibleChargeDate;
+    private String nextPossibleStandardAchChargeDate;
     private Boolean paymentsRequireApproval;
     private String reference;
     private String scheme;
@@ -59,6 +61,18 @@ public class Mandate {
     }
 
     /**
+     * This field will decide how GoCardless handles settlement of funds from the customer.
+     * 
+     * - `managed` will be moved through GoCardless' account, batched, and payed out. - `direct`
+     * will be a direct transfer from the payer's account to the merchant where invoicing will be
+     * handled separately.
+     * 
+     */
+    public FundsSettlement getFundsSettlement() {
+        return fundsSettlement;
+    }
+
+    /**
      * Unique identifier, beginning with "MD". Note that this prefix may not apply to mandates
      * created before 2016.
      */
@@ -74,7 +88,7 @@ public class Mandate {
      * Key-value store of custom data. Up to 3 keys are permitted, with key names up to 50
      * characters and values up to 500 characters.
      */
-    public Map<String, String> getMetadata() {
+    public Map<String, Object> getMetadata() {
         return metadata;
     }
 
@@ -84,6 +98,17 @@ public class Mandate {
      */
     public String getNextPossibleChargeDate() {
         return nextPossibleChargeDate;
+    }
+
+    /**
+     * If this is an an ACH mandate, the earliest date that can be used as a `charge_date` on any
+     * newly created payment to be charged through standard ACH, rather than Faster ACH. This value
+     * will change over time.
+     * 
+     * It is only present in the API response for ACH mandates.
+     */
+    public String getNextPossibleStandardAchChargeDate() {
+        return nextPossibleStandardAchChargeDate;
     }
 
     /**
@@ -146,6 +171,13 @@ public class Mandate {
         WEB, @SerializedName("telephone")
         TELEPHONE, @SerializedName("paper")
         PAPER, @SerializedName("unknown")
+        UNKNOWN
+    }
+
+    public enum FundsSettlement {
+        @SerializedName("managed")
+        MANAGED, @SerializedName("direct")
+        DIRECT, @SerializedName("unknown")
         UNKNOWN
     }
 

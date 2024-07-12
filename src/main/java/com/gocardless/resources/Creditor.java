@@ -18,10 +18,10 @@ public class Creditor {
         // blank to prevent instantiation
     }
 
-    private Boolean activated;
     private String addressLine1;
     private String addressLine2;
     private String addressLine3;
+    private String bankReferencePrefix;
     private Boolean canCreateRefunds;
     private String city;
     private String countryCode;
@@ -39,13 +39,6 @@ public class Creditor {
     private String region;
     private List<SchemeIdentifier> schemeIdentifiers;
     private VerificationStatus verificationStatus;
-
-    /**
-     * Boolean value indicating whether the creditor is activated in the product.
-     */
-    public Boolean getActivated() {
-        return activated;
-    }
 
     /**
      * The first line of the creditor's address.
@@ -69,7 +62,19 @@ public class Creditor {
     }
 
     /**
-     * Boolean indicating whether the creditor is permitted to create refunds
+     * Prefix for the bank reference of payouts sent to this creditor. For instance, if the
+     * creditor's `bank_reference_prefix` was `ACME`, the bank reference of a payout sent to that
+     * creditor could be `ACME-8G7Q8`.
+     * 
+     * This prefix is also used for refunds in EUR and GBP.
+     * 
+     */
+    public String getBankReferencePrefix() {
+        return bankReferencePrefix;
+    }
+
+    /**
+     * Boolean indicating whether the creditor is permitted to create refunds.
      */
     public Boolean getCanCreateRefunds() {
         return canCreateRefunds;

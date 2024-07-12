@@ -59,10 +59,18 @@ public class BillingRequestService {
      * The endpoint takes the same payload as Customer Bank Accounts, but check the bank account is
      * valid for the billing request scheme before creating and attaching it.
      * 
+     * If the scheme is PayTo and the pay_id is available, this can be included in the payload along
+     * with the country_code.
+     * 
      * _ACH scheme_ For compliance reasons, an extra validation step is done using a third-party
      * provider to make sure the customer's bank account can accept Direct Debit. If a bank account
      * is discovered to be closed or invalid, the customer is requested to adjust the account
      * number/routing number and succeed in this check to continue with the flow.
+     * 
+     * _BACS scheme_ [Payer Name
+     * Verification](https://hub.gocardless.com/s/article/Introduction-to-Payer-Name-Verification?language=en_GB)
+     * is enabled by default for UK based bank accounts, meaning we verify the account holder name
+     * and bank account number match the details held by the relevant bank.
      */
     public BillingRequestCollectBankAccountRequest collectBankAccount(String identity) {
         return new BillingRequestCollectBankAccountRequest(httpClient, identity);
@@ -165,7 +173,7 @@ public class BillingRequestService {
          * debit. Should not be set if GoCardless payment intelligence feature is used.
          * 
          * See [Billing Requests: Retain customers with
-         * Fallbacks](https://developer.gocardless.com/getting-started/billing-requests/retain-customers-with-fallbacks/)
+         * Fallbacks](https://developer.gocardless.com/billing-requests/retain-customers-with-fallbacks/)
          * for more information.
          */
         public BillingRequestCreateRequest withFallbackEnabled(Boolean fallbackEnabled) {
@@ -424,6 +432,23 @@ public class BillingRequestService {
         }
 
         /**
+         * This field will decide how GoCardless handles settlement of funds from the customer.
+         * 
+         * - `managed` will be moved through GoCardless' account, batched, and payed out. - `direct`
+         * will be a direct transfer from the payer's account to the merchant where invoicing will
+         * be handled separately.
+         * 
+         */
+        public BillingRequestCreateRequest withPaymentRequestFundsSettlement(
+                PaymentRequest.FundsSettlement fundsSettlement) {
+            if (paymentRequest == null) {
+                paymentRequest = new PaymentRequest();
+            }
+            paymentRequest.withFundsSettlement(fundsSettlement);
+            return this;
+        }
+
+        /**
          * Key-value store of custom data. Up to 3 keys are permitted, with key names up to 50
          * characters and values up to 500 characters.
          */
@@ -584,7 +609,8 @@ public class BillingRequestService {
             }
 
             /**
-             * The maximum number of payments that can be collected in this periodic limit
+             * (Optional) The maximum number of payments that can be collected in this periodic
+             * limit.
              */
             public PeriodicLimits withMaxPayments(Integer maxPayments) {
                 this.maxPayments = maxPayments;
@@ -592,7 +618,9 @@ public class BillingRequestService {
             }
 
             /**
-             * The maximum total amount that can be charged for all payments in this periodic limit
+             * The maximum total amount that can be charged for all payments in this periodic limit.
+             * Required for VRP.
+             * 
              */
             public PeriodicLimits withMaxTotalAmount(Integer maxTotalAmount) {
                 this.maxTotalAmount = maxTotalAmount;
@@ -673,7 +701,7 @@ public class BillingRequestService {
             }
 
             /**
-             * The maximum amount that can be charged for a single payment
+             * The maximum amount that can be charged for a single payment. Required for VRP.
              */
             public Constraints withMaxAmountPerPayment(Integer maxAmountPerPayment) {
                 this.maxAmountPerPayment = maxAmountPerPayment;
@@ -865,6 +893,7 @@ public class BillingRequestService {
             private Integer appFee;
             private String currency;
             private String description;
+            private FundsSettlement fundsSettlement;
             private Map<String, String> metadata;
             private String scheme;
 
@@ -907,6 +936,19 @@ public class BillingRequestService {
             }
 
             /**
+             * This field will decide how GoCardless handles settlement of funds from the customer.
+             * 
+             * - `managed` will be moved through GoCardless' account, batched, and payed out. -
+             * `direct` will be a direct transfer from the payer's account to the merchant where
+             * invoicing will be handled separately.
+             * 
+             */
+            public PaymentRequest withFundsSettlement(FundsSettlement fundsSettlement) {
+                this.fundsSettlement = fundsSettlement;
+                return this;
+            }
+
+            /**
              * Key-value store of custom data. Up to 3 keys are permitted, with key names up to 50
              * characters and values up to 500 characters.
              */
@@ -925,6 +967,18 @@ public class BillingRequestService {
             public PaymentRequest withScheme(String scheme) {
                 this.scheme = scheme;
                 return this;
+            }
+
+            public enum FundsSettlement {
+                @SerializedName("managed")
+                MANAGED, @SerializedName("direct")
+                DIRECT, @SerializedName("unknown")
+                UNKNOWN;
+
+                @Override
+                public String toString() {
+                    return name().toLowerCase();
+                }
             }
         }
     }
@@ -1008,8 +1062,8 @@ public class BillingRequestService {
          * language for notification emails sent by GoCardless if your organisation does not send
          * its own (see [compliance requirements](#appendix-compliance-requirements)). Currently
          * only "en", "fr", "de", "pt", "es", "it", "nl", "da", "nb", "sl", "sv" are supported. If
-         * this is not provided, the language will be chosen based on the `country_code` (if
-         * supplied) or default to "en".
+         * this is not provided and a customer was linked during billing request creation, the
+         * linked customer language will be used. Otherwise, the language is default to "en".
          */
         public BillingRequestCollectCustomerDetailsRequest withCustomerLanguage(String language) {
             if (customer == null) {
@@ -1277,8 +1331,9 @@ public class BillingRequestService {
              * language for notification emails sent by GoCardless if your organisation does not
              * send its own (see [compliance requirements](#appendix-compliance-requirements)).
              * Currently only "en", "fr", "de", "pt", "es", "it", "nl", "da", "nb", "sl", "sv" are
-             * supported. If this is not provided, the language will be chosen based on the
-             * `country_code` (if supplied) or default to "en".
+             * supported. If this is not provided and a customer was linked during billing request
+             * creation, the linked customer language will be used. Otherwise, the language is
+             * default to "en".
              */
             public Customer withLanguage(String language) {
                 this.language = language;
@@ -1420,10 +1475,18 @@ public class BillingRequestService {
      * The endpoint takes the same payload as Customer Bank Accounts, but check the bank account is
      * valid for the billing request scheme before creating and attaching it.
      * 
+     * If the scheme is PayTo and the pay_id is available, this can be included in the payload along
+     * with the country_code.
+     * 
      * _ACH scheme_ For compliance reasons, an extra validation step is done using a third-party
      * provider to make sure the customer's bank account can accept Direct Debit. If a bank account
      * is discovered to be closed or invalid, the customer is requested to adjust the account
      * number/routing number and succeed in this check to continue with the flow.
+     * 
+     * _BACS scheme_ [Payer Name
+     * Verification](https://hub.gocardless.com/s/article/Introduction-to-Payer-Name-Verification?language=en_GB)
+     * is enabled by default for UK based bank accounts, meaning we verify the account holder name
+     * and bank account number match the details held by the relevant bank.
      */
     public static final class BillingRequestCollectBankAccountRequest
             extends PostRequest<BillingRequest> {
@@ -1439,6 +1502,7 @@ public class BillingRequestService {
         private String currency;
         private String iban;
         private Map<String, String> metadata;
+        private String payId;
 
         /**
          * Name of the account holder, as known by the bank. Usually this is the same as the name
@@ -1550,6 +1614,15 @@ public class BillingRequestService {
             return this;
         }
 
+        /**
+         * A unique record such as an email address, mobile number or company number, that can be
+         * used to make and accept payments.
+         */
+        public BillingRequestCollectBankAccountRequest withPayId(String payId) {
+            this.payId = payId;
+            return this;
+        }
+
         private BillingRequestCollectBankAccountRequest(HttpClient httpClient, String identity) {
             super(httpClient);
             this.identity = identity;
@@ -1617,6 +1690,7 @@ public class BillingRequestService {
         @PathParam
         private final String identity;
         private Map<String, String> metadata;
+        private Boolean payerRequestedDualSignature;
 
         /**
          * Key-value store of custom data. Up to 3 keys are permitted, with key names up to 50
@@ -1636,6 +1710,19 @@ public class BillingRequestService {
                 metadata = new HashMap<>();
             }
             metadata.put(key, value);
+            return this;
+        }
+
+        /**
+         * This attribute can be set to true if the payer has indicated that multiple signatures are
+         * required for the mandate. As long as every other Billing Request actions have been
+         * completed, the payer will receive an email notification containing instructions on how to
+         * complete the additional signature. The dual signature flow can only be completed using
+         * GoCardless branded pages.
+         */
+        public BillingRequestConfirmPayerDetailsRequest withPayerRequestedDualSignature(
+                Boolean payerRequestedDualSignature) {
+            this.payerRequestedDualSignature = payerRequestedDualSignature;
             return this;
         }
 

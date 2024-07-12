@@ -47,17 +47,8 @@ public class BankAuthorisationService {
      */
     public static final class BankAuthorisationCreateRequest
             extends IdempotentPostRequest<BankAuthorisation> {
-        private String authorisationType;
         private Links links;
         private String redirectUri;
-
-        /**
-         * Type of authorisation, can be either 'mandate' or 'payment'.
-         */
-        public BankAuthorisationCreateRequest withAuthorisationType(String authorisationType) {
-            this.authorisationType = authorisationType;
-            return this;
-        }
 
         public BankAuthorisationCreateRequest withLinks(Links links) {
             this.links = links;

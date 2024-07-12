@@ -26,7 +26,7 @@ public class BillingRequest {
     private String id;
     private Links links;
     private MandateRequest mandateRequest;
-    private Map<String, String> metadata;
+    private Map<String, Object> metadata;
     private PaymentRequest paymentRequest;
     private PurposeCode purposeCode;
     private Resources resources;
@@ -51,7 +51,7 @@ public class BillingRequest {
      * Should not be set if GoCardless payment intelligence feature is used.
      * 
      * See [Billing Requests: Retain customers with
-     * Fallbacks](https://developer.gocardless.com/getting-started/billing-requests/retain-customers-with-fallbacks/)
+     * Fallbacks](https://developer.gocardless.com/billing-requests/retain-customers-with-fallbacks/)
      * for more information.
      */
     public Boolean getFallbackEnabled() {
@@ -80,7 +80,7 @@ public class BillingRequest {
      * Key-value store of custom data. Up to 3 keys are permitted, with key names up to 50
      * characters and values up to 500 characters.
      */
-    public Map<String, String> getMetadata() {
+    public Map<String, Object> getMetadata() {
         return metadata;
     }
 
@@ -155,6 +155,7 @@ public class BillingRequest {
         private BankAuthorisation bankAuthorisation;
         private CollectCustomerDetails collectCustomerDetails;
         private List<String> completesActions;
+        private InstitutionGuessStatus institutionGuessStatus;
         private Boolean required;
         private List<String> requiresActions;
         private Status status;
@@ -189,6 +190,19 @@ public class BillingRequest {
         }
 
         /**
+         * Describes whether we inferred the institution from the provided bank account details. One
+         * of: - `not_needed`: we won't attempt to infer the institution as it is not needed. Either
+         * because it was manually selected or the billing request does not support this feature -
+         * `pending`: we are waiting on the bank details in order to infer the institution -
+         * `failed`: we weren't able to infer the institution - `success`: we inferred the
+         * institution and added it to the resources of a Billing Request
+         * 
+         */
+        public InstitutionGuessStatus getInstitutionGuessStatus() {
+            return institutionGuessStatus;
+        }
+
+        /**
          * Informs you whether the action is required to fulfil the billing request or not.
          */
         public Boolean getRequired() {
@@ -214,6 +228,15 @@ public class BillingRequest {
          */
         public Type getType() {
             return type;
+        }
+
+        public enum InstitutionGuessStatus {
+            @SerializedName("not_needed")
+            NOT_NEEDED, @SerializedName("pending")
+            PENDING, @SerializedName("failed")
+            FAILED, @SerializedName("success")
+            SUCCESS, @SerializedName("unknown")
+            UNKNOWN
         }
 
         public enum Status {
@@ -267,7 +290,6 @@ public class BillingRequest {
 
             private Adapter adapter;
             private AuthorisationType authorisationType;
-            private Boolean requiresInstitution;
 
             /**
              * Which authorisation adapter will be used to power these authorisations (GoCardless
@@ -282,13 +304,6 @@ public class BillingRequest {
              */
             public AuthorisationType getAuthorisationType() {
                 return authorisationType;
-            }
-
-            /**
-             * Whether an institution is a required field when creating this bank authorisation
-             */
-            public Boolean getRequiresInstitution() {
-                return requiresInstitution;
             }
 
             public enum Adapter {
@@ -365,6 +380,7 @@ public class BillingRequest {
         private String mandateRequest;
         private String mandateRequestMandate;
         private String organisation;
+        private String paymentProvider;
         private String paymentRequest;
         private String paymentRequestPayment;
 
@@ -428,6 +444,13 @@ public class BillingRequest {
         }
 
         /**
+         * (Optional) ID of the associated payment provider
+         */
+        public String getPaymentProvider() {
+            return paymentProvider;
+        }
+
+        /**
          * (Optional) ID of the associated payment request
          */
         public String getPaymentRequest() {
@@ -458,7 +481,8 @@ public class BillingRequest {
         private String currency;
         private String description;
         private Links links;
-        private Map<String, String> metadata;
+        private Map<String, Object> metadata;
+        private Boolean payerRequestedDualSignature;
         private String scheme;
         private Verify verify;
 
@@ -508,8 +532,19 @@ public class BillingRequest {
          * Key-value store of custom data. Up to 3 keys are permitted, with key names up to 50
          * characters and values up to 500 characters.
          */
-        public Map<String, String> getMetadata() {
+        public Map<String, Object> getMetadata() {
             return metadata;
+        }
+
+        /**
+         * This attribute can be set to true if the payer has indicated that multiple signatures are
+         * required for the mandate. As long as every other Billing Request actions have been
+         * completed, the payer will receive an email notification containing instructions on how to
+         * complete the additional signature. The dual signature flow can only be completed using
+         * GoCardless branded pages.
+         */
+        public Boolean getPayerRequestedDualSignature() {
+            return payerRequestedDualSignature;
         }
 
         /**
@@ -596,7 +631,7 @@ public class BillingRequest {
             }
 
             /**
-             * The maximum amount that can be charged for a single payment
+             * The maximum amount that can be charged for a single payment. Required for VRP.
              */
             public Integer getMaxAmountPerPayment() {
                 return maxAmountPerPayment;
@@ -646,7 +681,8 @@ public class BillingRequest {
                 }
 
                 /**
-                 * The maximum number of payments that can be collected in this periodic limit
+                 * (Optional) The maximum number of payments that can be collected in this periodic
+                 * limit.
                  */
                 public Integer getMaxPayments() {
                     return maxPayments;
@@ -654,7 +690,8 @@ public class BillingRequest {
 
                 /**
                  * The maximum total amount that can be charged for all payments in this periodic
-                 * limit
+                 * limit. Required for VRP.
+                 * 
                  */
                 public Integer getMaxTotalAmount() {
                     return maxTotalAmount;
@@ -718,8 +755,9 @@ public class BillingRequest {
         private Integer appFee;
         private String currency;
         private String description;
+        private FundsSettlement fundsSettlement;
         private Links links;
-        private Map<String, String> metadata;
+        private Map<String, Object> metadata;
         private String scheme;
 
         /**
@@ -756,6 +794,18 @@ public class BillingRequest {
             return description;
         }
 
+        /**
+         * This field will decide how GoCardless handles settlement of funds from the customer.
+         * 
+         * - `managed` will be moved through GoCardless' account, batched, and payed out. - `direct`
+         * will be a direct transfer from the payer's account to the merchant where invoicing will
+         * be handled separately.
+         * 
+         */
+        public FundsSettlement getFundsSettlement() {
+            return fundsSettlement;
+        }
+
         public Links getLinks() {
             return links;
         }
@@ -764,7 +814,7 @@ public class BillingRequest {
          * Key-value store of custom data. Up to 3 keys are permitted, with key names up to 50
          * characters and values up to 500 characters.
          */
-        public Map<String, String> getMetadata() {
+        public Map<String, Object> getMetadata() {
             return metadata;
         }
 
@@ -777,6 +827,13 @@ public class BillingRequest {
          */
         public String getScheme() {
             return scheme;
+        }
+
+        public enum FundsSettlement {
+            @SerializedName("managed")
+            MANAGED, @SerializedName("direct")
+            DIRECT, @SerializedName("unknown")
+            UNKNOWN
         }
 
         public static class Links {
@@ -843,7 +900,7 @@ public class BillingRequest {
             private String givenName;
             private String id;
             private String language;
-            private Map<String, String> metadata;
+            private Map<String, Object> metadata;
             private String phoneNumber;
 
             /**
@@ -909,7 +966,7 @@ public class BillingRequest {
              * Key-value store of custom data. Up to 3 keys are permitted, with key names up to 50
              * characters and values up to 500 characters.
              */
-            public Map<String, String> getMetadata() {
+            public Map<String, Object> getMetadata() {
                 return metadata;
             }
 
@@ -942,7 +999,7 @@ public class BillingRequest {
             private Boolean enabled;
             private String id;
             private Links links;
-            private Map<String, String> metadata;
+            private Map<String, Object> metadata;
 
             /**
              * Name of the account holder, as known by the bank. Usually this is the same as the
@@ -1026,7 +1083,7 @@ public class BillingRequest {
              * Key-value store of custom data. Up to 3 keys are permitted, with key names up to 50
              * characters and values up to 500 characters.
              */
-            public Map<String, String> getMetadata() {
+            public Map<String, Object> getMetadata() {
                 return metadata;
             }
 

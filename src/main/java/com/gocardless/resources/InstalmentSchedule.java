@@ -28,9 +28,9 @@ public class InstalmentSchedule {
     private Currency currency;
     private String id;
     private Links links;
-    private Map<String, String> metadata;
+    private Map<String, Object> metadata;
     private String name;
-    private Map<String, String> paymentErrors;
+    private Map<String, Object> paymentErrors;
     private Status status;
     private Integer totalAmount;
 
@@ -67,7 +67,7 @@ public class InstalmentSchedule {
      * Key-value store of custom data. Up to 3 keys are permitted, with key names up to 50
      * characters and values up to 500 characters.
      */
-    public Map<String, String> getMetadata() {
+    public Map<String, Object> getMetadata() {
         return metadata;
     }
 
@@ -84,7 +84,7 @@ public class InstalmentSchedule {
      * from the individual payments, arranged by the index of the payment that failed.
      * 
      */
-    public Map<String, String> getPaymentErrors() {
+    public Map<String, Object> getPaymentErrors() {
         return paymentErrors;
     }
 

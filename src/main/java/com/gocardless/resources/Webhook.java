@@ -16,11 +16,11 @@ public class Webhook {
     private String id;
     private Boolean isTest;
     private String requestBody;
-    private Map<String, String> requestHeaders;
+    private Map<String, Object> requestHeaders;
     private String responseBody;
     private Boolean responseBodyTruncated;
     private Integer responseCode;
-    private Map<String, String> responseHeaders;
+    private Map<String, Object> responseHeaders;
     private Boolean responseHeadersContentTruncated;
     private Boolean responseHeadersCountTruncated;
     private Boolean successful;
@@ -57,7 +57,7 @@ public class Webhook {
     /**
      * The request headers sent with the webhook
      */
-    public Map<String, String> getRequestHeaders() {
+    public Map<String, Object> getRequestHeaders() {
         return requestHeaders;
     }
 
@@ -85,7 +85,7 @@ public class Webhook {
     /**
      * The headers sent with the response from the webhook URL
      */
-    public Map<String, String> getResponseHeaders() {
+    public Map<String, Object> getResponseHeaders() {
         return responseHeaders;
     }
 

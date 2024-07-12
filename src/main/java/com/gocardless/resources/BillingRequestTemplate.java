@@ -6,7 +6,16 @@ import java.util.Map;
 /**
  * Represents a billing request template resource returned from the API.
  *
- * Billing Request Templates
+ * Billing Request Templates are reusable templates that result in numerous Billing Requests with
+ * similar attributes. They provide a no-code solution for generating various types of multi-user
+ * payment links.
+ * 
+ * Each template includes a reusable URL that can be embedded in a website or shared with customers
+ * via email. Every time the URL is opened, it generates a new Billing Request.
+ * 
+ * Billing Request Templates overcome the key limitation of the Billing Request: a Billing Request
+ * cannot be shared among multiple users because it is intended for single-use and is designed to
+ * cater to the unique needs of individual customers.
  */
 public class BillingRequestTemplate {
     private BillingRequestTemplate() {
@@ -18,15 +27,15 @@ public class BillingRequestTemplate {
     private String id;
     private String mandateRequestCurrency;
     private String mandateRequestDescription;
-    private Map<String, String> mandateRequestMetadata;
+    private Map<String, Object> mandateRequestMetadata;
     private String mandateRequestScheme;
     private MandateRequestVerify mandateRequestVerify;
-    private Map<String, String> metadata;
+    private Map<String, Object> metadata;
     private String name;
     private Integer paymentRequestAmount;
     private String paymentRequestCurrency;
     private String paymentRequestDescription;
-    private Map<String, String> paymentRequestMetadata;
+    private Map<String, Object> paymentRequestMetadata;
     private String paymentRequestScheme;
     private String redirectUri;
     private String updatedAt;
@@ -74,7 +83,7 @@ public class BillingRequestTemplate {
      * is fulfilled. Up to 3 keys are permitted, with key names up to 50 characters and values up to
      * 500 characters.
      */
-    public Map<String, String> getMandateRequestMetadata() {
+    public Map<String, Object> getMandateRequestMetadata() {
         return mandateRequestMetadata;
     }
 
@@ -119,7 +128,7 @@ public class BillingRequestTemplate {
      * Key-value store of custom data. Up to 3 keys are permitted, with key names up to 50
      * characters and values up to 500 characters.
      */
-    public Map<String, String> getMetadata() {
+    public Map<String, Object> getMetadata() {
         return metadata;
     }
 
@@ -161,7 +170,7 @@ public class BillingRequestTemplate {
      * is fulfilled. Up to 3 keys are permitted, with key names up to 50 characters and values up to
      * 500 characters.
      */
-    public Map<String, String> getPaymentRequestMetadata() {
+    public Map<String, Object> getPaymentRequestMetadata() {
         return paymentRequestMetadata;
     }
 

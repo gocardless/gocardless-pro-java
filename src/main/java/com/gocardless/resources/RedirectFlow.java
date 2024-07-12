@@ -7,9 +7,9 @@ import java.util.Map;
  * Represents a redirect flow resource returned from the API.
  *
  * <p class="deprecated-notice">
- * <strong>Deprecated</strong>: Redirect Flows are our legacy APIs for setting up mandates and will
- * no longer be supported in the future. We strongly recommend using the [Billing Request
- * flow](#billing-requests) instead.
+ * <strong>Deprecated</strong>: Redirect Flows are legacy APIs and cannot be used by new
+ * integrators. The [Billing Request flow](#billing-requests) API should be used for your payment
+ * flows.
  * </p>
  * 
  * Redirect flows enable you to use GoCardless' [hosted payment
@@ -52,7 +52,7 @@ public class RedirectFlow {
     private String id;
     private Links links;
     private String mandateReference;
-    private Map<String, String> metadata;
+    private Map<String, Object> metadata;
     private String redirectUrl;
     private Scheme scheme;
     private String sessionToken;
@@ -108,7 +108,7 @@ public class RedirectFlow {
      * characters and values up to 500 characters. _Note:_ This should not be used for storing PII
      * data.
      */
-    public Map<String, String> getMetadata() {
+    public Map<String, Object> getMetadata() {
         return metadata;
     }
 

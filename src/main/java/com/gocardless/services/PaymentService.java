@@ -109,6 +109,7 @@ public class PaymentService {
         private String chargeDate;
         private Currency currency;
         private String description;
+        private Boolean fasterAch;
         private Links links;
         private Map<String, String> metadata;
         private String reference;
@@ -158,6 +159,16 @@ public class PaymentService {
          */
         public PaymentCreateRequest withDescription(String description) {
             this.description = description;
+            return this;
+        }
+
+        /**
+         * Set this to true or false in the request to create an ACH payment to explicitly choose
+         * whether the payment should be processed through Faster ACH or standard ACH, rather than
+         * relying on the presence or absence of the charge date to indicate that.
+         */
+        public PaymentCreateRequest withFasterAch(Boolean fasterAch) {
+            this.fasterAch = fasterAch;
             return this;
         }
 

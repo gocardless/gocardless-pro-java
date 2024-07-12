@@ -13,10 +13,10 @@ import java.util.Map;
  * 
  * The following rules apply when specifying recurrence:
  * 
- * - The first payment must be charged within 1 year. - If `day_of_month` and `start_date` are not
- * provided `start_date` will be the [mandate](#core-endpoints-mandates)'s
- * `next_possible_charge_date` and the subscription will then recur based on the `interval` &
- * `interval_unit` - If `month` or `day_of_month` are present the following validations apply:
+ * - If `day_of_month` and `start_date` are not provided `start_date` will be the
+ * [mandate](#core-endpoints-mandates)'s `next_possible_charge_date` and the subscription will then
+ * recur based on the `interval` & `interval_unit` - If `month` or `day_of_month` are present the
+ * following validations apply:
  * 
  * | __interval_unit__ | __month__ | __day_of_month__ | | :---------------- |
  * :--------------------------------------------- | :----------------------------------------- | |
@@ -40,7 +40,6 @@ import java.util.Map;
  * - if the recurrence rule specified `-1` as the `day_of_month`, the charge date will be rolled
  * __backwards__ to the previous business day (i.e., the last working day of the month). - otherwise
  * the charge date will be rolled __forwards__ to the next business day.
- * 
  */
 public class Subscription {
     private Subscription() {
@@ -59,9 +58,10 @@ public class Subscription {
     private Integer interval;
     private IntervalUnit intervalUnit;
     private Links links;
-    private Map<String, String> metadata;
+    private Map<String, Object> metadata;
     private Month month;
     private String name;
+    private Boolean parentPlanPaused;
     private String paymentReference;
     private Boolean retryIfPossible;
     private String startDate;
@@ -166,7 +166,7 @@ public class Subscription {
      * Key-value store of custom data. Up to 3 keys are permitted, with key names up to 50
      * characters and values up to 500 characters.
      */
-    public Map<String, String> getMetadata() {
+    public Map<String, Object> getMetadata() {
         return metadata;
     }
 
@@ -185,6 +185,13 @@ public class Subscription {
      */
     public String getName() {
         return name;
+    }
+
+    /**
+     * Whether the parent plan of this subscription is paused.
+     */
+    public Boolean getParentPlanPaused() {
+        return parentPlanPaused;
     }
 
     /**

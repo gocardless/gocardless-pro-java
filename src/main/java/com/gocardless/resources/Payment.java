@@ -24,10 +24,11 @@ public class Payment {
     private String createdAt;
     private Currency currency;
     private String description;
+    private Boolean fasterAch;
     private Fx fx;
     private String id;
     private Links links;
-    private Map<String, String> metadata;
+    private Map<String, Object> metadata;
     private String reference;
     private Boolean retryIfPossible;
     private Status status;
@@ -81,6 +82,15 @@ public class Payment {
         return description;
     }
 
+    /**
+     * This field indicates whether the ACH payment is processed through Faster ACH or standard ACH.
+     * 
+     * It is only present in the API response for ACH payments.
+     */
+    public Boolean getFasterAch() {
+        return fasterAch;
+    }
+
     public Fx getFx() {
         return fx;
     }
@@ -100,7 +110,7 @@ public class Payment {
      * Key-value store of custom data. Up to 3 keys are permitted, with key names up to 50
      * characters and values up to 500 characters.
      */
-    public Map<String, String> getMetadata() {
+    public Map<String, Object> getMetadata() {
         return metadata;
     }
 

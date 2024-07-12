@@ -47,6 +47,7 @@ public class BillingRequestFlowService {
     public static final class BillingRequestFlowCreateRequest
             extends PostRequest<BillingRequestFlow> {
         private Boolean autoFulfil;
+        private Boolean customerDetailsCaptured;
         private String exitUri;
         private String language;
         private Links links;
@@ -57,6 +58,7 @@ public class BillingRequestFlowService {
         private PrefilledCustomer prefilledCustomer;
         private String redirectUri;
         private Boolean showRedirectButtons;
+        private Boolean showSuccessRedirectButton;
 
         /**
          * (Experimental feature) Fulfil the Billing Request on completion of the flow (true by
@@ -64,6 +66,15 @@ public class BillingRequestFlowService {
          */
         public BillingRequestFlowCreateRequest withAutoFulfil(Boolean autoFulfil) {
             this.autoFulfil = autoFulfil;
+            return this;
+        }
+
+        /**
+         * Identifies whether a Billing Request belongs to a specific customer
+         */
+        public BillingRequestFlowCreateRequest withCustomerDetailsCaptured(
+                Boolean customerDetailsCaptured) {
+            this.customerDetailsCaptured = customerDetailsCaptured;
             return this;
         }
 
@@ -347,6 +358,18 @@ public class BillingRequestFlowService {
         public BillingRequestFlowCreateRequest withShowRedirectButtons(
                 Boolean showRedirectButtons) {
             this.showRedirectButtons = showRedirectButtons;
+            return this;
+        }
+
+        /**
+         * If true, the payer will be able to see a redirect action button on the Success page. This
+         * action button will provide a way to redirect the payer to the given redirect_uri. This
+         * functionality is helpful when merchants do not want payers to be automatically redirected
+         * or on Android devices, where automatic redirections are not possible.
+         */
+        public BillingRequestFlowCreateRequest withShowSuccessRedirectButton(
+                Boolean showSuccessRedirectButton) {
+            this.showSuccessRedirectButton = showSuccessRedirectButton;
             return this;
         }
 

@@ -24,7 +24,8 @@ public class Event {
     private Details details;
     private String id;
     private Links links;
-    private Map<String, String> metadata;
+    private Map<String, Object> metadata;
+    private Map<String, Object> resourceMetadata;
     private ResourceType resourceType;
 
     /**
@@ -67,11 +68,25 @@ public class Event {
     }
 
     /**
-     * If the `details[origin]` is `api`, this will contain any metadata you specified when
-     * triggering this event. In other cases it will be an empty object.
+     * The metadata that was passed when making the API request that triggered the event (for
+     * instance, cancelling a mandate).
+     * 
+     * This field will only be populated if the `details[origin]` field is `api` otherwise it will
+     * be an empty object.
+     * 
      */
-    public Map<String, String> getMetadata() {
+    public Map<String, Object> getMetadata() {
         return metadata;
+    }
+
+    /**
+     * The metadata of the resource that the event is for. For example, this field will have the
+     * same value of the `mandate[metadata]` field on the response you would receive from performing
+     * a GET request on a mandate.
+     * 
+     */
+    public Map<String, Object> getResourceMetadata() {
+        return resourceMetadata;
     }
 
     /**

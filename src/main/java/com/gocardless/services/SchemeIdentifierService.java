@@ -28,25 +28,31 @@ public class SchemeIdentifierService {
     }
 
     /**
-     * Creates a new scheme identifier. The scheme identifier must be [applied to a
-     * creditor](#creditors-apply-a-scheme-identifier) before payments are taken using it. The
-     * scheme identifier must also have the `status` of active before it can be used. For some
-     * schemes e.g. faster_payments this will happen instantly. For other schemes e.g. bacs this can
-     * take several days.
+     * Creates a new scheme identifier. The scheme identifier status will be `pending` while
+     * GoCardless is processing the request. Once the scheme identifier is ready to be used the
+     * status will be updated to `active`. At this point, GoCardless will emit a scheme identifier
+     * activated event via webhook to notify you of this change. In Bacs, it will take up to five
+     * working days for a scheme identifier to become active. On other schemes, including SEPA, this
+     * happens instantly.
      * 
-     * ### Scheme identifier name validations
+     * #### Scheme identifier name validations
      * 
-     * Each scheme has different rules for the length and permitted characters in the scheme
-     * identifier name field. The rules are:
+     * The `name` field of a scheme identifier can contain alphanumeric characters, spaces and
+     * special characters.
      * 
-     * | __scheme__ | __maximum length__ | __allowed characters__ | __spaces__ | | :-------------- |
-     * :----------------- | :----------------------- | :--------- | | bacs | 18 characters |
-     * `a-zA-Z0-9/.&-` | yes | | sepa_core | 70 characters | `a-zA-Z0-9/?:().,+&<>'"` | yes | | ach
-     * | 16 characters | `a-zA-Z0-9/?:().,'+-` | yes | | faster_payments | 18 characters |
-     * `a-zA-Z0-9/?:().,'+-` | yes |
+     * Its maximum length and the special characters it supports depend on the scheme:
+     * 
+     * | __scheme__ | __maximum length__ | __special characters allowed__ | | :---------------- |
+     * :----------------- | :-------------------------------------------------- | | `bacs` | 18
+     * characters | `/` `.` `&` `-` | | `sepa` | 70 characters | `/` `?` `:` `(` `)` `.` `,` `+` `&`
+     * `<` `>` `'` `"` | | `ach` | 16 characters | `/` `?` `:` `(` `)` `.` `,` `'` `+` `-` | |
+     * `faster_payments` | 18 characters | `/` `?` `:` `(` `)` `.` `,` `'` `+` `-` |
      * 
      * The validation error that gets returned for an invalid name will contain a suggested name in
      * the metadata that is guaranteed to pass name validations.
+     * 
+     * You should ensure that the name you set matches the legal name or the trading name of the
+     * creditor, otherwise, there is an increased risk of chargeback.
      * 
      */
     public SchemeIdentifierCreateRequest create() {
@@ -76,31 +82,55 @@ public class SchemeIdentifierService {
     /**
      * Request class for {@link SchemeIdentifierService#create }.
      *
-     * Creates a new scheme identifier. The scheme identifier must be [applied to a
-     * creditor](#creditors-apply-a-scheme-identifier) before payments are taken using it. The
-     * scheme identifier must also have the `status` of active before it can be used. For some
-     * schemes e.g. faster_payments this will happen instantly. For other schemes e.g. bacs this can
-     * take several days.
+     * Creates a new scheme identifier. The scheme identifier status will be `pending` while
+     * GoCardless is processing the request. Once the scheme identifier is ready to be used the
+     * status will be updated to `active`. At this point, GoCardless will emit a scheme identifier
+     * activated event via webhook to notify you of this change. In Bacs, it will take up to five
+     * working days for a scheme identifier to become active. On other schemes, including SEPA, this
+     * happens instantly.
      * 
-     * ### Scheme identifier name validations
+     * #### Scheme identifier name validations
      * 
-     * Each scheme has different rules for the length and permitted characters in the scheme
-     * identifier name field. The rules are:
+     * The `name` field of a scheme identifier can contain alphanumeric characters, spaces and
+     * special characters.
      * 
-     * | __scheme__ | __maximum length__ | __allowed characters__ | __spaces__ | | :-------------- |
-     * :----------------- | :----------------------- | :--------- | | bacs | 18 characters |
-     * `a-zA-Z0-9/.&-` | yes | | sepa_core | 70 characters | `a-zA-Z0-9/?:().,+&<>'"` | yes | | ach
-     * | 16 characters | `a-zA-Z0-9/?:().,'+-` | yes | | faster_payments | 18 characters |
-     * `a-zA-Z0-9/?:().,'+-` | yes |
+     * Its maximum length and the special characters it supports depend on the scheme:
+     * 
+     * | __scheme__ | __maximum length__ | __special characters allowed__ | | :---------------- |
+     * :----------------- | :-------------------------------------------------- | | `bacs` | 18
+     * characters | `/` `.` `&` `-` | | `sepa` | 70 characters | `/` `?` `:` `(` `)` `.` `,` `+` `&`
+     * `<` `>` `'` `"` | | `ach` | 16 characters | `/` `?` `:` `(` `)` `.` `,` `'` `+` `-` | |
+     * `faster_payments` | 18 characters | `/` `?` `:` `(` `)` `.` `,` `'` `+` `-` |
      * 
      * The validation error that gets returned for an invalid name will contain a suggested name in
      * the metadata that is guaranteed to pass name validations.
      * 
+     * You should ensure that the name you set matches the legal name or the trading name of the
+     * creditor, otherwise, there is an increased risk of chargeback.
+     * 
      */
     public static final class SchemeIdentifierCreateRequest
             extends IdempotentPostRequest<SchemeIdentifier> {
+        private Links links;
         private String name;
         private Scheme scheme;
+
+        public SchemeIdentifierCreateRequest withLinks(Links links) {
+            this.links = links;
+            return this;
+        }
+
+        /**
+         * <em>required</em> ID of the associated [creditor](#core-endpoints-creditors).
+         * 
+         */
+        public SchemeIdentifierCreateRequest withLinksCreditor(String creditor) {
+            if (links == null) {
+                links = new Links();
+            }
+            links.withCreditor(creditor);
+            return this;
+        }
 
         /**
          * The name which appears on customers' bank statements. This should usually be the
@@ -183,6 +213,19 @@ public class SchemeIdentifierService {
                 return name().toLowerCase();
             }
         }
+
+        public static class Links {
+            private String creditor;
+
+            /**
+             * <em>required</em> ID of the associated [creditor](#core-endpoints-creditors).
+             * 
+             */
+            public Links withCreditor(String creditor) {
+                this.creditor = creditor;
+                return this;
+            }
+        }
     }
 
     /**
@@ -192,6 +235,8 @@ public class SchemeIdentifierService {
      */
     public static final class SchemeIdentifierListRequest<S>
             extends ListRequest<S, SchemeIdentifier> {
+        private String creditor;
+
         /**
          * Cursor pointing to the start of the desired set.
          */
@@ -205,6 +250,14 @@ public class SchemeIdentifierService {
          */
         public SchemeIdentifierListRequest<S> withBefore(String before) {
             setBefore(before);
+            return this;
+        }
+
+        /**
+         * Unique identifier, beginning with "CR".
+         */
+        public SchemeIdentifierListRequest<S> withCreditor(String creditor) {
+            this.creditor = creditor;
             return this;
         }
 
@@ -230,6 +283,9 @@ public class SchemeIdentifierService {
         protected Map<String, Object> getQueryParams() {
             ImmutableMap.Builder<String, Object> params = ImmutableMap.builder();
             params.putAll(super.getQueryParams());
+            if (creditor != null) {
+                params.put("creditor", creditor);
+            }
             return params.build();
         }
 

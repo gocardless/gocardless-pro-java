@@ -16,6 +16,7 @@ public class BillingRequestFlow {
     private String authorisationUrl;
     private Boolean autoFulfil;
     private String createdAt;
+    private Boolean customerDetailsCaptured;
     private String exitUri;
     private String expiresAt;
     private String id;
@@ -29,6 +30,7 @@ public class BillingRequestFlow {
     private String redirectUri;
     private String sessionToken;
     private Boolean showRedirectButtons;
+    private Boolean showSuccessRedirectButton;
 
     /**
      * URL for a GC-controlled flow which will allow the payer to fulfil the billing request
@@ -50,6 +52,13 @@ public class BillingRequestFlow {
      */
     public String getCreatedAt() {
         return createdAt;
+    }
+
+    /**
+     * Identifies whether a Billing Request belongs to a specific customer
+     */
+    public Boolean getCustomerDetailsCaptured() {
+        return customerDetailsCaptured;
     }
 
     /**
@@ -161,6 +170,16 @@ public class BillingRequestFlow {
      */
     public Boolean getShowRedirectButtons() {
         return showRedirectButtons;
+    }
+
+    /**
+     * If true, the payer will be able to see a redirect action button on the Success page. This
+     * action button will provide a way to redirect the payer to the given redirect_uri. This
+     * functionality is helpful when merchants do not want payers to be automatically redirected or
+     * on Android devices, where automatic redirections are not possible.
+     */
+    public Boolean getShowSuccessRedirectButton() {
+        return showSuccessRedirectButton;
     }
 
     public static class Links {

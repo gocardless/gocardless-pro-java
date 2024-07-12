@@ -43,6 +43,7 @@ public class MandateImport {
 
     private String createdAt;
     private String id;
+    private Links links;
     private Scheme scheme;
     private Status status;
 
@@ -58,6 +59,13 @@ public class MandateImport {
      */
     public String getId() {
         return id;
+    }
+
+    /**
+     * Related resources
+     */
+    public Links getLinks() {
+        return links;
     }
 
     /**
@@ -108,5 +116,25 @@ public class MandateImport {
         PROCESSING, @SerializedName("processed")
         PROCESSED, @SerializedName("unknown")
         UNKNOWN
+    }
+
+    /**
+     * Represents a link resource returned from the API.
+     *
+     * Related resources
+     */
+    public static class Links {
+        private Links() {
+            // blank to prevent instantiation
+        }
+
+        private String creditor;
+
+        /**
+         * ID of the associated creditor.
+         */
+        public String getCreditor() {
+            return creditor;
+        }
     }
 }
