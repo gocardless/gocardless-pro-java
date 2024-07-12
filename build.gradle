@@ -2,6 +2,11 @@ buildscript {
     repositories {
         mavenCentral()
         maven { url 'https://plugins.gradle.org/m2/' }
+        jcenter()
+        google()
+        maven {
+            url 'https://maven.google.com'
+        }
     }
 
     dependencies {
@@ -20,12 +25,18 @@ plugins {
 sourceCompatibility = 1.8
 targetCompatibility = 1.8
 group = 'com.gocardless'
-version = '5.25.0'
+version = '5.26.0'
 
 apply plugin: 'ch.raffael.pegdown-doclet'
 
 repositories {
     mavenCentral()
+    maven { url 'https://plugins.gradle.org/m2/' }
+    jcenter()
+        google()
+        maven {
+            url 'https://maven.google.com'
+        }
 }
 
 dependencies {

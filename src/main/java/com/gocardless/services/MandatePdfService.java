@@ -80,8 +80,11 @@ public class MandatePdfService {
         private String bic;
         private String branchCode;
         private String city;
+        private String companyName;
         private String countryCode;
         private String danishIdentityNumber;
+        private String familyName;
+        private String givenName;
         private String iban;
         private Links links;
         private String mandateReference;
@@ -183,6 +186,15 @@ public class MandatePdfService {
         }
 
         /**
+         * The customer's company name. Used to populate the "Customer Name or Company name" field
+         * on the PDF.
+         */
+        public MandatePdfCreateRequest withCompanyName(String companyName) {
+            this.companyName = companyName;
+            return this;
+        }
+
+        /**
          * [ISO
          * 3166-1](http://en.wikipedia.org/wiki/ISO_3166-1_alpha-2#Officially_assigned_code_elements)
          * alpha-2 code. Required if providing local details.
@@ -198,6 +210,24 @@ public class MandatePdfService {
          */
         public MandatePdfCreateRequest withDanishIdentityNumber(String danishIdentityNumber) {
             this.danishIdentityNumber = danishIdentityNumber;
+            return this;
+        }
+
+        /**
+         * The customer's family name (i.e. last name). Used to populate the "Customer Name or
+         * Company name" field on the PDF. Ignored if `company_name` is provided.
+         */
+        public MandatePdfCreateRequest withFamilyName(String familyName) {
+            this.familyName = familyName;
+            return this;
+        }
+
+        /**
+         * The customer's given name (i.e. first name). Used to populate the "Customer Name or
+         * Company name" field on the PDF. Ignored if `company_name` is provided.
+         */
+        public MandatePdfCreateRequest withGivenName(String givenName) {
+            this.givenName = givenName;
             return this;
         }
 
