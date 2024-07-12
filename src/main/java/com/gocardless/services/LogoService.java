@@ -23,6 +23,11 @@ public class LogoService {
     /**
      * Creates a new logo associated with a creditor. If a creditor already has a logo, this will
      * update the existing logo linked to the creditor.
+     * 
+     * We support JPG and PNG formats. Your logo will be scaled to a maximum of 300px by 40px. For
+     * more guidance on how to upload logos that will look great across your customer payment page
+     * and notification emails see
+     * [here](https://developer.gocardless.com/gc-embed/setting-up-branding#tips_for_uploading_your_logo).
      */
     public LogoCreateForCreditorRequest createForCreditor() {
         return new LogoCreateForCreditorRequest(httpClient);
@@ -33,6 +38,11 @@ public class LogoService {
      *
      * Creates a new logo associated with a creditor. If a creditor already has a logo, this will
      * update the existing logo linked to the creditor.
+     * 
+     * We support JPG and PNG formats. Your logo will be scaled to a maximum of 300px by 40px. For
+     * more guidance on how to upload logos that will look great across your customer payment page
+     * and notification emails see
+     * [here](https://developer.gocardless.com/gc-embed/setting-up-branding#tips_for_uploading_your_logo).
      */
     public static final class LogoCreateForCreditorRequest extends PostRequest<Logo> {
         private String image;
@@ -52,7 +62,7 @@ public class LogoService {
         }
 
         /**
-         * ID of the creditor the payer theme belongs to
+         * ID of the creditor the logo belongs to
          */
         public LogoCreateForCreditorRequest withLinksCreditor(String creditor) {
             if (links == null) {
@@ -95,7 +105,7 @@ public class LogoService {
             private String creditor;
 
             /**
-             * ID of the creditor the payer theme belongs to
+             * ID of the creditor the logo belongs to
              */
             public Links withCreditor(String creditor) {
                 this.creditor = creditor;
