@@ -27,6 +27,7 @@ public class GoCardlessClient {
     private final CustomerBankAccountService customerBankAccounts;
     private final CustomerNotificationService customerNotifications;
     private final EventService events;
+    private final ExportService exports;
     private final InstalmentScheduleService instalmentSchedules;
     private final InstitutionService institutions;
     private final LogoService logos;
@@ -183,6 +184,7 @@ public class GoCardlessClient {
         this.customerBankAccounts = new CustomerBankAccountService(httpClient);
         this.customerNotifications = new CustomerNotificationService(httpClient);
         this.events = new EventService(httpClient);
+        this.exports = new ExportService(httpClient);
         this.instalmentSchedules = new InstalmentScheduleService(httpClient);
         this.institutions = new InstitutionService(httpClient);
         this.logos = new LogoService(httpClient);
@@ -296,6 +298,13 @@ public class GoCardlessClient {
      */
     public EventService events() {
         return events;
+    }
+
+    /**
+     * A service class for working with export resources.
+     */
+    public ExportService exports() {
+        return exports;
     }
 
     /**
