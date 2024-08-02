@@ -462,6 +462,19 @@ public class BillingRequestService {
         }
 
         /**
+         * A custom payment reference defined by the merchant. It is only available for payments
+         * using the Direct Funds settlement model on the Faster Payments scheme.
+         * 
+         */
+        public BillingRequestCreateRequest withPaymentRequestReference(String reference) {
+            if (paymentRequest == null) {
+                paymentRequest = new PaymentRequest();
+            }
+            paymentRequest.withReference(reference);
+            return this;
+        }
+
+        /**
          * (Optional) A scheme used for Open Banking payments. Currently `faster_payments` is
          * supported in the UK (GBP) and `sepa_credit_transfer` and `sepa_instant_credit_transfer`
          * are supported in supported Eurozone countries (EUR). For Eurozone countries,
@@ -895,6 +908,7 @@ public class BillingRequestService {
             private String description;
             private FundsSettlement fundsSettlement;
             private Map<String, String> metadata;
+            private String reference;
             private String scheme;
 
             /**
@@ -954,6 +968,16 @@ public class BillingRequestService {
              */
             public PaymentRequest withMetadata(Map<String, String> metadata) {
                 this.metadata = metadata;
+                return this;
+            }
+
+            /**
+             * A custom payment reference defined by the merchant. It is only available for payments
+             * using the Direct Funds settlement model on the Faster Payments scheme.
+             * 
+             */
+            public PaymentRequest withReference(String reference) {
+                this.reference = reference;
                 return this;
             }
 

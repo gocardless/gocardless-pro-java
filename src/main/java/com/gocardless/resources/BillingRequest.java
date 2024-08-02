@@ -758,6 +758,7 @@ public class BillingRequest {
         private FundsSettlement fundsSettlement;
         private Links links;
         private Map<String, Object> metadata;
+        private String reference;
         private String scheme;
 
         /**
@@ -816,6 +817,15 @@ public class BillingRequest {
          */
         public Map<String, Object> getMetadata() {
             return metadata;
+        }
+
+        /**
+         * A custom payment reference defined by the merchant. It is only available for payments
+         * using the Direct Funds settlement model on the Faster Payments scheme.
+         * 
+         */
+        public String getReference() {
+            return reference;
         }
 
         /**
