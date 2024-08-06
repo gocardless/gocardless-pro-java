@@ -408,7 +408,7 @@ public class BillingRequestService {
         /**
          * [ISO 4217](http://en.wikipedia.org/wiki/ISO_4217#Active_codes) currency code. `GBP` and
          * `EUR` supported; `GBP` with your customers in the UK and for `EUR` with your customers in
-         * Germany only.
+         * supported Eurozone countries only.
          */
         public BillingRequestCreateRequest withPaymentRequestCurrency(String currency) {
             if (paymentRequest == null) {
@@ -462,11 +462,24 @@ public class BillingRequestService {
         }
 
         /**
+         * A custom payment reference defined by the merchant. It is only available for payments
+         * using the Direct Funds settlement model on the Faster Payments scheme.
+         * 
+         */
+        public BillingRequestCreateRequest withPaymentRequestReference(String reference) {
+            if (paymentRequest == null) {
+                paymentRequest = new PaymentRequest();
+            }
+            paymentRequest.withReference(reference);
+            return this;
+        }
+
+        /**
          * (Optional) A scheme used for Open Banking payments. Currently `faster_payments` is
          * supported in the UK (GBP) and `sepa_credit_transfer` and `sepa_instant_credit_transfer`
-         * are supported in Germany (EUR). In Germany, `sepa_credit_transfer` is used as the
-         * default. Please be aware that `sepa_instant_credit_transfer` may incur an additional fee
-         * for your customer.
+         * are supported in supported Eurozone countries (EUR). For Eurozone countries,
+         * `sepa_credit_transfer` is used as the default. Please be aware that
+         * `sepa_instant_credit_transfer` may incur an additional fee for your customer.
          */
         public BillingRequestCreateRequest withPaymentRequestScheme(String scheme) {
             if (paymentRequest == null) {
@@ -895,6 +908,7 @@ public class BillingRequestService {
             private String description;
             private FundsSettlement fundsSettlement;
             private Map<String, String> metadata;
+            private String reference;
             private String scheme;
 
             /**
@@ -918,7 +932,7 @@ public class BillingRequestService {
             /**
              * [ISO 4217](http://en.wikipedia.org/wiki/ISO_4217#Active_codes) currency code. `GBP`
              * and `EUR` supported; `GBP` with your customers in the UK and for `EUR` with your
-             * customers in Germany only.
+             * customers in supported Eurozone countries only.
              */
             public PaymentRequest withCurrency(String currency) {
                 this.currency = currency;
@@ -958,11 +972,22 @@ public class BillingRequestService {
             }
 
             /**
+             * A custom payment reference defined by the merchant. It is only available for payments
+             * using the Direct Funds settlement model on the Faster Payments scheme.
+             * 
+             */
+            public PaymentRequest withReference(String reference) {
+                this.reference = reference;
+                return this;
+            }
+
+            /**
              * (Optional) A scheme used for Open Banking payments. Currently `faster_payments` is
              * supported in the UK (GBP) and `sepa_credit_transfer` and
-             * `sepa_instant_credit_transfer` are supported in Germany (EUR). In Germany,
-             * `sepa_credit_transfer` is used as the default. Please be aware that
-             * `sepa_instant_credit_transfer` may incur an additional fee for your customer.
+             * `sepa_instant_credit_transfer` are supported in supported Eurozone countries (EUR).
+             * For Eurozone countries, `sepa_credit_transfer` is used as the default. Please be
+             * aware that `sepa_instant_credit_transfer` may incur an additional fee for your
+             * customer.
              */
             public PaymentRequest withScheme(String scheme) {
                 this.scheme = scheme;
@@ -1505,11 +1530,9 @@ public class BillingRequestService {
         private String payId;
 
         /**
-         * Name of the account holder, as known by the bank. Usually this is the same as the name
-         * stored with the linked [creditor](#core-endpoints-creditors). This field will be
-         * transliterated, upcased and truncated to 18 characters. This field is required unless the
-         * request includes a [customer bank account
-         * token](#javascript-flow-customer-bank-account-tokens).
+         * Name of the account holder, as known by the bank. This field will be transliterated,
+         * upcased and truncated to 18 characters. This field is required unless the request
+         * includes a [customer bank account token](#javascript-flow-customer-bank-account-tokens).
          */
         public BillingRequestCollectBankAccountRequest withAccountHolderName(
                 String accountHolderName) {

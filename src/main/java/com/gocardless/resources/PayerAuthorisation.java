@@ -165,11 +165,9 @@ public class PayerAuthorisation {
         private Map<String, Object> metadata;
 
         /**
-         * Name of the account holder, as known by the bank. Usually this is the same as the name
-         * stored with the linked [creditor](#core-endpoints-creditors). This field will be
-         * transliterated, upcased and truncated to 18 characters. This field is required unless the
-         * request includes a [customer bank account
-         * token](#javascript-flow-customer-bank-account-tokens).
+         * Name of the account holder, as known by the bank. This field will be transliterated,
+         * upcased and truncated to 18 characters. This field is required unless the request
+         * includes a [customer bank account token](#javascript-flow-customer-bank-account-tokens).
          */
         public String getAccountHolderName() {
             return accountHolderName;

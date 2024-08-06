@@ -56,6 +56,7 @@ public class EventService {
         private String billingRequest;
         private CreatedAt createdAt;
         private String creditor;
+        private String export;
         private Include include;
         private String instalmentSchedule;
         private String mandate;
@@ -160,6 +161,14 @@ public class EventService {
         }
 
         /**
+         * ID of an export. If specified, this endpoint will return all events for the given export.
+         */
+        public EventListRequest<S> withExport(String export) {
+            this.export = export;
+            return this;
+        }
+
+        /**
          * Includes linked resources in the response. Must be used with the `resource_type`
          * parameter specified. The include should be one of:
          * <ul>
@@ -252,12 +261,13 @@ public class EventService {
 
         /**
          * Type of resource that you'd like to get all events for. Cannot be used together with the
-         * `billing_request`, `creditor`, `instalment_schedule`, `mandate`, `payer_authorisation`,
-         * `payment`, `payout`, `refund`, `scheme_identifier` or `subscription` parameters. The type
-         * can be one of:
+         * `billing_request`, `creditor`, `export`,`instalment_schedule`, `mandate`,
+         * `payer_authorisation`, `payment`, `payout`, `refund`, `scheme_identifier` or
+         * `subscription` parameters. The type can be one of:
          * <ul>
          * <li>`billing_requests`</li>
          * <li>`creditors`</li>
+         * <li>`exports`</li>
          * <li>`instalment_schedules`</li>
          * <li>`mandates`</li>
          * <li>`payer_authorisations`</li>
@@ -315,6 +325,9 @@ public class EventService {
             }
             if (creditor != null) {
                 params.put("creditor", creditor);
+            }
+            if (export != null) {
+                params.put("export", export);
             }
             if (include != null) {
                 params.put("include", include);
@@ -390,7 +403,8 @@ public class EventService {
         public enum ResourceType {
             @SerializedName("billing_requests")
             BILLING_REQUESTS, @SerializedName("creditors")
-            CREDITORS, @SerializedName("instalment_schedules")
+            CREDITORS, @SerializedName("exports")
+            EXPORTS, @SerializedName("instalment_schedules")
             INSTALMENT_SCHEDULES, @SerializedName("mandates")
             MANDATES, @SerializedName("organisations")
             ORGANISATIONS, @SerializedName("payer_authorisations")

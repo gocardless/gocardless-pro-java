@@ -758,6 +758,7 @@ public class BillingRequest {
         private FundsSettlement fundsSettlement;
         private Links links;
         private Map<String, Object> metadata;
+        private String reference;
         private String scheme;
 
         /**
@@ -779,7 +780,7 @@ public class BillingRequest {
         /**
          * [ISO 4217](http://en.wikipedia.org/wiki/ISO_4217#Active_codes) currency code. `GBP` and
          * `EUR` supported; `GBP` with your customers in the UK and for `EUR` with your customers in
-         * Germany only.
+         * supported Eurozone countries only.
          */
         public String getCurrency() {
             return currency;
@@ -819,11 +820,20 @@ public class BillingRequest {
         }
 
         /**
+         * A custom payment reference defined by the merchant. It is only available for payments
+         * using the Direct Funds settlement model on the Faster Payments scheme.
+         * 
+         */
+        public String getReference() {
+            return reference;
+        }
+
+        /**
          * (Optional) A scheme used for Open Banking payments. Currently `faster_payments` is
          * supported in the UK (GBP) and `sepa_credit_transfer` and `sepa_instant_credit_transfer`
-         * are supported in Germany (EUR). In Germany, `sepa_credit_transfer` is used as the
-         * default. Please be aware that `sepa_instant_credit_transfer` may incur an additional fee
-         * for your customer.
+         * are supported in supported Eurozone countries (EUR). For Eurozone countries,
+         * `sepa_credit_transfer` is used as the default. Please be aware that
+         * `sepa_instant_credit_transfer` may incur an additional fee for your customer.
          */
         public String getScheme() {
             return scheme;
@@ -1002,10 +1012,9 @@ public class BillingRequest {
             private Map<String, Object> metadata;
 
             /**
-             * Name of the account holder, as known by the bank. Usually this is the same as the
-             * name stored with the linked [creditor](#core-endpoints-creditors). This field will be
-             * transliterated, upcased and truncated to 18 characters. This field is required unless
-             * the request includes a [customer bank account
+             * Name of the account holder, as known by the bank. This field will be transliterated,
+             * upcased and truncated to 18 characters. This field is required unless the request
+             * includes a [customer bank account
              * token](#javascript-flow-customer-bank-account-tokens).
              */
             public String getAccountHolderName() {

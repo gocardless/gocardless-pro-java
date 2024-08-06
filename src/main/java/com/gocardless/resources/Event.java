@@ -94,6 +94,7 @@ public class Event {
      * <ul>
      * <li>`billing_requests`</li>
      * <li>`creditors`</li>
+     * <li>`exports`</li>
      * <li>`instalment_schedules`</li>
      * <li>`mandates`</li>
      * <li>`payer_authorisations`</li>
@@ -111,7 +112,8 @@ public class Event {
     public enum ResourceType {
         @SerializedName("billing_requests")
         BILLING_REQUESTS, @SerializedName("creditors")
-        CREDITORS, @SerializedName("instalment_schedules")
+        CREDITORS, @SerializedName("exports")
+        EXPORTS, @SerializedName("instalment_schedules")
         INSTALMENT_SCHEDULES, @SerializedName("mandates")
         MANDATES, @SerializedName("organisations")
         ORGANISATIONS, @SerializedName("payer_authorisations")
