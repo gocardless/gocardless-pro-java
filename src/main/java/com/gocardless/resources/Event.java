@@ -175,6 +175,7 @@ public class Event {
         private String cause;
         private String currency;
         private String description;
+        private Integer itemCount;
         private String notRetriedReason;
         private Origin origin;
         private String property;
@@ -212,6 +213,13 @@ public class Event {
          */
         public String getDescription() {
             return description;
+        }
+
+        /**
+         * Count of rows in the csv. This is sent for export events
+         */
+        public Integer getItemCount() {
+            return itemCount;
         }
 
         /**
