@@ -477,7 +477,7 @@ public class BillingRequest {
         }
 
         private AuthorisationSource authorisationSource;
-        private ConsentType consentType;
+        private String consentType;
         private Constraints constraints;
         private String currency;
         private String description;
@@ -506,7 +506,7 @@ public class BillingRequest {
          * be set to one-off, recurring or standing for ACH scheme. And single, recurring and
          * sporadic for PAD scheme.
          */
-        public ConsentType getConsentType() {
+        public String getConsentType() {
             return consentType;
         }
 
@@ -599,16 +599,6 @@ public class BillingRequest {
             WEB, @SerializedName("telephone")
             TELEPHONE, @SerializedName("paper")
             PAPER, @SerializedName("unknown")
-            UNKNOWN
-        }
-
-        public enum ConsentType {
-            @SerializedName("one_off")
-            ONE_OFF, @SerializedName("single")
-            SINGLE, @SerializedName("recurring")
-            RECURRING, @SerializedName("standing")
-            STANDING, @SerializedName("sporadic")
-            SPORADIC, @SerializedName("unknown")
             UNKNOWN
         }
 
