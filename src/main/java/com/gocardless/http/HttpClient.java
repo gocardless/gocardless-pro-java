@@ -47,6 +47,7 @@ public class HttpClient {
     static {
         ImmutableMap.Builder<String, String> builder = ImmutableMap.builder();
         builder.put("GoCardless-Version", "2015-07-06");
+        builder.put("Accept", "application/json");
         builder.put("GoCardless-Client-Library", "gocardless-pro-java");
         builder.put("GoCardless-Client-Version", "5.20.0");
         HEADERS = builder.build();
