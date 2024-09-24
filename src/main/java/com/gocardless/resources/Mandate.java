@@ -19,6 +19,7 @@ public class Mandate {
 
     private AuthorisationSource authorisationSource;
     private ConsentParameters consentParameters;
+    private ConsentType consentType;
     private String createdAt;
     private FundsSettlement fundsSettlement;
     private String id;
@@ -51,6 +52,14 @@ public class Mandate {
      */
     public ConsentParameters getConsentParameters() {
         return consentParameters;
+    }
+
+    /**
+     * (Optional) Specifies the type of authorisation agreed between the payer and merchant. It can
+     * be set to one-off, recurring or standing for ACH, or single, recurring and sporadic for PAD.
+     */
+    public ConsentType getConsentType() {
+        return consentType;
     }
 
     /**
@@ -171,6 +180,16 @@ public class Mandate {
         WEB, @SerializedName("telephone")
         TELEPHONE, @SerializedName("paper")
         PAPER, @SerializedName("unknown")
+        UNKNOWN
+    }
+
+    public enum ConsentType {
+        @SerializedName("one_off")
+        ONE_OFF, @SerializedName("single")
+        SINGLE, @SerializedName("recurring")
+        RECURRING, @SerializedName("standing")
+        STANDING, @SerializedName("sporadic")
+        SPORADIC, @SerializedName("unknown")
         UNKNOWN
     }
 

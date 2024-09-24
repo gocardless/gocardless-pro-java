@@ -32,7 +32,7 @@ public class BillingRequestTemplate {
     private MandateRequestVerify mandateRequestVerify;
     private Map<String, Object> metadata;
     private String name;
-    private Integer paymentRequestAmount;
+    private String paymentRequestAmount;
     private String paymentRequestCurrency;
     private String paymentRequestDescription;
     private Map<String, Object> paymentRequestMetadata;
@@ -141,9 +141,9 @@ public class BillingRequestTemplate {
     }
 
     /**
-     * Amount in minor unit (e.g. pence in GBP, cents in EUR).
+     * Amount in full.
      */
-    public Integer getPaymentRequestAmount() {
+    public String getPaymentRequestAmount() {
         return paymentRequestAmount;
     }
 
