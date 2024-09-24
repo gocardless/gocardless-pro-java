@@ -195,7 +195,7 @@ public class BillingRequestTemplateService {
         private MandateRequestVerify mandateRequestVerify;
         private Map<String, String> metadata;
         private String name;
-        private Integer paymentRequestAmount;
+        private String paymentRequestAmount;
         private String paymentRequestCurrency;
         private String paymentRequestDescription;
         private Map<String, String> paymentRequestMetadata;
@@ -336,10 +336,10 @@ public class BillingRequestTemplateService {
         }
 
         /**
-         * Amount in minor unit (e.g. pence in GBP, cents in EUR).
+         * Amount in full.
          */
         public BillingRequestTemplateCreateRequest withPaymentRequestAmount(
-                Integer paymentRequestAmount) {
+                String paymentRequestAmount) {
             this.paymentRequestAmount = paymentRequestAmount;
             return this;
         }
@@ -503,7 +503,7 @@ public class BillingRequestTemplateService {
         private MandateRequestVerify mandateRequestVerify;
         private Map<String, String> metadata;
         private String name;
-        private Integer paymentRequestAmount;
+        private String paymentRequestAmount;
         private String paymentRequestCurrency;
         private String paymentRequestDescription;
         private Map<String, String> paymentRequestMetadata;
@@ -627,10 +627,10 @@ public class BillingRequestTemplateService {
         }
 
         /**
-         * Amount in minor unit (e.g. pence in GBP, cents in EUR).
+         * Amount in full.
          */
         public BillingRequestTemplateUpdateRequest withPaymentRequestAmount(
-                Integer paymentRequestAmount) {
+                String paymentRequestAmount) {
             this.paymentRequestAmount = paymentRequestAmount;
             return this;
         }

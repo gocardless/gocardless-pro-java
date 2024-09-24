@@ -27,6 +27,7 @@ public class CustomerBankAccount {
     private String accountHolderName;
     private String accountNumberEnding;
     private AccountType accountType;
+    private String bankAccountToken;
     private String bankName;
     private String countryCode;
     private String createdAt;
@@ -60,6 +61,14 @@ public class CustomerBankAccount {
      */
     public AccountType getAccountType() {
         return accountType;
+    }
+
+    /**
+     * A token to uniquely refer to a set of bank account details. This feature is still in early
+     * access and is only available for certain organisations.
+     */
+    public String getBankAccountToken() {
+        return bankAccountToken;
     }
 
     /**

@@ -116,7 +116,8 @@ public class Event {
         EXPORTS, @SerializedName("instalment_schedules")
         INSTALMENT_SCHEDULES, @SerializedName("mandates")
         MANDATES, @SerializedName("organisations")
-        ORGANISATIONS, @SerializedName("payer_authorisations")
+        ORGANISATIONS, @SerializedName("outbound_payments")
+        OUTBOUND_PAYMENTS, @SerializedName("payer_authorisations")
         PAYER_AUTHORISATIONS, @SerializedName("payments")
         PAYMENTS, @SerializedName("payouts")
         PAYOUTS, @SerializedName("refunds")
@@ -175,6 +176,7 @@ public class Event {
         private String cause;
         private String currency;
         private String description;
+        private Integer itemCount;
         private String notRetriedReason;
         private Origin origin;
         private String property;
@@ -212,6 +214,13 @@ public class Event {
          */
         public String getDescription() {
             return description;
+        }
+
+        /**
+         * Count of rows in the csv. This is sent for export events
+         */
+        public Integer getItemCount() {
+            return itemCount;
         }
 
         /**

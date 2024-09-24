@@ -31,6 +31,7 @@ public class BillingRequest {
     private PurposeCode purposeCode;
     private Resources resources;
     private Status status;
+    private SubscriptionRequest subscriptionRequest;
 
     /**
      * List of actions that can be performed before this billing request can be fulfilled.
@@ -117,6 +118,13 @@ public class BillingRequest {
      */
     public Status getStatus() {
         return status;
+    }
+
+    /**
+     * Request for a subscription
+     */
+    public SubscriptionRequest getSubscriptionRequest() {
+        return subscriptionRequest;
     }
 
     public enum PurposeCode {
@@ -383,6 +391,7 @@ public class BillingRequest {
         private String paymentProvider;
         private String paymentRequest;
         private String paymentRequestPayment;
+        private String subscriptionRequest;
 
         /**
          * (Optional) ID of the [bank authorisation](#billing-requests-bank-authorisations) that was
@@ -464,6 +473,13 @@ public class BillingRequest {
         public String getPaymentRequestPayment() {
             return paymentRequestPayment;
         }
+
+        /**
+         * (Optional) ID of the associated subscription request
+         */
+        public String getSubscriptionRequest() {
+            return subscriptionRequest;
+        }
     }
 
     /**
@@ -477,6 +493,7 @@ public class BillingRequest {
         }
 
         private AuthorisationSource authorisationSource;
+        private String consentType;
         private Constraints constraints;
         private String currency;
         private String description;
@@ -498,6 +515,15 @@ public class BillingRequest {
          */
         public AuthorisationSource getAuthorisationSource() {
             return authorisationSource;
+        }
+
+        /**
+         * This attribute represents the authorisation type between the payer and merchant. It can
+         * be set to one-off, recurring or standing for ACH scheme. And single, recurring and
+         * sporadic for PAD scheme.
+         */
+        public String getConsentType() {
+            return consentType;
         }
 
         /**
@@ -1002,6 +1028,7 @@ public class BillingRequest {
             private String accountHolderName;
             private String accountNumberEnding;
             private AccountType accountType;
+            private String bankAccountToken;
             private String bankName;
             private String countryCode;
             private String createdAt;
@@ -1036,6 +1063,14 @@ public class BillingRequest {
              */
             public AccountType getAccountType() {
                 return accountType;
+            }
+
+            /**
+             * A token to uniquely refer to a set of bank account details. This feature is still in
+             * early access and is only available for certain organisations.
+             */
+            public String getBankAccountToken() {
+                return bankAccountToken;
             }
 
             /**
@@ -1247,6 +1282,158 @@ public class BillingRequest {
             public String getSwedishIdentityNumber() {
                 return swedishIdentityNumber;
             }
+        }
+    }
+
+    /**
+     * Represents a subscription request resource returned from the API.
+     *
+     * Request for a subscription
+     */
+    public static class SubscriptionRequest {
+        private SubscriptionRequest() {
+            // blank to prevent instantiation
+        }
+
+        private Integer amount;
+        private Integer appFee;
+        private Integer count;
+        private String currency;
+        private Integer dayOfMonth;
+        private Integer interval;
+        private IntervalUnit intervalUnit;
+        private Map<String, Object> metadata;
+        private Month month;
+        private String name;
+        private String paymentReference;
+        private String startDate;
+
+        /**
+         * Amount in the lowest denomination for the currency (e.g. pence in GBP, cents in EUR).
+         */
+        public Integer getAmount() {
+            return amount;
+        }
+
+        /**
+         * The amount to be deducted from each payment as an app fee, to be paid to the partner
+         * integration which created the subscription, in the lowest denomination for the currency
+         * (e.g. pence in GBP, cents in EUR).
+         */
+        public Integer getAppFee() {
+            return appFee;
+        }
+
+        /**
+         * The total number of payments that should be taken by this subscription.
+         */
+        public Integer getCount() {
+            return count;
+        }
+
+        /**
+         * [ISO 4217](http://en.wikipedia.org/wiki/ISO_4217#Active_codes) currency code. Currently
+         * "AUD", "CAD", "DKK", "EUR", "GBP", "NZD", "SEK" and "USD" are supported.
+         */
+        public String getCurrency() {
+            return currency;
+        }
+
+        /**
+         * As per RFC 2445. The day of the month to charge customers on. `1`-`28` or `-1` to
+         * indicate the last day of the month.
+         */
+        public Integer getDayOfMonth() {
+            return dayOfMonth;
+        }
+
+        /**
+         * Number of `interval_units` between customer charge dates. Must be greater than or equal
+         * to `1`. Must result in at least one charge date per year. Defaults to `1`.
+         */
+        public Integer getInterval() {
+            return interval;
+        }
+
+        /**
+         * The unit of time between customer charge dates. One of `weekly`, `monthly` or `yearly`.
+         */
+        public IntervalUnit getIntervalUnit() {
+            return intervalUnit;
+        }
+
+        /**
+         * Key-value store of custom data. Up to 3 keys are permitted, with key names up to 50
+         * characters and values up to 500 characters.
+         */
+        public Map<String, Object> getMetadata() {
+            return metadata;
+        }
+
+        /**
+         * Name of the month on which to charge a customer. Must be lowercase. Only applies when the
+         * interval_unit is `yearly`.
+         * 
+         */
+        public Month getMonth() {
+            return month;
+        }
+
+        /**
+         * Optional name for the subscription. This will be set as the description on each payment
+         * created. Must not exceed 255 characters.
+         */
+        public String getName() {
+            return name;
+        }
+
+        /**
+         * An optional payment reference. This will be set as the reference on each payment created
+         * and will appear on your customer's bank statement. See the documentation for the [create
+         * payment endpoint](#payments-create-a-payment) for more details. <br />
+         * <p class="restricted-notice">
+         * <strong>Restricted</strong>: You need your own Service User Number to specify a payment
+         * reference for Bacs payments.
+         * </p>
+         */
+        public String getPaymentReference() {
+            return paymentReference;
+        }
+
+        /**
+         * The date on which the first payment should be charged. Must be on or after the
+         * [mandate](#core-endpoints-mandates)'s `next_possible_charge_date`. When left blank and
+         * `month` or `day_of_month` are provided, this will be set to the date of the first
+         * payment. If created without `month` or `day_of_month` this will be set as the mandate's
+         * `next_possible_charge_date`
+         */
+        public String getStartDate() {
+            return startDate;
+        }
+
+        public enum IntervalUnit {
+            @SerializedName("weekly")
+            WEEKLY, @SerializedName("monthly")
+            MONTHLY, @SerializedName("yearly")
+            YEARLY, @SerializedName("unknown")
+            UNKNOWN
+        }
+
+        public enum Month {
+            @SerializedName("january")
+            JANUARY, @SerializedName("february")
+            FEBRUARY, @SerializedName("march")
+            MARCH, @SerializedName("april")
+            APRIL, @SerializedName("may")
+            MAY, @SerializedName("june")
+            JUNE, @SerializedName("july")
+            JULY, @SerializedName("august")
+            AUGUST, @SerializedName("september")
+            SEPTEMBER, @SerializedName("october")
+            OCTOBER, @SerializedName("november")
+            NOVEMBER, @SerializedName("december")
+            DECEMBER, @SerializedName("unknown")
+            UNKNOWN
         }
     }
 }
