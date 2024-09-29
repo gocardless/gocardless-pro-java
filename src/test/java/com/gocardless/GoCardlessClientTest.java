@@ -108,7 +108,7 @@ public class GoCardlessClientTest {
         http.enqueueResponse(201, "fixtures/client/create_a_customer_response.json");
         Customer customer = client.customers().create().withHeader("Accept-Language", "fr-FR")
                 .withFamilyName("Osborne").withGivenName("Sharon").withAddressLine1("27 Acer Road")
-                .withAddressLine2("Apt 2").withCity("London").withPostalCode("E8 3GX")
+                .withAddressLine2("Apt 2").withCity("London").withPostalCode("E8 3GX").withEmail("test-email@gmail.com")
                 .withCountryCode("GB").execute();
         assertThat(customer.getId()).isNotNull();
         assertThat(customer.getFamilyName()).isEqualTo("Osborne");
@@ -122,7 +122,7 @@ public class GoCardlessClientTest {
     public void shouldCreateACustomerWithAGeneratedIdempotencyKey() throws Exception {
         http.enqueueResponse(201, "fixtures/client/create_a_customer_response.json");
         CustomerCreateRequest request = client.customers().create()
-                .withHeader("Accept-Language", "fr-FR").withFamilyName("Osborne")
+                .withHeader("Accept-Language", "fr-FR").withFamilyName("Osborne").withEmail("test-email@gmail.com")
                 .withGivenName("Sharon").withAddressLine1("27 Acer Road").withAddressLine2("Apt 2")
                 .withCity("London").withPostalCode("E8 3GX").withCountryCode("GB");
         request.execute();
@@ -139,7 +139,7 @@ public class GoCardlessClientTest {
         http.enqueueResponse(409, "fixtures/conflict.json");
         http.enqueueResponse(200, "fixtures/client/create_a_customer_response.json");
         CustomerCreateRequest request = client.customers().create()
-                .withHeader("Accept-Language", "fr-FR").withFamilyName("Osborne")
+                .withHeader("Accept-Language", "fr-FR").withFamilyName("Osborne").withEmail("test-email@gmail.com")
                 .withGivenName("Sharon").withAddressLine1("27 Acer Road").withAddressLine2("Apt 2")
                 .withCity("London").withPostalCode("E8 3GX").withCountryCode("GB");
         request.execute();
