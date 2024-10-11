@@ -475,6 +475,26 @@ public class BillingRequestService {
         }
 
         /**
+         * On failure, automatically retry payments using [intelligent
+         * retries](#success-intelligent-retries). Default is `false`.
+         * <p class="notice">
+         * <strong>Important</strong>: To be able to use intelligent retries, Success+ needs to be
+         * enabled in [GoCardless dashboard](https://manage.gocardless.com/success-plus).
+         * </p>
+         * <p class="notice">
+         * <strong>Important</strong>: This is not applicable to IBP and VRP payments.
+         * </p>
+         */
+        public BillingRequestCreateRequest withPaymentRequestRetryIfPossible(
+                Boolean retryIfPossible) {
+            if (paymentRequest == null) {
+                paymentRequest = new PaymentRequest();
+            }
+            paymentRequest.withRetryIfPossible(retryIfPossible);
+            return this;
+        }
+
+        /**
          * (Optional) A scheme used for Open Banking payments. Currently `faster_payments` is
          * supported in the UK (GBP) and `sepa_credit_transfer` and `sepa_instant_credit_transfer`
          * are supported in supported Eurozone countries (EUR). For Eurozone countries,
@@ -909,6 +929,7 @@ public class BillingRequestService {
             private FundsSettlement fundsSettlement;
             private Map<String, String> metadata;
             private String reference;
+            private Boolean retryIfPossible;
             private String scheme;
 
             /**
@@ -978,6 +999,22 @@ public class BillingRequestService {
              */
             public PaymentRequest withReference(String reference) {
                 this.reference = reference;
+                return this;
+            }
+
+            /**
+             * On failure, automatically retry payments using [intelligent
+             * retries](#success-intelligent-retries). Default is `false`.
+             * <p class="notice">
+             * <strong>Important</strong>: To be able to use intelligent retries, Success+ needs to
+             * be enabled in [GoCardless dashboard](https://manage.gocardless.com/success-plus).
+             * </p>
+             * <p class="notice">
+             * <strong>Important</strong>: This is not applicable to IBP and VRP payments.
+             * </p>
+             */
+            public PaymentRequest withRetryIfPossible(Boolean retryIfPossible) {
+                this.retryIfPossible = retryIfPossible;
                 return this;
             }
 
