@@ -23,6 +23,7 @@ public class BillingRequest {
     private List<Action> actions;
     private String createdAt;
     private Boolean fallbackEnabled;
+    private Boolean fallbackOccurred;
     private String id;
     private Links links;
     private MandateRequest mandateRequest;
@@ -56,6 +57,13 @@ public class BillingRequest {
      */
     public Boolean getFallbackEnabled() {
         return fallbackEnabled;
+    }
+
+    /**
+     * True if the billing request was completed with direct debit.
+     */
+    public Boolean getFallbackOccurred() {
+        return fallbackOccurred;
     }
 
     /**
