@@ -19,6 +19,10 @@ import java.util.Map;
  * See [Billing Requests:
  * Overview](https://developer.gocardless.com/getting-started/billing-requests/overview/) for
  * how-to's, explanations and tutorials.
+ * <p class="notice">
+ * <strong>Important</strong>: All properties associated with `subscription_request` and
+ * `instalment_schedule_request` are only supported for ACH and PAD schemes.
+ * </p>
  */
 public class BillingRequestService {
     private final HttpClient httpClient;
@@ -32,7 +36,10 @@ public class BillingRequestService {
     }
 
     /**
-      * 
+     * <p class="notice">
+     * <strong>Important</strong>: All properties associated with `subscription_request` and
+     * `instalment_schedule_request` are only supported for ACH and PAD schemes.
+     * </p>
      */
     public BillingRequestCreateRequest create() {
         return new BillingRequestCreateRequest(httpClient);
@@ -157,16 +164,21 @@ public class BillingRequestService {
     /**
      * Request class for {@link BillingRequestService#create }.
      *
-     * 
+     * <p class="notice">
+     * <strong>Important</strong>: All properties associated with `subscription_request` and
+     * `instalment_schedule_request` are only supported for ACH and PAD schemes.
+     * </p>
      */
     public static final class BillingRequestCreateRequest
             extends IdempotentPostRequest<BillingRequest> {
         private Boolean fallbackEnabled;
+        private InstalmentScheduleRequest instalmentScheduleRequest;
         private Links links;
         private MandateRequest mandateRequest;
         private Map<String, String> metadata;
         private PaymentRequest paymentRequest;
         private PurposeCode purposeCode;
+        private SubscriptionRequest subscriptionRequest;
 
         /**
          * (Optional) If true, this billing request can fallback from instant payment to direct
@@ -178,6 +190,124 @@ public class BillingRequestService {
          */
         public BillingRequestCreateRequest withFallbackEnabled(Boolean fallbackEnabled) {
             this.fallbackEnabled = fallbackEnabled;
+            return this;
+        }
+
+        public BillingRequestCreateRequest withInstalmentScheduleRequest(
+                InstalmentScheduleRequest instalmentScheduleRequest) {
+            this.instalmentScheduleRequest = instalmentScheduleRequest;
+            return this;
+        }
+
+        /**
+         * The amount to be deducted from each payment as an app fee, to be paid to the partner
+         * integration which created the subscription, in the lowest denomination for the currency
+         * (e.g. pence in GBP, cents in EUR).
+         */
+        public BillingRequestCreateRequest withInstalmentScheduleRequestAppFee(Integer appFee) {
+            if (instalmentScheduleRequest == null) {
+                instalmentScheduleRequest = new InstalmentScheduleRequest();
+            }
+            instalmentScheduleRequest.withAppFee(appFee);
+            return this;
+        }
+
+        /**
+         * [ISO 4217](http://en.wikipedia.org/wiki/ISO_4217#Active_codes) currency code. Currently
+         * "AUD", "CAD", "DKK", "EUR", "GBP", "NZD", "SEK" and "USD" are supported.
+         */
+        public BillingRequestCreateRequest withInstalmentScheduleRequestCurrency(
+                InstalmentScheduleRequest.Currency currency) {
+            if (instalmentScheduleRequest == null) {
+                instalmentScheduleRequest = new InstalmentScheduleRequest();
+            }
+            instalmentScheduleRequest.withCurrency(currency);
+            return this;
+        }
+
+        /**
+         * instalments to be created. See [create (with
+         * dates)](#instalment-schedules-create-with-dates) and [create (with
+         * schedule)](#instalment-schedules-create-with-schedule) for more information on how to
+         * specify instalments.
+         */
+        public BillingRequestCreateRequest withInstalmentScheduleRequestInstalments(
+                List<String> instalments) {
+            if (instalmentScheduleRequest == null) {
+                instalmentScheduleRequest = new InstalmentScheduleRequest();
+            }
+            instalmentScheduleRequest.withInstalments(instalments);
+            return this;
+        }
+
+        /**
+         * Key-value store of custom data. Up to 3 keys are permitted, with key names up to 50
+         * characters and values up to 500 characters.
+         */
+        public BillingRequestCreateRequest withInstalmentScheduleRequestMetadata(
+                Map<String, String> metadata) {
+            if (instalmentScheduleRequest == null) {
+                instalmentScheduleRequest = new InstalmentScheduleRequest();
+            }
+            instalmentScheduleRequest.withMetadata(metadata);
+            return this;
+        }
+
+        /**
+         * Name of the instalment schedule, up to 100 chars. This name will also be copied to the
+         * payments of the instalment schedule if you use schedule-based creation.
+         */
+        public BillingRequestCreateRequest withInstalmentScheduleRequestName(String name) {
+            if (instalmentScheduleRequest == null) {
+                instalmentScheduleRequest = new InstalmentScheduleRequest();
+            }
+            instalmentScheduleRequest.withName(name);
+            return this;
+        }
+
+        /**
+         * An optional payment reference. This will be set as the reference on each payment created
+         * and will appear on your customer's bank statement. See the documentation for the [create
+         * payment endpoint](#payments-create-a-payment) for more details. <br />
+         */
+        public BillingRequestCreateRequest withInstalmentScheduleRequestPaymentReference(
+                String paymentReference) {
+            if (instalmentScheduleRequest == null) {
+                instalmentScheduleRequest = new InstalmentScheduleRequest();
+            }
+            instalmentScheduleRequest.withPaymentReference(paymentReference);
+            return this;
+        }
+
+        /**
+         * On failure, automatically retry payments using [intelligent
+         * retries](#success-intelligent-retries). Default is `false`.
+         * <p class="notice">
+         * <strong>Important</strong>: To be able to use intelligent retries, Success+ needs to be
+         * enabled in [GoCardless dashboard](https://manage.gocardless.com/success-plus).
+         * </p>
+         */
+        public BillingRequestCreateRequest withInstalmentScheduleRequestRetryIfPossible(
+                Boolean retryIfPossible) {
+            if (instalmentScheduleRequest == null) {
+                instalmentScheduleRequest = new InstalmentScheduleRequest();
+            }
+            instalmentScheduleRequest.withRetryIfPossible(retryIfPossible);
+            return this;
+        }
+
+        /**
+         * The total amount of the instalment schedule, defined as the sum of all individual
+         * payments, in the lowest denomination for the currency (e.g. pence in GBP, cents in EUR).
+         * If the requested payment amounts do not sum up correctly, a validation error will be
+         * returned.
+         */
+        public BillingRequestCreateRequest withInstalmentScheduleRequestTotalAmount(
+                Integer totalAmount) {
+            if (instalmentScheduleRequest == null) {
+                instalmentScheduleRequest = new InstalmentScheduleRequest();
+            }
+            instalmentScheduleRequest.withTotalAmount(totalAmount);
             return this;
         }
 
@@ -520,6 +650,181 @@ public class BillingRequestService {
             return this;
         }
 
+        public BillingRequestCreateRequest withSubscriptionRequest(
+                SubscriptionRequest subscriptionRequest) {
+            this.subscriptionRequest = subscriptionRequest;
+            return this;
+        }
+
+        /**
+         * Amount in the lowest denomination for the currency (e.g. pence in GBP, cents in EUR).
+         */
+        public BillingRequestCreateRequest withSubscriptionRequestAmount(Integer amount) {
+            if (subscriptionRequest == null) {
+                subscriptionRequest = new SubscriptionRequest();
+            }
+            subscriptionRequest.withAmount(amount);
+            return this;
+        }
+
+        /**
+         * The amount to be deducted from each payment as an app fee, to be paid to the partner
+         * integration which created the subscription, in the lowest denomination for the currency
+         * (e.g. pence in GBP, cents in EUR).
+         */
+        public BillingRequestCreateRequest withSubscriptionRequestAppFee(Integer appFee) {
+            if (subscriptionRequest == null) {
+                subscriptionRequest = new SubscriptionRequest();
+            }
+            subscriptionRequest.withAppFee(appFee);
+            return this;
+        }
+
+        /**
+         * The total number of payments that should be taken by this subscription.
+         */
+        public BillingRequestCreateRequest withSubscriptionRequestCount(Integer count) {
+            if (subscriptionRequest == null) {
+                subscriptionRequest = new SubscriptionRequest();
+            }
+            subscriptionRequest.withCount(count);
+            return this;
+        }
+
+        /**
+         * [ISO 4217](http://en.wikipedia.org/wiki/ISO_4217#Active_codes) currency code. Currently
+         * "AUD", "CAD", "DKK", "EUR", "GBP", "NZD", "SEK" and "USD" are supported.
+         */
+        public BillingRequestCreateRequest withSubscriptionRequestCurrency(String currency) {
+            if (subscriptionRequest == null) {
+                subscriptionRequest = new SubscriptionRequest();
+            }
+            subscriptionRequest.withCurrency(currency);
+            return this;
+        }
+
+        /**
+         * As per RFC 2445. The day of the month to charge customers on. `1`-`28` or `-1` to
+         * indicate the last day of the month.
+         */
+        public BillingRequestCreateRequest withSubscriptionRequestDayOfMonth(Integer dayOfMonth) {
+            if (subscriptionRequest == null) {
+                subscriptionRequest = new SubscriptionRequest();
+            }
+            subscriptionRequest.withDayOfMonth(dayOfMonth);
+            return this;
+        }
+
+        /**
+         * Number of `interval_units` between customer charge dates. Must be greater than or equal
+         * to `1`. Must result in at least one charge date per year. Defaults to `1`.
+         */
+        public BillingRequestCreateRequest withSubscriptionRequestInterval(Integer interval) {
+            if (subscriptionRequest == null) {
+                subscriptionRequest = new SubscriptionRequest();
+            }
+            subscriptionRequest.withInterval(interval);
+            return this;
+        }
+
+        /**
+         * The unit of time between customer charge dates. One of `weekly`, `monthly` or `yearly`.
+         */
+        public BillingRequestCreateRequest withSubscriptionRequestIntervalUnit(
+                SubscriptionRequest.IntervalUnit intervalUnit) {
+            if (subscriptionRequest == null) {
+                subscriptionRequest = new SubscriptionRequest();
+            }
+            subscriptionRequest.withIntervalUnit(intervalUnit);
+            return this;
+        }
+
+        /**
+         * Key-value store of custom data. Up to 3 keys are permitted, with key names up to 50
+         * characters and values up to 500 characters.
+         */
+        public BillingRequestCreateRequest withSubscriptionRequestMetadata(
+                Map<String, String> metadata) {
+            if (subscriptionRequest == null) {
+                subscriptionRequest = new SubscriptionRequest();
+            }
+            subscriptionRequest.withMetadata(metadata);
+            return this;
+        }
+
+        /**
+         * Name of the month on which to charge a customer. Must be lowercase. Only applies when the
+         * interval_unit is `yearly`.
+         * 
+         */
+        public BillingRequestCreateRequest withSubscriptionRequestMonth(
+                SubscriptionRequest.Month month) {
+            if (subscriptionRequest == null) {
+                subscriptionRequest = new SubscriptionRequest();
+            }
+            subscriptionRequest.withMonth(month);
+            return this;
+        }
+
+        /**
+         * Optional name for the subscription. This will be set as the description on each payment
+         * created. Must not exceed 255 characters.
+         */
+        public BillingRequestCreateRequest withSubscriptionRequestName(String name) {
+            if (subscriptionRequest == null) {
+                subscriptionRequest = new SubscriptionRequest();
+            }
+            subscriptionRequest.withName(name);
+            return this;
+        }
+
+        /**
+         * An optional payment reference. This will be set as the reference on each payment created
+         * and will appear on your customer's bank statement. See the documentation for the [create
+         * payment endpoint](#payments-create-a-payment) for more details. <br />
+         */
+        public BillingRequestCreateRequest withSubscriptionRequestPaymentReference(
+                String paymentReference) {
+            if (subscriptionRequest == null) {
+                subscriptionRequest = new SubscriptionRequest();
+            }
+            subscriptionRequest.withPaymentReference(paymentReference);
+            return this;
+        }
+
+        /**
+         * On failure, automatically retry payments using [intelligent
+         * retries](#success-intelligent-retries). Default is `false`.
+         * <p class="notice">
+         * <strong>Important</strong>: To be able to use intelligent retries, Success+ needs to be
+         * enabled in [GoCardless dashboard](https://manage.gocardless.com/success-plus).
+         * </p>
+         */
+        public BillingRequestCreateRequest withSubscriptionRequestRetryIfPossible(
+                Boolean retryIfPossible) {
+            if (subscriptionRequest == null) {
+                subscriptionRequest = new SubscriptionRequest();
+            }
+            subscriptionRequest.withRetryIfPossible(retryIfPossible);
+            return this;
+        }
+
+        /**
+         * The date on which the first payment should be charged. If fulfilled after this date, this
+         * will be set as the mandate's `next_possible_charge_date`. When left blank and `month` or
+         * `day_of_month` are provided, this will be set to the date of the first payment. If
+         * created without `month` or `day_of_month` this will be set as the mandate's
+         * `next_possible_charge_date`.
+         * 
+         */
+        public BillingRequestCreateRequest withSubscriptionRequestStartDate(String startDate) {
+            if (subscriptionRequest == null) {
+                subscriptionRequest = new SubscriptionRequest();
+            }
+            subscriptionRequest.withStartDate(startDate);
+            return this;
+        }
+
         public BillingRequestCreateRequest withIdempotencyKey(String idempotencyKey) {
             super.setIdempotencyKey(idempotencyKey);
             return this;
@@ -582,6 +887,117 @@ public class BillingRequestService {
             @Override
             public String toString() {
                 return name().toLowerCase();
+            }
+        }
+
+        public static class InstalmentScheduleRequest {
+            private Integer appFee;
+            private Currency currency;
+            private List<String> instalments;
+            private Map<String, String> metadata;
+            private String name;
+            private String paymentReference;
+            private Boolean retryIfPossible;
+            private Integer totalAmount;
+
+            /**
+             * The amount to be deducted from each payment as an app fee, to be paid to the partner
+             * integration which created the subscription, in the lowest denomination for the
+             * currency (e.g. pence in GBP, cents in EUR).
+             */
+            public InstalmentScheduleRequest withAppFee(Integer appFee) {
+                this.appFee = appFee;
+                return this;
+            }
+
+            /**
+             * [ISO 4217](http://en.wikipedia.org/wiki/ISO_4217#Active_codes) currency code.
+             * Currently "AUD", "CAD", "DKK", "EUR", "GBP", "NZD", "SEK" and "USD" are supported.
+             */
+            public InstalmentScheduleRequest withCurrency(Currency currency) {
+                this.currency = currency;
+                return this;
+            }
+
+            /**
+             * instalments to be created. See [create (with
+             * dates)](#instalment-schedules-create-with-dates) and [create (with
+             * schedule)](#instalment-schedules-create-with-schedule) for more information on how to
+             * specify instalments.
+             */
+            public InstalmentScheduleRequest withInstalments(List<String> instalments) {
+                this.instalments = instalments;
+                return this;
+            }
+
+            /**
+             * Key-value store of custom data. Up to 3 keys are permitted, with key names up to 50
+             * characters and values up to 500 characters.
+             */
+            public InstalmentScheduleRequest withMetadata(Map<String, String> metadata) {
+                this.metadata = metadata;
+                return this;
+            }
+
+            /**
+             * Name of the instalment schedule, up to 100 chars. This name will also be copied to
+             * the payments of the instalment schedule if you use schedule-based creation.
+             */
+            public InstalmentScheduleRequest withName(String name) {
+                this.name = name;
+                return this;
+            }
+
+            /**
+             * An optional payment reference. This will be set as the reference on each payment
+             * created and will appear on your customer's bank statement. See the documentation for
+             * the [create payment endpoint](#payments-create-a-payment) for more details. <br />
+             */
+            public InstalmentScheduleRequest withPaymentReference(String paymentReference) {
+                this.paymentReference = paymentReference;
+                return this;
+            }
+
+            /**
+             * On failure, automatically retry payments using [intelligent
+             * retries](#success-intelligent-retries). Default is `false`.
+             * <p class="notice">
+             * <strong>Important</strong>: To be able to use intelligent retries, Success+ needs to
+             * be enabled in [GoCardless dashboard](https://manage.gocardless.com/success-plus).
+             * </p>
+             */
+            public InstalmentScheduleRequest withRetryIfPossible(Boolean retryIfPossible) {
+                this.retryIfPossible = retryIfPossible;
+                return this;
+            }
+
+            /**
+             * The total amount of the instalment schedule, defined as the sum of all individual
+             * payments, in the lowest denomination for the currency (e.g. pence in GBP, cents in
+             * EUR). If the requested payment amounts do not sum up correctly, a validation error
+             * will be returned.
+             */
+            public InstalmentScheduleRequest withTotalAmount(Integer totalAmount) {
+                this.totalAmount = totalAmount;
+                return this;
+            }
+
+            public enum Currency {
+                @SerializedName("AUD")
+                AUD, @SerializedName("CAD")
+                CAD, @SerializedName("DKK")
+                DKK, @SerializedName("EUR")
+                EUR, @SerializedName("GBP")
+                GBP, @SerializedName("NZD")
+                NZD, @SerializedName("SEK")
+                SEK, @SerializedName("USD")
+                USD, @SerializedName("unknown")
+                UNKNOWN;
+
+                @Override
+                public String toString() {
+                    return name();
+                }
             }
         }
 
@@ -716,6 +1132,7 @@ public class BillingRequestService {
         public static class Constraints {
             private String endDate;
             private Integer maxAmountPerPayment;
+            private String paymentMethod;
             private List<PeriodicLimits> periodicLimits;
             private String startDate;
 
@@ -738,6 +1155,16 @@ public class BillingRequestService {
              */
             public Constraints withMaxAmountPerPayment(Integer maxAmountPerPayment) {
                 this.maxAmountPerPayment = maxAmountPerPayment;
+                return this;
+            }
+
+            /**
+             * A constraint where you can specify info (free text string) about how payments are
+             * calculated. _Note:_ This is only supported for ACH and PAD schemes.
+             * 
+             */
+            public Constraints withPaymentMethod(String paymentMethod) {
+                this.paymentMethod = paymentMethod;
                 return this;
             }
 
@@ -768,6 +1195,9 @@ public class BillingRequestService {
                 }
                 if (maxAmountPerPayment != null) {
                     params.put("constraints[max_amount_per_payment]", maxAmountPerPayment);
+                }
+                if (paymentMethod != null) {
+                    params.put("constraints[payment_method]", paymentMethod);
                 }
                 if (periodicLimits != null) {
                     params.put("constraints[periodic_limits]", periodicLimits);
@@ -1035,6 +1465,183 @@ public class BillingRequestService {
                 @SerializedName("managed")
                 MANAGED, @SerializedName("direct")
                 DIRECT, @SerializedName("unknown")
+                UNKNOWN;
+
+                @Override
+                public String toString() {
+                    return name().toLowerCase();
+                }
+            }
+        }
+
+        public static class SubscriptionRequest {
+            private Integer amount;
+            private Integer appFee;
+            private Integer count;
+            private String currency;
+            private Integer dayOfMonth;
+            private Integer interval;
+            private IntervalUnit intervalUnit;
+            private Map<String, String> metadata;
+            private Month month;
+            private String name;
+            private String paymentReference;
+            private Boolean retryIfPossible;
+            private String startDate;
+
+            /**
+             * Amount in the lowest denomination for the currency (e.g. pence in GBP, cents in EUR).
+             */
+            public SubscriptionRequest withAmount(Integer amount) {
+                this.amount = amount;
+                return this;
+            }
+
+            /**
+             * The amount to be deducted from each payment as an app fee, to be paid to the partner
+             * integration which created the subscription, in the lowest denomination for the
+             * currency (e.g. pence in GBP, cents in EUR).
+             */
+            public SubscriptionRequest withAppFee(Integer appFee) {
+                this.appFee = appFee;
+                return this;
+            }
+
+            /**
+             * The total number of payments that should be taken by this subscription.
+             */
+            public SubscriptionRequest withCount(Integer count) {
+                this.count = count;
+                return this;
+            }
+
+            /**
+             * [ISO 4217](http://en.wikipedia.org/wiki/ISO_4217#Active_codes) currency code.
+             * Currently "AUD", "CAD", "DKK", "EUR", "GBP", "NZD", "SEK" and "USD" are supported.
+             */
+            public SubscriptionRequest withCurrency(String currency) {
+                this.currency = currency;
+                return this;
+            }
+
+            /**
+             * As per RFC 2445. The day of the month to charge customers on. `1`-`28` or `-1` to
+             * indicate the last day of the month.
+             */
+            public SubscriptionRequest withDayOfMonth(Integer dayOfMonth) {
+                this.dayOfMonth = dayOfMonth;
+                return this;
+            }
+
+            /**
+             * Number of `interval_units` between customer charge dates. Must be greater than or
+             * equal to `1`. Must result in at least one charge date per year. Defaults to `1`.
+             */
+            public SubscriptionRequest withInterval(Integer interval) {
+                this.interval = interval;
+                return this;
+            }
+
+            /**
+             * The unit of time between customer charge dates. One of `weekly`, `monthly` or
+             * `yearly`.
+             */
+            public SubscriptionRequest withIntervalUnit(IntervalUnit intervalUnit) {
+                this.intervalUnit = intervalUnit;
+                return this;
+            }
+
+            /**
+             * Key-value store of custom data. Up to 3 keys are permitted, with key names up to 50
+             * characters and values up to 500 characters.
+             */
+            public SubscriptionRequest withMetadata(Map<String, String> metadata) {
+                this.metadata = metadata;
+                return this;
+            }
+
+            /**
+             * Name of the month on which to charge a customer. Must be lowercase. Only applies when
+             * the interval_unit is `yearly`.
+             * 
+             */
+            public SubscriptionRequest withMonth(Month month) {
+                this.month = month;
+                return this;
+            }
+
+            /**
+             * Optional name for the subscription. This will be set as the description on each
+             * payment created. Must not exceed 255 characters.
+             */
+            public SubscriptionRequest withName(String name) {
+                this.name = name;
+                return this;
+            }
+
+            /**
+             * An optional payment reference. This will be set as the reference on each payment
+             * created and will appear on your customer's bank statement. See the documentation for
+             * the [create payment endpoint](#payments-create-a-payment) for more details. <br />
+             */
+            public SubscriptionRequest withPaymentReference(String paymentReference) {
+                this.paymentReference = paymentReference;
+                return this;
+            }
+
+            /**
+             * On failure, automatically retry payments using [intelligent
+             * retries](#success-intelligent-retries). Default is `false`.
+             * <p class="notice">
+             * <strong>Important</strong>: To be able to use intelligent retries, Success+ needs to
+             * be enabled in [GoCardless dashboard](https://manage.gocardless.com/success-plus).
+             * </p>
+             */
+            public SubscriptionRequest withRetryIfPossible(Boolean retryIfPossible) {
+                this.retryIfPossible = retryIfPossible;
+                return this;
+            }
+
+            /**
+             * The date on which the first payment should be charged. If fulfilled after this date,
+             * this will be set as the mandate's `next_possible_charge_date`. When left blank and
+             * `month` or `day_of_month` are provided, this will be set to the date of the first
+             * payment. If created without `month` or `day_of_month` this will be set as the
+             * mandate's `next_possible_charge_date`.
+             * 
+             */
+            public SubscriptionRequest withStartDate(String startDate) {
+                this.startDate = startDate;
+                return this;
+            }
+
+            public enum IntervalUnit {
+                @SerializedName("weekly")
+                WEEKLY, @SerializedName("monthly")
+                MONTHLY, @SerializedName("yearly")
+                YEARLY, @SerializedName("unknown")
+                UNKNOWN;
+
+                @Override
+                public String toString() {
+                    return name().toLowerCase();
+                }
+            }
+
+            public enum Month {
+                @SerializedName("january")
+                JANUARY, @SerializedName("february")
+                FEBRUARY, @SerializedName("march")
+                MARCH, @SerializedName("april")
+                APRIL, @SerializedName("may")
+                MAY, @SerializedName("june")
+                JUNE, @SerializedName("july")
+                JULY, @SerializedName("august")
+                AUGUST, @SerializedName("september")
+                SEPTEMBER, @SerializedName("october")
+                OCTOBER, @SerializedName("november")
+                NOVEMBER, @SerializedName("december")
+                DECEMBER, @SerializedName("unknown")
                 UNKNOWN;
 
                 @Override
