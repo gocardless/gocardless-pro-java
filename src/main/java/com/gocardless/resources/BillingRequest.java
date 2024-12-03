@@ -14,6 +14,10 @@ import java.util.Map;
  * See [Billing Requests:
  * Overview](https://developer.gocardless.com/getting-started/billing-requests/overview/) for
  * how-to's, explanations and tutorials.
+ * <p class="notice">
+ * <strong>Important</strong>: All properties associated with `subscription_request` and
+ * `instalment_schedule_request` are only supported for ACH and PAD schemes.
+ * </p>
  */
 public class BillingRequest {
     private BillingRequest() {
@@ -23,7 +27,9 @@ public class BillingRequest {
     private List<Action> actions;
     private String createdAt;
     private Boolean fallbackEnabled;
+    private Boolean fallbackOccurred;
     private String id;
+    private InstalmentScheduleRequest instalmentScheduleRequest;
     private Links links;
     private MandateRequest mandateRequest;
     private Map<String, Object> metadata;
@@ -60,10 +66,24 @@ public class BillingRequest {
     }
 
     /**
+     * True if the billing request was completed with direct debit.
+     */
+    public Boolean getFallbackOccurred() {
+        return fallbackOccurred;
+    }
+
+    /**
      * Unique identifier, beginning with "BRQ".
      */
     public String getId() {
         return id;
+    }
+
+    /**
+     * Request for an instalment schedule
+     */
+    public InstalmentScheduleRequest getInstalmentScheduleRequest() {
+        return instalmentScheduleRequest;
     }
 
     public Links getLinks() {
@@ -375,6 +395,135 @@ public class BillingRequest {
         }
     }
 
+    /**
+     * Represents a instalment schedule request resource returned from the API.
+     *
+     * Request for an instalment schedule
+     */
+    public static class InstalmentScheduleRequest {
+        private InstalmentScheduleRequest() {
+            // blank to prevent instantiation
+        }
+
+        private Integer appFee;
+        private Currency currency;
+        private List<String> instalments;
+        private Links links;
+        private Map<String, Object> metadata;
+        private String name;
+        private String paymentReference;
+        private Boolean retryIfPossible;
+        private Integer totalAmount;
+
+        /**
+         * The amount to be deducted from each payment as an app fee, to be paid to the partner
+         * integration which created the subscription, in the lowest denomination for the currency
+         * (e.g. pence in GBP, cents in EUR).
+         */
+        public Integer getAppFee() {
+            return appFee;
+        }
+
+        /**
+         * [ISO 4217](http://en.wikipedia.org/wiki/ISO_4217#Active_codes) currency code. Currently
+         * "AUD", "CAD", "DKK", "EUR", "GBP", "NZD", "SEK" and "USD" are supported.
+         */
+        public Currency getCurrency() {
+            return currency;
+        }
+
+        /**
+         * instalments to be created. See [create (with
+         * dates)](#instalment-schedules-create-with-dates) and [create (with
+         * schedule)](#instalment-schedules-create-with-schedule) for more information on how to
+         * specify instalments.
+         */
+        public List<String> getInstalments() {
+            return instalments;
+        }
+
+        public Links getLinks() {
+            return links;
+        }
+
+        /**
+         * Key-value store of custom data. Up to 3 keys are permitted, with key names up to 50
+         * characters and values up to 500 characters.
+         */
+        public Map<String, Object> getMetadata() {
+            return metadata;
+        }
+
+        /**
+         * Name of the instalment schedule, up to 100 chars. This name will also be copied to the
+         * payments of the instalment schedule if you use schedule-based creation.
+         */
+        public String getName() {
+            return name;
+        }
+
+        /**
+         * An optional payment reference. This will be set as the reference on each payment created
+         * and will appear on your customer's bank statement. See the documentation for the [create
+         * payment endpoint](#payments-create-a-payment) for more details. <br />
+         */
+        public String getPaymentReference() {
+            return paymentReference;
+        }
+
+        /**
+         * On failure, automatically retry payments using [intelligent
+         * retries](#success-intelligent-retries). Default is `false`.
+         * <p class="notice">
+         * <strong>Important</strong>: To be able to use intelligent retries, Success+ needs to be
+         * enabled in [GoCardless dashboard](https://manage.gocardless.com/success-plus).
+         * </p>
+         */
+        public Boolean getRetryIfPossible() {
+            return retryIfPossible;
+        }
+
+        /**
+         * The total amount of the instalment schedule, defined as the sum of all individual
+         * payments, in the lowest denomination for the currency (e.g. pence in GBP, cents in EUR).
+         * If the requested payment amounts do not sum up correctly, a validation error will be
+         * returned.
+         */
+        public Integer getTotalAmount() {
+            return totalAmount;
+        }
+
+        public enum Currency {
+            @SerializedName("AUD")
+            AUD, @SerializedName("CAD")
+            CAD, @SerializedName("DKK")
+            DKK, @SerializedName("EUR")
+            EUR, @SerializedName("GBP")
+            GBP, @SerializedName("NZD")
+            NZD, @SerializedName("SEK")
+            SEK, @SerializedName("USD")
+            USD, @SerializedName("unknown")
+            UNKNOWN
+        }
+
+        public static class Links {
+            private Links() {
+                // blank to prevent instantiation
+            }
+
+            private String instalmentSchedule;
+
+            /**
+             * (Optional) ID of the [instalment_schedule](#core-endpoints-instalment-schedules) that
+             * was created from this instalment schedule request.
+             * 
+             */
+            public String getInstalmentSchedule() {
+                return instalmentSchedule;
+            }
+        }
+    }
+
     public static class Links {
         private Links() {
             // blank to prevent instantiation
@@ -385,6 +534,8 @@ public class BillingRequest {
         private String customer;
         private String customerBankAccount;
         private String customerBillingDetail;
+        private String instalmentScheduleRequest;
+        private String instalmentScheduleRequestInstalmentSchedule;
         private String mandateRequest;
         private String mandateRequestMandate;
         private String organisation;
@@ -392,6 +543,7 @@ public class BillingRequest {
         private String paymentRequest;
         private String paymentRequestPayment;
         private String subscriptionRequest;
+        private String subscriptionRequestSubscription;
 
         /**
          * (Optional) ID of the [bank authorisation](#billing-requests-bank-authorisations) that was
@@ -428,6 +580,21 @@ public class BillingRequest {
          */
         public String getCustomerBillingDetail() {
             return customerBillingDetail;
+        }
+
+        /**
+         * (Optional) ID of the associated instalment schedule request
+         */
+        public String getInstalmentScheduleRequest() {
+            return instalmentScheduleRequest;
+        }
+
+        /**
+         * (Optional) ID of the [instalment_schedule](#core-endpoints-instalment-schedules) that was
+         * created from this instalment schedule request.
+         */
+        public String getInstalmentScheduleRequestInstalmentSchedule() {
+            return instalmentScheduleRequestInstalmentSchedule;
         }
 
         /**
@@ -480,6 +647,14 @@ public class BillingRequest {
         public String getSubscriptionRequest() {
             return subscriptionRequest;
         }
+
+        /**
+         * (Optional) ID of the [subscription](#core-endpoints-subscriptions) that was created from
+         * this subscription request.
+         */
+        public String getSubscriptionRequestSubscription() {
+            return subscriptionRequestSubscription;
+        }
     }
 
     /**
@@ -519,8 +694,9 @@ public class BillingRequest {
 
         /**
          * This attribute represents the authorisation type between the payer and merchant. It can
-         * be set to one-off, recurring or standing for ACH scheme. And single, recurring and
-         * sporadic for PAD scheme.
+         * be set to `one_off`, `recurring` or `standing` for ACH scheme. And `single`, `recurring`
+         * and `sporadic` for PAD scheme. _Note:_ This is only supported for ACH and PAD schemes.
+         * 
          */
         public String getConsentType() {
             return consentType;
@@ -640,6 +816,7 @@ public class BillingRequest {
 
             private String endDate;
             private Integer maxAmountPerPayment;
+            private String paymentMethod;
             private List<PeriodicLimit> periodicLimits;
             private String startDate;
 
@@ -661,6 +838,15 @@ public class BillingRequest {
              */
             public Integer getMaxAmountPerPayment() {
                 return maxAmountPerPayment;
+            }
+
+            /**
+             * A constraint where you can specify info (free text string) about how payments are
+             * calculated. _Note:_ This is only supported for ACH and PAD schemes.
+             * 
+             */
+            public String getPaymentMethod() {
+                return paymentMethod;
             }
 
             /**
@@ -1302,10 +1488,12 @@ public class BillingRequest {
         private Integer dayOfMonth;
         private Integer interval;
         private IntervalUnit intervalUnit;
+        private Links links;
         private Map<String, Object> metadata;
         private Month month;
         private String name;
         private String paymentReference;
+        private Boolean retryIfPossible;
         private String startDate;
 
         /**
@@ -1362,6 +1550,10 @@ public class BillingRequest {
             return intervalUnit;
         }
 
+        public Links getLinks() {
+            return links;
+        }
+
         /**
          * Key-value store of custom data. Up to 3 keys are permitted, with key names up to 50
          * characters and values up to 500 characters.
@@ -1391,21 +1583,30 @@ public class BillingRequest {
          * An optional payment reference. This will be set as the reference on each payment created
          * and will appear on your customer's bank statement. See the documentation for the [create
          * payment endpoint](#payments-create-a-payment) for more details. <br />
-         * <p class="restricted-notice">
-         * <strong>Restricted</strong>: You need your own Service User Number to specify a payment
-         * reference for Bacs payments.
-         * </p>
          */
         public String getPaymentReference() {
             return paymentReference;
         }
 
         /**
-         * The date on which the first payment should be charged. Must be on or after the
-         * [mandate](#core-endpoints-mandates)'s `next_possible_charge_date`. When left blank and
-         * `month` or `day_of_month` are provided, this will be set to the date of the first
-         * payment. If created without `month` or `day_of_month` this will be set as the mandate's
-         * `next_possible_charge_date`
+         * On failure, automatically retry payments using [intelligent
+         * retries](#success-intelligent-retries). Default is `false`.
+         * <p class="notice">
+         * <strong>Important</strong>: To be able to use intelligent retries, Success+ needs to be
+         * enabled in [GoCardless dashboard](https://manage.gocardless.com/success-plus).
+         * </p>
+         */
+        public Boolean getRetryIfPossible() {
+            return retryIfPossible;
+        }
+
+        /**
+         * The date on which the first payment should be charged. If fulfilled after this date, this
+         * will be set as the mandate's `next_possible_charge_date`. When left blank and `month` or
+         * `day_of_month` are provided, this will be set to the date of the first payment. If
+         * created without `month` or `day_of_month` this will be set as the mandate's
+         * `next_possible_charge_date`.
+         * 
          */
         public String getStartDate() {
             return startDate;
@@ -1434,6 +1635,23 @@ public class BillingRequest {
             NOVEMBER, @SerializedName("december")
             DECEMBER, @SerializedName("unknown")
             UNKNOWN
+        }
+
+        public static class Links {
+            private Links() {
+                // blank to prevent instantiation
+            }
+
+            private String subscription;
+
+            /**
+             * (Optional) ID of the [subscription](#core-endpoints-subscriptions) that was created
+             * from this subscription request.
+             * 
+             */
+            public String getSubscription() {
+                return subscription;
+            }
         }
     }
 }

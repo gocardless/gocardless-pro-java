@@ -59,6 +59,7 @@ public class BillingRequestFlowService {
         private String redirectUri;
         private Boolean showRedirectButtons;
         private Boolean showSuccessRedirectButton;
+        private Boolean skipSuccessScreen;
 
         /**
          * (Experimental feature) Fulfil the Billing Request on completion of the flow (true by
@@ -370,6 +371,15 @@ public class BillingRequestFlowService {
         public BillingRequestFlowCreateRequest withShowSuccessRedirectButton(
                 Boolean showSuccessRedirectButton) {
             this.showSuccessRedirectButton = showSuccessRedirectButton;
+            return this;
+        }
+
+        /**
+         * If true, the payer will not be redirected to the success screen after completing the
+         * flow. A redirect_uri needs to be provided for this parameter to be taken into account.
+         */
+        public BillingRequestFlowCreateRequest withSkipSuccessScreen(Boolean skipSuccessScreen) {
+            this.skipSuccessScreen = skipSuccessScreen;
             return this;
         }
 
