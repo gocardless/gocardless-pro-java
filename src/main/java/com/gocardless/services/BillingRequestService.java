@@ -232,7 +232,7 @@ public class BillingRequestService {
          * specify instalments.
          */
         public BillingRequestCreateRequest withInstalmentScheduleRequestInstalments(
-                List<String> instalments) {
+                Map<String, String> instalments) {
             if (instalmentScheduleRequest == null) {
                 instalmentScheduleRequest = new InstalmentScheduleRequest();
             }
@@ -893,7 +893,7 @@ public class BillingRequestService {
         public static class InstalmentScheduleRequest {
             private Integer appFee;
             private Currency currency;
-            private List<String> instalments;
+            private Map<String, String> instalments;
             private Map<String, String> metadata;
             private String name;
             private String paymentReference;
@@ -925,7 +925,7 @@ public class BillingRequestService {
              * schedule)](#instalment-schedules-create-with-schedule) for more information on how to
              * specify instalments.
              */
-            public InstalmentScheduleRequest withInstalments(List<String> instalments) {
+            public InstalmentScheduleRequest withInstalments(Map<String, String> instalments) {
                 this.instalments = instalments;
                 return this;
             }

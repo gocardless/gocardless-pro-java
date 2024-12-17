@@ -153,7 +153,7 @@ public class InstalmentScheduleService {
 
         /**
          * An explicit array of instalment payments, each specifying at least an `amount` and
-         * `charge_date`.
+         * `charge_date`. See [create (with dates)](#instalment-schedules-create-with-dates)
          */
         public InstalmentScheduleCreateWithDatesRequest withInstalments(
                 List<Instalments> instalments) {
@@ -163,7 +163,7 @@ public class InstalmentScheduleService {
 
         /**
          * An explicit array of instalment payments, each specifying at least an `amount` and
-         * `charge_date`.
+         * `charge_date`. See [create (with dates)](#instalment-schedules-create-with-dates)
          */
         public InstalmentScheduleCreateWithDatesRequest withInstalments(Instalments instalments) {
             if (this.instalments == null) {
@@ -433,7 +433,8 @@ public class InstalmentScheduleService {
 
         /**
          * Frequency of the payments you want to create, together with an array of payment amounts
-         * to be collected, with a specified start date for the first payment.
+         * to be collected, with a specified start date for the first payment. See [create (with
+         * schedule)](#instalment-schedules-create-with-schedule)
          * 
          */
         public InstalmentScheduleCreateWithScheduleRequest withInstalments(

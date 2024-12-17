@@ -407,7 +407,7 @@ public class BillingRequest {
 
         private Integer appFee;
         private Currency currency;
-        private List<String> instalments;
+        private Map<String, Object> instalments;
         private Links links;
         private Map<String, Object> metadata;
         private String name;
@@ -438,7 +438,7 @@ public class BillingRequest {
          * schedule)](#instalment-schedules-create-with-schedule) for more information on how to
          * specify instalments.
          */
-        public List<String> getInstalments() {
+        public Map<String, Object> getInstalments() {
             return instalments;
         }
 
