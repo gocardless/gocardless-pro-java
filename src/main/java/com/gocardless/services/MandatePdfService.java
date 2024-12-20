@@ -246,6 +246,18 @@ public class MandatePdfService {
         }
 
         /**
+         * ID of an existing [creditor](#core-endpoints-creditors). Only required if your account
+         * manages multiple creditors.
+         */
+        public MandatePdfCreateRequest withLinksCreditor(String creditor) {
+            if (links == null) {
+                links = new Links();
+            }
+            links.withCreditor(creditor);
+            return this;
+        }
+
+        /**
          * ID of an existing [mandate](#core-endpoints-mandates) to build the PDF from. The
          * customer's bank details will be censored in the generated PDF. No other parameters may be
          * provided alongside this.
@@ -391,7 +403,17 @@ public class MandatePdfService {
         }
 
         public static class Links {
+            private String creditor;
             private String mandate;
+
+            /**
+             * ID of an existing [creditor](#core-endpoints-creditors). Only required if your
+             * account manages multiple creditors.
+             */
+            public Links withCreditor(String creditor) {
+                this.creditor = creditor;
+                return this;
+            }
 
             /**
              * ID of an existing [mandate](#core-endpoints-mandates) to build the PDF from. The
