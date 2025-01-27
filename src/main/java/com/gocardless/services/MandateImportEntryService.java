@@ -890,6 +890,7 @@ public class MandateImportEntryService {
     public static final class MandateImportEntryListRequest<S>
             extends ListRequest<S, MandateImportEntry> {
         private String mandateImport;
+        private Status status;
 
         /**
          * Cursor pointing to the start of the desired set.
@@ -923,6 +924,20 @@ public class MandateImportEntryService {
             return this;
         }
 
+        /**
+         * One of:
+         * <ul>
+         * <li>`sucessfully_processed`: the entry has been imported and the associated records
+         * created.</li>
+         * <li>`unsuccessfully_processed`: the entry could not be processed due to an error, see the
+         * 'processing_errors' value</li>
+         * </ul>
+         */
+        public MandateImportEntryListRequest<S> withStatus(Status status) {
+            this.status = status;
+            return this;
+        }
+
         private MandateImportEntryListRequest(HttpClient httpClient,
                 ListRequestExecutor<S, MandateImportEntry> executor) {
             super(httpClient, executor);
@@ -940,6 +955,9 @@ public class MandateImportEntryService {
             if (mandateImport != null) {
                 params.put("mandate_import", mandateImport);
             }
+            if (status != null) {
+                params.put("status", status);
+            }
             return params.build();
         }
 
@@ -956,6 +974,18 @@ public class MandateImportEntryService {
         @Override
         protected TypeToken<List<MandateImportEntry>> getTypeToken() {
             return new TypeToken<List<MandateImportEntry>>() {};
+        }
+
+        public enum Status {
+            @SerializedName("successfully_processed")
+            SUCCESSFULLY_PROCESSED, @SerializedName("unsuccessfully_processed")
+            UNSUCCESSFULLY_PROCESSED, @SerializedName("unknown")
+            UNKNOWN;
+
+            @Override
+            public String toString() {
+                return name().toLowerCase();
+            }
         }
     }
 }
