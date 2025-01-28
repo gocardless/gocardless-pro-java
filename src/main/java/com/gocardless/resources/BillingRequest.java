@@ -406,8 +406,8 @@ public class BillingRequest {
         }
 
         private Integer appFee;
-        private Currency currency;
-        private List<String> instalments;
+        private String currency;
+        private Map<String, Object> instalments;
         private Links links;
         private Map<String, Object> metadata;
         private String name;
@@ -426,9 +426,9 @@ public class BillingRequest {
 
         /**
          * [ISO 4217](http://en.wikipedia.org/wiki/ISO_4217#Active_codes) currency code. Currently
-         * "AUD", "CAD", "DKK", "EUR", "GBP", "NZD", "SEK" and "USD" are supported.
+         * "USD" and "CAD" are supported.
          */
-        public Currency getCurrency() {
+        public String getCurrency() {
             return currency;
         }
 
@@ -438,7 +438,7 @@ public class BillingRequest {
          * schedule)](#instalment-schedules-create-with-schedule) for more information on how to
          * specify instalments.
          */
-        public List<String> getInstalments() {
+        public Map<String, Object> getInstalments() {
             return instalments;
         }
 
@@ -491,19 +491,6 @@ public class BillingRequest {
          */
         public Integer getTotalAmount() {
             return totalAmount;
-        }
-
-        public enum Currency {
-            @SerializedName("AUD")
-            AUD, @SerializedName("CAD")
-            CAD, @SerializedName("DKK")
-            DKK, @SerializedName("EUR")
-            EUR, @SerializedName("GBP")
-            GBP, @SerializedName("NZD")
-            NZD, @SerializedName("SEK")
-            SEK, @SerializedName("USD")
-            USD, @SerializedName("unknown")
-            UNKNOWN
         }
 
         public static class Links {
@@ -1521,7 +1508,7 @@ public class BillingRequest {
 
         /**
          * [ISO 4217](http://en.wikipedia.org/wiki/ISO_4217#Active_codes) currency code. Currently
-         * "AUD", "CAD", "DKK", "EUR", "GBP", "NZD", "SEK" and "USD" are supported.
+         * "USD" and "CAD" are supported.
          */
         public String getCurrency() {
             return currency;

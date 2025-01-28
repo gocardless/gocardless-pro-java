@@ -1,5 +1,7 @@
 package com.gocardless.resources;
 
+import java.util.Map;
+
 /**
  * Represents a mandate import entry resource returned from the API.
  *
@@ -33,6 +35,7 @@ public class MandateImportEntry {
 
     private String createdAt;
     private Links links;
+    private Map<String, Object> processingErrors;
     private String recordIdentifier;
 
     /**
@@ -47,6 +50,13 @@ public class MandateImportEntry {
      */
     public Links getLinks() {
         return links;
+    }
+
+    /**
+     * Per-resource processing errors
+     */
+    public Map<String, Object> getProcessingErrors() {
+        return processingErrors;
     }
 
     /**
