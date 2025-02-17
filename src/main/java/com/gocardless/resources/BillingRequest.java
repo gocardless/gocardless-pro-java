@@ -663,6 +663,7 @@ public class BillingRequest {
         private Map<String, Object> metadata;
         private Boolean payerRequestedDualSignature;
         private String scheme;
+        private Boolean sweeping;
         private Verify verify;
 
         /**
@@ -744,6 +745,15 @@ public class BillingRequest {
          */
         public String getScheme() {
             return scheme;
+        }
+
+        /**
+         * If true, this billing request would be used to set up a mandate solely for moving (or
+         * sweeping) money from one account owned by the payer to another account that the payer
+         * also owns. This is required for Faster Payments
+         */
+        public Boolean getSweeping() {
+            return sweeping;
         }
 
         /**
