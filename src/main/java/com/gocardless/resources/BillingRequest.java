@@ -408,6 +408,8 @@ public class BillingRequest {
         private Integer appFee;
         private String currency;
         private Map<String, Object> instalments;
+        private List<InstalmentsWithDate> instalmentsWithDates;
+        private InstalmentsWithSchedule instalmentsWithSchedule;
         private Links links;
         private Map<String, Object> metadata;
         private String name;
@@ -440,6 +442,24 @@ public class BillingRequest {
          */
         public Map<String, Object> getInstalments() {
             return instalments;
+        }
+
+        /**
+         * An explicit array of instalment payments, each specifying at least an `amount` and
+         * `charge_date`. See [create (with dates)](#instalment-schedules-create-with-dates)
+         */
+        public List<InstalmentsWithDate> getInstalmentsWithDates() {
+            return instalmentsWithDates;
+        }
+
+        /**
+         * Frequency of the payments you want to create, together with an array of payment amounts
+         * to be collected, with a specified start date for the first payment. See [create (with
+         * schedule)](#instalment-schedules-create-with-schedule)
+         * 
+         */
+        public InstalmentsWithSchedule getInstalmentsWithSchedule() {
+            return instalmentsWithSchedule;
         }
 
         public Links getLinks() {
@@ -491,6 +511,107 @@ public class BillingRequest {
          */
         public Integer getTotalAmount() {
             return totalAmount;
+        }
+
+        public static class InstalmentsWithDate {
+            private InstalmentsWithDate() {
+                // blank to prevent instantiation
+            }
+
+            private Integer amount;
+            private String chargeDate;
+            private String description;
+
+            /**
+             * Amount, in the lowest denomination for the currency (e.g. pence in GBP, cents in
+             * EUR).
+             */
+            public Integer getAmount() {
+                return amount;
+            }
+
+            /**
+             * A future date on which the payment should be collected. If the date is before the
+             * next_possible_charge_date on the [mandate](#core-endpoints-mandates), it will be
+             * automatically rolled forwards to that date.
+             */
+            public String getChargeDate() {
+                return chargeDate;
+            }
+
+            /**
+             * A human-readable description of the payment. This will be included in the
+             * notification email GoCardless sends to your customer if your organisation does not
+             * send its own notifications (see [compliance
+             * requirements](#appendix-compliance-requirements)).
+             */
+            public String getDescription() {
+                return description;
+            }
+        }
+
+        /**
+         * Represents a instalments with schedule resource returned from the API.
+         *
+         * Frequency of the payments you want to create, together with an array of payment amounts
+         * to be collected, with a specified start date for the first payment. See [create (with
+         * schedule)](#instalment-schedules-create-with-schedule)
+         * 
+         */
+        public static class InstalmentsWithSchedule {
+            private InstalmentsWithSchedule() {
+                // blank to prevent instantiation
+            }
+
+            private List<Integer> amounts;
+            private Integer interval;
+            private IntervalUnit intervalUnit;
+            private String startDate;
+
+            /**
+             * List of amounts of each instalment, in the lowest denomination for the currency (e.g.
+             * cents in USD).
+             * 
+             */
+            public List<Integer> getAmounts() {
+                return amounts;
+            }
+
+            /**
+             * Number of `interval_units` between charge dates. Must be greater than or equal to
+             * `1`.
+             * 
+             */
+            public Integer getInterval() {
+                return interval;
+            }
+
+            /**
+             * The unit of time between customer charge dates. One of `weekly`, `monthly` or
+             * `yearly`.
+             */
+            public IntervalUnit getIntervalUnit() {
+                return intervalUnit;
+            }
+
+            /**
+             * The date on which the first payment should be charged. Must be on or after the
+             * [mandate](#core-endpoints-mandates)'s `next_possible_charge_date`. When left blank
+             * and `month` or `day_of_month` are provided, this will be set to the date of the first
+             * payment. If created without `month` or `day_of_month` this will be set as the
+             * mandate's `next_possible_charge_date`
+             */
+            public String getStartDate() {
+                return startDate;
+            }
+
+            public enum IntervalUnit {
+                @SerializedName("weekly")
+                WEEKLY, @SerializedName("monthly")
+                MONTHLY, @SerializedName("yearly")
+                YEARLY, @SerializedName("unknown")
+                UNKNOWN
+            }
         }
 
         public static class Links {
