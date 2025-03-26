@@ -76,7 +76,8 @@ public class Export {
         ORGANISATION_AUTHORISATIONS, @SerializedName("gc_invalid_authorisation_requests")
         GC_INVALID_AUTHORISATION_REQUESTS, @SerializedName("partner_fees")
         PARTNER_FEES, @SerializedName("payments_import_template")
-        PAYMENTS_IMPORT_TEMPLATE, @SerializedName("unknown")
+        PAYMENTS_IMPORT_TEMPLATE, @SerializedName("payment_account_statement")
+        PAYMENT_ACCOUNT_STATEMENT, @SerializedName("unknown")
         UNKNOWN
     }
 }

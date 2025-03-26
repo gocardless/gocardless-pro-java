@@ -14,6 +14,7 @@ import okhttp3.OkHttpClient;
  */
 public class GoCardlessClient {
     private final HttpClient httpClient;
+    private final BalanceService balances;
     private final BankAuthorisationService bankAuthorisations;
     private final BankDetailsLookupService bankDetailsLookups;
     private final BillingRequestService billingRequests;
@@ -171,6 +172,7 @@ public class GoCardlessClient {
 
     private GoCardlessClient(HttpClient httpClient) {
         this.httpClient = httpClient;
+        this.balances = new BalanceService(httpClient);
         this.bankAuthorisations = new BankAuthorisationService(httpClient);
         this.bankDetailsLookups = new BankDetailsLookupService(httpClient);
         this.billingRequests = new BillingRequestService(httpClient);
@@ -207,6 +209,13 @@ public class GoCardlessClient {
         this.transferredMandates = new TransferredMandateService(httpClient);
         this.verificationDetails = new VerificationDetailService(httpClient);
         this.webhooks = new WebhookService(httpClient);
+    }
+
+    /**
+     * A service class for working with balance resources.
+     */
+    public BalanceService balances() {
+        return balances;
     }
 
     /**

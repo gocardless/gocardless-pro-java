@@ -356,6 +356,19 @@ public class BillingRequestService {
         }
 
         /**
+         * If true, this billing request would be used to set up a mandate solely for moving (or
+         * sweeping) money from one account owned by the payer to another account that the payer
+         * also owns. This is required for Faster Payments
+         */
+        public BillingRequestCreateRequest withMandateRequestSweeping(Boolean sweeping) {
+            if (mandateRequest == null) {
+                mandateRequest = new MandateRequest();
+            }
+            mandateRequest.withSweeping(sweeping);
+            return this;
+        }
+
+        /**
          * Verification preference for the mandate. One of:
          * <ul>
          * <li>`minimum`: only verify if absolutely required, such as when part of scheme rules</li>
@@ -1007,6 +1020,7 @@ public class BillingRequestService {
             private Map<String, String> metadata;
             private String reference;
             private String scheme;
+            private Boolean sweeping;
             private Verify verify;
 
             /**
@@ -1079,6 +1093,16 @@ public class BillingRequestService {
              */
             public MandateRequest withScheme(String scheme) {
                 this.scheme = scheme;
+                return this;
+            }
+
+            /**
+             * If true, this billing request would be used to set up a mandate solely for moving (or
+             * sweeping) money from one account owned by the payer to another account that the payer
+             * also owns. This is required for Faster Payments
+             */
+            public MandateRequest withSweeping(Boolean sweeping) {
+                this.sweeping = sweeping;
                 return this;
             }
 
@@ -1728,6 +1752,20 @@ public class BillingRequestService {
         }
 
         /**
+         * If true, this billing request would be used to set up a mandate solely for moving (or
+         * sweeping) money from one account owned by the payer to another account that the payer
+         * also owns. This is required for Faster Payments
+         */
+        public BillingRequestCreateWithInstalmentsWithDatesRequest withMandateRequestSweeping(
+                Boolean sweeping) {
+            if (mandateRequest == null) {
+                mandateRequest = new MandateRequest();
+            }
+            mandateRequest.withSweeping(sweeping);
+            return this;
+        }
+
+        /**
          * Verification preference for the mandate. One of:
          * <ul>
          * <li>`minimum`: only verify if absolutely required, such as when part of scheme rules</li>
@@ -2141,6 +2179,7 @@ public class BillingRequestService {
             private Map<String, String> metadata;
             private String reference;
             private String scheme;
+            private Boolean sweeping;
             private Verify verify;
 
             /**
@@ -2203,6 +2242,16 @@ public class BillingRequestService {
              */
             public MandateRequest withScheme(String scheme) {
                 this.scheme = scheme;
+                return this;
+            }
+
+            /**
+             * If true, this billing request would be used to set up a mandate solely for moving (or
+             * sweeping) money from one account owned by the payer to another account that the payer
+             * also owns. This is required for Faster Payments
+             */
+            public MandateRequest withSweeping(Boolean sweeping) {
+                this.sweeping = sweeping;
                 return this;
             }
 
@@ -2669,6 +2718,20 @@ public class BillingRequestService {
         }
 
         /**
+         * If true, this billing request would be used to set up a mandate solely for moving (or
+         * sweeping) money from one account owned by the payer to another account that the payer
+         * also owns. This is required for Faster Payments
+         */
+        public BillingRequestCreateWithInstalmentsWithScheduleRequest withMandateRequestSweeping(
+                Boolean sweeping) {
+            if (mandateRequest == null) {
+                mandateRequest = new MandateRequest();
+            }
+            mandateRequest.withSweeping(sweeping);
+            return this;
+        }
+
+        /**
          * Verification preference for the mandate. One of:
          * <ul>
          * <li>`minimum`: only verify if absolutely required, such as when part of scheme rules</li>
@@ -3112,6 +3175,7 @@ public class BillingRequestService {
             private Map<String, String> metadata;
             private String reference;
             private String scheme;
+            private Boolean sweeping;
             private Verify verify;
 
             /**
@@ -3174,6 +3238,16 @@ public class BillingRequestService {
              */
             public MandateRequest withScheme(String scheme) {
                 this.scheme = scheme;
+                return this;
+            }
+
+            /**
+             * If true, this billing request would be used to set up a mandate solely for moving (or
+             * sweeping) money from one account owned by the payer to another account that the payer
+             * also owns. This is required for Faster Payments
+             */
+            public MandateRequest withSweeping(Boolean sweeping) {
+                this.sweeping = sweeping;
                 return this;
             }
 
