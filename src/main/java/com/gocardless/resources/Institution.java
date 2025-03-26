@@ -1,5 +1,7 @@
 package com.gocardless.resources;
 
+import com.google.gson.annotations.SerializedName;
+
 /**
  * Represents a institution resource returned from the API.
  *
@@ -20,6 +22,7 @@ public class Institution {
     private String id;
     private String logoUrl;
     private String name;
+    private Status status;
 
     /**
      * Flag to show if selecting this institution in the select_institution action can auto-complete
@@ -65,5 +68,20 @@ public class Institution {
      */
     public String getName() {
         return name;
+    }
+
+    /**
+     * The status of the institution
+     */
+    public Status getStatus() {
+        return status;
+    }
+
+    public enum Status {
+        @SerializedName("enabled")
+        ENABLED, @SerializedName("disabled")
+        DISABLED, @SerializedName("temporarily_disabled")
+        TEMPORARILY_DISABLED, @SerializedName("unknown")
+        UNKNOWN
     }
 }
