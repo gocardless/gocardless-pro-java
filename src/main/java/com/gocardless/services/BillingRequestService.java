@@ -37,32 +37,12 @@ public class BillingRequestService {
 
     /**
      * <p class="notice">
-     * <strong>Important</strong>: All properties associated with `subscription_request` are only
-     * supported for ACH and PAD schemes.
+     * <strong>Important</strong>: All properties associated with `subscription_request` and
+     * `instalment_schedule_request` are only supported for ACH and PAD schemes.
      * </p>
      */
     public BillingRequestCreateRequest create() {
         return new BillingRequestCreateRequest(httpClient);
-    }
-
-    /**
-     * <p class="notice">
-     * <strong>Important</strong>: All properties associated with `instalment_schedule_request` are
-     * only supported for ACH and PAD schemes.
-     * </p>
-     */
-    public BillingRequestCreateWithInstalmentsWithDatesRequest createWithInstalmentsWithDates() {
-        return new BillingRequestCreateWithInstalmentsWithDatesRequest(httpClient);
-    }
-
-    /**
-     * <p class="notice">
-     * <strong>Important</strong>: All properties associated with `instalment_schedule_request` are
-     * only supported for ACH and PAD schemes.
-     * </p>
-     */
-    public BillingRequestCreateWithInstalmentsWithScheduleRequest createWithInstalmentsWithSchedule() {
-        return new BillingRequestCreateWithInstalmentsWithScheduleRequest(httpClient);
     }
 
     /**
@@ -185,13 +165,14 @@ public class BillingRequestService {
      * Request class for {@link BillingRequestService#create }.
      *
      * <p class="notice">
-     * <strong>Important</strong>: All properties associated with `subscription_request` are only
-     * supported for ACH and PAD schemes.
+     * <strong>Important</strong>: All properties associated with `subscription_request` and
+     * `instalment_schedule_request` are only supported for ACH and PAD schemes.
      * </p>
      */
     public static final class BillingRequestCreateRequest
             extends IdempotentPostRequest<BillingRequest> {
         private Boolean fallbackEnabled;
+        private InstalmentScheduleRequest instalmentScheduleRequest;
         private Links links;
         private MandateRequest mandateRequest;
         private Map<String, String> metadata;
@@ -209,6 +190,136 @@ public class BillingRequestService {
          */
         public BillingRequestCreateRequest withFallbackEnabled(Boolean fallbackEnabled) {
             this.fallbackEnabled = fallbackEnabled;
+            return this;
+        }
+
+        public BillingRequestCreateRequest withInstalmentScheduleRequest(
+                InstalmentScheduleRequest instalmentScheduleRequest) {
+            this.instalmentScheduleRequest = instalmentScheduleRequest;
+            return this;
+        }
+
+        /**
+         * The amount to be deducted from each payment as an app fee, to be paid to the partner
+         * integration which created the subscription, in the lowest denomination for the currency
+         * (e.g. pence in GBP, cents in EUR).
+         */
+        public BillingRequestCreateRequest withInstalmentScheduleRequestAppFee(Integer appFee) {
+            if (instalmentScheduleRequest == null) {
+                instalmentScheduleRequest = new InstalmentScheduleRequest();
+            }
+            instalmentScheduleRequest.withAppFee(appFee);
+            return this;
+        }
+
+        /**
+         * [ISO 4217](http://en.wikipedia.org/wiki/ISO_4217#Active_codes) currency code. Currently
+         * "USD" and "CAD" are supported.
+         */
+        public BillingRequestCreateRequest withInstalmentScheduleRequestCurrency(String currency) {
+            if (instalmentScheduleRequest == null) {
+                instalmentScheduleRequest = new InstalmentScheduleRequest();
+            }
+            instalmentScheduleRequest.withCurrency(currency);
+            return this;
+        }
+
+        /**
+         * An explicit array of instalment payments, each specifying at least an `amount` and
+         * `charge_date`. See [create (with dates)](#instalment-schedules-create-with-dates)
+         */
+        public BillingRequestCreateRequest withInstalmentScheduleRequestInstalmentsWithDates(
+                List<InstalmentsWithDates> instalmentsWithDates) {
+            if (instalmentScheduleRequest == null) {
+                instalmentScheduleRequest = new InstalmentScheduleRequest();
+            }
+            instalmentScheduleRequest.withInstalmentsWithDates(instalmentsWithDates);
+            return this;
+        }
+
+        /**
+         * Frequency of the payments you want to create, together with an array of payment amounts
+         * to be collected, with a specified start date for the first payment. See [create (with
+         * schedule)](#instalment-schedules-create-with-schedule)
+         * 
+         */
+        public BillingRequestCreateRequest withInstalmentScheduleRequestInstalmentsWithSchedule(
+                InstalmentsWithSchedule instalmentsWithSchedule) {
+            if (instalmentScheduleRequest == null) {
+                instalmentScheduleRequest = new InstalmentScheduleRequest();
+            }
+            instalmentScheduleRequest.withInstalmentsWithSchedule(instalmentsWithSchedule);
+            return this;
+        }
+
+        /**
+         * Key-value store of custom data. Up to 3 keys are permitted, with key names up to 50
+         * characters and values up to 500 characters.
+         */
+        public BillingRequestCreateRequest withInstalmentScheduleRequestMetadata(
+                Map<String, String> metadata) {
+            if (instalmentScheduleRequest == null) {
+                instalmentScheduleRequest = new InstalmentScheduleRequest();
+            }
+            instalmentScheduleRequest.withMetadata(metadata);
+            return this;
+        }
+
+        /**
+         * Name of the instalment schedule, up to 100 chars. This name will also be copied to the
+         * payments of the instalment schedule if you use schedule-based creation.
+         */
+        public BillingRequestCreateRequest withInstalmentScheduleRequestName(String name) {
+            if (instalmentScheduleRequest == null) {
+                instalmentScheduleRequest = new InstalmentScheduleRequest();
+            }
+            instalmentScheduleRequest.withName(name);
+            return this;
+        }
+
+        /**
+         * An optional payment reference. This will be set as the reference on each payment created
+         * and will appear on your customer's bank statement. See the documentation for the [create
+         * payment endpoint](#payments-create-a-payment) for more details. <br />
+         */
+        public BillingRequestCreateRequest withInstalmentScheduleRequestPaymentReference(
+                String paymentReference) {
+            if (instalmentScheduleRequest == null) {
+                instalmentScheduleRequest = new InstalmentScheduleRequest();
+            }
+            instalmentScheduleRequest.withPaymentReference(paymentReference);
+            return this;
+        }
+
+        /**
+         * On failure, automatically retry payments using [intelligent
+         * retries](#success-intelligent-retries). Default is `false`.
+         * <p class="notice">
+         * <strong>Important</strong>: To be able to use intelligent retries, Success+ needs to be
+         * enabled in [GoCardless dashboard](https://manage.gocardless.com/success-plus).
+         * </p>
+         */
+        public BillingRequestCreateRequest withInstalmentScheduleRequestRetryIfPossible(
+                Boolean retryIfPossible) {
+            if (instalmentScheduleRequest == null) {
+                instalmentScheduleRequest = new InstalmentScheduleRequest();
+            }
+            instalmentScheduleRequest.withRetryIfPossible(retryIfPossible);
+            return this;
+        }
+
+        /**
+         * The total amount of the instalment schedule, defined as the sum of all individual
+         * payments, in the lowest denomination for the currency (e.g. pence in GBP, cents in EUR).
+         * If the requested payment amounts do not sum up correctly, a validation error will be
+         * returned.
+         */
+        public BillingRequestCreateRequest withInstalmentScheduleRequestTotalAmount(
+                Integer totalAmount) {
+            if (instalmentScheduleRequest == null) {
+                instalmentScheduleRequest = new InstalmentScheduleRequest();
+            }
+            instalmentScheduleRequest.withTotalAmount(totalAmount);
             return this;
         }
 
@@ -276,6 +387,20 @@ public class BillingRequestService {
                 mandateRequest = new MandateRequest();
             }
             mandateRequest.withAuthorisationSource(authorisationSource);
+            return this;
+        }
+
+        /**
+         * This attribute represents the authorisation type between the payer and merchant. It can
+         * be set to `one_off`, `recurring` or `standing` for ACH scheme. And `single`, `recurring`
+         * and `sporadic` for PAD scheme. _Note:_ This is only supported for ACH and PAD schemes.
+         * 
+         */
+        public BillingRequestCreateRequest withMandateRequestConsentType(String consentType) {
+            if (mandateRequest == null) {
+                mandateRequest = new MandateRequest();
+            }
+            mandateRequest.withConsentType(consentType);
             return this;
         }
 
@@ -804,6 +929,239 @@ public class BillingRequestService {
             }
         }
 
+        public static class InstalmentsWithDates {
+            private Integer amount;
+            private String chargeDate;
+            private String description;
+
+            /**
+             * Amount, in the lowest denomination for the currency (e.g. pence in GBP, cents in
+             * EUR).
+             */
+            public InstalmentsWithDates withAmount(Integer amount) {
+                this.amount = amount;
+                return this;
+            }
+
+            /**
+             * A future date on which the payment should be collected. If the date is before the
+             * next_possible_charge_date on the [mandate](#core-endpoints-mandates), it will be
+             * automatically rolled forwards to that date.
+             */
+            public InstalmentsWithDates withChargeDate(String chargeDate) {
+                this.chargeDate = chargeDate;
+                return this;
+            }
+
+            /**
+             * A human-readable description of the payment. This will be included in the
+             * notification email GoCardless sends to your customer if your organisation does not
+             * send its own notifications (see [compliance
+             * requirements](#appendix-compliance-requirements)).
+             */
+            public InstalmentsWithDates withDescription(String description) {
+                this.description = description;
+                return this;
+            }
+
+            public Map<String, Object> getQueryParams() {
+                ImmutableMap.Builder<String, Object> params = ImmutableMap.builder();
+                if (amount != null) {
+                    params.put("instalments_with_dates[amount]", amount);
+                }
+                if (chargeDate != null) {
+                    params.put("instalments_with_dates[charge_date]", chargeDate);
+                }
+                if (description != null) {
+                    params.put("instalments_with_dates[description]", description);
+                }
+                return params.build();
+            }
+        }
+
+        public static class InstalmentsWithSchedule {
+            private List<Integer> amounts;
+            private Integer interval;
+            private IntervalUnit intervalUnit;
+            private String startDate;
+
+            /**
+             * List of amounts of each instalment, in the lowest denomination for the currency (e.g.
+             * cents in USD).
+             * 
+             */
+            public InstalmentsWithSchedule withAmounts(List<Integer> amounts) {
+                this.amounts = amounts;
+                return this;
+            }
+
+            /**
+             * Number of `interval_units` between charge dates. Must be greater than or equal to
+             * `1`.
+             * 
+             */
+            public InstalmentsWithSchedule withInterval(Integer interval) {
+                this.interval = interval;
+                return this;
+            }
+
+            /**
+             * The unit of time between customer charge dates. One of `weekly`, `monthly` or
+             * `yearly`.
+             */
+            public InstalmentsWithSchedule withIntervalUnit(IntervalUnit intervalUnit) {
+                this.intervalUnit = intervalUnit;
+                return this;
+            }
+
+            /**
+             * The date on which the first payment should be charged. Must be on or after the
+             * [mandate](#core-endpoints-mandates)'s `next_possible_charge_date`. When left blank
+             * and `month` or `day_of_month` are provided, this will be set to the date of the first
+             * payment. If created without `month` or `day_of_month` this will be set as the
+             * mandate's `next_possible_charge_date`
+             */
+            public InstalmentsWithSchedule withStartDate(String startDate) {
+                this.startDate = startDate;
+                return this;
+            }
+
+            public Map<String, Object> getQueryParams() {
+                ImmutableMap.Builder<String, Object> params = ImmutableMap.builder();
+                if (amounts != null) {
+                    params.put("instalments_with_schedule[amounts]", amounts);
+                }
+                if (interval != null) {
+                    params.put("instalments_with_schedule[interval]", interval);
+                }
+                if (intervalUnit != null) {
+                    params.put("instalments_with_schedule[interval_unit]", intervalUnit);
+                }
+                if (startDate != null) {
+                    params.put("instalments_with_schedule[start_date]", startDate);
+                }
+                return params.build();
+            }
+
+            public enum IntervalUnit {
+                @SerializedName("weekly")
+                WEEKLY, @SerializedName("monthly")
+                MONTHLY, @SerializedName("yearly")
+                YEARLY, @SerializedName("unknown")
+                UNKNOWN;
+
+                @Override
+                public String toString() {
+                    return name().toLowerCase();
+                }
+            }
+        }
+
+        public static class InstalmentScheduleRequest {
+            private Integer appFee;
+            private String currency;
+            private List<InstalmentsWithDates> instalmentsWithDates;
+            private InstalmentsWithSchedule instalmentsWithSchedule;
+            private Map<String, String> metadata;
+            private String name;
+            private String paymentReference;
+            private Boolean retryIfPossible;
+            private Integer totalAmount;
+
+            /**
+             * The amount to be deducted from each payment as an app fee, to be paid to the partner
+             * integration which created the subscription, in the lowest denomination for the
+             * currency (e.g. pence in GBP, cents in EUR).
+             */
+            public InstalmentScheduleRequest withAppFee(Integer appFee) {
+                this.appFee = appFee;
+                return this;
+            }
+
+            /**
+             * [ISO 4217](http://en.wikipedia.org/wiki/ISO_4217#Active_codes) currency code.
+             * Currently "USD" and "CAD" are supported.
+             */
+            public InstalmentScheduleRequest withCurrency(String currency) {
+                this.currency = currency;
+                return this;
+            }
+
+            /**
+             * An explicit array of instalment payments, each specifying at least an `amount` and
+             * `charge_date`. See [create (with dates)](#instalment-schedules-create-with-dates)
+             */
+            public InstalmentScheduleRequest withInstalmentsWithDates(
+                    List<InstalmentsWithDates> instalmentsWithDates) {
+                this.instalmentsWithDates = instalmentsWithDates;
+                return this;
+            }
+
+            /**
+             * Frequency of the payments you want to create, together with an array of payment
+             * amounts to be collected, with a specified start date for the first payment. See
+             * [create (with schedule)](#instalment-schedules-create-with-schedule)
+             * 
+             */
+            public InstalmentScheduleRequest withInstalmentsWithSchedule(
+                    InstalmentsWithSchedule instalmentsWithSchedule) {
+                this.instalmentsWithSchedule = instalmentsWithSchedule;
+                return this;
+            }
+
+            /**
+             * Key-value store of custom data. Up to 3 keys are permitted, with key names up to 50
+             * characters and values up to 500 characters.
+             */
+            public InstalmentScheduleRequest withMetadata(Map<String, String> metadata) {
+                this.metadata = metadata;
+                return this;
+            }
+
+            /**
+             * Name of the instalment schedule, up to 100 chars. This name will also be copied to
+             * the payments of the instalment schedule if you use schedule-based creation.
+             */
+            public InstalmentScheduleRequest withName(String name) {
+                this.name = name;
+                return this;
+            }
+
+            /**
+             * An optional payment reference. This will be set as the reference on each payment
+             * created and will appear on your customer's bank statement. See the documentation for
+             * the [create payment endpoint](#payments-create-a-payment) for more details. <br />
+             */
+            public InstalmentScheduleRequest withPaymentReference(String paymentReference) {
+                this.paymentReference = paymentReference;
+                return this;
+            }
+
+            /**
+             * On failure, automatically retry payments using [intelligent
+             * retries](#success-intelligent-retries). Default is `false`.
+             * <p class="notice">
+             * <strong>Important</strong>: To be able to use intelligent retries, Success+ needs to
+             * be enabled in [GoCardless dashboard](https://manage.gocardless.com/success-plus).
+             * </p>
+             */
+            public InstalmentScheduleRequest withRetryIfPossible(Boolean retryIfPossible) {
+                this.retryIfPossible = retryIfPossible;
+                return this;
+            }
+
+            /**
+             * The total amount of the instalment schedule, defined as the sum of all individual
+             * payments, in the lowest denomination for the currency (e.g. pence in GBP, cents in
+             * EUR). If the requested payment amounts do not sum up correctly, a validation error
+             * will be returned.
+             */
+            public InstalmentScheduleRequest withTotalAmount(Integer totalAmount) {
+                this.totalAmount = totalAmount;
+                return this;
+            }
+        }
+
         public static class Links {
             private String creditor;
             private String customer;
@@ -1014,6 +1372,7 @@ public class BillingRequestService {
 
         public static class MandateRequest {
             private AuthorisationSource authorisationSource;
+            private String consentType;
             private Constraints constraints;
             private String currency;
             private String description;
@@ -1036,6 +1395,18 @@ public class BillingRequestService {
              */
             public MandateRequest withAuthorisationSource(AuthorisationSource authorisationSource) {
                 this.authorisationSource = authorisationSource;
+                return this;
+            }
+
+            /**
+             * This attribute represents the authorisation type between the payer and merchant. It
+             * can be set to `one_off`, `recurring` or `standing` for ACH scheme. And `single`,
+             * `recurring` and `sporadic` for PAD scheme. _Note:_ This is only supported for ACH and
+             * PAD schemes.
+             * 
+             */
+            public MandateRequest withConsentType(String consentType) {
+                this.consentType = consentType;
                 return this;
             }
 
@@ -1456,1966 +1827,6 @@ public class BillingRequestService {
                 OCTOBER, @SerializedName("november")
                 NOVEMBER, @SerializedName("december")
                 DECEMBER, @SerializedName("unknown")
-                UNKNOWN;
-
-                @Override
-                public String toString() {
-                    return name().toLowerCase();
-                }
-            }
-        }
-    }
-
-    /**
-     * Request class for {@link BillingRequestService#createWithInstalmentsWithDates }.
-     *
-     * <p class="notice">
-     * <strong>Important</strong>: All properties associated with `instalment_schedule_request` are
-     * only supported for ACH and PAD schemes.
-     * </p>
-     */
-    public static final class BillingRequestCreateWithInstalmentsWithDatesRequest
-            extends IdempotentPostRequest<BillingRequest> {
-        private Boolean fallbackEnabled;
-        private InstalmentScheduleRequest instalmentScheduleRequest;
-        private Links links;
-        private MandateRequest mandateRequest;
-        private Map<String, String> metadata;
-        private PaymentRequest paymentRequest;
-
-        /**
-         * (Optional) If true, this billing request can fallback from instant payment to direct
-         * debit. Should not be set if GoCardless payment intelligence feature is used.
-         * 
-         * See [Billing Requests: Retain customers with
-         * Fallbacks](https://developer.gocardless.com/billing-requests/retain-customers-with-fallbacks/)
-         * for more information.
-         */
-        public BillingRequestCreateWithInstalmentsWithDatesRequest withFallbackEnabled(
-                Boolean fallbackEnabled) {
-            this.fallbackEnabled = fallbackEnabled;
-            return this;
-        }
-
-        public BillingRequestCreateWithInstalmentsWithDatesRequest withInstalmentScheduleRequest(
-                InstalmentScheduleRequest instalmentScheduleRequest) {
-            this.instalmentScheduleRequest = instalmentScheduleRequest;
-            return this;
-        }
-
-        /**
-         * The amount to be deducted from each payment as an app fee, to be paid to the partner
-         * integration which created the subscription, in the lowest denomination for the currency
-         * (e.g. pence in GBP, cents in EUR).
-         */
-        public BillingRequestCreateWithInstalmentsWithDatesRequest withInstalmentScheduleRequestAppFee(
-                Integer appFee) {
-            if (instalmentScheduleRequest == null) {
-                instalmentScheduleRequest = new InstalmentScheduleRequest();
-            }
-            instalmentScheduleRequest.withAppFee(appFee);
-            return this;
-        }
-
-        /**
-         * [ISO 4217](http://en.wikipedia.org/wiki/ISO_4217#Active_codes) currency code. Currently
-         * "USD" and "CAD" are supported.
-         */
-        public BillingRequestCreateWithInstalmentsWithDatesRequest withInstalmentScheduleRequestCurrency(
-                String currency) {
-            if (instalmentScheduleRequest == null) {
-                instalmentScheduleRequest = new InstalmentScheduleRequest();
-            }
-            instalmentScheduleRequest.withCurrency(currency);
-            return this;
-        }
-
-        /**
-         * An explicit array of instalment payments, each specifying at least an `amount` and
-         * `charge_date`. See [create (with dates)](#instalment-schedules-create-with-dates)
-         */
-        public BillingRequestCreateWithInstalmentsWithDatesRequest withInstalmentScheduleRequestInstalments(
-                List<Instalments> instalments) {
-            if (instalmentScheduleRequest == null) {
-                instalmentScheduleRequest = new InstalmentScheduleRequest();
-            }
-            instalmentScheduleRequest.withInstalments(instalments);
-            return this;
-        }
-
-        /**
-         * Key-value store of custom data. Up to 3 keys are permitted, with key names up to 50
-         * characters and values up to 500 characters.
-         */
-        public BillingRequestCreateWithInstalmentsWithDatesRequest withInstalmentScheduleRequestMetadata(
-                Map<String, String> metadata) {
-            if (instalmentScheduleRequest == null) {
-                instalmentScheduleRequest = new InstalmentScheduleRequest();
-            }
-            instalmentScheduleRequest.withMetadata(metadata);
-            return this;
-        }
-
-        /**
-         * Name of the instalment schedule, up to 100 chars. This name will also be copied to the
-         * payments of the instalment schedule if you use schedule-based creation.
-         */
-        public BillingRequestCreateWithInstalmentsWithDatesRequest withInstalmentScheduleRequestName(
-                String name) {
-            if (instalmentScheduleRequest == null) {
-                instalmentScheduleRequest = new InstalmentScheduleRequest();
-            }
-            instalmentScheduleRequest.withName(name);
-            return this;
-        }
-
-        /**
-         * An optional payment reference. This will be set as the reference on each payment created
-         * and will appear on your customer's bank statement. See the documentation for the [create
-         * payment endpoint](#payments-create-a-payment) for more details. <br />
-         */
-        public BillingRequestCreateWithInstalmentsWithDatesRequest withInstalmentScheduleRequestPaymentReference(
-                String paymentReference) {
-            if (instalmentScheduleRequest == null) {
-                instalmentScheduleRequest = new InstalmentScheduleRequest();
-            }
-            instalmentScheduleRequest.withPaymentReference(paymentReference);
-            return this;
-        }
-
-        /**
-         * On failure, automatically retry payments using [intelligent
-         * retries](#success-intelligent-retries). Default is `false`.
-         * <p class="notice">
-         * <strong>Important</strong>: To be able to use intelligent retries, Success+ needs to be
-         * enabled in [GoCardless dashboard](https://manage.gocardless.com/success-plus).
-         * </p>
-         */
-        public BillingRequestCreateWithInstalmentsWithDatesRequest withInstalmentScheduleRequestRetryIfPossible(
-                Boolean retryIfPossible) {
-            if (instalmentScheduleRequest == null) {
-                instalmentScheduleRequest = new InstalmentScheduleRequest();
-            }
-            instalmentScheduleRequest.withRetryIfPossible(retryIfPossible);
-            return this;
-        }
-
-        /**
-         * The total amount of the instalment schedule, defined as the sum of all individual
-         * payments, in the lowest denomination for the currency (e.g. pence in GBP, cents in EUR).
-         * If the requested payment amounts do not sum up correctly, a validation error will be
-         * returned.
-         */
-        public BillingRequestCreateWithInstalmentsWithDatesRequest withInstalmentScheduleRequestTotalAmount(
-                Integer totalAmount) {
-            if (instalmentScheduleRequest == null) {
-                instalmentScheduleRequest = new InstalmentScheduleRequest();
-            }
-            instalmentScheduleRequest.withTotalAmount(totalAmount);
-            return this;
-        }
-
-        public BillingRequestCreateWithInstalmentsWithDatesRequest withLinks(Links links) {
-            this.links = links;
-            return this;
-        }
-
-        /**
-         * ID of the associated [creditor](#core-endpoints-creditors). Only required if your account
-         * manages multiple creditors.
-         */
-        public BillingRequestCreateWithInstalmentsWithDatesRequest withLinksCreditor(
-                String creditor) {
-            if (links == null) {
-                links = new Links();
-            }
-            links.withCreditor(creditor);
-            return this;
-        }
-
-        /**
-         * ID of the [customer](#core-endpoints-customers) against which this request should be
-         * made.
-         */
-        public BillingRequestCreateWithInstalmentsWithDatesRequest withLinksCustomer(
-                String customer) {
-            if (links == null) {
-                links = new Links();
-            }
-            links.withCustomer(customer);
-            return this;
-        }
-
-        /**
-         * (Optional) ID of the [customer_bank_account](#core-endpoints-customer-bank-accounts)
-         * against which this request should be made.
-         * 
-         */
-        public BillingRequestCreateWithInstalmentsWithDatesRequest withLinksCustomerBankAccount(
-                String customerBankAccount) {
-            if (links == null) {
-                links = new Links();
-            }
-            links.withCustomerBankAccount(customerBankAccount);
-            return this;
-        }
-
-        public BillingRequestCreateWithInstalmentsWithDatesRequest withMandateRequest(
-                MandateRequest mandateRequest) {
-            this.mandateRequest = mandateRequest;
-            return this;
-        }
-
-        /**
-         * This field is ACH specific, sometimes referred to as [SEC
-         * code](https://www.moderntreasury.com/learn/sec-codes).
-         * 
-         * This is the way that the payer gives authorisation to the merchant. web: Authorisation is
-         * Internet Initiated or via Mobile Entry (maps to SEC code: WEB) telephone: Authorisation
-         * is provided orally over telephone (maps to SEC code: TEL) paper: Authorisation is
-         * provided in writing and signed, or similarly authenticated (maps to SEC code: PPD)
-         * 
-         */
-        public BillingRequestCreateWithInstalmentsWithDatesRequest withMandateRequestAuthorisationSource(
-                MandateRequest.AuthorisationSource authorisationSource) {
-            if (mandateRequest == null) {
-                mandateRequest = new MandateRequest();
-            }
-            mandateRequest.withAuthorisationSource(authorisationSource);
-            return this;
-        }
-
-        /**
-         * [ISO 4217](http://en.wikipedia.org/wiki/ISO_4217#Active_codes) currency code. Currently
-         * "USD" and "CAD" are supported.
-         */
-        public BillingRequestCreateWithInstalmentsWithDatesRequest withMandateRequestCurrency(
-                String currency) {
-            if (mandateRequest == null) {
-                mandateRequest = new MandateRequest();
-            }
-            mandateRequest.withCurrency(currency);
-            return this;
-        }
-
-        /**
-         * A human-readable description of the payment and/or mandate. This will be displayed to the
-         * payer when authorising the billing request.
-         * 
-         */
-        public BillingRequestCreateWithInstalmentsWithDatesRequest withMandateRequestDescription(
-                String description) {
-            if (mandateRequest == null) {
-                mandateRequest = new MandateRequest();
-            }
-            mandateRequest.withDescription(description);
-            return this;
-        }
-
-        /**
-         * Key-value store of custom data. Up to 3 keys are permitted, with key names up to 50
-         * characters and values up to 500 characters.
-         */
-        public BillingRequestCreateWithInstalmentsWithDatesRequest withMandateRequestMetadata(
-                Map<String, String> metadata) {
-            if (mandateRequest == null) {
-                mandateRequest = new MandateRequest();
-            }
-            mandateRequest.withMetadata(metadata);
-            return this;
-        }
-
-        /**
-         * Unique reference. Different schemes have different length and [character
-         * set](#appendix-character-sets) requirements. GoCardless will generate a unique reference
-         * satisfying the different scheme requirements if this field is left blank.
-         */
-        public BillingRequestCreateWithInstalmentsWithDatesRequest withMandateRequestReference(
-                String reference) {
-            if (mandateRequest == null) {
-                mandateRequest = new MandateRequest();
-            }
-            mandateRequest.withReference(reference);
-            return this;
-        }
-
-        /**
-         * Payment scheme. Currently supports `ach` in the US (USD) and 'pad' in the Canada (CAD)
-         */
-        public BillingRequestCreateWithInstalmentsWithDatesRequest withMandateRequestScheme(
-                String scheme) {
-            if (mandateRequest == null) {
-                mandateRequest = new MandateRequest();
-            }
-            mandateRequest.withScheme(scheme);
-            return this;
-        }
-
-        /**
-         * If true, this billing request would be used to set up a mandate solely for moving (or
-         * sweeping) money from one account owned by the payer to another account that the payer
-         * also owns. This is required for Faster Payments
-         */
-        public BillingRequestCreateWithInstalmentsWithDatesRequest withMandateRequestSweeping(
-                Boolean sweeping) {
-            if (mandateRequest == null) {
-                mandateRequest = new MandateRequest();
-            }
-            mandateRequest.withSweeping(sweeping);
-            return this;
-        }
-
-        /**
-         * Verification preference for the mandate. One of:
-         * <ul>
-         * <li>`minimum`: only verify if absolutely required, such as when part of scheme rules</li>
-         * <li>`recommended`: in addition to `minimum`, use the GoCardless payment intelligence
-         * solution to decide if a payer should be verified</li>
-         * <li>`when_available`: if verification mechanisms are available, use them</li>
-         * <li>`always`: as `when_available`, but fail to create the Billing Request if a mechanism
-         * isn't available</li>
-         * </ul>
-         * 
-         * By default, all Billing Requests use the `recommended` verification preference. It uses
-         * GoCardless payment intelligence solution to determine if a payer is fraudulent or not.
-         * The verification mechanism is based on the response and the payer may be asked to verify
-         * themselves. If the feature is not available, `recommended` behaves like `minimum`.
-         * 
-         * If you never wish to take advantage of our reduced risk products and Verified Mandates as
-         * they are released in new schemes, please use the `minimum` verification preference.
-         * 
-         * See [Billing Requests: Creating Verified
-         * Mandates](https://developer.gocardless.com/getting-started/billing-requests/verified-mandates/)
-         * for more information.
-         */
-        public BillingRequestCreateWithInstalmentsWithDatesRequest withMandateRequestVerify(
-                MandateRequest.Verify verify) {
-            if (mandateRequest == null) {
-                mandateRequest = new MandateRequest();
-            }
-            mandateRequest.withVerify(verify);
-            return this;
-        }
-
-        /**
-         * Key-value store of custom data. Up to 3 keys are permitted, with key names up to 50
-         * characters and values up to 500 characters.
-         */
-        public BillingRequestCreateWithInstalmentsWithDatesRequest withMetadata(
-                Map<String, String> metadata) {
-            this.metadata = metadata;
-            return this;
-        }
-
-        /**
-         * Key-value store of custom data. Up to 3 keys are permitted, with key names up to 50
-         * characters and values up to 500 characters.
-         */
-        public BillingRequestCreateWithInstalmentsWithDatesRequest withMetadata(String key,
-                String value) {
-            if (metadata == null) {
-                metadata = new HashMap<>();
-            }
-            metadata.put(key, value);
-            return this;
-        }
-
-        public BillingRequestCreateWithInstalmentsWithDatesRequest withPaymentRequest(
-                PaymentRequest paymentRequest) {
-            this.paymentRequest = paymentRequest;
-            return this;
-        }
-
-        /**
-         * Amount in minor unit (e.g. pence in GBP, cents in EUR).
-         */
-        public BillingRequestCreateWithInstalmentsWithDatesRequest withPaymentRequestAmount(
-                Integer amount) {
-            if (paymentRequest == null) {
-                paymentRequest = new PaymentRequest();
-            }
-            paymentRequest.withAmount(amount);
-            return this;
-        }
-
-        /**
-         * The amount to be deducted from the payment as an app fee, to be paid to the partner
-         * integration which created the billing request, in the lowest denomination for the
-         * currency (e.g. pence in GBP, cents in EUR).
-         */
-        public BillingRequestCreateWithInstalmentsWithDatesRequest withPaymentRequestAppFee(
-                Integer appFee) {
-            if (paymentRequest == null) {
-                paymentRequest = new PaymentRequest();
-            }
-            paymentRequest.withAppFee(appFee);
-            return this;
-        }
-
-        /**
-         * [ISO 4217](http://en.wikipedia.org/wiki/ISO_4217#Active_codes) currency code. Currently
-         * "USD" and "CAD" are supported.
-         */
-        public BillingRequestCreateWithInstalmentsWithDatesRequest withPaymentRequestCurrency(
-                String currency) {
-            if (paymentRequest == null) {
-                paymentRequest = new PaymentRequest();
-            }
-            paymentRequest.withCurrency(currency);
-            return this;
-        }
-
-        /**
-         * A human-readable description of the payment and/or mandate. This will be displayed to the
-         * payer when authorising the billing request.
-         * 
-         */
-        public BillingRequestCreateWithInstalmentsWithDatesRequest withPaymentRequestDescription(
-                String description) {
-            if (paymentRequest == null) {
-                paymentRequest = new PaymentRequest();
-            }
-            paymentRequest.withDescription(description);
-            return this;
-        }
-
-        /**
-         * This field will decide how GoCardless handles settlement of funds from the customer.
-         * 
-         * - `managed` will be moved through GoCardless' account, batched, and payed out. - `direct`
-         * will be a direct transfer from the payer's account to the merchant where invoicing will
-         * be handled separately.
-         * 
-         */
-        public BillingRequestCreateWithInstalmentsWithDatesRequest withPaymentRequestFundsSettlement(
-                PaymentRequest.FundsSettlement fundsSettlement) {
-            if (paymentRequest == null) {
-                paymentRequest = new PaymentRequest();
-            }
-            paymentRequest.withFundsSettlement(fundsSettlement);
-            return this;
-        }
-
-        /**
-         * Key-value store of custom data. Up to 3 keys are permitted, with key names up to 50
-         * characters and values up to 500 characters.
-         */
-        public BillingRequestCreateWithInstalmentsWithDatesRequest withPaymentRequestMetadata(
-                Map<String, String> metadata) {
-            if (paymentRequest == null) {
-                paymentRequest = new PaymentRequest();
-            }
-            paymentRequest.withMetadata(metadata);
-            return this;
-        }
-
-        /**
-         * A custom payment reference defined by the merchant. It is only available for payments
-         * using the Direct Funds settlement model on the Faster Payments scheme.
-         * 
-         */
-        public BillingRequestCreateWithInstalmentsWithDatesRequest withPaymentRequestReference(
-                String reference) {
-            if (paymentRequest == null) {
-                paymentRequest = new PaymentRequest();
-            }
-            paymentRequest.withReference(reference);
-            return this;
-        }
-
-        /**
-         * On failure, automatically retry payments using [intelligent
-         * retries](#success-intelligent-retries). Default is `false`.
-         * <p class="notice">
-         * <strong>Important</strong>: To be able to use intelligent retries, Success+ needs to be
-         * enabled in [GoCardless dashboard](https://manage.gocardless.com/success-plus).
-         * </p>
-         */
-        public BillingRequestCreateWithInstalmentsWithDatesRequest withPaymentRequestRetryIfPossible(
-                Boolean retryIfPossible) {
-            if (paymentRequest == null) {
-                paymentRequest = new PaymentRequest();
-            }
-            paymentRequest.withRetryIfPossible(retryIfPossible);
-            return this;
-        }
-
-        /**
-         * Payment scheme. Currently supports `ach` in the US (USD) and 'pad' in the Canada (CAD)
-         */
-        public BillingRequestCreateWithInstalmentsWithDatesRequest withPaymentRequestScheme(
-                String scheme) {
-            if (paymentRequest == null) {
-                paymentRequest = new PaymentRequest();
-            }
-            paymentRequest.withScheme(scheme);
-            return this;
-        }
-
-        public BillingRequestCreateWithInstalmentsWithDatesRequest withIdempotencyKey(
-                String idempotencyKey) {
-            super.setIdempotencyKey(idempotencyKey);
-            return this;
-        }
-
-        @Override
-        protected GetRequest<BillingRequest> handleConflict(HttpClient httpClient, String id) {
-            BillingRequestGetRequest request = new BillingRequestGetRequest(httpClient, id);
-            for (Map.Entry<String, String> header : this.getCustomHeaders().entrySet()) {
-                request = request.withHeader(header.getKey(), header.getValue());
-            }
-            return request;
-        }
-
-        private BillingRequestCreateWithInstalmentsWithDatesRequest(HttpClient httpClient) {
-            super(httpClient);
-        }
-
-        public BillingRequestCreateWithInstalmentsWithDatesRequest withHeader(String headerName,
-                String headerValue) {
-            this.addHeader(headerName, headerValue);
-            return this;
-        }
-
-        @Override
-        protected String getPathTemplate() {
-            return "billing_requests";
-        }
-
-        @Override
-        protected String getEnvelope() {
-            return "billing_requests";
-        }
-
-        @Override
-        protected Class<BillingRequest> getResponseClass() {
-            return BillingRequest.class;
-        }
-
-        @Override
-        protected boolean hasBody() {
-            return true;
-        }
-
-        public static class Instalments {
-            private Integer amount;
-            private String chargeDate;
-            private String description;
-
-            /**
-             * Amount, in the lowest denomination for the currency (e.g. pence in GBP, cents in
-             * EUR).
-             */
-            public Instalments withAmount(Integer amount) {
-                this.amount = amount;
-                return this;
-            }
-
-            /**
-             * A future date on which the payment should be collected. If the date is before the
-             * next_possible_charge_date on the [mandate](#core-endpoints-mandates), it will be
-             * automatically rolled forwards to that date.
-             */
-            public Instalments withChargeDate(String chargeDate) {
-                this.chargeDate = chargeDate;
-                return this;
-            }
-
-            /**
-             * A human-readable description of the payment. This will be included in the
-             * notification email GoCardless sends to your customer if your organisation does not
-             * send its own notifications (see [compliance
-             * requirements](#appendix-compliance-requirements)).
-             */
-            public Instalments withDescription(String description) {
-                this.description = description;
-                return this;
-            }
-
-            public Map<String, Object> getQueryParams() {
-                ImmutableMap.Builder<String, Object> params = ImmutableMap.builder();
-                if (amount != null) {
-                    params.put("instalments[amount]", amount);
-                }
-                if (chargeDate != null) {
-                    params.put("instalments[charge_date]", chargeDate);
-                }
-                if (description != null) {
-                    params.put("instalments[description]", description);
-                }
-                return params.build();
-            }
-        }
-
-        public static class InstalmentScheduleRequest {
-            private Integer appFee;
-            private String currency;
-            private List<Instalments> instalments;
-            private Map<String, String> metadata;
-            private String name;
-            private String paymentReference;
-            private Boolean retryIfPossible;
-            private Integer totalAmount;
-
-            /**
-             * The amount to be deducted from each payment as an app fee, to be paid to the partner
-             * integration which created the subscription, in the lowest denomination for the
-             * currency (e.g. pence in GBP, cents in EUR).
-             */
-            public InstalmentScheduleRequest withAppFee(Integer appFee) {
-                this.appFee = appFee;
-                return this;
-            }
-
-            /**
-             * [ISO 4217](http://en.wikipedia.org/wiki/ISO_4217#Active_codes) currency code.
-             * Currently "USD" and "CAD" are supported.
-             */
-            public InstalmentScheduleRequest withCurrency(String currency) {
-                this.currency = currency;
-                return this;
-            }
-
-            /**
-             * An explicit array of instalment payments, each specifying at least an `amount` and
-             * `charge_date`. See [create (with dates)](#instalment-schedules-create-with-dates)
-             */
-            public InstalmentScheduleRequest withInstalments(List<Instalments> instalments) {
-                this.instalments = instalments;
-                return this;
-            }
-
-            /**
-             * Key-value store of custom data. Up to 3 keys are permitted, with key names up to 50
-             * characters and values up to 500 characters.
-             */
-            public InstalmentScheduleRequest withMetadata(Map<String, String> metadata) {
-                this.metadata = metadata;
-                return this;
-            }
-
-            /**
-             * Name of the instalment schedule, up to 100 chars. This name will also be copied to
-             * the payments of the instalment schedule if you use schedule-based creation.
-             */
-            public InstalmentScheduleRequest withName(String name) {
-                this.name = name;
-                return this;
-            }
-
-            /**
-             * An optional payment reference. This will be set as the reference on each payment
-             * created and will appear on your customer's bank statement. See the documentation for
-             * the [create payment endpoint](#payments-create-a-payment) for more details. <br />
-             */
-            public InstalmentScheduleRequest withPaymentReference(String paymentReference) {
-                this.paymentReference = paymentReference;
-                return this;
-            }
-
-            /**
-             * On failure, automatically retry payments using [intelligent
-             * retries](#success-intelligent-retries). Default is `false`.
-             * <p class="notice">
-             * <strong>Important</strong>: To be able to use intelligent retries, Success+ needs to
-             * be enabled in [GoCardless dashboard](https://manage.gocardless.com/success-plus).
-             * </p>
-             */
-            public InstalmentScheduleRequest withRetryIfPossible(Boolean retryIfPossible) {
-                this.retryIfPossible = retryIfPossible;
-                return this;
-            }
-
-            /**
-             * The total amount of the instalment schedule, defined as the sum of all individual
-             * payments, in the lowest denomination for the currency (e.g. pence in GBP, cents in
-             * EUR). If the requested payment amounts do not sum up correctly, a validation error
-             * will be returned.
-             */
-            public InstalmentScheduleRequest withTotalAmount(Integer totalAmount) {
-                this.totalAmount = totalAmount;
-                return this;
-            }
-        }
-
-        public static class Links {
-            private String creditor;
-            private String customer;
-            private String customerBankAccount;
-
-            /**
-             * ID of the associated [creditor](#core-endpoints-creditors). Only required if your
-             * account manages multiple creditors.
-             */
-            public Links withCreditor(String creditor) {
-                this.creditor = creditor;
-                return this;
-            }
-
-            /**
-             * ID of the [customer](#core-endpoints-customers) against which this request should be
-             * made.
-             */
-            public Links withCustomer(String customer) {
-                this.customer = customer;
-                return this;
-            }
-
-            /**
-             * (Optional) ID of the [customer_bank_account](#core-endpoints-customer-bank-accounts)
-             * against which this request should be made.
-             * 
-             */
-            public Links withCustomerBankAccount(String customerBankAccount) {
-                this.customerBankAccount = customerBankAccount;
-                return this;
-            }
-        }
-
-        public static class MandateRequest {
-            private AuthorisationSource authorisationSource;
-            private String currency;
-            private String description;
-            private Map<String, String> metadata;
-            private String reference;
-            private String scheme;
-            private Boolean sweeping;
-            private Verify verify;
-
-            /**
-             * This field is ACH specific, sometimes referred to as [SEC
-             * code](https://www.moderntreasury.com/learn/sec-codes).
-             * 
-             * This is the way that the payer gives authorisation to the merchant. web:
-             * Authorisation is Internet Initiated or via Mobile Entry (maps to SEC code: WEB)
-             * telephone: Authorisation is provided orally over telephone (maps to SEC code: TEL)
-             * paper: Authorisation is provided in writing and signed, or similarly authenticated
-             * (maps to SEC code: PPD)
-             * 
-             */
-            public MandateRequest withAuthorisationSource(AuthorisationSource authorisationSource) {
-                this.authorisationSource = authorisationSource;
-                return this;
-            }
-
-            /**
-             * [ISO 4217](http://en.wikipedia.org/wiki/ISO_4217#Active_codes) currency code.
-             * Currently "USD" and "CAD" are supported.
-             */
-            public MandateRequest withCurrency(String currency) {
-                this.currency = currency;
-                return this;
-            }
-
-            /**
-             * A human-readable description of the payment and/or mandate. This will be displayed to
-             * the payer when authorising the billing request.
-             * 
-             */
-            public MandateRequest withDescription(String description) {
-                this.description = description;
-                return this;
-            }
-
-            /**
-             * Key-value store of custom data. Up to 3 keys are permitted, with key names up to 50
-             * characters and values up to 500 characters.
-             */
-            public MandateRequest withMetadata(Map<String, String> metadata) {
-                this.metadata = metadata;
-                return this;
-            }
-
-            /**
-             * Unique reference. Different schemes have different length and [character
-             * set](#appendix-character-sets) requirements. GoCardless will generate a unique
-             * reference satisfying the different scheme requirements if this field is left blank.
-             */
-            public MandateRequest withReference(String reference) {
-                this.reference = reference;
-                return this;
-            }
-
-            /**
-             * Payment scheme. Currently supports `ach` in the US (USD) and 'pad' in the Canada
-             * (CAD)
-             */
-            public MandateRequest withScheme(String scheme) {
-                this.scheme = scheme;
-                return this;
-            }
-
-            /**
-             * If true, this billing request would be used to set up a mandate solely for moving (or
-             * sweeping) money from one account owned by the payer to another account that the payer
-             * also owns. This is required for Faster Payments
-             */
-            public MandateRequest withSweeping(Boolean sweeping) {
-                this.sweeping = sweeping;
-                return this;
-            }
-
-            /**
-             * Verification preference for the mandate. One of:
-             * <ul>
-             * <li>`minimum`: only verify if absolutely required, such as when part of scheme
-             * rules</li>
-             * <li>`recommended`: in addition to `minimum`, use the GoCardless payment intelligence
-             * solution to decide if a payer should be verified</li>
-             * <li>`when_available`: if verification mechanisms are available, use them</li>
-             * <li>`always`: as `when_available`, but fail to create the Billing Request if a
-             * mechanism isn't available</li>
-             * </ul>
-             * 
-             * By default, all Billing Requests use the `recommended` verification preference. It
-             * uses GoCardless payment intelligence solution to determine if a payer is fraudulent
-             * or not. The verification mechanism is based on the response and the payer may be
-             * asked to verify themselves. If the feature is not available, `recommended` behaves
-             * like `minimum`.
-             * 
-             * If you never wish to take advantage of our reduced risk products and Verified
-             * Mandates as they are released in new schemes, please use the `minimum` verification
-             * preference.
-             * 
-             * See [Billing Requests: Creating Verified
-             * Mandates](https://developer.gocardless.com/getting-started/billing-requests/verified-mandates/)
-             * for more information.
-             */
-            public MandateRequest withVerify(Verify verify) {
-                this.verify = verify;
-                return this;
-            }
-
-            public enum AuthorisationSource {
-                @SerializedName("web")
-                WEB, @SerializedName("telephone")
-                TELEPHONE, @SerializedName("paper")
-                PAPER, @SerializedName("unknown")
-                UNKNOWN;
-
-                @Override
-                public String toString() {
-                    return name().toLowerCase();
-                }
-            }
-
-            public enum Verify {
-                @SerializedName("minimum")
-                MINIMUM, @SerializedName("recommended")
-                RECOMMENDED, @SerializedName("when_available")
-                WHEN_AVAILABLE, @SerializedName("always")
-                ALWAYS, @SerializedName("unknown")
-                UNKNOWN;
-
-                @Override
-                public String toString() {
-                    return name().toLowerCase();
-                }
-            }
-        }
-
-        public static class PaymentRequest {
-            private Integer amount;
-            private Integer appFee;
-            private String currency;
-            private String description;
-            private FundsSettlement fundsSettlement;
-            private Map<String, String> metadata;
-            private String reference;
-            private Boolean retryIfPossible;
-            private String scheme;
-
-            /**
-             * Amount in minor unit (e.g. pence in GBP, cents in EUR).
-             */
-            public PaymentRequest withAmount(Integer amount) {
-                this.amount = amount;
-                return this;
-            }
-
-            /**
-             * The amount to be deducted from the payment as an app fee, to be paid to the partner
-             * integration which created the billing request, in the lowest denomination for the
-             * currency (e.g. pence in GBP, cents in EUR).
-             */
-            public PaymentRequest withAppFee(Integer appFee) {
-                this.appFee = appFee;
-                return this;
-            }
-
-            /**
-             * [ISO 4217](http://en.wikipedia.org/wiki/ISO_4217#Active_codes) currency code.
-             * Currently "USD" and "CAD" are supported.
-             */
-            public PaymentRequest withCurrency(String currency) {
-                this.currency = currency;
-                return this;
-            }
-
-            /**
-             * A human-readable description of the payment and/or mandate. This will be displayed to
-             * the payer when authorising the billing request.
-             * 
-             */
-            public PaymentRequest withDescription(String description) {
-                this.description = description;
-                return this;
-            }
-
-            /**
-             * This field will decide how GoCardless handles settlement of funds from the customer.
-             * 
-             * - `managed` will be moved through GoCardless' account, batched, and payed out. -
-             * `direct` will be a direct transfer from the payer's account to the merchant where
-             * invoicing will be handled separately.
-             * 
-             */
-            public PaymentRequest withFundsSettlement(FundsSettlement fundsSettlement) {
-                this.fundsSettlement = fundsSettlement;
-                return this;
-            }
-
-            /**
-             * Key-value store of custom data. Up to 3 keys are permitted, with key names up to 50
-             * characters and values up to 500 characters.
-             */
-            public PaymentRequest withMetadata(Map<String, String> metadata) {
-                this.metadata = metadata;
-                return this;
-            }
-
-            /**
-             * A custom payment reference defined by the merchant. It is only available for payments
-             * using the Direct Funds settlement model on the Faster Payments scheme.
-             * 
-             */
-            public PaymentRequest withReference(String reference) {
-                this.reference = reference;
-                return this;
-            }
-
-            /**
-             * On failure, automatically retry payments using [intelligent
-             * retries](#success-intelligent-retries). Default is `false`.
-             * <p class="notice">
-             * <strong>Important</strong>: To be able to use intelligent retries, Success+ needs to
-             * be enabled in [GoCardless dashboard](https://manage.gocardless.com/success-plus).
-             * </p>
-             */
-            public PaymentRequest withRetryIfPossible(Boolean retryIfPossible) {
-                this.retryIfPossible = retryIfPossible;
-                return this;
-            }
-
-            /**
-             * Payment scheme. Currently supports `ach` in the US (USD) and 'pad' in the Canada
-             * (CAD)
-             */
-            public PaymentRequest withScheme(String scheme) {
-                this.scheme = scheme;
-                return this;
-            }
-
-            public enum FundsSettlement {
-                @SerializedName("managed")
-                MANAGED, @SerializedName("direct")
-                DIRECT, @SerializedName("unknown")
-                UNKNOWN;
-
-                @Override
-                public String toString() {
-                    return name().toLowerCase();
-                }
-            }
-        }
-    }
-
-    /**
-     * Request class for {@link BillingRequestService#createWithInstalmentsWithSchedule }.
-     *
-     * <p class="notice">
-     * <strong>Important</strong>: All properties associated with `instalment_schedule_request` are
-     * only supported for ACH and PAD schemes.
-     * </p>
-     */
-    public static final class BillingRequestCreateWithInstalmentsWithScheduleRequest
-            extends IdempotentPostRequest<BillingRequest> {
-        private Boolean fallbackEnabled;
-        private InstalmentScheduleRequest instalmentScheduleRequest;
-        private Links links;
-        private MandateRequest mandateRequest;
-        private Map<String, String> metadata;
-        private PaymentRequest paymentRequest;
-
-        /**
-         * (Optional) If true, this billing request can fallback from instant payment to direct
-         * debit. Should not be set if GoCardless payment intelligence feature is used.
-         * 
-         * See [Billing Requests: Retain customers with
-         * Fallbacks](https://developer.gocardless.com/billing-requests/retain-customers-with-fallbacks/)
-         * for more information.
-         */
-        public BillingRequestCreateWithInstalmentsWithScheduleRequest withFallbackEnabled(
-                Boolean fallbackEnabled) {
-            this.fallbackEnabled = fallbackEnabled;
-            return this;
-        }
-
-        public BillingRequestCreateWithInstalmentsWithScheduleRequest withInstalmentScheduleRequest(
-                InstalmentScheduleRequest instalmentScheduleRequest) {
-            this.instalmentScheduleRequest = instalmentScheduleRequest;
-            return this;
-        }
-
-        /**
-         * The amount to be deducted from each payment as an app fee, to be paid to the partner
-         * integration which created the subscription, in the lowest denomination for the currency
-         * (e.g. pence in GBP, cents in EUR).
-         */
-        public BillingRequestCreateWithInstalmentsWithScheduleRequest withInstalmentScheduleRequestAppFee(
-                Integer appFee) {
-            if (instalmentScheduleRequest == null) {
-                instalmentScheduleRequest = new InstalmentScheduleRequest();
-            }
-            instalmentScheduleRequest.withAppFee(appFee);
-            return this;
-        }
-
-        /**
-         * [ISO 4217](http://en.wikipedia.org/wiki/ISO_4217#Active_codes) currency code. Currently
-         * "USD" and "CAD" are supported.
-         */
-        public BillingRequestCreateWithInstalmentsWithScheduleRequest withInstalmentScheduleRequestCurrency(
-                String currency) {
-            if (instalmentScheduleRequest == null) {
-                instalmentScheduleRequest = new InstalmentScheduleRequest();
-            }
-            instalmentScheduleRequest.withCurrency(currency);
-            return this;
-        }
-
-        /**
-         * Frequency of the payments you want to create, together with an array of payment amounts
-         * to be collected, with a specified start date for the first payment. See [create (with
-         * schedule)](#instalment-schedules-create-with-schedule)
-         * 
-         */
-        public BillingRequestCreateWithInstalmentsWithScheduleRequest withInstalmentScheduleRequestInstalments(
-                Instalments instalments) {
-            if (instalmentScheduleRequest == null) {
-                instalmentScheduleRequest = new InstalmentScheduleRequest();
-            }
-            instalmentScheduleRequest.withInstalments(instalments);
-            return this;
-        }
-
-        /**
-         * Key-value store of custom data. Up to 3 keys are permitted, with key names up to 50
-         * characters and values up to 500 characters.
-         */
-        public BillingRequestCreateWithInstalmentsWithScheduleRequest withInstalmentScheduleRequestMetadata(
-                Map<String, String> metadata) {
-            if (instalmentScheduleRequest == null) {
-                instalmentScheduleRequest = new InstalmentScheduleRequest();
-            }
-            instalmentScheduleRequest.withMetadata(metadata);
-            return this;
-        }
-
-        /**
-         * Name of the instalment schedule, up to 100 chars. This name will also be copied to the
-         * payments of the instalment schedule if you use schedule-based creation.
-         */
-        public BillingRequestCreateWithInstalmentsWithScheduleRequest withInstalmentScheduleRequestName(
-                String name) {
-            if (instalmentScheduleRequest == null) {
-                instalmentScheduleRequest = new InstalmentScheduleRequest();
-            }
-            instalmentScheduleRequest.withName(name);
-            return this;
-        }
-
-        /**
-         * An optional payment reference. This will be set as the reference on each payment created
-         * and will appear on your customer's bank statement. See the documentation for the [create
-         * payment endpoint](#payments-create-a-payment) for more details. <br />
-         */
-        public BillingRequestCreateWithInstalmentsWithScheduleRequest withInstalmentScheduleRequestPaymentReference(
-                String paymentReference) {
-            if (instalmentScheduleRequest == null) {
-                instalmentScheduleRequest = new InstalmentScheduleRequest();
-            }
-            instalmentScheduleRequest.withPaymentReference(paymentReference);
-            return this;
-        }
-
-        /**
-         * On failure, automatically retry payments using [intelligent
-         * retries](#success-intelligent-retries). Default is `false`.
-         * <p class="notice">
-         * <strong>Important</strong>: To be able to use intelligent retries, Success+ needs to be
-         * enabled in [GoCardless dashboard](https://manage.gocardless.com/success-plus).
-         * </p>
-         */
-        public BillingRequestCreateWithInstalmentsWithScheduleRequest withInstalmentScheduleRequestRetryIfPossible(
-                Boolean retryIfPossible) {
-            if (instalmentScheduleRequest == null) {
-                instalmentScheduleRequest = new InstalmentScheduleRequest();
-            }
-            instalmentScheduleRequest.withRetryIfPossible(retryIfPossible);
-            return this;
-        }
-
-        /**
-         * The total amount of the instalment schedule, defined as the sum of all individual
-         * payments, in the lowest denomination for the currency (e.g. pence in GBP, cents in EUR).
-         * If the requested payment amounts do not sum up correctly, a validation error will be
-         * returned.
-         */
-        public BillingRequestCreateWithInstalmentsWithScheduleRequest withInstalmentScheduleRequestTotalAmount(
-                Integer totalAmount) {
-            if (instalmentScheduleRequest == null) {
-                instalmentScheduleRequest = new InstalmentScheduleRequest();
-            }
-            instalmentScheduleRequest.withTotalAmount(totalAmount);
-            return this;
-        }
-
-        public BillingRequestCreateWithInstalmentsWithScheduleRequest withLinks(Links links) {
-            this.links = links;
-            return this;
-        }
-
-        /**
-         * ID of the associated [creditor](#core-endpoints-creditors). Only required if your account
-         * manages multiple creditors.
-         */
-        public BillingRequestCreateWithInstalmentsWithScheduleRequest withLinksCreditor(
-                String creditor) {
-            if (links == null) {
-                links = new Links();
-            }
-            links.withCreditor(creditor);
-            return this;
-        }
-
-        /**
-         * ID of the [customer](#core-endpoints-customers) against which this request should be
-         * made.
-         */
-        public BillingRequestCreateWithInstalmentsWithScheduleRequest withLinksCustomer(
-                String customer) {
-            if (links == null) {
-                links = new Links();
-            }
-            links.withCustomer(customer);
-            return this;
-        }
-
-        /**
-         * (Optional) ID of the [customer_bank_account](#core-endpoints-customer-bank-accounts)
-         * against which this request should be made.
-         * 
-         */
-        public BillingRequestCreateWithInstalmentsWithScheduleRequest withLinksCustomerBankAccount(
-                String customerBankAccount) {
-            if (links == null) {
-                links = new Links();
-            }
-            links.withCustomerBankAccount(customerBankAccount);
-            return this;
-        }
-
-        public BillingRequestCreateWithInstalmentsWithScheduleRequest withMandateRequest(
-                MandateRequest mandateRequest) {
-            this.mandateRequest = mandateRequest;
-            return this;
-        }
-
-        /**
-         * This field is ACH specific, sometimes referred to as [SEC
-         * code](https://www.moderntreasury.com/learn/sec-codes).
-         * 
-         * This is the way that the payer gives authorisation to the merchant. web: Authorisation is
-         * Internet Initiated or via Mobile Entry (maps to SEC code: WEB) telephone: Authorisation
-         * is provided orally over telephone (maps to SEC code: TEL) paper: Authorisation is
-         * provided in writing and signed, or similarly authenticated (maps to SEC code: PPD)
-         * 
-         */
-        public BillingRequestCreateWithInstalmentsWithScheduleRequest withMandateRequestAuthorisationSource(
-                MandateRequest.AuthorisationSource authorisationSource) {
-            if (mandateRequest == null) {
-                mandateRequest = new MandateRequest();
-            }
-            mandateRequest.withAuthorisationSource(authorisationSource);
-            return this;
-        }
-
-        /**
-         * [ISO 4217](http://en.wikipedia.org/wiki/ISO_4217#Active_codes) currency code. Currently
-         * "USD" and "CAD" are supported.
-         */
-        public BillingRequestCreateWithInstalmentsWithScheduleRequest withMandateRequestCurrency(
-                String currency) {
-            if (mandateRequest == null) {
-                mandateRequest = new MandateRequest();
-            }
-            mandateRequest.withCurrency(currency);
-            return this;
-        }
-
-        /**
-         * A human-readable description of the payment and/or mandate. This will be displayed to the
-         * payer when authorising the billing request.
-         * 
-         */
-        public BillingRequestCreateWithInstalmentsWithScheduleRequest withMandateRequestDescription(
-                String description) {
-            if (mandateRequest == null) {
-                mandateRequest = new MandateRequest();
-            }
-            mandateRequest.withDescription(description);
-            return this;
-        }
-
-        /**
-         * Key-value store of custom data. Up to 3 keys are permitted, with key names up to 50
-         * characters and values up to 500 characters.
-         */
-        public BillingRequestCreateWithInstalmentsWithScheduleRequest withMandateRequestMetadata(
-                Map<String, String> metadata) {
-            if (mandateRequest == null) {
-                mandateRequest = new MandateRequest();
-            }
-            mandateRequest.withMetadata(metadata);
-            return this;
-        }
-
-        /**
-         * Unique reference. Different schemes have different length and [character
-         * set](#appendix-character-sets) requirements. GoCardless will generate a unique reference
-         * satisfying the different scheme requirements if this field is left blank.
-         */
-        public BillingRequestCreateWithInstalmentsWithScheduleRequest withMandateRequestReference(
-                String reference) {
-            if (mandateRequest == null) {
-                mandateRequest = new MandateRequest();
-            }
-            mandateRequest.withReference(reference);
-            return this;
-        }
-
-        /**
-         * Payment scheme. Currently supports `ach` in the US (USD) and 'pad' in the Canada (CAD)
-         */
-        public BillingRequestCreateWithInstalmentsWithScheduleRequest withMandateRequestScheme(
-                String scheme) {
-            if (mandateRequest == null) {
-                mandateRequest = new MandateRequest();
-            }
-            mandateRequest.withScheme(scheme);
-            return this;
-        }
-
-        /**
-         * If true, this billing request would be used to set up a mandate solely for moving (or
-         * sweeping) money from one account owned by the payer to another account that the payer
-         * also owns. This is required for Faster Payments
-         */
-        public BillingRequestCreateWithInstalmentsWithScheduleRequest withMandateRequestSweeping(
-                Boolean sweeping) {
-            if (mandateRequest == null) {
-                mandateRequest = new MandateRequest();
-            }
-            mandateRequest.withSweeping(sweeping);
-            return this;
-        }
-
-        /**
-         * Verification preference for the mandate. One of:
-         * <ul>
-         * <li>`minimum`: only verify if absolutely required, such as when part of scheme rules</li>
-         * <li>`recommended`: in addition to `minimum`, use the GoCardless payment intelligence
-         * solution to decide if a payer should be verified</li>
-         * <li>`when_available`: if verification mechanisms are available, use them</li>
-         * <li>`always`: as `when_available`, but fail to create the Billing Request if a mechanism
-         * isn't available</li>
-         * </ul>
-         * 
-         * By default, all Billing Requests use the `recommended` verification preference. It uses
-         * GoCardless payment intelligence solution to determine if a payer is fraudulent or not.
-         * The verification mechanism is based on the response and the payer may be asked to verify
-         * themselves. If the feature is not available, `recommended` behaves like `minimum`.
-         * 
-         * If you never wish to take advantage of our reduced risk products and Verified Mandates as
-         * they are released in new schemes, please use the `minimum` verification preference.
-         * 
-         * See [Billing Requests: Creating Verified
-         * Mandates](https://developer.gocardless.com/getting-started/billing-requests/verified-mandates/)
-         * for more information.
-         */
-        public BillingRequestCreateWithInstalmentsWithScheduleRequest withMandateRequestVerify(
-                MandateRequest.Verify verify) {
-            if (mandateRequest == null) {
-                mandateRequest = new MandateRequest();
-            }
-            mandateRequest.withVerify(verify);
-            return this;
-        }
-
-        /**
-         * Key-value store of custom data. Up to 3 keys are permitted, with key names up to 50
-         * characters and values up to 500 characters.
-         */
-        public BillingRequestCreateWithInstalmentsWithScheduleRequest withMetadata(
-                Map<String, String> metadata) {
-            this.metadata = metadata;
-            return this;
-        }
-
-        /**
-         * Key-value store of custom data. Up to 3 keys are permitted, with key names up to 50
-         * characters and values up to 500 characters.
-         */
-        public BillingRequestCreateWithInstalmentsWithScheduleRequest withMetadata(String key,
-                String value) {
-            if (metadata == null) {
-                metadata = new HashMap<>();
-            }
-            metadata.put(key, value);
-            return this;
-        }
-
-        public BillingRequestCreateWithInstalmentsWithScheduleRequest withPaymentRequest(
-                PaymentRequest paymentRequest) {
-            this.paymentRequest = paymentRequest;
-            return this;
-        }
-
-        /**
-         * Amount in minor unit (e.g. pence in GBP, cents in EUR).
-         */
-        public BillingRequestCreateWithInstalmentsWithScheduleRequest withPaymentRequestAmount(
-                Integer amount) {
-            if (paymentRequest == null) {
-                paymentRequest = new PaymentRequest();
-            }
-            paymentRequest.withAmount(amount);
-            return this;
-        }
-
-        /**
-         * The amount to be deducted from the payment as an app fee, to be paid to the partner
-         * integration which created the billing request, in the lowest denomination for the
-         * currency (e.g. pence in GBP, cents in EUR).
-         */
-        public BillingRequestCreateWithInstalmentsWithScheduleRequest withPaymentRequestAppFee(
-                Integer appFee) {
-            if (paymentRequest == null) {
-                paymentRequest = new PaymentRequest();
-            }
-            paymentRequest.withAppFee(appFee);
-            return this;
-        }
-
-        /**
-         * [ISO 4217](http://en.wikipedia.org/wiki/ISO_4217#Active_codes) currency code. Currently
-         * "USD" and "CAD" are supported.
-         */
-        public BillingRequestCreateWithInstalmentsWithScheduleRequest withPaymentRequestCurrency(
-                String currency) {
-            if (paymentRequest == null) {
-                paymentRequest = new PaymentRequest();
-            }
-            paymentRequest.withCurrency(currency);
-            return this;
-        }
-
-        /**
-         * A human-readable description of the payment and/or mandate. This will be displayed to the
-         * payer when authorising the billing request.
-         * 
-         */
-        public BillingRequestCreateWithInstalmentsWithScheduleRequest withPaymentRequestDescription(
-                String description) {
-            if (paymentRequest == null) {
-                paymentRequest = new PaymentRequest();
-            }
-            paymentRequest.withDescription(description);
-            return this;
-        }
-
-        /**
-         * This field will decide how GoCardless handles settlement of funds from the customer.
-         * 
-         * - `managed` will be moved through GoCardless' account, batched, and payed out. - `direct`
-         * will be a direct transfer from the payer's account to the merchant where invoicing will
-         * be handled separately.
-         * 
-         */
-        public BillingRequestCreateWithInstalmentsWithScheduleRequest withPaymentRequestFundsSettlement(
-                PaymentRequest.FundsSettlement fundsSettlement) {
-            if (paymentRequest == null) {
-                paymentRequest = new PaymentRequest();
-            }
-            paymentRequest.withFundsSettlement(fundsSettlement);
-            return this;
-        }
-
-        /**
-         * Key-value store of custom data. Up to 3 keys are permitted, with key names up to 50
-         * characters and values up to 500 characters.
-         */
-        public BillingRequestCreateWithInstalmentsWithScheduleRequest withPaymentRequestMetadata(
-                Map<String, String> metadata) {
-            if (paymentRequest == null) {
-                paymentRequest = new PaymentRequest();
-            }
-            paymentRequest.withMetadata(metadata);
-            return this;
-        }
-
-        /**
-         * A custom payment reference defined by the merchant. It is only available for payments
-         * using the Direct Funds settlement model on the Faster Payments scheme.
-         * 
-         */
-        public BillingRequestCreateWithInstalmentsWithScheduleRequest withPaymentRequestReference(
-                String reference) {
-            if (paymentRequest == null) {
-                paymentRequest = new PaymentRequest();
-            }
-            paymentRequest.withReference(reference);
-            return this;
-        }
-
-        /**
-         * On failure, automatically retry payments using [intelligent
-         * retries](#success-intelligent-retries). Default is `false`.
-         * <p class="notice">
-         * <strong>Important</strong>: To be able to use intelligent retries, Success+ needs to be
-         * enabled in [GoCardless dashboard](https://manage.gocardless.com/success-plus).
-         * </p>
-         */
-        public BillingRequestCreateWithInstalmentsWithScheduleRequest withPaymentRequestRetryIfPossible(
-                Boolean retryIfPossible) {
-            if (paymentRequest == null) {
-                paymentRequest = new PaymentRequest();
-            }
-            paymentRequest.withRetryIfPossible(retryIfPossible);
-            return this;
-        }
-
-        /**
-         * Payment scheme. Currently supports `ach` in the US (USD) and 'pad' in the Canada (CAD)
-         */
-        public BillingRequestCreateWithInstalmentsWithScheduleRequest withPaymentRequestScheme(
-                String scheme) {
-            if (paymentRequest == null) {
-                paymentRequest = new PaymentRequest();
-            }
-            paymentRequest.withScheme(scheme);
-            return this;
-        }
-
-        public BillingRequestCreateWithInstalmentsWithScheduleRequest withIdempotencyKey(
-                String idempotencyKey) {
-            super.setIdempotencyKey(idempotencyKey);
-            return this;
-        }
-
-        @Override
-        protected GetRequest<BillingRequest> handleConflict(HttpClient httpClient, String id) {
-            BillingRequestGetRequest request = new BillingRequestGetRequest(httpClient, id);
-            for (Map.Entry<String, String> header : this.getCustomHeaders().entrySet()) {
-                request = request.withHeader(header.getKey(), header.getValue());
-            }
-            return request;
-        }
-
-        private BillingRequestCreateWithInstalmentsWithScheduleRequest(HttpClient httpClient) {
-            super(httpClient);
-        }
-
-        public BillingRequestCreateWithInstalmentsWithScheduleRequest withHeader(String headerName,
-                String headerValue) {
-            this.addHeader(headerName, headerValue);
-            return this;
-        }
-
-        @Override
-        protected String getPathTemplate() {
-            return "billing_requests";
-        }
-
-        @Override
-        protected String getEnvelope() {
-            return "billing_requests";
-        }
-
-        @Override
-        protected Class<BillingRequest> getResponseClass() {
-            return BillingRequest.class;
-        }
-
-        @Override
-        protected boolean hasBody() {
-            return true;
-        }
-
-        public static class Instalments {
-            private List<Integer> amounts;
-            private Integer interval;
-            private IntervalUnit intervalUnit;
-            private String startDate;
-
-            /**
-             * List of amounts of each instalment, in the lowest denomination for the currency (e.g.
-             * cents in USD).
-             * 
-             */
-            public Instalments withAmounts(List<Integer> amounts) {
-                this.amounts = amounts;
-                return this;
-            }
-
-            /**
-             * Number of `interval_units` between charge dates. Must be greater than or equal to
-             * `1`.
-             * 
-             */
-            public Instalments withInterval(Integer interval) {
-                this.interval = interval;
-                return this;
-            }
-
-            /**
-             * The unit of time between customer charge dates. One of `weekly`, `monthly` or
-             * `yearly`.
-             */
-            public Instalments withIntervalUnit(IntervalUnit intervalUnit) {
-                this.intervalUnit = intervalUnit;
-                return this;
-            }
-
-            /**
-             * The date on which the first payment should be charged. Must be on or after the
-             * [mandate](#core-endpoints-mandates)'s `next_possible_charge_date`. When left blank
-             * and `month` or `day_of_month` are provided, this will be set to the date of the first
-             * payment. If created without `month` or `day_of_month` this will be set as the
-             * mandate's `next_possible_charge_date`
-             */
-            public Instalments withStartDate(String startDate) {
-                this.startDate = startDate;
-                return this;
-            }
-
-            public Map<String, Object> getQueryParams() {
-                ImmutableMap.Builder<String, Object> params = ImmutableMap.builder();
-                if (amounts != null) {
-                    params.put("instalments[amounts]", amounts);
-                }
-                if (interval != null) {
-                    params.put("instalments[interval]", interval);
-                }
-                if (intervalUnit != null) {
-                    params.put("instalments[interval_unit]", intervalUnit);
-                }
-                if (startDate != null) {
-                    params.put("instalments[start_date]", startDate);
-                }
-                return params.build();
-            }
-
-            public enum IntervalUnit {
-                @SerializedName("weekly")
-                WEEKLY, @SerializedName("monthly")
-                MONTHLY, @SerializedName("yearly")
-                YEARLY, @SerializedName("unknown")
-                UNKNOWN;
-
-                @Override
-                public String toString() {
-                    return name().toLowerCase();
-                }
-            }
-        }
-
-        public static class InstalmentScheduleRequest {
-            private Integer appFee;
-            private String currency;
-            private Instalments instalments;
-            private Map<String, String> metadata;
-            private String name;
-            private String paymentReference;
-            private Boolean retryIfPossible;
-            private Integer totalAmount;
-
-            /**
-             * The amount to be deducted from each payment as an app fee, to be paid to the partner
-             * integration which created the subscription, in the lowest denomination for the
-             * currency (e.g. pence in GBP, cents in EUR).
-             */
-            public InstalmentScheduleRequest withAppFee(Integer appFee) {
-                this.appFee = appFee;
-                return this;
-            }
-
-            /**
-             * [ISO 4217](http://en.wikipedia.org/wiki/ISO_4217#Active_codes) currency code.
-             * Currently "USD" and "CAD" are supported.
-             */
-            public InstalmentScheduleRequest withCurrency(String currency) {
-                this.currency = currency;
-                return this;
-            }
-
-            /**
-             * Frequency of the payments you want to create, together with an array of payment
-             * amounts to be collected, with a specified start date for the first payment. See
-             * [create (with schedule)](#instalment-schedules-create-with-schedule)
-             * 
-             */
-            public InstalmentScheduleRequest withInstalments(Instalments instalments) {
-                this.instalments = instalments;
-                return this;
-            }
-
-            /**
-             * Key-value store of custom data. Up to 3 keys are permitted, with key names up to 50
-             * characters and values up to 500 characters.
-             */
-            public InstalmentScheduleRequest withMetadata(Map<String, String> metadata) {
-                this.metadata = metadata;
-                return this;
-            }
-
-            /**
-             * Name of the instalment schedule, up to 100 chars. This name will also be copied to
-             * the payments of the instalment schedule if you use schedule-based creation.
-             */
-            public InstalmentScheduleRequest withName(String name) {
-                this.name = name;
-                return this;
-            }
-
-            /**
-             * An optional payment reference. This will be set as the reference on each payment
-             * created and will appear on your customer's bank statement. See the documentation for
-             * the [create payment endpoint](#payments-create-a-payment) for more details. <br />
-             */
-            public InstalmentScheduleRequest withPaymentReference(String paymentReference) {
-                this.paymentReference = paymentReference;
-                return this;
-            }
-
-            /**
-             * On failure, automatically retry payments using [intelligent
-             * retries](#success-intelligent-retries). Default is `false`.
-             * <p class="notice">
-             * <strong>Important</strong>: To be able to use intelligent retries, Success+ needs to
-             * be enabled in [GoCardless dashboard](https://manage.gocardless.com/success-plus).
-             * </p>
-             */
-            public InstalmentScheduleRequest withRetryIfPossible(Boolean retryIfPossible) {
-                this.retryIfPossible = retryIfPossible;
-                return this;
-            }
-
-            /**
-             * The total amount of the instalment schedule, defined as the sum of all individual
-             * payments, in the lowest denomination for the currency (e.g. pence in GBP, cents in
-             * EUR). If the requested payment amounts do not sum up correctly, a validation error
-             * will be returned.
-             */
-            public InstalmentScheduleRequest withTotalAmount(Integer totalAmount) {
-                this.totalAmount = totalAmount;
-                return this;
-            }
-        }
-
-        public static class Links {
-            private String creditor;
-            private String customer;
-            private String customerBankAccount;
-
-            /**
-             * ID of the associated [creditor](#core-endpoints-creditors). Only required if your
-             * account manages multiple creditors.
-             */
-            public Links withCreditor(String creditor) {
-                this.creditor = creditor;
-                return this;
-            }
-
-            /**
-             * ID of the [customer](#core-endpoints-customers) against which this request should be
-             * made.
-             */
-            public Links withCustomer(String customer) {
-                this.customer = customer;
-                return this;
-            }
-
-            /**
-             * (Optional) ID of the [customer_bank_account](#core-endpoints-customer-bank-accounts)
-             * against which this request should be made.
-             * 
-             */
-            public Links withCustomerBankAccount(String customerBankAccount) {
-                this.customerBankAccount = customerBankAccount;
-                return this;
-            }
-        }
-
-        public static class MandateRequest {
-            private AuthorisationSource authorisationSource;
-            private String currency;
-            private String description;
-            private Map<String, String> metadata;
-            private String reference;
-            private String scheme;
-            private Boolean sweeping;
-            private Verify verify;
-
-            /**
-             * This field is ACH specific, sometimes referred to as [SEC
-             * code](https://www.moderntreasury.com/learn/sec-codes).
-             * 
-             * This is the way that the payer gives authorisation to the merchant. web:
-             * Authorisation is Internet Initiated or via Mobile Entry (maps to SEC code: WEB)
-             * telephone: Authorisation is provided orally over telephone (maps to SEC code: TEL)
-             * paper: Authorisation is provided in writing and signed, or similarly authenticated
-             * (maps to SEC code: PPD)
-             * 
-             */
-            public MandateRequest withAuthorisationSource(AuthorisationSource authorisationSource) {
-                this.authorisationSource = authorisationSource;
-                return this;
-            }
-
-            /**
-             * [ISO 4217](http://en.wikipedia.org/wiki/ISO_4217#Active_codes) currency code.
-             * Currently "USD" and "CAD" are supported.
-             */
-            public MandateRequest withCurrency(String currency) {
-                this.currency = currency;
-                return this;
-            }
-
-            /**
-             * A human-readable description of the payment and/or mandate. This will be displayed to
-             * the payer when authorising the billing request.
-             * 
-             */
-            public MandateRequest withDescription(String description) {
-                this.description = description;
-                return this;
-            }
-
-            /**
-             * Key-value store of custom data. Up to 3 keys are permitted, with key names up to 50
-             * characters and values up to 500 characters.
-             */
-            public MandateRequest withMetadata(Map<String, String> metadata) {
-                this.metadata = metadata;
-                return this;
-            }
-
-            /**
-             * Unique reference. Different schemes have different length and [character
-             * set](#appendix-character-sets) requirements. GoCardless will generate a unique
-             * reference satisfying the different scheme requirements if this field is left blank.
-             */
-            public MandateRequest withReference(String reference) {
-                this.reference = reference;
-                return this;
-            }
-
-            /**
-             * Payment scheme. Currently supports `ach` in the US (USD) and 'pad' in the Canada
-             * (CAD)
-             */
-            public MandateRequest withScheme(String scheme) {
-                this.scheme = scheme;
-                return this;
-            }
-
-            /**
-             * If true, this billing request would be used to set up a mandate solely for moving (or
-             * sweeping) money from one account owned by the payer to another account that the payer
-             * also owns. This is required for Faster Payments
-             */
-            public MandateRequest withSweeping(Boolean sweeping) {
-                this.sweeping = sweeping;
-                return this;
-            }
-
-            /**
-             * Verification preference for the mandate. One of:
-             * <ul>
-             * <li>`minimum`: only verify if absolutely required, such as when part of scheme
-             * rules</li>
-             * <li>`recommended`: in addition to `minimum`, use the GoCardless payment intelligence
-             * solution to decide if a payer should be verified</li>
-             * <li>`when_available`: if verification mechanisms are available, use them</li>
-             * <li>`always`: as `when_available`, but fail to create the Billing Request if a
-             * mechanism isn't available</li>
-             * </ul>
-             * 
-             * By default, all Billing Requests use the `recommended` verification preference. It
-             * uses GoCardless payment intelligence solution to determine if a payer is fraudulent
-             * or not. The verification mechanism is based on the response and the payer may be
-             * asked to verify themselves. If the feature is not available, `recommended` behaves
-             * like `minimum`.
-             * 
-             * If you never wish to take advantage of our reduced risk products and Verified
-             * Mandates as they are released in new schemes, please use the `minimum` verification
-             * preference.
-             * 
-             * See [Billing Requests: Creating Verified
-             * Mandates](https://developer.gocardless.com/getting-started/billing-requests/verified-mandates/)
-             * for more information.
-             */
-            public MandateRequest withVerify(Verify verify) {
-                this.verify = verify;
-                return this;
-            }
-
-            public enum AuthorisationSource {
-                @SerializedName("web")
-                WEB, @SerializedName("telephone")
-                TELEPHONE, @SerializedName("paper")
-                PAPER, @SerializedName("unknown")
-                UNKNOWN;
-
-                @Override
-                public String toString() {
-                    return name().toLowerCase();
-                }
-            }
-
-            public enum Verify {
-                @SerializedName("minimum")
-                MINIMUM, @SerializedName("recommended")
-                RECOMMENDED, @SerializedName("when_available")
-                WHEN_AVAILABLE, @SerializedName("always")
-                ALWAYS, @SerializedName("unknown")
-                UNKNOWN;
-
-                @Override
-                public String toString() {
-                    return name().toLowerCase();
-                }
-            }
-        }
-
-        public static class PaymentRequest {
-            private Integer amount;
-            private Integer appFee;
-            private String currency;
-            private String description;
-            private FundsSettlement fundsSettlement;
-            private Map<String, String> metadata;
-            private String reference;
-            private Boolean retryIfPossible;
-            private String scheme;
-
-            /**
-             * Amount in minor unit (e.g. pence in GBP, cents in EUR).
-             */
-            public PaymentRequest withAmount(Integer amount) {
-                this.amount = amount;
-                return this;
-            }
-
-            /**
-             * The amount to be deducted from the payment as an app fee, to be paid to the partner
-             * integration which created the billing request, in the lowest denomination for the
-             * currency (e.g. pence in GBP, cents in EUR).
-             */
-            public PaymentRequest withAppFee(Integer appFee) {
-                this.appFee = appFee;
-                return this;
-            }
-
-            /**
-             * [ISO 4217](http://en.wikipedia.org/wiki/ISO_4217#Active_codes) currency code.
-             * Currently "USD" and "CAD" are supported.
-             */
-            public PaymentRequest withCurrency(String currency) {
-                this.currency = currency;
-                return this;
-            }
-
-            /**
-             * A human-readable description of the payment and/or mandate. This will be displayed to
-             * the payer when authorising the billing request.
-             * 
-             */
-            public PaymentRequest withDescription(String description) {
-                this.description = description;
-                return this;
-            }
-
-            /**
-             * This field will decide how GoCardless handles settlement of funds from the customer.
-             * 
-             * - `managed` will be moved through GoCardless' account, batched, and payed out. -
-             * `direct` will be a direct transfer from the payer's account to the merchant where
-             * invoicing will be handled separately.
-             * 
-             */
-            public PaymentRequest withFundsSettlement(FundsSettlement fundsSettlement) {
-                this.fundsSettlement = fundsSettlement;
-                return this;
-            }
-
-            /**
-             * Key-value store of custom data. Up to 3 keys are permitted, with key names up to 50
-             * characters and values up to 500 characters.
-             */
-            public PaymentRequest withMetadata(Map<String, String> metadata) {
-                this.metadata = metadata;
-                return this;
-            }
-
-            /**
-             * A custom payment reference defined by the merchant. It is only available for payments
-             * using the Direct Funds settlement model on the Faster Payments scheme.
-             * 
-             */
-            public PaymentRequest withReference(String reference) {
-                this.reference = reference;
-                return this;
-            }
-
-            /**
-             * On failure, automatically retry payments using [intelligent
-             * retries](#success-intelligent-retries). Default is `false`.
-             * <p class="notice">
-             * <strong>Important</strong>: To be able to use intelligent retries, Success+ needs to
-             * be enabled in [GoCardless dashboard](https://manage.gocardless.com/success-plus).
-             * </p>
-             */
-            public PaymentRequest withRetryIfPossible(Boolean retryIfPossible) {
-                this.retryIfPossible = retryIfPossible;
-                return this;
-            }
-
-            /**
-             * Payment scheme. Currently supports `ach` in the US (USD) and 'pad' in the Canada
-             * (CAD)
-             */
-            public PaymentRequest withScheme(String scheme) {
-                this.scheme = scheme;
-                return this;
-            }
-
-            public enum FundsSettlement {
-                @SerializedName("managed")
-                MANAGED, @SerializedName("direct")
-                DIRECT, @SerializedName("unknown")
                 UNKNOWN;
 
                 @Override
