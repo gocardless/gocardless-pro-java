@@ -80,7 +80,8 @@ public class BillingRequest {
     }
 
     /**
-     * Request for an instalment schedule
+     * Request for an instalment schedule. Has to contain either `instalments_with_schedule` object
+     * or an array of `instalments_with_dates` objects
      */
     public InstalmentScheduleRequest getInstalmentScheduleRequest() {
         return instalmentScheduleRequest;
@@ -398,7 +399,8 @@ public class BillingRequest {
     /**
      * Represents a instalment schedule request resource returned from the API.
      *
-     * Request for an instalment schedule
+     * Request for an instalment schedule. Has to contain either `instalments_with_schedule` object
+     * or an array of `instalments_with_dates` objects
      */
     public static class InstalmentScheduleRequest {
         private InstalmentScheduleRequest() {
@@ -407,7 +409,6 @@ public class BillingRequest {
 
         private Integer appFee;
         private String currency;
-        private Map<String, Object> instalments;
         private List<InstalmentsWithDate> instalmentsWithDates;
         private InstalmentsWithSchedule instalmentsWithSchedule;
         private Links links;
@@ -432,16 +433,6 @@ public class BillingRequest {
          */
         public String getCurrency() {
             return currency;
-        }
-
-        /**
-         * instalments to be created. See [create (with
-         * dates)](#instalment-schedules-create-with-dates) and [create (with
-         * schedule)](#instalment-schedules-create-with-schedule) for more information on how to
-         * specify instalments.
-         */
-        public Map<String, Object> getInstalments() {
-            return instalments;
         }
 
         /**
