@@ -29,7 +29,7 @@ public class NegativeBalanceLimit {
     }
 
     /**
-     * Fixed [timestamp](#api-usage-time-zones--dates), recording when this limit was created.
+     * Fixed [timestamp](#api-usage-dates-and-times), recording when this limit was created.
      */
     public String getCreatedAt() {
         return createdAt;

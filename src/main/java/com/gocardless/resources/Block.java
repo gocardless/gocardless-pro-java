@@ -62,7 +62,7 @@ public class Block {
     }
 
     /**
-     * Fixed [timestamp](#api-usage-time-zones--dates), recording when this resource was created.
+     * Fixed [timestamp](#api-usage-dates-and-times), recording when this resource was created.
      */
     public String getCreatedAt() {
         return createdAt;
@@ -104,7 +104,7 @@ public class Block {
     }
 
     /**
-     * Fixed [timestamp](#api-usage-time-zones--dates), recording when this resource was updated.
+     * Fixed [timestamp](#api-usage-dates-and-times), recording when this resource was updated.
      */
     public String getUpdatedAt() {
         return updatedAt;

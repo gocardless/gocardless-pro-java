@@ -39,7 +39,7 @@ public class CustomerNotification {
     }
 
     /**
-     * Fixed [timestamp](#api-usage-time-zones--dates), recording when this action was taken.
+     * Fixed [timestamp](#api-usage-dates-and-times), recording when this action was taken.
      */
     public String getActionTakenAt() {
         return actionTakenAt;

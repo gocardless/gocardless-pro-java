@@ -35,7 +35,7 @@ public class BankAuthorisation {
     }
 
     /**
-     * Fixed [timestamp](#api-usage-time-zones--dates), recording when the user has been authorised.
+     * Fixed [timestamp](#api-usage-dates-and-times), recording when the user has been authorised.
      */
     public String getAuthorisedAt() {
         return authorisedAt;
@@ -64,8 +64,8 @@ public class BankAuthorisation {
     }
 
     /**
-     * Fixed [timestamp](#api-usage-time-zones--dates), recording when the authorisation URL has
-     * been visited.
+     * Fixed [timestamp](#api-usage-dates-and-times), recording when the authorisation URL has been
+     * visited.
      */
     public String getLastVisitedAt() {
         return lastVisitedAt;
