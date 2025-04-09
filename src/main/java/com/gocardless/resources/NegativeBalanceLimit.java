@@ -76,7 +76,7 @@ public class NegativeBalanceLimit {
         private String creditor;
 
         /**
-         * ID of the [creator_user](#core-endpoints-creator_users) who created this limit
+         * ID of the creator_user who created this limit
          */
         public String getCreatorUser() {
             return creatorUser;
