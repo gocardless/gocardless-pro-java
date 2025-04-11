@@ -415,7 +415,8 @@ public class EventService {
             PAYOUTS, @SerializedName("refunds")
             REFUNDS, @SerializedName("scheme_identifiers")
             SCHEME_IDENTIFIERS, @SerializedName("subscriptions")
-            SUBSCRIPTIONS, @SerializedName("unknown")
+            SUBSCRIPTIONS, @SerializedName("outbound_payment")
+            OUTBOUND_PAYMENT, @SerializedName("unknown")
             UNKNOWN;
 
             @Override
