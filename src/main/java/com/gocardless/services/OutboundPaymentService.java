@@ -54,23 +54,23 @@ public class OutboundPaymentService {
      * `pending_approval`, or `scheduled` status can be cancelled. Once an outbound payment is
      * `executing`, the money moving process has begun and cannot be reversed.
      */
-    public OutboundPaymentCancelRequest cancel(String id) {
-        return new OutboundPaymentCancelRequest(httpClient, id);
+    public OutboundPaymentCancelRequest cancel(String identity) {
+        return new OutboundPaymentCancelRequest(httpClient, identity);
     }
 
     /**
      * Approves an outbound payment. Only outbound payments in the “pending_approval” state can be
      * approved.
      */
-    public OutboundPaymentApproveRequest approve(String id) {
-        return new OutboundPaymentApproveRequest(httpClient, id);
+    public OutboundPaymentApproveRequest approve(String identity) {
+        return new OutboundPaymentApproveRequest(httpClient, identity);
     }
 
     /**
      * Fetches an outbound_payment by ID
      */
-    public OutboundPaymentGetRequest get(String id) {
-        return new OutboundPaymentGetRequest(httpClient, id);
+    public OutboundPaymentGetRequest get(String identity) {
+        return new OutboundPaymentGetRequest(httpClient, identity);
     }
 
     /**
@@ -89,8 +89,8 @@ public class OutboundPaymentService {
     /**
      * Updates an outbound payment object. This accepts only the metadata parameter.
      */
-    public OutboundPaymentUpdateRequest update(String id) {
-        return new OutboundPaymentUpdateRequest(httpClient, id);
+    public OutboundPaymentUpdateRequest update(String identity) {
+        return new OutboundPaymentUpdateRequest(httpClient, identity);
     }
 
     /**
@@ -395,7 +395,7 @@ public class OutboundPaymentService {
      */
     public static final class OutboundPaymentCancelRequest extends PostRequest<OutboundPayment> {
         @PathParam
-        private final String id;
+        private final String identity;
         private Map<String, String> metadata;
 
         /**
@@ -419,9 +419,9 @@ public class OutboundPaymentService {
             return this;
         }
 
-        private OutboundPaymentCancelRequest(HttpClient httpClient, String id) {
+        private OutboundPaymentCancelRequest(HttpClient httpClient, String identity) {
             super(httpClient);
-            this.id = id;
+            this.identity = identity;
         }
 
         public OutboundPaymentCancelRequest withHeader(String headerName, String headerValue) {
@@ -432,13 +432,13 @@ public class OutboundPaymentService {
         @Override
         protected Map<String, String> getPathParams() {
             ImmutableMap.Builder<String, String> params = ImmutableMap.builder();
-            params.put("id", id);
+            params.put("identity", identity);
             return params.build();
         }
 
         @Override
         protected String getPathTemplate() {
-            return "outbound_payments/:id/actions/cancel";
+            return "outbound_payments/:identity/actions/cancel";
         }
 
         @Override
@@ -470,11 +470,11 @@ public class OutboundPaymentService {
      */
     public static final class OutboundPaymentApproveRequest extends PostRequest<OutboundPayment> {
         @PathParam
-        private final String id;
+        private final String identity;
 
-        private OutboundPaymentApproveRequest(HttpClient httpClient, String id) {
+        private OutboundPaymentApproveRequest(HttpClient httpClient, String identity) {
             super(httpClient);
-            this.id = id;
+            this.identity = identity;
         }
 
         public OutboundPaymentApproveRequest withHeader(String headerName, String headerValue) {
@@ -485,13 +485,13 @@ public class OutboundPaymentService {
         @Override
         protected Map<String, String> getPathParams() {
             ImmutableMap.Builder<String, String> params = ImmutableMap.builder();
-            params.put("id", id);
+            params.put("identity", identity);
             return params.build();
         }
 
         @Override
         protected String getPathTemplate() {
-            return "outbound_payments/:id/actions/approve";
+            return "outbound_payments/:identity/actions/approve";
         }
 
         @Override
@@ -522,11 +522,11 @@ public class OutboundPaymentService {
      */
     public static final class OutboundPaymentGetRequest extends GetRequest<OutboundPayment> {
         @PathParam
-        private final String id;
+        private final String identity;
 
-        private OutboundPaymentGetRequest(HttpClient httpClient, String id) {
+        private OutboundPaymentGetRequest(HttpClient httpClient, String identity) {
             super(httpClient);
-            this.id = id;
+            this.identity = identity;
         }
 
         public OutboundPaymentGetRequest withHeader(String headerName, String headerValue) {
@@ -537,13 +537,13 @@ public class OutboundPaymentService {
         @Override
         protected Map<String, String> getPathParams() {
             ImmutableMap.Builder<String, String> params = ImmutableMap.builder();
-            params.put("id", id);
+            params.put("identity", identity);
             return params.build();
         }
 
         @Override
         protected String getPathTemplate() {
-            return "outbound_payments/:id";
+            return "outbound_payments/:identity";
         }
 
         @Override
@@ -701,7 +701,7 @@ public class OutboundPaymentService {
      */
     public static final class OutboundPaymentUpdateRequest extends PutRequest<OutboundPayment> {
         @PathParam
-        private final String id;
+        private final String identity;
         private Map<String, String> metadata;
 
         /**
@@ -725,9 +725,9 @@ public class OutboundPaymentService {
             return this;
         }
 
-        private OutboundPaymentUpdateRequest(HttpClient httpClient, String id) {
+        private OutboundPaymentUpdateRequest(HttpClient httpClient, String identity) {
             super(httpClient);
-            this.id = id;
+            this.identity = identity;
         }
 
         public OutboundPaymentUpdateRequest withHeader(String headerName, String headerValue) {
@@ -738,13 +738,13 @@ public class OutboundPaymentService {
         @Override
         protected Map<String, String> getPathParams() {
             ImmutableMap.Builder<String, String> params = ImmutableMap.builder();
-            params.put("id", id);
+            params.put("identity", identity);
             return params.build();
         }
 
         @Override
         protected String getPathTemplate() {
-            return "outbound_payments/:id";
+            return "outbound_payments/:identity";
         }
 
         @Override
