@@ -9,7 +9,7 @@ import java.util.Map;
  * Outbound Payments represent payments sent from [creditors](#core-endpoints-creditors).
  * 
  * GoCardless will notify you via a [webhook](#appendix-webhooks) when the status of the outbound
- * payment [changes](#event-actions-outbound-payments).
+ * payment [changes](#event-actions-outbound-payment).
  * 
  * <p class="restricted-notice">
  * <strong>Restricted</strong>: Outbound Payments are currently in Beta and available only to a
@@ -111,8 +111,9 @@ public class OutboundPayment {
     /**
      * One of:
      * <ul>
-     * <li>`verifying`: The payment has been [created](outbound-payments-create-an-outbound-payment)
-     * and the verification process has begun.</li>
+     * <li>`verifying`: The payment has been
+     * [created](#outbound-payments-create-an-outbound-payment) and the verification process has
+     * begun.</li>
      * <li>`pending_approval`: The payment is awaiting
      * [approval](#outbound-payments-approve-an-outbound-payment).</li>
      * <li>`scheduled`: The payment has passed verification &
