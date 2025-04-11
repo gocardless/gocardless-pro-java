@@ -159,6 +159,7 @@ public class OutboundPayment {
         }
 
         private String creditor;
+        private String customer;
         private String recipientBankAccount;
 
         /**
@@ -166,6 +167,13 @@ public class OutboundPayment {
          */
         public String getCreditor() {
             return creditor;
+        }
+
+        /**
+         * ID of the [customer](#core-endpoints-customers) that receives this outbound payment
+         */
+        public String getCustomer() {
+            return customer;
         }
 
         /**
