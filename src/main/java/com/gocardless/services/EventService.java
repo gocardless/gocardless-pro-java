@@ -60,6 +60,7 @@ public class EventService {
         private Include include;
         private String instalmentSchedule;
         private String mandate;
+        private String outboundPayment;
         private String parentEvent;
         private String payerAuthorisation;
         private String payment;
@@ -216,6 +217,15 @@ public class EventService {
         }
 
         /**
+         * ID of an outbound_payment. If specified, this endpoint will return all events for the
+         * given payment.
+         */
+        public EventListRequest<S> withOutboundPayment(String outboundPayment) {
+            this.outboundPayment = outboundPayment;
+            return this;
+        }
+
+        /**
          * ID of an event. If specified, this endpoint will return all events whose parent_event is
          * the given event ID.
          */
@@ -337,6 +347,9 @@ public class EventService {
             }
             if (mandate != null) {
                 params.put("mandate", mandate);
+            }
+            if (outboundPayment != null) {
+                params.put("outbound_payment", outboundPayment);
             }
             if (parentEvent != null) {
                 params.put("parent_event", parentEvent);
