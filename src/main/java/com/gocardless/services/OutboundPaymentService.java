@@ -59,8 +59,8 @@ public class OutboundPaymentService {
     }
 
     /**
-     * Approves an outbound payment. Only outbound payments in the “pending_approval” state can be
-     * approved.
+     * Approves an outbound payment. Only outbound payments with the “pending_approval” status can
+     * be approved.
      */
     public OutboundPaymentApproveRequest approve(String identity) {
         return new OutboundPaymentApproveRequest(httpClient, identity);
@@ -465,8 +465,8 @@ public class OutboundPaymentService {
     /**
      * Request class for {@link OutboundPaymentService#approve }.
      *
-     * Approves an outbound payment. Only outbound payments in the “pending_approval” state can be
-     * approved.
+     * Approves an outbound payment. Only outbound payments with the “pending_approval” status can
+     * be approved.
      */
     public static final class OutboundPaymentApproveRequest extends PostRequest<OutboundPayment> {
         @PathParam
