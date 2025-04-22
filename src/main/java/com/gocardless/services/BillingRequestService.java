@@ -2798,8 +2798,7 @@ public class BillingRequestService {
         }
 
         /**
-         * Fixed [timestamp](#api-usage-time-zones--dates), recording when this resource was
-         * created.
+         * Fixed [timestamp](#api-usage-dates-and-times), recording when this resource was created.
          */
         public BillingRequestListRequest<S> withCreatedAt(String createdAt) {
             this.createdAt = createdAt;

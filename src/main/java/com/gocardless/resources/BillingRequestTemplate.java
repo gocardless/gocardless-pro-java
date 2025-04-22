@@ -49,7 +49,7 @@ public class BillingRequestTemplate {
     }
 
     /**
-     * Fixed [timestamp](#api-usage-time-zones--dates), recording when this resource was created.
+     * Fixed [timestamp](#api-usage-dates-and-times), recording when this resource was created.
      */
     public String getCreatedAt() {
         return createdAt;
@@ -193,7 +193,7 @@ public class BillingRequestTemplate {
     }
 
     /**
-     * Dynamic [timestamp](#api-usage-time-zones--dates) recording when this resource was last
+     * Dynamic [timestamp](#api-usage-dates-and-times) recording when this resource was last
      * updated.
      */
     public String getUpdatedAt() {

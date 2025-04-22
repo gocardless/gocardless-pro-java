@@ -37,7 +37,7 @@ public class Event {
     }
 
     /**
-     * Fixed [timestamp](#api-usage-time-zones--dates), recording when this resource was created.
+     * Fixed [timestamp](#api-usage-dates-and-times), recording when this resource was created.
      */
     public String getCreatedAt() {
         return createdAt;
@@ -103,6 +103,7 @@ public class Event {
      * <li>`refunds`</li>
      * <li>`scheme_identifiers`</li>
      * <li>`subscriptions`</li>
+     * <li>`outbound_payment`</li>
      * </ul>
      */
     public ResourceType getResourceType() {
@@ -123,7 +124,8 @@ public class Event {
         PAYOUTS, @SerializedName("refunds")
         REFUNDS, @SerializedName("scheme_identifiers")
         SCHEME_IDENTIFIERS, @SerializedName("subscriptions")
-        SUBSCRIPTIONS, @SerializedName("unknown")
+        SUBSCRIPTIONS, @SerializedName("outbound_payment")
+        OUTBOUND_PAYMENT, @SerializedName("unknown")
         UNKNOWN
     }
 

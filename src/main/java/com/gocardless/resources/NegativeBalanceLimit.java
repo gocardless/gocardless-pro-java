@@ -29,7 +29,7 @@ public class NegativeBalanceLimit {
     }
 
     /**
-     * Fixed [timestamp](#api-usage-time-zones--dates), recording when this limit was created.
+     * Fixed [timestamp](#api-usage-dates-and-times), recording when this limit was created.
      */
     public String getCreatedAt() {
         return createdAt;
@@ -76,7 +76,7 @@ public class NegativeBalanceLimit {
         private String creditor;
 
         /**
-         * ID of the [creator_user](#core-endpoints-creator_users) who created this limit
+         * ID of the creator_user who created this limit
          */
         public String getCreatorUser() {
             return creatorUser;

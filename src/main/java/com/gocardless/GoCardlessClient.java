@@ -38,6 +38,7 @@ public class GoCardlessClient {
     private final MandateImportEntryService mandateImportEntries;
     private final MandatePdfService mandatePdfs;
     private final NegativeBalanceLimitService negativeBalanceLimits;
+    private final OutboundPaymentService outboundPayments;
     private final PayerAuthorisationService payerAuthorisations;
     private final PayerThemeService payerThemes;
     private final PaymentService payments;
@@ -197,6 +198,7 @@ public class GoCardlessClient {
         this.mandateImportEntries = new MandateImportEntryService(httpClient);
         this.mandatePdfs = new MandatePdfService(httpClient);
         this.negativeBalanceLimits = new NegativeBalanceLimitService(httpClient);
+        this.outboundPayments = new OutboundPaymentService(httpClient);
         this.payerAuthorisations = new PayerAuthorisationService(httpClient);
         this.payerThemes = new PayerThemeService(httpClient);
         this.payments = new PaymentService(httpClient);
@@ -379,6 +381,13 @@ public class GoCardlessClient {
      */
     public NegativeBalanceLimitService negativeBalanceLimits() {
         return negativeBalanceLimits;
+    }
+
+    /**
+     * A service class for working with outbound payment resources.
+     */
+    public OutboundPaymentService outboundPayments() {
+        return outboundPayments;
     }
 
     /**

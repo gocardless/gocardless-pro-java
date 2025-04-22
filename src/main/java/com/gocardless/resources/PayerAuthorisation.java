@@ -73,8 +73,7 @@ public class PayerAuthorisation {
     }
 
     /**
-     * [Timestamp](#api-usage-time-zones--dates), recording when this Payer Authorisation was
-     * created.
+     * [Timestamp](#api-usage-dates-and-times), recording when this Payer Authorisation was created.
      */
     public String getCreatedAt() {
         return createdAt;

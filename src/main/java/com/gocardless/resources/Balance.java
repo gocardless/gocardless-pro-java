@@ -57,7 +57,7 @@ public class Balance {
     }
 
     /**
-     * Dynamic [timestamp](#api-usage-time-zones--dates) recording when this resource was last
+     * Dynamic [timestamp](#api-usage-dates-and-times) recording when this resource was last
      * updated.
      */
     public String getLastUpdatedAt() {
