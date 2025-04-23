@@ -1,6 +1,7 @@
 package com.gocardless.resources;
 
 import com.google.gson.annotations.SerializedName;
+import java.util.Map;
 
 /**
  * Represents a institution resource returned from the API.
@@ -20,6 +21,7 @@ public class Institution {
     private String countryCode;
     private String iconUrl;
     private String id;
+    private Limits limits;
     private String logoUrl;
     private String name;
     private Status status;
@@ -36,7 +38,8 @@ public class Institution {
     /**
      * [ISO
      * 3166-1](http://en.wikipedia.org/wiki/ISO_3166-1_alpha-2#Officially_assigned_code_elements)
-     * alpha-2 code. The country code of the institution.
+     * alpha-2 code. The country code of the institution. If nothing is provided, institutions with
+     * the country code 'GB' are returned by default.
      */
     public String getCountryCode() {
         return countryCode;
@@ -54,6 +57,13 @@ public class Institution {
      */
     public String getId() {
         return id;
+    }
+
+    /**
+     * Defines individual limits for business and personal accounts.
+     */
+    public Limits getLimits() {
+        return limits;
     }
 
     /**
@@ -83,5 +93,35 @@ public class Institution {
         DISABLED, @SerializedName("temporarily_disabled")
         TEMPORARILY_DISABLED, @SerializedName("unknown")
         UNKNOWN
+    }
+
+    /**
+     * Represents a limit resource returned from the API.
+     *
+     * Defines individual limits for business and personal accounts.
+     */
+    public static class Limits {
+        private Limits() {
+            // blank to prevent instantiation
+        }
+
+        private Map<String, Object> daily;
+        private Map<String, Object> single;
+
+        /**
+         * Daily limit details for this institution. (The 'limits' property is only available via an
+         * authenticated request with a generated access token)
+         */
+        public Map<String, Object> getDaily() {
+            return daily;
+        }
+
+        /**
+         * Single transaction limit details for this institution. (The 'limits' property is only
+         * available via an authenticated request with a generated access token)
+         */
+        public Map<String, Object> getSingle() {
+            return single;
+        }
     }
 }
