@@ -161,6 +161,7 @@ public class InstitutionService {
         private final String identity;
         private String countryCode;
         private List<String> ids;
+        private Boolean includeDisabled;
         private String search;
 
         /**
@@ -192,6 +193,17 @@ public class InstitutionService {
                 this.ids = new ArrayList<>();
             }
             this.ids.add(ids);
+            return this;
+        }
+
+        /**
+         * Indicates whether to include temporarily disabled institutions in the response. If not
+         * provided or set to false, only enabled institutions will be returned.
+         * 
+         */
+        public InstitutionListForBillingRequestRequest<S> withIncludeDisabled(
+                Boolean includeDisabled) {
+            this.includeDisabled = includeDisabled;
             return this;
         }
 
@@ -231,6 +243,9 @@ public class InstitutionService {
             }
             if (ids != null) {
                 params.put("ids", Joiner.on(",").join(ids));
+            }
+            if (includeDisabled != null) {
+                params.put("include_disabled", includeDisabled);
             }
             if (search != null) {
                 params.put("search", search);
