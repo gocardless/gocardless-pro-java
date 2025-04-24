@@ -183,6 +183,7 @@ public class EventService {
          * <li>`refund`</li>
          * <li>`scheme_identifier`</li>
          * <li>`subscription`</li>
+         * <li>`outbound_payment`</li>
          * </ul>
          */
         public EventListRequest<S> withInclude(Include include) {
@@ -272,8 +273,8 @@ public class EventService {
         /**
          * Type of resource that you'd like to get all events for. Cannot be used together with the
          * `billing_request`, `creditor`, `export`,`instalment_schedule`, `mandate`,
-         * `payer_authorisation`, `payment`, `payout`, `refund`, `scheme_identifier` or
-         * `subscription` parameters. The type can be one of:
+         * `payer_authorisation`, `payment`, `payout`, `refund`, `scheme_identifier`, `subscription`
+         * or `outbound_payment` parameters. The type can be one of:
          * <ul>
          * <li>`billing_requests`</li>
          * <li>`creditors`</li>
@@ -286,6 +287,7 @@ public class EventService {
          * <li>`refunds`</li>
          * <li>`scheme_identifiers`</li>
          * <li>`subscriptions`</li>
+         * <li>`outbound_payments`</li>
          * </ul>
          */
         public EventListRequest<S> withResourceType(ResourceType resourceType) {
@@ -428,8 +430,7 @@ public class EventService {
             PAYOUTS, @SerializedName("refunds")
             REFUNDS, @SerializedName("scheme_identifiers")
             SCHEME_IDENTIFIERS, @SerializedName("subscriptions")
-            SUBSCRIPTIONS, @SerializedName("outbound_payment")
-            OUTBOUND_PAYMENT, @SerializedName("unknown")
+            SUBSCRIPTIONS, @SerializedName("unknown")
             UNKNOWN;
 
             @Override
