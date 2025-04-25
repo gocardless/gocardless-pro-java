@@ -58,15 +58,48 @@ public class InstitutionService {
      * Returns a list of supported institutions.
      */
     public static final class InstitutionListRequest<S> extends ListRequest<S, Institution> {
+        private String branchCode;
         private String countryCode;
+        private String feature;
+        private String scheme;
+
+        /**
+         * (Currently only supports UK sort-codes) The six-digit number that identifies both the
+         * bank and the specific branch where an account is held, eg. '601234'.
+         */
+        public InstitutionListRequest<S> withBranchCode(String branchCode) {
+            this.branchCode = branchCode;
+            return this;
+        }
 
         /**
          * [ISO
          * 3166-1](http://en.wikipedia.org/wiki/ISO_3166-1_alpha-2#Officially_assigned_code_elements)
-         * alpha-2 code. The country code of the institution.
+         * alpha-2 code. The country code of the institution. If nothing is provided, institutions
+         * with the country code 'GB' are returned by default.
          */
         public InstitutionListRequest<S> withCountryCode(String countryCode) {
             this.countryCode = countryCode;
+            return this;
+        }
+
+        /**
+         * The feature that institutions support. The available options include `pis`, and
+         * `vrp_sweeping`. If nothing is provided, institutions supporting 'pis' are returned by
+         * default.
+         */
+        public InstitutionListRequest<S> withFeature(String feature) {
+            this.feature = feature;
+            return this;
+        }
+
+        /**
+         * The scheme that institutions support. The available options include `faster_payments`,
+         * `sepa_credit_transfer`, and `sepa_instant_credit_transfer`. If nothing is provided,
+         * institutions supporting 'faster_payments' are returned by default.
+         */
+        public InstitutionListRequest<S> withScheme(String scheme) {
+            this.scheme = scheme;
             return this;
         }
 
@@ -84,8 +117,17 @@ public class InstitutionService {
         protected Map<String, Object> getQueryParams() {
             ImmutableMap.Builder<String, Object> params = ImmutableMap.builder();
             params.putAll(super.getQueryParams());
+            if (branchCode != null) {
+                params.put("branch_code", branchCode);
+            }
             if (countryCode != null) {
                 params.put("country_code", countryCode);
+            }
+            if (feature != null) {
+                params.put("feature", feature);
+            }
+            if (scheme != null) {
+                params.put("scheme", scheme);
             }
             return params.build();
         }
@@ -119,12 +161,14 @@ public class InstitutionService {
         private final String identity;
         private String countryCode;
         private List<String> ids;
+        private Boolean includeDisabled;
         private String search;
 
         /**
          * [ISO
          * 3166-1](http://en.wikipedia.org/wiki/ISO_3166-1_alpha-2#Officially_assigned_code_elements)
-         * alpha-2 code. The country code of the institution.
+         * alpha-2 code. The country code of the institution. If nothing is provided, institutions
+         * with the country code 'GB' are returned by default.
          */
         public InstitutionListForBillingRequestRequest<S> withCountryCode(String countryCode) {
             this.countryCode = countryCode;
@@ -149,6 +193,17 @@ public class InstitutionService {
                 this.ids = new ArrayList<>();
             }
             this.ids.add(ids);
+            return this;
+        }
+
+        /**
+         * Indicates whether to include temporarily disabled institutions in the response. If not
+         * provided or set to false, only enabled institutions will be returned.
+         * 
+         */
+        public InstitutionListForBillingRequestRequest<S> withIncludeDisabled(
+                Boolean includeDisabled) {
+            this.includeDisabled = includeDisabled;
             return this;
         }
 
@@ -188,6 +243,9 @@ public class InstitutionService {
             }
             if (ids != null) {
                 params.put("ids", Joiner.on(",").join(ids));
+            }
+            if (includeDisabled != null) {
+                params.put("include_disabled", includeDisabled);
             }
             if (search != null) {
                 params.put("search", search);
