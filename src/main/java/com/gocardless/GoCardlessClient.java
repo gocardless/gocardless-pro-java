@@ -21,6 +21,7 @@ public class GoCardlessClient {
     private final BillingRequestService billingRequests;
     private final BillingRequestFlowService billingRequestFlows;
     private final BillingRequestTemplateService billingRequestTemplates;
+    private final BillingRequestWithActionService billingRequestWithActions;
     private final BlockService blocks;
     private final CreditorService creditors;
     private final CreditorBankAccountService creditorBankAccounts;
@@ -181,6 +182,7 @@ public class GoCardlessClient {
         this.billingRequests = new BillingRequestService(httpClient);
         this.billingRequestFlows = new BillingRequestFlowService(httpClient);
         this.billingRequestTemplates = new BillingRequestTemplateService(httpClient);
+        this.billingRequestWithActions = new BillingRequestWithActionService(httpClient);
         this.blocks = new BlockService(httpClient);
         this.creditors = new CreditorService(httpClient);
         this.creditorBankAccounts = new CreditorBankAccountService(httpClient);
@@ -262,6 +264,13 @@ public class GoCardlessClient {
      */
     public BillingRequestTemplateService billingRequestTemplates() {
         return billingRequestTemplates;
+    }
+
+    /**
+     * A service class for working with billing request with action resources.
+     */
+    public BillingRequestWithActionService billingRequestWithActions() {
+        return billingRequestWithActions;
     }
 
     /**
