@@ -25,6 +25,7 @@ public class OutboundPayment {
 
     private Integer amount;
     private String createdAt;
+    private Currency currency;
     private String description;
     private String executionDate;
     private String id;
@@ -49,6 +50,14 @@ public class OutboundPayment {
      */
     public String getCreatedAt() {
         return createdAt;
+    }
+
+    /**
+     * [ISO 4217](http://en.wikipedia.org/wiki/ISO_4217#Active_codes) currency. Currently only "GBP"
+     * is supported.
+     */
+    public Currency getCurrency() {
+        return currency;
     }
 
     /**
@@ -139,6 +148,12 @@ public class OutboundPayment {
      */
     public Verifications getVerifications() {
         return verifications;
+    }
+
+    public enum Currency {
+        @SerializedName("GBP")
+        GBP, @SerializedName("unknown")
+        UNKNOWN
     }
 
     public enum Status {
