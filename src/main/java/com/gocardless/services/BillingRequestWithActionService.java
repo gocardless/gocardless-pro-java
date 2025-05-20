@@ -714,7 +714,7 @@ public class BillingRequestWithActionService {
 
         @Override
         protected String getEnvelope() {
-            return "billing_requests";
+            return "billing_request_with_actions";
         }
 
         @Override
