@@ -26,7 +26,7 @@ public class PayoutItem {
 
     private String amount;
     private Links links;
-    private List<Taxis> taxes;
+    private List<Tax> taxes;
     private Type type;
 
     /**
@@ -55,7 +55,7 @@ public class PayoutItem {
      * _Note_: VAT applies to transaction and surcharge fees for merchants operating in the UK and
      * France.
      */
-    public List<Taxis> getTaxes() {
+    public List<Tax> getTaxes() {
         return taxes;
     }
 
@@ -137,8 +137,8 @@ public class PayoutItem {
         }
     }
 
-    public static class Taxis {
-        private Taxis() {
+    public static class Tax {
+        private Tax() {
             // blank to prevent instantiation
         }
 
