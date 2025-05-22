@@ -631,8 +631,9 @@ public class BillingRequestService {
         }
 
         /**
-         * A custom payment reference defined by the merchant. It is only available for payments
-         * using the Direct Funds settlement model on the Faster Payments scheme.
+         * A custom payment reference defined by the merchant. It is only available for payments on
+         * the PayTo scheme or payments using the Direct Funds settlement model on the Faster
+         * Payments scheme.
          * 
          */
         public BillingRequestCreateRequest withPaymentRequestReference(String reference) {
@@ -1609,7 +1610,8 @@ public class BillingRequestService {
 
             /**
              * A custom payment reference defined by the merchant. It is only available for payments
-             * using the Direct Funds settlement model on the Faster Payments scheme.
+             * on the PayTo scheme or payments using the Direct Funds settlement model on the Faster
+             * Payments scheme.
              * 
              */
             public PaymentRequest withReference(String reference) {

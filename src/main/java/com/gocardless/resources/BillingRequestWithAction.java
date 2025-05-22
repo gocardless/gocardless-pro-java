@@ -1346,7 +1346,8 @@ public class BillingRequestWithAction {
 
             /**
              * A custom payment reference defined by the merchant. It is only available for payments
-             * using the Direct Funds settlement model on the Faster Payments scheme.
+             * on the PayTo scheme or payments using the Direct Funds settlement model on the Faster
+             * Payments scheme.
              * 
              */
             public String getReference() {
