@@ -188,6 +188,7 @@ public class BillingRequestTemplateService {
     public static final class BillingRequestTemplateCreateRequest
             extends IdempotentPostRequest<BillingRequestTemplate> {
         private Links links;
+        private MandateRequestConstraints mandateRequestConstraints;
         private String mandateRequestCurrency;
         private String mandateRequestDescription;
         private Map<String, String> mandateRequestMetadata;
@@ -216,6 +217,87 @@ public class BillingRequestTemplateService {
                 links = new Links();
             }
             links.withCreditor(creditor);
+            return this;
+        }
+
+        /**
+         * Constraints that will apply to the mandate_request. (Optional) Specifically required for
+         * PayTo and VRP.
+         */
+        public BillingRequestTemplateCreateRequest withMandateRequestConstraints(
+                MandateRequestConstraints mandateRequestConstraints) {
+            this.mandateRequestConstraints = mandateRequestConstraints;
+            return this;
+        }
+
+        /**
+         * The latest date at which payments can be taken, must occur after start_date if present
+         * 
+         * This is an optional field and if it is not supplied the agreement will be considered open
+         * and will not have an end date. Keep in mind the end date must take into account how long
+         * it will take the user to set up this agreement via the Billing Request.
+         * 
+         */
+        public BillingRequestTemplateCreateRequest withMandateRequestConstraintsEndDate(
+                String endDate) {
+            if (mandateRequestConstraints == null) {
+                mandateRequestConstraints = new MandateRequestConstraints();
+            }
+            mandateRequestConstraints.withEndDate(endDate);
+            return this;
+        }
+
+        /**
+         * The maximum amount that can be charged for a single payment. Required for PayTo and VRP.
+         */
+        public BillingRequestTemplateCreateRequest withMandateRequestConstraintsMaxAmountPerPayment(
+                Integer maxAmountPerPayment) {
+            if (mandateRequestConstraints == null) {
+                mandateRequestConstraints = new MandateRequestConstraints();
+            }
+            mandateRequestConstraints.withMaxAmountPerPayment(maxAmountPerPayment);
+            return this;
+        }
+
+        /**
+         * A constraint where you can specify info (free text string) about how payments are
+         * calculated. _Note:_ This is only supported for ACH and PAD schemes.
+         * 
+         */
+        public BillingRequestTemplateCreateRequest withMandateRequestConstraintsPaymentMethod(
+                String paymentMethod) {
+            if (mandateRequestConstraints == null) {
+                mandateRequestConstraints = new MandateRequestConstraints();
+            }
+            mandateRequestConstraints.withPaymentMethod(paymentMethod);
+            return this;
+        }
+
+        /**
+         * List of periodic limits and constraints which apply to them
+         */
+        public BillingRequestTemplateCreateRequest withMandateRequestConstraintsPeriodicLimits(
+                List<PeriodicLimits> periodicLimits) {
+            if (mandateRequestConstraints == null) {
+                mandateRequestConstraints = new MandateRequestConstraints();
+            }
+            mandateRequestConstraints.withPeriodicLimits(periodicLimits);
+            return this;
+        }
+
+        /**
+         * The date from which payments can be taken.
+         * 
+         * This is an optional field and if it is not supplied the start date will be set to the day
+         * authorisation happens.
+         * 
+         */
+        public BillingRequestTemplateCreateRequest withMandateRequestConstraintsStartDate(
+                String startDate) {
+            if (mandateRequestConstraints == null) {
+                mandateRequestConstraints = new MandateRequestConstraints();
+            }
+            mandateRequestConstraints.withStartDate(startDate);
             return this;
         }
 
@@ -484,6 +566,163 @@ public class BillingRequestTemplateService {
                 return this;
             }
         }
+
+        public static class PeriodicLimits {
+            private Alignment alignment;
+            private Integer maxPayments;
+            private Integer maxTotalAmount;
+            private Period period;
+
+            /**
+             * The alignment of the period.
+             * 
+             * `calendar` - this will finish on the end of the current period. For example this will
+             * expire on the Monday for the current week or the January for the next year.
+             * 
+             * `creation_date` - this will finish on the next instance of the current period. For
+             * example Monthly it will expire on the same day of the next month, or yearly the same
+             * day of the next year.
+             * 
+             */
+            public PeriodicLimits withAlignment(Alignment alignment) {
+                this.alignment = alignment;
+                return this;
+            }
+
+            /**
+             * (Optional) The maximum number of payments that can be collected in this periodic
+             * limit.
+             */
+            public PeriodicLimits withMaxPayments(Integer maxPayments) {
+                this.maxPayments = maxPayments;
+                return this;
+            }
+
+            /**
+             * The maximum total amount that can be charged for all payments in this periodic limit.
+             * Required for VRP.
+             * 
+             */
+            public PeriodicLimits withMaxTotalAmount(Integer maxTotalAmount) {
+                this.maxTotalAmount = maxTotalAmount;
+                return this;
+            }
+
+            /**
+             * The repeating period for this mandate. Defaults to flexible for PayTo if not
+             * specified.
+             */
+            public PeriodicLimits withPeriod(Period period) {
+                this.period = period;
+                return this;
+            }
+
+            public Map<String, Object> getQueryParams() {
+                ImmutableMap.Builder<String, Object> params = ImmutableMap.builder();
+                if (alignment != null) {
+                    params.put("periodic_limits[alignment]", alignment);
+                }
+                if (maxPayments != null) {
+                    params.put("periodic_limits[max_payments]", maxPayments);
+                }
+                if (maxTotalAmount != null) {
+                    params.put("periodic_limits[max_total_amount]", maxTotalAmount);
+                }
+                if (period != null) {
+                    params.put("periodic_limits[period]", period);
+                }
+                return params.build();
+            }
+
+            public enum Alignment {
+                @SerializedName("calendar")
+                CALENDAR, @SerializedName("creation_date")
+                CREATION_DATE, @SerializedName("unknown")
+                UNKNOWN;
+
+                @Override
+                public String toString() {
+                    return name().toLowerCase();
+                }
+            }
+
+            public enum Period {
+                @SerializedName("day")
+                DAY, @SerializedName("week")
+                WEEK, @SerializedName("month")
+                MONTH, @SerializedName("year")
+                YEAR, @SerializedName("flexible")
+                FLEXIBLE, @SerializedName("unknown")
+                UNKNOWN;
+
+                @Override
+                public String toString() {
+                    return name().toLowerCase();
+                }
+            }
+        }
+
+        public static class MandateRequestConstraints {
+            private String endDate;
+            private Integer maxAmountPerPayment;
+            private String paymentMethod;
+            private List<PeriodicLimits> periodicLimits;
+            private String startDate;
+
+            /**
+             * The latest date at which payments can be taken, must occur after start_date if
+             * present
+             * 
+             * This is an optional field and if it is not supplied the agreement will be considered
+             * open and will not have an end date. Keep in mind the end date must take into account
+             * how long it will take the user to set up this agreement via the Billing Request.
+             * 
+             */
+            public MandateRequestConstraints withEndDate(String endDate) {
+                this.endDate = endDate;
+                return this;
+            }
+
+            /**
+             * The maximum amount that can be charged for a single payment. Required for PayTo and
+             * VRP.
+             */
+            public MandateRequestConstraints withMaxAmountPerPayment(Integer maxAmountPerPayment) {
+                this.maxAmountPerPayment = maxAmountPerPayment;
+                return this;
+            }
+
+            /**
+             * A constraint where you can specify info (free text string) about how payments are
+             * calculated. _Note:_ This is only supported for ACH and PAD schemes.
+             * 
+             */
+            public MandateRequestConstraints withPaymentMethod(String paymentMethod) {
+                this.paymentMethod = paymentMethod;
+                return this;
+            }
+
+            /**
+             * List of periodic limits and constraints which apply to them
+             */
+            public MandateRequestConstraints withPeriodicLimits(
+                    List<PeriodicLimits> periodicLimits) {
+                this.periodicLimits = periodicLimits;
+                return this;
+            }
+
+            /**
+             * The date from which payments can be taken.
+             * 
+             * This is an optional field and if it is not supplied the start date will be set to the
+             * day authorisation happens.
+             * 
+             */
+            public MandateRequestConstraints withStartDate(String startDate) {
+                this.startDate = startDate;
+                return this;
+            }
+        }
     }
 
     /**
@@ -496,6 +735,7 @@ public class BillingRequestTemplateService {
             extends PutRequest<BillingRequestTemplate> {
         @PathParam
         private final String identity;
+        private MandateRequestConstraints mandateRequestConstraints;
         private String mandateRequestCurrency;
         private String mandateRequestDescription;
         private Map<String, String> mandateRequestMetadata;
@@ -509,6 +749,87 @@ public class BillingRequestTemplateService {
         private Map<String, String> paymentRequestMetadata;
         private String paymentRequestScheme;
         private String redirectUri;
+
+        /**
+         * Constraints that will apply to the mandate_request. (Optional) Specifically required for
+         * PayTo and VRP.
+         */
+        public BillingRequestTemplateUpdateRequest withMandateRequestConstraints(
+                MandateRequestConstraints mandateRequestConstraints) {
+            this.mandateRequestConstraints = mandateRequestConstraints;
+            return this;
+        }
+
+        /**
+         * The latest date at which payments can be taken, must occur after start_date if present
+         * 
+         * This is an optional field and if it is not supplied the agreement will be considered open
+         * and will not have an end date. Keep in mind the end date must take into account how long
+         * it will take the user to set up this agreement via the Billing Request.
+         * 
+         */
+        public BillingRequestTemplateUpdateRequest withMandateRequestConstraintsEndDate(
+                String endDate) {
+            if (mandateRequestConstraints == null) {
+                mandateRequestConstraints = new MandateRequestConstraints();
+            }
+            mandateRequestConstraints.withEndDate(endDate);
+            return this;
+        }
+
+        /**
+         * The maximum amount that can be charged for a single payment. Required for PayTo and VRP.
+         */
+        public BillingRequestTemplateUpdateRequest withMandateRequestConstraintsMaxAmountPerPayment(
+                Integer maxAmountPerPayment) {
+            if (mandateRequestConstraints == null) {
+                mandateRequestConstraints = new MandateRequestConstraints();
+            }
+            mandateRequestConstraints.withMaxAmountPerPayment(maxAmountPerPayment);
+            return this;
+        }
+
+        /**
+         * A constraint where you can specify info (free text string) about how payments are
+         * calculated. _Note:_ This is only supported for ACH and PAD schemes.
+         * 
+         */
+        public BillingRequestTemplateUpdateRequest withMandateRequestConstraintsPaymentMethod(
+                String paymentMethod) {
+            if (mandateRequestConstraints == null) {
+                mandateRequestConstraints = new MandateRequestConstraints();
+            }
+            mandateRequestConstraints.withPaymentMethod(paymentMethod);
+            return this;
+        }
+
+        /**
+         * List of periodic limits and constraints which apply to them
+         */
+        public BillingRequestTemplateUpdateRequest withMandateRequestConstraintsPeriodicLimits(
+                List<PeriodicLimits> periodicLimits) {
+            if (mandateRequestConstraints == null) {
+                mandateRequestConstraints = new MandateRequestConstraints();
+            }
+            mandateRequestConstraints.withPeriodicLimits(periodicLimits);
+            return this;
+        }
+
+        /**
+         * The date from which payments can be taken.
+         * 
+         * This is an optional field and if it is not supplied the start date will be set to the day
+         * authorisation happens.
+         * 
+         */
+        public BillingRequestTemplateUpdateRequest withMandateRequestConstraintsStartDate(
+                String startDate) {
+            if (mandateRequestConstraints == null) {
+                mandateRequestConstraints = new MandateRequestConstraints();
+            }
+            mandateRequestConstraints.withStartDate(startDate);
+            return this;
+        }
 
         /**
          * [ISO 4217](http://en.wikipedia.org/wiki/ISO_4217#Active_codes) currency code.
@@ -752,6 +1073,163 @@ public class BillingRequestTemplateService {
             @Override
             public String toString() {
                 return name().toLowerCase();
+            }
+        }
+
+        public static class PeriodicLimits {
+            private Alignment alignment;
+            private Integer maxPayments;
+            private Integer maxTotalAmount;
+            private Period period;
+
+            /**
+             * The alignment of the period.
+             * 
+             * `calendar` - this will finish on the end of the current period. For example this will
+             * expire on the Monday for the current week or the January for the next year.
+             * 
+             * `creation_date` - this will finish on the next instance of the current period. For
+             * example Monthly it will expire on the same day of the next month, or yearly the same
+             * day of the next year.
+             * 
+             */
+            public PeriodicLimits withAlignment(Alignment alignment) {
+                this.alignment = alignment;
+                return this;
+            }
+
+            /**
+             * (Optional) The maximum number of payments that can be collected in this periodic
+             * limit.
+             */
+            public PeriodicLimits withMaxPayments(Integer maxPayments) {
+                this.maxPayments = maxPayments;
+                return this;
+            }
+
+            /**
+             * The maximum total amount that can be charged for all payments in this periodic limit.
+             * Required for VRP.
+             * 
+             */
+            public PeriodicLimits withMaxTotalAmount(Integer maxTotalAmount) {
+                this.maxTotalAmount = maxTotalAmount;
+                return this;
+            }
+
+            /**
+             * The repeating period for this mandate. Defaults to flexible for PayTo if not
+             * specified.
+             */
+            public PeriodicLimits withPeriod(Period period) {
+                this.period = period;
+                return this;
+            }
+
+            public Map<String, Object> getQueryParams() {
+                ImmutableMap.Builder<String, Object> params = ImmutableMap.builder();
+                if (alignment != null) {
+                    params.put("periodic_limits[alignment]", alignment);
+                }
+                if (maxPayments != null) {
+                    params.put("periodic_limits[max_payments]", maxPayments);
+                }
+                if (maxTotalAmount != null) {
+                    params.put("periodic_limits[max_total_amount]", maxTotalAmount);
+                }
+                if (period != null) {
+                    params.put("periodic_limits[period]", period);
+                }
+                return params.build();
+            }
+
+            public enum Alignment {
+                @SerializedName("calendar")
+                CALENDAR, @SerializedName("creation_date")
+                CREATION_DATE, @SerializedName("unknown")
+                UNKNOWN;
+
+                @Override
+                public String toString() {
+                    return name().toLowerCase();
+                }
+            }
+
+            public enum Period {
+                @SerializedName("day")
+                DAY, @SerializedName("week")
+                WEEK, @SerializedName("month")
+                MONTH, @SerializedName("year")
+                YEAR, @SerializedName("flexible")
+                FLEXIBLE, @SerializedName("unknown")
+                UNKNOWN;
+
+                @Override
+                public String toString() {
+                    return name().toLowerCase();
+                }
+            }
+        }
+
+        public static class MandateRequestConstraints {
+            private String endDate;
+            private Integer maxAmountPerPayment;
+            private String paymentMethod;
+            private List<PeriodicLimits> periodicLimits;
+            private String startDate;
+
+            /**
+             * The latest date at which payments can be taken, must occur after start_date if
+             * present
+             * 
+             * This is an optional field and if it is not supplied the agreement will be considered
+             * open and will not have an end date. Keep in mind the end date must take into account
+             * how long it will take the user to set up this agreement via the Billing Request.
+             * 
+             */
+            public MandateRequestConstraints withEndDate(String endDate) {
+                this.endDate = endDate;
+                return this;
+            }
+
+            /**
+             * The maximum amount that can be charged for a single payment. Required for PayTo and
+             * VRP.
+             */
+            public MandateRequestConstraints withMaxAmountPerPayment(Integer maxAmountPerPayment) {
+                this.maxAmountPerPayment = maxAmountPerPayment;
+                return this;
+            }
+
+            /**
+             * A constraint where you can specify info (free text string) about how payments are
+             * calculated. _Note:_ This is only supported for ACH and PAD schemes.
+             * 
+             */
+            public MandateRequestConstraints withPaymentMethod(String paymentMethod) {
+                this.paymentMethod = paymentMethod;
+                return this;
+            }
+
+            /**
+             * List of periodic limits and constraints which apply to them
+             */
+            public MandateRequestConstraints withPeriodicLimits(
+                    List<PeriodicLimits> periodicLimits) {
+                this.periodicLimits = periodicLimits;
+                return this;
+            }
+
+            /**
+             * The date from which payments can be taken.
+             * 
+             * This is an optional field and if it is not supplied the start date will be set to the
+             * day authorisation happens.
+             * 
+             */
+            public MandateRequestConstraints withStartDate(String startDate) {
+                this.startDate = startDate;
+                return this;
             }
         }
     }

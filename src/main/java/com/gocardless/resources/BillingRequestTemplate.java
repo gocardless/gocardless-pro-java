@@ -1,6 +1,7 @@
 package com.gocardless.resources;
 
 import com.google.gson.annotations.SerializedName;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -25,6 +26,7 @@ public class BillingRequestTemplate {
     private String authorisationUrl;
     private String createdAt;
     private String id;
+    private MandateRequestConstraints mandateRequestConstraints;
     private String mandateRequestCurrency;
     private String mandateRequestDescription;
     private Map<String, Object> mandateRequestMetadata;
@@ -60,6 +62,14 @@ public class BillingRequestTemplate {
      */
     public String getId() {
         return id;
+    }
+
+    /**
+     * Constraints that will apply to the mandate_request. (Optional) Specifically required for
+     * PayTo and VRP.
+     */
+    public MandateRequestConstraints getMandateRequestConstraints() {
+        return mandateRequestConstraints;
     }
 
     /**
@@ -207,5 +217,137 @@ public class BillingRequestTemplate {
         WHEN_AVAILABLE, @SerializedName("always")
         ALWAYS, @SerializedName("unknown")
         UNKNOWN
+    }
+
+    /**
+     * Represents a mandate request constraint resource returned from the API.
+     *
+     * Constraints that will apply to the mandate_request. (Optional) Specifically required for
+     * PayTo and VRP.
+     */
+    public static class MandateRequestConstraints {
+        private MandateRequestConstraints() {
+            // blank to prevent instantiation
+        }
+
+        private String endDate;
+        private Integer maxAmountPerPayment;
+        private String paymentMethod;
+        private List<PeriodicLimit> periodicLimits;
+        private String startDate;
+
+        /**
+         * The latest date at which payments can be taken, must occur after start_date if present
+         * 
+         * This is an optional field and if it is not supplied the agreement will be considered open
+         * and will not have an end date. Keep in mind the end date must take into account how long
+         * it will take the user to set up this agreement via the Billing Request.
+         * 
+         */
+        public String getEndDate() {
+            return endDate;
+        }
+
+        /**
+         * The maximum amount that can be charged for a single payment. Required for PayTo and VRP.
+         */
+        public Integer getMaxAmountPerPayment() {
+            return maxAmountPerPayment;
+        }
+
+        /**
+         * A constraint where you can specify info (free text string) about how payments are
+         * calculated. _Note:_ This is only supported for ACH and PAD schemes.
+         * 
+         */
+        public String getPaymentMethod() {
+            return paymentMethod;
+        }
+
+        /**
+         * List of periodic limits and constraints which apply to them
+         */
+        public List<PeriodicLimit> getPeriodicLimits() {
+            return periodicLimits;
+        }
+
+        /**
+         * The date from which payments can be taken.
+         * 
+         * This is an optional field and if it is not supplied the start date will be set to the day
+         * authorisation happens.
+         * 
+         */
+        public String getStartDate() {
+            return startDate;
+        }
+
+        public static class PeriodicLimit {
+            private PeriodicLimit() {
+                // blank to prevent instantiation
+            }
+
+            private Alignment alignment;
+            private Integer maxPayments;
+            private Integer maxTotalAmount;
+            private Period period;
+
+            /**
+             * The alignment of the period.
+             * 
+             * `calendar` - this will finish on the end of the current period. For example this will
+             * expire on the Monday for the current week or the January for the next year.
+             * 
+             * `creation_date` - this will finish on the next instance of the current period. For
+             * example Monthly it will expire on the same day of the next month, or yearly the same
+             * day of the next year.
+             * 
+             */
+            public Alignment getAlignment() {
+                return alignment;
+            }
+
+            /**
+             * (Optional) The maximum number of payments that can be collected in this periodic
+             * limit.
+             */
+            public Integer getMaxPayments() {
+                return maxPayments;
+            }
+
+            /**
+             * The maximum total amount that can be charged for all payments in this periodic limit.
+             * Required for VRP.
+             * 
+             */
+            public Integer getMaxTotalAmount() {
+                return maxTotalAmount;
+            }
+
+            /**
+             * The repeating period for this mandate. Defaults to flexible for PayTo if not
+             * specified.
+             */
+            public Period getPeriod() {
+                return period;
+            }
+
+            public enum Alignment {
+                @SerializedName("calendar")
+                CALENDAR, @SerializedName("creation_date")
+                CREATION_DATE, @SerializedName("unknown")
+                UNKNOWN
+            }
+
+            public enum Period {
+                @SerializedName("day")
+                DAY, @SerializedName("week")
+                WEEK, @SerializedName("month")
+                MONTH, @SerializedName("year")
+                YEAR, @SerializedName("flexible")
+                FLEXIBLE, @SerializedName("unknown")
+                UNKNOWN
+            }
+        }
     }
 }

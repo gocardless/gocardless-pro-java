@@ -208,8 +208,8 @@ public class BillingRequestWithActionService {
         }
 
         /**
-         * Constraints that will apply to the mandate_request. (Optional) Specifically for PayTo and
-         * VRP.
+         * Constraints that will apply to the mandate_request. (Optional) Specifically required for
+         * PayTo and VRP.
          */
         public BillingRequestWithActionCreateWithActionsRequest withMandateRequestConstraints(
                 Constraints constraints) {
@@ -448,8 +448,9 @@ public class BillingRequestWithActionService {
         }
 
         /**
-         * A custom payment reference defined by the merchant. It is only available for payments
-         * using the Direct Funds settlement model on the Faster Payments scheme.
+         * A custom payment reference defined by the merchant. It is only available for payments on
+         * the PayTo scheme or payments using the Direct Funds settlement model on the Faster
+         * Payments scheme.
          * 
          */
         public BillingRequestWithActionCreateWithActionsRequest withPaymentRequestReference(
@@ -1201,7 +1202,8 @@ public class BillingRequestWithActionService {
             }
 
             /**
-             * The repeating period for this mandate
+             * The repeating period for this mandate. Defaults to flexible for PayTo if not
+             * specified.
              */
             public PeriodicLimits withPeriod(Period period) {
                 this.period = period;
@@ -1275,7 +1277,8 @@ public class BillingRequestWithActionService {
             }
 
             /**
-             * The maximum amount that can be charged for a single payment. Required for VRP.
+             * The maximum amount that can be charged for a single payment. Required for PayTo and
+             * VRP.
              */
             public Constraints withMaxAmountPerPayment(Integer maxAmountPerPayment) {
                 this.maxAmountPerPayment = maxAmountPerPayment;
@@ -1361,8 +1364,8 @@ public class BillingRequestWithActionService {
             }
 
             /**
-             * Constraints that will apply to the mandate_request. (Optional) Specifically for PayTo
-             * and VRP.
+             * Constraints that will apply to the mandate_request. (Optional) Specifically required
+             * for PayTo and VRP.
              */
             public MandateRequest withConstraints(Constraints constraints) {
                 this.constraints = constraints;
@@ -1559,7 +1562,8 @@ public class BillingRequestWithActionService {
 
             /**
              * A custom payment reference defined by the merchant. It is only available for payments
-             * using the Direct Funds settlement model on the Faster Payments scheme.
+             * on the PayTo scheme or payments using the Direct Funds settlement model on the Faster
+             * Payments scheme.
              * 
              */
             public PaymentRequest withReference(String reference) {

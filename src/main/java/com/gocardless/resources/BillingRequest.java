@@ -803,8 +803,8 @@ public class BillingRequest {
         }
 
         /**
-         * Constraints that will apply to the mandate_request. (Optional) Specifically for PayTo and
-         * VRP.
+         * Constraints that will apply to the mandate_request. (Optional) Specifically required for
+         * PayTo and VRP.
          */
         public Constraints getConstraints() {
             return constraints;
@@ -915,8 +915,8 @@ public class BillingRequest {
         /**
          * Represents a constraint resource returned from the API.
          *
-         * Constraints that will apply to the mandate_request. (Optional) Specifically for PayTo and
-         * VRP.
+         * Constraints that will apply to the mandate_request. (Optional) Specifically required for
+         * PayTo and VRP.
          */
         public static class Constraints {
             private Constraints() {
@@ -943,7 +943,8 @@ public class BillingRequest {
             }
 
             /**
-             * The maximum amount that can be charged for a single payment. Required for VRP.
+             * The maximum amount that can be charged for a single payment. Required for PayTo and
+             * VRP.
              */
             public Integer getMaxAmountPerPayment() {
                 return maxAmountPerPayment;
@@ -1019,7 +1020,8 @@ public class BillingRequest {
                 }
 
                 /**
-                 * The repeating period for this mandate
+                 * The repeating period for this mandate. Defaults to flexible for PayTo if not
+                 * specified.
                  */
                 public Period getPeriod() {
                     return period;
@@ -1141,8 +1143,9 @@ public class BillingRequest {
         }
 
         /**
-         * A custom payment reference defined by the merchant. It is only available for payments
-         * using the Direct Funds settlement model on the Faster Payments scheme.
+         * A custom payment reference defined by the merchant. It is only available for payments on
+         * the PayTo scheme or payments using the Direct Funds settlement model on the Faster
+         * Payments scheme.
          * 
          */
         public String getReference() {
