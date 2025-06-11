@@ -1002,8 +1002,8 @@ public class BillingRequestWithAction {
             }
 
             /**
-             * Constraints that will apply to the mandate_request. (Optional) Specifically for PayTo
-             * and VRP.
+             * Constraints that will apply to the mandate_request. (Optional) Specifically required
+             * for PayTo and VRP.
              */
             public Constraints getConstraints() {
                 return constraints;
@@ -1117,8 +1117,8 @@ public class BillingRequestWithAction {
             /**
              * Represents a constraint resource returned from the API.
              *
-             * Constraints that will apply to the mandate_request. (Optional) Specifically for PayTo
-             * and VRP.
+             * Constraints that will apply to the mandate_request. (Optional) Specifically required
+             * for PayTo and VRP.
              */
             public static class Constraints {
                 private Constraints() {
@@ -1146,7 +1146,8 @@ public class BillingRequestWithAction {
                 }
 
                 /**
-                 * The maximum amount that can be charged for a single payment. Required for VRP.
+                 * The maximum amount that can be charged for a single payment. Required for PayTo
+                 * and VRP.
                  */
                 public Integer getMaxAmountPerPayment() {
                     return maxAmountPerPayment;
@@ -1223,7 +1224,8 @@ public class BillingRequestWithAction {
                     }
 
                     /**
-                     * The repeating period for this mandate
+                     * The repeating period for this mandate. Defaults to flexible for PayTo if not
+                     * specified.
                      */
                     public Period getPeriod() {
                         return period;
