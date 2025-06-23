@@ -42,15 +42,6 @@ public class NegativeBalanceLimitService {
     }
 
     /**
-     * Creates a new negative balance limit, which replaces the existing limit (if present) for that
-     * currency and creditor combination.
-     * 
-     */
-    public NegativeBalanceLimitCreateRequest create() {
-        return new NegativeBalanceLimitCreateRequest(httpClient);
-    }
-
-    /**
      * Request class for {@link NegativeBalanceLimitService#list }.
      *
      * Returns a [cursor-paginated](#api-usage-cursor-pagination) list of negative balance limits.
@@ -155,112 +146,6 @@ public class NegativeBalanceLimitService {
             @Override
             public String toString() {
                 return name();
-            }
-        }
-    }
-
-    /**
-     * Request class for {@link NegativeBalanceLimitService#create }.
-     *
-     * Creates a new negative balance limit, which replaces the existing limit (if present) for that
-     * currency and creditor combination.
-     * 
-     */
-    public static final class NegativeBalanceLimitCreateRequest
-            extends PostRequest<NegativeBalanceLimit> {
-        private Integer balanceLimit;
-        private Currency currency;
-        private Links links;
-
-        /**
-         * The limit amount in pence (e.g. 10000 for a -100 GBP limit).
-         */
-        public NegativeBalanceLimitCreateRequest withBalanceLimit(Integer balanceLimit) {
-            this.balanceLimit = balanceLimit;
-            return this;
-        }
-
-        /**
-         * [ISO 4217](http://en.wikipedia.org/wiki/ISO_4217#Active_codes) currency code. Currently
-         * "AUD", "CAD", "DKK", "EUR", "GBP", "NZD", "SEK" and "USD" are supported.
-         */
-        public NegativeBalanceLimitCreateRequest withCurrency(Currency currency) {
-            this.currency = currency;
-            return this;
-        }
-
-        public NegativeBalanceLimitCreateRequest withLinks(Links links) {
-            this.links = links;
-            return this;
-        }
-
-        /**
-         * ID of the [creditor](#core-endpoints-creditors) this limit relates to
-         */
-        public NegativeBalanceLimitCreateRequest withLinksCreditor(String creditor) {
-            if (links == null) {
-                links = new Links();
-            }
-            links.withCreditor(creditor);
-            return this;
-        }
-
-        private NegativeBalanceLimitCreateRequest(HttpClient httpClient) {
-            super(httpClient);
-        }
-
-        public NegativeBalanceLimitCreateRequest withHeader(String headerName, String headerValue) {
-            this.addHeader(headerName, headerValue);
-            return this;
-        }
-
-        @Override
-        protected String getPathTemplate() {
-            return "negative_balance_limits";
-        }
-
-        @Override
-        protected String getEnvelope() {
-            return "negative_balance_limits";
-        }
-
-        @Override
-        protected Class<NegativeBalanceLimit> getResponseClass() {
-            return NegativeBalanceLimit.class;
-        }
-
-        @Override
-        protected boolean hasBody() {
-            return true;
-        }
-
-        public enum Currency {
-            @SerializedName("AUD")
-            AUD, @SerializedName("CAD")
-            CAD, @SerializedName("DKK")
-            DKK, @SerializedName("EUR")
-            EUR, @SerializedName("GBP")
-            GBP, @SerializedName("NZD")
-            NZD, @SerializedName("SEK")
-            SEK, @SerializedName("USD")
-            USD, @SerializedName("unknown")
-            UNKNOWN;
-
-            @Override
-            public String toString() {
-                return name();
-            }
-        }
-
-        public static class Links {
-            private String creditor;
-
-            /**
-             * ID of the [creditor](#core-endpoints-creditors) this limit relates to
-             */
-            public Links withCreditor(String creditor) {
-                this.creditor = creditor;
-                return this;
             }
         }
     }
