@@ -921,7 +921,11 @@ public class BillingRequestService {
             GOVERNMENT, @SerializedName("pension")
             PENSION, @SerializedName("tax")
             TAX, @SerializedName("other")
-            OTHER, @SerializedName("unknown")
+            OTHER, @SerializedName("Epayment")
+            EPAYMENT, @SerializedName("Commercial")
+            COMMERCIAL, @SerializedName("OtherPayment")
+            OTHERPAYMENT, @SerializedName("Trade")
+            TRADE, @SerializedName("unknown")
             UNKNOWN;
 
             @Override
