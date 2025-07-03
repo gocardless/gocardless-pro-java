@@ -105,7 +105,7 @@ public class OutboundPaymentService {
         private String executionDate;
         private Links links;
         private Map<String, String> metadata;
-        private String scheme;
+        private Scheme scheme;
 
         /**
          * Amount, in the lowest denomination for the currency (e.g. pence in GBP, cents in EUR).
@@ -185,7 +185,7 @@ public class OutboundPaymentService {
          * Bank payment scheme to process the outbound payment. Currently only "faster_payments"
          * (GBP) is supported.
          */
-        public OutboundPaymentCreateRequest withScheme(String scheme) {
+        public OutboundPaymentCreateRequest withScheme(Scheme scheme) {
             this.scheme = scheme;
             return this;
         }
@@ -233,6 +233,17 @@ public class OutboundPaymentService {
             return true;
         }
 
+        public enum Scheme {
+            @SerializedName("faster_payments")
+            FASTER_PAYMENTS, @SerializedName("unknown")
+            UNKNOWN;
+
+            @Override
+            public String toString() {
+                return name().toLowerCase();
+            }
+        }
+
         public static class Links {
             private String creditor;
             private String recipientBankAccount;
@@ -266,7 +277,7 @@ public class OutboundPaymentService {
         private String executionDate;
         private Links links;
         private Map<String, String> metadata;
-        private String scheme;
+        private Scheme scheme;
 
         /**
          * Amount, in the lowest denomination for the currency (e.g. pence in GBP, cents in EUR).
@@ -334,7 +345,7 @@ public class OutboundPaymentService {
          * Bank payment scheme to process the outbound payment. Currently only "faster_payments"
          * (GBP) is supported.
          */
-        public OutboundPaymentWithdrawRequest withScheme(String scheme) {
+        public OutboundPaymentWithdrawRequest withScheme(Scheme scheme) {
             this.scheme = scheme;
             return this;
         }
@@ -371,6 +382,17 @@ public class OutboundPaymentService {
         @Override
         protected String getRequestEnvelope() {
             return "data";
+        }
+
+        public enum Scheme {
+            @SerializedName("faster_payments")
+            FASTER_PAYMENTS, @SerializedName("unknown")
+            UNKNOWN;
+
+            @Override
+            public String toString() {
+                return name().toLowerCase();
+            }
         }
 
         public static class Links {

@@ -33,7 +33,7 @@ public class OutboundPayment {
     private Links links;
     private Map<String, Object> metadata;
     private String reference;
-    private String scheme;
+    private Scheme scheme;
     private Status status;
     private Verifications verifications;
 
@@ -113,7 +113,7 @@ public class OutboundPayment {
      * Bank payment scheme to process the outbound payment. Currently only "faster_payments" (GBP)
      * is supported.
      */
-    public String getScheme() {
+    public Scheme getScheme() {
         return scheme;
     }
 
@@ -153,6 +153,12 @@ public class OutboundPayment {
     public enum Currency {
         @SerializedName("GBP")
         GBP, @SerializedName("unknown")
+        UNKNOWN
+    }
+
+    public enum Scheme {
+        @SerializedName("faster_payments")
+        FASTER_PAYMENTS, @SerializedName("unknown")
         UNKNOWN
     }
 
