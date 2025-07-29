@@ -105,6 +105,7 @@ public class OutboundPaymentService {
         private String executionDate;
         private Links links;
         private Map<String, String> metadata;
+        private String reference;
         private Scheme scheme;
 
         /**
@@ -178,6 +179,17 @@ public class OutboundPaymentService {
                 metadata = new HashMap<>();
             }
             metadata.put(key, value);
+            return this;
+        }
+
+        /**
+         * An optional reference that will appear on your customer's bank statement. The character
+         * limit for this reference is dependent on the scheme.<br />
+         * <strong>Faster Payments</strong> - 18 characters, including:
+         * "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789 &-./"<br />
+         */
+        public OutboundPaymentCreateRequest withReference(String reference) {
+            this.reference = reference;
             return this;
         }
 
@@ -277,6 +289,7 @@ public class OutboundPaymentService {
         private String executionDate;
         private Links links;
         private Map<String, String> metadata;
+        private String reference;
         private Scheme scheme;
 
         /**
@@ -338,6 +351,17 @@ public class OutboundPaymentService {
                 metadata = new HashMap<>();
             }
             metadata.put(key, value);
+            return this;
+        }
+
+        /**
+         * An optional reference that will appear on your customer's bank statement. The character
+         * limit for this reference is dependent on the scheme.<br />
+         * <strong>Faster Payments</strong> - 18 characters, including:
+         * "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789 &-./"<br />
+         */
+        public OutboundPaymentWithdrawRequest withReference(String reference) {
+            this.reference = reference;
             return this;
         }
 
