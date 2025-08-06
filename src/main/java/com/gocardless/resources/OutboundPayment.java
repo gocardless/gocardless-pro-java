@@ -242,8 +242,8 @@ public class OutboundPayment {
             private Type type;
 
             /**
-             * -| The actual account name returned by the recipient's bank, populated only in the
-             * case of a partial match.
+             * The actual account name returned by the recipient's bank, populated only in the case
+             * of a partial match.
              */
             public String getActualAccountName() {
                 return actualAccountName;
