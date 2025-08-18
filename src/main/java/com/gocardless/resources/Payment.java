@@ -31,6 +31,7 @@ public class Payment {
     private Map<String, Object> metadata;
     private String reference;
     private Boolean retryIfPossible;
+    private String scheme;
     private Status status;
 
     /**
@@ -152,6 +153,14 @@ public class Payment {
      */
     public Boolean getRetryIfPossible() {
         return retryIfPossible;
+    }
+
+    /**
+     * A bank payment scheme. Currently "ach", "autogiro", "bacs", "becs", "becs_nz",
+     * "betalingsservice", "faster_payments", "pad", "pay_to" and "sepa_core" are supported.
+     */
+    public String getScheme() {
+        return scheme;
     }
 
     /**
