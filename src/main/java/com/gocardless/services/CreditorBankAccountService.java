@@ -77,13 +77,6 @@ public class CreditorBankAccountService {
     }
 
     /**
-     * Validate bank details without creating a creditor bank account
-     */
-    public CreditorBankAccountValidateRequest validate() {
-        return new CreditorBankAccountValidateRequest(httpClient);
-    }
-
-    /**
      * Request class for {@link CreditorBankAccountService#create }.
      *
      * Creates a new creditor bank account object.
@@ -587,114 +580,6 @@ public class CreditorBankAccountService {
         @Override
         protected boolean hasBody() {
             return false;
-        }
-    }
-
-    /**
-     * Request class for {@link CreditorBankAccountService#validate }.
-     *
-     * Validate bank details without creating a creditor bank account
-     */
-    public static final class CreditorBankAccountValidateRequest
-            extends PostRequest<CreditorBankAccount> {
-        private String iban;
-        private LocalDetails localDetails;
-
-        /**
-         * International Bank Account Number. Alternatively you can provide [local
-         * details](#appendix-local-bank-details). IBANs are not accepted for Swedish bank accounts
-         * denominated in SEK - you must supply [local details](#local-bank-details-sweden).
-         */
-        public CreditorBankAccountValidateRequest withIban(String iban) {
-            this.iban = iban;
-            return this;
-        }
-
-        public CreditorBankAccountValidateRequest withLocalDetails(LocalDetails localDetails) {
-            this.localDetails = localDetails;
-            return this;
-        }
-
-        /**
-         * Bank account number - see [local details](#appendix-local-bank-details) for more
-         * information. Alternatively you can provide an `iban`.
-         */
-        public CreditorBankAccountValidateRequest withLocalDetailsBankNumber(String bankNumber) {
-            if (localDetails == null) {
-                localDetails = new LocalDetails();
-            }
-            localDetails.withBankNumber(bankNumber);
-            return this;
-        }
-
-        /**
-         * Branch code - see [local details](#appendix-local-bank-details) for more information.
-         * Alternatively you can provide an `iban`.
-         */
-        public CreditorBankAccountValidateRequest withLocalDetailsSortCode(String sortCode) {
-            if (localDetails == null) {
-                localDetails = new LocalDetails();
-            }
-            localDetails.withSortCode(sortCode);
-            return this;
-        }
-
-        private CreditorBankAccountValidateRequest(HttpClient httpClient) {
-            super(httpClient);
-        }
-
-        public CreditorBankAccountValidateRequest withHeader(String headerName,
-                String headerValue) {
-            this.addHeader(headerName, headerValue);
-            return this;
-        }
-
-        @Override
-        protected String getPathTemplate() {
-            return "creditor_bank_accounts/validate";
-        }
-
-        @Override
-        protected String getEnvelope() {
-            return "creditor_bank_accounts";
-        }
-
-        @Override
-        protected Class<CreditorBankAccount> getResponseClass() {
-            return CreditorBankAccount.class;
-        }
-
-        @Override
-        protected boolean hasBody() {
-            return true;
-        }
-
-        @Override
-        protected String getRequestEnvelope() {
-            return "data";
-        }
-
-        public static class LocalDetails {
-            private String bankNumber;
-            private String sortCode;
-
-            /**
-             * Bank account number - see [local details](#appendix-local-bank-details) for more
-             * information. Alternatively you can provide an `iban`.
-             */
-            public LocalDetails withBankNumber(String bankNumber) {
-                this.bankNumber = bankNumber;
-                return this;
-            }
-
-            /**
-             * Branch code - see [local details](#appendix-local-bank-details) for more information.
-             * Alternatively you can provide an `iban`.
-             */
-            public LocalDetails withSortCode(String sortCode) {
-                this.sortCode = sortCode;
-                return this;
-            }
         }
     }
 }

@@ -25,6 +25,7 @@ public class GoCardlessClient {
     private final BlockService blocks;
     private final CreditorService creditors;
     private final CreditorBankAccountService creditorBankAccounts;
+    private final CreditorBankAccountValidateService creditorBankAccountValidates;
     private final CurrencyExchangeRateService currencyExchangeRates;
     private final CustomerService customers;
     private final CustomerBankAccountService customerBankAccounts;
@@ -186,6 +187,7 @@ public class GoCardlessClient {
         this.blocks = new BlockService(httpClient);
         this.creditors = new CreditorService(httpClient);
         this.creditorBankAccounts = new CreditorBankAccountService(httpClient);
+        this.creditorBankAccountValidates = new CreditorBankAccountValidateService(httpClient);
         this.currencyExchangeRates = new CurrencyExchangeRateService(httpClient);
         this.customers = new CustomerService(httpClient);
         this.customerBankAccounts = new CustomerBankAccountService(httpClient);
@@ -292,6 +294,13 @@ public class GoCardlessClient {
      */
     public CreditorBankAccountService creditorBankAccounts() {
         return creditorBankAccounts;
+    }
+
+    /**
+     * A service class for working with creditor bank account validate resources.
+     */
+    public CreditorBankAccountValidateService creditorBankAccountValidates() {
+        return creditorBankAccountValidates;
     }
 
     /**
