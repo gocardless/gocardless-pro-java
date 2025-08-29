@@ -33,7 +33,7 @@ public class OutboundPayment {
     private Links links;
     private Map<String, Object> metadata;
     private String reference;
-    private String scheme;
+    private Scheme scheme;
     private Status status;
     private Verifications verifications;
 
@@ -103,7 +103,10 @@ public class OutboundPayment {
     }
 
     /**
-     * An auto-generated reference that will appear on your receiver's bank statement.
+     * An optional reference that will appear on your customer's bank statement. The character limit
+     * for this reference is dependent on the scheme.<br />
+     * <strong>Faster Payments</strong> - 18 characters, including:
+     * "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789 &-./"<br />
      */
     public String getReference() {
         return reference;
@@ -113,7 +116,7 @@ public class OutboundPayment {
      * Bank payment scheme to process the outbound payment. Currently only "faster_payments" (GBP)
      * is supported.
      */
-    public String getScheme() {
+    public Scheme getScheme() {
         return scheme;
     }
 
@@ -153,6 +156,12 @@ public class OutboundPayment {
     public enum Currency {
         @SerializedName("GBP")
         GBP, @SerializedName("unknown")
+        UNKNOWN
+    }
+
+    public enum Scheme {
+        @SerializedName("faster_payments")
+        FASTER_PAYMENTS, @SerializedName("unknown")
         UNKNOWN
     }
 
@@ -233,8 +242,8 @@ public class OutboundPayment {
             private Type type;
 
             /**
-             * -| The actual account name returned by the recipient's bank, populated only in the
-             * case of a partial match.
+             * The actual account name returned by the recipient's bank, populated only in the case
+             * of a partial match.
              */
             public String getActualAccountName() {
                 return actualAccountName;

@@ -46,7 +46,9 @@ final class ResponseParser {
         List<T> items = parseMultiple(json, envelope, clazz);
         JsonObject metaJson = json.getAsJsonObject("meta");
         ListResponse.Meta meta = gson.fromJson(metaJson, ListResponse.Meta.class);
-        return new ListResponse<>(ImmutableList.copyOf(items), meta);
+        JsonObject linkedJson = json.getAsJsonObject("linked");
+        ListResponse.Linked linked = gson.fromJson(linkedJson, ListResponse.Linked.class);
+        return new ListResponse<>(ImmutableList.copyOf(items), meta, linked);
     }
 
     GoCardlessApiException parseError(String responseBody) {
