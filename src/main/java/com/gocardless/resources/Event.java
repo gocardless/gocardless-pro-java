@@ -324,6 +324,7 @@ public class Event {
         private String customerBankAccount;
         private String instalmentSchedule;
         private String mandate;
+        private String mandateRequest;
         private String mandateRequestMandate;
         private String newCustomerBankAccount;
         private String newMandate;
@@ -395,6 +396,13 @@ public class Event {
          */
         public String getMandate() {
             return mandate;
+        }
+
+        /**
+         * This is the id of the mandate request associated to this event
+         */
+        public String getMandateRequest() {
+            return mandateRequest;
         }
 
         /**
