@@ -79,6 +79,8 @@ public class BillingRequestTemplateService {
      */
     public static final class BillingRequestTemplateListRequest<S>
             extends ListRequest<S, BillingRequestTemplate> {
+        private String paymentRequestScheme;
+
         /**
          * Cursor pointing to the start of the desired set.
          */
@@ -103,6 +105,19 @@ public class BillingRequestTemplateService {
             return this;
         }
 
+        /**
+         * (Optional) A scheme used for Open Banking payments. Currently `faster_payments` is
+         * supported in the UK (GBP) and `sepa_credit_transfer` and `sepa_instant_credit_transfer`
+         * are supported in supported Eurozone countries (EUR). For Eurozone countries,
+         * `sepa_credit_transfer` is used as the default. Please be aware that
+         * `sepa_instant_credit_transfer` may incur an additional fee for your customer.
+         */
+        public BillingRequestTemplateListRequest<S> withPaymentRequestScheme(
+                String paymentRequestScheme) {
+            this.paymentRequestScheme = paymentRequestScheme;
+            return this;
+        }
+
         private BillingRequestTemplateListRequest(HttpClient httpClient,
                 ListRequestExecutor<S, BillingRequestTemplate> executor) {
             super(httpClient, executor);
@@ -118,6 +133,9 @@ public class BillingRequestTemplateService {
         protected Map<String, Object> getQueryParams() {
             ImmutableMap.Builder<String, Object> params = ImmutableMap.builder();
             params.putAll(super.getQueryParams());
+            if (paymentRequestScheme != null) {
+                params.put("payment_request_scheme", paymentRequestScheme);
+            }
             return params.build();
         }
 

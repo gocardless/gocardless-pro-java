@@ -105,7 +105,8 @@ public class OutboundPaymentService {
         private String executionDate;
         private Links links;
         private Map<String, String> metadata;
-        private String scheme;
+        private String reference;
+        private Scheme scheme;
 
         /**
          * Amount, in the lowest denomination for the currency (e.g. pence in GBP, cents in EUR).
@@ -182,10 +183,21 @@ public class OutboundPaymentService {
         }
 
         /**
+         * An optional reference that will appear on your customer's bank statement. The character
+         * limit for this reference is dependent on the scheme.<br />
+         * <strong>Faster Payments</strong> - 18 characters, including:
+         * "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789 &-./"<br />
+         */
+        public OutboundPaymentCreateRequest withReference(String reference) {
+            this.reference = reference;
+            return this;
+        }
+
+        /**
          * Bank payment scheme to process the outbound payment. Currently only "faster_payments"
          * (GBP) is supported.
          */
-        public OutboundPaymentCreateRequest withScheme(String scheme) {
+        public OutboundPaymentCreateRequest withScheme(Scheme scheme) {
             this.scheme = scheme;
             return this;
         }
@@ -233,6 +245,17 @@ public class OutboundPaymentService {
             return true;
         }
 
+        public enum Scheme {
+            @SerializedName("faster_payments")
+            FASTER_PAYMENTS, @SerializedName("unknown")
+            UNKNOWN;
+
+            @Override
+            public String toString() {
+                return name().toLowerCase();
+            }
+        }
+
         public static class Links {
             private String creditor;
             private String recipientBankAccount;
@@ -266,7 +289,8 @@ public class OutboundPaymentService {
         private String executionDate;
         private Links links;
         private Map<String, String> metadata;
-        private String scheme;
+        private String reference;
+        private Scheme scheme;
 
         /**
          * Amount, in the lowest denomination for the currency (e.g. pence in GBP, cents in EUR).
@@ -331,10 +355,21 @@ public class OutboundPaymentService {
         }
 
         /**
+         * An optional reference that will appear on your customer's bank statement. The character
+         * limit for this reference is dependent on the scheme.<br />
+         * <strong>Faster Payments</strong> - 18 characters, including:
+         * "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789 &-./"<br />
+         */
+        public OutboundPaymentWithdrawRequest withReference(String reference) {
+            this.reference = reference;
+            return this;
+        }
+
+        /**
          * Bank payment scheme to process the outbound payment. Currently only "faster_payments"
          * (GBP) is supported.
          */
-        public OutboundPaymentWithdrawRequest withScheme(String scheme) {
+        public OutboundPaymentWithdrawRequest withScheme(Scheme scheme) {
             this.scheme = scheme;
             return this;
         }
@@ -371,6 +406,17 @@ public class OutboundPaymentService {
         @Override
         protected String getRequestEnvelope() {
             return "data";
+        }
+
+        public enum Scheme {
+            @SerializedName("faster_payments")
+            FASTER_PAYMENTS, @SerializedName("unknown")
+            UNKNOWN;
+
+            @Override
+            public String toString() {
+                return name().toLowerCase();
+            }
         }
 
         public static class Links {

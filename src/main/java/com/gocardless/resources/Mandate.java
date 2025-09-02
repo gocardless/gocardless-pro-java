@@ -1,7 +1,6 @@
 package com.gocardless.resources;
 
 import com.google.gson.annotations.SerializedName;
-import java.util.List;
 import java.util.Map;
 
 /**
@@ -227,7 +226,9 @@ public class Mandate {
 
         private String endDate;
         private Integer maxAmountPerPayment;
-        private List<Period> periods;
+        private Integer maxAmountPerPeriod;
+        private Integer maxPaymentsPerPeriod;
+        private Period period;
         private String startDate;
 
         /**
@@ -245,10 +246,24 @@ public class Mandate {
         }
 
         /**
-         * Frequency configuration
+         * The maximum total amount that can be charged for all payments in this period
          */
-        public List<Period> getPeriods() {
-            return periods;
+        public Integer getMaxAmountPerPeriod() {
+            return maxAmountPerPeriod;
+        }
+
+        /**
+         * The maximum number of payments that can be collected in this period
+         */
+        public Integer getMaxPaymentsPerPeriod() {
+            return maxPaymentsPerPeriod;
+        }
+
+        /**
+         * The repeating period for this mandate
+         */
+        public Period getPeriod() {
+            return period;
         }
 
         /**
@@ -258,45 +273,14 @@ public class Mandate {
             return startDate;
         }
 
-        public static class Period {
-            private Period() {
-                // blank to prevent instantiation
-            }
-
-            private Integer maxAmountPerPeriod;
-            private Integer maxPaymentsPerPeriod;
-            private PeriodPeriod period;
-
-            /**
-             * The maximum total amount that can be charged for all payments in this period
-             */
-            public Integer getMaxAmountPerPeriod() {
-                return maxAmountPerPeriod;
-            }
-
-            /**
-             * The maximum number of payments that can be collected in this period
-             */
-            public Integer getMaxPaymentsPerPeriod() {
-                return maxPaymentsPerPeriod;
-            }
-
-            /**
-             * The repeating period for this mandate
-             */
-            public PeriodPeriod getPeriod() {
-                return period;
-            }
-
-            public enum PeriodPeriod {
-                @SerializedName("day")
-                DAY, @SerializedName("week")
-                WEEK, @SerializedName("month")
-                MONTH, @SerializedName("year")
-                YEAR, @SerializedName("flexible")
-                FLEXIBLE, @SerializedName("unknown")
-                UNKNOWN
-            }
+        public enum Period {
+            @SerializedName("day")
+            DAY, @SerializedName("week")
+            WEEK, @SerializedName("month")
+            MONTH, @SerializedName("year")
+            YEAR, @SerializedName("flexible")
+            FLEXIBLE, @SerializedName("unknown")
+            UNKNOWN
         }
     }
 
