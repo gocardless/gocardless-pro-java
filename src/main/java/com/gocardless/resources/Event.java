@@ -27,6 +27,7 @@ public class Event {
     private Map<String, Object> metadata;
     private Map<String, Object> resourceMetadata;
     private ResourceType resourceType;
+    private Source source;
 
     /**
      * What has happened to the resource. See [Event Actions](#event-actions) for the possible
@@ -108,6 +109,13 @@ public class Event {
      */
     public ResourceType getResourceType() {
         return resourceType;
+    }
+
+    /**
+     * Audit information about the source of the event.
+     */
+    public Source getSource() {
+        return source;
     }
 
     public enum ResourceType {
@@ -510,6 +518,43 @@ public class Event {
          */
         public String getSubscription() {
             return subscription;
+        }
+    }
+
+    /**
+     * Represents a source resource returned from the API.
+     *
+     * Audit information about the source of the event.
+     */
+    public static class Source {
+        private Source() {
+            // blank to prevent instantiation
+        }
+
+        private String name;
+        private Type type;
+
+        /**
+         * The name of the event's source.
+         */
+        public String getName() {
+            return name;
+        }
+
+        /**
+         * The type of the event's source.
+         */
+        public Type getType() {
+            return type;
+        }
+
+        public enum Type {
+            @SerializedName("app")
+            APP, @SerializedName("user")
+            USER, @SerializedName("gc_team")
+            GC_TEAM, @SerializedName("access_token")
+            ACCESS_TOKEN, @SerializedName("unknown")
+            UNKNOWN
         }
     }
 }
