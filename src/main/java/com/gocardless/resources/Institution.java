@@ -60,8 +60,7 @@ public class Institution {
     }
 
     /**
-     * Defines individual limits for business and personal accounts, in the lowest denomination for
-     * the currency (e.g. pence in GBP, cents in EUR).
+     * Defines individual limits for business and personal accounts.
      */
     public Limits getLimits() {
         return limits;
@@ -99,8 +98,7 @@ public class Institution {
     /**
      * Represents a limit resource returned from the API.
      *
-     * Defines individual limits for business and personal accounts, in the lowest denomination for
-     * the currency (e.g. pence in GBP, cents in EUR).
+     * Defines individual limits for business and personal accounts.
      */
     public static class Limits {
         private Limits() {
