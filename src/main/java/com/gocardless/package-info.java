@@ -1,8 +1,8 @@
 /**
  * Java client library for the GoCardless API.
  *
- * The main entry point into this library is {@link com.gocardless.GoCardlessClient}. This can be
- * created as follows:
+ * The main entry point into this library is {@link com.gocardless.GoCardlessClient}.
+ * This can be created as follows:
  *
  * <pre>
  * String accessToken = "AO00000123";

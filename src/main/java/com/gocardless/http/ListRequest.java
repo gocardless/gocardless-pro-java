@@ -2,6 +2,9 @@ package com.gocardless.http;
 
 import com.google.common.collect.ImmutableMap;
 import com.google.gson.reflect.TypeToken;
+
+import java.io.Reader;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
@@ -13,6 +16,7 @@ import java.util.Map;
 public abstract class ListRequest<S, T> extends ApiRequest<ListResponse<T>> {
     private final transient ListRequestExecutor<S, T> executor;
     private final transient String method;
+
     private String after;
     private String before;
     private Integer limit;
@@ -21,9 +25,9 @@ public abstract class ListRequest<S, T> extends ApiRequest<ListResponse<T>> {
         this(httpClient, executor, "GET");
     }
 
-    protected ListRequest(HttpClient httpClient, ListRequestExecutor<S, T> executor,
-            String method) {
+    protected ListRequest(HttpClient httpClient, ListRequestExecutor<S, T> executor, String method) {
         super(httpClient);
+
         this.method = method;
         this.executor = executor;
     }
@@ -42,7 +46,8 @@ public abstract class ListRequest<S, T> extends ApiRequest<ListResponse<T>> {
     /**
      * Executes this request.
      *
-     * Returns a {@link com.gocardless.http.ApiResponse} that wraps the response entity.
+     * Returns a {@link com.gocardless.http.ApiResponse} that wraps the
+     * response entity.
      *
      * @throws com.gocardless.GoCardlessException
      */
@@ -68,15 +73,19 @@ public abstract class ListRequest<S, T> extends ApiRequest<ListResponse<T>> {
     @Override
     protected Map<String, Object> getQueryParams() {
         ImmutableMap.Builder<String, Object> params = ImmutableMap.builder();
+
         if (after != null) {
             params.put("after", after);
         }
+
         if (before != null) {
             params.put("before", before);
         }
+
         if (limit != null) {
             params.put("limit", limit);
         }
+
         return params.build();
     }
 
@@ -96,21 +105,18 @@ public abstract class ListRequest<S, T> extends ApiRequest<ListResponse<T>> {
 
     public interface ListRequestExecutor<S, T> {
         S execute(ListRequest<S, T> request, HttpClient client);
-
         ApiResponse<S> executeWrapped(ListRequest<S, T> request, HttpClient client);
     }
 
     public static <T> ListRequestExecutor<ListResponse<T>, T> pagingExecutor() {
         return new ListRequestExecutor<ListResponse<T>, T>() {
             @Override
-            public ListResponse<T> execute(ListRequest<ListResponse<T>, T> request,
-                    HttpClient client) {
+            public ListResponse<T> execute(ListRequest<ListResponse<T>, T> request, HttpClient client) {
                 return client.executeWithRetries(request);
             }
 
             @Override
-            public ApiResponse<ListResponse<T>> executeWrapped(
-                    ListRequest<ListResponse<T>, T> request, HttpClient client) {
+            public ApiResponse<ListResponse<T>> executeWrapped(ListRequest<ListResponse<T>, T> request, HttpClient client) {
                 return client.executeWrapped(request);
             }
         };
@@ -124,10 +130,8 @@ public abstract class ListRequest<S, T> extends ApiRequest<ListResponse<T>> {
             }
 
             @Override
-            public ApiResponse<Iterable<T>> executeWrapped(ListRequest<Iterable<T>, T> request,
-                    HttpClient client) {
-                throw new IllegalStateException(
-                        "executeWrapped not available when iterating through list responses");
+            public ApiResponse<Iterable<T>> executeWrapped(ListRequest<Iterable<T>, T> request, HttpClient client) {
+                throw new IllegalStateException("executeWrapped not available when iterating through list responses");
             }
         };
     }

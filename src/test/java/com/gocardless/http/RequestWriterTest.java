@@ -1,11 +1,12 @@
 package com.gocardless.http;
 
-import static com.gocardless.http.HttpTestUtil.jsonMatchesFixture;
-import static org.assertj.core.api.Assertions.assertThat;
-
-import java.io.IOException;
 import org.junit.Before;
 import org.junit.Test;
+
+import java.io.IOException;
+
+import static com.gocardless.http.HttpTestUtil.jsonMatchesFixture;
+import static org.assertj.core.api.Assertions.assertThat;
 
 public class RequestWriterTest {
     private RequestWriter writer;

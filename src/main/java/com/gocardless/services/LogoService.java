@@ -1,116 +1,325 @@
+
+
+
+
+
+
+
+
+
+
+
+
+
 package com.gocardless.services;
 
 import com.gocardless.http.*;
 import com.gocardless.resources.Logo;
+import com.google.common.base.Joiner;
+import com.google.common.collect.ImmutableMap;
+import com.google.gson.annotations.SerializedName;
+import com.google.gson.reflect.TypeToken;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 /**
  * Service class for working with logo resources.
  *
- * Logos are image uploads that, when associated with a creditor, are shown on the [billing request
- * flow](#billing-requests-billing-request-flows) payment pages.
+  * Logos are image uploads that, when associated with a creditor, are shown on the [billing request
+* flow](#billing-requests-billing-request-flows) payment pages.
  */
 public class LogoService {
     private final HttpClient httpClient;
 
     /**
-     * Constructor. Users of this library should have no need to call this - an instance of this
-     * class can be obtained by calling {@link com.gocardless.GoCardlessClient#logos() }.
+     * Constructor.  Users of this library should have no need to call this - an instance
+     * of this class can be obtained by calling
+      {@link com.gocardless.GoCardlessClient#logos() }.
      */
     public LogoService(HttpClient httpClient) {
         this.httpClient = httpClient;
     }
 
-    /**
-     * Creates a new logo associated with a creditor. If a creditor already has a logo, this will
-     * update the existing logo linked to the creditor.
-     * 
-     * We support JPG and PNG formats. Your logo will be scaled to a maximum of 300px by 40px. For
-     * more guidance on how to upload logos that will look great across your customer payment page
-     * and notification emails see
-     * [here](https://developer.gocardless.com/gc-embed/setting-up-branding#tips_for_uploading_your_logo).
-     */
-    public LogoCreateForCreditorRequest createForCreditor() {
-        return new LogoCreateForCreditorRequest(httpClient);
-    }
-
-    /**
-     * Request class for {@link LogoService#createForCreditor }.
-     *
-     * Creates a new logo associated with a creditor. If a creditor already has a logo, this will
-     * update the existing logo linked to the creditor.
-     * 
-     * We support JPG and PNG formats. Your logo will be scaled to a maximum of 300px by 40px. For
-     * more guidance on how to upload logos that will look great across your customer payment page
-     * and notification emails see
-     * [here](https://developer.gocardless.com/gc-embed/setting-up-branding#tips_for_uploading_your_logo).
-     */
-    public static final class LogoCreateForCreditorRequest extends PostRequest<Logo> {
-        private String image;
-        private Links links;
-
+    
+        
+        
         /**
-         * Base64 encoded string.
+          * Creates a new logo associated with a creditor. If a creditor already has a logo, this will update
+* the existing logo linked to the creditor.
+* 
+* We support JPG and PNG formats. Your logo will be scaled to a maximum of 300px by 40px. For more
+* guidance on how to upload logos that will look
+* great across your customer payment page and notification emails see
+* [here](https://developer.gocardless.com/gc-embed/setting-up-branding#tips_for_uploading_your_logo).
          */
-        public LogoCreateForCreditorRequest withImage(String image) {
-            this.image = image;
-            return this;
+        public LogoCreateForCreditorRequest
+        
+        createForCreditor() {
+            return new LogoCreateForCreditorRequest
+            
+            (httpClient
+            
+
+            
+            );
         }
 
-        public LogoCreateForCreditorRequest withLinks(Links links) {
-            this.links = links;
-            return this;
-        }
+        
+    
 
+    
+        
+        
         /**
-         * ID of the creditor the logo belongs to
+         * Request class for {@link LogoService#createForCreditor }.
+         *
+          * Creates a new logo associated with a creditor. If a creditor already has a logo, this will update
+* the existing logo linked to the creditor.
+* 
+* We support JPG and PNG formats. Your logo will be scaled to a maximum of 300px by 40px. For more
+* guidance on how to upload logos that will look
+* great across your customer payment page and notification emails see
+* [here](https://developer.gocardless.com/gc-embed/setting-up-branding#tips_for_uploading_your_logo).
          */
-        public LogoCreateForCreditorRequest withLinksCreditor(String creditor) {
-            if (links == null) {
-                links = new Links();
-            }
-            links.withCreditor(creditor);
-            return this;
-        }
+        public static final class LogoCreateForCreditorRequest
+        
+        extends
+        
+            PostRequest<Logo>
+         {
+          
 
-        private LogoCreateForCreditorRequest(HttpClient httpClient) {
-            super(httpClient);
-        }
+          
+              
+                  
+                  
+                      private 
+    
+        String
+    
+ image;
+                  
+              
+                  
+                  
+                      private 
+    
+        Links
+    
+ links;
+                  
+              
 
-        public LogoCreateForCreditorRequest withHeader(String headerName, String headerValue) {
-            this.addHeader(headerName, headerValue);
-            return this;
-        }
+              
+                  
 
-        @Override
-        protected String getPathTemplate() {
-            return "branding/logos";
-        }
+                  
+                      /**
+                       * Base64 encoded string.
+                       */
+                  
+                  public 
+    LogoCreateForCreditorRequest
 
-        @Override
-        protected String getEnvelope() {
-            return "logos";
-        }
+                      withImage(
+    
+        String
+    
+ image) {
+                      
+                          this.image = image;
+                      
 
-        @Override
-        protected Class<Logo> getResponseClass() {
-            return Logo.class;
-        }
+                      return this;
+                  }
 
-        @Override
-        protected boolean hasBody() {
-            return true;
-        }
+                  
+              
+                  
 
-        public static class Links {
-            private String creditor;
+                  
+                  public 
+    LogoCreateForCreditorRequest
 
-            /**
-             * ID of the creditor the logo belongs to
-             */
-            public Links withCreditor(String creditor) {
+                      withLinks(
+    
+        Links
+    
+ links) {
+                      
+                          this.links = links;
+                      
+
+                      return this;
+                  }
+
+                  
+                      
+                          
+                              
+                              
+                                  /**
+                                    * ID of the creditor the logo belongs to
+                                   */
+                              
+                              public 
+    LogoCreateForCreditorRequest
+
+                                  withLinksCreditor(
+                                      
+    
+        String
+    
+ creditor
+                                  ) {
+                                  if (links == null) {
+                                      links = new 
+    
+        Links
+    
+();
+                                  }
+
+                                  links.withCreditor(creditor);
+                                  return this;
+                              }
+                          
+                      
+                  
+              
+
+              
+                  
+                      
+                  
+              
+          
+
+          private LogoCreateForCreditorRequest(HttpClient httpClient
+              
+              
+          ) {
+
+              
+                  super(httpClient);
+              
+
+              
+          }
+
+              public 
+    LogoCreateForCreditorRequest
+ withHeader(String headerName, String headerValue) {
+                  this.addHeader(headerName, headerValue);
+                  return this;
+              }
+
+          
+
+          
+
+          @Override
+          protected String getPathTemplate() {
+              return "branding/logos";
+          }
+
+          @Override
+          protected String getEnvelope() {
+              return "logos";
+          }
+
+          
+              @Override
+              protected Class<Logo> getResponseClass() {
+                  return Logo.class;
+              }
+          
+
+          
+
+          
+              @Override
+              protected boolean hasBody() {
+                  return true;
+              }
+          
+
+          
+
+          
+              
+    
+        
+
+        
+    
+        
+
+        
+    
+
+
+              
+                  
+
+                  
+              
+                  
+                      
+    
+
+    
+        
+
+        
+    
+
+    public static class Links {
+        
+            
+            private 
+    
+        String
+    
+ creditor;
+        
+
+        
+            
+            
+                /**
+                 * ID of the creditor the logo belongs to
+                 */
+            
+            public Links withCreditor(
+    
+        String
+    
+ creditor) {
                 this.creditor = creditor;
                 return this;
             }
-        }
+        
+
+        
+
+        
+    
+        
+
+        
+    
+
     }
+
+                  
+
+                  
+              
+          
+        }
+    
 }

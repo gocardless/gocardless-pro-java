@@ -1,7 +1,5 @@
 package com.gocardless;
 
-import static org.assertj.core.api.Assertions.assertThat;
-
 import com.gocardless.http.GCEnumTypeAdapterFactory;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -9,13 +7,15 @@ import com.google.gson.annotations.SerializedName;
 import org.junit.Before;
 import org.junit.Test;
 
+import static org.assertj.core.api.Assertions.assertThat;
+
 public class GCEnumTypeAdapterFactoryTest {
     enum Scheme {
-        @SerializedName("bacs")
-        BACS, @SerializedName("becs")
-        BECS, @SerializedName("mos")
-        MY_OWN_SCHEME, @SerializedName("unknown")
-        UNKNOWN, SCHEME_WITHOUT_ANNOTATION;
+        @SerializedName("bacs") BACS,
+        @SerializedName("becs") BECS,
+        @SerializedName("mos") MY_OWN_SCHEME,
+        @SerializedName("unknown") UNKNOWN,
+        SCHEME_WITHOUT_ANNOTATION;
 
         @Override
         public String toString() {
@@ -48,8 +48,7 @@ public class GCEnumTypeAdapterFactoryTest {
 
     @Test
     public void toJsonSchemeWithoutAnnotation() throws Exception {
-        assertThat(gson.toJson(Scheme.SCHEME_WITHOUT_ANNOTATION))
-                .isEqualTo("\"scheme_without_annotation\"");
+        assertThat(gson.toJson(Scheme.SCHEME_WITHOUT_ANNOTATION)).isEqualTo("\"scheme_without_annotation\"");
     }
 
     @Test
@@ -79,7 +78,6 @@ public class GCEnumTypeAdapterFactoryTest {
 
     @Test
     public void fromJsonSchemeWithoutAnnotation() throws Exception {
-        assertThat(gson.fromJson("scheme_without_annotation", Scheme.class))
-                .isEqualTo(Scheme.SCHEME_WITHOUT_ANNOTATION);
+        assertThat(gson.fromJson("scheme_without_annotation", Scheme.class)).isEqualTo(Scheme.SCHEME_WITHOUT_ANNOTATION);
     }
 }

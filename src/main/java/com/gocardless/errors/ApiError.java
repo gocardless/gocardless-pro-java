@@ -2,6 +2,7 @@ package com.gocardless.errors;
 
 import com.google.common.base.Joiner;
 import com.google.common.collect.ImmutableMap;
+
 import java.util.Map;
 
 /**
@@ -9,14 +10,14 @@ import java.util.Map;
  */
 public class ApiError {
     private static final Joiner JOINER = Joiner.on(" ").skipNulls();
+
     private final String message;
     private final String reason;
     private final String field;
     private final String requestPointer;
     private final Map<String, String> links;
 
-    private ApiError(String message, String reason, String field, String requestPointer,
-            Map<String, String> links) {
+    private ApiError(String message, String reason, String field, String requestPointer, Map<String, String> links) {
         this.message = message;
         this.reason = reason;
         this.field = field;
@@ -46,8 +47,8 @@ public class ApiError {
     }
 
     /**
-     * Returns the request pointer, indicating the exact field of the request that triggered the
-     * validation error
+     * Returns the request pointer, indicating the exact field of the request that
+     * triggered the validation error
      */
     public String getRequestPointer() {
         return requestPointer;
@@ -60,6 +61,7 @@ public class ApiError {
         if (links == null) {
             return ImmutableMap.of();
         }
+
         return ImmutableMap.copyOf(links);
     }
 

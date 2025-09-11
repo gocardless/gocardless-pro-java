@@ -1,48 +1,59 @@
 package com.gocardless.http;
 
-import static org.assertj.core.api.Assertions.assertThat;
-
 import com.gocardless.errors.InvalidApiUsageException;
+import com.gocardless.http.ApiResponse;
 import com.gocardless.http.HttpTestUtil.DummyItem;
 import com.google.common.collect.ImmutableMap;
+import java.util.Map;
+import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
 
+import static org.assertj.core.api.Assertions.assertThat;
+
 public class GetRequestTest {
     @Rule
     public final MockHttp http = new MockHttp();
+
     @Rule
     public final ExpectedException exception = ExpectedException.none();
 
     @Test
     public void shouldPerformGetRequest() throws Exception {
         http.enqueueResponse(200, "fixtures/single.json");
+
         DummyItem result = new DummyGetRequest().execute();
+
         assertThat(result.stringField).isEqualTo("foo");
         assertThat(result.intField).isEqualTo(123);
-        http.assertRequestMade("GET", "/dummy/123",
-                ImmutableMap.of("Authorization", "Bearer token"));
+
+        http.assertRequestMade("GET", "/dummy/123", ImmutableMap.of("Authorization", "Bearer token"));
     }
 
     @Test
     public void shouldPerformWrappedGetRequest() throws Exception {
         http.enqueueResponse(200, "fixtures/single.json", ImmutableMap.of("foo", "bar"));
-        ApiResponse<DummyItem> result =
-                new DummyGetRequest().withHeader("Accept-Language", "fr-FR").executeWrapped();
+
+        ApiResponse<DummyItem> result = new DummyGetRequest()
+            .withHeader("Accept-Language", "fr-FR")
+            .executeWrapped();
+
         assertThat(result.getStatusCode()).isEqualTo(200);
         assertThat(result.getHeaders().get("foo")).containsExactly("bar");
         assertThat(result.getResource().stringField).isEqualTo("foo");
         assertThat(result.getResource().intField).isEqualTo(123);
-        http.assertRequestMade("GET", "/dummy/123",
-                ImmutableMap.of("Authorization", "Bearer token", "Accept-Language", "fr-FR"));
+
+        http.assertRequestMade("GET", "/dummy/123", ImmutableMap.of("Authorization", "Bearer token", "Accept-Language", "fr-FR"));
     }
 
     @Test
     public void shouldThrowOnApiError() throws Exception {
         http.enqueueResponse(400, "fixtures/invalid_api_usage.json");
+
         exception.expect(InvalidApiUsageException.class);
         exception.expectMessage("Invalid document structure");
+
         new DummyGetRequest().execute();
     }
 
@@ -50,26 +61,33 @@ public class GetRequestTest {
     public void shouldRetryOnNetworkFailure() throws Exception {
         http.enqueueNetworkFailure();
         http.enqueueResponse(200, "fixtures/single.json");
-        DummyItem result = new DummyGetRequest().withHeader("Accept-Language", "fr-FR").execute();
+
+        DummyItem result = new DummyGetRequest()
+                .withHeader("Accept-Language", "fr-FR")
+                .execute();
+
         assertThat(result.stringField).isEqualTo("foo");
         assertThat(result.intField).isEqualTo(123);
+
         http.takeRequest();
         // This tests that we send our headers on the retry.
-        http.assertRequestMade("GET", "/dummy/123",
-                ImmutableMap.of("Authorization", "Bearer token", "Accept-Language", "fr-FR"));
+        http.assertRequestMade("GET", "/dummy/123", ImmutableMap.of("Authorization", "Bearer token", "Accept-Language", "fr-FR"));
     }
 
     @Test
     public void shouldRetryOnInternalError() throws Exception {
         http.enqueueResponse(500, "fixtures/internal_error.json");
         http.enqueueResponse(200, "fixtures/single.json");
-        DummyItem result = new DummyGetRequest().withHeader("Accept-Language", "fr-FR").execute();
+
+        DummyItem result = new DummyGetRequest()
+                .withHeader("Accept-Language", "fr-FR")
+                .execute();
+
         assertThat(result.stringField).isEqualTo("foo");
         assertThat(result.intField).isEqualTo(123);
-        http.assertRequestMade("GET", "/dummy/123",
-                ImmutableMap.of("Authorization", "Bearer token", "Accept-Language", "fr-FR"));
-        http.assertRequestMade("GET", "/dummy/123",
-                ImmutableMap.of("Authorization", "Bearer token", "Accept-Language", "fr-FR"));
+
+        http.assertRequestMade("GET", "/dummy/123", ImmutableMap.of("Authorization", "Bearer token", "Accept-Language", "fr-FR"));
+        http.assertRequestMade("GET", "/dummy/123", ImmutableMap.of("Authorization", "Bearer token", "Accept-Language", "fr-FR"));
     }
 
     private class DummyGetRequest extends GetRequest<DummyItem> {

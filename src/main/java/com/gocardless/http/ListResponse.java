@@ -1,6 +1,7 @@
 package com.gocardless.http;
 
 import com.gocardless.resources.*;
+
 import java.util.List;
 
 /**
@@ -27,16 +28,16 @@ public class ListResponse<T> {
     }
 
     /**
-     * Returns a cursor that can be used to get the page after this one. If null, then this is the
-     * last page.
+     * Returns a cursor that can be used to get the page after this one.  If null, then
+     * this is the last page.
      */
     public String getAfter() {
         return meta.getCursors().getAfter();
     }
 
     /**
-     * Returns a cursor that can be used to get the page before this one. If null, then this is the
-     * first page.
+     * Returns a cursor that can be used to get the page before this one.  If null, then
+     * this is the first page.
      */
     public String getBefore() {
         return meta.getCursors().getBefore();
@@ -87,82 +88,69 @@ public class ListResponse<T> {
 
     static class Linked {
         private final List<BillingRequest> billingRequests;
-
         public List<BillingRequest> getBillingRequests() {
             return billingRequests;
         }
-
         private final List<Creditor> creditors;
-
         public List<Creditor> getCreditors() {
             return creditors;
         }
-
         private final List<Customer> customers;
-
         public List<Customer> getCustomers() {
             return customers;
         }
-
         private final List<InstalmentSchedule> instalmentSchedules;
-
         public List<InstalmentSchedule> getInstalmentSchedules() {
             return instalmentSchedules;
         }
-
         private final List<Mandate> mandates;
-
         public List<Mandate> getMandates() {
             return mandates;
         }
-
         private final List<OutboundPayment> outboundPayments;
-
         public List<OutboundPayment> getOutboundPayments() {
             return outboundPayments;
         }
-
         private final List<PayerAuthorisation> payerAuthorisations;
-
         public List<PayerAuthorisation> getPayerAuthorisations() {
             return payerAuthorisations;
         }
-
         private final List<Payment> payments;
-
         public List<Payment> getPayments() {
             return payments;
         }
-
         private final List<Payout> payouts;
-
         public List<Payout> getPayouts() {
             return payouts;
         }
-
         private final List<Refund> refunds;
-
         public List<Refund> getRefunds() {
             return refunds;
         }
-
         private final List<SchemeIdentifier> schemeIdentifiers;
-
         public List<SchemeIdentifier> getSchemeIdentifiers() {
             return schemeIdentifiers;
         }
-
         private final List<Subscription> subscriptions;
-
         public List<Subscription> getSubscriptions() {
             return subscriptions;
         }
 
-        Linked(List<Mandate> mandates, List<OutboundPayment> outboundPayments, List<Refund> refunds,
-                List<BillingRequest> billingRequests, List<InstalmentSchedule> instalmentSchedules,
-                List<Subscription> subscriptions, List<SchemeIdentifier> schemeIdentifiers,
-                List<Customer> customers, List<PayerAuthorisation> payerAuthorisations,
-                List<Payment> payments, List<Payout> payouts, List<Creditor> creditors) {
+
+        Linked(
+            List<SchemeIdentifier> schemeIdentifiers, 
+            List<InstalmentSchedule> instalmentSchedules, 
+            List<Mandate> mandates, 
+            List<Refund> refunds, 
+            List<PayerAuthorisation> payerAuthorisations, 
+            List<Payment> payments, 
+            List<Customer> customers, 
+            List<Creditor> creditors, 
+            List<Payout> payouts, 
+            List<Subscription> subscriptions, 
+            List<BillingRequest> billingRequests, 
+            List<OutboundPayment> outboundPayments
+        ) {
             this.billingRequests = billingRequests;
             this.creditors = creditors;
             this.customers = customers;

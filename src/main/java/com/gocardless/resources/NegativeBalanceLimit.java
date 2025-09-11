@@ -1,92 +1,386 @@
+
+
+
+
+
+
 package com.gocardless.resources;
 
 import com.google.gson.annotations.SerializedName;
 
-/**
- * Represents a negative balance limit resource returned from the API.
- *
- * The negative balance limit is a threshold for the creditor balance beyond which refunds are not
- * permitted. The default limit is zero — refunds are not permitted if the creditor has a negative
- * balance. The limit can be changed on a per-creditor basis.
- * 
- */
-public class NegativeBalanceLimit {
-    private NegativeBalanceLimit() {
-        // blank to prevent instantiation
+import java.util.List;
+import java.util.Map;
+
+
+    
+
+    
+      /**
+       * Represents a negative balance limit resource returned from the API.
+       *
+        * The negative balance limit is a threshold for the creditor balance beyond which refunds are not
+* permitted. The default limit is zero — refunds are not permitted if the creditor has a negative
+* balance. The limit can be changed on a per-creditor basis.
+* 
+       */
+    
+    public class NegativeBalanceLimit {
+        private NegativeBalanceLimit() {
+            // blank to prevent instantiation
+        }
+
+        
+            
+            
+                private 
+    
+    
+
+    
+        Integer
+    
+ balanceLimit;
+            
+        
+            
+            
+                private 
+    
+    
+
+    
+        String
+    
+ createdAt;
+            
+        
+            
+            
+                private 
+    
+    
+
+    
+        
+            Currency
+        
+    
+ currency;
+            
+        
+            
+            
+                private 
+    
+    
+
+    
+        String
+    
+ id;
+            
+        
+            
+            
+                private 
+    
+    
+
+    
+        
+            Links
+        
+    
+ links;
+            
+        
+
+        
+            
+
+            
+                /**
+                 * The limit amount in pence (e.g. 10000 for a -100 GBP limit).
+                 */
+            
+
+            
+                public 
+    
+    
+
+    
+        Integer
+    
+ getBalanceLimit() {
+                    return balanceLimit;
+                }
+            
+        
+            
+
+            
+                /**
+                 * Fixed [timestamp](#api-usage-dates-and-times), recording when this limit was created.
+                 */
+            
+
+            
+                public 
+    
+    
+
+    
+        String
+    
+ getCreatedAt() {
+                    return createdAt;
+                }
+            
+        
+            
+
+            
+                /**
+                 * [ISO 4217](http://en.wikipedia.org/wiki/ISO_4217#Active_codes) currency code. Currently "AUD",
+* "CAD", "DKK", "EUR", "GBP", "NZD", "SEK" and "USD" are supported.
+                 */
+            
+
+            
+                public 
+    
+    
+
+    
+        
+            Currency
+        
+    
+ getCurrency() {
+                    return currency;
+                }
+            
+        
+            
+
+            
+                /**
+                 * Unique identifier, beginning with "NBL".
+                 */
+            
+
+            
+                public 
+    
+    
+
+    
+        String
+    
+ getId() {
+                    return id;
+                }
+            
+        
+            
+
+            
+
+            
+                public 
+    
+    
+
+    
+        
+            Links
+        
+    
+ getLinks() {
+                    return links;
+                }
+            
+        
+
+        
+            
+
+            
+        
+            
+
+            
+        
+            
+                
+    
+    
+
+    public enum 
+    
+    
+
+    
+        
+            Currency
+        
+    
+ {
+        
+            @SerializedName("AUD") AUD,
+        
+            @SerializedName("CAD") CAD,
+        
+            @SerializedName("DKK") DKK,
+        
+            @SerializedName("EUR") EUR,
+        
+            @SerializedName("GBP") GBP,
+        
+            @SerializedName("NZD") NZD,
+        
+            @SerializedName("SEK") SEK,
+        
+            @SerializedName("USD") USD,
+        
+        @SerializedName("unknown") UNKNOWN
     }
 
-    private Integer balanceLimit;
-    private String createdAt;
-    private Currency currency;
-    private String id;
-    private Links links;
+            
 
-    /**
-     * The limit amount in pence (e.g. 10000 for a -100 GBP limit).
-     */
-    public Integer getBalanceLimit() {
-        return balanceLimit;
-    }
+            
+        
+            
 
-    /**
-     * Fixed [timestamp](#api-usage-dates-and-times), recording when this limit was created.
-     */
-    public String getCreatedAt() {
-        return createdAt;
-    }
+            
+        
+            
 
-    /**
-     * [ISO 4217](http://en.wikipedia.org/wiki/ISO_4217#Active_codes) currency code. Currently
-     * "AUD", "CAD", "DKK", "EUR", "GBP", "NZD", "SEK" and "USD" are supported.
-     */
-    public Currency getCurrency() {
-        return currency;
-    }
+            
+        
 
-    /**
-     * Unique identifier, beginning with "NBL".
-     */
-    public String getId() {
-        return id;
-    }
+        
+            
 
-    public Links getLinks() {
-        return links;
-    }
+            
+        
+            
 
-    public enum Currency {
-        @SerializedName("AUD")
-        AUD, @SerializedName("CAD")
-        CAD, @SerializedName("DKK")
-        DKK, @SerializedName("EUR")
-        EUR, @SerializedName("GBP")
-        GBP, @SerializedName("NZD")
-        NZD, @SerializedName("SEK")
-        SEK, @SerializedName("USD")
-        USD, @SerializedName("unknown")
-        UNKNOWN
-    }
+            
+        
+            
 
+            
+        
+            
+
+            
+        
+            
+                
+    
+
+    
     public static class Links {
         private Links() {
             // blank to prevent instantiation
         }
 
-        private String creatorUser;
-        private String creditor;
+        
+            
+            
+                private 
+    
+    
 
-        /**
-         * ID of the creator_user who created this limit
-         */
-        public String getCreatorUser() {
-            return creatorUser;
-        }
+    
+        String
+    
+ creatorUser;
+            
+        
+            
+            
+                private 
+    
+    
 
-        /**
-         * ID of [creditor](#core-endpoints-creditors) which this limit relates to
-         */
-        public String getCreditor() {
-            return creditor;
-        }
+    
+        String
+    
+ creditor;
+            
+        
+
+        
+            
+
+            
+                /**
+                 * ID of the creator_user who created this limit
+                 */
+            
+
+            
+                public 
+    
+    
+
+    
+        String
+    
+ getCreatorUser() {
+                    return creatorUser;
+                }
+            
+        
+            
+
+            
+                /**
+                 * ID of [creditor](#core-endpoints-creditors) which this limit relates to
+                 */
+            
+
+            
+                public 
+    
+    
+
+    
+        String
+    
+ getCreditor() {
+                    return creditor;
+                }
+            
+        
+
+        
+            
+
+            
+        
+            
+
+            
+        
+
+        
+            
+
+            
+        
+            
+
+            
+        
     }
-}
+
+            
+
+            
+        
+    }
+

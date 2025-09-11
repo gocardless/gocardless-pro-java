@@ -2,8 +2,10 @@ package com.gocardless.http;
 
 import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.Maps;
-import java.util.Map;
 import okhttp3.HttpUrl;
+
+import java.io.Reader;
+import java.util.Map;
 
 /**
  * Base class for API requests.
