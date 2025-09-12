@@ -109,16 +109,18 @@ public class Institution {
         private Map<String, Object> single;
 
         /**
-         * Daily limit details for this institution. (The 'limits' property is only available via an
-         * authenticated request with a generated access token)
+         * Daily limit details for this institution, in the lowest denomination for the currency
+         * (e.g. pence in GBP, cents in EUR). The 'limits' property is only available via an
+         * authenticated request with a generated access token
          */
         public Map<String, Object> getDaily() {
             return daily;
         }
 
         /**
-         * Single transaction limit details for this institution. (The 'limits' property is only
-         * available via an authenticated request with a generated access token)
+         * Single transaction limit details for this institution, in the lowest denomination for the
+         * currency (e.g. pence in GBP, cents in EUR). The 'limits' property is only available via
+         * an authenticated request with a generated access token
          */
         public Map<String, Object> getSingle() {
             return single;
