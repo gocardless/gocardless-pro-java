@@ -339,6 +339,7 @@ public class PaymentService {
         private Currency currency;
         private String customer;
         private String mandate;
+        private String scheme;
         private SortDirection sortDirection;
         private SortField sortField;
         private Status status;
@@ -507,6 +508,15 @@ public class PaymentService {
         }
 
         /**
+         * A bank payment scheme. Currently "ach", "autogiro", "bacs", "becs", "becs_nz",
+         * "betalingsservice", "faster_payments", "pad", "pay_to" and "sepa_core" are supported.
+         */
+        public PaymentListRequest<S> withScheme(String scheme) {
+            this.scheme = scheme;
+            return this;
+        }
+
+        /**
          * The direction to sort in. One of:
          * <ul>
          * <li>`asc`</li>
@@ -592,6 +602,9 @@ public class PaymentService {
             }
             if (mandate != null) {
                 params.put("mandate", mandate);
+            }
+            if (scheme != null) {
+                params.put("scheme", scheme);
             }
             if (sortDirection != null) {
                 params.put("sort_direction", sortDirection);
