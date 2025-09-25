@@ -247,6 +247,23 @@ public class BillingRequestWithActionService {
         }
 
         /**
+         * This field will decide how GoCardless handles settlement of funds from the customer.
+         * 
+         * - `managed` will be moved through GoCardless' account, batched, and payed out. - `direct`
+         * will be a direct transfer from the payer's account to the merchant where invoicing will
+         * be handled separately.
+         * 
+         */
+        public BillingRequestWithActionCreateWithActionsRequest withMandateRequestFundsSettlement(
+                MandateRequest.FundsSettlement fundsSettlement) {
+            if (mandateRequest == null) {
+                mandateRequest = new MandateRequest();
+            }
+            mandateRequest.withFundsSettlement(fundsSettlement);
+            return this;
+        }
+
+        /**
          * Key-value store of custom data. Up to 3 keys are permitted, with key names up to 50
          * characters and values up to 500 characters.
          */
@@ -1345,6 +1362,7 @@ public class BillingRequestWithActionService {
             private Constraints constraints;
             private String currency;
             private String description;
+            private FundsSettlement fundsSettlement;
             private Map<String, String> metadata;
             private String reference;
             private String scheme;
@@ -1391,6 +1409,19 @@ public class BillingRequestWithActionService {
              */
             public MandateRequest withDescription(String description) {
                 this.description = description;
+                return this;
+            }
+
+            /**
+             * This field will decide how GoCardless handles settlement of funds from the customer.
+             * 
+             * - `managed` will be moved through GoCardless' account, batched, and payed out. -
+             * `direct` will be a direct transfer from the payer's account to the merchant where
+             * invoicing will be handled separately.
+             * 
+             */
+            public MandateRequest withFundsSettlement(FundsSettlement fundsSettlement) {
+                this.fundsSettlement = fundsSettlement;
                 return this;
             }
 
@@ -1470,6 +1501,18 @@ public class BillingRequestWithActionService {
                 WEB, @SerializedName("telephone")
                 TELEPHONE, @SerializedName("paper")
                 PAPER, @SerializedName("unknown")
+                UNKNOWN;
+
+                @Override
+                public String toString() {
+                    return name().toLowerCase();
+                }
+            }
+
+            public enum FundsSettlement {
+                @SerializedName("managed")
+                MANAGED, @SerializedName("direct")
+                DIRECT, @SerializedName("unknown")
                 UNKNOWN;
 
                 @Override

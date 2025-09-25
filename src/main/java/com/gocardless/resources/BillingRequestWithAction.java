@@ -972,6 +972,7 @@ public class BillingRequestWithAction {
             private Constraints constraints;
             private String currency;
             private String description;
+            private FundsSettlement fundsSettlement;
             private Links links;
             private Map<String, Object> metadata;
             private Boolean payerRequestedDualSignature;
@@ -1027,6 +1028,18 @@ public class BillingRequestWithAction {
              */
             public String getDescription() {
                 return description;
+            }
+
+            /**
+             * This field will decide how GoCardless handles settlement of funds from the customer.
+             * 
+             * - `managed` will be moved through GoCardless' account, batched, and payed out. -
+             * `direct` will be a direct transfer from the payer's account to the merchant where
+             * invoicing will be handled separately.
+             * 
+             */
+            public FundsSettlement getFundsSettlement() {
+                return fundsSettlement;
             }
 
             public Links getLinks() {
@@ -1106,6 +1119,13 @@ public class BillingRequestWithAction {
                 WEB, @SerializedName("telephone")
                 TELEPHONE, @SerializedName("paper")
                 PAPER, @SerializedName("unknown")
+                UNKNOWN
+            }
+
+            public enum FundsSettlement {
+                @SerializedName("managed")
+                MANAGED, @SerializedName("direct")
+                DIRECT, @SerializedName("unknown")
                 UNKNOWN
             }
 
