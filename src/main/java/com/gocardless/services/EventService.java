@@ -398,7 +398,8 @@ public class EventService {
         public enum Include {
             @SerializedName("billing_request")
             BILLING_REQUEST, @SerializedName("creditor")
-            CREDITOR, @SerializedName("instalment_schedule")
+            CREDITOR, @SerializedName("customer")
+            CUSTOMER, @SerializedName("instalment_schedule")
             INSTALMENT_SCHEDULE, @SerializedName("mandate")
             MANDATE, @SerializedName("outbound_payment")
             OUTBOUND_PAYMENT, @SerializedName("payer_authorisation")
@@ -419,7 +420,8 @@ public class EventService {
         public enum ResourceType {
             @SerializedName("billing_requests")
             BILLING_REQUESTS, @SerializedName("creditors")
-            CREDITORS, @SerializedName("exports")
+            CREDITORS, @SerializedName("customers")
+            CUSTOMERS, @SerializedName("exports")
             EXPORTS, @SerializedName("instalment_schedules")
             INSTALMENT_SCHEDULES, @SerializedName("mandates")
             MANDATES, @SerializedName("organisations")

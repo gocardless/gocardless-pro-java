@@ -121,7 +121,8 @@ public class Event {
     public enum ResourceType {
         @SerializedName("billing_requests")
         BILLING_REQUESTS, @SerializedName("creditors")
-        CREDITORS, @SerializedName("exports")
+        CREDITORS, @SerializedName("customers")
+        CUSTOMERS, @SerializedName("exports")
         EXPORTS, @SerializedName("instalment_schedules")
         INSTALMENT_SCHEDULES, @SerializedName("mandates")
         MANDATES, @SerializedName("organisations")
