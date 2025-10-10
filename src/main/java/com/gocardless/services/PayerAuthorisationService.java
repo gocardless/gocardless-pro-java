@@ -32,7 +32,7 @@ import java.util.Map;
  * 
  * To retrieve the status and ID of the linked resources you can do one of the following:
  * <ol>
- * <li>Listen to <code>  payer_authorisation_completed </code> <a href="#appendix-webhooks">
+ * <li>Listen to <code>  payer_authorisation_completed </code> <a href="#appendix-more-on-webhooks">
  * webhook</a> (recommended)</li>
  * <li>Poll the GET <a href="#payer-authorisations-get-a-single-payer-authorisation">
  * endpoint</a></li>

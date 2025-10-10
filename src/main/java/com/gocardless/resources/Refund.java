@@ -9,8 +9,8 @@ import java.util.Map;
  * Refund objects represent (partial) refunds of a [payment](#core-endpoints-payments) back to the
  * [customer](#core-endpoints-customers).
  * 
- * GoCardless will notify you via a [webhook](#appendix-webhooks) whenever a refund is created, and
- * will update the `amount_refunded` property of the payment.
+ * GoCardless will notify you via a [webhook](#appendix-more-on-webhooks) whenever a refund is
+ * created, and will update the `amount_refunded` property of the payment.
  */
 public class Refund {
     private Refund() {
