@@ -10,8 +10,8 @@ import java.util.Map;
  * [creditor](#core-endpoints-creditors), taken against a Direct Debit
  * [mandate](#core-endpoints-mandates).
  * 
- * GoCardless will notify you via a [webhook](#appendix-more-on-webhooks) whenever the state of a
- * payment changes.
+ * GoCardless will notify you via a [webhook](#appendix-webhooks) whenever the state of a payment
+ * changes.
  */
 public class Payment {
     private Payment() {

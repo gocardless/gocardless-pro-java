@@ -41,7 +41,7 @@ public class PayoutService {
 
     /**
      * Retrieves the details of a single payout. For an example of how to reconcile the transactions
-     * in a payout, see [this guide](#webhooks-payouts-with-events).
+     * in a payout, see [this guide](#events-reconciling-payouts-with-events).
      */
     public PayoutGetRequest get(String identity) {
         return new PayoutGetRequest(httpClient, identity);
@@ -380,7 +380,7 @@ public class PayoutService {
      * Request class for {@link PayoutService#get }.
      *
      * Retrieves the details of a single payout. For an example of how to reconcile the transactions
-     * in a payout, see [this guide](#webhooks-payouts-with-events).
+     * in a payout, see [this guide](#events-reconciling-payouts-with-events).
      */
     public static final class PayoutGetRequest extends GetRequest<Payout> {
         @PathParam
