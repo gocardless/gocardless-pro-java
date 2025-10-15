@@ -23,39 +23,24 @@ public class BillingRequestTemplate {
         // blank to prevent instantiation
     }
 
-    private String authorisationUrl;
-    private String createdAt;
     private String id;
-    private MandateRequestConstraints mandateRequestConstraints;
-    private String mandateRequestCurrency;
-    private String mandateRequestDescription;
-    private Map<String, Object> mandateRequestMetadata;
-    private String mandateRequestScheme;
-    private MandateRequestVerify mandateRequestVerify;
-    private Map<String, Object> metadata;
-    private String name;
-    private String paymentRequestAmount;
     private String paymentRequestCurrency;
+    private String mandateRequestScheme;
     private String paymentRequestDescription;
     private Map<String, Object> paymentRequestMetadata;
+    private String createdAt;
+    private Map<String, Object> mandateRequestMetadata;
+    private String mandateRequestCurrency;
+    private Map<String, Object> metadata;
     private String paymentRequestScheme;
-    private String redirectUri;
+    private String mandateRequestDescription;
     private String updatedAt;
-
-    /**
-     * Permanent URL that customers can visit to allow them to complete a flow based on this
-     * template, before being returned to the `redirect_uri`.
-     */
-    public String getAuthorisationUrl() {
-        return authorisationUrl;
-    }
-
-    /**
-     * Fixed [timestamp](#api-usage-dates-and-times), recording when this resource was created.
-     */
-    public String getCreatedAt() {
-        return createdAt;
-    }
+    private String paymentRequestAmount;
+    private MandateRequestVerify mandateRequestVerify;
+    private String authorisationUrl;
+    private String name;
+    private MandateRequestConstraints mandateRequestConstraints;
+    private String redirectUri;
 
     /**
      * Unique identifier, beginning with "BRT".
@@ -65,18 +50,22 @@ public class BillingRequestTemplate {
     }
 
     /**
-     * Constraints that will apply to the mandate_request. (Optional) Specifically required for
-     * PayTo and VRP.
+     * [ISO 4217](http://en.wikipedia.org/wiki/ISO_4217#Active_codes) currency code. `GBP` and `EUR`
+     * supported; `GBP` with your customers in the UK and for `EUR` with your customers in supported
+     * Eurozone countries only.
      */
-    public MandateRequestConstraints getMandateRequestConstraints() {
-        return mandateRequestConstraints;
+    public String getPaymentRequestCurrency() {
+        return paymentRequestCurrency;
     }
 
     /**
-     * [ISO 4217](http://en.wikipedia.org/wiki/ISO_4217#Active_codes) currency code.
+     * A bank payment scheme. Currently "ach", "autogiro", "bacs", "becs", "becs_nz",
+     * "betalingsservice", "faster_payments", "pad", "pay_to" and "sepa_core" are supported.
+     * Optional for mandate only requests - if left blank, the payer will be able to select the
+     * currency/scheme to pay with from a list of your available schemes.
      */
-    public String getMandateRequestCurrency() {
-        return mandateRequestCurrency;
+    public String getMandateRequestScheme() {
+        return mandateRequestScheme;
     }
 
     /**
@@ -84,8 +73,24 @@ public class BillingRequestTemplate {
      * payer when authorising the billing request.
      * 
      */
-    public String getMandateRequestDescription() {
-        return mandateRequestDescription;
+    public String getPaymentRequestDescription() {
+        return paymentRequestDescription;
+    }
+
+    /**
+     * Key-value store of custom data that will be applied to the payment created when this request
+     * is fulfilled. Up to 3 keys are permitted, with key names up to 50 characters and values up to
+     * 500 characters.
+     */
+    public Map<String, Object> getPaymentRequestMetadata() {
+        return paymentRequestMetadata;
+    }
+
+    /**
+     * Fixed [timestamp](#api-usage-dates-and-times), recording when this resource was created.
+     */
+    public String getCreatedAt() {
+        return createdAt;
     }
 
     /**
@@ -98,13 +103,53 @@ public class BillingRequestTemplate {
     }
 
     /**
-     * A bank payment scheme. Currently "ach", "autogiro", "bacs", "becs", "becs_nz",
-     * "betalingsservice", "faster_payments", "pad", "pay_to" and "sepa_core" are supported.
-     * Optional for mandate only requests - if left blank, the payer will be able to select the
-     * currency/scheme to pay with from a list of your available schemes.
+     * [ISO 4217](http://en.wikipedia.org/wiki/ISO_4217#Active_codes) currency code.
      */
-    public String getMandateRequestScheme() {
-        return mandateRequestScheme;
+    public String getMandateRequestCurrency() {
+        return mandateRequestCurrency;
+    }
+
+    /**
+     * Key-value store of custom data. Up to 3 keys are permitted, with key names up to 50
+     * characters and values up to 500 characters.
+     */
+    public Map<String, Object> getMetadata() {
+        return metadata;
+    }
+
+    /**
+     * (Optional) A scheme used for Open Banking payments. Currently `faster_payments` is supported
+     * in the UK (GBP) and `sepa_credit_transfer` and `sepa_instant_credit_transfer` are supported
+     * in supported Eurozone countries (EUR). For Eurozone countries, `sepa_credit_transfer` is used
+     * as the default. Please be aware that `sepa_instant_credit_transfer` may incur an additional
+     * fee for your customer.
+     */
+    public String getPaymentRequestScheme() {
+        return paymentRequestScheme;
+    }
+
+    /**
+     * A human-readable description of the payment and/or mandate. This will be displayed to the
+     * payer when authorising the billing request.
+     * 
+     */
+    public String getMandateRequestDescription() {
+        return mandateRequestDescription;
+    }
+
+    /**
+     * Dynamic [timestamp](#api-usage-dates-and-times) recording when this resource was last
+     * updated.
+     */
+    public String getUpdatedAt() {
+        return updatedAt;
+    }
+
+    /**
+     * Amount in full.
+     */
+    public String getPaymentRequestAmount() {
+        return paymentRequestAmount;
     }
 
     /**
@@ -135,11 +180,11 @@ public class BillingRequestTemplate {
     }
 
     /**
-     * Key-value store of custom data. Up to 3 keys are permitted, with key names up to 50
-     * characters and values up to 500 characters.
+     * Permanent URL that customers can visit to allow them to complete a flow based on this
+     * template, before being returned to the `redirect_uri`.
      */
-    public Map<String, Object> getMetadata() {
-        return metadata;
+    public String getAuthorisationUrl() {
+        return authorisationUrl;
     }
 
     /**
@@ -151,48 +196,11 @@ public class BillingRequestTemplate {
     }
 
     /**
-     * Amount in full.
+     * Constraints that will apply to the mandate_request. (Optional) Specifically required for
+     * PayTo and VRP.
      */
-    public String getPaymentRequestAmount() {
-        return paymentRequestAmount;
-    }
-
-    /**
-     * [ISO 4217](http://en.wikipedia.org/wiki/ISO_4217#Active_codes) currency code. `GBP` and `EUR`
-     * supported; `GBP` with your customers in the UK and for `EUR` with your customers in supported
-     * Eurozone countries only.
-     */
-    public String getPaymentRequestCurrency() {
-        return paymentRequestCurrency;
-    }
-
-    /**
-     * A human-readable description of the payment and/or mandate. This will be displayed to the
-     * payer when authorising the billing request.
-     * 
-     */
-    public String getPaymentRequestDescription() {
-        return paymentRequestDescription;
-    }
-
-    /**
-     * Key-value store of custom data that will be applied to the payment created when this request
-     * is fulfilled. Up to 3 keys are permitted, with key names up to 50 characters and values up to
-     * 500 characters.
-     */
-    public Map<String, Object> getPaymentRequestMetadata() {
-        return paymentRequestMetadata;
-    }
-
-    /**
-     * (Optional) A scheme used for Open Banking payments. Currently `faster_payments` is supported
-     * in the UK (GBP) and `sepa_credit_transfer` and `sepa_instant_credit_transfer` are supported
-     * in supported Eurozone countries (EUR). For Eurozone countries, `sepa_credit_transfer` is used
-     * as the default. Please be aware that `sepa_instant_credit_transfer` may incur an additional
-     * fee for your customer.
-     */
-    public String getPaymentRequestScheme() {
-        return paymentRequestScheme;
+    public MandateRequestConstraints getMandateRequestConstraints() {
+        return mandateRequestConstraints;
     }
 
     /**
@@ -200,14 +208,6 @@ public class BillingRequestTemplate {
      */
     public String getRedirectUri() {
         return redirectUri;
-    }
-
-    /**
-     * Dynamic [timestamp](#api-usage-dates-and-times) recording when this resource was last
-     * updated.
-     */
-    public String getUpdatedAt() {
-        return updatedAt;
     }
 
     public enum MandateRequestVerify {
@@ -230,11 +230,22 @@ public class BillingRequestTemplate {
             // blank to prevent instantiation
         }
 
+        private String startDate;
         private String endDate;
         private Integer maxAmountPerPayment;
         private String paymentMethod;
         private List<PeriodicLimit> periodicLimits;
-        private String startDate;
+
+        /**
+         * The date from which payments can be taken.
+         * 
+         * This is an optional field and if it is not supplied the start date will be set to the day
+         * authorisation happens.
+         * 
+         */
+        public String getStartDate() {
+            return startDate;
+        }
 
         /**
          * The latest date at which payments can be taken, must occur after start_date if present
@@ -272,25 +283,36 @@ public class BillingRequestTemplate {
         }
 
         /**
-         * The date from which payments can be taken.
-         * 
-         * This is an optional field and if it is not supplied the start date will be set to the day
-         * authorisation happens.
+         * Represents a periodic limit resource returned from the API.
+         *
          * 
          */
-        public String getStartDate() {
-            return startDate;
-        }
-
         public static class PeriodicLimit {
             private PeriodicLimit() {
                 // blank to prevent instantiation
             }
 
-            private Alignment alignment;
-            private Integer maxPayments;
             private Integer maxTotalAmount;
+            private Integer maxPayments;
+            private Alignment alignment;
             private Period period;
+
+            /**
+             * The maximum total amount that can be charged for all payments in this periodic limit.
+             * Required for VRP.
+             * 
+             */
+            public Integer getMaxTotalAmount() {
+                return maxTotalAmount;
+            }
+
+            /**
+             * (Optional) The maximum number of payments that can be collected in this periodic
+             * limit.
+             */
+            public Integer getMaxPayments() {
+                return maxPayments;
+            }
 
             /**
              * The alignment of the period.
@@ -305,23 +327,6 @@ public class BillingRequestTemplate {
              */
             public Alignment getAlignment() {
                 return alignment;
-            }
-
-            /**
-             * (Optional) The maximum number of payments that can be collected in this periodic
-             * limit.
-             */
-            public Integer getMaxPayments() {
-                return maxPayments;
-            }
-
-            /**
-             * The maximum total amount that can be charged for all payments in this periodic limit.
-             * Required for VRP.
-             * 
-             */
-            public Integer getMaxTotalAmount() {
-                return maxTotalAmount;
             }
 
             /**

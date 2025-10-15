@@ -23,27 +23,18 @@ public class CreditorBankAccount {
         // blank to prevent instantiation
     }
 
-    private String accountHolderName;
     private String accountNumberEnding;
-    private AccountType accountType;
     private String bankName;
     private String countryCode;
-    private String createdAt;
+    private AccountType accountType;
     private String currency;
     private Boolean enabled;
-    private String id;
-    private Links links;
     private Map<String, Object> metadata;
     private VerificationStatus verificationStatus;
-
-    /**
-     * Name of the account holder, as known by the bank. Usually this is the same as the name stored
-     * with the linked [creditor](#core-endpoints-creditors). This field will be transliterated,
-     * upcased and truncated to 18 characters.
-     */
-    public String getAccountHolderName() {
-        return accountHolderName;
-    }
+    private String createdAt;
+    private String accountHolderName;
+    private Links links;
+    private String id;
 
     /**
      * The last few digits of the account number. Currently 4 digits for NZD bank accounts and 2
@@ -51,15 +42,6 @@ public class CreditorBankAccount {
      */
     public String getAccountNumberEnding() {
         return accountNumberEnding;
-    }
-
-    /**
-     * Bank account type. Required for USD-denominated bank accounts. Must not be provided for bank
-     * accounts in other currencies. See [local details](#local-bank-details-united-states) for more
-     * information.
-     */
-    public AccountType getAccountType() {
-        return accountType;
     }
 
     /**
@@ -79,10 +61,12 @@ public class CreditorBankAccount {
     }
 
     /**
-     * Fixed [timestamp](#api-usage-dates-and-times), recording when this resource was created.
+     * Bank account type. Required for USD-denominated bank accounts. Must not be provided for bank
+     * accounts in other currencies. See [local details](#local-bank-details-united-states) for more
+     * information.
      */
-    public String getCreatedAt() {
-        return createdAt;
+    public AccountType getAccountType() {
+        return accountType;
     }
 
     /**
@@ -101,17 +85,6 @@ public class CreditorBankAccount {
     }
 
     /**
-     * Unique identifier, beginning with "BA".
-     */
-    public String getId() {
-        return id;
-    }
-
-    public Links getLinks() {
-        return links;
-    }
-
-    /**
      * Key-value store of custom data. Up to 3 keys are permitted, with key names up to 50
      * characters and values up to 500 characters.
      */
@@ -124,6 +97,36 @@ public class CreditorBankAccount {
      */
     public VerificationStatus getVerificationStatus() {
         return verificationStatus;
+    }
+
+    /**
+     * Fixed [timestamp](#api-usage-dates-and-times), recording when this resource was created.
+     */
+    public String getCreatedAt() {
+        return createdAt;
+    }
+
+    /**
+     * Name of the account holder, as known by the bank. Usually this is the same as the name stored
+     * with the linked [creditor](#core-endpoints-creditors). This field will be transliterated,
+     * upcased and truncated to 18 characters.
+     */
+    public String getAccountHolderName() {
+        return accountHolderName;
+    }
+
+    /**
+    * 
+    */
+    public Links getLinks() {
+        return links;
+    }
+
+    /**
+     * Unique identifier, beginning with "BA".
+     */
+    public String getId() {
+        return id;
     }
 
     public enum AccountType {
@@ -142,6 +145,11 @@ public class CreditorBankAccount {
         UNKNOWN
     }
 
+    /**
+     * Represents a link resource returned from the API.
+     *
+     * 
+     */
     public static class Links {
         private Links() {
             // blank to prevent instantiation

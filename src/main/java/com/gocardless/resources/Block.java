@@ -37,13 +37,13 @@ public class Block {
     }
 
     private Boolean active;
-    private BlockType blockType;
     private String createdAt;
-    private String id;
-    private String reasonDescription;
-    private ReasonType reasonType;
-    private String resourceReference;
     private String updatedAt;
+    private String id;
+    private BlockType blockType;
+    private ReasonType reasonType;
+    private String reasonDescription;
+    private String resourceReference;
 
     /**
      * Shows if the block is active or disabled. Only active blocks will be used when deciding if a
@@ -54,18 +54,17 @@ public class Block {
     }
 
     /**
-     * Type of entity we will seek to match against when blocking the mandate. This can currently be
-     * one of 'email', 'email_domain', 'bank_account', or 'bank_name'.
-     */
-    public BlockType getBlockType() {
-        return blockType;
-    }
-
-    /**
      * Fixed [timestamp](#api-usage-dates-and-times), recording when this resource was created.
      */
     public String getCreatedAt() {
         return createdAt;
+    }
+
+    /**
+     * Fixed [timestamp](#api-usage-dates-and-times), recording when this resource was updated.
+     */
+    public String getUpdatedAt() {
+        return updatedAt;
     }
 
     /**
@@ -76,12 +75,11 @@ public class Block {
     }
 
     /**
-     * This field is required if the reason_type is other. It should be a description of the reason
-     * for why you wish to block this payer and why it does not align with the given reason_types.
-     * This is intended to help us improve our knowledge of types of fraud.
+     * Type of entity we will seek to match against when blocking the mandate. This can currently be
+     * one of 'email', 'email_domain', 'bank_account', or 'bank_name'.
      */
-    public String getReasonDescription() {
-        return reasonDescription;
+    public BlockType getBlockType() {
+        return blockType;
     }
 
     /**
@@ -94,6 +92,15 @@ public class Block {
     }
 
     /**
+     * This field is required if the reason_type is other. It should be a description of the reason
+     * for why you wish to block this payer and why it does not align with the given reason_types.
+     * This is intended to help us improve our knowledge of types of fraud.
+     */
+    public String getReasonDescription() {
+        return reasonDescription;
+    }
+
+    /**
      * This field is a reference to the value you wish to block. This may be the raw value (in the
      * case of emails or email domains) or the ID of the resource (in the case of bank accounts and
      * bank names). This means in order to block a specific bank account (even if you wish to block
@@ -101,13 +108,6 @@ public class Block {
      */
     public String getResourceReference() {
         return resourceReference;
-    }
-
-    /**
-     * Fixed [timestamp](#api-usage-dates-and-times), recording when this resource was updated.
-     */
-    public String getUpdatedAt() {
-        return updatedAt;
     }
 
     public enum BlockType {

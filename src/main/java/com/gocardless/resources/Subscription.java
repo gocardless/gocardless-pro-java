@@ -46,33 +46,78 @@ public class Subscription {
         // blank to prevent instantiation
     }
 
-    private Integer amount;
-    private Integer appFee;
-    private Integer count;
-    private String createdAt;
-    private String currency;
-    private Integer dayOfMonth;
-    private String earliestChargeDateAfterResume;
-    private String endDate;
-    private String id;
     private Integer interval;
-    private IntervalUnit intervalUnit;
-    private Links links;
-    private Map<String, Object> metadata;
-    private Month month;
-    private String name;
-    private Boolean parentPlanPaused;
-    private String paymentReference;
+    private Integer dayOfMonth;
+    private String currency;
     private Boolean retryIfPossible;
-    private String startDate;
-    private Status status;
+    private String name;
+    private Map<String, Object> metadata;
+    private Integer appFee;
+    private IntervalUnit intervalUnit;
     private List<UpcomingPayment> upcomingPayments;
+    private String createdAt;
+    private Month month;
+    private String earliestChargeDateAfterResume;
+    private Links links;
+    private String startDate;
+    private Integer amount;
+    private String endDate;
+    private Integer count;
+    private String id;
+    private Status status;
+    private String paymentReference;
+    private Boolean parentPlanPaused;
 
     /**
-     * Amount in the lowest denomination for the currency (e.g. pence in GBP, cents in EUR).
+     * Number of `interval_units` between customer charge dates. Must be greater than or equal to
+     * `1`. Must result in at least one charge date per year. Defaults to `1`.
      */
-    public Integer getAmount() {
-        return amount;
+    public Integer getInterval() {
+        return interval;
+    }
+
+    /**
+     * As per RFC 2445. The day of the month to charge customers on. `1`-`28` or `-1` to indicate
+     * the last day of the month.
+     */
+    public Integer getDayOfMonth() {
+        return dayOfMonth;
+    }
+
+    /**
+     * [ISO 4217](http://en.wikipedia.org/wiki/ISO_4217#Active_codes) currency code. Currently
+     * "AUD", "CAD", "DKK", "EUR", "GBP", "NZD", "SEK" and "USD" are supported.
+     */
+    public String getCurrency() {
+        return currency;
+    }
+
+    /**
+     * On failure, automatically retry payments using [intelligent
+     * retries](#success-intelligent-retries). Default is `false`.
+     * <p class="notice">
+     * <strong>Important</strong>: To be able to use intelligent retries, Success+ needs to be
+     * enabled in [GoCardless dashboard](https://manage.gocardless.com/success-plus).
+     * </p>
+     */
+    public Boolean getRetryIfPossible() {
+        return retryIfPossible;
+    }
+
+    /**
+     * Optional name for the subscription. This will be set as the description on each payment
+     * created. Must not exceed 255 characters.
+     */
+    public String getName() {
+        return name;
+    }
+
+    /**
+     * Key-value store of custom data. Up to 3 keys are permitted, with key names up to 50
+     * characters and values up to 500 characters.
+     */
+    public Map<String, Object> getMetadata() {
+        return metadata;
     }
 
     /**
@@ -85,10 +130,17 @@ public class Subscription {
     }
 
     /**
-     * The total number of payments that should be taken by this subscription.
+     * The unit of time between customer charge dates. One of `weekly`, `monthly` or `yearly`.
      */
-    public Integer getCount() {
-        return count;
+    public IntervalUnit getIntervalUnit() {
+        return intervalUnit;
+    }
+
+    /**
+     * Up to 10 upcoming payments with their amounts and charge dates.
+     */
+    public List<UpcomingPayment> getUpcomingPayments() {
+        return upcomingPayments;
     }
 
     /**
@@ -99,19 +151,12 @@ public class Subscription {
     }
 
     /**
-     * [ISO 4217](http://en.wikipedia.org/wiki/ISO_4217#Active_codes) currency code. Currently
-     * "AUD", "CAD", "DKK", "EUR", "GBP", "NZD", "SEK" and "USD" are supported.
+     * Name of the month on which to charge a customer. Must be lowercase. Only applies when the
+     * interval_unit is `yearly`.
+     * 
      */
-    public String getCurrency() {
-        return currency;
-    }
-
-    /**
-     * As per RFC 2445. The day of the month to charge customers on. `1`-`28` or `-1` to indicate
-     * the last day of the month.
-     */
-    public Integer getDayOfMonth() {
-        return dayOfMonth;
+    public Month getMonth() {
+        return month;
     }
 
     /**
@@ -121,6 +166,31 @@ public class Subscription {
      */
     public String getEarliestChargeDateAfterResume() {
         return earliestChargeDateAfterResume;
+    }
+
+    /**
+    * 
+    */
+    public Links getLinks() {
+        return links;
+    }
+
+    /**
+     * The date on which the first payment should be charged. Must be on or after the
+     * [mandate](#core-endpoints-mandates)'s `next_possible_charge_date`. When left blank and
+     * `month` or `day_of_month` are provided, this will be set to the date of the first payment. If
+     * created without `month` or `day_of_month` this will be set as the mandate's
+     * `next_possible_charge_date`
+     */
+    public String getStartDate() {
+        return startDate;
+    }
+
+    /**
+     * Amount in the lowest denomination for the currency (e.g. pence in GBP, cents in EUR).
+     */
+    public Integer getAmount() {
+        return amount;
     }
 
     /**
@@ -137,97 +207,17 @@ public class Subscription {
     }
 
     /**
+     * The total number of payments that should be taken by this subscription.
+     */
+    public Integer getCount() {
+        return count;
+    }
+
+    /**
      * Unique identifier, beginning with "SB".
      */
     public String getId() {
         return id;
-    }
-
-    /**
-     * Number of `interval_units` between customer charge dates. Must be greater than or equal to
-     * `1`. Must result in at least one charge date per year. Defaults to `1`.
-     */
-    public Integer getInterval() {
-        return interval;
-    }
-
-    /**
-     * The unit of time between customer charge dates. One of `weekly`, `monthly` or `yearly`.
-     */
-    public IntervalUnit getIntervalUnit() {
-        return intervalUnit;
-    }
-
-    public Links getLinks() {
-        return links;
-    }
-
-    /**
-     * Key-value store of custom data. Up to 3 keys are permitted, with key names up to 50
-     * characters and values up to 500 characters.
-     */
-    public Map<String, Object> getMetadata() {
-        return metadata;
-    }
-
-    /**
-     * Name of the month on which to charge a customer. Must be lowercase. Only applies when the
-     * interval_unit is `yearly`.
-     * 
-     */
-    public Month getMonth() {
-        return month;
-    }
-
-    /**
-     * Optional name for the subscription. This will be set as the description on each payment
-     * created. Must not exceed 255 characters.
-     */
-    public String getName() {
-        return name;
-    }
-
-    /**
-     * Whether the parent plan of this subscription is paused.
-     */
-    public Boolean getParentPlanPaused() {
-        return parentPlanPaused;
-    }
-
-    /**
-     * An optional payment reference. This will be set as the reference on each payment created and
-     * will appear on your customer's bank statement. See the documentation for the [create payment
-     * endpoint](#payments-create-a-payment) for more details. <br />
-     * <p class="restricted-notice">
-     * <strong>Restricted</strong>: You need your own Service User Number to specify a payment
-     * reference for Bacs payments.
-     * </p>
-     */
-    public String getPaymentReference() {
-        return paymentReference;
-    }
-
-    /**
-     * On failure, automatically retry payments using [intelligent
-     * retries](#success-intelligent-retries). Default is `false`.
-     * <p class="notice">
-     * <strong>Important</strong>: To be able to use intelligent retries, Success+ needs to be
-     * enabled in [GoCardless dashboard](https://manage.gocardless.com/success-plus).
-     * </p>
-     */
-    public Boolean getRetryIfPossible() {
-        return retryIfPossible;
-    }
-
-    /**
-     * The date on which the first payment should be charged. Must be on or after the
-     * [mandate](#core-endpoints-mandates)'s `next_possible_charge_date`. When left blank and
-     * `month` or `day_of_month` are provided, this will be set to the date of the first payment. If
-     * created without `month` or `day_of_month` this will be set as the mandate's
-     * `next_possible_charge_date`
-     */
-    public String getStartDate() {
-        return startDate;
     }
 
     /**
@@ -248,10 +238,23 @@ public class Subscription {
     }
 
     /**
-     * Up to 10 upcoming payments with their amounts and charge dates.
+     * An optional payment reference. This will be set as the reference on each payment created and
+     * will appear on your customer's bank statement. See the documentation for the [create payment
+     * endpoint](#payments-create-a-payment) for more details. <br />
+     * <p class="restricted-notice">
+     * <strong>Restricted</strong>: You need your own Service User Number to specify a payment
+     * reference for Bacs payments.
+     * </p>
      */
-    public List<UpcomingPayment> getUpcomingPayments() {
-        return upcomingPayments;
+    public String getPaymentReference() {
+        return paymentReference;
+    }
+
+    /**
+     * Whether the parent plan of this subscription is paused.
+     */
+    public Boolean getParentPlanPaused() {
+        return parentPlanPaused;
     }
 
     public enum IntervalUnit {
@@ -259,6 +262,17 @@ public class Subscription {
         WEEKLY, @SerializedName("monthly")
         MONTHLY, @SerializedName("yearly")
         YEARLY, @SerializedName("unknown")
+        UNKNOWN
+    }
+
+    public enum Status {
+        @SerializedName("pending_customer_approval")
+        PENDING_CUSTOMER_APPROVAL, @SerializedName("customer_approval_denied")
+        CUSTOMER_APPROVAL_DENIED, @SerializedName("active")
+        ACTIVE, @SerializedName("finished")
+        FINISHED, @SerializedName("cancelled")
+        CANCELLED, @SerializedName("paused")
+        PAUSED, @SerializedName("unknown")
         UNKNOWN
     }
 
@@ -279,17 +293,39 @@ public class Subscription {
         UNKNOWN
     }
 
-    public enum Status {
-        @SerializedName("pending_customer_approval")
-        PENDING_CUSTOMER_APPROVAL, @SerializedName("customer_approval_denied")
-        CUSTOMER_APPROVAL_DENIED, @SerializedName("active")
-        ACTIVE, @SerializedName("finished")
-        FINISHED, @SerializedName("cancelled")
-        CANCELLED, @SerializedName("paused")
-        PAUSED, @SerializedName("unknown")
-        UNKNOWN
+    /**
+     * Represents a upcoming payment resource returned from the API.
+     *
+     * 
+     */
+    public static class UpcomingPayment {
+        private UpcomingPayment() {
+            // blank to prevent instantiation
+        }
+
+        private String chargeDate;
+        private Integer amount;
+
+        /**
+         * The date on which this payment will be charged.
+         */
+        public String getChargeDate() {
+            return chargeDate;
+        }
+
+        /**
+         * The amount of this payment, in minor unit (e.g. pence in GBP, cents in EUR).
+         */
+        public Integer getAmount() {
+            return amount;
+        }
     }
 
+    /**
+     * Represents a link resource returned from the API.
+     *
+     * 
+     */
     public static class Links {
         private Links() {
             // blank to prevent instantiation
@@ -303,29 +339,6 @@ public class Subscription {
          */
         public String getMandate() {
             return mandate;
-        }
-    }
-
-    public static class UpcomingPayment {
-        private UpcomingPayment() {
-            // blank to prevent instantiation
-        }
-
-        private Integer amount;
-        private String chargeDate;
-
-        /**
-         * The amount of this payment, in minor unit (e.g. pence in GBP, cents in EUR).
-         */
-        public Integer getAmount() {
-            return amount;
-        }
-
-        /**
-         * The date on which this payment will be charged.
-         */
-        public String getChargeDate() {
-            return chargeDate;
         }
     }
 }

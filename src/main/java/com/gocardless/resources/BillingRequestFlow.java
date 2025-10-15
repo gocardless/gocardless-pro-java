@@ -13,61 +13,25 @@ public class BillingRequestFlow {
         // blank to prevent instantiation
     }
 
-    private String authorisationUrl;
-    private Boolean autoFulfil;
-    private String createdAt;
-    private Boolean customerDetailsCaptured;
-    private String exitUri;
     private String expiresAt;
-    private String id;
-    private String language;
-    private Links links;
-    private Boolean lockBankAccount;
-    private Boolean lockCurrency;
-    private Boolean lockCustomerDetails;
-    private PrefilledBankAccount prefilledBankAccount;
-    private PrefilledCustomer prefilledCustomer;
-    private String redirectUri;
-    private String sessionToken;
     private Boolean showRedirectButtons;
+    private PrefilledCustomer prefilledCustomer;
+    private Boolean lockCurrency;
+    private String sessionToken;
+    private Boolean customerDetailsCaptured;
+    private Boolean lockCustomerDetails;
+    private String language;
+    private String id;
+    private Boolean autoFulfil;
+    private Links links;
     private Boolean showSuccessRedirectButton;
+    private PrefilledBankAccount prefilledBankAccount;
+    private String createdAt;
+    private String exitUri;
+    private String authorisationUrl;
+    private String redirectUri;
     private Boolean skipSuccessScreen;
-
-    /**
-     * URL for a GC-controlled flow which will allow the payer to fulfil the billing request
-     */
-    public String getAuthorisationUrl() {
-        return authorisationUrl;
-    }
-
-    /**
-     * (Experimental feature) Fulfil the Billing Request on completion of the flow (true by
-     * default). Disabling the auto_fulfil is not allowed currently.
-     */
-    public Boolean getAutoFulfil() {
-        return autoFulfil;
-    }
-
-    /**
-     * Timestamp when the flow was created
-     */
-    public String getCreatedAt() {
-        return createdAt;
-    }
-
-    /**
-     * Identifies whether a Billing Request belongs to a specific customer
-     */
-    public Boolean getCustomerDetailsCaptured() {
-        return customerDetailsCaptured;
-    }
-
-    /**
-     * URL that the payer can be taken to if there isn't a way to progress ahead in flow.
-     */
-    public String getExitUri() {
-        return exitUri;
-    }
+    private Boolean lockBankAccount;
 
     /**
      * Timestamp when the flow will expire. Each flow currently lasts for 7 days.
@@ -77,35 +41,23 @@ public class BillingRequestFlow {
     }
 
     /**
-     * Unique identifier, beginning with "BRF".
+     * If true, the payer will be able to see redirect action buttons on Thank You page. These
+     * action buttons will provide a way to connect back to the billing request flow app if opened
+     * within a mobile app. For successful flow, the button will take the payer back the billing
+     * request flow where they will see the success screen. For failure, button will take the payer
+     * to url being provided against exit_uri field.
      */
-    public String getId() {
-        return id;
+    public Boolean getShowRedirectButtons() {
+        return showRedirectButtons;
     }
 
     /**
-     * Sets the default language of the Billing Request Flow and the customer. [ISO
-     * 639-1](https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes) code.
+     * Customer information used to prefill the payment page so your customer doesn't have to
+     * re-type details you already hold about them. It will be stored unvalidated and the customer
+     * will be able to review and amend it before completing the form.
      */
-    public String getLanguage() {
-        return language;
-    }
-
-    public Links getLinks() {
-        return links;
-    }
-
-    /**
-     * If true, the payer will not be able to change their bank account within the flow. If the
-     * bank_account details are collected as part of bank_authorisation then GC will set this value
-     * to true mid flow.
-     * 
-     * You can only lock bank account if these have already been completed as a part of the billing
-     * request.
-     * 
-     */
-    public Boolean getLockBankAccount() {
-        return lockBankAccount;
+    public PrefilledCustomer getPrefilledCustomer() {
+        return prefilledCustomer;
     }
 
     /**
@@ -115,6 +67,20 @@ public class BillingRequestFlow {
      */
     public Boolean getLockCurrency() {
         return lockCurrency;
+    }
+
+    /**
+     * Session token populated when responding to the initialise action
+     */
+    public String getSessionToken() {
+        return sessionToken;
+    }
+
+    /**
+     * Identifies whether a Billing Request belongs to a specific customer
+     */
+    public Boolean getCustomerDetailsCaptured() {
+        return customerDetailsCaptured;
     }
 
     /**
@@ -131,46 +97,33 @@ public class BillingRequestFlow {
     }
 
     /**
-     * Bank account information used to prefill the payment page so your customer doesn't have to
-     * re-type details you already hold about them. It will be stored unvalidated and the customer
-     * will be able to review and amend it before completing the form.
+     * Sets the default language of the Billing Request Flow and the customer. [ISO
+     * 639-1](https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes) code.
      */
-    public PrefilledBankAccount getPrefilledBankAccount() {
-        return prefilledBankAccount;
+    public String getLanguage() {
+        return language;
     }
 
     /**
-     * Customer information used to prefill the payment page so your customer doesn't have to
-     * re-type details you already hold about them. It will be stored unvalidated and the customer
-     * will be able to review and amend it before completing the form.
+     * Unique identifier, beginning with "BRF".
      */
-    public PrefilledCustomer getPrefilledCustomer() {
-        return prefilledCustomer;
+    public String getId() {
+        return id;
     }
 
     /**
-     * URL that the payer can be redirected to after completing the request flow.
+     * (Experimental feature) Fulfil the Billing Request on completion of the flow (true by
+     * default). Disabling the auto_fulfil is not allowed currently.
      */
-    public String getRedirectUri() {
-        return redirectUri;
+    public Boolean getAutoFulfil() {
+        return autoFulfil;
     }
 
     /**
-     * Session token populated when responding to the initialise action
-     */
-    public String getSessionToken() {
-        return sessionToken;
-    }
-
-    /**
-     * If true, the payer will be able to see redirect action buttons on Thank You page. These
-     * action buttons will provide a way to connect back to the billing request flow app if opened
-     * within a mobile app. For successful flow, the button will take the payer back the billing
-     * request flow where they will see the success screen. For failure, button will take the payer
-     * to url being provided against exit_uri field.
-     */
-    public Boolean getShowRedirectButtons() {
-        return showRedirectButtons;
+    * 
+    */
+    public Links getLinks() {
+        return links;
     }
 
     /**
@@ -184,6 +137,43 @@ public class BillingRequestFlow {
     }
 
     /**
+     * Bank account information used to prefill the payment page so your customer doesn't have to
+     * re-type details you already hold about them. It will be stored unvalidated and the customer
+     * will be able to review and amend it before completing the form.
+     */
+    public PrefilledBankAccount getPrefilledBankAccount() {
+        return prefilledBankAccount;
+    }
+
+    /**
+     * Timestamp when the flow was created
+     */
+    public String getCreatedAt() {
+        return createdAt;
+    }
+
+    /**
+     * URL that the payer can be taken to if there isn't a way to progress ahead in flow.
+     */
+    public String getExitUri() {
+        return exitUri;
+    }
+
+    /**
+     * URL for a GC-controlled flow which will allow the payer to fulfil the billing request
+     */
+    public String getAuthorisationUrl() {
+        return authorisationUrl;
+    }
+
+    /**
+     * URL that the payer can be redirected to after completing the request flow.
+     */
+    public String getRedirectUri() {
+        return redirectUri;
+    }
+
+    /**
      * If true, the payer will not be redirected to the success screen after completing the flow. A
      * redirect_uri needs to be provided for this parameter to be taken into account.
      */
@@ -191,20 +181,17 @@ public class BillingRequestFlow {
         return skipSuccessScreen;
     }
 
-    public static class Links {
-        private Links() {
-            // blank to prevent instantiation
-        }
-
-        private String billingRequest;
-
-        /**
-         * ID of the [billing request](#billing-requests-billing-requests) against which this flow
-         * was created.
-         */
-        public String getBillingRequest() {
-            return billingRequest;
-        }
+    /**
+     * If true, the payer will not be able to change their bank account within the flow. If the
+     * bank_account details are collected as part of bank_authorisation then GC will set this value
+     * to true mid flow.
+     * 
+     * You can only lock bank account if these have already been completed as a part of the billing
+     * request.
+     * 
+     */
+    public Boolean getLockBankAccount() {
+        return lockBankAccount;
     }
 
     /**
@@ -239,6 +226,27 @@ public class BillingRequestFlow {
     }
 
     /**
+     * Represents a link resource returned from the API.
+     *
+     * 
+     */
+    public static class Links {
+        private Links() {
+            // blank to prevent instantiation
+        }
+
+        private String billingRequest;
+
+        /**
+         * ID of the [billing request](#billing-requests-billing-requests) against which this flow
+         * was created.
+         */
+        public String getBillingRequest() {
+            return billingRequest;
+        }
+    }
+
+    /**
      * Represents a prefilled customer resource returned from the API.
      *
      * Customer information used to prefill the payment page so your customer doesn't have to
@@ -250,40 +258,19 @@ public class BillingRequestFlow {
             // blank to prevent instantiation
         }
 
-        private String addressLine1;
-        private String addressLine2;
-        private String addressLine3;
         private String city;
-        private String companyName;
         private String countryCode;
-        private String danishIdentityNumber;
         private String email;
         private String familyName;
-        private String givenName;
-        private String postalCode;
+        private String addressLine1;
+        private String addressLine3;
+        private String danishIdentityNumber;
+        private String companyName;
         private String region;
+        private String postalCode;
         private String swedishIdentityNumber;
-
-        /**
-         * The first line of the customer's address.
-         */
-        public String getAddressLine1() {
-            return addressLine1;
-        }
-
-        /**
-         * The second line of the customer's address.
-         */
-        public String getAddressLine2() {
-            return addressLine2;
-        }
-
-        /**
-         * The third line of the customer's address.
-         */
-        public String getAddressLine3() {
-            return addressLine3;
-        }
+        private String givenName;
+        private String addressLine2;
 
         /**
          * The city of the customer's address.
@@ -293,26 +280,11 @@ public class BillingRequestFlow {
         }
 
         /**
-         * Customer's company name. Company name should only be provided if `given_name` and
-         * `family_name` are null.
-         */
-        public String getCompanyName() {
-            return companyName;
-        }
-
-        /**
          * [ISO 3166-1 alpha-2
          * code.](http://en.wikipedia.org/wiki/ISO_3166-1_alpha-2#Officially_assigned_code_elements)
          */
         public String getCountryCode() {
             return countryCode;
-        }
-
-        /**
-         * For Danish customers only. The civic/company number (CPR or CVR) of the customer.
-         */
-        public String getDanishIdentityNumber() {
-            return danishIdentityNumber;
         }
 
         /**
@@ -330,17 +302,32 @@ public class BillingRequestFlow {
         }
 
         /**
-         * Customer's first name.
+         * The first line of the customer's address.
          */
-        public String getGivenName() {
-            return givenName;
+        public String getAddressLine1() {
+            return addressLine1;
         }
 
         /**
-         * The customer's postal code.
+         * The third line of the customer's address.
          */
-        public String getPostalCode() {
-            return postalCode;
+        public String getAddressLine3() {
+            return addressLine3;
+        }
+
+        /**
+         * For Danish customers only. The civic/company number (CPR or CVR) of the customer.
+         */
+        public String getDanishIdentityNumber() {
+            return danishIdentityNumber;
+        }
+
+        /**
+         * Customer's company name. Company name should only be provided if `given_name` and
+         * `family_name` are null.
+         */
+        public String getCompanyName() {
+            return companyName;
         }
 
         /**
@@ -351,11 +338,32 @@ public class BillingRequestFlow {
         }
 
         /**
+         * The customer's postal code.
+         */
+        public String getPostalCode() {
+            return postalCode;
+        }
+
+        /**
          * For Swedish customers only. The civic/company number (personnummer, samordningsnummer, or
          * organisationsnummer) of the customer.
          */
         public String getSwedishIdentityNumber() {
             return swedishIdentityNumber;
+        }
+
+        /**
+         * Customer's first name.
+         */
+        public String getGivenName() {
+            return givenName;
+        }
+
+        /**
+         * The second line of the customer's address.
+         */
+        public String getAddressLine2() {
+            return addressLine2;
         }
     }
 }

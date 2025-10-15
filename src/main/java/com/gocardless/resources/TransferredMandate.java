@@ -10,10 +10,17 @@ public class TransferredMandate {
         // blank to prevent instantiation
     }
 
-    private String encryptedCustomerBankDetails;
-    private String encryptedDecryptionKey;
-    private Links links;
     private String publicKeyId;
+    private String encryptedCustomerBankDetails;
+    private Links links;
+    private String encryptedDecryptionKey;
+
+    /**
+     * The ID of an RSA-2048 public key, from your JWKS, used to encrypt the AES key.
+     */
+    public String getPublicKeyId() {
+        return publicKeyId;
+    }
 
     /**
      * Encrypted customer bank account details, containing: `iban`, `account_holder_name`,
@@ -24,6 +31,13 @@ public class TransferredMandate {
     }
 
     /**
+    * 
+    */
+    public Links getLinks() {
+        return links;
+    }
+
+    /**
      * Random AES-256 key used to encrypt bank account details, itself encrypted with your public
      * key.
      */
@@ -31,17 +45,11 @@ public class TransferredMandate {
         return encryptedDecryptionKey;
     }
 
-    public Links getLinks() {
-        return links;
-    }
-
     /**
-     * The ID of an RSA-2048 public key, from your JWKS, used to encrypt the AES key.
+     * Represents a link resource returned from the API.
+     *
+     * 
      */
-    public String getPublicKeyId() {
-        return publicKeyId;
-    }
-
     public static class Links {
         private Links() {
             // blank to prevent instantiation

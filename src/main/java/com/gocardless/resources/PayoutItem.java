@@ -24,40 +24,10 @@ public class PayoutItem {
         // blank to prevent instantiation
     }
 
-    private String amount;
-    private Links links;
-    private List<Tax> taxes;
     private Type type;
-
-    /**
-     * The positive (credit) or negative (debit) value of the item, in fractional currency; the
-     * lowest denomination for the currency (e.g. pence in GBP, cents in EUR), to one decimal place.
-     * <p class="notice">
-     * For accuracy, we store some of our fees to greater precision than we can actually pay out
-     * (for example, a GoCardless fee we record might come to 0.5 pence, but it is not possible to
-     * send a payout via bank transfer including a half penny).<br>
-     * <br>
-     * To calculate the final amount of the payout, we sum all of the items and then round to the
-     * nearest currency unit.
-     * </p>
-     */
-    public String getAmount() {
-        return amount;
-    }
-
-    public Links getLinks() {
-        return links;
-    }
-
-    /**
-     * An array of tax items <em>beta</em>
-     * 
-     * _Note_: VAT applies to transaction and surcharge fees for merchants operating in the UK and
-     * France.
-     */
-    public List<Tax> getTaxes() {
-        return taxes;
-    }
+    private List<Tax> taxes;
+    private Links links;
+    private String amount;
 
     /**
      * The type of the credit (positive) or debit (negative) item in the payout (inclusive of VAT if
@@ -88,6 +58,39 @@ public class PayoutItem {
         return type;
     }
 
+    /**
+     * An array of tax items <em>beta</em>
+     * 
+     * _Note_: VAT applies to transaction and surcharge fees for merchants operating in the UK and
+     * France.
+     */
+    public List<Tax> getTaxes() {
+        return taxes;
+    }
+
+    /**
+    * 
+    */
+    public Links getLinks() {
+        return links;
+    }
+
+    /**
+     * The positive (credit) or negative (debit) value of the item, in fractional currency; the
+     * lowest denomination for the currency (e.g. pence in GBP, cents in EUR), to one decimal place.
+     * <p class="notice">
+     * For accuracy, we store some of our fees to greater precision than we can actually pay out
+     * (for example, a GoCardless fee we record might come to 0.5 pence, but it is not possible to
+     * send a payout via bank transfer including a half penny).<br>
+     * <br>
+     * To calculate the final amount of the payout, we sum all of the items and then round to the
+     * nearest currency unit.
+     * </p>
+     */
+    public String getAmount() {
+        return amount;
+    }
+
     public enum Type {
         @SerializedName("payment_paid_out")
         PAYMENT_PAID_OUT, @SerializedName("payment_failed")
@@ -103,59 +106,22 @@ public class PayoutItem {
         UNKNOWN
     }
 
-    public static class Links {
-        private Links() {
-            // blank to prevent instantiation
-        }
-
-        private String mandate;
-        private String payment;
-        private String refund;
-
-        /**
-         * Unique identifier, beginning with "MD". Note that this prefix may not apply to mandates
-         * created before 2016. Present only for the items of type `payment_refunded`, `refund` and
-         * `refund_funds_returned`.
-         */
-        public String getMandate() {
-            return mandate;
-        }
-
-        /**
-         * Unique identifier, beginning with "PM".
-         */
-        public String getPayment() {
-            return payment;
-        }
-
-        /**
-         * Unique identifier, beginning with "RF". Present only for the items of type
-         * `payment_refunded`, `refund` and `refund_funds_returned`.
-         */
-        public String getRefund() {
-            return refund;
-        }
-    }
-
+    /**
+     * Represents a tax resource returned from the API.
+     *
+     * 
+     */
     public static class Tax {
         private Tax() {
             // blank to prevent instantiation
         }
 
-        private String amount;
         private Currency currency;
         private String destinationAmount;
         private String destinationCurrency;
         private String exchangeRate;
         private String taxRateId;
-
-        /**
-         * The amount of tax applied to a fee in fractional currency; the lowest denomination for
-         * the currency (e.g. pence in GBP, cents in EUR), to one decimal place.
-         */
-        public String getAmount() {
-            return amount;
-        }
+        private String amount;
 
         /**
          * [ISO 4217](http://en.wikipedia.org/wiki/ISO_4217#Active_codes) currency code. Currently
@@ -207,6 +173,14 @@ public class PayoutItem {
             return taxRateId;
         }
 
+        /**
+         * The amount of tax applied to a fee in fractional currency; the lowest denomination for
+         * the currency (e.g. pence in GBP, cents in EUR), to one decimal place.
+         */
+        public String getAmount() {
+            return amount;
+        }
+
         public enum Currency {
             @SerializedName("AUD")
             AUD, @SerializedName("CAD")
@@ -218,6 +192,70 @@ public class PayoutItem {
             SEK, @SerializedName("USD")
             USD, @SerializedName("unknown")
             UNKNOWN
+        }
+    }
+
+    /**
+     * Represents a link resource returned from the API.
+     *
+     * 
+     */
+    public static class Links {
+        private Links() {
+            // blank to prevent instantiation
+        }
+
+        private String payment;
+        private Mandate mandate;
+        private Refund refund;
+
+        /**
+         * Unique identifier, beginning with "PM".
+         */
+        public String getPayment() {
+            return payment;
+        }
+
+        /**
+         * Unique identifier, beginning with "MD". Note that this prefix may not apply to mandates
+         * created before 2016. Present only for the items of type `payment_refunded`, `refund` and
+         * `refund_funds_returned`.
+         */
+        public Mandate getMandate() {
+            return mandate;
+        }
+
+        /**
+         * Unique identifier, beginning with "RF". Present only for the items of type
+         * `payment_refunded`, `refund` and `refund_funds_returned`.
+         */
+        public Refund getRefund() {
+            return refund;
+        }
+
+        /**
+         * Represents a refund resource returned from the API.
+         *
+         * Unique identifier, beginning with "RF". Present only for the items of type
+         * `payment_refunded`, `refund` and `refund_funds_returned`.
+         */
+        public static class Refund {
+            private Refund() {
+                // blank to prevent instantiation
+            }
+        }
+
+        /**
+         * Represents a mandate resource returned from the API.
+         *
+         * Unique identifier, beginning with "MD". Note that this prefix may not apply to mandates
+         * created before 2016. Present only for the items of type `payment_refunded`, `refund` and
+         * `refund_funds_returned`.
+         */
+        public static class Mandate {
+            private Mandate() {
+                // blank to prevent instantiation
+            }
         }
     }
 }

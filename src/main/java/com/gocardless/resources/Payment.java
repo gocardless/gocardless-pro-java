@@ -18,21 +18,48 @@ public class Payment {
         // blank to prevent instantiation
     }
 
+    private String chargeDate;
+    private Map<String, Object> metadata;
+    private Boolean fasterAch;
     private Integer amount;
     private Integer amountRefunded;
-    private String chargeDate;
-    private String createdAt;
-    private Currency currency;
-    private String description;
-    private Boolean fasterAch;
-    private Fx fx;
+    private String reference;
     private String id;
     private Links links;
-    private Map<String, Object> metadata;
-    private String reference;
-    private Boolean retryIfPossible;
+    private Fx fx;
     private String scheme;
+    private String createdAt;
+    private String description;
+    private Currency currency;
     private Status status;
+    private Boolean retryIfPossible;
+
+    /**
+     * A future date on which the payment should be collected. If not specified, the payment will be
+     * collected as soon as possible. If the value is before the
+     * [mandate](#core-endpoints-mandates)'s `next_possible_charge_date` creation will fail. If the
+     * value is not a working day it will be rolled forwards to the next available one.
+     */
+    public String getChargeDate() {
+        return chargeDate;
+    }
+
+    /**
+     * Key-value store of custom data. Up to 3 keys are permitted, with key names up to 50
+     * characters and values up to 500 characters.
+     */
+    public Map<String, Object> getMetadata() {
+        return metadata;
+    }
+
+    /**
+     * This field indicates whether the ACH payment is processed through Faster ACH or standard ACH.
+     * 
+     * It is only present in the API response for ACH payments.
+     */
+    public Boolean getFasterAch() {
+        return fasterAch;
+    }
 
     /**
      * Amount, in the lowest denomination for the currency (e.g. pence in GBP, cents in EUR).
@@ -47,72 +74,6 @@ public class Payment {
      */
     public Integer getAmountRefunded() {
         return amountRefunded;
-    }
-
-    /**
-     * A future date on which the payment should be collected. If not specified, the payment will be
-     * collected as soon as possible. If the value is before the
-     * [mandate](#core-endpoints-mandates)'s `next_possible_charge_date` creation will fail. If the
-     * value is not a working day it will be rolled forwards to the next available one.
-     */
-    public String getChargeDate() {
-        return chargeDate;
-    }
-
-    /**
-     * Fixed [timestamp](#api-usage-dates-and-times), recording when this resource was created.
-     */
-    public String getCreatedAt() {
-        return createdAt;
-    }
-
-    /**
-     * [ISO 4217](http://en.wikipedia.org/wiki/ISO_4217#Active_codes) currency code. Currently
-     * "AUD", "CAD", "DKK", "EUR", "GBP", "NZD", "SEK" and "USD" are supported.
-     */
-    public Currency getCurrency() {
-        return currency;
-    }
-
-    /**
-     * A human-readable description of the payment. This will be included in the notification email
-     * GoCardless sends to your customer if your organisation does not send its own notifications
-     * (see [compliance requirements](#appendix-compliance-requirements)).
-     */
-    public String getDescription() {
-        return description;
-    }
-
-    /**
-     * This field indicates whether the ACH payment is processed through Faster ACH or standard ACH.
-     * 
-     * It is only present in the API response for ACH payments.
-     */
-    public Boolean getFasterAch() {
-        return fasterAch;
-    }
-
-    public Fx getFx() {
-        return fx;
-    }
-
-    /**
-     * Unique identifier, beginning with "PM".
-     */
-    public String getId() {
-        return id;
-    }
-
-    public Links getLinks() {
-        return links;
-    }
-
-    /**
-     * Key-value store of custom data. Up to 3 keys are permitted, with key names up to 50
-     * characters and values up to 500 characters.
-     */
-    public Map<String, Object> getMetadata() {
-        return metadata;
     }
 
     /**
@@ -144,15 +105,24 @@ public class Payment {
     }
 
     /**
-     * On failure, automatically retry the payment using [intelligent
-     * retries](#success-intelligent-retries). Default is `false`.
-     * <p class="notice">
-     * <strong>Important</strong>: To be able to use intelligent retries, Success+ needs to be
-     * enabled in [GoCardless dashboard](https://manage.gocardless.com/success-plus).
-     * </p>
+     * Unique identifier, beginning with "PM".
      */
-    public Boolean getRetryIfPossible() {
-        return retryIfPossible;
+    public String getId() {
+        return id;
+    }
+
+    /**
+    * 
+    */
+    public Links getLinks() {
+        return links;
+    }
+
+    /**
+    * 
+    */
+    public Fx getFx() {
+        return fx;
     }
 
     /**
@@ -161,6 +131,30 @@ public class Payment {
      */
     public String getScheme() {
         return scheme;
+    }
+
+    /**
+     * Fixed [timestamp](#api-usage-dates-and-times), recording when this resource was created.
+     */
+    public String getCreatedAt() {
+        return createdAt;
+    }
+
+    /**
+     * A human-readable description of the payment. This will be included in the notification email
+     * GoCardless sends to your customer if your organisation does not send its own notifications
+     * (see [compliance requirements](#appendix-compliance-requirements)).
+     */
+    public String getDescription() {
+        return description;
+    }
+
+    /**
+     * [ISO 4217](http://en.wikipedia.org/wiki/ISO_4217#Active_codes) currency code. Currently
+     * "AUD", "CAD", "DKK", "EUR", "GBP", "NZD", "SEK" and "USD" are supported.
+     */
+    public Currency getCurrency() {
+        return currency;
     }
 
     /**
@@ -182,6 +176,18 @@ public class Payment {
      */
     public Status getStatus() {
         return status;
+    }
+
+    /**
+     * On failure, automatically retry the payment using [intelligent
+     * retries](#success-intelligent-retries). Default is `false`.
+     * <p class="notice">
+     * <strong>Important</strong>: To be able to use intelligent retries, Success+ needs to be
+     * enabled in [GoCardless dashboard](https://manage.gocardless.com/success-plus).
+     * </p>
+     */
+    public Boolean getRetryIfPossible() {
+        return retryIfPossible;
     }
 
     public enum Currency {
@@ -211,32 +217,20 @@ public class Payment {
         UNKNOWN
     }
 
+    /**
+     * Represents a fx resource returned from the API.
+     *
+     * 
+     */
     public static class Fx {
         private Fx() {
             // blank to prevent instantiation
         }
 
-        private String estimatedExchangeRate;
-        private String exchangeRate;
         private Integer fxAmount;
         private FxCurrency fxCurrency;
-
-        /**
-         * Estimated rate that will be used in the foreign exchange of the `amount` into the
-         * `fx_currency`. This will vary based on the prevailing market rate until the moment that
-         * it is paid out. Present only before a resource is paid out. Has up to 10 decimal places.
-         */
-        public String getEstimatedExchangeRate() {
-            return estimatedExchangeRate;
-        }
-
-        /**
-         * Rate used in the foreign exchange of the `amount` into the `fx_currency`. Present only
-         * after a resource is paid out. Has up to 10 decimal places.
-         */
-        public String getExchangeRate() {
-            return exchangeRate;
-        }
+        private String exchangeRate;
+        private String estimatedExchangeRate;
 
         /**
          * Amount that was paid out in the `fx_currency` after foreign exchange. Present only after
@@ -256,6 +250,23 @@ public class Payment {
             return fxCurrency;
         }
 
+        /**
+         * Rate used in the foreign exchange of the `amount` into the `fx_currency`. Present only
+         * after a resource is paid out. Has up to 10 decimal places.
+         */
+        public String getExchangeRate() {
+            return exchangeRate;
+        }
+
+        /**
+         * Estimated rate that will be used in the foreign exchange of the `amount` into the
+         * `fx_currency`. This will vary based on the prevailing market rate until the moment that
+         * it is paid out. Present only before a resource is paid out. Has up to 10 decimal places.
+         */
+        public String getEstimatedExchangeRate() {
+            return estimatedExchangeRate;
+        }
+
         public enum FxCurrency {
             @SerializedName("AUD")
             AUD, @SerializedName("CAD")
@@ -270,33 +281,21 @@ public class Payment {
         }
     }
 
+    /**
+     * Represents a link resource returned from the API.
+     *
+     * 
+     */
     public static class Links {
         private Links() {
             // blank to prevent instantiation
         }
 
-        private String creditor;
-        private String instalmentSchedule;
         private String mandate;
+        private String creditor;
         private String payout;
         private String subscription;
-
-        /**
-         * ID of [creditor](#core-endpoints-creditors) to which the collected payment will be sent.
-         */
-        public String getCreditor() {
-            return creditor;
-        }
-
-        /**
-         * ID of [instalment_schedule](#core-endpoints-instalment-schedules) from which this payment
-         * was created.<br/>
-         * **Note**: this property will only be present if this payment is part of an instalment
-         * schedule.
-         */
-        public String getInstalmentSchedule() {
-            return instalmentSchedule;
-        }
+        private String instalmentSchedule;
 
         /**
          * ID of the [mandate](#core-endpoints-mandates) against which this payment should be
@@ -304,6 +303,13 @@ public class Payment {
          */
         public String getMandate() {
             return mandate;
+        }
+
+        /**
+         * ID of [creditor](#core-endpoints-creditors) to which the collected payment will be sent.
+         */
+        public String getCreditor() {
+            return creditor;
         }
 
         /**
@@ -322,6 +328,16 @@ public class Payment {
          */
         public String getSubscription() {
             return subscription;
+        }
+
+        /**
+         * ID of [instalment_schedule](#core-endpoints-instalment-schedules) from which this payment
+         * was created.<br/>
+         * **Note**: this property will only be present if this payment is part of an instalment
+         * schedule.
+         */
+        public String getInstalmentSchedule() {
+            return instalmentSchedule;
         }
     }
 }

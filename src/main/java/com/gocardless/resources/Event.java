@@ -19,14 +19,14 @@ public class Event {
     }
 
     private String action;
-    private String createdAt;
     private List<CustomerNotification> customerNotifications;
-    private Details details;
-    private String id;
-    private Links links;
     private Map<String, Object> metadata;
-    private Map<String, Object> resourceMetadata;
+    private Links links;
+    private String id;
+    private String createdAt;
     private ResourceType resourceType;
+    private Details details;
+    private Map<String, Object> resourceMetadata;
     private Source source;
 
     /**
@@ -38,34 +38,12 @@ public class Event {
     }
 
     /**
-     * Fixed [timestamp](#api-usage-dates-and-times), recording when this resource was created.
-     */
-    public String getCreatedAt() {
-        return createdAt;
-    }
-
-    /**
      * Present only in webhooks when an integrator is authorised to send their own notifications.
      * See [here](/getting-started/api/handling-customer-notifications/) for further information.
      * 
      */
     public List<CustomerNotification> getCustomerNotifications() {
         return customerNotifications;
-    }
-
-    public Details getDetails() {
-        return details;
-    }
-
-    /**
-     * Unique identifier, beginning with "EV".
-     */
-    public String getId() {
-        return id;
-    }
-
-    public Links getLinks() {
-        return links;
     }
 
     /**
@@ -81,13 +59,24 @@ public class Event {
     }
 
     /**
-     * The metadata of the resource that the event is for. For example, this field will have the
-     * same value of the `mandate[metadata]` field on the response you would receive from performing
-     * a GET request on a mandate.
-     * 
+    * 
+    */
+    public Links getLinks() {
+        return links;
+    }
+
+    /**
+     * Unique identifier, beginning with "EV".
      */
-    public Map<String, Object> getResourceMetadata() {
-        return resourceMetadata;
+    public String getId() {
+        return id;
+    }
+
+    /**
+     * Fixed [timestamp](#api-usage-dates-and-times), recording when this resource was created.
+     */
+    public String getCreatedAt() {
+        return createdAt;
     }
 
     /**
@@ -109,6 +98,23 @@ public class Event {
      */
     public ResourceType getResourceType() {
         return resourceType;
+    }
+
+    /**
+    * 
+    */
+    public Details getDetails() {
+        return details;
+    }
+
+    /**
+     * The metadata of the resource that the event is for. For example, this field will have the
+     * same value of the `mandate[metadata]` field on the response you would receive from performing
+     * a GET request on a mandate.
+     * 
+     */
+    public Map<String, Object> getResourceMetadata() {
+        return resourceMetadata;
     }
 
     /**
@@ -137,114 +143,27 @@ public class Event {
         UNKNOWN
     }
 
-    public static class CustomerNotification {
-        private CustomerNotification() {
-            // blank to prevent instantiation
-        }
-
-        private String deadline;
-        private String id;
-        private Boolean mandatory;
-        private String type;
-
-        /**
-         * Time after which GoCardless will send the notification by email.
-         */
-        public String getDeadline() {
-            return deadline;
-        }
-
-        /**
-         * The id of the notification.
-         */
-        public String getId() {
-            return id;
-        }
-
-        /**
-         * Whether or not the notification must be sent.
-         */
-        public Boolean getMandatory() {
-            return mandatory;
-        }
-
-        /**
-         * See [here](#core-endpoints-customer-notifications) for a complete list of customer
-         * notification types.
-         */
-        public String getType() {
-            return type;
-        }
-    }
-
+    /**
+     * Represents a detail resource returned from the API.
+     *
+     * 
+     */
     public static class Details {
         private Details() {
             // blank to prevent instantiation
         }
 
-        private String bankAccountId;
-        private String cause;
-        private String currency;
-        private String description;
-        private Integer itemCount;
-        private String notRetriedReason;
         private Origin origin;
-        private String property;
         private String reasonCode;
+        private String notRetriedReason;
+        private String property;
         private Scheme scheme;
         private Boolean willAttemptRetry;
-
-        /**
-         * When we send a creditor `new_payout_currency_added` webhook, we also send the bank
-         * account id of the new account
-         */
-        public String getBankAccountId() {
-            return bankAccountId;
-        }
-
-        /**
-         * What triggered the event. _Note:_ `cause` is our simplified and predictable key
-         * indicating what triggered the event.
-         */
-        public String getCause() {
-            return cause;
-        }
-
-        /**
-         * When we send a creditor `new_payout_currency_added` webhook, we also send the currency of
-         * the new account
-         */
-        public String getCurrency() {
-            return currency;
-        }
-
-        /**
-         * Human readable description of the cause. _Note:_ Changes to event descriptions are not
-         * considered breaking.
-         */
-        public String getDescription() {
-            return description;
-        }
-
-        /**
-         * Count of rows in the csv. This is sent for export events
-         */
-        public Integer getItemCount() {
-            return itemCount;
-        }
-
-        /**
-         * When will_attempt_retry is set to false, this field will contain the reason the payment
-         * was not retried. This can be one of:
-         * <ul>
-         * <li>`failure_filter_applied`: The payment won't be intelligently retried as there is a
-         * high likelihood of failure on retry.</li>
-         * <li>`other`: The payment won't be intelligently retried due to any other reason.</li>
-         * </ul>
-         */
-        public String getNotRetriedReason() {
-            return notRetriedReason;
-        }
+        private String description;
+        private String cause;
+        private String bankAccountId;
+        private String currency;
+        private Integer itemCount;
 
         /**
          * Who initiated the event. One of:
@@ -261,14 +180,6 @@ public class Event {
         }
 
         /**
-         * When we send a creditor `creditor_updated` webhook, this tells you which property on the
-         * creditor has been updated
-         */
-        public String getProperty() {
-            return property;
-        }
-
-        /**
          * Set when a `bank` is the origin of the event. This is the reason code received in the
          * report from the customer's bank. See the [GoCardless Direct Debit
          * guide](https://gocardless.com/direct-debit/receiving-messages) for information on the
@@ -277,6 +188,27 @@ public class Event {
          */
         public String getReasonCode() {
             return reasonCode;
+        }
+
+        /**
+         * When will_attempt_retry is set to false, this field will contain the reason the payment
+         * was not retried. This can be one of:
+         * <ul>
+         * <li>`failure_filter_applied`: The payment won't be intelligently retried as there is a
+         * high likelihood of failure on retry.</li>
+         * <li>`other`: The payment won't be intelligently retried due to any other reason.</li>
+         * </ul>
+         */
+        public String getNotRetriedReason() {
+            return notRetriedReason;
+        }
+
+        /**
+         * When we send a creditor `creditor_updated` webhook, this tells you which property on the
+         * creditor has been updated
+         */
+        public String getProperty() {
+            return property;
         }
 
         /**
@@ -293,14 +225,43 @@ public class Event {
             return willAttemptRetry;
         }
 
-        public enum Origin {
-            @SerializedName("bank")
-            BANK, @SerializedName("api")
-            API, @SerializedName("gocardless")
-            GOCARDLESS, @SerializedName("customer")
-            CUSTOMER, @SerializedName("payer")
-            PAYER, @SerializedName("unknown")
-            UNKNOWN
+        /**
+         * Human readable description of the cause. _Note:_ Changes to event descriptions are not
+         * considered breaking.
+         */
+        public String getDescription() {
+            return description;
+        }
+
+        /**
+         * What triggered the event. _Note:_ `cause` is our simplified and predictable key
+         * indicating what triggered the event.
+         */
+        public String getCause() {
+            return cause;
+        }
+
+        /**
+         * When we send a creditor `new_payout_currency_added` webhook, we also send the bank
+         * account id of the new account
+         */
+        public String getBankAccountId() {
+            return bankAccountId;
+        }
+
+        /**
+         * When we send a creditor `new_payout_currency_added` webhook, we also send the currency of
+         * the new account
+         */
+        public String getCurrency() {
+            return currency;
+        }
+
+        /**
+         * Count of rows in the csv. This is sent for export events
+         */
+        public Integer getItemCount() {
+            return itemCount;
         }
 
         public enum Scheme {
@@ -318,133 +279,138 @@ public class Event {
             SEPA_COR1, @SerializedName("unknown")
             UNKNOWN
         }
+
+        public enum Origin {
+            @SerializedName("bank")
+            BANK, @SerializedName("api")
+            API, @SerializedName("gocardless")
+            GOCARDLESS, @SerializedName("customer")
+            CUSTOMER, @SerializedName("payer")
+            PAYER, @SerializedName("unknown")
+            UNKNOWN
+        }
     }
 
+    /**
+     * Represents a source resource returned from the API.
+     *
+     * Audit information about the source of the event.
+     */
+    public static class Source {
+        private Source() {
+            // blank to prevent instantiation
+        }
+
+        private Type type;
+        private String name;
+
+        /**
+         * The type of the event's source.
+         */
+        public Type getType() {
+            return type;
+        }
+
+        /**
+         * The name of the event's source.
+         */
+        public String getName() {
+            return name;
+        }
+
+        public enum Type {
+            @SerializedName("app")
+            APP, @SerializedName("user")
+            USER, @SerializedName("gc_team")
+            GC_TEAM, @SerializedName("access_token")
+            ACCESS_TOKEN, @SerializedName("unknown")
+            UNKNOWN
+        }
+    }
+
+    /**
+     * Represents a customer notification resource returned from the API.
+     *
+     * 
+     */
+    public static class CustomerNotification {
+        private CustomerNotification() {
+            // blank to prevent instantiation
+        }
+
+        private String id;
+        private String type;
+        private Boolean mandatory;
+        private String deadline;
+
+        /**
+         * The id of the notification.
+         */
+        public String getId() {
+            return id;
+        }
+
+        /**
+         * See [here](#core-endpoints-customer-notifications) for a complete list of customer
+         * notification types.
+         */
+        public String getType() {
+            return type;
+        }
+
+        /**
+         * Whether or not the notification must be sent.
+         */
+        public Boolean getMandatory() {
+            return mandatory;
+        }
+
+        /**
+         * Time after which GoCardless will send the notification by email.
+         */
+        public String getDeadline() {
+            return deadline;
+        }
+    }
+
+    /**
+     * Represents a link resource returned from the API.
+     *
+     * 
+     */
     public static class Links {
         private Links() {
             // blank to prevent instantiation
         }
 
-        private String bankAuthorisation;
-        private String billingRequest;
-        private String billingRequestFlow;
-        private String creditor;
-        private String customer;
-        private String customerBankAccount;
-        private String instalmentSchedule;
-        private String mandate;
         private String mandateRequest;
-        private String mandateRequestMandate;
-        private String newCustomerBankAccount;
-        private String newMandate;
-        private String organisation;
         private String parentEvent;
-        private String payerAuthorisation;
-        private String payment;
+        private String subscription;
+        private String newMandate;
+        private String bankAuthorisation;
+        private String customerBankAccount;
+        private String refund;
+        private String organisation;
+        private String customer;
+        private String previousCustomerBankAccount;
+        private String newCustomerBankAccount;
+        private String billingRequestFlow;
+        private String mandate;
+        private String schemeIdentifier;
         private String paymentRequestPayment;
         private String payout;
-        private String previousCustomerBankAccount;
-        private String refund;
-        private String schemeIdentifier;
-        private String subscription;
-
-        /**
-         * ID of a [bank authorisation](#billing-requests-bank-authorisations).
-         */
-        public String getBankAuthorisation() {
-            return bankAuthorisation;
-        }
-
-        /**
-         * ID of a [billing request](#billing-requests-billing-requests).
-         */
-        public String getBillingRequest() {
-            return billingRequest;
-        }
-
-        /**
-         * ID of a [billing request flow](#billing-requests-billing-request-flows).
-         */
-        public String getBillingRequestFlow() {
-            return billingRequestFlow;
-        }
-
-        /**
-         * If `resource_type` is `creditor`, this is the ID of the
-         * [creditor](#core-endpoints-creditors) which has been updated.
-         */
-        public String getCreditor() {
-            return creditor;
-        }
-
-        /**
-         * ID of a [customer](#core-endpoints-customers).
-         */
-        public String getCustomer() {
-            return customer;
-        }
-
-        /**
-         * ID of a [customer bank account](#core-endpoints-customer-bank-accounts).
-         */
-        public String getCustomerBankAccount() {
-            return customerBankAccount;
-        }
-
-        /**
-         * If `resource_type` is `instalment_schedule`, this is the ID of the [instalment
-         * schedule](#core-endpoints-instalment-schedules) which has been updated.
-         */
-        public String getInstalmentSchedule() {
-            return instalmentSchedule;
-        }
-
-        /**
-         * If `resource_type` is `mandates`, this is the ID of the
-         * [mandate](#core-endpoints-mandates) which has been updated.
-         */
-        public String getMandate() {
-            return mandate;
-        }
+        private String instalmentSchedule;
+        private String billingRequest;
+        private String mandateRequestMandate;
+        private String creditor;
+        private String payment;
+        private String payerAuthorisation;
 
         /**
          * This is the id of the mandate request associated to this event
          */
         public String getMandateRequest() {
             return mandateRequest;
-        }
-
-        /**
-         * If `resource_type` is `billing_requests`, this is the ID of the
-         * [mandate](#core-endpoints-mandates) which has been created.
-         */
-        public String getMandateRequestMandate() {
-            return mandateRequestMandate;
-        }
-
-        /**
-         * This is only included for mandate transfer events, when it is the ID of the [customer
-         * bank account](#core-endpoints-customer-bank-accounts) which the mandate is being
-         * transferred to.
-         */
-        public String getNewCustomerBankAccount() {
-            return newCustomerBankAccount;
-        }
-
-        /**
-         * This is only included for mandate replaced events, when it is the ID of the new
-         * [mandate](#core-endpoints-mandates) that replaces the existing mandate.
-         */
-        public String getNewMandate() {
-            return newMandate;
-        }
-
-        /**
-         * If the event is included in a [webhook](#webhooks-overview) to an [OAuth
-         * app](#appendix-oauth), this is the ID of the account to which it belongs.
-         */
-        public String getOrganisation() {
-            return organisation;
         }
 
         /**
@@ -458,18 +424,97 @@ public class Event {
         }
 
         /**
-         * ID of a [payer authorisation](#core-endpoints-payer-authorisations).
+         * If `resource_type` is `subscription`, this is the ID of the
+         * [subscription](#core-endpoints-subscriptions) which has been updated.
          */
-        public String getPayerAuthorisation() {
-            return payerAuthorisation;
+        public String getSubscription() {
+            return subscription;
         }
 
         /**
-         * If `resource_type` is `payments`, this is the ID of the
-         * [payment](#core-endpoints-payments) which has been updated.
+         * This is only included for mandate replaced events, when it is the ID of the new
+         * [mandate](#core-endpoints-mandates) that replaces the existing mandate.
          */
-        public String getPayment() {
-            return payment;
+        public String getNewMandate() {
+            return newMandate;
+        }
+
+        /**
+         * ID of a [bank authorisation](#billing-requests-bank-authorisations).
+         */
+        public String getBankAuthorisation() {
+            return bankAuthorisation;
+        }
+
+        /**
+         * ID of a [customer bank account](#core-endpoints-customer-bank-accounts).
+         */
+        public String getCustomerBankAccount() {
+            return customerBankAccount;
+        }
+
+        /**
+         * If `resource_type` is `refunds`, this is the ID of the [refund](#core-endpoints-refunds)
+         * which has been updated.
+         */
+        public String getRefund() {
+            return refund;
+        }
+
+        /**
+         * If the event is included in a [webhook](#webhooks-overview) to an [OAuth
+         * app](#appendix-oauth), this is the ID of the account to which it belongs.
+         */
+        public String getOrganisation() {
+            return organisation;
+        }
+
+        /**
+         * ID of a [customer](#core-endpoints-customers).
+         */
+        public String getCustomer() {
+            return customer;
+        }
+
+        /**
+         * This is only included for mandate transfer events, when it is the ID of the [customer
+         * bank account](#core-endpoints-customer-bank-accounts) which the mandate is being
+         * transferred from.
+         */
+        public String getPreviousCustomerBankAccount() {
+            return previousCustomerBankAccount;
+        }
+
+        /**
+         * This is only included for mandate transfer events, when it is the ID of the [customer
+         * bank account](#core-endpoints-customer-bank-accounts) which the mandate is being
+         * transferred to.
+         */
+        public String getNewCustomerBankAccount() {
+            return newCustomerBankAccount;
+        }
+
+        /**
+         * ID of a [billing request flow](#billing-requests-billing-request-flows).
+         */
+        public String getBillingRequestFlow() {
+            return billingRequestFlow;
+        }
+
+        /**
+         * If `resource_type` is `mandates`, this is the ID of the
+         * [mandate](#core-endpoints-mandates) which has been updated.
+         */
+        public String getMandate() {
+            return mandate;
+        }
+
+        /**
+         * If `resource_type` is `scheme_identifiers`, this is the ID of the
+         * [scheme_identifier](#core-endpoints-scheme-identifiers) which has been updated.
+         */
+        public String getSchemeIdentifier() {
+            return schemeIdentifier;
         }
 
         /**
@@ -489,73 +534,49 @@ public class Event {
         }
 
         /**
-         * This is only included for mandate transfer events, when it is the ID of the [customer
-         * bank account](#core-endpoints-customer-bank-accounts) which the mandate is being
-         * transferred from.
+         * If `resource_type` is `instalment_schedule`, this is the ID of the [instalment
+         * schedule](#core-endpoints-instalment-schedules) which has been updated.
          */
-        public String getPreviousCustomerBankAccount() {
-            return previousCustomerBankAccount;
+        public String getInstalmentSchedule() {
+            return instalmentSchedule;
         }
 
         /**
-         * If `resource_type` is `refunds`, this is the ID of the [refund](#core-endpoints-refunds)
-         * which has been updated.
+         * ID of a [billing request](#billing-requests-billing-requests).
          */
-        public String getRefund() {
-            return refund;
+        public String getBillingRequest() {
+            return billingRequest;
         }
 
         /**
-         * If `resource_type` is `scheme_identifiers`, this is the ID of the
-         * [scheme_identifier](#core-endpoints-scheme-identifiers) which has been updated.
+         * If `resource_type` is `billing_requests`, this is the ID of the
+         * [mandate](#core-endpoints-mandates) which has been created.
          */
-        public String getSchemeIdentifier() {
-            return schemeIdentifier;
+        public String getMandateRequestMandate() {
+            return mandateRequestMandate;
         }
 
         /**
-         * If `resource_type` is `subscription`, this is the ID of the
-         * [subscription](#core-endpoints-subscriptions) which has been updated.
+         * If `resource_type` is `creditor`, this is the ID of the
+         * [creditor](#core-endpoints-creditors) which has been updated.
          */
-        public String getSubscription() {
-            return subscription;
-        }
-    }
-
-    /**
-     * Represents a source resource returned from the API.
-     *
-     * Audit information about the source of the event.
-     */
-    public static class Source {
-        private Source() {
-            // blank to prevent instantiation
-        }
-
-        private String name;
-        private Type type;
-
-        /**
-         * The name of the event's source.
-         */
-        public String getName() {
-            return name;
+        public String getCreditor() {
+            return creditor;
         }
 
         /**
-         * The type of the event's source.
+         * If `resource_type` is `payments`, this is the ID of the
+         * [payment](#core-endpoints-payments) which has been updated.
          */
-        public Type getType() {
-            return type;
+        public String getPayment() {
+            return payment;
         }
 
-        public enum Type {
-            @SerializedName("app")
-            APP, @SerializedName("user")
-            USER, @SerializedName("gc_team")
-            GC_TEAM, @SerializedName("access_token")
-            ACCESS_TOKEN, @SerializedName("unknown")
-            UNKNOWN
+        /**
+         * ID of a [payer authorisation](#core-endpoints-payer-authorisations).
+         */
+        public String getPayerAuthorisation() {
+            return payerAuthorisation;
         }
     }
 }

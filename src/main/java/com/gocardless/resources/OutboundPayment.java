@@ -23,19 +23,34 @@ public class OutboundPayment {
         // blank to prevent instantiation
     }
 
-    private Integer amount;
-    private String createdAt;
-    private Currency currency;
-    private String description;
-    private String executionDate;
-    private String id;
-    private Boolean isWithdrawal;
-    private Links links;
-    private Map<String, Object> metadata;
-    private String reference;
     private Scheme scheme;
-    private Status status;
     private Verifications verifications;
+    private Integer amount;
+    private String description;
+    private Map<String, Object> metadata;
+    private String id;
+    private String createdAt;
+    private Status status;
+    private Currency currency;
+    private String reference;
+    private Boolean isWithdrawal;
+    private String executionDate;
+    private Links links;
+
+    /**
+     * Bank payment scheme to process the outbound payment. Currently only "faster_payments" (GBP)
+     * is supported.
+     */
+    public Scheme getScheme() {
+        return scheme;
+    }
+
+    /**
+     * Contains details of the verifications performed for the outbound payment
+     */
+    public Verifications getVerifications() {
+        return verifications;
+    }
 
     /**
      * Amount, in the lowest denomination for the currency (e.g. pence in GBP, cents in EUR).
@@ -45,53 +60,10 @@ public class OutboundPayment {
     }
 
     /**
-     * Fixed [timestamp](#api-usage-dates-and-times), recording when the outbound payment was
-     * created.
-     */
-    public String getCreatedAt() {
-        return createdAt;
-    }
-
-    /**
-     * [ISO 4217](http://en.wikipedia.org/wiki/ISO_4217#Active_codes) currency. Currently only "GBP"
-     * is supported.
-     */
-    public Currency getCurrency() {
-        return currency;
-    }
-
-    /**
      * A human-readable description of the outbound payment
      */
     public String getDescription() {
         return description;
-    }
-
-    /**
-     * A future date on which the outbound payment should be sent. If not specified, the payment
-     * will be sent as soon as possible.
-     */
-    public String getExecutionDate() {
-        return executionDate;
-    }
-
-    /**
-     * Unique identifier of the outbound payment.
-     */
-    public String getId() {
-        return id;
-    }
-
-    /**
-     * Indicates whether the outbound payment is a withdrawal to your verified business bank
-     * account.
-     */
-    public Boolean getIsWithdrawal() {
-        return isWithdrawal;
-    }
-
-    public Links getLinks() {
-        return links;
     }
 
     /**
@@ -103,21 +75,18 @@ public class OutboundPayment {
     }
 
     /**
-     * An optional reference that will appear on your customer's bank statement. The character limit
-     * for this reference is dependent on the scheme.<br />
-     * <strong>Faster Payments</strong> - 18 characters, including:
-     * "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789 &-./"<br />
+     * Unique identifier of the outbound payment.
      */
-    public String getReference() {
-        return reference;
+    public String getId() {
+        return id;
     }
 
     /**
-     * Bank payment scheme to process the outbound payment. Currently only "faster_payments" (GBP)
-     * is supported.
+     * Fixed [timestamp](#api-usage-dates-and-times), recording when the outbound payment was
+     * created.
      */
-    public Scheme getScheme() {
-        return scheme;
+    public String getCreatedAt() {
+        return createdAt;
     }
 
     /**
@@ -147,22 +116,44 @@ public class OutboundPayment {
     }
 
     /**
-     * Contains details of the verifications performed for the outbound payment
+     * [ISO 4217](http://en.wikipedia.org/wiki/ISO_4217#Active_codes) currency. Currently only "GBP"
+     * is supported.
      */
-    public Verifications getVerifications() {
-        return verifications;
+    public Currency getCurrency() {
+        return currency;
     }
 
-    public enum Currency {
-        @SerializedName("GBP")
-        GBP, @SerializedName("unknown")
-        UNKNOWN
+    /**
+     * An optional reference that will appear on your customer's bank statement. The character limit
+     * for this reference is dependent on the scheme.<br />
+     * <strong>Faster Payments</strong> - 18 characters, including:
+     * "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789 &-./"<br />
+     */
+    public String getReference() {
+        return reference;
     }
 
-    public enum Scheme {
-        @SerializedName("faster_payments")
-        FASTER_PAYMENTS, @SerializedName("unknown")
-        UNKNOWN
+    /**
+     * Indicates whether the outbound payment is a withdrawal to your verified business bank
+     * account.
+     */
+    public Boolean getIsWithdrawal() {
+        return isWithdrawal;
+    }
+
+    /**
+     * A future date on which the outbound payment should be sent. If not specified, the payment
+     * will be sent as soon as possible.
+     */
+    public String getExecutionDate() {
+        return executionDate;
+    }
+
+    /**
+    * 
+    */
+    public Links getLinks() {
+        return links;
     }
 
     public enum Status {
@@ -177,35 +168,16 @@ public class OutboundPayment {
         UNKNOWN
     }
 
-    public static class Links {
-        private Links() {
-            // blank to prevent instantiation
-        }
+    public enum Scheme {
+        @SerializedName("faster_payments")
+        FASTER_PAYMENTS, @SerializedName("unknown")
+        UNKNOWN
+    }
 
-        private String creditor;
-        private String customer;
-        private String recipientBankAccount;
-
-        /**
-         * ID of the creditor who sends the outbound payment.
-         */
-        public String getCreditor() {
-            return creditor;
-        }
-
-        /**
-         * ID of the [customer](#core-endpoints-customers) that receives this outbound payment
-         */
-        public String getCustomer() {
-            return customer;
-        }
-
-        /**
-         * ID of the customer bank account which receives the outbound payment.
-         */
-        public String getRecipientBankAccount() {
-            return recipientBankAccount;
-        }
+    public enum Currency {
+        @SerializedName("GBP")
+        GBP, @SerializedName("unknown")
+        UNKNOWN
     }
 
     /**
@@ -237,16 +209,16 @@ public class OutboundPayment {
                 // blank to prevent instantiation
             }
 
-            private String actualAccountName;
-            private Result result;
             private Type type;
+            private Result result;
+            private String actualAccountName;
 
             /**
-             * The actual account name returned by the recipient's bank, populated only in the case
-             * of a partial match.
+             * Type of the verification that has been performed eg. [Confirmation of
+             * Payee](https://www.wearepay.uk/what-we-do/overlay-services/confirmation-of-payee/)
              */
-            public String getActualAccountName() {
-                return actualAccountName;
+            public Type getType() {
+                return type;
             }
 
             /**
@@ -267,11 +239,17 @@ public class OutboundPayment {
             }
 
             /**
-             * Type of the verification that has been performed eg. [Confirmation of
-             * Payee](https://www.wearepay.uk/what-we-do/overlay-services/confirmation-of-payee/)
+             * The actual account name returned by the recipient's bank, populated only in the case
+             * of a partial match.
              */
-            public Type getType() {
-                return type;
+            public String getActualAccountName() {
+                return actualAccountName;
+            }
+
+            public enum Type {
+                @SerializedName("confirmation_of_payee")
+                CONFIRMATION_OF_PAYEE, @SerializedName("unknown")
+                UNKNOWN
             }
 
             public enum Result {
@@ -282,12 +260,42 @@ public class OutboundPayment {
                 UNABLE_TO_MATCH, @SerializedName("unknown")
                 UNKNOWN
             }
+        }
+    }
 
-            public enum Type {
-                @SerializedName("confirmation_of_payee")
-                CONFIRMATION_OF_PAYEE, @SerializedName("unknown")
-                UNKNOWN
-            }
+    /**
+     * Represents a link resource returned from the API.
+     *
+     * 
+     */
+    public static class Links {
+        private Links() {
+            // blank to prevent instantiation
+        }
+
+        private String recipientBankAccount;
+        private String creditor;
+        private String customer;
+
+        /**
+         * ID of the customer bank account which receives the outbound payment.
+         */
+        public String getRecipientBankAccount() {
+            return recipientBankAccount;
+        }
+
+        /**
+         * ID of the creditor who sends the outbound payment.
+         */
+        public String getCreditor() {
+            return creditor;
+        }
+
+        /**
+         * ID of the [customer](#core-endpoints-customers) that receives this outbound payment
+         */
+        public String getCustomer() {
+            return customer;
         }
     }
 }

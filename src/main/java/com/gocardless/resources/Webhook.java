@@ -12,32 +12,39 @@ public class Webhook {
         // blank to prevent instantiation
     }
 
-    private String createdAt;
-    private String id;
-    private Boolean isTest;
-    private String requestBody;
     private Map<String, Object> requestHeaders;
-    private String responseBody;
-    private Boolean responseBodyTruncated;
     private Integer responseCode;
+    private Boolean responseHeadersCountTruncated;
+    private Boolean isTest;
+    private String createdAt;
+    private String responseBody;
+    private String id;
+    private String requestBody;
+    private Boolean successful;
+    private Boolean responseBodyTruncated;
     private Map<String, Object> responseHeaders;
     private Boolean responseHeadersContentTruncated;
-    private Boolean responseHeadersCountTruncated;
-    private Boolean successful;
     private String url;
 
     /**
-     * Fixed [timestamp](#api-usage-dates-and-times), recording when this resource was created.
+     * The request headers sent with the webhook
      */
-    public String getCreatedAt() {
-        return createdAt;
+    public Map<String, Object> getRequestHeaders() {
+        return requestHeaders;
     }
 
     /**
-     * Unique identifier, beginning with "WB".
+     * The response code from the webhook request
      */
-    public String getId() {
-        return id;
+    public Integer getResponseCode() {
+        return responseCode;
+    }
+
+    /**
+     * Boolean indicating the number of response headers was truncated
+     */
+    public Boolean getResponseHeadersCountTruncated() {
+        return responseHeadersCountTruncated;
     }
 
     /**
@@ -48,17 +55,10 @@ public class Webhook {
     }
 
     /**
-     * The body of the request sent to the webhook URL
+     * Fixed [timestamp](#api-usage-dates-and-times), recording when this resource was created.
      */
-    public String getRequestBody() {
-        return requestBody;
-    }
-
-    /**
-     * The request headers sent with the webhook
-     */
-    public Map<String, Object> getRequestHeaders() {
-        return requestHeaders;
+    public String getCreatedAt() {
+        return createdAt;
     }
 
     /**
@@ -69,17 +69,31 @@ public class Webhook {
     }
 
     /**
+     * Unique identifier, beginning with "WB".
+     */
+    public String getId() {
+        return id;
+    }
+
+    /**
+     * The body of the request sent to the webhook URL
+     */
+    public String getRequestBody() {
+        return requestBody;
+    }
+
+    /**
+     * Boolean indicating whether the request was successful or failed
+     */
+    public Boolean getSuccessful() {
+        return successful;
+    }
+
+    /**
      * Boolean value indicating the webhook response body was truncated
      */
     public Boolean getResponseBodyTruncated() {
         return responseBodyTruncated;
-    }
-
-    /**
-     * The response code from the webhook request
-     */
-    public Integer getResponseCode() {
-        return responseCode;
     }
 
     /**
@@ -94,20 +108,6 @@ public class Webhook {
      */
     public Boolean getResponseHeadersContentTruncated() {
         return responseHeadersContentTruncated;
-    }
-
-    /**
-     * Boolean indicating the number of response headers was truncated
-     */
-    public Boolean getResponseHeadersCountTruncated() {
-        return responseHeadersCountTruncated;
-    }
-
-    /**
-     * Boolean indicating whether the request was successful or failed
-     */
-    public Boolean getSuccessful() {
-        return successful;
     }
 
     /**

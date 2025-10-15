@@ -41,24 +41,18 @@ public class MandateImport {
         // blank to prevent instantiation
     }
 
-    private String createdAt;
-    private String id;
-    private Links links;
     private Scheme scheme;
+    private Links links;
+    private String id;
+    private String createdAt;
     private Status status;
 
     /**
-     * Fixed [timestamp](#api-usage-dates-and-times), recording when this resource was created.
+     * The scheme of the mandates to be imported.<br>
+     * All mandates in a single mandate import must be for the same scheme.
      */
-    public String getCreatedAt() {
-        return createdAt;
-    }
-
-    /**
-     * Unique identifier, beginning with "IM".
-     */
-    public String getId() {
-        return id;
+    public Scheme getScheme() {
+        return scheme;
     }
 
     /**
@@ -69,11 +63,17 @@ public class MandateImport {
     }
 
     /**
-     * The scheme of the mandates to be imported.<br>
-     * All mandates in a single mandate import must be for the same scheme.
+     * Unique identifier, beginning with "IM".
      */
-    public Scheme getScheme() {
-        return scheme;
+    public String getId() {
+        return id;
+    }
+
+    /**
+     * Fixed [timestamp](#api-usage-dates-and-times), recording when this resource was created.
+     */
+    public String getCreatedAt() {
+        return createdAt;
     }
 
     /**
@@ -93,6 +93,16 @@ public class MandateImport {
         return status;
     }
 
+    public enum Status {
+        @SerializedName("created")
+        CREATED, @SerializedName("submitted")
+        SUBMITTED, @SerializedName("cancelled")
+        CANCELLED, @SerializedName("processing")
+        PROCESSING, @SerializedName("processed")
+        PROCESSED, @SerializedName("unknown")
+        UNKNOWN
+    }
+
     public enum Scheme {
         @SerializedName("ach")
         ACH, @SerializedName("autogiro")
@@ -105,16 +115,6 @@ public class MandateImport {
         PAD, @SerializedName("pay_to")
         PAY_TO, @SerializedName("sepa_core")
         SEPA_CORE, @SerializedName("unknown")
-        UNKNOWN
-    }
-
-    public enum Status {
-        @SerializedName("created")
-        CREATED, @SerializedName("submitted")
-        SUBMITTED, @SerializedName("cancelled")
-        CANCELLED, @SerializedName("processing")
-        PROCESSING, @SerializedName("processed")
-        PROCESSED, @SerializedName("unknown")
         UNKNOWN
     }
 

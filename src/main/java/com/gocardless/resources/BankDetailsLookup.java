@@ -13,17 +13,9 @@ public class BankDetailsLookup {
         // blank to prevent instantiation
     }
 
-    private List<AvailableDebitScheme> availableDebitSchemes;
     private String bankName;
     private String bic;
-
-    /**
-     * Array of [schemes](#mandates_scheme) supported for this bank account. This will be an empty
-     * array if the bank account is not reachable by any schemes.
-     */
-    public List<AvailableDebitScheme> getAvailableDebitSchemes() {
-        return availableDebitSchemes;
-    }
+    private List<AvailableDebitScheme> availableDebitSchemes;
 
     /**
      * The name of the bank with which the account is held (if available).
@@ -43,6 +35,14 @@ public class BankDetailsLookup {
      */
     public String getBic() {
         return bic;
+    }
+
+    /**
+     * Array of [schemes](#mandates_scheme) supported for this bank account. This will be an empty
+     * array if the bank account is not reachable by any schemes.
+     */
+    public List<AvailableDebitScheme> getAvailableDebitSchemes() {
+        return availableDebitSchemes;
     }
 
     public enum AvailableDebitScheme {

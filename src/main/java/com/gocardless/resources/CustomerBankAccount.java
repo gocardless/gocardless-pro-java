@@ -24,26 +24,24 @@ public class CustomerBankAccount {
         // blank to prevent instantiation
     }
 
-    private String accountHolderName;
-    private String accountNumberEnding;
-    private AccountType accountType;
-    private String bankAccountToken;
-    private String bankName;
-    private String countryCode;
-    private String createdAt;
-    private String currency;
     private Boolean enabled;
+    private String accountNumberEnding;
+    private String countryCode;
     private String id;
-    private Links links;
     private Map<String, Object> metadata;
+    private String createdAt;
+    private AccountType accountType;
+    private String currency;
+    private String bankAccountToken;
+    private Links links;
+    private String accountHolderName;
+    private String bankName;
 
     /**
-     * Name of the account holder, as known by the bank. This field will be transliterated, upcased
-     * and truncated to 18 characters. This field is required unless the request includes a
-     * [customer bank account token](#javascript-flow-customer-bank-account-tokens).
+     * Boolean value showing whether the bank account is enabled or disabled.
      */
-    public String getAccountHolderName() {
-        return accountHolderName;
+    public Boolean getEnabled() {
+        return enabled;
     }
 
     /**
@@ -52,30 +50,6 @@ public class CustomerBankAccount {
      */
     public String getAccountNumberEnding() {
         return accountNumberEnding;
-    }
-
-    /**
-     * Bank account type. Required for USD-denominated bank accounts. Must not be provided for bank
-     * accounts in other currencies. See [local details](#local-bank-details-united-states) for more
-     * information.
-     */
-    public AccountType getAccountType() {
-        return accountType;
-    }
-
-    /**
-     * A token to uniquely refer to a set of bank account details. This feature is still in early
-     * access and is only available for certain organisations.
-     */
-    public String getBankAccountToken() {
-        return bankAccountToken;
-    }
-
-    /**
-     * Name of bank, taken from the bank details.
-     */
-    public String getBankName() {
-        return bankName;
     }
 
     /**
@@ -88,10 +62,34 @@ public class CustomerBankAccount {
     }
 
     /**
+     * Unique identifier, beginning with "BA".
+     */
+    public String getId() {
+        return id;
+    }
+
+    /**
+     * Key-value store of custom data. Up to 3 keys are permitted, with key names up to 50
+     * characters and values up to 500 characters.
+     */
+    public Map<String, Object> getMetadata() {
+        return metadata;
+    }
+
+    /**
      * Fixed [timestamp](#api-usage-dates-and-times), recording when this resource was created.
      */
     public String getCreatedAt() {
         return createdAt;
+    }
+
+    /**
+     * Bank account type. Required for USD-denominated bank accounts. Must not be provided for bank
+     * accounts in other currencies. See [local details](#local-bank-details-united-states) for more
+     * information.
+     */
+    public AccountType getAccountType() {
+        return accountType;
     }
 
     /**
@@ -103,29 +101,34 @@ public class CustomerBankAccount {
     }
 
     /**
-     * Boolean value showing whether the bank account is enabled or disabled.
+     * A token to uniquely refer to a set of bank account details. This feature is still in early
+     * access and is only available for certain organisations.
      */
-    public Boolean getEnabled() {
-        return enabled;
+    public String getBankAccountToken() {
+        return bankAccountToken;
     }
 
     /**
-     * Unique identifier, beginning with "BA".
-     */
-    public String getId() {
-        return id;
-    }
-
+    * 
+    */
     public Links getLinks() {
         return links;
     }
 
     /**
-     * Key-value store of custom data. Up to 3 keys are permitted, with key names up to 50
-     * characters and values up to 500 characters.
+     * Name of the account holder, as known by the bank. This field will be transliterated, upcased
+     * and truncated to 18 characters. This field is required unless the request includes a
+     * [customer bank account token](#javascript-flow-customer-bank-account-tokens).
      */
-    public Map<String, Object> getMetadata() {
-        return metadata;
+    public String getAccountHolderName() {
+        return accountHolderName;
+    }
+
+    /**
+     * Name of bank, taken from the bank details.
+     */
+    public String getBankName() {
+        return bankName;
     }
 
     public enum AccountType {
@@ -135,6 +138,11 @@ public class CustomerBankAccount {
         UNKNOWN
     }
 
+    /**
+     * Represents a link resource returned from the API.
+     *
+     * 
+     */
     public static class Links {
         private Links() {
             // blank to prevent instantiation
