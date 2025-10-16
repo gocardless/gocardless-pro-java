@@ -15,17 +15,17 @@ public class NegativeBalanceLimit {
         // blank to prevent instantiation
     }
 
-    private String id;
-    private String createdAt;
     private Integer balanceLimit;
+    private String createdAt;
     private Currency currency;
+    private String id;
     private Links links;
 
     /**
-     * Unique identifier, beginning with "NBL".
+     * The limit amount in pence (e.g. 10000 for a -100 GBP limit).
      */
-    public String getId() {
-        return id;
+    public Integer getBalanceLimit() {
+        return balanceLimit;
     }
 
     /**
@@ -33,13 +33,6 @@ public class NegativeBalanceLimit {
      */
     public String getCreatedAt() {
         return createdAt;
-    }
-
-    /**
-     * The limit amount in pence (e.g. 10000 for a -100 GBP limit).
-     */
-    public Integer getBalanceLimit() {
-        return balanceLimit;
     }
 
     /**
@@ -51,8 +44,12 @@ public class NegativeBalanceLimit {
     }
 
     /**
-    * 
-    */
+     * Unique identifier, beginning with "NBL".
+     */
+    public String getId() {
+        return id;
+    }
+
     public Links getLinks() {
         return links;
     }

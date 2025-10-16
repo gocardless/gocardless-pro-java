@@ -12,22 +12,18 @@ public class BankAccountDetail {
         // blank to prevent instantiation
     }
 
-    @SerializedName("protected")
-    private String protectedValue;
+    private String ciphertext;
     private String encryptedKey;
     private String iv;
-    private String ciphertext;
+    @SerializedName("protected")
+    private String protectedValue;
     private String tag;
 
     /**
-     * Base64 URL encoded JWE header values, containing the following keys:
-     * 
-     * - `alg`: the asymmetric encryption type used to encrypt symmetric key, e.g: `RSA-OAEP`. -
-     * `enc`: the content encryption type, e.g: `A256GCM`. - `kid`: the ID of an RSA-2048 public
-     * key, from your JWKS, used to encrypt the AES key.
+     * Base64 URL encoded encrypted payload, in this case bank details.
      */
-    public String getProtectedValue() {
-        return protectedValue;
+    public String getCiphertext() {
+        return ciphertext;
     }
 
     /**
@@ -46,10 +42,14 @@ public class BankAccountDetail {
     }
 
     /**
-     * Base64 URL encoded encrypted payload, in this case bank details.
+     * Base64 URL encoded JWE header values, containing the following keys:
+     * 
+     * - `alg`: the asymmetric encryption type used to encrypt symmetric key, e.g: `RSA-OAEP`. -
+     * `enc`: the content encryption type, e.g: `A256GCM`. - `kid`: the ID of an RSA-2048 public
+     * key, from your JWKS, used to encrypt the AES key.
      */
-    public String getCiphertext() {
-        return ciphertext;
+    public String getProtectedValue() {
+        return protectedValue;
     }
 
     /**

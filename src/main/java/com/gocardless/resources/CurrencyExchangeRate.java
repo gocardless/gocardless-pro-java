@@ -10,10 +10,17 @@ public class CurrencyExchangeRate {
         // blank to prevent instantiation
     }
 
+    private String rate;
     private String source;
     private String target;
-    private String rate;
     private String time;
+
+    /**
+     * The exchange rate from the source to target currencies provided with up to 10 decimal places.
+     */
+    public String getRate() {
+        return rate;
+    }
 
     /**
      * Source currency
@@ -27,13 +34,6 @@ public class CurrencyExchangeRate {
      */
     public String getTarget() {
         return target;
-    }
-
-    /**
-     * The exchange rate from the source to target currencies provided with up to 10 decimal places.
-     */
-    public String getRate() {
-        return rate;
     }
 
     /**

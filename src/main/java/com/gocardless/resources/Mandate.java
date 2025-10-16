@@ -16,80 +16,21 @@ public class Mandate {
         // blank to prevent instantiation
     }
 
-    private String verifiedAt;
-    private ConsentParameters consentParameters;
-    private String scheme;
-    private Links links;
-    private FundsSettlement fundsSettlement;
-    private ConsentType consentType;
-    private String reference;
     private AuthorisationSource authorisationSource;
-    private Boolean paymentsRequireApproval;
-    private Status status;
+    private ConsentParameters consentParameters;
+    private ConsentType consentType;
+    private String createdAt;
+    private FundsSettlement fundsSettlement;
     private String id;
+    private Links links;
+    private Map<String, Object> metadata;
     private String nextPossibleChargeDate;
     private String nextPossibleStandardAchChargeDate;
-    private String createdAt;
-    private Map<String, Object> metadata;
-
-    /**
-     * [Timestamp](#api-usage-dates-and-times) recording when this mandate was verified.
-     */
-    public String getVerifiedAt() {
-        return verifiedAt;
-    }
-
-    /**
-     * (Optional) Payto and VRP Scheme specific information
-     */
-    public ConsentParameters getConsentParameters() {
-        return consentParameters;
-    }
-
-    /**
-     * <a name="mandates_scheme"></a>Bank payment scheme to which this mandate and associated
-     * payments are submitted. Can be supplied or automatically detected from the customer's bank
-     * account.
-     */
-    public String getScheme() {
-        return scheme;
-    }
-
-    /**
-    * 
-    */
-    public Links getLinks() {
-        return links;
-    }
-
-    /**
-     * This field will decide how GoCardless handles settlement of funds from the customer.
-     * 
-     * - `managed` will be moved through GoCardless' account, batched, and payed out. - `direct`
-     * will be a direct transfer from the payer's account to the merchant where invoicing will be
-     * handled separately.
-     * 
-     */
-    public FundsSettlement getFundsSettlement() {
-        return fundsSettlement;
-    }
-
-    /**
-     * (Optional) Specifies the type of authorisation agreed between the payer and merchant. It can
-     * be set to one-off, recurring or standing for ACH, or single, recurring and sporadic for PAD.
-     */
-    public ConsentType getConsentType() {
-        return consentType;
-    }
-
-    /**
-     * Unique reference. Different schemes have different length and [character
-     * set](#appendix-character-sets) requirements. GoCardless will generate a unique reference
-     * satisfying the different scheme requirements if this field is left blank.
-     */
-    public String getReference() {
-        return reference;
-    }
+    private Boolean paymentsRequireApproval;
+    private String reference;
+    private String scheme;
+    private Status status;
+    private String verifiedAt;
 
     /**
      * This field is ACH specific, sometimes referred to as [SEC
@@ -106,11 +47,102 @@ public class Mandate {
     }
 
     /**
+     * (Optional) Payto and VRP Scheme specific information
+     */
+    public ConsentParameters getConsentParameters() {
+        return consentParameters;
+    }
+
+    /**
+     * (Optional) Specifies the type of authorisation agreed between the payer and merchant. It can
+     * be set to one-off, recurring or standing for ACH, or single, recurring and sporadic for PAD.
+     */
+    public ConsentType getConsentType() {
+        return consentType;
+    }
+
+    /**
+     * Fixed [timestamp](#api-usage-dates-and-times), recording when this resource was created.
+     */
+    public String getCreatedAt() {
+        return createdAt;
+    }
+
+    /**
+     * This field will decide how GoCardless handles settlement of funds from the customer.
+     * 
+     * - `managed` will be moved through GoCardless' account, batched, and payed out. - `direct`
+     * will be a direct transfer from the payer's account to the merchant where invoicing will be
+     * handled separately.
+     * 
+     */
+    public FundsSettlement getFundsSettlement() {
+        return fundsSettlement;
+    }
+
+    /**
+     * Unique identifier, beginning with "MD". Note that this prefix may not apply to mandates
+     * created before 2016.
+     */
+    public String getId() {
+        return id;
+    }
+
+    public Links getLinks() {
+        return links;
+    }
+
+    /**
+     * Key-value store of custom data. Up to 3 keys are permitted, with key names up to 50
+     * characters and values up to 500 characters.
+     */
+    public Map<String, Object> getMetadata() {
+        return metadata;
+    }
+
+    /**
+     * The earliest date that can be used as a `charge_date` on any newly created payment for this
+     * mandate. This value will change over time.
+     */
+    public String getNextPossibleChargeDate() {
+        return nextPossibleChargeDate;
+    }
+
+    /**
+     * If this is an an ACH mandate, the earliest date that can be used as a `charge_date` on any
+     * newly created payment to be charged through standard ACH, rather than Faster ACH. This value
+     * will change over time.
+     * 
+     * It is only present in the API response for ACH mandates.
+     */
+    public String getNextPossibleStandardAchChargeDate() {
+        return nextPossibleStandardAchChargeDate;
+    }
+
+    /**
      * Boolean value showing whether payments and subscriptions under this mandate require approval
      * via an automated email before being processed.
      */
     public Boolean getPaymentsRequireApproval() {
         return paymentsRequireApproval;
+    }
+
+    /**
+     * Unique reference. Different schemes have different length and [character
+     * set](#appendix-character-sets) requirements. GoCardless will generate a unique reference
+     * satisfying the different scheme requirements if this field is left blank.
+     */
+    public String getReference() {
+        return reference;
+    }
+
+    /**
+     * <a name="mandates_scheme"></a>Bank payment scheme to which this mandate and associated
+     * payments are submitted. Can be supplied or automatically detected from the customer's bank
+     * account.
+     */
+    public String getScheme() {
+        return scheme;
     }
 
     /**
@@ -136,45 +168,35 @@ public class Mandate {
     }
 
     /**
-     * Unique identifier, beginning with "MD". Note that this prefix may not apply to mandates
-     * created before 2016.
+     * [Timestamp](#api-usage-dates-and-times) recording when this mandate was verified.
      */
-    public String getId() {
-        return id;
+    public String getVerifiedAt() {
+        return verifiedAt;
     }
 
-    /**
-     * The earliest date that can be used as a `charge_date` on any newly created payment for this
-     * mandate. This value will change over time.
-     */
-    public String getNextPossibleChargeDate() {
-        return nextPossibleChargeDate;
+    public enum AuthorisationSource {
+        @SerializedName("web")
+        WEB, @SerializedName("telephone")
+        TELEPHONE, @SerializedName("paper")
+        PAPER, @SerializedName("unknown")
+        UNKNOWN
     }
 
-    /**
-     * If this is an an ACH mandate, the earliest date that can be used as a `charge_date` on any
-     * newly created payment to be charged through standard ACH, rather than Faster ACH. This value
-     * will change over time.
-     * 
-     * It is only present in the API response for ACH mandates.
-     */
-    public String getNextPossibleStandardAchChargeDate() {
-        return nextPossibleStandardAchChargeDate;
+    public enum ConsentType {
+        @SerializedName("one_off")
+        ONE_OFF, @SerializedName("single")
+        SINGLE, @SerializedName("recurring")
+        RECURRING, @SerializedName("standing")
+        STANDING, @SerializedName("sporadic")
+        SPORADIC, @SerializedName("unknown")
+        UNKNOWN
     }
 
-    /**
-     * Fixed [timestamp](#api-usage-dates-and-times), recording when this resource was created.
-     */
-    public String getCreatedAt() {
-        return createdAt;
-    }
-
-    /**
-     * Key-value store of custom data. Up to 3 keys are permitted, with key names up to 50
-     * characters and values up to 500 characters.
-     */
-    public Map<String, Object> getMetadata() {
-        return metadata;
+    public enum FundsSettlement {
+        @SerializedName("managed")
+        MANAGED, @SerializedName("direct")
+        DIRECT, @SerializedName("unknown")
+        UNKNOWN
     }
 
     public enum Status {
@@ -192,31 +214,6 @@ public class Mandate {
         UNKNOWN
     }
 
-    public enum AuthorisationSource {
-        @SerializedName("web")
-        WEB, @SerializedName("telephone")
-        TELEPHONE, @SerializedName("paper")
-        PAPER, @SerializedName("unknown")
-        UNKNOWN
-    }
-
-    public enum FundsSettlement {
-        @SerializedName("managed")
-        MANAGED, @SerializedName("direct")
-        DIRECT, @SerializedName("unknown")
-        UNKNOWN
-    }
-
-    public enum ConsentType {
-        @SerializedName("one_off")
-        ONE_OFF, @SerializedName("single")
-        SINGLE, @SerializedName("recurring")
-        RECURRING, @SerializedName("standing")
-        STANDING, @SerializedName("sporadic")
-        SPORADIC, @SerializedName("unknown")
-        UNKNOWN
-    }
-
     /**
      * Represents a consent parameter resource returned from the API.
      *
@@ -227,25 +224,25 @@ public class Mandate {
             // blank to prevent instantiation
         }
 
+        private String endDate;
         private Integer maxAmountPerPayment;
-        private Period period;
         private Integer maxAmountPerPeriod;
         private Integer maxPaymentsPerPeriod;
+        private Period period;
         private String startDate;
-        private String endDate;
+
+        /**
+         * The latest date at which payments can be taken, must occur after start_date if present
+         */
+        public String getEndDate() {
+            return endDate;
+        }
 
         /**
          * The maximum amount that can be charged for a single payment
          */
         public Integer getMaxAmountPerPayment() {
             return maxAmountPerPayment;
-        }
-
-        /**
-         * The repeating period for this mandate
-         */
-        public Period getPeriod() {
-            return period;
         }
 
         /**
@@ -263,17 +260,17 @@ public class Mandate {
         }
 
         /**
+         * The repeating period for this mandate
+         */
+        public Period getPeriod() {
+            return period;
+        }
+
+        /**
          * The date from which payments can be taken
          */
         public String getStartDate() {
             return startDate;
-        }
-
-        /**
-         * The latest date at which payments can be taken, must occur after start_date if present
-         */
-        public String getEndDate() {
-            return endDate;
         }
 
         public enum Period {
@@ -297,10 +294,24 @@ public class Mandate {
             // blank to prevent instantiation
         }
 
-        private String customerBankAccount;
         private String creditor;
-        private String newMandate;
         private String customer;
+        private String customerBankAccount;
+        private String newMandate;
+
+        /**
+         * ID of the associated [creditor](#core-endpoints-creditors).
+         */
+        public String getCreditor() {
+            return creditor;
+        }
+
+        /**
+         * ID of the associated [customer](#core-endpoints-customers)
+         */
+        public String getCustomer() {
+            return customer;
+        }
 
         /**
          * ID of the associated [customer bank account](#core-endpoints-customer-bank-accounts)
@@ -311,24 +322,10 @@ public class Mandate {
         }
 
         /**
-         * ID of the associated [creditor](#core-endpoints-creditors).
-         */
-        public String getCreditor() {
-            return creditor;
-        }
-
-        /**
          * ID of the new mandate if this mandate has been replaced.
          */
         public String getNewMandate() {
             return newMandate;
-        }
-
-        /**
-         * ID of the associated [customer](#core-endpoints-customers)
-         */
-        public String getCustomer() {
-            return customer;
         }
     }
 }

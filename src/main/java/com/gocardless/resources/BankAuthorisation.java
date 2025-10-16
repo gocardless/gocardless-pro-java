@@ -17,13 +17,13 @@ public class BankAuthorisation {
     }
 
     private AuthorisationType authorisationType;
-    private String id;
-    private String lastVisitedAt;
     private String authorisedAt;
-    private Links links;
-    private String qrCodeUrl;
     private String createdAt;
     private String expiresAt;
+    private String id;
+    private String lastVisitedAt;
+    private Links links;
+    private String qrCodeUrl;
     private String redirectUri;
     private String url;
 
@@ -32,6 +32,28 @@ public class BankAuthorisation {
      */
     public AuthorisationType getAuthorisationType() {
         return authorisationType;
+    }
+
+    /**
+     * Fixed [timestamp](#api-usage-dates-and-times), recording when the user has been authorised.
+     */
+    public String getAuthorisedAt() {
+        return authorisedAt;
+    }
+
+    /**
+     * Timestamp when the flow was created
+     */
+    public String getCreatedAt() {
+        return createdAt;
+    }
+
+    /**
+     * Timestamp when the url will expire. Each authorisation url currently lasts for 15 minutes,
+     * but this can vary by bank.
+     */
+    public String getExpiresAt() {
+        return expiresAt;
     }
 
     /**
@@ -49,16 +71,6 @@ public class BankAuthorisation {
         return lastVisitedAt;
     }
 
-    /**
-     * Fixed [timestamp](#api-usage-dates-and-times), recording when the user has been authorised.
-     */
-    public String getAuthorisedAt() {
-        return authorisedAt;
-    }
-
-    /**
-    * 
-    */
     public Links getLinks() {
         return links;
     }
@@ -70,21 +82,6 @@ public class BankAuthorisation {
      */
     public String getQrCodeUrl() {
         return qrCodeUrl;
-    }
-
-    /**
-     * Timestamp when the flow was created
-     */
-    public String getCreatedAt() {
-        return createdAt;
-    }
-
-    /**
-     * Timestamp when the url will expire. Each authorisation url currently lasts for 15 minutes,
-     * but this can vary by bank.
-     */
-    public String getExpiresAt() {
-        return expiresAt;
     }
 
     /**

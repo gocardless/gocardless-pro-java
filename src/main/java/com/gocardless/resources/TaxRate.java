@@ -12,12 +12,19 @@ public class TaxRate {
         // blank to prevent instantiation
     }
 
+    private String endDate;
     private String id;
     private String jurisdiction;
-    private String type;
     private String percentage;
     private String startDate;
-    private String endDate;
+    private String type;
+
+    /**
+     * Date at which GoCardless stopped applying the tax rate for the jurisdiction.
+     */
+    public String getEndDate() {
+        return endDate;
+    }
 
     /**
      * The unique identifier created by the jurisdiction, tax type and version
@@ -31,13 +38,6 @@ public class TaxRate {
      */
     public String getJurisdiction() {
         return jurisdiction;
-    }
-
-    /**
-     * The type of tax applied by this rate
-     */
-    public String getType() {
-        return type;
     }
 
     /**
@@ -55,9 +55,9 @@ public class TaxRate {
     }
 
     /**
-     * Date at which GoCardless stopped applying the tax rate for the jurisdiction.
+     * The type of tax applied by this rate
      */
-    public String getEndDate() {
-        return endDate;
+    public String getType() {
+        return type;
     }
 }

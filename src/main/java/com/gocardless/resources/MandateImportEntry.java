@@ -33,10 +33,17 @@ public class MandateImportEntry {
         // blank to prevent instantiation
     }
 
+    private String createdAt;
     private Links links;
     private Map<String, Object> processingErrors;
     private String recordIdentifier;
-    private String createdAt;
+
+    /**
+     * Fixed [timestamp](#api-usage-dates-and-times), recording when this resource was created.
+     */
+    public String getCreatedAt() {
+        return createdAt;
+    }
 
     /**
      * Related resources
@@ -62,13 +69,6 @@ public class MandateImportEntry {
     }
 
     /**
-     * Fixed [timestamp](#api-usage-dates-and-times), recording when this resource was created.
-     */
-    public String getCreatedAt() {
-        return createdAt;
-    }
-
-    /**
      * Represents a link resource returned from the API.
      *
      * Related resources
@@ -78,10 +78,32 @@ public class MandateImportEntry {
             // blank to prevent instantiation
         }
 
+        private String customer;
+        private String customerBankAccount;
+        private String mandate;
         private String mandateImport;
-        private Mandate mandate;
-        private Customer customer;
-        private CustomerBankAccount customerBankAccount;
+
+        /**
+         * The ID of the customer which was created when the mandate import was processed.
+         */
+        public String getCustomer() {
+            return customer;
+        }
+
+        /**
+         * The ID of the customer bank account which was created when the mandate import was
+         * processed.
+         */
+        public String getCustomerBankAccount() {
+            return customerBankAccount;
+        }
+
+        /**
+         * The ID of the mandate which was created when the mandate import was processed.
+         */
+        public String getMandate() {
+            return mandate;
+        }
 
         /**
          * The ID of the mandate import. This is returned when you [create a Mandate
@@ -90,62 +112,6 @@ public class MandateImportEntry {
          */
         public String getMandateImport() {
             return mandateImport;
-        }
-
-        /**
-         * The ID of the mandate which was created when the mandate import was processed.
-         */
-        public Mandate getMandate() {
-            return mandate;
-        }
-
-        /**
-         * The ID of the customer which was created when the mandate import was processed.
-         */
-        public Customer getCustomer() {
-            return customer;
-        }
-
-        /**
-         * The ID of the customer bank account which was created when the mandate import was
-         * processed.
-         */
-        public CustomerBankAccount getCustomerBankAccount() {
-            return customerBankAccount;
-        }
-
-        /**
-         * Represents a mandate resource returned from the API.
-         *
-         * The ID of the mandate which was created when the mandate import was processed.
-         */
-        public static class Mandate {
-            private Mandate() {
-                // blank to prevent instantiation
-            }
-        }
-
-        /**
-         * Represents a customer resource returned from the API.
-         *
-         * The ID of the customer which was created when the mandate import was processed.
-         */
-        public static class Customer {
-            private Customer() {
-                // blank to prevent instantiation
-            }
-        }
-
-        /**
-         * Represents a customer bank account resource returned from the API.
-         *
-         * The ID of the customer bank account which was created when the mandate import was
-         * processed.
-         */
-        public static class CustomerBankAccount {
-            private CustomerBankAccount() {
-                // blank to prevent instantiation
-            }
         }
     }
 }

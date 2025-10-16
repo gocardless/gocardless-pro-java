@@ -37,13 +37,13 @@ public class Block {
     }
 
     private Boolean active;
-    private String createdAt;
-    private String updatedAt;
-    private String id;
     private BlockType blockType;
-    private ReasonType reasonType;
+    private String createdAt;
+    private String id;
     private String reasonDescription;
+    private ReasonType reasonType;
     private String resourceReference;
+    private String updatedAt;
 
     /**
      * Shows if the block is active or disabled. Only active blocks will be used when deciding if a
@@ -51,27 +51,6 @@ public class Block {
      */
     public Boolean getActive() {
         return active;
-    }
-
-    /**
-     * Fixed [timestamp](#api-usage-dates-and-times), recording when this resource was created.
-     */
-    public String getCreatedAt() {
-        return createdAt;
-    }
-
-    /**
-     * Fixed [timestamp](#api-usage-dates-and-times), recording when this resource was updated.
-     */
-    public String getUpdatedAt() {
-        return updatedAt;
-    }
-
-    /**
-     * Unique identifier, beginning with "BLC".
-     */
-    public String getId() {
-        return id;
     }
 
     /**
@@ -83,12 +62,17 @@ public class Block {
     }
 
     /**
-     * The reason you wish to block this payer, can currently be one of 'identity_fraud',
-     * 'no_intent_to_pay', 'unfair_chargeback'. If the reason isn't captured by one of the above
-     * then 'other' can be selected but you must provide a reason description.
+     * Fixed [timestamp](#api-usage-dates-and-times), recording when this resource was created.
      */
-    public ReasonType getReasonType() {
-        return reasonType;
+    public String getCreatedAt() {
+        return createdAt;
+    }
+
+    /**
+     * Unique identifier, beginning with "BLC".
+     */
+    public String getId() {
+        return id;
     }
 
     /**
@@ -101,6 +85,15 @@ public class Block {
     }
 
     /**
+     * The reason you wish to block this payer, can currently be one of 'identity_fraud',
+     * 'no_intent_to_pay', 'unfair_chargeback'. If the reason isn't captured by one of the above
+     * then 'other' can be selected but you must provide a reason description.
+     */
+    public ReasonType getReasonType() {
+        return reasonType;
+    }
+
+    /**
      * This field is a reference to the value you wish to block. This may be the raw value (in the
      * case of emails or email domains) or the ID of the resource (in the case of bank accounts and
      * bank names). This means in order to block a specific bank account (even if you wish to block
@@ -108,6 +101,13 @@ public class Block {
      */
     public String getResourceReference() {
         return resourceReference;
+    }
+
+    /**
+     * Fixed [timestamp](#api-usage-dates-and-times), recording when this resource was updated.
+     */
+    public String getUpdatedAt() {
+        return updatedAt;
     }
 
     public enum BlockType {

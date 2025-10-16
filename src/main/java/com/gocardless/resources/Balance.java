@@ -16,25 +16,18 @@ public class Balance {
         // blank to prevent instantiation
     }
 
+    private Integer amount;
+    private BalanceType balanceType;
+    private Currency currency;
     private String lastUpdatedAt;
     private Links links;
-    private BalanceType balanceType;
-    private Integer amount;
-    private Currency currency;
 
     /**
-     * Dynamic [timestamp](#api-usage-dates-and-times) recording when this resource was last
-     * updated.
+     * The total amount in the balance, defined as the sum of all debits subtracted from the sum of
+     * all credits, in the lowest denomination for the currency (e.g. pence in GBP, cents in EUR).
      */
-    public String getLastUpdatedAt() {
-        return lastUpdatedAt;
-    }
-
-    /**
-    * 
-    */
-    public Links getLinks() {
-        return links;
+    public Integer getAmount() {
+        return amount;
     }
 
     /**
@@ -56,19 +49,23 @@ public class Balance {
     }
 
     /**
-     * The total amount in the balance, defined as the sum of all debits subtracted from the sum of
-     * all credits, in the lowest denomination for the currency (e.g. pence in GBP, cents in EUR).
-     */
-    public Integer getAmount() {
-        return amount;
-    }
-
-    /**
      * [ISO 4217](http://en.wikipedia.org/wiki/ISO_4217#Active_codes) currency code. Currently
      * "AUD", "CAD", "DKK", "EUR", "GBP", "NZD", "SEK" and "USD" are supported.
      */
     public Currency getCurrency() {
         return currency;
+    }
+
+    /**
+     * Dynamic [timestamp](#api-usage-dates-and-times) recording when this resource was last
+     * updated.
+     */
+    public String getLastUpdatedAt() {
+        return lastUpdatedAt;
+    }
+
+    public Links getLinks() {
+        return links;
     }
 
     public enum BalanceType {

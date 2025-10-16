@@ -24,22 +24,15 @@ public class InstalmentSchedule {
         // blank to prevent instantiation
     }
 
-    private String id;
     private String createdAt;
     private Currency currency;
-    private Map<String, Object> metadata;
+    private String id;
     private Links links;
-    private Integer totalAmount;
-    private Map<String, Object> paymentErrors;
+    private Map<String, Object> metadata;
     private String name;
+    private Map<String, Object> paymentErrors;
     private Status status;
-
-    /**
-     * Unique identifier, beginning with "IS".
-     */
-    public String getId() {
-        return id;
-    }
+    private Integer totalAmount;
 
     /**
      * Fixed [timestamp](#api-usage-dates-and-times), recording when this resource was created.
@@ -57,11 +50,10 @@ public class InstalmentSchedule {
     }
 
     /**
-     * Key-value store of custom data. Up to 3 keys are permitted, with key names up to 50
-     * characters and values up to 500 characters.
+     * Unique identifier, beginning with "IS".
      */
-    public Map<String, Object> getMetadata() {
-        return metadata;
+    public String getId() {
+        return id;
     }
 
     /**
@@ -72,12 +64,19 @@ public class InstalmentSchedule {
     }
 
     /**
-     * The total amount of the instalment schedule, defined as the sum of all individual payments,
-     * in the lowest denomination for the currency (e.g. pence in GBP, cents in EUR). If the
-     * requested payment amounts do not sum up correctly, a validation error will be returned.
+     * Key-value store of custom data. Up to 3 keys are permitted, with key names up to 50
+     * characters and values up to 500 characters.
      */
-    public Integer getTotalAmount() {
-        return totalAmount;
+    public Map<String, Object> getMetadata() {
+        return metadata;
+    }
+
+    /**
+     * Name of the instalment schedule, up to 100 chars. This name will also be copied to the
+     * payments of the instalment schedule if you use schedule-based creation.
+     */
+    public String getName() {
+        return name;
     }
 
     /**
@@ -87,14 +86,6 @@ public class InstalmentSchedule {
      */
     public Map<String, Object> getPaymentErrors() {
         return paymentErrors;
-    }
-
-    /**
-     * Name of the instalment schedule, up to 100 chars. This name will also be copied to the
-     * payments of the instalment schedule if you use schedule-based creation.
-     */
-    public String getName() {
-        return name;
     }
 
     /**
@@ -113,15 +104,13 @@ public class InstalmentSchedule {
         return status;
     }
 
-    public enum Status {
-        @SerializedName("pending")
-        PENDING, @SerializedName("active")
-        ACTIVE, @SerializedName("creation_failed")
-        CREATION_FAILED, @SerializedName("completed")
-        COMPLETED, @SerializedName("cancelled")
-        CANCELLED, @SerializedName("errored")
-        ERRORED, @SerializedName("unknown")
-        UNKNOWN
+    /**
+     * The total amount of the instalment schedule, defined as the sum of all individual payments,
+     * in the lowest denomination for the currency (e.g. pence in GBP, cents in EUR). If the
+     * requested payment amounts do not sum up correctly, a validation error will be returned.
+     */
+    public Integer getTotalAmount() {
+        return totalAmount;
     }
 
     public enum Currency {
@@ -137,6 +126,17 @@ public class InstalmentSchedule {
         UNKNOWN
     }
 
+    public enum Status {
+        @SerializedName("pending")
+        PENDING, @SerializedName("active")
+        ACTIVE, @SerializedName("creation_failed")
+        CREATION_FAILED, @SerializedName("completed")
+        COMPLETED, @SerializedName("cancelled")
+        CANCELLED, @SerializedName("errored")
+        ERRORED, @SerializedName("unknown")
+        UNKNOWN
+    }
+
     /**
      * Represents a link resource returned from the API.
      *
@@ -147,9 +147,16 @@ public class InstalmentSchedule {
             // blank to prevent instantiation
         }
 
-        private String mandate;
         private String customer;
+        private String mandate;
         private List<String> payments;
+
+        /**
+         * ID of the associated [customer](#core-endpoints-customers).
+         */
+        public String getCustomer() {
+            return customer;
+        }
 
         /**
          * ID of the associated [mandate](#core-endpoints-mandates) which the instalment schedule
@@ -157,13 +164,6 @@ public class InstalmentSchedule {
          */
         public String getMandate() {
             return mandate;
-        }
-
-        /**
-         * ID of the associated [customer](#core-endpoints-customers).
-         */
-        public String getCustomer() {
-            return customer;
         }
 
         /**

@@ -24,24 +24,26 @@ public class CustomerBankAccount {
         // blank to prevent instantiation
     }
 
-    private Boolean enabled;
-    private String accountNumberEnding;
-    private String countryCode;
-    private String id;
-    private Map<String, Object> metadata;
-    private String createdAt;
-    private AccountType accountType;
-    private String currency;
-    private String bankAccountToken;
-    private Links links;
     private String accountHolderName;
+    private String accountNumberEnding;
+    private AccountType accountType;
+    private String bankAccountToken;
     private String bankName;
+    private String countryCode;
+    private String createdAt;
+    private String currency;
+    private Boolean enabled;
+    private String id;
+    private Links links;
+    private Map<String, Object> metadata;
 
     /**
-     * Boolean value showing whether the bank account is enabled or disabled.
+     * Name of the account holder, as known by the bank. This field will be transliterated, upcased
+     * and truncated to 18 characters. This field is required unless the request includes a
+     * [customer bank account token](#javascript-flow-customer-bank-account-tokens).
      */
-    public Boolean getEnabled() {
-        return enabled;
+    public String getAccountHolderName() {
+        return accountHolderName;
     }
 
     /**
@@ -50,37 +52,6 @@ public class CustomerBankAccount {
      */
     public String getAccountNumberEnding() {
         return accountNumberEnding;
-    }
-
-    /**
-     * [ISO 3166-1 alpha-2
-     * code](http://en.wikipedia.org/wiki/ISO_3166-1_alpha-2#Officially_assigned_code_elements).
-     * Defaults to the country code of the `iban` if supplied, otherwise is required.
-     */
-    public String getCountryCode() {
-        return countryCode;
-    }
-
-    /**
-     * Unique identifier, beginning with "BA".
-     */
-    public String getId() {
-        return id;
-    }
-
-    /**
-     * Key-value store of custom data. Up to 3 keys are permitted, with key names up to 50
-     * characters and values up to 500 characters.
-     */
-    public Map<String, Object> getMetadata() {
-        return metadata;
-    }
-
-    /**
-     * Fixed [timestamp](#api-usage-dates-and-times), recording when this resource was created.
-     */
-    public String getCreatedAt() {
-        return createdAt;
     }
 
     /**
@@ -93,14 +64,6 @@ public class CustomerBankAccount {
     }
 
     /**
-     * [ISO 4217](http://en.wikipedia.org/wiki/ISO_4217#Active_codes) currency code. Currently
-     * "AUD", "CAD", "DKK", "EUR", "GBP", "NZD", "SEK" and "USD" are supported.
-     */
-    public String getCurrency() {
-        return currency;
-    }
-
-    /**
      * A token to uniquely refer to a set of bank account details. This feature is still in early
      * access and is only available for certain organisations.
      */
@@ -109,26 +72,60 @@ public class CustomerBankAccount {
     }
 
     /**
-    * 
-    */
+     * Name of bank, taken from the bank details.
+     */
+    public String getBankName() {
+        return bankName;
+    }
+
+    /**
+     * [ISO 3166-1 alpha-2
+     * code](http://en.wikipedia.org/wiki/ISO_3166-1_alpha-2#Officially_assigned_code_elements).
+     * Defaults to the country code of the `iban` if supplied, otherwise is required.
+     */
+    public String getCountryCode() {
+        return countryCode;
+    }
+
+    /**
+     * Fixed [timestamp](#api-usage-dates-and-times), recording when this resource was created.
+     */
+    public String getCreatedAt() {
+        return createdAt;
+    }
+
+    /**
+     * [ISO 4217](http://en.wikipedia.org/wiki/ISO_4217#Active_codes) currency code. Currently
+     * "AUD", "CAD", "DKK", "EUR", "GBP", "NZD", "SEK" and "USD" are supported.
+     */
+    public String getCurrency() {
+        return currency;
+    }
+
+    /**
+     * Boolean value showing whether the bank account is enabled or disabled.
+     */
+    public Boolean getEnabled() {
+        return enabled;
+    }
+
+    /**
+     * Unique identifier, beginning with "BA".
+     */
+    public String getId() {
+        return id;
+    }
+
     public Links getLinks() {
         return links;
     }
 
     /**
-     * Name of the account holder, as known by the bank. This field will be transliterated, upcased
-     * and truncated to 18 characters. This field is required unless the request includes a
-     * [customer bank account token](#javascript-flow-customer-bank-account-tokens).
+     * Key-value store of custom data. Up to 3 keys are permitted, with key names up to 50
+     * characters and values up to 500 characters.
      */
-    public String getAccountHolderName() {
-        return accountHolderName;
-    }
-
-    /**
-     * Name of bank, taken from the bank details.
-     */
-    public String getBankName() {
-        return bankName;
+    public Map<String, Object> getMetadata() {
+        return metadata;
     }
 
     public enum AccountType {

@@ -17,36 +17,15 @@ public class Refund {
         // blank to prevent instantiation
     }
 
-    private String createdAt;
-    private Links links;
-    private String id;
     private Integer amount;
-    private Status status;
-    private Fx fx;
+    private String createdAt;
     private String currency;
-    private String reference;
+    private Fx fx;
+    private String id;
+    private Links links;
     private Map<String, Object> metadata;
-
-    /**
-     * Fixed [timestamp](#api-usage-dates-and-times), recording when this resource was created.
-     */
-    public String getCreatedAt() {
-        return createdAt;
-    }
-
-    /**
-    * 
-    */
-    public Links getLinks() {
-        return links;
-    }
-
-    /**
-     * Unique identifier, beginning with "RF".
-     */
-    public String getId() {
-        return id;
-    }
+    private String reference;
+    private Status status;
 
     /**
      * Amount in minor unit (e.g. pence in GBP, cents in EUR).
@@ -56,27 +35,10 @@ public class Refund {
     }
 
     /**
-     * One of:
-     * <ul>
-     * <li>`created`: the refund has been created</li>
-     * <li>`pending_submission`: the refund has been created, but not yet submitted to the
-     * banks</li>
-     * <li>`submitted`: the refund has been submitted to the banks</li>
-     * <li>`paid`: the refund has been included in a [payout](#core-endpoints-payouts)</li>
-     * <li>`cancelled`: the refund has been cancelled</li>
-     * <li>`bounced`: the refund has failed to be paid</li>
-     * <li>`funds_returned`: the refund has had its funds returned</li>
-     * </ul>
+     * Fixed [timestamp](#api-usage-dates-and-times), recording when this resource was created.
      */
-    public Status getStatus() {
-        return status;
-    }
-
-    /**
-    * 
-    */
-    public Fx getFx() {
-        return fx;
+    public String getCreatedAt() {
+        return createdAt;
     }
 
     /**
@@ -85,6 +47,29 @@ public class Refund {
      */
     public String getCurrency() {
         return currency;
+    }
+
+    public Fx getFx() {
+        return fx;
+    }
+
+    /**
+     * Unique identifier, beginning with "RF".
+     */
+    public String getId() {
+        return id;
+    }
+
+    public Links getLinks() {
+        return links;
+    }
+
+    /**
+     * Key-value store of custom data. Up to 3 keys are permitted, with key names up to 50
+     * characters and values up to 500 characters.
+     */
+    public Map<String, Object> getMetadata() {
+        return metadata;
     }
 
     /**
@@ -116,11 +101,20 @@ public class Refund {
     }
 
     /**
-     * Key-value store of custom data. Up to 3 keys are permitted, with key names up to 50
-     * characters and values up to 500 characters.
+     * One of:
+     * <ul>
+     * <li>`created`: the refund has been created</li>
+     * <li>`pending_submission`: the refund has been created, but not yet submitted to the
+     * banks</li>
+     * <li>`submitted`: the refund has been submitted to the banks</li>
+     * <li>`paid`: the refund has been included in a [payout](#core-endpoints-payouts)</li>
+     * <li>`cancelled`: the refund has been cancelled</li>
+     * <li>`bounced`: the refund has failed to be paid</li>
+     * <li>`funds_returned`: the refund has had its funds returned</li>
+     * </ul>
      */
-    public Map<String, Object> getMetadata() {
-        return metadata;
+    public Status getStatus() {
+        return status;
     }
 
     public enum Status {
@@ -145,10 +139,27 @@ public class Refund {
             // blank to prevent instantiation
         }
 
+        private String estimatedExchangeRate;
+        private String exchangeRate;
         private Integer fxAmount;
         private FxCurrency fxCurrency;
-        private String exchangeRate;
-        private String estimatedExchangeRate;
+
+        /**
+         * Estimated rate that will be used in the foreign exchange of the `amount` into the
+         * `fx_currency`. This will vary based on the prevailing market rate until the moment that
+         * it is paid out. Present only before a resource is paid out. Has up to 10 decimal places.
+         */
+        public String getEstimatedExchangeRate() {
+            return estimatedExchangeRate;
+        }
+
+        /**
+         * Rate used in the foreign exchange of the `amount` into the `fx_currency`. Present only
+         * after a resource is paid out. Has up to 10 decimal places.
+         */
+        public String getExchangeRate() {
+            return exchangeRate;
+        }
 
         /**
          * Amount that was paid out in the `fx_currency` after foreign exchange. Present only after
@@ -166,23 +177,6 @@ public class Refund {
          */
         public FxCurrency getFxCurrency() {
             return fxCurrency;
-        }
-
-        /**
-         * Rate used in the foreign exchange of the `amount` into the `fx_currency`. Present only
-         * after a resource is paid out. Has up to 10 decimal places.
-         */
-        public String getExchangeRate() {
-            return exchangeRate;
-        }
-
-        /**
-         * Estimated rate that will be used in the foreign exchange of the `amount` into the
-         * `fx_currency`. This will vary based on the prevailing market rate until the moment that
-         * it is paid out. Present only before a resource is paid out. Has up to 10 decimal places.
-         */
-        public String getEstimatedExchangeRate() {
-            return estimatedExchangeRate;
         }
 
         public enum FxCurrency {

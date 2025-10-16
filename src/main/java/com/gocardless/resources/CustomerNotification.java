@@ -22,29 +22,12 @@ public class CustomerNotification {
         // blank to prevent instantiation
     }
 
-    private Type type;
     private ActionTaken actionTaken;
     private String actionTakenAt;
     private String actionTakenBy;
-    private Links links;
     private String id;
-
-    /**
-     * The type of notification the customer shall receive. One of:
-     * <ul>
-     * <li>`payment_created`</li>
-     * <li>`payment_cancelled`</li>
-     * <li>`mandate_created`</li>
-     * <li>`mandate_blocked`</li>
-     * <li>`subscription_created`</li>
-     * <li>`subscription_cancelled`</li>
-     * <li>`instalment_schedule_created`</li>
-     * <li>`instalment_schedule_cancelled`</li>
-     * </ul>
-     */
-    public Type getType() {
-        return type;
-    }
+    private Links links;
+    private Type type;
 
     /**
      * The action that was taken on the notification. Currently this can only be `handled`, which
@@ -70,17 +53,31 @@ public class CustomerNotification {
     }
 
     /**
-    * 
-    */
+     * The id of the notification.
+     */
+    public String getId() {
+        return id;
+    }
+
     public Links getLinks() {
         return links;
     }
 
     /**
-     * The id of the notification.
+     * The type of notification the customer shall receive. One of:
+     * <ul>
+     * <li>`payment_created`</li>
+     * <li>`payment_cancelled`</li>
+     * <li>`mandate_created`</li>
+     * <li>`mandate_blocked`</li>
+     * <li>`subscription_created`</li>
+     * <li>`subscription_cancelled`</li>
+     * <li>`instalment_schedule_created`</li>
+     * <li>`instalment_schedule_cancelled`</li>
+     * </ul>
      */
-    public String getId() {
-        return id;
+    public Type getType() {
+        return type;
     }
 
     public enum ActionTaken {
@@ -112,12 +109,19 @@ public class CustomerNotification {
             // blank to prevent instantiation
         }
 
+        private String customer;
         private String event;
-        private String payment;
         private String mandate;
+        private String payment;
         private String refund;
         private String subscription;
-        private String customer;
+
+        /**
+         * The customer who should be contacted with this notification.
+         */
+        public String getCustomer() {
+            return customer;
+        }
 
         /**
          * The event that triggered the notification to be scheduled.
@@ -127,17 +131,17 @@ public class CustomerNotification {
         }
 
         /**
-         * The identifier of the related payment.
-         */
-        public String getPayment() {
-            return payment;
-        }
-
-        /**
          * The identifier of the related mandate.
          */
         public String getMandate() {
             return mandate;
+        }
+
+        /**
+         * The identifier of the related payment.
+         */
+        public String getPayment() {
+            return payment;
         }
 
         /**
@@ -152,13 +156,6 @@ public class CustomerNotification {
          */
         public String getSubscription() {
             return subscription;
-        }
-
-        /**
-         * The customer who should be contacted with this notification.
-         */
-        public String getCustomer() {
-            return customer;
         }
     }
 }

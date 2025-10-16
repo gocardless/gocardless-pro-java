@@ -16,19 +16,26 @@ public class Payout {
         // blank to prevent instantiation
     }
 
+    private Integer amount;
     private String arrivalDate;
+    private String createdAt;
+    private Currency currency;
+    private Integer deductedFees;
     private Fx fx;
     private String id;
-    private String createdAt;
-    private String reference;
-    private String taxCurrency;
-    private Map<String, Object> metadata;
-    private Integer amount;
     private Links links;
-    private Integer deductedFees;
-    private Currency currency;
+    private Map<String, Object> metadata;
     private PayoutType payoutType;
+    private String reference;
     private Status status;
+    private String taxCurrency;
+
+    /**
+     * Amount in minor unit (e.g. pence in GBP, cents in EUR).
+     */
+    public Integer getAmount() {
+        return amount;
+    }
 
     /**
      * Date the payout is due to arrive in the creditor's bank account. One of:
@@ -44,20 +51,6 @@ public class Payout {
     }
 
     /**
-    * 
-    */
-    public Fx getFx() {
-        return fx;
-    }
-
-    /**
-     * Unique identifier, beginning with "PO".
-     */
-    public String getId() {
-        return id;
-    }
-
-    /**
      * Fixed [timestamp](#api-usage-dates-and-times), recording when this resource was created.
      */
     public String getCreatedAt() {
@@ -65,42 +58,11 @@ public class Payout {
     }
 
     /**
-     * Reference which appears on the creditor's bank statement.
+     * [ISO 4217](http://en.wikipedia.org/wiki/ISO_4217#Active_codes) currency code. Currently
+     * "AUD", "CAD", "DKK", "EUR", "GBP", "NZD", "SEK" and "USD" are supported.
      */
-    public String getReference() {
-        return reference;
-    }
-
-    /**
-     * [ISO 4217](http://en.wikipedia.org/wiki/ISO_4217#Active_codes) code for the currency in which
-     * tax is paid out to the tax authorities of your tax jurisdiction. Currently “EUR”, “GBP”, for
-     * French or British merchants, this will be `null` if tax is not applicable <em>beta</em>
-     */
-    public String getTaxCurrency() {
-        return taxCurrency;
-    }
-
-    /**
-     * Key-value store of custom data. Up to 3 keys are permitted, with key names up to 50
-     * characters and values up to 500 characters. _Note:_ This should not be used for storing PII
-     * data.
-     */
-    public Map<String, Object> getMetadata() {
-        return metadata;
-    }
-
-    /**
-     * Amount in minor unit (e.g. pence in GBP, cents in EUR).
-     */
-    public Integer getAmount() {
-        return amount;
-    }
-
-    /**
-    * 
-    */
-    public Links getLinks() {
-        return links;
+    public Currency getCurrency() {
+        return currency;
     }
 
     /**
@@ -117,12 +79,28 @@ public class Payout {
         return deductedFees;
     }
 
+    public Fx getFx() {
+        return fx;
+    }
+
     /**
-     * [ISO 4217](http://en.wikipedia.org/wiki/ISO_4217#Active_codes) currency code. Currently
-     * "AUD", "CAD", "DKK", "EUR", "GBP", "NZD", "SEK" and "USD" are supported.
+     * Unique identifier, beginning with "PO".
      */
-    public Currency getCurrency() {
-        return currency;
+    public String getId() {
+        return id;
+    }
+
+    public Links getLinks() {
+        return links;
+    }
+
+    /**
+     * Key-value store of custom data. Up to 3 keys are permitted, with key names up to 50
+     * characters and values up to 500 characters. _Note:_ This should not be used for storing PII
+     * data.
+     */
+    public Map<String, Object> getMetadata() {
+        return metadata;
     }
 
     /**
@@ -130,6 +108,13 @@ public class Payout {
      */
     public PayoutType getPayoutType() {
         return payoutType;
+    }
+
+    /**
+     * Reference which appears on the creditor's bank statement.
+     */
+    public String getReference() {
+        return reference;
     }
 
     /**
@@ -146,12 +131,13 @@ public class Payout {
         return status;
     }
 
-    public enum Status {
-        @SerializedName("pending")
-        PENDING, @SerializedName("paid")
-        PAID, @SerializedName("bounced")
-        BOUNCED, @SerializedName("unknown")
-        UNKNOWN
+    /**
+     * [ISO 4217](http://en.wikipedia.org/wiki/ISO_4217#Active_codes) code for the currency in which
+     * tax is paid out to the tax authorities of your tax jurisdiction. Currently “EUR”, “GBP”, for
+     * French or British merchants, this will be `null` if tax is not applicable <em>beta</em>
+     */
+    public String getTaxCurrency() {
+        return taxCurrency;
     }
 
     public enum Currency {
@@ -172,6 +158,78 @@ public class Payout {
         MERCHANT, @SerializedName("partner")
         PARTNER, @SerializedName("unknown")
         UNKNOWN
+    }
+
+    public enum Status {
+        @SerializedName("pending")
+        PENDING, @SerializedName("paid")
+        PAID, @SerializedName("bounced")
+        BOUNCED, @SerializedName("unknown")
+        UNKNOWN
+    }
+
+    /**
+     * Represents a fx resource returned from the API.
+     *
+     * 
+     */
+    public static class Fx {
+        private Fx() {
+            // blank to prevent instantiation
+        }
+
+        private String estimatedExchangeRate;
+        private String exchangeRate;
+        private Integer fxAmount;
+        private FxCurrency fxCurrency;
+
+        /**
+         * Estimated rate that will be used in the foreign exchange of the `amount` into the
+         * `fx_currency`. This will vary based on the prevailing market rate until the moment that
+         * it is paid out. Present only before a resource is paid out. Has up to 10 decimal places.
+         */
+        public String getEstimatedExchangeRate() {
+            return estimatedExchangeRate;
+        }
+
+        /**
+         * Rate used in the foreign exchange of the `amount` into the `fx_currency`. Present only
+         * after a resource is paid out. Has up to 10 decimal places.
+         */
+        public String getExchangeRate() {
+            return exchangeRate;
+        }
+
+        /**
+         * Amount that was paid out in the `fx_currency` after foreign exchange. Present only after
+         * the resource has been paid out.
+         */
+        public Integer getFxAmount() {
+            return fxAmount;
+        }
+
+        /**
+         * [ISO 4217](http://en.wikipedia.org/wiki/ISO_4217#Active_codes) code for the currency in
+         * which amounts will be paid out (after foreign exchange). Currently "AUD", "CAD", "DKK",
+         * "EUR", "GBP", "NZD", "SEK" and "USD" are supported. Present only if payouts will be (or
+         * were) made via foreign exchange.
+         */
+        public FxCurrency getFxCurrency() {
+            return fxCurrency;
+        }
+
+        public enum FxCurrency {
+            @SerializedName("AUD")
+            AUD, @SerializedName("CAD")
+            CAD, @SerializedName("DKK")
+            DKK, @SerializedName("EUR")
+            EUR, @SerializedName("GBP")
+            GBP, @SerializedName("NZD")
+            NZD, @SerializedName("SEK")
+            SEK, @SerializedName("USD")
+            USD, @SerializedName("unknown")
+            UNKNOWN
+        }
     }
 
     /**
@@ -200,70 +258,6 @@ public class Payout {
          */
         public String getCreditorBankAccount() {
             return creditorBankAccount;
-        }
-    }
-
-    /**
-     * Represents a fx resource returned from the API.
-     *
-     * 
-     */
-    public static class Fx {
-        private Fx() {
-            // blank to prevent instantiation
-        }
-
-        private String estimatedExchangeRate;
-        private Integer fxAmount;
-        private FxCurrency fxCurrency;
-        private String exchangeRate;
-
-        /**
-         * Estimated rate that will be used in the foreign exchange of the `amount` into the
-         * `fx_currency`. This will vary based on the prevailing market rate until the moment that
-         * it is paid out. Present only before a resource is paid out. Has up to 10 decimal places.
-         */
-        public String getEstimatedExchangeRate() {
-            return estimatedExchangeRate;
-        }
-
-        /**
-         * Amount that was paid out in the `fx_currency` after foreign exchange. Present only after
-         * the resource has been paid out.
-         */
-        public Integer getFxAmount() {
-            return fxAmount;
-        }
-
-        /**
-         * [ISO 4217](http://en.wikipedia.org/wiki/ISO_4217#Active_codes) code for the currency in
-         * which amounts will be paid out (after foreign exchange). Currently "AUD", "CAD", "DKK",
-         * "EUR", "GBP", "NZD", "SEK" and "USD" are supported. Present only if payouts will be (or
-         * were) made via foreign exchange.
-         */
-        public FxCurrency getFxCurrency() {
-            return fxCurrency;
-        }
-
-        /**
-         * Rate used in the foreign exchange of the `amount` into the `fx_currency`. Present only
-         * after a resource is paid out. Has up to 10 decimal places.
-         */
-        public String getExchangeRate() {
-            return exchangeRate;
-        }
-
-        public enum FxCurrency {
-            @SerializedName("AUD")
-            AUD, @SerializedName("CAD")
-            CAD, @SerializedName("DKK")
-            DKK, @SerializedName("EUR")
-            EUR, @SerializedName("GBP")
-            GBP, @SerializedName("NZD")
-            NZD, @SerializedName("SEK")
-            SEK, @SerializedName("USD")
-            USD, @SerializedName("unknown")
-            UNKNOWN
         }
     }
 }

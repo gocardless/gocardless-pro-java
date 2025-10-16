@@ -17,20 +17,22 @@ public class Institution {
         // blank to prevent instantiation
     }
 
-    private String logoUrl;
-    private String countryCode;
-    private Limits limits;
     private Boolean autocompletesCollectBankAccount;
-    private Status status;
-    private String id;
-    private String name;
+    private String countryCode;
     private String iconUrl;
+    private String id;
+    private Limits limits;
+    private String logoUrl;
+    private String name;
+    private Status status;
 
     /**
-     * A URL pointing to the logo for this institution
+     * Flag to show if selecting this institution in the select_institution action can auto-complete
+     * the collect_bank_account action. The bank can return the payer's bank account details to
+     * GoCardless.
      */
-    public String getLogoUrl() {
-        return logoUrl;
+    public Boolean getAutocompletesCollectBankAccount() {
+        return autocompletesCollectBankAccount;
     }
 
     /**
@@ -44,26 +46,10 @@ public class Institution {
     }
 
     /**
-     * Defines individual limits for business and personal accounts.
+     * A URL pointing to the icon for this institution
      */
-    public Limits getLimits() {
-        return limits;
-    }
-
-    /**
-     * Flag to show if selecting this institution in the select_institution action can auto-complete
-     * the collect_bank_account action. The bank can return the payer's bank account details to
-     * GoCardless.
-     */
-    public Boolean getAutocompletesCollectBankAccount() {
-        return autocompletesCollectBankAccount;
-    }
-
-    /**
-     * The status of the institution
-     */
-    public Status getStatus() {
-        return status;
+    public String getIconUrl() {
+        return iconUrl;
     }
 
     /**
@@ -74,6 +60,20 @@ public class Institution {
     }
 
     /**
+     * Defines individual limits for business and personal accounts.
+     */
+    public Limits getLimits() {
+        return limits;
+    }
+
+    /**
+     * A URL pointing to the logo for this institution
+     */
+    public String getLogoUrl() {
+        return logoUrl;
+    }
+
+    /**
      * A human readable name for this institution
      */
     public String getName() {
@@ -81,10 +81,10 @@ public class Institution {
     }
 
     /**
-     * A URL pointing to the icon for this institution
+     * The status of the institution
      */
-    public String getIconUrl() {
-        return iconUrl;
+    public Status getStatus() {
+        return status;
     }
 
     public enum Status {
@@ -105,17 +105,8 @@ public class Institution {
             // blank to prevent instantiation
         }
 
-        private Map<String, Object> single;
         private Map<String, Object> daily;
-
-        /**
-         * Single transaction limit details for this institution, in the lowest denomination for the
-         * currency (e.g. pence in GBP, cents in EUR). The 'limits' property is only available via
-         * an authenticated request with a generated access token
-         */
-        public Map<String, Object> getSingle() {
-            return single;
-        }
+        private Map<String, Object> single;
 
         /**
          * Daily limit details for this institution, in the lowest denomination for the currency
@@ -124,6 +115,15 @@ public class Institution {
          */
         public Map<String, Object> getDaily() {
             return daily;
+        }
+
+        /**
+         * Single transaction limit details for this institution, in the lowest denomination for the
+         * currency (e.g. pence in GBP, cents in EUR). The 'limits' property is only available via
+         * an authenticated request with a generated access token
+         */
+        public Map<String, Object> getSingle() {
+            return single;
         }
     }
 }

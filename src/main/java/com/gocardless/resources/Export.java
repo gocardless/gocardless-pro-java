@@ -12,18 +12,11 @@ public class Export {
         // blank to prevent instantiation
     }
 
-    private String id;
     private String createdAt;
-    private ExportType exportType;
-    private String downloadUrl;
     private String currency;
-
-    /**
-     * Unique identifier, beginning with "EX".
-     */
-    public String getId() {
-        return id;
-    }
+    private String downloadUrl;
+    private ExportType exportType;
+    private String id;
 
     /**
      * Fixed [timestamp](#api-usage-dates-and-times), recording when this resource was created.
@@ -33,10 +26,10 @@ public class Export {
     }
 
     /**
-     * The type of the export
+     * The currency of the export (if applicable)
      */
-    public ExportType getExportType() {
-        return exportType;
+    public String getCurrency() {
+        return currency;
     }
 
     /**
@@ -47,10 +40,17 @@ public class Export {
     }
 
     /**
-     * The currency of the export (if applicable)
+     * The type of the export
      */
-    public String getCurrency() {
-        return currency;
+    public ExportType getExportType() {
+        return exportType;
+    }
+
+    /**
+     * Unique identifier, beginning with "EX".
+     */
+    public String getId() {
+        return id;
     }
 
     public enum ExportType {

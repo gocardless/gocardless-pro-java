@@ -11,8 +11,15 @@ public class MandatePdf {
         // blank to prevent instantiation
     }
 
-    private String url;
     private String expiresAt;
+    private String url;
+
+    /**
+     * The date and time at which the `url` will expire (10 minutes after the original request).
+     */
+    public String getExpiresAt() {
+        return expiresAt;
+    }
 
     /**
      * The URL at which this mandate PDF can be viewed until it expires at the date and time
@@ -21,12 +28,5 @@ public class MandatePdf {
      */
     public String getUrl() {
         return url;
-    }
-
-    /**
-     * The date and time at which the `url` will expire (10 minutes after the original request).
-     */
-    public String getExpiresAt() {
-        return expiresAt;
     }
 }

@@ -18,34 +18,104 @@ public class Creditor {
         // blank to prevent instantiation
     }
 
-    private Boolean mandateImportsEnabled;
-    private FxPayoutCurrency fxPayoutCurrency;
-    private CreditorType creditorType;
-    private String createdAt;
-    private Links links;
-    private VerificationStatus verificationStatus;
-    private Boolean canCreateRefunds;
-    private String name;
-    private String logoUrl;
-    private String bankReferencePrefix;
-    private List<SchemeIdentifier> schemeIdentifiers;
-    private String addressLine2;
-    private String countryCode;
-    private String id;
-    private String city;
-    private String region;
-    private Boolean merchantResponsibleForNotifications;
-    private Boolean customPaymentPagesEnabled;
-    private String addressLine3;
-    private String postalCode;
     private String addressLine1;
+    private String addressLine2;
+    private String addressLine3;
+    private String bankReferencePrefix;
+    private Boolean canCreateRefunds;
+    private String city;
+    private String countryCode;
+    private String createdAt;
+    private CreditorType creditorType;
+    private Boolean customPaymentPagesEnabled;
+    private FxPayoutCurrency fxPayoutCurrency;
+    private String id;
+    private Links links;
+    private String logoUrl;
+    private Boolean mandateImportsEnabled;
+    private Boolean merchantResponsibleForNotifications;
+    private String name;
+    private String postalCode;
+    private String region;
+    private List<SchemeIdentifier> schemeIdentifiers;
+    private VerificationStatus verificationStatus;
 
     /**
-     * Boolean value indicating whether creditor has the [Mandate
-     * Imports](#core-endpoints-mandate-imports) functionality enabled.
+     * The first line of the creditor's address.
      */
-    public Boolean getMandateImportsEnabled() {
-        return mandateImportsEnabled;
+    public String getAddressLine1() {
+        return addressLine1;
+    }
+
+    /**
+     * The second line of the creditor's address.
+     */
+    public String getAddressLine2() {
+        return addressLine2;
+    }
+
+    /**
+     * The third line of the creditor's address.
+     */
+    public String getAddressLine3() {
+        return addressLine3;
+    }
+
+    /**
+     * Prefix for the bank reference of payouts sent to this creditor. For instance, if the
+     * creditor's `bank_reference_prefix` was `ACME`, the bank reference of a payout sent to that
+     * creditor could be `ACME-8G7Q8`.
+     * 
+     * This prefix is also used for refunds in EUR and GBP.
+     * 
+     */
+    public String getBankReferencePrefix() {
+        return bankReferencePrefix;
+    }
+
+    /**
+     * Boolean indicating whether the creditor is permitted to create refunds.
+     */
+    public Boolean getCanCreateRefunds() {
+        return canCreateRefunds;
+    }
+
+    /**
+     * The city of the creditor's address.
+     */
+    public String getCity() {
+        return city;
+    }
+
+    /**
+     * [ISO 3166-1 alpha-2
+     * code.](http://en.wikipedia.org/wiki/ISO_3166-1_alpha-2#Officially_assigned_code_elements)
+     */
+    public String getCountryCode() {
+        return countryCode;
+    }
+
+    /**
+     * Fixed [timestamp](#api-usage-dates-and-times), recording when this resource was created.
+     */
+    public String getCreatedAt() {
+        return createdAt;
+    }
+
+    /**
+     * The type of business of the creditor. Currently, `individual`, `company`, `charity`,
+     * `partnership`, and `trust` are supported.
+     */
+    public CreditorType getCreditorType() {
+        return creditorType;
+    }
+
+    /**
+     * Boolean value indicating whether creditor has the [Custom Payment
+     * Pages](https://hub.gocardless.com/s/article/Custom-payment-pages) functionality enabled.
+     */
+    public Boolean getCustomPaymentPagesEnabled() {
+        return customPaymentPagesEnabled;
     }
 
     /**
@@ -59,25 +129,71 @@ public class Creditor {
     }
 
     /**
-     * The type of business of the creditor. Currently, `individual`, `company`, `charity`,
-     * `partnership`, and `trust` are supported.
+     * Unique identifier, beginning with "CR".
      */
-    public CreditorType getCreditorType() {
-        return creditorType;
+    public String getId() {
+        return id;
     }
 
-    /**
-     * Fixed [timestamp](#api-usage-dates-and-times), recording when this resource was created.
-     */
-    public String getCreatedAt() {
-        return createdAt;
-    }
-
-    /**
-    * 
-    */
     public Links getLinks() {
         return links;
+    }
+
+    /**
+     * URL for the creditor's logo, which may be shown on their payment pages.
+     */
+    public String getLogoUrl() {
+        return logoUrl;
+    }
+
+    /**
+     * Boolean value indicating whether creditor has the [Mandate
+     * Imports](#core-endpoints-mandate-imports) functionality enabled.
+     */
+    public Boolean getMandateImportsEnabled() {
+        return mandateImportsEnabled;
+    }
+
+    /**
+     * Boolean value indicating whether the organisation is responsible for sending all customer
+     * notifications (note this is separate from the functionality described
+     * [here](/getting-started/api/handling-customer-notifications/)). If you are a partner app, and
+     * this value is true, you should not send notifications on behalf of this organisation.
+     */
+    public Boolean getMerchantResponsibleForNotifications() {
+        return merchantResponsibleForNotifications;
+    }
+
+    /**
+     * The creditor's trading name.
+     */
+    public String getName() {
+        return name;
+    }
+
+    /**
+     * The creditor's postal code.
+     */
+    public String getPostalCode() {
+        return postalCode;
+    }
+
+    /**
+     * The creditor's address region, county or department.
+     */
+    public String getRegion() {
+        return region;
+    }
+
+    /**
+     * An array of the scheme identifiers this creditor can create mandates against.
+     * 
+     * The support address, `phone_number` and `email` fields are for customers to contact the
+     * merchant for support purposes. They must be displayed on the payment page, please see our
+     * [compliance requirements](#appendix-compliance-requirements) for more details.
+     */
+    public List<SchemeIdentifier> getSchemeIdentifiers() {
+        return schemeIdentifiers;
     }
 
     /**
@@ -99,123 +215,14 @@ public class Creditor {
         return verificationStatus;
     }
 
-    /**
-     * Boolean indicating whether the creditor is permitted to create refunds.
-     */
-    public Boolean getCanCreateRefunds() {
-        return canCreateRefunds;
-    }
-
-    /**
-     * The creditor's trading name.
-     */
-    public String getName() {
-        return name;
-    }
-
-    /**
-     * URL for the creditor's logo, which may be shown on their payment pages.
-     */
-    public String getLogoUrl() {
-        return logoUrl;
-    }
-
-    /**
-     * Prefix for the bank reference of payouts sent to this creditor. For instance, if the
-     * creditor's `bank_reference_prefix` was `ACME`, the bank reference of a payout sent to that
-     * creditor could be `ACME-8G7Q8`.
-     * 
-     * This prefix is also used for refunds in EUR and GBP.
-     * 
-     */
-    public String getBankReferencePrefix() {
-        return bankReferencePrefix;
-    }
-
-    /**
-     * An array of the scheme identifiers this creditor can create mandates against.
-     * 
-     * The support address, `phone_number` and `email` fields are for customers to contact the
-     * merchant for support purposes. They must be displayed on the payment page, please see our
-     * [compliance requirements](#appendix-compliance-requirements) for more details.
-     */
-    public List<SchemeIdentifier> getSchemeIdentifiers() {
-        return schemeIdentifiers;
-    }
-
-    /**
-     * The second line of the creditor's address.
-     */
-    public String getAddressLine2() {
-        return addressLine2;
-    }
-
-    /**
-     * [ISO 3166-1 alpha-2
-     * code.](http://en.wikipedia.org/wiki/ISO_3166-1_alpha-2#Officially_assigned_code_elements)
-     */
-    public String getCountryCode() {
-        return countryCode;
-    }
-
-    /**
-     * Unique identifier, beginning with "CR".
-     */
-    public String getId() {
-        return id;
-    }
-
-    /**
-     * The city of the creditor's address.
-     */
-    public String getCity() {
-        return city;
-    }
-
-    /**
-     * The creditor's address region, county or department.
-     */
-    public String getRegion() {
-        return region;
-    }
-
-    /**
-     * Boolean value indicating whether the organisation is responsible for sending all customer
-     * notifications (note this is separate from the functionality described
-     * [here](/getting-started/api/handling-customer-notifications/)). If you are a partner app, and
-     * this value is true, you should not send notifications on behalf of this organisation.
-     */
-    public Boolean getMerchantResponsibleForNotifications() {
-        return merchantResponsibleForNotifications;
-    }
-
-    /**
-     * Boolean value indicating whether creditor has the [Custom Payment
-     * Pages](https://hub.gocardless.com/s/article/Custom-payment-pages) functionality enabled.
-     */
-    public Boolean getCustomPaymentPagesEnabled() {
-        return customPaymentPagesEnabled;
-    }
-
-    /**
-     * The third line of the creditor's address.
-     */
-    public String getAddressLine3() {
-        return addressLine3;
-    }
-
-    /**
-     * The creditor's postal code.
-     */
-    public String getPostalCode() {
-        return postalCode;
-    }
-
-    /**
-     * The first line of the creditor's address.
-     */
-    public String getAddressLine1() {
-        return addressLine1;
+    public enum CreditorType {
+        @SerializedName("company")
+        COMPANY, @SerializedName("individual")
+        INDIVIDUAL, @SerializedName("charity")
+        CHARITY, @SerializedName("partnership")
+        PARTNERSHIP, @SerializedName("trust")
+        TRUST, @SerializedName("unknown")
+        UNKNOWN
     }
 
     public enum FxPayoutCurrency {
@@ -228,16 +235,6 @@ public class Creditor {
         NZD, @SerializedName("SEK")
         SEK, @SerializedName("USD")
         USD, @SerializedName("unknown")
-        UNKNOWN
-    }
-
-    public enum CreditorType {
-        @SerializedName("company")
-        COMPANY, @SerializedName("individual")
-        INDIVIDUAL, @SerializedName("charity")
-        CHARITY, @SerializedName("partnership")
-        PARTNERSHIP, @SerializedName("trust")
-        TRUST, @SerializedName("unknown")
         UNKNOWN
     }
 
@@ -259,22 +256,14 @@ public class Creditor {
             // blank to prevent instantiation
         }
 
-        private String defaultUsdPayoutAccount;
         private String defaultAudPayoutAccount;
-        private String defaultGbpPayoutAccount;
-        private String defaultEurPayoutAccount;
-        private String defaultSekPayoutAccount;
-        private String defaultDkkPayoutAccount;
-        private String defaultNzdPayoutAccount;
         private String defaultCadPayoutAccount;
-
-        /**
-         * ID of the [bank account](#core-endpoints-creditor-bank-accounts) which is set up to
-         * receive payouts in USD.
-         */
-        public String getDefaultUsdPayoutAccount() {
-            return defaultUsdPayoutAccount;
-        }
+        private String defaultDkkPayoutAccount;
+        private String defaultEurPayoutAccount;
+        private String defaultGbpPayoutAccount;
+        private String defaultNzdPayoutAccount;
+        private String defaultSekPayoutAccount;
+        private String defaultUsdPayoutAccount;
 
         /**
          * ID of the [bank account](#core-endpoints-creditor-bank-accounts) which is set up to
@@ -286,26 +275,10 @@ public class Creditor {
 
         /**
          * ID of the [bank account](#core-endpoints-creditor-bank-accounts) which is set up to
-         * receive payouts in GBP.
+         * receive payouts in CAD.
          */
-        public String getDefaultGbpPayoutAccount() {
-            return defaultGbpPayoutAccount;
-        }
-
-        /**
-         * ID of the [bank account](#core-endpoints-creditor-bank-accounts) which is set up to
-         * receive payouts in EUR.
-         */
-        public String getDefaultEurPayoutAccount() {
-            return defaultEurPayoutAccount;
-        }
-
-        /**
-         * ID of the [bank account](#core-endpoints-creditor-bank-accounts) which is set up to
-         * receive payouts in SEK.
-         */
-        public String getDefaultSekPayoutAccount() {
-            return defaultSekPayoutAccount;
+        public String getDefaultCadPayoutAccount() {
+            return defaultCadPayoutAccount;
         }
 
         /**
@@ -318,6 +291,22 @@ public class Creditor {
 
         /**
          * ID of the [bank account](#core-endpoints-creditor-bank-accounts) which is set up to
+         * receive payouts in EUR.
+         */
+        public String getDefaultEurPayoutAccount() {
+            return defaultEurPayoutAccount;
+        }
+
+        /**
+         * ID of the [bank account](#core-endpoints-creditor-bank-accounts) which is set up to
+         * receive payouts in GBP.
+         */
+        public String getDefaultGbpPayoutAccount() {
+            return defaultGbpPayoutAccount;
+        }
+
+        /**
+         * ID of the [bank account](#core-endpoints-creditor-bank-accounts) which is set up to
          * receive payouts in NZD.
          */
         public String getDefaultNzdPayoutAccount() {
@@ -326,10 +315,18 @@ public class Creditor {
 
         /**
          * ID of the [bank account](#core-endpoints-creditor-bank-accounts) which is set up to
-         * receive payouts in CAD.
+         * receive payouts in SEK.
          */
-        public String getDefaultCadPayoutAccount() {
-            return defaultCadPayoutAccount;
+        public String getDefaultSekPayoutAccount() {
+            return defaultSekPayoutAccount;
+        }
+
+        /**
+         * ID of the [bank account](#core-endpoints-creditor-bank-accounts) which is set up to
+         * receive payouts in USD.
+         */
+        public String getDefaultUsdPayoutAccount() {
+            return defaultUsdPayoutAccount;
         }
     }
 
@@ -343,98 +340,30 @@ public class Creditor {
             // blank to prevent instantiation
         }
 
-        private String reference;
-        private Integer minimumAdvanceNotice;
-        private String countryCode;
         private String addressLine1;
-        private String phoneNumber;
-        private String region;
-        private String id;
-        private Boolean canSpecifyMandateReference;
-        private Scheme scheme;
-        private String email;
         private String addressLine2;
         private String addressLine3;
-        private Status status;
-        private String postalCode;
-        private String name;
-        private Currency currency;
+        private Boolean canSpecifyMandateReference;
         private String city;
+        private String countryCode;
         private String createdAt;
-
-        /**
-         * The scheme-unique identifier against which payments are submitted.
-         */
-        public String getReference() {
-            return reference;
-        }
-
-        /**
-         * The minimum interval, in working days, between the sending of a pre-notification to the
-         * customer, and the charge date of a payment using this scheme identifier.
-         * 
-         * By default, GoCardless sends these notifications automatically. Please see our
-         * [compliance requirements](#appendix-compliance-requirements) for more details.
-         */
-        public Integer getMinimumAdvanceNotice() {
-            return minimumAdvanceNotice;
-        }
-
-        /**
-         * [ISO 3166-1 alpha-2
-         * code.](http://en.wikipedia.org/wiki/ISO_3166-1_alpha-2#Officially_assigned_code_elements)
-         */
-        public String getCountryCode() {
-            return countryCode;
-        }
+        private Currency currency;
+        private String email;
+        private String id;
+        private Integer minimumAdvanceNotice;
+        private String name;
+        private String phoneNumber;
+        private String postalCode;
+        private String reference;
+        private String region;
+        private Scheme scheme;
+        private Status status;
 
         /**
          * The first line of the scheme identifier's support address.
          */
         public String getAddressLine1() {
             return addressLine1;
-        }
-
-        /**
-         * Scheme identifier's support phone number.
-         */
-        public String getPhoneNumber() {
-            return phoneNumber;
-        }
-
-        /**
-         * The scheme identifier's support address region, county or department.
-         */
-        public String getRegion() {
-            return region;
-        }
-
-        /**
-         * Unique identifier, usually beginning with "SU".
-         */
-        public String getId() {
-            return id;
-        }
-
-        /**
-         * Whether a custom reference can be submitted for mandates using this scheme identifier.
-         */
-        public Boolean getCanSpecifyMandateReference() {
-            return canSpecifyMandateReference;
-        }
-
-        /**
-         * The scheme which this scheme identifier applies to.
-         */
-        public Scheme getScheme() {
-            return scheme;
-        }
-
-        /**
-         * Scheme identifier's support email address.
-         */
-        public String getEmail() {
-            return email;
         }
 
         /**
@@ -452,18 +381,64 @@ public class Creditor {
         }
 
         /**
-         * The status of the scheme identifier. Only `active` scheme identifiers will be applied to
-         * a creditor and used against payments.
+         * Whether a custom reference can be submitted for mandates using this scheme identifier.
          */
-        public Status getStatus() {
-            return status;
+        public Boolean getCanSpecifyMandateReference() {
+            return canSpecifyMandateReference;
         }
 
         /**
-         * The scheme identifier's support postal code.
+         * The city of the scheme identifier's support address.
          */
-        public String getPostalCode() {
-            return postalCode;
+        public String getCity() {
+            return city;
+        }
+
+        /**
+         * [ISO 3166-1 alpha-2
+         * code.](http://en.wikipedia.org/wiki/ISO_3166-1_alpha-2#Officially_assigned_code_elements)
+         */
+        public String getCountryCode() {
+            return countryCode;
+        }
+
+        /**
+         * Fixed [timestamp](#api-usage-dates-and-times), recording when this resource was created.
+         */
+        public String getCreatedAt() {
+            return createdAt;
+        }
+
+        /**
+         * The currency of the scheme identifier.
+         */
+        public Currency getCurrency() {
+            return currency;
+        }
+
+        /**
+         * Scheme identifier's support email address.
+         */
+        public String getEmail() {
+            return email;
+        }
+
+        /**
+         * Unique identifier, usually beginning with "SU".
+         */
+        public String getId() {
+            return id;
+        }
+
+        /**
+         * The minimum interval, in working days, between the sending of a pre-notification to the
+         * customer, and the charge date of a payment using this scheme identifier.
+         * 
+         * By default, GoCardless sends these notifications automatically. Please see our
+         * [compliance requirements](#appendix-compliance-requirements) for more details.
+         */
+        public Integer getMinimumAdvanceNotice() {
+            return minimumAdvanceNotice;
         }
 
         /**
@@ -475,24 +450,59 @@ public class Creditor {
         }
 
         /**
-         * The currency of the scheme identifier.
+         * Scheme identifier's support phone number.
          */
-        public Currency getCurrency() {
-            return currency;
+        public String getPhoneNumber() {
+            return phoneNumber;
         }
 
         /**
-         * The city of the scheme identifier's support address.
+         * The scheme identifier's support postal code.
          */
-        public String getCity() {
-            return city;
+        public String getPostalCode() {
+            return postalCode;
         }
 
         /**
-         * Fixed [timestamp](#api-usage-dates-and-times), recording when this resource was created.
+         * The scheme-unique identifier against which payments are submitted.
          */
-        public String getCreatedAt() {
-            return createdAt;
+        public String getReference() {
+            return reference;
+        }
+
+        /**
+         * The scheme identifier's support address region, county or department.
+         */
+        public String getRegion() {
+            return region;
+        }
+
+        /**
+         * The scheme which this scheme identifier applies to.
+         */
+        public Scheme getScheme() {
+            return scheme;
+        }
+
+        /**
+         * The status of the scheme identifier. Only `active` scheme identifiers will be applied to
+         * a creditor and used against payments.
+         */
+        public Status getStatus() {
+            return status;
+        }
+
+        public enum Currency {
+            @SerializedName("AUD")
+            AUD, @SerializedName("CAD")
+            CAD, @SerializedName("DKK")
+            DKK, @SerializedName("EUR")
+            EUR, @SerializedName("GBP")
+            GBP, @SerializedName("NZD")
+            NZD, @SerializedName("SEK")
+            SEK, @SerializedName("USD")
+            USD, @SerializedName("unknown")
+            UNKNOWN
         }
 
         public enum Scheme {
@@ -509,19 +519,6 @@ public class Creditor {
             SEPA, @SerializedName("sepa_credit_transfer")
             SEPA_CREDIT_TRANSFER, @SerializedName("sepa_instant_credit_transfer")
             SEPA_INSTANT_CREDIT_TRANSFER, @SerializedName("unknown")
-            UNKNOWN
-        }
-
-        public enum Currency {
-            @SerializedName("AUD")
-            AUD, @SerializedName("CAD")
-            CAD, @SerializedName("DKK")
-            DKK, @SerializedName("EUR")
-            EUR, @SerializedName("GBP")
-            GBP, @SerializedName("NZD")
-            NZD, @SerializedName("SEK")
-            SEK, @SerializedName("USD")
-            USD, @SerializedName("unknown")
             UNKNOWN
         }
 
