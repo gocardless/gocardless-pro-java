@@ -158,11 +158,11 @@ public class ListResponse<T> {
             return subscriptions;
         }
 
-        Linked(List<Creditor> creditors, List<Refund> refunds, List<Customer> customers,
-                List<InstalmentSchedule> instalmentSchedules, List<Subscription> subscriptions,
-                List<BillingRequest> billingRequests, List<Payout> payouts,
-                List<SchemeIdentifier> schemeIdentifiers, List<Mandate> mandates,
-                List<OutboundPayment> outboundPayments, List<Payment> payments,
+        Linked(List<InstalmentSchedule> instalmentSchedules, List<Customer> customers,
+                List<Mandate> mandates, List<Refund> refunds, List<BillingRequest> billingRequests,
+                List<Creditor> creditors, List<Payment> payments, List<Payout> payouts,
+                List<OutboundPayment> outboundPayments, List<Subscription> subscriptions,
+                List<SchemeIdentifier> schemeIdentifiers,
                 List<PayerAuthorisation> payerAuthorisations) {
             this.billingRequests = billingRequests;
             this.creditors = creditors;
