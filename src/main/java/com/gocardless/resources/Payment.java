@@ -211,6 +211,11 @@ public class Payment {
         UNKNOWN
     }
 
+    /**
+     * Represents a fx resource returned from the API.
+     *
+     * 
+     */
     public static class Fx {
         private Fx() {
             // blank to prevent instantiation
@@ -270,6 +275,11 @@ public class Payment {
         }
     }
 
+    /**
+     * Represents a link resource returned from the API.
+     *
+     * 
+     */
     public static class Links {
         private Links() {
             // blank to prevent instantiation

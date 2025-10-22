@@ -408,6 +408,11 @@ public class PayerAuthorisation {
         }
     }
 
+    /**
+     * Represents a incomplete field resource returned from the API.
+     *
+     * 
+     */
     public static class IncompleteField {
         private IncompleteField() {
             // blank to prevent instantiation

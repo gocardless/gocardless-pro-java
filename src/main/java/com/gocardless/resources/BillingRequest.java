@@ -179,6 +179,11 @@ public class BillingRequest {
         UNKNOWN
     }
 
+    /**
+     * Represents a action resource returned from the API.
+     *
+     * 
+     */
     public static class Action {
         private Action() {
             // blank to prevent instantiation
@@ -381,6 +386,11 @@ public class BillingRequest {
                 return incompleteFields;
             }
 
+            /**
+             * Represents a incomplete field resource returned from the API.
+             *
+             * 
+             */
             public static class IncompleteFields {
                 private IncompleteFields() {
                     // blank to prevent instantiation
@@ -508,6 +518,11 @@ public class BillingRequest {
             return totalAmount;
         }
 
+        /**
+         * Represents a instalments with date resource returned from the API.
+         *
+         * 
+         */
         public static class InstalmentsWithDate {
             private InstalmentsWithDate() {
                 // blank to prevent instantiation
@@ -609,6 +624,11 @@ public class BillingRequest {
             }
         }
 
+        /**
+         * Represents a link resource returned from the API.
+         *
+         * 
+         */
         public static class Links {
             private Links() {
                 // blank to prevent instantiation
@@ -627,6 +647,11 @@ public class BillingRequest {
         }
     }
 
+    /**
+     * Represents a link resource returned from the API.
+     *
+     * 
+     */
     public static class Links {
         private Links() {
             // blank to prevent instantiation
@@ -775,6 +800,7 @@ public class BillingRequest {
         private Constraints constraints;
         private String currency;
         private String description;
+        private FundsSettlement fundsSettlement;
         private Links links;
         private Map<String, Object> metadata;
         private Boolean payerRequestedDualSignature;
@@ -828,6 +854,18 @@ public class BillingRequest {
          */
         public String getDescription() {
             return description;
+        }
+
+        /**
+         * This field will decide how GoCardless handles settlement of funds from the customer.
+         * 
+         * - `managed` will be moved through GoCardless' account, batched, and payed out. - `direct`
+         * will be a direct transfer from the payer's account to the merchant where invoicing will
+         * be handled separately.
+         * 
+         */
+        public FundsSettlement getFundsSettlement() {
+            return fundsSettlement;
         }
 
         public Links getLinks() {
@@ -907,6 +945,13 @@ public class BillingRequest {
             UNKNOWN
         }
 
+        public enum FundsSettlement {
+            @SerializedName("managed")
+            MANAGED, @SerializedName("direct")
+            DIRECT, @SerializedName("unknown")
+            UNKNOWN
+        }
+
         public enum Verify {
             @SerializedName("minimum")
             MINIMUM, @SerializedName("recommended")
@@ -981,6 +1026,11 @@ public class BillingRequest {
                 return startDate;
             }
 
+            /**
+             * Represents a periodic limit resource returned from the API.
+             *
+             * 
+             */
             public static class PeriodicLimit {
                 private PeriodicLimit() {
                     // blank to prevent instantiation
@@ -1050,6 +1100,11 @@ public class BillingRequest {
             }
         }
 
+        /**
+         * Represents a link resource returned from the API.
+         *
+         * 
+         */
         public static class Links {
             private Links() {
                 // blank to prevent instantiation
@@ -1174,6 +1229,11 @@ public class BillingRequest {
             UNKNOWN
         }
 
+        /**
+         * Represents a link resource returned from the API.
+         *
+         * 
+         */
         public static class Links {
             private Links() {
                 // blank to prevent instantiation
@@ -1191,6 +1251,11 @@ public class BillingRequest {
         }
     }
 
+    /**
+     * Represents a resource resource returned from the API.
+     *
+     * 
+     */
     public static class Resources {
         private Resources() {
             // blank to prevent instantiation
@@ -1440,6 +1505,11 @@ public class BillingRequest {
                 UNKNOWN
             }
 
+            /**
+             * Represents a link resource returned from the API.
+             *
+             * 
+             */
             public static class Links {
                 private Links() {
                     // blank to prevent instantiation
@@ -1753,6 +1823,11 @@ public class BillingRequest {
             UNKNOWN
         }
 
+        /**
+         * Represents a link resource returned from the API.
+         *
+         * 
+         */
         public static class Links {
             private Links() {
                 // blank to prevent instantiation

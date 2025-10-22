@@ -103,6 +103,11 @@ public class PayoutItem {
         UNKNOWN
     }
 
+    /**
+     * Represents a link resource returned from the API.
+     *
+     * 
+     */
     public static class Links {
         private Links() {
             // blank to prevent instantiation
@@ -137,6 +142,11 @@ public class PayoutItem {
         }
     }
 
+    /**
+     * Represents a tax resource returned from the API.
+     *
+     * 
+     */
     public static class Tax {
         private Tax() {
             // blank to prevent instantiation
@@ -193,8 +203,8 @@ public class PayoutItem {
          * rate has been finalised.
          * 
          * You can listen for the payout's [`tax_exchange_rates_confirmed`
-         * webhook](https://developer.gocardless.com/api-reference/#event-actions-payout) to know
-         * when the exchange rate has been finalised for all fees in the payout.
+         * webhook](https://developer.gocardless.com/api-reference/#event-types-payout) to know when
+         * the exchange rate has been finalised for all fees in the payout.
          */
         public String getExchangeRate() {
             return exchangeRate;

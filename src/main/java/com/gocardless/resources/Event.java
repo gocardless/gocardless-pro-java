@@ -10,7 +10,7 @@ import java.util.Map;
  * Events are stored for all webhooks. An event refers to a resource which has been updated, for
  * example a payment which has been collected, or a mandate which has been transferred. Event
  * creation is an asynchronous process, so it can take some time between an action occurring and its
- * corresponding event getting included in API responses. See [here](#event-actions) for a complete
+ * corresponding event getting included in API responses. See [here](#event-types) for a complete
  * list of event types.
  */
 public class Event {
@@ -27,10 +27,10 @@ public class Event {
     private Map<String, Object> metadata;
     private Map<String, Object> resourceMetadata;
     private ResourceType resourceType;
+    private Source source;
 
     /**
-     * What has happened to the resource. See [Event Actions](#event-actions) for the possible
-     * actions.
+     * What has happened to the resource. See [Event Types](#event-types) for the possible actions.
      */
     public String getAction() {
         return action;
@@ -110,10 +110,18 @@ public class Event {
         return resourceType;
     }
 
+    /**
+     * Audit information about the source of the event.
+     */
+    public Source getSource() {
+        return source;
+    }
+
     public enum ResourceType {
         @SerializedName("billing_requests")
         BILLING_REQUESTS, @SerializedName("creditors")
-        CREDITORS, @SerializedName("exports")
+        CREDITORS, @SerializedName("customers")
+        CUSTOMERS, @SerializedName("exports")
         EXPORTS, @SerializedName("instalment_schedules")
         INSTALMENT_SCHEDULES, @SerializedName("mandates")
         MANDATES, @SerializedName("organisations")
@@ -128,6 +136,11 @@ public class Event {
         UNKNOWN
     }
 
+    /**
+     * Represents a customer notification resource returned from the API.
+     *
+     * 
+     */
     public static class CustomerNotification {
         private CustomerNotification() {
             // blank to prevent instantiation
@@ -168,6 +181,11 @@ public class Event {
         }
     }
 
+    /**
+     * Represents a detail resource returned from the API.
+     *
+     * 
+     */
     public static class Details {
         private Details() {
             // blank to prevent instantiation
@@ -311,6 +329,11 @@ public class Event {
         }
     }
 
+    /**
+     * Represents a link resource returned from the API.
+     *
+     * 
+     */
     public static class Links {
         private Links() {
             // blank to prevent instantiation
@@ -510,6 +533,43 @@ public class Event {
          */
         public String getSubscription() {
             return subscription;
+        }
+    }
+
+    /**
+     * Represents a source resource returned from the API.
+     *
+     * Audit information about the source of the event.
+     */
+    public static class Source {
+        private Source() {
+            // blank to prevent instantiation
+        }
+
+        private String name;
+        private Type type;
+
+        /**
+         * The name of the event's source.
+         */
+        public String getName() {
+            return name;
+        }
+
+        /**
+         * The type of the event's source.
+         */
+        public Type getType() {
+            return type;
+        }
+
+        public enum Type {
+            @SerializedName("app")
+            APP, @SerializedName("user")
+            USER, @SerializedName("gc_team")
+            GC_TEAM, @SerializedName("access_token")
+            ACCESS_TOKEN, @SerializedName("unknown")
+            UNKNOWN
         }
     }
 }

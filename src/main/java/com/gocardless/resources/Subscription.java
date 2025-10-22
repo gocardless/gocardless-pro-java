@@ -290,6 +290,11 @@ public class Subscription {
         UNKNOWN
     }
 
+    /**
+     * Represents a link resource returned from the API.
+     *
+     * 
+     */
     public static class Links {
         private Links() {
             // blank to prevent instantiation
@@ -306,6 +311,11 @@ public class Subscription {
         }
     }
 
+    /**
+     * Represents a upcoming payment resource returned from the API.
+     *
+     * 
+     */
     public static class UpcomingPayment {
         private UpcomingPayment() {
             // blank to prevent instantiation

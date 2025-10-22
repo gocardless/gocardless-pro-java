@@ -282,6 +282,11 @@ public class BillingRequestTemplate {
             return startDate;
         }
 
+        /**
+         * Represents a periodic limit resource returned from the API.
+         *
+         * 
+         */
         public static class PeriodicLimit {
             private PeriodicLimit() {
                 // blank to prevent instantiation

@@ -246,6 +246,11 @@ public class Creditor {
         UNKNOWN
     }
 
+    /**
+     * Represents a link resource returned from the API.
+     *
+     * 
+     */
     public static class Links {
         private Links() {
             // blank to prevent instantiation
@@ -325,6 +330,11 @@ public class Creditor {
         }
     }
 
+    /**
+     * Represents a schemeentifier resource returned from the API.
+     *
+     * 
+     */
     public static class SchemeIdentifier {
         private SchemeIdentifier() {
             // blank to prevent instantiation

@@ -9,7 +9,7 @@ import java.util.Map;
  * Outbound Payments represent payments sent from [creditors](#core-endpoints-creditors).
  * 
  * GoCardless will notify you via a [webhook](#appendix-webhooks) when the status of the outbound
- * payment [changes](#event-actions-outbound-payment).
+ * payment [changes](#event-types-outbound-payment).
  * 
  * <p class="restricted-notice">
  * <strong>Restricted</strong>: Outbound Payments are currently in Early Access and available only
@@ -177,6 +177,11 @@ public class OutboundPayment {
         UNKNOWN
     }
 
+    /**
+     * Represents a link resource returned from the API.
+     *
+     * 
+     */
     public static class Links {
         private Links() {
             // blank to prevent instantiation

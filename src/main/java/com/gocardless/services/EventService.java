@@ -14,7 +14,7 @@ import java.util.Map;
  * Events are stored for all webhooks. An event refers to a resource which has been updated, for
  * example a payment which has been collected, or a mandate which has been transferred. Event
  * creation is an asynchronous process, so it can take some time between an action occurring and its
- * corresponding event getting included in API responses. See [here](#event-actions) for a complete
+ * corresponding event getting included in API responses. See [here](#event-types) for a complete
  * list of event types.
  */
 public class EventService {
@@ -398,7 +398,8 @@ public class EventService {
         public enum Include {
             @SerializedName("billing_request")
             BILLING_REQUEST, @SerializedName("creditor")
-            CREDITOR, @SerializedName("instalment_schedule")
+            CREDITOR, @SerializedName("customer")
+            CUSTOMER, @SerializedName("instalment_schedule")
             INSTALMENT_SCHEDULE, @SerializedName("mandate")
             MANDATE, @SerializedName("outbound_payment")
             OUTBOUND_PAYMENT, @SerializedName("payer_authorisation")
@@ -419,7 +420,8 @@ public class EventService {
         public enum ResourceType {
             @SerializedName("billing_requests")
             BILLING_REQUESTS, @SerializedName("creditors")
-            CREDITORS, @SerializedName("exports")
+            CREDITORS, @SerializedName("customers")
+            CUSTOMERS, @SerializedName("exports")
             EXPORTS, @SerializedName("instalment_schedules")
             INSTALMENT_SCHEDULES, @SerializedName("mandates")
             MANDATES, @SerializedName("organisations")
