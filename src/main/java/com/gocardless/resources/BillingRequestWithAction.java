@@ -499,26 +499,6 @@ public class BillingRequestWithAction {
             }
 
             /**
-             * Represents a available currency resource returned from the API.
-             *
-             * List of currencies the current mandate supports
-             */
-            public static class AvailableCurrencies {
-                private AvailableCurrencies() {
-                    // blank to prevent instantiation
-                }
-
-                private String currency;
-
-                /**
-                 * [ISO 4217](http://en.wikipedia.org/wiki/ISO_4217#Active_codes) currency code.
-                 */
-                public String getCurrency() {
-                    return currency;
-                }
-            }
-
-            /**
              * Represents a bank authorisation resource returned from the API.
              *
              * Describes the behaviour of bank authorisations, for the bank_authorisation action
