@@ -132,18 +132,6 @@ public class OutboundPaymentService {
         }
 
         /**
-         * ID of the app that created the outbound payment. <br/>
-         * _Note_: this property will only be present if the payment was created through an app.
-         */
-        public OutboundPaymentCreateRequest withLinksApp(String app) {
-            if (links == null) {
-                links = new Links();
-            }
-            links.withApp(app);
-            return this;
-        }
-
-        /**
          * ID of the creditor who sends the outbound payment.
          */
         public OutboundPaymentCreateRequest withLinksCreditor(String creditor) {
@@ -262,18 +250,8 @@ public class OutboundPaymentService {
         }
 
         public static class Links {
-            private String app;
             private String creditor;
             private String recipientBankAccount;
-
-            /**
-             * ID of the app that created the outbound payment. <br/>
-             * _Note_: this property will only be present if the payment was created through an app.
-             */
-            public Links withApp(String app) {
-                this.app = app;
-                return this;
-            }
 
             /**
              * ID of the creditor who sends the outbound payment.
