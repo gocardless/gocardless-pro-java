@@ -44,6 +44,7 @@ public class GoCardlessClient {
     private final PayerAuthorisationService payerAuthorisations;
     private final PayerThemeService payerThemes;
     private final PaymentService payments;
+    private final PaymentAccountService paymentAccounts;
     private final PaymentAccountTransactionService paymentAccountTransactions;
     private final PayoutService payouts;
     private final PayoutItemService payoutItems;
@@ -207,6 +208,7 @@ public class GoCardlessClient {
         this.payerAuthorisations = new PayerAuthorisationService(httpClient);
         this.payerThemes = new PayerThemeService(httpClient);
         this.payments = new PaymentService(httpClient);
+        this.paymentAccounts = new PaymentAccountService(httpClient);
         this.paymentAccountTransactions = new PaymentAccountTransactionService(httpClient);
         this.payouts = new PayoutService(httpClient);
         this.payoutItems = new PayoutItemService(httpClient);
@@ -429,6 +431,13 @@ public class GoCardlessClient {
      */
     public PaymentService payments() {
         return payments;
+    }
+
+    /**
+     * A service class for working with payment account resources.
+     */
+    public PaymentAccountService paymentAccounts() {
+        return paymentAccounts;
     }
 
     /**
