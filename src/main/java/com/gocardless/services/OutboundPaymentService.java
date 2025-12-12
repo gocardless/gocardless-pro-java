@@ -87,6 +87,13 @@ public class OutboundPaymentService {
     }
 
     /**
+     * Retrieve aggregate statistics on outbound payments.
+     */
+    public OutboundPaymentStatsRequest stats() {
+        return new OutboundPaymentStatsRequest(httpClient);
+    }
+
+    /**
      * Request class for {@link OutboundPaymentService#create }.
      *
      * 
@@ -799,6 +806,44 @@ public class OutboundPaymentService {
         @Override
         protected boolean hasBody() {
             return true;
+        }
+    }
+
+    /**
+     * Request class for {@link OutboundPaymentService#stats }.
+     *
+     * Retrieve aggregate statistics on outbound payments.
+     */
+    public static final class OutboundPaymentStatsRequest extends GetRequest<OutboundPayment> {
+        private OutboundPaymentStatsRequest(HttpClient httpClient) {
+            super(httpClient);
+        }
+
+        public OutboundPaymentStatsRequest withHeader(String headerName, String headerValue) {
+            this.addHeader(headerName, headerValue);
+            return this;
+        }
+
+        @Override
+        protected Map<String, Object> getQueryParams() {
+            ImmutableMap.Builder<String, Object> params = ImmutableMap.builder();
+            params.putAll(super.getQueryParams());
+            return params.build();
+        }
+
+        @Override
+        protected String getPathTemplate() {
+            return "outbound_payments/stats";
+        }
+
+        @Override
+        protected String getEnvelope() {
+            return "outbound_payments";
+        }
+
+        @Override
+        protected Class<OutboundPayment> getResponseClass() {
+            return OutboundPayment.class;
         }
     }
 }
