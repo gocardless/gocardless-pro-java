@@ -16,6 +16,7 @@ public class GoCardlessClient {
     private final HttpClient httpClient;
     private final BalanceService balances;
     private final BankAccountDetailService bankAccountDetails;
+    private final BankAccountHolderVerificationService bankAccountHolderVerifications;
     private final BankAuthorisationService bankAuthorisations;
     private final BankDetailsLookupService bankDetailsLookups;
     private final BillingRequestService billingRequests;
@@ -178,6 +179,7 @@ public class GoCardlessClient {
         this.httpClient = httpClient;
         this.balances = new BalanceService(httpClient);
         this.bankAccountDetails = new BankAccountDetailService(httpClient);
+        this.bankAccountHolderVerifications = new BankAccountHolderVerificationService(httpClient);
         this.bankAuthorisations = new BankAuthorisationService(httpClient);
         this.bankDetailsLookups = new BankDetailsLookupService(httpClient);
         this.billingRequests = new BillingRequestService(httpClient);
@@ -231,6 +233,13 @@ public class GoCardlessClient {
      */
     public BankAccountDetailService bankAccountDetails() {
         return bankAccountDetails;
+    }
+
+    /**
+     * A service class for working with bank account holder verification resources.
+     */
+    public BankAccountHolderVerificationService bankAccountHolderVerifications() {
+        return bankAccountHolderVerifications;
     }
 
     /**
