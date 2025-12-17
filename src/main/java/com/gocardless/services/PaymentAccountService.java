@@ -52,15 +52,6 @@ public class PaymentAccountService {
     public static final class PaymentAccountGetRequest extends GetRequest<PaymentAccount> {
         @PathParam
         private final String identity;
-        private String id;
-
-        /**
-         * Unique identifier, beginning with "BA".
-         */
-        public PaymentAccountGetRequest withId(String id) {
-            this.id = id;
-            return this;
-        }
 
         private PaymentAccountGetRequest(HttpClient httpClient, String identity) {
             super(httpClient);
@@ -76,16 +67,6 @@ public class PaymentAccountService {
         protected Map<String, String> getPathParams() {
             ImmutableMap.Builder<String, String> params = ImmutableMap.builder();
             params.put("identity", identity);
-            return params.build();
-        }
-
-        @Override
-        protected Map<String, Object> getQueryParams() {
-            ImmutableMap.Builder<String, Object> params = ImmutableMap.builder();
-            params.putAll(super.getQueryParams());
-            if (id != null) {
-                params.put("id", id);
-            }
             return params.build();
         }
 
