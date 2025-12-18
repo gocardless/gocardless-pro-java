@@ -10,6 +10,14 @@ import java.util.Map;
  * 
  * GoCardless will notify you via a [webhook](#appendix-webhooks) when the status of the outbound
  * payment [changes](#event-types-outbound-payment).
+ * 
+ * ####Rate limiting
+ * 
+ * Two rate limits apply to the Outbound Payments APIs: - All POST Outbound Payment endpoints
+ * (create, withdraw, approve, cancel and etc.) share a single rate-limit group of 300 requests per
+ * minute. As initiating a payment typically requires two API calls (one to create the payment and
+ * one to approve it), this allows you to add approximately 150 outbound payments per minute. - All
+ * remaining Outbound Payment endpoints are limited to 500 requests per minute.
  */
 public class OutboundPayment {
     private OutboundPayment() {
