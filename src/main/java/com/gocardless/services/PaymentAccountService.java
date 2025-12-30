@@ -92,6 +92,30 @@ public class PaymentAccountService {
      * Returns a [cursor-paginated](#api-usage-cursor-pagination) list of your payment accounts.
      */
     public static final class PaymentAccountListRequest<S> extends ListRequest<S, PaymentAccount> {
+        /**
+         * Cursor pointing to the start of the desired set.
+         */
+        public PaymentAccountListRequest<S> withAfter(String after) {
+            setAfter(after);
+            return this;
+        }
+
+        /**
+         * Cursor pointing to the end of the desired set.
+         */
+        public PaymentAccountListRequest<S> withBefore(String before) {
+            setBefore(before);
+            return this;
+        }
+
+        /**
+         * Number of records to return.
+         */
+        public PaymentAccountListRequest<S> withLimit(Integer limit) {
+            setLimit(limit);
+            return this;
+        }
+
         private PaymentAccountListRequest(HttpClient httpClient,
                 ListRequestExecutor<S, PaymentAccount> executor) {
             super(httpClient, executor);
