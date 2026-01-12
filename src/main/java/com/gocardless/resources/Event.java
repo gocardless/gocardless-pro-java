@@ -352,6 +352,7 @@ public class Event {
         private String newCustomerBankAccount;
         private String newMandate;
         private String organisation;
+        private String outboundPayment;
         private String parentEvent;
         private String payerAuthorisation;
         private String payment;
@@ -459,6 +460,14 @@ public class Event {
          */
         public String getOrganisation() {
             return organisation;
+        }
+
+        /**
+         * If `resource_type` is `outbound_payments`, this is the ID of the outbound_payment which
+         * has been updated.
+         */
+        public String getOutboundPayment() {
+            return outboundPayment;
         }
 
         /**

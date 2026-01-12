@@ -218,8 +218,8 @@ public class EventService {
         }
 
         /**
-         * ID of an outbound_payment. If specified, this endpoint will return all events for the
-         * given payment.
+         * ID of an [outbound_payment](#core-endpoints-outbound-payments). If specified, this
+         * endpoint will return all events for the given payment.
          */
         public EventListRequest<S> withOutboundPayment(String outboundPayment) {
             this.outboundPayment = outboundPayment;
