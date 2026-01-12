@@ -17,12 +17,13 @@ import java.util.Map;
  * GoCardless will notify you via a [webhook](#appendix-webhooks) when the status of the outbound
  * payment [changes](#event-types-outbound-payment).
  * 
- * <p class="restricted-notice">
- * <strong>Restricted</strong>: Outbound Payments are currently in Early Access and available only
- * to a limited list of organisations. If you are interested in using this feature, please stay
- * tuned for our public launch announcement. We are actively testing and refining our API to ensure
- * it meets your needs and provides the best experience.
- * </p>
+ * ####Rate limiting
+ * 
+ * Two rate limits apply to the Outbound Payments APIs: - All POST Outbound Payment endpoints
+ * (create, withdraw, approve, cancel and etc.) share a single rate-limit group of 300 requests per
+ * minute. As initiating a payment typically requires two API calls (one to create the payment and
+ * one to approve it), this allows you to add approximately 150 outbound payments per minute. - All
+ * remaining Outbound Payment endpoints are limited to 500 requests per minute.
  */
 public class OutboundPaymentService {
     private final HttpClient httpClient;
@@ -91,6 +92,13 @@ public class OutboundPaymentService {
      */
     public OutboundPaymentUpdateRequest update(String identity) {
         return new OutboundPaymentUpdateRequest(httpClient, identity);
+    }
+
+    /**
+     * Retrieve aggregate statistics on outbound payments.
+     */
+    public OutboundPaymentStatsRequest stats() {
+        return new OutboundPaymentStatsRequest(httpClient);
     }
 
     /**
@@ -806,6 +814,44 @@ public class OutboundPaymentService {
         @Override
         protected boolean hasBody() {
             return true;
+        }
+    }
+
+    /**
+     * Request class for {@link OutboundPaymentService#stats }.
+     *
+     * Retrieve aggregate statistics on outbound payments.
+     */
+    public static final class OutboundPaymentStatsRequest extends GetRequest<OutboundPayment> {
+        private OutboundPaymentStatsRequest(HttpClient httpClient) {
+            super(httpClient);
+        }
+
+        public OutboundPaymentStatsRequest withHeader(String headerName, String headerValue) {
+            this.addHeader(headerName, headerValue);
+            return this;
+        }
+
+        @Override
+        protected Map<String, Object> getQueryParams() {
+            ImmutableMap.Builder<String, Object> params = ImmutableMap.builder();
+            params.putAll(super.getQueryParams());
+            return params.build();
+        }
+
+        @Override
+        protected String getPathTemplate() {
+            return "outbound_payments/stats";
+        }
+
+        @Override
+        protected String getEnvelope() {
+            return "outbound_payments";
+        }
+
+        @Override
+        protected Class<OutboundPayment> getResponseClass() {
+            return OutboundPayment.class;
         }
     }
 }

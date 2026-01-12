@@ -293,7 +293,7 @@ public class BillingRequestService {
 
         /**
          * On failure, automatically retry payments using [intelligent
-         * retries](#success-intelligent-retries). Default is `false`.
+         * retries](/success-plus/overview). Default is `false`.
          * <p class="notice">
          * <strong>Important</strong>: To be able to use intelligent retries, Success+ needs to be
          * enabled in [GoCardless dashboard](https://manage.gocardless.com/success-plus).
@@ -663,7 +663,7 @@ public class BillingRequestService {
 
         /**
          * On failure, automatically retry payments using [intelligent
-         * retries](#success-intelligent-retries). Default is `false`.
+         * retries](/success-plus/overview). Default is `false`.
          * <p class="notice">
          * <strong>Important</strong>: To be able to use intelligent retries, Success+ needs to be
          * enabled in [GoCardless dashboard](https://manage.gocardless.com/success-plus).
@@ -851,7 +851,7 @@ public class BillingRequestService {
 
         /**
          * On failure, automatically retry payments using [intelligent
-         * retries](#success-intelligent-retries). Default is `false`.
+         * retries](/success-plus/overview). Default is `false`.
          * <p class="notice">
          * <strong>Important</strong>: To be able to use intelligent retries, Success+ needs to be
          * enabled in [GoCardless dashboard](https://manage.gocardless.com/success-plus).
@@ -1161,7 +1161,7 @@ public class BillingRequestService {
 
             /**
              * On failure, automatically retry payments using [intelligent
-             * retries](#success-intelligent-retries). Default is `false`.
+             * retries](/success-plus/overview). Default is `false`.
              * <p class="notice">
              * <strong>Important</strong>: To be able to use intelligent retries, Success+ needs to
              * be enabled in [GoCardless dashboard](https://manage.gocardless.com/success-plus).
@@ -1670,7 +1670,7 @@ public class BillingRequestService {
 
             /**
              * On failure, automatically retry payments using [intelligent
-             * retries](#success-intelligent-retries). Default is `false`.
+             * retries](/success-plus/overview). Default is `false`.
              * <p class="notice">
              * <strong>Important</strong>: To be able to use intelligent retries, Success+ needs to
              * be enabled in [GoCardless dashboard](https://manage.gocardless.com/success-plus).
@@ -1827,7 +1827,7 @@ public class BillingRequestService {
 
             /**
              * On failure, automatically retry payments using [intelligent
-             * retries](#success-intelligent-retries). Default is `false`.
+             * retries](/success-plus/overview). Default is `false`.
              * <p class="notice">
              * <strong>Important</strong>: To be able to use intelligent retries, Success+ needs to
              * be enabled in [GoCardless dashboard](https://manage.gocardless.com/success-plus).
@@ -2410,9 +2410,11 @@ public class BillingRequestService {
         private String payId;
 
         /**
-         * Name of the account holder, as known by the bank. This field will be transliterated,
-         * upcased and truncated to 18 characters. This field is required unless the request
-         * includes a [customer bank account token](#javascript-flow-customer-bank-account-tokens).
+         * Name of the account holder, as known by the bank. The full name provided when the
+         * customer is created is stored and is available via the API, but is transliterated,
+         * upcased, and truncated to 18 characters in bank submissions. This field is required
+         * unless the request includes a [customer bank account
+         * token](#javascript-flow-customer-bank-account-tokens).
          */
         public BillingRequestCollectBankAccountRequest withAccountHolderName(
                 String accountHolderName) {
