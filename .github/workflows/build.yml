@@ -27,7 +27,7 @@ jobs:
       - name: Test
         run: |-
           export TERM=${TERM:-dumb}
-          ./gradlew test
+          ./gradlew test --debug
       # test build
       - name: Build with Gradle
         run: ./gradlew build
