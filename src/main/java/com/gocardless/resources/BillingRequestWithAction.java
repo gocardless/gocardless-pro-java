@@ -362,10 +362,10 @@ public class BillingRequestWithAction {
             GOVERNMENT, @SerializedName("pension")
             PENSION, @SerializedName("tax")
             TAX, @SerializedName("other")
-            OTHER, @SerializedName("Epayment")
-            EPAYMENT, @SerializedName("Commercial")
-            COMMERCIAL, @SerializedName("OtherPayment")
-            OTHERPAYMENT, @SerializedName("Trade")
+            OTHER, @SerializedName("epayment")
+            EPAYMENT, @SerializedName("commercial")
+            COMMERCIAL, @SerializedName("other_payment")
+            OTHER_PAYMENT, @SerializedName("trade")
             TRADE, @SerializedName("unknown")
             UNKNOWN
         }
