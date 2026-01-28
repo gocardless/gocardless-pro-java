@@ -33,6 +33,8 @@ public class BillingRequest {
     private Links links;
     private MandateRequest mandateRequest;
     private Map<String, Object> metadata;
+    private PaymentContextCode paymentContextCode;
+    private String paymentPurposeCode;
     private PaymentRequest paymentRequest;
     private PurposeCode purposeCode;
     private Resources resources;
@@ -107,6 +109,27 @@ public class BillingRequest {
     }
 
     /**
+     * Specifies the context or scenario in which the payment is being made. Defines whether the
+     * payment is for advance/arrears billing, point of sale transactions, ecommerce, or account
+     * transfers. This helps banks and payment processors understand the payment scenario and apply
+     * appropriate processing rules and risk controls.
+     */
+    public PaymentContextCode getPaymentContextCode() {
+        return paymentContextCode;
+    }
+
+    /**
+     * Specifies the underlying purpose of the payment. Defines the specific reason or type of
+     * service/goods the payment relates to, improving straight-through processing and compliance.
+     * See [VRP Commercial Payment Purpose
+     * Codes](https://developer.gocardless.com/vrp-commercial-payment-purpose-codes/) for the
+     * complete list of valid codes.
+     */
+    public String getPaymentPurposeCode() {
+        return paymentPurposeCode;
+    }
+
+    /**
      * Request for a one-off strongly authorised payment
      */
     public PaymentRequest getPaymentRequest() {
@@ -114,10 +137,11 @@ public class BillingRequest {
     }
 
     /**
-     * Specifies the high-level purpose of a mandate and/or payment using a set of pre-defined
-     * categories. Required for the PayTo scheme, optional for all others. Currently `mortgage`,
-     * `utility`, `loan`, `dependant_support`, `gambling`, `retail`, `salary`, `personal`,
-     * `government`, `pension`, `tax` and `other` are supported.
+     * Specifies the high-level purpose/category of a mandate and/or payment using a set of
+     * pre-defined categories. Provides context on the nature and reason for the payment to
+     * facilitate processing and compliance. See [Billing Request Purpose
+     * Codes](https://developer.gocardless.com/billing-request-purpose-codes/) for the complete list
+     * of valid codes.
      */
     public PurposeCode getPurposeCode() {
         return purposeCode;
@@ -148,6 +172,17 @@ public class BillingRequest {
         return subscriptionRequest;
     }
 
+    public enum PaymentContextCode {
+        @SerializedName("billing_goods_and_services_in_advance")
+        BILLING_GOODS_AND_SERVICES_IN_ADVANCE, @SerializedName("billing_goods_and_services_in_arrears")
+        BILLING_GOODS_AND_SERVICES_IN_ARREARS, @SerializedName("face_to_face_point_of_sale")
+        FACE_TO_FACE_POINT_OF_SALE, @SerializedName("ecommerce_merchant_initiated_payment")
+        ECOMMERCE_MERCHANT_INITIATED_PAYMENT, @SerializedName("transfer_to_self")
+        TRANSFER_TO_SELF, @SerializedName("transfer_to_third_party")
+        TRANSFER_TO_THIRD_PARTY, @SerializedName("unknown")
+        UNKNOWN
+    }
+
     public enum PurposeCode {
         @SerializedName("mortgage")
         MORTGAGE, @SerializedName("utility")
@@ -161,11 +196,50 @@ public class BillingRequest {
         GOVERNMENT, @SerializedName("pension")
         PENSION, @SerializedName("tax")
         TAX, @SerializedName("other")
-        OTHER, @SerializedName("epayment")
-        EPAYMENT, @SerializedName("commercial")
-        COMMERCIAL, @SerializedName("other_payment")
-        OTHER_PAYMENT, @SerializedName("trade")
-        TRADE, @SerializedName("unknown")
+        OTHER, @SerializedName("bonus_payment")
+        BONUS_PAYMENT, @SerializedName("cash_management_transfer")
+        CASH_MANAGEMENT_TRANSFER, @SerializedName("card_bulk_clearing")
+        CARD_BULK_CLEARING, @SerializedName("credit_card_payment")
+        CREDIT_CARD_PAYMENT, @SerializedName("trade_settlement_payment")
+        TRADE_SETTLEMENT_PAYMENT, @SerializedName("debit_card_payment")
+        DEBIT_CARD_PAYMENT, @SerializedName("dividend")
+        DIVIDEND, @SerializedName("deliver_against_payment")
+        DELIVER_AGAINST_PAYMENT, @SerializedName("epayment")
+        EPAYMENT, @SerializedName("fee_collection_and_interest")
+        FEE_COLLECTION_AND_INTEREST, @SerializedName("fee_collection")
+        FEE_COLLECTION, @SerializedName("person_to_person_payment")
+        PERSON_TO_PERSON_PAYMENT, @SerializedName("government_payment")
+        GOVERNMENT_PAYMENT, @SerializedName("hedging_transaction")
+        HEDGING_TRANSACTION, @SerializedName("irrevocable_credit_card_payment")
+        IRREVOCABLE_CREDIT_CARD_PAYMENT, @SerializedName("irrevocable_debit_card_payment")
+        IRREVOCABLE_DEBIT_CARD_PAYMENT, @SerializedName("intra_company_payment")
+        INTRA_COMPANY_PAYMENT, @SerializedName("interest")
+        INTEREST, @SerializedName("lockbox_transactions")
+        LOCKBOX_TRANSACTIONS, @SerializedName("commercial")
+        COMMERCIAL, @SerializedName("consumer")
+        CONSUMER, @SerializedName("other_payment")
+        OTHER_PAYMENT, @SerializedName("pension_payment")
+        PENSION_PAYMENT, @SerializedName("represented")
+        REPRESENTED, @SerializedName("reimbursement_received_credit_transfer")
+        REIMBURSEMENT_RECEIVED_CREDIT_TRANSFER, @SerializedName("receive_against_payment")
+        RECEIVE_AGAINST_PAYMENT, @SerializedName("salary_payment")
+        SALARY_PAYMENT, @SerializedName("securities")
+        SECURITIES, @SerializedName("social_security_benefit")
+        SOCIAL_SECURITY_BENEFIT, @SerializedName("supplier_payment")
+        SUPPLIER_PAYMENT, @SerializedName("tax_payment")
+        TAX_PAYMENT, @SerializedName("trade")
+        TRADE, @SerializedName("treasury_payment")
+        TREASURY_PAYMENT, @SerializedName("value_added_tax_payment")
+        VALUE_ADDED_TAX_PAYMENT, @SerializedName("with_holding")
+        WITH_HOLDING, @SerializedName("cash_management_sweep_account")
+        CASH_MANAGEMENT_SWEEP_ACCOUNT, @SerializedName("cash_management_top_account")
+        CASH_MANAGEMENT_TOP_ACCOUNT, @SerializedName("cash_management_zero_balance_account")
+        CASH_MANAGEMENT_ZERO_BALANCE_ACCOUNT, @SerializedName("crossborder_mi_payments")
+        CROSSBORDER_MI_PAYMENTS, @SerializedName("foreign_currency_domestic_transfer")
+        FOREIGN_CURRENCY_DOMESTIC_TRANSFER, @SerializedName("cash_in_pre_credit")
+        CASH_IN_PRE_CREDIT, @SerializedName("cash_out_notes_coins")
+        CASH_OUT_NOTES_COINS, @SerializedName("carrier_guarded_wholesale_valuables")
+        CARRIER_GUARDED_WHOLESALE_VALUABLES, @SerializedName("unknown")
         UNKNOWN
     }
 
