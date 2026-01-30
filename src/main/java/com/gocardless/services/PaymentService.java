@@ -112,6 +112,7 @@ public class PaymentService {
         private Boolean fasterAch;
         private Links links;
         private Map<String, String> metadata;
+        private PsuInteractionType psuInteractionType;
         private String reference;
         private Boolean retryIfPossible;
 
@@ -207,6 +208,22 @@ public class PaymentService {
                 metadata = new HashMap<>();
             }
             metadata.put(key, value);
+            return this;
+        }
+
+        /**
+         * Indicates how a Variable Recurring Payment (VRP) is initiated, by or on behalf of the
+         * payer.
+         * <ul>
+         * <li>`in_session`: The payer is actively participating in the payment creation
+         * session.</li>
+         * <li>`off_session`: The payer is not present during the transaction, and the payment is
+         * initiated by the merchant based on an established consent (e.g., a recurring subscription
+         * payment).</li>
+         * </ul>
+         */
+        public PaymentCreateRequest withPsuInteractionType(PsuInteractionType psuInteractionType) {
+            this.psuInteractionType = psuInteractionType;
             return this;
         }
 
@@ -310,6 +327,18 @@ public class PaymentService {
             @Override
             public String toString() {
                 return name();
+            }
+        }
+
+        public enum PsuInteractionType {
+            @SerializedName("in_session")
+            IN_SESSION, @SerializedName("off_session")
+            OFF_SESSION, @SerializedName("unknown")
+            UNKNOWN;
+
+            @Override
+            public String toString() {
+                return name().toLowerCase();
             }
         }
 
