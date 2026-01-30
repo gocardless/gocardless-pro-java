@@ -32,6 +32,7 @@ public class GoCardlessClient {
     private final CustomerNotificationService customerNotifications;
     private final EventService events;
     private final ExportService exports;
+    private final FundsAvailabilityService fundsAvailabilities;
     private final InstalmentScheduleService instalmentSchedules;
     private final InstitutionService institutions;
     private final LogoService logos;
@@ -196,6 +197,7 @@ public class GoCardlessClient {
         this.customerNotifications = new CustomerNotificationService(httpClient);
         this.events = new EventService(httpClient);
         this.exports = new ExportService(httpClient);
+        this.fundsAvailabilities = new FundsAvailabilityService(httpClient);
         this.instalmentSchedules = new InstalmentScheduleService(httpClient);
         this.institutions = new InstitutionService(httpClient);
         this.logos = new LogoService(httpClient);
@@ -347,6 +349,13 @@ public class GoCardlessClient {
      */
     public ExportService exports() {
         return exports;
+    }
+
+    /**
+     * A service class for working with funds availability resources.
+     */
+    public FundsAvailabilityService fundsAvailabilities() {
+        return fundsAvailabilities;
     }
 
     /**
