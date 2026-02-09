@@ -474,6 +474,25 @@ public class MandateImportEntryService {
         }
 
         /**
+         * This field is ACH specific, sometimes referred to as [SEC
+         * code](https://www.moderntreasury.com/learn/sec-codes).
+         * 
+         * This is the way that the payer gives authorisation to the merchant. web: Authorisation is
+         * Internet Initiated or via Mobile Entry (maps to SEC code: WEB) telephone: Authorisation
+         * is provided orally over telephone (maps to SEC code: TEL) paper: Authorisation is
+         * provided in writing and signed, or similarly authenticated (maps to SEC code: PPD)
+         * 
+         */
+        public MandateImportEntryCreateRequest withMandateAuthorisationSource(
+                Mandate.AuthorisationSource authorisationSource) {
+            if (mandate == null) {
+                mandate = new Mandate();
+            }
+            mandate.withAuthorisationSource(authorisationSource);
+            return this;
+        }
+
+        /**
          * Key-value store of custom data. Up to 3 keys are permitted, with key names up to 50
          * characters and values up to 500 characters.
          */
@@ -856,8 +875,25 @@ public class MandateImportEntryService {
         }
 
         public static class Mandate {
+            private AuthorisationSource authorisationSource;
             private Map<String, String> metadata;
             private String reference;
+
+            /**
+             * This field is ACH specific, sometimes referred to as [SEC
+             * code](https://www.moderntreasury.com/learn/sec-codes).
+             * 
+             * This is the way that the payer gives authorisation to the merchant. web:
+             * Authorisation is Internet Initiated or via Mobile Entry (maps to SEC code: WEB)
+             * telephone: Authorisation is provided orally over telephone (maps to SEC code: TEL)
+             * paper: Authorisation is provided in writing and signed, or similarly authenticated
+             * (maps to SEC code: PPD)
+             * 
+             */
+            public Mandate withAuthorisationSource(AuthorisationSource authorisationSource) {
+                this.authorisationSource = authorisationSource;
+                return this;
+            }
 
             /**
              * Key-value store of custom data. Up to 3 keys are permitted, with key names up to 50
@@ -876,6 +912,19 @@ public class MandateImportEntryService {
             public Mandate withReference(String reference) {
                 this.reference = reference;
                 return this;
+            }
+
+            public enum AuthorisationSource {
+                @SerializedName("web")
+                WEB, @SerializedName("telephone")
+                TELEPHONE, @SerializedName("paper")
+                PAPER, @SerializedName("unknown")
+                UNKNOWN;
+
+                @Override
+                public String toString() {
+                    return name().toLowerCase();
+                }
             }
         }
     }
