@@ -51,8 +51,20 @@ final class ResponseParser {
         return new ListResponse<>(ImmutableList.copyOf(items), meta, linked);
     }
 
-    GoCardlessApiException parseError(String responseBody) {
-        ApiErrorResponse error = parseSingle(responseBody, "error", ApiErrorResponse.class);
+    GoCardlessApiException parseError(String responseBody, int statusCode) {
+        JsonElement json;
+        try {
+            json = new JsonParser().parse(responseBody);
+        } catch (JsonSyntaxException e) {
+            throw new MalformedResponseException(responseBody);
+        }
+        JsonElement errorElement = json.getAsJsonObject().get("error");
+        if (errorElement.isJsonPrimitive()) {
+            ApiErrorResponse error =
+                    ApiErrorResponse.fromMessage(errorElement.getAsString(), statusCode);
+            return GoCardlessErrorMapper.toException(error);
+        }
+        ApiErrorResponse error = gson.fromJson(errorElement, ApiErrorResponse.class);
         return GoCardlessErrorMapper.toException(error);
     }
 }

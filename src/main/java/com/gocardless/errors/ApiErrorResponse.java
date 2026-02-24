@@ -23,6 +23,10 @@ public class ApiErrorResponse {
         this.errors = errors;
     }
 
+    public static ApiErrorResponse fromMessage(String message, int code) {
+        return new ApiErrorResponse(message, ErrorType.GOCARDLESS, null, null, code, null);
+    }
+
     String getMessage() {
         return message;
     }

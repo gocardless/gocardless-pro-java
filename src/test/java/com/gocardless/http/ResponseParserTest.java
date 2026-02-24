@@ -69,7 +69,7 @@ public class ResponseParserTest {
     public void shouldParseInvalidApiUsageError() throws IOException {
         URL resource = Resources.getResource("fixtures/invalid_api_usage.json");
         String responseBody = Resources.toString(resource, UTF_8);
-        GoCardlessApiException exception = parser.parseError(responseBody);
+        GoCardlessApiException exception = parser.parseError(responseBody, 400);
         assertThat(exception).isInstanceOf(InvalidApiUsageException.class);
         assertThat(exception.getType()).isEqualTo(INVALID_API_USAGE);
         assertThat(exception.getMessage()).isEqualTo("Invalid document structure");
@@ -88,7 +88,7 @@ public class ResponseParserTest {
     public void shouldParseInvalidStateError() throws IOException {
         URL resource = Resources.getResource("fixtures/invalid_state.json");
         String responseBody = Resources.toString(resource, UTF_8);
-        GoCardlessApiException exception = parser.parseError(responseBody);
+        GoCardlessApiException exception = parser.parseError(responseBody, 409);
         assertThat(exception).isInstanceOf(InvalidStateException.class);
         assertThat(exception.getType()).isEqualTo(INVALID_STATE);
         assertThat(exception.getMessage()).isEqualTo("Bank account already exists");
@@ -108,7 +108,7 @@ public class ResponseParserTest {
     public void shouldParseValidationFailedError() throws IOException {
         URL resource = Resources.getResource("fixtures/validation_failed.json");
         String responseBody = Resources.toString(resource, UTF_8);
-        GoCardlessApiException exception = parser.parseError(responseBody);
+        GoCardlessApiException exception = parser.parseError(responseBody, 422);
         assertThat(exception).isInstanceOf(ValidationFailedException.class);
         assertThat(exception.getType()).isEqualTo(VALIDATION_FAILED);
         assertThat(exception.getMessage()).isEqualTo(
@@ -133,7 +133,7 @@ public class ResponseParserTest {
     public void shouldParseInternalError() throws IOException {
         URL resource = Resources.getResource("fixtures/internal_error.json");
         String responseBody = Resources.toString(resource, UTF_8);
-        GoCardlessApiException exception = parser.parseError(responseBody);
+        GoCardlessApiException exception = parser.parseError(responseBody, 500);
         assertThat(exception).isInstanceOf(GoCardlessInternalException.class);
         assertThat(exception.getType()).isEqualTo(GOCARDLESS);
         assertThat(exception.getMessage()).isEqualTo("THE BEES THEY'RE IN MY EYES");
@@ -146,18 +146,31 @@ public class ResponseParserTest {
     }
 
     @Test
+    public void shouldParseStringError() throws IOException {
+        URL resource = Resources.getResource("fixtures/string_error.json");
+        String responseBody = Resources.toString(resource, UTF_8);
+        GoCardlessApiException exception = parser.parseError(responseBody, 400);
+        assertThat(exception).isInstanceOf(GoCardlessInternalException.class);
+        assertThat(exception.getType()).isEqualTo(GOCARDLESS);
+        assertThat(exception.getMessage()).isEqualTo("bank_authorisation_expired");
+        assertThat(exception.getErrorMessage()).isEqualTo("bank_authorisation_expired");
+        assertThat(exception.getCode()).isEqualTo(400);
+        assertThat(exception.getErrors()).isEmpty();
+    }
+
+    @Test
     public void shouldHandleNonJsonResponse() throws IOException {
         exception.expect(MalformedResponseException.class);
         URL resource = Resources.getResource("fixtures/non_json_response.html");
         String responseBody = Resources.toString(resource, UTF_8);
-        parser.parseError(responseBody);
+        parser.parseError(responseBody, 500);
     }
 
     @Test
     public void shouldHandleAuthenticationError() throws IOException {
         URL resource = Resources.getResource("fixtures/unauthorized_error.json");
         String responseBody = Resources.toString(resource, UTF_8);
-        GoCardlessApiException exception = parser.parseError(responseBody);
+        GoCardlessApiException exception = parser.parseError(responseBody, 401);
         assertThat(exception).isInstanceOf(AuthenticationException.class);
         assertThat(exception.getMessage()).isEqualTo("Unauthorized");
         assertThat(exception.getDocumentationUrl())
@@ -174,7 +187,7 @@ public class ResponseParserTest {
     public void shouldHandleRateLimitError() throws IOException {
         URL resource = Resources.getResource("fixtures/rate_limit_exceeded.json");
         String responseBody = Resources.toString(resource, UTF_8);
-        GoCardlessApiException exception = parser.parseError(responseBody);
+        GoCardlessApiException exception = parser.parseError(responseBody, 429);
         assertThat(exception).isInstanceOf(RateLimitException.class);
         assertThat(exception.getMessage()).isEqualTo("Rate limit exceeded");
         assertThat(exception.getDocumentationUrl())
@@ -191,7 +204,7 @@ public class ResponseParserTest {
     public void shouldHandlePermissionException() throws IOException {
         URL resource = Resources.getResource("fixtures/insufficient_permission.json");
         String responseBody = Resources.toString(resource, UTF_8);
-        GoCardlessApiException exception = parser.parseError(responseBody);
+        GoCardlessApiException exception = parser.parseError(responseBody, 403);
         assertThat(exception).isInstanceOf(PermissionException.class);
         assertThat(exception.getMessage()).isEqualTo("Insufficient permissions");
         assertThat(exception.getDocumentationUrl()).isEqualTo(

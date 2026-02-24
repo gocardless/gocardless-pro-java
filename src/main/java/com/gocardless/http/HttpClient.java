@@ -177,7 +177,7 @@ public class HttpClient {
     private GoCardlessException handleErrorResponse(Response response) {
         try {
             String responseBody = response.body().string();
-            return responseParser.parseError(responseBody);
+            return responseParser.parseError(responseBody, response.code());
         } catch (IOException e) {
             throw new GoCardlessNetworkException("Failed to read response body", e);
         }
