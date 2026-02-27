@@ -302,10 +302,19 @@ public class CustomerService {
      * Returns a [cursor-paginated](#api-usage-cursor-pagination) list of your customers.
      */
     public static final class CustomerListRequest<S> extends ListRequest<S, Customer> {
+        private ActionRequired actionRequired;
         private CreatedAt createdAt;
         private Currency currency;
         private SortDirection sortDirection;
         private SortField sortField;
+
+        /**
+         * Boolean indicating whether the customer has any actions required.
+         */
+        public CustomerListRequest<S> withActionRequired(ActionRequired actionRequired) {
+            this.actionRequired = actionRequired;
+            return this;
+        }
 
         /**
          * Cursor pointing to the start of the desired set.
@@ -428,6 +437,9 @@ public class CustomerService {
         protected Map<String, Object> getQueryParams() {
             ImmutableMap.Builder<String, Object> params = ImmutableMap.builder();
             params.putAll(super.getQueryParams());
+            if (actionRequired != null) {
+                params.put("action_required", actionRequired);
+            }
             if (createdAt != null) {
                 params.putAll(createdAt.getQueryParams());
             }
@@ -456,6 +468,18 @@ public class CustomerService {
         @Override
         protected TypeToken<List<Customer>> getTypeToken() {
             return new TypeToken<List<Customer>>() {};
+        }
+
+        public enum ActionRequired {
+            @SerializedName("true")
+            TRUE, @SerializedName("false")
+            FALSE, @SerializedName("unknown")
+            UNKNOWN;
+
+            @Override
+            public String toString() {
+                return name().toLowerCase();
+            }
         }
 
         public enum Currency {
