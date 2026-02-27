@@ -1,4 +1,4 @@
-# Java Client for GoCardless Pro API
+# Java Client for GoCardless API
 
 This library provides a simple wrapper around the [GoCardless API](http://developer.gocardless.com/api-reference).
 
