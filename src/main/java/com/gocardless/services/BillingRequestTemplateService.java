@@ -57,7 +57,7 @@ public class BillingRequestTemplateService {
     }
 
     /**
-      *  
+      * 
      */
     public BillingRequestTemplateCreateRequest create() {
         return new BillingRequestTemplateCreateRequest(httpClient);

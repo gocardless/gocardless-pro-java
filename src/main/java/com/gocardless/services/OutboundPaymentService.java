@@ -37,7 +37,7 @@ public class OutboundPaymentService {
     }
 
     /**
-      *  
+      * 
      */
     public OutboundPaymentCreateRequest create() {
         return new OutboundPaymentCreateRequest(httpClient);
