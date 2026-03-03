@@ -12,13 +12,13 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        jdk-version: [ 8, 11 ]
+        jdk-version: [25, 21, 17, 11, 8]
     steps:
       - uses: actions/checkout@v4
-      - uses: actions/setup-java@v2
+      - uses: actions/setup-java@v5
         with:
           java-version: "${{ matrix.jdk-version }}"
-          distribution: adopt
+          distribution: temurin
       - name: Verify java installed properly
         run: java -version
       - name: Grant execute permission for gradlew
