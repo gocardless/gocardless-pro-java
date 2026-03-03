@@ -24,7 +24,7 @@ public class Payout {
     private Fx fx;
     private String id;
     private Links links;
-    private Map<String, Object> metadata;
+    private Map<String, String> metadata;
     private PayoutType payoutType;
     private String reference;
     private Status status;
@@ -99,7 +99,7 @@ public class Payout {
      * characters and values up to 500 characters. _Note:_ This should not be used for storing PII
      * data.
      */
-    public Map<String, Object> getMetadata() {
+    public Map<String, String> getMetadata() {
         return metadata;
     }
 

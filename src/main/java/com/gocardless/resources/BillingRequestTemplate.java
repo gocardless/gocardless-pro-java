@@ -29,15 +29,15 @@ public class BillingRequestTemplate {
     private MandateRequestConstraints mandateRequestConstraints;
     private String mandateRequestCurrency;
     private String mandateRequestDescription;
-    private Map<String, Object> mandateRequestMetadata;
+    private Map<String, String> mandateRequestMetadata;
     private String mandateRequestScheme;
     private MandateRequestVerify mandateRequestVerify;
-    private Map<String, Object> metadata;
+    private Map<String, String> metadata;
     private String name;
     private String paymentRequestAmount;
     private String paymentRequestCurrency;
     private String paymentRequestDescription;
-    private Map<String, Object> paymentRequestMetadata;
+    private Map<String, String> paymentRequestMetadata;
     private String paymentRequestScheme;
     private String redirectUri;
     private String updatedAt;
@@ -93,7 +93,7 @@ public class BillingRequestTemplate {
      * is fulfilled. Up to 3 keys are permitted, with key names up to 50 characters and values up to
      * 500 characters.
      */
-    public Map<String, Object> getMandateRequestMetadata() {
+    public Map<String, String> getMandateRequestMetadata() {
         return mandateRequestMetadata;
     }
 
@@ -138,7 +138,7 @@ public class BillingRequestTemplate {
      * Key-value store of custom data. Up to 3 keys are permitted, with key names up to 50
      * characters and values up to 500 characters.
      */
-    public Map<String, Object> getMetadata() {
+    public Map<String, String> getMetadata() {
         return metadata;
     }
 
@@ -180,7 +180,7 @@ public class BillingRequestTemplate {
      * is fulfilled. Up to 3 keys are permitted, with key names up to 50 characters and values up to
      * 500 characters.
      */
-    public Map<String, Object> getPaymentRequestMetadata() {
+    public Map<String, String> getPaymentRequestMetadata() {
         return paymentRequestMetadata;
     }
 

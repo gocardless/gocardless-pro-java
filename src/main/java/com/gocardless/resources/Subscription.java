@@ -58,7 +58,7 @@ public class Subscription {
     private Integer interval;
     private IntervalUnit intervalUnit;
     private Links links;
-    private Map<String, Object> metadata;
+    private Map<String, String> metadata;
     private Month month;
     private String name;
     private Boolean parentPlanPaused;
@@ -166,7 +166,7 @@ public class Subscription {
      * Key-value store of custom data. Up to 3 keys are permitted, with key names up to 50
      * characters and values up to 500 characters.
      */
-    public Map<String, Object> getMetadata() {
+    public Map<String, String> getMetadata() {
         return metadata;
     }
 
