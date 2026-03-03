@@ -32,7 +32,7 @@ public class OutboundPayment {
     private String id;
     private Boolean isWithdrawal;
     private Links links;
-    private Map<String, Object> metadata;
+    private Map<String, String> metadata;
     private String reference;
     private Scheme scheme;
     private Status status;
@@ -99,7 +99,7 @@ public class OutboundPayment {
      * Key-value store of custom data. Up to 3 keys are permitted, with key names up to 50
      * characters and values up to 500 characters.
      */
-    public Map<String, Object> getMetadata() {
+    public Map<String, String> getMetadata() {
         return metadata;
     }
 

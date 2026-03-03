@@ -14,14 +14,14 @@ With Maven:
 <dependency>
     <groupId>com.gocardless</groupId>
     <artifactId>gocardless-pro</artifactId>
-    <version>7.6.0</version>
+    <version>8.0.0</version>
 </dependency>
 ```
 
 With Gradle:
 
 ```
-implementation 'com.gocardless:gocardless-pro:7.6.0'
+implementation 'com.gocardless:gocardless-pro:8.0.0'
 ```
 
 ## Initializing the client
@@ -228,112 +228,9 @@ public class WebhookHandler {
 
 For more details on working with webhooks, see our ["Getting started" guide](https://developer.gocardless.com/getting-started/api/introduction/?lang=java).
 
-## Upgrading from v4.x to v5.x or above
+## Upgrading from older versions
 
-### Breaking Changes
-
-- Stop support for apps using Java 7, supports apps using only Java 8 and above
-- Response Header names are all in lower case now
-- GoCardless client initiation method `withsslSocketFactory` replaced with `withSslSocketFactoryAndTrustManager`
-
-```java
-import com.gocardless.GoCardlessClient;
-import javax.net.ssl.SSLSocketFactory;
-import javax.net.ssl.TrustManager;
-import javax.net.ssl.TrustManagerFactory;
-import javax.net.ssl.X509TrustManager;
-import java.security.KeyStore;
-
-String accessToken = "AO00000123";
-TrustManagerFactory trustManagerFactory = TrustManagerFactory.getInstance(
-TrustManagerFactory.getDefaultAlgorithm());
-trustManagerFactory.init((KeyStore) null);
-TrustManager[] trustManagers = trustManagerFactory.getTrustManagers();
-if (trustManagers.length != 1 || !(trustManagers[0] instanceof X509TrustManager)) {
-    throw new IllegalStateException("Unexpected default trust managers:"
-        + Arrays.toString(trustManagers));
-}
-X509TrustManager trustManager = (X509TrustManager) trustManagers[0];
-
-SSLContext sslContext = SSLContext.getInstance("TLS");
-sslContext.init(null, new TrustManager[] { trustManager }, null);
-SSLSocketFactory sslSocketFactory = sslContext.getSocketFactory();
-
-
-GoCardlessClient client = GoCardlessClient.newBuilder(accessToken)
-    .withSslSocketFactoryAndTrustManager(sslSocketFactory, trustManager)
-    .build();
-```
-
-## Upgrading from v2.x to v3.x or above
-
-To upgrade from v2.x, you will need to switch from calling `GoCardlessClient.create` with arguments to
-using the `Builder` returned by `GoCardlessClient.newBuilder()` and its `withX()` and `build()` methods.
-
-If you're only setting an access token and using the default GoCardless environment (live):
-
-```java
-import com.gocardless.GoCardlessClient;
-
-String accessToken = "foo";
-
-// Before
-GoCardlessClient client = GoCardlessClient.create(accessToken)
-
-// After
-GoCardlessClient client = GoCardlessClient.newBuilder(accessToken).build();
-```
-
-If you're customising the environment as well:
-
-```java
-import com.gocardless.GoCardlessClient;
-
-String accessToken = "foo";
-
-// Before
-GoCardlessClient client = GoCardlessClient.create(accessToken, GoCardlessClient.Environment.SANDBOX)
-
-// After
-GoCardlessClient client = GoCardlessClient.newBuilder(accessToken)
-    .withEnvironment(GoCardlessClient.Environment.SANDBOX)
-    .build();
-```
-
-Or, if you're customising the base URL:
-
-```java
-import com.gocardless.GoCardlessClient;
-
-String accessToken = "foo";
-String baseUrl = "https://api.gocardless.com";
-
-// Before
-GoCardlessClient client = GoCardlessClient.create(accessToken, baseUrl)
-
-// After
-GoCardlessClient client = GoCardlessClient.newBuilder(accessToken)
-    .withBaseUrl(baseUrl)
-    .build();
-```
-
-If you were instantiating your own `com.gocardless.http.HttpClient` (which is very unlikely unless you
-were patching the internals of the library), you'll now need to supply an `OkHttpClient` as well as the
-access token and base URL.
-
-```java
-String accessToken = "foo";
-String baseUrl = "https://api.gocardless.com";
-
-// Before
-HttpClient rawClient = new HttpClient(accessToken, baseUrl);
-
-// After
-HttpClient rawClient = new HttpClient(accessToken, baseUrl, new OkHttpClient());
-```
-
-Once you've instantiated the client, everything works exactly the same as before, so you won't need to
-change any of your other code.
+If you're upgrading from v7 or earlier to v8 or later, see: MIGRATION_V8.md
 
 ## Compatibility
 
