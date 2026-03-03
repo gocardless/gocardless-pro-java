@@ -11,6 +11,11 @@ buildscript {
 
     dependencies {
         classpath 'ch.raffael.pegdown-doclet:pegdown-doclet:1.2.1'
+        // Only add Spotless if running on Java 11+
+        // TODO: Remove this when we drop support for Java 8
+        if (JavaVersion.current() >= JavaVersion.VERSION_11) {
+            classpath 'com.diffplug.spotless:spotless-plugin-gradle:6.25.0'
+        }
     }
 }
 
@@ -19,7 +24,6 @@ plugins {
     id "signing"
     id "maven-publish"
     id "io.github.gradle-nexus.publish-plugin" version "1.1.0"
-    id "com.diffplug.spotless" version "5.12.5"
 }
 
 sourceCompatibility = 1.8
@@ -28,6 +32,13 @@ group = 'com.gocardless'
 version = '7.6.0'
 
 apply plugin: 'ch.raffael.pegdown-doclet'
+
+// TODO: Remove this when we drop support for Java 8
+// Conditionally apply Spotless plugin only on Java 11+
+// (required because Spotless 6.x needs Java 11+ to load)
+if (JavaVersion.current() >= JavaVersion.VERSION_11) {
+    apply plugin: 'com.diffplug.spotless'
+}
 
 repositories {
     mavenCentral()
@@ -66,12 +77,12 @@ javadoc {
 
 task javadocJar(type: Jar, dependsOn: javadoc) {
     from tasks.javadoc.destinationDir
-    classifier = 'javadoc'
+    archiveClassifier = 'javadoc'
 }
 
 task sourcesJar(type: Jar) {
     from sourceSets.main.allSource
-    classifier = 'sources'
+    archiveClassifier = 'sources'
 }
 
 publishing {
@@ -147,10 +158,13 @@ nexusPublishing {
     }
 }
 
-spotless {
-    java {
-        importOrder()
-        removeUnusedImports()
-        eclipse().configFile("format.xml")
+// Only configure Spotless if it was applied (Java 11+)
+if (JavaVersion.current() >= JavaVersion.VERSION_11) {
+    spotless {
+        java {
+            importOrder()
+            removeUnusedImports()
+            eclipse().configFile("format.xml")
+        }
     }
 }
