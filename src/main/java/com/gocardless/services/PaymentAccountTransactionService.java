@@ -28,6 +28,13 @@ public class PaymentAccountTransactionService {
     }
 
     /**
+     * Retrieves the details of an existing payment account transaction.
+     */
+    public PaymentAccountTransactionGetRequest get(String identity) {
+        return new PaymentAccountTransactionGetRequest(httpClient, identity);
+    }
+
+    /**
      * List transactions for a given payment account.
      */
     public PaymentAccountTransactionListRequest<ListResponse<PaymentAccountTransaction>> list(
@@ -40,6 +47,50 @@ public class PaymentAccountTransactionService {
             String identity) {
         return new PaymentAccountTransactionListRequest<>(httpClient,
                 ListRequest.<PaymentAccountTransaction>iteratingExecutor(), identity);
+    }
+
+    /**
+     * Request class for {@link PaymentAccountTransactionService#get }.
+     *
+     * Retrieves the details of an existing payment account transaction.
+     */
+    public static final class PaymentAccountTransactionGetRequest
+            extends GetRequest<PaymentAccountTransaction> {
+        @PathParam
+        private final String identity;
+
+        private PaymentAccountTransactionGetRequest(HttpClient httpClient, String identity) {
+            super(httpClient);
+            this.identity = identity;
+        }
+
+        public PaymentAccountTransactionGetRequest withHeader(String headerName,
+                String headerValue) {
+            this.addHeader(headerName, headerValue);
+            return this;
+        }
+
+        @Override
+        protected Map<String, String> getPathParams() {
+            ImmutableMap.Builder<String, String> params = ImmutableMap.builder();
+            params.put("identity", identity);
+            return params.build();
+        }
+
+        @Override
+        protected String getPathTemplate() {
+            return "payment_account_transactions/:identity";
+        }
+
+        @Override
+        protected String getEnvelope() {
+            return "payment_account_transactions";
+        }
+
+        @Override
+        protected Class<PaymentAccountTransaction> getResponseClass() {
+            return PaymentAccountTransaction.class;
+        }
     }
 
     /**
