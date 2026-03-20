@@ -64,6 +64,7 @@ public class EventService {
         private String parentEvent;
         private String payerAuthorisation;
         private String payment;
+        private String paymentAccountTransaction;
         private String payout;
         private String refund;
         private ResourceType resourceType;
@@ -184,6 +185,7 @@ public class EventService {
          * <li>`scheme_identifier`</li>
          * <li>`subscription`</li>
          * <li>`outbound_payment`</li>
+         * <li>`payment_account_transaction`</li>
          * </ul>
          */
         public EventListRequest<S> withInclude(Include include) {
@@ -253,6 +255,15 @@ public class EventService {
         }
 
         /**
+         * ID of a payment account transaction. If specified, this endpoint will return all events
+         * for the given transaction.
+         */
+        public EventListRequest<S> withPaymentAccountTransaction(String paymentAccountTransaction) {
+            this.paymentAccountTransaction = paymentAccountTransaction;
+            return this;
+        }
+
+        /**
          * ID of a [payout](#core-endpoints-payouts). If specified, this endpoint will return all
          * events for the given payout.
          */
@@ -273,8 +284,9 @@ public class EventService {
         /**
          * Type of resource that you'd like to get all events for. Cannot be used together with the
          * `billing_request`, `creditor`, `export`,`instalment_schedule`, `mandate`,
-         * `payer_authorisation`, `payment`, `payout`, `refund`, `scheme_identifier`, `subscription`
-         * or `outbound_payment` parameters. The type can be one of:
+         * `payer_authorisation`, `payment`, `payout`, `refund`, `scheme_identifier`,
+         * `subscription`, `outbound_payment` or `payment_account_transaction` parameters. The type
+         * can be one of:
          * <ul>
          * <li>`billing_requests`</li>
          * <li>`creditors`</li>
@@ -288,6 +300,7 @@ public class EventService {
          * <li>`scheme_identifiers`</li>
          * <li>`subscriptions`</li>
          * <li>`outbound_payments`</li>
+         * <li>`payment_account_transactions`</li>
          * </ul>
          */
         public EventListRequest<S> withResourceType(ResourceType resourceType) {
@@ -362,6 +375,9 @@ public class EventService {
             if (payment != null) {
                 params.put("payment", payment);
             }
+            if (paymentAccountTransaction != null) {
+                params.put("payment_account_transaction", paymentAccountTransaction);
+            }
             if (payout != null) {
                 params.put("payout", payout);
             }
@@ -404,7 +420,8 @@ public class EventService {
             MANDATE, @SerializedName("outbound_payment")
             OUTBOUND_PAYMENT, @SerializedName("payer_authorisation")
             PAYER_AUTHORISATION, @SerializedName("payment")
-            PAYMENT, @SerializedName("payout")
+            PAYMENT, @SerializedName("payment_account_transaction")
+            PAYMENT_ACCOUNT_TRANSACTION, @SerializedName("payout")
             PAYOUT, @SerializedName("refund")
             REFUND, @SerializedName("scheme_identifier")
             SCHEME_IDENTIFIER, @SerializedName("subscription")
@@ -428,7 +445,8 @@ public class EventService {
             ORGANISATIONS, @SerializedName("outbound_payments")
             OUTBOUND_PAYMENTS, @SerializedName("payer_authorisations")
             PAYER_AUTHORISATIONS, @SerializedName("payments")
-            PAYMENTS, @SerializedName("payouts")
+            PAYMENTS, @SerializedName("payment_account_transactions")
+            PAYMENT_ACCOUNT_TRANSACTIONS, @SerializedName("payouts")
             PAYOUTS, @SerializedName("refunds")
             REFUNDS, @SerializedName("scheme_identifiers")
             SCHEME_IDENTIFIERS, @SerializedName("subscriptions")

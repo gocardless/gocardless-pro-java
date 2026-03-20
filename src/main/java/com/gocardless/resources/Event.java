@@ -104,6 +104,7 @@ public class Event {
      * <li>`scheme_identifiers`</li>
      * <li>`subscriptions`</li>
      * <li>`outbound_payments`</li>
+     * <li>`payment_account_transactions`</li>
      * </ul>
      */
     public ResourceType getResourceType() {
@@ -128,7 +129,8 @@ public class Event {
         ORGANISATIONS, @SerializedName("outbound_payments")
         OUTBOUND_PAYMENTS, @SerializedName("payer_authorisations")
         PAYER_AUTHORISATIONS, @SerializedName("payments")
-        PAYMENTS, @SerializedName("payouts")
+        PAYMENTS, @SerializedName("payment_account_transactions")
+        PAYMENT_ACCOUNT_TRANSACTIONS, @SerializedName("payouts")
         PAYOUTS, @SerializedName("refunds")
         REFUNDS, @SerializedName("scheme_identifiers")
         SCHEME_IDENTIFIERS, @SerializedName("subscriptions")
@@ -356,6 +358,7 @@ public class Event {
         private String parentEvent;
         private String payerAuthorisation;
         private String payment;
+        private String paymentAccountTransaction;
         private String paymentRequestPayment;
         private String payout;
         private String previousCustomerBankAccount;
@@ -493,6 +496,14 @@ public class Event {
          */
         public String getPayment() {
             return payment;
+        }
+
+        /**
+         * If `resource_type` is `payment_account_transaction`, this is the ID of a transaction
+         * which has been recorded on the payment account.
+         */
+        public String getPaymentAccountTransaction() {
+            return paymentAccountTransaction;
         }
 
         /**
