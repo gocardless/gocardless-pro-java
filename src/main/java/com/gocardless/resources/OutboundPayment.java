@@ -190,6 +190,7 @@ public class OutboundPayment {
 
         private String creditor;
         private String customer;
+        private String outboundPaymentImport;
         private String recipientBankAccount;
 
         /**
@@ -204,6 +205,13 @@ public class OutboundPayment {
          */
         public String getCustomer() {
             return customer;
+        }
+
+        /**
+         * ID of the outbound payment import that created this outbound payment.
+         */
+        public String getOutboundPaymentImport() {
+            return outboundPaymentImport;
         }
 
         /**

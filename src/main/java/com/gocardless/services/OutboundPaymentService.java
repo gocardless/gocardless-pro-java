@@ -158,6 +158,18 @@ public class OutboundPaymentService {
         }
 
         /**
+         * ID of the outbound payment import that created this outbound payment.
+         */
+        public OutboundPaymentCreateRequest withLinksOutboundPaymentImport(
+                String outboundPaymentImport) {
+            if (links == null) {
+                links = new Links();
+            }
+            links.withOutboundPaymentImport(outboundPaymentImport);
+            return this;
+        }
+
+        /**
          * ID of the customer bank account which receives the outbound payment.
          */
         public OutboundPaymentCreateRequest withLinksRecipientBankAccount(
@@ -266,6 +278,7 @@ public class OutboundPaymentService {
 
         public static class Links {
             private String creditor;
+            private String outboundPaymentImport;
             private String recipientBankAccount;
 
             /**
@@ -273,6 +286,14 @@ public class OutboundPaymentService {
              */
             public Links withCreditor(String creditor) {
                 this.creditor = creditor;
+                return this;
+            }
+
+            /**
+             * ID of the outbound payment import that created this outbound payment.
+             */
+            public Links withOutboundPaymentImport(String outboundPaymentImport) {
+                this.outboundPaymentImport = outboundPaymentImport;
                 return this;
             }
 
