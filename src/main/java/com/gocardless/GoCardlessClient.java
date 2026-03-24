@@ -153,8 +153,8 @@ public class GoCardlessClient {
          * Configures the fixed wait strategy time the client should wait before retrying a failed
          * request
          *
-         * @param maxNoOfRetries The amount of time to wait before retrying a failed request in
-         *        milli seconds
+         * @param waitBetweenRetriesInMilliSeconds The amount of time to wait before retrying a
+         *        failed request in milliseconds
          */
         public Builder withWaitBetweenRetriesInMilliSeconds(long waitBetweenRetriesInMilliSeconds) {
             this.waitBetweenRetriesInMilliSeconds = waitBetweenRetriesInMilliSeconds;
