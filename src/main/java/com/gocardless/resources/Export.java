@@ -15,6 +15,7 @@ public class Export {
     private String createdAt;
     private String currency;
     private String downloadUrl;
+    private String errorMessage;
     private ExportType exportType;
     private String id;
 
@@ -37,6 +38,13 @@ public class Export {
      */
     public String getDownloadUrl() {
         return downloadUrl;
+    }
+
+    /**
+     * Error message if the export encountered an error during processing.
+     */
+    public String getErrorMessage() {
+        return errorMessage;
     }
 
     /**

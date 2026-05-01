@@ -400,8 +400,7 @@ public class BillingRequest {
 
             public enum Adapter {
                 @SerializedName("open_banking_gateway_pis")
-                OPEN_BANKING_GATEWAY_PIS, @SerializedName("plaid_ais")
-                PLAID_AIS, @SerializedName("open_banking_gateway_ais")
+                OPEN_BANKING_GATEWAY_PIS, @SerializedName("open_banking_gateway_ais")
                 OPEN_BANKING_GATEWAY_AIS, @SerializedName("bankid_ais")
                 BANKID_AIS, @SerializedName("bank_pay_recurring")
                 BANK_PAY_RECURRING, @SerializedName("unknown")
