@@ -167,6 +167,20 @@ public class ResponseParserTest {
     }
 
     @Test
+    public void shouldIncludeStatusCodeAndBodyForNonJsonErrorResponse() throws IOException {
+        URL resource = Resources.getResource("fixtures/non_json_response.html");
+        String responseBody = Resources.toString(resource, UTF_8);
+        try {
+            parser.parseError(responseBody, 502);
+            org.junit.Assert.fail("expected MalformedResponseException");
+        } catch (MalformedResponseException e) {
+            assertThat(e.getStatusCode()).isEqualTo(502);
+            assertThat(e.getResponseBody()).isEqualTo(responseBody);
+            assertThat(e.getMessage()).contains("HTTP 502");
+        }
+    }
+
+    @Test
     public void shouldHandleAuthenticationError() throws IOException {
         URL resource = Resources.getResource("fixtures/unauthorized_error.json");
         String responseBody = Resources.toString(resource, UTF_8);

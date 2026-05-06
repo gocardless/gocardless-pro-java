@@ -56,15 +56,22 @@ final class ResponseParser {
         try {
             json = new JsonParser().parse(responseBody);
         } catch (JsonSyntaxException e) {
-            throw new MalformedResponseException(responseBody);
+            throw new MalformedResponseException(statusCode, responseBody);
         }
-        JsonElement errorElement = json.getAsJsonObject().get("error");
-        if (errorElement.isJsonPrimitive()) {
-            ApiErrorResponse error =
-                    ApiErrorResponse.fromMessage(errorElement.getAsString(), statusCode);
+        try {
+            JsonElement errorElement = json.getAsJsonObject().get("error");
+            if (errorElement == null || errorElement.isJsonNull()) {
+                throw new MalformedResponseException(statusCode, responseBody);
+            }
+            if (errorElement.isJsonPrimitive()) {
+                ApiErrorResponse error =
+                        ApiErrorResponse.fromMessage(errorElement.getAsString(), statusCode);
+                return GoCardlessErrorMapper.toException(error);
+            }
+            ApiErrorResponse error = gson.fromJson(errorElement, ApiErrorResponse.class);
             return GoCardlessErrorMapper.toException(error);
+        } catch (IllegalStateException | ClassCastException | JsonSyntaxException e) {
+            throw new MalformedResponseException(statusCode, responseBody);
         }
-        ApiErrorResponse error = gson.fromJson(errorElement, ApiErrorResponse.class);
-        return GoCardlessErrorMapper.toException(error);
     }
 }
