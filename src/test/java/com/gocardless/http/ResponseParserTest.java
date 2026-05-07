@@ -3,6 +3,7 @@ package com.gocardless.http;
 import static com.gocardless.errors.ErrorType.*;
 import static com.google.common.base.Charsets.UTF_8;
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.junit.Assert.fail;
 
 import com.gocardless.errors.*;
 import com.gocardless.http.HttpTestUtil.DummyItem;
@@ -164,6 +165,20 @@ public class ResponseParserTest {
         URL resource = Resources.getResource("fixtures/non_json_response.html");
         String responseBody = Resources.toString(resource, UTF_8);
         parser.parseError(responseBody, 500);
+    }
+
+    @Test
+    public void shouldIncludeStatusCodeAndBodyForNonJsonErrorResponse() throws IOException {
+        URL resource = Resources.getResource("fixtures/non_json_response.html");
+        String responseBody = Resources.toString(resource, UTF_8);
+        try {
+            parser.parseError(responseBody, 502);
+            fail("expected MalformedResponseException");
+        } catch (MalformedResponseException e) {
+            assertThat(e.getStatusCode()).isEqualTo(502);
+            assertThat(e.getResponseBody()).isEqualTo(responseBody);
+            assertThat(e.getMessage()).contains("HTTP 502");
+        }
     }
 
     @Test
