@@ -42,6 +42,8 @@ public class GoCardlessClient {
     private final MandatePdfService mandatePdfs;
     private final NegativeBalanceLimitService negativeBalanceLimits;
     private final OutboundPaymentService outboundPayments;
+    private final OutboundPaymentImportService outboundPaymentImports;
+    private final OutboundPaymentImportEntryService outboundPaymentImportEntries;
     private final PayerAuthorisationService payerAuthorisations;
     private final PayerThemeService payerThemes;
     private final PaymentService payments;
@@ -153,8 +155,8 @@ public class GoCardlessClient {
          * Configures the fixed wait strategy time the client should wait before retrying a failed
          * request
          *
-         * @param maxNoOfRetries The amount of time to wait before retrying a failed request in
-         *        milli seconds
+         * @param waitBetweenRetriesInMilliSeconds The amount of time to wait before retrying a
+         *        failed request in milliseconds
          */
         public Builder withWaitBetweenRetriesInMilliSeconds(long waitBetweenRetriesInMilliSeconds) {
             this.waitBetweenRetriesInMilliSeconds = waitBetweenRetriesInMilliSeconds;
@@ -207,6 +209,8 @@ public class GoCardlessClient {
         this.mandatePdfs = new MandatePdfService(httpClient);
         this.negativeBalanceLimits = new NegativeBalanceLimitService(httpClient);
         this.outboundPayments = new OutboundPaymentService(httpClient);
+        this.outboundPaymentImports = new OutboundPaymentImportService(httpClient);
+        this.outboundPaymentImportEntries = new OutboundPaymentImportEntryService(httpClient);
         this.payerAuthorisations = new PayerAuthorisationService(httpClient);
         this.payerThemes = new PayerThemeService(httpClient);
         this.payments = new PaymentService(httpClient);
@@ -419,6 +423,20 @@ public class GoCardlessClient {
      */
     public OutboundPaymentService outboundPayments() {
         return outboundPayments;
+    }
+
+    /**
+     * A service class for working with outbound payment import resources.
+     */
+    public OutboundPaymentImportService outboundPaymentImports() {
+        return outboundPaymentImports;
+    }
+
+    /**
+     * A service class for working with outbound payment import entry resources.
+     */
+    public OutboundPaymentImportEntryService outboundPaymentImportEntries() {
+        return outboundPaymentImportEntries;
     }
 
     /**
