@@ -31,6 +31,9 @@ public class ListResponse<T> {
      * last page.
      */
     public String getAfter() {
+        if (meta == null || meta.getCursors() == null) {
+            return null;
+        }
         return meta.getCursors().getAfter();
     }
 
@@ -39,6 +42,9 @@ public class ListResponse<T> {
      * first page.
      */
     public String getBefore() {
+        if (meta == null || meta.getCursors() == null) {
+            return null;
+        }
         return meta.getCursors().getBefore();
     }
 
