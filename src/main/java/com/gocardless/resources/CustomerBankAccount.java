@@ -36,6 +36,7 @@ public class CustomerBankAccount {
     private String id;
     private Links links;
     private Map<String, String> metadata;
+    private Boolean trustedRecipient;
 
     /**
      * Name of the account holder, as known by the bank. The full name provided when the customer is
@@ -127,6 +128,14 @@ public class CustomerBankAccount {
      */
     public Map<String, String> getMetadata() {
         return metadata;
+    }
+
+    /**
+     * Whether this customer bank account is registered as a trusted recipient for Outbound
+     * Payments. Only present when the feature is enabled for the organisation.
+     */
+    public Boolean getTrustedRecipient() {
+        return trustedRecipient;
     }
 
     public enum AccountType {
