@@ -212,7 +212,7 @@ public class MandateImportEntryService {
 
         /**
          * [ISO 3166-1 alpha-2
-         * code](http://en.wikipedia.org/wiki/ISO_3166-1_alpha-2#Officially_assigned_code_elements).
+         * code](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2#Officially_assigned_code_elements).
          * Defaults to the country code of the `iban` if supplied, otherwise is required.
          */
         public MandateImportEntryCreateRequest withBankAccountCountryCode(String countryCode) {
@@ -316,7 +316,7 @@ public class MandateImportEntryService {
 
         /**
          * [ISO 3166-1 alpha-2
-         * code.](http://en.wikipedia.org/wiki/ISO_3166-1_alpha-2#Officially_assigned_code_elements)
+         * code.](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2#Officially_assigned_code_elements)
          */
         public MandateImportEntryCreateRequest withCustomerCountryCode(String countryCode) {
             if (customer == null) {
@@ -374,7 +374,7 @@ public class MandateImportEntryService {
         }
 
         /**
-         * [ISO 639-1](http://en.wikipedia.org/wiki/List_of_ISO_639-1_codes) code. Used as the
+         * [ISO 639-1](https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes) code. Used as the
          * language for notification emails sent by GoCardless if your organisation does not send
          * its own (see [compliance requirements](#appendix-compliance-requirements)). Currently
          * only "en", "fr", "de", "pt", "es", "it", "nl", "da", "nb", "sl", "sv" are supported. If
@@ -652,7 +652,7 @@ public class MandateImportEntryService {
 
             /**
              * [ISO 3166-1 alpha-2
-             * code](http://en.wikipedia.org/wiki/ISO_3166-1_alpha-2#Officially_assigned_code_elements).
+             * code](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2#Officially_assigned_code_elements).
              * Defaults to the country code of the `iban` if supplied, otherwise is required.
              */
             public BankAccount withCountryCode(String countryCode) {
@@ -758,7 +758,7 @@ public class MandateImportEntryService {
 
             /**
              * [ISO 3166-1 alpha-2
-             * code.](http://en.wikipedia.org/wiki/ISO_3166-1_alpha-2#Officially_assigned_code_elements)
+             * code.](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2#Officially_assigned_code_elements)
              */
             public Customer withCountryCode(String countryCode) {
                 this.countryCode = countryCode;
@@ -800,7 +800,7 @@ public class MandateImportEntryService {
             }
 
             /**
-             * [ISO 639-1](http://en.wikipedia.org/wiki/List_of_ISO_639-1_codes) code. Used as the
+             * [ISO 639-1](https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes) code. Used as the
              * language for notification emails sent by GoCardless if your organisation does not
              * send its own (see [compliance requirements](#appendix-compliance-requirements)).
              * Currently only "en", "fr", "de", "pt", "es", "it", "nl", "da", "nb", "sl", "sv" are

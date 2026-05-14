@@ -67,7 +67,7 @@ public class Payment {
     }
 
     /**
-     * [ISO 4217](http://en.wikipedia.org/wiki/ISO_4217#Active_codes) currency code. Currently
+     * [ISO 4217](https://en.wikipedia.org/wiki/ISO_4217#Active_codes) currency code. Currently
      * "AUD", "CAD", "DKK", "EUR", "GBP", "NZD", "SEK" and "USD" are supported.
      */
     public Currency getCurrency() {
@@ -252,7 +252,7 @@ public class Payment {
         }
 
         /**
-         * [ISO 4217](http://en.wikipedia.org/wiki/ISO_4217#Active_codes) code for the currency in
+         * [ISO 4217](https://en.wikipedia.org/wiki/ISO_4217#Active_codes) code for the currency in
          * which amounts will be paid out (after foreign exchange). Currently "AUD", "CAD", "DKK",
          * "EUR", "GBP", "NZD", "SEK" and "USD" are supported. Present only if payouts will be (or
          * were) made via foreign exchange.

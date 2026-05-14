@@ -168,7 +168,7 @@ public class PayoutItem {
         }
 
         /**
-         * [ISO 4217](http://en.wikipedia.org/wiki/ISO_4217#Active_codes) currency code. Currently
+         * [ISO 4217](https://en.wikipedia.org/wiki/ISO_4217#Active_codes) currency code. Currently
          * "AUD", "CAD", "DKK", "EUR", "GBP", "NZD", "SEK" and "USD" are supported.
          */
         public Currency getCurrency() {
@@ -188,7 +188,7 @@ public class PayoutItem {
         }
 
         /**
-         * [ISO 4217](http://en.wikipedia.org/wiki/ISO_4217#Active_codes) code for the currency in
+         * [ISO 4217](https://en.wikipedia.org/wiki/ISO_4217#Active_codes) code for the currency in
          * which tax is paid out to the tax authorities of your tax jurisdiction. Currently “EUR”
          * for French merchants and “GBP” for British merchants.
          */
