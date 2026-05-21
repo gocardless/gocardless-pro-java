@@ -246,7 +246,7 @@ public class RedirectFlowService {
 
         /**
          * [ISO 3166-1 alpha-2
-         * code.](http://en.wikipedia.org/wiki/ISO_3166-1_alpha-2#Officially_assigned_code_elements)
+         * code.](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2#Officially_assigned_code_elements)
          */
         public RedirectFlowCreateRequest withPrefilledCustomerCountryCode(String countryCode) {
             if (prefilledCustomer == null) {
@@ -302,7 +302,7 @@ public class RedirectFlowService {
         }
 
         /**
-         * [ISO 639-1](http://en.wikipedia.org/wiki/List_of_ISO_639-1_codes) code.
+         * [ISO 639-1](https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes) code.
          */
         public RedirectFlowCreateRequest withPrefilledCustomerLanguage(String language) {
             if (prefilledCustomer == null) {
@@ -548,7 +548,7 @@ public class RedirectFlowService {
 
             /**
              * [ISO 3166-1 alpha-2
-             * code.](http://en.wikipedia.org/wiki/ISO_3166-1_alpha-2#Officially_assigned_code_elements)
+             * code.](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2#Officially_assigned_code_elements)
              */
             public PrefilledCustomer withCountryCode(String countryCode) {
                 this.countryCode = countryCode;
@@ -588,7 +588,7 @@ public class RedirectFlowService {
             }
 
             /**
-             * [ISO 639-1](http://en.wikipedia.org/wiki/List_of_ISO_639-1_codes) code.
+             * [ISO 639-1](https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes) code.
              */
             public PrefilledCustomer withLanguage(String language) {
                 this.language = language;

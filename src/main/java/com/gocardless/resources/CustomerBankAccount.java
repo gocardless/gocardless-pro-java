@@ -36,6 +36,7 @@ public class CustomerBankAccount {
     private String id;
     private Links links;
     private Map<String, String> metadata;
+    private Boolean trustedRecipient;
 
     /**
      * Name of the account holder, as known by the bank. The full name provided when the customer is
@@ -81,7 +82,7 @@ public class CustomerBankAccount {
 
     /**
      * [ISO 3166-1 alpha-2
-     * code](http://en.wikipedia.org/wiki/ISO_3166-1_alpha-2#Officially_assigned_code_elements).
+     * code](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2#Officially_assigned_code_elements).
      * Defaults to the country code of the `iban` if supplied, otherwise is required.
      */
     public String getCountryCode() {
@@ -96,7 +97,7 @@ public class CustomerBankAccount {
     }
 
     /**
-     * [ISO 4217](http://en.wikipedia.org/wiki/ISO_4217#Active_codes) currency code. Currently
+     * [ISO 4217](https://en.wikipedia.org/wiki/ISO_4217#Active_codes) currency code. Currently
      * "AUD", "CAD", "DKK", "EUR", "GBP", "NZD", "SEK" and "USD" are supported.
      */
     public String getCurrency() {
@@ -127,6 +128,14 @@ public class CustomerBankAccount {
      */
     public Map<String, String> getMetadata() {
         return metadata;
+    }
+
+    /**
+     * Whether this customer bank account is registered as a trusted recipient for Outbound
+     * Payments. Only present when the feature is enabled for the organisation.
+     */
+    public Boolean getTrustedRecipient() {
+        return trustedRecipient;
     }
 
     public enum AccountType {

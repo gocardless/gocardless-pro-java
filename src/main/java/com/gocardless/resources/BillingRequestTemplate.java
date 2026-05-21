@@ -73,7 +73,7 @@ public class BillingRequestTemplate {
     }
 
     /**
-     * [ISO 4217](http://en.wikipedia.org/wiki/ISO_4217#Active_codes) currency code.
+     * [ISO 4217](https://en.wikipedia.org/wiki/ISO_4217#Active_codes) currency code.
      */
     public String getMandateRequestCurrency() {
         return mandateRequestCurrency;
@@ -158,9 +158,9 @@ public class BillingRequestTemplate {
     }
 
     /**
-     * [ISO 4217](http://en.wikipedia.org/wiki/ISO_4217#Active_codes) currency code. `GBP` and `EUR`
-     * supported; `GBP` with your customers in the UK and for `EUR` with your customers in supported
-     * Eurozone countries only.
+     * [ISO 4217](https://en.wikipedia.org/wiki/ISO_4217#Active_codes) currency code. `GBP` and
+     * `EUR` supported; `GBP` with your customers in the UK and for `EUR` with your customers in
+     * supported Eurozone countries only.
      */
     public String getPaymentRequestCurrency() {
         return paymentRequestCurrency;
@@ -313,8 +313,9 @@ public class BillingRequestTemplate {
             }
 
             /**
-             * (Optional) The maximum number of payments that can be collected in this periodic
-             * limit.
+             * The maximum number of payments that can be collected in this periodic limit. _Note:_
+             * This is only supported for the PayTo scheme, where it is required.
+             * 
              */
             public Integer getMaxPayments() {
                 return maxPayments;

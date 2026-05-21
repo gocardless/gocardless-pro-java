@@ -1,6 +1,7 @@
 package com.gocardless;
 
 import com.gocardless.errors.InvalidSignatureException;
+import com.gocardless.http.WebhookParseResult;
 import com.gocardless.http.WebhookParser;
 import com.gocardless.resources.Event;
 import java.security.MessageDigest;
@@ -33,6 +34,30 @@ public class Webhook {
             String webhookEndpointSecret) {
         if (isValidSignature(requestBody, signatureHeader, webhookEndpointSecret)) {
             return WebhookParser.parse(requestBody);
+        } else {
+            throw new InvalidSignatureException();
+        }
+    }
+
+    /**
+     * Validates that a webhook was genuinely sent by GoCardless using `isValidSignature`, and then
+     * parses it into a `WebhookParseResult` containing both the events and the webhook ID from the
+     * meta field.
+     *
+     * @param requestBody the request body
+     * @param signatureHeader the signature included in the request, found in the
+     *        `Webhook-Signature` header
+     * @param webhookEndpointSecret the webhook endpoint secret for your webhook endpoint, as
+     *        configured in your GoCardless Dashboard
+     * @return a WebhookParseResult containing the events and webhook ID
+     * @throws com.gocardless.errors.InvalidSignatureException if the signature header specified
+     *         does not match the signature computed using the request body and webhook endpoint
+     *         secret
+     */
+    public static WebhookParseResult parseWithMeta(String requestBody, String signatureHeader,
+            String webhookEndpointSecret) {
+        if (isValidSignature(requestBody, signatureHeader, webhookEndpointSecret)) {
+            return WebhookParser.parseWithMeta(requestBody);
         } else {
             throw new InvalidSignatureException();
         }

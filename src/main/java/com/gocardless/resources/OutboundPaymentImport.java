@@ -57,8 +57,8 @@ public class OutboundPaymentImport {
     }
 
     /**
-     * [ISO 4217](http://en.wikipedia.org/wiki/ISO_4217#Active_codes) currency. Currently only "GBP"
-     * is supported.
+     * [ISO 4217](https://en.wikipedia.org/wiki/ISO_4217#Active_codes) currency. Currently only
+     * "GBP" is supported.
      */
     public Currency getCurrency() {
         return currency;

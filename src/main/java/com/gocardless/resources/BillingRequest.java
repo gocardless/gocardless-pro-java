@@ -495,7 +495,7 @@ public class BillingRequest {
         }
 
         /**
-         * [ISO 4217](http://en.wikipedia.org/wiki/ISO_4217#Active_codes) currency code. Currently
+         * [ISO 4217](https://en.wikipedia.org/wiki/ISO_4217#Active_codes) currency code. Currently
          * "USD" and "CAD" are supported.
          */
         public String getCurrency() {
@@ -894,7 +894,7 @@ public class BillingRequest {
         }
 
         /**
-         * [ISO 4217](http://en.wikipedia.org/wiki/ISO_4217#Active_codes) currency code.
+         * [ISO 4217](https://en.wikipedia.org/wiki/ISO_4217#Active_codes) currency code.
          */
         public String getCurrency() {
             return currency;
@@ -1110,8 +1110,9 @@ public class BillingRequest {
                 }
 
                 /**
-                 * (Optional) The maximum number of payments that can be collected in this periodic
-                 * limit.
+                 * The maximum number of payments that can be collected in this periodic limit.
+                 * _Note:_ This is only supported for the PayTo scheme, where it is required.
+                 * 
                  */
                 public Integer getMaxPayments() {
                     return maxPayments;
@@ -1213,7 +1214,7 @@ public class BillingRequest {
         }
 
         /**
-         * [ISO 4217](http://en.wikipedia.org/wiki/ISO_4217#Active_codes) currency code. `GBP` and
+         * [ISO 4217](https://en.wikipedia.org/wiki/ISO_4217#Active_codes) currency code. `GBP` and
          * `EUR` supported; `GBP` with your customers in the UK and for `EUR` with your customers in
          * supported Eurozone countries only.
          */
@@ -1407,7 +1408,7 @@ public class BillingRequest {
             }
 
             /**
-             * [ISO 639-1](http://en.wikipedia.org/wiki/List_of_ISO_639-1_codes) code. Used as the
+             * [ISO 639-1](https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes) code. Used as the
              * language for notification emails sent by GoCardless if your organisation does not
              * send its own (see [compliance requirements](#appendix-compliance-requirements)).
              * Currently only "en", "fr", "de", "pt", "es", "it", "nl", "da", "nb", "sl", "sv" are
@@ -1503,7 +1504,7 @@ public class BillingRequest {
 
             /**
              * [ISO 3166-1 alpha-2
-             * code](http://en.wikipedia.org/wiki/ISO_3166-1_alpha-2#Officially_assigned_code_elements).
+             * code](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2#Officially_assigned_code_elements).
              * Defaults to the country code of the `iban` if supplied, otherwise is required.
              */
             public String getCountryCode() {
@@ -1519,7 +1520,7 @@ public class BillingRequest {
             }
 
             /**
-             * [ISO 4217](http://en.wikipedia.org/wiki/ISO_4217#Active_codes) currency code.
+             * [ISO 4217](https://en.wikipedia.org/wiki/ISO_4217#Active_codes) currency code.
              * Currently "AUD", "CAD", "DKK", "EUR", "GBP", "NZD", "SEK" and "USD" are supported.
              */
             public String getCurrency() {
@@ -1634,7 +1635,7 @@ public class BillingRequest {
 
             /**
              * [ISO 3166-1 alpha-2
-             * code.](http://en.wikipedia.org/wiki/ISO_3166-1_alpha-2#Officially_assigned_code_elements)
+             * code.](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2#Officially_assigned_code_elements)
              */
             public String getCountryCode() {
                 return countryCode;
@@ -1760,7 +1761,7 @@ public class BillingRequest {
         }
 
         /**
-         * [ISO 4217](http://en.wikipedia.org/wiki/ISO_4217#Active_codes) currency code. Currently
+         * [ISO 4217](https://en.wikipedia.org/wiki/ISO_4217#Active_codes) currency code. Currently
          * "USD" and "CAD" are supported.
          */
         public String getCurrency() {

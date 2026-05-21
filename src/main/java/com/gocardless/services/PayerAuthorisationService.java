@@ -284,7 +284,7 @@ public class PayerAuthorisationService {
 
         /**
          * [ISO 3166-1 alpha-2
-         * code](http://en.wikipedia.org/wiki/ISO_3166-1_alpha-2#Officially_assigned_code_elements).
+         * code](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2#Officially_assigned_code_elements).
          * Defaults to the country code of the `iban` if supplied, otherwise is required.
          */
         public PayerAuthorisationCreateRequest withBankAccountCountryCode(String countryCode) {
@@ -296,7 +296,7 @@ public class PayerAuthorisationService {
         }
 
         /**
-         * [ISO 4217](http://en.wikipedia.org/wiki/ISO_4217#Active_codes) currency code. Currently
+         * [ISO 4217](https://en.wikipedia.org/wiki/ISO_4217#Active_codes) currency code. Currently
          * "AUD", "CAD", "DKK", "EUR", "GBP", "NZD", "SEK" and "USD" are supported.
          */
         public PayerAuthorisationCreateRequest withBankAccountCurrency(String currency) {
@@ -401,7 +401,7 @@ public class PayerAuthorisationService {
 
         /**
          * [ISO 3166-1 alpha-2
-         * code.](http://en.wikipedia.org/wiki/ISO_3166-1_alpha-2#Officially_assigned_code_elements)
+         * code.](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2#Officially_assigned_code_elements)
          */
         public PayerAuthorisationCreateRequest withCustomerCountryCode(String countryCode) {
             if (customer == null) {
@@ -708,7 +708,7 @@ public class PayerAuthorisationService {
 
             /**
              * [ISO 3166-1 alpha-2
-             * code](http://en.wikipedia.org/wiki/ISO_3166-1_alpha-2#Officially_assigned_code_elements).
+             * code](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2#Officially_assigned_code_elements).
              * Defaults to the country code of the `iban` if supplied, otherwise is required.
              */
             public BankAccount withCountryCode(String countryCode) {
@@ -717,7 +717,7 @@ public class PayerAuthorisationService {
             }
 
             /**
-             * [ISO 4217](http://en.wikipedia.org/wiki/ISO_4217#Active_codes) currency code.
+             * [ISO 4217](https://en.wikipedia.org/wiki/ISO_4217#Active_codes) currency code.
              * Currently "AUD", "CAD", "DKK", "EUR", "GBP", "NZD", "SEK" and "USD" are supported.
              */
             public BankAccount withCurrency(String currency) {
@@ -820,7 +820,7 @@ public class PayerAuthorisationService {
 
             /**
              * [ISO 3166-1 alpha-2
-             * code.](http://en.wikipedia.org/wiki/ISO_3166-1_alpha-2#Officially_assigned_code_elements)
+             * code.](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2#Officially_assigned_code_elements)
              */
             public Customer withCountryCode(String countryCode) {
                 this.countryCode = countryCode;
@@ -1104,7 +1104,7 @@ public class PayerAuthorisationService {
 
         /**
          * [ISO 3166-1 alpha-2
-         * code](http://en.wikipedia.org/wiki/ISO_3166-1_alpha-2#Officially_assigned_code_elements).
+         * code](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2#Officially_assigned_code_elements).
          * Defaults to the country code of the `iban` if supplied, otherwise is required.
          */
         public PayerAuthorisationUpdateRequest withBankAccountCountryCode(String countryCode) {
@@ -1116,7 +1116,7 @@ public class PayerAuthorisationService {
         }
 
         /**
-         * [ISO 4217](http://en.wikipedia.org/wiki/ISO_4217#Active_codes) currency code. Currently
+         * [ISO 4217](https://en.wikipedia.org/wiki/ISO_4217#Active_codes) currency code. Currently
          * "AUD", "CAD", "DKK", "EUR", "GBP", "NZD", "SEK" and "USD" are supported.
          */
         public PayerAuthorisationUpdateRequest withBankAccountCurrency(String currency) {
@@ -1221,7 +1221,7 @@ public class PayerAuthorisationService {
 
         /**
          * [ISO 3166-1 alpha-2
-         * code.](http://en.wikipedia.org/wiki/ISO_3166-1_alpha-2#Officially_assigned_code_elements)
+         * code.](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2#Officially_assigned_code_elements)
          */
         public PayerAuthorisationUpdateRequest withCustomerCountryCode(String countryCode) {
             if (customer == null) {
@@ -1522,7 +1522,7 @@ public class PayerAuthorisationService {
 
             /**
              * [ISO 3166-1 alpha-2
-             * code](http://en.wikipedia.org/wiki/ISO_3166-1_alpha-2#Officially_assigned_code_elements).
+             * code](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2#Officially_assigned_code_elements).
              * Defaults to the country code of the `iban` if supplied, otherwise is required.
              */
             public BankAccount withCountryCode(String countryCode) {
@@ -1531,7 +1531,7 @@ public class PayerAuthorisationService {
             }
 
             /**
-             * [ISO 4217](http://en.wikipedia.org/wiki/ISO_4217#Active_codes) currency code.
+             * [ISO 4217](https://en.wikipedia.org/wiki/ISO_4217#Active_codes) currency code.
              * Currently "AUD", "CAD", "DKK", "EUR", "GBP", "NZD", "SEK" and "USD" are supported.
              */
             public BankAccount withCurrency(String currency) {
@@ -1634,7 +1634,7 @@ public class PayerAuthorisationService {
 
             /**
              * [ISO 3166-1 alpha-2
-             * code.](http://en.wikipedia.org/wiki/ISO_3166-1_alpha-2#Officially_assigned_code_elements)
+             * code.](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2#Officially_assigned_code_elements)
              */
             public Customer withCountryCode(String countryCode) {
                 this.countryCode = countryCode;

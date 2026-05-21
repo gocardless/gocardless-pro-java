@@ -215,7 +215,7 @@ public class BillingRequestService {
         }
 
         /**
-         * [ISO 4217](http://en.wikipedia.org/wiki/ISO_4217#Active_codes) currency code. Currently
+         * [ISO 4217](https://en.wikipedia.org/wiki/ISO_4217#Active_codes) currency code. Currently
          * "USD" and "CAD" are supported.
          */
         public BillingRequestCreateRequest withInstalmentScheduleRequestCurrency(String currency) {
@@ -419,7 +419,7 @@ public class BillingRequestService {
         }
 
         /**
-         * [ISO 4217](http://en.wikipedia.org/wiki/ISO_4217#Active_codes) currency code.
+         * [ISO 4217](https://en.wikipedia.org/wiki/ISO_4217#Active_codes) currency code.
          */
         public BillingRequestCreateRequest withMandateRequestCurrency(String currency) {
             if (mandateRequest == null) {
@@ -618,7 +618,7 @@ public class BillingRequestService {
         }
 
         /**
-         * [ISO 4217](http://en.wikipedia.org/wiki/ISO_4217#Active_codes) currency code. `GBP` and
+         * [ISO 4217](https://en.wikipedia.org/wiki/ISO_4217#Active_codes) currency code. `GBP` and
          * `EUR` supported; `GBP` with your customers in the UK and for `EUR` with your customers in
          * supported Eurozone countries only.
          */
@@ -776,7 +776,7 @@ public class BillingRequestService {
         }
 
         /**
-         * [ISO 4217](http://en.wikipedia.org/wiki/ISO_4217#Active_codes) currency code. Currently
+         * [ISO 4217](https://en.wikipedia.org/wiki/ISO_4217#Active_codes) currency code. Currently
          * "AUD", "CAD", "DKK", "EUR", "GBP", "NZD", "SEK" and "USD" are supported.
          */
         public BillingRequestCreateRequest withSubscriptionRequestCurrency(String currency) {
@@ -1183,7 +1183,7 @@ public class BillingRequestService {
             }
 
             /**
-             * [ISO 4217](http://en.wikipedia.org/wiki/ISO_4217#Active_codes) currency code.
+             * [ISO 4217](https://en.wikipedia.org/wiki/ISO_4217#Active_codes) currency code.
              * Currently "USD" and "CAD" are supported.
              */
             public InstalmentScheduleRequest withCurrency(String currency) {
@@ -1323,8 +1323,9 @@ public class BillingRequestService {
             }
 
             /**
-             * (Optional) The maximum number of payments that can be collected in this periodic
-             * limit.
+             * The maximum number of payments that can be collected in this periodic limit. _Note:_
+             * This is only supported for the PayTo scheme, where it is required.
+             * 
              */
             public PeriodicLimits withMaxPayments(Integer maxPayments) {
                 this.maxPayments = maxPayments;
@@ -1527,7 +1528,7 @@ public class BillingRequestService {
             }
 
             /**
-             * [ISO 4217](http://en.wikipedia.org/wiki/ISO_4217#Active_codes) currency code.
+             * [ISO 4217](https://en.wikipedia.org/wiki/ISO_4217#Active_codes) currency code.
              */
             public MandateRequest withCurrency(String currency) {
                 this.currency = currency;
@@ -1698,7 +1699,7 @@ public class BillingRequestService {
             }
 
             /**
-             * [ISO 4217](http://en.wikipedia.org/wiki/ISO_4217#Active_codes) currency code. `GBP`
+             * [ISO 4217](https://en.wikipedia.org/wiki/ISO_4217#Active_codes) currency code. `GBP`
              * and `EUR` supported; `GBP` with your customers in the UK and for `EUR` with your
              * customers in supported Eurozone countries only.
              */
@@ -1834,7 +1835,7 @@ public class BillingRequestService {
             }
 
             /**
-             * [ISO 4217](http://en.wikipedia.org/wiki/ISO_4217#Active_codes) currency code.
+             * [ISO 4217](https://en.wikipedia.org/wiki/ISO_4217#Active_codes) currency code.
              * Currently "AUD", "CAD", "DKK", "EUR", "GBP", "NZD", "SEK" and "USD" are supported.
              */
             public SubscriptionRequest withCurrency(String currency) {
@@ -2045,7 +2046,7 @@ public class BillingRequestService {
         }
 
         /**
-         * [ISO 639-1](http://en.wikipedia.org/wiki/List_of_ISO_639-1_codes) code. Used as the
+         * [ISO 639-1](https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes) code. Used as the
          * language for notification emails sent by GoCardless if your organisation does not send
          * its own (see [compliance requirements](#appendix-compliance-requirements)). Currently
          * only "en", "fr", "de", "pt", "es", "it", "nl", "da", "nb", "sl", "sv" are supported. If
@@ -2142,7 +2143,7 @@ public class BillingRequestService {
 
         /**
          * [ISO 3166-1 alpha-2
-         * code.](http://en.wikipedia.org/wiki/ISO_3166-1_alpha-2#Officially_assigned_code_elements)
+         * code.](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2#Officially_assigned_code_elements)
          */
         public BillingRequestCollectCustomerDetailsRequest withCustomerBillingDetailCountryCode(
                 String countryCode) {
@@ -2314,7 +2315,7 @@ public class BillingRequestService {
             }
 
             /**
-             * [ISO 639-1](http://en.wikipedia.org/wiki/List_of_ISO_639-1_codes) code. Used as the
+             * [ISO 639-1](https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes) code. Used as the
              * language for notification emails sent by GoCardless if your organisation does not
              * send its own (see [compliance requirements](#appendix-compliance-requirements)).
              * Currently only "en", "fr", "de", "pt", "es", "it", "nl", "da", "nb", "sl", "sv" are
@@ -2392,7 +2393,7 @@ public class BillingRequestService {
 
             /**
              * [ISO 3166-1 alpha-2
-             * code.](http://en.wikipedia.org/wiki/ISO_3166-1_alpha-2#Officially_assigned_code_elements)
+             * code.](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2#Officially_assigned_code_elements)
              */
             public CustomerBillingDetail withCountryCode(String countryCode) {
                 this.countryCode = countryCode;
@@ -2553,7 +2554,7 @@ public class BillingRequestService {
 
         /**
          * [ISO 3166-1 alpha-2
-         * code](http://en.wikipedia.org/wiki/ISO_3166-1_alpha-2#Officially_assigned_code_elements).
+         * code](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2#Officially_assigned_code_elements).
          * Defaults to the country code of the `iban` if supplied, otherwise is required.
          */
         public BillingRequestCollectBankAccountRequest withCountryCode(String countryCode) {
@@ -2562,7 +2563,7 @@ public class BillingRequestService {
         }
 
         /**
-         * [ISO 4217](http://en.wikipedia.org/wiki/ISO_4217#Active_codes) currency code. Currently
+         * [ISO 4217](https://en.wikipedia.org/wiki/ISO_4217#Active_codes) currency code. Currently
          * "AUD", "CAD", "DKK", "EUR", "GBP", "NZD", "SEK" and "USD" are supported.
          */
         public BillingRequestCollectBankAccountRequest withCurrency(String currency) {
@@ -3198,7 +3199,7 @@ public class BillingRequestService {
         private Map<String, String> metadata;
 
         /**
-         * [ISO 4217](http://en.wikipedia.org/wiki/ISO_4217#Active_codes) currency code. Currently
+         * [ISO 4217](https://en.wikipedia.org/wiki/ISO_4217#Active_codes) currency code. Currently
          * "AUD", "CAD", "DKK", "EUR", "GBP", "NZD", "SEK" and "USD" are supported.
          */
         public BillingRequestChooseCurrencyRequest withCurrency(String currency) {
@@ -3285,7 +3286,7 @@ public class BillingRequestService {
 
         /**
          * [ISO
-         * 3166-1](http://en.wikipedia.org/wiki/ISO_3166-1_alpha-2#Officially_assigned_code_elements)
+         * 3166-1](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2#Officially_assigned_code_elements)
          * alpha-2 code. The country code of the institution. If nothing is provided, institutions
          * with the country code 'GB' are returned by default.
          */
