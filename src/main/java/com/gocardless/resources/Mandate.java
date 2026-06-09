@@ -23,6 +23,7 @@ public class Mandate {
     private FundsSettlement fundsSettlement;
     private String id;
     private Links links;
+    private MandateType mandateType;
     private Map<String, String> metadata;
     private String nextPossibleChargeDate;
     private String nextPossibleStandardAchChargeDate;
@@ -90,6 +91,13 @@ public class Mandate {
 
     public Links getLinks() {
         return links;
+    }
+
+    /**
+     * Mandate type
+     */
+    public MandateType getMandateType() {
+        return mandateType;
     }
 
     /**
@@ -196,6 +204,16 @@ public class Mandate {
         @SerializedName("managed")
         MANAGED, @SerializedName("direct")
         DIRECT, @SerializedName("unknown")
+        UNKNOWN
+    }
+
+    public enum MandateType {
+        @SerializedName("bank_debit")
+        BANK_DEBIT, @SerializedName("instant")
+        INSTANT, @SerializedName("recurring")
+        RECURRING, @SerializedName("vrp_commercial")
+        VRP_COMMERCIAL, @SerializedName("vrp_sweeping")
+        VRP_SWEEPING, @SerializedName("unknown")
         UNKNOWN
     }
 

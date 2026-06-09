@@ -508,7 +508,7 @@ public class Event {
 
         /**
          * If `resource_type` is `billing_requests`, this is the ID of the
-         * [payment](#core-endpoints-payments) which has been created for Instant Bank Payment.
+         * [payment](#core-endpoints-payments) which has been created for Pay by Bank.
          */
         public String getPaymentRequestPayment() {
             return paymentRequestPayment;
