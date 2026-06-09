@@ -514,7 +514,7 @@ public class BillingRequestWithActionService {
          * enabled in [GoCardless dashboard](https://manage.gocardless.com/success-plus).
          * </p>
          * <p class="notice">
-         * <strong>Important</strong>: This is not applicable to IBP and VRP payments.
+         * <strong>Important</strong>: This is not applicable to Pay by Bank and VRP payments.
          * </p>
          */
         public BillingRequestWithActionCreateWithActionsRequest withPaymentRequestRetryIfPossible(
@@ -1711,7 +1711,7 @@ public class BillingRequestWithActionService {
              * be enabled in [GoCardless dashboard](https://manage.gocardless.com/success-plus).
              * </p>
              * <p class="notice">
-             * <strong>Important</strong>: This is not applicable to IBP and VRP payments.
+             * <strong>Important</strong>: This is not applicable to Pay by Bank and VRP payments.
              * </p>
              */
             public PaymentRequest withRetryIfPossible(Boolean retryIfPossible) {

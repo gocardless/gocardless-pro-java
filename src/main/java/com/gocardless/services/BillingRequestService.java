@@ -130,7 +130,7 @@ public class BillingRequestService {
      * Notifies the customer linked to the billing request, asking them to authorise it. Currently,
      * the customer can only be notified by email.
      * 
-     * This endpoint is currently supported only for Instant Bank Pay Billing Requests.
+     * This endpoint is currently supported only for Pay by Bank Billing Requests.
      */
     public BillingRequestNotifyRequest notify(String identity) {
         return new BillingRequestNotifyRequest(httpClient, identity);
@@ -695,7 +695,7 @@ public class BillingRequestService {
          * enabled in [GoCardless dashboard](https://manage.gocardless.com/success-plus).
          * </p>
          * <p class="notice">
-         * <strong>Important</strong>: This is not applicable to IBP and VRP payments.
+         * <strong>Important</strong>: This is not applicable to Pay by Bank and VRP payments.
          * </p>
          */
         public BillingRequestCreateRequest withPaymentRequestRetryIfPossible(
@@ -1759,7 +1759,7 @@ public class BillingRequestService {
              * be enabled in [GoCardless dashboard](https://manage.gocardless.com/success-plus).
              * </p>
              * <p class="notice">
-             * <strong>Important</strong>: This is not applicable to IBP and VRP payments.
+             * <strong>Important</strong>: This is not applicable to Pay by Bank and VRP payments.
              * </p>
              */
             public PaymentRequest withRetryIfPossible(Boolean retryIfPossible) {
@@ -3063,7 +3063,7 @@ public class BillingRequestService {
      * Notifies the customer linked to the billing request, asking them to authorise it. Currently,
      * the customer can only be notified by email.
      * 
-     * This endpoint is currently supported only for Instant Bank Pay Billing Requests.
+     * This endpoint is currently supported only for Pay by Bank Billing Requests.
      */
     public static final class BillingRequestNotifyRequest extends PostRequest<BillingRequest> {
         @PathParam
