@@ -31,7 +31,7 @@ public class BillingRequestTemplate {
     private String mandateRequestDescription;
     private Map<String, String> mandateRequestMetadata;
     private String mandateRequestScheme;
-    private MandateRequestVerify mandateRequestVerify;
+    private String mandateRequestVerify;
     private Map<String, String> metadata;
     private String name;
     private String paymentRequestAmount;
@@ -108,29 +108,9 @@ public class BillingRequestTemplate {
     }
 
     /**
-     * Verification preference for the mandate. One of:
-     * <ul>
-     * <li>`minimum`: only verify if absolutely required, such as when part of scheme rules</li>
-     * <li>`recommended`: in addition to `minimum`, use the GoCardless payment intelligence solution
-     * to decide if a payer should be verified</li>
-     * <li>`when_available`: if verification mechanisms are available, use them</li>
-     * <li>`always`: as `when_available`, but fail to create the Billing Request if a mechanism
-     * isn't available</li>
-     * </ul>
-     * 
-     * By default, all Billing Requests use the `recommended` verification preference. It uses
-     * GoCardless payment intelligence solution to determine if a payer is fraudulent or not. The
-     * verification mechanism is based on the response and the payer may be asked to verify
-     * themselves. If the feature is not available, `recommended` behaves like `minimum`.
-     * 
-     * If you never wish to take advantage of our reduced risk products and Verified Mandates as
-     * they are released in new schemes, please use the `minimum` verification preference.
-     * 
-     * See [Billing Requests: Creating Verified
-     * Mandates](https://developer.gocardless.com/getting-started/billing-requests/verified-mandates/)
-     * for more information.
+     * Verification preference for the mandate.
      */
-    public MandateRequestVerify getMandateRequestVerify() {
+    public String getMandateRequestVerify() {
         return mandateRequestVerify;
     }
 
@@ -208,15 +188,6 @@ public class BillingRequestTemplate {
      */
     public String getUpdatedAt() {
         return updatedAt;
-    }
-
-    public enum MandateRequestVerify {
-        @SerializedName("minimum")
-        MINIMUM, @SerializedName("recommended")
-        RECOMMENDED, @SerializedName("when_available")
-        WHEN_AVAILABLE, @SerializedName("always")
-        ALWAYS, @SerializedName("unknown")
-        UNKNOWN
     }
 
     /**
