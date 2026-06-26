@@ -23,11 +23,13 @@ public class VerificationDetail {
     private String addressLine3;
     private String city;
     private String companyNumber;
+    private String countryCode;
     private String description;
     private List<Director> directors;
     private Links links;
     private String name;
     private String postalCode;
+    private String region;
 
     /**
      * The first line of the company's address.
@@ -65,6 +67,13 @@ public class VerificationDetail {
     }
 
     /**
+     * The country code of the company's address.
+     */
+    public String getCountryCode() {
+        return countryCode;
+    }
+
+    /**
      * A summary describing what the company does.
      */
     public String getDescription() {
@@ -94,6 +103,13 @@ public class VerificationDetail {
      */
     public String getPostalCode() {
         return postalCode;
+    }
+
+    /**
+     * The region of the company's address.
+     */
+    public String getRegion() {
+        return region;
     }
 
     /**
