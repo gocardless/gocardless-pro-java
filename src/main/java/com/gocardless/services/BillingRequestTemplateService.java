@@ -266,7 +266,8 @@ public class BillingRequestTemplateService {
         }
 
         /**
-         * The maximum amount that can be charged for a single payment. Required for PayTo and VRP.
+         * The maximum amount that can be charged for a single payment in the lowest denomination
+         * for the currency (e.g. pence in GBP, cents in EUR). _Note:_ Required for PayTo and VRP.
          */
         public BillingRequestTemplateCreateRequest withMandateRequestConstraintsMaxAmountPerPayment(
                 Integer maxAmountPerPayment) {
@@ -279,7 +280,8 @@ public class BillingRequestTemplateService {
 
         /**
          * A constraint where you can specify info (free text string) about how payments are
-         * calculated. _Note:_ This is only supported for ACH and PAD schemes.
+         * calculated. For use when payments vary and cannot be expressed as a fixed amount and
+         * frequency. _Note:_ This is only supported for ACH and PAD schemes.
          * 
          */
         public BillingRequestTemplateCreateRequest withMandateRequestConstraintsPaymentMethod(
@@ -292,7 +294,13 @@ public class BillingRequestTemplateService {
         }
 
         /**
-         * List of periodic limits and constraints which apply to them
+         * Caps on the total amount and/or number of payments that can be collected within a
+         * repeating period (e.g. no more than a set amount per month), as opposed to
+         * `max_amount_per_payment` which caps a single payment.
+         * 
+         * _Note:_ Required for VRP, where exactly one periodic limit must be provided. Optional for
+         * PayTo.
+         * 
          */
         public BillingRequestTemplateCreateRequest withMandateRequestConstraintsPeriodicLimits(
                 List<PeriodicLimits> periodicLimits) {
@@ -558,14 +566,21 @@ public class BillingRequestTemplateService {
             private Period period;
 
             /**
-             * The alignment of the period.
+             * The alignment of the period. Defaults to `creation_date` if not specified.
              * 
-             * `calendar` - this will finish on the end of the current period. For example this will
-             * expire on the Monday for the current week or the January for the next year.
+             * `calendar` - the period follows fixed calendar boundaries, the same for every
+             * mandate: `week` runs Monday to Sunday, `month` runs from the 1st to the last day of
+             * the calendar month, and `year` runs from 1 January to 31 December. If the mandate
+             * starts partway through a period, the limit for that first period is reduced
+             * proportionally to the days remaining (e.g. a monthly limit starting on the 15th gives
+             * roughly half the limit for that first month).
              * 
-             * `creation_date` - this will finish on the next instance of the current period. For
-             * example Monthly it will expire on the same day of the next month, or yearly the same
-             * day of the next year.
+             * `creation_date` - the period follows the mandate's own start date rather than the
+             * calendar. For example, if the mandate starts on the 15th, each monthly period runs
+             * from the 15th to the 14th of the following month. The first period is a full period,
+             * not reduced proportionally.
+             * 
+             * _Note:_ Has no effect when period is `flexible`.
              * 
              */
             public PeriodicLimits withAlignment(Alignment alignment) {
@@ -574,8 +589,9 @@ public class BillingRequestTemplateService {
             }
 
             /**
-             * The maximum number of payments that can be collected in this periodic limit. _Note:_
-             * This is only supported for the PayTo scheme, where it is required.
+             * The maximum number of payments that can be collected in this periodic limit.
+             * 
+             * _Note:_ Only supported for the PayTo scheme, where it is optional.
              * 
              */
             public PeriodicLimits withMaxPayments(Integer maxPayments) {
@@ -584,8 +600,10 @@ public class BillingRequestTemplateService {
             }
 
             /**
-             * The maximum total amount that can be charged for all payments in this periodic limit.
-             * Required for VRP.
+             * The maximum total amount that can be charged for all payments in this periodic limit,
+             * in the lowest denomination for the currency (e.g. pence in GBP, cents in EUR).
+             * 
+             * _Note:_ Required for VRP. This is not permitted for the PayTo scheme.
              * 
              */
             public PeriodicLimits withMaxTotalAmount(Integer maxTotalAmount) {
@@ -594,8 +612,10 @@ public class BillingRequestTemplateService {
             }
 
             /**
-             * The repeating period for this mandate. Defaults to flexible for PayTo if not
-             * specified.
+             * The repeating period for this mandate. Required whenever a periodic limit is provided
+             * (for both VRP and PayTo). If periodic_limits is omitted entirely for PayTo, this
+             * defaults to flexible.
+             * 
              */
             public PeriodicLimits withPeriod(Period period) {
                 this.period = period;
@@ -669,8 +689,9 @@ public class BillingRequestTemplateService {
             }
 
             /**
-             * The maximum amount that can be charged for a single payment. Required for PayTo and
-             * VRP.
+             * The maximum amount that can be charged for a single payment in the lowest
+             * denomination for the currency (e.g. pence in GBP, cents in EUR). _Note:_ Required for
+             * PayTo and VRP.
              */
             public MandateRequestConstraints withMaxAmountPerPayment(Integer maxAmountPerPayment) {
                 this.maxAmountPerPayment = maxAmountPerPayment;
@@ -679,7 +700,8 @@ public class BillingRequestTemplateService {
 
             /**
              * A constraint where you can specify info (free text string) about how payments are
-             * calculated. _Note:_ This is only supported for ACH and PAD schemes.
+             * calculated. For use when payments vary and cannot be expressed as a fixed amount and
+             * frequency. _Note:_ This is only supported for ACH and PAD schemes.
              * 
              */
             public MandateRequestConstraints withPaymentMethod(String paymentMethod) {
@@ -688,7 +710,13 @@ public class BillingRequestTemplateService {
             }
 
             /**
-             * List of periodic limits and constraints which apply to them
+             * Caps on the total amount and/or number of payments that can be collected within a
+             * repeating period (e.g. no more than a set amount per month), as opposed to
+             * `max_amount_per_payment` which caps a single payment.
+             * 
+             * _Note:_ Required for VRP, where exactly one periodic limit must be provided. Optional
+             * for PayTo.
+             * 
              */
             public MandateRequestConstraints withPeriodicLimits(
                     List<PeriodicLimits> periodicLimits) {
@@ -763,7 +791,8 @@ public class BillingRequestTemplateService {
         }
 
         /**
-         * The maximum amount that can be charged for a single payment. Required for PayTo and VRP.
+         * The maximum amount that can be charged for a single payment in the lowest denomination
+         * for the currency (e.g. pence in GBP, cents in EUR). _Note:_ Required for PayTo and VRP.
          */
         public BillingRequestTemplateUpdateRequest withMandateRequestConstraintsMaxAmountPerPayment(
                 Integer maxAmountPerPayment) {
@@ -776,7 +805,8 @@ public class BillingRequestTemplateService {
 
         /**
          * A constraint where you can specify info (free text string) about how payments are
-         * calculated. _Note:_ This is only supported for ACH and PAD schemes.
+         * calculated. For use when payments vary and cannot be expressed as a fixed amount and
+         * frequency. _Note:_ This is only supported for ACH and PAD schemes.
          * 
          */
         public BillingRequestTemplateUpdateRequest withMandateRequestConstraintsPaymentMethod(
@@ -789,7 +819,13 @@ public class BillingRequestTemplateService {
         }
 
         /**
-         * List of periodic limits and constraints which apply to them
+         * Caps on the total amount and/or number of payments that can be collected within a
+         * repeating period (e.g. no more than a set amount per month), as opposed to
+         * `max_amount_per_payment` which caps a single payment.
+         * 
+         * _Note:_ Required for VRP, where exactly one periodic limit must be provided. Optional for
+         * PayTo.
+         * 
          */
         public BillingRequestTemplateUpdateRequest withMandateRequestConstraintsPeriodicLimits(
                 List<PeriodicLimits> periodicLimits) {
@@ -1034,14 +1070,21 @@ public class BillingRequestTemplateService {
             private Period period;
 
             /**
-             * The alignment of the period.
+             * The alignment of the period. Defaults to `creation_date` if not specified.
              * 
-             * `calendar` - this will finish on the end of the current period. For example this will
-             * expire on the Monday for the current week or the January for the next year.
+             * `calendar` - the period follows fixed calendar boundaries, the same for every
+             * mandate: `week` runs Monday to Sunday, `month` runs from the 1st to the last day of
+             * the calendar month, and `year` runs from 1 January to 31 December. If the mandate
+             * starts partway through a period, the limit for that first period is reduced
+             * proportionally to the days remaining (e.g. a monthly limit starting on the 15th gives
+             * roughly half the limit for that first month).
              * 
-             * `creation_date` - this will finish on the next instance of the current period. For
-             * example Monthly it will expire on the same day of the next month, or yearly the same
-             * day of the next year.
+             * `creation_date` - the period follows the mandate's own start date rather than the
+             * calendar. For example, if the mandate starts on the 15th, each monthly period runs
+             * from the 15th to the 14th of the following month. The first period is a full period,
+             * not reduced proportionally.
+             * 
+             * _Note:_ Has no effect when period is `flexible`.
              * 
              */
             public PeriodicLimits withAlignment(Alignment alignment) {
@@ -1050,8 +1093,9 @@ public class BillingRequestTemplateService {
             }
 
             /**
-             * The maximum number of payments that can be collected in this periodic limit. _Note:_
-             * This is only supported for the PayTo scheme, where it is required.
+             * The maximum number of payments that can be collected in this periodic limit.
+             * 
+             * _Note:_ Only supported for the PayTo scheme, where it is optional.
              * 
              */
             public PeriodicLimits withMaxPayments(Integer maxPayments) {
@@ -1060,8 +1104,10 @@ public class BillingRequestTemplateService {
             }
 
             /**
-             * The maximum total amount that can be charged for all payments in this periodic limit.
-             * Required for VRP.
+             * The maximum total amount that can be charged for all payments in this periodic limit,
+             * in the lowest denomination for the currency (e.g. pence in GBP, cents in EUR).
+             * 
+             * _Note:_ Required for VRP. This is not permitted for the PayTo scheme.
              * 
              */
             public PeriodicLimits withMaxTotalAmount(Integer maxTotalAmount) {
@@ -1070,8 +1116,10 @@ public class BillingRequestTemplateService {
             }
 
             /**
-             * The repeating period for this mandate. Defaults to flexible for PayTo if not
-             * specified.
+             * The repeating period for this mandate. Required whenever a periodic limit is provided
+             * (for both VRP and PayTo). If periodic_limits is omitted entirely for PayTo, this
+             * defaults to flexible.
+             * 
              */
             public PeriodicLimits withPeriod(Period period) {
                 this.period = period;
@@ -1145,8 +1193,9 @@ public class BillingRequestTemplateService {
             }
 
             /**
-             * The maximum amount that can be charged for a single payment. Required for PayTo and
-             * VRP.
+             * The maximum amount that can be charged for a single payment in the lowest
+             * denomination for the currency (e.g. pence in GBP, cents in EUR). _Note:_ Required for
+             * PayTo and VRP.
              */
             public MandateRequestConstraints withMaxAmountPerPayment(Integer maxAmountPerPayment) {
                 this.maxAmountPerPayment = maxAmountPerPayment;
@@ -1155,7 +1204,8 @@ public class BillingRequestTemplateService {
 
             /**
              * A constraint where you can specify info (free text string) about how payments are
-             * calculated. _Note:_ This is only supported for ACH and PAD schemes.
+             * calculated. For use when payments vary and cannot be expressed as a fixed amount and
+             * frequency. _Note:_ This is only supported for ACH and PAD schemes.
              * 
              */
             public MandateRequestConstraints withPaymentMethod(String paymentMethod) {
@@ -1164,7 +1214,13 @@ public class BillingRequestTemplateService {
             }
 
             /**
-             * List of periodic limits and constraints which apply to them
+             * Caps on the total amount and/or number of payments that can be collected within a
+             * repeating period (e.g. no more than a set amount per month), as opposed to
+             * `max_amount_per_payment` which caps a single payment.
+             * 
+             * _Note:_ Required for VRP, where exactly one periodic limit must be provided. Optional
+             * for PayTo.
+             * 
              */
             public MandateRequestConstraints withPeriodicLimits(
                     List<PeriodicLimits> periodicLimits) {
