@@ -16,6 +16,12 @@ import java.util.Map;
  * creation is an asynchronous process, so it can take some time between an action occurring and its
  * corresponding event getting included in API responses. See [here](#event-types) for a complete
  * list of event types.
+ * <p class="notice">
+ * <strong>Important</strong>: Events older than 18 months will be archived and no longer accessible
+ * via the API or exports. Archival will begin no sooner than 1 August 2026 in sandbox environments,
+ * and no sooner than 1 October 2026 in live environments. Events within the 18-month window are
+ * unaffected. If you need archived data, contact GoCardless support.
+ * </p>
  */
 public class EventService {
     private final HttpClient httpClient;
@@ -30,6 +36,11 @@ public class EventService {
 
     /**
      * Returns a [cursor-paginated](#api-usage-cursor-pagination) list of your events.
+     * <p class="notice">
+     * <strong>Important</strong>: This endpoint will no longer return events older than 18 months,
+     * including when filtering by resource. This takes effect no sooner than 1 August 2026 in
+     * sandbox environments, and no sooner than 1 October 2026 in live environments.
+     * </p>
      */
     public EventListRequest<ListResponse<Event>> list() {
         return new EventListRequest<>(httpClient, ListRequest.<Event>pagingExecutor());
@@ -50,6 +61,11 @@ public class EventService {
      * Request class for {@link EventService#list }.
      *
      * Returns a [cursor-paginated](#api-usage-cursor-pagination) list of your events.
+     * <p class="notice">
+     * <strong>Important</strong>: This endpoint will no longer return events older than 18 months,
+     * including when filtering by resource. This takes effect no sooner than 1 August 2026 in
+     * sandbox environments, and no sooner than 1 October 2026 in live environments.
+     * </p>
      */
     public static final class EventListRequest<S> extends ListRequest<S, Event> {
         private String action;
