@@ -10,37 +10,38 @@ import java.util.Map;
 /**
  * Service class for working with redirect flow resources.
  *
- * <p class="deprecated-notice">
- * <strong>Deprecated</strong>: Redirect Flows are legacy APIs and cannot be used by new
- * integrators. The [Billing Request flow](#billing-requests) API should be used for your payment
- * flows.
- * </p>
+ * Deprecated: Redirect Flows are legacy APIs and cannot be used by new integrators. The Billing
+ * Request flow (https://developer.gocardless.com/api-reference/#billing-requests) API should be
+ * used for your payment flows.
  * 
- * Redirect flows enable you to use GoCardless' [hosted payment
- * pages](https://pay-sandbox.gocardless.com/AL000000AKFPFF) to set up mandates with your customers.
- * These pages are fully compliant and have been translated into Danish, Dutch, French, German,
- * Italian, Norwegian, Portuguese, Slovak, Spanish and Swedish.
+ * Redirect flows enable you to use GoCardless' hosted payment pages
+ * (https://pay-sandbox.gocardless.com/AL000000AKFPFF) to set up mandates with your customers. These
+ * pages are fully compliant and have been translated into Danish, Dutch, French, German, Italian,
+ * Norwegian, Portuguese, Slovak, Spanish and Swedish.
  * 
  * The overall flow is:
  * 
- * 1. You [create](#redirect-flows-create-a-redirect-flow) a redirect flow for your customer, and
- * redirect them to the returned redirect url, e.g. `https://pay.gocardless.com/flow/RE123`.
+ * 1. You create
+ * (https://developer.gocardless.com/api-reference/#redirect-flows-create-a-redirect-flow) a
+ * redirect flow for your customer, and redirect them to the returned redirect url, e.g.
+ * `https://pay.gocardless.com/flow/RE123`. 2. Your customer supplies their name, email, address,
+ * and bank account details, and submits the form. This securely stores their details, and redirects
+ * them back to your `success_redirect_url` with `redirect_flow_id=RE123` in the querystring. 3. You
+ * complete
+ * (https://developer.gocardless.com/api-reference/#redirect-flows-complete-a-redirect-flow) the
+ * redirect flow, which creates a customer
+ * (https://developer.gocardless.com/api-reference/#core-endpoints-customers), customer bank account
+ * (https://developer.gocardless.com/api-reference/#core-endpoints-customer-bank-accounts), and
+ * mandate (https://developer.gocardless.com/api-reference/#core-endpoints-mandates), and returns
+ * the ID of the mandate. You may wish to create a subscription
+ * (https://developer.gocardless.com/api-reference/#core-endpoints-subscriptions) or payment
+ * (https://developer.gocardless.com/api-reference/#core-endpoints-payments) at this point.
  * 
- * 2. Your customer supplies their name, email, address, and bank account details, and submits the
- * form. This securely stores their details, and redirects them back to your `success_redirect_url`
- * with `redirect_flow_id=RE123` in the querystring.
- * 
- * 3. You [complete](#redirect-flows-complete-a-redirect-flow) the redirect flow, which creates a
- * [customer](#core-endpoints-customers), [customer bank
- * account](#core-endpoints-customer-bank-accounts), and [mandate](#core-endpoints-mandates), and
- * returns the ID of the mandate. You may wish to create a
- * [subscription](#core-endpoints-subscriptions) or [payment](#core-endpoints-payments) at this
- * point.
- * 
- * Once you have [completed](#redirect-flows-complete-a-redirect-flow) the redirect flow via the
- * API, you should display a confirmation page to your customer, confirming that their Direct Debit
- * has been set up. You can build your own page, or redirect to the one we provide in the
- * `confirmation_url` attribute of the redirect flow.
+ * Once you have completed
+ * (https://developer.gocardless.com/api-reference/#redirect-flows-complete-a-redirect-flow) the
+ * redirect flow via the API, you should display a confirmation page to your customer, confirming
+ * that their Direct Debit has been set up. You can build your own page, or redirect to the one we
+ * provide in the `confirmation_url` attribute of the redirect flow.
  * 
  * Redirect flows expire 30 minutes after they are first created. You cannot complete an expired
  * redirect flow. For an integrator this is shorter and they will expire after 10 minutes.
@@ -72,9 +73,12 @@ public class RedirectFlowService {
     }
 
     /**
-     * This creates a [customer](#core-endpoints-customers), [customer bank
-     * account](#core-endpoints-customer-bank-accounts), and [mandate](#core-endpoints-mandates)
-     * using the details supplied by your customer and returns the ID of the created mandate.
+     * This creates a customer
+     * (https://developer.gocardless.com/api-reference/#core-endpoints-customers), customer bank
+     * account
+     * (https://developer.gocardless.com/api-reference/#core-endpoints-customer-bank-accounts), and
+     * mandate (https://developer.gocardless.com/api-reference/#core-endpoints-mandates) using the
+     * details supplied by your customer and returns the ID of the created mandate.
      * 
      * This will return a `redirect_flow_incomplete` error if your customer has not yet been
      * redirected back to your site, and a `redirect_flow_already_completed` error if your
@@ -117,9 +121,9 @@ public class RedirectFlowService {
         }
 
         /**
-         * The [creditor](#core-endpoints-creditors) for whom the mandate will be created. The
-         * `name` of the creditor will be displayed on the payment page. Required if your account
-         * manages multiple creditors.
+         * The creditor (https://developer.gocardless.com/api-reference/#core-endpoints-creditors)
+         * for whom the mandate will be created. The `name` of the creditor will be displayed on the
+         * payment page. Required if your account manages multiple creditors.
          */
         public RedirectFlowCreateRequest withLinksCreditor(String creditor) {
             if (links == null) {
@@ -131,8 +135,8 @@ public class RedirectFlowService {
 
         /**
          * Key-value store of custom data. Up to 3 keys are permitted, with key names up to 50
-         * characters and values up to 500 characters. _Note:_ This should not be used for storing
-         * PII data.
+         * characters and values up to 500 characters. Note: This should not be used for storing PII
+         * data.
          */
         public RedirectFlowCreateRequest withMetadata(Map<String, String> metadata) {
             this.metadata = metadata;
@@ -141,8 +145,8 @@ public class RedirectFlowService {
 
         /**
          * Key-value store of custom data. Up to 3 keys are permitted, with key names up to 50
-         * characters and values up to 500 characters. _Note:_ This should not be used for storing
-         * PII data.
+         * characters and values up to 500 characters. Note: This should not be used for storing PII
+         * data.
          */
         public RedirectFlowCreateRequest withMetadata(String key, String value) {
             if (metadata == null) {
@@ -165,7 +169,8 @@ public class RedirectFlowService {
 
         /**
          * Bank account type for USD-denominated bank accounts. Must not be provided for bank
-         * accounts in other currencies. See [local details](#local-bank-details-united-states) for
+         * accounts in other currencies. See local details
+         * (https://developer.gocardless.com/api-reference/#local-bank-details-united-states) for
          * more information.
          */
         public RedirectFlowCreateRequest withPrefilledBankAccountAccountType(
@@ -245,8 +250,8 @@ public class RedirectFlowService {
         }
 
         /**
-         * [ISO 3166-1 alpha-2
-         * code.](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2#Officially_assigned_code_elements)
+         * ISO 3166-1 alpha-2 code.
+         * (https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2#Officially_assigned_code_elements)
          */
         public RedirectFlowCreateRequest withPrefilledCustomerCountryCode(String countryCode) {
             if (prefilledCustomer == null) {
@@ -302,7 +307,7 @@ public class RedirectFlowService {
         }
 
         /**
-         * [ISO 639-1](https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes) code.
+         * ISO 639-1 (https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes) code.
          */
         public RedirectFlowCreateRequest withPrefilledCustomerLanguage(String language) {
             if (prefilledCustomer == null) {
@@ -452,9 +457,10 @@ public class RedirectFlowService {
             private String creditor;
 
             /**
-             * The [creditor](#core-endpoints-creditors) for whom the mandate will be created. The
-             * `name` of the creditor will be displayed on the payment page. Required if your
-             * account manages multiple creditors.
+             * The creditor
+             * (https://developer.gocardless.com/api-reference/#core-endpoints-creditors) for whom
+             * the mandate will be created. The `name` of the creditor will be displayed on the
+             * payment page. Required if your account manages multiple creditors.
              */
             public Links withCreditor(String creditor) {
                 this.creditor = creditor;
@@ -467,7 +473,8 @@ public class RedirectFlowService {
 
             /**
              * Bank account type for USD-denominated bank accounts. Must not be provided for bank
-             * accounts in other currencies. See [local details](#local-bank-details-united-states)
+             * accounts in other currencies. See local details
+             * (https://developer.gocardless.com/api-reference/#local-bank-details-united-states)
              * for more information.
              */
             public PrefilledBankAccount withAccountType(AccountType accountType) {
@@ -547,8 +554,8 @@ public class RedirectFlowService {
             }
 
             /**
-             * [ISO 3166-1 alpha-2
-             * code.](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2#Officially_assigned_code_elements)
+             * ISO 3166-1 alpha-2 code.
+             * (https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2#Officially_assigned_code_elements)
              */
             public PrefilledCustomer withCountryCode(String countryCode) {
                 this.countryCode = countryCode;
@@ -588,7 +595,7 @@ public class RedirectFlowService {
             }
 
             /**
-             * [ISO 639-1](https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes) code.
+             * ISO 639-1 (https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes) code.
              */
             public PrefilledCustomer withLanguage(String language) {
                 this.language = language;
@@ -675,9 +682,12 @@ public class RedirectFlowService {
     /**
      * Request class for {@link RedirectFlowService#complete }.
      *
-     * This creates a [customer](#core-endpoints-customers), [customer bank
-     * account](#core-endpoints-customer-bank-accounts), and [mandate](#core-endpoints-mandates)
-     * using the details supplied by your customer and returns the ID of the created mandate.
+     * This creates a customer
+     * (https://developer.gocardless.com/api-reference/#core-endpoints-customers), customer bank
+     * account
+     * (https://developer.gocardless.com/api-reference/#core-endpoints-customer-bank-accounts), and
+     * mandate (https://developer.gocardless.com/api-reference/#core-endpoints-mandates) using the
+     * details supplied by your customer and returns the ID of the created mandate.
      * 
      * This will return a `redirect_flow_incomplete` error if your customer has not yet been
      * redirected back to your site, and a `redirect_flow_already_completed` error if your

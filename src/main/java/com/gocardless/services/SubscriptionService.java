@@ -14,39 +14,40 @@ import java.util.Map;
 /**
  * Service class for working with subscription resources.
  *
- * Subscriptions create [payments](#core-endpoints-payments) according to a schedule.
+ * Subscriptions create payments
+ * (https://developer.gocardless.com/api-reference/#core-endpoints-payments) according to a
+ * schedule.
  * 
- * ### Recurrence Rules
+ * Recurrence Rules
  * 
  * The following rules apply when specifying recurrence:
  * 
- * - If `day_of_month` and `start_date` are not provided `start_date` will be the
- * [mandate](#core-endpoints-mandates)'s `next_possible_charge_date` and the subscription will then
- * recur based on the `interval` & `interval_unit` - If `month` or `day_of_month` are present the
- * following validations apply:
+ * - If `day_of_month` and `start_date` are not provided `start_date` will be the mandate
+ * (https://developer.gocardless.com/api-reference/#core-endpoints-mandates)'s
+ * `next_possible_charge_date` and the subscription will then recur based on the `interval` &
+ * `interval_unit` - If `month` or `day_of_month` are present the following validations apply:
  * 
- * | __interval_unit__ | __month__ | __day_of_month__ | | :---------------- |
+ * | interval_unit | month | day_of_month | | :---------------- |
  * :--------------------------------------------- | :----------------------------------------- | |
  * yearly | optional (required if `day_of_month` provided) | optional (invalid if `month` not
  * provided) | | monthly | invalid | optional | | weekly | invalid | invalid |
  * 
  * Examples:
  * 
- * | __interval_unit__ | __interval__ | __month__ | __day_of_month__ | valid? | | :----------------
- * | :----------- | :-------- | :--------------- |
- * :------------------------------------------------- | | yearly | 1 | january | -1 | valid | |
- * monthly | 6 | | | valid | | monthly | 6 | | 12 | valid | | weekly | 2 | | | valid | | yearly | 1
- * | march | | invalid - missing `day_of_month` | | yearly | 1 | | 2 | invalid - missing `month` | |
- * monthly | 6 | august | 12 | invalid - `month` must be blank | | weekly | 2 | october | 10 |
- * invalid - `month` and `day_of_month` must be blank |
+ * | interval_unit | interval | month | day_of_month | valid? | | :---------------- | :----------- |
+ * :-------- | :--------------- | :------------------------------------------------- | | yearly | 1
+ * | january | -1 | valid | | monthly | 6 | | | valid | | monthly | 6 | | 12 | valid | | weekly | 2
+ * | | | valid | | yearly | 1 | march | | invalid - missing `day_of_month` | | yearly | 1 | | 2 |
+ * invalid - missing `month` | | monthly | 6 | august | 12 | invalid - `month` must be blank | |
+ * weekly | 2 | october | 10 | invalid - `month` and `day_of_month` must be blank |
  * 
- * ### Rolling dates
+ * Rolling dates
  * 
  * When a charge date falls on a non-business day, one of two things will happen:
  * 
  * - if the recurrence rule specified `-1` as the `day_of_month`, the charge date will be rolled
- * __backwards__ to the previous business day (i.e., the last working day of the month). - otherwise
- * the charge date will be rolled __forwards__ to the next business day.
+ * backwards to the previous business day (i.e., the last working day of the month). - otherwise the
+ * charge date will be rolled forwards to the next business day.
  */
 public class SubscriptionService {
     private final HttpClient httpClient;
@@ -67,9 +68,10 @@ public class SubscriptionService {
     }
 
     /**
-     * Returns a [cursor-paginated](#api-usage-cursor-pagination) list of your subscriptions. Please
-     * note if the subscriptions are related to customers who have been removed, they will not be
-     * shown in the response.
+     * Returns a cursor-paginated
+     * (https://developer.gocardless.com/api-reference/#api-usage-cursor-pagination) list of your
+     * subscriptions. Please note if the subscriptions are related to customers who have been
+     * removed, they will not be shown in the response.
      */
     public SubscriptionListRequest<ListResponse<Subscription>> list() {
         return new SubscriptionListRequest<>(httpClient,
@@ -93,25 +95,16 @@ public class SubscriptionService {
      * 
      * This fails with:
      * 
-     * - `validation_failed` if invalid data is provided when attempting to update a subscription.
-     * 
-     * - `subscription_not_active` if the subscription is no longer active.
-     * 
-     * - `subscription_already_ended` if the subscription has taken all payments.
-     * 
-     * - `mandate_payments_require_approval` if the amount is being changed and the mandate requires
-     * approval.
-     * 
-     * - `number_of_subscription_amendments_exceeded` error if the subscription amount has already
-     * been changed 10 times.
-     * 
-     * - `forbidden` if the amount is being changed, and the subscription was created by an app and
-     * you are not authenticated as that app, or if the subscription was not created by an app and
-     * you are authenticated as an app
-     * 
-     * - `resource_created_by_another_app` if the app fee is being changed, and the subscription was
+     * - `validation_failed` if invalid data is provided when attempting to update a subscription. -
+     * `subscription_not_active` if the subscription is no longer active. -
+     * `subscription_already_ended` if the subscription has taken all payments. -
+     * `mandate_payments_require_approval` if the amount is being changed and the mandate requires
+     * approval. - `number_of_subscription_amendments_exceeded` error if the subscription amount has
+     * already been changed 10 times. - `forbidden` if the amount is being changed, and the
+     * subscription was created by an app and you are not authenticated as that app, or if the
+     * subscription was not created by an app and you are authenticated as an app -
+     * `resource_created_by_another_app` if the app fee is being changed, and the subscription was
      * created by an app other than the app you are authenticated as
-     * 
      */
     public SubscriptionUpdateRequest update(String identity) {
         return new SubscriptionUpdateRequest(httpClient, identity);
@@ -124,10 +117,10 @@ public class SubscriptionService {
      * using `count`), when they continue forever (created without `count` or `end_date`) or the
      * subscription is already paused for a number of cycles.
      * 
-     * When `pause_cycles` is omitted the subscription is paused until the [resume
-     * endpoint](#subscriptions-resume-a-subscription) is called. If the subscription is collecting
-     * a fixed number of payments, `end_date` will be set to `null`. When paused indefinitely,
-     * `upcoming_payments` will be empty.
+     * When `pause_cycles` is omitted the subscription is paused until the resume endpoint
+     * (https://developer.gocardless.com/api-reference/#subscriptions-resume-a-subscription) is
+     * called. If the subscription is collecting a fixed number of payments, `end_date` will be set
+     * to `null`. When paused indefinitely, `upcoming_payments` will be empty.
      * 
      * When `pause_cycles` is provided the subscription will be paused for the number of cycles
      * requested. If the subscription is collecting a fixed number of payments, `end_date` will be
@@ -137,18 +130,13 @@ public class SubscriptionService {
      * This fails with:
      * 
      * - `forbidden` if the subscription was created by an app and you are not authenticated as that
-     * app, or if the subscription was not created by an app and you are authenticated as an app
-     * 
-     * - `validation_failed` if invalid data is provided when attempting to pause a subscription.
-     * 
-     * - `subscription_paused_cannot_update_cycles` if the subscription is already paused for a
-     * number of cycles and the request provides a value for `pause_cycle`.
-     * 
-     * - `subscription_cannot_be_paused` if the subscription cannot be paused.
-     * 
-     * - `subscription_already_ended` if the subscription has taken all payments.
-     * 
-     * - `pause_cycles_must_be_greater_than_or_equal_to` if the provided value for `pause_cycles`
+     * app, or if the subscription was not created by an app and you are authenticated as an app -
+     * `validation_failed` if invalid data is provided when attempting to pause a subscription. -
+     * `subscription_paused_cannot_update_cycles` if the subscription is already paused for a number
+     * of cycles and the request provides a value for `pause_cycle`. -
+     * `subscription_cannot_be_paused` if the subscription cannot be paused. -
+     * `subscription_already_ended` if the subscription has taken all payments. -
+     * `pause_cycles_must_be_greater_than_or_equal_to` if the provided value for `pause_cycles`
      * cannot be satisfied.
      */
     public SubscriptionPauseRequest pause(String identity) {
@@ -163,12 +151,9 @@ public class SubscriptionService {
      * This fails with:
      * 
      * - `forbidden` if the subscription was created by an app and you are not authenticated as that
-     * app, or if the subscription was not created by an app and you are authenticated as an app
-     * 
-     * - `validation_failed` if invalid data is provided when attempting to resume a subscription.
-     * 
-     * - `subscription_not_paused` if the subscription is not paused.
-     * 
+     * app, or if the subscription was not created by an app and you are authenticated as an app -
+     * `validation_failed` if invalid data is provided when attempting to resume a subscription. -
+     * `subscription_not_paused` if the subscription is not paused.
      */
     public SubscriptionResumeRequest resume(String identity) {
         return new SubscriptionResumeRequest(httpClient, identity);
@@ -235,7 +220,7 @@ public class SubscriptionService {
         }
 
         /**
-         * [ISO 4217](https://en.wikipedia.org/wiki/ISO_4217#Active_codes) currency code. Currently
+         * ISO 4217 (https://en.wikipedia.org/wiki/ISO_4217#Active_codes) currency code. Currently
          * "AUD", "CAD", "DKK", "EUR", "GBP", "NZD", "SEK" and "USD" are supported.
          */
         public SubscriptionCreateRequest withCurrency(String currency) {
@@ -253,13 +238,13 @@ public class SubscriptionService {
         }
 
         /**
-         * Date on or after which no further payments should be created. <br />
+         * Date on or after which no further payments should be created.
+         * 
          * If this field is blank and `count` is not specified, the subscription will continue
-         * forever. <br />
-         * <p class="deprecated-notice">
-         * <strong>Deprecated</strong>: This field will be removed in a future API version. Use
-         * `count` to specify a number of payments instead.
-         * </p>
+         * forever.
+         * 
+         * Deprecated: This field will be removed in a future API version. Use `count` to specify a
+         * number of payments instead.
          */
         public SubscriptionCreateRequest withEndDate(String endDate) {
             this.endDate = endDate;
@@ -289,8 +274,9 @@ public class SubscriptionService {
         }
 
         /**
-         * ID of the associated [mandate](#core-endpoints-mandates) which the subscription will
-         * create payments against.
+         * ID of the associated mandate
+         * (https://developer.gocardless.com/api-reference/#core-endpoints-mandates) which the
+         * subscription will create payments against.
          */
         public SubscriptionCreateRequest withLinksMandate(String mandate) {
             if (links == null) {
@@ -324,7 +310,6 @@ public class SubscriptionService {
         /**
          * Name of the month on which to charge a customer. Must be lowercase. Only applies when the
          * interval_unit is `yearly`.
-         * 
          */
         public SubscriptionCreateRequest withMonth(Month month) {
             this.month = month;
@@ -342,12 +327,13 @@ public class SubscriptionService {
 
         /**
          * An optional payment reference. This will be set as the reference on each payment created
-         * and will appear on your customer's bank statement. See the documentation for the [create
-         * payment endpoint](#payments-create-a-payment) for more details. <br />
-         * <p class="restricted-notice">
-         * <strong>Restricted</strong>: You need your own Service User Number to specify a payment
-         * reference for Bacs payments.
-         * </p>
+         * and will appear on your customer's bank statement. See the documentation for the create
+         * payment endpoint
+         * (https://developer.gocardless.com/api-reference/#payments-create-a-payment) for more
+         * details.
+         * 
+         * Restricted: You need your own Service User Number to specify a payment reference for Bacs
+         * payments.
          */
         public SubscriptionCreateRequest withPaymentReference(String paymentReference) {
             this.paymentReference = paymentReference;
@@ -355,12 +341,10 @@ public class SubscriptionService {
         }
 
         /**
-         * On failure, automatically retry payments using [intelligent
-         * retries](/success-plus/overview). Default is `false`.
-         * <p class="notice">
-         * <strong>Important</strong>: To be able to use intelligent retries, Success+ needs to be
-         * enabled in [GoCardless dashboard](https://manage.gocardless.com/success-plus).
-         * </p>
+         * On failure, automatically retry payments using intelligent retries
+         * (https://developer.gocardless.com/success-plus/overview). Default is `false`. Important:
+         * To be able to use intelligent retries, Success+ needs to be enabled in GoCardless
+         * dashboard (https://manage.gocardless.com/success-plus).
          */
         public SubscriptionCreateRequest withRetryIfPossible(Boolean retryIfPossible) {
             this.retryIfPossible = retryIfPossible;
@@ -368,11 +352,11 @@ public class SubscriptionService {
         }
 
         /**
-         * The date on which the first payment should be charged. Must be on or after the
-         * [mandate](#core-endpoints-mandates)'s `next_possible_charge_date`. When left blank and
-         * `month` or `day_of_month` are provided, this will be set to the date of the first
-         * payment. If created without `month` or `day_of_month` this will be set as the mandate's
-         * `next_possible_charge_date`
+         * The date on which the first payment should be charged. Must be on or after the mandate
+         * (https://developer.gocardless.com/api-reference/#core-endpoints-mandates)'s
+         * `next_possible_charge_date`. When left blank and `month` or `day_of_month` are provided,
+         * this will be set to the date of the first payment. If created without `month` or
+         * `day_of_month` this will be set as the mandate's `next_possible_charge_date`
          */
         public SubscriptionCreateRequest withStartDate(String startDate) {
             this.startDate = startDate;
@@ -461,8 +445,9 @@ public class SubscriptionService {
             private String mandate;
 
             /**
-             * ID of the associated [mandate](#core-endpoints-mandates) which the subscription will
-             * create payments against.
+             * ID of the associated mandate
+             * (https://developer.gocardless.com/api-reference/#core-endpoints-mandates) which the
+             * subscription will create payments against.
              */
             public Links withMandate(String mandate) {
                 this.mandate = mandate;
@@ -474,9 +459,10 @@ public class SubscriptionService {
     /**
      * Request class for {@link SubscriptionService#list }.
      *
-     * Returns a [cursor-paginated](#api-usage-cursor-pagination) list of your subscriptions. Please
-     * note if the subscriptions are related to customers who have been removed, they will not be
-     * shown in the response.
+     * Returns a cursor-paginated
+     * (https://developer.gocardless.com/api-reference/#api-usage-cursor-pagination) list of your
+     * subscriptions. Please note if the subscriptions are related to customers who have been
+     * removed, they will not be shown in the response.
      */
     public static final class SubscriptionListRequest<S> extends ListRequest<S, Subscription> {
         private CreatedAt createdAt;
@@ -576,14 +562,10 @@ public class SubscriptionService {
 
         /**
          * Upto 5 of:
-         * <ul>
-         * <li>`pending_customer_approval`</li>
-         * <li>`customer_approval_denied`</li>
-         * <li>`active`</li>
-         * <li>`finished`</li>
-         * <li>`cancelled`</li>
-         * <li>`paused`</li>
-         * </ul>
+         * 
+         * - `pending_customer_approval` - `customer_approval_denied` - `active` - `finished` -
+         * `cancelled` - `paused`
+         * 
          * Omit entirely to include subscriptions in all states.
          */
         public SubscriptionListRequest<S> withStatus(List<String> status) {
@@ -593,14 +575,10 @@ public class SubscriptionService {
 
         /**
          * Upto 5 of:
-         * <ul>
-         * <li>`pending_customer_approval`</li>
-         * <li>`customer_approval_denied`</li>
-         * <li>`active`</li>
-         * <li>`finished`</li>
-         * <li>`cancelled`</li>
-         * <li>`paused`</li>
-         * </ul>
+         * 
+         * - `pending_customer_approval` - `customer_approval_denied` - `active` - `finished` -
+         * `cancelled` - `paused`
+         * 
          * Omit entirely to include subscriptions in all states.
          */
         public SubscriptionListRequest<S> withStatus(String status) {
@@ -761,25 +739,16 @@ public class SubscriptionService {
      * 
      * This fails with:
      * 
-     * - `validation_failed` if invalid data is provided when attempting to update a subscription.
-     * 
-     * - `subscription_not_active` if the subscription is no longer active.
-     * 
-     * - `subscription_already_ended` if the subscription has taken all payments.
-     * 
-     * - `mandate_payments_require_approval` if the amount is being changed and the mandate requires
-     * approval.
-     * 
-     * - `number_of_subscription_amendments_exceeded` error if the subscription amount has already
-     * been changed 10 times.
-     * 
-     * - `forbidden` if the amount is being changed, and the subscription was created by an app and
-     * you are not authenticated as that app, or if the subscription was not created by an app and
-     * you are authenticated as an app
-     * 
-     * - `resource_created_by_another_app` if the app fee is being changed, and the subscription was
+     * - `validation_failed` if invalid data is provided when attempting to update a subscription. -
+     * `subscription_not_active` if the subscription is no longer active. -
+     * `subscription_already_ended` if the subscription has taken all payments. -
+     * `mandate_payments_require_approval` if the amount is being changed and the mandate requires
+     * approval. - `number_of_subscription_amendments_exceeded` error if the subscription amount has
+     * already been changed 10 times. - `forbidden` if the amount is being changed, and the
+     * subscription was created by an app and you are not authenticated as that app, or if the
+     * subscription was not created by an app and you are authenticated as an app -
+     * `resource_created_by_another_app` if the app fee is being changed, and the subscription was
      * created by an app other than the app you are authenticated as
-     * 
      */
     public static final class SubscriptionUpdateRequest extends PutRequest<Subscription> {
         @PathParam
@@ -841,12 +810,13 @@ public class SubscriptionService {
 
         /**
          * An optional payment reference. This will be set as the reference on each payment created
-         * and will appear on your customer's bank statement. See the documentation for the [create
-         * payment endpoint](#payments-create-a-payment) for more details. <br />
-         * <p class="restricted-notice">
-         * <strong>Restricted</strong>: You need your own Service User Number to specify a payment
-         * reference for Bacs payments.
-         * </p>
+         * and will appear on your customer's bank statement. See the documentation for the create
+         * payment endpoint
+         * (https://developer.gocardless.com/api-reference/#payments-create-a-payment) for more
+         * details.
+         * 
+         * Restricted: You need your own Service User Number to specify a payment reference for Bacs
+         * payments.
          */
         public SubscriptionUpdateRequest withPaymentReference(String paymentReference) {
             this.paymentReference = paymentReference;
@@ -854,12 +824,10 @@ public class SubscriptionService {
         }
 
         /**
-         * On failure, automatically retry payments using [intelligent
-         * retries](/success-plus/overview). Default is `false`.
-         * <p class="notice">
-         * <strong>Important</strong>: To be able to use intelligent retries, Success+ needs to be
-         * enabled in [GoCardless dashboard](https://manage.gocardless.com/success-plus).
-         * </p>
+         * On failure, automatically retry payments using intelligent retries
+         * (https://developer.gocardless.com/success-plus/overview). Default is `false`. Important:
+         * To be able to use intelligent retries, Success+ needs to be enabled in GoCardless
+         * dashboard (https://manage.gocardless.com/success-plus).
          */
         public SubscriptionUpdateRequest withRetryIfPossible(Boolean retryIfPossible) {
             this.retryIfPossible = retryIfPossible;
@@ -913,10 +881,10 @@ public class SubscriptionService {
      * using `count`), when they continue forever (created without `count` or `end_date`) or the
      * subscription is already paused for a number of cycles.
      * 
-     * When `pause_cycles` is omitted the subscription is paused until the [resume
-     * endpoint](#subscriptions-resume-a-subscription) is called. If the subscription is collecting
-     * a fixed number of payments, `end_date` will be set to `null`. When paused indefinitely,
-     * `upcoming_payments` will be empty.
+     * When `pause_cycles` is omitted the subscription is paused until the resume endpoint
+     * (https://developer.gocardless.com/api-reference/#subscriptions-resume-a-subscription) is
+     * called. If the subscription is collecting a fixed number of payments, `end_date` will be set
+     * to `null`. When paused indefinitely, `upcoming_payments` will be empty.
      * 
      * When `pause_cycles` is provided the subscription will be paused for the number of cycles
      * requested. If the subscription is collecting a fixed number of payments, `end_date` will be
@@ -926,18 +894,13 @@ public class SubscriptionService {
      * This fails with:
      * 
      * - `forbidden` if the subscription was created by an app and you are not authenticated as that
-     * app, or if the subscription was not created by an app and you are authenticated as an app
-     * 
-     * - `validation_failed` if invalid data is provided when attempting to pause a subscription.
-     * 
-     * - `subscription_paused_cannot_update_cycles` if the subscription is already paused for a
-     * number of cycles and the request provides a value for `pause_cycle`.
-     * 
-     * - `subscription_cannot_be_paused` if the subscription cannot be paused.
-     * 
-     * - `subscription_already_ended` if the subscription has taken all payments.
-     * 
-     * - `pause_cycles_must_be_greater_than_or_equal_to` if the provided value for `pause_cycles`
+     * app, or if the subscription was not created by an app and you are authenticated as an app -
+     * `validation_failed` if invalid data is provided when attempting to pause a subscription. -
+     * `subscription_paused_cannot_update_cycles` if the subscription is already paused for a number
+     * of cycles and the request provides a value for `pause_cycle`. -
+     * `subscription_cannot_be_paused` if the subscription cannot be paused. -
+     * `subscription_already_ended` if the subscription has taken all payments. -
+     * `pause_cycles_must_be_greater_than_or_equal_to` if the provided value for `pause_cycles`
      * cannot be satisfied.
      */
     public static final class SubscriptionPauseRequest extends PostRequest<Subscription> {
@@ -971,9 +934,11 @@ public class SubscriptionService {
          * The number of cycles to pause a subscription for. A cycle is one duration of `interval`
          * and `interval_unit`. This should be a non zero positive value. For AUD subscriptions with
          * `interval_unit: weekly` the minimum value varies between `3` & `4` because of the
-         * [mandatory minimum waiting period](#subscriptions-resume-a-subscription). For NZD
-         * subscriptions with `interval_unit: weekly` the minimum value is `2` because of the
-         * [mandatory minimum waiting period](#subscriptions-resume-a-subscription).
+         * mandatory minimum waiting period
+         * (https://developer.gocardless.com/api-reference/#subscriptions-resume-a-subscription).
+         * For NZD subscriptions with `interval_unit: weekly` the minimum value is `2` because of
+         * the mandatory minimum waiting period
+         * (https://developer.gocardless.com/api-reference/#subscriptions-resume-a-subscription).
          */
         public SubscriptionPauseRequest withPauseCycles(Integer pauseCycles) {
             this.pauseCycles = pauseCycles;
@@ -1033,12 +998,9 @@ public class SubscriptionService {
      * This fails with:
      * 
      * - `forbidden` if the subscription was created by an app and you are not authenticated as that
-     * app, or if the subscription was not created by an app and you are authenticated as an app
-     * 
-     * - `validation_failed` if invalid data is provided when attempting to resume a subscription.
-     * 
-     * - `subscription_not_paused` if the subscription is not paused.
-     * 
+     * app, or if the subscription was not created by an app and you are authenticated as an app -
+     * `validation_failed` if invalid data is provided when attempting to resume a subscription. -
+     * `subscription_not_paused` if the subscription is not paused.
      */
     public static final class SubscriptionResumeRequest extends PostRequest<Subscription> {
         @PathParam

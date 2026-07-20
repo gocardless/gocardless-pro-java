@@ -12,9 +12,11 @@ import java.util.Map;
 /**
  * Service class for working with customer resources.
  *
- * Customer objects hold the contact details for a customer. A customer can have several [customer
- * bank accounts](#core-endpoints-customer-bank-accounts), which in turn can have several Direct
- * Debit [mandates](#core-endpoints-mandates).
+ * Customer objects hold the contact details for a customer. A customer can have several customer
+ * bank accounts
+ * (https://developer.gocardless.com/api-reference/#core-endpoints-customer-bank-accounts), which in
+ * turn can have several Direct Debit mandates
+ * (https://developer.gocardless.com/api-reference/#core-endpoints-mandates).
  */
 public class CustomerService {
     private final HttpClient httpClient;
@@ -35,7 +37,9 @@ public class CustomerService {
     }
 
     /**
-     * Returns a [cursor-paginated](#api-usage-cursor-pagination) list of your customers.
+     * Returns a cursor-paginated
+     * (https://developer.gocardless.com/api-reference/#api-usage-cursor-pagination) list of your
+     * customers.
      */
     public CustomerListRequest<ListResponse<Customer>> list() {
         return new CustomerListRequest<>(httpClient, ListRequest.<Customer>pagingExecutor());
@@ -63,10 +67,7 @@ public class CustomerService {
      * Removed customers will not appear in search results or lists of customers (in our API or
      * exports), and it will not be possible to load an individually removed customer by ID.
      * 
-     * <p class="restricted-notice">
-     * <strong>The action of removing a customer cannot be reversed, so please use with
-     * care.</strong>
-     * </p>
+     * The action of removing a customer cannot be reversed, so please use with care.
      */
     public CustomerRemoveRequest remove(String identity) {
         return new CustomerRemoveRequest(httpClient, identity);
@@ -139,8 +140,8 @@ public class CustomerService {
         }
 
         /**
-         * [ISO 3166-1 alpha-2
-         * code.](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2#Officially_assigned_code_elements)
+         * ISO 3166-1 alpha-2 code.
+         * (https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2#Officially_assigned_code_elements)
          */
         public CustomerCreateRequest withCountryCode(String countryCode) {
             this.countryCode = countryCode;
@@ -182,12 +183,13 @@ public class CustomerService {
         }
 
         /**
-         * [ISO 639-1](https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes) code. Used as the
+         * ISO 639-1 (https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes) code. Used as the
          * language for notification emails sent by GoCardless if your organisation does not send
-         * its own (see [compliance requirements](#appendix-compliance-requirements)). Currently
-         * only "en", "fr", "de", "pt", "es", "it", "nl", "da", "nb", "sl", "sv" are supported. If
-         * this is not provided, the language will be chosen based on the `country_code` (if
-         * supplied) or default to "en".
+         * its own (see compliance requirements
+         * (https://developer.gocardless.com/api-reference/#appendix-compliance-requirements)).
+         * Currently only "en", "fr", "de", "pt", "es", "it", "nl", "da", "nb", "sl", "sv" are
+         * supported. If this is not provided, the language will be chosen based on the
+         * `country_code` (if supplied) or default to "en".
          */
         public CustomerCreateRequest withLanguage(String language) {
             this.language = language;
@@ -216,8 +218,8 @@ public class CustomerService {
         }
 
         /**
-         * [ITU E.123](https://en.wikipedia.org/wiki/E.123) formatted phone number, including
-         * country code.
+         * ITU E.123 (https://en.wikipedia.org/wiki/E.123) formatted phone number, including country
+         * code.
          */
         public CustomerCreateRequest withPhoneNumber(String phoneNumber) {
             this.phoneNumber = phoneNumber;
@@ -234,7 +236,7 @@ public class CustomerService {
 
         /**
          * The customer's address region, county or department. For US customers a 2 letter
-         * [ISO3166-2:US](https://en.wikipedia.org/wiki/ISO_3166-2:US) state code is required (e.g.
+         * ISO3166-2:US (https://en.wikipedia.org/wiki/ISO_3166-2:US) state code is required (e.g.
          * `CA` for California).
          */
         public CustomerCreateRequest withRegion(String region) {
@@ -299,7 +301,9 @@ public class CustomerService {
     /**
      * Request class for {@link CustomerService#list }.
      *
-     * Returns a [cursor-paginated](#api-usage-cursor-pagination) list of your customers.
+     * Returns a cursor-paginated
+     * (https://developer.gocardless.com/api-reference/#api-usage-cursor-pagination) list of your
+     * customers.
      */
     public static final class CustomerListRequest<S> extends ListRequest<S, Customer> {
         private ActionRequired actionRequired;
@@ -382,7 +386,7 @@ public class CustomerService {
         }
 
         /**
-         * [ISO 4217](https://en.wikipedia.org/wiki/ISO_4217#Active_codes) currency code. Currently
+         * ISO 4217 (https://en.wikipedia.org/wiki/ISO_4217#Active_codes) currency code. Currently
          * "AUD", "CAD", "DKK", "EUR", "GBP", "NZD", "SEK" and "USD" are supported.
          */
         public CustomerListRequest<S> withCurrency(Currency currency) {
@@ -400,10 +404,8 @@ public class CustomerService {
 
         /**
          * The direction to sort in. One of:
-         * <ul>
-         * <li>`asc`</li>
-         * <li>`desc`</li>
-         * </ul>
+         * 
+         * - `asc` - `desc`
          */
         public CustomerListRequest<S> withSortDirection(SortDirection sortDirection) {
             this.sortDirection = sortDirection;
@@ -412,11 +414,8 @@ public class CustomerService {
 
         /**
          * Field by which to sort records. One of:
-         * <ul>
-         * <li>`name`</li>
-         * <li>`company_name`</li>
-         * <li>`created_at`</li>
-         * </ul>
+         * 
+         * - `name` - `company_name` - `created_at`
          */
         public CustomerListRequest<S> withSortField(SortField sortField) {
             this.sortField = sortField;
@@ -693,8 +692,8 @@ public class CustomerService {
         }
 
         /**
-         * [ISO 3166-1 alpha-2
-         * code.](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2#Officially_assigned_code_elements)
+         * ISO 3166-1 alpha-2 code.
+         * (https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2#Officially_assigned_code_elements)
          */
         public CustomerUpdateRequest withCountryCode(String countryCode) {
             this.countryCode = countryCode;
@@ -736,12 +735,13 @@ public class CustomerService {
         }
 
         /**
-         * [ISO 639-1](https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes) code. Used as the
+         * ISO 639-1 (https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes) code. Used as the
          * language for notification emails sent by GoCardless if your organisation does not send
-         * its own (see [compliance requirements](#appendix-compliance-requirements)). Currently
-         * only "en", "fr", "de", "pt", "es", "it", "nl", "da", "nb", "sl", "sv" are supported. If
-         * this is not provided, the language will be chosen based on the `country_code` (if
-         * supplied) or default to "en".
+         * its own (see compliance requirements
+         * (https://developer.gocardless.com/api-reference/#appendix-compliance-requirements)).
+         * Currently only "en", "fr", "de", "pt", "es", "it", "nl", "da", "nb", "sl", "sv" are
+         * supported. If this is not provided, the language will be chosen based on the
+         * `country_code` (if supplied) or default to "en".
          */
         public CustomerUpdateRequest withLanguage(String language) {
             this.language = language;
@@ -770,8 +770,8 @@ public class CustomerService {
         }
 
         /**
-         * [ITU E.123](https://en.wikipedia.org/wiki/E.123) formatted phone number, including
-         * country code.
+         * ITU E.123 (https://en.wikipedia.org/wiki/E.123) formatted phone number, including country
+         * code.
          */
         public CustomerUpdateRequest withPhoneNumber(String phoneNumber) {
             this.phoneNumber = phoneNumber;
@@ -788,7 +788,7 @@ public class CustomerService {
 
         /**
          * The customer's address region, county or department. For US customers a 2 letter
-         * [ISO3166-2:US](https://en.wikipedia.org/wiki/ISO_3166-2:US) state code is required (e.g.
+         * ISO3166-2:US (https://en.wikipedia.org/wiki/ISO_3166-2:US) state code is required (e.g.
          * `CA` for California).
          */
         public CustomerUpdateRequest withRegion(String region) {
@@ -850,10 +850,7 @@ public class CustomerService {
      * Removed customers will not appear in search results or lists of customers (in our API or
      * exports), and it will not be possible to load an individually removed customer by ID.
      * 
-     * <p class="restricted-notice">
-     * <strong>The action of removing a customer cannot be reversed, so please use with
-     * care.</strong>
-     * </p>
+     * The action of removing a customer cannot be reversed, so please use with care.
      */
     public static final class CustomerRemoveRequest extends DeleteRequest<Customer> {
         @PathParam

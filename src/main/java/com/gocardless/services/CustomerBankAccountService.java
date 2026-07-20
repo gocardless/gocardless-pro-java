@@ -12,18 +12,21 @@ import java.util.Map;
 /**
  * Service class for working with customer bank account resources.
  *
- * Customer Bank Accounts hold the bank details of a [customer](#core-endpoints-customers). They
- * always belong to a [customer](#core-endpoints-customers), and may be linked to several Direct
- * Debit [mandates](#core-endpoints-mandates).
+ * Customer Bank Accounts hold the bank details of a customer
+ * (https://developer.gocardless.com/api-reference/#core-endpoints-customers). They always belong to
+ * a customer (https://developer.gocardless.com/api-reference/#core-endpoints-customers), and may be
+ * linked to several Direct Debit mandates
+ * (https://developer.gocardless.com/api-reference/#core-endpoints-mandates).
  * 
  * Note that customer bank accounts must be unique, and so you will encounter a
  * `bank_account_exists` error if you try to create a duplicate bank account. You may wish to handle
  * this by updating the existing record instead, the ID of which will be provided as
  * `links[customer_bank_account]` in the error response.
  * 
- * _Note:_ To ensure the customer's bank accounts are valid, verify them first using
- * [bank_details_lookups](#bank-details-lookups-perform-a-bank-details-lookup), before proceeding
- * with creating the accounts
+ * Note: To ensure the customer's bank accounts are valid, verify them first using
+ * bank_details_lookups
+ * (https://developer.gocardless.com/api-reference/#bank-details-lookups-perform-a-bank-details-lookup),
+ * before proceeding with creating the accounts
  */
 public class CustomerBankAccountService {
     private final HttpClient httpClient;
@@ -42,21 +45,21 @@ public class CustomerBankAccountService {
      * 
      * There are three different ways to supply bank account details:
      * 
-     * - [Local details](#appendix-local-bank-details)
+     * - Local details (https://developer.gocardless.com/api-reference/#appendix-local-bank-details)
+     * - IBAN - Customer Bank Account Tokens
+     * (https://developer.gocardless.com/api-reference/#javascript-flow-create-a-customer-bank-account-token)
      * 
-     * - IBAN
-     * 
-     * - [Customer Bank Account Tokens](#javascript-flow-create-a-customer-bank-account-token)
-     * 
-     * For more information on the different fields required in each country, see [local bank
-     * details](#appendix-local-bank-details).
+     * For more information on the different fields required in each country, see local bank details
+     * (https://developer.gocardless.com/api-reference/#appendix-local-bank-details).
      */
     public CustomerBankAccountCreateRequest create() {
         return new CustomerBankAccountCreateRequest(httpClient);
     }
 
     /**
-     * Returns a [cursor-paginated](#api-usage-cursor-pagination) list of your bank accounts.
+     * Returns a cursor-paginated
+     * (https://developer.gocardless.com/api-reference/#api-usage-cursor-pagination) list of your
+     * bank accounts.
      */
     public CustomerBankAccountListRequest<ListResponse<CustomerBankAccount>> list() {
         return new CustomerBankAccountListRequest<>(httpClient,
@@ -101,14 +104,12 @@ public class CustomerBankAccountService {
      * 
      * There are three different ways to supply bank account details:
      * 
-     * - [Local details](#appendix-local-bank-details)
+     * - Local details (https://developer.gocardless.com/api-reference/#appendix-local-bank-details)
+     * - IBAN - Customer Bank Account Tokens
+     * (https://developer.gocardless.com/api-reference/#javascript-flow-create-a-customer-bank-account-token)
      * 
-     * - IBAN
-     * 
-     * - [Customer Bank Account Tokens](#javascript-flow-create-a-customer-bank-account-token)
-     * 
-     * For more information on the different fields required in each country, see [local bank
-     * details](#appendix-local-bank-details).
+     * For more information on the different fields required in each country, see local bank details
+     * (https://developer.gocardless.com/api-reference/#appendix-local-bank-details).
      */
     public static final class CustomerBankAccountCreateRequest
             extends IdempotentPostRequest<CustomerBankAccount> {
@@ -127,8 +128,8 @@ public class CustomerBankAccountService {
          * Name of the account holder, as known by the bank. The full name provided when the
          * customer is created is stored and is available via the API, but is transliterated,
          * upcased, and truncated to 18 characters in bank submissions. This field is required
-         * unless the request includes a [customer bank account
-         * token](#javascript-flow-customer-bank-account-tokens).
+         * unless the request includes a customer bank account token
+         * (https://developer.gocardless.com/api-reference/#javascript-flow-customer-bank-account-tokens).
          */
         public CustomerBankAccountCreateRequest withAccountHolderName(String accountHolderName) {
             this.accountHolderName = accountHolderName;
@@ -136,7 +137,8 @@ public class CustomerBankAccountService {
         }
 
         /**
-         * Bank account number - see [local details](#appendix-local-bank-details) for more
+         * Bank account number - see local details
+         * (https://developer.gocardless.com/api-reference/#appendix-local-bank-details) for more
          * information. Alternatively you can provide an `iban`.
          */
         public CustomerBankAccountCreateRequest withAccountNumber(String accountNumber) {
@@ -146,8 +148,9 @@ public class CustomerBankAccountService {
 
         /**
          * Bank account type. Required for USD-denominated bank accounts. Must not be provided for
-         * bank accounts in other currencies. See [local details](#local-bank-details-united-states)
-         * for more information.
+         * bank accounts in other currencies. See local details
+         * (https://developer.gocardless.com/api-reference/#local-bank-details-united-states) for
+         * more information.
          */
         public CustomerBankAccountCreateRequest withAccountType(AccountType accountType) {
             this.accountType = accountType;
@@ -155,8 +158,9 @@ public class CustomerBankAccountService {
         }
 
         /**
-         * Bank code - see [local details](#appendix-local-bank-details) for more information.
-         * Alternatively you can provide an `iban`.
+         * Bank code - see local details
+         * (https://developer.gocardless.com/api-reference/#appendix-local-bank-details) for more
+         * information. Alternatively you can provide an `iban`.
          */
         public CustomerBankAccountCreateRequest withBankCode(String bankCode) {
             this.bankCode = bankCode;
@@ -164,8 +168,9 @@ public class CustomerBankAccountService {
         }
 
         /**
-         * Branch code - see [local details](#appendix-local-bank-details) for more information.
-         * Alternatively you can provide an `iban`.
+         * Branch code - see local details
+         * (https://developer.gocardless.com/api-reference/#appendix-local-bank-details) for more
+         * information. Alternatively you can provide an `iban`.
          */
         public CustomerBankAccountCreateRequest withBranchCode(String branchCode) {
             this.branchCode = branchCode;
@@ -173,8 +178,8 @@ public class CustomerBankAccountService {
         }
 
         /**
-         * [ISO 3166-1 alpha-2
-         * code](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2#Officially_assigned_code_elements).
+         * ISO 3166-1 alpha-2 code
+         * (https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2#Officially_assigned_code_elements).
          * Defaults to the country code of the `iban` if supplied, otherwise is required.
          */
         public CustomerBankAccountCreateRequest withCountryCode(String countryCode) {
@@ -183,7 +188,7 @@ public class CustomerBankAccountService {
         }
 
         /**
-         * [ISO 4217](https://en.wikipedia.org/wiki/ISO_4217#Active_codes) currency code. Currently
+         * ISO 4217 (https://en.wikipedia.org/wiki/ISO_4217#Active_codes) currency code. Currently
          * "AUD", "CAD", "DKK", "EUR", "GBP", "NZD", "SEK" and "USD" are supported.
          */
         public CustomerBankAccountCreateRequest withCurrency(String currency) {
@@ -192,9 +197,10 @@ public class CustomerBankAccountService {
         }
 
         /**
-         * International Bank Account Number. Alternatively you can provide [local
-         * details](#appendix-local-bank-details). IBANs are not accepted for Swedish bank accounts
-         * denominated in SEK - you must supply [local details](#local-bank-details-sweden).
+         * International Bank Account Number. Alternatively you can provide local details
+         * (https://developer.gocardless.com/api-reference/#appendix-local-bank-details). IBANs are
+         * not accepted for Swedish bank accounts denominated in SEK - you must supply local details
+         * (https://developer.gocardless.com/api-reference/#local-bank-details-sweden).
          */
         public CustomerBankAccountCreateRequest withIban(String iban) {
             this.iban = iban;
@@ -207,7 +213,9 @@ public class CustomerBankAccountService {
         }
 
         /**
-         * ID of the [customer](#core-endpoints-customers) that owns this bank account.
+         * ID of the customer
+         * (https://developer.gocardless.com/api-reference/#core-endpoints-customers) that owns this
+         * bank account.
          */
         public CustomerBankAccountCreateRequest withLinksCustomer(String customer) {
             if (links == null) {
@@ -218,8 +226,9 @@ public class CustomerBankAccountService {
         }
 
         /**
-         * ID of a [customer bank account token](#javascript-flow-customer-bank-account-tokens) to
-         * use in place of bank account parameters.
+         * ID of a customer bank account token
+         * (https://developer.gocardless.com/api-reference/#javascript-flow-customer-bank-account-tokens)
+         * to use in place of bank account parameters.
          */
         public CustomerBankAccountCreateRequest withLinksCustomerBankAccountToken(
                 String customerBankAccountToken) {
@@ -312,7 +321,9 @@ public class CustomerBankAccountService {
             private String customerBankAccountToken;
 
             /**
-             * ID of the [customer](#core-endpoints-customers) that owns this bank account.
+             * ID of the customer
+             * (https://developer.gocardless.com/api-reference/#core-endpoints-customers) that owns
+             * this bank account.
              */
             public Links withCustomer(String customer) {
                 this.customer = customer;
@@ -320,7 +331,8 @@ public class CustomerBankAccountService {
             }
 
             /**
-             * ID of a [customer bank account token](#javascript-flow-customer-bank-account-tokens)
+             * ID of a customer bank account token
+             * (https://developer.gocardless.com/api-reference/#javascript-flow-customer-bank-account-tokens)
              * to use in place of bank account parameters.
              */
             public Links withCustomerBankAccountToken(String customerBankAccountToken) {
@@ -333,7 +345,9 @@ public class CustomerBankAccountService {
     /**
      * Request class for {@link CustomerBankAccountService#list }.
      *
-     * Returns a [cursor-paginated](#api-usage-cursor-pagination) list of your bank accounts.
+     * Returns a cursor-paginated
+     * (https://developer.gocardless.com/api-reference/#api-usage-cursor-pagination) list of your
+     * bank accounts.
      */
     public static final class CustomerBankAccountListRequest<S>
             extends ListRequest<S, CustomerBankAccount> {

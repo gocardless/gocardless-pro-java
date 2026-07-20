@@ -13,11 +13,9 @@ import java.util.Map;
  *
  * Verification details represent any information needed by GoCardless to verify a creditor.
  * 
- * <p class="restricted-notice">
- * <strong>Restricted</strong>: These endpoints are restricted to customers who want to collect
- * their merchant's verification details and pass them to GoCardless via our API. Please [get in
- * touch](mailto:help@gocardless.com) if you wish to enable this feature on your account.
- * </p>
+ * Restricted: These endpoints are restricted to customers who want to collect their merchant's
+ * verification details and pass them to GoCardless via our API. Please get in touch
+ * (mailto:help@gocardless.com) if you wish to enable this feature on your account.
  */
 public class VerificationDetailService {
     private final HttpClient httpClient;
@@ -142,7 +140,8 @@ public class VerificationDetailService {
         }
 
         /**
-         * ID of the associated [creditor](#core-endpoints-creditors).
+         * ID of the associated creditor
+         * (https://developer.gocardless.com/api-reference/#core-endpoints-creditors).
          */
         public VerificationDetailCreateRequest withLinksCreditor(String creditor) {
             if (links == null) {
@@ -215,8 +214,8 @@ public class VerificationDetailService {
             }
 
             /**
-             * [ISO 3166-1 alpha-2
-             * code.](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2#Officially_assigned_code_elements)
+             * ISO 3166-1 alpha-2 code.
+             * (https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2#Officially_assigned_code_elements)
              */
             public Directors withCountryCode(String countryCode) {
                 this.countryCode = countryCode;
@@ -268,7 +267,8 @@ public class VerificationDetailService {
             private String creditor;
 
             /**
-             * ID of the associated [creditor](#core-endpoints-creditors).
+             * ID of the associated creditor
+             * (https://developer.gocardless.com/api-reference/#core-endpoints-creditors).
              */
             public Links withCreditor(String creditor) {
                 this.creditor = creditor;

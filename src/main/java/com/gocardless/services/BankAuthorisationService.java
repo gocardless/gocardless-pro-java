@@ -56,8 +56,9 @@ public class BankAuthorisationService {
         }
 
         /**
-         * ID of the [billing request](#billing-requests-billing-requests) against which this
-         * authorisation was created.
+         * ID of the billing request
+         * (https://developer.gocardless.com/api-reference/#billing-requests-billing-requests)
+         * against which this authorisation was created.
          */
         public BankAuthorisationCreateRequest withLinksBillingRequest(String billingRequest) {
             if (links == null) {
@@ -78,11 +79,13 @@ public class BankAuthorisationService {
          * 
          * Please note: bank authorisations can still fail despite an `outcome=success` on the
          * `redirect_uri`. It is therefore recommended to wait for the relevant bank authorisation
-         * event, such as
-         * [`BANK_AUTHORISATION_AUTHORISED`](#billing-request-bankauthorisationauthorised),
-         * [`BANK_AUTHORISATION_DENIED`](#billing-request-bankauthorisationdenied), or
-         * [`BANK_AUTHORISATION_FAILED`](#billing-request-bankauthorisationfailed) in order to show
-         * the correct outcome to the user.
+         * event, such as `BANK_AUTHORISATION_AUTHORISED`
+         * (https://developer.gocardless.com/api-reference/#billing-request-bankauthorisationauthorised),
+         * `BANK_AUTHORISATION_DENIED`
+         * (https://developer.gocardless.com/api-reference/#billing-request-bankauthorisationdenied),
+         * or `BANK_AUTHORISATION_FAILED`
+         * (https://developer.gocardless.com/api-reference/#billing-request-bankauthorisationfailed)
+         * in order to show the correct outcome to the user.
          * 
          * The BillingRequestFlow ID will also be appended to the `redirect_uri` as query parameter
          * `id=BRF123`.
@@ -141,8 +144,9 @@ public class BankAuthorisationService {
             private String billingRequest;
 
             /**
-             * ID of the [billing request](#billing-requests-billing-requests) against which this
-             * authorisation was created.
+             * ID of the billing request
+             * (https://developer.gocardless.com/api-reference/#billing-requests-billing-requests)
+             * against which this authorisation was created.
              */
             public Links withBillingRequest(String billingRequest) {
                 this.billingRequest = billingRequest;

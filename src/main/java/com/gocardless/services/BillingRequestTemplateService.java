@@ -36,8 +36,9 @@ public class BillingRequestTemplateService {
     }
 
     /**
-     * Returns a [cursor-paginated](#api-usage-cursor-pagination) list of your Billing Request
-     * Templates.
+     * Returns a cursor-paginated
+     * (https://developer.gocardless.com/api-reference/#api-usage-cursor-pagination) list of your
+     * Billing Request Templates.
      */
     public BillingRequestTemplateListRequest<ListResponse<BillingRequestTemplate>> list() {
         return new BillingRequestTemplateListRequest<>(httpClient,
@@ -74,8 +75,9 @@ public class BillingRequestTemplateService {
     /**
      * Request class for {@link BillingRequestTemplateService#list }.
      *
-     * Returns a [cursor-paginated](#api-usage-cursor-pagination) list of your Billing Request
-     * Templates.
+     * Returns a cursor-paginated
+     * (https://developer.gocardless.com/api-reference/#api-usage-cursor-pagination) list of your
+     * Billing Request Templates.
      */
     public static final class BillingRequestTemplateListRequest<S>
             extends ListRequest<S, BillingRequestTemplate> {
@@ -227,8 +229,9 @@ public class BillingRequestTemplateService {
         }
 
         /**
-         * ID of the associated [creditor](#core-endpoints-creditors). Only required if your account
-         * manages multiple creditors.
+         * ID of the associated creditor
+         * (https://developer.gocardless.com/api-reference/#core-endpoints-creditors). Only required
+         * if your account manages multiple creditors.
          */
         public BillingRequestTemplateCreateRequest withLinksCreditor(String creditor) {
             if (links == null) {
@@ -254,7 +257,6 @@ public class BillingRequestTemplateService {
          * This is an optional field and if it is not supplied the agreement will be considered open
          * and will not have an end date. Keep in mind the end date must take into account how long
          * it will take the user to set up this agreement via the Billing Request.
-         * 
          */
         public BillingRequestTemplateCreateRequest withMandateRequestConstraintsEndDate(
                 String endDate) {
@@ -267,7 +269,7 @@ public class BillingRequestTemplateService {
 
         /**
          * The maximum amount that can be charged for a single payment in the lowest denomination
-         * for the currency (e.g. pence in GBP, cents in EUR). _Note:_ Required for PayTo and VRP.
+         * for the currency (e.g. pence in GBP, cents in EUR). Note: Required for PayTo and VRP.
          */
         public BillingRequestTemplateCreateRequest withMandateRequestConstraintsMaxAmountPerPayment(
                 Integer maxAmountPerPayment) {
@@ -281,8 +283,7 @@ public class BillingRequestTemplateService {
         /**
          * A constraint where you can specify info (free text string) about how payments are
          * calculated. For use when payments vary and cannot be expressed as a fixed amount and
-         * frequency. _Note:_ This is only supported for ACH and PAD schemes.
-         * 
+         * frequency. Note: This is only supported for ACH and PAD schemes.
          */
         public BillingRequestTemplateCreateRequest withMandateRequestConstraintsPaymentMethod(
                 String paymentMethod) {
@@ -298,9 +299,8 @@ public class BillingRequestTemplateService {
          * repeating period (e.g. no more than a set amount per month), as opposed to
          * `max_amount_per_payment` which caps a single payment.
          * 
-         * _Note:_ Required for VRP, where exactly one periodic limit must be provided. Optional for
+         * Note: Required for VRP, where exactly one periodic limit must be provided. Optional for
          * PayTo.
-         * 
          */
         public BillingRequestTemplateCreateRequest withMandateRequestConstraintsPeriodicLimits(
                 List<PeriodicLimits> periodicLimits) {
@@ -316,7 +316,6 @@ public class BillingRequestTemplateService {
          * 
          * This is an optional field and if it is not supplied the start date will be set to the day
          * authorisation happens.
-         * 
          */
         public BillingRequestTemplateCreateRequest withMandateRequestConstraintsStartDate(
                 String startDate) {
@@ -328,7 +327,7 @@ public class BillingRequestTemplateService {
         }
 
         /**
-         * [ISO 4217](https://en.wikipedia.org/wiki/ISO_4217#Active_codes) currency code.
+         * ISO 4217 (https://en.wikipedia.org/wiki/ISO_4217#Active_codes) currency code.
          */
         public BillingRequestTemplateCreateRequest withMandateRequestCurrency(
                 String mandateRequestCurrency) {
@@ -339,7 +338,6 @@ public class BillingRequestTemplateService {
         /**
          * A human-readable description of the payment and/or mandate. This will be displayed to the
          * payer when authorising the billing request.
-         * 
          */
         public BillingRequestTemplateCreateRequest withMandateRequestDescription(
                 String mandateRequestDescription) {
@@ -433,7 +431,7 @@ public class BillingRequestTemplateService {
         }
 
         /**
-         * [ISO 4217](https://en.wikipedia.org/wiki/ISO_4217#Active_codes) currency code. `GBP` and
+         * ISO 4217 (https://en.wikipedia.org/wiki/ISO_4217#Active_codes) currency code. `GBP` and
          * `EUR` supported; `GBP` with your customers in the UK and for `EUR` with your customers in
          * supported Eurozone countries only.
          */
@@ -446,7 +444,6 @@ public class BillingRequestTemplateService {
         /**
          * A human-readable description of the payment and/or mandate. This will be displayed to the
          * payer when authorising the billing request.
-         * 
          */
         public BillingRequestTemplateCreateRequest withPaymentRequestDescription(
                 String paymentRequestDescription) {
@@ -550,8 +547,9 @@ public class BillingRequestTemplateService {
             private String creditor;
 
             /**
-             * ID of the associated [creditor](#core-endpoints-creditors). Only required if your
-             * account manages multiple creditors.
+             * ID of the associated creditor
+             * (https://developer.gocardless.com/api-reference/#core-endpoints-creditors). Only
+             * required if your account manages multiple creditors.
              */
             public Links withCreditor(String creditor) {
                 this.creditor = creditor;
@@ -580,8 +578,7 @@ public class BillingRequestTemplateService {
              * from the 15th to the 14th of the following month. The first period is a full period,
              * not reduced proportionally.
              * 
-             * _Note:_ Has no effect when period is `flexible`.
-             * 
+             * Note: Has no effect when period is `flexible`.
              */
             public PeriodicLimits withAlignment(Alignment alignment) {
                 this.alignment = alignment;
@@ -591,8 +588,7 @@ public class BillingRequestTemplateService {
             /**
              * The maximum number of payments that can be collected in this periodic limit.
              * 
-             * _Note:_ Only supported for the PayTo scheme, where it is optional.
-             * 
+             * Note: Only supported for the PayTo scheme, where it is optional.
              */
             public PeriodicLimits withMaxPayments(Integer maxPayments) {
                 this.maxPayments = maxPayments;
@@ -603,8 +599,7 @@ public class BillingRequestTemplateService {
              * The maximum total amount that can be charged for all payments in this periodic limit,
              * in the lowest denomination for the currency (e.g. pence in GBP, cents in EUR).
              * 
-             * _Note:_ Required for VRP. This is not permitted for the PayTo scheme.
-             * 
+             * Note: Required for VRP. This is not permitted for the PayTo scheme.
              */
             public PeriodicLimits withMaxTotalAmount(Integer maxTotalAmount) {
                 this.maxTotalAmount = maxTotalAmount;
@@ -615,7 +610,6 @@ public class BillingRequestTemplateService {
              * The repeating period for this mandate. Required whenever a periodic limit is provided
              * (for both VRP and PayTo). If periodic_limits is omitted entirely for PayTo, this
              * defaults to flexible.
-             * 
              */
             public PeriodicLimits withPeriod(Period period) {
                 this.period = period;
@@ -681,7 +675,6 @@ public class BillingRequestTemplateService {
              * This is an optional field and if it is not supplied the agreement will be considered
              * open and will not have an end date. Keep in mind the end date must take into account
              * how long it will take the user to set up this agreement via the Billing Request.
-             * 
              */
             public MandateRequestConstraints withEndDate(String endDate) {
                 this.endDate = endDate;
@@ -690,7 +683,7 @@ public class BillingRequestTemplateService {
 
             /**
              * The maximum amount that can be charged for a single payment in the lowest
-             * denomination for the currency (e.g. pence in GBP, cents in EUR). _Note:_ Required for
+             * denomination for the currency (e.g. pence in GBP, cents in EUR). Note: Required for
              * PayTo and VRP.
              */
             public MandateRequestConstraints withMaxAmountPerPayment(Integer maxAmountPerPayment) {
@@ -701,8 +694,7 @@ public class BillingRequestTemplateService {
             /**
              * A constraint where you can specify info (free text string) about how payments are
              * calculated. For use when payments vary and cannot be expressed as a fixed amount and
-             * frequency. _Note:_ This is only supported for ACH and PAD schemes.
-             * 
+             * frequency. Note: This is only supported for ACH and PAD schemes.
              */
             public MandateRequestConstraints withPaymentMethod(String paymentMethod) {
                 this.paymentMethod = paymentMethod;
@@ -714,9 +706,8 @@ public class BillingRequestTemplateService {
              * repeating period (e.g. no more than a set amount per month), as opposed to
              * `max_amount_per_payment` which caps a single payment.
              * 
-             * _Note:_ Required for VRP, where exactly one periodic limit must be provided. Optional
+             * Note: Required for VRP, where exactly one periodic limit must be provided. Optional
              * for PayTo.
-             * 
              */
             public MandateRequestConstraints withPeriodicLimits(
                     List<PeriodicLimits> periodicLimits) {
@@ -729,7 +720,6 @@ public class BillingRequestTemplateService {
              * 
              * This is an optional field and if it is not supplied the start date will be set to the
              * day authorisation happens.
-             * 
              */
             public MandateRequestConstraints withStartDate(String startDate) {
                 this.startDate = startDate;
@@ -779,7 +769,6 @@ public class BillingRequestTemplateService {
          * This is an optional field and if it is not supplied the agreement will be considered open
          * and will not have an end date. Keep in mind the end date must take into account how long
          * it will take the user to set up this agreement via the Billing Request.
-         * 
          */
         public BillingRequestTemplateUpdateRequest withMandateRequestConstraintsEndDate(
                 String endDate) {
@@ -792,7 +781,7 @@ public class BillingRequestTemplateService {
 
         /**
          * The maximum amount that can be charged for a single payment in the lowest denomination
-         * for the currency (e.g. pence in GBP, cents in EUR). _Note:_ Required for PayTo and VRP.
+         * for the currency (e.g. pence in GBP, cents in EUR). Note: Required for PayTo and VRP.
          */
         public BillingRequestTemplateUpdateRequest withMandateRequestConstraintsMaxAmountPerPayment(
                 Integer maxAmountPerPayment) {
@@ -806,8 +795,7 @@ public class BillingRequestTemplateService {
         /**
          * A constraint where you can specify info (free text string) about how payments are
          * calculated. For use when payments vary and cannot be expressed as a fixed amount and
-         * frequency. _Note:_ This is only supported for ACH and PAD schemes.
-         * 
+         * frequency. Note: This is only supported for ACH and PAD schemes.
          */
         public BillingRequestTemplateUpdateRequest withMandateRequestConstraintsPaymentMethod(
                 String paymentMethod) {
@@ -823,9 +811,8 @@ public class BillingRequestTemplateService {
          * repeating period (e.g. no more than a set amount per month), as opposed to
          * `max_amount_per_payment` which caps a single payment.
          * 
-         * _Note:_ Required for VRP, where exactly one periodic limit must be provided. Optional for
+         * Note: Required for VRP, where exactly one periodic limit must be provided. Optional for
          * PayTo.
-         * 
          */
         public BillingRequestTemplateUpdateRequest withMandateRequestConstraintsPeriodicLimits(
                 List<PeriodicLimits> periodicLimits) {
@@ -841,7 +828,6 @@ public class BillingRequestTemplateService {
          * 
          * This is an optional field and if it is not supplied the start date will be set to the day
          * authorisation happens.
-         * 
          */
         public BillingRequestTemplateUpdateRequest withMandateRequestConstraintsStartDate(
                 String startDate) {
@@ -853,7 +839,7 @@ public class BillingRequestTemplateService {
         }
 
         /**
-         * [ISO 4217](https://en.wikipedia.org/wiki/ISO_4217#Active_codes) currency code.
+         * ISO 4217 (https://en.wikipedia.org/wiki/ISO_4217#Active_codes) currency code.
          */
         public BillingRequestTemplateUpdateRequest withMandateRequestCurrency(
                 String mandateRequestCurrency) {
@@ -864,7 +850,6 @@ public class BillingRequestTemplateService {
         /**
          * A human-readable description of the payment and/or mandate. This will be displayed to the
          * payer when authorising the billing request.
-         * 
          */
         public BillingRequestTemplateUpdateRequest withMandateRequestDescription(
                 String mandateRequestDescription) {
@@ -958,7 +943,7 @@ public class BillingRequestTemplateService {
         }
 
         /**
-         * [ISO 4217](https://en.wikipedia.org/wiki/ISO_4217#Active_codes) currency code. `GBP` and
+         * ISO 4217 (https://en.wikipedia.org/wiki/ISO_4217#Active_codes) currency code. `GBP` and
          * `EUR` supported; `GBP` with your customers in the UK and for `EUR` with your customers in
          * supported Eurozone countries only.
          */
@@ -971,7 +956,6 @@ public class BillingRequestTemplateService {
         /**
          * A human-readable description of the payment and/or mandate. This will be displayed to the
          * payer when authorising the billing request.
-         * 
          */
         public BillingRequestTemplateUpdateRequest withPaymentRequestDescription(
                 String paymentRequestDescription) {
@@ -1084,8 +1068,7 @@ public class BillingRequestTemplateService {
              * from the 15th to the 14th of the following month. The first period is a full period,
              * not reduced proportionally.
              * 
-             * _Note:_ Has no effect when period is `flexible`.
-             * 
+             * Note: Has no effect when period is `flexible`.
              */
             public PeriodicLimits withAlignment(Alignment alignment) {
                 this.alignment = alignment;
@@ -1095,8 +1078,7 @@ public class BillingRequestTemplateService {
             /**
              * The maximum number of payments that can be collected in this periodic limit.
              * 
-             * _Note:_ Only supported for the PayTo scheme, where it is optional.
-             * 
+             * Note: Only supported for the PayTo scheme, where it is optional.
              */
             public PeriodicLimits withMaxPayments(Integer maxPayments) {
                 this.maxPayments = maxPayments;
@@ -1107,8 +1089,7 @@ public class BillingRequestTemplateService {
              * The maximum total amount that can be charged for all payments in this periodic limit,
              * in the lowest denomination for the currency (e.g. pence in GBP, cents in EUR).
              * 
-             * _Note:_ Required for VRP. This is not permitted for the PayTo scheme.
-             * 
+             * Note: Required for VRP. This is not permitted for the PayTo scheme.
              */
             public PeriodicLimits withMaxTotalAmount(Integer maxTotalAmount) {
                 this.maxTotalAmount = maxTotalAmount;
@@ -1119,7 +1100,6 @@ public class BillingRequestTemplateService {
              * The repeating period for this mandate. Required whenever a periodic limit is provided
              * (for both VRP and PayTo). If periodic_limits is omitted entirely for PayTo, this
              * defaults to flexible.
-             * 
              */
             public PeriodicLimits withPeriod(Period period) {
                 this.period = period;
@@ -1185,7 +1165,6 @@ public class BillingRequestTemplateService {
              * This is an optional field and if it is not supplied the agreement will be considered
              * open and will not have an end date. Keep in mind the end date must take into account
              * how long it will take the user to set up this agreement via the Billing Request.
-             * 
              */
             public MandateRequestConstraints withEndDate(String endDate) {
                 this.endDate = endDate;
@@ -1194,7 +1173,7 @@ public class BillingRequestTemplateService {
 
             /**
              * The maximum amount that can be charged for a single payment in the lowest
-             * denomination for the currency (e.g. pence in GBP, cents in EUR). _Note:_ Required for
+             * denomination for the currency (e.g. pence in GBP, cents in EUR). Note: Required for
              * PayTo and VRP.
              */
             public MandateRequestConstraints withMaxAmountPerPayment(Integer maxAmountPerPayment) {
@@ -1205,8 +1184,7 @@ public class BillingRequestTemplateService {
             /**
              * A constraint where you can specify info (free text string) about how payments are
              * calculated. For use when payments vary and cannot be expressed as a fixed amount and
-             * frequency. _Note:_ This is only supported for ACH and PAD schemes.
-             * 
+             * frequency. Note: This is only supported for ACH and PAD schemes.
              */
             public MandateRequestConstraints withPaymentMethod(String paymentMethod) {
                 this.paymentMethod = paymentMethod;
@@ -1218,9 +1196,8 @@ public class BillingRequestTemplateService {
              * repeating period (e.g. no more than a set amount per month), as opposed to
              * `max_amount_per_payment` which caps a single payment.
              * 
-             * _Note:_ Required for VRP, where exactly one periodic limit must be provided. Optional
+             * Note: Required for VRP, where exactly one periodic limit must be provided. Optional
              * for PayTo.
-             * 
              */
             public MandateRequestConstraints withPeriodicLimits(
                     List<PeriodicLimits> periodicLimits) {
@@ -1233,7 +1210,6 @@ public class BillingRequestTemplateService {
              * 
              * This is an optional field and if it is not supplied the start date will be set to the
              * day authorisation happens.
-             * 
              */
             public MandateRequestConstraints withStartDate(String startDate) {
                 this.startDate = startDate;

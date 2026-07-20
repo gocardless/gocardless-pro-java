@@ -28,20 +28,21 @@ public class BankDetailsLookupService {
      * a sort code or an iban are already present), we verify that the account holder name and bank
      * account number match the details held by the relevant bank.
      * 
-     * If your request returns an [error](#api-usage-errors) or the `available_debit_schemes`
-     * attribute is an empty array, you will not be able to collect payments from the specified bank
-     * account. GoCardless may be able to collect payments from an account even if no `bic` is
-     * returned.
+     * If your request returns an error
+     * (https://developer.gocardless.com/api-reference/#api-usage-errors) or the
+     * `available_debit_schemes` attribute is an empty array, you will not be able to collect
+     * payments from the specified bank account. GoCardless may be able to collect payments from an
+     * account even if no `bic` is returned.
      * 
-     * Bank account details may be supplied using [local details](#appendix-local-bank-details) or
-     * an IBAN.
+     * Bank account details may be supplied using local details
+     * (https://developer.gocardless.com/api-reference/#appendix-local-bank-details) or an IBAN.
      * 
-     * _ACH scheme_ For compliance reasons, an extra validation step is done using a third-party
+     * ACH scheme For compliance reasons, an extra validation step is done using a third-party
      * provider to make sure the customer's bank account can accept Direct Debit. If a bank account
      * is discovered to be closed or invalid, the customer is requested to adjust the account
      * number/routing number and succeed in this check to continue with the flow.
      * 
-     * _Note:_ Usage of this endpoint is monitored. If your organisation relies on GoCardless for
+     * Note: Usage of this endpoint is monitored. If your organisation relies on GoCardless for
      * modulus or reachability checking but not for payment collection, please get in touch.
      */
     public BankDetailsLookupCreateRequest create() {
@@ -58,20 +59,21 @@ public class BankDetailsLookupService {
      * a sort code or an iban are already present), we verify that the account holder name and bank
      * account number match the details held by the relevant bank.
      * 
-     * If your request returns an [error](#api-usage-errors) or the `available_debit_schemes`
-     * attribute is an empty array, you will not be able to collect payments from the specified bank
-     * account. GoCardless may be able to collect payments from an account even if no `bic` is
-     * returned.
+     * If your request returns an error
+     * (https://developer.gocardless.com/api-reference/#api-usage-errors) or the
+     * `available_debit_schemes` attribute is an empty array, you will not be able to collect
+     * payments from the specified bank account. GoCardless may be able to collect payments from an
+     * account even if no `bic` is returned.
      * 
-     * Bank account details may be supplied using [local details](#appendix-local-bank-details) or
-     * an IBAN.
+     * Bank account details may be supplied using local details
+     * (https://developer.gocardless.com/api-reference/#appendix-local-bank-details) or an IBAN.
      * 
-     * _ACH scheme_ For compliance reasons, an extra validation step is done using a third-party
+     * ACH scheme For compliance reasons, an extra validation step is done using a third-party
      * provider to make sure the customer's bank account can accept Direct Debit. If a bank account
      * is discovered to be closed or invalid, the customer is requested to adjust the account
      * number/routing number and succeed in this check to continue with the flow.
      * 
-     * _Note:_ Usage of this endpoint is monitored. If your organisation relies on GoCardless for
+     * Note: Usage of this endpoint is monitored. If your organisation relies on GoCardless for
      * modulus or reachability checking but not for payment collection, please get in touch.
      */
     public static final class BankDetailsLookupCreateRequest
@@ -93,7 +95,8 @@ public class BankDetailsLookupService {
         }
 
         /**
-         * Bank account number - see [local details](#appendix-local-bank-details) for more
+         * Bank account number - see local details
+         * (https://developer.gocardless.com/api-reference/#appendix-local-bank-details) for more
          * information. Alternatively you can provide an `iban`.
          */
         public BankDetailsLookupCreateRequest withAccountNumber(String accountNumber) {
@@ -102,8 +105,9 @@ public class BankDetailsLookupService {
         }
 
         /**
-         * Bank code - see [local details](#appendix-local-bank-details) for more information.
-         * Alternatively you can provide an `iban`.
+         * Bank code - see local details
+         * (https://developer.gocardless.com/api-reference/#appendix-local-bank-details) for more
+         * information. Alternatively you can provide an `iban`.
          */
         public BankDetailsLookupCreateRequest withBankCode(String bankCode) {
             this.bankCode = bankCode;
@@ -111,8 +115,9 @@ public class BankDetailsLookupService {
         }
 
         /**
-         * Branch code - see [local details](#appendix-local-bank-details) for more information.
-         * Alternatively you can provide an `iban`.
+         * Branch code - see local details
+         * (https://developer.gocardless.com/api-reference/#appendix-local-bank-details) for more
+         * information. Alternatively you can provide an `iban`.
          */
         public BankDetailsLookupCreateRequest withBranchCode(String branchCode) {
             this.branchCode = branchCode;
@@ -120,8 +125,8 @@ public class BankDetailsLookupService {
         }
 
         /**
-         * [ISO
-         * 3166-1](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2#Officially_assigned_code_elements)
+         * ISO 3166-1
+         * (https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2#Officially_assigned_code_elements)
          * alpha-2 code. Must be provided if specifying local details.
          */
         public BankDetailsLookupCreateRequest withCountryCode(String countryCode) {
@@ -130,8 +135,8 @@ public class BankDetailsLookupService {
         }
 
         /**
-         * International Bank Account Number. Alternatively you can provide [local
-         * details](#appendix-local-bank-details).
+         * International Bank Account Number. Alternatively you can provide local details
+         * (https://developer.gocardless.com/api-reference/#appendix-local-bank-details).
          */
         public BankDetailsLookupCreateRequest withIban(String iban) {
             this.iban = iban;

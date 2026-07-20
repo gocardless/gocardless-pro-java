@@ -15,10 +15,8 @@ import java.util.Map;
  * Note that these are ephemeral records - once the notification has been actioned in some way, it
  * is no longer visible using this API.
  * 
- * <p class="restricted-notice">
- * <strong>Restricted</strong>: This API is currently only available for approved integrators -
- * please <a href="mailto:help@gocardless.com">get in touch</a> if you would like to use this API.
- * </p>
+ * Restricted: This API is currently only available for approved integrators - please get in touch
+ * (mailto:help@gocardless.com) if you would like to use this API.
  */
 public class CustomerNotificationService {
     private final HttpClient httpClient;
@@ -37,7 +35,6 @@ public class CustomerNotificationService {
      * GoCardless to send it). If the notification has already been actioned, or the deadline to
      * notify has passed, this endpoint will return an `already_actioned` error and you should not
      * take further action. This endpoint takes no additional parameters.
-     * 
      */
     public CustomerNotificationHandleRequest handle(String identity) {
         return new CustomerNotificationHandleRequest(httpClient, identity);
@@ -50,7 +47,6 @@ public class CustomerNotificationService {
      * GoCardless to send it). If the notification has already been actioned, or the deadline to
      * notify has passed, this endpoint will return an `already_actioned` error and you should not
      * take further action. This endpoint takes no additional parameters.
-     * 
      */
     public static final class CustomerNotificationHandleRequest
             extends PostRequest<CustomerNotification> {

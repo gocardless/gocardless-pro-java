@@ -36,6 +36,7 @@ public class CustomerBankAccount {
     private String id;
     private Links links;
     private Map<String, String> metadata;
+    private PayerNameVerificationResult payerNameVerificationResult;
     private Boolean trustedRecipient;
 
     /**
@@ -131,6 +132,21 @@ public class CustomerBankAccount {
     }
 
     /**
+     * The result of the payer name verification check performed when the bank account was created.
+     * Only present if a check was performed.
+     * 
+     * - `full`: The name provided matches the name held by the bank. - `close`: The name provided
+     * is a close but not exact match to the name held by the bank. - `cannot_perform_verification`:
+     * A verification was attempted but could not be completed. This can happen for a number of
+     * reasons, including the account holder's bank not participating in the verification scheme,
+     * the account not being eligible for verification (e.g. the account holder has opted out), or
+     * the bank details not being resolvable, among others.
+     */
+    public PayerNameVerificationResult getPayerNameVerificationResult() {
+        return payerNameVerificationResult;
+    }
+
+    /**
      * Whether this customer bank account is registered as a trusted recipient for Outbound
      * Payments. Only present when the feature is enabled for the organisation.
      */
@@ -142,6 +158,14 @@ public class CustomerBankAccount {
         @SerializedName("savings")
         SAVINGS, @SerializedName("checking")
         CHECKING, @SerializedName("unknown")
+        UNKNOWN
+    }
+
+    public enum PayerNameVerificationResult {
+        @SerializedName("full")
+        FULL, @SerializedName("close")
+        CLOSE, @SerializedName("cannot_perform_verification")
+        CANNOT_PERFORM_VERIFICATION, @SerializedName("unknown")
         UNKNOWN
     }
 

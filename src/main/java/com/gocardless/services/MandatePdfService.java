@@ -7,8 +7,9 @@ import com.google.gson.annotations.SerializedName;
 /**
  * Service class for working with mandate pdf resources.
  *
- * Mandate PDFs allow you to easily display [scheme-rules
- * compliant](#appendix-compliance-requirements) Direct Debit mandates to your customers.
+ * Mandate PDFs allow you to easily display scheme-rules compliant
+ * (https://developer.gocardless.com/api-reference/#appendix-compliance-requirements) Direct Debit
+ * mandates to your customers.
  */
 public class MandatePdfService {
     private final HttpClient httpClient;
@@ -25,13 +26,14 @@ public class MandatePdfService {
      * Generates a PDF mandate and returns its temporary URL.
      * 
      * Customer and bank account details can be left blank (for a blank mandate), provided manually,
-     * or inferred from the ID of an existing [mandate](#core-endpoints-mandates).
+     * or inferred from the ID of an existing mandate
+     * (https://developer.gocardless.com/api-reference/#core-endpoints-mandates).
      * 
      * By default, we'll generate PDF mandates in English.
      * 
      * To generate a PDF mandate in another language, set the `Accept-Language` header when creating
-     * the PDF mandate to the relevant [ISO
-     * 639-1](https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes) language code supported for the
+     * the PDF mandate to the relevant ISO 639-1
+     * (https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes) language code supported for the
      * scheme.
      * 
      * | Scheme | Supported languages | | :--------------- |
@@ -52,13 +54,14 @@ public class MandatePdfService {
      * Generates a PDF mandate and returns its temporary URL.
      * 
      * Customer and bank account details can be left blank (for a blank mandate), provided manually,
-     * or inferred from the ID of an existing [mandate](#core-endpoints-mandates).
+     * or inferred from the ID of an existing mandate
+     * (https://developer.gocardless.com/api-reference/#core-endpoints-mandates).
      * 
      * By default, we'll generate PDF mandates in English.
      * 
      * To generate a PDF mandate in another language, set the `Accept-Language` header when creating
-     * the PDF mandate to the relevant [ISO
-     * 639-1](https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes) language code supported for the
+     * the PDF mandate to the relevant ISO 639-1
+     * (https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes) language code supported for the
      * scheme.
      * 
      * | Scheme | Supported languages | | :--------------- |
@@ -100,7 +103,8 @@ public class MandatePdfService {
 
         /**
          * Name of the account holder, as known by the bank. Usually this matches the name of the
-         * [customer](#core-endpoints-customers). This field cannot exceed 18 characters.
+         * customer (https://developer.gocardless.com/api-reference/#core-endpoints-customers). This
+         * field cannot exceed 18 characters.
          */
         public MandatePdfCreateRequest withAccountHolderName(String accountHolderName) {
             this.accountHolderName = accountHolderName;
@@ -108,7 +112,8 @@ public class MandatePdfService {
         }
 
         /**
-         * Bank account number - see [local details](#appendix-local-bank-details) for more
+         * Bank account number - see local details
+         * (https://developer.gocardless.com/api-reference/#appendix-local-bank-details) for more
          * information. Alternatively you can provide an `iban`.
          */
         public MandatePdfCreateRequest withAccountNumber(String accountNumber) {
@@ -118,8 +123,9 @@ public class MandatePdfService {
 
         /**
          * Bank account type. Required for USD-denominated bank accounts. Must not be provided for
-         * bank accounts in other currencies. See [local details](#local-bank-details-united-states)
-         * for more information.
+         * bank accounts in other currencies. See local details
+         * (https://developer.gocardless.com/api-reference/#local-bank-details-united-states) for
+         * more information.
          */
         public MandatePdfCreateRequest withAccountType(AccountType accountType) {
             this.accountType = accountType;
@@ -151,8 +157,9 @@ public class MandatePdfService {
         }
 
         /**
-         * Bank code - see [local details](#appendix-local-bank-details) for more information.
-         * Alternatively you can provide an `iban`.
+         * Bank code - see local details
+         * (https://developer.gocardless.com/api-reference/#appendix-local-bank-details) for more
+         * information. Alternatively you can provide an `iban`.
          */
         public MandatePdfCreateRequest withBankCode(String bankCode) {
             this.bankCode = bankCode;
@@ -160,8 +167,9 @@ public class MandatePdfService {
         }
 
         /**
-         * SWIFT BIC. Will be derived automatically if a valid `iban` or [local
-         * details](#appendix-local-bank-details) are provided.
+         * SWIFT BIC. Will be derived automatically if a valid `iban` or local details
+         * (https://developer.gocardless.com/api-reference/#appendix-local-bank-details) are
+         * provided.
          */
         public MandatePdfCreateRequest withBic(String bic) {
             this.bic = bic;
@@ -169,8 +177,9 @@ public class MandatePdfService {
         }
 
         /**
-         * Branch code - see [local details](#appendix-local-bank-details) for more information.
-         * Alternatively you can provide an `iban`.
+         * Branch code - see local details
+         * (https://developer.gocardless.com/api-reference/#appendix-local-bank-details) for more
+         * information. Alternatively you can provide an `iban`.
          */
         public MandatePdfCreateRequest withBranchCode(String branchCode) {
             this.branchCode = branchCode;
@@ -195,8 +204,8 @@ public class MandatePdfService {
         }
 
         /**
-         * [ISO
-         * 3166-1](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2#Officially_assigned_code_elements)
+         * ISO 3166-1
+         * (https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2#Officially_assigned_code_elements)
          * alpha-2 code. Required if providing local details.
          */
         public MandatePdfCreateRequest withCountryCode(String countryCode) {
@@ -232,8 +241,9 @@ public class MandatePdfService {
         }
 
         /**
-         * International Bank Account Number. Alternatively you can provide [local
-         * details](#appendix-local-bank-details). IBANs cannot be provided for Autogiro mandates.
+         * International Bank Account Number. Alternatively you can provide local details
+         * (https://developer.gocardless.com/api-reference/#appendix-local-bank-details). IBANs
+         * cannot be provided for Autogiro mandates.
          */
         public MandatePdfCreateRequest withIban(String iban) {
             this.iban = iban;
@@ -246,8 +256,9 @@ public class MandatePdfService {
         }
 
         /**
-         * ID of an existing [creditor](#core-endpoints-creditors). Only required if your account
-         * manages multiple creditors.
+         * ID of an existing creditor
+         * (https://developer.gocardless.com/api-reference/#core-endpoints-creditors). Only required
+         * if your account manages multiple creditors.
          */
         public MandatePdfCreateRequest withLinksCreditor(String creditor) {
             if (links == null) {
@@ -258,9 +269,10 @@ public class MandatePdfService {
         }
 
         /**
-         * ID of an existing [mandate](#core-endpoints-mandates) to build the PDF from. The
-         * customer's bank details will be censored in the generated PDF. No other parameters may be
-         * provided alongside this.
+         * ID of an existing mandate
+         * (https://developer.gocardless.com/api-reference/#core-endpoints-mandates) to build the
+         * PDF from. The customer's bank details will be censored in the generated PDF. No other
+         * parameters may be provided alongside this.
          */
         public MandatePdfCreateRequest withLinksMandate(String mandate) {
             if (links == null) {
@@ -306,7 +318,7 @@ public class MandatePdfService {
 
         /**
          * The customer's address region, county or department. For US customers a 2 letter
-         * [ISO3166-2:US](https://en.wikipedia.org/wiki/ISO_3166-2:US) state code is required (e.g.
+         * ISO3166-2:US (https://en.wikipedia.org/wiki/ISO_3166-2:US) state code is required (e.g.
          * `CA` for California).
          */
         public MandatePdfCreateRequest withRegion(String region) {
@@ -317,7 +329,9 @@ public class MandatePdfService {
         /**
          * Direct Debit scheme. Can be supplied or automatically detected from the bank account
          * details provided. If you do not provide a scheme, you must provide either a mandate, an
-         * `iban`, or [local details](#appendix-local-bank-details) including a `country_code`.
+         * `iban`, or local details
+         * (https://developer.gocardless.com/api-reference/#appendix-local-bank-details) including a
+         * `country_code`.
          */
         public MandatePdfCreateRequest withScheme(String scheme) {
             this.scheme = scheme;
@@ -407,8 +421,9 @@ public class MandatePdfService {
             private String mandate;
 
             /**
-             * ID of an existing [creditor](#core-endpoints-creditors). Only required if your
-             * account manages multiple creditors.
+             * ID of an existing creditor
+             * (https://developer.gocardless.com/api-reference/#core-endpoints-creditors). Only
+             * required if your account manages multiple creditors.
              */
             public Links withCreditor(String creditor) {
                 this.creditor = creditor;
@@ -416,9 +431,10 @@ public class MandatePdfService {
             }
 
             /**
-             * ID of an existing [mandate](#core-endpoints-mandates) to build the PDF from. The
-             * customer's bank details will be censored in the generated PDF. No other parameters
-             * may be provided alongside this.
+             * ID of an existing mandate
+             * (https://developer.gocardless.com/api-reference/#core-endpoints-mandates) to build
+             * the PDF from. The customer's bank details will be censored in the generated PDF. No
+             * other parameters may be provided alongside this.
              */
             public Links withMandate(String mandate) {
                 this.mandate = mandate;

@@ -10,8 +10,8 @@ import java.util.Map;
 /**
  * Service class for working with payment account resources.
  *
- * Access the details of bank accounts provided for you by GoCardless that are used to fund
- * [Outbound Payments](#core-endpoints-outbound-payments).
+ * Access the details of bank accounts provided for you by GoCardless that are used to fund Outbound
+ * Payments (https://developer.gocardless.com/api-reference/#core-endpoints-outbound-payments).
  */
 public class PaymentAccountService {
     private final HttpClient httpClient;
@@ -32,7 +32,9 @@ public class PaymentAccountService {
     }
 
     /**
-     * Returns a [cursor-paginated](#api-usage-cursor-pagination) list of your payment accounts.
+     * Returns a cursor-paginated
+     * (https://developer.gocardless.com/api-reference/#api-usage-cursor-pagination) list of your
+     * payment accounts.
      */
     public PaymentAccountListRequest<ListResponse<PaymentAccount>> list() {
         return new PaymentAccountListRequest<>(httpClient,
@@ -89,7 +91,9 @@ public class PaymentAccountService {
     /**
      * Request class for {@link PaymentAccountService#list }.
      *
-     * Returns a [cursor-paginated](#api-usage-cursor-pagination) list of your payment accounts.
+     * Returns a cursor-paginated
+     * (https://developer.gocardless.com/api-reference/#api-usage-cursor-pagination) list of your
+     * payment accounts.
      */
     public static final class PaymentAccountListRequest<S> extends ListRequest<S, PaymentAccount> {
         /**

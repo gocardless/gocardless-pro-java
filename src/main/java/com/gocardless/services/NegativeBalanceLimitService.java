@@ -14,7 +14,6 @@ import java.util.Map;
  * The negative balance limit is a threshold for the creditor balance beyond which refunds are not
  * permitted. The default limit is zero — refunds are not permitted if the creditor has a negative
  * balance. The limit can be changed on a per-creditor basis.
- * 
  */
 public class NegativeBalanceLimitService {
     private final HttpClient httpClient;
@@ -29,7 +28,9 @@ public class NegativeBalanceLimitService {
     }
 
     /**
-     * Returns a [cursor-paginated](#api-usage-cursor-pagination) list of negative balance limits.
+     * Returns a cursor-paginated
+     * (https://developer.gocardless.com/api-reference/#api-usage-cursor-pagination) list of
+     * negative balance limits.
      */
     public NegativeBalanceLimitListRequest<ListResponse<NegativeBalanceLimit>> list() {
         return new NegativeBalanceLimitListRequest<>(httpClient,
@@ -44,7 +45,9 @@ public class NegativeBalanceLimitService {
     /**
      * Request class for {@link NegativeBalanceLimitService#list }.
      *
-     * Returns a [cursor-paginated](#api-usage-cursor-pagination) list of negative balance limits.
+     * Returns a cursor-paginated
+     * (https://developer.gocardless.com/api-reference/#api-usage-cursor-pagination) list of
+     * negative balance limits.
      */
     public static final class NegativeBalanceLimitListRequest<S>
             extends ListRequest<S, NegativeBalanceLimit> {
@@ -76,7 +79,7 @@ public class NegativeBalanceLimitService {
         }
 
         /**
-         * [ISO 4217](https://en.wikipedia.org/wiki/ISO_4217#Active_codes) currency code. Currently
+         * ISO 4217 (https://en.wikipedia.org/wiki/ISO_4217#Active_codes) currency code. Currently
          * "AUD", "CAD", "DKK", "EUR", "GBP", "NZD", "SEK" and "USD" are supported.
          */
         public NegativeBalanceLimitListRequest<S> withCurrency(Currency currency) {

@@ -12,17 +12,17 @@ import java.util.Map;
 /**
  * Service class for working with creditor bank account resources.
  *
- * Creditor Bank Accounts hold the bank details of a [creditor](#core-endpoints-creditors). These
- * are the bank accounts which your [payouts](#core-endpoints-payouts) will be sent to.
+ * Creditor Bank Accounts hold the bank details of a creditor
+ * (https://developer.gocardless.com/api-reference/#core-endpoints-creditors). These are the bank
+ * accounts which your payouts
+ * (https://developer.gocardless.com/api-reference/#core-endpoints-payouts) will be sent to.
  * 
  * Note that creditor bank accounts must be unique, and so you will encounter a
  * `bank_account_exists` error if you try to create a duplicate bank account. You may wish to handle
  * this by updating the existing record instead, the ID of which will be provided as
  * `links[creditor_bank_account]` in the error response.
  * 
- * <p class="restricted-notice">
- * <strong>Restricted</strong>: This API is not available for partner integrations.
- * </p>
+ * Restricted: This API is not available for partner integrations.
  */
 public class CreditorBankAccountService {
     private final HttpClient httpClient;
@@ -44,8 +44,9 @@ public class CreditorBankAccountService {
     }
 
     /**
-     * Returns a [cursor-paginated](#api-usage-cursor-pagination) list of your creditor bank
-     * accounts.
+     * Returns a cursor-paginated
+     * (https://developer.gocardless.com/api-reference/#api-usage-cursor-pagination) list of your
+     * creditor bank accounts.
      */
     public CreditorBankAccountListRequest<ListResponse<CreditorBankAccount>> list() {
         return new CreditorBankAccountListRequest<>(httpClient,
@@ -97,8 +98,9 @@ public class CreditorBankAccountService {
 
         /**
          * Name of the account holder, as known by the bank. Usually this is the same as the name
-         * stored with the linked [creditor](#core-endpoints-creditors). This field will be
-         * transliterated, upcased and truncated to 18 characters.
+         * stored with the linked creditor
+         * (https://developer.gocardless.com/api-reference/#core-endpoints-creditors). This field
+         * will be transliterated, upcased and truncated to 18 characters.
          */
         public CreditorBankAccountCreateRequest withAccountHolderName(String accountHolderName) {
             this.accountHolderName = accountHolderName;
@@ -106,7 +108,8 @@ public class CreditorBankAccountService {
         }
 
         /**
-         * Bank account number - see [local details](#appendix-local-bank-details) for more
+         * Bank account number - see local details
+         * (https://developer.gocardless.com/api-reference/#appendix-local-bank-details) for more
          * information. Alternatively you can provide an `iban`.
          */
         public CreditorBankAccountCreateRequest withAccountNumber(String accountNumber) {
@@ -116,8 +119,9 @@ public class CreditorBankAccountService {
 
         /**
          * Bank account type. Required for USD-denominated bank accounts. Must not be provided for
-         * bank accounts in other currencies. See [local details](#local-bank-details-united-states)
-         * for more information.
+         * bank accounts in other currencies. See local details
+         * (https://developer.gocardless.com/api-reference/#local-bank-details-united-states) for
+         * more information.
          */
         public CreditorBankAccountCreateRequest withAccountType(AccountType accountType) {
             this.accountType = accountType;
@@ -125,8 +129,9 @@ public class CreditorBankAccountService {
         }
 
         /**
-         * Bank code - see [local details](#appendix-local-bank-details) for more information.
-         * Alternatively you can provide an `iban`.
+         * Bank code - see local details
+         * (https://developer.gocardless.com/api-reference/#appendix-local-bank-details) for more
+         * information. Alternatively you can provide an `iban`.
          */
         public CreditorBankAccountCreateRequest withBankCode(String bankCode) {
             this.bankCode = bankCode;
@@ -134,8 +139,9 @@ public class CreditorBankAccountService {
         }
 
         /**
-         * Branch code - see [local details](#appendix-local-bank-details) for more information.
-         * Alternatively you can provide an `iban`.
+         * Branch code - see local details
+         * (https://developer.gocardless.com/api-reference/#appendix-local-bank-details) for more
+         * information. Alternatively you can provide an `iban`.
          */
         public CreditorBankAccountCreateRequest withBranchCode(String branchCode) {
             this.branchCode = branchCode;
@@ -143,8 +149,8 @@ public class CreditorBankAccountService {
         }
 
         /**
-         * [ISO 3166-1 alpha-2
-         * code](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2#Officially_assigned_code_elements).
+         * ISO 3166-1 alpha-2 code
+         * (https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2#Officially_assigned_code_elements).
          * Defaults to the country code of the `iban` if supplied, otherwise is required.
          */
         public CreditorBankAccountCreateRequest withCountryCode(String countryCode) {
@@ -153,7 +159,7 @@ public class CreditorBankAccountService {
         }
 
         /**
-         * [ISO 4217](https://en.wikipedia.org/wiki/ISO_4217#Active_codes) currency code. Currently
+         * ISO 4217 (https://en.wikipedia.org/wiki/ISO_4217#Active_codes) currency code. Currently
          * "AUD", "CAD", "DKK", "EUR", "GBP", "NZD", "SEK" and "USD" are supported.
          */
         public CreditorBankAccountCreateRequest withCurrency(String currency) {
@@ -162,9 +168,10 @@ public class CreditorBankAccountService {
         }
 
         /**
-         * International Bank Account Number. Alternatively you can provide [local
-         * details](#appendix-local-bank-details). IBANs are not accepted for Swedish bank accounts
-         * denominated in SEK - you must supply [local details](#local-bank-details-sweden).
+         * International Bank Account Number. Alternatively you can provide local details
+         * (https://developer.gocardless.com/api-reference/#appendix-local-bank-details). IBANs are
+         * not accepted for Swedish bank accounts denominated in SEK - you must supply local details
+         * (https://developer.gocardless.com/api-reference/#local-bank-details-sweden).
          */
         public CreditorBankAccountCreateRequest withIban(String iban) {
             this.iban = iban;
@@ -177,7 +184,9 @@ public class CreditorBankAccountService {
         }
 
         /**
-         * ID of the [creditor](#core-endpoints-creditors) that owns this bank account.
+         * ID of the creditor
+         * (https://developer.gocardless.com/api-reference/#core-endpoints-creditors) that owns this
+         * bank account.
          */
         public CreditorBankAccountCreateRequest withLinksCreditor(String creditor) {
             if (links == null) {
@@ -278,7 +287,9 @@ public class CreditorBankAccountService {
             private String creditor;
 
             /**
-             * ID of the [creditor](#core-endpoints-creditors) that owns this bank account.
+             * ID of the creditor
+             * (https://developer.gocardless.com/api-reference/#core-endpoints-creditors) that owns
+             * this bank account.
              */
             public Links withCreditor(String creditor) {
                 this.creditor = creditor;
@@ -290,8 +301,9 @@ public class CreditorBankAccountService {
     /**
      * Request class for {@link CreditorBankAccountService#list }.
      *
-     * Returns a [cursor-paginated](#api-usage-cursor-pagination) list of your creditor bank
-     * accounts.
+     * Returns a cursor-paginated
+     * (https://developer.gocardless.com/api-reference/#api-usage-cursor-pagination) list of your
+     * creditor bank accounts.
      */
     public static final class CreditorBankAccountListRequest<S>
             extends ListRequest<S, CreditorBankAccount> {

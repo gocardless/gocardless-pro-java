@@ -13,7 +13,6 @@ import java.util.Map;
  *
  * This represents a scheme identifier (e.g. a SUN in Bacs or a CID in SEPA). Scheme identifiers are
  * used to specify the beneficiary name that appears on customers' bank statements.
- * 
  */
 public class SchemeIdentifierService {
     private final HttpClient httpClient;
@@ -35,14 +34,14 @@ public class SchemeIdentifierService {
      * working days for a scheme identifier to become active. On other schemes, including SEPA, this
      * happens instantly.
      * 
-     * #### Scheme identifier name validations
+     * Scheme identifier name validations
      * 
      * The `name` field of a scheme identifier can contain alphanumeric characters, spaces and
      * special characters.
      * 
      * Its maximum length and the special characters it supports depend on the scheme:
      * 
-     * | __scheme__ | __maximum length__ | __special characters allowed__ | | :---------------- |
+     * | scheme | maximum length | special characters allowed | | :---------------- |
      * :----------------- | :-------------------------------------------------- | | `bacs` | 18
      * characters | `/` `.` `&` `-` | | `sepa` | 70 characters | `/` `?` `:` `(` `)` `.` `,` `+` `&`
      * `<` `>` `'` `"` | | `ach` | 16 characters | `/` `?` `:` `(` `)` `.` `,` `'` `+` `-` | |
@@ -53,14 +52,15 @@ public class SchemeIdentifierService {
      * 
      * You should ensure that the name you set matches the legal name or the trading name of the
      * creditor, otherwise, there is an increased risk of chargeback.
-     * 
      */
     public SchemeIdentifierCreateRequest create() {
         return new SchemeIdentifierCreateRequest(httpClient);
     }
 
     /**
-     * Returns a [cursor-paginated](#api-usage-cursor-pagination) list of your scheme identifiers.
+     * Returns a cursor-paginated
+     * (https://developer.gocardless.com/api-reference/#api-usage-cursor-pagination) list of your
+     * scheme identifiers.
      */
     public SchemeIdentifierListRequest<ListResponse<SchemeIdentifier>> list() {
         return new SchemeIdentifierListRequest<>(httpClient,
@@ -89,14 +89,14 @@ public class SchemeIdentifierService {
      * working days for a scheme identifier to become active. On other schemes, including SEPA, this
      * happens instantly.
      * 
-     * #### Scheme identifier name validations
+     * Scheme identifier name validations
      * 
      * The `name` field of a scheme identifier can contain alphanumeric characters, spaces and
      * special characters.
      * 
      * Its maximum length and the special characters it supports depend on the scheme:
      * 
-     * | __scheme__ | __maximum length__ | __special characters allowed__ | | :---------------- |
+     * | scheme | maximum length | special characters allowed | | :---------------- |
      * :----------------- | :-------------------------------------------------- | | `bacs` | 18
      * characters | `/` `.` `&` `-` | | `sepa` | 70 characters | `/` `?` `:` `(` `)` `.` `,` `+` `&`
      * `<` `>` `'` `"` | | `ach` | 16 characters | `/` `?` `:` `(` `)` `.` `,` `'` `+` `-` | |
@@ -107,7 +107,6 @@ public class SchemeIdentifierService {
      * 
      * You should ensure that the name you set matches the legal name or the trading name of the
      * creditor, otherwise, there is an increased risk of chargeback.
-     * 
      */
     public static final class SchemeIdentifierCreateRequest
             extends IdempotentPostRequest<SchemeIdentifier> {
@@ -121,8 +120,8 @@ public class SchemeIdentifierService {
         }
 
         /**
-         * <em>required</em> ID of the associated [creditor](#core-endpoints-creditors).
-         * 
+         * required ID of the associated creditor
+         * (https://developer.gocardless.com/api-reference/#core-endpoints-creditors).
          */
         public SchemeIdentifierCreateRequest withLinksCreditor(String creditor) {
             if (links == null) {
@@ -218,8 +217,8 @@ public class SchemeIdentifierService {
             private String creditor;
 
             /**
-             * <em>required</em> ID of the associated [creditor](#core-endpoints-creditors).
-             * 
+             * required ID of the associated creditor
+             * (https://developer.gocardless.com/api-reference/#core-endpoints-creditors).
              */
             public Links withCreditor(String creditor) {
                 this.creditor = creditor;
@@ -231,7 +230,9 @@ public class SchemeIdentifierService {
     /**
      * Request class for {@link SchemeIdentifierService#list }.
      *
-     * Returns a [cursor-paginated](#api-usage-cursor-pagination) list of your scheme identifiers.
+     * Returns a cursor-paginated
+     * (https://developer.gocardless.com/api-reference/#api-usage-cursor-pagination) list of your
+     * scheme identifiers.
      */
     public static final class SchemeIdentifierListRequest<S>
             extends ListRequest<S, SchemeIdentifier> {

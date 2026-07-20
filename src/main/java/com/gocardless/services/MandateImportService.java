@@ -14,31 +14,35 @@ import java.util.Map;
  * 
  * The process is as follows:
  * 
- * 1. [Create a mandate import](#mandate-imports-create-a-new-mandate-import) 2. [Add
- * entries](#mandate-import-entries-add-a-mandate-import-entry) to the import 3.
- * [Submit](#mandate-imports-submit-a-mandate-import) the import 4. Wait until a member of the
- * GoCardless team approves the import, at which point the mandates will be created 5. [Link up the
- * mandates](#mandate-import-entries-list-all-mandate-import-entries) in your system
+ * 1. Create a mandate import
+ * (https://developer.gocardless.com/api-reference/#mandate-imports-create-a-new-mandate-import) 2.
+ * Add entries
+ * (https://developer.gocardless.com/api-reference/#mandate-import-entries-add-a-mandate-import-entry)
+ * to the import 3. Submit
+ * (https://developer.gocardless.com/api-reference/#mandate-imports-submit-a-mandate-import) the
+ * import 4. Wait until a member of the GoCardless team approves the import, at which point the
+ * mandates will be created 5. Link up the mandates
+ * (https://developer.gocardless.com/api-reference/#mandate-import-entries-list-all-mandate-import-entries)
+ * in your system
  * 
  * When you add entries to your mandate import, they are not turned into actual mandates until the
  * mandate import is submitted by you via the API, and then processed by a member of the GoCardless
  * team. When that happens, a mandate will be created for each entry in the import.
  * 
  * We will issue a `mandate_created` webhook for each entry, which will be the same as the webhooks
- * triggered when [ creating a mandate ](#mandates-create-a-mandate) using the mandates API. Once
- * these webhooks start arriving, any reconciliation can now be accomplished by [checking the
- * current status](#mandate-imports-get-a-mandate-import) of the mandate import and [linking up the
- * mandates to your system](#mandate-import-entries-list-all-mandate-import-entries).
+ * triggered when creating a mandate
+ * (https://developer.gocardless.com/api-reference/#mandates-create-a-mandate) using the mandates
+ * API. Once these webhooks start arriving, any reconciliation can now be accomplished by checking
+ * the current status
+ * (https://developer.gocardless.com/api-reference/#mandate-imports-get-a-mandate-import) of the
+ * mandate import and linking up the mandates to your system
+ * (https://developer.gocardless.com/api-reference/#mandate-import-entries-list-all-mandate-import-entries).
  * 
- * <p class="notice">
  * Note that all Mandate Imports have an upper limit of 30,000 entries, so we recommend you split
  * your import into several smaller imports if you're planning to exceed this threshold.
- * </p>
  * 
- * <p class="restricted-notice">
- * <strong>Restricted</strong>: This API is currently only available for approved integrators -
- * please <a href="mailto:help@gocardless.com">get in touch</a> if you would like to use this API.
- * </p>
+ * Restricted: This API is currently only available for approved integrators - please get in touch
+ * (mailto:help@gocardless.com) if you would like to use this API.
  */
 public class MandateImportService {
     private final HttpClient httpClient;
@@ -54,7 +58,8 @@ public class MandateImportService {
     /**
      * Mandate imports are first created, before mandates are added one-at-a-time, so this endpoint
      * merely signals the start of the import process. Once you've finished adding entries to an
-     * import, you should [submit](#mandate-imports-submit-a-mandate-import) it.
+     * import, you should submit
+     * (https://developer.gocardless.com/api-reference/#mandate-imports-submit-a-mandate-import) it.
      */
     public MandateImportCreateRequest create() {
         return new MandateImportCreateRequest(httpClient);
@@ -93,7 +98,8 @@ public class MandateImportService {
      *
      * Mandate imports are first created, before mandates are added one-at-a-time, so this endpoint
      * merely signals the start of the import process. Once you've finished adding entries to an
-     * import, you should [submit](#mandate-imports-submit-a-mandate-import) it.
+     * import, you should submit
+     * (https://developer.gocardless.com/api-reference/#mandate-imports-submit-a-mandate-import) it.
      */
     public static final class MandateImportCreateRequest
             extends IdempotentPostRequest<MandateImport> {

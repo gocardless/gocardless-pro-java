@@ -31,10 +31,8 @@ import java.util.Map;
  * an existing bank account must be used when creating this block. Please be aware that we cannot
  * always match a bank account to a given bank name.
  * 
- * <p class="notice">
- * This API is currently only available for GoCardless Protect+ integrators - please
- * <a href="mailto:help@gocardless.com">get in touch</a> if you would like to use this API.
- * </p>
+ * This API is currently only available for GoCardless Protect+ integrators - please get in touch
+ * (mailto:help@gocardless.com) if you would like to use this API.
  */
 public class BlockService {
     private final HttpClient httpClient;
@@ -62,7 +60,9 @@ public class BlockService {
     }
 
     /**
-     * Returns a [cursor-paginated](#api-usage-cursor-pagination) list of your blocks.
+     * Returns a cursor-paginated
+     * (https://developer.gocardless.com/api-reference/#api-usage-cursor-pagination) list of your
+     * blocks.
      */
     public BlockListRequest<ListResponse<Block>> list() {
         return new BlockListRequest<>(httpClient, ListRequest.<Block>pagingExecutor());
@@ -244,7 +244,9 @@ public class BlockService {
     /**
      * Request class for {@link BlockService#list }.
      *
-     * Returns a [cursor-paginated](#api-usage-cursor-pagination) list of your blocks.
+     * Returns a cursor-paginated
+     * (https://developer.gocardless.com/api-reference/#api-usage-cursor-pagination) list of your
+     * blocks.
      */
     public static final class BlockListRequest<S> extends ListRequest<S, Block> {
         private String block;
@@ -270,7 +272,7 @@ public class BlockService {
         }
 
         /**
-         * ID of a [Block](#core-endpoints-blocks).
+         * ID of a Block (https://developer.gocardless.com/api-reference/#core-endpoints-blocks).
          */
         public BlockListRequest<S> withBlock(String block) {
             this.block = block;
@@ -287,7 +289,9 @@ public class BlockService {
         }
 
         /**
-         * Fixed [timestamp](#api-usage-dates-and-times), recording when this resource was created.
+         * Fixed timestamp
+         * (https://developer.gocardless.com/api-reference/#api-usage-dates-and-times), recording
+         * when this resource was created.
          */
         public BlockListRequest<S> withCreatedAt(String createdAt) {
             this.createdAt = createdAt;
@@ -313,7 +317,9 @@ public class BlockService {
         }
 
         /**
-         * Fixed [timestamp](#api-usage-dates-and-times), recording when this resource was updated.
+         * Fixed timestamp
+         * (https://developer.gocardless.com/api-reference/#api-usage-dates-and-times), recording
+         * when this resource was updated.
          */
         public BlockListRequest<S> withUpdatedAt(String updatedAt) {
             this.updatedAt = updatedAt;
