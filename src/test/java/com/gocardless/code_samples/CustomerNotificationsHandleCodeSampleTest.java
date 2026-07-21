@@ -46,7 +46,7 @@ public class CustomerNotificationsHandleCodeSampleTest {
         System.setOut(new PrintStream(new ByteArrayOutputStream()));
         try {
             CustomerNotification customerNotification =
-                    client.customerNotifications().handle("PCN123").execute();
+                    client.customerNotifications().handle("EV1D18JEXAMPLE").execute();
         } finally {
             System.setOut(originalOut);
         }
