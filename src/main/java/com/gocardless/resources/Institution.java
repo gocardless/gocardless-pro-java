@@ -1,6 +1,7 @@
 package com.gocardless.resources;
 
 import com.google.gson.annotations.SerializedName;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -24,6 +25,7 @@ public class Institution {
     private Limits limits;
     private String logoUrl;
     private String name;
+    private List<String> roles;
     private Status status;
 
     /**
@@ -78,6 +80,13 @@ public class Institution {
      */
     public String getName() {
         return name;
+    }
+
+    /**
+     * The roles assigned to this institution, representing the open banking features it supports.
+     */
+    public List<String> getRoles() {
+        return roles;
     }
 
     /**
