@@ -55,7 +55,7 @@ dependencies {
     implementation 'com.google.code.gson:gson:2.14.0'
     implementation("com.google.guava:guava:33.6.0-jre")
     implementation 'org.slf4j:slf4j-api:2.0.18'
-    implementation 'commons-codec:commons-codec:1.15'
+    implementation 'commons-codec:commons-codec:1.22.0'
 
     implementation('com.github.rholder:guava-retrying:2.0.0') {
       exclude group: 'com.google.guava', module: 'guava'
