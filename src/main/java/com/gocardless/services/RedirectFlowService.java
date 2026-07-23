@@ -11,8 +11,8 @@ import java.util.Map;
  * Service class for working with redirect flow resources.
  *
  * Deprecated: Redirect Flows are legacy APIs and cannot be used by new integrators. The Billing
- * Request flow (https://developer.gocardless.com/api-reference/#billing-requests) API should be
- * used for your payment flows.
+ * Request flow (https://developer.gocardless.com/api-reference/#billing-requests-billing-requests)
+ * API should be used for your payment flows.
  * 
  * Redirect flows enable you to use GoCardless' hosted payment pages
  * (https://pay-sandbox.gocardless.com/AL000000AKFPFF) to set up mandates with your customers. These

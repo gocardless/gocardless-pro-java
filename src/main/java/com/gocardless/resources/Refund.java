@@ -102,16 +102,12 @@ public class Refund {
 
     /**
      * One of:
-     * <ul>
-     * <li>`created`: the refund has been created</li>
-     * <li>`pending_submission`: the refund has been created, but not yet submitted to the
-     * banks</li>
-     * <li>`submitted`: the refund has been submitted to the banks</li>
-     * <li>`paid`: the refund has been included in a [payout](#core-endpoints-payouts)</li>
-     * <li>`cancelled`: the refund has been cancelled</li>
-     * <li>`bounced`: the refund has failed to be paid</li>
-     * <li>`funds_returned`: the refund has had its funds returned</li>
-     * </ul>
+     * 
+     * - `created`: the refund has been created - `pending_submission`: the refund has been created,
+     * but not yet submitted to the banks - `submitted`: the refund has been submitted to the banks
+     * - `paid`: the refund has been included in a [payout](#core-endpoints-payouts) - `cancelled`:
+     * the refund has been cancelled - `bounced`: the refund has failed to be paid -
+     * `funds_returned`: the refund has had its funds returned
      */
     public Status getStatus() {
         return status;

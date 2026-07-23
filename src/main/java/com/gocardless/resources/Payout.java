@@ -39,11 +39,9 @@ public class Payout {
 
     /**
      * Date the payout is due to arrive in the creditor's bank account. One of:
-     * <ul>
-     * <li>`yyyy-mm-dd`: the payout has been paid and is due to arrive in the creditor's bank
-     * account on this day</li>
-     * <li>`null`: the payout hasn't been paid yet</li>
-     * </ul>
+     * 
+     * - `yyyy-mm-dd`: the payout has been paid and is due to arrive in the creditor's bank account
+     * on this day - `null`: the payout hasn't been paid yet
      * 
      */
     public String getArrivalDate() {
@@ -119,13 +117,11 @@ public class Payout {
 
     /**
      * One of:
-     * <ul>
-     * <li>`pending`: the payout has been created, but not yet sent to your bank or it is in the
-     * process of being exchanged through our FX provider.</li>
-     * <li>`paid`: the payout has been sent to the your bank. FX payouts will become `paid` after we
-     * emit the `fx_rate_confirmed` webhook.</li>
-     * <li>`bounced`: the payout bounced when sent, the payout can be retried.</li>
-     * </ul>
+     * 
+     * - `pending`: the payout has been created, but not yet sent to your bank or it is in the
+     * process of being exchanged through our FX provider. - `paid`: the payout has been sent to the
+     * your bank. FX payouts will become `paid` after we emit the `fx_rate_confirmed` webhook. -
+     * `bounced`: the payout bounced when sent, the payout can be retried.
      */
     public Status getStatus() {
         return status;

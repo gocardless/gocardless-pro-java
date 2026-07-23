@@ -243,7 +243,7 @@ public class SubscriptionService {
          * If this field is blank and `count` is not specified, the subscription will continue
          * forever.
          * 
-         * Deprecated: This field will be removed in a future API version. Use `count` to specify a
+         * Deprecated: This field will be removed in a future API version. Use count to specify a
          * number of payments instead.
          */
         public SubscriptionCreateRequest withEndDate(String endDate) {

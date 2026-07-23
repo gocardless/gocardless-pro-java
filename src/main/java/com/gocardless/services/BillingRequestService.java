@@ -33,8 +33,8 @@ public class BillingRequestService {
     }
 
     /**
-     * Important: All properties associated with `subscription_request` and
-     * `instalment_schedule_request` are only supported for ACH and PAD schemes.
+     * Important: All properties associated with subscription_request and
+     * instalment_schedule_request are only supported for ACH and PAD schemes.
      */
     public BillingRequestCreateRequest create() {
         return new BillingRequestCreateRequest(httpClient);
@@ -161,8 +161,8 @@ public class BillingRequestService {
     /**
      * Request class for {@link BillingRequestService#create }.
      *
-     * Important: All properties associated with `subscription_request` and
-     * `instalment_schedule_request` are only supported for ACH and PAD schemes.
+     * Important: All properties associated with subscription_request and
+     * instalment_schedule_request are only supported for ACH and PAD schemes.
      */
     public static final class BillingRequestCreateRequest
             extends IdempotentPostRequest<BillingRequest> {

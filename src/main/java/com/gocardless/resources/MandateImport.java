@@ -78,16 +78,13 @@ public class MandateImport {
 
     /**
      * The status of the mandate import.
-     * <ul>
-     * <li>`created`: A new mandate import.</li>
-     * <li>`submitted`: After the integrator has finished adding mandates and
-     * <a href="#mandate-imports-submit-a-mandate-import">submitted</a> the import.</li>
-     * <li>`cancelled`: If the integrator
-     * <a href="#mandate-imports-cancel-a-mandate-import">cancelled</a> the mandate import.</li>
-     * <li>`processing`: Once a mandate import has been approved by a GoCardless team member it will
-     * be in this state while mandates are imported.</li>
-     * <li>`processed`: When all mandates have been imported successfully.</li>
-     * </ul>
+     * 
+     * - `created`: A new mandate import. - `submitted`: After the integrator has finished adding
+     * mandates and [submitted](#mandate-imports-submit-a-mandate-import) the import. - `cancelled`:
+     * If the integrator [cancelled](#mandate-imports-cancel-a-mandate-import) the mandate import. -
+     * `processing`: Once a mandate import has been approved by a GoCardless team member it will be
+     * in this state while mandates are imported. - `processed`: When all mandates have been
+     * imported successfully.
      */
     public Status getStatus() {
         return status;

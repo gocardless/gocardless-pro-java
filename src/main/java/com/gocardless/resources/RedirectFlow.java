@@ -8,8 +8,9 @@ import java.util.Map;
  *
  * <p class="deprecated-notice">
  * <strong>Deprecated</strong>: Redirect Flows are legacy APIs and cannot be used by new
- * integrators. The [Billing Request flow](#billing-requests) API should be used for your payment
- * flows.
+ * integrators. The <a href=
+ * "https://developer.gocardless.com/api-reference/#billing-requests-billing-requests">Billing
+ * Request flow</a> API should be used for your payment flows.
  * </p>
  * 
  * Redirect flows enable you to use GoCardless' [hosted payment
