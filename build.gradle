@@ -51,7 +51,7 @@ repositories {
 }
 
 dependencies {
-    implementation("com.squareup.okhttp3:okhttp:4.9.1")
+    implementation("com.squareup.okhttp3:okhttp:5.4.0")
     implementation 'com.google.code.gson:gson:2.14.0'
     implementation("com.google.guava:guava:33.6.0-jre")
     implementation 'org.slf4j:slf4j-api:2.0.18'
@@ -63,7 +63,7 @@ dependencies {
 
     testImplementation 'junit:junit:4.13.2'
     testImplementation 'org.assertj:assertj-core:3.27.7'
-    testImplementation 'com.squareup.okhttp3:mockwebserver:4.9.1'
+    testImplementation 'com.squareup.okhttp3:mockwebserver:5.4.0'
 }
 
 javadoc {
