@@ -139,8 +139,9 @@ public class VerificationDetail {
         }
 
         /**
-         * [ISO 3166-1 alpha-2
-         * code.](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2#Officially_assigned_code_elements)
+         * <a href=
+         * "https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2#Officially_assigned_code_elements">ISO
+         * 3166-1 alpha-2 code.</a>
          */
         public String getCountryCode() {
             return countryCode;
@@ -195,7 +196,8 @@ public class VerificationDetail {
         private String creditor;
 
         /**
-         * ID of the [creditor](#core-endpoints-creditors)
+         * ID of the <a href=
+         * "https://developer.gocardless.com/api-reference/#core-endpoints-creditors">creditor</a>
          */
         public String getCreditor() {
             return creditor;

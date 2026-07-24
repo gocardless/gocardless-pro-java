@@ -15,9 +15,9 @@ import java.util.Map;
  * Service class for working with instalment schedule resources.
  *
  * Instalment schedules are objects which represent a collection of related payments, with the
- * intention to collect the `total_amount` specified. The API supports both schedule-based creation
- * (similar to subscriptions) as well as explicit selection of differing payment amounts and charge
- * dates.
+ * intention to collect the <code>total_amount</code> specified. The API supports both
+ * schedule-based creation (similar to subscriptions) as well as explicit selection of differing
+ * payment amounts and charge dates.
  * 
  * Unlike subscriptions, the payments are created immediately, so the instalment schedule cannot be
  * modified once submitted and instead can only be cancelled (which will cancel any of the payments
@@ -40,15 +40,18 @@ public class InstalmentScheduleService {
     /**
      * Creates a new instalment schedule object, along with the associated payments. This API is
      * recommended if you know the specific dates you wish to charge. Otherwise, please check out
-     * the scheduling version
-     * (https://developer.gocardless.com/api-reference/#instalment-schedules-create-with-schedule).
+     * the <a href=
+     * "https://developer.gocardless.com/api-reference/#instalment-schedules-create-with-schedule">scheduling
+     * version</a>.
      * 
-     * The `instalments` property is an array of payment properties (`amount` and `charge_date`).
+     * The <code>instalments</code> property is an array of payment properties (<code>amount</code>
+     * and <code>charge_date</code>).
      * 
      * It can take quite a while to create the associated payments, so the API will return the
-     * status as `pending` initially. When processing has completed, a subsequent GET request for
-     * the instalment schedule will either have the status `success` and link to the created
-     * payments, or the status `error` and detailed information about the failures.
+     * status as <code>pending</code> initially. When processing has completed, a subsequent GET
+     * request for the instalment schedule will either have the status <code>success</code> and link
+     * to the created payments, or the status <code>error</code> and detailed information about the
+     * failures.
      */
     public InstalmentScheduleCreateWithDatesRequest createWithDates() {
         return new InstalmentScheduleCreateWithDatesRequest(httpClient);
@@ -57,22 +60,24 @@ public class InstalmentScheduleService {
     /**
      * Creates a new instalment schedule object, along with the associated payments. This API is
      * recommended if you wish to use the GoCardless scheduling logic. For finer control over the
-     * individual dates, please check out the alternative version
-     * (https://developer.gocardless.com/api-reference/#instalment-schedules-create-with-dates).
+     * individual dates, please check out the <a href=
+     * "https://developer.gocardless.com/api-reference/#instalment-schedules-create-with-dates">alternative
+     * version</a>.
      * 
      * It can take quite a while to create the associated payments, so the API will return the
-     * status as `pending` initially. When processing has completed, a subsequent GET request for
-     * the instalment schedule will either have the status `success` and link to the created
-     * payments, or the status `error` and detailed information about the failures.
+     * status as <code>pending</code> initially. When processing has completed, a subsequent GET
+     * request for the instalment schedule will either have the status <code>success</code> and link
+     * to the created payments, or the status <code>error</code> and detailed information about the
+     * failures.
      */
     public InstalmentScheduleCreateWithScheduleRequest createWithSchedule() {
         return new InstalmentScheduleCreateWithScheduleRequest(httpClient);
     }
 
     /**
-     * Returns a cursor-paginated
-     * (https://developer.gocardless.com/api-reference/#api-usage-cursor-pagination) list of your
-     * instalment schedules.
+     * Returns a <a href=
+     * "https://developer.gocardless.com/api-reference/#api-usage-cursor-pagination">cursor-paginated</a>
+     * list of your instalment schedules.
      */
     public InstalmentScheduleListRequest<ListResponse<InstalmentSchedule>> list() {
         return new InstalmentScheduleListRequest<>(httpClient,
@@ -101,8 +106,8 @@ public class InstalmentScheduleService {
     /**
      * Immediately cancels an instalment schedule; no further payments will be collected for it.
      * 
-     * This will fail with a `cancellation_failed` error if the instalment schedule is already
-     * cancelled or has completed.
+     * This will fail with a <code>cancellation_failed</code> error if the instalment schedule is
+     * already cancelled or has completed.
      */
     public InstalmentScheduleCancelRequest cancel(String identity) {
         return new InstalmentScheduleCancelRequest(httpClient, identity);
@@ -113,15 +118,18 @@ public class InstalmentScheduleService {
      *
      * Creates a new instalment schedule object, along with the associated payments. This API is
      * recommended if you know the specific dates you wish to charge. Otherwise, please check out
-     * the scheduling version
-     * (https://developer.gocardless.com/api-reference/#instalment-schedules-create-with-schedule).
+     * the <a href=
+     * "https://developer.gocardless.com/api-reference/#instalment-schedules-create-with-schedule">scheduling
+     * version</a>.
      * 
-     * The `instalments` property is an array of payment properties (`amount` and `charge_date`).
+     * The <code>instalments</code> property is an array of payment properties (<code>amount</code>
+     * and <code>charge_date</code>).
      * 
      * It can take quite a while to create the associated payments, so the API will return the
-     * status as `pending` initially. When processing has completed, a subsequent GET request for
-     * the instalment schedule will either have the status `success` and link to the created
-     * payments, or the status `error` and detailed information about the failures.
+     * status as <code>pending</code> initially. When processing has completed, a subsequent GET
+     * request for the instalment schedule will either have the status <code>success</code> and link
+     * to the created payments, or the status <code>error</code> and detailed information about the
+     * failures.
      */
     public static final class InstalmentScheduleCreateWithDatesRequest
             extends IdempotentPostRequest<InstalmentSchedule> {
@@ -146,8 +154,8 @@ public class InstalmentScheduleService {
         }
 
         /**
-         * ISO 4217 (https://en.wikipedia.org/wiki/ISO_4217#Active_codes) currency code. Currently
-         * "AUD", "CAD", "DKK", "EUR", "GBP", "NZD", "SEK" and "USD" are supported.
+         * <a href="https://en.wikipedia.org/wiki/ISO_4217#Active_codes">ISO 4217</a> currency code.
+         * Currently "AUD", "CAD", "DKK", "EUR", "GBP", "NZD", "SEK" and "USD" are supported.
          */
         public InstalmentScheduleCreateWithDatesRequest withCurrency(Currency currency) {
             this.currency = currency;
@@ -155,9 +163,10 @@ public class InstalmentScheduleService {
         }
 
         /**
-         * An explicit array of instalment payments, each specifying at least an `amount` and
-         * `charge_date`. See create (with dates)
-         * (https://developer.gocardless.com/api-reference/#instalment-schedules-create-with-dates)
+         * An explicit array of instalment payments, each specifying at least an <code>amount</code>
+         * and <code>charge_date</code>. See <a href=
+         * "https://developer.gocardless.com/api-reference/#instalment-schedules-create-with-dates">create
+         * (with dates)</a>
          */
         public InstalmentScheduleCreateWithDatesRequest withInstalments(
                 List<Instalments> instalments) {
@@ -166,9 +175,10 @@ public class InstalmentScheduleService {
         }
 
         /**
-         * An explicit array of instalment payments, each specifying at least an `amount` and
-         * `charge_date`. See create (with dates)
-         * (https://developer.gocardless.com/api-reference/#instalment-schedules-create-with-dates)
+         * An explicit array of instalment payments, each specifying at least an <code>amount</code>
+         * and <code>charge_date</code>. See <a href=
+         * "https://developer.gocardless.com/api-reference/#instalment-schedules-create-with-dates">create
+         * (with dates)</a>
          */
         public InstalmentScheduleCreateWithDatesRequest withInstalments(Instalments instalments) {
             if (this.instalments == null) {
@@ -184,9 +194,9 @@ public class InstalmentScheduleService {
         }
 
         /**
-         * ID of the associated mandate
-         * (https://developer.gocardless.com/api-reference/#core-endpoints-mandates) which the
-         * instalment schedule will create payments against.
+         * ID of the associated <a href=
+         * "https://developer.gocardless.com/api-reference/#core-endpoints-mandates">mandate</a>
+         * which the instalment schedule will create payments against.
          */
         public InstalmentScheduleCreateWithDatesRequest withLinksMandate(String mandate) {
             if (links == null) {
@@ -228,51 +238,78 @@ public class InstalmentScheduleService {
 
         /**
          * An optional reference that will appear on your customer's bank statement. The character
-         * limit for this reference is dependent on the scheme. ACH
+         * limit for this reference is dependent on the scheme.<br>
+         * </br>
+         * <strong>ACH</strong>
          * <ul>
          * <li>10 characters</li>
          * </ul>
-         * Autogiro
+         * <br>
+         * </br>
+         * <strong>Autogiro</strong>
          * <ul>
          * <li>11 characters</li>
          * </ul>
-         * Bacs
+         * <br>
+         * </br>
+         * <strong>Bacs</strong>
          * <ul>
          * <li>10 characters</li>
          * </ul>
-         * BECS
+         * <br>
+         * </br>
+         * <strong>BECS</strong>
          * <ul>
          * <li>30 characters</li>
          * </ul>
-         * BECS NZ
+         * <br>
+         * </br>
+         * <strong>BECS NZ</strong>
          * <ul>
          * <li>12 characters</li>
          * </ul>
-         * Betalingsservice
+         * <br>
+         * </br>
+         * <strong>Betalingsservice</strong>
          * <ul>
          * <li>30 characters</li>
          * </ul>
-         * Faster Payments
+         * <br>
+         * </br>
+         * <strong>Faster Payments</strong>
          * <ul>
          * <li>18 characters</li>
          * </ul>
-         * PAD
+         * <br>
+         * </br>
+         * <strong>PAD</strong>
          * <ul>
          * <li>scheme doesn't offer references</li>
          * </ul>
-         * PayTo
+         * <br>
+         * </br>
+         * <strong>PayTo</strong>
          * <ul>
          * <li>18 characters</li>
          * </ul>
-         * SEPA
+         * <br>
+         * </br>
+         * <strong>SEPA</strong>
          * <ul>
          * <li>140 characters</li>
          * </ul>
+         * <br>
+         * </br>
          * Note that this reference must be unique (for each merchant) for the BECS scheme as it is
-         * a scheme requirement. Restricted: You can only specify a payment reference for Bacs
-         * payments (that is, when collecting from the UK) if you're on the GoCardless Plus, Pro or
-         * Enterprise packages (https://gocardless.com/pricing). Restricted: You can not specify a
-         * payment reference for Faster Payments.
+         * a scheme requirement.
+         * <p class="restricted-notice">
+         * <strong>Restricted</strong>: You can only specify a payment reference for Bacs payments
+         * (that is, when collecting from the UK) if you're on the
+         * <a href="https://gocardless.com/pricing">GoCardless Plus, Pro or Enterprise packages</a>.
+         * </p>
+         * <p class="restricted-notice">
+         * <strong>Restricted</strong>: You can not specify a payment reference for Faster Payments.
+         * </p>
          */
         public InstalmentScheduleCreateWithDatesRequest withPaymentReference(
                 String paymentReference) {
@@ -281,10 +318,13 @@ public class InstalmentScheduleService {
         }
 
         /**
-         * On failure, automatically retry payments using intelligent retries
-         * (https://developer.gocardless.com/success-plus/overview). Default is `false`. Important:
-         * To be able to use intelligent retries, Success+ needs to be enabled in GoCardless
-         * dashboard (https://manage.gocardless.com/success-plus).
+         * On failure, automatically retry payments using
+         * <a href="https://developer.gocardless.com/success-plus/overview">intelligent retries</a>.
+         * Default is <code>false</code>.
+         * <p class="notice">
+         * <strong>Important</strong>: To be able to use intelligent retries, Success+ needs to be
+         * enabled in <a href="https://manage.gocardless.com/success-plus">GoCardless dashboard</a>.
+         * </p>
          */
         public InstalmentScheduleCreateWithDatesRequest withRetryIfPossible(
                 Boolean retryIfPossible) {
@@ -375,11 +415,12 @@ public class InstalmentScheduleService {
              * EUR).
              * 
              * Minimum and maximum amounts vary by payment scheme. For more information, see
-             * Transaction limits
-             * (https://support.gocardless.com/hc/en-gb/articles/115000309245-Transaction-limits)
+             * <a href=
+             * "https://support.gocardless.com/hc/en-gb/articles/115000309245-Transaction-limits">Transaction
+             * limits</a>
              * 
              * For Variable Recurring Payments (VRP), this must not exceed the mandate's
-             * `max_amount_per_payment` constraint.
+             * <code>max_amount_per_payment</code> constraint.
              */
             public Instalments withAmount(Integer amount) {
                 this.amount = amount;
@@ -388,9 +429,9 @@ public class InstalmentScheduleService {
 
             /**
              * A future date on which the payment should be collected. If the date is before the
-             * next_possible_charge_date on the mandate
-             * (https://developer.gocardless.com/api-reference/#core-endpoints-mandates), it will be
-             * automatically rolled forwards to that date.
+             * next_possible_charge_date on the <a href=
+             * "https://developer.gocardless.com/api-reference/#core-endpoints-mandates">mandate</a>,
+             * it will be automatically rolled forwards to that date.
              */
             public Instalments withChargeDate(String chargeDate) {
                 this.chargeDate = chargeDate;
@@ -400,8 +441,9 @@ public class InstalmentScheduleService {
             /**
              * A human-readable description of the payment. This will be included in the
              * notification email GoCardless sends to your customer if your organisation does not
-             * send its own notifications (see compliance requirements
-             * (https://developer.gocardless.com/api-reference/#appendix-compliance-requirements)).
+             * send its own notifications (see <a href=
+             * "https://developer.gocardless.com/api-reference/#appendix-compliance-requirements">compliance
+             * requirements</a>).
              */
             public Instalments withDescription(String description) {
                 this.description = description;
@@ -413,9 +455,9 @@ public class InstalmentScheduleService {
             private String mandate;
 
             /**
-             * ID of the associated mandate
-             * (https://developer.gocardless.com/api-reference/#core-endpoints-mandates) which the
-             * instalment schedule will create payments against.
+             * ID of the associated <a href=
+             * "https://developer.gocardless.com/api-reference/#core-endpoints-mandates">mandate</a>
+             * which the instalment schedule will create payments against.
              */
             public Links withMandate(String mandate) {
                 this.mandate = mandate;
@@ -429,13 +471,15 @@ public class InstalmentScheduleService {
      *
      * Creates a new instalment schedule object, along with the associated payments. This API is
      * recommended if you wish to use the GoCardless scheduling logic. For finer control over the
-     * individual dates, please check out the alternative version
-     * (https://developer.gocardless.com/api-reference/#instalment-schedules-create-with-dates).
+     * individual dates, please check out the <a href=
+     * "https://developer.gocardless.com/api-reference/#instalment-schedules-create-with-dates">alternative
+     * version</a>.
      * 
      * It can take quite a while to create the associated payments, so the API will return the
-     * status as `pending` initially. When processing has completed, a subsequent GET request for
-     * the instalment schedule will either have the status `success` and link to the created
-     * payments, or the status `error` and detailed information about the failures.
+     * status as <code>pending</code> initially. When processing has completed, a subsequent GET
+     * request for the instalment schedule will either have the status <code>success</code> and link
+     * to the created payments, or the status <code>error</code> and detailed information about the
+     * failures.
      */
     public static final class InstalmentScheduleCreateWithScheduleRequest
             extends IdempotentPostRequest<InstalmentSchedule> {
@@ -460,8 +504,8 @@ public class InstalmentScheduleService {
         }
 
         /**
-         * ISO 4217 (https://en.wikipedia.org/wiki/ISO_4217#Active_codes) currency code. Currently
-         * "AUD", "CAD", "DKK", "EUR", "GBP", "NZD", "SEK" and "USD" are supported.
+         * <a href="https://en.wikipedia.org/wiki/ISO_4217#Active_codes">ISO 4217</a> currency code.
+         * Currently "AUD", "CAD", "DKK", "EUR", "GBP", "NZD", "SEK" and "USD" are supported.
          */
         public InstalmentScheduleCreateWithScheduleRequest withCurrency(Currency currency) {
             this.currency = currency;
@@ -470,9 +514,9 @@ public class InstalmentScheduleService {
 
         /**
          * Frequency of the payments you want to create, together with an array of payment amounts
-         * to be collected, with a specified start date for the first payment. See create (with
-         * schedule)
-         * (https://developer.gocardless.com/api-reference/#instalment-schedules-create-with-schedule)
+         * to be collected, with a specified start date for the first payment. See <a href=
+         * "https://developer.gocardless.com/api-reference/#instalment-schedules-create-with-schedule">create
+         * (with schedule)</a>
          */
         public InstalmentScheduleCreateWithScheduleRequest withInstalments(
                 Instalments instalments) {
@@ -494,7 +538,8 @@ public class InstalmentScheduleService {
         }
 
         /**
-         * Number of `interval_units` between charge dates. Must be greater than or equal to `1`.
+         * Number of <code>interval_units</code> between charge dates. Must be greater than or equal
+         * to <code>1</code>.
          */
         public InstalmentScheduleCreateWithScheduleRequest withInstalmentsInterval(
                 Integer interval) {
@@ -506,7 +551,8 @@ public class InstalmentScheduleService {
         }
 
         /**
-         * The unit of time between customer charge dates. One of `weekly`, `monthly` or `yearly`.
+         * The unit of time between customer charge dates. One of <code>weekly</code>,
+         * <code>monthly</code> or <code>yearly</code>.
          */
         public InstalmentScheduleCreateWithScheduleRequest withInstalmentsIntervalUnit(
                 Instalments.IntervalUnit intervalUnit) {
@@ -518,11 +564,12 @@ public class InstalmentScheduleService {
         }
 
         /**
-         * The date on which the first payment should be charged. Must be on or after the mandate
-         * (https://developer.gocardless.com/api-reference/#core-endpoints-mandates)'s
-         * `next_possible_charge_date`. When left blank and `month` or `day_of_month` are provided,
-         * this will be set to the date of the first payment. If created without `month` or
-         * `day_of_month` this will be set as the mandate's `next_possible_charge_date`
+         * The date on which the first payment should be charged. Must be on or after the <a href=
+         * "https://developer.gocardless.com/api-reference/#core-endpoints-mandates">mandate</a>'s
+         * <code>next_possible_charge_date</code>. When left blank and <code>month</code> or
+         * <code>day_of_month</code> are provided, this will be set to the date of the first
+         * payment. If created without <code>month</code> or <code>day_of_month</code> this will be
+         * set as the mandate's <code>next_possible_charge_date</code>
          */
         public InstalmentScheduleCreateWithScheduleRequest withInstalmentsStartDate(
                 String startDate) {
@@ -539,9 +586,9 @@ public class InstalmentScheduleService {
         }
 
         /**
-         * ID of the associated mandate
-         * (https://developer.gocardless.com/api-reference/#core-endpoints-mandates) which the
-         * instalment schedule will create payments against.
+         * ID of the associated <a href=
+         * "https://developer.gocardless.com/api-reference/#core-endpoints-mandates">mandate</a>
+         * which the instalment schedule will create payments against.
          */
         public InstalmentScheduleCreateWithScheduleRequest withLinksMandate(String mandate) {
             if (links == null) {
@@ -584,51 +631,78 @@ public class InstalmentScheduleService {
 
         /**
          * An optional reference that will appear on your customer's bank statement. The character
-         * limit for this reference is dependent on the scheme. ACH
+         * limit for this reference is dependent on the scheme.<br>
+         * </br>
+         * <strong>ACH</strong>
          * <ul>
          * <li>10 characters</li>
          * </ul>
-         * Autogiro
+         * <br>
+         * </br>
+         * <strong>Autogiro</strong>
          * <ul>
          * <li>11 characters</li>
          * </ul>
-         * Bacs
+         * <br>
+         * </br>
+         * <strong>Bacs</strong>
          * <ul>
          * <li>10 characters</li>
          * </ul>
-         * BECS
+         * <br>
+         * </br>
+         * <strong>BECS</strong>
          * <ul>
          * <li>30 characters</li>
          * </ul>
-         * BECS NZ
+         * <br>
+         * </br>
+         * <strong>BECS NZ</strong>
          * <ul>
          * <li>12 characters</li>
          * </ul>
-         * Betalingsservice
+         * <br>
+         * </br>
+         * <strong>Betalingsservice</strong>
          * <ul>
          * <li>30 characters</li>
          * </ul>
-         * Faster Payments
+         * <br>
+         * </br>
+         * <strong>Faster Payments</strong>
          * <ul>
          * <li>18 characters</li>
          * </ul>
-         * PAD
+         * <br>
+         * </br>
+         * <strong>PAD</strong>
          * <ul>
          * <li>scheme doesn't offer references</li>
          * </ul>
-         * PayTo
+         * <br>
+         * </br>
+         * <strong>PayTo</strong>
          * <ul>
          * <li>18 characters</li>
          * </ul>
-         * SEPA
+         * <br>
+         * </br>
+         * <strong>SEPA</strong>
          * <ul>
          * <li>140 characters</li>
          * </ul>
+         * <br>
+         * </br>
          * Note that this reference must be unique (for each merchant) for the BECS scheme as it is
-         * a scheme requirement. Restricted: You can only specify a payment reference for Bacs
-         * payments (that is, when collecting from the UK) if you're on the GoCardless Plus, Pro or
-         * Enterprise packages (https://gocardless.com/pricing). Restricted: You can not specify a
-         * payment reference for Faster Payments.
+         * a scheme requirement.
+         * <p class="restricted-notice">
+         * <strong>Restricted</strong>: You can only specify a payment reference for Bacs payments
+         * (that is, when collecting from the UK) if you're on the
+         * <a href="https://gocardless.com/pricing">GoCardless Plus, Pro or Enterprise packages</a>.
+         * </p>
+         * <p class="restricted-notice">
+         * <strong>Restricted</strong>: You can not specify a payment reference for Faster Payments.
+         * </p>
          */
         public InstalmentScheduleCreateWithScheduleRequest withPaymentReference(
                 String paymentReference) {
@@ -637,10 +711,13 @@ public class InstalmentScheduleService {
         }
 
         /**
-         * On failure, automatically retry payments using intelligent retries
-         * (https://developer.gocardless.com/success-plus/overview). Default is `false`. Important:
-         * To be able to use intelligent retries, Success+ needs to be enabled in GoCardless
-         * dashboard (https://manage.gocardless.com/success-plus).
+         * On failure, automatically retry payments using
+         * <a href="https://developer.gocardless.com/success-plus/overview">intelligent retries</a>.
+         * Default is <code>false</code>.
+         * <p class="notice">
+         * <strong>Important</strong>: To be able to use intelligent retries, Success+ needs to be
+         * enabled in <a href="https://manage.gocardless.com/success-plus">GoCardless dashboard</a>.
+         * </p>
          */
         public InstalmentScheduleCreateWithScheduleRequest withRetryIfPossible(
                 Boolean retryIfPossible) {
@@ -738,8 +815,8 @@ public class InstalmentScheduleService {
             }
 
             /**
-             * Number of `interval_units` between charge dates. Must be greater than or equal to
-             * `1`.
+             * Number of <code>interval_units</code> between charge dates. Must be greater than or
+             * equal to <code>1</code>.
              */
             public Instalments withInterval(Integer interval) {
                 this.interval = interval;
@@ -747,8 +824,8 @@ public class InstalmentScheduleService {
             }
 
             /**
-             * The unit of time between customer charge dates. One of `weekly`, `monthly` or
-             * `yearly`.
+             * The unit of time between customer charge dates. One of <code>weekly</code>,
+             * <code>monthly</code> or <code>yearly</code>.
              */
             public Instalments withIntervalUnit(IntervalUnit intervalUnit) {
                 this.intervalUnit = intervalUnit;
@@ -757,11 +834,12 @@ public class InstalmentScheduleService {
 
             /**
              * The date on which the first payment should be charged. Must be on or after the
-             * mandate (https://developer.gocardless.com/api-reference/#core-endpoints-mandates)'s
-             * `next_possible_charge_date`. When left blank and `month` or `day_of_month` are
-             * provided, this will be set to the date of the first payment. If created without
-             * `month` or `day_of_month` this will be set as the mandate's
-             * `next_possible_charge_date`
+             * <a href=
+             * "https://developer.gocardless.com/api-reference/#core-endpoints-mandates">mandate</a>'s
+             * <code>next_possible_charge_date</code>. When left blank and <code>month</code> or
+             * <code>day_of_month</code> are provided, this will be set to the date of the first
+             * payment. If created without <code>month</code> or <code>day_of_month</code> this will
+             * be set as the mandate's <code>next_possible_charge_date</code>
              */
             public Instalments withStartDate(String startDate) {
                 this.startDate = startDate;
@@ -786,9 +864,9 @@ public class InstalmentScheduleService {
             private String mandate;
 
             /**
-             * ID of the associated mandate
-             * (https://developer.gocardless.com/api-reference/#core-endpoints-mandates) which the
-             * instalment schedule will create payments against.
+             * ID of the associated <a href=
+             * "https://developer.gocardless.com/api-reference/#core-endpoints-mandates">mandate</a>
+             * which the instalment schedule will create payments against.
              */
             public Links withMandate(String mandate) {
                 this.mandate = mandate;
@@ -800,9 +878,9 @@ public class InstalmentScheduleService {
     /**
      * Request class for {@link InstalmentScheduleService#list }.
      *
-     * Returns a cursor-paginated
-     * (https://developer.gocardless.com/api-reference/#api-usage-cursor-pagination) list of your
-     * instalment schedules.
+     * Returns a <a href=
+     * "https://developer.gocardless.com/api-reference/#api-usage-cursor-pagination">cursor-paginated</a>
+     * list of your instalment schedules.
      */
     public static final class InstalmentScheduleListRequest<S>
             extends ListRequest<S, InstalmentSchedule> {
@@ -877,8 +955,8 @@ public class InstalmentScheduleService {
         }
 
         /**
-         * ID of the associated customer
-         * (https://developer.gocardless.com/api-reference/#core-endpoints-customers).
+         * ID of the associated <a href=
+         * "https://developer.gocardless.com/api-reference/#core-endpoints-customers">customer</a>.
          */
         public InstalmentScheduleListRequest<S> withCustomer(String customer) {
             this.customer = customer;
@@ -894,9 +972,9 @@ public class InstalmentScheduleService {
         }
 
         /**
-         * ID of the associated mandate
-         * (https://developer.gocardless.com/api-reference/#core-endpoints-mandates) which the
-         * instalment schedule will create payments against.
+         * ID of the associated <a href=
+         * "https://developer.gocardless.com/api-reference/#core-endpoints-mandates">mandate</a>
+         * which the instalment schedule will create payments against.
          */
         public InstalmentScheduleListRequest<S> withMandate(String mandate) {
             this.mandate = mandate;
@@ -1156,8 +1234,8 @@ public class InstalmentScheduleService {
      *
      * Immediately cancels an instalment schedule; no further payments will be collected for it.
      * 
-     * This will fail with a `cancellation_failed` error if the instalment schedule is already
-     * cancelled or has completed.
+     * This will fail with a <code>cancellation_failed</code> error if the instalment schedule is
+     * already cancelled or has completed.
      */
     public static final class InstalmentScheduleCancelRequest
             extends PostRequest<InstalmentSchedule> {

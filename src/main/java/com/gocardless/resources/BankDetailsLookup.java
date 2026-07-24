@@ -18,8 +18,10 @@ public class BankDetailsLookup {
     private String bic;
 
     /**
-     * Array of [schemes](#mandates_scheme) supported for this bank account. This will be an empty
-     * array if the bank account is not reachable by any schemes.
+     * Array of
+     * <a href="https://developer.gocardless.com/api-reference/#mandates_scheme">schemes</a>
+     * supported for this bank account. This will be an empty array if the bank account is not
+     * reachable by any schemes.
      */
     public List<AvailableDebitScheme> getAvailableDebitSchemes() {
         return availableDebitSchemes;

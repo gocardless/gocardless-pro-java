@@ -10,8 +10,10 @@ import java.util.Map;
  * Events are stored for all webhooks. An event refers to a resource which has been updated, for
  * example a payment which has been collected, or a mandate which has been transferred. Event
  * creation is an asynchronous process, so it can take some time between an action occurring and its
- * corresponding event getting included in API responses. See [here](#event-types) for a complete
+ * corresponding event getting included in API responses. See
+ * <a href="https://developer.gocardless.com/api-reference/#event-types">here</a> for a complete
  * list of event types.
+ * 
  * <p class="notice">
  * <strong>Important</strong>: Events older than 18 months will be archived and no longer accessible
  * via the API or exports. Archival will begin no sooner than 1 August 2026 in sandbox environments,
@@ -36,14 +38,18 @@ public class Event {
     private Source source;
 
     /**
-     * What has happened to the resource. See [Event Types](#event-types) for the possible actions.
+     * What has happened to the resource. See
+     * <a href="https://developer.gocardless.com/api-reference/#event-types">Event Types</a> for the
+     * possible actions.
      */
     public String getAction() {
         return action;
     }
 
     /**
-     * Fixed [timestamp](#api-usage-dates-and-times), recording when this resource was created.
+     * Fixed <a href=
+     * "https://developer.gocardless.com/api-reference/#api-usage-dates-and-times">timestamp</a>,
+     * recording when this resource was created.
      */
     public String getCreatedAt() {
         return createdAt;
@@ -51,8 +57,9 @@ public class Event {
 
     /**
      * Present only in webhooks when an integrator is authorised to send their own notifications.
-     * See [here](/getting-started/api/handling-customer-notifications/) for further information.
-     * 
+     * See <a href=
+     * "https://developer.gocardless.com/getting-started/api/handling-customer-notifications/">here</a>
+     * for further information.
      */
     public List<CustomerNotification> getCustomerNotifications() {
         return customerNotifications;
@@ -77,9 +84,8 @@ public class Event {
      * The metadata that was passed when making the API request that triggered the event (for
      * instance, cancelling a mandate).
      * 
-     * This field will only be populated if the `details[origin]` field is `api` otherwise it will
-     * be an empty object.
-     * 
+     * This field will only be populated if the <code>details[origin]</code> field is
+     * <code>api</code> otherwise it will be an empty object.
      */
     public Map<String, Object> getMetadata() {
         return metadata;
@@ -87,9 +93,8 @@ public class Event {
 
     /**
      * The metadata of the resource that the event is for. For example, this field will have the
-     * same value of the `mandate[metadata]` field on the response you would receive from performing
-     * a GET request on a mandate.
-     * 
+     * same value of the <code>mandate[metadata]</code> field on the response you would receive from
+     * performing a GET request on a mandate.
      */
     public Map<String, Object> getResourceMetadata() {
         return resourceMetadata;
@@ -98,9 +103,21 @@ public class Event {
     /**
      * The resource type for this event. One of:
      * 
-     * - `billing_requests` - `creditors` - `exports` - `instalment_schedules` - `mandates` -
-     * `payer_authorisations` - `payments` - `payouts` - `refunds` - `scheme_identifiers` -
-     * `subscriptions` - `outbound_payments` - `payment_account_transactions`
+     * <ul>
+     * <li><code>billing_requests</code></li>
+     * <li><code>creditors</code></li>
+     * <li><code>exports</code></li>
+     * <li><code>instalment_schedules</code></li>
+     * <li><code>mandates</code></li>
+     * <li><code>payer_authorisations</code></li>
+     * <li><code>payments</code></li>
+     * <li><code>payouts</code></li>
+     * <li><code>refunds</code></li>
+     * <li><code>scheme_identifiers</code></li>
+     * <li><code>subscriptions</code></li>
+     * <li><code>outbound_payments</code></li>
+     * <li><code>payment_account_transactions</code></li>
+     * </ul>
      */
     public ResourceType getResourceType() {
         return resourceType;
@@ -170,8 +187,9 @@ public class Event {
         }
 
         /**
-         * See [here](#core-endpoints-customer-notifications) for a complete list of customer
-         * notification types.
+         * See <a href=
+         * "https://developer.gocardless.com/api-reference/#core-endpoints-customer-notifications">here</a>
+         * for a complete list of customer notification types.
          */
         public String getType() {
             return type;
@@ -201,32 +219,32 @@ public class Event {
         private Boolean willAttemptRetry;
 
         /**
-         * When we send a creditor `new_payout_currency_added` webhook, we also send the bank
-         * account id of the new account
+         * When we send a creditor <code>new_payout_currency_added</code> webhook, we also send the
+         * bank account id of the new account
          */
         public String getBankAccountId() {
             return bankAccountId;
         }
 
         /**
-         * What triggered the event. _Note:_ `cause` is our simplified and predictable key
-         * indicating what triggered the event.
+         * What triggered the event. <em>Note:</em> <code>cause</code> is our simplified and
+         * predictable key indicating what triggered the event.
          */
         public String getCause() {
             return cause;
         }
 
         /**
-         * When we send a creditor `new_payout_currency_added` webhook, we also send the currency of
-         * the new account
+         * When we send a creditor <code>new_payout_currency_added</code> webhook, we also send the
+         * currency of the new account
          */
         public String getCurrency() {
             return currency;
         }
 
         /**
-         * Human readable description of the cause. _Note:_ Changes to event descriptions are not
-         * considered breaking.
+         * Human readable description of the cause. <em>Note:</em> Changes to event descriptions are
+         * not considered breaking.
          */
         public String getDescription() {
             return description;
@@ -243,9 +261,12 @@ public class Event {
          * When will_attempt_retry is set to false, this field will contain the reason the payment
          * was not retried. This can be one of:
          * 
-         * - `failure_filter_applied`: The payment won't be intelligently retried as there is a high
-         * likelihood of failure on retry. - `other`: The payment won't be intelligently retried due
-         * to any other reason.
+         * <ul>
+         * <li><code>failure_filter_applied</code>: The payment won't be intelligently retried as
+         * there is a high likelihood of failure on retry.</li>
+         * <li><code>other</code>: The payment won't be intelligently retried due to any other
+         * reason.</li>
+         * </ul>
          */
         public String getNotRetriedReason() {
             return notRetriedReason;
@@ -254,29 +275,33 @@ public class Event {
         /**
          * Who initiated the event. One of:
          * 
-         * - `bank`: this event was triggered by a report from the banks - `gocardless`: this event
-         * was performed by GoCardless automatically - `api`: this event was triggered by an API
-         * endpoint - `customer`: this event was triggered by a Customer - `payer`: this event was
-         * triggered by a Payer
+         * <ul>
+         * <li><code>bank</code>: this event was triggered by a report from the banks</li>
+         * <li><code>gocardless</code>: this event was performed by GoCardless automatically</li>
+         * <li><code>api</code>: this event was triggered by an API endpoint</li>
+         * <li><code>customer</code>: this event was triggered by a Customer</li>
+         * <li><code>payer</code>: this event was triggered by a Payer</li>
+         * </ul>
          */
         public Origin getOrigin() {
             return origin;
         }
 
         /**
-         * When we send a creditor `creditor_updated` webhook, this tells you which property on the
-         * creditor has been updated
+         * When we send a creditor <code>creditor_updated</code> webhook, this tells you which
+         * property on the creditor has been updated
          */
         public String getProperty() {
             return property;
         }
 
         /**
-         * Set when a `bank` is the origin of the event. This is the reason code received in the
-         * report from the customer's bank. See the [GoCardless Direct Debit
-         * guide](https://gocardless.com/direct-debit/receiving-messages) for information on the
-         * meanings of different reason codes. _Note:_ `reason_code` is payment scheme-specific and
-         * can be inconsistent between banks.
+         * Set when a <code>bank</code> is the origin of the event. This is the reason code received
+         * in the report from the customer's bank. See the
+         * <a href="https://gocardless.com/direct-debit/receiving-messages">GoCardless Direct Debit
+         * guide</a> for information on the meanings of different reason codes. <em>Note:</em>
+         * <code>reason_code</code> is payment scheme-specific and can be inconsistent between
+         * banks.
          */
         public String getReasonCode() {
             return reasonCode;
@@ -359,59 +384,72 @@ public class Event {
         private String subscription;
 
         /**
-         * ID of a [bank authorisation](#billing-requests-bank-authorisations).
+         * ID of a <a href=
+         * "https://developer.gocardless.com/api-reference/#billing-requests-bank-authorisations">bank
+         * authorisation</a>.
          */
         public String getBankAuthorisation() {
             return bankAuthorisation;
         }
 
         /**
-         * ID of a [billing request](#billing-requests-billing-requests).
+         * ID of a <a href=
+         * "https://developer.gocardless.com/api-reference/#billing-requests-billing-requests">billing
+         * request</a>.
          */
         public String getBillingRequest() {
             return billingRequest;
         }
 
         /**
-         * ID of a [billing request flow](#billing-requests-billing-request-flows).
+         * ID of a <a href=
+         * "https://developer.gocardless.com/api-reference/#billing-requests-billing-request-flows">billing
+         * request flow</a>.
          */
         public String getBillingRequestFlow() {
             return billingRequestFlow;
         }
 
         /**
-         * If `resource_type` is `creditor`, this is the ID of the
-         * [creditor](#core-endpoints-creditors) which has been updated.
+         * If <code>resource_type</code> is <code>creditor</code>, this is the ID of the <a href=
+         * "https://developer.gocardless.com/api-reference/#core-endpoints-creditors">creditor</a>
+         * which has been updated.
          */
         public String getCreditor() {
             return creditor;
         }
 
         /**
-         * ID of a [customer](#core-endpoints-customers).
+         * ID of a <a href=
+         * "https://developer.gocardless.com/api-reference/#core-endpoints-customers">customer</a>.
          */
         public String getCustomer() {
             return customer;
         }
 
         /**
-         * ID of a [customer bank account](#core-endpoints-customer-bank-accounts).
+         * ID of a <a href=
+         * "https://developer.gocardless.com/api-reference/#core-endpoints-customer-bank-accounts">customer
+         * bank account</a>.
          */
         public String getCustomerBankAccount() {
             return customerBankAccount;
         }
 
         /**
-         * If `resource_type` is `instalment_schedule`, this is the ID of the [instalment
-         * schedule](#core-endpoints-instalment-schedules) which has been updated.
+         * If <code>resource_type</code> is <code>instalment_schedule</code>, this is the ID of the
+         * <a href=
+         * "https://developer.gocardless.com/api-reference/#core-endpoints-instalment-schedules">instalment
+         * schedule</a> which has been updated.
          */
         public String getInstalmentSchedule() {
             return instalmentSchedule;
         }
 
         /**
-         * If `resource_type` is `mandates`, this is the ID of the
-         * [mandate](#core-endpoints-mandates) which has been updated.
+         * If <code>resource_type</code> is <code>mandates</code>, this is the ID of the <a href=
+         * "https://developer.gocardless.com/api-reference/#core-endpoints-mandates">mandate</a>
+         * which has been updated.
          */
         public String getMandate() {
             return mandate;
@@ -425,41 +463,46 @@ public class Event {
         }
 
         /**
-         * If `resource_type` is `billing_requests`, this is the ID of the
-         * [mandate](#core-endpoints-mandates) which has been created.
+         * If <code>resource_type</code> is <code>billing_requests</code>, this is the ID of the
+         * <a href=
+         * "https://developer.gocardless.com/api-reference/#core-endpoints-mandates">mandate</a>
+         * which has been created.
          */
         public String getMandateRequestMandate() {
             return mandateRequestMandate;
         }
 
         /**
-         * This is only included for mandate transfer events, when it is the ID of the [customer
-         * bank account](#core-endpoints-customer-bank-accounts) which the mandate is being
-         * transferred to.
+         * This is only included for mandate transfer events, when it is the ID of the <a href=
+         * "https://developer.gocardless.com/api-reference/#core-endpoints-customer-bank-accounts">customer
+         * bank account</a> which the mandate is being transferred to.
          */
         public String getNewCustomerBankAccount() {
             return newCustomerBankAccount;
         }
 
         /**
-         * This is only included for mandate replaced events, when it is the ID of the new
-         * [mandate](#core-endpoints-mandates) that replaces the existing mandate.
+         * This is only included for mandate replaced events, when it is the ID of the new <a href=
+         * "https://developer.gocardless.com/api-reference/#core-endpoints-mandates">mandate</a>
+         * that replaces the existing mandate.
          */
         public String getNewMandate() {
             return newMandate;
         }
 
         /**
-         * If the event is included in a [webhook](#webhooks-overview) to an [OAuth
-         * app](#appendix-oauth), this is the ID of the account to which it belongs.
+         * If the event is included in a
+         * <a href="https://developer.gocardless.com/api-reference/#webhooks-overview">webhook</a>
+         * to an <a href="https://developer.gocardless.com/api-reference/#appendix-oauth">OAuth
+         * app</a>, this is the ID of the account to which it belongs.
          */
         public String getOrganisation() {
             return organisation;
         }
 
         /**
-         * If `resource_type` is `outbound_payments`, this is the ID of the outbound_payment which
-         * has been updated.
+         * If <code>resource_type</code> is <code>outbound_payments</code>, this is the ID of the
+         * outbound_payment which has been updated.
          */
         public String getOutboundPayment() {
             return outboundPayment;
@@ -476,72 +519,83 @@ public class Event {
         }
 
         /**
-         * ID of a [payer authorisation](#core-endpoints-payer-authorisations).
+         * ID of a <a href=
+         * "https://developer.gocardless.com/api-reference/#core-endpoints-payer-authorisations">payer
+         * authorisation</a>.
          */
         public String getPayerAuthorisation() {
             return payerAuthorisation;
         }
 
         /**
-         * If `resource_type` is `payments`, this is the ID of the
-         * [payment](#core-endpoints-payments) which has been updated.
+         * If <code>resource_type</code> is <code>payments</code>, this is the ID of the <a href=
+         * "https://developer.gocardless.com/api-reference/#core-endpoints-payments">payment</a>
+         * which has been updated.
          */
         public String getPayment() {
             return payment;
         }
 
         /**
-         * If `resource_type` is `payment_account_transaction`, this is the ID of a transaction
-         * which has been recorded on the payment account.
+         * If <code>resource_type</code> is <code>payment_account_transaction</code>, this is the ID
+         * of a transaction which has been recorded on the payment account.
          */
         public String getPaymentAccountTransaction() {
             return paymentAccountTransaction;
         }
 
         /**
-         * If `resource_type` is `billing_requests`, this is the ID of the
-         * [payment](#core-endpoints-payments) which has been created for Pay by Bank.
+         * If <code>resource_type</code> is <code>billing_requests</code>, this is the ID of the
+         * <a href=
+         * "https://developer.gocardless.com/api-reference/#core-endpoints-payments">payment</a>
+         * which has been created for Pay by Bank.
          */
         public String getPaymentRequestPayment() {
             return paymentRequestPayment;
         }
 
         /**
-         * If `resource_type` is `payouts`, this is the ID of the [payout](#core-endpoints-payouts)
-         * which has been updated.
+         * If <code>resource_type</code> is <code>payouts</code>, this is the ID of the <a href=
+         * "https://developer.gocardless.com/api-reference/#core-endpoints-payouts">payout</a> which
+         * has been updated.
          */
         public String getPayout() {
             return payout;
         }
 
         /**
-         * This is only included for mandate transfer events, when it is the ID of the [customer
-         * bank account](#core-endpoints-customer-bank-accounts) which the mandate is being
-         * transferred from.
+         * This is only included for mandate transfer events, when it is the ID of the <a href=
+         * "https://developer.gocardless.com/api-reference/#core-endpoints-customer-bank-accounts">customer
+         * bank account</a> which the mandate is being transferred from.
          */
         public String getPreviousCustomerBankAccount() {
             return previousCustomerBankAccount;
         }
 
         /**
-         * If `resource_type` is `refunds`, this is the ID of the [refund](#core-endpoints-refunds)
-         * which has been updated.
+         * If <code>resource_type</code> is <code>refunds</code>, this is the ID of the <a href=
+         * "https://developer.gocardless.com/api-reference/#core-endpoints-refunds">refund</a> which
+         * has been updated.
          */
         public String getRefund() {
             return refund;
         }
 
         /**
-         * If `resource_type` is `scheme_identifiers`, this is the ID of the
-         * [scheme_identifier](#core-endpoints-scheme-identifiers) which has been updated.
+         * If <code>resource_type</code> is <code>scheme_identifiers</code>, this is the ID of the
+         * <a href=
+         * "https://developer.gocardless.com/api-reference/#core-endpoints-scheme-identifiers">scheme_identifier</a>
+         * which has been updated.
          */
         public String getSchemeIdentifier() {
             return schemeIdentifier;
         }
 
         /**
-         * If `resource_type` is `subscription`, this is the ID of the
-         * [subscription](#core-endpoints-subscriptions) which has been updated.
+         * If <code>resource_type</code> is <code>subscription</code>, this is the ID of the
+         * <a href=
+         * "https://developer.gocardless.com/api-reference/#core-endpoints-subscriptions">subscription</a>
+         * which has been updated.
          */
         public String getSubscription() {
             return subscription;

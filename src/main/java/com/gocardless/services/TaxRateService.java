@@ -12,8 +12,9 @@ import java.util.Map;
  *
  * Tax rates from tax authority.
  * 
- * We also maintain a static list of the tax rates for each jurisdiction
- * (https://developer.gocardless.com/api-reference/#appendix-tax-rates).
+ * We also maintain a
+ * <a href="https://developer.gocardless.com/api-reference/#appendix-tax-rates">static list of the
+ * tax rates for each jurisdiction</a>.
  */
 public class TaxRateService {
     private final HttpClient httpClient;
@@ -27,9 +28,9 @@ public class TaxRateService {
     }
 
     /**
-     * Returns a cursor-paginated
-     * (https://developer.gocardless.com/api-reference/#api-usage-cursor-pagination) list of all tax
-     * rates.
+     * Returns a <a href=
+     * "https://developer.gocardless.com/api-reference/#api-usage-cursor-pagination">cursor-paginated</a>
+     * list of all tax rates.
      */
     public TaxRateListRequest<ListResponse<TaxRate>> list() {
         return new TaxRateListRequest<>(httpClient, ListRequest.<TaxRate>pagingExecutor());
@@ -49,9 +50,9 @@ public class TaxRateService {
     /**
      * Request class for {@link TaxRateService#list }.
      *
-     * Returns a cursor-paginated
-     * (https://developer.gocardless.com/api-reference/#api-usage-cursor-pagination) list of all tax
-     * rates.
+     * Returns a <a href=
+     * "https://developer.gocardless.com/api-reference/#api-usage-cursor-pagination">cursor-paginated</a>
+     * list of all tax rates.
      */
     public static final class TaxRateListRequest<S> extends ListRequest<S, TaxRate> {
         private String jurisdiction;

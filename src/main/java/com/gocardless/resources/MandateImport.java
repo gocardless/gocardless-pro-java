@@ -10,27 +10,40 @@ import com.google.gson.annotations.SerializedName;
  * 
  * The process is as follows:
  * 
- * 1. [Create a mandate import](#mandate-imports-create-a-new-mandate-import) 2. [Add
- * entries](#mandate-import-entries-add-a-mandate-import-entry) to the import 3.
- * [Submit](#mandate-imports-submit-a-mandate-import) the import 4. Wait until a member of the
- * GoCardless team approves the import, at which point the mandates will be created 5. [Link up the
- * mandates](#mandate-import-entries-list-all-mandate-import-entries) in your system
- * 
+ * <ol>
+ * <li><a href=
+ * "https://developer.gocardless.com/api-reference/#mandate-imports-create-a-new-mandate-import">Create
+ * a mandate import</a></li>
+ * <li><a href=
+ * "https://developer.gocardless.com/api-reference/#mandate-import-entries-add-a-mandate-import-entry">Add
+ * entries</a> to the import</li>
+ * <li><a href=
+ * "https://developer.gocardless.com/api-reference/#mandate-imports-submit-a-mandate-import">Submit</a>
+ * the import</li>
+ * <li>Wait until a member of the GoCardless team approves the import, at which point the mandates
+ * will be created</li>
+ * <li><a href=
+ * "https://developer.gocardless.com/api-reference/#mandate-import-entries-list-all-mandate-import-entries">Link
+ * up the mandates</a> in your system</li>
+ * </ol>
  * When you add entries to your mandate import, they are not turned into actual mandates until the
  * mandate import is submitted by you via the API, and then processed by a member of the GoCardless
  * team. When that happens, a mandate will be created for each entry in the import.
  * 
- * We will issue a `mandate_created` webhook for each entry, which will be the same as the webhooks
- * triggered when [ creating a mandate ](#mandates-create-a-mandate) using the mandates API. Once
- * these webhooks start arriving, any reconciliation can now be accomplished by [checking the
- * current status](#mandate-imports-get-a-mandate-import) of the mandate import and [linking up the
- * mandates to your system](#mandate-import-entries-list-all-mandate-import-entries).
+ * We will issue a <code>mandate_created</code> webhook for each entry, which will be the same as
+ * the webhooks triggered when
+ * <a href="https://developer.gocardless.com/api-reference/#mandates-create-a-mandate"> creating a
+ * mandate </a> using the mandates API. Once these webhooks start arriving, any reconciliation can
+ * now be accomplished by <a href=
+ * "https://developer.gocardless.com/api-reference/#mandate-imports-get-a-mandate-import">checking
+ * the current status</a> of the mandate import and <a href=
+ * "https://developer.gocardless.com/api-reference/#mandate-import-entries-list-all-mandate-import-entries">linking
+ * up the mandates to your system</a>.
  * 
  * <p class="notice">
  * Note that all Mandate Imports have an upper limit of 30,000 entries, so we recommend you split
  * your import into several smaller imports if you're planning to exceed this threshold.
  * </p>
- * 
  * <p class="restricted-notice">
  * <strong>Restricted</strong>: This API is currently only available for approved integrators -
  * please <a href="mailto:help@gocardless.com">get in touch</a> if you would like to use this API.
@@ -48,7 +61,9 @@ public class MandateImport {
     private Status status;
 
     /**
-     * Fixed [timestamp](#api-usage-dates-and-times), recording when this resource was created.
+     * Fixed <a href=
+     * "https://developer.gocardless.com/api-reference/#api-usage-dates-and-times">timestamp</a>,
+     * recording when this resource was created.
      */
     public String getCreatedAt() {
         return createdAt;
@@ -70,6 +85,7 @@ public class MandateImport {
 
     /**
      * The scheme of the mandates to be imported.<br>
+     * </br>
      * All mandates in a single mandate import must be for the same scheme.
      */
     public Scheme getScheme() {
@@ -79,12 +95,18 @@ public class MandateImport {
     /**
      * The status of the mandate import.
      * 
-     * - `created`: A new mandate import. - `submitted`: After the integrator has finished adding
-     * mandates and [submitted](#mandate-imports-submit-a-mandate-import) the import. - `cancelled`:
-     * If the integrator [cancelled](#mandate-imports-cancel-a-mandate-import) the mandate import. -
-     * `processing`: Once a mandate import has been approved by a GoCardless team member it will be
-     * in this state while mandates are imported. - `processed`: When all mandates have been
-     * imported successfully.
+     * <ul>
+     * <li><code>created</code>: A new mandate import.</li>
+     * <li><code>submitted</code>: After the integrator has finished adding mandates and <a href=
+     * "https://developer.gocardless.com/api-reference/#mandate-imports-submit-a-mandate-import">submitted</a>
+     * the import.</li>
+     * <li><code>cancelled</code>: If the integrator <a href=
+     * "https://developer.gocardless.com/api-reference/#mandate-imports-cancel-a-mandate-import">cancelled</a>
+     * the mandate import.</li>
+     * <li><code>processing</code>: Once a mandate import has been approved by a GoCardless team
+     * member it will be in this state while mandates are imported.</li>
+     * <li><code>processed</code>: When all mandates have been imported successfully.</li>
+     * </ul>
      */
     public Status getStatus() {
         return status;

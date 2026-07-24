@@ -6,18 +6,23 @@ import java.util.Map;
 /**
  * Represents a outbound payment resource returned from the API.
  *
- * Outbound Payments represent payments sent from [creditors](#core-endpoints-creditors).
+ * Outbound Payments represent payments sent from
+ * <a href="https://developer.gocardless.com/api-reference/#core-endpoints-creditors">creditors</a>.
  * 
- * GoCardless will notify you via a [webhook](#appendix-webhooks) when the status of the outbound
- * payment [changes](#event-types-outbound-payment).
+ * GoCardless will notify you via a
+ * <a href="https://developer.gocardless.com/api-reference/#appendix-webhooks">webhook</a> when the
+ * status of the outbound payment <a href=
+ * "https://developer.gocardless.com/api-reference/#event-types-outbound-payment">changes</a>.
  * 
- * #### Rate limiting
+ * <h4>Rate limiting</h4> Two rate limits apply to the Outbound Payments APIs:
  * 
- * Two rate limits apply to the Outbound Payments APIs: - All POST Outbound Payment endpoints
- * (create, withdraw, approve, cancel and etc.) share a single rate-limit group of 300 requests per
- * minute. As initiating a payment typically requires two API calls (one to create the payment and
- * one to approve it), this allows you to add approximately 150 outbound payments per minute. - All
- * remaining Outbound Payment endpoints are limited to 500 requests per minute.
+ * <ul>
+ * <li>All POST Outbound Payment endpoints (create, withdraw, approve, cancel and etc.) share a
+ * single rate-limit group of 300 requests per minute. As initiating a payment typically requires
+ * two API calls (one to create the payment and one to approve it), this allows you to add
+ * approximately 150 outbound payments per minute.</li>
+ * <li>All remaining Outbound Payment endpoints are limited to 500 requests per minute.</li>
+ * </ul>
  */
 public class OutboundPayment {
     private OutboundPayment() {
@@ -46,16 +51,17 @@ public class OutboundPayment {
     }
 
     /**
-     * Fixed [timestamp](#api-usage-dates-and-times), recording when the outbound payment was
-     * created.
+     * Fixed <a href=
+     * "https://developer.gocardless.com/api-reference/#api-usage-dates-and-times">timestamp</a>,
+     * recording when the outbound payment was created.
      */
     public String getCreatedAt() {
         return createdAt;
     }
 
     /**
-     * [ISO 4217](https://en.wikipedia.org/wiki/ISO_4217#Active_codes) currency. Currently only
-     * "GBP" is supported.
+     * <a href="https://en.wikipedia.org/wiki/ISO_4217#Active_codes">ISO 4217</a> currency.
+     * Currently only "GBP" is supported.
      */
     public Currency getCurrency() {
         return currency;
@@ -105,9 +111,15 @@ public class OutboundPayment {
 
     /**
      * An optional reference that will appear on your customer's bank statement. The character limit
-     * for this reference is dependent on the scheme.<br />
-     * <strong>Faster Payments</strong> - 18 characters, including:
-     * "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789 &-./"<br />
+     * for this reference is dependent on the scheme.<br>
+     * </br>
+     * <strong>Faster Payments</strong>
+     * <ul>
+     * <li>18 characters, including: "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789
+     * &amp;-./"</li>
+     * </ul>
+     * <br>
+     * </br>
      */
     public String getReference() {
         return reference;
@@ -124,16 +136,27 @@ public class OutboundPayment {
     /**
      * One of:
      * 
-     * - `verifying`: The payment has been [created](#outbound-payments-create-an-outbound-payment)
-     * and the verification process has begun. - `pending_approval`: The payment is awaiting
-     * [approval](#outbound-payments-approve-an-outbound-payment). - `scheduled`: The payment has
-     * passed verification & [approval](#outbound-payments-approve-an-outbound-payment), but
-     * processing has not yet begun. - `executing`: The execution date has arrived and the payment
-     * has been placed in queue for processing. - `executed`: The payment has been accepted by the
-     * scheme and is now on its way to the recipient. - `cancelled`: The payment has been
-     * [cancelled](#outbound-payments-cancel-an-outbound-payment) or was not
-     * [approved](#outbound-payments-approve-an-outbound-payment) on time. - `failed`: The payment
-     * was not sent, usually due to an error while or after executing.
+     * <ul>
+     * <li><code>verifying</code>: The payment has been <a href=
+     * "https://developer.gocardless.com/api-reference/#outbound-payments-create-an-outbound-payment">created</a>
+     * and the verification process has begun.</li>
+     * <li><code>pending_approval</code>: The payment is awaiting <a href=
+     * "https://developer.gocardless.com/api-reference/#outbound-payments-approve-an-outbound-payment">approval</a>.</li>
+     * <li><code>scheduled</code>: The payment has passed verification &amp; <a href=
+     * "https://developer.gocardless.com/api-reference/#outbound-payments-approve-an-outbound-payment">approval</a>,
+     * but processing has not yet begun.</li>
+     * <li><code>executing</code>: The execution date has arrived and the payment has been placed in
+     * queue for processing.</li>
+     * <li><code>executed</code>: The payment has been accepted by the scheme and is now on its way
+     * to the recipient.</li>
+     * <li><code>cancelled</code>: The payment has been <a href=
+     * "https://developer.gocardless.com/api-reference/#outbound-payments-cancel-an-outbound-payment">cancelled</a>
+     * or was not <a href=
+     * "https://developer.gocardless.com/api-reference/#outbound-payments-approve-an-outbound-payment">approved</a>
+     * on time.</li>
+     * <li><code>failed</code>: The payment was not sent, usually due to an error while or after
+     * executing.</li>
+     * </ul>
      */
     public Status getStatus() {
         return status;
@@ -193,7 +216,9 @@ public class OutboundPayment {
         }
 
         /**
-         * ID of the [customer](#core-endpoints-customers) that receives this outbound payment
+         * ID of the <a href=
+         * "https://developer.gocardless.com/api-reference/#core-endpoints-customers">customer</a>
+         * that receives this outbound payment
          */
         public String getCustomer() {
             return customer;
@@ -258,20 +283,25 @@ public class OutboundPayment {
             /**
              * Result of the verification, could be one of
              * 
-             * - `full_match`: The verification has confirmed that the account name exactly matches
-             * the details provided. - `partial_match`: The verification has confirmed that the
-             * account name is similar but does not match to the details provided. - `no_match`: The
-             * verification concludes the provided name does not match the account details. -
-             * `unable_to_match`: The verification could not be performed due to recipient bank
-             * issues or technical issues
+             * <ul>
+             * <li><code>full_match</code>: The verification has confirmed that the account name
+             * exactly matches the details provided.</li>
+             * <li><code>partial_match</code>: The verification has confirmed that the account name
+             * is similar but does not match to the details provided.</li>
+             * <li><code>no_match</code>: The verification concludes the provided name does not
+             * match the account details.</li>
+             * <li><code>unable_to_match</code>: The verification could not be performed due to
+             * recipient bank issues or technical issues</li>
+             * </ul>
              */
             public Result getResult() {
                 return result;
             }
 
             /**
-             * Type of the verification that has been performed eg. [Confirmation of
-             * Payee](https://www.wearepay.uk/what-we-do/overlay-services/confirmation-of-payee/)
+             * Type of the verification that has been performed eg. <a href=
+             * "https://www.wearepay.uk/what-we-do/overlay-services/confirmation-of-payee/">Confirmation
+             * of Payee</a>
              */
             public Type getType() {
                 return type;

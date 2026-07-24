@@ -14,12 +14,12 @@ import java.util.Map;
 /**
  * Service class for working with mandate resources.
  *
- * Mandates represent the Direct Debit mandate with a customer
- * (https://developer.gocardless.com/api-reference/#core-endpoints-customers).
+ * Mandates represent the Direct Debit mandate with a
+ * <a href="https://developer.gocardless.com/api-reference/#core-endpoints-customers">customer</a>.
  * 
- * GoCardless will notify you via a webhook
- * (https://developer.gocardless.com/api-reference/#appendix-webhooks) whenever the status of a
- * mandate changes.
+ * GoCardless will notify you via a
+ * <a href="https://developer.gocardless.com/api-reference/#appendix-webhooks">webhook</a> whenever
+ * the status of a mandate changes.
  */
 public class MandateService {
     private final HttpClient httpClient;
@@ -40,9 +40,9 @@ public class MandateService {
     }
 
     /**
-     * Returns a cursor-paginated
-     * (https://developer.gocardless.com/api-reference/#api-usage-cursor-pagination) list of your
-     * mandates.
+     * Returns a <a href=
+     * "https://developer.gocardless.com/api-reference/#api-usage-cursor-pagination">cursor-paginated</a>
+     * list of your mandates.
      */
     public MandateListRequest<ListResponse<Mandate>> list() {
         return new MandateListRequest<>(httpClient, ListRequest.<Mandate>pagingExecutor());
@@ -70,21 +70,23 @@ public class MandateService {
      * Immediately cancels a mandate and all associated cancellable payments. Any metadata supplied
      * to this endpoint will be stored on the mandate cancellation event it causes.
      * 
-     * This will fail with a `cancellation_failed` error if the mandate is already cancelled.
+     * This will fail with a <code>cancellation_failed</code> error if the mandate is already
+     * cancelled.
      */
     public MandateCancelRequest cancel(String identity) {
         return new MandateCancelRequest(httpClient, identity);
     }
 
     /**
-     * Reinstates a cancelled or expired mandate to the banks. You will receive a
-     * `resubmission_requested` webhook, but after that reinstating the mandate follows the same
-     * process as its initial creation, so you will receive a `submitted` webhook, followed by a
-     * `reinstated` or `failed` webhook up to two working days later. Any metadata supplied to this
-     * endpoint will be stored on the `resubmission_requested` event it causes.
+     * <a name="mandate_not_inactive"></a>Reinstates a cancelled or expired mandate to the banks.
+     * You will receive a <code>resubmission_requested</code> webhook, but after that reinstating
+     * the mandate follows the same process as its initial creation, so you will receive a
+     * <code>submitted</code> webhook, followed by a <code>reinstated</code> or <code>failed</code>
+     * webhook up to two working days later. Any metadata supplied to this endpoint will be stored
+     * on the <code>resubmission_requested</code> event it causes.
      * 
-     * This will fail with a `mandate_not_inactive` error if the mandate is already being submitted,
-     * or is active.
+     * This will fail with a <code>mandate_not_inactive</code> error if the mandate is already being
+     * submitted, or is active.
      * 
      * Mandates can be resubmitted up to 10 times.
      */
@@ -106,8 +108,8 @@ public class MandateService {
         private String scheme;
 
         /**
-         * This field is ACH specific, sometimes referred to as SEC code
-         * (https://www.moderntreasury.com/learn/sec-codes).
+         * This field is ACH specific, sometimes referred to as
+         * <a href="https://www.moderntreasury.com/learn/sec-codes">SEC code</a>.
          * 
          * This is the way that the payer gives authorisation to the merchant. web: Authorisation is
          * Internet Initiated or via Mobile Entry (maps to SEC code: WEB) telephone: Authorisation
@@ -126,9 +128,9 @@ public class MandateService {
         }
 
         /**
-         * ID of the associated creditor
-         * (https://developer.gocardless.com/api-reference/#core-endpoints-creditors). Only required
-         * if your account manages multiple creditors.
+         * ID of the associated <a href=
+         * "https://developer.gocardless.com/api-reference/#core-endpoints-creditors">creditor</a>.
+         * Only required if your account manages multiple creditors.
          */
         public MandateCreateRequest withLinksCreditor(String creditor) {
             if (links == null) {
@@ -139,9 +141,9 @@ public class MandateService {
         }
 
         /**
-         * ID of the associated customer bank account
-         * (https://developer.gocardless.com/api-reference/#core-endpoints-customer-bank-accounts)
-         * which the mandate is created and submits payments against.
+         * ID of the associated <a href=
+         * "https://developer.gocardless.com/api-reference/#core-endpoints-customer-bank-accounts">customer
+         * bank account</a> which the mandate is created and submits payments against.
          */
         public MandateCreateRequest withLinksCustomerBankAccount(String customerBankAccount) {
             if (links == null) {
@@ -177,8 +179,8 @@ public class MandateService {
          * the payer to whom the mandate belongs (i.e. as a result of their completion of a mandate
          * setup flow in their browser).
          * 
-         * Not required for creating offline mandates where `authorisation_source` is set to
-         * telephone or paper.
+         * Not required for creating offline mandates where <code>authorisation_source</code> is set
+         * to telephone or paper.
          */
         public MandateCreateRequest withPayerIpAddress(String payerIpAddress) {
             this.payerIpAddress = payerIpAddress;
@@ -186,10 +188,10 @@ public class MandateService {
         }
 
         /**
-         * Unique reference. Different schemes have different length and character set
-         * (https://developer.gocardless.com/api-reference/#appendix-character-sets) requirements.
-         * GoCardless will generate a unique reference satisfying the different scheme requirements
-         * if this field is left blank.
+         * Unique reference. Different schemes have different length and <a href=
+         * "https://developer.gocardless.com/api-reference/#appendix-character-sets">character
+         * set</a> requirements. GoCardless will generate a unique reference satisfying the
+         * different scheme requirements if this field is left blank.
          */
         public MandateCreateRequest withReference(String reference) {
             this.reference = reference;
@@ -197,8 +199,9 @@ public class MandateService {
         }
 
         /**
-         * Bank payment scheme to which this mandate and associated payments are submitted. Can be
-         * supplied or automatically detected from the customer's bank account.
+         * <a name="mandates_scheme"></a>Bank payment scheme to which this mandate and associated
+         * payments are submitted. Can be supplied or automatically detected from the customer's
+         * bank account.
          */
         public MandateCreateRequest withScheme(String scheme) {
             this.scheme = scheme;
@@ -266,9 +269,9 @@ public class MandateService {
             private String customerBankAccount;
 
             /**
-             * ID of the associated creditor
-             * (https://developer.gocardless.com/api-reference/#core-endpoints-creditors). Only
-             * required if your account manages multiple creditors.
+             * ID of the associated <a href=
+             * "https://developer.gocardless.com/api-reference/#core-endpoints-creditors">creditor</a>.
+             * Only required if your account manages multiple creditors.
              */
             public Links withCreditor(String creditor) {
                 this.creditor = creditor;
@@ -276,9 +279,9 @@ public class MandateService {
             }
 
             /**
-             * ID of the associated customer bank account
-             * (https://developer.gocardless.com/api-reference/#core-endpoints-customer-bank-accounts)
-             * which the mandate is created and submits payments against.
+             * ID of the associated <a href=
+             * "https://developer.gocardless.com/api-reference/#core-endpoints-customer-bank-accounts">customer
+             * bank account</a> which the mandate is created and submits payments against.
              */
             public Links withCustomerBankAccount(String customerBankAccount) {
                 this.customerBankAccount = customerBankAccount;
@@ -290,9 +293,9 @@ public class MandateService {
     /**
      * Request class for {@link MandateService#list }.
      *
-     * Returns a cursor-paginated
-     * (https://developer.gocardless.com/api-reference/#api-usage-cursor-pagination) list of your
-     * mandates.
+     * Returns a <a href=
+     * "https://developer.gocardless.com/api-reference/#api-usage-cursor-pagination">cursor-paginated</a>
+     * list of your mandates.
      */
     public static final class MandateListRequest<S> extends ListRequest<S, Mandate> {
         private CreatedAt createdAt;
@@ -370,10 +373,10 @@ public class MandateService {
         }
 
         /**
-         * ID of a creditor
-         * (https://developer.gocardless.com/api-reference/#core-endpoints-creditors). If specified,
-         * this endpoint will return all mandates for the given creditor. Cannot be used in
-         * conjunction with `customer` or `customer_bank_account`
+         * ID of a <a href=
+         * "https://developer.gocardless.com/api-reference/#core-endpoints-creditors">creditor</a>.
+         * If specified, this endpoint will return all mandates for the given creditor. Cannot be
+         * used in conjunction with <code>customer</code> or <code>customer_bank_account</code>
          */
         public MandateListRequest<S> withCreditor(String creditor) {
             this.creditor = creditor;
@@ -381,10 +384,10 @@ public class MandateService {
         }
 
         /**
-         * ID of a customer
-         * (https://developer.gocardless.com/api-reference/#core-endpoints-customers). If specified,
-         * this endpoint will return all mandates for the given customer. Cannot be used in
-         * conjunction with `customer_bank_account` or `creditor`
+         * ID of a <a href=
+         * "https://developer.gocardless.com/api-reference/#core-endpoints-customers">customer</a>.
+         * If specified, this endpoint will return all mandates for the given customer. Cannot be
+         * used in conjunction with <code>customer_bank_account</code> or <code>creditor</code>
          */
         public MandateListRequest<S> withCustomer(String customer) {
             this.customer = customer;
@@ -392,10 +395,11 @@ public class MandateService {
         }
 
         /**
-         * ID of a customer bank account
-         * (https://developer.gocardless.com/api-reference/#core-endpoints-customer-bank-accounts).
-         * If specified, this endpoint will return all mandates for the given bank account. Cannot
-         * be used in conjunction with `customer` or `creditor`
+         * ID of a <a href=
+         * "https://developer.gocardless.com/api-reference/#core-endpoints-customer-bank-accounts">customer
+         * bank account</a>. If specified, this endpoint will return all mandates for the given bank
+         * account. Cannot be used in conjunction with <code>customer</code> or
+         * <code>creditor</code>
          */
         public MandateListRequest<S> withCustomerBankAccount(String customerBankAccount) {
             this.customerBankAccount = customerBankAccount;
@@ -419,10 +423,10 @@ public class MandateService {
         }
 
         /**
-         * Unique reference. Different schemes have different length and character set
-         * (https://developer.gocardless.com/api-reference/#appendix-character-sets) requirements.
-         * GoCardless will generate a unique reference satisfying the different scheme requirements
-         * if this field is left blank.
+         * Unique reference. Different schemes have different length and <a href=
+         * "https://developer.gocardless.com/api-reference/#appendix-character-sets">character
+         * set</a> requirements. GoCardless will generate a unique reference satisfying the
+         * different scheme requirements if this field is left blank.
          */
         public MandateListRequest<S> withReference(String reference) {
             this.reference = reference;
@@ -717,7 +721,8 @@ public class MandateService {
      * Immediately cancels a mandate and all associated cancellable payments. Any metadata supplied
      * to this endpoint will be stored on the mandate cancellation event it causes.
      * 
-     * This will fail with a `cancellation_failed` error if the mandate is already cancelled.
+     * This will fail with a <code>cancellation_failed</code> error if the mandate is already
+     * cancelled.
      */
     public static final class MandateCancelRequest extends PostRequest<Mandate> {
         @PathParam
@@ -791,14 +796,15 @@ public class MandateService {
     /**
      * Request class for {@link MandateService#reinstate }.
      *
-     * Reinstates a cancelled or expired mandate to the banks. You will receive a
-     * `resubmission_requested` webhook, but after that reinstating the mandate follows the same
-     * process as its initial creation, so you will receive a `submitted` webhook, followed by a
-     * `reinstated` or `failed` webhook up to two working days later. Any metadata supplied to this
-     * endpoint will be stored on the `resubmission_requested` event it causes.
+     * <a name="mandate_not_inactive"></a>Reinstates a cancelled or expired mandate to the banks.
+     * You will receive a <code>resubmission_requested</code> webhook, but after that reinstating
+     * the mandate follows the same process as its initial creation, so you will receive a
+     * <code>submitted</code> webhook, followed by a <code>reinstated</code> or <code>failed</code>
+     * webhook up to two working days later. Any metadata supplied to this endpoint will be stored
+     * on the <code>resubmission_requested</code> event it causes.
      * 
-     * This will fail with a `mandate_not_inactive` error if the mandate is already being submitted,
-     * or is active.
+     * This will fail with a <code>mandate_not_inactive</code> error if the mandate is already being
+     * submitted, or is active.
      * 
      * Mandates can be resubmitted up to 10 times.
      */

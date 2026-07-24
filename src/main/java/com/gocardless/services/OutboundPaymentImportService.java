@@ -16,16 +16,21 @@ import java.util.Map;
  * 
  * The Workflow:
  * 
- * 1. Create the outbound payment import. 2. Retrieve an authorisation link from the response. 3.
- * Redirect the user to the link to authorise the import. 4. Once the user authorises the import,
- * the individual outbound payments are automatically submitted.
- * 
+ * <ol>
+ * <li>Create the outbound payment import.</li>
+ * <li>Retrieve an authorisation link from the response.</li>
+ * <li>Redirect the user to the link to authorise the import.</li>
+ * <li>Once the user authorises the import, the individual outbound payments are automatically
+ * submitted.</li>
+ * </ol>
  * Import entries are not processed as actual payments until they are reviewed and authorised in
  * GoCardless Dashboard. Upon approval, a unique outbound payment is generated for every entry in
  * the import.
  * 
+ * <p class="notice">
  * Outbound Payment Imports are capped at 1000 entries. If you expect to exceed this limit, please
  * create multiple smaller imports.
+ * </p>
  */
 public class OutboundPaymentImportService {
     private final HttpClient httpClient;
@@ -54,9 +59,9 @@ public class OutboundPaymentImportService {
     }
 
     /**
-     * Returns a cursor-paginated
-     * (https://developer.gocardless.com/api-reference/#api-usage-cursor-pagination) list of your
-     * outbound payment imports.
+     * Returns a <a href=
+     * "https://developer.gocardless.com/api-reference/#api-usage-cursor-pagination">cursor-paginated</a>
+     * list of your outbound payment imports.
      */
     public OutboundPaymentImportListRequest<ListResponse<OutboundPaymentImport>> list() {
         return new OutboundPaymentImportListRequest<>(httpClient,
@@ -188,13 +193,15 @@ public class OutboundPaymentImportService {
 
             /**
              * An optional reference that will appear on your customer's bank statement. The
-             * character limit for this reference is dependent on the scheme.
-             * 
-             * Faster Payments
+             * character limit for this reference is dependent on the scheme.<br>
+             * </br>
+             * <strong>Faster Payments</strong>
              * <ul>
              * <li>18 characters, including:
-             * "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789 &-./"</li>
+             * "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789 &amp;-./"</li>
              * </ul>
+             * <br>
+             * </br>
              */
             public EntryItems withReference(String reference) {
                 this.reference = reference;
@@ -288,9 +295,9 @@ public class OutboundPaymentImportService {
     /**
      * Request class for {@link OutboundPaymentImportService#list }.
      *
-     * Returns a cursor-paginated
-     * (https://developer.gocardless.com/api-reference/#api-usage-cursor-pagination) list of your
-     * outbound payment imports.
+     * Returns a <a href=
+     * "https://developer.gocardless.com/api-reference/#api-usage-cursor-pagination">cursor-paginated</a>
+     * list of your outbound payment imports.
      */
     public static final class OutboundPaymentImportListRequest<S>
             extends ListRequest<S, OutboundPaymentImport> {
@@ -373,11 +380,17 @@ public class OutboundPaymentImportService {
         /**
          * The status of the outbound payment import.
          * 
-         * - `created`: The initial state of a new import. - `validating`: Import validation in
-         * progress. - `invalid`: Import validation failed. - `valid`: Import validation succeeded.
-         * - `processing`: Authorisation received; payments are being generated. - `processed`: All
-         * entries have been successfully converted into outbound payments. - `cancelled`: The
-         * import was cancelled by a user or automatically expired by the system.
+         * <ul>
+         * <li><code>created</code>: The initial state of a new import.</li>
+         * <li><code>validating</code>: Import validation in progress.</li>
+         * <li><code>invalid</code>: Import validation failed.</li>
+         * <li><code>valid</code>: Import validation succeeded.</li>
+         * <li><code>processing</code>: Authorisation received; payments are being generated.</li>
+         * <li><code>processed</code>: All entries have been successfully converted into outbound
+         * payments.</li>
+         * <li><code>cancelled</code>: The import was cancelled by a user or automatically expired
+         * by the system.</li>
+         * </ul>
          */
         public OutboundPaymentImportListRequest<S> withStatus(Status status) {
             this.status = status;

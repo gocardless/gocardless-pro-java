@@ -8,16 +8,15 @@ import java.util.Map;
  * Represents a instalment schedule resource returned from the API.
  *
  * Instalment schedules are objects which represent a collection of related payments, with the
- * intention to collect the `total_amount` specified. The API supports both schedule-based creation
- * (similar to subscriptions) as well as explicit selection of differing payment amounts and charge
- * dates.
+ * intention to collect the <code>total_amount</code> specified. The API supports both
+ * schedule-based creation (similar to subscriptions) as well as explicit selection of differing
+ * payment amounts and charge dates.
  * 
  * Unlike subscriptions, the payments are created immediately, so the instalment schedule cannot be
  * modified once submitted and instead can only be cancelled (which will cancel any of the payments
  * which have not yet been submitted).
  * 
  * Customers will receive a single notification about the complete schedule of collection.
- * 
  */
 public class InstalmentSchedule {
     private InstalmentSchedule() {
@@ -35,15 +34,17 @@ public class InstalmentSchedule {
     private Integer totalAmount;
 
     /**
-     * Fixed [timestamp](#api-usage-dates-and-times), recording when this resource was created.
+     * Fixed <a href=
+     * "https://developer.gocardless.com/api-reference/#api-usage-dates-and-times">timestamp</a>,
+     * recording when this resource was created.
      */
     public String getCreatedAt() {
         return createdAt;
     }
 
     /**
-     * [ISO 4217](https://en.wikipedia.org/wiki/ISO_4217#Active_codes) currency code. Currently
-     * "AUD", "CAD", "DKK", "EUR", "GBP", "NZD", "SEK" and "USD" are supported.
+     * <a href="https://en.wikipedia.org/wiki/ISO_4217#Active_codes">ISO 4217</a> currency code.
+     * Currently "AUD", "CAD", "DKK", "EUR", "GBP", "NZD", "SEK" and "USD" are supported.
      */
     public Currency getCurrency() {
         return currency;
@@ -80,9 +81,9 @@ public class InstalmentSchedule {
     }
 
     /**
-     * If the status is `creation_failed`, this property will be populated with validation failures
-     * from the individual payments, arranged by the index of the payment that failed.
-     * 
+     * If the status is <code>creation_failed</code>, this property will be populated with
+     * validation failures from the individual payments, arranged by the index of the payment that
+     * failed.
      */
     public Map<String, Object> getPaymentErrors() {
         return paymentErrors;
@@ -91,11 +92,15 @@ public class InstalmentSchedule {
     /**
      * One of:
      * 
-     * - `pending`: we're waiting for GC to create the payments - `active`: the payments have been
-     * created, and the schedule is active - `creation_failed`: payment creation failed -
-     * `completed`: we have passed the date of the final payment and all payments have been
-     * collected - `cancelled`: the schedule has been cancelled - `errored`: one or more payments
-     * have failed
+     * <ul>
+     * <li><code>pending</code>: we're waiting for GC to create the payments</li>
+     * <li><code>active</code>: the payments have been created, and the schedule is active</li>
+     * <li><code>creation_failed</code>: payment creation failed</li>
+     * <li><code>completed</code>: we have passed the date of the final payment and all payments
+     * have been collected</li>
+     * <li><code>cancelled</code>: the schedule has been cancelled</li>
+     * <li><code>errored</code>: one or more payments have failed</li>
+     * </ul>
      */
     public Status getStatus() {
         return status;
@@ -149,22 +154,25 @@ public class InstalmentSchedule {
         private List<String> payments;
 
         /**
-         * ID of the associated [customer](#core-endpoints-customers).
+         * ID of the associated <a href=
+         * "https://developer.gocardless.com/api-reference/#core-endpoints-customers">customer</a>.
          */
         public String getCustomer() {
             return customer;
         }
 
         /**
-         * ID of the associated [mandate](#core-endpoints-mandates) which the instalment schedule
-         * will create payments against.
+         * ID of the associated <a href=
+         * "https://developer.gocardless.com/api-reference/#core-endpoints-mandates">mandate</a>
+         * which the instalment schedule will create payments against.
          */
         public String getMandate() {
             return mandate;
         }
 
         /**
-         * Array of IDs of the associated [payments](#core-endpoints-payments)
+         * Array of IDs of the associated <a href=
+         * "https://developer.gocardless.com/api-reference/#core-endpoints-payments">payments</a>
          */
         public List<String> getPayments() {
             return payments;

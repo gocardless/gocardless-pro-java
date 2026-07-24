@@ -34,7 +34,9 @@ public class OutboundPaymentImportEntry {
     }
 
     /**
-     * Fixed [timestamp](#api-usage-dates-and-times), recording when this resource was created.
+     * Fixed <a href=
+     * "https://developer.gocardless.com/api-reference/#api-usage-dates-and-times">timestamp</a>,
+     * recording when this resource was created.
      */
     public String getCreatedAt() {
         return createdAt;
@@ -60,7 +62,9 @@ public class OutboundPaymentImportEntry {
     }
 
     /**
-     * Fixed [timestamp](#api-usage-dates-and-times), recording when this entry was processed.
+     * Fixed <a href=
+     * "https://developer.gocardless.com/api-reference/#api-usage-dates-and-times">timestamp</a>,
+     * recording when this entry was processed.
      */
     public String getProcessedAt() {
         return processedAt;

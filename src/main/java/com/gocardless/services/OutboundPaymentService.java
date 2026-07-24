@@ -12,23 +12,23 @@ import java.util.Map;
 /**
  * Service class for working with outbound payment resources.
  *
- * Outbound Payments represent payments sent from creditors
- * (https://developer.gocardless.com/api-reference/#core-endpoints-creditors).
+ * Outbound Payments represent payments sent from
+ * <a href="https://developer.gocardless.com/api-reference/#core-endpoints-creditors">creditors</a>.
  * 
- * GoCardless will notify you via a webhook
- * (https://developer.gocardless.com/api-reference/#appendix-webhooks) when the status of the
- * outbound payment changes
- * (https://developer.gocardless.com/api-reference/#event-types-outbound-payment).
+ * GoCardless will notify you via a
+ * <a href="https://developer.gocardless.com/api-reference/#appendix-webhooks">webhook</a> when the
+ * status of the outbound payment <a href=
+ * "https://developer.gocardless.com/api-reference/#event-types-outbound-payment">changes</a>.
  * 
- * Rate limiting
+ * <h4>Rate limiting</h4> Two rate limits apply to the Outbound Payments APIs:
  * 
- * Two rate limits apply to the Outbound Payments APIs:
- * 
- * - All POST Outbound Payment endpoints (create, withdraw, approve, cancel and etc.) share a single
- * rate-limit group of 300 requests per minute. As initiating a payment typically requires two API
- * calls (one to create the payment and one to approve it), this allows you to add approximately 150
- * outbound payments per minute. - All remaining Outbound Payment endpoints are limited to 500
- * requests per minute.
+ * <ul>
+ * <li>All POST Outbound Payment endpoints (create, withdraw, approve, cancel and etc.) share a
+ * single rate-limit group of 300 requests per minute. As initiating a payment typically requires
+ * two API calls (one to create the payment and one to approve it), this allows you to add
+ * approximately 150 outbound payments per minute.</li>
+ * <li>All remaining Outbound Payment endpoints are limited to 500 requests per minute.</li>
+ * </ul>
  */
 public class OutboundPaymentService {
     private final HttpClient httpClient;
@@ -56,9 +56,10 @@ public class OutboundPaymentService {
     }
 
     /**
-     * Cancels an outbound payment. Only outbound payments with either `verifying`,
-     * `pending_approval`, or `scheduled` status can be cancelled. Once an outbound payment is
-     * `executing`, the money moving process has begun and cannot be reversed.
+     * Cancels an outbound payment. Only outbound payments with either <code>verifying</code>,
+     * <code>pending_approval</code>, or <code>scheduled</code> status can be cancelled. Once an
+     * outbound payment is <code>executing</code>, the money moving process has begun and cannot be
+     * reversed.
      */
     public OutboundPaymentCancelRequest cancel(String identity) {
         return new OutboundPaymentCancelRequest(httpClient, identity);
@@ -80,9 +81,9 @@ public class OutboundPaymentService {
     }
 
     /**
-     * Returns a cursor-paginated
-     * (https://developer.gocardless.com/api-reference/#api-usage-cursor-pagination) list of
-     * outbound payments.
+     * Returns a <a href=
+     * "https://developer.gocardless.com/api-reference/#api-usage-cursor-pagination">cursor-paginated</a>
+     * list of outbound payments.
      */
     public OutboundPaymentListRequest<ListResponse<OutboundPayment>> list() {
         return new OutboundPaymentListRequest<>(httpClient,
@@ -211,13 +212,15 @@ public class OutboundPaymentService {
 
         /**
          * An optional reference that will appear on your customer's bank statement. The character
-         * limit for this reference is dependent on the scheme.
-         * 
-         * Faster Payments
+         * limit for this reference is dependent on the scheme.<br>
+         * </br>
+         * <strong>Faster Payments</strong>
          * <ul>
          * <li>18 characters, including:
-         * "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789 &-./"</li>
+         * "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789 &amp;-./"</li>
          * </ul>
+         * <br>
+         * </br>
          */
         public OutboundPaymentCreateRequest withReference(String reference) {
             this.reference = reference;
@@ -396,13 +399,15 @@ public class OutboundPaymentService {
 
         /**
          * An optional reference that will appear on your customer's bank statement. The character
-         * limit for this reference is dependent on the scheme.
-         * 
-         * Faster Payments
+         * limit for this reference is dependent on the scheme.<br>
+         * </br>
+         * <strong>Faster Payments</strong>
          * <ul>
          * <li>18 characters, including:
-         * "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789 &-./"</li>
+         * "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789 &amp;-./"</li>
          * </ul>
+         * <br>
+         * </br>
          */
         public OutboundPaymentWithdrawRequest withReference(String reference) {
             this.reference = reference;
@@ -479,9 +484,10 @@ public class OutboundPaymentService {
     /**
      * Request class for {@link OutboundPaymentService#cancel }.
      *
-     * Cancels an outbound payment. Only outbound payments with either `verifying`,
-     * `pending_approval`, or `scheduled` status can be cancelled. Once an outbound payment is
-     * `executing`, the money moving process has begun and cannot be reversed.
+     * Cancels an outbound payment. Only outbound payments with either <code>verifying</code>,
+     * <code>pending_approval</code>, or <code>scheduled</code> status can be cancelled. Once an
+     * outbound payment is <code>executing</code>, the money moving process has begun and cannot be
+     * reversed.
      */
     public static final class OutboundPaymentCancelRequest extends PostRequest<OutboundPayment> {
         @PathParam
@@ -650,9 +656,9 @@ public class OutboundPaymentService {
     /**
      * Request class for {@link OutboundPaymentService#list }.
      *
-     * Returns a cursor-paginated
-     * (https://developer.gocardless.com/api-reference/#api-usage-cursor-pagination) list of
-     * outbound payments.
+     * Returns a <a href=
+     * "https://developer.gocardless.com/api-reference/#api-usage-cursor-pagination">cursor-paginated</a>
+     * list of outbound payments.
      */
     public static final class OutboundPaymentListRequest<S>
             extends ListRequest<S, OutboundPayment> {
@@ -703,22 +709,27 @@ public class OutboundPaymentService {
         /**
          * One of:
          * 
-         * - `verifying`: The payment has been created
-         * (https://developer.gocardless.com/api-reference/#outbound-payments-create-an-outbound-payment)
-         * and the verification process has begun. - `pending_approval`: The payment is awaiting
-         * approval
-         * (https://developer.gocardless.com/api-reference/#outbound-payments-approve-an-outbound-payment).
-         * - `scheduled`: The payment has passed verification & approval
-         * (https://developer.gocardless.com/api-reference/#outbound-payments-approve-an-outbound-payment),
-         * but processing has not yet begun. - `executing`: The execution date has arrived and the
-         * payment has been placed in queue for processing. - `executed`: The payment has been
-         * accepted by the scheme and is now on its way to the recipient. - `cancelled`: The payment
-         * has been cancelled
-         * (https://developer.gocardless.com/api-reference/#outbound-payments-cancel-an-outbound-payment)
-         * or was not approved
-         * (https://developer.gocardless.com/api-reference/#outbound-payments-approve-an-outbound-payment)
-         * on time. - `failed`: The payment was not sent, usually due to an error while or after
-         * executing.
+         * <ul>
+         * <li><code>verifying</code>: The payment has been <a href=
+         * "https://developer.gocardless.com/api-reference/#outbound-payments-create-an-outbound-payment">created</a>
+         * and the verification process has begun.</li>
+         * <li><code>pending_approval</code>: The payment is awaiting <a href=
+         * "https://developer.gocardless.com/api-reference/#outbound-payments-approve-an-outbound-payment">approval</a>.</li>
+         * <li><code>scheduled</code>: The payment has passed verification &amp; <a href=
+         * "https://developer.gocardless.com/api-reference/#outbound-payments-approve-an-outbound-payment">approval</a>,
+         * but processing has not yet begun.</li>
+         * <li><code>executing</code>: The execution date has arrived and the payment has been
+         * placed in queue for processing.</li>
+         * <li><code>executed</code>: The payment has been accepted by the scheme and is now on its
+         * way to the recipient.</li>
+         * <li><code>cancelled</code>: The payment has been <a href=
+         * "https://developer.gocardless.com/api-reference/#outbound-payments-cancel-an-outbound-payment">cancelled</a>
+         * or was not <a href=
+         * "https://developer.gocardless.com/api-reference/#outbound-payments-approve-an-outbound-payment">approved</a>
+         * on time.</li>
+         * <li><code>failed</code>: The payment was not sent, usually due to an error while or after
+         * executing.</li>
+         * </ul>
          */
         public OutboundPaymentListRequest<S> withStatus(Status status) {
             this.status = status;

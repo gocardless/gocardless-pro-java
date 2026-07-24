@@ -28,9 +28,9 @@ public class NegativeBalanceLimitService {
     }
 
     /**
-     * Returns a cursor-paginated
-     * (https://developer.gocardless.com/api-reference/#api-usage-cursor-pagination) list of
-     * negative balance limits.
+     * Returns a <a href=
+     * "https://developer.gocardless.com/api-reference/#api-usage-cursor-pagination">cursor-paginated</a>
+     * list of negative balance limits.
      */
     public NegativeBalanceLimitListRequest<ListResponse<NegativeBalanceLimit>> list() {
         return new NegativeBalanceLimitListRequest<>(httpClient,
@@ -45,9 +45,9 @@ public class NegativeBalanceLimitService {
     /**
      * Request class for {@link NegativeBalanceLimitService#list }.
      *
-     * Returns a cursor-paginated
-     * (https://developer.gocardless.com/api-reference/#api-usage-cursor-pagination) list of
-     * negative balance limits.
+     * Returns a <a href=
+     * "https://developer.gocardless.com/api-reference/#api-usage-cursor-pagination">cursor-paginated</a>
+     * list of negative balance limits.
      */
     public static final class NegativeBalanceLimitListRequest<S>
             extends ListRequest<S, NegativeBalanceLimit> {
@@ -79,8 +79,8 @@ public class NegativeBalanceLimitService {
         }
 
         /**
-         * ISO 4217 (https://en.wikipedia.org/wiki/ISO_4217#Active_codes) currency code. Currently
-         * "AUD", "CAD", "DKK", "EUR", "GBP", "NZD", "SEK" and "USD" are supported.
+         * <a href="https://en.wikipedia.org/wiki/ISO_4217#Active_codes">ISO 4217</a> currency code.
+         * Currently "AUD", "CAD", "DKK", "EUR", "GBP", "NZD", "SEK" and "USD" are supported.
          */
         public NegativeBalanceLimitListRequest<S> withCurrency(Currency currency) {
             this.currency = currency;

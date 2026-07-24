@@ -44,14 +44,16 @@ public class BillingRequestTemplate {
 
     /**
      * Permanent URL that customers can visit to allow them to complete a flow based on this
-     * template, before being returned to the `redirect_uri`.
+     * template, before being returned to the <code>redirect_uri</code>.
      */
     public String getAuthorisationUrl() {
         return authorisationUrl;
     }
 
     /**
-     * Fixed [timestamp](#api-usage-dates-and-times), recording when this resource was created.
+     * Fixed <a href=
+     * "https://developer.gocardless.com/api-reference/#api-usage-dates-and-times">timestamp</a>,
+     * recording when this resource was created.
      */
     public String getCreatedAt() {
         return createdAt;
@@ -73,7 +75,7 @@ public class BillingRequestTemplate {
     }
 
     /**
-     * [ISO 4217](https://en.wikipedia.org/wiki/ISO_4217#Active_codes) currency code.
+     * <a href="https://en.wikipedia.org/wiki/ISO_4217#Active_codes">ISO 4217</a> currency code.
      */
     public String getMandateRequestCurrency() {
         return mandateRequestCurrency;
@@ -82,7 +84,6 @@ public class BillingRequestTemplate {
     /**
      * A human-readable description of the payment and/or mandate. This will be displayed to the
      * payer when authorising the billing request.
-     * 
      */
     public String getMandateRequestDescription() {
         return mandateRequestDescription;
@@ -138,9 +139,9 @@ public class BillingRequestTemplate {
     }
 
     /**
-     * [ISO 4217](https://en.wikipedia.org/wiki/ISO_4217#Active_codes) currency code. `GBP` and
-     * `EUR` supported; `GBP` with your customers in the UK and for `EUR` with your customers in
-     * supported Eurozone countries only.
+     * <a href="https://en.wikipedia.org/wiki/ISO_4217#Active_codes">ISO 4217</a> currency code.
+     * <code>GBP</code> and <code>EUR</code> supported; <code>GBP</code> with your customers in the
+     * UK and for <code>EUR</code> with your customers in supported Eurozone countries only.
      */
     public String getPaymentRequestCurrency() {
         return paymentRequestCurrency;
@@ -149,7 +150,6 @@ public class BillingRequestTemplate {
     /**
      * A human-readable description of the payment and/or mandate. This will be displayed to the
      * payer when authorising the billing request.
-     * 
      */
     public String getPaymentRequestDescription() {
         return paymentRequestDescription;
@@ -165,11 +165,12 @@ public class BillingRequestTemplate {
     }
 
     /**
-     * (Optional) A scheme used for Open Banking payments. Currently `faster_payments` is supported
-     * in the UK (GBP) and `sepa_credit_transfer` and `sepa_instant_credit_transfer` are supported
-     * in supported Eurozone countries (EUR). For Eurozone countries, `sepa_credit_transfer` is used
-     * as the default. Please be aware that `sepa_instant_credit_transfer` may incur an additional
-     * fee for your customer.
+     * (Optional) A scheme used for Open Banking payments. Currently <code>faster_payments</code> is
+     * supported in the UK (GBP) and <code>sepa_credit_transfer</code> and
+     * <code>sepa_instant_credit_transfer</code> are supported in supported Eurozone countries
+     * (EUR). For Eurozone countries, <code>sepa_credit_transfer</code> is used as the default.
+     * Please be aware that <code>sepa_instant_credit_transfer</code> may incur an additional fee
+     * for your customer.
      */
     public String getPaymentRequestScheme() {
         return paymentRequestScheme;
@@ -183,8 +184,9 @@ public class BillingRequestTemplate {
     }
 
     /**
-     * Dynamic [timestamp](#api-usage-dates-and-times) recording when this resource was last
-     * updated.
+     * Dynamic <a href=
+     * "https://developer.gocardless.com/api-reference/#api-usage-dates-and-times">timestamp</a>
+     * recording when this resource was last updated.
      */
     public String getUpdatedAt() {
         return updatedAt;
@@ -213,7 +215,6 @@ public class BillingRequestTemplate {
          * This is an optional field and if it is not supplied the agreement will be considered open
          * and will not have an end date. Keep in mind the end date must take into account how long
          * it will take the user to set up this agreement via the Billing Request.
-         * 
          */
         public String getEndDate() {
             return endDate;
@@ -221,7 +222,8 @@ public class BillingRequestTemplate {
 
         /**
          * The maximum amount that can be charged for a single payment in the lowest denomination
-         * for the currency (e.g. pence in GBP, cents in EUR). _Note:_ Required for PayTo and VRP.
+         * for the currency (e.g. pence in GBP, cents in EUR). <em>Note:</em> Required for PayTo and
+         * VRP.
          */
         public Integer getMaxAmountPerPayment() {
             return maxAmountPerPayment;
@@ -230,8 +232,7 @@ public class BillingRequestTemplate {
         /**
          * A constraint where you can specify info (free text string) about how payments are
          * calculated. For use when payments vary and cannot be expressed as a fixed amount and
-         * frequency. _Note:_ This is only supported for ACH and PAD schemes.
-         * 
+         * frequency. <em>Note:</em> This is only supported for ACH and PAD schemes.
          */
         public String getPaymentMethod() {
             return paymentMethod;
@@ -240,11 +241,10 @@ public class BillingRequestTemplate {
         /**
          * Caps on the total amount and/or number of payments that can be collected within a
          * repeating period (e.g. no more than a set amount per month), as opposed to
-         * `max_amount_per_payment` which caps a single payment.
+         * <code>max_amount_per_payment</code> which caps a single payment.
          * 
-         * _Note:_ Required for VRP, where exactly one periodic limit must be provided. Optional for
-         * PayTo.
-         * 
+         * <em>Note:</em> Required for VRP, where exactly one periodic limit must be provided.
+         * Optional for PayTo.
          */
         public List<PeriodicLimit> getPeriodicLimits() {
             return periodicLimits;
@@ -255,7 +255,6 @@ public class BillingRequestTemplate {
          * 
          * This is an optional field and if it is not supplied the start date will be set to the day
          * authorisation happens.
-         * 
          */
         public String getStartDate() {
             return startDate;
@@ -277,22 +276,27 @@ public class BillingRequestTemplate {
             private Period period;
 
             /**
-             * The alignment of the period. Defaults to `creation_date` if not specified.
+             * The alignment of the period. Defaults to <code>creation_date</code> if not specified.
              * 
-             * `calendar` - the period follows fixed calendar boundaries, the same for every
-             * mandate: `week` runs Monday to Sunday, `month` runs from the 1st to the last day of
-             * the calendar month, and `year` runs from 1 January to 31 December. If the mandate
-             * starts partway through a period, the limit for that first period is reduced
-             * proportionally to the days remaining (e.g. a monthly limit starting on the 15th gives
-             * roughly half the limit for that first month).
+             * <code>calendar</code>
+             * <ul>
+             * <li>the period follows fixed calendar boundaries, the same for every mandate:</li>
+             * </ul>
+             * <code>week</code> runs Monday to Sunday, <code>month</code> runs from the 1st to the
+             * last day of the calendar month, and <code>year</code> runs from 1 January to 31
+             * December. If the mandate starts partway through a period, the limit for that first
+             * period is reduced proportionally to the days remaining (e.g. a monthly limit starting
+             * on the 15th gives roughly half the limit for that first month).
              * 
-             * `creation_date` - the period follows the mandate's own start date rather than the
-             * calendar. For example, if the mandate starts on the 15th, each monthly period runs
-             * from the 15th to the 14th of the following month. The first period is a full period,
-             * not reduced proportionally.
+             * <code>creation_date</code>
+             * <ul>
+             * <li>the period follows the mandate's own start date rather than the calendar. For
+             * example, if the mandate starts on the 15th, each monthly period runs from the 15th to
+             * the 14th of the following month. The first period is a full period, not reduced
+             * proportionally.</li>
+             * </ul>
              * 
-             * _Note:_ Has no effect when period is `flexible`.
-             * 
+             * <em>Note:</em> Has no effect when period is <code>flexible</code>.
              */
             public Alignment getAlignment() {
                 return alignment;
@@ -301,8 +305,7 @@ public class BillingRequestTemplate {
             /**
              * The maximum number of payments that can be collected in this periodic limit.
              * 
-             * _Note:_ Only supported for the PayTo scheme, where it is optional.
-             * 
+             * <em>Note:</em> Only supported for the PayTo scheme, where it is optional.
              */
             public Integer getMaxPayments() {
                 return maxPayments;
@@ -312,8 +315,7 @@ public class BillingRequestTemplate {
              * The maximum total amount that can be charged for all payments in this periodic limit,
              * in the lowest denomination for the currency (e.g. pence in GBP, cents in EUR).
              * 
-             * _Note:_ Required for VRP. This is not permitted for the PayTo scheme.
-             * 
+             * <em>Note:</em> Required for VRP. This is not permitted for the PayTo scheme.
              */
             public Integer getMaxTotalAmount() {
                 return maxTotalAmount;
@@ -323,7 +325,6 @@ public class BillingRequestTemplate {
              * The repeating period for this mandate. Required whenever a periodic limit is provided
              * (for both VRP and PayTo). If periodic_limits is omitted entirely for PayTo, this
              * defaults to flexible.
-             * 
              */
             public Period getPeriod() {
                 return period;

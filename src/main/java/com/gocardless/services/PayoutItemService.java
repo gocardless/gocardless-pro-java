@@ -21,7 +21,7 @@ import java.util.Map;
  * 
  * The Payout Items API allows you to view, on a per-payout basis, the credit and debit items that
  * make up that payout's amount. Payout items can only be retrieved for payouts created in the last
- * 6 months. Requests for older payouts will return an HTTP status 410 Gone.
+ * 6 months. Requests for older payouts will return an HTTP status <code>410 Gone</code>.
  */
 public class PayoutItemService {
     private final HttpClient httpClient;
@@ -35,12 +35,12 @@ public class PayoutItemService {
     }
 
     /**
-     * Returns a cursor-paginated
-     * (https://developer.gocardless.com/api-reference/#api-usage-cursor-pagination) list of items
-     * in the payout.
+     * Returns a <a href=
+     * "https://developer.gocardless.com/api-reference/#api-usage-cursor-pagination">cursor-paginated</a>
+     * list of items in the payout.
      * 
-     * This endpoint only serves requests for payouts created in the last 6 months. Requests for
-     * older payouts will return an HTTP status 410 Gone.
+     * <strong>This endpoint only serves requests for payouts created in the last 6 months. Requests
+     * for older payouts will return an HTTP status <code>410 Gone</code>.</strong>
      */
     public PayoutItemListRequest<ListResponse<PayoutItem>> list() {
         return new PayoutItemListRequest<>(httpClient, ListRequest.<PayoutItem>pagingExecutor());
@@ -53,12 +53,12 @@ public class PayoutItemService {
     /**
      * Request class for {@link PayoutItemService#list }.
      *
-     * Returns a cursor-paginated
-     * (https://developer.gocardless.com/api-reference/#api-usage-cursor-pagination) list of items
-     * in the payout.
+     * Returns a <a href=
+     * "https://developer.gocardless.com/api-reference/#api-usage-cursor-pagination">cursor-paginated</a>
+     * list of items in the payout.
      * 
-     * This endpoint only serves requests for payouts created in the last 6 months. Requests for
-     * older payouts will return an HTTP status 410 Gone.
+     * <strong>This endpoint only serves requests for payouts created in the last 6 months. Requests
+     * for older payouts will return an HTTP status <code>410 Gone</code>.</strong>
      */
     public static final class PayoutItemListRequest<S> extends ListRequest<S, PayoutItem> {
         private Include2020TaxCutover include2020TaxCutover;

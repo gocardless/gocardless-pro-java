@@ -6,9 +6,11 @@ import java.util.List;
 /**
  * Represents a creditor resource returned from the API.
  *
- * Each [payment](#core-endpoints-payments) taken through the API is linked to a "creditor", to whom
- * the payment is then paid out. In most cases your organisation will have a single "creditor", but
- * the API also supports collecting payments on behalf of others.
+ * Each
+ * <a href="https://developer.gocardless.com/api-reference/#core-endpoints-payments">payment</a>
+ * taken through the API is linked to a "creditor", to whom the payment is then paid out. In most
+ * cases your organisation will have a single "creditor", but the API also supports collecting
+ * payments on behalf of others.
  * 
  * Currently, for Anti Money Laundering reasons, any creditors you add must be directly related to
  * your organisation.
@@ -63,11 +65,10 @@ public class Creditor {
 
     /**
      * Prefix for the bank reference of payouts sent to this creditor. For instance, if the
-     * creditor's `bank_reference_prefix` was `ACME`, the bank reference of a payout sent to that
-     * creditor could be `ACME-8G7Q8`.
+     * creditor's <code>bank_reference_prefix</code> was <code>ACME</code>, the bank reference of a
+     * payout sent to that creditor could be <code>ACME-8G7Q8</code>.
      * 
      * This prefix is also used for refunds in EUR and GBP.
-     * 
      */
     public String getBankReferencePrefix() {
         return bankReferencePrefix;
@@ -88,41 +89,46 @@ public class Creditor {
     }
 
     /**
-     * [ISO 3166-1 alpha-2
-     * code.](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2#Officially_assigned_code_elements)
+     * <a href=
+     * "https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2#Officially_assigned_code_elements">ISO
+     * 3166-1 alpha-2 code.</a>
      */
     public String getCountryCode() {
         return countryCode;
     }
 
     /**
-     * Fixed [timestamp](#api-usage-dates-and-times), recording when this resource was created.
+     * Fixed <a href=
+     * "https://developer.gocardless.com/api-reference/#api-usage-dates-and-times">timestamp</a>,
+     * recording when this resource was created.
      */
     public String getCreatedAt() {
         return createdAt;
     }
 
     /**
-     * The type of business of the creditor. Currently, `individual`, `company`, `charity`,
-     * `partnership`, and `trust` are supported.
+     * The type of business of the creditor. Currently, <code>individual</code>,
+     * <code>company</code>, <code>charity</code>, <code>partnership</code>, and <code>trust</code>
+     * are supported.
      */
     public CreditorType getCreditorType() {
         return creditorType;
     }
 
     /**
-     * Boolean value indicating whether creditor has the [Custom Payment
-     * Pages](https://hub.gocardless.com/s/article/Custom-payment-pages) functionality enabled.
+     * Boolean value indicating whether creditor has the
+     * <a href="https://hub.gocardless.com/s/article/Custom-payment-pages">Custom Payment Pages</a>
+     * functionality enabled.
      */
     public Boolean getCustomPaymentPagesEnabled() {
         return customPaymentPagesEnabled;
     }
 
     /**
-     * [ISO 4217](https://en.wikipedia.org/wiki/ISO_4217#Active_codes) code for the currency in
-     * which amounts will be paid out (after foreign exchange). Currently "AUD", "CAD", "DKK",
-     * "EUR", "GBP", "NZD", "SEK" and "USD" are supported. Present only if payouts will be (or were)
-     * made via foreign exchange.
+     * <a href="https://en.wikipedia.org/wiki/ISO_4217#Active_codes">ISO 4217</a> code for the
+     * currency in which amounts will be paid out (after foreign exchange). Currently "AUD", "CAD",
+     * "DKK", "EUR", "GBP", "NZD", "SEK" and "USD" are supported. Present only if payouts will be
+     * (or were) made via foreign exchange.
      */
     public FxPayoutCurrency getFxPayoutCurrency() {
         return fxPayoutCurrency;
@@ -147,8 +153,9 @@ public class Creditor {
     }
 
     /**
-     * Boolean value indicating whether creditor has the [Mandate
-     * Imports](#core-endpoints-mandate-imports) functionality enabled.
+     * Boolean value indicating whether creditor has the <a href=
+     * "https://developer.gocardless.com/api-reference/#core-endpoints-mandate-imports">Mandate
+     * Imports</a> functionality enabled.
      */
     public Boolean getMandateImportsEnabled() {
         return mandateImportsEnabled;
@@ -156,9 +163,10 @@ public class Creditor {
 
     /**
      * Boolean value indicating whether the organisation is responsible for sending all customer
-     * notifications (note this is separate from the functionality described
-     * [here](/getting-started/api/handling-customer-notifications/)). If you are a partner app, and
-     * this value is true, you should not send notifications on behalf of this organisation.
+     * notifications (note this is separate from the functionality described <a href=
+     * "https://developer.gocardless.com/getting-started/api/handling-customer-notifications/">here</a>).
+     * If you are a partner app, and this value is true, you should not send notifications on behalf
+     * of this organisation.
      */
     public Boolean getMerchantResponsibleForNotifications() {
         return merchantResponsibleForNotifications;
@@ -188,9 +196,11 @@ public class Creditor {
     /**
      * An array of the scheme identifiers this creditor can create mandates against.
      * 
-     * The support address, `phone_number` and `email` fields are for customers to contact the
-     * merchant for support purposes. They must be displayed on the payment page, please see our
-     * [compliance requirements](#appendix-compliance-requirements) for more details.
+     * The support address, <code>phone_number</code> and <code>email</code> fields are for
+     * customers to contact the merchant for support purposes. They must be displayed on the payment
+     * page, please see our <a href=
+     * "https://developer.gocardless.com/api-reference/#appendix-compliance-requirements">compliance
+     * requirements</a> for more details.
      */
     public List<SchemeIdentifier> getSchemeIdentifiers() {
         return schemeIdentifiers;
@@ -198,17 +208,21 @@ public class Creditor {
 
     /**
      * The creditor's verification status, indicating whether they can yet receive payouts. For more
-     * details on handling verification as a partner, see our ["Helping your users get verified"
-     * guide](/getting-started/partners/helping-your-users-get-verified/). One of:
+     * details on handling verification as a partner, see our <a href=
+     * "https://developer.gocardless.com/getting-started/partners/helping-your-users-get-verified/">"Helping
+     * your users get verified" guide</a>. One of:
      * 
-     * - `successful`: The creditor's account is fully verified, and they can receive payouts. Once
-     * a creditor has been successfully verified, they may in the future require further
-     * verification - for example, if they change their payout bank account, we will have to check
-     * that they own the new bank account before they can receive payouts again. - `in_review`: The
-     * creditor has provided all of the information currently requested, and it is awaiting review
-     * by GoCardless before they can be verified and receive payouts. - `action_required`: The
-     * creditor needs to provide further information to verify their account so they can receive
-     * payouts, and should visit the verification flow.
+     * <ul>
+     * <li><code>successful</code>: The creditor's account is fully verified, and they can receive
+     * payouts. Once a creditor has been successfully verified, they may in the future require
+     * further verification - for example, if they change their payout bank account, we will have to
+     * check that they own the new bank account before they can receive payouts again.</li>
+     * <li><code>in_review</code>: The creditor has provided all of the information currently
+     * requested, and it is awaiting review by GoCardless before they can be verified and receive
+     * payouts.</li>
+     * <li><code>action_required</code>: The creditor needs to provide further information to verify
+     * their account so they can receive payouts, and should visit the verification flow.</li>
+     * </ul>
      */
     public VerificationStatus getVerificationStatus() {
         return verificationStatus;
@@ -265,64 +279,72 @@ public class Creditor {
         private String defaultUsdPayoutAccount;
 
         /**
-         * ID of the [bank account](#core-endpoints-creditor-bank-accounts) which is set up to
-         * receive payouts in AUD.
+         * ID of the <a href=
+         * "https://developer.gocardless.com/api-reference/#core-endpoints-creditor-bank-accounts">bank
+         * account</a> which is set up to receive payouts in AUD.
          */
         public String getDefaultAudPayoutAccount() {
             return defaultAudPayoutAccount;
         }
 
         /**
-         * ID of the [bank account](#core-endpoints-creditor-bank-accounts) which is set up to
-         * receive payouts in CAD.
+         * ID of the <a href=
+         * "https://developer.gocardless.com/api-reference/#core-endpoints-creditor-bank-accounts">bank
+         * account</a> which is set up to receive payouts in CAD.
          */
         public String getDefaultCadPayoutAccount() {
             return defaultCadPayoutAccount;
         }
 
         /**
-         * ID of the [bank account](#core-endpoints-creditor-bank-accounts) which is set up to
-         * receive payouts in DKK.
+         * ID of the <a href=
+         * "https://developer.gocardless.com/api-reference/#core-endpoints-creditor-bank-accounts">bank
+         * account</a> which is set up to receive payouts in DKK.
          */
         public String getDefaultDkkPayoutAccount() {
             return defaultDkkPayoutAccount;
         }
 
         /**
-         * ID of the [bank account](#core-endpoints-creditor-bank-accounts) which is set up to
-         * receive payouts in EUR.
+         * ID of the <a href=
+         * "https://developer.gocardless.com/api-reference/#core-endpoints-creditor-bank-accounts">bank
+         * account</a> which is set up to receive payouts in EUR.
          */
         public String getDefaultEurPayoutAccount() {
             return defaultEurPayoutAccount;
         }
 
         /**
-         * ID of the [bank account](#core-endpoints-creditor-bank-accounts) which is set up to
-         * receive payouts in GBP.
+         * ID of the <a href=
+         * "https://developer.gocardless.com/api-reference/#core-endpoints-creditor-bank-accounts">bank
+         * account</a> which is set up to receive payouts in GBP.
          */
         public String getDefaultGbpPayoutAccount() {
             return defaultGbpPayoutAccount;
         }
 
         /**
-         * ID of the [bank account](#core-endpoints-creditor-bank-accounts) which is set up to
-         * receive payouts in NZD.
+         * ID of the <a href=
+         * "https://developer.gocardless.com/api-reference/#core-endpoints-creditor-bank-accounts">bank
+         * account</a> which is set up to receive payouts in NZD.
          */
         public String getDefaultNzdPayoutAccount() {
             return defaultNzdPayoutAccount;
         }
 
         /**
-         * ID of the [bank account](#core-endpoints-creditor-bank-accounts) which is set up to
-         * receive payouts in SEK.
+         * ID of the <a href=
+         * "https://developer.gocardless.com/api-reference/#core-endpoints-creditor-bank-accounts">bank
+         * account</a> which is set up to receive payouts in SEK.
          */
         public String getDefaultSekPayoutAccount() {
             return defaultSekPayoutAccount;
         }
 
         /**
-         * ID of the [bank account](#core-endpoints-creditor-bank-accounts) which is set up to
-         * receive payouts in USD.
+         * ID of the <a href=
+         * "https://developer.gocardless.com/api-reference/#core-endpoints-creditor-bank-accounts">bank
+         * account</a> which is set up to receive payouts in USD.
          */
         public String getDefaultUsdPayoutAccount() {
             return defaultUsdPayoutAccount;
@@ -394,15 +416,18 @@ public class Creditor {
         }
 
         /**
-         * [ISO 3166-1 alpha-2
-         * code.](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2#Officially_assigned_code_elements)
+         * <a href=
+         * "https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2#Officially_assigned_code_elements">ISO
+         * 3166-1 alpha-2 code.</a>
          */
         public String getCountryCode() {
             return countryCode;
         }
 
         /**
-         * Fixed [timestamp](#api-usage-dates-and-times), recording when this resource was created.
+         * Fixed <a href=
+         * "https://developer.gocardless.com/api-reference/#api-usage-dates-and-times">timestamp</a>,
+         * recording when this resource was created.
          */
         public String getCreatedAt() {
             return createdAt;
@@ -433,8 +458,9 @@ public class Creditor {
          * The minimum interval, in working days, between the sending of a pre-notification to the
          * customer, and the charge date of a payment using this scheme identifier.
          * 
-         * By default, GoCardless sends these notifications automatically. Please see our
-         * [compliance requirements](#appendix-compliance-requirements) for more details.
+         * By default, GoCardless sends these notifications automatically. Please see our <a href=
+         * "https://developer.gocardless.com/api-reference/#appendix-compliance-requirements">compliance
+         * requirements</a> for more details.
          */
         public Integer getMinimumAdvanceNotice() {
             return minimumAdvanceNotice;
@@ -484,8 +510,8 @@ public class Creditor {
         }
 
         /**
-         * The status of the scheme identifier. Only `active` scheme identifiers will be applied to
-         * a creditor and used against payments.
+         * The status of the scheme identifier. Only <code>active</code> scheme identifiers will be
+         * applied to a creditor and used against payments.
          */
         public Status getStatus() {
             return status;

@@ -28,9 +28,10 @@ public class BalanceService {
     }
 
     /**
-     * Returns a cursor-paginated
-     * (https://developer.gocardless.com/api-reference/#api-usage-cursor-pagination) list of
-     * balances for a given creditor. This endpoint is rate limited to 60 requests per minute.
+     * Returns a <a href=
+     * "https://developer.gocardless.com/api-reference/#api-usage-cursor-pagination">cursor-paginated</a>
+     * list of balances for a given creditor. This endpoint is rate limited to 60 requests per
+     * minute.
      */
     public BalanceListRequest<ListResponse<Balance>> list() {
         return new BalanceListRequest<>(httpClient, ListRequest.<Balance>pagingExecutor());
@@ -43,9 +44,10 @@ public class BalanceService {
     /**
      * Request class for {@link BalanceService#list }.
      *
-     * Returns a cursor-paginated
-     * (https://developer.gocardless.com/api-reference/#api-usage-cursor-pagination) list of
-     * balances for a given creditor. This endpoint is rate limited to 60 requests per minute.
+     * Returns a <a href=
+     * "https://developer.gocardless.com/api-reference/#api-usage-cursor-pagination">cursor-paginated</a>
+     * list of balances for a given creditor. This endpoint is rate limited to 60 requests per
+     * minute.
      */
     public static final class BalanceListRequest<S> extends ListRequest<S, Balance> {
         private String creditor;
@@ -67,8 +69,8 @@ public class BalanceService {
         }
 
         /**
-         * ID of a creditor
-         * (https://developer.gocardless.com/api-reference/#core-endpoints-creditors).
+         * ID of a <a href=
+         * "https://developer.gocardless.com/api-reference/#core-endpoints-creditors">creditor</a>.
          */
         public BalanceListRequest<S> withCreditor(String creditor) {
             this.creditor = creditor;

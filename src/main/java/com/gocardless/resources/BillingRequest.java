@@ -11,12 +11,11 @@ import java.util.Map;
  * of required input might be additional customer billing details, while an action would be asking a
  * customer to authorise a payment using their mobile banking app.
  * 
- * See [Billing Requests:
- * Overview](https://developer.gocardless.com/getting-started/billing-requests/overview/) for
- * how-to's, explanations and tutorials.
+ * See <a href="https://developer.gocardless.com/getting-started/billing-requests/overview/">Billing
+ * Requests: Overview</a> for how-to's, explanations and tutorials.
  * <p class="notice">
- * <strong>Important</strong>: All properties associated with `subscription_request` and
- * `instalment_schedule_request` are only supported for ACH and PAD schemes.
+ * <strong>Important</strong>: All properties associated with <code>subscription_request</code> and
+ * <code>instalment_schedule_request</code> are only supported for ACH and PAD schemes.
  * </p>
  */
 public class BillingRequest {
@@ -49,7 +48,9 @@ public class BillingRequest {
     }
 
     /**
-     * Fixed [timestamp](#api-usage-dates-and-times), recording when this resource was created.
+     * Fixed <a href=
+     * "https://developer.gocardless.com/api-reference/#api-usage-dates-and-times">timestamp</a>,
+     * recording when this resource was created.
      */
     public String getCreatedAt() {
         return createdAt;
@@ -59,9 +60,9 @@ public class BillingRequest {
      * (Optional) If true, this billing request can fallback from instant payment to direct debit.
      * Should not be set if GoCardless payment intelligence feature is used.
      * 
-     * See [Billing Requests: Retain customers with
-     * Fallbacks](https://developer.gocardless.com/billing-requests/retain-customers-with-fallbacks/)
-     * for more information.
+     * See <a href=
+     * "https://developer.gocardless.com/billing-requests/retain-customers-with-fallbacks/">Billing
+     * Requests: Retain customers with Fallbacks</a> for more information.
      */
     public Boolean getFallbackEnabled() {
         return fallbackEnabled;
@@ -82,8 +83,9 @@ public class BillingRequest {
     }
 
     /**
-     * Request for an instalment schedule. Has to contain either `instalments_with_schedule` object
-     * or an array of `instalments_with_dates` objects
+     * Request for an instalment schedule. Has to contain either
+     * <code>instalments_with_schedule</code> object or an array of
+     * <code>instalments_with_dates</code> objects
      */
     public InstalmentScheduleRequest getInstalmentScheduleRequest() {
         return instalmentScheduleRequest;
@@ -121,9 +123,8 @@ public class BillingRequest {
     /**
      * Specifies the underlying purpose of the payment. Defines the specific reason or type of
      * service/goods the payment relates to, improving straight-through processing and compliance.
-     * See [VRP Commercial Payment Purpose
-     * Codes](https://developer.gocardless.com/vrp-commercial-payment-purpose-codes/) for the
-     * complete list of valid codes.
+     * See <a href="https://developer.gocardless.com/vrp-commercial-payment-purpose-codes/">VRP
+     * Commercial Payment Purpose Codes</a> for the complete list of valid codes.
      */
     public String getPaymentPurposeCode() {
         return paymentPurposeCode;
@@ -139,9 +140,9 @@ public class BillingRequest {
     /**
      * Specifies the high-level purpose/category of a mandate and/or payment using a set of
      * pre-defined categories. Provides context on the nature and reason for the payment to
-     * facilitate processing and compliance. See [Billing Request Purpose
-     * Codes](https://developer.gocardless.com/billing-request-purpose-codes/) for the complete list
-     * of valid codes.
+     * facilitate processing and compliance. See
+     * <a href="https://developer.gocardless.com/billing-request-purpose-codes/">Billing Request
+     * Purpose Codes</a> for the complete list of valid codes.
      */
     public PurposeCode getPurposeCode() {
         return purposeCode;
@@ -154,10 +155,13 @@ public class BillingRequest {
     /**
      * One of:
      * 
-     * - `pending`: the billing request is pending and can be used - `ready_to_fulfil`: the billing
-     * request is ready to fulfil - `fulfilling`: the billing request is currently undergoing
-     * fulfilment - `fulfilled`: the billing request has been fulfilled and a payment created -
-     * `cancelled`: the billing request has been cancelled and cannot be used
+     * <ul>
+     * <li><code>pending</code>: the billing request is pending and can be used</li>
+     * <li><code>ready_to_fulfil</code>: the billing request is ready to fulfil</li>
+     * <li><code>fulfilling</code>: the billing request is currently undergoing fulfilment</li>
+     * <li><code>fulfilled</code>: the billing request has been fulfilled and a payment created</li>
+     * <li><code>cancelled</code>: the billing request has been cancelled and cannot be used</li>
+     * </ul>
      */
     public Status getStatus() {
         return status;
@@ -301,12 +305,18 @@ public class BillingRequest {
 
         /**
          * Describes whether we inferred the institution from the provided bank account details. One
-         * of: - `not_needed`: we won't attempt to infer the institution as it is not needed. Either
-         * because it was manually selected or the billing request does not support this feature -
-         * `pending`: we are waiting on the bank details in order to infer the institution -
-         * `failed`: we weren't able to infer the institution - `success`: we inferred the
-         * institution and added it to the resources of a Billing Request
+         * of:
          * 
+         * <ul>
+         * <li><code>not_needed</code>: we won't attempt to infer the institution as it is not
+         * needed. Either because it was manually selected or the billing request does not support
+         * this feature</li>
+         * <li><code>pending</code>: we are waiting on the bank details in order to infer the
+         * institution</li>
+         * <li><code>failed</code>: we weren't able to infer the institution</li>
+         * <li><code>success</code>: we inferred the institution and added it to the resources of a
+         * Billing Request</li>
+         * </ul>
          */
         public InstitutionGuessStatus getInstitutionGuessStatus() {
             return institutionGuessStatus;
@@ -464,8 +474,9 @@ public class BillingRequest {
     /**
      * Represents a instalment schedule request resource returned from the API.
      *
-     * Request for an instalment schedule. Has to contain either `instalments_with_schedule` object
-     * or an array of `instalments_with_dates` objects
+     * Request for an instalment schedule. Has to contain either
+     * <code>instalments_with_schedule</code> object or an array of
+     * <code>instalments_with_dates</code> objects
      */
     public static class InstalmentScheduleRequest {
         private InstalmentScheduleRequest() {
@@ -493,16 +504,18 @@ public class BillingRequest {
         }
 
         /**
-         * [ISO 4217](https://en.wikipedia.org/wiki/ISO_4217#Active_codes) currency code. Currently
-         * "USD" and "CAD" are supported.
+         * <a href="https://en.wikipedia.org/wiki/ISO_4217#Active_codes">ISO 4217</a> currency code.
+         * Currently "USD" and "CAD" are supported.
          */
         public String getCurrency() {
             return currency;
         }
 
         /**
-         * An explicit array of instalment payments, each specifying at least an `amount` and
-         * `charge_date`. See [create (with dates)](#instalment-schedules-create-with-dates)
+         * An explicit array of instalment payments, each specifying at least an <code>amount</code>
+         * and <code>charge_date</code>. See <a href=
+         * "https://developer.gocardless.com/api-reference/#instalment-schedules-create-with-dates">create
+         * (with dates)</a>
          */
         public List<InstalmentsWithDate> getInstalmentsWithDates() {
             return instalmentsWithDates;
@@ -510,9 +523,9 @@ public class BillingRequest {
 
         /**
          * Frequency of the payments you want to create, together with an array of payment amounts
-         * to be collected, with a specified start date for the first payment. See [create (with
-         * schedule)](#instalment-schedules-create-with-schedule)
-         * 
+         * to be collected, with a specified start date for the first payment. See <a href=
+         * "https://developer.gocardless.com/api-reference/#instalment-schedules-create-with-schedule">create
+         * (with schedule)</a>
          */
         public InstalmentsWithSchedule getInstalmentsWithSchedule() {
             return instalmentsWithSchedule;
@@ -540,19 +553,22 @@ public class BillingRequest {
 
         /**
          * An optional payment reference. This will be set as the reference on each payment created
-         * and will appear on your customer's bank statement. See the documentation for the [create
-         * payment endpoint](#payments-create-a-payment) for more details. <br />
+         * and will appear on your customer's bank statement. See the documentation for the <a href=
+         * "https://developer.gocardless.com/api-reference/#payments-create-a-payment">create
+         * payment endpoint</a> for more details. <br>
+         * </br>
          */
         public String getPaymentReference() {
             return paymentReference;
         }
 
         /**
-         * On failure, automatically retry payments using [intelligent
-         * retries](/success-plus/overview). Default is `false`.
+         * On failure, automatically retry payments using
+         * <a href="https://developer.gocardless.com/success-plus/overview">intelligent retries</a>.
+         * Default is <code>false</code>.
          * <p class="notice">
          * <strong>Important</strong>: To be able to use intelligent retries, Success+ needs to be
-         * enabled in [GoCardless dashboard](https://manage.gocardless.com/success-plus).
+         * enabled in <a href="https://manage.gocardless.com/success-plus">GoCardless dashboard</a>.
          * </p>
          */
         public Boolean getRetryIfPossible() {
@@ -588,11 +604,12 @@ public class BillingRequest {
              * EUR).
              * 
              * Minimum and maximum amounts vary by payment scheme. For more information, see
-             * [Transaction
-             * limits](https://support.gocardless.com/hc/en-gb/articles/115000309245-Transaction-limits)
+             * <a href=
+             * "https://support.gocardless.com/hc/en-gb/articles/115000309245-Transaction-limits">Transaction
+             * limits</a>
              * 
              * For Variable Recurring Payments (VRP), this must not exceed the mandate's
-             * `max_amount_per_payment` constraint.
+             * <code>max_amount_per_payment</code> constraint.
              */
             public Integer getAmount() {
                 return amount;
@@ -600,8 +617,9 @@ public class BillingRequest {
 
             /**
              * A future date on which the payment should be collected. If the date is before the
-             * next_possible_charge_date on the [mandate](#core-endpoints-mandates), it will be
-             * automatically rolled forwards to that date.
+             * next_possible_charge_date on the <a href=
+             * "https://developer.gocardless.com/api-reference/#core-endpoints-mandates">mandate</a>,
+             * it will be automatically rolled forwards to that date.
              */
             public String getChargeDate() {
                 return chargeDate;
@@ -610,8 +628,9 @@ public class BillingRequest {
             /**
              * A human-readable description of the payment. This will be included in the
              * notification email GoCardless sends to your customer if your organisation does not
-             * send its own notifications (see [compliance
-             * requirements](#appendix-compliance-requirements)).
+             * send its own notifications (see <a href=
+             * "https://developer.gocardless.com/api-reference/#appendix-compliance-requirements">compliance
+             * requirements</a>).
              */
             public String getDescription() {
                 return description;
@@ -622,9 +641,9 @@ public class BillingRequest {
          * Represents a instalments with schedule resource returned from the API.
          *
          * Frequency of the payments you want to create, together with an array of payment amounts
-         * to be collected, with a specified start date for the first payment. See [create (with
-         * schedule)](#instalment-schedules-create-with-schedule)
-         * 
+         * to be collected, with a specified start date for the first payment. See <a href=
+         * "https://developer.gocardless.com/api-reference/#instalment-schedules-create-with-schedule">create
+         * (with schedule)</a>
          */
         public static class InstalmentsWithSchedule {
             private InstalmentsWithSchedule() {
@@ -639,24 +658,22 @@ public class BillingRequest {
             /**
              * List of amounts of each instalment, in the lowest denomination for the currency (e.g.
              * cents in USD).
-             * 
              */
             public List<Integer> getAmounts() {
                 return amounts;
             }
 
             /**
-             * Number of `interval_units` between charge dates. Must be greater than or equal to
-             * `1`.
-             * 
+             * Number of <code>interval_units</code> between charge dates. Must be greater than or
+             * equal to <code>1</code>.
              */
             public Integer getInterval() {
                 return interval;
             }
 
             /**
-             * The unit of time between customer charge dates. One of `weekly`, `monthly` or
-             * `yearly`.
+             * The unit of time between customer charge dates. One of <code>weekly</code>,
+             * <code>monthly</code> or <code>yearly</code>.
              */
             public IntervalUnit getIntervalUnit() {
                 return intervalUnit;
@@ -664,10 +681,12 @@ public class BillingRequest {
 
             /**
              * The date on which the first payment should be charged. Must be on or after the
-             * [mandate](#core-endpoints-mandates)'s `next_possible_charge_date`. When left blank
-             * and `month` or `day_of_month` are provided, this will be set to the date of the first
-             * payment. If created without `month` or `day_of_month` this will be set as the
-             * mandate's `next_possible_charge_date`
+             * <a href=
+             * "https://developer.gocardless.com/api-reference/#core-endpoints-mandates">mandate</a>'s
+             * <code>next_possible_charge_date</code>. When left blank and <code>month</code> or
+             * <code>day_of_month</code> are provided, this will be set to the date of the first
+             * payment. If created without <code>month</code> or <code>day_of_month</code> this will
+             * be set as the mandate's <code>next_possible_charge_date</code>
              */
             public String getStartDate() {
                 return startDate;
@@ -695,9 +714,9 @@ public class BillingRequest {
             private String instalmentSchedule;
 
             /**
-             * (Optional) ID of the [instalment_schedule](#core-endpoints-instalment-schedules) that
-             * was created from this instalment schedule request.
-             * 
+             * (Optional) ID of the <a href=
+             * "https://developer.gocardless.com/api-reference/#core-endpoints-instalment-schedules">instalment_schedule</a>
+             * that was created from this instalment schedule request.
              */
             public String getInstalmentSchedule() {
                 return instalmentSchedule;
@@ -732,30 +751,35 @@ public class BillingRequest {
         private String subscriptionRequestSubscription;
 
         /**
-         * (Optional) ID of the [bank authorisation](#billing-requests-bank-authorisations) that was
-         * used to verify this request.
+         * (Optional) ID of the <a href=
+         * "https://developer.gocardless.com/api-reference/#billing-requests-bank-authorisations">bank
+         * authorisation</a> that was used to verify this request.
          */
         public String getBankAuthorisation() {
             return bankAuthorisation;
         }
 
         /**
-         * ID of the associated [creditor](#core-endpoints-creditors).
+         * ID of the associated <a href=
+         * "https://developer.gocardless.com/api-reference/#core-endpoints-creditors">creditor</a>.
          */
         public String getCreditor() {
             return creditor;
         }
 
         /**
-         * ID of the [customer](#core-endpoints-customers) that will be used for this request
+         * ID of the <a href=
+         * "https://developer.gocardless.com/api-reference/#core-endpoints-customers">customer</a>
+         * that will be used for this request
          */
         public String getCustomer() {
             return customer;
         }
 
         /**
-         * (Optional) ID of the [customer_bank_account](#core-endpoints-customer-bank-accounts) that
-         * will be used for this request
+         * (Optional) ID of the <a href=
+         * "https://developer.gocardless.com/api-reference/#core-endpoints-customer-bank-accounts">customer_bank_account</a>
+         * that will be used for this request
          */
         public String getCustomerBankAccount() {
             return customerBankAccount;
@@ -776,8 +800,9 @@ public class BillingRequest {
         }
 
         /**
-         * (Optional) ID of the [instalment_schedule](#core-endpoints-instalment-schedules) that was
-         * created from this instalment schedule request.
+         * (Optional) ID of the <a href=
+         * "https://developer.gocardless.com/api-reference/#core-endpoints-instalment-schedules">instalment_schedule</a>
+         * that was created from this instalment schedule request.
          */
         public String getInstalmentScheduleRequestInstalmentSchedule() {
             return instalmentScheduleRequestInstalmentSchedule;
@@ -791,8 +816,9 @@ public class BillingRequest {
         }
 
         /**
-         * (Optional) ID of the [mandate](#core-endpoints-mandates) that was created from this
-         * mandate request. this mandate request.
+         * (Optional) ID of the <a href=
+         * "https://developer.gocardless.com/api-reference/#core-endpoints-mandates">mandate</a>
+         * that was created from this mandate request. this mandate request.
          */
         public String getMandateRequestMandate() {
             return mandateRequestMandate;
@@ -820,8 +846,9 @@ public class BillingRequest {
         }
 
         /**
-         * (Optional) ID of the [payment](#core-endpoints-payments) that was created from this
-         * payment request.
+         * (Optional) ID of the <a href=
+         * "https://developer.gocardless.com/api-reference/#core-endpoints-payments">payment</a>
+         * that was created from this payment request.
          */
         public String getPaymentRequestPayment() {
             return paymentRequestPayment;
@@ -835,8 +862,9 @@ public class BillingRequest {
         }
 
         /**
-         * (Optional) ID of the [subscription](#core-endpoints-subscriptions) that was created from
-         * this subscription request.
+         * (Optional) ID of the <a href=
+         * "https://developer.gocardless.com/api-reference/#core-endpoints-subscriptions">subscription</a>
+         * that was created from this subscription request.
          */
         public String getSubscriptionRequestSubscription() {
             return subscriptionRequestSubscription;
@@ -867,14 +895,13 @@ public class BillingRequest {
         private Verify verify;
 
         /**
-         * This field is ACH specific, sometimes referred to as [SEC
-         * code](https://www.moderntreasury.com/learn/sec-codes).
+         * This field is ACH specific, sometimes referred to as
+         * <a href="https://www.moderntreasury.com/learn/sec-codes">SEC code</a>.
          * 
          * This is the way that the payer gives authorisation to the merchant. web: Authorisation is
          * Internet Initiated or via Mobile Entry (maps to SEC code: WEB) telephone: Authorisation
          * is provided orally over telephone (maps to SEC code: TEL) paper: Authorisation is
          * provided in writing and signed, or similarly authenticated (maps to SEC code: PPD)
-         * 
          */
         public AuthorisationSource getAuthorisationSource() {
             return authorisationSource;
@@ -882,9 +909,9 @@ public class BillingRequest {
 
         /**
          * This attribute represents the authorisation type between the payer and merchant. It can
-         * be set to `one_off`, `recurring` or `standing` for ACH scheme. And `single`, `recurring`
-         * and `sporadic` for PAD scheme. _Note:_ This is only supported for ACH and PAD schemes.
-         * 
+         * be set to <code>one_off</code>, <code>recurring</code> or <code>standing</code> for ACH
+         * scheme. And <code>single</code>, <code>recurring</code> and <code>sporadic</code> for PAD
+         * scheme. <em>Note:</em> This is only supported for ACH and PAD schemes.
          */
         public String getConsentType() {
             return consentType;
@@ -899,7 +926,7 @@ public class BillingRequest {
         }
 
         /**
-         * [ISO 4217](https://en.wikipedia.org/wiki/ISO_4217#Active_codes) currency code.
+         * <a href="https://en.wikipedia.org/wiki/ISO_4217#Active_codes">ISO 4217</a> currency code.
          */
         public String getCurrency() {
             return currency;
@@ -908,7 +935,6 @@ public class BillingRequest {
         /**
          * A human-readable description of the payment and/or mandate. This will be displayed to the
          * payer when authorising the billing request.
-         * 
          */
         public String getDescription() {
             return description;
@@ -917,10 +943,12 @@ public class BillingRequest {
         /**
          * This field will decide how GoCardless handles settlement of funds from the customer.
          * 
-         * - `managed` will be moved through GoCardless' account, batched, and payed out. - `direct`
-         * will be a direct transfer from the payer's account to the merchant where invoicing will
-         * be handled separately.
-         * 
+         * <ul>
+         * <li><code>managed</code> will be moved through GoCardless' account, batched, and payed
+         * out.</li>
+         * <li><code>direct</code> will be a direct transfer from the payer's account to the
+         * merchant where invoicing will be handled separately.</li>
+         * </ul>
          */
         public FundsSettlement getFundsSettlement() {
             return fundsSettlement;
@@ -971,23 +999,28 @@ public class BillingRequest {
         /**
          * Verification preference for the mandate. One of:
          * 
-         * - `minimum`: only verify if absolutely required, such as when part of scheme rules -
-         * `recommended`: in addition to `minimum`, use the GoCardless payment intelligence solution
-         * to decide if a payer should be verified - `when_available`: if verification mechanisms
-         * are available, use them - `always`: as `when_available`, but fail to create the Billing
-         * Request if a mechanism isn't available
-         * 
-         * By default, all Billing Requests use the `recommended` verification preference. It uses
-         * GoCardless payment intelligence solution to determine if a payer is fraudulent or not.
-         * The verification mechanism is based on the response and the payer may be asked to verify
-         * themselves. If the feature is not available, `recommended` behaves like `minimum`.
+         * <ul>
+         * <li><code>minimum</code>: only verify if absolutely required, such as when part of scheme
+         * rules</li>
+         * <li><code>recommended</code>: in addition to <code>minimum</code>, use the GoCardless
+         * payment intelligence solution to decide if a payer should be verified</li>
+         * <li><code>when_available</code>: if verification mechanisms are available, use them</li>
+         * <li><code>always</code>: as <code>when_available</code>, but fail to create the Billing
+         * Request if a mechanism isn't available</li>
+         * </ul>
+         * By default, all Billing Requests use the <code>recommended</code> verification
+         * preference. It uses GoCardless payment intelligence solution to determine if a payer is
+         * fraudulent or not. The verification mechanism is based on the response and the payer may
+         * be asked to verify themselves. If the feature is not available, <code>recommended</code>
+         * behaves like <code>minimum</code>.
          * 
          * If you never wish to take advantage of our reduced risk products and Verified Mandates as
-         * they are released in new schemes, please use the `minimum` verification preference.
+         * they are released in new schemes, please use the <code>minimum</code> verification
+         * preference.
          * 
-         * See [Billing Requests: Creating Verified
-         * Mandates](https://developer.gocardless.com/getting-started/billing-requests/verified-mandates/)
-         * for more information.
+         * See <a href=
+         * "https://developer.gocardless.com/getting-started/billing-requests/verified-mandates/">Billing
+         * Requests: Creating Verified Mandates</a> for more information.
          */
         public Verify getVerify() {
             return verify;
@@ -1041,7 +1074,6 @@ public class BillingRequest {
              * This is an optional field and if it is not supplied the agreement will be considered
              * open and will not have an end date. Keep in mind the end date must take into account
              * how long it will take the user to set up this agreement via the Billing Request.
-             * 
              */
             public String getEndDate() {
                 return endDate;
@@ -1049,8 +1081,8 @@ public class BillingRequest {
 
             /**
              * The maximum amount that can be charged for a single payment in the lowest
-             * denomination for the currency (e.g. pence in GBP, cents in EUR). _Note:_ Required for
-             * PayTo and VRP.
+             * denomination for the currency (e.g. pence in GBP, cents in EUR). <em>Note:</em>
+             * Required for PayTo and VRP.
              */
             public Integer getMaxAmountPerPayment() {
                 return maxAmountPerPayment;
@@ -1059,8 +1091,7 @@ public class BillingRequest {
             /**
              * A constraint where you can specify info (free text string) about how payments are
              * calculated. For use when payments vary and cannot be expressed as a fixed amount and
-             * frequency. _Note:_ This is only supported for ACH and PAD schemes.
-             * 
+             * frequency. <em>Note:</em> This is only supported for ACH and PAD schemes.
              */
             public String getPaymentMethod() {
                 return paymentMethod;
@@ -1069,11 +1100,10 @@ public class BillingRequest {
             /**
              * Caps on the total amount and/or number of payments that can be collected within a
              * repeating period (e.g. no more than a set amount per month), as opposed to
-             * `max_amount_per_payment` which caps a single payment.
+             * <code>max_amount_per_payment</code> which caps a single payment.
              * 
-             * _Note:_ Required for VRP, where exactly one periodic limit must be provided. Optional
-             * for PayTo.
-             * 
+             * <em>Note:</em> Required for VRP, where exactly one periodic limit must be provided.
+             * Optional for PayTo.
              */
             public List<PeriodicLimit> getPeriodicLimits() {
                 return periodicLimits;
@@ -1084,7 +1114,6 @@ public class BillingRequest {
              * 
              * This is an optional field and if it is not supplied the start date will be set to the
              * day authorisation happens.
-             * 
              */
             public String getStartDate() {
                 return startDate;
@@ -1106,22 +1135,29 @@ public class BillingRequest {
                 private Period period;
 
                 /**
-                 * The alignment of the period. Defaults to `creation_date` if not specified.
+                 * The alignment of the period. Defaults to <code>creation_date</code> if not
+                 * specified.
                  * 
-                 * `calendar` - the period follows fixed calendar boundaries, the same for every
-                 * mandate: `week` runs Monday to Sunday, `month` runs from the 1st to the last day
-                 * of the calendar month, and `year` runs from 1 January to 31 December. If the
-                 * mandate starts partway through a period, the limit for that first period is
-                 * reduced proportionally to the days remaining (e.g. a monthly limit starting on
-                 * the 15th gives roughly half the limit for that first month).
+                 * <code>calendar</code>
+                 * <ul>
+                 * <li>the period follows fixed calendar boundaries, the same for every
+                 * mandate:</li>
+                 * </ul>
+                 * <code>week</code> runs Monday to Sunday, <code>month</code> runs from the 1st to
+                 * the last day of the calendar month, and <code>year</code> runs from 1 January to
+                 * 31 December. If the mandate starts partway through a period, the limit for that
+                 * first period is reduced proportionally to the days remaining (e.g. a monthly
+                 * limit starting on the 15th gives roughly half the limit for that first month).
                  * 
-                 * `creation_date` - the period follows the mandate's own start date rather than the
-                 * calendar. For example, if the mandate starts on the 15th, each monthly period
-                 * runs from the 15th to the 14th of the following month. The first period is a full
-                 * period, not reduced proportionally.
+                 * <code>creation_date</code>
+                 * <ul>
+                 * <li>the period follows the mandate's own start date rather than the calendar. For
+                 * example, if the mandate starts on the 15th, each monthly period runs from the
+                 * 15th to the 14th of the following month. The first period is a full period, not
+                 * reduced proportionally.</li>
+                 * </ul>
                  * 
-                 * _Note:_ Has no effect when period is `flexible`.
-                 * 
+                 * <em>Note:</em> Has no effect when period is <code>flexible</code>.
                  */
                 public Alignment getAlignment() {
                     return alignment;
@@ -1130,8 +1166,7 @@ public class BillingRequest {
                 /**
                  * The maximum number of payments that can be collected in this periodic limit.
                  * 
-                 * _Note:_ Only supported for the PayTo scheme, where it is optional.
-                 * 
+                 * <em>Note:</em> Only supported for the PayTo scheme, where it is optional.
                  */
                 public Integer getMaxPayments() {
                     return maxPayments;
@@ -1142,8 +1177,7 @@ public class BillingRequest {
                  * limit, in the lowest denomination for the currency (e.g. pence in GBP, cents in
                  * EUR).
                  * 
-                 * _Note:_ Required for VRP. This is not permitted for the PayTo scheme.
-                 * 
+                 * <em>Note:</em> Required for VRP. This is not permitted for the PayTo scheme.
                  */
                 public Integer getMaxTotalAmount() {
                     return maxTotalAmount;
@@ -1153,7 +1187,6 @@ public class BillingRequest {
                  * The repeating period for this mandate. Required whenever a periodic limit is
                  * provided (for both VRP and PayTo). If periodic_limits is omitted entirely for
                  * PayTo, this defaults to flexible.
-                 * 
                  */
                 public Period getPeriod() {
                     return period;
@@ -1191,9 +1224,9 @@ public class BillingRequest {
             private String mandate;
 
             /**
-             * (Optional) ID of the [mandate](#core-endpoints-mandates) that was created from this
-             * mandate request. this mandate request.
-             * 
+             * (Optional) ID of the <a href=
+             * "https://developer.gocardless.com/api-reference/#core-endpoints-mandates">mandate</a>
+             * that was created from this mandate request. this mandate request.
              */
             public String getMandate() {
                 return mandate;
@@ -1238,9 +1271,9 @@ public class BillingRequest {
         }
 
         /**
-         * [ISO 4217](https://en.wikipedia.org/wiki/ISO_4217#Active_codes) currency code. `GBP` and
-         * `EUR` supported; `GBP` with your customers in the UK and for `EUR` with your customers in
-         * supported Eurozone countries only.
+         * <a href="https://en.wikipedia.org/wiki/ISO_4217#Active_codes">ISO 4217</a> currency code.
+         * <code>GBP</code> and <code>EUR</code> supported; <code>GBP</code> with your customers in
+         * the UK and for <code>EUR</code> with your customers in supported Eurozone countries only.
          */
         public String getCurrency() {
             return currency;
@@ -1249,7 +1282,6 @@ public class BillingRequest {
         /**
          * A human-readable description of the payment and/or mandate. This will be displayed to the
          * payer when authorising the billing request.
-         * 
          */
         public String getDescription() {
             return description;
@@ -1258,10 +1290,12 @@ public class BillingRequest {
         /**
          * This field will decide how GoCardless handles settlement of funds from the customer.
          * 
-         * - `managed` will be moved through GoCardless' account, batched, and payed out. - `direct`
-         * will be a direct transfer from the payer's account to the merchant where invoicing will
-         * be handled separately.
-         * 
+         * <ul>
+         * <li><code>managed</code> will be moved through GoCardless' account, batched, and payed
+         * out.</li>
+         * <li><code>direct</code> will be a direct transfer from the payer's account to the
+         * merchant where invoicing will be handled separately.</li>
+         * </ul>
          */
         public FundsSettlement getFundsSettlement() {
             return fundsSettlement;
@@ -1283,18 +1317,18 @@ public class BillingRequest {
          * A custom payment reference defined by the merchant. It is only available for payments on
          * the PayTo scheme or payments using the Direct Funds settlement model on the Faster
          * Payments scheme.
-         * 
          */
         public String getReference() {
             return reference;
         }
 
         /**
-         * (Optional) A scheme used for Open Banking payments. Currently `faster_payments` is
-         * supported in the UK (GBP) and `sepa_credit_transfer` and `sepa_instant_credit_transfer`
-         * are supported in supported Eurozone countries (EUR). For Eurozone countries,
-         * `sepa_credit_transfer` is used as the default. Please be aware that
-         * `sepa_instant_credit_transfer` may incur an additional fee for your customer.
+         * (Optional) A scheme used for Open Banking payments. Currently
+         * <code>faster_payments</code> is supported in the UK (GBP) and
+         * <code>sepa_credit_transfer</code> and <code>sepa_instant_credit_transfer</code> are
+         * supported in supported Eurozone countries (EUR). For Eurozone countries,
+         * <code>sepa_credit_transfer</code> is used as the default. Please be aware that
+         * <code>sepa_instant_credit_transfer</code> may incur an additional fee for your customer.
          */
         public String getScheme() {
             return scheme;
@@ -1320,8 +1354,9 @@ public class BillingRequest {
             private String payment;
 
             /**
-             * (Optional) ID of the [payment](#core-endpoints-payments) that was created from this
-             * payment request.
+             * (Optional) ID of the <a href=
+             * "https://developer.gocardless.com/api-reference/#core-endpoints-payments">payment</a>
+             * that was created from this payment request.
              */
             public String getPayment() {
                 return payment;
@@ -1385,18 +1420,20 @@ public class BillingRequest {
             private String phoneNumber;
 
             /**
-             * Customer's company name. Required unless a `given_name` and `family_name` are
-             * provided. For Canadian customers, the use of a `company_name` value will mean that
-             * any mandate created from this customer will be considered to be a "Business PAD"
-             * (otherwise, any mandate will be considered to be a "Personal PAD").
+             * Customer's company name. Required unless a <code>given_name</code> and
+             * <code>family_name</code> are provided. For Canadian customers, the use of a
+             * <code>company_name</code> value will mean that any mandate created from this customer
+             * will be considered to be a "Business PAD" (otherwise, any mandate will be considered
+             * to be a "Personal PAD").
              */
             public String getCompanyName() {
                 return companyName;
             }
 
             /**
-             * Fixed [timestamp](#api-usage-dates-and-times), recording when this resource was
-             * created.
+             * Fixed <a href=
+             * "https://developer.gocardless.com/api-reference/#api-usage-dates-and-times">timestamp</a>,
+             * recording when this resource was created.
              */
             public String getCreatedAt() {
                 return createdAt;
@@ -1411,14 +1448,14 @@ public class BillingRequest {
             }
 
             /**
-             * Customer's surname. Required unless a `company_name` is provided.
+             * Customer's surname. Required unless a <code>company_name</code> is provided.
              */
             public String getFamilyName() {
                 return familyName;
             }
 
             /**
-             * Customer's first name. Required unless a `company_name` is provided.
+             * Customer's first name. Required unless a <code>company_name</code> is provided.
              */
             public String getGivenName() {
                 return givenName;
@@ -1432,12 +1469,13 @@ public class BillingRequest {
             }
 
             /**
-             * [ISO 639-1](https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes) code. Used as the
-             * language for notification emails sent by GoCardless if your organisation does not
-             * send its own (see [compliance requirements](#appendix-compliance-requirements)).
-             * Currently only "en", "fr", "de", "pt", "es", "it", "nl", "da", "nb", "sl", "sv" are
-             * supported. If this is not provided, the language will be chosen based on the
-             * `country_code` (if supplied) or default to "en".
+             * <a href="https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes">ISO 639-1</a> code.
+             * Used as the language for notification emails sent by GoCardless if your organisation
+             * does not send its own (see <a href=
+             * "https://developer.gocardless.com/api-reference/#appendix-compliance-requirements">compliance
+             * requirements</a>). Currently only "en", "fr", "de", "pt", "es", "it", "nl", "da",
+             * "nb", "sl", "sv" are supported. If this is not provided, the language will be chosen
+             * based on the <code>country_code</code> (if supplied) or default to "en".
              */
             public String getLanguage() {
                 return language;
@@ -1452,8 +1490,8 @@ public class BillingRequest {
             }
 
             /**
-             * [ITU E.123](https://en.wikipedia.org/wiki/E.123) formatted phone number, including
-             * country code.
+             * <a href="https://en.wikipedia.org/wiki/E.123">ITU E.123</a> formatted phone number,
+             * including country code.
              */
             public String getPhoneNumber() {
                 return phoneNumber;
@@ -1488,8 +1526,9 @@ public class BillingRequest {
              * Name of the account holder, as known by the bank. The full name provided when the
              * customer is created is stored and is available via the API, but is transliterated,
              * upcased, and truncated to 18 characters in bank submissions. This field is required
-             * unless the request includes a [customer bank account
-             * token](#javascript-flow-customer-bank-account-tokens).
+             * unless the request includes a <a href=
+             * "https://developer.gocardless.com/api-reference/#javascript-flow-customer-bank-account-tokens">customer
+             * bank account token</a>.
              */
             public String getAccountHolderName() {
                 return accountHolderName;
@@ -1505,8 +1544,9 @@ public class BillingRequest {
 
             /**
              * Bank account type. Required for USD-denominated bank accounts. Must not be provided
-             * for bank accounts in other currencies. See [local
-             * details](#local-bank-details-united-states) for more information.
+             * for bank accounts in other currencies. See <a href=
+             * "https://developer.gocardless.com/api-reference/#local-bank-details-united-states">local
+             * details</a> for more information.
              */
             public AccountType getAccountType() {
                 return accountType;
@@ -1528,25 +1568,28 @@ public class BillingRequest {
             }
 
             /**
-             * [ISO 3166-1 alpha-2
-             * code](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2#Officially_assigned_code_elements).
-             * Defaults to the country code of the `iban` if supplied, otherwise is required.
+             * <a href=
+             * "https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2#Officially_assigned_code_elements">ISO
+             * 3166-1 alpha-2 code</a>. Defaults to the country code of the <code>iban</code> if
+             * supplied, otherwise is required.
              */
             public String getCountryCode() {
                 return countryCode;
             }
 
             /**
-             * Fixed [timestamp](#api-usage-dates-and-times), recording when this resource was
-             * created.
+             * Fixed <a href=
+             * "https://developer.gocardless.com/api-reference/#api-usage-dates-and-times">timestamp</a>,
+             * recording when this resource was created.
              */
             public String getCreatedAt() {
                 return createdAt;
             }
 
             /**
-             * [ISO 4217](https://en.wikipedia.org/wiki/ISO_4217#Active_codes) currency code.
-             * Currently "AUD", "CAD", "DKK", "EUR", "GBP", "NZD", "SEK" and "USD" are supported.
+             * <a href="https://en.wikipedia.org/wiki/ISO_4217#Active_codes">ISO 4217</a> currency
+             * code. Currently "AUD", "CAD", "DKK", "EUR", "GBP", "NZD", "SEK" and "USD" are
+             * supported.
              */
             public String getCurrency() {
                 return currency;
@@ -1582,13 +1625,16 @@ public class BillingRequest {
              * The result of the payer name verification check performed when the bank account was
              * created. Only present if a check was performed.
              * 
-             * - `full`: The name provided matches the name held by the bank. - `close`: The name
-             * provided is a close but not exact match to the name held by the bank. -
-             * `cannot_perform_verification`: A verification was attempted but could not be
-             * completed. This can happen for a number of reasons, including the account holder's
-             * bank not participating in the verification scheme, the account not being eligible for
-             * verification (e.g. the account holder has opted out), or the bank details not being
-             * resolvable, among others.
+             * <ul>
+             * <li><code>full</code>: The name provided matches the name held by the bank.</li>
+             * <li><code>close</code>: The name provided is a close but not exact match to the name
+             * held by the bank.</li>
+             * <li><code>cannot_perform_verification</code>: A verification was attempted but could
+             * not be completed. This can happen for a number of reasons, including the account
+             * holder's bank not participating in the verification scheme, the account not being
+             * eligible for verification (e.g. the account holder has opted out), or the bank
+             * details not being resolvable, among others.</li>
+             * </ul>
              */
             public PayerNameVerificationResult getPayerNameVerificationResult() {
                 return payerNameVerificationResult;
@@ -1622,7 +1668,9 @@ public class BillingRequest {
                 private String customer;
 
                 /**
-                 * ID of the [customer](#core-endpoints-customers) that owns this bank account.
+                 * ID of the <a href=
+                 * "https://developer.gocardless.com/api-reference/#core-endpoints-customers">customer</a>
+                 * that owns this bank account.
                  */
                 public String getCustomer() {
                     return customer;
@@ -1683,16 +1731,18 @@ public class BillingRequest {
             }
 
             /**
-             * [ISO 3166-1 alpha-2
-             * code.](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2#Officially_assigned_code_elements)
+             * <a href=
+             * "https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2#Officially_assigned_code_elements">ISO
+             * 3166-1 alpha-2 code.</a>
              */
             public String getCountryCode() {
                 return countryCode;
             }
 
             /**
-             * Fixed [timestamp](#api-usage-dates-and-times), recording when this resource was
-             * created.
+             * Fixed <a href=
+             * "https://developer.gocardless.com/api-reference/#api-usage-dates-and-times">timestamp</a>,
+             * recording when this resource was created.
              */
             public String getCreatedAt() {
                 return createdAt;
@@ -1718,9 +1768,8 @@ public class BillingRequest {
              * address of the payer to whom the mandate belongs (i.e. as a result of their
              * completion of a mandate setup flow in their browser).
              * 
-             * Not required for creating offline mandates where `authorisation_source` is set to
-             * telephone or paper.
-             * 
+             * Not required for creating offline mandates where <code>authorisation_source</code> is
+             * set to telephone or paper.
              */
             public String getIpAddress() {
                 return ipAddress;
@@ -1735,8 +1784,8 @@ public class BillingRequest {
 
             /**
              * The customer's address region, county or department. For US customers a 2 letter
-             * [ISO3166-2:US](https://en.wikipedia.org/wiki/ISO_3166-2:US) state code is required
-             * (e.g. `CA` for California).
+             * <a href="https://en.wikipedia.org/wiki/ISO_3166-2:US">ISO3166-2:US</a> state code is
+             * required (e.g. <code>CA</code> for California).
              */
             public String getRegion() {
                 return region;
@@ -1810,31 +1859,36 @@ public class BillingRequest {
         }
 
         /**
-         * [ISO 4217](https://en.wikipedia.org/wiki/ISO_4217#Active_codes) currency code. Currently
-         * "USD" and "CAD" are supported.
+         * <a href="https://en.wikipedia.org/wiki/ISO_4217#Active_codes">ISO 4217</a> currency code.
+         * Currently "USD" and "CAD" are supported.
          */
         public String getCurrency() {
             return currency;
         }
 
         /**
-         * As per RFC 2445. The day of the month to charge customers on. `1`-`28` or `-1` to
-         * indicate the last day of the month.
+         * As per RFC 2445. The day of the month to charge customers on. <code>1</code>
+         * <ul>
+         * <li></li>
+         * </ul>
+         * <code>28</code> or <code>-1</code> to indicate the last day of the month.
          */
         public Integer getDayOfMonth() {
             return dayOfMonth;
         }
 
         /**
-         * Number of `interval_units` between customer charge dates. Must be greater than or equal
-         * to `1`. Must result in at least one charge date per year. Defaults to `1`.
+         * Number of <code>interval_units</code> between customer charge dates. Must be greater than
+         * or equal to <code>1</code>. Must result in at least one charge date per year. Defaults to
+         * <code>1</code>.
          */
         public Integer getInterval() {
             return interval;
         }
 
         /**
-         * The unit of time between customer charge dates. One of `weekly`, `monthly` or `yearly`.
+         * The unit of time between customer charge dates. One of <code>weekly</code>,
+         * <code>monthly</code> or <code>yearly</code>.
          */
         public IntervalUnit getIntervalUnit() {
             return intervalUnit;
@@ -1854,8 +1908,7 @@ public class BillingRequest {
 
         /**
          * Name of the month on which to charge a customer. Must be lowercase. Only applies when the
-         * interval_unit is `yearly`.
-         * 
+         * interval_unit is <code>yearly</code>.
          */
         public Month getMonth() {
             return month;
@@ -1871,19 +1924,22 @@ public class BillingRequest {
 
         /**
          * An optional payment reference. This will be set as the reference on each payment created
-         * and will appear on your customer's bank statement. See the documentation for the [create
-         * payment endpoint](#payments-create-a-payment) for more details. <br />
+         * and will appear on your customer's bank statement. See the documentation for the <a href=
+         * "https://developer.gocardless.com/api-reference/#payments-create-a-payment">create
+         * payment endpoint</a> for more details. <br>
+         * </br>
          */
         public String getPaymentReference() {
             return paymentReference;
         }
 
         /**
-         * On failure, automatically retry payments using [intelligent
-         * retries](/success-plus/overview). Default is `false`.
+         * On failure, automatically retry payments using
+         * <a href="https://developer.gocardless.com/success-plus/overview">intelligent retries</a>.
+         * Default is <code>false</code>.
          * <p class="notice">
          * <strong>Important</strong>: To be able to use intelligent retries, Success+ needs to be
-         * enabled in [GoCardless dashboard](https://manage.gocardless.com/success-plus).
+         * enabled in <a href="https://manage.gocardless.com/success-plus">GoCardless dashboard</a>.
          * </p>
          */
         public Boolean getRetryIfPossible() {
@@ -1892,11 +1948,11 @@ public class BillingRequest {
 
         /**
          * The date on which the first payment should be charged. If fulfilled after this date, this
-         * will be set as the mandate's `next_possible_charge_date`. When left blank and `month` or
-         * `day_of_month` are provided, this will be set to the date of the first payment. If
-         * created without `month` or `day_of_month` this will be set as the mandate's
-         * `next_possible_charge_date`.
-         * 
+         * will be set as the mandate's <code>next_possible_charge_date</code>. When left blank and
+         * <code>month</code> or <code>day_of_month</code> are provided, this will be set to the
+         * date of the first payment. If created without <code>month</code> or
+         * <code>day_of_month</code> this will be set as the mandate's
+         * <code>next_possible_charge_date</code>.
          */
         public String getStartDate() {
             return startDate;
@@ -1940,9 +1996,9 @@ public class BillingRequest {
             private String subscription;
 
             /**
-             * (Optional) ID of the [subscription](#core-endpoints-subscriptions) that was created
-             * from this subscription request.
-             * 
+             * (Optional) ID of the <a href=
+             * "https://developer.gocardless.com/api-reference/#core-endpoints-subscriptions">subscription</a>
+             * that was created from this subscription request.
              */
             public String getSubscription() {
                 return subscription;

@@ -68,8 +68,9 @@ public class BankAccountHolderVerificationService {
         }
 
         /**
-         * Type of the verification that has been performed eg. Confirmation of Payee
-         * (https://www.wearepay.uk/what-we-do/overlay-services/confirmation-of-payee/)
+         * Type of the verification that has been performed eg. <a href=
+         * "https://www.wearepay.uk/what-we-do/overlay-services/confirmation-of-payee/">Confirmation
+         * of Payee</a>
          */
         public BankAccountHolderVerificationCreateRequest withType(Type type) {
             this.type = type;

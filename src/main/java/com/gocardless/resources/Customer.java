@@ -5,9 +5,10 @@ import java.util.Map;
 /**
  * Represents a customer resource returned from the API.
  *
- * Customer objects hold the contact details for a customer. A customer can have several [customer
- * bank accounts](#core-endpoints-customer-bank-accounts), which in turn can have several Direct
- * Debit [mandates](#core-endpoints-mandates).
+ * Customer objects hold the contact details for a customer. A customer can have several <a href=
+ * "https://developer.gocardless.com/api-reference/#core-endpoints-customer-bank-accounts">customer
+ * bank accounts</a>, which in turn can have several Direct Debit
+ * <a href="https://developer.gocardless.com/api-reference/#core-endpoints-mandates">mandates</a>.
  */
 public class Customer {
     private Customer() {
@@ -62,25 +63,29 @@ public class Customer {
     }
 
     /**
-     * Customer's company name. Required unless a `given_name` and `family_name` are provided. For
-     * Canadian customers, the use of a `company_name` value will mean that any mandate created from
-     * this customer will be considered to be a "Business PAD" (otherwise, any mandate will be
-     * considered to be a "Personal PAD").
+     * Customer's company name. Required unless a <code>given_name</code> and
+     * <code>family_name</code> are provided. For Canadian customers, the use of a
+     * <code>company_name</code> value will mean that any mandate created from this customer will be
+     * considered to be a "Business PAD" (otherwise, any mandate will be considered to be a
+     * "Personal PAD").
      */
     public String getCompanyName() {
         return companyName;
     }
 
     /**
-     * [ISO 3166-1 alpha-2
-     * code.](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2#Officially_assigned_code_elements)
+     * <a href=
+     * "https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2#Officially_assigned_code_elements">ISO
+     * 3166-1 alpha-2 code.</a>
      */
     public String getCountryCode() {
         return countryCode;
     }
 
     /**
-     * Fixed [timestamp](#api-usage-dates-and-times), recording when this resource was created.
+     * Fixed <a href=
+     * "https://developer.gocardless.com/api-reference/#api-usage-dates-and-times">timestamp</a>,
+     * recording when this resource was created.
      */
     public String getCreatedAt() {
         return createdAt;
@@ -103,14 +108,14 @@ public class Customer {
     }
 
     /**
-     * Customer's surname. Required unless a `company_name` is provided.
+     * Customer's surname. Required unless a <code>company_name</code> is provided.
      */
     public String getFamilyName() {
         return familyName;
     }
 
     /**
-     * Customer's first name. Required unless a `company_name` is provided.
+     * Customer's first name. Required unless a <code>company_name</code> is provided.
      */
     public String getGivenName() {
         return givenName;
@@ -124,11 +129,13 @@ public class Customer {
     }
 
     /**
-     * [ISO 639-1](https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes) code. Used as the language
-     * for notification emails sent by GoCardless if your organisation does not send its own (see
-     * [compliance requirements](#appendix-compliance-requirements)). Currently only "en", "fr",
-     * "de", "pt", "es", "it", "nl", "da", "nb", "sl", "sv" are supported. If this is not provided,
-     * the language will be chosen based on the `country_code` (if supplied) or default to "en".
+     * <a href="https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes">ISO 639-1</a> code. Used as
+     * the language for notification emails sent by GoCardless if your organisation does not send
+     * its own (see <a href=
+     * "https://developer.gocardless.com/api-reference/#appendix-compliance-requirements">compliance
+     * requirements</a>). Currently only "en", "fr", "de", "pt", "es", "it", "nl", "da", "nb", "sl",
+     * "sv" are supported. If this is not provided, the language will be chosen based on the
+     * <code>country_code</code> (if supplied) or default to "en".
      */
     public String getLanguage() {
         return language;
@@ -143,8 +150,8 @@ public class Customer {
     }
 
     /**
-     * [ITU E.123](https://en.wikipedia.org/wiki/E.123) formatted phone number, including country
-     * code.
+     * <a href="https://en.wikipedia.org/wiki/E.123">ITU E.123</a> formatted phone number, including
+     * country code.
      */
     public String getPhoneNumber() {
         return phoneNumber;
@@ -159,8 +166,8 @@ public class Customer {
 
     /**
      * The customer's address region, county or department. For US customers a 2 letter
-     * [ISO3166-2:US](https://en.wikipedia.org/wiki/ISO_3166-2:US) state code is required (e.g. `CA`
-     * for California).
+     * <a href="https://en.wikipedia.org/wiki/ISO_3166-2:US">ISO3166-2:US</a> state code is required
+     * (e.g. <code>CA</code> for California).
      */
     public String getRegion() {
         return region;

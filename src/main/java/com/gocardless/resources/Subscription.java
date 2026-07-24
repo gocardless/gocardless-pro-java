@@ -7,39 +7,48 @@ import java.util.Map;
 /**
  * Represents a subscription resource returned from the API.
  *
- * Subscriptions create [payments](#core-endpoints-payments) according to a schedule.
+ * Subscriptions create
+ * <a href="https://developer.gocardless.com/api-reference/#core-endpoints-payments">payments</a>
+ * according to a schedule.
  * 
- * ### Recurrence Rules
+ * <h3>Recurrence Rules</h3> The following rules apply when specifying recurrence:
  * 
- * The following rules apply when specifying recurrence:
- * 
- * - If `day_of_month` and `start_date` are not provided `start_date` will be the
- * [mandate](#core-endpoints-mandates)'s `next_possible_charge_date` and the subscription will then
- * recur based on the `interval` & `interval_unit` - If `month` or `day_of_month` are present the
- * following validations apply:
- * 
- * | __interval_unit__ | __month__ | __day_of_month__ | | :---------------- |
- * :--------------------------------------------- | :----------------------------------------- | |
- * yearly | optional (required if `day_of_month` provided) | optional (invalid if `month` not
- * provided) | | monthly | invalid | optional | | weekly | invalid | invalid |
+ * <ul>
+ * <li>If <code>day_of_month</code> and <code>start_date</code> are not provided
+ * <code>start_date</code> will be the
+ * <a href="https://developer.gocardless.com/api-reference/#core-endpoints-mandates">mandate</a>'s
+ * <code>next_possible_charge_date</code> and the subscription will then recur based on the
+ * <code>interval</code> &amp; <code>interval_unit</code></li>
+ * <li>If <code>month</code> or <code>day_of_month</code> are present the following validations
+ * apply:</li>
+ * </ul>
+ * | <strong>interval_unit</strong> | <strong>month</strong> | <strong>day_of_month</strong> | |
+ * :---------------- | :--------------------------------------------- |
+ * :----------------------------------------- | | yearly | optional (required if
+ * <code>day_of_month</code> provided) | optional (invalid if <code>month</code> not provided) | |
+ * monthly | invalid | optional | | weekly | invalid | invalid |
  * 
  * Examples:
  * 
- * | __interval_unit__ | __interval__ | __month__ | __day_of_month__ | valid? | | :----------------
- * | :----------- | :-------- | :--------------- |
- * :------------------------------------------------- | | yearly | 1 | january | -1 | valid | |
- * monthly | 6 | | | valid | | monthly | 6 | | 12 | valid | | weekly | 2 | | | valid | | yearly | 1
- * | march | | invalid - missing `day_of_month` | | yearly | 1 | | 2 | invalid - missing `month` | |
- * monthly | 6 | august | 12 | invalid - `month` must be blank | | weekly | 2 | october | 10 |
- * invalid - `month` and `day_of_month` must be blank |
+ * | <strong>interval_unit</strong> | <strong>interval</strong> | <strong>month</strong> |
+ * <strong>day_of_month</strong> | valid? | | :---------------- | :----------- | :-------- |
+ * :--------------- | :------------------------------------------------- | | yearly | 1 | january |
+ * -1 | valid | | monthly | 6 | | | valid | | monthly | 6 | | 12 | valid | | weekly | 2 | | | valid
+ * | | yearly | 1 | march | | invalid - missing <code>day_of_month</code> | | yearly | 1 | | 2 |
+ * invalid - missing <code>month</code> | | monthly | 6 | august | 12 | invalid - <code>month</code>
+ * must be blank | | weekly | 2 | october | 10 | invalid - <code>month</code> and
+ * <code>day_of_month</code> must be blank |
  * 
- * ### Rolling dates
+ * <h3>Rolling dates</h3> When a charge date falls on a non-business day, one of two things will
+ * happen:
  * 
- * When a charge date falls on a non-business day, one of two things will happen:
- * 
- * - if the recurrence rule specified `-1` as the `day_of_month`, the charge date will be rolled
- * __backwards__ to the previous business day (i.e., the last working day of the month). - otherwise
- * the charge date will be rolled __forwards__ to the next business day.
+ * <ul>
+ * <li>if the recurrence rule specified <code>-1</code> as the <code>day_of_month</code>, the charge
+ * date will be rolled <strong>backwards</strong> to the previous business day (i.e., the last
+ * working day of the month).</li>
+ * <li>otherwise the charge date will be rolled <strong>forwards</strong> to the next business
+ * day.</li>
+ * </ul>
  */
 public class Subscription {
     private Subscription() {
@@ -92,41 +101,49 @@ public class Subscription {
     }
 
     /**
-     * Fixed [timestamp](#api-usage-dates-and-times), recording when this resource was created.
+     * Fixed <a href=
+     * "https://developer.gocardless.com/api-reference/#api-usage-dates-and-times">timestamp</a>,
+     * recording when this resource was created.
      */
     public String getCreatedAt() {
         return createdAt;
     }
 
     /**
-     * [ISO 4217](https://en.wikipedia.org/wiki/ISO_4217#Active_codes) currency code. Currently
-     * "AUD", "CAD", "DKK", "EUR", "GBP", "NZD", "SEK" and "USD" are supported.
+     * <a href="https://en.wikipedia.org/wiki/ISO_4217#Active_codes">ISO 4217</a> currency code.
+     * Currently "AUD", "CAD", "DKK", "EUR", "GBP", "NZD", "SEK" and "USD" are supported.
      */
     public String getCurrency() {
         return currency;
     }
 
     /**
-     * As per RFC 2445. The day of the month to charge customers on. `1`-`28` or `-1` to indicate
-     * the last day of the month.
+     * As per RFC 2445. The day of the month to charge customers on. <code>1</code>
+     * <ul>
+     * <li></li>
+     * </ul>
+     * <code>28</code> or <code>-1</code> to indicate the last day of the month.
      */
     public Integer getDayOfMonth() {
         return dayOfMonth;
     }
 
     /**
-     * The earliest date that will be used as a `charge_date` on payments created for this
-     * subscription if it is resumed. Only present for `paused` subscriptions. This value will
-     * change over time.
+     * The earliest date that will be used as a <code>charge_date</code> on payments created for
+     * this subscription if it is resumed. Only present for <code>paused</code> subscriptions. This
+     * value will change over time.
      */
     public String getEarliestChargeDateAfterResume() {
         return earliestChargeDateAfterResume;
     }
 
     /**
-     * Date on or after which no further payments should be created. <br />
-     * If this field is blank and `count` is not specified, the subscription will continue forever.
-     * <br />
+     * Date on or after which no further payments should be created. <br>
+     * </br>
+     * If this field is blank and <code>count</code> is not specified, the subscription will
+     * continue forever. <br>
+     * </br>
+     * 
      * <p class="deprecated-notice">
      * <strong>Deprecated</strong>: This field will be removed in a future API version. Use
      * <code>count</code> to specify a number of payments instead.
@@ -144,15 +161,17 @@ public class Subscription {
     }
 
     /**
-     * Number of `interval_units` between customer charge dates. Must be greater than or equal to
-     * `1`. Must result in at least one charge date per year. Defaults to `1`.
+     * Number of <code>interval_units</code> between customer charge dates. Must be greater than or
+     * equal to <code>1</code>. Must result in at least one charge date per year. Defaults to
+     * <code>1</code>.
      */
     public Integer getInterval() {
         return interval;
     }
 
     /**
-     * The unit of time between customer charge dates. One of `weekly`, `monthly` or `yearly`.
+     * The unit of time between customer charge dates. One of <code>weekly</code>,
+     * <code>monthly</code> or <code>yearly</code>.
      */
     public IntervalUnit getIntervalUnit() {
         return intervalUnit;
@@ -172,8 +191,7 @@ public class Subscription {
 
     /**
      * Name of the month on which to charge a customer. Must be lowercase. Only applies when the
-     * interval_unit is `yearly`.
-     * 
+     * interval_unit is <code>yearly</code>.
      */
     public Month getMonth() {
         return month;
@@ -196,8 +214,11 @@ public class Subscription {
 
     /**
      * An optional payment reference. This will be set as the reference on each payment created and
-     * will appear on your customer's bank statement. See the documentation for the [create payment
-     * endpoint](#payments-create-a-payment) for more details. <br />
+     * will appear on your customer's bank statement. See the documentation for the
+     * <a href="https://developer.gocardless.com/api-reference/#payments-create-a-payment">create
+     * payment endpoint</a> for more details. <br>
+     * </br>
+     * 
      * <p class="restricted-notice">
      * <strong>Restricted</strong>: You need your own Service User Number to specify a payment
      * reference for Bacs payments.
@@ -208,11 +229,12 @@ public class Subscription {
     }
 
     /**
-     * On failure, automatically retry payments using [intelligent retries](/success-plus/overview).
-     * Default is `false`.
+     * On failure, automatically retry payments using
+     * <a href="https://developer.gocardless.com/success-plus/overview">intelligent retries</a>.
+     * Default is <code>false</code>.
      * <p class="notice">
      * <strong>Important</strong>: To be able to use intelligent retries, Success+ needs to be
-     * enabled in [GoCardless dashboard](https://manage.gocardless.com/success-plus).
+     * enabled in <a href="https://manage.gocardless.com/success-plus">GoCardless dashboard</a>.
      * </p>
      */
     public Boolean getRetryIfPossible() {
@@ -220,11 +242,12 @@ public class Subscription {
     }
 
     /**
-     * The date on which the first payment should be charged. Must be on or after the
-     * [mandate](#core-endpoints-mandates)'s `next_possible_charge_date`. When left blank and
-     * `month` or `day_of_month` are provided, this will be set to the date of the first payment. If
-     * created without `month` or `day_of_month` this will be set as the mandate's
-     * `next_possible_charge_date`
+     * The date on which the first payment should be charged. Must be on or after the <a href=
+     * "https://developer.gocardless.com/api-reference/#core-endpoints-mandates">mandate</a>'s
+     * <code>next_possible_charge_date</code>. When left blank and <code>month</code> or
+     * <code>day_of_month</code> are provided, this will be set to the date of the first payment. If
+     * created without <code>month</code> or <code>day_of_month</code> this will be set as the
+     * mandate's <code>next_possible_charge_date</code>
      */
     public String getStartDate() {
         return startDate;
@@ -233,12 +256,18 @@ public class Subscription {
     /**
      * One of:
      * 
-     * - `pending_customer_approval`: the subscription is waiting for customer approval before
-     * becoming active - `customer_approval_denied`: the customer did not approve the subscription -
-     * `active`: the subscription is currently active and will continue to create payments -
-     * `finished`: all of the payments scheduled for creation under this subscription have been
-     * created - `cancelled`: the subscription has been cancelled and will no longer create payments
-     * - `paused`: the subscription has been paused and will not create payments
+     * <ul>
+     * <li><code>pending_customer_approval</code>: the subscription is waiting for customer approval
+     * before becoming active</li>
+     * <li><code>customer_approval_denied</code>: the customer did not approve the subscription</li>
+     * <li><code>active</code>: the subscription is currently active and will continue to create
+     * payments</li>
+     * <li><code>finished</code>: all of the payments scheduled for creation under this subscription
+     * have been created</li>
+     * <li><code>cancelled</code>: the subscription has been cancelled and will no longer create
+     * payments</li>
+     * <li><code>paused</code>: the subscription has been paused and will not create payments</li>
+     * </ul>
      */
     public Status getStatus() {
         return status;
@@ -300,8 +329,9 @@ public class Subscription {
         private String mandate;
 
         /**
-         * ID of the associated [mandate](#core-endpoints-mandates) which the subscription will
-         * create payments against.
+         * ID of the associated <a href=
+         * "https://developer.gocardless.com/api-reference/#core-endpoints-mandates">mandate</a>
+         * which the subscription will create payments against.
          */
         public String getMandate() {
             return mandate;

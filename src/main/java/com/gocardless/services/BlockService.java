@@ -23,16 +23,19 @@ import java.util.Map;
  * 
  * Please note:
  * 
- * - Payments and subscriptions cannot be created against a mandate in blocked state. - A mandate
- * can never be transitioned out of the blocked state.
- * 
+ * <ul>
+ * <li>Payments and subscriptions cannot be created against a mandate in blocked state.</li>
+ * <li>A mandate can never be transitioned out of the blocked state.</li>
+ * </ul>
  * The one exception to this is when blocking a 'bank_name'. This block will prevent bank accounts
  * from being created for banks that match the given name. To ensure we match bank names correctly
  * an existing bank account must be used when creating this block. Please be aware that we cannot
  * always match a bank account to a given bank name.
  * 
- * This API is currently only available for GoCardless Protect+ integrators - please get in touch
- * (mailto:help@gocardless.com) if you would like to use this API.
+ * <p class="notice">
+ * This API is currently only available for GoCardless Protect+ integrators - please
+ * <a href="mailto:help@gocardless.com">get in touch</a> if you would like to use this API.
+ * </p>
  */
 public class BlockService {
     private final HttpClient httpClient;
@@ -60,9 +63,9 @@ public class BlockService {
     }
 
     /**
-     * Returns a cursor-paginated
-     * (https://developer.gocardless.com/api-reference/#api-usage-cursor-pagination) list of your
-     * blocks.
+     * Returns a <a href=
+     * "https://developer.gocardless.com/api-reference/#api-usage-cursor-pagination">cursor-paginated</a>
+     * list of your blocks.
      */
     public BlockListRequest<ListResponse<Block>> list() {
         return new BlockListRequest<>(httpClient, ListRequest.<Block>pagingExecutor());
@@ -244,9 +247,9 @@ public class BlockService {
     /**
      * Request class for {@link BlockService#list }.
      *
-     * Returns a cursor-paginated
-     * (https://developer.gocardless.com/api-reference/#api-usage-cursor-pagination) list of your
-     * blocks.
+     * Returns a <a href=
+     * "https://developer.gocardless.com/api-reference/#api-usage-cursor-pagination">cursor-paginated</a>
+     * list of your blocks.
      */
     public static final class BlockListRequest<S> extends ListRequest<S, Block> {
         private String block;
@@ -272,7 +275,8 @@ public class BlockService {
         }
 
         /**
-         * ID of a Block (https://developer.gocardless.com/api-reference/#core-endpoints-blocks).
+         * ID of a <a href=
+         * "https://developer.gocardless.com/api-reference/#core-endpoints-blocks">Block</a>.
          */
         public BlockListRequest<S> withBlock(String block) {
             this.block = block;
@@ -289,9 +293,9 @@ public class BlockService {
         }
 
         /**
-         * Fixed timestamp
-         * (https://developer.gocardless.com/api-reference/#api-usage-dates-and-times), recording
-         * when this resource was created.
+         * Fixed <a href=
+         * "https://developer.gocardless.com/api-reference/#api-usage-dates-and-times">timestamp</a>,
+         * recording when this resource was created.
          */
         public BlockListRequest<S> withCreatedAt(String createdAt) {
             this.createdAt = createdAt;
@@ -317,9 +321,9 @@ public class BlockService {
         }
 
         /**
-         * Fixed timestamp
-         * (https://developer.gocardless.com/api-reference/#api-usage-dates-and-times), recording
-         * when this resource was updated.
+         * Fixed <a href=
+         * "https://developer.gocardless.com/api-reference/#api-usage-dates-and-times">timestamp</a>,
+         * recording when this resource was updated.
          */
         public BlockListRequest<S> withUpdatedAt(String updatedAt) {
             this.updatedAt = updatedAt;
