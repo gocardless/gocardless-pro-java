@@ -3005,7 +3005,6 @@ public class BillingRequestService {
      * list of your billing requests.
      */
     public static final class BillingRequestListRequest<S> extends ListRequest<S, BillingRequest> {
-        private String createdAt;
         private String customer;
         private String status;
 
@@ -3022,16 +3021,6 @@ public class BillingRequestService {
          */
         public BillingRequestListRequest<S> withBefore(String before) {
             setBefore(before);
-            return this;
-        }
-
-        /**
-         * Fixed <a href=
-         * "https://developer.gocardless.com/api-reference/#api-usage-dates-and-times">timestamp</a>,
-         * recording when this resource was created.
-         */
-        public BillingRequestListRequest<S> withCreatedAt(String createdAt) {
-            this.createdAt = createdAt;
             return this;
         }
 
@@ -3085,9 +3074,6 @@ public class BillingRequestService {
         protected Map<String, Object> getQueryParams() {
             ImmutableMap.Builder<String, Object> params = ImmutableMap.builder();
             params.putAll(super.getQueryParams());
-            if (createdAt != null) {
-                params.put("created_at", createdAt);
-            }
             if (customer != null) {
                 params.put("customer", customer);
             }

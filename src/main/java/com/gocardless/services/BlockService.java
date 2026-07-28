@@ -252,11 +252,9 @@ public class BlockService {
      * list of your blocks.
      */
     public static final class BlockListRequest<S> extends ListRequest<S, Block> {
-        private String block;
         private String blockType;
-        private String createdAt;
+        private CreatedAt createdAt;
         private String reasonType;
-        private String updatedAt;
 
         /**
          * Cursor pointing to the start of the desired set.
@@ -275,15 +273,6 @@ public class BlockService {
         }
 
         /**
-         * ID of a <a href=
-         * "https://developer.gocardless.com/api-reference/#core-endpoints-blocks">Block</a>.
-         */
-        public BlockListRequest<S> withBlock(String block) {
-            this.block = block;
-            return this;
-        }
-
-        /**
          * Type of entity we will seek to match against when blocking the mandate. This can
          * currently be one of 'email', 'email_domain', 'bank_account', or 'bank_name'.
          */
@@ -292,13 +281,52 @@ public class BlockService {
             return this;
         }
 
-        /**
-         * Fixed <a href=
-         * "https://developer.gocardless.com/api-reference/#api-usage-dates-and-times">timestamp</a>,
-         * recording when this resource was created.
-         */
-        public BlockListRequest<S> withCreatedAt(String createdAt) {
+        public BlockListRequest<S> withCreatedAt(CreatedAt createdAt) {
             this.createdAt = createdAt;
+            return this;
+        }
+
+        /**
+         * Limit to records created after the specified date-time.
+         */
+        public BlockListRequest<S> withCreatedAtGt(String gt) {
+            if (createdAt == null) {
+                createdAt = new CreatedAt();
+            }
+            createdAt.withGt(gt);
+            return this;
+        }
+
+        /**
+         * Limit to records created on or after the specified date-time.
+         */
+        public BlockListRequest<S> withCreatedAtGte(String gte) {
+            if (createdAt == null) {
+                createdAt = new CreatedAt();
+            }
+            createdAt.withGte(gte);
+            return this;
+        }
+
+        /**
+         * Limit to records created before the specified date-time.
+         */
+        public BlockListRequest<S> withCreatedAtLt(String lt) {
+            if (createdAt == null) {
+                createdAt = new CreatedAt();
+            }
+            createdAt.withLt(lt);
+            return this;
+        }
+
+        /**
+         * Limit to records created on or before the specified date-time.
+         */
+        public BlockListRequest<S> withCreatedAtLte(String lte) {
+            if (createdAt == null) {
+                createdAt = new CreatedAt();
+            }
+            createdAt.withLte(lte);
             return this;
         }
 
@@ -320,16 +348,6 @@ public class BlockService {
             return this;
         }
 
-        /**
-         * Fixed <a href=
-         * "https://developer.gocardless.com/api-reference/#api-usage-dates-and-times">timestamp</a>,
-         * recording when this resource was updated.
-         */
-        public BlockListRequest<S> withUpdatedAt(String updatedAt) {
-            this.updatedAt = updatedAt;
-            return this;
-        }
-
         private BlockListRequest(HttpClient httpClient, ListRequestExecutor<S, Block> executor) {
             super(httpClient, executor);
         }
@@ -343,20 +361,14 @@ public class BlockService {
         protected Map<String, Object> getQueryParams() {
             ImmutableMap.Builder<String, Object> params = ImmutableMap.builder();
             params.putAll(super.getQueryParams());
-            if (block != null) {
-                params.put("block", block);
-            }
             if (blockType != null) {
                 params.put("block_type", blockType);
             }
             if (createdAt != null) {
-                params.put("created_at", createdAt);
+                params.putAll(createdAt.getQueryParams());
             }
             if (reasonType != null) {
                 params.put("reason_type", reasonType);
-            }
-            if (updatedAt != null) {
-                params.put("updated_at", updatedAt);
             }
             return params.build();
         }
@@ -374,6 +386,62 @@ public class BlockService {
         @Override
         protected TypeToken<List<Block>> getTypeToken() {
             return new TypeToken<List<Block>>() {};
+        }
+
+        public static class CreatedAt {
+            private String gt;
+            private String gte;
+            private String lt;
+            private String lte;
+
+            /**
+             * Limit to records created after the specified date-time.
+             */
+            public CreatedAt withGt(String gt) {
+                this.gt = gt;
+                return this;
+            }
+
+            /**
+             * Limit to records created on or after the specified date-time.
+             */
+            public CreatedAt withGte(String gte) {
+                this.gte = gte;
+                return this;
+            }
+
+            /**
+             * Limit to records created before the specified date-time.
+             */
+            public CreatedAt withLt(String lt) {
+                this.lt = lt;
+                return this;
+            }
+
+            /**
+             * Limit to records created on or before the specified date-time.
+             */
+            public CreatedAt withLte(String lte) {
+                this.lte = lte;
+                return this;
+            }
+
+            public Map<String, Object> getQueryParams() {
+                ImmutableMap.Builder<String, Object> params = ImmutableMap.builder();
+                if (gt != null) {
+                    params.put("created_at[gt]", gt);
+                }
+                if (gte != null) {
+                    params.put("created_at[gte]", gte);
+                }
+                if (lt != null) {
+                    params.put("created_at[lt]", lt);
+                }
+                if (lte != null) {
+                    params.put("created_at[lte]", lte);
+                }
+                return params.build();
+            }
         }
     }
 
