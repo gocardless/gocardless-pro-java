@@ -12,8 +12,9 @@ import java.util.Map;
  * Service class for working with payment account transaction resources.
  *
  * Payment account transactions represent movements of funds on a given payment account. The payment
- * account is provisioned by GoCardless and is used to fund [outbound
- * payments](#core-endpoints-outbound-payments).
+ * account is provisioned by GoCardless and is used to fund <a href=
+ * "https://developer.gocardless.com/api-reference/#core-endpoints-outbound-payments">outbound
+ * payments</a>.
  */
 public class PaymentAccountTransactionService {
     private final HttpClient httpClient;

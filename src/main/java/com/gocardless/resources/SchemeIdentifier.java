@@ -7,7 +7,6 @@ import com.google.gson.annotations.SerializedName;
  *
  * This represents a scheme identifier (e.g. a SUN in Bacs or a CID in SEPA). Scheme identifiers are
  * used to specify the beneficiary name that appears on customers' bank statements.
- * 
  */
 public class SchemeIdentifier {
     private SchemeIdentifier() {
@@ -69,15 +68,18 @@ public class SchemeIdentifier {
     }
 
     /**
-     * [ISO 3166-1 alpha-2
-     * code.](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2#Officially_assigned_code_elements)
+     * <a href=
+     * "https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2#Officially_assigned_code_elements">ISO
+     * 3166-1 alpha-2 code.</a>
      */
     public String getCountryCode() {
         return countryCode;
     }
 
     /**
-     * Fixed [timestamp](#api-usage-dates-and-times), recording when this resource was created.
+     * Fixed <a href=
+     * "https://developer.gocardless.com/api-reference/#api-usage-dates-and-times">timestamp</a>,
+     * recording when this resource was created.
      */
     public String getCreatedAt() {
         return createdAt;
@@ -108,8 +110,9 @@ public class SchemeIdentifier {
      * The minimum interval, in working days, between the sending of a pre-notification to the
      * customer, and the charge date of a payment using this scheme identifier.
      * 
-     * By default, GoCardless sends these notifications automatically. Please see our [compliance
-     * requirements](#appendix-compliance-requirements) for more details.
+     * By default, GoCardless sends these notifications automatically. Please see our <a href=
+     * "https://developer.gocardless.com/api-reference/#appendix-compliance-requirements">compliance
+     * requirements</a> for more details.
      */
     public Integer getMinimumAdvanceNotice() {
         return minimumAdvanceNotice;
@@ -159,8 +162,8 @@ public class SchemeIdentifier {
     }
 
     /**
-     * The status of the scheme identifier. Only `active` scheme identifiers will be applied to a
-     * creditor and used against payments.
+     * The status of the scheme identifier. Only <code>active</code> scheme identifiers will be
+     * applied to a creditor and used against payments.
      */
     public Status getStatus() {
         return status;

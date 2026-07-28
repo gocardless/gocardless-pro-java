@@ -12,9 +12,11 @@ import java.util.Map;
 /**
  * Service class for working with payout resources.
  *
- * Payouts represent transfers from GoCardless to a [creditor](#core-endpoints-creditors). Each
- * payout contains the funds collected from one or many [payments](#core-endpoints-payments). All
- * the payments in a payout will have been collected in the same currency. Payouts are created
+ * Payouts represent transfers from GoCardless to a
+ * <a href="https://developer.gocardless.com/api-reference/#core-endpoints-creditors">creditor</a>.
+ * Each payout contains the funds collected from one or many
+ * <a href="https://developer.gocardless.com/api-reference/#core-endpoints-payments">payments</a>.
+ * All the payments in a payout will have been collected in the same currency. Payouts are created
  * automatically after a payment has been successfully collected.
  */
 public class PayoutService {
@@ -29,7 +31,9 @@ public class PayoutService {
     }
 
     /**
-     * Returns a [cursor-paginated](#api-usage-cursor-pagination) list of your payouts.
+     * Returns a <a href=
+     * "https://developer.gocardless.com/api-reference/#api-usage-cursor-pagination">cursor-paginated</a>
+     * list of your payouts.
      */
     public PayoutListRequest<ListResponse<Payout>> list() {
         return new PayoutListRequest<>(httpClient, ListRequest.<Payout>pagingExecutor());
@@ -41,7 +45,9 @@ public class PayoutService {
 
     /**
      * Retrieves the details of a single payout. For an example of how to reconcile the transactions
-     * in a payout, see [this guide](#events-reconciling-payouts-with-events).
+     * in a payout, see <a href=
+     * "https://developer.gocardless.com/api-reference/#events-reconciling-payouts-with-events">this
+     * guide</a>.
      */
     public PayoutGetRequest get(String identity) {
         return new PayoutGetRequest(httpClient, identity);
@@ -57,7 +63,9 @@ public class PayoutService {
     /**
      * Request class for {@link PayoutService#list }.
      *
-     * Returns a [cursor-paginated](#api-usage-cursor-pagination) list of your payouts.
+     * Returns a <a href=
+     * "https://developer.gocardless.com/api-reference/#api-usage-cursor-pagination">cursor-paginated</a>
+     * list of your payouts.
      */
     public static final class PayoutListRequest<S> extends ListRequest<S, Payout> {
         private CreatedAt createdAt;
@@ -151,8 +159,8 @@ public class PayoutService {
         }
 
         /**
-         * [ISO 4217](https://en.wikipedia.org/wiki/ISO_4217#Active_codes) currency code. Currently
-         * "AUD", "CAD", "DKK", "EUR", "GBP", "NZD", "SEK" and "USD" are supported.
+         * <a href="https://en.wikipedia.org/wiki/ISO_4217#Active_codes">ISO 4217</a> currency code.
+         * Currently "AUD", "CAD", "DKK", "EUR", "GBP", "NZD", "SEK" and "USD" are supported.
          */
         public PayoutListRequest<S> withCurrency(Currency currency) {
             this.currency = currency;
@@ -169,8 +177,8 @@ public class PayoutService {
 
         /**
          * Key-value store of custom data. Up to 3 keys are permitted, with key names up to 50
-         * characters and values up to 500 characters. _Note:_ This should not be used for storing
-         * PII data.
+         * characters and values up to 500 characters. <em>Note:</em> This should not be used for
+         * storing PII data.
          */
         public PayoutListRequest<S> withMetadata(Map<String, String> metadata) {
             this.metadata = metadata;
@@ -179,8 +187,8 @@ public class PayoutService {
 
         /**
          * Key-value store of custom data. Up to 3 keys are permitted, with key names up to 50
-         * characters and values up to 500 characters. _Note:_ This should not be used for storing
-         * PII data.
+         * characters and values up to 500 characters. <em>Note:</em> This should not be used for
+         * storing PII data.
          */
         public PayoutListRequest<S> withMetadata(String key, String value) {
             if (metadata == null) {
@@ -208,12 +216,13 @@ public class PayoutService {
 
         /**
          * One of:
+         * 
          * <ul>
-         * <li>`pending`: the payout has been created, but not yet sent to your bank or it is in the
-         * process of being exchanged through our FX provider.</li>
-         * <li>`paid`: the payout has been sent to the your bank. FX payouts will become `paid`
-         * after we emit the `fx_rate_confirmed` webhook.</li>
-         * <li>`bounced`: the payout bounced when sent, the payout can be retried.</li>
+         * <li><code>pending</code>: the payout has been created, but not yet sent to your bank or
+         * it is in the process of being exchanged through our FX provider.</li>
+         * <li><code>paid</code>: the payout has been sent to the your bank. FX payouts will become
+         * <code>paid</code> after we emit the <code>fx_rate_confirmed</code> webhook.</li>
+         * <li><code>bounced</code>: the payout bounced when sent, the payout can be retried.</li>
          * </ul>
          */
         public PayoutListRequest<S> withStatus(Status status) {
@@ -380,7 +389,9 @@ public class PayoutService {
      * Request class for {@link PayoutService#get }.
      *
      * Retrieves the details of a single payout. For an example of how to reconcile the transactions
-     * in a payout, see [this guide](#events-reconciling-payouts-with-events).
+     * in a payout, see <a href=
+     * "https://developer.gocardless.com/api-reference/#events-reconciling-payouts-with-events">this
+     * guide</a>.
      */
     public static final class PayoutGetRequest extends GetRequest<Payout> {
         @PathParam

@@ -35,7 +35,9 @@ public class BankAuthorisation {
     }
 
     /**
-     * Fixed [timestamp](#api-usage-dates-and-times), recording when the user has been authorised.
+     * Fixed <a href=
+     * "https://developer.gocardless.com/api-reference/#api-usage-dates-and-times">timestamp</a>,
+     * recording when the user has been authorised.
      */
     public String getAuthorisedAt() {
         return authorisedAt;
@@ -64,8 +66,9 @@ public class BankAuthorisation {
     }
 
     /**
-     * Fixed [timestamp](#api-usage-dates-and-times), recording when the authorisation URL has been
-     * visited.
+     * Fixed <a href=
+     * "https://developer.gocardless.com/api-reference/#api-usage-dates-and-times">timestamp</a>,
+     * recording when the authorisation URL has been visited.
      */
     public String getLastVisitedAt() {
         return lastVisitedAt;
@@ -77,8 +80,8 @@ public class BankAuthorisation {
 
     /**
      * URL to a QR code PNG image of the bank authorisation url. This QR code can be used as an
-     * alternative to providing the `url` to the payer to allow them to authorise with their mobile
-     * devices.
+     * alternative to providing the <code>url</code> to the payer to allow them to authorise with
+     * their mobile devices.
      */
     public String getQrCodeUrl() {
         return qrCodeUrl;
@@ -87,24 +90,27 @@ public class BankAuthorisation {
     /**
      * URL that the payer can be redirected to after authorising the payment.
      * 
-     * On completion of bank authorisation, the query parameter of either `outcome=success` or
-     * `outcome=failure` will be appended to the `redirect_uri` to indicate the result of the bank
-     * authorisation. If the bank authorisation is expired, the query parameter `outcome=timeout`
-     * will be appended to the `redirect_uri`, in which case you should prompt the user to try the
-     * bank authorisation step again.
+     * On completion of bank authorisation, the query parameter of either
+     * <code>outcome=success</code> or <code>outcome=failure</code> will be appended to the
+     * <code>redirect_uri</code> to indicate the result of the bank authorisation. If the bank
+     * authorisation is expired, the query parameter <code>outcome=timeout</code> will be appended
+     * to the <code>redirect_uri</code>, in which case you should prompt the user to try the bank
+     * authorisation step again.
      * 
-     * Please note: bank authorisations can still fail despite an `outcome=success` on the
-     * `redirect_uri`. It is therefore recommended to wait for the relevant bank authorisation
-     * event, such as
-     * [`BANK_AUTHORISATION_AUTHORISED`](#billing-request-bankauthorisationauthorised),
-     * [`BANK_AUTHORISATION_DENIED`](#billing-request-bankauthorisationdenied), or
-     * [`BANK_AUTHORISATION_FAILED`](#billing-request-bankauthorisationfailed) in order to show the
-     * correct outcome to the user.
+     * Please note: bank authorisations can still fail despite an <code>outcome=success</code> on
+     * the <code>redirect_uri</code>. It is therefore recommended to wait for the relevant bank
+     * authorisation event, such as <a href=
+     * "https://developer.gocardless.com/api-reference/#billing-request-bankauthorisationauthorised"><code>BANK_AUTHORISATION_AUTHORISED</code></a>,
+     * <a href=
+     * "https://developer.gocardless.com/api-reference/#billing-request-bankauthorisationdenied"><code>BANK_AUTHORISATION_DENIED</code></a>,
+     * or <a href=
+     * "https://developer.gocardless.com/api-reference/#billing-request-bankauthorisationfailed"><code>BANK_AUTHORISATION_FAILED</code></a>
+     * in order to show the correct outcome to the user.
      * 
-     * The BillingRequestFlow ID will also be appended to the `redirect_uri` as query parameter
-     * `id=BRF123`.
+     * The BillingRequestFlow ID will also be appended to the <code>redirect_uri</code> as query
+     * parameter <code>id=BRF123</code>.
      * 
-     * Defaults to `https://pay.gocardless.com/billing/static/thankyou`.
+     * Defaults to <code>https://pay.gocardless.com/billing/static/thankyou</code>.
      */
     public String getRedirectUri() {
         return redirectUri;
@@ -138,16 +144,18 @@ public class BankAuthorisation {
         private String institution;
 
         /**
-         * ID of the [billing request](#billing-requests-billing-requests) against which this
-         * authorisation was created.
+         * ID of the <a href=
+         * "https://developer.gocardless.com/api-reference/#billing-requests-billing-requests">billing
+         * request</a> against which this authorisation was created.
          */
         public String getBillingRequest() {
             return billingRequest;
         }
 
         /**
-         * ID of the [institution](#billing-requests-institutions) against which this authorisation
-         * was created.
+         * ID of the <a href=
+         * "https://developer.gocardless.com/api-reference/#billing-requests-institutions">institution</a>
+         * against which this authorisation was created.
          */
         public String getInstitution() {
             return institution;

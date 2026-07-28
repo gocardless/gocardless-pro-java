@@ -16,8 +16,9 @@ public class TransferredMandate {
     private String publicKeyId;
 
     /**
-     * Encrypted customer bank account details, containing: `iban`, `account_holder_name`,
-     * `swift_bank_code`, `swift_branch_code`, `swift_account_number`
+     * Encrypted customer bank account details, containing: <code>iban</code>,
+     * <code>account_holder_name</code>, <code>swift_bank_code</code>,
+     * <code>swift_branch_code</code>, <code>swift_account_number</code>
      */
     public String getEncryptedCustomerBankDetails() {
         return encryptedCustomerBankDetails;
@@ -56,7 +57,8 @@ public class TransferredMandate {
         private String mandate;
 
         /**
-         * The ID of the updated [customer_bank_account](#core-endpoints-customer-bank-accounts)
+         * The ID of the updated <a href=
+         * "https://developer.gocardless.com/api-reference/#core-endpoints-customer-bank-accounts">customer_bank_account</a>
          */
         public String getCustomerBankAccount() {
             return customerBankAccount;

@@ -24,7 +24,9 @@ public class WebhookService {
     }
 
     /**
-     * Returns a [cursor-paginated](#api-usage-cursor-pagination) list of your webhooks.
+     * Returns a <a href=
+     * "https://developer.gocardless.com/api-reference/#api-usage-cursor-pagination">cursor-paginated</a>
+     * list of your webhooks.
      */
     public WebhookListRequest<ListResponse<Webhook>> list() {
         return new WebhookListRequest<>(httpClient, ListRequest.<Webhook>pagingExecutor());
@@ -51,7 +53,9 @@ public class WebhookService {
     /**
      * Request class for {@link WebhookService#list }.
      *
-     * Returns a [cursor-paginated](#api-usage-cursor-pagination) list of your webhooks.
+     * Returns a <a href=
+     * "https://developer.gocardless.com/api-reference/#api-usage-cursor-pagination">cursor-paginated</a>
+     * list of your webhooks.
      */
     public static final class WebhookListRequest<S> extends ListRequest<S, Webhook> {
         private CreatedAt createdAt;

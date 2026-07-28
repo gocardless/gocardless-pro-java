@@ -6,13 +6,16 @@ import java.util.Map;
 /**
  * Represents a creditor bank account resource returned from the API.
  *
- * Creditor Bank Accounts hold the bank details of a [creditor](#core-endpoints-creditors). These
- * are the bank accounts which your [payouts](#core-endpoints-payouts) will be sent to.
+ * Creditor Bank Accounts hold the bank details of a
+ * <a href="https://developer.gocardless.com/api-reference/#core-endpoints-creditors">creditor</a>.
+ * These are the bank accounts which your
+ * <a href="https://developer.gocardless.com/api-reference/#core-endpoints-payouts">payouts</a> will
+ * be sent to.
  * 
  * Note that creditor bank accounts must be unique, and so you will encounter a
- * `bank_account_exists` error if you try to create a duplicate bank account. You may wish to handle
- * this by updating the existing record instead, the ID of which will be provided as
- * `links[creditor_bank_account]` in the error response.
+ * <code>bank_account_exists</code> error if you try to create a duplicate bank account. You may
+ * wish to handle this by updating the existing record instead, the ID of which will be provided as
+ * <code>links[creditor_bank_account]</code> in the error response.
  * 
  * <p class="restricted-notice">
  * <strong>Restricted</strong>: This API is not available for partner integrations.
@@ -38,8 +41,9 @@ public class CreditorBankAccount {
 
     /**
      * Name of the account holder, as known by the bank. Usually this is the same as the name stored
-     * with the linked [creditor](#core-endpoints-creditors). This field will be transliterated,
-     * upcased and truncated to 18 characters.
+     * with the linked <a href=
+     * "https://developer.gocardless.com/api-reference/#core-endpoints-creditors">creditor</a>. This
+     * field will be transliterated, upcased and truncated to 18 characters.
      */
     public String getAccountHolderName() {
         return accountHolderName;
@@ -55,8 +59,9 @@ public class CreditorBankAccount {
 
     /**
      * Bank account type. Required for USD-denominated bank accounts. Must not be provided for bank
-     * accounts in other currencies. See [local details](#local-bank-details-united-states) for more
-     * information.
+     * accounts in other currencies. See <a href=
+     * "https://developer.gocardless.com/api-reference/#local-bank-details-united-states">local
+     * details</a> for more information.
      */
     public AccountType getAccountType() {
         return accountType;
@@ -70,24 +75,27 @@ public class CreditorBankAccount {
     }
 
     /**
-     * [ISO 3166-1 alpha-2
-     * code](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2#Officially_assigned_code_elements).
-     * Defaults to the country code of the `iban` if supplied, otherwise is required.
+     * <a href=
+     * "https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2#Officially_assigned_code_elements">ISO
+     * 3166-1 alpha-2 code</a>. Defaults to the country code of the <code>iban</code> if supplied,
+     * otherwise is required.
      */
     public String getCountryCode() {
         return countryCode;
     }
 
     /**
-     * Fixed [timestamp](#api-usage-dates-and-times), recording when this resource was created.
+     * Fixed <a href=
+     * "https://developer.gocardless.com/api-reference/#api-usage-dates-and-times">timestamp</a>,
+     * recording when this resource was created.
      */
     public String getCreatedAt() {
         return createdAt;
     }
 
     /**
-     * [ISO 4217](https://en.wikipedia.org/wiki/ISO_4217#Active_codes) currency code. Currently
-     * "AUD", "CAD", "DKK", "EUR", "GBP", "NZD", "SEK" and "USD" are supported.
+     * <a href="https://en.wikipedia.org/wiki/ISO_4217#Active_codes">ISO 4217</a> currency code.
+     * Currently "AUD", "CAD", "DKK", "EUR", "GBP", "NZD", "SEK" and "USD" are supported.
      */
     public String getCurrency() {
         return currency;
@@ -120,7 +128,8 @@ public class CreditorBankAccount {
     }
 
     /**
-     * Verification status of the Bank Account. Can be one of `pending`, `in_review` or `successful`
+     * Verification status of the Bank Account. Can be one of <code>pending</code>,
+     * <code>in_review</code> or <code>successful</code>
      */
     public VerificationStatus getVerificationStatus() {
         return verificationStatus;
@@ -155,7 +164,9 @@ public class CreditorBankAccount {
         private String creditor;
 
         /**
-         * ID of the [creditor](#core-endpoints-creditors) that owns this bank account.
+         * ID of the <a href=
+         * "https://developer.gocardless.com/api-reference/#core-endpoints-creditors">creditor</a>
+         * that owns this bank account.
          */
         public String getCreditor() {
             return creditor;

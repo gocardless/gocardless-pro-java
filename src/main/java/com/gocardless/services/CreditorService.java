@@ -12,9 +12,11 @@ import java.util.Map;
 /**
  * Service class for working with creditor resources.
  *
- * Each [payment](#core-endpoints-payments) taken through the API is linked to a "creditor", to whom
- * the payment is then paid out. In most cases your organisation will have a single "creditor", but
- * the API also supports collecting payments on behalf of others.
+ * Each
+ * <a href="https://developer.gocardless.com/api-reference/#core-endpoints-payments">payment</a>
+ * taken through the API is linked to a "creditor", to whom the payment is then paid out. In most
+ * cases your organisation will have a single "creditor", but the API also supports collecting
+ * payments on behalf of others.
  * 
  * Currently, for Anti Money Laundering reasons, any creditors you add must be directly related to
  * your organisation.
@@ -38,7 +40,9 @@ public class CreditorService {
     }
 
     /**
-     * Returns a [cursor-paginated](#api-usage-cursor-pagination) list of your creditors.
+     * Returns a <a href=
+     * "https://developer.gocardless.com/api-reference/#api-usage-cursor-pagination">cursor-paginated</a>
+     * list of your creditors.
      */
     public CreditorListRequest<ListResponse<Creditor>> list() {
         return new CreditorListRequest<>(httpClient, ListRequest.<Creditor>pagingExecutor());
@@ -76,11 +80,10 @@ public class CreditorService {
 
         /**
          * Prefix for the bank reference of payouts sent to this creditor. For instance, if the
-         * creditor's `bank_reference_prefix` was `ACME`, the bank reference of a payout sent to
-         * that creditor could be `ACME-8G7Q8`.
+         * creditor's <code>bank_reference_prefix</code> was <code>ACME</code>, the bank reference
+         * of a payout sent to that creditor could be <code>ACME-8G7Q8</code>.
          * 
          * This prefix is also used for refunds in EUR and GBP.
-         * 
          */
         public CreditorCreateRequest withBankReferencePrefix(String bankReferencePrefix) {
             this.bankReferencePrefix = bankReferencePrefix;
@@ -88,8 +91,9 @@ public class CreditorService {
         }
 
         /**
-         * [ISO 3166-1 alpha-2
-         * code.](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2#Officially_assigned_code_elements)
+         * <a href=
+         * "https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2#Officially_assigned_code_elements">ISO
+         * 3166-1 alpha-2 code.</a>
          */
         public CreditorCreateRequest withCountryCode(String countryCode) {
             this.countryCode = countryCode;
@@ -97,8 +101,9 @@ public class CreditorService {
         }
 
         /**
-         * The type of business of the creditor. Currently, `individual`, `company`, `charity`,
-         * `partnership`, and `trust` are supported.
+         * The type of business of the creditor. Currently, <code>individual</code>,
+         * <code>company</code>, <code>charity</code>, <code>partnership</code>, and
+         * <code>trust</code> are supported.
          */
         public CreditorCreateRequest withCreditorType(CreditorType creditorType) {
             this.creditorType = creditorType;
@@ -188,7 +193,9 @@ public class CreditorService {
     /**
      * Request class for {@link CreditorService#list }.
      *
-     * Returns a [cursor-paginated](#api-usage-cursor-pagination) list of your creditors.
+     * Returns a <a href=
+     * "https://developer.gocardless.com/api-reference/#api-usage-cursor-pagination">cursor-paginated</a>
+     * list of your creditors.
      */
     public static final class CreditorListRequest<S> extends ListRequest<S, Creditor> {
         private CreatedAt createdAt;
@@ -452,11 +459,10 @@ public class CreditorService {
 
         /**
          * Prefix for the bank reference of payouts sent to this creditor. For instance, if the
-         * creditor's `bank_reference_prefix` was `ACME`, the bank reference of a payout sent to
-         * that creditor could be `ACME-8G7Q8`.
+         * creditor's <code>bank_reference_prefix</code> was <code>ACME</code>, the bank reference
+         * of a payout sent to that creditor could be <code>ACME-8G7Q8</code>.
          * 
          * This prefix is also used for refunds in EUR and GBP.
-         * 
          */
         public CreditorUpdateRequest withBankReferencePrefix(String bankReferencePrefix) {
             this.bankReferencePrefix = bankReferencePrefix;
@@ -472,8 +478,9 @@ public class CreditorService {
         }
 
         /**
-         * [ISO 3166-1 alpha-2
-         * code.](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2#Officially_assigned_code_elements)
+         * <a href=
+         * "https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2#Officially_assigned_code_elements">ISO
+         * 3166-1 alpha-2 code.</a>
          */
         public CreditorUpdateRequest withCountryCode(String countryCode) {
             this.countryCode = countryCode;
@@ -486,8 +493,9 @@ public class CreditorService {
         }
 
         /**
-         * ID of the [bank account](#core-endpoints-creditor-bank-accounts) which is set up to
-         * receive payouts in AUD.
+         * ID of the <a href=
+         * "https://developer.gocardless.com/api-reference/#core-endpoints-creditor-bank-accounts">bank
+         * account</a> which is set up to receive payouts in AUD.
          */
         public CreditorUpdateRequest withLinksDefaultAudPayoutAccount(
                 String defaultAudPayoutAccount) {
@@ -499,8 +507,9 @@ public class CreditorService {
         }
 
         /**
-         * ID of the [bank account](#core-endpoints-creditor-bank-accounts) which is set up to
-         * receive payouts in CAD.
+         * ID of the <a href=
+         * "https://developer.gocardless.com/api-reference/#core-endpoints-creditor-bank-accounts">bank
+         * account</a> which is set up to receive payouts in CAD.
          */
         public CreditorUpdateRequest withLinksDefaultCadPayoutAccount(
                 String defaultCadPayoutAccount) {
@@ -512,8 +521,9 @@ public class CreditorService {
         }
 
         /**
-         * ID of the [bank account](#core-endpoints-creditor-bank-accounts) which is set up to
-         * receive payouts in DKK.
+         * ID of the <a href=
+         * "https://developer.gocardless.com/api-reference/#core-endpoints-creditor-bank-accounts">bank
+         * account</a> which is set up to receive payouts in DKK.
          */
         public CreditorUpdateRequest withLinksDefaultDkkPayoutAccount(
                 String defaultDkkPayoutAccount) {
@@ -525,8 +535,9 @@ public class CreditorService {
         }
 
         /**
-         * ID of the [bank account](#core-endpoints-creditor-bank-accounts) which is set up to
-         * receive payouts in EUR.
+         * ID of the <a href=
+         * "https://developer.gocardless.com/api-reference/#core-endpoints-creditor-bank-accounts">bank
+         * account</a> which is set up to receive payouts in EUR.
          */
         public CreditorUpdateRequest withLinksDefaultEurPayoutAccount(
                 String defaultEurPayoutAccount) {
@@ -538,8 +549,9 @@ public class CreditorService {
         }
 
         /**
-         * ID of the [bank account](#core-endpoints-creditor-bank-accounts) which is set up to
-         * receive payouts in GBP.
+         * ID of the <a href=
+         * "https://developer.gocardless.com/api-reference/#core-endpoints-creditor-bank-accounts">bank
+         * account</a> which is set up to receive payouts in GBP.
          */
         public CreditorUpdateRequest withLinksDefaultGbpPayoutAccount(
                 String defaultGbpPayoutAccount) {
@@ -551,8 +563,9 @@ public class CreditorService {
         }
 
         /**
-         * ID of the [bank account](#core-endpoints-creditor-bank-accounts) which is set up to
-         * receive payouts in NZD.
+         * ID of the <a href=
+         * "https://developer.gocardless.com/api-reference/#core-endpoints-creditor-bank-accounts">bank
+         * account</a> which is set up to receive payouts in NZD.
          */
         public CreditorUpdateRequest withLinksDefaultNzdPayoutAccount(
                 String defaultNzdPayoutAccount) {
@@ -564,8 +577,9 @@ public class CreditorService {
         }
 
         /**
-         * ID of the [bank account](#core-endpoints-creditor-bank-accounts) which is set up to
-         * receive payouts in SEK.
+         * ID of the <a href=
+         * "https://developer.gocardless.com/api-reference/#core-endpoints-creditor-bank-accounts">bank
+         * account</a> which is set up to receive payouts in SEK.
          */
         public CreditorUpdateRequest withLinksDefaultSekPayoutAccount(
                 String defaultSekPayoutAccount) {
@@ -577,8 +591,9 @@ public class CreditorService {
         }
 
         /**
-         * ID of the [bank account](#core-endpoints-creditor-bank-accounts) which is set up to
-         * receive payouts in USD.
+         * ID of the <a href=
+         * "https://developer.gocardless.com/api-reference/#core-endpoints-creditor-bank-accounts">bank
+         * account</a> which is set up to receive payouts in USD.
          */
         public CreditorUpdateRequest withLinksDefaultUsdPayoutAccount(
                 String defaultUsdPayoutAccount) {
@@ -661,8 +676,9 @@ public class CreditorService {
             private String defaultUsdPayoutAccount;
 
             /**
-             * ID of the [bank account](#core-endpoints-creditor-bank-accounts) which is set up to
-             * receive payouts in AUD.
+             * ID of the <a href=
+             * "https://developer.gocardless.com/api-reference/#core-endpoints-creditor-bank-accounts">bank
+             * account</a> which is set up to receive payouts in AUD.
              */
             public Links withDefaultAudPayoutAccount(String defaultAudPayoutAccount) {
                 this.defaultAudPayoutAccount = defaultAudPayoutAccount;
@@ -670,8 +686,9 @@ public class CreditorService {
             }
 
             /**
-             * ID of the [bank account](#core-endpoints-creditor-bank-accounts) which is set up to
-             * receive payouts in CAD.
+             * ID of the <a href=
+             * "https://developer.gocardless.com/api-reference/#core-endpoints-creditor-bank-accounts">bank
+             * account</a> which is set up to receive payouts in CAD.
              */
             public Links withDefaultCadPayoutAccount(String defaultCadPayoutAccount) {
                 this.defaultCadPayoutAccount = defaultCadPayoutAccount;
@@ -679,8 +696,9 @@ public class CreditorService {
             }
 
             /**
-             * ID of the [bank account](#core-endpoints-creditor-bank-accounts) which is set up to
-             * receive payouts in DKK.
+             * ID of the <a href=
+             * "https://developer.gocardless.com/api-reference/#core-endpoints-creditor-bank-accounts">bank
+             * account</a> which is set up to receive payouts in DKK.
              */
             public Links withDefaultDkkPayoutAccount(String defaultDkkPayoutAccount) {
                 this.defaultDkkPayoutAccount = defaultDkkPayoutAccount;
@@ -688,8 +706,9 @@ public class CreditorService {
             }
 
             /**
-             * ID of the [bank account](#core-endpoints-creditor-bank-accounts) which is set up to
-             * receive payouts in EUR.
+             * ID of the <a href=
+             * "https://developer.gocardless.com/api-reference/#core-endpoints-creditor-bank-accounts">bank
+             * account</a> which is set up to receive payouts in EUR.
              */
             public Links withDefaultEurPayoutAccount(String defaultEurPayoutAccount) {
                 this.defaultEurPayoutAccount = defaultEurPayoutAccount;
@@ -697,8 +716,9 @@ public class CreditorService {
             }
 
             /**
-             * ID of the [bank account](#core-endpoints-creditor-bank-accounts) which is set up to
-             * receive payouts in GBP.
+             * ID of the <a href=
+             * "https://developer.gocardless.com/api-reference/#core-endpoints-creditor-bank-accounts">bank
+             * account</a> which is set up to receive payouts in GBP.
              */
             public Links withDefaultGbpPayoutAccount(String defaultGbpPayoutAccount) {
                 this.defaultGbpPayoutAccount = defaultGbpPayoutAccount;
@@ -706,8 +726,9 @@ public class CreditorService {
             }
 
             /**
-             * ID of the [bank account](#core-endpoints-creditor-bank-accounts) which is set up to
-             * receive payouts in NZD.
+             * ID of the <a href=
+             * "https://developer.gocardless.com/api-reference/#core-endpoints-creditor-bank-accounts">bank
+             * account</a> which is set up to receive payouts in NZD.
              */
             public Links withDefaultNzdPayoutAccount(String defaultNzdPayoutAccount) {
                 this.defaultNzdPayoutAccount = defaultNzdPayoutAccount;
@@ -715,8 +736,9 @@ public class CreditorService {
             }
 
             /**
-             * ID of the [bank account](#core-endpoints-creditor-bank-accounts) which is set up to
-             * receive payouts in SEK.
+             * ID of the <a href=
+             * "https://developer.gocardless.com/api-reference/#core-endpoints-creditor-bank-accounts">bank
+             * account</a> which is set up to receive payouts in SEK.
              */
             public Links withDefaultSekPayoutAccount(String defaultSekPayoutAccount) {
                 this.defaultSekPayoutAccount = defaultSekPayoutAccount;
@@ -724,8 +746,9 @@ public class CreditorService {
             }
 
             /**
-             * ID of the [bank account](#core-endpoints-creditor-bank-accounts) which is set up to
-             * receive payouts in USD.
+             * ID of the <a href=
+             * "https://developer.gocardless.com/api-reference/#core-endpoints-creditor-bank-accounts">bank
+             * account</a> which is set up to receive payouts in USD.
              */
             public Links withDefaultUsdPayoutAccount(String defaultUsdPayoutAccount) {
                 this.defaultUsdPayoutAccount = defaultUsdPayoutAccount;

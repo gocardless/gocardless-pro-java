@@ -15,9 +15,8 @@ import java.util.Map;
  * of required input might be additional customer billing details, while an action would be asking a
  * customer to authorise a payment using their mobile banking app.
  * 
- * See [Billing Requests:
- * Overview](https://developer.gocardless.com/getting-started/billing-requests/overview/) for
- * how-to's, explanations and tutorials.
+ * See <a href="https://developer.gocardless.com/getting-started/billing-requests/overview/">Billing
+ * Requests: Overview</a> for how-to's, explanations and tutorials.
  */
 public class BillingRequestWithActionService {
     private final HttpClient httpClient;
@@ -131,9 +130,9 @@ public class BillingRequestWithActionService {
          * (Optional) If true, this billing request can fallback from instant payment to direct
          * debit. Should not be set if GoCardless payment intelligence feature is used.
          * 
-         * See [Billing Requests: Retain customers with
-         * Fallbacks](https://developer.gocardless.com/billing-requests/retain-customers-with-fallbacks/)
-         * for more information.
+         * See <a href=
+         * "https://developer.gocardless.com/billing-requests/retain-customers-with-fallbacks/">Billing
+         * Requests: Retain customers with Fallbacks</a> for more information.
          */
         public BillingRequestWithActionCreateWithActionsRequest withFallbackEnabled(
                 Boolean fallbackEnabled) {
@@ -147,8 +146,9 @@ public class BillingRequestWithActionService {
         }
 
         /**
-         * ID of the associated [creditor](#core-endpoints-creditors). Only required if your account
-         * manages multiple creditors.
+         * ID of the associated <a href=
+         * "https://developer.gocardless.com/api-reference/#core-endpoints-creditors">creditor</a>.
+         * Only required if your account manages multiple creditors.
          */
         public BillingRequestWithActionCreateWithActionsRequest withLinksCreditor(String creditor) {
             if (links == null) {
@@ -159,8 +159,9 @@ public class BillingRequestWithActionService {
         }
 
         /**
-         * ID of the [customer](#core-endpoints-customers) against which this request should be
-         * made.
+         * ID of the <a href=
+         * "https://developer.gocardless.com/api-reference/#core-endpoints-customers">customer</a>
+         * against which this request should be made.
          */
         public BillingRequestWithActionCreateWithActionsRequest withLinksCustomer(String customer) {
             if (links == null) {
@@ -171,9 +172,9 @@ public class BillingRequestWithActionService {
         }
 
         /**
-         * (Optional) ID of the [customer_bank_account](#core-endpoints-customer-bank-accounts)
+         * (Optional) ID of the <a href=
+         * "https://developer.gocardless.com/api-reference/#core-endpoints-customer-bank-accounts">customer_bank_account</a>
          * against which this request should be made.
-         * 
          */
         public BillingRequestWithActionCreateWithActionsRequest withLinksCustomerBankAccount(
                 String customerBankAccount) {
@@ -191,14 +192,13 @@ public class BillingRequestWithActionService {
         }
 
         /**
-         * This field is ACH specific, sometimes referred to as [SEC
-         * code](https://www.moderntreasury.com/learn/sec-codes).
+         * This field is ACH specific, sometimes referred to as
+         * <a href="https://www.moderntreasury.com/learn/sec-codes">SEC code</a>.
          * 
          * This is the way that the payer gives authorisation to the merchant. web: Authorisation is
          * Internet Initiated or via Mobile Entry (maps to SEC code: WEB) telephone: Authorisation
          * is provided orally over telephone (maps to SEC code: TEL) paper: Authorisation is
          * provided in writing and signed, or similarly authenticated (maps to SEC code: PPD)
-         * 
          */
         public BillingRequestWithActionCreateWithActionsRequest withMandateRequestAuthorisationSource(
                 MandateRequest.AuthorisationSource authorisationSource) {
@@ -223,7 +223,7 @@ public class BillingRequestWithActionService {
         }
 
         /**
-         * [ISO 4217](https://en.wikipedia.org/wiki/ISO_4217#Active_codes) currency code.
+         * <a href="https://en.wikipedia.org/wiki/ISO_4217#Active_codes">ISO 4217</a> currency code.
          */
         public BillingRequestWithActionCreateWithActionsRequest withMandateRequestCurrency(
                 String currency) {
@@ -237,7 +237,6 @@ public class BillingRequestWithActionService {
         /**
          * A human-readable description of the payment and/or mandate. This will be displayed to the
          * payer when authorising the billing request.
-         * 
          */
         public BillingRequestWithActionCreateWithActionsRequest withMandateRequestDescription(
                 String description) {
@@ -251,10 +250,12 @@ public class BillingRequestWithActionService {
         /**
          * This field will decide how GoCardless handles settlement of funds from the customer.
          * 
-         * - `managed` will be moved through GoCardless' account, batched, and payed out. - `direct`
-         * will be a direct transfer from the payer's account to the merchant where invoicing will
-         * be handled separately.
-         * 
+         * <ul>
+         * <li><code>managed</code> will be moved through GoCardless' account, batched, and payed
+         * out.</li>
+         * <li><code>direct</code> will be a direct transfer from the payer's account to the
+         * merchant where invoicing will be handled separately.</li>
+         * </ul>
          */
         public BillingRequestWithActionCreateWithActionsRequest withMandateRequestFundsSettlement(
                 MandateRequest.FundsSettlement fundsSettlement) {
@@ -279,9 +280,10 @@ public class BillingRequestWithActionService {
         }
 
         /**
-         * Unique reference. Different schemes have different length and [character
-         * set](#appendix-character-sets) requirements. GoCardless will generate a unique reference
-         * satisfying the different scheme requirements if this field is left blank.
+         * Unique reference. Different schemes have different length and <a href=
+         * "https://developer.gocardless.com/api-reference/#appendix-character-sets">character
+         * set</a> requirements. GoCardless will generate a unique reference satisfying the
+         * different scheme requirements if this field is left blank.
          */
         public BillingRequestWithActionCreateWithActionsRequest withMandateRequestReference(
                 String reference) {
@@ -323,26 +325,29 @@ public class BillingRequestWithActionService {
 
         /**
          * Verification preference for the mandate. One of:
-         * <ul>
-         * <li>`minimum`: only verify if absolutely required, such as when part of scheme rules</li>
-         * <li>`recommended`: in addition to `minimum`, use the GoCardless payment intelligence
-         * solution to decide if a payer should be verified</li>
-         * <li>`when_available`: if verification mechanisms are available, use them</li>
-         * <li>`always`: as `when_available`, but fail to create the Billing Request if a mechanism
-         * isn't available</li>
-         * </ul>
          * 
-         * By default, all Billing Requests use the `recommended` verification preference. It uses
-         * GoCardless payment intelligence solution to determine if a payer is fraudulent or not.
-         * The verification mechanism is based on the response and the payer may be asked to verify
-         * themselves. If the feature is not available, `recommended` behaves like `minimum`.
+         * <ul>
+         * <li><code>minimum</code>: only verify if absolutely required, such as when part of scheme
+         * rules</li>
+         * <li><code>recommended</code>: in addition to <code>minimum</code>, use the GoCardless
+         * payment intelligence solution to decide if a payer should be verified</li>
+         * <li><code>when_available</code>: if verification mechanisms are available, use them</li>
+         * <li><code>always</code>: as <code>when_available</code>, but fail to create the Billing
+         * Request if a mechanism isn't available</li>
+         * </ul>
+         * By default, all Billing Requests use the <code>recommended</code> verification
+         * preference. It uses GoCardless payment intelligence solution to determine if a payer is
+         * fraudulent or not. The verification mechanism is based on the response and the payer may
+         * be asked to verify themselves. If the feature is not available, <code>recommended</code>
+         * behaves like <code>minimum</code>.
          * 
          * If you never wish to take advantage of our reduced risk products and Verified Mandates as
-         * they are released in new schemes, please use the `minimum` verification preference.
+         * they are released in new schemes, please use the <code>minimum</code> verification
+         * preference.
          * 
-         * See [Billing Requests: Creating Verified
-         * Mandates](https://developer.gocardless.com/getting-started/billing-requests/verified-mandates/)
-         * for more information.
+         * See <a href=
+         * "https://developer.gocardless.com/getting-started/billing-requests/verified-mandates/">Billing
+         * Requests: Creating Verified Mandates</a> for more information.
          */
         public BillingRequestWithActionCreateWithActionsRequest withMandateRequestVerify(
                 MandateRequest.Verify verify) {
@@ -391,9 +396,9 @@ public class BillingRequestWithActionService {
         /**
          * Specifies the underlying purpose of the payment. Defines the specific reason or type of
          * service/goods the payment relates to, improving straight-through processing and
-         * compliance. See [VRP Commercial Payment Purpose
-         * Codes](https://developer.gocardless.com/vrp-commercial-payment-purpose-codes/) for the
-         * complete list of valid codes.
+         * compliance. See
+         * <a href="https://developer.gocardless.com/vrp-commercial-payment-purpose-codes/">VRP
+         * Commercial Payment Purpose Codes</a> for the complete list of valid codes.
          */
         public BillingRequestWithActionCreateWithActionsRequest withPaymentPurposeCode(
                 String paymentPurposeCode) {
@@ -434,9 +439,9 @@ public class BillingRequestWithActionService {
         }
 
         /**
-         * [ISO 4217](https://en.wikipedia.org/wiki/ISO_4217#Active_codes) currency code. `GBP` and
-         * `EUR` supported; `GBP` with your customers in the UK and for `EUR` with your customers in
-         * supported Eurozone countries only.
+         * <a href="https://en.wikipedia.org/wiki/ISO_4217#Active_codes">ISO 4217</a> currency code.
+         * <code>GBP</code> and <code>EUR</code> supported; <code>GBP</code> with your customers in
+         * the UK and for <code>EUR</code> with your customers in supported Eurozone countries only.
          */
         public BillingRequestWithActionCreateWithActionsRequest withPaymentRequestCurrency(
                 String currency) {
@@ -450,7 +455,6 @@ public class BillingRequestWithActionService {
         /**
          * A human-readable description of the payment and/or mandate. This will be displayed to the
          * payer when authorising the billing request.
-         * 
          */
         public BillingRequestWithActionCreateWithActionsRequest withPaymentRequestDescription(
                 String description) {
@@ -464,10 +468,12 @@ public class BillingRequestWithActionService {
         /**
          * This field will decide how GoCardless handles settlement of funds from the customer.
          * 
-         * - `managed` will be moved through GoCardless' account, batched, and payed out. - `direct`
-         * will be a direct transfer from the payer's account to the merchant where invoicing will
-         * be handled separately.
-         * 
+         * <ul>
+         * <li><code>managed</code> will be moved through GoCardless' account, batched, and payed
+         * out.</li>
+         * <li><code>direct</code> will be a direct transfer from the payer's account to the
+         * merchant where invoicing will be handled separately.</li>
+         * </ul>
          */
         public BillingRequestWithActionCreateWithActionsRequest withPaymentRequestFundsSettlement(
                 PaymentRequest.FundsSettlement fundsSettlement) {
@@ -495,7 +501,6 @@ public class BillingRequestWithActionService {
          * A custom payment reference defined by the merchant. It is only available for payments on
          * the PayTo scheme or payments using the Direct Funds settlement model on the Faster
          * Payments scheme.
-         * 
          */
         public BillingRequestWithActionCreateWithActionsRequest withPaymentRequestReference(
                 String reference) {
@@ -507,11 +512,12 @@ public class BillingRequestWithActionService {
         }
 
         /**
-         * On failure, automatically retry payments using [intelligent
-         * retries](/success-plus/overview). Default is `false`.
+         * On failure, automatically retry payments using
+         * <a href="https://developer.gocardless.com/success-plus/overview">intelligent retries</a>.
+         * Default is <code>false</code>.
          * <p class="notice">
          * <strong>Important</strong>: To be able to use intelligent retries, Success+ needs to be
-         * enabled in [GoCardless dashboard](https://manage.gocardless.com/success-plus).
+         * enabled in <a href="https://manage.gocardless.com/success-plus">GoCardless dashboard</a>.
          * </p>
          * <p class="notice">
          * <strong>Important</strong>: This is not applicable to Pay by Bank and VRP payments.
@@ -527,11 +533,12 @@ public class BillingRequestWithActionService {
         }
 
         /**
-         * (Optional) A scheme used for Open Banking payments. Currently `faster_payments` is
-         * supported in the UK (GBP) and `sepa_credit_transfer` and `sepa_instant_credit_transfer`
-         * are supported in supported Eurozone countries (EUR). For Eurozone countries,
-         * `sepa_credit_transfer` is used as the default. Please be aware that
-         * `sepa_instant_credit_transfer` may incur an additional fee for your customer.
+         * (Optional) A scheme used for Open Banking payments. Currently
+         * <code>faster_payments</code> is supported in the UK (GBP) and
+         * <code>sepa_credit_transfer</code> and <code>sepa_instant_credit_transfer</code> are
+         * supported in supported Eurozone countries (EUR). For Eurozone countries,
+         * <code>sepa_credit_transfer</code> is used as the default. Please be aware that
+         * <code>sepa_instant_credit_transfer</code> may incur an additional fee for your customer.
          */
         public BillingRequestWithActionCreateWithActionsRequest withPaymentRequestScheme(
                 String scheme) {
@@ -545,9 +552,9 @@ public class BillingRequestWithActionService {
         /**
          * Specifies the high-level purpose/category of a mandate and/or payment using a set of
          * pre-defined categories. Provides context on the nature and reason for the payment to
-         * facilitate processing and compliance. See [Billing Request Purpose
-         * Codes](https://developer.gocardless.com/billing-request-purpose-codes/) for the complete
-         * list of valid codes.
+         * facilitate processing and compliance. See
+         * <a href="https://developer.gocardless.com/billing-request-purpose-codes/">Billing Request
+         * Purpose Codes</a> for the complete list of valid codes.
          */
         public BillingRequestWithActionCreateWithActionsRequest withPurposeCode(
                 PurposeCode purposeCode) {
@@ -683,8 +690,9 @@ public class BillingRequestWithActionService {
              * Name of the account holder, as known by the bank. The full name provided when the
              * customer is created is stored and is available via the API, but is transliterated,
              * upcased, and truncated to 18 characters in bank submissions. This field is required
-             * unless the request includes a [customer bank account
-             * token](#javascript-flow-customer-bank-account-tokens).
+             * unless the request includes a <a href=
+             * "https://developer.gocardless.com/api-reference/#javascript-flow-customer-bank-account-tokens">customer
+             * bank account token</a>.
              */
             public CollectBankAccount withAccountHolderName(String accountHolderName) {
                 this.accountHolderName = accountHolderName;
@@ -692,8 +700,9 @@ public class BillingRequestWithActionService {
             }
 
             /**
-             * Bank account number - see [local details](#appendix-local-bank-details) for more
-             * information. Alternatively you can provide an `iban`.
+             * Bank account number - see <a href=
+             * "https://developer.gocardless.com/api-reference/#appendix-local-bank-details">local
+             * details</a> for more information. Alternatively you can provide an <code>iban</code>.
              */
             public CollectBankAccount withAccountNumber(String accountNumber) {
                 this.accountNumber = accountNumber;
@@ -701,8 +710,9 @@ public class BillingRequestWithActionService {
             }
 
             /**
-             * Account number suffix (only for bank accounts denominated in NZD) - see [local
-             * details](#local-bank-details-new-zealand) for more information.
+             * Account number suffix (only for bank accounts denominated in NZD) - see <a href=
+             * "https://developer.gocardless.com/api-reference/#local-bank-details-new-zealand">local
+             * details</a> for more information.
              */
             public CollectBankAccount withAccountNumberSuffix(String accountNumberSuffix) {
                 this.accountNumberSuffix = accountNumberSuffix;
@@ -711,8 +721,9 @@ public class BillingRequestWithActionService {
 
             /**
              * Bank account type. Required for USD-denominated bank accounts. Must not be provided
-             * for bank accounts in other currencies. See [local
-             * details](#local-bank-details-united-states) for more information.
+             * for bank accounts in other currencies. See <a href=
+             * "https://developer.gocardless.com/api-reference/#local-bank-details-united-states">local
+             * details</a> for more information.
              */
             public CollectBankAccount withAccountType(AccountType accountType) {
                 this.accountType = accountType;
@@ -720,8 +731,9 @@ public class BillingRequestWithActionService {
             }
 
             /**
-             * Bank code - see [local details](#appendix-local-bank-details) for more information.
-             * Alternatively you can provide an `iban`.
+             * Bank code - see <a href=
+             * "https://developer.gocardless.com/api-reference/#appendix-local-bank-details">local
+             * details</a> for more information. Alternatively you can provide an <code>iban</code>.
              */
             public CollectBankAccount withBankCode(String bankCode) {
                 this.bankCode = bankCode;
@@ -729,8 +741,9 @@ public class BillingRequestWithActionService {
             }
 
             /**
-             * Branch code - see [local details](#appendix-local-bank-details) for more information.
-             * Alternatively you can provide an `iban`.
+             * Branch code - see <a href=
+             * "https://developer.gocardless.com/api-reference/#appendix-local-bank-details">local
+             * details</a> for more information. Alternatively you can provide an <code>iban</code>.
              */
             public CollectBankAccount withBranchCode(String branchCode) {
                 this.branchCode = branchCode;
@@ -738,9 +751,10 @@ public class BillingRequestWithActionService {
             }
 
             /**
-             * [ISO 3166-1 alpha-2
-             * code](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2#Officially_assigned_code_elements).
-             * Defaults to the country code of the `iban` if supplied, otherwise is required.
+             * <a href=
+             * "https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2#Officially_assigned_code_elements">ISO
+             * 3166-1 alpha-2 code</a>. Defaults to the country code of the <code>iban</code> if
+             * supplied, otherwise is required.
              */
             public CollectBankAccount withCountryCode(String countryCode) {
                 this.countryCode = countryCode;
@@ -748,8 +762,9 @@ public class BillingRequestWithActionService {
             }
 
             /**
-             * [ISO 4217](https://en.wikipedia.org/wiki/ISO_4217#Active_codes) currency code.
-             * Currently "AUD", "CAD", "DKK", "EUR", "GBP", "NZD", "SEK" and "USD" are supported.
+             * <a href="https://en.wikipedia.org/wiki/ISO_4217#Active_codes">ISO 4217</a> currency
+             * code. Currently "AUD", "CAD", "DKK", "EUR", "GBP", "NZD", "SEK" and "USD" are
+             * supported.
              */
             public CollectBankAccount withCurrency(String currency) {
                 this.currency = currency;
@@ -757,10 +772,12 @@ public class BillingRequestWithActionService {
             }
 
             /**
-             * International Bank Account Number. Alternatively you can provide [local
-             * details](#appendix-local-bank-details). IBANs are not accepted for Swedish bank
-             * accounts denominated in SEK - you must supply [local
-             * details](#local-bank-details-sweden).
+             * International Bank Account Number. Alternatively you can provide <a href=
+             * "https://developer.gocardless.com/api-reference/#appendix-local-bank-details">local
+             * details</a>. IBANs are not accepted for Swedish bank accounts denominated in SEK -
+             * you must supply <a href=
+             * "https://developer.gocardless.com/api-reference/#local-bank-details-sweden">local
+             * details</a>.
              */
             public CollectBankAccount withIban(String iban) {
                 this.iban = iban;
@@ -846,10 +863,11 @@ public class BillingRequestWithActionService {
             private String phoneNumber;
 
             /**
-             * Customer's company name. Required unless a `given_name` and `family_name` are
-             * provided. For Canadian customers, the use of a `company_name` value will mean that
-             * any mandate created from this customer will be considered to be a "Business PAD"
-             * (otherwise, any mandate will be considered to be a "Personal PAD").
+             * Customer's company name. Required unless a <code>given_name</code> and
+             * <code>family_name</code> are provided. For Canadian customers, the use of a
+             * <code>company_name</code> value will mean that any mandate created from this customer
+             * will be considered to be a "Business PAD" (otherwise, any mandate will be considered
+             * to be a "Personal PAD").
              */
             public Customer withCompanyName(String companyName) {
                 this.companyName = companyName;
@@ -866,7 +884,7 @@ public class BillingRequestWithActionService {
             }
 
             /**
-             * Customer's surname. Required unless a `company_name` is provided.
+             * Customer's surname. Required unless a <code>company_name</code> is provided.
              */
             public Customer withFamilyName(String familyName) {
                 this.familyName = familyName;
@@ -874,7 +892,7 @@ public class BillingRequestWithActionService {
             }
 
             /**
-             * Customer's first name. Required unless a `company_name` is provided.
+             * Customer's first name. Required unless a <code>company_name</code> is provided.
              */
             public Customer withGivenName(String givenName) {
                 this.givenName = givenName;
@@ -882,13 +900,14 @@ public class BillingRequestWithActionService {
             }
 
             /**
-             * [ISO 639-1](https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes) code. Used as the
-             * language for notification emails sent by GoCardless if your organisation does not
-             * send its own (see [compliance requirements](#appendix-compliance-requirements)).
-             * Currently only "en", "fr", "de", "pt", "es", "it", "nl", "da", "nb", "sl", "sv" are
-             * supported. If this is not provided and a customer was linked during billing request
-             * creation, the linked customer language will be used. Otherwise, the language is
-             * default to "en".
+             * <a href="https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes">ISO 639-1</a> code.
+             * Used as the language for notification emails sent by GoCardless if your organisation
+             * does not send its own (see <a href=
+             * "https://developer.gocardless.com/api-reference/#appendix-compliance-requirements">compliance
+             * requirements</a>). Currently only "en", "fr", "de", "pt", "es", "it", "nl", "da",
+             * "nb", "sl", "sv" are supported. If this is not provided and a customer was linked
+             * during billing request creation, the linked customer language will be used.
+             * Otherwise, the language is default to "en".
              */
             public Customer withLanguage(String language) {
                 this.language = language;
@@ -905,8 +924,8 @@ public class BillingRequestWithActionService {
             }
 
             /**
-             * [ITU E.123](https://en.wikipedia.org/wiki/E.123) formatted phone number, including
-             * country code.
+             * <a href="https://en.wikipedia.org/wiki/E.123">ITU E.123</a> formatted phone number,
+             * including country code.
              */
             public Customer withPhoneNumber(String phoneNumber) {
                 this.phoneNumber = phoneNumber;
@@ -985,8 +1004,9 @@ public class BillingRequestWithActionService {
             }
 
             /**
-             * [ISO 3166-1 alpha-2
-             * code.](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2#Officially_assigned_code_elements)
+             * <a href=
+             * "https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2#Officially_assigned_code_elements">ISO
+             * 3166-1 alpha-2 code.</a>
              */
             public CustomerBillingDetail withCountryCode(String countryCode) {
                 this.countryCode = countryCode;
@@ -1007,9 +1027,8 @@ public class BillingRequestWithActionService {
              * address of the payer to whom the mandate belongs (i.e. as a result of their
              * completion of a mandate setup flow in their browser).
              * 
-             * Not required for creating offline mandates where `authorisation_source` is set to
-             * telephone or paper.
-             * 
+             * Not required for creating offline mandates where <code>authorisation_source</code> is
+             * set to telephone or paper.
              */
             public CustomerBillingDetail withIpAddress(String ipAddress) {
                 this.ipAddress = ipAddress;
@@ -1026,8 +1045,8 @@ public class BillingRequestWithActionService {
 
             /**
              * The customer's address region, county or department. For US customers a 2 letter
-             * [ISO3166-2:US](https://en.wikipedia.org/wiki/ISO_3166-2:US) state code is required
-             * (e.g. `CA` for California).
+             * <a href="https://en.wikipedia.org/wiki/ISO_3166-2:US">ISO3166-2:US</a> state code is
+             * required (e.g. <code>CA</code> for California).
              */
             public CustomerBillingDetail withRegion(String region) {
                 this.region = region;
@@ -1155,9 +1174,9 @@ public class BillingRequestWithActionService {
             private String institution;
 
             /**
-             * [ISO
-             * 3166-1](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2#Officially_assigned_code_elements)
-             * alpha-2 code. The country code of the institution. If nothing is provided,
+             * <a href=
+             * "https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2#Officially_assigned_code_elements">ISO
+             * 3166-1</a> alpha-2 code. The country code of the institution. If nothing is provided,
              * institutions with the country code 'GB' are returned by default.
              */
             public SelectInstitution withCountryCode(String countryCode) {
@@ -1237,8 +1256,9 @@ public class BillingRequestWithActionService {
             private String customerBankAccount;
 
             /**
-             * ID of the associated [creditor](#core-endpoints-creditors). Only required if your
-             * account manages multiple creditors.
+             * ID of the associated <a href=
+             * "https://developer.gocardless.com/api-reference/#core-endpoints-creditors">creditor</a>.
+             * Only required if your account manages multiple creditors.
              */
             public Links withCreditor(String creditor) {
                 this.creditor = creditor;
@@ -1246,8 +1266,9 @@ public class BillingRequestWithActionService {
             }
 
             /**
-             * ID of the [customer](#core-endpoints-customers) against which this request should be
-             * made.
+             * ID of the <a href=
+             * "https://developer.gocardless.com/api-reference/#core-endpoints-customers">customer</a>
+             * against which this request should be made.
              */
             public Links withCustomer(String customer) {
                 this.customer = customer;
@@ -1255,9 +1276,9 @@ public class BillingRequestWithActionService {
             }
 
             /**
-             * (Optional) ID of the [customer_bank_account](#core-endpoints-customer-bank-accounts)
+             * (Optional) ID of the <a href=
+             * "https://developer.gocardless.com/api-reference/#core-endpoints-customer-bank-accounts">customer_bank_account</a>
              * against which this request should be made.
-             * 
              */
             public Links withCustomerBankAccount(String customerBankAccount) {
                 this.customerBankAccount = customerBankAccount;
@@ -1272,15 +1293,27 @@ public class BillingRequestWithActionService {
             private Period period;
 
             /**
-             * The alignment of the period.
+             * The alignment of the period. Defaults to <code>creation_date</code> if not specified.
              * 
-             * `calendar` - this will finish on the end of the current period. For example this will
-             * expire on the Monday for the current week or the January for the next year.
+             * <code>calendar</code>
+             * <ul>
+             * <li>the period follows fixed calendar boundaries, the same for every mandate:</li>
+             * </ul>
+             * <code>week</code> runs Monday to Sunday, <code>month</code> runs from the 1st to the
+             * last day of the calendar month, and <code>year</code> runs from 1 January to 31
+             * December. If the mandate starts partway through a period, the limit for that first
+             * period is reduced proportionally to the days remaining (e.g. a monthly limit starting
+             * on the 15th gives roughly half the limit for that first month).
              * 
-             * `creation_date` - this will finish on the next instance of the current period. For
-             * example Monthly it will expire on the same day of the next month, or yearly the same
-             * day of the next year.
+             * <code>creation_date</code>
+             * <ul>
+             * <li>the period follows the mandate's own start date rather than the calendar. For
+             * example, if the mandate starts on the 15th, each monthly period runs from the 15th to
+             * the 14th of the following month. The first period is a full period, not reduced
+             * proportionally.</li>
+             * </ul>
              * 
+             * <em>Note:</em> Has no effect when period is <code>flexible</code>.
              */
             public PeriodicLimits withAlignment(Alignment alignment) {
                 this.alignment = alignment;
@@ -1288,9 +1321,9 @@ public class BillingRequestWithActionService {
             }
 
             /**
-             * The maximum number of payments that can be collected in this periodic limit. _Note:_
-             * This is only supported for the PayTo scheme, where it is required.
+             * The maximum number of payments that can be collected in this periodic limit.
              * 
+             * <em>Note:</em> Only supported for the PayTo scheme, where it is optional.
              */
             public PeriodicLimits withMaxPayments(Integer maxPayments) {
                 this.maxPayments = maxPayments;
@@ -1298,9 +1331,10 @@ public class BillingRequestWithActionService {
             }
 
             /**
-             * The maximum total amount that can be charged for all payments in this periodic limit.
-             * Required for VRP.
+             * The maximum total amount that can be charged for all payments in this periodic limit,
+             * in the lowest denomination for the currency (e.g. pence in GBP, cents in EUR).
              * 
+             * <em>Note:</em> Required for VRP. This is not permitted for the PayTo scheme.
              */
             public PeriodicLimits withMaxTotalAmount(Integer maxTotalAmount) {
                 this.maxTotalAmount = maxTotalAmount;
@@ -1308,8 +1342,9 @@ public class BillingRequestWithActionService {
             }
 
             /**
-             * The repeating period for this mandate. Defaults to flexible for PayTo if not
-             * specified.
+             * The repeating period for this mandate. Required whenever a periodic limit is provided
+             * (for both VRP and PayTo). If periodic_limits is omitted entirely for PayTo, this
+             * defaults to flexible.
              */
             public PeriodicLimits withPeriod(Period period) {
                 this.period = period;
@@ -1375,7 +1410,6 @@ public class BillingRequestWithActionService {
              * This is an optional field and if it is not supplied the agreement will be considered
              * open and will not have an end date. Keep in mind the end date must take into account
              * how long it will take the user to set up this agreement via the Billing Request.
-             * 
              */
             public Constraints withEndDate(String endDate) {
                 this.endDate = endDate;
@@ -1383,8 +1417,9 @@ public class BillingRequestWithActionService {
             }
 
             /**
-             * The maximum amount that can be charged for a single payment. Required for PayTo and
-             * VRP.
+             * The maximum amount that can be charged for a single payment in the lowest
+             * denomination for the currency (e.g. pence in GBP, cents in EUR). <em>Note:</em>
+             * Required for PayTo and VRP.
              */
             public Constraints withMaxAmountPerPayment(Integer maxAmountPerPayment) {
                 this.maxAmountPerPayment = maxAmountPerPayment;
@@ -1393,8 +1428,8 @@ public class BillingRequestWithActionService {
 
             /**
              * A constraint where you can specify info (free text string) about how payments are
-             * calculated. _Note:_ This is only supported for ACH and PAD schemes.
-             * 
+             * calculated. For use when payments vary and cannot be expressed as a fixed amount and
+             * frequency. <em>Note:</em> This is only supported for ACH and PAD schemes.
              */
             public Constraints withPaymentMethod(String paymentMethod) {
                 this.paymentMethod = paymentMethod;
@@ -1402,7 +1437,12 @@ public class BillingRequestWithActionService {
             }
 
             /**
-             * List of periodic limits and constraints which apply to them
+             * Caps on the total amount and/or number of payments that can be collected within a
+             * repeating period (e.g. no more than a set amount per month), as opposed to
+             * <code>max_amount_per_payment</code> which caps a single payment.
+             * 
+             * <em>Note:</em> Required for VRP, where exactly one periodic limit must be provided.
+             * Optional for PayTo.
              */
             public Constraints withPeriodicLimits(List<PeriodicLimits> periodicLimits) {
                 this.periodicLimits = periodicLimits;
@@ -1414,7 +1454,6 @@ public class BillingRequestWithActionService {
              * 
              * This is an optional field and if it is not supplied the start date will be set to the
              * day authorisation happens.
-             * 
              */
             public Constraints withStartDate(String startDate) {
                 this.startDate = startDate;
@@ -1455,15 +1494,14 @@ public class BillingRequestWithActionService {
             private Verify verify;
 
             /**
-             * This field is ACH specific, sometimes referred to as [SEC
-             * code](https://www.moderntreasury.com/learn/sec-codes).
+             * This field is ACH specific, sometimes referred to as
+             * <a href="https://www.moderntreasury.com/learn/sec-codes">SEC code</a>.
              * 
              * This is the way that the payer gives authorisation to the merchant. web:
              * Authorisation is Internet Initiated or via Mobile Entry (maps to SEC code: WEB)
              * telephone: Authorisation is provided orally over telephone (maps to SEC code: TEL)
              * paper: Authorisation is provided in writing and signed, or similarly authenticated
              * (maps to SEC code: PPD)
-             * 
              */
             public MandateRequest withAuthorisationSource(AuthorisationSource authorisationSource) {
                 this.authorisationSource = authorisationSource;
@@ -1480,7 +1518,8 @@ public class BillingRequestWithActionService {
             }
 
             /**
-             * [ISO 4217](https://en.wikipedia.org/wiki/ISO_4217#Active_codes) currency code.
+             * <a href="https://en.wikipedia.org/wiki/ISO_4217#Active_codes">ISO 4217</a> currency
+             * code.
              */
             public MandateRequest withCurrency(String currency) {
                 this.currency = currency;
@@ -1490,7 +1529,6 @@ public class BillingRequestWithActionService {
             /**
              * A human-readable description of the payment and/or mandate. This will be displayed to
              * the payer when authorising the billing request.
-             * 
              */
             public MandateRequest withDescription(String description) {
                 this.description = description;
@@ -1500,10 +1538,12 @@ public class BillingRequestWithActionService {
             /**
              * This field will decide how GoCardless handles settlement of funds from the customer.
              * 
-             * - `managed` will be moved through GoCardless' account, batched, and payed out. -
-             * `direct` will be a direct transfer from the payer's account to the merchant where
-             * invoicing will be handled separately.
-             * 
+             * <ul>
+             * <li><code>managed</code> will be moved through GoCardless' account, batched, and
+             * payed out.</li>
+             * <li><code>direct</code> will be a direct transfer from the payer's account to the
+             * merchant where invoicing will be handled separately.</li>
+             * </ul>
              */
             public MandateRequest withFundsSettlement(FundsSettlement fundsSettlement) {
                 this.fundsSettlement = fundsSettlement;
@@ -1520,9 +1560,10 @@ public class BillingRequestWithActionService {
             }
 
             /**
-             * Unique reference. Different schemes have different length and [character
-             * set](#appendix-character-sets) requirements. GoCardless will generate a unique
-             * reference satisfying the different scheme requirements if this field is left blank.
+             * Unique reference. Different schemes have different length and <a href=
+             * "https://developer.gocardless.com/api-reference/#appendix-character-sets">character
+             * set</a> requirements. GoCardless will generate a unique reference satisfying the
+             * different scheme requirements if this field is left blank.
              */
             public MandateRequest withReference(String reference) {
                 this.reference = reference;
@@ -1552,29 +1593,30 @@ public class BillingRequestWithActionService {
 
             /**
              * Verification preference for the mandate. One of:
-             * <ul>
-             * <li>`minimum`: only verify if absolutely required, such as when part of scheme
-             * rules</li>
-             * <li>`recommended`: in addition to `minimum`, use the GoCardless payment intelligence
-             * solution to decide if a payer should be verified</li>
-             * <li>`when_available`: if verification mechanisms are available, use them</li>
-             * <li>`always`: as `when_available`, but fail to create the Billing Request if a
-             * mechanism isn't available</li>
-             * </ul>
              * 
-             * By default, all Billing Requests use the `recommended` verification preference. It
-             * uses GoCardless payment intelligence solution to determine if a payer is fraudulent
-             * or not. The verification mechanism is based on the response and the payer may be
-             * asked to verify themselves. If the feature is not available, `recommended` behaves
-             * like `minimum`.
+             * <ul>
+             * <li><code>minimum</code>: only verify if absolutely required, such as when part of
+             * scheme rules</li>
+             * <li><code>recommended</code>: in addition to <code>minimum</code>, use the GoCardless
+             * payment intelligence solution to decide if a payer should be verified</li>
+             * <li><code>when_available</code>: if verification mechanisms are available, use
+             * them</li>
+             * <li><code>always</code>: as <code>when_available</code>, but fail to create the
+             * Billing Request if a mechanism isn't available</li>
+             * </ul>
+             * By default, all Billing Requests use the <code>recommended</code> verification
+             * preference. It uses GoCardless payment intelligence solution to determine if a payer
+             * is fraudulent or not. The verification mechanism is based on the response and the
+             * payer may be asked to verify themselves. If the feature is not available,
+             * <code>recommended</code> behaves like <code>minimum</code>.
              * 
              * If you never wish to take advantage of our reduced risk products and Verified
-             * Mandates as they are released in new schemes, please use the `minimum` verification
-             * preference.
+             * Mandates as they are released in new schemes, please use the <code>minimum</code>
+             * verification preference.
              * 
-             * See [Billing Requests: Creating Verified
-             * Mandates](https://developer.gocardless.com/getting-started/billing-requests/verified-mandates/)
-             * for more information.
+             * See <a href=
+             * "https://developer.gocardless.com/getting-started/billing-requests/verified-mandates/">Billing
+             * Requests: Creating Verified Mandates</a> for more information.
              */
             public MandateRequest withVerify(Verify verify) {
                 this.verify = verify;
@@ -1651,9 +1693,10 @@ public class BillingRequestWithActionService {
             }
 
             /**
-             * [ISO 4217](https://en.wikipedia.org/wiki/ISO_4217#Active_codes) currency code. `GBP`
-             * and `EUR` supported; `GBP` with your customers in the UK and for `EUR` with your
-             * customers in supported Eurozone countries only.
+             * <a href="https://en.wikipedia.org/wiki/ISO_4217#Active_codes">ISO 4217</a> currency
+             * code. <code>GBP</code> and <code>EUR</code> supported; <code>GBP</code> with your
+             * customers in the UK and for <code>EUR</code> with your customers in supported
+             * Eurozone countries only.
              */
             public PaymentRequest withCurrency(String currency) {
                 this.currency = currency;
@@ -1663,7 +1706,6 @@ public class BillingRequestWithActionService {
             /**
              * A human-readable description of the payment and/or mandate. This will be displayed to
              * the payer when authorising the billing request.
-             * 
              */
             public PaymentRequest withDescription(String description) {
                 this.description = description;
@@ -1673,10 +1715,12 @@ public class BillingRequestWithActionService {
             /**
              * This field will decide how GoCardless handles settlement of funds from the customer.
              * 
-             * - `managed` will be moved through GoCardless' account, batched, and payed out. -
-             * `direct` will be a direct transfer from the payer's account to the merchant where
-             * invoicing will be handled separately.
-             * 
+             * <ul>
+             * <li><code>managed</code> will be moved through GoCardless' account, batched, and
+             * payed out.</li>
+             * <li><code>direct</code> will be a direct transfer from the payer's account to the
+             * merchant where invoicing will be handled separately.</li>
+             * </ul>
              */
             public PaymentRequest withFundsSettlement(FundsSettlement fundsSettlement) {
                 this.fundsSettlement = fundsSettlement;
@@ -1696,7 +1740,6 @@ public class BillingRequestWithActionService {
              * A custom payment reference defined by the merchant. It is only available for payments
              * on the PayTo scheme or payments using the Direct Funds settlement model on the Faster
              * Payments scheme.
-             * 
              */
             public PaymentRequest withReference(String reference) {
                 this.reference = reference;
@@ -1704,11 +1747,13 @@ public class BillingRequestWithActionService {
             }
 
             /**
-             * On failure, automatically retry payments using [intelligent
-             * retries](/success-plus/overview). Default is `false`.
+             * On failure, automatically retry payments using
+             * <a href="https://developer.gocardless.com/success-plus/overview">intelligent
+             * retries</a>. Default is <code>false</code>.
              * <p class="notice">
              * <strong>Important</strong>: To be able to use intelligent retries, Success+ needs to
-             * be enabled in [GoCardless dashboard](https://manage.gocardless.com/success-plus).
+             * be enabled in <a href="https://manage.gocardless.com/success-plus">GoCardless
+             * dashboard</a>.
              * </p>
              * <p class="notice">
              * <strong>Important</strong>: This is not applicable to Pay by Bank and VRP payments.
@@ -1720,11 +1765,12 @@ public class BillingRequestWithActionService {
             }
 
             /**
-             * (Optional) A scheme used for Open Banking payments. Currently `faster_payments` is
-             * supported in the UK (GBP) and `sepa_credit_transfer` and
-             * `sepa_instant_credit_transfer` are supported in supported Eurozone countries (EUR).
-             * For Eurozone countries, `sepa_credit_transfer` is used as the default. Please be
-             * aware that `sepa_instant_credit_transfer` may incur an additional fee for your
+             * (Optional) A scheme used for Open Banking payments. Currently
+             * <code>faster_payments</code> is supported in the UK (GBP) and
+             * <code>sepa_credit_transfer</code> and <code>sepa_instant_credit_transfer</code> are
+             * supported in supported Eurozone countries (EUR). For Eurozone countries,
+             * <code>sepa_credit_transfer</code> is used as the default. Please be aware that
+             * <code>sepa_instant_credit_transfer</code> may incur an additional fee for your
              * customer.
              */
             public PaymentRequest withScheme(String scheme) {

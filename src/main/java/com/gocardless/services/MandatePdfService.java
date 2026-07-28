@@ -7,8 +7,9 @@ import com.google.gson.annotations.SerializedName;
 /**
  * Service class for working with mandate pdf resources.
  *
- * Mandate PDFs allow you to easily display [scheme-rules
- * compliant](#appendix-compliance-requirements) Direct Debit mandates to your customers.
+ * Mandate PDFs allow you to easily display <a href=
+ * "https://developer.gocardless.com/api-reference/#appendix-compliance-requirements">scheme-rules
+ * compliant</a> Direct Debit mandates to your customers.
  */
 public class MandatePdfService {
     private final HttpClient httpClient;
@@ -25,22 +26,25 @@ public class MandatePdfService {
      * Generates a PDF mandate and returns its temporary URL.
      * 
      * Customer and bank account details can be left blank (for a blank mandate), provided manually,
-     * or inferred from the ID of an existing [mandate](#core-endpoints-mandates).
+     * or inferred from the ID of an existing <a href=
+     * "https://developer.gocardless.com/api-reference/#core-endpoints-mandates">mandate</a>.
      * 
      * By default, we'll generate PDF mandates in English.
      * 
-     * To generate a PDF mandate in another language, set the `Accept-Language` header when creating
-     * the PDF mandate to the relevant [ISO
-     * 639-1](https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes) language code supported for the
-     * scheme.
+     * To generate a PDF mandate in another language, set the <code>Accept-Language</code> header
+     * when creating the PDF mandate to the relevant
+     * <a href="https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes">ISO 639-1</a> language code
+     * supported for the scheme.
      * 
      * | Scheme | Supported languages | | :--------------- |
      * :-------------------------------------------------------------------------------------------------------------------------------------------
-     * | | ACH | English (`en`) | | Autogiro | English (`en`), Swedish (`sv`) | | Bacs | English
-     * (`en`) | | BECS | English (`en`) | | BECS NZ | English (`en`) | | Betalingsservice | Danish
-     * (`da`), English (`en`) | | PAD | English (`en`) | | SEPA Core | Danish (`da`), Dutch (`nl`),
-     * English (`en`), French (`fr`), German (`de`), Italian (`it`), Portuguese (`pt`), Spanish
-     * (`es`), Swedish (`sv`) |
+     * | | ACH | English (<code>en</code>) | | Autogiro | English (<code>en</code>), Swedish
+     * (<code>sv</code>) | | Bacs | English (<code>en</code>) | | BECS | English (<code>en</code>) |
+     * | BECS NZ | English (<code>en</code>) | | Betalingsservice | Danish (<code>da</code>),
+     * English (<code>en</code>) | | PAD | English (<code>en</code>) | | SEPA Core | Danish
+     * (<code>da</code>), Dutch (<code>nl</code>), English (<code>en</code>), French
+     * (<code>fr</code>), German (<code>de</code>), Italian (<code>it</code>), Portuguese
+     * (<code>pt</code>), Spanish (<code>es</code>), Swedish (<code>sv</code>) |
      */
     public MandatePdfCreateRequest create() {
         return new MandatePdfCreateRequest(httpClient);
@@ -52,22 +56,25 @@ public class MandatePdfService {
      * Generates a PDF mandate and returns its temporary URL.
      * 
      * Customer and bank account details can be left blank (for a blank mandate), provided manually,
-     * or inferred from the ID of an existing [mandate](#core-endpoints-mandates).
+     * or inferred from the ID of an existing <a href=
+     * "https://developer.gocardless.com/api-reference/#core-endpoints-mandates">mandate</a>.
      * 
      * By default, we'll generate PDF mandates in English.
      * 
-     * To generate a PDF mandate in another language, set the `Accept-Language` header when creating
-     * the PDF mandate to the relevant [ISO
-     * 639-1](https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes) language code supported for the
-     * scheme.
+     * To generate a PDF mandate in another language, set the <code>Accept-Language</code> header
+     * when creating the PDF mandate to the relevant
+     * <a href="https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes">ISO 639-1</a> language code
+     * supported for the scheme.
      * 
      * | Scheme | Supported languages | | :--------------- |
      * :-------------------------------------------------------------------------------------------------------------------------------------------
-     * | | ACH | English (`en`) | | Autogiro | English (`en`), Swedish (`sv`) | | Bacs | English
-     * (`en`) | | BECS | English (`en`) | | BECS NZ | English (`en`) | | Betalingsservice | Danish
-     * (`da`), English (`en`) | | PAD | English (`en`) | | SEPA Core | Danish (`da`), Dutch (`nl`),
-     * English (`en`), French (`fr`), German (`de`), Italian (`it`), Portuguese (`pt`), Spanish
-     * (`es`), Swedish (`sv`) |
+     * | | ACH | English (<code>en</code>) | | Autogiro | English (<code>en</code>), Swedish
+     * (<code>sv</code>) | | Bacs | English (<code>en</code>) | | BECS | English (<code>en</code>) |
+     * | BECS NZ | English (<code>en</code>) | | Betalingsservice | Danish (<code>da</code>),
+     * English (<code>en</code>) | | PAD | English (<code>en</code>) | | SEPA Core | Danish
+     * (<code>da</code>), Dutch (<code>nl</code>), English (<code>en</code>), French
+     * (<code>fr</code>), German (<code>de</code>), Italian (<code>it</code>), Portuguese
+     * (<code>pt</code>), Spanish (<code>es</code>), Swedish (<code>sv</code>) |
      */
     public static final class MandatePdfCreateRequest extends PostRequest<MandatePdf> {
         private String accountHolderName;
@@ -100,7 +107,9 @@ public class MandatePdfService {
 
         /**
          * Name of the account holder, as known by the bank. Usually this matches the name of the
-         * [customer](#core-endpoints-customers). This field cannot exceed 18 characters.
+         * <a href=
+         * "https://developer.gocardless.com/api-reference/#core-endpoints-customers">customer</a>.
+         * This field cannot exceed 18 characters.
          */
         public MandatePdfCreateRequest withAccountHolderName(String accountHolderName) {
             this.accountHolderName = accountHolderName;
@@ -108,8 +117,9 @@ public class MandatePdfService {
         }
 
         /**
-         * Bank account number - see [local details](#appendix-local-bank-details) for more
-         * information. Alternatively you can provide an `iban`.
+         * Bank account number - see <a href=
+         * "https://developer.gocardless.com/api-reference/#appendix-local-bank-details">local
+         * details</a> for more information. Alternatively you can provide an <code>iban</code>.
          */
         public MandatePdfCreateRequest withAccountNumber(String accountNumber) {
             this.accountNumber = accountNumber;
@@ -118,8 +128,9 @@ public class MandatePdfService {
 
         /**
          * Bank account type. Required for USD-denominated bank accounts. Must not be provided for
-         * bank accounts in other currencies. See [local details](#local-bank-details-united-states)
-         * for more information.
+         * bank accounts in other currencies. See <a href=
+         * "https://developer.gocardless.com/api-reference/#local-bank-details-united-states">local
+         * details</a> for more information.
          */
         public MandatePdfCreateRequest withAccountType(AccountType accountType) {
             this.accountType = accountType;
@@ -151,8 +162,9 @@ public class MandatePdfService {
         }
 
         /**
-         * Bank code - see [local details](#appendix-local-bank-details) for more information.
-         * Alternatively you can provide an `iban`.
+         * Bank code - see <a href=
+         * "https://developer.gocardless.com/api-reference/#appendix-local-bank-details">local
+         * details</a> for more information. Alternatively you can provide an <code>iban</code>.
          */
         public MandatePdfCreateRequest withBankCode(String bankCode) {
             this.bankCode = bankCode;
@@ -160,8 +172,9 @@ public class MandatePdfService {
         }
 
         /**
-         * SWIFT BIC. Will be derived automatically if a valid `iban` or [local
-         * details](#appendix-local-bank-details) are provided.
+         * SWIFT BIC. Will be derived automatically if a valid <code>iban</code> or <a href=
+         * "https://developer.gocardless.com/api-reference/#appendix-local-bank-details">local
+         * details</a> are provided.
          */
         public MandatePdfCreateRequest withBic(String bic) {
             this.bic = bic;
@@ -169,8 +182,9 @@ public class MandatePdfService {
         }
 
         /**
-         * Branch code - see [local details](#appendix-local-bank-details) for more information.
-         * Alternatively you can provide an `iban`.
+         * Branch code - see <a href=
+         * "https://developer.gocardless.com/api-reference/#appendix-local-bank-details">local
+         * details</a> for more information. Alternatively you can provide an <code>iban</code>.
          */
         public MandatePdfCreateRequest withBranchCode(String branchCode) {
             this.branchCode = branchCode;
@@ -195,9 +209,9 @@ public class MandatePdfService {
         }
 
         /**
-         * [ISO
-         * 3166-1](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2#Officially_assigned_code_elements)
-         * alpha-2 code. Required if providing local details.
+         * <a href=
+         * "https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2#Officially_assigned_code_elements">ISO
+         * 3166-1</a> alpha-2 code. Required if providing local details.
          */
         public MandatePdfCreateRequest withCountryCode(String countryCode) {
             this.countryCode = countryCode;
@@ -215,7 +229,7 @@ public class MandatePdfService {
 
         /**
          * The customer's family name (i.e. last name). Used to populate the "Customer Name or
-         * Company name" field on the PDF. Ignored if `company_name` is provided.
+         * Company name" field on the PDF. Ignored if <code>company_name</code> is provided.
          */
         public MandatePdfCreateRequest withFamilyName(String familyName) {
             this.familyName = familyName;
@@ -224,7 +238,7 @@ public class MandatePdfService {
 
         /**
          * The customer's given name (i.e. first name). Used to populate the "Customer Name or
-         * Company name" field on the PDF. Ignored if `company_name` is provided.
+         * Company name" field on the PDF. Ignored if <code>company_name</code> is provided.
          */
         public MandatePdfCreateRequest withGivenName(String givenName) {
             this.givenName = givenName;
@@ -232,8 +246,9 @@ public class MandatePdfService {
         }
 
         /**
-         * International Bank Account Number. Alternatively you can provide [local
-         * details](#appendix-local-bank-details). IBANs cannot be provided for Autogiro mandates.
+         * International Bank Account Number. Alternatively you can provide <a href=
+         * "https://developer.gocardless.com/api-reference/#appendix-local-bank-details">local
+         * details</a>. IBANs cannot be provided for Autogiro mandates.
          */
         public MandatePdfCreateRequest withIban(String iban) {
             this.iban = iban;
@@ -246,8 +261,9 @@ public class MandatePdfService {
         }
 
         /**
-         * ID of an existing [creditor](#core-endpoints-creditors). Only required if your account
-         * manages multiple creditors.
+         * ID of an existing <a href=
+         * "https://developer.gocardless.com/api-reference/#core-endpoints-creditors">creditor</a>.
+         * Only required if your account manages multiple creditors.
          */
         public MandatePdfCreateRequest withLinksCreditor(String creditor) {
             if (links == null) {
@@ -258,9 +274,10 @@ public class MandatePdfService {
         }
 
         /**
-         * ID of an existing [mandate](#core-endpoints-mandates) to build the PDF from. The
-         * customer's bank details will be censored in the generated PDF. No other parameters may be
-         * provided alongside this.
+         * ID of an existing <a href=
+         * "https://developer.gocardless.com/api-reference/#core-endpoints-mandates">mandate</a> to
+         * build the PDF from. The customer's bank details will be censored in the generated PDF. No
+         * other parameters may be provided alongside this.
          */
         public MandatePdfCreateRequest withLinksMandate(String mandate) {
             if (links == null) {
@@ -306,8 +323,8 @@ public class MandatePdfService {
 
         /**
          * The customer's address region, county or department. For US customers a 2 letter
-         * [ISO3166-2:US](https://en.wikipedia.org/wiki/ISO_3166-2:US) state code is required (e.g.
-         * `CA` for California).
+         * <a href="https://en.wikipedia.org/wiki/ISO_3166-2:US">ISO3166-2:US</a> state code is
+         * required (e.g. <code>CA</code> for California).
          */
         public MandatePdfCreateRequest withRegion(String region) {
             this.region = region;
@@ -317,7 +334,9 @@ public class MandatePdfService {
         /**
          * Direct Debit scheme. Can be supplied or automatically detected from the bank account
          * details provided. If you do not provide a scheme, you must provide either a mandate, an
-         * `iban`, or [local details](#appendix-local-bank-details) including a `country_code`.
+         * <code>iban</code>, or <a href=
+         * "https://developer.gocardless.com/api-reference/#appendix-local-bank-details">local
+         * details</a> including a <code>country_code</code>.
          */
         public MandatePdfCreateRequest withScheme(String scheme) {
             this.scheme = scheme;
@@ -335,7 +354,7 @@ public class MandatePdfService {
         /**
          * For American customers only. Subscription amount being authorised by the mandate. In the
          * lowest denomination for the currency (cents in USD). Is required if
-         * `subscription_frequency` has been provided.
+         * <code>subscription_frequency</code> has been provided.
          */
         public MandatePdfCreateRequest withSubscriptionAmount(Integer subscriptionAmount) {
             this.subscriptionAmount = subscriptionAmount;
@@ -344,8 +363,8 @@ public class MandatePdfService {
 
         /**
          * For American customers only. Frequency of the subscription being authorised by the
-         * mandate. One of `weekly`, `monthly` or `yearly`. Is required if `subscription_amount` has
-         * been provided.
+         * mandate. One of <code>weekly</code>, <code>monthly</code> or <code>yearly</code>. Is
+         * required if <code>subscription_amount</code> has been provided.
          */
         public MandatePdfCreateRequest withSubscriptionFrequency(String subscriptionFrequency) {
             this.subscriptionFrequency = subscriptionFrequency;
@@ -407,8 +426,9 @@ public class MandatePdfService {
             private String mandate;
 
             /**
-             * ID of an existing [creditor](#core-endpoints-creditors). Only required if your
-             * account manages multiple creditors.
+             * ID of an existing <a href=
+             * "https://developer.gocardless.com/api-reference/#core-endpoints-creditors">creditor</a>.
+             * Only required if your account manages multiple creditors.
              */
             public Links withCreditor(String creditor) {
                 this.creditor = creditor;
@@ -416,9 +436,10 @@ public class MandatePdfService {
             }
 
             /**
-             * ID of an existing [mandate](#core-endpoints-mandates) to build the PDF from. The
-             * customer's bank details will be censored in the generated PDF. No other parameters
-             * may be provided alongside this.
+             * ID of an existing <a href=
+             * "https://developer.gocardless.com/api-reference/#core-endpoints-mandates">mandate</a>
+             * to build the PDF from. The customer's bank details will be censored in the generated
+             * PDF. No other parameters may be provided alongside this.
              */
             public Links withMandate(String mandate) {
                 this.mandate = mandate;

@@ -14,40 +14,46 @@ import java.util.Map;
  * <a href="https://developer.gocardless.com/getting-started/billing-requests/overview/"> Billing
  * Requests</a>. Use Billing Requests to build any future integrations.
  * </p>
- * 
  * Payer Authorisation resource acts as a wrapper for creating customer, bank account and mandate
  * details in a single request. PayerAuthorisation API enables the integrators to build their own
  * custom payment pages.
  * 
  * The process to use the Payer Authorisation API is as follows:
  * 
- * 1. Create a Payer Authorisation, either empty or with already available information 2. Update the
- * authorisation with additional information or fix any mistakes 3. Submit the authorisation, after
- * the payer has reviewed their information 4. [coming soon] Redirect the payer to the verification
- * mechanisms from the response of the Submit request (this will be introduced as a non-breaking
- * change) 5. Confirm the authorisation to indicate that the resources can be created
- * 
+ * <ol>
+ * <li>Create a Payer Authorisation, either empty or with already available information</li>
+ * <li>Update the authorisation with additional information or fix any mistakes</li>
+ * <li>Submit the authorisation, after the payer has reviewed their information</li>
+ * <li>[coming soon] Redirect the payer to the verification mechanisms from the response of the
+ * Submit request (this will be introduced as a non-breaking change)</li>
+ * <li>Confirm the authorisation to indicate that the resources can be created</li>
+ * </ol>
  * After the Payer Authorisation is confirmed, resources will eventually be created as it's an
  * asynchronous process.
  * 
  * To retrieve the status and ID of the linked resources you can do one of the following:
+ * 
  * <ol>
- * <li>Listen to <code>  payer_authorisation_completed </code> <a href="#appendix-webhooks">
- * webhook</a> (recommended)</li>
- * <li>Poll the GET <a href="#payer-authorisations-get-a-single-payer-authorisation">
+ * <li>Listen to <code>  payer_authorisation_completed </code>
+ * <a href="https://developer.gocardless.com/api-reference/#appendix-webhooks"> webhook</a>
+ * (recommended)</li>
+ * <li>Poll the GET <a href=
+ * "https://developer.gocardless.com/api-reference/#payer-authorisations-get-a-single-payer-authorisation">
  * endpoint</a></li>
  * <li>Poll the GET events API
- * <code>https://api.gocardless.com/events?payer_authorisation={id}&action=completed</code></li>
+ * <code>https://api.gocardless.com/events?payer_authorisation={id}&amp;action=completed</code></li>
  * </ol>
- * 
  * <p class="notice">
- * Note that the `create` and `update` endpoints behave differently than other existing `create` and
- * `update` endpoints. The Payer Authorisation is still saved if incomplete data is provided. We
- * return the list of incomplete data in the `incomplete_fields` along with the resources in the
- * body of the response. The bank account details(account_number, bank_code & branch_code) must be
- * sent together rather than splitting across different request for both `create` and `update`
+ * Note that the <code>create</code> and <code>update</code> endpoints behave differently than other
+ * existing <code>create</code> and <code>update</code> endpoints. The Payer Authorisation is still
+ * saved if incomplete data is provided. We return the list of incomplete data in the
+ * <code>incomplete_fields</code> along with the resources in the body of the response. The bank
+ * account details(account_number, bank_code &amp; branch_code) must be sent together rather than
+ * splitting across different request for both <code>create</code> and <code>update</code>
  * endpoints. <br>
+ * </br>
  * <br>
+ * </br>
  * The API is designed to be flexible and allows you to collect information in multiple steps
  * without storing any sensitive data in the browser or in your servers.
  * </p>
@@ -90,8 +96,8 @@ public class PayerAuthorisationService {
      * designed this way so you do not need to save any payer data on your servers or the browser
      * while still being able to implement a progressive solution, such a multi-step form.
      * <p class="notice">
-     * Note that in order to update the `metadata` attribute values it must be sent completely as it
-     * overrides the previously existing values.
+     * Note that in order to update the <code>metadata</code> attribute values it must be sent
+     * completely as it overrides the previously existing values.
      * </p>
      */
     public PayerAuthorisationUpdateRequest update(String identity) {
@@ -182,8 +188,9 @@ public class PayerAuthorisationService {
         private Mandate mandate;
 
         /**
-         * All details required for the creation of a [Customer Bank
-         * Account](#core-endpoints-customer-bank-accounts).
+         * All details required for the creation of a <a href=
+         * "https://developer.gocardless.com/api-reference/#core-endpoints-customer-bank-accounts">Customer
+         * Bank Account</a>.
          */
         public PayerAuthorisationCreateRequest withBankAccount(BankAccount bankAccount) {
             this.bankAccount = bankAccount;
@@ -194,8 +201,9 @@ public class PayerAuthorisationService {
          * Name of the account holder, as known by the bank. The full name provided when the
          * customer is created is stored and is available via the API, but is transliterated,
          * upcased, and truncated to 18 characters in bank submissions. This field is required
-         * unless the request includes a [customer bank account
-         * token](#javascript-flow-customer-bank-account-tokens).
+         * unless the request includes a <a href=
+         * "https://developer.gocardless.com/api-reference/#javascript-flow-customer-bank-account-tokens">customer
+         * bank account token</a>.
          */
         public PayerAuthorisationCreateRequest withBankAccountAccountHolderName(
                 String accountHolderName) {
@@ -207,8 +215,9 @@ public class PayerAuthorisationService {
         }
 
         /**
-         * Bank account number - see [local details](#appendix-local-bank-details) for more
-         * information. Alternatively you can provide an `iban`.
+         * Bank account number - see <a href=
+         * "https://developer.gocardless.com/api-reference/#appendix-local-bank-details">local
+         * details</a> for more information. Alternatively you can provide an <code>iban</code>.
          */
         public PayerAuthorisationCreateRequest withBankAccountAccountNumber(String accountNumber) {
             if (bankAccount == null) {
@@ -232,8 +241,9 @@ public class PayerAuthorisationService {
         }
 
         /**
-         * Account number suffix (only for bank accounts denominated in NZD) - see [local
-         * details](#local-bank-details-new-zealand) for more information.
+         * Account number suffix (only for bank accounts denominated in NZD) - see <a href=
+         * "https://developer.gocardless.com/api-reference/#local-bank-details-new-zealand">local
+         * details</a> for more information.
          */
         public PayerAuthorisationCreateRequest withBankAccountAccountNumberSuffix(
                 String accountNumberSuffix) {
@@ -246,8 +256,9 @@ public class PayerAuthorisationService {
 
         /**
          * Bank account type. Required for USD-denominated bank accounts. Must not be provided for
-         * bank accounts in other currencies. See [local details](#local-bank-details-united-states)
-         * for more information.
+         * bank accounts in other currencies. See <a href=
+         * "https://developer.gocardless.com/api-reference/#local-bank-details-united-states">local
+         * details</a> for more information.
          */
         public PayerAuthorisationCreateRequest withBankAccountAccountType(
                 BankAccount.AccountType accountType) {
@@ -259,8 +270,9 @@ public class PayerAuthorisationService {
         }
 
         /**
-         * Bank code - see [local details](#appendix-local-bank-details) for more information.
-         * Alternatively you can provide an `iban`.
+         * Bank code - see <a href=
+         * "https://developer.gocardless.com/api-reference/#appendix-local-bank-details">local
+         * details</a> for more information. Alternatively you can provide an <code>iban</code>.
          */
         public PayerAuthorisationCreateRequest withBankAccountBankCode(String bankCode) {
             if (bankAccount == null) {
@@ -271,8 +283,9 @@ public class PayerAuthorisationService {
         }
 
         /**
-         * Branch code - see [local details](#appendix-local-bank-details) for more information.
-         * Alternatively you can provide an `iban`.
+         * Branch code - see <a href=
+         * "https://developer.gocardless.com/api-reference/#appendix-local-bank-details">local
+         * details</a> for more information. Alternatively you can provide an <code>iban</code>.
          */
         public PayerAuthorisationCreateRequest withBankAccountBranchCode(String branchCode) {
             if (bankAccount == null) {
@@ -283,9 +296,10 @@ public class PayerAuthorisationService {
         }
 
         /**
-         * [ISO 3166-1 alpha-2
-         * code](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2#Officially_assigned_code_elements).
-         * Defaults to the country code of the `iban` if supplied, otherwise is required.
+         * <a href=
+         * "https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2#Officially_assigned_code_elements">ISO
+         * 3166-1 alpha-2 code</a>. Defaults to the country code of the <code>iban</code> if
+         * supplied, otherwise is required.
          */
         public PayerAuthorisationCreateRequest withBankAccountCountryCode(String countryCode) {
             if (bankAccount == null) {
@@ -296,8 +310,8 @@ public class PayerAuthorisationService {
         }
 
         /**
-         * [ISO 4217](https://en.wikipedia.org/wiki/ISO_4217#Active_codes) currency code. Currently
-         * "AUD", "CAD", "DKK", "EUR", "GBP", "NZD", "SEK" and "USD" are supported.
+         * <a href="https://en.wikipedia.org/wiki/ISO_4217#Active_codes">ISO 4217</a> currency code.
+         * Currently "AUD", "CAD", "DKK", "EUR", "GBP", "NZD", "SEK" and "USD" are supported.
          */
         public PayerAuthorisationCreateRequest withBankAccountCurrency(String currency) {
             if (bankAccount == null) {
@@ -308,9 +322,12 @@ public class PayerAuthorisationService {
         }
 
         /**
-         * International Bank Account Number. Alternatively you can provide [local
-         * details](#appendix-local-bank-details). IBANs are not accepted for Swedish bank accounts
-         * denominated in SEK - you must supply [local details](#local-bank-details-sweden).
+         * International Bank Account Number. Alternatively you can provide <a href=
+         * "https://developer.gocardless.com/api-reference/#appendix-local-bank-details">local
+         * details</a>. IBANs are not accepted for Swedish bank accounts denominated in SEK - you
+         * must supply
+         * <a href="https://developer.gocardless.com/api-reference/#local-bank-details-sweden">local
+         * details</a>.
          */
         public PayerAuthorisationCreateRequest withBankAccountIban(String iban) {
             if (bankAccount == null) {
@@ -334,7 +351,8 @@ public class PayerAuthorisationService {
         }
 
         /**
-         * All details required for the creation of a [Customer](#core-endpoints-customers).
+         * All details required for the creation of a <a href=
+         * "https://developer.gocardless.com/api-reference/#core-endpoints-customers">Customer</a>.
          */
         public PayerAuthorisationCreateRequest withCustomer(Customer customer) {
             this.customer = customer;
@@ -386,10 +404,11 @@ public class PayerAuthorisationService {
         }
 
         /**
-         * Customer's company name. Required unless a `given_name` and `family_name` are provided.
-         * For Canadian customers, the use of a `company_name` value will mean that any mandate
-         * created from this customer will be considered to be a "Business PAD" (otherwise, any
-         * mandate will be considered to be a "Personal PAD").
+         * Customer's company name. Required unless a <code>given_name</code> and
+         * <code>family_name</code> are provided. For Canadian customers, the use of a
+         * <code>company_name</code> value will mean that any mandate created from this customer
+         * will be considered to be a "Business PAD" (otherwise, any mandate will be considered to
+         * be a "Personal PAD").
          */
         public PayerAuthorisationCreateRequest withCustomerCompanyName(String companyName) {
             if (customer == null) {
@@ -400,8 +419,9 @@ public class PayerAuthorisationService {
         }
 
         /**
-         * [ISO 3166-1 alpha-2
-         * code.](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2#Officially_assigned_code_elements)
+         * <a href=
+         * "https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2#Officially_assigned_code_elements">ISO
+         * 3166-1 alpha-2 code.</a>
          */
         public PayerAuthorisationCreateRequest withCustomerCountryCode(String countryCode) {
             if (customer == null) {
@@ -437,7 +457,7 @@ public class PayerAuthorisationService {
         }
 
         /**
-         * Customer's surname. Required unless a `company_name` is provided.
+         * Customer's surname. Required unless a <code>company_name</code> is provided.
          */
         public PayerAuthorisationCreateRequest withCustomerFamilyName(String familyName) {
             if (customer == null) {
@@ -448,7 +468,7 @@ public class PayerAuthorisationService {
         }
 
         /**
-         * Customer's first name. Required unless a `company_name` is provided.
+         * Customer's first name. Required unless a <code>company_name</code> is provided.
          */
         public PayerAuthorisationCreateRequest withCustomerGivenName(String givenName) {
             if (customer == null) {
@@ -459,9 +479,8 @@ public class PayerAuthorisationService {
         }
 
         /**
-         * An [IETF Language Tag](https://tools.ietf.org/html/rfc5646), used for both language and
-         * regional variations of our product.
-         * 
+         * An <a href="https://tools.ietf.org/html/rfc5646">IETF Language Tag</a>, used for both
+         * language and regional variations of our product.
          */
         public PayerAuthorisationCreateRequest withCustomerLocale(String locale) {
             if (customer == null) {
@@ -496,8 +515,8 @@ public class PayerAuthorisationService {
 
         /**
          * The customer's address region, county or department. For US customers a 2 letter
-         * [ISO3166-2:US](https://en.wikipedia.org/wiki/ISO_3166-2:US) state code is required (e.g.
-         * `CA` for California).
+         * <a href="https://en.wikipedia.org/wiki/ISO_3166-2:US">ISO3166-2:US</a> state code is
+         * required (e.g. <code>CA</code> for California).
          */
         public PayerAuthorisationCreateRequest withCustomerRegion(String region) {
             if (customer == null) {
@@ -522,7 +541,8 @@ public class PayerAuthorisationService {
         }
 
         /**
-         * All details required for the creation of a [Mandate](#core-endpoints-mandates).
+         * All details required for the creation of a <a href=
+         * "https://developer.gocardless.com/api-reference/#core-endpoints-mandates">Mandate</a>.
          */
         public PayerAuthorisationCreateRequest withMandate(Mandate mandate) {
             this.mandate = mandate;
@@ -546,9 +566,8 @@ public class PayerAuthorisationService {
          * the payer to whom the mandate belongs (i.e. as a result of their completion of a mandate
          * setup flow in their browser).
          * 
-         * Not required for creating offline mandates where `authorisation_source` is set to
-         * telephone or paper.
-         * 
+         * Not required for creating offline mandates where <code>authorisation_source</code> is set
+         * to telephone or paper.
          */
         public PayerAuthorisationCreateRequest withMandatePayerIpAddress(String payerIpAddress) {
             if (mandate == null) {
@@ -559,9 +578,10 @@ public class PayerAuthorisationService {
         }
 
         /**
-         * Unique reference. Different schemes have different length and [character
-         * set](#appendix-character-sets) requirements. GoCardless will generate a unique reference
-         * satisfying the different scheme requirements if this field is left blank.
+         * Unique reference. Different schemes have different length and <a href=
+         * "https://developer.gocardless.com/api-reference/#appendix-character-sets">character
+         * set</a> requirements. GoCardless will generate a unique reference satisfying the
+         * different scheme requirements if this field is left blank.
          */
         public PayerAuthorisationCreateRequest withMandateReference(String reference) {
             if (mandate == null) {
@@ -643,8 +663,9 @@ public class PayerAuthorisationService {
              * Name of the account holder, as known by the bank. The full name provided when the
              * customer is created is stored and is available via the API, but is transliterated,
              * upcased, and truncated to 18 characters in bank submissions. This field is required
-             * unless the request includes a [customer bank account
-             * token](#javascript-flow-customer-bank-account-tokens).
+             * unless the request includes a <a href=
+             * "https://developer.gocardless.com/api-reference/#javascript-flow-customer-bank-account-tokens">customer
+             * bank account token</a>.
              */
             public BankAccount withAccountHolderName(String accountHolderName) {
                 this.accountHolderName = accountHolderName;
@@ -652,8 +673,9 @@ public class PayerAuthorisationService {
             }
 
             /**
-             * Bank account number - see [local details](#appendix-local-bank-details) for more
-             * information. Alternatively you can provide an `iban`.
+             * Bank account number - see <a href=
+             * "https://developer.gocardless.com/api-reference/#appendix-local-bank-details">local
+             * details</a> for more information. Alternatively you can provide an <code>iban</code>.
              */
             public BankAccount withAccountNumber(String accountNumber) {
                 this.accountNumber = accountNumber;
@@ -670,8 +692,9 @@ public class PayerAuthorisationService {
             }
 
             /**
-             * Account number suffix (only for bank accounts denominated in NZD) - see [local
-             * details](#local-bank-details-new-zealand) for more information.
+             * Account number suffix (only for bank accounts denominated in NZD) - see <a href=
+             * "https://developer.gocardless.com/api-reference/#local-bank-details-new-zealand">local
+             * details</a> for more information.
              */
             public BankAccount withAccountNumberSuffix(String accountNumberSuffix) {
                 this.accountNumberSuffix = accountNumberSuffix;
@@ -680,8 +703,9 @@ public class PayerAuthorisationService {
 
             /**
              * Bank account type. Required for USD-denominated bank accounts. Must not be provided
-             * for bank accounts in other currencies. See [local
-             * details](#local-bank-details-united-states) for more information.
+             * for bank accounts in other currencies. See <a href=
+             * "https://developer.gocardless.com/api-reference/#local-bank-details-united-states">local
+             * details</a> for more information.
              */
             public BankAccount withAccountType(AccountType accountType) {
                 this.accountType = accountType;
@@ -689,8 +713,9 @@ public class PayerAuthorisationService {
             }
 
             /**
-             * Bank code - see [local details](#appendix-local-bank-details) for more information.
-             * Alternatively you can provide an `iban`.
+             * Bank code - see <a href=
+             * "https://developer.gocardless.com/api-reference/#appendix-local-bank-details">local
+             * details</a> for more information. Alternatively you can provide an <code>iban</code>.
              */
             public BankAccount withBankCode(String bankCode) {
                 this.bankCode = bankCode;
@@ -698,8 +723,9 @@ public class PayerAuthorisationService {
             }
 
             /**
-             * Branch code - see [local details](#appendix-local-bank-details) for more information.
-             * Alternatively you can provide an `iban`.
+             * Branch code - see <a href=
+             * "https://developer.gocardless.com/api-reference/#appendix-local-bank-details">local
+             * details</a> for more information. Alternatively you can provide an <code>iban</code>.
              */
             public BankAccount withBranchCode(String branchCode) {
                 this.branchCode = branchCode;
@@ -707,9 +733,10 @@ public class PayerAuthorisationService {
             }
 
             /**
-             * [ISO 3166-1 alpha-2
-             * code](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2#Officially_assigned_code_elements).
-             * Defaults to the country code of the `iban` if supplied, otherwise is required.
+             * <a href=
+             * "https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2#Officially_assigned_code_elements">ISO
+             * 3166-1 alpha-2 code</a>. Defaults to the country code of the <code>iban</code> if
+             * supplied, otherwise is required.
              */
             public BankAccount withCountryCode(String countryCode) {
                 this.countryCode = countryCode;
@@ -717,8 +744,9 @@ public class PayerAuthorisationService {
             }
 
             /**
-             * [ISO 4217](https://en.wikipedia.org/wiki/ISO_4217#Active_codes) currency code.
-             * Currently "AUD", "CAD", "DKK", "EUR", "GBP", "NZD", "SEK" and "USD" are supported.
+             * <a href="https://en.wikipedia.org/wiki/ISO_4217#Active_codes">ISO 4217</a> currency
+             * code. Currently "AUD", "CAD", "DKK", "EUR", "GBP", "NZD", "SEK" and "USD" are
+             * supported.
              */
             public BankAccount withCurrency(String currency) {
                 this.currency = currency;
@@ -726,10 +754,12 @@ public class PayerAuthorisationService {
             }
 
             /**
-             * International Bank Account Number. Alternatively you can provide [local
-             * details](#appendix-local-bank-details). IBANs are not accepted for Swedish bank
-             * accounts denominated in SEK - you must supply [local
-             * details](#local-bank-details-sweden).
+             * International Bank Account Number. Alternatively you can provide <a href=
+             * "https://developer.gocardless.com/api-reference/#appendix-local-bank-details">local
+             * details</a>. IBANs are not accepted for Swedish bank accounts denominated in SEK -
+             * you must supply <a href=
+             * "https://developer.gocardless.com/api-reference/#local-bank-details-sweden">local
+             * details</a>.
              */
             public BankAccount withIban(String iban) {
                 this.iban = iban;
@@ -808,10 +838,11 @@ public class PayerAuthorisationService {
             }
 
             /**
-             * Customer's company name. Required unless a `given_name` and `family_name` are
-             * provided. For Canadian customers, the use of a `company_name` value will mean that
-             * any mandate created from this customer will be considered to be a "Business PAD"
-             * (otherwise, any mandate will be considered to be a "Personal PAD").
+             * Customer's company name. Required unless a <code>given_name</code> and
+             * <code>family_name</code> are provided. For Canadian customers, the use of a
+             * <code>company_name</code> value will mean that any mandate created from this customer
+             * will be considered to be a "Business PAD" (otherwise, any mandate will be considered
+             * to be a "Personal PAD").
              */
             public Customer withCompanyName(String companyName) {
                 this.companyName = companyName;
@@ -819,8 +850,9 @@ public class PayerAuthorisationService {
             }
 
             /**
-             * [ISO 3166-1 alpha-2
-             * code.](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2#Officially_assigned_code_elements)
+             * <a href=
+             * "https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2#Officially_assigned_code_elements">ISO
+             * 3166-1 alpha-2 code.</a>
              */
             public Customer withCountryCode(String countryCode) {
                 this.countryCode = countryCode;
@@ -846,7 +878,7 @@ public class PayerAuthorisationService {
             }
 
             /**
-             * Customer's surname. Required unless a `company_name` is provided.
+             * Customer's surname. Required unless a <code>company_name</code> is provided.
              */
             public Customer withFamilyName(String familyName) {
                 this.familyName = familyName;
@@ -854,7 +886,7 @@ public class PayerAuthorisationService {
             }
 
             /**
-             * Customer's first name. Required unless a `company_name` is provided.
+             * Customer's first name. Required unless a <code>company_name</code> is provided.
              */
             public Customer withGivenName(String givenName) {
                 this.givenName = givenName;
@@ -862,9 +894,8 @@ public class PayerAuthorisationService {
             }
 
             /**
-             * An [IETF Language Tag](https://tools.ietf.org/html/rfc5646), used for both language
-             * and regional variations of our product.
-             * 
+             * An <a href="https://tools.ietf.org/html/rfc5646">IETF Language Tag</a>, used for both
+             * language and regional variations of our product.
              */
             public Customer withLocale(String locale) {
                 this.locale = locale;
@@ -890,8 +921,8 @@ public class PayerAuthorisationService {
 
             /**
              * The customer's address region, county or department. For US customers a 2 letter
-             * [ISO3166-2:US](https://en.wikipedia.org/wiki/ISO_3166-2:US) state code is required
-             * (e.g. `CA` for California).
+             * <a href="https://en.wikipedia.org/wiki/ISO_3166-2:US">ISO3166-2:US</a> state code is
+             * required (e.g. <code>CA</code> for California).
              */
             public Customer withRegion(String region) {
                 this.region = region;
@@ -930,9 +961,8 @@ public class PayerAuthorisationService {
              * address of the payer to whom the mandate belongs (i.e. as a result of their
              * completion of a mandate setup flow in their browser).
              * 
-             * Not required for creating offline mandates where `authorisation_source` is set to
-             * telephone or paper.
-             * 
+             * Not required for creating offline mandates where <code>authorisation_source</code> is
+             * set to telephone or paper.
              */
             public Mandate withPayerIpAddress(String payerIpAddress) {
                 this.payerIpAddress = payerIpAddress;
@@ -940,9 +970,10 @@ public class PayerAuthorisationService {
             }
 
             /**
-             * Unique reference. Different schemes have different length and [character
-             * set](#appendix-character-sets) requirements. GoCardless will generate a unique
-             * reference satisfying the different scheme requirements if this field is left blank.
+             * Unique reference. Different schemes have different length and <a href=
+             * "https://developer.gocardless.com/api-reference/#appendix-character-sets">character
+             * set</a> requirements. GoCardless will generate a unique reference satisfying the
+             * different scheme requirements if this field is left blank.
              */
             public Mandate withReference(String reference) {
                 this.reference = reference;
@@ -989,8 +1020,8 @@ public class PayerAuthorisationService {
      * designed this way so you do not need to save any payer data on your servers or the browser
      * while still being able to implement a progressive solution, such a multi-step form.
      * <p class="notice">
-     * Note that in order to update the `metadata` attribute values it must be sent completely as it
-     * overrides the previously existing values.
+     * Note that in order to update the <code>metadata</code> attribute values it must be sent
+     * completely as it overrides the previously existing values.
      * </p>
      */
     public static final class PayerAuthorisationUpdateRequest
@@ -1002,8 +1033,9 @@ public class PayerAuthorisationService {
         private Mandate mandate;
 
         /**
-         * All details required for the creation of a [Customer Bank
-         * Account](#core-endpoints-customer-bank-accounts).
+         * All details required for the creation of a <a href=
+         * "https://developer.gocardless.com/api-reference/#core-endpoints-customer-bank-accounts">Customer
+         * Bank Account</a>.
          */
         public PayerAuthorisationUpdateRequest withBankAccount(BankAccount bankAccount) {
             this.bankAccount = bankAccount;
@@ -1014,8 +1046,9 @@ public class PayerAuthorisationService {
          * Name of the account holder, as known by the bank. The full name provided when the
          * customer is created is stored and is available via the API, but is transliterated,
          * upcased, and truncated to 18 characters in bank submissions. This field is required
-         * unless the request includes a [customer bank account
-         * token](#javascript-flow-customer-bank-account-tokens).
+         * unless the request includes a <a href=
+         * "https://developer.gocardless.com/api-reference/#javascript-flow-customer-bank-account-tokens">customer
+         * bank account token</a>.
          */
         public PayerAuthorisationUpdateRequest withBankAccountAccountHolderName(
                 String accountHolderName) {
@@ -1027,8 +1060,9 @@ public class PayerAuthorisationService {
         }
 
         /**
-         * Bank account number - see [local details](#appendix-local-bank-details) for more
-         * information. Alternatively you can provide an `iban`.
+         * Bank account number - see <a href=
+         * "https://developer.gocardless.com/api-reference/#appendix-local-bank-details">local
+         * details</a> for more information. Alternatively you can provide an <code>iban</code>.
          */
         public PayerAuthorisationUpdateRequest withBankAccountAccountNumber(String accountNumber) {
             if (bankAccount == null) {
@@ -1052,8 +1086,9 @@ public class PayerAuthorisationService {
         }
 
         /**
-         * Account number suffix (only for bank accounts denominated in NZD) - see [local
-         * details](#local-bank-details-new-zealand) for more information.
+         * Account number suffix (only for bank accounts denominated in NZD) - see <a href=
+         * "https://developer.gocardless.com/api-reference/#local-bank-details-new-zealand">local
+         * details</a> for more information.
          */
         public PayerAuthorisationUpdateRequest withBankAccountAccountNumberSuffix(
                 String accountNumberSuffix) {
@@ -1066,8 +1101,9 @@ public class PayerAuthorisationService {
 
         /**
          * Bank account type. Required for USD-denominated bank accounts. Must not be provided for
-         * bank accounts in other currencies. See [local details](#local-bank-details-united-states)
-         * for more information.
+         * bank accounts in other currencies. See <a href=
+         * "https://developer.gocardless.com/api-reference/#local-bank-details-united-states">local
+         * details</a> for more information.
          */
         public PayerAuthorisationUpdateRequest withBankAccountAccountType(
                 BankAccount.AccountType accountType) {
@@ -1079,8 +1115,9 @@ public class PayerAuthorisationService {
         }
 
         /**
-         * Bank code - see [local details](#appendix-local-bank-details) for more information.
-         * Alternatively you can provide an `iban`.
+         * Bank code - see <a href=
+         * "https://developer.gocardless.com/api-reference/#appendix-local-bank-details">local
+         * details</a> for more information. Alternatively you can provide an <code>iban</code>.
          */
         public PayerAuthorisationUpdateRequest withBankAccountBankCode(String bankCode) {
             if (bankAccount == null) {
@@ -1091,8 +1128,9 @@ public class PayerAuthorisationService {
         }
 
         /**
-         * Branch code - see [local details](#appendix-local-bank-details) for more information.
-         * Alternatively you can provide an `iban`.
+         * Branch code - see <a href=
+         * "https://developer.gocardless.com/api-reference/#appendix-local-bank-details">local
+         * details</a> for more information. Alternatively you can provide an <code>iban</code>.
          */
         public PayerAuthorisationUpdateRequest withBankAccountBranchCode(String branchCode) {
             if (bankAccount == null) {
@@ -1103,9 +1141,10 @@ public class PayerAuthorisationService {
         }
 
         /**
-         * [ISO 3166-1 alpha-2
-         * code](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2#Officially_assigned_code_elements).
-         * Defaults to the country code of the `iban` if supplied, otherwise is required.
+         * <a href=
+         * "https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2#Officially_assigned_code_elements">ISO
+         * 3166-1 alpha-2 code</a>. Defaults to the country code of the <code>iban</code> if
+         * supplied, otherwise is required.
          */
         public PayerAuthorisationUpdateRequest withBankAccountCountryCode(String countryCode) {
             if (bankAccount == null) {
@@ -1116,8 +1155,8 @@ public class PayerAuthorisationService {
         }
 
         /**
-         * [ISO 4217](https://en.wikipedia.org/wiki/ISO_4217#Active_codes) currency code. Currently
-         * "AUD", "CAD", "DKK", "EUR", "GBP", "NZD", "SEK" and "USD" are supported.
+         * <a href="https://en.wikipedia.org/wiki/ISO_4217#Active_codes">ISO 4217</a> currency code.
+         * Currently "AUD", "CAD", "DKK", "EUR", "GBP", "NZD", "SEK" and "USD" are supported.
          */
         public PayerAuthorisationUpdateRequest withBankAccountCurrency(String currency) {
             if (bankAccount == null) {
@@ -1128,9 +1167,12 @@ public class PayerAuthorisationService {
         }
 
         /**
-         * International Bank Account Number. Alternatively you can provide [local
-         * details](#appendix-local-bank-details). IBANs are not accepted for Swedish bank accounts
-         * denominated in SEK - you must supply [local details](#local-bank-details-sweden).
+         * International Bank Account Number. Alternatively you can provide <a href=
+         * "https://developer.gocardless.com/api-reference/#appendix-local-bank-details">local
+         * details</a>. IBANs are not accepted for Swedish bank accounts denominated in SEK - you
+         * must supply
+         * <a href="https://developer.gocardless.com/api-reference/#local-bank-details-sweden">local
+         * details</a>.
          */
         public PayerAuthorisationUpdateRequest withBankAccountIban(String iban) {
             if (bankAccount == null) {
@@ -1154,7 +1196,8 @@ public class PayerAuthorisationService {
         }
 
         /**
-         * All details required for the creation of a [Customer](#core-endpoints-customers).
+         * All details required for the creation of a <a href=
+         * "https://developer.gocardless.com/api-reference/#core-endpoints-customers">Customer</a>.
          */
         public PayerAuthorisationUpdateRequest withCustomer(Customer customer) {
             this.customer = customer;
@@ -1206,10 +1249,11 @@ public class PayerAuthorisationService {
         }
 
         /**
-         * Customer's company name. Required unless a `given_name` and `family_name` are provided.
-         * For Canadian customers, the use of a `company_name` value will mean that any mandate
-         * created from this customer will be considered to be a "Business PAD" (otherwise, any
-         * mandate will be considered to be a "Personal PAD").
+         * Customer's company name. Required unless a <code>given_name</code> and
+         * <code>family_name</code> are provided. For Canadian customers, the use of a
+         * <code>company_name</code> value will mean that any mandate created from this customer
+         * will be considered to be a "Business PAD" (otherwise, any mandate will be considered to
+         * be a "Personal PAD").
          */
         public PayerAuthorisationUpdateRequest withCustomerCompanyName(String companyName) {
             if (customer == null) {
@@ -1220,8 +1264,9 @@ public class PayerAuthorisationService {
         }
 
         /**
-         * [ISO 3166-1 alpha-2
-         * code.](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2#Officially_assigned_code_elements)
+         * <a href=
+         * "https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2#Officially_assigned_code_elements">ISO
+         * 3166-1 alpha-2 code.</a>
          */
         public PayerAuthorisationUpdateRequest withCustomerCountryCode(String countryCode) {
             if (customer == null) {
@@ -1257,7 +1302,7 @@ public class PayerAuthorisationService {
         }
 
         /**
-         * Customer's surname. Required unless a `company_name` is provided.
+         * Customer's surname. Required unless a <code>company_name</code> is provided.
          */
         public PayerAuthorisationUpdateRequest withCustomerFamilyName(String familyName) {
             if (customer == null) {
@@ -1268,7 +1313,7 @@ public class PayerAuthorisationService {
         }
 
         /**
-         * Customer's first name. Required unless a `company_name` is provided.
+         * Customer's first name. Required unless a <code>company_name</code> is provided.
          */
         public PayerAuthorisationUpdateRequest withCustomerGivenName(String givenName) {
             if (customer == null) {
@@ -1279,9 +1324,8 @@ public class PayerAuthorisationService {
         }
 
         /**
-         * An [IETF Language Tag](https://tools.ietf.org/html/rfc5646), used for both language and
-         * regional variations of our product.
-         * 
+         * An <a href="https://tools.ietf.org/html/rfc5646">IETF Language Tag</a>, used for both
+         * language and regional variations of our product.
          */
         public PayerAuthorisationUpdateRequest withCustomerLocale(String locale) {
             if (customer == null) {
@@ -1316,8 +1360,8 @@ public class PayerAuthorisationService {
 
         /**
          * The customer's address region, county or department. For US customers a 2 letter
-         * [ISO3166-2:US](https://en.wikipedia.org/wiki/ISO_3166-2:US) state code is required (e.g.
-         * `CA` for California).
+         * <a href="https://en.wikipedia.org/wiki/ISO_3166-2:US">ISO3166-2:US</a> state code is
+         * required (e.g. <code>CA</code> for California).
          */
         public PayerAuthorisationUpdateRequest withCustomerRegion(String region) {
             if (customer == null) {
@@ -1342,7 +1386,8 @@ public class PayerAuthorisationService {
         }
 
         /**
-         * All details required for the creation of a [Mandate](#core-endpoints-mandates).
+         * All details required for the creation of a <a href=
+         * "https://developer.gocardless.com/api-reference/#core-endpoints-mandates">Mandate</a>.
          */
         public PayerAuthorisationUpdateRequest withMandate(Mandate mandate) {
             this.mandate = mandate;
@@ -1366,9 +1411,8 @@ public class PayerAuthorisationService {
          * the payer to whom the mandate belongs (i.e. as a result of their completion of a mandate
          * setup flow in their browser).
          * 
-         * Not required for creating offline mandates where `authorisation_source` is set to
-         * telephone or paper.
-         * 
+         * Not required for creating offline mandates where <code>authorisation_source</code> is set
+         * to telephone or paper.
          */
         public PayerAuthorisationUpdateRequest withMandatePayerIpAddress(String payerIpAddress) {
             if (mandate == null) {
@@ -1379,9 +1423,10 @@ public class PayerAuthorisationService {
         }
 
         /**
-         * Unique reference. Different schemes have different length and [character
-         * set](#appendix-character-sets) requirements. GoCardless will generate a unique reference
-         * satisfying the different scheme requirements if this field is left blank.
+         * Unique reference. Different schemes have different length and <a href=
+         * "https://developer.gocardless.com/api-reference/#appendix-character-sets">character
+         * set</a> requirements. GoCardless will generate a unique reference satisfying the
+         * different scheme requirements if this field is left blank.
          */
         public PayerAuthorisationUpdateRequest withMandateReference(String reference) {
             if (mandate == null) {
@@ -1457,8 +1502,9 @@ public class PayerAuthorisationService {
              * Name of the account holder, as known by the bank. The full name provided when the
              * customer is created is stored and is available via the API, but is transliterated,
              * upcased, and truncated to 18 characters in bank submissions. This field is required
-             * unless the request includes a [customer bank account
-             * token](#javascript-flow-customer-bank-account-tokens).
+             * unless the request includes a <a href=
+             * "https://developer.gocardless.com/api-reference/#javascript-flow-customer-bank-account-tokens">customer
+             * bank account token</a>.
              */
             public BankAccount withAccountHolderName(String accountHolderName) {
                 this.accountHolderName = accountHolderName;
@@ -1466,8 +1512,9 @@ public class PayerAuthorisationService {
             }
 
             /**
-             * Bank account number - see [local details](#appendix-local-bank-details) for more
-             * information. Alternatively you can provide an `iban`.
+             * Bank account number - see <a href=
+             * "https://developer.gocardless.com/api-reference/#appendix-local-bank-details">local
+             * details</a> for more information. Alternatively you can provide an <code>iban</code>.
              */
             public BankAccount withAccountNumber(String accountNumber) {
                 this.accountNumber = accountNumber;
@@ -1484,8 +1531,9 @@ public class PayerAuthorisationService {
             }
 
             /**
-             * Account number suffix (only for bank accounts denominated in NZD) - see [local
-             * details](#local-bank-details-new-zealand) for more information.
+             * Account number suffix (only for bank accounts denominated in NZD) - see <a href=
+             * "https://developer.gocardless.com/api-reference/#local-bank-details-new-zealand">local
+             * details</a> for more information.
              */
             public BankAccount withAccountNumberSuffix(String accountNumberSuffix) {
                 this.accountNumberSuffix = accountNumberSuffix;
@@ -1494,8 +1542,9 @@ public class PayerAuthorisationService {
 
             /**
              * Bank account type. Required for USD-denominated bank accounts. Must not be provided
-             * for bank accounts in other currencies. See [local
-             * details](#local-bank-details-united-states) for more information.
+             * for bank accounts in other currencies. See <a href=
+             * "https://developer.gocardless.com/api-reference/#local-bank-details-united-states">local
+             * details</a> for more information.
              */
             public BankAccount withAccountType(AccountType accountType) {
                 this.accountType = accountType;
@@ -1503,8 +1552,9 @@ public class PayerAuthorisationService {
             }
 
             /**
-             * Bank code - see [local details](#appendix-local-bank-details) for more information.
-             * Alternatively you can provide an `iban`.
+             * Bank code - see <a href=
+             * "https://developer.gocardless.com/api-reference/#appendix-local-bank-details">local
+             * details</a> for more information. Alternatively you can provide an <code>iban</code>.
              */
             public BankAccount withBankCode(String bankCode) {
                 this.bankCode = bankCode;
@@ -1512,8 +1562,9 @@ public class PayerAuthorisationService {
             }
 
             /**
-             * Branch code - see [local details](#appendix-local-bank-details) for more information.
-             * Alternatively you can provide an `iban`.
+             * Branch code - see <a href=
+             * "https://developer.gocardless.com/api-reference/#appendix-local-bank-details">local
+             * details</a> for more information. Alternatively you can provide an <code>iban</code>.
              */
             public BankAccount withBranchCode(String branchCode) {
                 this.branchCode = branchCode;
@@ -1521,9 +1572,10 @@ public class PayerAuthorisationService {
             }
 
             /**
-             * [ISO 3166-1 alpha-2
-             * code](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2#Officially_assigned_code_elements).
-             * Defaults to the country code of the `iban` if supplied, otherwise is required.
+             * <a href=
+             * "https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2#Officially_assigned_code_elements">ISO
+             * 3166-1 alpha-2 code</a>. Defaults to the country code of the <code>iban</code> if
+             * supplied, otherwise is required.
              */
             public BankAccount withCountryCode(String countryCode) {
                 this.countryCode = countryCode;
@@ -1531,8 +1583,9 @@ public class PayerAuthorisationService {
             }
 
             /**
-             * [ISO 4217](https://en.wikipedia.org/wiki/ISO_4217#Active_codes) currency code.
-             * Currently "AUD", "CAD", "DKK", "EUR", "GBP", "NZD", "SEK" and "USD" are supported.
+             * <a href="https://en.wikipedia.org/wiki/ISO_4217#Active_codes">ISO 4217</a> currency
+             * code. Currently "AUD", "CAD", "DKK", "EUR", "GBP", "NZD", "SEK" and "USD" are
+             * supported.
              */
             public BankAccount withCurrency(String currency) {
                 this.currency = currency;
@@ -1540,10 +1593,12 @@ public class PayerAuthorisationService {
             }
 
             /**
-             * International Bank Account Number. Alternatively you can provide [local
-             * details](#appendix-local-bank-details). IBANs are not accepted for Swedish bank
-             * accounts denominated in SEK - you must supply [local
-             * details](#local-bank-details-sweden).
+             * International Bank Account Number. Alternatively you can provide <a href=
+             * "https://developer.gocardless.com/api-reference/#appendix-local-bank-details">local
+             * details</a>. IBANs are not accepted for Swedish bank accounts denominated in SEK -
+             * you must supply <a href=
+             * "https://developer.gocardless.com/api-reference/#local-bank-details-sweden">local
+             * details</a>.
              */
             public BankAccount withIban(String iban) {
                 this.iban = iban;
@@ -1622,10 +1677,11 @@ public class PayerAuthorisationService {
             }
 
             /**
-             * Customer's company name. Required unless a `given_name` and `family_name` are
-             * provided. For Canadian customers, the use of a `company_name` value will mean that
-             * any mandate created from this customer will be considered to be a "Business PAD"
-             * (otherwise, any mandate will be considered to be a "Personal PAD").
+             * Customer's company name. Required unless a <code>given_name</code> and
+             * <code>family_name</code> are provided. For Canadian customers, the use of a
+             * <code>company_name</code> value will mean that any mandate created from this customer
+             * will be considered to be a "Business PAD" (otherwise, any mandate will be considered
+             * to be a "Personal PAD").
              */
             public Customer withCompanyName(String companyName) {
                 this.companyName = companyName;
@@ -1633,8 +1689,9 @@ public class PayerAuthorisationService {
             }
 
             /**
-             * [ISO 3166-1 alpha-2
-             * code.](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2#Officially_assigned_code_elements)
+             * <a href=
+             * "https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2#Officially_assigned_code_elements">ISO
+             * 3166-1 alpha-2 code.</a>
              */
             public Customer withCountryCode(String countryCode) {
                 this.countryCode = countryCode;
@@ -1660,7 +1717,7 @@ public class PayerAuthorisationService {
             }
 
             /**
-             * Customer's surname. Required unless a `company_name` is provided.
+             * Customer's surname. Required unless a <code>company_name</code> is provided.
              */
             public Customer withFamilyName(String familyName) {
                 this.familyName = familyName;
@@ -1668,7 +1725,7 @@ public class PayerAuthorisationService {
             }
 
             /**
-             * Customer's first name. Required unless a `company_name` is provided.
+             * Customer's first name. Required unless a <code>company_name</code> is provided.
              */
             public Customer withGivenName(String givenName) {
                 this.givenName = givenName;
@@ -1676,9 +1733,8 @@ public class PayerAuthorisationService {
             }
 
             /**
-             * An [IETF Language Tag](https://tools.ietf.org/html/rfc5646), used for both language
-             * and regional variations of our product.
-             * 
+             * An <a href="https://tools.ietf.org/html/rfc5646">IETF Language Tag</a>, used for both
+             * language and regional variations of our product.
              */
             public Customer withLocale(String locale) {
                 this.locale = locale;
@@ -1704,8 +1760,8 @@ public class PayerAuthorisationService {
 
             /**
              * The customer's address region, county or department. For US customers a 2 letter
-             * [ISO3166-2:US](https://en.wikipedia.org/wiki/ISO_3166-2:US) state code is required
-             * (e.g. `CA` for California).
+             * <a href="https://en.wikipedia.org/wiki/ISO_3166-2:US">ISO3166-2:US</a> state code is
+             * required (e.g. <code>CA</code> for California).
              */
             public Customer withRegion(String region) {
                 this.region = region;
@@ -1744,9 +1800,8 @@ public class PayerAuthorisationService {
              * address of the payer to whom the mandate belongs (i.e. as a result of their
              * completion of a mandate setup flow in their browser).
              * 
-             * Not required for creating offline mandates where `authorisation_source` is set to
-             * telephone or paper.
-             * 
+             * Not required for creating offline mandates where <code>authorisation_source</code> is
+             * set to telephone or paper.
              */
             public Mandate withPayerIpAddress(String payerIpAddress) {
                 this.payerIpAddress = payerIpAddress;
@@ -1754,9 +1809,10 @@ public class PayerAuthorisationService {
             }
 
             /**
-             * Unique reference. Different schemes have different length and [character
-             * set](#appendix-character-sets) requirements. GoCardless will generate a unique
-             * reference satisfying the different scheme requirements if this field is left blank.
+             * Unique reference. Different schemes have different length and <a href=
+             * "https://developer.gocardless.com/api-reference/#appendix-character-sets">character
+             * set</a> requirements. GoCardless will generate a unique reference satisfying the
+             * different scheme requirements if this field is left blank.
              */
             public Mandate withReference(String reference) {
                 this.reference = reference;

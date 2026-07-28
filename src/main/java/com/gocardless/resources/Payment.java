@@ -6,12 +6,16 @@ import java.util.Map;
 /**
  * Represents a payment resource returned from the API.
  *
- * Payment objects represent payments from a [customer](#core-endpoints-customers) to a
- * [creditor](#core-endpoints-creditors), taken against a Direct Debit
- * [mandate](#core-endpoints-mandates).
+ * Payment objects represent payments from a
+ * <a href="https://developer.gocardless.com/api-reference/#core-endpoints-customers">customer</a>
+ * to a
+ * <a href="https://developer.gocardless.com/api-reference/#core-endpoints-creditors">creditor</a>,
+ * taken against a Direct Debit
+ * <a href="https://developer.gocardless.com/api-reference/#core-endpoints-mandates">mandate</a>.
  * 
- * GoCardless will notify you via a [webhook](#appendix-webhooks) whenever the state of a payment
- * changes.
+ * GoCardless will notify you via a
+ * <a href="https://developer.gocardless.com/api-reference/#appendix-webhooks">webhook</a> whenever
+ * the state of a payment changes.
  */
 public class Payment {
     private Payment() {
@@ -36,14 +40,22 @@ public class Payment {
 
     /**
      * Amount, in the lowest denomination for the currency (e.g. pence in GBP, cents in EUR).
+     * 
+     * Minimum and maximum amounts vary by payment scheme. For more information, see <a href=
+     * "https://support.gocardless.com/hc/en-gb/articles/115000309245-Transaction-limits">Transaction
+     * limits</a>
+     * 
+     * For Variable Recurring Payments (VRP), this must not exceed the mandate's
+     * <code>max_amount_per_payment</code> constraint.
      */
     public Integer getAmount() {
         return amount;
     }
 
     /**
-     * Amount [refunded](#core-endpoints-refunds), in the lowest denomination for the currency (e.g.
-     * pence in GBP, cents in EUR).
+     * Amount <a href=
+     * "https://developer.gocardless.com/api-reference/#core-endpoints-refunds">refunded</a>, in the
+     * lowest denomination for the currency (e.g. pence in GBP, cents in EUR).
      */
     public Integer getAmountRefunded() {
         return amountRefunded;
@@ -51,24 +63,27 @@ public class Payment {
 
     /**
      * A future date on which the payment should be collected. If not specified, the payment will be
-     * collected as soon as possible. If the value is before the
-     * [mandate](#core-endpoints-mandates)'s `next_possible_charge_date` creation will fail. If the
-     * value is not a working day it will be rolled forwards to the next available one.
+     * collected as soon as possible. If the value is before the <a href=
+     * "https://developer.gocardless.com/api-reference/#core-endpoints-mandates">mandate</a>'s
+     * <code>next_possible_charge_date</code> creation will fail. If the value is not a working day
+     * it will be rolled forwards to the next available one.
      */
     public String getChargeDate() {
         return chargeDate;
     }
 
     /**
-     * Fixed [timestamp](#api-usage-dates-and-times), recording when this resource was created.
+     * Fixed <a href=
+     * "https://developer.gocardless.com/api-reference/#api-usage-dates-and-times">timestamp</a>,
+     * recording when this resource was created.
      */
     public String getCreatedAt() {
         return createdAt;
     }
 
     /**
-     * [ISO 4217](https://en.wikipedia.org/wiki/ISO_4217#Active_codes) currency code. Currently
-     * "AUD", "CAD", "DKK", "EUR", "GBP", "NZD", "SEK" and "USD" are supported.
+     * <a href="https://en.wikipedia.org/wiki/ISO_4217#Active_codes">ISO 4217</a> currency code.
+     * Currently "AUD", "CAD", "DKK", "EUR", "GBP", "NZD", "SEK" and "USD" are supported.
      */
     public Currency getCurrency() {
         return currency;
@@ -77,7 +92,9 @@ public class Payment {
     /**
      * A human-readable description of the payment. This will be included in the notification email
      * GoCardless sends to your customer if your organisation does not send its own notifications
-     * (see [compliance requirements](#appendix-compliance-requirements)).
+     * (see <a href=
+     * "https://developer.gocardless.com/api-reference/#appendix-compliance-requirements">compliance
+     * requirements</a>).
      */
     public String getDescription() {
         return description;
@@ -117,25 +134,76 @@ public class Payment {
 
     /**
      * An optional reference that will appear on your customer's bank statement. The character limit
-     * for this reference is dependent on the scheme.<br />
-     * <strong>ACH</strong> - 10 characters<br />
-     * <strong>Autogiro</strong> - 11 characters<br />
-     * <strong>Bacs</strong> - 10 characters<br />
-     * <strong>BECS</strong> - 30 characters<br />
-     * <strong>BECS NZ</strong> - 12 characters<br />
-     * <strong>Betalingsservice</strong> - 30 characters<br />
-     * <strong>Faster Payments</strong> - 18 characters<br />
-     * <strong>PAD</strong> - scheme doesn't offer references<br />
-     * <strong>PayTo</strong> - 18 characters<br />
-     * <strong>SEPA</strong> - 140 characters<br />
+     * for this reference is dependent on the scheme.<br>
+     * </br>
+     * <strong>ACH</strong>
+     * <ul>
+     * <li>10 characters</li>
+     * </ul>
+     * <br>
+     * </br>
+     * <strong>Autogiro</strong>
+     * <ul>
+     * <li>11 characters</li>
+     * </ul>
+     * <br>
+     * </br>
+     * <strong>Bacs</strong>
+     * <ul>
+     * <li>10 characters</li>
+     * </ul>
+     * <br>
+     * </br>
+     * <strong>BECS</strong>
+     * <ul>
+     * <li>30 characters</li>
+     * </ul>
+     * <br>
+     * </br>
+     * <strong>BECS NZ</strong>
+     * <ul>
+     * <li>12 characters</li>
+     * </ul>
+     * <br>
+     * </br>
+     * <strong>Betalingsservice</strong>
+     * <ul>
+     * <li>30 characters</li>
+     * </ul>
+     * <br>
+     * </br>
+     * <strong>Faster Payments</strong>
+     * <ul>
+     * <li>18 characters</li>
+     * </ul>
+     * <br>
+     * </br>
+     * <strong>PAD</strong>
+     * <ul>
+     * <li>scheme doesn't offer references</li>
+     * </ul>
+     * <br>
+     * </br>
+     * <strong>PayTo</strong>
+     * <ul>
+     * <li>18 characters</li>
+     * </ul>
+     * <br>
+     * </br>
+     * <strong>SEPA</strong>
+     * <ul>
+     * <li>140 characters</li>
+     * </ul>
+     * <br>
+     * </br>
      * Note that this reference must be unique (for each merchant) for the BECS scheme as it is a
      * scheme requirement.
-     * <p class='restricted-notice'>
+     * <p class="restricted-notice">
      * <strong>Restricted</strong>: You can only specify a payment reference for Bacs payments (that
      * is, when collecting from the UK) if you're on the
-     * <a href='https://gocardless.com/pricing'>GoCardless Plus, Pro or Enterprise packages</a>.
+     * <a href="https://gocardless.com/pricing">GoCardless Plus, Pro or Enterprise packages</a>.
      * </p>
-     * <p class='restricted-notice'>
+     * <p class="restricted-notice">
      * <strong>Restricted</strong>: You can not specify a payment reference for Faster Payments.
      * </p>
      */
@@ -144,11 +212,12 @@ public class Payment {
     }
 
     /**
-     * On failure, automatically retry the payment using [intelligent
-     * retries](/success-plus/overview). Default is `false`.
+     * On failure, automatically retry the payment using
+     * <a href="https://developer.gocardless.com/success-plus/overview">intelligent retries</a>.
+     * Default is <code>false</code>.
      * <p class="notice">
      * <strong>Important</strong>: To be able to use intelligent retries, Success+ needs to be
-     * enabled in [GoCardless dashboard](https://manage.gocardless.com/success-plus).
+     * enabled in <a href="https://manage.gocardless.com/success-plus">GoCardless dashboard</a>.
      * </p>
      */
     public Boolean getRetryIfPossible() {
@@ -166,19 +235,22 @@ public class Payment {
 
     /**
      * One of:
+     * 
      * <ul>
-     * <li>`pending_customer_approval`: we're waiting for the customer to approve this payment</li>
-     * <li>`pending_submission`: the payment has been created, but not yet submitted to the
-     * banks</li>
-     * <li>`submitted`: the payment has been submitted to the banks</li>
-     * <li>`confirmed`: the payment has been confirmed as collected</li>
-     * <li>`paid_out`: the payment has been included in a [payout](#core-endpoints-payouts)</li>
-     * <li>`cancelled`: the payment has been cancelled</li>
-     * <li>`customer_approval_denied`: the customer has denied approval for the payment. You should
-     * contact the customer directly</li>
-     * <li>`failed`: the payment failed to be processed. Note that payments can fail after being
-     * confirmed if the failure message is sent late by the banks.</li>
-     * <li>`charged_back`: the payment has been charged back</li>
+     * <li><code>pending_customer_approval</code>: we're waiting for the customer to approve this
+     * payment</li>
+     * <li><code>pending_submission</code>: the payment has been created, but not yet submitted to
+     * the banks</li>
+     * <li><code>submitted</code>: the payment has been submitted to the banks</li>
+     * <li><code>confirmed</code>: the payment has been confirmed as collected</li>
+     * <li><code>paid_out</code>: the payment has been included in a <a href=
+     * "https://developer.gocardless.com/api-reference/#core-endpoints-payouts">payout</a></li>
+     * <li><code>cancelled</code>: the payment has been cancelled</li>
+     * <li><code>customer_approval_denied</code>: the customer has denied approval for the payment.
+     * You should contact the customer directly</li>
+     * <li><code>failed</code>: the payment failed to be processed. Note that payments can fail
+     * after being confirmed if the failure message is sent late by the banks.</li>
+     * <li><code>charged_back</code>: the payment has been charged back</li>
      * </ul>
      */
     public Status getStatus() {
@@ -228,35 +300,37 @@ public class Payment {
         private FxCurrency fxCurrency;
 
         /**
-         * Estimated rate that will be used in the foreign exchange of the `amount` into the
-         * `fx_currency`. This will vary based on the prevailing market rate until the moment that
-         * it is paid out. Present only before a resource is paid out. Has up to 10 decimal places.
+         * Estimated rate that will be used in the foreign exchange of the <code>amount</code> into
+         * the <code>fx_currency</code>. This will vary based on the prevailing market rate until
+         * the moment that it is paid out. Present only before a resource is paid out. Has up to 10
+         * decimal places.
          */
         public String getEstimatedExchangeRate() {
             return estimatedExchangeRate;
         }
 
         /**
-         * Rate used in the foreign exchange of the `amount` into the `fx_currency`. Present only
-         * after a resource is paid out. Has up to 10 decimal places.
+         * Rate used in the foreign exchange of the <code>amount</code> into the
+         * <code>fx_currency</code>. Present only after a resource is paid out. Has up to 10 decimal
+         * places.
          */
         public String getExchangeRate() {
             return exchangeRate;
         }
 
         /**
-         * Amount that was paid out in the `fx_currency` after foreign exchange. Present only after
-         * the resource has been paid out.
+         * Amount that was paid out in the <code>fx_currency</code> after foreign exchange. Present
+         * only after the resource has been paid out.
          */
         public Integer getFxAmount() {
             return fxAmount;
         }
 
         /**
-         * [ISO 4217](https://en.wikipedia.org/wiki/ISO_4217#Active_codes) code for the currency in
-         * which amounts will be paid out (after foreign exchange). Currently "AUD", "CAD", "DKK",
-         * "EUR", "GBP", "NZD", "SEK" and "USD" are supported. Present only if payouts will be (or
-         * were) made via foreign exchange.
+         * <a href="https://en.wikipedia.org/wiki/ISO_4217#Active_codes">ISO 4217</a> code for the
+         * currency in which amounts will be paid out (after foreign exchange). Currently "AUD",
+         * "CAD", "DKK", "EUR", "GBP", "NZD", "SEK" and "USD" are supported. Present only if payouts
+         * will be (or were) made via foreign exchange.
          */
         public FxCurrency getFxCurrency() {
             return fxCurrency;
@@ -293,33 +367,41 @@ public class Payment {
         private String subscription;
 
         /**
-         * ID of [creditor](#core-endpoints-creditors) to which the collected payment will be sent.
+         * ID of <a href=
+         * "https://developer.gocardless.com/api-reference/#core-endpoints-creditors">creditor</a>
+         * to which the collected payment will be sent.
          */
         public String getCreditor() {
             return creditor;
         }
 
         /**
-         * ID of [instalment_schedule](#core-endpoints-instalment-schedules) from which this payment
-         * was created.<br/>
-         * **Note**: this property will only be present if this payment is part of an instalment
-         * schedule.
+         * ID of <a href=
+         * "https://developer.gocardless.com/api-reference/#core-endpoints-instalment-schedules">instalment_schedule</a>
+         * from which this payment was created.<br>
+         * </br>
+         * <strong>Note</strong>: this property will only be present if this payment is part of an
+         * instalment schedule.
          */
         public String getInstalmentSchedule() {
             return instalmentSchedule;
         }
 
         /**
-         * ID of the [mandate](#core-endpoints-mandates) against which this payment should be
-         * collected.
+         * ID of the <a href=
+         * "https://developer.gocardless.com/api-reference/#core-endpoints-mandates">mandate</a>
+         * against which this payment should be collected.
          */
         public String getMandate() {
             return mandate;
         }
 
         /**
-         * ID of [payout](#core-endpoints-payouts) which contains the funds from this payment.<br/>
-         * _Note_: this property will not be present until the payment has been successfully
+         * ID of <a href=
+         * "https://developer.gocardless.com/api-reference/#core-endpoints-payouts">payout</a> which
+         * contains the funds from this payment.<br>
+         * </br>
+         * <em>Note</em>: this property will not be present until the payment has been successfully
          * collected.
          */
         public String getPayout() {
@@ -327,9 +409,12 @@ public class Payment {
         }
 
         /**
-         * ID of [subscription](#core-endpoints-subscriptions) from which this payment was
-         * created.<br/>
-         * _Note_: this property will only be present if this payment is part of a subscription.
+         * ID of <a href=
+         * "https://developer.gocardless.com/api-reference/#core-endpoints-subscriptions">subscription</a>
+         * from which this payment was created.<br>
+         * </br>
+         * <em>Note</em>: this property will only be present if this payment is part of a
+         * subscription.
          */
         public String getSubscription() {
             return subscription;

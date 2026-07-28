@@ -11,23 +11,26 @@ import java.util.Map;
 /**
  * Service class for working with mandate import entry resources.
  *
- * Mandate Import Entries are added to a [Mandate Import](#core-endpoints-mandate-imports). Each
- * entry corresponds to one mandate to be imported into GoCardless.
+ * Mandate Import Entries are added to a
+ * <a href="https://developer.gocardless.com/api-reference/#core-endpoints-mandate-imports">Mandate
+ * Import</a>. Each entry corresponds to one mandate to be imported into GoCardless.
  * 
  * To import a mandate you will need:
+ * 
  * <ol>
  * <li>Identifying information about the customer (name/company and address)</li>
  * <li>Bank account details, consisting of an account holder name and either an IBAN or
- * <a href="#appendix-local-bank-details">local bank details</a></li>
+ * <a href="https://developer.gocardless.com/api-reference/#appendix-local-bank-details">local bank
+ * details</a></li>
  * <li>Amendment details (SEPA only)</li>
  * </ol>
- * 
- * We suggest you provide a `record_identifier` (which is unique within the context of a single
- * mandate import) to help you to identify mandates that have been created once the import has been
- * processed by GoCardless. You can [list the mandate import
- * entries](#mandate-import-entries-list-all-mandate-import-entries), match them up in your system
- * using the `record_identifier`, and look at the `links` fields to find the mandate, customer and
- * customer bank account that have been imported.
+ * We suggest you provide a <code>record_identifier</code> (which is unique within the context of a
+ * single mandate import) to help you to identify mandates that have been created once the import
+ * has been processed by GoCardless. You can <a href=
+ * "https://developer.gocardless.com/api-reference/#mandate-import-entries-list-all-mandate-import-entries">list
+ * the mandate import entries</a>, match them up in your system using the
+ * <code>record_identifier</code>, and look at the <code>links</code> fields to find the mandate,
+ * customer and customer bank account that have been imported.
  * 
  * <p class="restricted-notice">
  * <strong>Restricted</strong>: This API is currently only available for approved integrators -
@@ -47,11 +50,13 @@ public class MandateImportEntryService {
     }
 
     /**
-     * For an existing [mandate import](#core-endpoints-mandate-imports), this endpoint can be used
-     * to add individual mandates to be imported into GoCardless.
+     * For an existing <a href=
+     * "https://developer.gocardless.com/api-reference/#core-endpoints-mandate-imports">mandate
+     * import</a>, this endpoint can be used to add individual mandates to be imported into
+     * GoCardless.
      * 
      * You can add no more than 30,000 rows to a single mandate import. If you attempt to go over
-     * this limit, the API will return a `record_limit_exceeded` error.
+     * this limit, the API will return a <code>record_limit_exceeded</code> error.
      */
     public MandateImportEntryCreateRequest create() {
         return new MandateImportEntryCreateRequest(httpClient);
@@ -61,9 +66,8 @@ public class MandateImportEntryService {
      * For an existing mandate import, this endpoint lists all of the entries attached.
      * 
      * After a mandate import has been submitted, you can use this endpoint to associate records in
-     * your system (using the `record_identifier` that you provided when creating the mandate
-     * import).
-     * 
+     * your system (using the <code>record_identifier</code> that you provided when creating the
+     * mandate import).
      */
     public MandateImportEntryListRequest<ListResponse<MandateImportEntry>> list() {
         return new MandateImportEntryListRequest<>(httpClient,
@@ -78,11 +82,13 @@ public class MandateImportEntryService {
     /**
      * Request class for {@link MandateImportEntryService#create }.
      *
-     * For an existing [mandate import](#core-endpoints-mandate-imports), this endpoint can be used
-     * to add individual mandates to be imported into GoCardless.
+     * For an existing <a href=
+     * "https://developer.gocardless.com/api-reference/#core-endpoints-mandate-imports">mandate
+     * import</a>, this endpoint can be used to add individual mandates to be imported into
+     * GoCardless.
      * 
      * You can add no more than 30,000 rows to a single mandate import. If you attempt to go over
-     * this limit, the API will return a `record_limit_exceeded` error.
+     * this limit, the API will return a <code>record_limit_exceeded</code> error.
      */
     public static final class MandateImportEntryCreateRequest
             extends PostRequest<MandateImportEntry> {
@@ -100,8 +106,7 @@ public class MandateImportEntryService {
 
         /**
          * The creditor identifier of the direct debit originator. Required if mandate import scheme
-         * is `sepa`.
-         * 
+         * is <code>sepa</code>.
          */
         public MandateImportEntryCreateRequest withAmendmentOriginalCreditorId(
                 String originalCreditorId) {
@@ -114,7 +119,6 @@ public class MandateImportEntryService {
 
         /**
          * Data about the original mandate to be moved or modified.
-         * 
          */
         public MandateImportEntryCreateRequest withAmendmentOriginalCreditorName(
                 String originalCreditorName) {
@@ -127,8 +131,7 @@ public class MandateImportEntryService {
 
         /**
          * The unique SEPA reference for the mandate being amended. Required if mandate import
-         * scheme is `sepa`.
-         * 
+         * scheme is <code>sepa</code>.
          */
         public MandateImportEntryCreateRequest withAmendmentOriginalMandateReference(
                 String originalMandateReference) {
@@ -148,8 +151,9 @@ public class MandateImportEntryService {
          * Name of the account holder, as known by the bank. The full name provided when the
          * customer is created is stored and is available via the API, but is transliterated,
          * upcased, and truncated to 18 characters in bank submissions. This field is required
-         * unless the request includes a [customer bank account
-         * token](#javascript-flow-customer-bank-account-tokens).
+         * unless the request includes a <a href=
+         * "https://developer.gocardless.com/api-reference/#javascript-flow-customer-bank-account-tokens">customer
+         * bank account token</a>.
          */
         public MandateImportEntryCreateRequest withBankAccountAccountHolderName(
                 String accountHolderName) {
@@ -161,8 +165,9 @@ public class MandateImportEntryService {
         }
 
         /**
-         * Bank account number - see [local details](#appendix-local-bank-details) for more
-         * information. Alternatively you can provide an `iban`.
+         * Bank account number - see <a href=
+         * "https://developer.gocardless.com/api-reference/#appendix-local-bank-details">local
+         * details</a> for more information. Alternatively you can provide an <code>iban</code>.
          */
         public MandateImportEntryCreateRequest withBankAccountAccountNumber(String accountNumber) {
             if (bankAccount == null) {
@@ -174,8 +179,9 @@ public class MandateImportEntryService {
 
         /**
          * Bank account type. Required for USD-denominated bank accounts. Must not be provided for
-         * bank accounts in other currencies. See [local details](#local-bank-details-united-states)
-         * for more information.
+         * bank accounts in other currencies. See <a href=
+         * "https://developer.gocardless.com/api-reference/#local-bank-details-united-states">local
+         * details</a> for more information.
          */
         public MandateImportEntryCreateRequest withBankAccountAccountType(
                 BankAccount.AccountType accountType) {
@@ -187,8 +193,9 @@ public class MandateImportEntryService {
         }
 
         /**
-         * Bank code - see [local details](#appendix-local-bank-details) for more information.
-         * Alternatively you can provide an `iban`.
+         * Bank code - see <a href=
+         * "https://developer.gocardless.com/api-reference/#appendix-local-bank-details">local
+         * details</a> for more information. Alternatively you can provide an <code>iban</code>.
          */
         public MandateImportEntryCreateRequest withBankAccountBankCode(String bankCode) {
             if (bankAccount == null) {
@@ -199,8 +206,9 @@ public class MandateImportEntryService {
         }
 
         /**
-         * Branch code - see [local details](#appendix-local-bank-details) for more information.
-         * Alternatively you can provide an `iban`.
+         * Branch code - see <a href=
+         * "https://developer.gocardless.com/api-reference/#appendix-local-bank-details">local
+         * details</a> for more information. Alternatively you can provide an <code>iban</code>.
          */
         public MandateImportEntryCreateRequest withBankAccountBranchCode(String branchCode) {
             if (bankAccount == null) {
@@ -211,9 +219,10 @@ public class MandateImportEntryService {
         }
 
         /**
-         * [ISO 3166-1 alpha-2
-         * code](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2#Officially_assigned_code_elements).
-         * Defaults to the country code of the `iban` if supplied, otherwise is required.
+         * <a href=
+         * "https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2#Officially_assigned_code_elements">ISO
+         * 3166-1 alpha-2 code</a>. Defaults to the country code of the <code>iban</code> if
+         * supplied, otherwise is required.
          */
         public MandateImportEntryCreateRequest withBankAccountCountryCode(String countryCode) {
             if (bankAccount == null) {
@@ -224,9 +233,12 @@ public class MandateImportEntryService {
         }
 
         /**
-         * International Bank Account Number. Alternatively you can provide [local
-         * details](#appendix-local-bank-details). IBANs are not accepted for Swedish bank accounts
-         * denominated in SEK - you must supply [local details](#local-bank-details-sweden).
+         * International Bank Account Number. Alternatively you can provide <a href=
+         * "https://developer.gocardless.com/api-reference/#appendix-local-bank-details">local
+         * details</a>. IBANs are not accepted for Swedish bank accounts denominated in SEK - you
+         * must supply
+         * <a href="https://developer.gocardless.com/api-reference/#local-bank-details-sweden">local
+         * details</a>.
          */
         public MandateImportEntryCreateRequest withBankAccountIban(String iban) {
             if (bankAccount == null) {
@@ -256,8 +268,7 @@ public class MandateImportEntryService {
 
         /**
          * The first line of the customer's address. Required if mandate import scheme is either
-         * `bacs` or `sepa`.
-         * 
+         * <code>bacs</code> or <code>sepa</code>.
          */
         public MandateImportEntryCreateRequest withCustomerAddressLine1(String addressLine1) {
             if (customer == null) {
@@ -301,10 +312,11 @@ public class MandateImportEntryService {
         }
 
         /**
-         * Customer's company name. Required unless a `given_name` and `family_name` are provided.
-         * For Canadian customers, the use of a `company_name` value will mean that any mandate
-         * created from this customer will be considered to be a "Business PAD" (otherwise, any
-         * mandate will be considered to be a "Personal PAD").
+         * Customer's company name. Required unless a <code>given_name</code> and
+         * <code>family_name</code> are provided. For Canadian customers, the use of a
+         * <code>company_name</code> value will mean that any mandate created from this customer
+         * will be considered to be a "Business PAD" (otherwise, any mandate will be considered to
+         * be a "Personal PAD").
          */
         public MandateImportEntryCreateRequest withCustomerCompanyName(String companyName) {
             if (customer == null) {
@@ -315,8 +327,9 @@ public class MandateImportEntryService {
         }
 
         /**
-         * [ISO 3166-1 alpha-2
-         * code.](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2#Officially_assigned_code_elements)
+         * <a href=
+         * "https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2#Officially_assigned_code_elements">ISO
+         * 3166-1 alpha-2 code.</a>
          */
         public MandateImportEntryCreateRequest withCustomerCountryCode(String countryCode) {
             if (customer == null) {
@@ -352,7 +365,7 @@ public class MandateImportEntryService {
         }
 
         /**
-         * Customer's surname. Required unless a `company_name` is provided.
+         * Customer's surname. Required unless a <code>company_name</code> is provided.
          */
         public MandateImportEntryCreateRequest withCustomerFamilyName(String familyName) {
             if (customer == null) {
@@ -363,7 +376,7 @@ public class MandateImportEntryService {
         }
 
         /**
-         * Customer's first name. Required unless a `company_name` is provided.
+         * Customer's first name. Required unless a <code>company_name</code> is provided.
          */
         public MandateImportEntryCreateRequest withCustomerGivenName(String givenName) {
             if (customer == null) {
@@ -374,12 +387,13 @@ public class MandateImportEntryService {
         }
 
         /**
-         * [ISO 639-1](https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes) code. Used as the
-         * language for notification emails sent by GoCardless if your organisation does not send
-         * its own (see [compliance requirements](#appendix-compliance-requirements)). Currently
-         * only "en", "fr", "de", "pt", "es", "it", "nl", "da", "nb", "sl", "sv" are supported. If
-         * this is not provided, the language will be chosen based on the `country_code` (if
-         * supplied) or default to "en".
+         * <a href="https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes">ISO 639-1</a> code. Used
+         * as the language for notification emails sent by GoCardless if your organisation does not
+         * send its own (see <a href=
+         * "https://developer.gocardless.com/api-reference/#appendix-compliance-requirements">compliance
+         * requirements</a>). Currently only "en", "fr", "de", "pt", "es", "it", "nl", "da", "nb",
+         * "sl", "sv" are supported. If this is not provided, the language will be chosen based on
+         * the <code>country_code</code> (if supplied) or default to "en".
          */
         public MandateImportEntryCreateRequest withCustomerLanguage(String language) {
             if (customer == null) {
@@ -402,8 +416,8 @@ public class MandateImportEntryService {
         }
 
         /**
-         * [ITU E.123](https://en.wikipedia.org/wiki/E.123) formatted phone number, including
-         * country code.
+         * <a href="https://en.wikipedia.org/wiki/E.123">ITU E.123</a> formatted phone number,
+         * including country code.
          */
         public MandateImportEntryCreateRequest withCustomerPhoneNumber(String phoneNumber) {
             if (customer == null) {
@@ -414,8 +428,8 @@ public class MandateImportEntryService {
         }
 
         /**
-         * The customer's postal code. Required if mandate import scheme is either `bacs` or `sepa`.
-         * 
+         * The customer's postal code. Required if mandate import scheme is either <code>bacs</code>
+         * or <code>sepa</code>.
          */
         public MandateImportEntryCreateRequest withCustomerPostalCode(String postalCode) {
             if (customer == null) {
@@ -427,8 +441,8 @@ public class MandateImportEntryService {
 
         /**
          * The customer's address region, county or department. For US customers a 2 letter
-         * [ISO3166-2:US](https://en.wikipedia.org/wiki/ISO_3166-2:US) state code is required (e.g.
-         * `CA` for California).
+         * <a href="https://en.wikipedia.org/wiki/ISO_3166-2:US">ISO3166-2:US</a> state code is
+         * required (e.g. <code>CA</code> for California).
          */
         public MandateImportEntryCreateRequest withCustomerRegion(String region) {
             if (customer == null) {
@@ -474,14 +488,13 @@ public class MandateImportEntryService {
         }
 
         /**
-         * This field is ACH specific, sometimes referred to as [SEC
-         * code](https://www.moderntreasury.com/learn/sec-codes).
+         * This field is ACH specific, sometimes referred to as
+         * <a href="https://www.moderntreasury.com/learn/sec-codes">SEC code</a>.
          * 
          * This is the way that the payer gives authorisation to the merchant. web: Authorisation is
          * Internet Initiated or via Mobile Entry (maps to SEC code: WEB) telephone: Authorisation
          * is provided orally over telephone (maps to SEC code: TEL) paper: Authorisation is
          * provided in writing and signed, or similarly authenticated (maps to SEC code: PPD)
-         * 
          */
         public MandateImportEntryCreateRequest withMandateAuthorisationSource(
                 Mandate.AuthorisationSource authorisationSource) {
@@ -505,9 +518,10 @@ public class MandateImportEntryService {
         }
 
         /**
-         * Unique reference. Different schemes have different length and [character
-         * set](#appendix-character-sets) requirements. GoCardless will generate a unique reference
-         * satisfying the different scheme requirements if this field is left blank.
+         * Unique reference. Different schemes have different length and <a href=
+         * "https://developer.gocardless.com/api-reference/#appendix-character-sets">character
+         * set</a> requirements. GoCardless will generate a unique reference satisfying the
+         * different scheme requirements if this field is left blank.
          */
         public MandateImportEntryCreateRequest withMandateReference(String reference) {
             if (mandate == null) {
@@ -520,7 +534,6 @@ public class MandateImportEntryService {
         /**
          * A unique identifier for this entry, which you can use (once the import has been processed
          * by GoCardless) to identify the records that have been created. Limited to 255 characters.
-         * 
          */
         public MandateImportEntryCreateRequest withRecordIdentifier(String recordIdentifier) {
             this.recordIdentifier = recordIdentifier;
@@ -563,8 +576,7 @@ public class MandateImportEntryService {
 
             /**
              * The creditor identifier of the direct debit originator. Required if mandate import
-             * scheme is `sepa`.
-             * 
+             * scheme is <code>sepa</code>.
              */
             public Amendment withOriginalCreditorId(String originalCreditorId) {
                 this.originalCreditorId = originalCreditorId;
@@ -573,7 +585,6 @@ public class MandateImportEntryService {
 
             /**
              * Data about the original mandate to be moved or modified.
-             * 
              */
             public Amendment withOriginalCreditorName(String originalCreditorName) {
                 this.originalCreditorName = originalCreditorName;
@@ -582,8 +593,7 @@ public class MandateImportEntryService {
 
             /**
              * The unique SEPA reference for the mandate being amended. Required if mandate import
-             * scheme is `sepa`.
-             * 
+             * scheme is <code>sepa</code>.
              */
             public Amendment withOriginalMandateReference(String originalMandateReference) {
                 this.originalMandateReference = originalMandateReference;
@@ -605,8 +615,9 @@ public class MandateImportEntryService {
              * Name of the account holder, as known by the bank. The full name provided when the
              * customer is created is stored and is available via the API, but is transliterated,
              * upcased, and truncated to 18 characters in bank submissions. This field is required
-             * unless the request includes a [customer bank account
-             * token](#javascript-flow-customer-bank-account-tokens).
+             * unless the request includes a <a href=
+             * "https://developer.gocardless.com/api-reference/#javascript-flow-customer-bank-account-tokens">customer
+             * bank account token</a>.
              */
             public BankAccount withAccountHolderName(String accountHolderName) {
                 this.accountHolderName = accountHolderName;
@@ -614,8 +625,9 @@ public class MandateImportEntryService {
             }
 
             /**
-             * Bank account number - see [local details](#appendix-local-bank-details) for more
-             * information. Alternatively you can provide an `iban`.
+             * Bank account number - see <a href=
+             * "https://developer.gocardless.com/api-reference/#appendix-local-bank-details">local
+             * details</a> for more information. Alternatively you can provide an <code>iban</code>.
              */
             public BankAccount withAccountNumber(String accountNumber) {
                 this.accountNumber = accountNumber;
@@ -624,8 +636,9 @@ public class MandateImportEntryService {
 
             /**
              * Bank account type. Required for USD-denominated bank accounts. Must not be provided
-             * for bank accounts in other currencies. See [local
-             * details](#local-bank-details-united-states) for more information.
+             * for bank accounts in other currencies. See <a href=
+             * "https://developer.gocardless.com/api-reference/#local-bank-details-united-states">local
+             * details</a> for more information.
              */
             public BankAccount withAccountType(AccountType accountType) {
                 this.accountType = accountType;
@@ -633,8 +646,9 @@ public class MandateImportEntryService {
             }
 
             /**
-             * Bank code - see [local details](#appendix-local-bank-details) for more information.
-             * Alternatively you can provide an `iban`.
+             * Bank code - see <a href=
+             * "https://developer.gocardless.com/api-reference/#appendix-local-bank-details">local
+             * details</a> for more information. Alternatively you can provide an <code>iban</code>.
              */
             public BankAccount withBankCode(String bankCode) {
                 this.bankCode = bankCode;
@@ -642,8 +656,9 @@ public class MandateImportEntryService {
             }
 
             /**
-             * Branch code - see [local details](#appendix-local-bank-details) for more information.
-             * Alternatively you can provide an `iban`.
+             * Branch code - see <a href=
+             * "https://developer.gocardless.com/api-reference/#appendix-local-bank-details">local
+             * details</a> for more information. Alternatively you can provide an <code>iban</code>.
              */
             public BankAccount withBranchCode(String branchCode) {
                 this.branchCode = branchCode;
@@ -651,9 +666,10 @@ public class MandateImportEntryService {
             }
 
             /**
-             * [ISO 3166-1 alpha-2
-             * code](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2#Officially_assigned_code_elements).
-             * Defaults to the country code of the `iban` if supplied, otherwise is required.
+             * <a href=
+             * "https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2#Officially_assigned_code_elements">ISO
+             * 3166-1 alpha-2 code</a>. Defaults to the country code of the <code>iban</code> if
+             * supplied, otherwise is required.
              */
             public BankAccount withCountryCode(String countryCode) {
                 this.countryCode = countryCode;
@@ -661,10 +677,12 @@ public class MandateImportEntryService {
             }
 
             /**
-             * International Bank Account Number. Alternatively you can provide [local
-             * details](#appendix-local-bank-details). IBANs are not accepted for Swedish bank
-             * accounts denominated in SEK - you must supply [local
-             * details](#local-bank-details-sweden).
+             * International Bank Account Number. Alternatively you can provide <a href=
+             * "https://developer.gocardless.com/api-reference/#appendix-local-bank-details">local
+             * details</a>. IBANs are not accepted for Swedish bank accounts denominated in SEK -
+             * you must supply <a href=
+             * "https://developer.gocardless.com/api-reference/#local-bank-details-sweden">local
+             * details</a>.
              */
             public BankAccount withIban(String iban) {
                 this.iban = iban;
@@ -713,8 +731,7 @@ public class MandateImportEntryService {
 
             /**
              * The first line of the customer's address. Required if mandate import scheme is either
-             * `bacs` or `sepa`.
-             * 
+             * <code>bacs</code> or <code>sepa</code>.
              */
             public Customer withAddressLine1(String addressLine1) {
                 this.addressLine1 = addressLine1;
@@ -746,10 +763,11 @@ public class MandateImportEntryService {
             }
 
             /**
-             * Customer's company name. Required unless a `given_name` and `family_name` are
-             * provided. For Canadian customers, the use of a `company_name` value will mean that
-             * any mandate created from this customer will be considered to be a "Business PAD"
-             * (otherwise, any mandate will be considered to be a "Personal PAD").
+             * Customer's company name. Required unless a <code>given_name</code> and
+             * <code>family_name</code> are provided. For Canadian customers, the use of a
+             * <code>company_name</code> value will mean that any mandate created from this customer
+             * will be considered to be a "Business PAD" (otherwise, any mandate will be considered
+             * to be a "Personal PAD").
              */
             public Customer withCompanyName(String companyName) {
                 this.companyName = companyName;
@@ -757,8 +775,9 @@ public class MandateImportEntryService {
             }
 
             /**
-             * [ISO 3166-1 alpha-2
-             * code.](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2#Officially_assigned_code_elements)
+             * <a href=
+             * "https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2#Officially_assigned_code_elements">ISO
+             * 3166-1 alpha-2 code.</a>
              */
             public Customer withCountryCode(String countryCode) {
                 this.countryCode = countryCode;
@@ -784,7 +803,7 @@ public class MandateImportEntryService {
             }
 
             /**
-             * Customer's surname. Required unless a `company_name` is provided.
+             * Customer's surname. Required unless a <code>company_name</code> is provided.
              */
             public Customer withFamilyName(String familyName) {
                 this.familyName = familyName;
@@ -792,7 +811,7 @@ public class MandateImportEntryService {
             }
 
             /**
-             * Customer's first name. Required unless a `company_name` is provided.
+             * Customer's first name. Required unless a <code>company_name</code> is provided.
              */
             public Customer withGivenName(String givenName) {
                 this.givenName = givenName;
@@ -800,12 +819,13 @@ public class MandateImportEntryService {
             }
 
             /**
-             * [ISO 639-1](https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes) code. Used as the
-             * language for notification emails sent by GoCardless if your organisation does not
-             * send its own (see [compliance requirements](#appendix-compliance-requirements)).
-             * Currently only "en", "fr", "de", "pt", "es", "it", "nl", "da", "nb", "sl", "sv" are
-             * supported. If this is not provided, the language will be chosen based on the
-             * `country_code` (if supplied) or default to "en".
+             * <a href="https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes">ISO 639-1</a> code.
+             * Used as the language for notification emails sent by GoCardless if your organisation
+             * does not send its own (see <a href=
+             * "https://developer.gocardless.com/api-reference/#appendix-compliance-requirements">compliance
+             * requirements</a>). Currently only "en", "fr", "de", "pt", "es", "it", "nl", "da",
+             * "nb", "sl", "sv" are supported. If this is not provided, the language will be chosen
+             * based on the <code>country_code</code> (if supplied) or default to "en".
              */
             public Customer withLanguage(String language) {
                 this.language = language;
@@ -822,8 +842,8 @@ public class MandateImportEntryService {
             }
 
             /**
-             * [ITU E.123](https://en.wikipedia.org/wiki/E.123) formatted phone number, including
-             * country code.
+             * <a href="https://en.wikipedia.org/wiki/E.123">ITU E.123</a> formatted phone number,
+             * including country code.
              */
             public Customer withPhoneNumber(String phoneNumber) {
                 this.phoneNumber = phoneNumber;
@@ -831,9 +851,8 @@ public class MandateImportEntryService {
             }
 
             /**
-             * The customer's postal code. Required if mandate import scheme is either `bacs` or
-             * `sepa`.
-             * 
+             * The customer's postal code. Required if mandate import scheme is either
+             * <code>bacs</code> or <code>sepa</code>.
              */
             public Customer withPostalCode(String postalCode) {
                 this.postalCode = postalCode;
@@ -842,8 +861,8 @@ public class MandateImportEntryService {
 
             /**
              * The customer's address region, county or department. For US customers a 2 letter
-             * [ISO3166-2:US](https://en.wikipedia.org/wiki/ISO_3166-2:US) state code is required
-             * (e.g. `CA` for California).
+             * <a href="https://en.wikipedia.org/wiki/ISO_3166-2:US">ISO3166-2:US</a> state code is
+             * required (e.g. <code>CA</code> for California).
              */
             public Customer withRegion(String region) {
                 this.region = region;
@@ -880,15 +899,14 @@ public class MandateImportEntryService {
             private String reference;
 
             /**
-             * This field is ACH specific, sometimes referred to as [SEC
-             * code](https://www.moderntreasury.com/learn/sec-codes).
+             * This field is ACH specific, sometimes referred to as
+             * <a href="https://www.moderntreasury.com/learn/sec-codes">SEC code</a>.
              * 
              * This is the way that the payer gives authorisation to the merchant. web:
              * Authorisation is Internet Initiated or via Mobile Entry (maps to SEC code: WEB)
              * telephone: Authorisation is provided orally over telephone (maps to SEC code: TEL)
              * paper: Authorisation is provided in writing and signed, or similarly authenticated
              * (maps to SEC code: PPD)
-             * 
              */
             public Mandate withAuthorisationSource(AuthorisationSource authorisationSource) {
                 this.authorisationSource = authorisationSource;
@@ -905,9 +923,10 @@ public class MandateImportEntryService {
             }
 
             /**
-             * Unique reference. Different schemes have different length and [character
-             * set](#appendix-character-sets) requirements. GoCardless will generate a unique
-             * reference satisfying the different scheme requirements if this field is left blank.
+             * Unique reference. Different schemes have different length and <a href=
+             * "https://developer.gocardless.com/api-reference/#appendix-character-sets">character
+             * set</a> requirements. GoCardless will generate a unique reference satisfying the
+             * different scheme requirements if this field is left blank.
              */
             public Mandate withReference(String reference) {
                 this.reference = reference;
@@ -935,9 +954,8 @@ public class MandateImportEntryService {
      * For an existing mandate import, this endpoint lists all of the entries attached.
      * 
      * After a mandate import has been submitted, you can use this endpoint to associate records in
-     * your system (using the `record_identifier` that you provided when creating the mandate
-     * import).
-     * 
+     * your system (using the <code>record_identifier</code> that you provided when creating the
+     * mandate import).
      */
     public static final class MandateImportEntryListRequest<S>
             extends ListRequest<S, MandateImportEntry> {
@@ -978,11 +996,12 @@ public class MandateImportEntryService {
 
         /**
          * One of:
+         * 
          * <ul>
-         * <li>`sucessfully_processed`: the entry has been imported and the associated records
-         * created.</li>
-         * <li>`unsuccessfully_processed`: the entry could not be processed due to an error, see the
-         * 'processing_errors' value</li>
+         * <li><code>sucessfully_processed</code>: the entry has been imported and the associated
+         * records created.</li>
+         * <li><code>unsuccessfully_processed</code>: the entry could not be processed due to an
+         * error, see the 'processing_errors' value</li>
          * </ul>
          */
         public MandateImportEntryListRequest<S> withStatus(Status status) {

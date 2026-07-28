@@ -9,8 +9,9 @@ import java.util.List;
  * 
  * <p class="restricted-notice">
  * <strong>Restricted</strong>: These endpoints are restricted to customers who want to collect
- * their merchant's verification details and pass them to GoCardless via our API. Please [get in
- * touch](mailto:help@gocardless.com) if you wish to enable this feature on your account.
+ * their merchant's verification details and pass them to GoCardless via our API. Please
+ * <a href="mailto:help@gocardless.com">get in touch</a> if you wish to enable this feature on your
+ * account.
  * </p>
  */
 public class VerificationDetail {
@@ -23,11 +24,13 @@ public class VerificationDetail {
     private String addressLine3;
     private String city;
     private String companyNumber;
+    private String countryCode;
     private String description;
     private List<Director> directors;
     private Links links;
     private String name;
     private String postalCode;
+    private String region;
 
     /**
      * The first line of the company's address.
@@ -65,6 +68,13 @@ public class VerificationDetail {
     }
 
     /**
+     * The country code of the company's address.
+     */
+    public String getCountryCode() {
+        return countryCode;
+    }
+
+    /**
      * A summary describing what the company does.
      */
     public String getDescription() {
@@ -97,6 +107,13 @@ public class VerificationDetail {
     }
 
     /**
+     * The region of the company's address.
+     */
+    public String getRegion() {
+        return region;
+    }
+
+    /**
      * Represents a director resource returned from the API.
      *
      * A primary director of the company represented by the creditor.
@@ -122,8 +139,9 @@ public class VerificationDetail {
         }
 
         /**
-         * [ISO 3166-1 alpha-2
-         * code.](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2#Officially_assigned_code_elements)
+         * <a href=
+         * "https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2#Officially_assigned_code_elements">ISO
+         * 3166-1 alpha-2 code.</a>
          */
         public String getCountryCode() {
             return countryCode;
@@ -178,7 +196,8 @@ public class VerificationDetail {
         private String creditor;
 
         /**
-         * ID of the [creditor](#core-endpoints-creditors)
+         * ID of the <a href=
+         * "https://developer.gocardless.com/api-reference/#core-endpoints-creditors">creditor</a>
          */
         public String getCreditor() {
             return creditor;

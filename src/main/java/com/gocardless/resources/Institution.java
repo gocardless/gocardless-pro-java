@@ -1,13 +1,15 @@
 package com.gocardless.resources;
 
 import com.google.gson.annotations.SerializedName;
+import java.util.List;
 import java.util.Map;
 
 /**
  * Represents a institution resource returned from the API.
  *
- * Institutions that are supported when creating [Bank
- * Authorisations](#billing-requests-bank-authorisations) for a particular country or purpose.
+ * Institutions that are supported when creating <a href=
+ * "https://developer.gocardless.com/api-reference/#billing-requests-bank-authorisations">Bank
+ * Authorisations</a> for a particular country or purpose.
  * 
  * Not all institutions support both Payment Initiation (PIS) and Account Information (AIS)
  * services.
@@ -24,6 +26,7 @@ public class Institution {
     private Limits limits;
     private String logoUrl;
     private String name;
+    private List<String> roles;
     private Status status;
 
     /**
@@ -36,10 +39,10 @@ public class Institution {
     }
 
     /**
-     * [ISO
-     * 3166-1](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2#Officially_assigned_code_elements)
-     * alpha-2 code. The country code of the institution. If nothing is provided, institutions with
-     * the country code 'GB' are returned by default.
+     * <a href=
+     * "https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2#Officially_assigned_code_elements">ISO
+     * 3166-1</a> alpha-2 code. The country code of the institution. If nothing is provided,
+     * institutions with the country code 'GB' are returned by default.
      */
     public String getCountryCode() {
         return countryCode;
@@ -78,6 +81,13 @@ public class Institution {
      */
     public String getName() {
         return name;
+    }
+
+    /**
+     * The roles assigned to this institution, representing the open banking features it supports.
+     */
+    public List<String> getRoles() {
+        return roles;
     }
 
     /**

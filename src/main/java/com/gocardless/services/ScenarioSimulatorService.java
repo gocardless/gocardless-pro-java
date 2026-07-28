@@ -47,8 +47,8 @@ public class ScenarioSimulatorService {
 
         /**
          * ID of the resource to run the simulation against. Must be same type of resource as the
-         * simulator that is being run. eg. Payment ID for `payment_failed`, Mandate ID for
-         * `mandate_activated` etc
+         * simulator that is being run. eg. Payment ID for <code>payment_failed</code>, Mandate ID
+         * for <code>mandate_activated</code> etc
          */
         public ScenarioSimulatorRunRequest withLinksResource(String resource) {
             if (links == null) {
@@ -105,8 +105,8 @@ public class ScenarioSimulatorService {
 
             /**
              * ID of the resource to run the simulation against. Must be same type of resource as
-             * the simulator that is being run. eg. Payment ID for `payment_failed`, Mandate ID for
-             * `mandate_activated` etc
+             * the simulator that is being run. eg. Payment ID for <code>payment_failed</code>,
+             * Mandate ID for <code>mandate_activated</code> etc
              */
             public Links withResource(String resource) {
                 this.resource = resource;

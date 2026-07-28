@@ -12,11 +12,14 @@ import java.util.Map;
 /**
  * Service class for working with refund resources.
  *
- * Refund objects represent (partial) refunds of a [payment](#core-endpoints-payments) back to the
- * [customer](#core-endpoints-customers).
+ * Refund objects represent (partial) refunds of a
+ * <a href="https://developer.gocardless.com/api-reference/#core-endpoints-payments">payment</a>
+ * back to the
+ * <a href="https://developer.gocardless.com/api-reference/#core-endpoints-customers">customer</a>.
  * 
- * GoCardless will notify you via a [webhook](#appendix-webhooks) whenever a refund is created, and
- * will update the `amount_refunded` property of the payment.
+ * GoCardless will notify you via a
+ * <a href="https://developer.gocardless.com/api-reference/#appendix-webhooks">webhook</a> whenever
+ * a refund is created, and will update the <code>amount_refunded</code> property of the payment.
  */
 public class RefundService {
     private final HttpClient httpClient;
@@ -35,20 +38,22 @@ public class RefundService {
      * This fails with:<a name="total_amount_confirmation_invalid"></a><a name=
      * "number_of_refunds_exceeded"></a><a name="available_refund_amount_insufficient"></a>
      * 
-     * - `total_amount_confirmation_invalid` if the confirmation amount doesn't match the total
-     * amount refunded for the payment. This safeguard is there to prevent two processes from
-     * creating refunds without awareness of each other.
-     * 
-     * - `available_refund_amount_insufficient` if the creditor does not have sufficient balance for
-     * refunds available to cover the cost of the requested refund.
-     * 
+     * <ul>
+     * <li><code>total_amount_confirmation_invalid</code> if the confirmation amount doesn't match
+     * the total amount refunded for the payment. This safeguard is there to prevent two processes
+     * from creating refunds without awareness of each other.</li>
+     * <li><code>available_refund_amount_insufficient</code> if the creditor does not have
+     * sufficient balance for refunds available to cover the cost of the requested refund.</li>
+     * </ul>
      */
     public RefundCreateRequest create() {
         return new RefundCreateRequest(httpClient);
     }
 
     /**
-     * Returns a [cursor-paginated](#api-usage-cursor-pagination) list of your refunds.
+     * Returns a <a href=
+     * "https://developer.gocardless.com/api-reference/#api-usage-cursor-pagination">cursor-paginated</a>
+     * list of your refunds.
      */
     public RefundListRequest<ListResponse<Refund>> list() {
         return new RefundListRequest<>(httpClient, ListRequest.<Refund>pagingExecutor());
@@ -80,13 +85,13 @@ public class RefundService {
      * This fails with:<a name="total_amount_confirmation_invalid"></a><a name=
      * "number_of_refunds_exceeded"></a><a name="available_refund_amount_insufficient"></a>
      * 
-     * - `total_amount_confirmation_invalid` if the confirmation amount doesn't match the total
-     * amount refunded for the payment. This safeguard is there to prevent two processes from
-     * creating refunds without awareness of each other.
-     * 
-     * - `available_refund_amount_insufficient` if the creditor does not have sufficient balance for
-     * refunds available to cover the cost of the requested refund.
-     * 
+     * <ul>
+     * <li><code>total_amount_confirmation_invalid</code> if the confirmation amount doesn't match
+     * the total amount refunded for the payment. This safeguard is there to prevent two processes
+     * from creating refunds without awareness of each other.</li>
+     * <li><code>available_refund_amount_insufficient</code> if the creditor does not have
+     * sufficient balance for refunds available to cover the cost of the requested refund.</li>
+     * </ul>
      */
     public static final class RefundCreateRequest extends IdempotentPostRequest<Refund> {
         private Integer amount;
@@ -109,8 +114,10 @@ public class RefundService {
         }
 
         /**
-         * ID of the [mandate](#core-endpoints-mandates) against which the refund is being made.
-         * <br />
+         * ID of the <a href=
+         * "https://developer.gocardless.com/api-reference/#core-endpoints-mandates">mandate</a>
+         * against which the refund is being made. <br>
+         * </br>
          * <p class="restricted-notice">
          * <strong>Restricted</strong>: You must request access to Mandate Refunds by contacting
          * <a href="mailto:support@gocardless.com">our support team</a>.
@@ -125,7 +132,9 @@ public class RefundService {
         }
 
         /**
-         * ID of the [payment](#core-endpoints-payments) against which the refund is being made.
+         * ID of the <a href=
+         * "https://developer.gocardless.com/api-reference/#core-endpoints-payments">payment</a>
+         * against which the refund is being made.
          */
         public RefundCreateRequest withLinksPayment(String payment) {
             if (links == null) {
@@ -158,25 +167,76 @@ public class RefundService {
 
         /**
          * An optional reference that will appear on your customer's bank statement. The character
-         * limit for this reference is dependent on the scheme.<br />
-         * <strong>ACH</strong> - 10 characters<br />
-         * <strong>Autogiro</strong> - 11 characters<br />
-         * <strong>Bacs</strong> - 10 characters<br />
-         * <strong>BECS</strong> - 30 characters<br />
-         * <strong>BECS NZ</strong> - 12 characters<br />
-         * <strong>Betalingsservice</strong> - 30 characters<br />
-         * <strong>Faster Payments</strong> - 18 characters<br />
-         * <strong>PAD</strong> - scheme doesn't offer references<br />
-         * <strong>PayTo</strong> - 18 characters<br />
-         * <strong>SEPA</strong> - 140 characters<br />
+         * limit for this reference is dependent on the scheme.<br>
+         * </br>
+         * <strong>ACH</strong>
+         * <ul>
+         * <li>10 characters</li>
+         * </ul>
+         * <br>
+         * </br>
+         * <strong>Autogiro</strong>
+         * <ul>
+         * <li>11 characters</li>
+         * </ul>
+         * <br>
+         * </br>
+         * <strong>Bacs</strong>
+         * <ul>
+         * <li>10 characters</li>
+         * </ul>
+         * <br>
+         * </br>
+         * <strong>BECS</strong>
+         * <ul>
+         * <li>30 characters</li>
+         * </ul>
+         * <br>
+         * </br>
+         * <strong>BECS NZ</strong>
+         * <ul>
+         * <li>12 characters</li>
+         * </ul>
+         * <br>
+         * </br>
+         * <strong>Betalingsservice</strong>
+         * <ul>
+         * <li>30 characters</li>
+         * </ul>
+         * <br>
+         * </br>
+         * <strong>Faster Payments</strong>
+         * <ul>
+         * <li>18 characters</li>
+         * </ul>
+         * <br>
+         * </br>
+         * <strong>PAD</strong>
+         * <ul>
+         * <li>scheme doesn't offer references</li>
+         * </ul>
+         * <br>
+         * </br>
+         * <strong>PayTo</strong>
+         * <ul>
+         * <li>18 characters</li>
+         * </ul>
+         * <br>
+         * </br>
+         * <strong>SEPA</strong>
+         * <ul>
+         * <li>140 characters</li>
+         * </ul>
+         * <br>
+         * </br>
          * Note that this reference must be unique (for each merchant) for the BECS scheme as it is
          * a scheme requirement.
-         * <p class='restricted-notice'>
+         * <p class="restricted-notice">
          * <strong>Restricted</strong>: You can only specify a payment reference for Bacs payments
          * (that is, when collecting from the UK) if you're on the
-         * <a href='https://gocardless.com/pricing'>GoCardless Plus, Pro or Enterprise packages</a>.
+         * <a href="https://gocardless.com/pricing">GoCardless Plus, Pro or Enterprise packages</a>.
          * </p>
-         * <p class='restricted-notice'>
+         * <p class="restricted-notice">
          * <strong>Restricted</strong>: You can not specify a payment reference for Faster Payments.
          * </p>
          */
@@ -188,11 +248,14 @@ public class RefundService {
         /**
          * Total expected refunded amount in minor unit (e.g. pence/cents/öre). If there are other
          * partial refunds against this payment, this value should be the sum of the existing
-         * refunds plus the amount of the refund being created. <br />
-         * Must be supplied if `links[payment]` is present.
+         * refunds plus the amount of the refund being created. <br>
+         * </br>
+         * Must be supplied if <code>links[payment]</code> is present.
+         * 
          * <p class="notice">
-         * It is possible to opt out of requiring `total_amount_confirmation`, please contact
-         * <a href="mailto:support@gocardless.com">our support team</a> for more information.
+         * It is possible to opt out of requiring <code>total_amount_confirmation</code>, please
+         * contact <a href="mailto:support@gocardless.com">our support team</a> for more
+         * information.
          * </p>
          */
         public RefundCreateRequest withTotalAmountConfirmation(Integer totalAmountConfirmation) {
@@ -248,8 +311,10 @@ public class RefundService {
             private String payment;
 
             /**
-             * ID of the [mandate](#core-endpoints-mandates) against which the refund is being made.
-             * <br />
+             * ID of the <a href=
+             * "https://developer.gocardless.com/api-reference/#core-endpoints-mandates">mandate</a>
+             * against which the refund is being made. <br>
+             * </br>
              * <p class="restricted-notice">
              * <strong>Restricted</strong>: You must request access to Mandate Refunds by contacting
              * <a href="mailto:support@gocardless.com">our support team</a>.
@@ -261,7 +326,9 @@ public class RefundService {
             }
 
             /**
-             * ID of the [payment](#core-endpoints-payments) against which the refund is being made.
+             * ID of the <a href=
+             * "https://developer.gocardless.com/api-reference/#core-endpoints-payments">payment</a>
+             * against which the refund is being made.
              */
             public Links withPayment(String payment) {
                 this.payment = payment;
@@ -273,7 +340,9 @@ public class RefundService {
     /**
      * Request class for {@link RefundService#list }.
      *
-     * Returns a [cursor-paginated](#api-usage-cursor-pagination) list of your refunds.
+     * Returns a <a href=
+     * "https://developer.gocardless.com/api-reference/#api-usage-cursor-pagination">cursor-paginated</a>
+     * list of your refunds.
      */
     public static final class RefundListRequest<S> extends ListRequest<S, Refund> {
         private CreatedAt createdAt;
@@ -373,9 +442,11 @@ public class RefundService {
 
         /**
          * Whether a refund was issued against a mandate or a payment. One of:
+         * 
          * <ul>
-         * <li>`payment`: <em>default</em> returns refunds created against payments only</li>
-         * <li>`mandate`: returns refunds created against mandates only</li>
+         * <li><code>payment</code>: <em>default</em> returns refunds created against payments
+         * only</li>
+         * <li><code>mandate</code>: returns refunds created against mandates only</li>
          * </ul>
          */
         public RefundListRequest<S> withRefundType(RefundType refundType) {

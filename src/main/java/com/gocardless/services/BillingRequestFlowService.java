@@ -90,8 +90,8 @@ public class BillingRequestFlowService {
         }
 
         /**
-         * Sets the default language of the Billing Request Flow and the customer. [ISO
-         * 639-1](https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes) code.
+         * Sets the default language of the Billing Request Flow and the customer.
+         * <a href="https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes">ISO 639-1</a> code.
          */
         public BillingRequestFlowCreateRequest withLanguage(String language) {
             this.language = language;
@@ -104,8 +104,9 @@ public class BillingRequestFlowService {
         }
 
         /**
-         * ID of the [billing request](#billing-requests-billing-requests) against which this flow
-         * was created.
+         * ID of the <a href=
+         * "https://developer.gocardless.com/api-reference/#billing-requests-billing-requests">billing
+         * request</a> against which this flow was created.
          */
         public BillingRequestFlowCreateRequest withLinksBillingRequest(String billingRequest) {
             if (links == null) {
@@ -122,7 +123,6 @@ public class BillingRequestFlowService {
          * 
          * You can only lock bank account if these have already been completed as a part of the
          * billing request.
-         * 
          */
         public BillingRequestFlowCreateRequest withLockBankAccount(Boolean lockBankAccount) {
             this.lockBankAccount = lockBankAccount;
@@ -146,7 +146,6 @@ public class BillingRequestFlowService {
          * 
          * You can only lock customer details if these have already been completed as a part of the
          * billing request.
-         * 
          */
         public BillingRequestFlowCreateRequest withLockCustomerDetails(
                 Boolean lockCustomerDetails) {
@@ -167,8 +166,9 @@ public class BillingRequestFlowService {
 
         /**
          * Bank account type for USD-denominated bank accounts. Must not be provided for bank
-         * accounts in other currencies. See [local details](#local-bank-details-united-states) for
-         * more information.
+         * accounts in other currencies. See <a href=
+         * "https://developer.gocardless.com/api-reference/#local-bank-details-united-states">local
+         * details</a> for more information.
          */
         public BillingRequestFlowCreateRequest withPrefilledBankAccountAccountType(
                 PrefilledBankAccount.AccountType accountType) {
@@ -238,8 +238,8 @@ public class BillingRequestFlowService {
         }
 
         /**
-         * Customer's company name. Company name should only be provided if `given_name` and
-         * `family_name` are null.
+         * Customer's company name. Company name should only be provided if <code>given_name</code>
+         * and <code>family_name</code> are null.
          */
         public BillingRequestFlowCreateRequest withPrefilledCustomerCompanyName(
                 String companyName) {
@@ -251,8 +251,9 @@ public class BillingRequestFlowService {
         }
 
         /**
-         * [ISO 3166-1 alpha-2
-         * code.](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2#Officially_assigned_code_elements)
+         * <a href=
+         * "https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2#Officially_assigned_code_elements">ISO
+         * 3166-1 alpha-2 code.</a>
          */
         public BillingRequestFlowCreateRequest withPrefilledCustomerCountryCode(
                 String countryCode) {
@@ -418,8 +419,9 @@ public class BillingRequestFlowService {
             private String billingRequest;
 
             /**
-             * ID of the [billing request](#billing-requests-billing-requests) against which this
-             * flow was created.
+             * ID of the <a href=
+             * "https://developer.gocardless.com/api-reference/#billing-requests-billing-requests">billing
+             * request</a> against which this flow was created.
              */
             public Links withBillingRequest(String billingRequest) {
                 this.billingRequest = billingRequest;
@@ -432,8 +434,9 @@ public class BillingRequestFlowService {
 
             /**
              * Bank account type for USD-denominated bank accounts. Must not be provided for bank
-             * accounts in other currencies. See [local details](#local-bank-details-united-states)
-             * for more information.
+             * accounts in other currencies. See <a href=
+             * "https://developer.gocardless.com/api-reference/#local-bank-details-united-states">local
+             * details</a> for more information.
              */
             public PrefilledBankAccount withAccountType(AccountType accountType) {
                 this.accountType = accountType;
@@ -501,8 +504,8 @@ public class BillingRequestFlowService {
             }
 
             /**
-             * Customer's company name. Company name should only be provided if `given_name` and
-             * `family_name` are null.
+             * Customer's company name. Company name should only be provided if
+             * <code>given_name</code> and <code>family_name</code> are null.
              */
             public PrefilledCustomer withCompanyName(String companyName) {
                 this.companyName = companyName;
@@ -510,8 +513,9 @@ public class BillingRequestFlowService {
             }
 
             /**
-             * [ISO 3166-1 alpha-2
-             * code.](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2#Officially_assigned_code_elements)
+             * <a href=
+             * "https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2#Officially_assigned_code_elements">ISO
+             * 3166-1 alpha-2 code.</a>
              */
             public PrefilledCustomer withCountryCode(String countryCode) {
                 this.countryCode = countryCode;

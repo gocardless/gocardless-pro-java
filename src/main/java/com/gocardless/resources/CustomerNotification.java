@@ -7,7 +7,7 @@ import com.google.gson.annotations.SerializedName;
  *
  * Customer Notifications represent the notification which is due to be sent to a customer after an
  * event has happened. The event, the resource and the customer to be notified are all identified in
- * the `links` property.
+ * the <code>links</code> property.
  * 
  * Note that these are ephemeral records - once the notification has been actioned in some way, it
  * is no longer visible using this API.
@@ -30,16 +30,17 @@ public class CustomerNotification {
     private Type type;
 
     /**
-     * The action that was taken on the notification. Currently this can only be `handled`, which
-     * means the integrator sent the notification themselves.
-     * 
+     * The action that was taken on the notification. Currently this can only be
+     * <code>handled</code>, which means the integrator sent the notification themselves.
      */
     public ActionTaken getActionTaken() {
         return actionTaken;
     }
 
     /**
-     * Fixed [timestamp](#api-usage-dates-and-times), recording when this action was taken.
+     * Fixed <a href=
+     * "https://developer.gocardless.com/api-reference/#api-usage-dates-and-times">timestamp</a>,
+     * recording when this action was taken.
      */
     public String getActionTakenAt() {
         return actionTakenAt;
@@ -65,15 +66,16 @@ public class CustomerNotification {
 
     /**
      * The type of notification the customer shall receive. One of:
+     * 
      * <ul>
-     * <li>`payment_created`</li>
-     * <li>`payment_cancelled`</li>
-     * <li>`mandate_created`</li>
-     * <li>`mandate_blocked`</li>
-     * <li>`subscription_created`</li>
-     * <li>`subscription_cancelled`</li>
-     * <li>`instalment_schedule_created`</li>
-     * <li>`instalment_schedule_cancelled`</li>
+     * <li><code>payment_created</code></li>
+     * <li><code>payment_cancelled</code></li>
+     * <li><code>mandate_created</code></li>
+     * <li><code>mandate_blocked</code></li>
+     * <li><code>subscription_created</code></li>
+     * <li><code>subscription_cancelled</code></li>
+     * <li><code>instalment_schedule_created</code></li>
+     * <li><code>instalment_schedule_cancelled</code></li>
      * </ul>
      */
     public Type getType() {

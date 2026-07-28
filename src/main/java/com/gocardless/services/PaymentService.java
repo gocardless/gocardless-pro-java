@@ -12,12 +12,16 @@ import java.util.Map;
 /**
  * Service class for working with payment resources.
  *
- * Payment objects represent payments from a [customer](#core-endpoints-customers) to a
- * [creditor](#core-endpoints-creditors), taken against a Direct Debit
- * [mandate](#core-endpoints-mandates).
+ * Payment objects represent payments from a
+ * <a href="https://developer.gocardless.com/api-reference/#core-endpoints-customers">customer</a>
+ * to a
+ * <a href="https://developer.gocardless.com/api-reference/#core-endpoints-creditors">creditor</a>,
+ * taken against a Direct Debit
+ * <a href="https://developer.gocardless.com/api-reference/#core-endpoints-mandates">mandate</a>.
  * 
- * GoCardless will notify you via a [webhook](#appendix-webhooks) whenever the state of a payment
- * changes.
+ * GoCardless will notify you via a
+ * <a href="https://developer.gocardless.com/api-reference/#appendix-webhooks">webhook</a> whenever
+ * the state of a payment changes.
  */
 public class PaymentService {
     private final HttpClient httpClient;
@@ -33,17 +37,20 @@ public class PaymentService {
     /**
      * <a name="mandate_is_inactive"></a>Creates a new payment object.
      * 
-     * This fails with a `mandate_is_inactive` error if the linked
-     * [mandate](#core-endpoints-mandates) is cancelled or has failed. Payments can be created
-     * against mandates with status of: `pending_customer_approval`, `pending_submission`,
-     * `submitted`, and `active`.
+     * This fails with a <code>mandate_is_inactive</code> error if the linked
+     * <a href="https://developer.gocardless.com/api-reference/#core-endpoints-mandates">mandate</a>
+     * is cancelled or has failed. Payments can be created against mandates with status of:
+     * <code>pending_customer_approval</code>, <code>pending_submission</code>,
+     * <code>submitted</code>, and <code>active</code>.
      */
     public PaymentCreateRequest create() {
         return new PaymentCreateRequest(httpClient);
     }
 
     /**
-     * Returns a [cursor-paginated](#api-usage-cursor-pagination) list of your payments.
+     * Returns a <a href=
+     * "https://developer.gocardless.com/api-reference/#api-usage-cursor-pagination">cursor-paginated</a>
+     * list of your payments.
      */
     public PaymentListRequest<ListResponse<Payment>> list() {
         return new PaymentListRequest<>(httpClient, ListRequest.<Payment>pagingExecutor());
@@ -71,8 +78,8 @@ public class PaymentService {
      * Cancels the payment if it has not already been submitted to the banks. Any metadata supplied
      * to this endpoint will be stored on the payment cancellation event it causes.
      * 
-     * This will fail with a `cancellation_failed` error unless the payment's status is
-     * `pending_submission`.
+     * This will fail with a <code>cancellation_failed</code> error unless the payment's status is
+     * <code>pending_submission</code>.
      */
     public PaymentCancelRequest cancel(String identity) {
         return new PaymentCancelRequest(httpClient, identity);
@@ -80,12 +87,13 @@ public class PaymentService {
 
     /**
      * <a name="retry_failed"></a>Retries a failed payment if the underlying mandate is active. You
-     * will receive a `resubmission_requested` webhook, but after that retrying the payment follows
-     * the same process as its initial creation, so you will receive a `submitted` webhook, followed
-     * by a `confirmed` or `failed` event. Any metadata supplied to this endpoint will be stored
-     * against the payment submission event it causes.
+     * will receive a <code>resubmission_requested</code> webhook, but after that retrying the
+     * payment follows the same process as its initial creation, so you will receive a
+     * <code>submitted</code> webhook, followed by a <code>confirmed</code> or <code>failed</code>
+     * event. Any metadata supplied to this endpoint will be stored against the payment submission
+     * event it causes.
      * 
-     * This will return a `retry_failed` error if the payment has not failed.
+     * This will return a <code>retry_failed</code> error if the payment has not failed.
      * 
      * Payments can be retried up to 3 times.
      */
@@ -98,10 +106,11 @@ public class PaymentService {
      *
      * <a name="mandate_is_inactive"></a>Creates a new payment object.
      * 
-     * This fails with a `mandate_is_inactive` error if the linked
-     * [mandate](#core-endpoints-mandates) is cancelled or has failed. Payments can be created
-     * against mandates with status of: `pending_customer_approval`, `pending_submission`,
-     * `submitted`, and `active`.
+     * This fails with a <code>mandate_is_inactive</code> error if the linked
+     * <a href="https://developer.gocardless.com/api-reference/#core-endpoints-mandates">mandate</a>
+     * is cancelled or has failed. Payments can be created against mandates with status of:
+     * <code>pending_customer_approval</code>, <code>pending_submission</code>,
+     * <code>submitted</code>, and <code>active</code>.
      */
     public static final class PaymentCreateRequest extends IdempotentPostRequest<Payment> {
         private Integer amount;
@@ -118,6 +127,13 @@ public class PaymentService {
 
         /**
          * Amount, in the lowest denomination for the currency (e.g. pence in GBP, cents in EUR).
+         * 
+         * Minimum and maximum amounts vary by payment scheme. For more information, see <a href=
+         * "https://support.gocardless.com/hc/en-gb/articles/115000309245-Transaction-limits">Transaction
+         * limits</a>
+         * 
+         * For Variable Recurring Payments (VRP), this must not exceed the mandate's
+         * <code>max_amount_per_payment</code> constraint.
          */
         public PaymentCreateRequest withAmount(Integer amount) {
             this.amount = amount;
@@ -135,9 +151,10 @@ public class PaymentService {
 
         /**
          * A future date on which the payment should be collected. If not specified, the payment
-         * will be collected as soon as possible. If the value is before the
-         * [mandate](#core-endpoints-mandates)'s `next_possible_charge_date` creation will fail. If
-         * the value is not a working day it will be rolled forwards to the next available one.
+         * will be collected as soon as possible. If the value is before the <a href=
+         * "https://developer.gocardless.com/api-reference/#core-endpoints-mandates">mandate</a>'s
+         * <code>next_possible_charge_date</code> creation will fail. If the value is not a working
+         * day it will be rolled forwards to the next available one.
          */
         public PaymentCreateRequest withChargeDate(String chargeDate) {
             this.chargeDate = chargeDate;
@@ -145,8 +162,8 @@ public class PaymentService {
         }
 
         /**
-         * [ISO 4217](https://en.wikipedia.org/wiki/ISO_4217#Active_codes) currency code. Currently
-         * "AUD", "CAD", "DKK", "EUR", "GBP", "NZD", "SEK" and "USD" are supported.
+         * <a href="https://en.wikipedia.org/wiki/ISO_4217#Active_codes">ISO 4217</a> currency code.
+         * Currently "AUD", "CAD", "DKK", "EUR", "GBP", "NZD", "SEK" and "USD" are supported.
          */
         public PaymentCreateRequest withCurrency(Currency currency) {
             this.currency = currency;
@@ -156,7 +173,9 @@ public class PaymentService {
         /**
          * A human-readable description of the payment. This will be included in the notification
          * email GoCardless sends to your customer if your organisation does not send its own
-         * notifications (see [compliance requirements](#appendix-compliance-requirements)).
+         * notifications (see <a href=
+         * "https://developer.gocardless.com/api-reference/#appendix-compliance-requirements">compliance
+         * requirements</a>).
          */
         public PaymentCreateRequest withDescription(String description) {
             this.description = description;
@@ -179,8 +198,9 @@ public class PaymentService {
         }
 
         /**
-         * ID of the [mandate](#core-endpoints-mandates) against which this payment should be
-         * collected.
+         * ID of the <a href=
+         * "https://developer.gocardless.com/api-reference/#core-endpoints-mandates">mandate</a>
+         * against which this payment should be collected.
          */
         public PaymentCreateRequest withLinksMandate(String mandate) {
             if (links == null) {
@@ -214,12 +234,13 @@ public class PaymentService {
         /**
          * Indicates how a Variable Recurring Payment (VRP) is initiated, by or on behalf of the
          * payer.
+         * 
          * <ul>
-         * <li>`in_session`: The payer is actively participating in the payment creation
+         * <li><code>in_session</code>: The payer is actively participating in the payment creation
          * session.</li>
-         * <li>`off_session`: The payer is not present during the transaction, and the payment is
-         * initiated by the merchant based on an established consent (e.g., a recurring subscription
-         * payment).</li>
+         * <li><code>off_session</code>: The payer is not present during the transaction, and the
+         * payment is initiated by the merchant based on an established consent (e.g., a recurring
+         * subscription payment).</li>
          * </ul>
          */
         public PaymentCreateRequest withPsuInteractionType(PsuInteractionType psuInteractionType) {
@@ -229,25 +250,76 @@ public class PaymentService {
 
         /**
          * An optional reference that will appear on your customer's bank statement. The character
-         * limit for this reference is dependent on the scheme.<br />
-         * <strong>ACH</strong> - 10 characters<br />
-         * <strong>Autogiro</strong> - 11 characters<br />
-         * <strong>Bacs</strong> - 10 characters<br />
-         * <strong>BECS</strong> - 30 characters<br />
-         * <strong>BECS NZ</strong> - 12 characters<br />
-         * <strong>Betalingsservice</strong> - 30 characters<br />
-         * <strong>Faster Payments</strong> - 18 characters<br />
-         * <strong>PAD</strong> - scheme doesn't offer references<br />
-         * <strong>PayTo</strong> - 18 characters<br />
-         * <strong>SEPA</strong> - 140 characters<br />
+         * limit for this reference is dependent on the scheme.<br>
+         * </br>
+         * <strong>ACH</strong>
+         * <ul>
+         * <li>10 characters</li>
+         * </ul>
+         * <br>
+         * </br>
+         * <strong>Autogiro</strong>
+         * <ul>
+         * <li>11 characters</li>
+         * </ul>
+         * <br>
+         * </br>
+         * <strong>Bacs</strong>
+         * <ul>
+         * <li>10 characters</li>
+         * </ul>
+         * <br>
+         * </br>
+         * <strong>BECS</strong>
+         * <ul>
+         * <li>30 characters</li>
+         * </ul>
+         * <br>
+         * </br>
+         * <strong>BECS NZ</strong>
+         * <ul>
+         * <li>12 characters</li>
+         * </ul>
+         * <br>
+         * </br>
+         * <strong>Betalingsservice</strong>
+         * <ul>
+         * <li>30 characters</li>
+         * </ul>
+         * <br>
+         * </br>
+         * <strong>Faster Payments</strong>
+         * <ul>
+         * <li>18 characters</li>
+         * </ul>
+         * <br>
+         * </br>
+         * <strong>PAD</strong>
+         * <ul>
+         * <li>scheme doesn't offer references</li>
+         * </ul>
+         * <br>
+         * </br>
+         * <strong>PayTo</strong>
+         * <ul>
+         * <li>18 characters</li>
+         * </ul>
+         * <br>
+         * </br>
+         * <strong>SEPA</strong>
+         * <ul>
+         * <li>140 characters</li>
+         * </ul>
+         * <br>
+         * </br>
          * Note that this reference must be unique (for each merchant) for the BECS scheme as it is
          * a scheme requirement.
-         * <p class='restricted-notice'>
+         * <p class="restricted-notice">
          * <strong>Restricted</strong>: You can only specify a payment reference for Bacs payments
          * (that is, when collecting from the UK) if you're on the
-         * <a href='https://gocardless.com/pricing'>GoCardless Plus, Pro or Enterprise packages</a>.
+         * <a href="https://gocardless.com/pricing">GoCardless Plus, Pro or Enterprise packages</a>.
          * </p>
-         * <p class='restricted-notice'>
+         * <p class="restricted-notice">
          * <strong>Restricted</strong>: You can not specify a payment reference for Faster Payments.
          * </p>
          */
@@ -257,11 +329,12 @@ public class PaymentService {
         }
 
         /**
-         * On failure, automatically retry the payment using [intelligent
-         * retries](/success-plus/overview). Default is `false`.
+         * On failure, automatically retry the payment using
+         * <a href="https://developer.gocardless.com/success-plus/overview">intelligent retries</a>.
+         * Default is <code>false</code>.
          * <p class="notice">
          * <strong>Important</strong>: To be able to use intelligent retries, Success+ needs to be
-         * enabled in [GoCardless dashboard](https://manage.gocardless.com/success-plus).
+         * enabled in <a href="https://manage.gocardless.com/success-plus">GoCardless dashboard</a>.
          * </p>
          */
         public PaymentCreateRequest withRetryIfPossible(Boolean retryIfPossible) {
@@ -346,8 +419,9 @@ public class PaymentService {
             private String mandate;
 
             /**
-             * ID of the [mandate](#core-endpoints-mandates) against which this payment should be
-             * collected.
+             * ID of the <a href=
+             * "https://developer.gocardless.com/api-reference/#core-endpoints-mandates">mandate</a>
+             * against which this payment should be collected.
              */
             public Links withMandate(String mandate) {
                 this.mandate = mandate;
@@ -359,7 +433,9 @@ public class PaymentService {
     /**
      * Request class for {@link PaymentService#list }.
      *
-     * Returns a [cursor-paginated](#api-usage-cursor-pagination) list of your payments.
+     * Returns a <a href=
+     * "https://developer.gocardless.com/api-reference/#api-usage-cursor-pagination">cursor-paginated</a>
+     * list of your payments.
      */
     public static final class PaymentListRequest<S> extends ListRequest<S, Payment> {
         private ChargeDate chargeDate;
@@ -494,7 +570,7 @@ public class PaymentService {
 
         /**
          * ID of a creditor to filter payments by. If you pass this parameter, you cannot also pass
-         * `customer`.
+         * <code>customer</code>.
          */
         public PaymentListRequest<S> withCreditor(String creditor) {
             this.creditor = creditor;
@@ -502,8 +578,8 @@ public class PaymentService {
         }
 
         /**
-         * [ISO 4217](https://en.wikipedia.org/wiki/ISO_4217#Active_codes) currency code. Currently
-         * "AUD", "CAD", "DKK", "EUR", "GBP", "NZD", "SEK" and "USD" are supported.
+         * <a href="https://en.wikipedia.org/wiki/ISO_4217#Active_codes">ISO 4217</a> currency code.
+         * Currently "AUD", "CAD", "DKK", "EUR", "GBP", "NZD", "SEK" and "USD" are supported.
          */
         public PaymentListRequest<S> withCurrency(Currency currency) {
             this.currency = currency;
@@ -512,7 +588,7 @@ public class PaymentService {
 
         /**
          * ID of a customer to filter payments by. If you pass this parameter, you cannot also pass
-         * `creditor`.
+         * <code>creditor</code>.
          */
         public PaymentListRequest<S> withCustomer(String customer) {
             this.customer = customer;
@@ -548,9 +624,10 @@ public class PaymentService {
 
         /**
          * The direction to sort in. One of:
+         * 
          * <ul>
-         * <li>`asc`</li>
-         * <li>`desc`</li>
+         * <li><code>asc</code></li>
+         * <li><code>desc</code></li>
          * </ul>
          */
         public PaymentListRequest<S> withSortDirection(SortDirection sortDirection) {
@@ -560,9 +637,10 @@ public class PaymentService {
 
         /**
          * Field by which to sort records. One of:
+         * 
          * <ul>
-         * <li>`charge_date`</li>
-         * <li>`amount`</li>
+         * <li><code>charge_date</code></li>
+         * <li><code>amount</code></li>
          * </ul>
          */
         public PaymentListRequest<S> withSortField(SortField sortField) {
@@ -572,20 +650,22 @@ public class PaymentService {
 
         /**
          * One of:
+         * 
          * <ul>
-         * <li>`pending_customer_approval`: we're waiting for the customer to approve this
-         * payment</li>
-         * <li>`pending_submission`: the payment has been created, but not yet submitted to the
-         * banks</li>
-         * <li>`submitted`: the payment has been submitted to the banks</li>
-         * <li>`confirmed`: the payment has been confirmed as collected</li>
-         * <li>`paid_out`: the payment has been included in a [payout](#core-endpoints-payouts)</li>
-         * <li>`cancelled`: the payment has been cancelled</li>
-         * <li>`customer_approval_denied`: the customer has denied approval for the payment. You
-         * should contact the customer directly</li>
-         * <li>`failed`: the payment failed to be processed. Note that payments can fail after being
-         * confirmed if the failure message is sent late by the banks.</li>
-         * <li>`charged_back`: the payment has been charged back</li>
+         * <li><code>pending_customer_approval</code>: we're waiting for the customer to approve
+         * this payment</li>
+         * <li><code>pending_submission</code>: the payment has been created, but not yet submitted
+         * to the banks</li>
+         * <li><code>submitted</code>: the payment has been submitted to the banks</li>
+         * <li><code>confirmed</code>: the payment has been confirmed as collected</li>
+         * <li><code>paid_out</code>: the payment has been included in a <a href=
+         * "https://developer.gocardless.com/api-reference/#core-endpoints-payouts">payout</a></li>
+         * <li><code>cancelled</code>: the payment has been cancelled</li>
+         * <li><code>customer_approval_denied</code>: the customer has denied approval for the
+         * payment. You should contact the customer directly</li>
+         * <li><code>failed</code>: the payment failed to be processed. Note that payments can fail
+         * after being confirmed if the failure message is sent late by the banks.</li>
+         * <li><code>charged_back</code>: the payment has been charged back</li>
          * </ul>
          */
         public PaymentListRequest<S> withStatus(Status status) {
@@ -919,11 +999,12 @@ public class PaymentService {
         }
 
         /**
-         * On failure, automatically retry the payment using [intelligent
-         * retries](/success-plus/overview). Default is `false`.
+         * On failure, automatically retry the payment using
+         * <a href="https://developer.gocardless.com/success-plus/overview">intelligent retries</a>.
+         * Default is <code>false</code>.
          * <p class="notice">
          * <strong>Important</strong>: To be able to use intelligent retries, Success+ needs to be
-         * enabled in [GoCardless dashboard](https://manage.gocardless.com/success-plus).
+         * enabled in <a href="https://manage.gocardless.com/success-plus">GoCardless dashboard</a>.
          * </p>
          */
         public PaymentUpdateRequest withRetryIfPossible(Boolean retryIfPossible) {
@@ -975,8 +1056,8 @@ public class PaymentService {
      * Cancels the payment if it has not already been submitted to the banks. Any metadata supplied
      * to this endpoint will be stored on the payment cancellation event it causes.
      * 
-     * This will fail with a `cancellation_failed` error unless the payment's status is
-     * `pending_submission`.
+     * This will fail with a <code>cancellation_failed</code> error unless the payment's status is
+     * <code>pending_submission</code>.
      */
     public static final class PaymentCancelRequest extends PostRequest<Payment> {
         @PathParam
@@ -1051,12 +1132,13 @@ public class PaymentService {
      * Request class for {@link PaymentService#retry }.
      *
      * <a name="retry_failed"></a>Retries a failed payment if the underlying mandate is active. You
-     * will receive a `resubmission_requested` webhook, but after that retrying the payment follows
-     * the same process as its initial creation, so you will receive a `submitted` webhook, followed
-     * by a `confirmed` or `failed` event. Any metadata supplied to this endpoint will be stored
-     * against the payment submission event it causes.
+     * will receive a <code>resubmission_requested</code> webhook, but after that retrying the
+     * payment follows the same process as its initial creation, so you will receive a
+     * <code>submitted</code> webhook, followed by a <code>confirmed</code> or <code>failed</code>
+     * event. Any metadata supplied to this endpoint will be stored against the payment submission
+     * event it causes.
      * 
-     * This will return a `retry_failed` error if the payment has not failed.
+     * This will return a <code>retry_failed</code> error if the payment has not failed.
      * 
      * Payments can be retried up to 3 times.
      */
@@ -1068,9 +1150,10 @@ public class PaymentService {
 
         /**
          * A future date on which the payment should be collected. If not specified, the payment
-         * will be collected as soon as possible. If the value is before the
-         * [mandate](#core-endpoints-mandates)'s `next_possible_charge_date` creation will fail. If
-         * the value is not a working day it will be rolled forwards to the next available one.
+         * will be collected as soon as possible. If the value is before the <a href=
+         * "https://developer.gocardless.com/api-reference/#core-endpoints-mandates">mandate</a>'s
+         * <code>next_possible_charge_date</code> creation will fail. If the value is not a working
+         * day it will be rolled forwards to the next available one.
          */
         public PaymentRetryRequest withChargeDate(String chargeDate) {
             this.chargeDate = chargeDate;

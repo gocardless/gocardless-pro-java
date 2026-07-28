@@ -18,8 +18,10 @@ public class BankDetailsLookup {
     private String bic;
 
     /**
-     * Array of [schemes](#mandates_scheme) supported for this bank account. This will be an empty
-     * array if the bank account is not reachable by any schemes.
+     * Array of
+     * <a href="https://developer.gocardless.com/api-reference/#mandates_scheme">schemes</a>
+     * supported for this bank account. This will be an empty array if the bank account is not
+     * reachable by any schemes.
      */
     public List<AvailableDebitScheme> getAvailableDebitSchemes() {
         return availableDebitSchemes;
@@ -37,7 +39,7 @@ public class BankDetailsLookup {
      * 
      * <p class="notice">
      * Even if no BIC is returned for an account, GoCardless may still be able to collect payments
-     * from it - you should refer to the `available_debit_schemes` attribute to determine
+     * from it - you should refer to the <code>available_debit_schemes</code> attribute to determine
      * reachability.
      * </p>
      */

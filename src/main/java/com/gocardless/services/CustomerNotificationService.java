@@ -10,7 +10,7 @@ import java.util.Map;
  *
  * Customer Notifications represent the notification which is due to be sent to a customer after an
  * event has happened. The event, the resource and the customer to be notified are all identified in
- * the `links` property.
+ * the <code>links</code> property.
  * 
  * Note that these are ephemeral records - once the notification has been actioned in some way, it
  * is no longer visible using this API.
@@ -35,9 +35,8 @@ public class CustomerNotificationService {
     /**
      * "Handling" a notification means that you have sent the notification yourself (and don't want
      * GoCardless to send it). If the notification has already been actioned, or the deadline to
-     * notify has passed, this endpoint will return an `already_actioned` error and you should not
-     * take further action. This endpoint takes no additional parameters.
-     * 
+     * notify has passed, this endpoint will return an <code>already_actioned</code> error and you
+     * should not take further action. This endpoint takes no additional parameters.
      */
     public CustomerNotificationHandleRequest handle(String identity) {
         return new CustomerNotificationHandleRequest(httpClient, identity);
@@ -48,9 +47,8 @@ public class CustomerNotificationService {
      *
      * "Handling" a notification means that you have sent the notification yourself (and don't want
      * GoCardless to send it). If the notification has already been actioned, or the deadline to
-     * notify has passed, this endpoint will return an `already_actioned` error and you should not
-     * take further action. This endpoint takes no additional parameters.
-     * 
+     * notify has passed, this endpoint will return an <code>already_actioned</code> error and you
+     * should not take further action. This endpoint takes no additional parameters.
      */
     public static final class CustomerNotificationHandleRequest
             extends PostRequest<CustomerNotification> {

@@ -25,7 +25,9 @@ public class CurrencyExchangeRateService {
     }
 
     /**
-     * Returns a [cursor-paginated](#api-usage-cursor-pagination) list of all exchange rates.
+     * Returns a <a href=
+     * "https://developer.gocardless.com/api-reference/#api-usage-cursor-pagination">cursor-paginated</a>
+     * list of all exchange rates.
      */
     public CurrencyExchangeRateListRequest<ListResponse<CurrencyExchangeRate>> list() {
         return new CurrencyExchangeRateListRequest<>(httpClient,
@@ -40,7 +42,9 @@ public class CurrencyExchangeRateService {
     /**
      * Request class for {@link CurrencyExchangeRateService#list }.
      *
-     * Returns a [cursor-paginated](#api-usage-cursor-pagination) list of all exchange rates.
+     * Returns a <a href=
+     * "https://developer.gocardless.com/api-reference/#api-usage-cursor-pagination">cursor-paginated</a>
+     * list of all exchange rates.
      */
     public static final class CurrencyExchangeRateListRequest<S>
             extends ListRequest<S, CurrencyExchangeRate> {

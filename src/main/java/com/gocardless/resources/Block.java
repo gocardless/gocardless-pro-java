@@ -18,9 +18,10 @@ import com.google.gson.annotations.SerializedName;
  * 
  * Please note:
  * 
- * - Payments and subscriptions cannot be created against a mandate in blocked state. - A mandate
- * can never be transitioned out of the blocked state.
- * 
+ * <ul>
+ * <li>Payments and subscriptions cannot be created against a mandate in blocked state.</li>
+ * <li>A mandate can never be transitioned out of the blocked state.</li>
+ * </ul>
  * The one exception to this is when blocking a 'bank_name'. This block will prevent bank accounts
  * from being created for banks that match the given name. To ensure we match bank names correctly
  * an existing bank account must be used when creating this block. Please be aware that we cannot
@@ -62,7 +63,9 @@ public class Block {
     }
 
     /**
-     * Fixed [timestamp](#api-usage-dates-and-times), recording when this resource was created.
+     * Fixed <a href=
+     * "https://developer.gocardless.com/api-reference/#api-usage-dates-and-times">timestamp</a>,
+     * recording when this resource was created.
      */
     public String getCreatedAt() {
         return createdAt;
@@ -104,7 +107,9 @@ public class Block {
     }
 
     /**
-     * Fixed [timestamp](#api-usage-dates-and-times), recording when this resource was updated.
+     * Fixed <a href=
+     * "https://developer.gocardless.com/api-reference/#api-usage-dates-and-times">timestamp</a>,
+     * recording when this resource was updated.
      */
     public String getUpdatedAt() {
         return updatedAt;

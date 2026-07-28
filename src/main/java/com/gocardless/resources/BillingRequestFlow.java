@@ -86,8 +86,8 @@ public class BillingRequestFlow {
     }
 
     /**
-     * Sets the default language of the Billing Request Flow and the customer. [ISO
-     * 639-1](https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes) code.
+     * Sets the default language of the Billing Request Flow and the customer.
+     * <a href="https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes">ISO 639-1</a> code.
      */
     public String getLanguage() {
         return language;
@@ -104,7 +104,6 @@ public class BillingRequestFlow {
      * 
      * You can only lock bank account if these have already been completed as a part of the billing
      * request.
-     * 
      */
     public Boolean getLockBankAccount() {
         return lockBankAccount;
@@ -126,7 +125,6 @@ public class BillingRequestFlow {
      * 
      * You can only lock customer details if these have already been completed as a part of the
      * billing request.
-     * 
      */
     public Boolean getLockCustomerDetails() {
         return lockCustomerDetails;
@@ -206,8 +204,9 @@ public class BillingRequestFlow {
         private String billingRequest;
 
         /**
-         * ID of the [billing request](#billing-requests-billing-requests) against which this flow
-         * was created.
+         * ID of the <a href=
+         * "https://developer.gocardless.com/api-reference/#billing-requests-billing-requests">billing
+         * request</a> against which this flow was created.
          */
         public String getBillingRequest() {
             return billingRequest;
@@ -230,8 +229,9 @@ public class BillingRequestFlow {
 
         /**
          * Bank account type for USD-denominated bank accounts. Must not be provided for bank
-         * accounts in other currencies. See [local details](#local-bank-details-united-states) for
-         * more information.
+         * accounts in other currencies. See <a href=
+         * "https://developer.gocardless.com/api-reference/#local-bank-details-united-states">local
+         * details</a> for more information.
          */
         public AccountType getAccountType() {
             return accountType;
@@ -300,16 +300,17 @@ public class BillingRequestFlow {
         }
 
         /**
-         * Customer's company name. Company name should only be provided if `given_name` and
-         * `family_name` are null.
+         * Customer's company name. Company name should only be provided if <code>given_name</code>
+         * and <code>family_name</code> are null.
          */
         public String getCompanyName() {
             return companyName;
         }
 
         /**
-         * [ISO 3166-1 alpha-2
-         * code.](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2#Officially_assigned_code_elements)
+         * <a href=
+         * "https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2#Officially_assigned_code_elements">ISO
+         * 3166-1 alpha-2 code.</a>
          */
         public String getCountryCode() {
             return countryCode;

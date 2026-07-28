@@ -17,7 +17,6 @@ import java.util.List;
  * The Payout Items API allows you to view, on a per-payout basis, the credit and debit items that
  * make up that payout's amount. Payout items can only be retrieved for payouts created in the last
  * 6 months. Requests for older payouts will return an HTTP status <code>410 Gone</code>.
- * 
  */
 public class PayoutItem {
     private PayoutItem() {
@@ -32,11 +31,14 @@ public class PayoutItem {
     /**
      * The positive (credit) or negative (debit) value of the item, in fractional currency; the
      * lowest denomination for the currency (e.g. pence in GBP, cents in EUR), to one decimal place.
+     * 
      * <p class="notice">
      * For accuracy, we store some of our fees to greater precision than we can actually pay out
      * (for example, a GoCardless fee we record might come to 0.5 pence, but it is not possible to
      * send a payout via bank transfer including a half penny).<br>
+     * </br>
      * <br>
+     * </br>
      * To calculate the final amount of the payout, we sum all of the items and then round to the
      * nearest currency unit.
      * </p>
@@ -52,8 +54,8 @@ public class PayoutItem {
     /**
      * An array of tax items <em>beta</em>
      * 
-     * _Note_: VAT applies to transaction and surcharge fees for merchants operating in the UK and
-     * France.
+     * <em>Note</em>: VAT applies to transaction and surcharge fees for merchants operating in the
+     * UK and France.
      */
     public List<Tax> getTaxes() {
         return taxes;
@@ -62,27 +64,28 @@ public class PayoutItem {
     /**
      * The type of the credit (positive) or debit (negative) item in the payout (inclusive of VAT if
      * applicable). One of:
-     * <ul>
-     * <li>`payment_paid_out` (credit)</li>
-     * <li>`payment_failed` (debit): The payment failed to be processed.</li>
-     * <li>`payment_charged_back` (debit): The payment has been charged back.</li>
-     * <li>`payment_refunded` (debit): The payment has been refunded to the customer.</li>
-     * <li>`refund` (debit): A refund sent to a customer, not linked to a payment.</li>
-     * <li>`refund_funds_returned` (credit): The refund could not be sent to the customer, and the
-     * funds have been returned to you.</li>
-     * <li>`gocardless_fee` (credit/debit): The fees that GoCardless charged for a payment. In the
-     * case of a payment failure or chargeback, these will appear as credits. Will include taxes if
-     * applicable for merchants.</li>
-     * <li>`app_fee` (credit/debit): The optional fees that a partner may have taken for a payment.
-     * In the case of a payment failure or chargeback, these will appear as credits.</li>
-     * <li>`revenue_share` (credit/debit): A share of the fees that GoCardless collected which some
-     * partner integrations receive when their users take payments. Only shown in partner payouts.
-     * In the case of a payment failure or chargeback, these will appear as credits.</li>
-     * <li>`surcharge_fee` (credit/debit): GoCardless deducted a surcharge fee as the payment failed
-     * or was charged back, or refunded a surcharge fee as the bank or customer cancelled the
-     * chargeback. Will include taxes if applicable for merchants.</li>
-     * </ul>
      * 
+     * <ul>
+     * <li><code>payment_paid_out</code> (credit)</li>
+     * <li><code>payment_failed</code> (debit): The payment failed to be processed.</li>
+     * <li><code>payment_charged_back</code> (debit): The payment has been charged back.</li>
+     * <li><code>payment_refunded</code> (debit): The payment has been refunded to the
+     * customer.</li>
+     * <li><code>refund</code> (debit): A refund sent to a customer, not linked to a payment.</li>
+     * <li><code>refund_funds_returned</code> (credit): The refund could not be sent to the
+     * customer, and the funds have been returned to you.</li>
+     * <li><code>gocardless_fee</code> (credit/debit): The fees that GoCardless charged for a
+     * payment. In the case of a payment failure or chargeback, these will appear as credits. Will
+     * include taxes if applicable for merchants.</li>
+     * <li><code>app_fee</code> (credit/debit): The optional fees that a partner may have taken for
+     * a payment. In the case of a payment failure or chargeback, these will appear as credits.</li>
+     * <li><code>revenue_share</code> (credit/debit): A share of the fees that GoCardless collected
+     * which some partner integrations receive when their users take payments. Only shown in partner
+     * payouts. In the case of a payment failure or chargeback, these will appear as credits.</li>
+     * <li><code>surcharge_fee</code> (credit/debit): GoCardless deducted a surcharge fee as the
+     * payment failed or was charged back, or refunded a surcharge fee as the bank or customer
+     * cancelled the chargeback. Will include taxes if applicable for merchants.</li>
+     * </ul>
      */
     public Type getType() {
         return type;
@@ -119,8 +122,8 @@ public class PayoutItem {
 
         /**
          * Unique identifier, beginning with "MD". Note that this prefix may not apply to mandates
-         * created before 2016. Present only for the items of type `payment_refunded`, `refund` and
-         * `refund_funds_returned`.
+         * created before 2016. Present only for the items of type <code>payment_refunded</code>,
+         * <code>refund</code> and <code>refund_funds_returned</code>.
          */
         public String getMandate() {
             return mandate;
@@ -135,7 +138,8 @@ public class PayoutItem {
 
         /**
          * Unique identifier, beginning with "RF". Present only for the items of type
-         * `payment_refunded`, `refund` and `refund_funds_returned`.
+         * <code>payment_refunded</code>, <code>refund</code> and
+         * <code>refund_funds_returned</code>.
          */
         public String getRefund() {
             return refund;
@@ -168,8 +172,8 @@ public class PayoutItem {
         }
 
         /**
-         * [ISO 4217](https://en.wikipedia.org/wiki/ISO_4217#Active_codes) currency code. Currently
-         * "AUD", "CAD", "DKK", "EUR", "GBP", "NZD", "SEK" and "USD" are supported.
+         * <a href="https://en.wikipedia.org/wiki/ISO_4217#Active_codes">ISO 4217</a> currency code.
+         * Currently "AUD", "CAD", "DKK", "EUR", "GBP", "NZD", "SEK" and "USD" are supported.
          */
         public Currency getCurrency() {
             return currency;
@@ -180,17 +184,17 @@ public class PayoutItem {
          * lowest denomination for the currency (e.g. pence in GBP, cents in EUR), to one decimal
          * place.
          * 
-         * When `currency` and `destination_currency` don't match this will be `null` until the
-         * `exchange_rate` has been finalised.
+         * When <code>currency</code> and <code>destination_currency</code> don't match this will be
+         * <code>null</code> until the <code>exchange_rate</code> has been finalised.
          */
         public String getDestinationAmount() {
             return destinationAmount;
         }
 
         /**
-         * [ISO 4217](https://en.wikipedia.org/wiki/ISO_4217#Active_codes) code for the currency in
-         * which tax is paid out to the tax authorities of your tax jurisdiction. Currently “EUR”
-         * for French merchants and “GBP” for British merchants.
+         * <a href="https://en.wikipedia.org/wiki/ISO_4217#Active_codes">ISO 4217</a> code for the
+         * currency in which tax is paid out to the tax authorities of your tax jurisdiction.
+         * Currently “EUR” for French merchants and “GBP” for British merchants.
          */
         public String getDestinationCurrency() {
             return destinationCurrency;
@@ -202,9 +206,9 @@ public class PayoutItem {
          * Present only if the currency and the destination currency don't match and the exchange
          * rate has been finalised.
          * 
-         * You can listen for the payout's [`tax_exchange_rates_confirmed`
-         * webhook](https://developer.gocardless.com/api-reference/#event-types-payout) to know when
-         * the exchange rate has been finalised for all fees in the payout.
+         * You can listen for the payout's <a href=
+         * "https://developer.gocardless.com/api-reference/#event-types-payout"><code>tax_exchange_rates_confirmed</code>
+         * webhook</a> to know when the exchange rate has been finalised for all fees in the payout.
          */
         public String getExchangeRate() {
             return exchangeRate;

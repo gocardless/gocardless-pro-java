@@ -12,9 +12,10 @@ import java.util.Map;
 /**
  * Service class for working with customer resources.
  *
- * Customer objects hold the contact details for a customer. A customer can have several [customer
- * bank accounts](#core-endpoints-customer-bank-accounts), which in turn can have several Direct
- * Debit [mandates](#core-endpoints-mandates).
+ * Customer objects hold the contact details for a customer. A customer can have several <a href=
+ * "https://developer.gocardless.com/api-reference/#core-endpoints-customer-bank-accounts">customer
+ * bank accounts</a>, which in turn can have several Direct Debit
+ * <a href="https://developer.gocardless.com/api-reference/#core-endpoints-mandates">mandates</a>.
  */
 public class CustomerService {
     private final HttpClient httpClient;
@@ -35,7 +36,9 @@ public class CustomerService {
     }
 
     /**
-     * Returns a [cursor-paginated](#api-usage-cursor-pagination) list of your customers.
+     * Returns a <a href=
+     * "https://developer.gocardless.com/api-reference/#api-usage-cursor-pagination">cursor-paginated</a>
+     * list of your customers.
      */
     public CustomerListRequest<ListResponse<Customer>> list() {
         return new CustomerListRequest<>(httpClient, ListRequest.<Customer>pagingExecutor());
@@ -128,10 +131,11 @@ public class CustomerService {
         }
 
         /**
-         * Customer's company name. Required unless a `given_name` and `family_name` are provided.
-         * For Canadian customers, the use of a `company_name` value will mean that any mandate
-         * created from this customer will be considered to be a "Business PAD" (otherwise, any
-         * mandate will be considered to be a "Personal PAD").
+         * Customer's company name. Required unless a <code>given_name</code> and
+         * <code>family_name</code> are provided. For Canadian customers, the use of a
+         * <code>company_name</code> value will mean that any mandate created from this customer
+         * will be considered to be a "Business PAD" (otherwise, any mandate will be considered to
+         * be a "Personal PAD").
          */
         public CustomerCreateRequest withCompanyName(String companyName) {
             this.companyName = companyName;
@@ -139,8 +143,9 @@ public class CustomerService {
         }
 
         /**
-         * [ISO 3166-1 alpha-2
-         * code.](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2#Officially_assigned_code_elements)
+         * <a href=
+         * "https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2#Officially_assigned_code_elements">ISO
+         * 3166-1 alpha-2 code.</a>
          */
         public CustomerCreateRequest withCountryCode(String countryCode) {
             this.countryCode = countryCode;
@@ -166,7 +171,7 @@ public class CustomerService {
         }
 
         /**
-         * Customer's surname. Required unless a `company_name` is provided.
+         * Customer's surname. Required unless a <code>company_name</code> is provided.
          */
         public CustomerCreateRequest withFamilyName(String familyName) {
             this.familyName = familyName;
@@ -174,7 +179,7 @@ public class CustomerService {
         }
 
         /**
-         * Customer's first name. Required unless a `company_name` is provided.
+         * Customer's first name. Required unless a <code>company_name</code> is provided.
          */
         public CustomerCreateRequest withGivenName(String givenName) {
             this.givenName = givenName;
@@ -182,12 +187,13 @@ public class CustomerService {
         }
 
         /**
-         * [ISO 639-1](https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes) code. Used as the
-         * language for notification emails sent by GoCardless if your organisation does not send
-         * its own (see [compliance requirements](#appendix-compliance-requirements)). Currently
-         * only "en", "fr", "de", "pt", "es", "it", "nl", "da", "nb", "sl", "sv" are supported. If
-         * this is not provided, the language will be chosen based on the `country_code` (if
-         * supplied) or default to "en".
+         * <a href="https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes">ISO 639-1</a> code. Used
+         * as the language for notification emails sent by GoCardless if your organisation does not
+         * send its own (see <a href=
+         * "https://developer.gocardless.com/api-reference/#appendix-compliance-requirements">compliance
+         * requirements</a>). Currently only "en", "fr", "de", "pt", "es", "it", "nl", "da", "nb",
+         * "sl", "sv" are supported. If this is not provided, the language will be chosen based on
+         * the <code>country_code</code> (if supplied) or default to "en".
          */
         public CustomerCreateRequest withLanguage(String language) {
             this.language = language;
@@ -216,8 +222,8 @@ public class CustomerService {
         }
 
         /**
-         * [ITU E.123](https://en.wikipedia.org/wiki/E.123) formatted phone number, including
-         * country code.
+         * <a href="https://en.wikipedia.org/wiki/E.123">ITU E.123</a> formatted phone number,
+         * including country code.
          */
         public CustomerCreateRequest withPhoneNumber(String phoneNumber) {
             this.phoneNumber = phoneNumber;
@@ -234,8 +240,8 @@ public class CustomerService {
 
         /**
          * The customer's address region, county or department. For US customers a 2 letter
-         * [ISO3166-2:US](https://en.wikipedia.org/wiki/ISO_3166-2:US) state code is required (e.g.
-         * `CA` for California).
+         * <a href="https://en.wikipedia.org/wiki/ISO_3166-2:US">ISO3166-2:US</a> state code is
+         * required (e.g. <code>CA</code> for California).
          */
         public CustomerCreateRequest withRegion(String region) {
             this.region = region;
@@ -299,7 +305,9 @@ public class CustomerService {
     /**
      * Request class for {@link CustomerService#list }.
      *
-     * Returns a [cursor-paginated](#api-usage-cursor-pagination) list of your customers.
+     * Returns a <a href=
+     * "https://developer.gocardless.com/api-reference/#api-usage-cursor-pagination">cursor-paginated</a>
+     * list of your customers.
      */
     public static final class CustomerListRequest<S> extends ListRequest<S, Customer> {
         private ActionRequired actionRequired;
@@ -382,8 +390,8 @@ public class CustomerService {
         }
 
         /**
-         * [ISO 4217](https://en.wikipedia.org/wiki/ISO_4217#Active_codes) currency code. Currently
-         * "AUD", "CAD", "DKK", "EUR", "GBP", "NZD", "SEK" and "USD" are supported.
+         * <a href="https://en.wikipedia.org/wiki/ISO_4217#Active_codes">ISO 4217</a> currency code.
+         * Currently "AUD", "CAD", "DKK", "EUR", "GBP", "NZD", "SEK" and "USD" are supported.
          */
         public CustomerListRequest<S> withCurrency(Currency currency) {
             this.currency = currency;
@@ -400,9 +408,10 @@ public class CustomerService {
 
         /**
          * The direction to sort in. One of:
+         * 
          * <ul>
-         * <li>`asc`</li>
-         * <li>`desc`</li>
+         * <li><code>asc</code></li>
+         * <li><code>desc</code></li>
          * </ul>
          */
         public CustomerListRequest<S> withSortDirection(SortDirection sortDirection) {
@@ -412,10 +421,11 @@ public class CustomerService {
 
         /**
          * Field by which to sort records. One of:
+         * 
          * <ul>
-         * <li>`name`</li>
-         * <li>`company_name`</li>
-         * <li>`created_at`</li>
+         * <li><code>name</code></li>
+         * <li><code>company_name</code></li>
+         * <li><code>created_at</code></li>
          * </ul>
          */
         public CustomerListRequest<S> withSortField(SortField sortField) {
@@ -682,10 +692,11 @@ public class CustomerService {
         }
 
         /**
-         * Customer's company name. Required unless a `given_name` and `family_name` are provided.
-         * For Canadian customers, the use of a `company_name` value will mean that any mandate
-         * created from this customer will be considered to be a "Business PAD" (otherwise, any
-         * mandate will be considered to be a "Personal PAD").
+         * Customer's company name. Required unless a <code>given_name</code> and
+         * <code>family_name</code> are provided. For Canadian customers, the use of a
+         * <code>company_name</code> value will mean that any mandate created from this customer
+         * will be considered to be a "Business PAD" (otherwise, any mandate will be considered to
+         * be a "Personal PAD").
          */
         public CustomerUpdateRequest withCompanyName(String companyName) {
             this.companyName = companyName;
@@ -693,8 +704,9 @@ public class CustomerService {
         }
 
         /**
-         * [ISO 3166-1 alpha-2
-         * code.](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2#Officially_assigned_code_elements)
+         * <a href=
+         * "https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2#Officially_assigned_code_elements">ISO
+         * 3166-1 alpha-2 code.</a>
          */
         public CustomerUpdateRequest withCountryCode(String countryCode) {
             this.countryCode = countryCode;
@@ -720,7 +732,7 @@ public class CustomerService {
         }
 
         /**
-         * Customer's surname. Required unless a `company_name` is provided.
+         * Customer's surname. Required unless a <code>company_name</code> is provided.
          */
         public CustomerUpdateRequest withFamilyName(String familyName) {
             this.familyName = familyName;
@@ -728,7 +740,7 @@ public class CustomerService {
         }
 
         /**
-         * Customer's first name. Required unless a `company_name` is provided.
+         * Customer's first name. Required unless a <code>company_name</code> is provided.
          */
         public CustomerUpdateRequest withGivenName(String givenName) {
             this.givenName = givenName;
@@ -736,12 +748,13 @@ public class CustomerService {
         }
 
         /**
-         * [ISO 639-1](https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes) code. Used as the
-         * language for notification emails sent by GoCardless if your organisation does not send
-         * its own (see [compliance requirements](#appendix-compliance-requirements)). Currently
-         * only "en", "fr", "de", "pt", "es", "it", "nl", "da", "nb", "sl", "sv" are supported. If
-         * this is not provided, the language will be chosen based on the `country_code` (if
-         * supplied) or default to "en".
+         * <a href="https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes">ISO 639-1</a> code. Used
+         * as the language for notification emails sent by GoCardless if your organisation does not
+         * send its own (see <a href=
+         * "https://developer.gocardless.com/api-reference/#appendix-compliance-requirements">compliance
+         * requirements</a>). Currently only "en", "fr", "de", "pt", "es", "it", "nl", "da", "nb",
+         * "sl", "sv" are supported. If this is not provided, the language will be chosen based on
+         * the <code>country_code</code> (if supplied) or default to "en".
          */
         public CustomerUpdateRequest withLanguage(String language) {
             this.language = language;
@@ -770,8 +783,8 @@ public class CustomerService {
         }
 
         /**
-         * [ITU E.123](https://en.wikipedia.org/wiki/E.123) formatted phone number, including
-         * country code.
+         * <a href="https://en.wikipedia.org/wiki/E.123">ITU E.123</a> formatted phone number,
+         * including country code.
          */
         public CustomerUpdateRequest withPhoneNumber(String phoneNumber) {
             this.phoneNumber = phoneNumber;
@@ -788,8 +801,8 @@ public class CustomerService {
 
         /**
          * The customer's address region, county or department. For US customers a 2 letter
-         * [ISO3166-2:US](https://en.wikipedia.org/wiki/ISO_3166-2:US) state code is required (e.g.
-         * `CA` for California).
+         * <a href="https://en.wikipedia.org/wiki/ISO_3166-2:US">ISO3166-2:US</a> state code is
+         * required (e.g. <code>CA</code> for California).
          */
         public CustomerUpdateRequest withRegion(String region) {
             this.region = region;

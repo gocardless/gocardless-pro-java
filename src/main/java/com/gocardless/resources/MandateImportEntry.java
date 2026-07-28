@@ -5,23 +5,26 @@ import java.util.Map;
 /**
  * Represents a mandate import entry resource returned from the API.
  *
- * Mandate Import Entries are added to a [Mandate Import](#core-endpoints-mandate-imports). Each
- * entry corresponds to one mandate to be imported into GoCardless.
+ * Mandate Import Entries are added to a
+ * <a href="https://developer.gocardless.com/api-reference/#core-endpoints-mandate-imports">Mandate
+ * Import</a>. Each entry corresponds to one mandate to be imported into GoCardless.
  * 
  * To import a mandate you will need:
+ * 
  * <ol>
  * <li>Identifying information about the customer (name/company and address)</li>
  * <li>Bank account details, consisting of an account holder name and either an IBAN or
- * <a href="#appendix-local-bank-details">local bank details</a></li>
+ * <a href="https://developer.gocardless.com/api-reference/#appendix-local-bank-details">local bank
+ * details</a></li>
  * <li>Amendment details (SEPA only)</li>
  * </ol>
- * 
- * We suggest you provide a `record_identifier` (which is unique within the context of a single
- * mandate import) to help you to identify mandates that have been created once the import has been
- * processed by GoCardless. You can [list the mandate import
- * entries](#mandate-import-entries-list-all-mandate-import-entries), match them up in your system
- * using the `record_identifier`, and look at the `links` fields to find the mandate, customer and
- * customer bank account that have been imported.
+ * We suggest you provide a <code>record_identifier</code> (which is unique within the context of a
+ * single mandate import) to help you to identify mandates that have been created once the import
+ * has been processed by GoCardless. You can <a href=
+ * "https://developer.gocardless.com/api-reference/#mandate-import-entries-list-all-mandate-import-entries">list
+ * the mandate import entries</a>, match them up in your system using the
+ * <code>record_identifier</code>, and look at the <code>links</code> fields to find the mandate,
+ * customer and customer bank account that have been imported.
  * 
  * <p class="restricted-notice">
  * <strong>Restricted</strong>: This API is currently only available for approved integrators -
@@ -39,7 +42,9 @@ public class MandateImportEntry {
     private String recordIdentifier;
 
     /**
-     * Fixed [timestamp](#api-usage-dates-and-times), recording when this resource was created.
+     * Fixed <a href=
+     * "https://developer.gocardless.com/api-reference/#api-usage-dates-and-times">timestamp</a>,
+     * recording when this resource was created.
      */
     public String getCreatedAt() {
         return createdAt;
@@ -62,7 +67,6 @@ public class MandateImportEntry {
     /**
      * A unique identifier for this entry, which you can use (once the import has been processed by
      * GoCardless) to identify the records that have been created. Limited to 255 characters.
-     * 
      */
     public String getRecordIdentifier() {
         return recordIdentifier;
@@ -106,9 +110,9 @@ public class MandateImportEntry {
         }
 
         /**
-         * The ID of the mandate import. This is returned when you [create a Mandate
-         * Import](#mandate-imports-create-a-new-mandate-import).
-         * 
+         * The ID of the mandate import. This is returned when you <a href=
+         * "https://developer.gocardless.com/api-reference/#mandate-imports-create-a-new-mandate-import">create
+         * a Mandate Import</a>.
          */
         public String getMandateImport() {
             return mandateImport;
