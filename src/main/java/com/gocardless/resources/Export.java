@@ -88,8 +88,7 @@ public class Export {
         PARTNER_FEES, @SerializedName("payments_import_template")
         PAYMENTS_IMPORT_TEMPLATE, @SerializedName("payment_account_statement")
         PAYMENT_ACCOUNT_STATEMENT, @SerializedName("outbound_payments_index")
-        OUTBOUND_PAYMENTS_INDEX, @SerializedName("payment_account_transactions")
-        PAYMENT_ACCOUNT_TRANSACTIONS, @SerializedName("unknown")
+        OUTBOUND_PAYMENTS_INDEX, @SerializedName("unknown")
         UNKNOWN
     }
 }
