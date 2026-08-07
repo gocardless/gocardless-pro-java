@@ -73,10 +73,14 @@ public class BillingRequestService {
      * bank account is discovered to be closed or invalid, the customer is requested to adjust the
      * account number/routing number and succeed in this check to continue with the flow.
      * 
-     * <em>BACS scheme</em> <a href=
+     * <em>BACS and SEPA schemes</em> <a href=
      * "https://hub.gocardless.com/s/article/Introduction-to-Payer-Name-Verification?language=en_GB">Payer
-     * Name Verification</a> is enabled by default for UK based bank accounts, meaning we verify the
-     * account holder name and bank account number match the details held by the relevant bank.
+     * Name Verification</a> is enabled by default for UK and Eurozone based bank accounts, meaning
+     * we verify the account holder name and bank account number/IBAN match the details held by the
+     * relevant bank. If there is no match, the endpoint will return a 422 - validation error on
+     * account_holder_name: "Account holder name does not match bank account details provided".
+     * Testing instructions are <a href=
+     * "https://developer.gocardless.com/developer-tools/scenario-simulators/#payer_name_verification">here</a>
      */
     public BillingRequestCollectBankAccountRequest collectBankAccount(String identity) {
         return new BillingRequestCollectBankAccountRequest(httpClient, identity);
@@ -2551,10 +2555,14 @@ public class BillingRequestService {
      * bank account is discovered to be closed or invalid, the customer is requested to adjust the
      * account number/routing number and succeed in this check to continue with the flow.
      * 
-     * <em>BACS scheme</em> <a href=
+     * <em>BACS and SEPA schemes</em> <a href=
      * "https://hub.gocardless.com/s/article/Introduction-to-Payer-Name-Verification?language=en_GB">Payer
-     * Name Verification</a> is enabled by default for UK based bank accounts, meaning we verify the
-     * account holder name and bank account number match the details held by the relevant bank.
+     * Name Verification</a> is enabled by default for UK and Eurozone based bank accounts, meaning
+     * we verify the account holder name and bank account number/IBAN match the details held by the
+     * relevant bank. If there is no match, the endpoint will return a 422 - validation error on
+     * account_holder_name: "Account holder name does not match bank account details provided".
+     * Testing instructions are <a href=
+     * "https://developer.gocardless.com/developer-tools/scenario-simulators/#payer_name_verification">here</a>
      */
     public static final class BillingRequestCollectBankAccountRequest
             extends PostRequest<BillingRequest> {
