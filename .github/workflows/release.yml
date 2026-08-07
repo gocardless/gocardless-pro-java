@@ -19,7 +19,7 @@ jobs:
         run: |
           git config --global user.name "github-actions[bot]"
           git config --global user.email "github-actions[bot]@users.noreply.github.com"
-      - uses: knope-dev/action@v2.1.2
+      - uses: gocardless/github-actions/proxies/knope-dev-action@master
         with:
           version: 0.23.0
       - run: knope release --verbose
