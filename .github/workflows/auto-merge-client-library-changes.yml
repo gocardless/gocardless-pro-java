@@ -9,6 +9,63 @@ permissions:
   pull-requests: write
 
 jobs:
-  run:
-    uses: gocardless/github-actions/.github/workflows/auto-merge-client-library-changes.yml@master
-    secrets: inherit
+  merge-if-ready:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Find open template-changes PR from gocardless-ci-robot
+        id: find-pr
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+        run: |
+          set -euo pipefail
+
+          pr_number=$(gh pr list --repo "$GITHUB_REPOSITORY" --head template-changes --state open \
+            --json number,author --jq '.[] | select(.author.login | endswith("gocardless-ci-robot")) | .number')
+
+          if [ -z "$pr_number" ]; then
+            echo "No open template-changes PR from gocardless-ci-robot"
+          fi
+
+          echo "pr_number=$pr_number" >> "$GITHUB_OUTPUT"
+
+      # Approved by github-actions[bot] via the default token - a different actor to
+      # gocardless-ci-robot[bot], which merges below. This satisfies the repo's required
+      # approving review count through normal review mechanics, without needing any
+      # ruleset bypass for gocardless-ci-robot.
+      - name: Approve PR
+        if: steps.find-pr.outputs.pr_number != ''
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+        run: |
+          set -euo pipefail
+
+          pr_number="${{ steps.find-pr.outputs.pr_number }}"
+          already_approved=$(gh pr view "$pr_number" --repo "$GITHUB_REPOSITORY" --json reviews \
+            --jq '[.reviews[] | select(.author.login == "github-actions" and .state == "APPROVED")] | length')
+
+          if [ "$already_approved" -gt 0 ]; then
+            echo "Already approved by github-actions[bot], skipping"
+            exit 0
+          fi
+
+          gh pr review "$pr_number" --repo "$GITHUB_REPOSITORY" --approve
+
+      - name: Merge template-changes PR once it's been open 24h
+        if: steps.find-pr.outputs.pr_number != ''
+        env:
+          GITHUB_TOKEN: ${{ secrets.GOCARDLESS_CI_ROBOT_TOKEN }}
+        run: |
+          set -euo pipefail
+
+          pr_number="${{ steps.find-pr.outputs.pr_number }}"
+          last_commit_date=$(gh pr view "$pr_number" --repo "$GITHUB_REPOSITORY" --json commits --jq '.commits[-1].committedDate')
+          age_seconds=$(( $(date -u +%s) - $(date -u -d "$last_commit_date" +%s) ))
+
+          echo "PR #$pr_number last pushed to $((age_seconds / 3600))h ago"
+
+          if [ "$age_seconds" -lt $((24 * 3600)) ]; then
+            echo "Still within the 24h window, skipping"
+            exit 0
+          fi
+
+          gh pr merge "$pr_number" --repo "$GITHUB_REPOSITORY" --auto --merge
