@@ -29,6 +29,7 @@ plugins {
 sourceCompatibility = 1.8
 targetCompatibility = 1.8
 group = 'com.gocardless'
+version = '8.6.0'
 
 apply plugin: 'ch.raffael.pegdown-doclet'
 
@@ -54,7 +55,7 @@ dependencies {
     implementation 'com.google.code.gson:gson:2.14.0'
     implementation("com.google.guava:guava:33.6.0-jre")
     implementation 'org.slf4j:slf4j-api:2.0.18'
-    implementation 'commons-codec:commons-codec:1.22.0'
+    implementation 'commons-codec:commons-codec:1.22.1'
 
     implementation('com.github.rholder:guava-retrying:2.0.0') {
       exclude group: 'com.google.guava', module: 'guava'
@@ -63,13 +64,6 @@ dependencies {
     testImplementation 'junit:junit:4.13.2'
     testImplementation 'org.assertj:assertj-core:3.27.7'
     testImplementation 'com.squareup.okhttp3:mockwebserver:5.4.0'
-}
-
-processResources {
-    inputs.property('version', project.version.toString())
-    filesMatching('version.properties') {
-        expand(version: project.version)
-    }
 }
 
 javadoc {

@@ -8,24 +8,20 @@ This library provides a simple wrapper around the [GoCardless API](http://develo
 
 ## Getting started
 
-[![Maven Central](https://img.shields.io/maven-central/v/com.gocardless/gocardless-pro.svg)](https://central.sonatype.com/artifact/com.gocardless/gocardless-pro)
-
-Add the dependency, replacing `VERSION` with the [latest version](https://central.sonatype.com/artifact/com.gocardless/gocardless-pro) (shown in the badge above):
-
 With Maven:
 
 ```xml
 <dependency>
     <groupId>com.gocardless</groupId>
     <artifactId>gocardless-pro</artifactId>
-    <version>VERSION</version>
+    <version>8.6.0</version>
 </dependency>
 ```
 
 With Gradle:
 
 ```
-implementation 'com.gocardless:gocardless-pro:VERSION'
+implementation 'com.gocardless:gocardless-pro:8.6.0'
 ```
 
 ## Initializing the client

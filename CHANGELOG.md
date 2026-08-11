@@ -1,6 +1,5 @@
+<!-- This file is generated, please add to it using `knope document-change` in the client-library-templates repo -->
 # Changelog
-
-This is where the changes in each release are documented.
 
 ## 8.6.0
 

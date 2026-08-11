@@ -10,9 +10,7 @@ import com.google.common.base.Throwables;
 import com.google.common.collect.ImmutableMap;
 import com.google.gson.Gson;
 import java.io.IOException;
-import java.io.InputStream;
 import java.util.Map;
-import java.util.Properties;
 import java.util.concurrent.Callable;
 import java.util.concurrent.ExecutionException;
 import okhttp3.*;
@@ -36,28 +34,8 @@ public class HttpClient {
      */
     private static final String DISALLOWED_USER_AGENT_CHARACTERS =
             "[^\\w!#$%&'\\*\\+\\-\\.\\^`\\|~]";
-    /**
-     * The client version is baked into version.properties at build time (see build.gradle's
-     * processResources config) rather than hardcoded here, so it always matches what's actually
-     * being built/published instead of a value fixed at code-generation time.
-     */
-    private static final String CLIENT_VERSION = loadClientVersion();
-
-    private static String loadClientVersion() {
-        try (InputStream in = HttpClient.class.getResourceAsStream("/version.properties")) {
-            if (in == null) {
-                return "unknown";
-            }
-            Properties properties = new Properties();
-            properties.load(in);
-            return properties.getProperty("version", "unknown");
-        } catch (IOException e) {
-            return "unknown";
-        }
-    }
-
     private static final String USER_AGENT =
-            String.format("gocardless-pro-java/%s java/%s %s/%s %s/%s", CLIENT_VERSION,
+            String.format("gocardless-pro-java/8.6.0 java/%s %s/%s %s/%s",
                     cleanUserAgentToken(System.getProperty("java.vm.specification.version")),
                     cleanUserAgentToken(System.getProperty("java.vm.name")),
                     cleanUserAgentToken(System.getProperty("java.version")),
@@ -71,7 +49,7 @@ public class HttpClient {
         builder.put("GoCardless-Version", "2015-07-06");
         builder.put("Accept", "application/json");
         builder.put("GoCardless-Client-Library", "gocardless-pro-java");
-        builder.put("GoCardless-Client-Version", CLIENT_VERSION);
+        builder.put("GoCardless-Client-Version", "8.6.0");
         HEADERS = builder.build();
     }
     private final OkHttpClient rawClient;
