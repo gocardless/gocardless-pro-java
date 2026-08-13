@@ -37,7 +37,7 @@ jobs:
         id: notes
         if: steps.check.outputs.should_release == 'true'
         run: |
-          VERSION="${{ steps.check.outputs.version }}"
+          VERSION="${{ steps.version.outputs.version }}"
           NOTES=""
           if [ -f CHANGELOG.md ]; then
             NOTES=$(awk -v ver="$VERSION" '
