@@ -998,7 +998,7 @@ public class MandateImportEntryService {
          * One of:
          * 
          * <ul>
-         * <li><code>sucessfully_processed</code>: the entry has been imported and the associated
+         * <li><code>successfully_processed</code>: the entry has been imported and the associated
          * records created.</li>
          * <li><code>unsuccessfully_processed</code>: the entry could not be processed due to an
          * error, see the 'processing_errors' value</li>
