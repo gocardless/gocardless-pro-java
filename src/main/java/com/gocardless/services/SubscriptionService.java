@@ -598,7 +598,7 @@ public class SubscriptionService {
         }
 
         /**
-         * Upto 5 of:
+         * Up to 5 of:
          * 
          * <ul>
          * <li><code>pending_customer_approval</code></li>
@@ -616,7 +616,7 @@ public class SubscriptionService {
         }
 
         /**
-         * Upto 5 of:
+         * Up to 5 of:
          * 
          * <ul>
          * <li><code>pending_customer_approval</code></li>
