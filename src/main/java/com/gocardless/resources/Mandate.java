@@ -122,9 +122,9 @@ public class Mandate {
     }
 
     /**
-     * If this is an an ACH mandate, the earliest date that can be used as a
-     * <code>charge_date</code> on any newly created payment to be charged through standard ACH,
-     * rather than Faster ACH. This value will change over time.
+     * If this is an ACH mandate, the earliest date that can be used as a <code>charge_date</code>
+     * on any newly created payment to be charged through standard ACH, rather than Faster ACH. This
+     * value will change over time.
      * 
      * It is only present in the API response for ACH mandates.
      */
