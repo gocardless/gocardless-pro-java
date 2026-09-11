@@ -369,7 +369,7 @@ public class InstalmentScheduleService {
 
         @Override
         protected String getPathTemplate() {
-            return "instalment_schedules";
+            return "instalment_schedules/create_with_dates";
         }
 
         @Override
@@ -763,7 +763,7 @@ public class InstalmentScheduleService {
 
         @Override
         protected String getPathTemplate() {
-            return "instalment_schedules";
+            return "instalment_schedules/create_with_schedule";
         }
 
         @Override
