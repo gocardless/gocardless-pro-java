@@ -343,7 +343,9 @@ public class Event {
             PAD, @SerializedName("pay_to")
             PAY_TO, @SerializedName("sepa_core")
             SEPA_CORE, @SerializedName("sepa_cor1")
-            SEPA_COR1, @SerializedName("unknown")
+            SEPA_COR1, @SerializedName("sepa_credit_transfer")
+            SEPA_CREDIT_TRANSFER, @SerializedName("sepa_instant_credit_transfer")
+            SEPA_INSTANT_CREDIT_TRANSFER, @SerializedName("unknown")
             UNKNOWN
         }
     }
@@ -634,7 +636,11 @@ public class Event {
             APP, @SerializedName("user")
             USER, @SerializedName("gc_team")
             GC_TEAM, @SerializedName("access_token")
-            ACCESS_TOKEN, @SerializedName("unknown")
+            ACCESS_TOKEN, @SerializedName("billing_request")
+            BILLING_REQUEST, @SerializedName("billing_request_flow")
+            BILLING_REQUEST_FLOW, @SerializedName("dropin")
+            DROPIN, @SerializedName("hosted_payment_page")
+            HOSTED_PAYMENT_PAGE, @SerializedName("unknown")
             UNKNOWN
         }
     }
