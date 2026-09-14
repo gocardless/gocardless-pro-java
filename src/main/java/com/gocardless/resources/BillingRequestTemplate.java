@@ -31,7 +31,7 @@ public class BillingRequestTemplate {
     private String mandateRequestDescription;
     private Map<String, String> mandateRequestMetadata;
     private String mandateRequestScheme;
-    private String mandateRequestVerify;
+    private MandateRequestVerify mandateRequestVerify;
     private Map<String, String> metadata;
     private String name;
     private String paymentRequestAmount;
@@ -111,7 +111,7 @@ public class BillingRequestTemplate {
     /**
      * Verification preference for the mandate.
      */
-    public String getMandateRequestVerify() {
+    public MandateRequestVerify getMandateRequestVerify() {
         return mandateRequestVerify;
     }
 
@@ -190,6 +190,15 @@ public class BillingRequestTemplate {
      */
     public String getUpdatedAt() {
         return updatedAt;
+    }
+
+    public enum MandateRequestVerify {
+        @SerializedName("minimum")
+        MINIMUM, @SerializedName("recommended")
+        RECOMMENDED, @SerializedName("when_available")
+        WHEN_AVAILABLE, @SerializedName("always")
+        ALWAYS, @SerializedName("unknown")
+        UNKNOWN
     }
 
     /**
