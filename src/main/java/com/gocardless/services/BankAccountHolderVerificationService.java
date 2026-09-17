@@ -49,6 +49,7 @@ public class BankAccountHolderVerificationService {
     public static final class BankAccountHolderVerificationCreateRequest
             extends IdempotentPostRequest<BankAccountHolderVerification> {
         private Links links;
+        private String reference;
         private Type type;
 
         public BankAccountHolderVerificationCreateRequest withLinks(Links links) {
@@ -64,6 +65,15 @@ public class BankAccountHolderVerificationService {
                 links = new Links();
             }
             links.withBankAccount(bankAccount);
+            return this;
+        }
+
+        /**
+         * An alphanumeric reference code used by some financial institutions to identify an
+         * individual account.
+         */
+        public BankAccountHolderVerificationCreateRequest withReference(String reference) {
+            this.reference = reference;
             return this;
         }
 
