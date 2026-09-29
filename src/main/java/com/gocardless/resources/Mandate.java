@@ -257,6 +257,7 @@ public class Mandate {
         private Integer maxAmountPerPeriod;
         private Integer maxPaymentsPerPeriod;
         private Period period;
+        private PeriodAlignment periodAlignment;
         private String startDate;
 
         /**
@@ -295,6 +296,13 @@ public class Mandate {
         }
 
         /**
+         * The alignment of the payment period.
+         */
+        public PeriodAlignment getPeriodAlignment() {
+            return periodAlignment;
+        }
+
+        /**
          * The date from which payments can be taken
          */
         public String getStartDate() {
@@ -308,6 +316,13 @@ public class Mandate {
             MONTH, @SerializedName("year")
             YEAR, @SerializedName("flexible")
             FLEXIBLE, @SerializedName("unknown")
+            UNKNOWN
+        }
+
+        public enum PeriodAlignment {
+            @SerializedName("calendar")
+            CALENDAR, @SerializedName("consent")
+            CONSENT, @SerializedName("unknown")
             UNKNOWN
         }
     }

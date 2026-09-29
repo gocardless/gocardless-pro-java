@@ -199,22 +199,7 @@ public class EventService {
 
         /**
          * Includes linked resources in the response. Must be used with the
-         * <code>resource_type</code> parameter specified. The include should be one of:
-         * 
-         * <ul>
-         * <li><code>billing_request</code></li>
-         * <li><code>creditor</code></li>
-         * <li><code>instalment_schedule</code></li>
-         * <li><code>mandate</code></li>
-         * <li><code>payer_authorisation</code></li>
-         * <li><code>payment</code></li>
-         * <li><code>payout</code></li>
-         * <li><code>refund</code></li>
-         * <li><code>scheme_identifier</code></li>
-         * <li><code>subscription</code></li>
-         * <li><code>outbound_payment</code></li>
-         * <li><code>payment_account_transaction</code></li>
-         * </ul>
+         * <code>resource_type</code> parameter specified.
          */
         public EventListRequest<S> withInclude(Include include) {
             this.include = include;
@@ -324,24 +309,7 @@ public class EventService {
          * <code>export</code>,<code>instalment_schedule</code>, <code>mandate</code>,
          * <code>payer_authorisation</code>, <code>payment</code>, <code>payout</code>,
          * <code>refund</code>, <code>scheme_identifier</code>, <code>subscription</code>,
-         * <code>outbound_payment</code> or <code>payment_account_transaction</code> parameters. The
-         * type can be one of:
-         * 
-         * <ul>
-         * <li><code>billing_requests</code></li>
-         * <li><code>creditors</code></li>
-         * <li><code>exports</code></li>
-         * <li><code>instalment_schedules</code></li>
-         * <li><code>mandates</code></li>
-         * <li><code>payer_authorisations</code></li>
-         * <li><code>payments</code></li>
-         * <li><code>payouts</code></li>
-         * <li><code>refunds</code></li>
-         * <li><code>scheme_identifiers</code></li>
-         * <li><code>subscriptions</code></li>
-         * <li><code>outbound_payments</code></li>
-         * <li><code>payment_account_transactions</code></li>
-         * </ul>
+         * <code>outbound_payment</code> or <code>payment_account_transaction</code> parameters.
          */
         public EventListRequest<S> withResourceType(ResourceType resourceType) {
             this.resourceType = resourceType;
