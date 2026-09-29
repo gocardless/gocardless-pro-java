@@ -19,12 +19,18 @@ jobs:
         id: version
         run: |
           VERSION=$(grep "^version = " build.gradle | sed "s/version = '\(.*\)'/\1/")
+          # Guard against a crafted version string reaching later shell commands.
+          if [[ ! "$VERSION" =~ ^[0-9]+\.[0-9]+\.[0-9]+([-+][0-9A-Za-z.-]+)?$ ]]; then
+            echo "Refusing to release: '$VERSION' is not a valid semantic version"
+            exit 1
+          fi
           echo "version=$VERSION" >> $GITHUB_OUTPUT
 
       - name: Check if tag exists
         id: check
+        env:
+          VERSION: ${{ steps.version.outputs.version }}
         run: |
-          VERSION="${{ steps.version.outputs.version }}"
           if git rev-parse "v${VERSION}" >/dev/null 2>&1; then
             echo "Tag v${VERSION} already exists, skipping release"
             echo "should_release=false" >> $GITHUB_OUTPUT
@@ -36,8 +42,9 @@ jobs:
       - name: Extract changelog notes for this version
         id: notes
         if: steps.check.outputs.should_release == 'true'
+        env:
+          VERSION: ${{ steps.version.outputs.version }}
         run: |
-          VERSION="${{ steps.version.outputs.version }}"
           NOTES=""
           if [ -f CHANGELOG.md ]; then
             NOTES=$(awk -v ver="$VERSION" '
@@ -57,7 +64,7 @@ jobs:
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
-          TAG="v${{ steps.version.outputs.version }}"
+          TAG="v${VERSION}"
           git tag "$TAG"
           git push origin "$TAG"
           if [ -n "$(echo "$NOTES" | tr -d '[:space:]')" ]; then
@@ -67,4 +74,5 @@ jobs:
           fi
         env:
           GITHUB_TOKEN: ${{ secrets.GOCARDLESS_CI_ROBOT_TOKEN }}
+          VERSION: ${{ steps.version.outputs.version }}
           NOTES: ${{ steps.notes.outputs.notes }}
