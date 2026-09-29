@@ -1,12 +1,6 @@
 <!-- This file is generated, please add to it using `knope document-change` in the client-library-templates repo -->
 # Changelog
 
-## 9.3.1 (2026-09-29)
-
-### Fixes
-
-- Add missing institution properties to billing_request schema
-
 ## 9.3.0 (2026-09-29)
 
 ### Features
