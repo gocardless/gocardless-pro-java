@@ -172,6 +172,7 @@ public class PayerAuthorisation {
         private String accountNumberSuffix;
         private AccountType accountType;
         private String bankCode;
+        private String bankName;
         private String branchCode;
         private String countryCode;
         private String currency;
@@ -233,6 +234,13 @@ public class PayerAuthorisation {
          */
         public String getBankCode() {
             return bankCode;
+        }
+
+        /**
+         * Name of bank, taken from the bank details.
+         */
+        public String getBankName() {
+            return bankName;
         }
 
         /**

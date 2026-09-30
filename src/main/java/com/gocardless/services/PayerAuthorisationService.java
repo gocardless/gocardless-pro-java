@@ -283,6 +283,17 @@ public class PayerAuthorisationService {
         }
 
         /**
+         * Name of bank, taken from the bank details.
+         */
+        public PayerAuthorisationCreateRequest withBankAccountBankName(String bankName) {
+            if (bankAccount == null) {
+                bankAccount = new BankAccount();
+            }
+            bankAccount.withBankName(bankName);
+            return this;
+        }
+
+        /**
          * Branch code - see <a href=
          * "https://developer.gocardless.com/api-reference/#appendix-local-bank-details">local
          * details</a> for more information. Alternatively you can provide an <code>iban</code>.
@@ -653,6 +664,7 @@ public class PayerAuthorisationService {
             private String accountNumberSuffix;
             private AccountType accountType;
             private String bankCode;
+            private String bankName;
             private String branchCode;
             private String countryCode;
             private String currency;
@@ -719,6 +731,14 @@ public class PayerAuthorisationService {
              */
             public BankAccount withBankCode(String bankCode) {
                 this.bankCode = bankCode;
+                return this;
+            }
+
+            /**
+             * Name of bank, taken from the bank details.
+             */
+            public BankAccount withBankName(String bankName) {
+                this.bankName = bankName;
                 return this;
             }
 
@@ -1128,6 +1148,17 @@ public class PayerAuthorisationService {
         }
 
         /**
+         * Name of bank, taken from the bank details.
+         */
+        public PayerAuthorisationUpdateRequest withBankAccountBankName(String bankName) {
+            if (bankAccount == null) {
+                bankAccount = new BankAccount();
+            }
+            bankAccount.withBankName(bankName);
+            return this;
+        }
+
+        /**
          * Branch code - see <a href=
          * "https://developer.gocardless.com/api-reference/#appendix-local-bank-details">local
          * details</a> for more information. Alternatively you can provide an <code>iban</code>.
@@ -1492,6 +1523,7 @@ public class PayerAuthorisationService {
             private String accountNumberSuffix;
             private AccountType accountType;
             private String bankCode;
+            private String bankName;
             private String branchCode;
             private String countryCode;
             private String currency;
@@ -1558,6 +1590,14 @@ public class PayerAuthorisationService {
              */
             public BankAccount withBankCode(String bankCode) {
                 this.bankCode = bankCode;
+                return this;
+            }
+
+            /**
+             * Name of bank, taken from the bank details.
+             */
+            public BankAccount withBankName(String bankName) {
+                this.bankName = bankName;
                 return this;
             }
 
