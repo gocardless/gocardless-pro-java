@@ -1,6 +1,5 @@
 package com.gocardless.resources;
 
-import com.google.gson.annotations.SerializedName;
 import java.util.List;
 import java.util.Map;
 
@@ -19,7 +18,6 @@ public class Institution {
         // blank to prevent instantiation
     }
 
-    private Boolean autocompletesCollectBankAccount;
     private String countryCode;
     private String iconUrl;
     private String id;
@@ -27,16 +25,6 @@ public class Institution {
     private String logoUrl;
     private String name;
     private List<String> roles;
-    private Status status;
-
-    /**
-     * Flag to show if selecting this institution in the select_institution action can auto-complete
-     * the collect_bank_account action. The bank can return the payer's bank account details to
-     * GoCardless.
-     */
-    public Boolean getAutocompletesCollectBankAccount() {
-        return autocompletesCollectBankAccount;
-    }
 
     /**
      * <a href=
@@ -88,21 +76,6 @@ public class Institution {
      */
     public List<String> getRoles() {
         return roles;
-    }
-
-    /**
-     * The status of the institution
-     */
-    public Status getStatus() {
-        return status;
-    }
-
-    public enum Status {
-        @SerializedName("enabled")
-        ENABLED, @SerializedName("disabled")
-        DISABLED, @SerializedName("temporarily_disabled")
-        TEMPORARILY_DISABLED, @SerializedName("unknown")
-        UNKNOWN
     }
 
     /**
