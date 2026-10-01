@@ -310,6 +310,30 @@ public class BillingRequestFlowService {
         }
 
         /**
+         * <a href="https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes">ISO 639-1</a> code. Used
+         * as the language for the payment page.
+         */
+        public BillingRequestFlowCreateRequest withPrefilledCustomerLanguage(String language) {
+            if (prefilledCustomer == null) {
+                prefilledCustomer = new PrefilledCustomer();
+            }
+            prefilledCustomer.withLanguage(language);
+            return this;
+        }
+
+        /**
+         * The customer's phone number.
+         */
+        public BillingRequestFlowCreateRequest withPrefilledCustomerPhoneNumber(
+                String phoneNumber) {
+            if (prefilledCustomer == null) {
+                prefilledCustomer = new PrefilledCustomer();
+            }
+            prefilledCustomer.withPhoneNumber(phoneNumber);
+            return this;
+        }
+
+        /**
          * The customer's postal code.
          */
         public BillingRequestFlowCreateRequest withPrefilledCustomerPostalCode(String postalCode) {
@@ -467,6 +491,8 @@ public class BillingRequestFlowService {
             private String email;
             private String familyName;
             private String givenName;
+            private String language;
+            private String phoneNumber;
             private String postalCode;
             private String region;
             private String swedishIdentityNumber;
@@ -551,6 +577,23 @@ public class BillingRequestFlowService {
              */
             public PrefilledCustomer withGivenName(String givenName) {
                 this.givenName = givenName;
+                return this;
+            }
+
+            /**
+             * <a href="https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes">ISO 639-1</a> code.
+             * Used as the language for the payment page.
+             */
+            public PrefilledCustomer withLanguage(String language) {
+                this.language = language;
+                return this;
+            }
+
+            /**
+             * The customer's phone number.
+             */
+            public PrefilledCustomer withPhoneNumber(String phoneNumber) {
+                this.phoneNumber = phoneNumber;
                 return this;
             }
 
