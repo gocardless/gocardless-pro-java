@@ -267,6 +267,8 @@ public class BillingRequestFlow {
         private String email;
         private String familyName;
         private String givenName;
+        private String language;
+        private String phoneNumber;
         private String postalCode;
         private String region;
         private String swedishIdentityNumber;
@@ -342,6 +344,21 @@ public class BillingRequestFlow {
          */
         public String getGivenName() {
             return givenName;
+        }
+
+        /**
+         * <a href="https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes">ISO 639-1</a> code. Used
+         * as the language for the payment page.
+         */
+        public String getLanguage() {
+            return language;
+        }
+
+        /**
+         * The customer's phone number.
+         */
+        public String getPhoneNumber() {
+            return phoneNumber;
         }
 
         /**
