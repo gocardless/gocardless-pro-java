@@ -12,6 +12,9 @@ import java.util.Map;
  * event has happened. The event, the resource and the customer to be notified are all identified in
  * the <code>links</code> property.
  * 
+ * Only <code>payment_created</code>, <code>mandate_created</code> and
+ * <code>subscription_created</code> notifications are supported.
+ * 
  * Note that these are ephemeral records - once the notification has been actioned in some way, it
  * is no longer visible using this API.
  * 

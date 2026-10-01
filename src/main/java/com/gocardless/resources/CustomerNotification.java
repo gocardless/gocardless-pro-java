@@ -9,6 +9,9 @@ import com.google.gson.annotations.SerializedName;
  * event has happened. The event, the resource and the customer to be notified are all identified in
  * the <code>links</code> property.
  * 
+ * Only <code>payment_created</code>, <code>mandate_created</code> and
+ * <code>subscription_created</code> notifications are supported.
+ * 
  * Note that these are ephemeral records - once the notification has been actioned in some way, it
  * is no longer visible using this API.
  * 
@@ -65,18 +68,14 @@ public class CustomerNotification {
     }
 
     /**
-     * The type of notification the customer shall receive. One of:
+     * The type of notification the customer shall receive.
      * 
-     * <ul>
-     * <li><code>payment_created</code></li>
-     * <li><code>payment_cancelled</code></li>
-     * <li><code>mandate_created</code></li>
-     * <li><code>mandate_blocked</code></li>
-     * <li><code>subscription_created</code></li>
-     * <li><code>subscription_cancelled</code></li>
-     * <li><code>instalment_schedule_created</code></li>
-     * <li><code>instalment_schedule_cancelled</code></li>
-     * </ul>
+     * Note: today, only <code>payment_created</code>, <code>mandate_created</code> and
+     * <code>subscription_created</code> notifications are actually supported. The remaining values
+     * are reserved for now.
+     * 
+     * Making a request for an event of any other type will get a <code>403</code>
+     * <code>customer_notifications_notification_type_forbidden</code> error.
      */
     public Type getType() {
         return type;
