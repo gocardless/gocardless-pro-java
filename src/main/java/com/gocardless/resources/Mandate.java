@@ -252,19 +252,44 @@ public class Mandate {
             // blank to prevent instantiation
         }
 
+        private String currency;
         private String endDate;
+        private Integer fixedAmountPerPayment;
+        private String id;
         private Integer maxAmountPerPayment;
         private Integer maxAmountPerPeriod;
         private Integer maxPaymentsPerPeriod;
         private Period period;
         private PeriodAlignment periodAlignment;
+        private String scheme;
         private String startDate;
+
+        /**
+         * The currency for the consent parameters
+         */
+        public String getCurrency() {
+            return currency;
+        }
 
         /**
          * The latest date at which payments can be taken, must occur after start_date if present
          */
         public String getEndDate() {
             return endDate;
+        }
+
+        /**
+         * The fixed amount for each payment, in the lowest denomination for the currency
+         */
+        public Integer getFixedAmountPerPayment() {
+            return fixedAmountPerPayment;
+        }
+
+        /**
+         * Unique identifier for the consent parameters
+         */
+        public String getId() {
+            return id;
         }
 
         /**
@@ -303,6 +328,13 @@ public class Mandate {
         }
 
         /**
+         * The scheme associated with the consent parameters
+         */
+        public String getScheme() {
+            return scheme;
+        }
+
+        /**
          * The date from which payments can be taken
          */
         public String getStartDate() {
@@ -322,7 +354,8 @@ public class Mandate {
         public enum PeriodAlignment {
             @SerializedName("calendar")
             CALENDAR, @SerializedName("consent")
-            CONSENT, @SerializedName("unknown")
+            CONSENT, @SerializedName("creation_date")
+            CREATION_DATE, @SerializedName("unknown")
             UNKNOWN
         }
     }
