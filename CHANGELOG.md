@@ -1,6 +1,12 @@
 <!-- This file is generated, please add to it using `knope document-change` in the client-library-templates repo -->
 # Changelog
 
+## 9.7.0 (2026-10-02)
+
+### Features
+
+- Fixed the email field in merchant_contact_details on Billing Request Flows to correctly allow null values.
+
 ## 9.6.1 (2026-10-02)
 
 ### Fixes
