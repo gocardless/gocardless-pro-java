@@ -265,6 +265,7 @@ public class BillingRequest {
             // blank to prevent instantiation
         }
 
+        private List<String> availableCountryCodes;
         private List<String> availableCurrencies;
         private BankAuthorisation bankAuthorisation;
         private CollectCustomerDetails collectCustomerDetails;
@@ -274,6 +275,14 @@ public class BillingRequest {
         private List<String> requiresActions;
         private Status status;
         private Type type;
+
+        /**
+         * List of country codes supported for collecting bank account details, for the
+         * collect_bank_account action
+         */
+        public List<String> getAvailableCountryCodes() {
+            return availableCountryCodes;
+        }
 
         /**
          * List of currencies the current mandate supports
@@ -1252,6 +1261,7 @@ public class BillingRequest {
         private Links links;
         private Map<String, String> metadata;
         private String reference;
+        private Boolean retryIfPossible;
         private String scheme;
 
         /**
@@ -1320,6 +1330,19 @@ public class BillingRequest {
          */
         public String getReference() {
             return reference;
+        }
+
+        /**
+         * On failure, automatically retry the payment using
+         * <a href="https://developer.gocardless.com/success-plus/overview">intelligent retries</a>.
+         * Default is <code>false</code>.
+         * <p class="notice">
+         * <strong>Important</strong>: To be able to use intelligent retries, Success+ needs to be
+         * enabled in <a href="https://manage.gocardless.com/success-plus">GoCardless dashboard</a>.
+         * </p>
+         */
+        public Boolean getRetryIfPossible() {
+            return retryIfPossible;
         }
 
         /**
