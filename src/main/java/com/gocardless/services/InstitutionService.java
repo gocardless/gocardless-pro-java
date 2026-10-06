@@ -62,6 +62,7 @@ public class InstitutionService {
         private String branchCode;
         private String countryCode;
         private String feature;
+        private Boolean includeDisabled;
         private String scheme;
 
         /**
@@ -86,8 +87,8 @@ public class InstitutionService {
 
         /**
          * The feature that institutions support. The available options include <code>pis</code>,
-         * and <code>vrp_sweeping</code>. If nothing is provided, institutions supporting 'pis' are
-         * returned by default.
+         * <code>vrp_sweeping</code>, and <code>vrp_commercial</code>. If nothing is provided,
+         * institutions supporting 'pis' are returned by default.
          */
         public InstitutionListRequest<S> withFeature(String feature) {
             this.feature = feature;
@@ -95,10 +96,19 @@ public class InstitutionService {
         }
 
         /**
+         * Indicates whether to include temporarily disabled institutions in the response. If not
+         * provided or set to false, only enabled institutions will be returned.
+         */
+        public InstitutionListRequest<S> withIncludeDisabled(Boolean includeDisabled) {
+            this.includeDisabled = includeDisabled;
+            return this;
+        }
+
+        /**
          * The scheme that institutions support. The available options include
          * <code>faster_payments</code>, <code>sepa_credit_transfer</code>, and
-         * <code>sepa_instant_credit_transfer</code>. If nothing is provided, institutions
-         * supporting 'faster_payments' are returned by default.
+         * <code>sepa_instant_credit_transfer</code>. If nothing is provided, no scheme filter is
+         * applied to the returned institutions.
          */
         public InstitutionListRequest<S> withScheme(String scheme) {
             this.scheme = scheme;
@@ -127,6 +137,9 @@ public class InstitutionService {
             }
             if (feature != null) {
                 params.put("feature", feature);
+            }
+            if (includeDisabled != null) {
+                params.put("include_disabled", includeDisabled);
             }
             if (scheme != null) {
                 params.put("scheme", scheme);
