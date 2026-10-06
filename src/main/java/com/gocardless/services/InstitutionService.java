@@ -62,7 +62,7 @@ public class InstitutionService {
         private String branchCode;
         private String countryCode;
         private String feature;
-        private Boolean includeDisabled;
+        private String includeDisabled;
         private String scheme;
 
         /**
@@ -99,7 +99,7 @@ public class InstitutionService {
          * Indicates whether to include temporarily disabled institutions in the response. If not
          * provided or set to false, only enabled institutions will be returned.
          */
-        public InstitutionListRequest<S> withIncludeDisabled(Boolean includeDisabled) {
+        public InstitutionListRequest<S> withIncludeDisabled(String includeDisabled) {
             this.includeDisabled = includeDisabled;
             return this;
         }
@@ -176,7 +176,7 @@ public class InstitutionService {
         private final String identity;
         private String countryCode;
         private List<String> ids;
-        private Boolean includeDisabled;
+        private String includeDisabled;
         private String search;
 
         /**
@@ -216,7 +216,7 @@ public class InstitutionService {
          * provided or set to false, only enabled institutions will be returned.
          */
         public InstitutionListForBillingRequestRequest<S> withIncludeDisabled(
-                Boolean includeDisabled) {
+                String includeDisabled) {
             this.includeDisabled = includeDisabled;
             return this;
         }
