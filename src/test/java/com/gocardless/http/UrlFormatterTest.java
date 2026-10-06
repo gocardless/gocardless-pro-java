@@ -1,6 +1,7 @@
 package com.gocardless.http;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 import com.google.common.collect.ImmutableMap;
 import java.util.Map;
@@ -72,12 +73,66 @@ public class UrlFormatterTest {
     }
 
     @Test
-    public void shouldEncodePathParam() {
+    public void shouldRejectSlashInPathParam() {
         String template = "/foo/:bar";
         Map<String, String> pathParams = ImmutableMap.of("bar", "bar/lah");
         Map<String, Object> queryParams = ImmutableMap.of();
-        HttpUrl result = urlFormatter.formatUrl(template, pathParams, queryParams);
-        assertThat(result.toString()).isEqualTo("http://example.com/foo/bar%2Flah");
+        assertThatThrownBy(() -> urlFormatter.formatUrl(template, pathParams, queryParams))
+                .isInstanceOf(IllegalArgumentException.class);
+    }
+
+    @Test
+    public void shouldRejectQuestionMarkInPathParam() {
+        String template = "/foo/:bar";
+        Map<String, String> pathParams = ImmutableMap.of("bar", "?limit=500");
+        Map<String, Object> queryParams = ImmutableMap.of();
+        assertThatThrownBy(() -> urlFormatter.formatUrl(template, pathParams, queryParams))
+                .isInstanceOf(IllegalArgumentException.class);
+    }
+
+    @Test
+    public void shouldRejectFragmentMarkerInPathParam() {
+        String template = "/foo/:bar";
+        Map<String, String> pathParams = ImmutableMap.of("bar", "ID123#x");
+        Map<String, Object> queryParams = ImmutableMap.of();
+        assertThatThrownBy(() -> urlFormatter.formatUrl(template, pathParams, queryParams))
+                .isInstanceOf(IllegalArgumentException.class);
+    }
+
+    @Test
+    public void shouldRejectControlCharacterInPathParam() {
+        String template = "/foo/:bar";
+        Map<String, String> pathParams = ImmutableMap.of("bar", "ID123\n");
+        Map<String, Object> queryParams = ImmutableMap.of();
+        assertThatThrownBy(() -> urlFormatter.formatUrl(template, pathParams, queryParams))
+                .isInstanceOf(IllegalArgumentException.class);
+    }
+
+    @Test
+    public void shouldRejectDotPathParam() {
+        String template = "/foo/:bar";
+        Map<String, String> pathParams = ImmutableMap.of("bar", ".");
+        Map<String, Object> queryParams = ImmutableMap.of();
+        assertThatThrownBy(() -> urlFormatter.formatUrl(template, pathParams, queryParams))
+                .isInstanceOf(IllegalArgumentException.class);
+    }
+
+    @Test
+    public void shouldRejectDoubleDotPathParam() {
+        String template = "/foo/:bar";
+        Map<String, String> pathParams = ImmutableMap.of("bar", "..");
+        Map<String, Object> queryParams = ImmutableMap.of();
+        assertThatThrownBy(() -> urlFormatter.formatUrl(template, pathParams, queryParams))
+                .isInstanceOf(IllegalArgumentException.class);
+    }
+
+    @Test
+    public void shouldRejectEmptyPathParam() {
+        String template = "/foo/:bar";
+        Map<String, String> pathParams = ImmutableMap.of("bar", "");
+        Map<String, Object> queryParams = ImmutableMap.of();
+        assertThatThrownBy(() -> urlFormatter.formatUrl(template, pathParams, queryParams))
+                .isInstanceOf(IllegalArgumentException.class);
     }
 
     @Test
@@ -97,5 +152,56 @@ public class UrlFormatterTest {
         Map<String, Object> queryParams = ImmutableMap.<String, Object>of();
         HttpUrl result = urlFormatter.formatUrl(template, pathParams, queryParams);
         assertThat(result.toString()).isEqualTo("http://example.com/direct/debit/ID123");
+    }
+    // An absolute or scheme-relative path would replace the configured base URL while the
+    // Authorization header is still attached, handing the token to whichever host it names.
+
+    @Test
+    public void shouldRejectAbsoluteUrlAsPath() {
+        String template = "http://elsewhere.example.com/capture";
+        Map<String, String> pathParams = ImmutableMap.of();
+        Map<String, Object> queryParams = ImmutableMap.of();
+        assertThatThrownBy(() -> urlFormatter.formatUrl(template, pathParams, queryParams))
+                .isInstanceOf(IllegalArgumentException.class);
+    }
+
+    @Test
+    public void shouldRejectSchemeRelativeUrlAsPath() {
+        String template = "//elsewhere.example.com/capture";
+        Map<String, String> pathParams = ImmutableMap.of();
+        Map<String, Object> queryParams = ImmutableMap.of();
+        assertThatThrownBy(() -> urlFormatter.formatUrl(template, pathParams, queryParams))
+                .isInstanceOf(IllegalArgumentException.class);
+    }
+
+    @Test
+    public void shouldRejectBackslashAuthorityAsPath() {
+        // HttpUrl#resolve reads backslashes as slashes, so this is authority syntax that a
+        // check on the raw string would be likely to miss.
+        String template = "\\\\elsewhere.example.com/capture";
+        Map<String, String> pathParams = ImmutableMap.of();
+        Map<String, Object> queryParams = ImmutableMap.of();
+        assertThatThrownBy(() -> urlFormatter.formatUrl(template, pathParams, queryParams))
+                .isInstanceOf(IllegalArgumentException.class);
+    }
+
+    @Test
+    public void shouldRejectAbsoluteUrlOnADifferentPortOfTheSameHost() {
+        String template = "http://example.com:8080/capture";
+        Map<String, String> pathParams = ImmutableMap.of();
+        Map<String, Object> queryParams = ImmutableMap.of();
+        assertThatThrownBy(() -> urlFormatter.formatUrl(template, pathParams, queryParams))
+                .isInstanceOf(IllegalArgumentException.class);
+    }
+
+    @Test
+    public void shouldKeepDotSegmentsOnTheConfiguredBaseUrl() {
+        // Dot segments resolve against the base URL, so they can reach another path on the
+        // same origin but cannot leave it. They are allowed through.
+        String template = "/foo/../other";
+        Map<String, String> pathParams = ImmutableMap.of();
+        Map<String, Object> queryParams = ImmutableMap.of();
+        HttpUrl result = urlFormatter.formatUrl(template, pathParams, queryParams);
+        assertThat(result.toString()).isEqualTo("http://example.com/other");
     }
 }
