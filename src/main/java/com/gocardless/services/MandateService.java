@@ -302,6 +302,7 @@ public class MandateService {
         private String creditor;
         private String customer;
         private String customerBankAccount;
+        private List<String> include;
         private String mandateType;
         private String reference;
         private List<String> scheme;
@@ -407,6 +408,27 @@ public class MandateService {
         }
 
         /**
+         * Includes linked resources in the response. Use <code>customer</code> to embed customer
+         * details, or <code>bank_account</code> to embed bank account details.
+         */
+        public MandateListRequest<S> withInclude(List<String> include) {
+            this.include = include;
+            return this;
+        }
+
+        /**
+         * Includes linked resources in the response. Use <code>customer</code> to embed customer
+         * details, or <code>bank_account</code> to embed bank account details.
+         */
+        public MandateListRequest<S> withInclude(String include) {
+            if (this.include == null) {
+                this.include = new ArrayList<>();
+            }
+            this.include.add(include);
+            return this;
+        }
+
+        /**
          * Number of records to return.
          */
         public MandateListRequest<S> withLimit(Integer limit) {
@@ -496,6 +518,9 @@ public class MandateService {
             }
             if (customerBankAccount != null) {
                 params.put("customer_bank_account", customerBankAccount);
+            }
+            if (include != null) {
+                params.put("include", Joiner.on(",").join(include));
             }
             if (mandateType != null) {
                 params.put("mandate_type", mandateType);
