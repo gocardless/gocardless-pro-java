@@ -51,7 +51,7 @@ repositories {
 }
 
 dependencies {
-    implementation("com.squareup.okhttp3:okhttp:5.4.0")
+    implementation("com.squareup.okhttp3:okhttp:5.5.0")
     implementation 'com.google.code.gson:gson:2.14.0'
     implementation("com.google.guava:guava:33.6.0-jre")
     implementation 'org.slf4j:slf4j-api:2.0.20'
