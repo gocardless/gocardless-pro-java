@@ -48,6 +48,13 @@ public class MockHttp extends ExternalResource {
         server.enqueue(response);
     }
 
+    public void enqueueDelayedResponse(int statusCode, String fixturePath, long delayMillis)
+            throws Exception {
+        String body = Resources.toString(Resources.getResource(fixturePath), UTF_8);
+        server.enqueue(new MockResponse().setBody(body).setResponseCode(statusCode)
+                .setHeadersDelay(delayMillis, java.util.concurrent.TimeUnit.MILLISECONDS));
+    }
+
     public void enqueueNetworkFailure() {
         server.enqueue(new MockResponse().setSocketPolicy(SocketPolicy.DISCONNECT_AT_START));
     }

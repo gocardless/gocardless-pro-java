@@ -5,6 +5,7 @@ import com.gocardless.http.LoggingInterceptor;
 import com.gocardless.services.*;
 import com.google.common.annotations.VisibleForTesting;
 import java.net.Proxy;
+import java.time.Duration;
 import javax.net.ssl.SSLSocketFactory;
 import javax.net.ssl.X509TrustManager;
 import okhttp3.OkHttpClient;
@@ -65,6 +66,10 @@ public class GoCardlessClient {
         private final String accessToken;
         private String baseUrl;
         private Proxy proxy;
+        private Duration connectTimeout;
+        private Duration readTimeout;
+        private Duration writeTimeout;
+        private Duration callTimeout;
         private SSLSocketFactory sslSocketFactory;
         private X509TrustManager trustManager;
         private boolean errorOnIdempotencyConflict;
@@ -111,6 +116,51 @@ public class GoCardlessClient {
          */
         public Builder withProxy(Proxy proxy) {
             this.proxy = proxy;
+            return this;
+        }
+
+        /**
+         * Configures how long to wait for a connection to be established. Defaults to 10 seconds.
+         *
+         * @param connectTimeout the maximum time to wait while connecting; zero means no timeout
+         */
+        public Builder withConnectTimeout(Duration connectTimeout) {
+            this.connectTimeout = connectTimeout;
+            return this;
+        }
+
+        /**
+         * Configures how long to wait for data to arrive once connected, for example while waiting
+         * for the response to start. Defaults to 10 seconds.
+         *
+         * @param readTimeout the maximum time to wait for each read; zero means no timeout
+         */
+        public Builder withReadTimeout(Duration readTimeout) {
+            this.readTimeout = readTimeout;
+            return this;
+        }
+
+        /**
+         * Configures how long to wait for each write of the request to complete. Defaults to 10
+         * seconds.
+         *
+         * @param writeTimeout the maximum time to wait for each write; zero means no timeout
+         */
+        public Builder withWriteTimeout(Duration writeTimeout) {
+            this.writeTimeout = writeTimeout;
+            return this;
+        }
+
+        /**
+         * Configures a limit on the whole of a single attempt, from connecting to reading the
+         * response. There is no call timeout by default. Failed attempts are still retried (see
+         * {@link #withMaxNoOfRetries(int)}), so the total time before an error is raised can exceed
+         * this value.
+         *
+         * @param callTimeout the maximum time to allow for a single attempt; zero means no timeout
+         */
+        public Builder withCallTimeout(Duration callTimeout) {
+            this.callTimeout = callTimeout;
             return this;
         }
 
@@ -168,6 +218,18 @@ public class GoCardlessClient {
          */
         public GoCardlessClient build() {
             OkHttpClient.Builder rawClientBuilder = new OkHttpClient.Builder().proxy(proxy);
+            if (connectTimeout != null) {
+                rawClientBuilder.connectTimeout(connectTimeout);
+            }
+            if (readTimeout != null) {
+                rawClientBuilder.readTimeout(readTimeout);
+            }
+            if (writeTimeout != null) {
+                rawClientBuilder.writeTimeout(writeTimeout);
+            }
+            if (callTimeout != null) {
+                rawClientBuilder.callTimeout(callTimeout);
+            }
             if (sslSocketFactory != null && trustManager != null) {
                 rawClientBuilder.sslSocketFactory(sslSocketFactory, trustManager);
             }

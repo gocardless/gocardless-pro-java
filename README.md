@@ -55,6 +55,18 @@ GoCardlessClient client = GoCardlessClient.newBuilder(accessToken)
     .build();
 ```
 
+By default requests use OkHttp's timeouts: 10 seconds each to connect, to read and to write, and no overall call
+timeout. To change them, use `withConnectTimeout`, `withReadTimeout`, `withWriteTimeout` and `withCallTimeout`, each of which takes a
+`java.time.Duration`. A request that times out raises a `GoCardlessNetworkException` once any automatic retries are
+exhausted:
+
+```java
+GoCardlessClient client = GoCardlessClient.newBuilder(accessToken)
+    .withConnectTimeout(Duration.ofSeconds(5))
+    .withCallTimeout(Duration.ofSeconds(30))
+    .build();
+```
+
 To see the configurable options in full, see the documentation for `GoCardlessClient.Builder`.
 
 If you're upgrading from v2.x, you'll need to update your code for initialising `GoCardlessClient`. See the

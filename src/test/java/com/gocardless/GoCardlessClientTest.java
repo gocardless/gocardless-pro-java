@@ -4,6 +4,7 @@ import static com.gocardless.services.MandateService.MandateListRequest.Status.A
 import static com.gocardless.services.MandateService.MandateListRequest.Status.FAILED;
 import static com.gocardless.services.SubscriptionService.SubscriptionCreateRequest.IntervalUnit.MONTHLY;
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 import com.gocardless.http.ApiResponse;
 import com.gocardless.http.GoCardlessNetworkException;
@@ -16,7 +17,12 @@ import com.gocardless.services.PaymentService.PaymentCreateRequest;
 import com.gocardless.services.SubscriptionService.SubscriptionCreateRequest;
 import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.Lists;
+import java.io.InterruptedIOException;
+import java.lang.reflect.Field;
+import java.net.SocketTimeoutException;
+import java.time.Duration;
 import java.util.List;
+import okhttp3.OkHttpClient;
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
@@ -348,5 +354,62 @@ public class GoCardlessClientTest {
                 .withGivenName("Sharon").withAddressLine1("27 Acer Road").withAddressLine2("Apt 2")
                 .withCity("London").withPostalCode("E8 3GX").withCountryCode("GB");
         assertThat(client.getHttpClient().getMaxNoOfRetries()).isEqualTo(HttpClient.MAX_RETRIES);
+    }
+
+    private OkHttpClient rawClientOf(GoCardlessClient goCardlessClient) throws Exception {
+        Field field = HttpClient.class.getDeclaredField("rawClient");
+        field.setAccessible(true);
+        return (OkHttpClient) field.get(goCardlessClient.getHttpClient());
+    }
+
+    @Test
+    public void shouldUseFiniteTimeoutsByDefault() throws Exception {
+        OkHttpClient rawClient = rawClientOf(GoCardlessClient.newBuilder(ACCESS_TOKEN).build());
+        assertThat(rawClient.connectTimeoutMillis()).isEqualTo(10_000);
+        assertThat(rawClient.readTimeoutMillis()).isEqualTo(10_000);
+        assertThat(rawClient.writeTimeoutMillis()).isEqualTo(10_000);
+        assertThat(rawClient.callTimeoutMillis()).isEqualTo(0);
+    }
+
+    @Test
+    public void shouldApplyConfiguredTimeouts() throws Exception {
+        OkHttpClient rawClient = rawClientOf(GoCardlessClient.newBuilder(ACCESS_TOKEN)
+                .withConnectTimeout(Duration.ofSeconds(1)).withReadTimeout(Duration.ofSeconds(2))
+                .withWriteTimeout(Duration.ofSeconds(3)).withCallTimeout(Duration.ofSeconds(4))
+                .build());
+        assertThat(rawClient.connectTimeoutMillis()).isEqualTo(1_000);
+        assertThat(rawClient.readTimeoutMillis()).isEqualTo(2_000);
+        assertThat(rawClient.writeTimeoutMillis()).isEqualTo(3_000);
+        assertThat(rawClient.callTimeoutMillis()).isEqualTo(4_000);
+    }
+
+    @Test
+    public void shouldFailWhenReadTimeoutIsExceeded() throws Exception {
+        http.enqueueDelayedResponse(200, "fixtures/client/get_a_customer.json", 2000);
+        client = GoCardlessClient.newBuilder(ACCESS_TOKEN).withBaseUrl(http.getBaseUrl())
+                .withMaxNoOfRetries(1).withReadTimeout(Duration.ofMillis(100)).build();
+        assertThatThrownBy(() -> client.customers().get("CU00003068FG73").execute())
+                .isInstanceOf(GoCardlessNetworkException.class)
+                .hasCauseInstanceOf(SocketTimeoutException.class);
+    }
+
+    @Test
+    public void shouldFailWhenCallTimeoutIsExceeded() throws Exception {
+        http.enqueueDelayedResponse(200, "fixtures/client/get_a_customer.json", 2000);
+        client = GoCardlessClient.newBuilder(ACCESS_TOKEN).withBaseUrl(http.getBaseUrl())
+                .withMaxNoOfRetries(1).withCallTimeout(Duration.ofMillis(100)).build();
+        assertThatThrownBy(() -> client.customers().get("CU00003068FG73").execute())
+                .isInstanceOf(GoCardlessNetworkException.class)
+                .hasCauseInstanceOf(InterruptedIOException.class);
+    }
+
+    @Test
+    public void shouldSucceedWhenResponseArrivesWithinTimeout() throws Exception {
+        http.enqueueDelayedResponse(200, "fixtures/client/get_a_customer.json", 50);
+        client = GoCardlessClient.newBuilder(ACCESS_TOKEN).withBaseUrl(http.getBaseUrl())
+                .withReadTimeout(Duration.ofSeconds(5)).withCallTimeout(Duration.ofSeconds(5))
+                .build();
+        Customer customer = client.customers().get("CU00003068FG73").execute();
+        assertThat(customer.getId()).isEqualTo("CU00003068FG73");
     }
 }
