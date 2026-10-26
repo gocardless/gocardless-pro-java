@@ -1,6 +1,23 @@
 <!-- This file is generated, please add to it using `knope document-change` in the client-library-templates repo -->
 # Changelog
 
+## 9.14.0 (2026-10-26)
+
+### Features
+
+#### Add timeout options to the client builder
+
+`GoCardlessClient.Builder` now has `withConnectTimeout`, `withReadTimeout`, `withWriteTimeout` and `withCallTimeout`, each taking a `java.time.Duration`. Previously the client used OkHttp's defaults (10 seconds for connect, read and write, and no overall call timeout) with no way to change them. Unset options keep those defaults, which are now documented in the README and covered by tests.
+
+```java
+GoCardlessClient client = GoCardlessClient.newBuilder(accessToken)
+    .withConnectTimeout(Duration.ofSeconds(5))
+    .withCallTimeout(Duration.ofSeconds(30))
+    .build();
+```
+
+A request that times out raises `GoCardlessNetworkException` once the client's automatic retries are exhausted, so the total time before an error can exceed the configured timeout.
+
 ## 9.13.0 (2026-10-12)
 
 ### Features
