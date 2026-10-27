@@ -2,9 +2,11 @@ package com.gocardless.services;
 
 import com.gocardless.http.*;
 import com.gocardless.resources.Payment;
+import com.google.common.base.Joiner;
 import com.google.common.collect.ImmutableMap;
 import com.google.gson.annotations.SerializedName;
 import com.google.gson.reflect.TypeToken;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -443,6 +445,7 @@ public class PaymentService {
         private String creditor;
         private Currency currency;
         private String customer;
+        private List<Include> include;
         private String mandate;
         private String scheme;
         private SortDirection sortDirection;
@@ -596,6 +599,27 @@ public class PaymentService {
         }
 
         /**
+         * Includes linked resources in the response. Use <code>customer</code> to embed customer
+         * details, or <code>mandate</code> to embed mandate details.
+         */
+        public PaymentListRequest<S> withInclude(List<Include> include) {
+            this.include = include;
+            return this;
+        }
+
+        /**
+         * Includes linked resources in the response. Use <code>customer</code> to embed customer
+         * details, or <code>mandate</code> to embed mandate details.
+         */
+        public PaymentListRequest<S> withInclude(Include include) {
+            if (this.include == null) {
+                this.include = new ArrayList<>();
+            }
+            this.include.add(include);
+            return this;
+        }
+
+        /**
          * Number of records to return.
          */
         public PaymentListRequest<S> withLimit(Integer limit) {
@@ -710,6 +734,9 @@ public class PaymentService {
             if (customer != null) {
                 params.put("customer", customer);
             }
+            if (include != null) {
+                params.put("include", Joiner.on(",").join(include));
+            }
             if (mandate != null) {
                 params.put("mandate", mandate);
             }
@@ -761,6 +788,18 @@ public class PaymentService {
             @Override
             public String toString() {
                 return name();
+            }
+        }
+
+        public enum Include {
+            @SerializedName("customer")
+            CUSTOMER, @SerializedName("mandate")
+            MANDATE, @SerializedName("unknown")
+            UNKNOWN;
+
+            @Override
+            public String toString() {
+                return name().toLowerCase();
             }
         }
 
