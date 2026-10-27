@@ -1894,7 +1894,9 @@ public class BillingRequest {
          * <ul>
          * <li></li>
          * </ul>
-         * <code>28</code> or <code>-1</code> to indicate the last day of the month.
+         * <code>31</code> or <code>-1</code> to indicate the last day of the month. If the chosen
+         * day does not exist in a given month (e.g. <code>31</code> in April), the charge is made
+         * on the last day of that month.
          */
         public Integer getDayOfMonth() {
             return dayOfMonth;
