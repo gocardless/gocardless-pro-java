@@ -68,14 +68,24 @@ public class RedirectFlowService {
     /**
      * Creates a redirect flow object which can then be used to redirect your customer to the
      * GoCardless hosted payment pages.
+     *
+     * @deprecated Redirect Flows are legacy APIs and cannot be used by new integrators. The Billing
+     *             Request flow (https://developer.gocardless.com/api-reference/#billing-requests)
+     *             API should be used for your payment flows.
      */
+    @Deprecated
     public RedirectFlowCreateRequest create() {
         return new RedirectFlowCreateRequest(httpClient);
     }
 
     /**
      * Returns all details about a single redirect flow
+     *
+     * @deprecated Redirect Flows are legacy APIs and cannot be used by new integrators. The Billing
+     *             Request flow (https://developer.gocardless.com/api-reference/#billing-requests)
+     *             API should be used for your payment flows.
      */
+    @Deprecated
     public RedirectFlowGetRequest get(String identity) {
         return new RedirectFlowGetRequest(httpClient, identity);
     }
@@ -94,7 +104,12 @@ public class RedirectFlowService {
      * if your integration has already completed this flow. It will return a
      * <code>bad_request</code> error if the <code>session_token</code> differs to the one supplied
      * when the redirect flow was created.
+     *
+     * @deprecated Redirect Flows are legacy APIs and cannot be used by new integrators. The Billing
+     *             Request flow (https://developer.gocardless.com/api-reference/#billing-requests)
+     *             API should be used for your payment flows.
      */
+    @Deprecated
     public RedirectFlowCompleteRequest complete(String identity) {
         return new RedirectFlowCompleteRequest(httpClient, identity);
     }
