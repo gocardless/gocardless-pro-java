@@ -73,7 +73,13 @@ public class PayerAuthorisationService {
     /**
      * Retrieves the details of a single existing Payer Authorisation. It can be used for polling
      * the status of a Payer Authorisation.
+     *
+     * @deprecated Payer Authorisation is legacy API and cannot be used by new integrators. The
+     *             Billing Request
+     *             (https://developer.gocardless.com/api-reference/#billing-requests) API should be
+     *             used for any new integrations.
      */
+    @Deprecated
     public PayerAuthorisationGetRequest get(String identity) {
         return new PayerAuthorisationGetRequest(httpClient, identity);
     }
@@ -84,7 +90,13 @@ public class PayerAuthorisationService {
      * used for the other actions. This endpoint has been designed this way so you do not need to
      * save any payer data on your servers or the browser while still being able to implement a
      * progressive solution, such as a multi-step form.
+     *
+     * @deprecated Payer Authorisation is legacy API and cannot be used by new integrators. The
+     *             Billing Request
+     *             (https://developer.gocardless.com/api-reference/#billing-requests) API should be
+     *             used for any new integrations.
      */
+    @Deprecated
     public PayerAuthorisationCreateRequest create() {
         return new PayerAuthorisationCreateRequest(httpClient);
     }
@@ -99,7 +111,13 @@ public class PayerAuthorisationService {
      * Note that in order to update the <code>metadata</code> attribute values it must be sent
      * completely as it overrides the previously existing values.
      * </p>
+     *
+     * @deprecated Payer Authorisation is legacy API and cannot be used by new integrators. The
+     *             Billing Request
+     *             (https://developer.gocardless.com/api-reference/#billing-requests) API should be
+     *             used for any new integrations.
      */
+    @Deprecated
     public PayerAuthorisationUpdateRequest update(String identity) {
         return new PayerAuthorisationUpdateRequest(httpClient, identity);
     }
@@ -109,7 +127,13 @@ public class PayerAuthorisationService {
      * time, a 200 HTTP status is returned if the resource is valid and a 422 error response in case
      * of validation errors. After it is successfully submitted, the Payer Authorisation can no
      * longer be edited.
+     *
+     * @deprecated Payer Authorisation is legacy API and cannot be used by new integrators. The
+     *             Billing Request
+     *             (https://developer.gocardless.com/api-reference/#billing-requests) API should be
+     *             used for any new integrations.
      */
+    @Deprecated
     public PayerAuthorisationSubmitRequest submit(String identity) {
         return new PayerAuthorisationSubmitRequest(httpClient, identity);
     }
@@ -124,7 +148,13 @@ public class PayerAuthorisationService {
      * through our flow or make them go through the necessary verification mechanism (upcoming
      * feature).
      * </p>
+     *
+     * @deprecated Payer Authorisation is legacy API and cannot be used by new integrators. The
+     *             Billing Request
+     *             (https://developer.gocardless.com/api-reference/#billing-requests) API should be
+     *             used for any new integrations.
      */
+    @Deprecated
     public PayerAuthorisationConfirmRequest confirm(String identity) {
         return new PayerAuthorisationConfirmRequest(httpClient, identity);
     }
