@@ -7,11 +7,11 @@ import java.util.Map;
  * Represents a payout resource returned from the API.
  *
  * Payouts represent transfers from GoCardless to a
- * <a href="https://developer.gocardless.com/api-reference/#core-endpoints-creditors">creditor</a>.
- * Each payout contains the funds collected from one or many
- * <a href="https://developer.gocardless.com/api-reference/#core-endpoints-payments">payments</a>.
- * All the payments in a payout will have been collected in the same currency. Payouts are created
- * automatically after a payment has been successfully collected.
+ * <a href="https://docs.gocardless.com/docs/api-reference/creditor">creditor</a>. Each payout
+ * contains the funds collected from one or many
+ * <a href="https://docs.gocardless.com/docs/api-reference/payment">payments</a>. All the payments
+ * in a payout will have been collected in the same currency. Payouts are created automatically
+ * after a payment has been successfully collected.
  */
 public class Payout {
     private Payout() {
@@ -54,7 +54,7 @@ public class Payout {
 
     /**
      * Fixed <a href=
-     * "https://developer.gocardless.com/api-reference/#api-usage-dates-and-times">timestamp</a>,
+     * "https://docs.gocardless.com/docs/api-reference/data-conventions#dates-and-times">timestamp</a>,
      * recording when this resource was created.
      */
     public String getCreatedAt() {
@@ -258,17 +258,15 @@ public class Payout {
         private String creditorBankAccount;
 
         /**
-         * ID of <a href=
-         * "https://developer.gocardless.com/api-reference/#core-endpoints-creditors">creditor</a>
-         * who will receive this payout, i.e. the owner of the <code>creditor_bank_account</code>.
+         * ID of <a href="https://docs.gocardless.com/docs/api-reference/creditor">creditor</a> who
+         * will receive this payout, i.e. the owner of the <code>creditor_bank_account</code>.
          */
         public String getCreditor() {
             return creditor;
         }
 
         /**
-         * ID of <a href=
-         * "https://developer.gocardless.com/api-reference/#core-endpoints-creditor-bank-accounts">bank
+         * ID of <a href="https://docs.gocardless.com/docs/api-reference/creditor-bank-account">bank
          * account</a> which this will be sent to.
          */
         public String getCreditorBankAccount() {

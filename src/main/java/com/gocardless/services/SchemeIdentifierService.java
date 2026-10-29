@@ -112,7 +112,7 @@ public class SchemeIdentifierService {
         
         /**
           * Returns a <a
-* href="https://developer.gocardless.com/api-reference/#api-usage-cursor-pagination">cursor-paginated</a>
+* href="https://docs.gocardless.com/docs/api-reference/data-conventions#cursor-pagination">cursor-paginated</a>
 * list of your scheme identifiers.
          */
         public SchemeIdentifierListRequest
@@ -281,7 +281,7 @@ public class SchemeIdentifierService {
                               
                                   /**
                                     * <em>required</em> ID of the associated <a
-* href="https://developer.gocardless.com/api-reference/#core-endpoints-creditors">creditor</a>.
+* href="https://docs.gocardless.com/docs/api-reference/creditor">creditor</a>.
                                    */
                               
                               public 
@@ -522,7 +522,7 @@ public class SchemeIdentifierService {
             
                 /**
                  * <em>required</em> ID of the associated <a
-* href="https://developer.gocardless.com/api-reference/#core-endpoints-creditors">creditor</a>.
+* href="https://docs.gocardless.com/docs/api-reference/creditor">creditor</a>.
                  */
             
             public Links withCreditor(
@@ -567,7 +567,7 @@ public class SchemeIdentifierService {
          * Request class for {@link SchemeIdentifierService#list }.
          *
           * Returns a <a
-* href="https://developer.gocardless.com/api-reference/#api-usage-cursor-pagination">cursor-paginated</a>
+* href="https://docs.gocardless.com/docs/api-reference/data-conventions#cursor-pagination">cursor-paginated</a>
 * list of your scheme identifiers.
          */
         public static final class SchemeIdentifierListRequest

@@ -11,8 +11,8 @@ import java.util.Map;
  * example a payment which has been collected, or a mandate which has been transferred. Event
  * creation is an asynchronous process, so it can take some time between an action occurring and its
  * corresponding event getting included in API responses. See
- * <a href="https://developer.gocardless.com/api-reference/#event-types">here</a> for a complete
- * list of event types.
+ * <a href="https://docs.gocardless.com/docs/api-reference/events">here</a> for a complete list of
+ * event types.
  * 
  * <p class="notice">
  * <strong>Important</strong>: Events older than 18 months will be archived and no longer accessible
@@ -39,7 +39,7 @@ public class Event {
 
     /**
      * What has happened to the resource. See
-     * <a href="https://developer.gocardless.com/api-reference/#event-types">Event Types</a> for the
+     * <a href="https://docs.gocardless.com/docs/api-reference/events">Event Types</a> for the
      * possible actions.
      */
     public String getAction() {
@@ -48,7 +48,7 @@ public class Event {
 
     /**
      * Fixed <a href=
-     * "https://developer.gocardless.com/api-reference/#api-usage-dates-and-times">timestamp</a>,
+     * "https://docs.gocardless.com/docs/api-reference/data-conventions#dates-and-times">timestamp</a>,
      * recording when this resource was created.
      */
     public String getCreatedAt() {
@@ -57,8 +57,8 @@ public class Event {
 
     /**
      * Present only in webhooks when an integrator is authorised to send their own notifications.
-     * See <a href=
-     * "https://developer.gocardless.com/getting-started/api/handling-customer-notifications/">here</a>
+     * See
+     * <a href="https://docs.gocardless.com/docs/tutorials/handling-customer-notifications">here</a>
      * for further information.
      */
     public List<CustomerNotification> getCustomerNotifications() {
@@ -171,8 +171,8 @@ public class Event {
         }
 
         /**
-         * See <a href=
-         * "https://developer.gocardless.com/api-reference/#core-endpoints-customer-notifications">here</a>
+         * See
+         * <a href="https://docs.gocardless.com/docs/api-reference/customer-notification">here</a>
          * for a complete list of customer notification types.
          */
         public String getType() {
@@ -370,8 +370,7 @@ public class Event {
         private String subscription;
 
         /**
-         * ID of a <a href=
-         * "https://developer.gocardless.com/api-reference/#billing-requests-bank-authorisations">bank
+         * ID of a <a href="https://docs.gocardless.com/docs/api-reference/bank-authorisation">bank
          * authorisation</a>.
          */
         public String getBankAuthorisation() {
@@ -379,8 +378,7 @@ public class Event {
         }
 
         /**
-         * ID of a <a href=
-         * "https://developer.gocardless.com/api-reference/#billing-requests-billing-requests">billing
+         * ID of a <a href="https://docs.gocardless.com/docs/api-reference/billing-request">billing
          * request</a>.
          */
         public String getBillingRequest() {
@@ -388,8 +386,8 @@ public class Event {
         }
 
         /**
-         * ID of a <a href=
-         * "https://developer.gocardless.com/api-reference/#billing-requests-billing-request-flows">billing
+         * ID of a
+         * <a href="https://docs.gocardless.com/docs/api-reference/billing-request-flow">billing
          * request flow</a>.
          */
         public String getBillingRequestFlow() {
@@ -397,25 +395,24 @@ public class Event {
         }
 
         /**
-         * If <code>resource_type</code> is <code>creditor</code>, this is the ID of the <a href=
-         * "https://developer.gocardless.com/api-reference/#core-endpoints-creditors">creditor</a>
-         * which has been updated.
+         * If <code>resource_type</code> is <code>creditor</code>, this is the ID of the
+         * <a href="https://docs.gocardless.com/docs/api-reference/creditor">creditor</a> which has
+         * been updated.
          */
         public String getCreditor() {
             return creditor;
         }
 
         /**
-         * ID of a <a href=
-         * "https://developer.gocardless.com/api-reference/#core-endpoints-customers">customer</a>.
+         * ID of a <a href="https://docs.gocardless.com/docs/api-reference/customer">customer</a>.
          */
         public String getCustomer() {
             return customer;
         }
 
         /**
-         * ID of a <a href=
-         * "https://developer.gocardless.com/api-reference/#core-endpoints-customer-bank-accounts">customer
+         * ID of a
+         * <a href="https://docs.gocardless.com/docs/api-reference/customer-bank-account">customer
          * bank account</a>.
          */
         public String getCustomerBankAccount() {
@@ -424,8 +421,7 @@ public class Event {
 
         /**
          * If <code>resource_type</code> is <code>instalment_schedule</code>, this is the ID of the
-         * <a href=
-         * "https://developer.gocardless.com/api-reference/#core-endpoints-instalment-schedules">instalment
+         * <a href="https://docs.gocardless.com/docs/api-reference/instalment-schedule">instalment
          * schedule</a> which has been updated.
          */
         public String getInstalmentSchedule() {
@@ -433,9 +429,9 @@ public class Event {
         }
 
         /**
-         * If <code>resource_type</code> is <code>mandates</code>, this is the ID of the <a href=
-         * "https://developer.gocardless.com/api-reference/#core-endpoints-mandates">mandate</a>
-         * which has been updated.
+         * If <code>resource_type</code> is <code>mandates</code>, this is the ID of the
+         * <a href="https://docs.gocardless.com/docs/api-reference/mandate">mandate</a> which has
+         * been updated.
          */
         public String getMandate() {
             return mandate;
@@ -450,17 +446,16 @@ public class Event {
 
         /**
          * If <code>resource_type</code> is <code>billing_requests</code>, this is the ID of the
-         * <a href=
-         * "https://developer.gocardless.com/api-reference/#core-endpoints-mandates">mandate</a>
-         * which has been created.
+         * <a href="https://docs.gocardless.com/docs/api-reference/mandate">mandate</a> which has
+         * been created.
          */
         public String getMandateRequestMandate() {
             return mandateRequestMandate;
         }
 
         /**
-         * This is only included for mandate transfer events, when it is the ID of the <a href=
-         * "https://developer.gocardless.com/api-reference/#core-endpoints-customer-bank-accounts">customer
+         * This is only included for mandate transfer events, when it is the ID of the
+         * <a href="https://docs.gocardless.com/docs/api-reference/customer-bank-account">customer
          * bank account</a> which the mandate is being transferred to.
          */
         public String getNewCustomerBankAccount() {
@@ -468,9 +463,9 @@ public class Event {
         }
 
         /**
-         * This is only included for mandate replaced events, when it is the ID of the new <a href=
-         * "https://developer.gocardless.com/api-reference/#core-endpoints-mandates">mandate</a>
-         * that replaces the existing mandate.
+         * This is only included for mandate replaced events, when it is the ID of the new
+         * <a href="https://docs.gocardless.com/docs/api-reference/mandate">mandate</a> that
+         * replaces the existing mandate.
          */
         public String getNewMandate() {
             return newMandate;
@@ -478,9 +473,9 @@ public class Event {
 
         /**
          * If the event is included in a
-         * <a href="https://developer.gocardless.com/api-reference/#webhooks-overview">webhook</a>
-         * to an <a href="https://developer.gocardless.com/api-reference/#appendix-oauth">OAuth
-         * app</a>, this is the ID of the account to which it belongs.
+         * <a href="https://docs.gocardless.com/docs/api-reference/webhooks">webhook</a> to an
+         * <a href="https://docs.gocardless.com/docs/api-reference/oauth-reference">OAuth app</a>,
+         * this is the ID of the account to which it belongs.
          */
         public String getOrganisation() {
             return organisation;
@@ -505,8 +500,8 @@ public class Event {
         }
 
         /**
-         * ID of a <a href=
-         * "https://developer.gocardless.com/api-reference/#core-endpoints-payer-authorisations">payer
+         * ID of a
+         * <a href="https://docs.gocardless.com/docs/api-reference/payer-authorisation">payer
          * authorisation</a>.
          */
         public String getPayerAuthorisation() {
@@ -514,9 +509,9 @@ public class Event {
         }
 
         /**
-         * If <code>resource_type</code> is <code>payments</code>, this is the ID of the <a href=
-         * "https://developer.gocardless.com/api-reference/#core-endpoints-payments">payment</a>
-         * which has been updated.
+         * If <code>resource_type</code> is <code>payments</code>, this is the ID of the
+         * <a href="https://docs.gocardless.com/docs/api-reference/payment">payment</a> which has
+         * been updated.
          */
         public String getPayment() {
             return payment;
@@ -532,26 +527,25 @@ public class Event {
 
         /**
          * If <code>resource_type</code> is <code>billing_requests</code>, this is the ID of the
-         * <a href=
-         * "https://developer.gocardless.com/api-reference/#core-endpoints-payments">payment</a>
-         * which has been created for Pay by Bank.
+         * <a href="https://docs.gocardless.com/docs/api-reference/payment">payment</a> which has
+         * been created for Pay by Bank.
          */
         public String getPaymentRequestPayment() {
             return paymentRequestPayment;
         }
 
         /**
-         * If <code>resource_type</code> is <code>payouts</code>, this is the ID of the <a href=
-         * "https://developer.gocardless.com/api-reference/#core-endpoints-payouts">payout</a> which
-         * has been updated.
+         * If <code>resource_type</code> is <code>payouts</code>, this is the ID of the
+         * <a href="https://docs.gocardless.com/docs/api-reference/payout">payout</a> which has been
+         * updated.
          */
         public String getPayout() {
             return payout;
         }
 
         /**
-         * This is only included for mandate transfer events, when it is the ID of the <a href=
-         * "https://developer.gocardless.com/api-reference/#core-endpoints-customer-bank-accounts">customer
+         * This is only included for mandate transfer events, when it is the ID of the
+         * <a href="https://docs.gocardless.com/docs/api-reference/customer-bank-account">customer
          * bank account</a> which the mandate is being transferred from.
          */
         public String getPreviousCustomerBankAccount() {
@@ -559,9 +553,9 @@ public class Event {
         }
 
         /**
-         * If <code>resource_type</code> is <code>refunds</code>, this is the ID of the <a href=
-         * "https://developer.gocardless.com/api-reference/#core-endpoints-refunds">refund</a> which
-         * has been updated.
+         * If <code>resource_type</code> is <code>refunds</code>, this is the ID of the
+         * <a href="https://docs.gocardless.com/docs/api-reference/refund">refund</a> which has been
+         * updated.
          */
         public String getRefund() {
             return refund;
@@ -570,7 +564,7 @@ public class Event {
         /**
          * If <code>resource_type</code> is <code>scheme_identifiers</code>, this is the ID of the
          * <a href=
-         * "https://developer.gocardless.com/api-reference/#core-endpoints-scheme-identifiers">scheme_identifier</a>
+         * "https://docs.gocardless.com/docs/api-reference/scheme-identifier">scheme_identifier</a>
          * which has been updated.
          */
         public String getSchemeIdentifier() {
@@ -579,8 +573,7 @@ public class Event {
 
         /**
          * If <code>resource_type</code> is <code>subscription</code>, this is the ID of the
-         * <a href=
-         * "https://developer.gocardless.com/api-reference/#core-endpoints-subscriptions">subscription</a>
+         * <a href="https://docs.gocardless.com/docs/api-reference/subscription">subscription</a>
          * which has been updated.
          */
         public String getSubscription() {

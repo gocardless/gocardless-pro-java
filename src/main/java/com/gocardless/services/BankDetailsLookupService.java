@@ -31,14 +31,14 @@ public class BankDetailsLookupService {
      * holder name does not match bank account details provided".
      * 
      * If your request returns an
-     * <a href="https://developer.gocardless.com/api-reference/#api-usage-errors">error</a> or the
-     * <code>available_debit_schemes</code> attribute is an empty array, you will not be able to
+     * <a href="https://docs.gocardless.com/docs/api-reference/responses-and-errors">error</a> or
+     * the <code>available_debit_schemes</code> attribute is an empty array, you will not be able to
      * collect payments from the specified bank account. GoCardless may be able to collect payments
      * from an account even if no <code>bic</code> is returned.
      * 
      * Bank account details may be supplied using
-     * <a href="https://developer.gocardless.com/api-reference/#appendix-local-bank-details">local
-     * details</a> or an IBAN.
+     * <a href="https://docs.gocardless.com/docs/api-reference/local-bank-details">local details</a>
+     * or an IBAN.
      * 
      * <em>ACH scheme</em> For compliance reasons, an extra validation step is done using a
      * third-party provider to make sure the customer's bank account can accept Direct Debit. If a
@@ -65,14 +65,14 @@ public class BankDetailsLookupService {
      * holder name does not match bank account details provided".
      * 
      * If your request returns an
-     * <a href="https://developer.gocardless.com/api-reference/#api-usage-errors">error</a> or the
-     * <code>available_debit_schemes</code> attribute is an empty array, you will not be able to
+     * <a href="https://docs.gocardless.com/docs/api-reference/responses-and-errors">error</a> or
+     * the <code>available_debit_schemes</code> attribute is an empty array, you will not be able to
      * collect payments from the specified bank account. GoCardless may be able to collect payments
      * from an account even if no <code>bic</code> is returned.
      * 
      * Bank account details may be supplied using
-     * <a href="https://developer.gocardless.com/api-reference/#appendix-local-bank-details">local
-     * details</a> or an IBAN.
+     * <a href="https://docs.gocardless.com/docs/api-reference/local-bank-details">local details</a>
+     * or an IBAN.
      * 
      * <em>ACH scheme</em> For compliance reasons, an extra validation step is done using a
      * third-party provider to make sure the customer's bank account can accept Direct Debit. If a
@@ -101,8 +101,8 @@ public class BankDetailsLookupService {
         }
 
         /**
-         * Bank account number - see <a href=
-         * "https://developer.gocardless.com/api-reference/#appendix-local-bank-details">local
+         * Bank account number - see
+         * <a href="https://docs.gocardless.com/docs/api-reference/local-bank-details">local
          * details</a> for more information. Alternatively you can provide an <code>iban</code>.
          */
         public BankDetailsLookupCreateRequest withAccountNumber(String accountNumber) {
@@ -111,8 +111,8 @@ public class BankDetailsLookupService {
         }
 
         /**
-         * Bank code - see <a href=
-         * "https://developer.gocardless.com/api-reference/#appendix-local-bank-details">local
+         * Bank code - see
+         * <a href="https://docs.gocardless.com/docs/api-reference/local-bank-details">local
          * details</a> for more information. Alternatively you can provide an <code>iban</code>.
          */
         public BankDetailsLookupCreateRequest withBankCode(String bankCode) {
@@ -121,8 +121,8 @@ public class BankDetailsLookupService {
         }
 
         /**
-         * Branch code - see <a href=
-         * "https://developer.gocardless.com/api-reference/#appendix-local-bank-details">local
+         * Branch code - see
+         * <a href="https://docs.gocardless.com/docs/api-reference/local-bank-details">local
          * details</a> for more information. Alternatively you can provide an <code>iban</code>.
          */
         public BankDetailsLookupCreateRequest withBranchCode(String branchCode) {
@@ -141,8 +141,8 @@ public class BankDetailsLookupService {
         }
 
         /**
-         * International Bank Account Number. Alternatively you can provide <a href=
-         * "https://developer.gocardless.com/api-reference/#appendix-local-bank-details">local
+         * International Bank Account Number. Alternatively you can provide
+         * <a href="https://docs.gocardless.com/docs/api-reference/local-bank-details">local
          * details</a>.
          */
         public BankDetailsLookupCreateRequest withIban(String iban) {

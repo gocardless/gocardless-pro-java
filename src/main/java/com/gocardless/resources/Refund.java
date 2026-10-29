@@ -7,13 +7,12 @@ import java.util.Map;
  * Represents a refund resource returned from the API.
  *
  * Refund objects represent (partial) refunds of a
- * <a href="https://developer.gocardless.com/api-reference/#core-endpoints-payments">payment</a>
- * back to the
- * <a href="https://developer.gocardless.com/api-reference/#core-endpoints-customers">customer</a>.
+ * <a href="https://docs.gocardless.com/docs/api-reference/payment">payment</a> back to the
+ * <a href="https://docs.gocardless.com/docs/api-reference/customer">customer</a>.
  * 
  * GoCardless will notify you via a
- * <a href="https://developer.gocardless.com/api-reference/#appendix-webhooks">webhook</a> whenever
- * a refund is created, and will update the <code>amount_refunded</code> property of the payment.
+ * <a href="https://docs.gocardless.com/docs/api-reference/webhooks">webhook</a> whenever a refund
+ * is created, and will update the <code>amount_refunded</code> property of the payment.
  */
 public class Refund {
     private Refund() {
@@ -39,7 +38,7 @@ public class Refund {
 
     /**
      * Fixed <a href=
-     * "https://developer.gocardless.com/api-reference/#api-usage-dates-and-times">timestamp</a>,
+     * "https://docs.gocardless.com/docs/api-reference/data-conventions#dates-and-times">timestamp</a>,
      * recording when this resource was created.
      */
     public String getCreatedAt() {
@@ -48,8 +47,8 @@ public class Refund {
 
     /**
      * <a href="https://en.wikipedia.org/wiki/ISO_4217#Active_codes">ISO 4217</a> currency code.
-     * This is set to the currency of the refund's <a href=
-     * "https://developer.gocardless.com/api-reference/#core-endpoints-payments">payment</a>.
+     * This is set to the currency of the refund's
+     * <a href="https://docs.gocardless.com/docs/api-reference/payment">payment</a>.
      */
     public String getCurrency() {
         return currency;
@@ -165,8 +164,8 @@ public class Refund {
      * <li><code>pending_submission</code>: the refund has been created, but not yet submitted to
      * the banks</li>
      * <li><code>submitted</code>: the refund has been submitted to the banks</li>
-     * <li><code>paid</code>: the refund has been included in a <a href=
-     * "https://developer.gocardless.com/api-reference/#core-endpoints-payouts">payout</a></li>
+     * <li><code>paid</code>: the refund has been included in a
+     * <a href="https://docs.gocardless.com/docs/api-reference/payout">payout</a></li>
      * <li><code>cancelled</code>: the refund has been cancelled</li>
      * <li><code>bounced</code>: the refund has failed to be paid</li>
      * <li><code>funds_returned</code>: the refund has had its funds returned</li>
@@ -268,8 +267,7 @@ public class Refund {
         private String payment;
 
         /**
-         * ID of the <a href=
-         * "https://developer.gocardless.com/api-reference/#core-endpoints-mandates">mandate</a>
+         * ID of the <a href="https://docs.gocardless.com/docs/api-reference/mandate">mandate</a>
          * against which the refund is being made.
          */
         public String getMandate() {
@@ -277,8 +275,7 @@ public class Refund {
         }
 
         /**
-         * ID of the <a href=
-         * "https://developer.gocardless.com/api-reference/#core-endpoints-payments">payment</a>
+         * ID of the <a href="https://docs.gocardless.com/docs/api-reference/payment">payment</a>
          * against which the refund is being made.
          */
         public String getPayment() {

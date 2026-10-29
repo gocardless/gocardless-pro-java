@@ -15,11 +15,11 @@ import java.util.Map;
  * Service class for working with mandate resources.
  *
  * Mandates represent the Direct Debit mandate with a
- * <a href="https://developer.gocardless.com/api-reference/#core-endpoints-customers">customer</a>.
+ * <a href="https://docs.gocardless.com/docs/api-reference/customer">customer</a>.
  * 
  * GoCardless will notify you via a
- * <a href="https://developer.gocardless.com/api-reference/#appendix-webhooks">webhook</a> whenever
- * the status of a mandate changes.
+ * <a href="https://docs.gocardless.com/docs/api-reference/webhooks">webhook</a> whenever the status
+ * of a mandate changes.
  */
 public class MandateService {
     private final HttpClient httpClient;
@@ -41,7 +41,7 @@ public class MandateService {
 
     /**
      * Returns a <a href=
-     * "https://developer.gocardless.com/api-reference/#api-usage-cursor-pagination">cursor-paginated</a>
+     * "https://docs.gocardless.com/docs/api-reference/data-conventions#cursor-pagination">cursor-paginated</a>
      * list of your mandates.
      */
     public MandateListRequest<ListResponse<Mandate>> list() {
@@ -128,9 +128,9 @@ public class MandateService {
         }
 
         /**
-         * ID of the associated <a href=
-         * "https://developer.gocardless.com/api-reference/#core-endpoints-creditors">creditor</a>.
-         * Only required if your account manages multiple creditors.
+         * ID of the associated
+         * <a href="https://docs.gocardless.com/docs/api-reference/creditor">creditor</a>. Only
+         * required if your account manages multiple creditors.
          */
         public MandateCreateRequest withLinksCreditor(String creditor) {
             if (links == null) {
@@ -141,8 +141,8 @@ public class MandateService {
         }
 
         /**
-         * ID of the associated <a href=
-         * "https://developer.gocardless.com/api-reference/#core-endpoints-customer-bank-accounts">customer
+         * ID of the associated
+         * <a href="https://docs.gocardless.com/docs/api-reference/customer-bank-account">customer
          * bank account</a> which the mandate is created and submits payments against.
          */
         public MandateCreateRequest withLinksCustomerBankAccount(String customerBankAccount) {
@@ -188,10 +188,10 @@ public class MandateService {
         }
 
         /**
-         * Unique reference. Different schemes have different length and <a href=
-         * "https://developer.gocardless.com/api-reference/#appendix-character-sets">character
-         * set</a> requirements. GoCardless will generate a unique reference satisfying the
-         * different scheme requirements if this field is left blank.
+         * Unique reference. Different schemes have different length and
+         * <a href="https://docs.gocardless.com/docs/api-reference/character-sets">character set</a>
+         * requirements. GoCardless will generate a unique reference satisfying the different scheme
+         * requirements if this field is left blank.
          */
         public MandateCreateRequest withReference(String reference) {
             this.reference = reference;
@@ -269,9 +269,9 @@ public class MandateService {
             private String customerBankAccount;
 
             /**
-             * ID of the associated <a href=
-             * "https://developer.gocardless.com/api-reference/#core-endpoints-creditors">creditor</a>.
-             * Only required if your account manages multiple creditors.
+             * ID of the associated
+             * <a href="https://docs.gocardless.com/docs/api-reference/creditor">creditor</a>. Only
+             * required if your account manages multiple creditors.
              */
             public Links withCreditor(String creditor) {
                 this.creditor = creditor;
@@ -280,8 +280,8 @@ public class MandateService {
 
             /**
              * ID of the associated <a href=
-             * "https://developer.gocardless.com/api-reference/#core-endpoints-customer-bank-accounts">customer
-             * bank account</a> which the mandate is created and submits payments against.
+             * "https://docs.gocardless.com/docs/api-reference/customer-bank-account">customer bank
+             * account</a> which the mandate is created and submits payments against.
              */
             public Links withCustomerBankAccount(String customerBankAccount) {
                 this.customerBankAccount = customerBankAccount;
@@ -294,7 +294,7 @@ public class MandateService {
      * Request class for {@link MandateService#list }.
      *
      * Returns a <a href=
-     * "https://developer.gocardless.com/api-reference/#api-usage-cursor-pagination">cursor-paginated</a>
+     * "https://docs.gocardless.com/docs/api-reference/data-conventions#cursor-pagination">cursor-paginated</a>
      * list of your mandates.
      */
     public static final class MandateListRequest<S> extends ListRequest<S, Mandate> {
@@ -374,8 +374,7 @@ public class MandateService {
         }
 
         /**
-         * ID of a <a href=
-         * "https://developer.gocardless.com/api-reference/#core-endpoints-creditors">creditor</a>.
+         * ID of a <a href="https://docs.gocardless.com/docs/api-reference/creditor">creditor</a>.
          * If specified, this endpoint will return all mandates for the given creditor. Cannot be
          * used in conjunction with <code>customer</code> or <code>customer_bank_account</code>
          */
@@ -385,8 +384,7 @@ public class MandateService {
         }
 
         /**
-         * ID of a <a href=
-         * "https://developer.gocardless.com/api-reference/#core-endpoints-customers">customer</a>.
+         * ID of a <a href="https://docs.gocardless.com/docs/api-reference/customer">customer</a>.
          * If specified, this endpoint will return all mandates for the given customer. Cannot be
          * used in conjunction with <code>customer_bank_account</code> or <code>creditor</code>
          */
@@ -396,8 +394,8 @@ public class MandateService {
         }
 
         /**
-         * ID of a <a href=
-         * "https://developer.gocardless.com/api-reference/#core-endpoints-customer-bank-accounts">customer
+         * ID of a
+         * <a href="https://docs.gocardless.com/docs/api-reference/customer-bank-account">customer
          * bank account</a>. If specified, this endpoint will return all mandates for the given bank
          * account. Cannot be used in conjunction with <code>customer</code> or
          * <code>creditor</code>
@@ -445,10 +443,10 @@ public class MandateService {
         }
 
         /**
-         * Unique reference. Different schemes have different length and <a href=
-         * "https://developer.gocardless.com/api-reference/#appendix-character-sets">character
-         * set</a> requirements. GoCardless will generate a unique reference satisfying the
-         * different scheme requirements if this field is left blank.
+         * Unique reference. Different schemes have different length and
+         * <a href="https://docs.gocardless.com/docs/api-reference/character-sets">character set</a>
+         * requirements. GoCardless will generate a unique reference satisfying the different scheme
+         * requirements if this field is left blank.
          */
         public MandateListRequest<S> withReference(String reference) {
             this.reference = reference;

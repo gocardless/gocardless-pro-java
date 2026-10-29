@@ -13,10 +13,9 @@ import java.util.Map;
  * Service class for working with creditor bank account resources.
  *
  * Creditor Bank Accounts hold the bank details of a
- * <a href="https://developer.gocardless.com/api-reference/#core-endpoints-creditors">creditor</a>.
- * These are the bank accounts which your
- * <a href="https://developer.gocardless.com/api-reference/#core-endpoints-payouts">payouts</a> will
- * be sent to.
+ * <a href="https://docs.gocardless.com/docs/api-reference/creditor">creditor</a>. These are the
+ * bank accounts which your
+ * <a href="https://docs.gocardless.com/docs/api-reference/payout">payouts</a> will be sent to.
  * 
  * Note that creditor bank accounts must be unique, and so you will encounter a
  * <code>bank_account_exists</code> error if you try to create a duplicate bank account. You may
@@ -48,7 +47,7 @@ public class CreditorBankAccountService {
 
     /**
      * Returns a <a href=
-     * "https://developer.gocardless.com/api-reference/#api-usage-cursor-pagination">cursor-paginated</a>
+     * "https://docs.gocardless.com/docs/api-reference/data-conventions#cursor-pagination">cursor-paginated</a>
      * list of your creditor bank accounts.
      */
     public CreditorBankAccountListRequest<ListResponse<CreditorBankAccount>> list() {
@@ -102,9 +101,9 @@ public class CreditorBankAccountService {
 
         /**
          * Name of the account holder, as known by the bank. Usually this is the same as the name
-         * stored with the linked <a href=
-         * "https://developer.gocardless.com/api-reference/#core-endpoints-creditors">creditor</a>.
-         * This field will be transliterated, upcased and truncated to 18 characters.
+         * stored with the linked
+         * <a href="https://docs.gocardless.com/docs/api-reference/creditor">creditor</a>. This
+         * field will be transliterated, upcased and truncated to 18 characters.
          */
         public CreditorBankAccountCreateRequest withAccountHolderName(String accountHolderName) {
             this.accountHolderName = accountHolderName;
@@ -112,8 +111,8 @@ public class CreditorBankAccountService {
         }
 
         /**
-         * Bank account number - see <a href=
-         * "https://developer.gocardless.com/api-reference/#appendix-local-bank-details">local
+         * Bank account number - see
+         * <a href="https://docs.gocardless.com/docs/api-reference/local-bank-details">local
          * details</a> for more information. Alternatively you can provide an <code>iban</code>.
          */
         public CreditorBankAccountCreateRequest withAccountNumber(String accountNumber) {
@@ -124,7 +123,7 @@ public class CreditorBankAccountService {
         /**
          * Bank account type. Required for USD-denominated bank accounts. Must not be provided for
          * bank accounts in other currencies. See <a href=
-         * "https://developer.gocardless.com/api-reference/#local-bank-details-united-states">local
+         * "https://docs.gocardless.com/docs/api-reference/local-bank-details#united-states">local
          * details</a> for more information.
          */
         public CreditorBankAccountCreateRequest withAccountType(AccountType accountType) {
@@ -133,8 +132,8 @@ public class CreditorBankAccountService {
         }
 
         /**
-         * Bank code - see <a href=
-         * "https://developer.gocardless.com/api-reference/#appendix-local-bank-details">local
+         * Bank code - see
+         * <a href="https://docs.gocardless.com/docs/api-reference/local-bank-details">local
          * details</a> for more information. Alternatively you can provide an <code>iban</code>.
          */
         public CreditorBankAccountCreateRequest withBankCode(String bankCode) {
@@ -143,8 +142,8 @@ public class CreditorBankAccountService {
         }
 
         /**
-         * Branch code - see <a href=
-         * "https://developer.gocardless.com/api-reference/#appendix-local-bank-details">local
+         * Branch code - see
+         * <a href="https://docs.gocardless.com/docs/api-reference/local-bank-details">local
          * details</a> for more information. Alternatively you can provide an <code>iban</code>.
          */
         public CreditorBankAccountCreateRequest withBranchCode(String branchCode) {
@@ -173,11 +172,11 @@ public class CreditorBankAccountService {
         }
 
         /**
-         * International Bank Account Number. Alternatively you can provide <a href=
-         * "https://developer.gocardless.com/api-reference/#appendix-local-bank-details">local
+         * International Bank Account Number. Alternatively you can provide
+         * <a href="https://docs.gocardless.com/docs/api-reference/local-bank-details">local
          * details</a>. IBANs are not accepted for Swedish bank accounts denominated in SEK - you
          * must supply
-         * <a href="https://developer.gocardless.com/api-reference/#local-bank-details-sweden">local
+         * <a href="https://docs.gocardless.com/docs/api-reference/local-bank-details#sweden">local
          * details</a>.
          */
         public CreditorBankAccountCreateRequest withIban(String iban) {
@@ -191,8 +190,7 @@ public class CreditorBankAccountService {
         }
 
         /**
-         * ID of the <a href=
-         * "https://developer.gocardless.com/api-reference/#core-endpoints-creditors">creditor</a>
+         * ID of the <a href="https://docs.gocardless.com/docs/api-reference/creditor">creditor</a>
          * that owns this bank account.
          */
         public CreditorBankAccountCreateRequest withLinksCreditor(String creditor) {
@@ -294,9 +292,9 @@ public class CreditorBankAccountService {
             private String creditor;
 
             /**
-             * ID of the <a href=
-             * "https://developer.gocardless.com/api-reference/#core-endpoints-creditors">creditor</a>
-             * that owns this bank account.
+             * ID of the
+             * <a href="https://docs.gocardless.com/docs/api-reference/creditor">creditor</a> that
+             * owns this bank account.
              */
             public Links withCreditor(String creditor) {
                 this.creditor = creditor;
@@ -309,7 +307,7 @@ public class CreditorBankAccountService {
      * Request class for {@link CreditorBankAccountService#list }.
      *
      * Returns a <a href=
-     * "https://developer.gocardless.com/api-reference/#api-usage-cursor-pagination">cursor-paginated</a>
+     * "https://docs.gocardless.com/docs/api-reference/data-conventions#cursor-pagination">cursor-paginated</a>
      * list of your creditor bank accounts.
      */
     public static final class CreditorBankAccountListRequest<S>

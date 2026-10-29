@@ -3,8 +3,8 @@ package com.gocardless.resources;
 /**
  * Represents a mandate pdf resource returned from the API.
  *
- * Mandate PDFs allow you to easily display <a href=
- * "https://developer.gocardless.com/api-reference/#appendix-compliance-requirements">scheme-rules
+ * Mandate PDFs allow you to easily display
+ * <a href="https://docs.gocardless.com/docs/api-reference/compliance-requirements">scheme-rules
  * compliant</a> Direct Debit mandates to your customers.
  */
 public class MandatePdf {

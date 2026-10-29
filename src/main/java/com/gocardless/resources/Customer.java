@@ -5,10 +5,10 @@ import java.util.Map;
 /**
  * Represents a customer resource returned from the API.
  *
- * Customer objects hold the contact details for a customer. A customer can have several <a href=
- * "https://developer.gocardless.com/api-reference/#core-endpoints-customer-bank-accounts">customer
- * bank accounts</a>, which in turn can have several Direct Debit
- * <a href="https://developer.gocardless.com/api-reference/#core-endpoints-mandates">mandates</a>.
+ * Customer objects hold the contact details for a customer. A customer can have several
+ * <a href="https://docs.gocardless.com/docs/api-reference/customer-bank-account">customer bank
+ * accounts</a>, which in turn can have several Direct Debit
+ * <a href="https://docs.gocardless.com/docs/api-reference/mandate">mandates</a>.
  */
 public class Customer {
     private Customer() {
@@ -84,7 +84,7 @@ public class Customer {
 
     /**
      * Fixed <a href=
-     * "https://developer.gocardless.com/api-reference/#api-usage-dates-and-times">timestamp</a>,
+     * "https://docs.gocardless.com/docs/api-reference/data-conventions#dates-and-times">timestamp</a>,
      * recording when this resource was created.
      */
     public String getCreatedAt() {
@@ -131,8 +131,8 @@ public class Customer {
     /**
      * <a href="https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes">ISO 639-1</a> code. Used as
      * the language for notification emails sent by GoCardless if your organisation does not send
-     * its own (see <a href=
-     * "https://developer.gocardless.com/api-reference/#appendix-compliance-requirements">compliance
+     * its own (see
+     * <a href="https://docs.gocardless.com/docs/api-reference/compliance-requirements">compliance
      * requirements</a>). Currently only "en", "fr", "de", "pt", "es", "it", "nl", "da", "nb", "sl",
      * "sv" are supported. If this is not provided, the language will be chosen based on the
      * <code>country_code</code> (if supplied) or default to "en".

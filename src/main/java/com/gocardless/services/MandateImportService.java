@@ -16,18 +16,18 @@ import java.util.Map;
  * 
  * <ol>
  * <li><a href=
- * "https://developer.gocardless.com/api-reference/#mandate-imports-create-a-new-mandate-import">Create
+ * "https://docs.gocardless.com/docs/api-reference/mandate-import#create-a-new-mandate-import">Create
  * a mandate import</a></li>
  * <li><a href=
- * "https://developer.gocardless.com/api-reference/#mandate-import-entries-add-a-mandate-import-entry">Add
+ * "https://docs.gocardless.com/docs/api-reference/mandate-import-entry#add-a-mandate-import-entry">Add
  * entries</a> to the import</li>
  * <li><a href=
- * "https://developer.gocardless.com/api-reference/#mandate-imports-submit-a-mandate-import">Submit</a>
+ * "https://docs.gocardless.com/docs/api-reference/mandate-import#submit-a-mandate-import">Submit</a>
  * the import</li>
  * <li>Wait until a member of the GoCardless team approves the import, at which point the mandates
  * will be created</li>
  * <li><a href=
- * "https://developer.gocardless.com/api-reference/#mandate-import-entries-list-all-mandate-import-entries">Link
+ * "https://docs.gocardless.com/docs/api-reference/mandate-import-entry#list-all-mandate-import-entries">Link
  * up the mandates</a> in your system</li>
  * </ol>
  * When you add entries to your mandate import, they are not turned into actual mandates until the
@@ -36,12 +36,12 @@ import java.util.Map;
  * 
  * We will issue a <code>mandate_created</code> webhook for each entry, which will be the same as
  * the webhooks triggered when
- * <a href="https://developer.gocardless.com/api-reference/#mandates-create-a-mandate"> creating a
+ * <a href="https://docs.gocardless.com/docs/api-reference/mandate#create-a-mandate"> creating a
  * mandate </a> using the mandates API. Once these webhooks start arriving, any reconciliation can
  * now be accomplished by <a href=
- * "https://developer.gocardless.com/api-reference/#mandate-imports-get-a-mandate-import">checking
- * the current status</a> of the mandate import and <a href=
- * "https://developer.gocardless.com/api-reference/#mandate-import-entries-list-all-mandate-import-entries">linking
+ * "https://docs.gocardless.com/docs/api-reference/mandate-import#get-a-mandate-import">checking the
+ * current status</a> of the mandate import and <a href=
+ * "https://docs.gocardless.com/docs/api-reference/mandate-import-entry#list-all-mandate-import-entries">linking
  * up the mandates to your system</a>.
  * 
  * <p class="notice">
@@ -68,7 +68,7 @@ public class MandateImportService {
      * Mandate imports are first created, before mandates are added one-at-a-time, so this endpoint
      * merely signals the start of the import process. Once you've finished adding entries to an
      * import, you should <a href=
-     * "https://developer.gocardless.com/api-reference/#mandate-imports-submit-a-mandate-import">submit</a>
+     * "https://docs.gocardless.com/docs/api-reference/mandate-import#submit-a-mandate-import">submit</a>
      * it.
      */
     public MandateImportCreateRequest create() {
@@ -109,7 +109,7 @@ public class MandateImportService {
      * Mandate imports are first created, before mandates are added one-at-a-time, so this endpoint
      * merely signals the start of the import process. Once you've finished adding entries to an
      * import, you should <a href=
-     * "https://developer.gocardless.com/api-reference/#mandate-imports-submit-a-mandate-import">submit</a>
+     * "https://docs.gocardless.com/docs/api-reference/mandate-import#submit-a-mandate-import">submit</a>
      * it.
      */
     public static final class MandateImportCreateRequest

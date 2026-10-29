@@ -6,22 +6,22 @@ import java.util.Map;
  * Represents a mandate import entry resource returned from the API.
  *
  * Mandate Import Entries are added to a
- * <a href="https://developer.gocardless.com/api-reference/#core-endpoints-mandate-imports">Mandate
- * Import</a>. Each entry corresponds to one mandate to be imported into GoCardless.
+ * <a href="https://docs.gocardless.com/docs/api-reference/mandate-import">Mandate Import</a>. Each
+ * entry corresponds to one mandate to be imported into GoCardless.
  * 
  * To import a mandate you will need:
  * 
  * <ol>
  * <li>Identifying information about the customer (name/company and address)</li>
  * <li>Bank account details, consisting of an account holder name and either an IBAN or
- * <a href="https://developer.gocardless.com/api-reference/#appendix-local-bank-details">local bank
+ * <a href="https://docs.gocardless.com/docs/api-reference/local-bank-details">local bank
  * details</a></li>
  * <li>Amendment details (SEPA only)</li>
  * </ol>
  * We suggest you provide a <code>record_identifier</code> (which is unique within the context of a
  * single mandate import) to help you to identify mandates that have been created once the import
  * has been processed by GoCardless. You can <a href=
- * "https://developer.gocardless.com/api-reference/#mandate-import-entries-list-all-mandate-import-entries">list
+ * "https://docs.gocardless.com/docs/api-reference/mandate-import-entry#list-all-mandate-import-entries">list
  * the mandate import entries</a>, match them up in your system using the
  * <code>record_identifier</code>, and look at the <code>links</code> fields to find the mandate,
  * customer and customer bank account that have been imported.
@@ -43,7 +43,7 @@ public class MandateImportEntry {
 
     /**
      * Fixed <a href=
-     * "https://developer.gocardless.com/api-reference/#api-usage-dates-and-times">timestamp</a>,
+     * "https://docs.gocardless.com/docs/api-reference/data-conventions#dates-and-times">timestamp</a>,
      * recording when this resource was created.
      */
     public String getCreatedAt() {
@@ -111,7 +111,7 @@ public class MandateImportEntry {
 
         /**
          * The ID of the mandate import. This is returned when you <a href=
-         * "https://developer.gocardless.com/api-reference/#mandate-imports-create-a-new-mandate-import">create
+         * "https://docs.gocardless.com/docs/api-reference/mandate-import#create-a-new-mandate-import">create
          * a Mandate Import</a>.
          */
         public String getMandateImport() {

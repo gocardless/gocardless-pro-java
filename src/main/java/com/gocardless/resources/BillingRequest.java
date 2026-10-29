@@ -11,7 +11,7 @@ import java.util.Map;
  * of required input might be additional customer billing details, while an action would be asking a
  * customer to authorise a payment using their mobile banking app.
  * 
- * See <a href="https://developer.gocardless.com/getting-started/billing-requests/overview/">Billing
+ * See <a href="https://docs.gocardless.com/docs/collect-payments/setting-up-mandates">Billing
  * Requests: Overview</a> for how-to's, explanations and tutorials.
  * <p class="notice">
  * <strong>Important</strong>: All properties associated with <code>subscription_request</code> and
@@ -49,7 +49,7 @@ public class BillingRequest {
 
     /**
      * Fixed <a href=
-     * "https://developer.gocardless.com/api-reference/#api-usage-dates-and-times">timestamp</a>,
+     * "https://docs.gocardless.com/docs/api-reference/data-conventions#dates-and-times">timestamp</a>,
      * recording when this resource was created.
      */
     public String getCreatedAt() {
@@ -60,8 +60,8 @@ public class BillingRequest {
      * (Optional) If true, this billing request can fallback from instant payment to direct debit.
      * Should not be set if GoCardless payment intelligence feature is used.
      * 
-     * See <a href=
-     * "https://developer.gocardless.com/billing-requests/retain-customers-with-fallbacks/">Billing
+     * See
+     * <a href="https://docs.gocardless.com/docs/optimise/retain-customers-with-fallbacks">Billing
      * Requests: Retain customers with Fallbacks</a> for more information.
      */
     public Boolean getFallbackEnabled() {
@@ -123,7 +123,8 @@ public class BillingRequest {
     /**
      * Specifies the underlying purpose of the payment. Defines the specific reason or type of
      * service/goods the payment relates to, improving straight-through processing and compliance.
-     * See <a href="https://developer.gocardless.com/vrp-commercial-payment-purpose-codes/">VRP
+     * See <a href=
+     * "https://docs.gocardless.com/docs/collect-payments/scheme-guidance/vrp-purpose-codes">VRP
      * Commercial Payment Purpose Codes</a> for the complete list of valid codes.
      */
     public String getPaymentPurposeCode() {
@@ -140,9 +141,9 @@ public class BillingRequest {
     /**
      * Specifies the high-level purpose/category of a mandate and/or payment using a set of
      * pre-defined categories. Provides context on the nature and reason for the payment to
-     * facilitate processing and compliance. See
-     * <a href="https://developer.gocardless.com/billing-request-purpose-codes/">Billing Request
-     * Purpose Codes</a> for the complete list of valid codes.
+     * facilitate processing and compliance. See <a href=
+     * "https://docs.gocardless.com/docs/collect-payments/scheme-guidance/billing-request-purpose-codes">Billing
+     * Request Purpose Codes</a> for the complete list of valid codes.
      */
     public PurposeCode getPurposeCode() {
         return purposeCode;
@@ -523,7 +524,7 @@ public class BillingRequest {
         /**
          * An explicit array of instalment payments, each specifying at least an <code>amount</code>
          * and <code>charge_date</code>. See <a href=
-         * "https://developer.gocardless.com/api-reference/#instalment-schedules-create-with-dates">create
+         * "https://docs.gocardless.com/docs/api-reference/instalment-schedule#create-with-schedule">create
          * (with dates)</a>
          */
         public List<InstalmentsWithDate> getInstalmentsWithDates() {
@@ -533,7 +534,7 @@ public class BillingRequest {
         /**
          * Frequency of the payments you want to create, together with an array of payment amounts
          * to be collected, with a specified start date for the first payment. See <a href=
-         * "https://developer.gocardless.com/api-reference/#instalment-schedules-create-with-schedule">create
+         * "https://docs.gocardless.com/docs/api-reference/instalment-schedule#create-with-schedule">create
          * (with schedule)</a>
          */
         public InstalmentsWithSchedule getInstalmentsWithSchedule() {
@@ -562,8 +563,8 @@ public class BillingRequest {
 
         /**
          * An optional payment reference. This will be set as the reference on each payment created
-         * and will appear on your customer's bank statement. See the documentation for the <a href=
-         * "https://developer.gocardless.com/api-reference/#payments-create-a-payment">create
+         * and will appear on your customer's bank statement. See the documentation for the
+         * <a href="https://docs.gocardless.com/docs/api-reference/payment#create-a-payment">create
          * payment endpoint</a> for more details. <br>
          * </br>
          */
@@ -572,9 +573,9 @@ public class BillingRequest {
         }
 
         /**
-         * On failure, automatically retry payments using
-         * <a href="https://developer.gocardless.com/success-plus/overview">intelligent retries</a>.
-         * Default is <code>false</code>.
+         * On failure, automatically retry payments using <a href=
+         * "https://docs.gocardless.com/docs/optimise/reduced-failed-payments-with-success-plus">intelligent
+         * retries</a>. Default is <code>false</code>.
          * <p class="notice">
          * <strong>Important</strong>: To be able to use intelligent retries, Success+ needs to be
          * enabled in <a href="https://manage.gocardless.com/success-plus">GoCardless dashboard</a>.
@@ -626,9 +627,9 @@ public class BillingRequest {
 
             /**
              * A future date on which the payment should be collected. If the date is before the
-             * next_possible_charge_date on the <a href=
-             * "https://developer.gocardless.com/api-reference/#core-endpoints-mandates">mandate</a>,
-             * it will be automatically rolled forwards to that date.
+             * next_possible_charge_date on the
+             * <a href="https://docs.gocardless.com/docs/api-reference/mandate">mandate</a>, it will
+             * be automatically rolled forwards to that date.
              */
             public String getChargeDate() {
                 return chargeDate;
@@ -638,7 +639,7 @@ public class BillingRequest {
              * A human-readable description of the payment. This will be included in the
              * notification email GoCardless sends to your customer if your organisation does not
              * send its own notifications (see <a href=
-             * "https://developer.gocardless.com/api-reference/#appendix-compliance-requirements">compliance
+             * "https://docs.gocardless.com/docs/api-reference/compliance-requirements">compliance
              * requirements</a>).
              */
             public String getDescription() {
@@ -651,7 +652,7 @@ public class BillingRequest {
          *
          * Frequency of the payments you want to create, together with an array of payment amounts
          * to be collected, with a specified start date for the first payment. See <a href=
-         * "https://developer.gocardless.com/api-reference/#instalment-schedules-create-with-schedule">create
+         * "https://docs.gocardless.com/docs/api-reference/instalment-schedule#create-with-schedule">create
          * (with schedule)</a>
          */
         public static class InstalmentsWithSchedule {
@@ -690,8 +691,7 @@ public class BillingRequest {
 
             /**
              * The date on which the first payment should be charged. Must be on or after the
-             * <a href=
-             * "https://developer.gocardless.com/api-reference/#core-endpoints-mandates">mandate</a>'s
+             * <a href="https://docs.gocardless.com/docs/api-reference/mandate">mandate</a>'s
              * <code>next_possible_charge_date</code>. When left blank and <code>month</code> or
              * <code>day_of_month</code> are provided, this will be set to the date of the first
              * payment. If created without <code>month</code> or <code>day_of_month</code> this will
@@ -724,7 +724,7 @@ public class BillingRequest {
 
             /**
              * (Optional) ID of the <a href=
-             * "https://developer.gocardless.com/api-reference/#core-endpoints-instalment-schedules">instalment_schedule</a>
+             * "https://docs.gocardless.com/docs/api-reference/instalment-schedule">instalment_schedule</a>
              * that was created from this instalment schedule request.
              */
             public String getInstalmentSchedule() {
@@ -760,8 +760,8 @@ public class BillingRequest {
         private String subscriptionRequestSubscription;
 
         /**
-         * (Optional) ID of the <a href=
-         * "https://developer.gocardless.com/api-reference/#billing-requests-bank-authorisations">bank
+         * (Optional) ID of the
+         * <a href="https://docs.gocardless.com/docs/api-reference/bank-authorisation">bank
          * authorisation</a> that was used to verify this request.
          */
         public String getBankAuthorisation() {
@@ -769,16 +769,15 @@ public class BillingRequest {
         }
 
         /**
-         * ID of the associated <a href=
-         * "https://developer.gocardless.com/api-reference/#core-endpoints-creditors">creditor</a>.
+         * ID of the associated
+         * <a href="https://docs.gocardless.com/docs/api-reference/creditor">creditor</a>.
          */
         public String getCreditor() {
             return creditor;
         }
 
         /**
-         * ID of the <a href=
-         * "https://developer.gocardless.com/api-reference/#core-endpoints-customers">customer</a>
+         * ID of the <a href="https://docs.gocardless.com/docs/api-reference/customer">customer</a>
          * that will be used for this request
          */
         public String getCustomer() {
@@ -787,7 +786,7 @@ public class BillingRequest {
 
         /**
          * (Optional) ID of the <a href=
-         * "https://developer.gocardless.com/api-reference/#core-endpoints-customer-bank-accounts">customer_bank_account</a>
+         * "https://docs.gocardless.com/docs/api-reference/customer-bank-account">customer_bank_account</a>
          * that will be used for this request
          */
         public String getCustomerBankAccount() {
@@ -810,7 +809,7 @@ public class BillingRequest {
 
         /**
          * (Optional) ID of the <a href=
-         * "https://developer.gocardless.com/api-reference/#core-endpoints-instalment-schedules">instalment_schedule</a>
+         * "https://docs.gocardless.com/docs/api-reference/instalment-schedule">instalment_schedule</a>
          * that was created from this instalment schedule request.
          */
         public String getInstalmentScheduleRequestInstalmentSchedule() {
@@ -825,9 +824,9 @@ public class BillingRequest {
         }
 
         /**
-         * (Optional) ID of the <a href=
-         * "https://developer.gocardless.com/api-reference/#core-endpoints-mandates">mandate</a>
-         * that was created from this mandate request. this mandate request.
+         * (Optional) ID of the
+         * <a href="https://docs.gocardless.com/docs/api-reference/mandate">mandate</a> that was
+         * created from this mandate request. this mandate request.
          */
         public String getMandateRequestMandate() {
             return mandateRequestMandate;
@@ -855,9 +854,9 @@ public class BillingRequest {
         }
 
         /**
-         * (Optional) ID of the <a href=
-         * "https://developer.gocardless.com/api-reference/#core-endpoints-payments">payment</a>
-         * that was created from this payment request.
+         * (Optional) ID of the
+         * <a href="https://docs.gocardless.com/docs/api-reference/payment">payment</a> that was
+         * created from this payment request.
          */
         public String getPaymentRequestPayment() {
             return paymentRequestPayment;
@@ -871,8 +870,8 @@ public class BillingRequest {
         }
 
         /**
-         * (Optional) ID of the <a href=
-         * "https://developer.gocardless.com/api-reference/#core-endpoints-subscriptions">subscription</a>
+         * (Optional) ID of the
+         * <a href="https://docs.gocardless.com/docs/api-reference/subscription">subscription</a>
          * that was created from this subscription request.
          */
         public String getSubscriptionRequestSubscription() {
@@ -1028,7 +1027,7 @@ public class BillingRequest {
          * preference.
          * 
          * See <a href=
-         * "https://developer.gocardless.com/getting-started/billing-requests/verified-mandates/">Billing
+         * "https://docs.gocardless.com/docs/collect-payments/setting-up-mandates/verified-mandates">Billing
          * Requests: Creating Verified Mandates</a> for more information.
          */
         public Verify getVerify() {
@@ -1233,9 +1232,9 @@ public class BillingRequest {
             private String mandate;
 
             /**
-             * (Optional) ID of the <a href=
-             * "https://developer.gocardless.com/api-reference/#core-endpoints-mandates">mandate</a>
-             * that was created from this mandate request. this mandate request.
+             * (Optional) ID of the
+             * <a href="https://docs.gocardless.com/docs/api-reference/mandate">mandate</a> that was
+             * created from this mandate request. this mandate request.
              */
             public String getMandate() {
                 return mandate;
@@ -1333,9 +1332,9 @@ public class BillingRequest {
         }
 
         /**
-         * On failure, automatically retry the payment using
-         * <a href="https://developer.gocardless.com/success-plus/overview">intelligent retries</a>.
-         * Default is <code>false</code>.
+         * On failure, automatically retry the payment using <a href=
+         * "https://docs.gocardless.com/docs/optimise/reduced-failed-payments-with-success-plus">intelligent
+         * retries</a>. Default is <code>false</code>.
          * <p class="notice">
          * <strong>Important</strong>: To be able to use intelligent retries, Success+ needs to be
          * enabled in <a href="https://manage.gocardless.com/success-plus">GoCardless dashboard</a>.
@@ -1377,9 +1376,9 @@ public class BillingRequest {
             private String payment;
 
             /**
-             * (Optional) ID of the <a href=
-             * "https://developer.gocardless.com/api-reference/#core-endpoints-payments">payment</a>
-             * that was created from this payment request.
+             * (Optional) ID of the
+             * <a href="https://docs.gocardless.com/docs/api-reference/payment">payment</a> that was
+             * created from this payment request.
              */
             public String getPayment() {
                 return payment;
@@ -1455,7 +1454,7 @@ public class BillingRequest {
 
             /**
              * Fixed <a href=
-             * "https://developer.gocardless.com/api-reference/#api-usage-dates-and-times">timestamp</a>,
+             * "https://docs.gocardless.com/docs/api-reference/data-conventions#dates-and-times">timestamp</a>,
              * recording when this resource was created.
              */
             public String getCreatedAt() {
@@ -1495,7 +1494,7 @@ public class BillingRequest {
              * <a href="https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes">ISO 639-1</a> code.
              * Used as the language for notification emails sent by GoCardless if your organisation
              * does not send its own (see <a href=
-             * "https://developer.gocardless.com/api-reference/#appendix-compliance-requirements">compliance
+             * "https://docs.gocardless.com/docs/api-reference/compliance-requirements">compliance
              * requirements</a>). Currently only "en", "fr", "de", "pt", "es", "it", "nl", "da",
              * "nb", "sl", "sv" are supported. If this is not provided, the language will be chosen
              * based on the <code>country_code</code> (if supplied) or default to "en".
@@ -1550,7 +1549,7 @@ public class BillingRequest {
              * customer is created is stored and is available via the API, but is transliterated,
              * upcased, and truncated to 18 characters in bank submissions. This field is required
              * unless the request includes a <a href=
-             * "https://developer.gocardless.com/api-reference/#javascript-flow-customer-bank-account-tokens">customer
+             * "https://docs.gocardless.com/docs/collect-payments/integration-types/javascript-drop-in-flow">customer
              * bank account token</a>.
              */
             public String getAccountHolderName() {
@@ -1568,7 +1567,7 @@ public class BillingRequest {
             /**
              * Bank account type. Required for USD-denominated bank accounts. Must not be provided
              * for bank accounts in other currencies. See <a href=
-             * "https://developer.gocardless.com/api-reference/#local-bank-details-united-states">local
+             * "https://docs.gocardless.com/docs/api-reference/local-bank-details#united-states">local
              * details</a> for more information.
              */
             public AccountType getAccountType() {
@@ -1602,7 +1601,7 @@ public class BillingRequest {
 
             /**
              * Fixed <a href=
-             * "https://developer.gocardless.com/api-reference/#api-usage-dates-and-times">timestamp</a>,
+             * "https://docs.gocardless.com/docs/api-reference/data-conventions#dates-and-times">timestamp</a>,
              * recording when this resource was created.
              */
             public String getCreatedAt() {
@@ -1691,8 +1690,8 @@ public class BillingRequest {
                 private String customer;
 
                 /**
-                 * ID of the <a href=
-                 * "https://developer.gocardless.com/api-reference/#core-endpoints-customers">customer</a>
+                 * ID of the
+                 * <a href="https://docs.gocardless.com/docs/api-reference/customer">customer</a>
                  * that owns this bank account.
                  */
                 public String getCustomer() {
@@ -1764,7 +1763,7 @@ public class BillingRequest {
 
             /**
              * Fixed <a href=
-             * "https://developer.gocardless.com/api-reference/#api-usage-dates-and-times">timestamp</a>,
+             * "https://docs.gocardless.com/docs/api-reference/data-conventions#dates-and-times">timestamp</a>,
              * recording when this resource was created.
              */
             public String getCreatedAt() {
@@ -1949,8 +1948,8 @@ public class BillingRequest {
 
         /**
          * An optional payment reference. This will be set as the reference on each payment created
-         * and will appear on your customer's bank statement. See the documentation for the <a href=
-         * "https://developer.gocardless.com/api-reference/#payments-create-a-payment">create
+         * and will appear on your customer's bank statement. See the documentation for the
+         * <a href="https://docs.gocardless.com/docs/api-reference/payment#create-a-payment">create
          * payment endpoint</a> for more details. <br>
          * </br>
          */
@@ -1959,9 +1958,9 @@ public class BillingRequest {
         }
 
         /**
-         * On failure, automatically retry payments using
-         * <a href="https://developer.gocardless.com/success-plus/overview">intelligent retries</a>.
-         * Default is <code>false</code>.
+         * On failure, automatically retry payments using <a href=
+         * "https://docs.gocardless.com/docs/optimise/reduced-failed-payments-with-success-plus">intelligent
+         * retries</a>. Default is <code>false</code>.
          * <p class="notice">
          * <strong>Important</strong>: To be able to use intelligent retries, Success+ needs to be
          * enabled in <a href="https://manage.gocardless.com/success-plus">GoCardless dashboard</a>.
@@ -2022,8 +2021,8 @@ public class BillingRequest {
 
             /**
              * (Optional) ID of the <a href=
-             * "https://developer.gocardless.com/api-reference/#core-endpoints-subscriptions">subscription</a>
-             * that was created from this subscription request.
+             * "https://docs.gocardless.com/docs/api-reference/subscription">subscription</a> that
+             * was created from this subscription request.
              */
             public String getSubscription() {
                 return subscription;
