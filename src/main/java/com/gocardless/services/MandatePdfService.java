@@ -7,8 +7,8 @@ import com.google.gson.annotations.SerializedName;
 /**
  * Service class for working with mandate pdf resources.
  *
- * Mandate PDFs allow you to easily display <a href=
- * "https://developer.gocardless.com/api-reference/#appendix-compliance-requirements">scheme-rules
+ * Mandate PDFs allow you to easily display
+ * <a href="https://docs.gocardless.com/docs/api-reference/compliance-requirements">scheme-rules
  * compliant</a> Direct Debit mandates to your customers.
  */
 public class MandatePdfService {
@@ -26,8 +26,8 @@ public class MandatePdfService {
      * Generates a PDF mandate and returns its temporary URL.
      * 
      * Customer and bank account details can be left blank (for a blank mandate), provided manually,
-     * or inferred from the ID of an existing <a href=
-     * "https://developer.gocardless.com/api-reference/#core-endpoints-mandates">mandate</a>.
+     * or inferred from the ID of an existing
+     * <a href="https://docs.gocardless.com/docs/api-reference/mandate">mandate</a>.
      * 
      * By default, we'll generate PDF mandates in English.
      * 
@@ -56,8 +56,8 @@ public class MandatePdfService {
      * Generates a PDF mandate and returns its temporary URL.
      * 
      * Customer and bank account details can be left blank (for a blank mandate), provided manually,
-     * or inferred from the ID of an existing <a href=
-     * "https://developer.gocardless.com/api-reference/#core-endpoints-mandates">mandate</a>.
+     * or inferred from the ID of an existing
+     * <a href="https://docs.gocardless.com/docs/api-reference/mandate">mandate</a>.
      * 
      * By default, we'll generate PDF mandates in English.
      * 
@@ -107,9 +107,8 @@ public class MandatePdfService {
 
         /**
          * Name of the account holder, as known by the bank. Usually this matches the name of the
-         * <a href=
-         * "https://developer.gocardless.com/api-reference/#core-endpoints-customers">customer</a>.
-         * This field cannot exceed 18 characters.
+         * <a href="https://docs.gocardless.com/docs/api-reference/customer">customer</a>. This
+         * field cannot exceed 18 characters.
          */
         public MandatePdfCreateRequest withAccountHolderName(String accountHolderName) {
             this.accountHolderName = accountHolderName;
@@ -117,8 +116,8 @@ public class MandatePdfService {
         }
 
         /**
-         * Bank account number - see <a href=
-         * "https://developer.gocardless.com/api-reference/#appendix-local-bank-details">local
+         * Bank account number - see
+         * <a href="https://docs.gocardless.com/docs/api-reference/local-bank-details">local
          * details</a> for more information. Alternatively you can provide an <code>iban</code>.
          */
         public MandatePdfCreateRequest withAccountNumber(String accountNumber) {
@@ -129,7 +128,7 @@ public class MandatePdfService {
         /**
          * Bank account type. Required for USD-denominated bank accounts. Must not be provided for
          * bank accounts in other currencies. See <a href=
-         * "https://developer.gocardless.com/api-reference/#local-bank-details-united-states">local
+         * "https://docs.gocardless.com/docs/api-reference/local-bank-details#united-states">local
          * details</a> for more information.
          */
         public MandatePdfCreateRequest withAccountType(AccountType accountType) {
@@ -162,8 +161,8 @@ public class MandatePdfService {
         }
 
         /**
-         * Bank code - see <a href=
-         * "https://developer.gocardless.com/api-reference/#appendix-local-bank-details">local
+         * Bank code - see
+         * <a href="https://docs.gocardless.com/docs/api-reference/local-bank-details">local
          * details</a> for more information. Alternatively you can provide an <code>iban</code>.
          */
         public MandatePdfCreateRequest withBankCode(String bankCode) {
@@ -172,8 +171,8 @@ public class MandatePdfService {
         }
 
         /**
-         * SWIFT BIC. Will be derived automatically if a valid <code>iban</code> or <a href=
-         * "https://developer.gocardless.com/api-reference/#appendix-local-bank-details">local
+         * SWIFT BIC. Will be derived automatically if a valid <code>iban</code> or
+         * <a href="https://docs.gocardless.com/docs/api-reference/local-bank-details">local
          * details</a> are provided.
          */
         public MandatePdfCreateRequest withBic(String bic) {
@@ -182,8 +181,8 @@ public class MandatePdfService {
         }
 
         /**
-         * Branch code - see <a href=
-         * "https://developer.gocardless.com/api-reference/#appendix-local-bank-details">local
+         * Branch code - see
+         * <a href="https://docs.gocardless.com/docs/api-reference/local-bank-details">local
          * details</a> for more information. Alternatively you can provide an <code>iban</code>.
          */
         public MandatePdfCreateRequest withBranchCode(String branchCode) {
@@ -246,8 +245,8 @@ public class MandatePdfService {
         }
 
         /**
-         * International Bank Account Number. Alternatively you can provide <a href=
-         * "https://developer.gocardless.com/api-reference/#appendix-local-bank-details">local
+         * International Bank Account Number. Alternatively you can provide
+         * <a href="https://docs.gocardless.com/docs/api-reference/local-bank-details">local
          * details</a>. IBANs cannot be provided for Autogiro mandates.
          */
         public MandatePdfCreateRequest withIban(String iban) {
@@ -261,9 +260,9 @@ public class MandatePdfService {
         }
 
         /**
-         * ID of an existing <a href=
-         * "https://developer.gocardless.com/api-reference/#core-endpoints-creditors">creditor</a>.
-         * Only required if your account manages multiple creditors.
+         * ID of an existing
+         * <a href="https://docs.gocardless.com/docs/api-reference/creditor">creditor</a>. Only
+         * required if your account manages multiple creditors.
          */
         public MandatePdfCreateRequest withLinksCreditor(String creditor) {
             if (links == null) {
@@ -274,10 +273,10 @@ public class MandatePdfService {
         }
 
         /**
-         * ID of an existing <a href=
-         * "https://developer.gocardless.com/api-reference/#core-endpoints-mandates">mandate</a> to
-         * build the PDF from. The customer's bank details will be censored in the generated PDF. No
-         * other parameters may be provided alongside this.
+         * ID of an existing
+         * <a href="https://docs.gocardless.com/docs/api-reference/mandate">mandate</a> to build the
+         * PDF from. The customer's bank details will be censored in the generated PDF. No other
+         * parameters may be provided alongside this.
          */
         public MandatePdfCreateRequest withLinksMandate(String mandate) {
             if (links == null) {
@@ -334,8 +333,8 @@ public class MandatePdfService {
         /**
          * Direct Debit scheme. Can be supplied or automatically detected from the bank account
          * details provided. If you do not provide a scheme, you must provide either a mandate, an
-         * <code>iban</code>, or <a href=
-         * "https://developer.gocardless.com/api-reference/#appendix-local-bank-details">local
+         * <code>iban</code>, or
+         * <a href="https://docs.gocardless.com/docs/api-reference/local-bank-details">local
          * details</a> including a <code>country_code</code>.
          */
         public MandatePdfCreateRequest withScheme(String scheme) {
@@ -426,9 +425,9 @@ public class MandatePdfService {
             private String mandate;
 
             /**
-             * ID of an existing <a href=
-             * "https://developer.gocardless.com/api-reference/#core-endpoints-creditors">creditor</a>.
-             * Only required if your account manages multiple creditors.
+             * ID of an existing
+             * <a href="https://docs.gocardless.com/docs/api-reference/creditor">creditor</a>. Only
+             * required if your account manages multiple creditors.
              */
             public Links withCreditor(String creditor) {
                 this.creditor = creditor;
@@ -436,10 +435,10 @@ public class MandatePdfService {
             }
 
             /**
-             * ID of an existing <a href=
-             * "https://developer.gocardless.com/api-reference/#core-endpoints-mandates">mandate</a>
-             * to build the PDF from. The customer's bank details will be censored in the generated
-             * PDF. No other parameters may be provided alongside this.
+             * ID of an existing
+             * <a href="https://docs.gocardless.com/docs/api-reference/mandate">mandate</a> to build
+             * the PDF from. The customer's bank details will be censored in the generated PDF. No
+             * other parameters may be provided alongside this.
              */
             public Links withMandate(String mandate) {
                 this.mandate = mandate;

@@ -29,7 +29,7 @@ public class NegativeBalanceLimitService {
 
     /**
      * Returns a <a href=
-     * "https://developer.gocardless.com/api-reference/#api-usage-cursor-pagination">cursor-paginated</a>
+     * "https://docs.gocardless.com/docs/api-reference/data-conventions#cursor-pagination">cursor-paginated</a>
      * list of negative balance limits.
      */
     public NegativeBalanceLimitListRequest<ListResponse<NegativeBalanceLimit>> list() {
@@ -46,7 +46,7 @@ public class NegativeBalanceLimitService {
      * Request class for {@link NegativeBalanceLimitService#list }.
      *
      * Returns a <a href=
-     * "https://developer.gocardless.com/api-reference/#api-usage-cursor-pagination">cursor-paginated</a>
+     * "https://docs.gocardless.com/docs/api-reference/data-conventions#cursor-pagination">cursor-paginated</a>
      * list of negative balance limits.
      */
     public static final class NegativeBalanceLimitListRequest<S>

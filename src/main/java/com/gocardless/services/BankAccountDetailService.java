@@ -27,7 +27,7 @@ public class BankAccountDetailService {
      * 7516.
      * 
      * You must specify a <code>Gc-Key-Id</code> header when using this endpoint. See <a href=
-     * "https://developer.gocardless.com/gc-embed/bank-details-access#public_key_setup">Public Key
+     * "https://docs.gocardless.com/docs/gc-embed/bank-details-access#public-key-setup">Public Key
      * Setup</a> for more details.
      */
     public BankAccountDetailGetRequest get(String identity) {
@@ -41,7 +41,7 @@ public class BankAccountDetailService {
      * 7516.
      * 
      * You must specify a <code>Gc-Key-Id</code> header when using this endpoint. See <a href=
-     * "https://developer.gocardless.com/gc-embed/bank-details-access#public_key_setup">Public Key
+     * "https://docs.gocardless.com/docs/gc-embed/bank-details-access#public-key-setup">Public Key
      * Setup</a> for more details.
      */
     public static final class BankAccountDetailGetRequest extends GetRequest<BankAccountDetail> {

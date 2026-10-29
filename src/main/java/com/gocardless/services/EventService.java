@@ -15,8 +15,8 @@ import java.util.Map;
  * example a payment which has been collected, or a mandate which has been transferred. Event
  * creation is an asynchronous process, so it can take some time between an action occurring and its
  * corresponding event getting included in API responses. See
- * <a href="https://developer.gocardless.com/api-reference/#event-types">here</a> for a complete
- * list of event types.
+ * <a href="https://docs.gocardless.com/docs/api-reference/events">here</a> for a complete list of
+ * event types.
  * 
  * <p class="notice">
  * <strong>Important</strong>: Events older than 18 months will be archived and no longer accessible
@@ -38,7 +38,7 @@ public class EventService {
 
     /**
      * Returns a <a href=
-     * "https://developer.gocardless.com/api-reference/#api-usage-cursor-pagination">cursor-paginated</a>
+     * "https://docs.gocardless.com/docs/api-reference/data-conventions#cursor-pagination">cursor-paginated</a>
      * list of your events.
      * 
      * <p class="notice">
@@ -66,7 +66,7 @@ public class EventService {
      * Request class for {@link EventService#list }.
      *
      * Returns a <a href=
-     * "https://developer.gocardless.com/api-reference/#api-usage-cursor-pagination">cursor-paginated</a>
+     * "https://docs.gocardless.com/docs/api-reference/data-conventions#cursor-pagination">cursor-paginated</a>
      * list of your events.
      * 
      * <p class="notice">
@@ -120,8 +120,7 @@ public class EventService {
         }
 
         /**
-         * ID of a <a href=
-         * "https://developer.gocardless.com/api-reference/#billing-requests-billing-requests">billing
+         * ID of a <a href="https://docs.gocardless.com/docs/api-reference/billing-request">billing
          * request</a>. If specified, this endpoint will return all events for the given billing
          * request.
          */
@@ -180,8 +179,7 @@ public class EventService {
         }
 
         /**
-         * ID of an <a href=
-         * "https://developer.gocardless.com/api-reference/#core-endpoints-creditors">creditor</a>.
+         * ID of an <a href="https://docs.gocardless.com/docs/api-reference/creditor">creditor</a>.
          * If specified, this endpoint will return all events for the given creditor.
          */
         public EventListRequest<S> withCreditor(String creditor) {
@@ -207,8 +205,8 @@ public class EventService {
         }
 
         /**
-         * ID of an <a href=
-         * "https://developer.gocardless.com/api-reference/#core-endpoints-instalment-schedules">instalment
+         * ID of an
+         * <a href="https://docs.gocardless.com/docs/api-reference/instalment-schedule">instalment
          * schedule</a>. If specified, this endpoint will return all events for the given instalment
          * schedule.
          */
@@ -226,8 +224,7 @@ public class EventService {
         }
 
         /**
-         * ID of a <a href=
-         * "https://developer.gocardless.com/api-reference/#core-endpoints-mandates">mandate</a>. If
+         * ID of a <a href="https://docs.gocardless.com/docs/api-reference/mandate">mandate</a>. If
          * specified, this endpoint will return all events for the given mandate.
          */
         public EventListRequest<S> withMandate(String mandate) {
@@ -237,7 +234,7 @@ public class EventService {
 
         /**
          * ID of an <a href=
-         * "https://developer.gocardless.com/api-reference/#core-endpoints-outbound-payments">outbound_payment</a>.
+         * "https://docs.gocardless.com/docs/api-reference/outbound-payment">outbound_payment</a>.
          * If specified, this endpoint will return all events for the given payment.
          */
         public EventListRequest<S> withOutboundPayment(String outboundPayment) {
@@ -255,8 +252,8 @@ public class EventService {
         }
 
         /**
-         * ID of a <a href=
-         * "https://developer.gocardless.com/api-reference/#core-endpoints-payer-authorisations">payer
+         * ID of a
+         * <a href="https://docs.gocardless.com/docs/api-reference/payer-authorisation">payer
          * authorisation</a>.
          */
         public EventListRequest<S> withPayerAuthorisation(String payerAuthorisation) {
@@ -265,8 +262,7 @@ public class EventService {
         }
 
         /**
-         * ID of a <a href=
-         * "https://developer.gocardless.com/api-reference/#core-endpoints-payments">payment</a>. If
+         * ID of a <a href="https://docs.gocardless.com/docs/api-reference/payment">payment</a>. If
          * specified, this endpoint will return all events for the given payment.
          */
         public EventListRequest<S> withPayment(String payment) {
@@ -284,8 +280,7 @@ public class EventService {
         }
 
         /**
-         * ID of a <a href=
-         * "https://developer.gocardless.com/api-reference/#core-endpoints-payouts">payout</a>. If
+         * ID of a <a href="https://docs.gocardless.com/docs/api-reference/payout">payout</a>. If
          * specified, this endpoint will return all events for the given payout.
          */
         public EventListRequest<S> withPayout(String payout) {
@@ -294,8 +289,7 @@ public class EventService {
         }
 
         /**
-         * ID of a <a href=
-         * "https://developer.gocardless.com/api-reference/#core-endpoints-refunds">refund</a>. If
+         * ID of a <a href="https://docs.gocardless.com/docs/api-reference/refund">refund</a>. If
          * specified, this endpoint will return all events for the given refund.
          */
         public EventListRequest<S> withRefund(String refund) {
@@ -317,8 +311,7 @@ public class EventService {
         }
 
         /**
-         * ID of a <a href=
-         * "https://developer.gocardless.com/api-reference/#core-endpoints-scheme-identifiers">scheme
+         * ID of a <a href="https://docs.gocardless.com/docs/api-reference/scheme-identifier">scheme
          * identifier</a>. If specified, this endpoint will return all events for the given scheme
          * identifier.
          */
@@ -328,8 +321,8 @@ public class EventService {
         }
 
         /**
-         * ID of a <a href=
-         * "https://developer.gocardless.com/api-reference/#core-endpoints-subscriptions">subscription</a>.
+         * ID of a
+         * <a href="https://docs.gocardless.com/docs/api-reference/subscription">subscription</a>.
          * If specified, this endpoint will return all events for the given subscription.
          */
         public EventListRequest<S> withSubscription(String subscription) {

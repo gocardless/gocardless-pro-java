@@ -143,8 +143,8 @@ public class VerificationDetailService {
         }
 
         /**
-         * ID of the associated <a href=
-         * "https://developer.gocardless.com/api-reference/#core-endpoints-creditors">creditor</a>.
+         * ID of the associated
+         * <a href="https://docs.gocardless.com/docs/api-reference/creditor">creditor</a>.
          */
         public VerificationDetailCreateRequest withLinksCreditor(String creditor) {
             if (links == null) {
@@ -271,8 +271,8 @@ public class VerificationDetailService {
             private String creditor;
 
             /**
-             * ID of the associated <a href=
-             * "https://developer.gocardless.com/api-reference/#core-endpoints-creditors">creditor</a>.
+             * ID of the associated
+             * <a href="https://docs.gocardless.com/docs/api-reference/creditor">creditor</a>.
              */
             public Links withCreditor(String creditor) {
                 this.creditor = creditor;

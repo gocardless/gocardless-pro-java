@@ -12,8 +12,8 @@ import java.util.Map;
 /**
  * Service class for working with institution resources.
  *
- * Institutions that are supported when creating <a href=
- * "https://developer.gocardless.com/api-reference/#billing-requests-bank-authorisations">Bank
+ * Institutions that are supported when creating
+ * <a href="https://docs.gocardless.com/docs/api-reference/bank-authorisation">Bank
  * Authorisations</a> for a particular country or purpose.
  * 
  * Not all institutions support both Payment Initiation (PIS) and Account Information (AIS)

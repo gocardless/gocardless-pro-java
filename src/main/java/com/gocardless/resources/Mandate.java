@@ -7,11 +7,11 @@ import java.util.Map;
  * Represents a mandate resource returned from the API.
  *
  * Mandates represent the Direct Debit mandate with a
- * <a href="https://developer.gocardless.com/api-reference/#core-endpoints-customers">customer</a>.
+ * <a href="https://docs.gocardless.com/docs/api-reference/customer">customer</a>.
  * 
  * GoCardless will notify you via a
- * <a href="https://developer.gocardless.com/api-reference/#appendix-webhooks">webhook</a> whenever
- * the status of a mandate changes.
+ * <a href="https://docs.gocardless.com/docs/api-reference/webhooks">webhook</a> whenever the status
+ * of a mandate changes.
  */
 public class Mandate {
     private Mandate() {
@@ -65,7 +65,7 @@ public class Mandate {
 
     /**
      * Fixed <a href=
-     * "https://developer.gocardless.com/api-reference/#api-usage-dates-and-times">timestamp</a>,
+     * "https://docs.gocardless.com/docs/api-reference/data-conventions#dates-and-times">timestamp</a>,
      * recording when this resource was created.
      */
     public String getCreatedAt() {
@@ -142,9 +142,9 @@ public class Mandate {
 
     /**
      * Unique reference. Different schemes have different length and
-     * <a href="https://developer.gocardless.com/api-reference/#appendix-character-sets">character
-     * set</a> requirements. GoCardless will generate a unique reference satisfying the different
-     * scheme requirements if this field is left blank.
+     * <a href="https://docs.gocardless.com/docs/api-reference/character-sets">character set</a>
+     * requirements. GoCardless will generate a unique reference satisfying the different scheme
+     * requirements if this field is left blank.
      */
     public String getReference() {
         return reference;
@@ -185,7 +185,7 @@ public class Mandate {
 
     /**
      * <a href=
-     * "https://developer.gocardless.com/api-reference/#api-usage-dates-and-times">Timestamp</a>
+     * "https://docs.gocardless.com/docs/api-reference/data-conventions#dates-and-times">Timestamp</a>
      * recording when this mandate was verified.
      */
     public String getVerifiedAt() {
@@ -376,24 +376,24 @@ public class Mandate {
         private String newMandate;
 
         /**
-         * ID of the associated <a href=
-         * "https://developer.gocardless.com/api-reference/#core-endpoints-creditors">creditor</a>.
+         * ID of the associated
+         * <a href="https://docs.gocardless.com/docs/api-reference/creditor">creditor</a>.
          */
         public String getCreditor() {
             return creditor;
         }
 
         /**
-         * ID of the associated <a href=
-         * "https://developer.gocardless.com/api-reference/#core-endpoints-customers">customer</a>
+         * ID of the associated
+         * <a href="https://docs.gocardless.com/docs/api-reference/customer">customer</a>
          */
         public String getCustomer() {
             return customer;
         }
 
         /**
-         * ID of the associated <a href=
-         * "https://developer.gocardless.com/api-reference/#core-endpoints-customer-bank-accounts">customer
+         * ID of the associated
+         * <a href="https://docs.gocardless.com/docs/api-reference/customer-bank-account">customer
          * bank account</a> which the mandate is created and submits payments against.
          */
         public String getCustomerBankAccount() {

@@ -104,8 +104,8 @@ public class BillingRequestFlowService {
         }
 
         /**
-         * ID of the <a href=
-         * "https://developer.gocardless.com/api-reference/#billing-requests-billing-requests">billing
+         * ID of the
+         * <a href="https://docs.gocardless.com/docs/api-reference/billing-request">billing
          * request</a> against which this flow was created.
          */
         public BillingRequestFlowCreateRequest withLinksBillingRequest(String billingRequest) {
@@ -167,7 +167,7 @@ public class BillingRequestFlowService {
         /**
          * Bank account type for USD-denominated bank accounts. Must not be provided for bank
          * accounts in other currencies. See <a href=
-         * "https://developer.gocardless.com/api-reference/#local-bank-details-united-states">local
+         * "https://docs.gocardless.com/docs/api-reference/local-bank-details#united-states">local
          * details</a> for more information.
          */
         public BillingRequestFlowCreateRequest withPrefilledBankAccountAccountType(
@@ -443,8 +443,8 @@ public class BillingRequestFlowService {
             private String billingRequest;
 
             /**
-             * ID of the <a href=
-             * "https://developer.gocardless.com/api-reference/#billing-requests-billing-requests">billing
+             * ID of the
+             * <a href="https://docs.gocardless.com/docs/api-reference/billing-request">billing
              * request</a> against which this flow was created.
              */
             public Links withBillingRequest(String billingRequest) {
@@ -459,7 +459,7 @@ public class BillingRequestFlowService {
             /**
              * Bank account type for USD-denominated bank accounts. Must not be provided for bank
              * accounts in other currencies. See <a href=
-             * "https://developer.gocardless.com/api-reference/#local-bank-details-united-states">local
+             * "https://docs.gocardless.com/docs/api-reference/local-bank-details#united-states">local
              * details</a> for more information.
              */
             public PrefilledBankAccount withAccountType(AccountType accountType) {

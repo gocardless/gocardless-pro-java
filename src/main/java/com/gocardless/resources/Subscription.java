@@ -8,15 +8,15 @@ import java.util.Map;
  * Represents a subscription resource returned from the API.
  *
  * Subscriptions create
- * <a href="https://developer.gocardless.com/api-reference/#core-endpoints-payments">payments</a>
- * according to a schedule.
+ * <a href="https://docs.gocardless.com/docs/api-reference/payment">payments</a> according to a
+ * schedule.
  * 
  * <h3>Recurrence Rules</h3> The following rules apply when specifying recurrence:
  * 
  * <ul>
  * <li>If <code>day_of_month</code> and <code>start_date</code> are not provided
  * <code>start_date</code> will be the
- * <a href="https://developer.gocardless.com/api-reference/#core-endpoints-mandates">mandate</a>'s
+ * <a href="https://docs.gocardless.com/docs/api-reference/mandate">mandate</a>'s
  * <code>next_possible_charge_date</code> and the subscription will then recur based on the
  * <code>interval</code> &amp; <code>interval_unit</code></li>
  * <li>If <code>month</code> or <code>day_of_month</code> are present the following validations
@@ -102,7 +102,7 @@ public class Subscription {
 
     /**
      * Fixed <a href=
-     * "https://developer.gocardless.com/api-reference/#api-usage-dates-and-times">timestamp</a>,
+     * "https://docs.gocardless.com/docs/api-reference/data-conventions#dates-and-times">timestamp</a>,
      * recording when this resource was created.
      */
     public String getCreatedAt() {
@@ -217,7 +217,7 @@ public class Subscription {
     /**
      * An optional payment reference. This will be set as the reference on each payment created and
      * will appear on your customer's bank statement. See the documentation for the
-     * <a href="https://developer.gocardless.com/api-reference/#payments-create-a-payment">create
+     * <a href="https://docs.gocardless.com/docs/api-reference/payment#create-a-payment">create
      * payment endpoint</a> for more details. <br>
      * </br>
      * 
@@ -231,9 +231,9 @@ public class Subscription {
     }
 
     /**
-     * On failure, automatically retry payments using
-     * <a href="https://developer.gocardless.com/success-plus/overview">intelligent retries</a>.
-     * Default is <code>false</code>.
+     * On failure, automatically retry payments using <a href=
+     * "https://docs.gocardless.com/docs/optimise/reduced-failed-payments-with-success-plus">intelligent
+     * retries</a>. Default is <code>false</code>.
      * <p class="notice">
      * <strong>Important</strong>: To be able to use intelligent retries, Success+ needs to be
      * enabled in <a href="https://manage.gocardless.com/success-plus">GoCardless dashboard</a>.
@@ -244,8 +244,8 @@ public class Subscription {
     }
 
     /**
-     * The date on which the first payment should be charged. Must be on or after the <a href=
-     * "https://developer.gocardless.com/api-reference/#core-endpoints-mandates">mandate</a>'s
+     * The date on which the first payment should be charged. Must be on or after the
+     * <a href="https://docs.gocardless.com/docs/api-reference/mandate">mandate</a>'s
      * <code>next_possible_charge_date</code>. When left blank and <code>month</code> or
      * <code>day_of_month</code> are provided, this will be set to the date of the first payment. If
      * created without <code>month</code> or <code>day_of_month</code> this will be set as the
@@ -331,9 +331,9 @@ public class Subscription {
         private String mandate;
 
         /**
-         * ID of the associated <a href=
-         * "https://developer.gocardless.com/api-reference/#core-endpoints-mandates">mandate</a>
-         * which the subscription will create payments against.
+         * ID of the associated
+         * <a href="https://docs.gocardless.com/docs/api-reference/mandate">mandate</a> which the
+         * subscription will create payments against.
          */
         public String getMandate() {
             return mandate;

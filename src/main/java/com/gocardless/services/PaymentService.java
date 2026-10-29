@@ -15,15 +15,13 @@ import java.util.Map;
  * Service class for working with payment resources.
  *
  * Payment objects represent payments from a
- * <a href="https://developer.gocardless.com/api-reference/#core-endpoints-customers">customer</a>
- * to a
- * <a href="https://developer.gocardless.com/api-reference/#core-endpoints-creditors">creditor</a>,
- * taken against a Direct Debit
- * <a href="https://developer.gocardless.com/api-reference/#core-endpoints-mandates">mandate</a>.
+ * <a href="https://docs.gocardless.com/docs/api-reference/customer">customer</a> to a
+ * <a href="https://docs.gocardless.com/docs/api-reference/creditor">creditor</a>, taken against a
+ * Direct Debit <a href="https://docs.gocardless.com/docs/api-reference/mandate">mandate</a>.
  * 
  * GoCardless will notify you via a
- * <a href="https://developer.gocardless.com/api-reference/#appendix-webhooks">webhook</a> whenever
- * the state of a payment changes.
+ * <a href="https://docs.gocardless.com/docs/api-reference/webhooks">webhook</a> whenever the state
+ * of a payment changes.
  */
 public class PaymentService {
     private final HttpClient httpClient;
@@ -40,8 +38,8 @@ public class PaymentService {
      * <a name="mandate_is_inactive"></a>Creates a new payment object.
      * 
      * This fails with a <code>mandate_is_inactive</code> error if the linked
-     * <a href="https://developer.gocardless.com/api-reference/#core-endpoints-mandates">mandate</a>
-     * is cancelled or has failed. Payments can be created against mandates with status of:
+     * <a href="https://docs.gocardless.com/docs/api-reference/mandate">mandate</a> is cancelled or
+     * has failed. Payments can be created against mandates with status of:
      * <code>pending_customer_approval</code>, <code>pending_submission</code>,
      * <code>submitted</code>, and <code>active</code>.
      */
@@ -51,7 +49,7 @@ public class PaymentService {
 
     /**
      * Returns a <a href=
-     * "https://developer.gocardless.com/api-reference/#api-usage-cursor-pagination">cursor-paginated</a>
+     * "https://docs.gocardless.com/docs/api-reference/data-conventions#cursor-pagination">cursor-paginated</a>
      * list of your payments.
      */
     public PaymentListRequest<ListResponse<Payment>> list() {
@@ -109,8 +107,8 @@ public class PaymentService {
      * <a name="mandate_is_inactive"></a>Creates a new payment object.
      * 
      * This fails with a <code>mandate_is_inactive</code> error if the linked
-     * <a href="https://developer.gocardless.com/api-reference/#core-endpoints-mandates">mandate</a>
-     * is cancelled or has failed. Payments can be created against mandates with status of:
+     * <a href="https://docs.gocardless.com/docs/api-reference/mandate">mandate</a> is cancelled or
+     * has failed. Payments can be created against mandates with status of:
      * <code>pending_customer_approval</code>, <code>pending_submission</code>,
      * <code>submitted</code>, and <code>active</code>.
      */
@@ -153,8 +151,8 @@ public class PaymentService {
 
         /**
          * A future date on which the payment should be collected. If not specified, the payment
-         * will be collected as soon as possible. If the value is before the <a href=
-         * "https://developer.gocardless.com/api-reference/#core-endpoints-mandates">mandate</a>'s
+         * will be collected as soon as possible. If the value is before the
+         * <a href="https://docs.gocardless.com/docs/api-reference/mandate">mandate</a>'s
          * <code>next_possible_charge_date</code> creation will fail. If the value is not a working
          * day it will be rolled forwards to the next available one.
          */
@@ -176,7 +174,7 @@ public class PaymentService {
          * A human-readable description of the payment. This will be included in the notification
          * email GoCardless sends to your customer if your organisation does not send its own
          * notifications (see <a href=
-         * "https://developer.gocardless.com/api-reference/#appendix-compliance-requirements">compliance
+         * "https://docs.gocardless.com/docs/api-reference/compliance-requirements">compliance
          * requirements</a>).
          */
         public PaymentCreateRequest withDescription(String description) {
@@ -200,8 +198,7 @@ public class PaymentService {
         }
 
         /**
-         * ID of the <a href=
-         * "https://developer.gocardless.com/api-reference/#core-endpoints-mandates">mandate</a>
+         * ID of the <a href="https://docs.gocardless.com/docs/api-reference/mandate">mandate</a>
          * against which this payment should be collected.
          */
         public PaymentCreateRequest withLinksMandate(String mandate) {
@@ -331,9 +328,9 @@ public class PaymentService {
         }
 
         /**
-         * On failure, automatically retry the payment using
-         * <a href="https://developer.gocardless.com/success-plus/overview">intelligent retries</a>.
-         * Default is <code>false</code>.
+         * On failure, automatically retry the payment using <a href=
+         * "https://docs.gocardless.com/docs/optimise/reduced-failed-payments-with-success-plus">intelligent
+         * retries</a>. Default is <code>false</code>.
          * <p class="notice">
          * <strong>Important</strong>: To be able to use intelligent retries, Success+ needs to be
          * enabled in <a href="https://manage.gocardless.com/success-plus">GoCardless dashboard</a>.
@@ -421,9 +418,9 @@ public class PaymentService {
             private String mandate;
 
             /**
-             * ID of the <a href=
-             * "https://developer.gocardless.com/api-reference/#core-endpoints-mandates">mandate</a>
-             * against which this payment should be collected.
+             * ID of the
+             * <a href="https://docs.gocardless.com/docs/api-reference/mandate">mandate</a> against
+             * which this payment should be collected.
              */
             public Links withMandate(String mandate) {
                 this.mandate = mandate;
@@ -436,7 +433,7 @@ public class PaymentService {
      * Request class for {@link PaymentService#list }.
      *
      * Returns a <a href=
-     * "https://developer.gocardless.com/api-reference/#api-usage-cursor-pagination">cursor-paginated</a>
+     * "https://docs.gocardless.com/docs/api-reference/data-conventions#cursor-pagination">cursor-paginated</a>
      * list of your payments.
      */
     public static final class PaymentListRequest<S> extends ListRequest<S, Payment> {
@@ -682,8 +679,8 @@ public class PaymentService {
          * to the banks</li>
          * <li><code>submitted</code>: the payment has been submitted to the banks</li>
          * <li><code>confirmed</code>: the payment has been confirmed as collected</li>
-         * <li><code>paid_out</code>: the payment has been included in a <a href=
-         * "https://developer.gocardless.com/api-reference/#core-endpoints-payouts">payout</a></li>
+         * <li><code>paid_out</code>: the payment has been included in a
+         * <a href="https://docs.gocardless.com/docs/api-reference/payout">payout</a></li>
          * <li><code>cancelled</code>: the payment has been cancelled</li>
          * <li><code>customer_approval_denied</code>: the customer has denied approval for the
          * payment. You should contact the customer directly</li>
@@ -1038,9 +1035,9 @@ public class PaymentService {
         }
 
         /**
-         * On failure, automatically retry the payment using
-         * <a href="https://developer.gocardless.com/success-plus/overview">intelligent retries</a>.
-         * Default is <code>false</code>.
+         * On failure, automatically retry the payment using <a href=
+         * "https://docs.gocardless.com/docs/optimise/reduced-failed-payments-with-success-plus">intelligent
+         * retries</a>. Default is <code>false</code>.
          * <p class="notice">
          * <strong>Important</strong>: To be able to use intelligent retries, Success+ needs to be
          * enabled in <a href="https://manage.gocardless.com/success-plus">GoCardless dashboard</a>.
@@ -1189,8 +1186,8 @@ public class PaymentService {
 
         /**
          * A future date on which the payment should be collected. If not specified, the payment
-         * will be collected as soon as possible. If the value is before the <a href=
-         * "https://developer.gocardless.com/api-reference/#core-endpoints-mandates">mandate</a>'s
+         * will be collected as soon as possible. If the value is before the
+         * <a href="https://docs.gocardless.com/docs/api-reference/mandate">mandate</a>'s
          * <code>next_possible_charge_date</code> creation will fail. If the value is not a working
          * day it will be rolled forwards to the next available one.
          */

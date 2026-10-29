@@ -58,7 +58,7 @@ public class TransferredMandate {
 
         /**
          * The ID of the updated <a href=
-         * "https://developer.gocardless.com/api-reference/#core-endpoints-customer-bank-accounts">customer_bank_account</a>
+         * "https://docs.gocardless.com/docs/api-reference/customer-bank-account">customer_bank_account</a>
          */
         public String getCustomerBankAccount() {
             return customerBankAccount;

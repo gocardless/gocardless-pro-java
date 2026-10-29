@@ -29,7 +29,7 @@ public class NegativeBalanceLimit {
 
     /**
      * Fixed <a href=
-     * "https://developer.gocardless.com/api-reference/#api-usage-dates-and-times">timestamp</a>,
+     * "https://docs.gocardless.com/docs/api-reference/data-conventions#dates-and-times">timestamp</a>,
      * recording when this limit was created.
      */
     public String getCreatedAt() {
@@ -89,8 +89,7 @@ public class NegativeBalanceLimit {
         }
 
         /**
-         * ID of <a href=
-         * "https://developer.gocardless.com/api-reference/#core-endpoints-creditors">creditor</a>
+         * ID of <a href="https://docs.gocardless.com/docs/api-reference/creditor">creditor</a>
          * which this limit relates to
          */
         public String getCreditor() {

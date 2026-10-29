@@ -35,7 +35,7 @@ public class InstalmentSchedule {
 
     /**
      * Fixed <a href=
-     * "https://developer.gocardless.com/api-reference/#api-usage-dates-and-times">timestamp</a>,
+     * "https://docs.gocardless.com/docs/api-reference/data-conventions#dates-and-times">timestamp</a>,
      * recording when this resource was created.
      */
     public String getCreatedAt() {
@@ -154,25 +154,25 @@ public class InstalmentSchedule {
         private List<String> payments;
 
         /**
-         * ID of the associated <a href=
-         * "https://developer.gocardless.com/api-reference/#core-endpoints-customers">customer</a>.
+         * ID of the associated
+         * <a href="https://docs.gocardless.com/docs/api-reference/customer">customer</a>.
          */
         public String getCustomer() {
             return customer;
         }
 
         /**
-         * ID of the associated <a href=
-         * "https://developer.gocardless.com/api-reference/#core-endpoints-mandates">mandate</a>
-         * which the instalment schedule will create payments against.
+         * ID of the associated
+         * <a href="https://docs.gocardless.com/docs/api-reference/mandate">mandate</a> which the
+         * instalment schedule will create payments against.
          */
         public String getMandate() {
             return mandate;
         }
 
         /**
-         * Array of IDs of the associated <a href=
-         * "https://developer.gocardless.com/api-reference/#core-endpoints-payments">payments</a>
+         * Array of IDs of the associated
+         * <a href="https://docs.gocardless.com/docs/api-reference/payment">payments</a>
          */
         public List<String> getPayments() {
             return payments;

@@ -7,11 +7,10 @@ import java.util.Map;
  * Represents a customer bank account resource returned from the API.
  *
  * Customer Bank Accounts hold the bank details of a
- * <a href="https://developer.gocardless.com/api-reference/#core-endpoints-customers">customer</a>.
- * They always belong to a
- * <a href="https://developer.gocardless.com/api-reference/#core-endpoints-customers">customer</a>,
- * and may be linked to several Direct Debit
- * <a href="https://developer.gocardless.com/api-reference/#core-endpoints-mandates">mandates</a>.
+ * <a href="https://docs.gocardless.com/docs/api-reference/customer">customer</a>. They always
+ * belong to a <a href="https://docs.gocardless.com/docs/api-reference/customer">customer</a>, and
+ * may be linked to several Direct Debit
+ * <a href="https://docs.gocardless.com/docs/api-reference/mandate">mandates</a>.
  * 
  * Note that customer bank accounts must be unique, and so you will encounter a
  * <code>bank_account_exists</code> error if you try to create a duplicate bank account. You may
@@ -19,7 +18,7 @@ import java.util.Map;
  * <code>links[customer_bank_account]</code> in the error response.
  * 
  * <em>Note:</em> To ensure the customer's bank accounts are valid, verify them first using <a href=
- * "https://developer.gocardless.com/api-reference/#bank-details-lookups-perform-a-bank-details-lookup">bank_details_lookups</a>,
+ * "https://docs.gocardless.com/docs/api-reference/bank-details-lookup#perform-a-bank-details-lookup">bank_details_lookups</a>,
  * before proceeding with creating the accounts
  */
 public class CustomerBankAccount {
@@ -47,7 +46,7 @@ public class CustomerBankAccount {
      * created is stored and is available via the API, but is transliterated, upcased, and truncated
      * to 18 characters in bank submissions. This field is required unless the request includes a
      * <a href=
-     * "https://developer.gocardless.com/api-reference/#javascript-flow-customer-bank-account-tokens">customer
+     * "https://docs.gocardless.com/docs/collect-payments/integration-types/javascript-drop-in-flow">customer
      * bank account token</a>.
      */
     public String getAccountHolderName() {
@@ -65,7 +64,7 @@ public class CustomerBankAccount {
     /**
      * Bank account type. Required for USD-denominated bank accounts. Must not be provided for bank
      * accounts in other currencies. See <a href=
-     * "https://developer.gocardless.com/api-reference/#local-bank-details-united-states">local
+     * "https://docs.gocardless.com/docs/api-reference/local-bank-details#united-states">local
      * details</a> for more information.
      */
     public AccountType getAccountType() {
@@ -99,7 +98,7 @@ public class CustomerBankAccount {
 
     /**
      * Fixed <a href=
-     * "https://developer.gocardless.com/api-reference/#api-usage-dates-and-times">timestamp</a>,
+     * "https://docs.gocardless.com/docs/api-reference/data-conventions#dates-and-times">timestamp</a>,
      * recording when this resource was created.
      */
     public String getCreatedAt() {
@@ -195,8 +194,7 @@ public class CustomerBankAccount {
         private String customer;
 
         /**
-         * ID of the <a href=
-         * "https://developer.gocardless.com/api-reference/#core-endpoints-customers">customer</a>
+         * ID of the <a href="https://docs.gocardless.com/docs/api-reference/customer">customer</a>
          * that owns this bank account.
          */
         public String getCustomer() {

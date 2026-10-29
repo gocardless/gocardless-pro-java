@@ -9,7 +9,7 @@ import java.util.Map;
  *
  * <p class="restricted-notice">
  * Don't use Payer Authorisations for new integrations. It is deprecated in favour of
- * <a href="https://developer.gocardless.com/getting-started/billing-requests/overview/"> Billing
+ * <a href="https://docs.gocardless.com/docs/collect-payments/setting-up-mandates"> Billing
  * Requests</a>. Use Billing Requests to build any future integrations.
  * </p>
  * Payer Authorisation resource acts as a wrapper for creating customer, bank account and mandate
@@ -33,10 +33,9 @@ import java.util.Map;
  * 
  * <ol>
  * <li>Listen to <code>  payer_authorisation_completed </code>
- * <a href="https://developer.gocardless.com/api-reference/#appendix-webhooks"> webhook</a>
- * (recommended)</li>
+ * <a href="https://docs.gocardless.com/docs/api-reference/webhooks"> webhook</a> (recommended)</li>
  * <li>Poll the GET <a href=
- * "https://developer.gocardless.com/api-reference/#payer-authorisations-get-a-single-payer-authorisation">
+ * "https://docs.gocardless.com/docs/api-reference/payer-authorisation#get-a-single-payer-authorisation">
  * endpoint</a></li>
  * <li>Poll the GET events API
  * <code>https://api.gocardless.com/events?payer_authorisation={id}&amp;action=completed</code></li>
@@ -71,9 +70,9 @@ public class PayerAuthorisation {
     private Status status;
 
     /**
-     * All details required for the creation of a <a href=
-     * "https://developer.gocardless.com/api-reference/#core-endpoints-customer-bank-accounts">Customer
-     * Bank Account</a>.
+     * All details required for the creation of a
+     * <a href="https://docs.gocardless.com/docs/api-reference/customer-bank-account">Customer Bank
+     * Account</a>.
      */
     public BankAccount getBankAccount() {
         return bankAccount;
@@ -81,7 +80,7 @@ public class PayerAuthorisation {
 
     /**
      * <a href=
-     * "https://developer.gocardless.com/api-reference/#api-usage-dates-and-times">Timestamp</a>,
+     * "https://docs.gocardless.com/docs/api-reference/data-conventions#dates-and-times">Timestamp</a>,
      * recording when this Payer Authorisation was created.
      */
     public String getCreatedAt() {
@@ -89,8 +88,8 @@ public class PayerAuthorisation {
     }
 
     /**
-     * All details required for the creation of a <a href=
-     * "https://developer.gocardless.com/api-reference/#core-endpoints-customers">Customer</a>.
+     * All details required for the creation of a
+     * <a href="https://docs.gocardless.com/docs/api-reference/customer">Customer</a>.
      */
     public Customer getCustomer() {
         return customer;
@@ -118,8 +117,8 @@ public class PayerAuthorisation {
     }
 
     /**
-     * All details required for the creation of a <a href=
-     * "https://developer.gocardless.com/api-reference/#core-endpoints-mandates">Mandate</a>.
+     * All details required for the creation of a
+     * <a href="https://docs.gocardless.com/docs/api-reference/mandate">Mandate</a>.
      */
     public Mandate getMandate() {
         return mandate;
@@ -157,9 +156,9 @@ public class PayerAuthorisation {
     /**
      * Represents a bank account resource returned from the API.
      *
-     * All details required for the creation of a <a href=
-     * "https://developer.gocardless.com/api-reference/#core-endpoints-customer-bank-accounts">Customer
-     * Bank Account</a>.
+     * All details required for the creation of a
+     * <a href="https://docs.gocardless.com/docs/api-reference/customer-bank-account">Customer Bank
+     * Account</a>.
      */
     public static class BankAccount {
         private BankAccount() {
@@ -184,7 +183,7 @@ public class PayerAuthorisation {
          * customer is created is stored and is available via the API, but is transliterated,
          * upcased, and truncated to 18 characters in bank submissions. This field is required
          * unless the request includes a <a href=
-         * "https://developer.gocardless.com/api-reference/#javascript-flow-customer-bank-account-tokens">customer
+         * "https://docs.gocardless.com/docs/collect-payments/integration-types/javascript-drop-in-flow">customer
          * bank account token</a>.
          */
         public String getAccountHolderName() {
@@ -192,8 +191,8 @@ public class PayerAuthorisation {
         }
 
         /**
-         * Bank account number - see <a href=
-         * "https://developer.gocardless.com/api-reference/#appendix-local-bank-details">local
+         * Bank account number - see
+         * <a href="https://docs.gocardless.com/docs/api-reference/local-bank-details">local
          * details</a> for more information. Alternatively you can provide an <code>iban</code>.
          */
         public String getAccountNumber() {
@@ -210,7 +209,7 @@ public class PayerAuthorisation {
 
         /**
          * Account number suffix (only for bank accounts denominated in NZD) - see <a href=
-         * "https://developer.gocardless.com/api-reference/#local-bank-details-new-zealand">local
+         * "https://docs.gocardless.com/docs/api-reference/local-bank-details#new-zealand">local
          * details</a> for more information.
          */
         public String getAccountNumberSuffix() {
@@ -220,7 +219,7 @@ public class PayerAuthorisation {
         /**
          * Bank account type. Required for USD-denominated bank accounts. Must not be provided for
          * bank accounts in other currencies. See <a href=
-         * "https://developer.gocardless.com/api-reference/#local-bank-details-united-states">local
+         * "https://docs.gocardless.com/docs/api-reference/local-bank-details#united-states">local
          * details</a> for more information.
          */
         public AccountType getAccountType() {
@@ -228,8 +227,8 @@ public class PayerAuthorisation {
         }
 
         /**
-         * Bank code - see <a href=
-         * "https://developer.gocardless.com/api-reference/#appendix-local-bank-details">local
+         * Bank code - see
+         * <a href="https://docs.gocardless.com/docs/api-reference/local-bank-details">local
          * details</a> for more information. Alternatively you can provide an <code>iban</code>.
          */
         public String getBankCode() {
@@ -244,8 +243,8 @@ public class PayerAuthorisation {
         }
 
         /**
-         * Branch code - see <a href=
-         * "https://developer.gocardless.com/api-reference/#appendix-local-bank-details">local
+         * Branch code - see
+         * <a href="https://docs.gocardless.com/docs/api-reference/local-bank-details">local
          * details</a> for more information. Alternatively you can provide an <code>iban</code>.
          */
         public String getBranchCode() {
@@ -271,11 +270,11 @@ public class PayerAuthorisation {
         }
 
         /**
-         * International Bank Account Number. Alternatively you can provide <a href=
-         * "https://developer.gocardless.com/api-reference/#appendix-local-bank-details">local
+         * International Bank Account Number. Alternatively you can provide
+         * <a href="https://docs.gocardless.com/docs/api-reference/local-bank-details">local
          * details</a>. IBANs are not accepted for Swedish bank accounts denominated in SEK - you
          * must supply
-         * <a href="https://developer.gocardless.com/api-reference/#local-bank-details-sweden">local
+         * <a href="https://docs.gocardless.com/docs/api-reference/local-bank-details#sweden">local
          * details</a>.
          */
         public String getIban() {
@@ -301,8 +300,8 @@ public class PayerAuthorisation {
     /**
      * Represents a customer resource returned from the API.
      *
-     * All details required for the creation of a <a href=
-     * "https://developer.gocardless.com/api-reference/#core-endpoints-customers">Customer</a>.
+     * All details required for the creation of a
+     * <a href="https://docs.gocardless.com/docs/api-reference/customer">Customer</a>.
      */
     public static class Customer {
         private Customer() {
@@ -521,8 +520,8 @@ public class PayerAuthorisation {
     /**
      * Represents a mandate resource returned from the API.
      *
-     * All details required for the creation of a <a href=
-     * "https://developer.gocardless.com/api-reference/#core-endpoints-mandates">Mandate</a>.
+     * All details required for the creation of a
+     * <a href="https://docs.gocardless.com/docs/api-reference/mandate">Mandate</a>.
      */
     public static class Mandate {
         private Mandate() {
@@ -555,10 +554,10 @@ public class PayerAuthorisation {
         }
 
         /**
-         * Unique reference. Different schemes have different length and <a href=
-         * "https://developer.gocardless.com/api-reference/#appendix-character-sets">character
-         * set</a> requirements. GoCardless will generate a unique reference satisfying the
-         * different scheme requirements if this field is left blank.
+         * Unique reference. Different schemes have different length and
+         * <a href="https://docs.gocardless.com/docs/api-reference/character-sets">character set</a>
+         * requirements. GoCardless will generate a unique reference satisfying the different scheme
+         * requirements if this field is left blank.
          */
         public String getReference() {
             return reference;

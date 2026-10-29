@@ -12,8 +12,7 @@ import java.util.Map;
  *
  * <p class="deprecated-notice">
  * <strong>Deprecated</strong>: Redirect Flows are legacy APIs and cannot be used by new
- * integrators. The <a href=
- * "https://developer.gocardless.com/api-reference/#billing-requests-billing-requests">Billing
+ * integrators. The <a href="https://docs.gocardless.com/docs/api-reference/billing-request">Billing
  * Request flow</a> API should be used for your payment flows.
  * </p>
  * Redirect flows enable you to use GoCardless'
@@ -25,7 +24,7 @@ import java.util.Map;
  * 
  * <ol>
  * <li>You <a href=
- * "https://developer.gocardless.com/api-reference/#redirect-flows-create-a-redirect-flow">create</a>
+ * "https://docs.gocardless.com/docs/api-reference/redirect-flow#create-a-redirect-flow">create</a>
  * a redirect flow for your customer, and redirect them to the returned redirect url, e.g.
  * <code>https://pay.gocardless.com/flow/RE123</code>.</li>
  * <li>Your customer supplies their name, email, address, and bank account details, and submits the
@@ -33,20 +32,17 @@ import java.util.Map;
  * <code>success_redirect_url</code> with <code>redirect_flow_id=RE123</code> in the
  * querystring.</li>
  * <li>You <a href=
- * "https://developer.gocardless.com/api-reference/#redirect-flows-complete-a-redirect-flow">complete</a>
+ * "https://docs.gocardless.com/docs/api-reference/redirect-flow#complete-a-redirect-flow">complete</a>
  * the redirect flow, which creates a
- * <a href="https://developer.gocardless.com/api-reference/#core-endpoints-customers">customer</a>,
- * <a href=
- * "https://developer.gocardless.com/api-reference/#core-endpoints-customer-bank-accounts">customer
- * bank account</a>, and
- * <a href="https://developer.gocardless.com/api-reference/#core-endpoints-mandates">mandate</a>,
- * and returns the ID of the mandate. You may wish to create a <a href=
- * "https://developer.gocardless.com/api-reference/#core-endpoints-subscriptions">subscription</a>
- * or <a href="https://developer.gocardless.com/api-reference/#core-endpoints-payments">payment</a>
- * at this point.</li>
+ * <a href="https://docs.gocardless.com/docs/api-reference/customer">customer</a>,
+ * <a href="https://docs.gocardless.com/docs/api-reference/customer-bank-account">customer bank
+ * account</a>, and <a href="https://docs.gocardless.com/docs/api-reference/mandate">mandate</a>,
+ * and returns the ID of the mandate. You may wish to create a
+ * <a href="https://docs.gocardless.com/docs/api-reference/subscription">subscription</a> or
+ * <a href="https://docs.gocardless.com/docs/api-reference/payment">payment</a> at this point.</li>
  * </ol>
  * Once you have <a href=
- * "https://developer.gocardless.com/api-reference/#redirect-flows-complete-a-redirect-flow">completed</a>
+ * "https://docs.gocardless.com/docs/api-reference/redirect-flow#complete-a-redirect-flow">completed</a>
  * the redirect flow via the API, you should display a confirmation page to your customer,
  * confirming that their Direct Debit has been set up. You can build your own page, or redirect to
  * the one we provide in the <code>confirmation_url</code> attribute of the redirect flow.
@@ -70,8 +66,8 @@ public class RedirectFlowService {
      * GoCardless hosted payment pages.
      *
      * @deprecated Redirect Flows are legacy APIs and cannot be used by new integrators. The Billing
-     *             Request flow (https://developer.gocardless.com/api-reference/#billing-requests)
-     *             API should be used for your payment flows.
+     *             Request flow (https://docs.gocardless.com/docs/api-reference/billing-request) API
+     *             should be used for your payment flows.
      */
     @Deprecated
     public RedirectFlowCreateRequest create() {
@@ -82,8 +78,8 @@ public class RedirectFlowService {
      * Returns all details about a single redirect flow
      *
      * @deprecated Redirect Flows are legacy APIs and cannot be used by new integrators. The Billing
-     *             Request flow (https://developer.gocardless.com/api-reference/#billing-requests)
-     *             API should be used for your payment flows.
+     *             Request flow (https://docs.gocardless.com/docs/api-reference/billing-request) API
+     *             should be used for your payment flows.
      */
     @Deprecated
     public RedirectFlowGetRequest get(String identity) {
@@ -91,12 +87,10 @@ public class RedirectFlowService {
     }
 
     /**
-     * This creates a <a href=
-     * "https://developer.gocardless.com/api-reference/#core-endpoints-customers">customer</a>,
-     * <a href=
-     * "https://developer.gocardless.com/api-reference/#core-endpoints-customer-bank-accounts">customer
-     * bank account</a>, and
-     * <a href="https://developer.gocardless.com/api-reference/#core-endpoints-mandates">mandate</a>
+     * This creates a
+     * <a href="https://docs.gocardless.com/docs/api-reference/customer">customer</a>,
+     * <a href="https://docs.gocardless.com/docs/api-reference/customer-bank-account">customer bank
+     * account</a>, and <a href="https://docs.gocardless.com/docs/api-reference/mandate">mandate</a>
      * using the details supplied by your customer and returns the ID of the created mandate.
      * 
      * This will return a <code>redirect_flow_incomplete</code> error if your customer has not yet
@@ -106,8 +100,8 @@ public class RedirectFlowService {
      * when the redirect flow was created.
      *
      * @deprecated Redirect Flows are legacy APIs and cannot be used by new integrators. The Billing
-     *             Request flow (https://developer.gocardless.com/api-reference/#billing-requests)
-     *             API should be used for your payment flows.
+     *             Request flow (https://docs.gocardless.com/docs/api-reference/billing-request) API
+     *             should be used for your payment flows.
      */
     @Deprecated
     public RedirectFlowCompleteRequest complete(String identity) {
@@ -146,10 +140,9 @@ public class RedirectFlowService {
         }
 
         /**
-         * The <a href=
-         * "https://developer.gocardless.com/api-reference/#core-endpoints-creditors">creditor</a>
-         * for whom the mandate will be created. The <code>name</code> of the creditor will be
-         * displayed on the payment page. Required if your account manages multiple creditors.
+         * The <a href="https://docs.gocardless.com/docs/api-reference/creditor">creditor</a> for
+         * whom the mandate will be created. The <code>name</code> of the creditor will be displayed
+         * on the payment page. Required if your account manages multiple creditors.
          */
         public RedirectFlowCreateRequest withLinksCreditor(String creditor) {
             if (links == null) {
@@ -196,7 +189,7 @@ public class RedirectFlowService {
         /**
          * Bank account type for USD-denominated bank accounts. Must not be provided for bank
          * accounts in other currencies. See <a href=
-         * "https://developer.gocardless.com/api-reference/#local-bank-details-united-states">local
+         * "https://docs.gocardless.com/docs/api-reference/local-bank-details#united-states">local
          * details</a> for more information.
          */
         public RedirectFlowCreateRequest withPrefilledBankAccountAccountType(
@@ -484,8 +477,7 @@ public class RedirectFlowService {
             private String creditor;
 
             /**
-             * The <a href=
-             * "https://developer.gocardless.com/api-reference/#core-endpoints-creditors">creditor</a>
+             * The <a href="https://docs.gocardless.com/docs/api-reference/creditor">creditor</a>
              * for whom the mandate will be created. The <code>name</code> of the creditor will be
              * displayed on the payment page. Required if your account manages multiple creditors.
              */
@@ -501,7 +493,7 @@ public class RedirectFlowService {
             /**
              * Bank account type for USD-denominated bank accounts. Must not be provided for bank
              * accounts in other currencies. See <a href=
-             * "https://developer.gocardless.com/api-reference/#local-bank-details-united-states">local
+             * "https://docs.gocardless.com/docs/api-reference/local-bank-details#united-states">local
              * details</a> for more information.
              */
             public PrefilledBankAccount withAccountType(AccountType accountType) {
@@ -710,12 +702,10 @@ public class RedirectFlowService {
     /**
      * Request class for {@link RedirectFlowService#complete }.
      *
-     * This creates a <a href=
-     * "https://developer.gocardless.com/api-reference/#core-endpoints-customers">customer</a>,
-     * <a href=
-     * "https://developer.gocardless.com/api-reference/#core-endpoints-customer-bank-accounts">customer
-     * bank account</a>, and
-     * <a href="https://developer.gocardless.com/api-reference/#core-endpoints-mandates">mandate</a>
+     * This creates a
+     * <a href="https://docs.gocardless.com/docs/api-reference/customer">customer</a>,
+     * <a href="https://docs.gocardless.com/docs/api-reference/customer-bank-account">customer bank
+     * account</a>, and <a href="https://docs.gocardless.com/docs/api-reference/mandate">mandate</a>
      * using the details supplied by your customer and returns the ID of the created mandate.
      * 
      * This will return a <code>redirect_flow_incomplete</code> error if your customer has not yet

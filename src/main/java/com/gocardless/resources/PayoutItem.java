@@ -207,7 +207,7 @@ public class PayoutItem {
          * rate has been finalised.
          * 
          * You can listen for the payout's <a href=
-         * "https://developer.gocardless.com/api-reference/#event-types-payout"><code>tax_exchange_rates_confirmed</code>
+         * "https://docs.gocardless.com/docs/api-reference/events/payout"><code>tax_exchange_rates_confirmed</code>
          * webhook</a> to know when the exchange rate has been finalised for all fees in the payout.
          */
         public String getExchangeRate() {

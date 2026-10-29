@@ -5,9 +5,8 @@ package com.gocardless.resources;
  *
  * Tax rates from tax authority.
  * 
- * We also maintain a
- * <a href="https://developer.gocardless.com/api-reference/#appendix-tax-rates">static list of the
- * tax rates for each jurisdiction</a>.
+ * We also maintain a <a href="https://docs.gocardless.com/docs/api-reference/tax-rates">static list
+ * of the tax rates for each jurisdiction</a>.
  */
 public class TaxRate {
     private TaxRate() {

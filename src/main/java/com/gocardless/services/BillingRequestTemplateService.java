@@ -37,7 +37,7 @@ public class BillingRequestTemplateService {
 
     /**
      * Returns a <a href=
-     * "https://developer.gocardless.com/api-reference/#api-usage-cursor-pagination">cursor-paginated</a>
+     * "https://docs.gocardless.com/docs/api-reference/data-conventions#cursor-pagination">cursor-paginated</a>
      * list of your Billing Request Templates.
      */
     public BillingRequestTemplateListRequest<ListResponse<BillingRequestTemplate>> list() {
@@ -76,7 +76,7 @@ public class BillingRequestTemplateService {
      * Request class for {@link BillingRequestTemplateService#list }.
      *
      * Returns a <a href=
-     * "https://developer.gocardless.com/api-reference/#api-usage-cursor-pagination">cursor-paginated</a>
+     * "https://docs.gocardless.com/docs/api-reference/data-conventions#cursor-pagination">cursor-paginated</a>
      * list of your Billing Request Templates.
      */
     public static final class BillingRequestTemplateListRequest<S>
@@ -230,9 +230,9 @@ public class BillingRequestTemplateService {
         }
 
         /**
-         * ID of the associated <a href=
-         * "https://developer.gocardless.com/api-reference/#core-endpoints-creditors">creditor</a>.
-         * Only required if your account manages multiple creditors.
+         * ID of the associated
+         * <a href="https://docs.gocardless.com/docs/api-reference/creditor">creditor</a>. Only
+         * required if your account manages multiple creditors.
          */
         public BillingRequestTemplateCreateRequest withLinksCreditor(String creditor) {
             if (links == null) {
@@ -550,9 +550,9 @@ public class BillingRequestTemplateService {
             private String creditor;
 
             /**
-             * ID of the associated <a href=
-             * "https://developer.gocardless.com/api-reference/#core-endpoints-creditors">creditor</a>.
-             * Only required if your account manages multiple creditors.
+             * ID of the associated
+             * <a href="https://docs.gocardless.com/docs/api-reference/creditor">creditor</a>. Only
+             * required if your account manages multiple creditors.
              */
             public Links withCreditor(String creditor) {
                 this.creditor = creditor;

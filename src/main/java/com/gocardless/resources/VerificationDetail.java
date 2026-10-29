@@ -196,8 +196,7 @@ public class VerificationDetail {
         private String creditor;
 
         /**
-         * ID of the <a href=
-         * "https://developer.gocardless.com/api-reference/#core-endpoints-creditors">creditor</a>
+         * ID of the <a href="https://docs.gocardless.com/docs/api-reference/creditor">creditor</a>
          */
         public String getCreditor() {
             return creditor;

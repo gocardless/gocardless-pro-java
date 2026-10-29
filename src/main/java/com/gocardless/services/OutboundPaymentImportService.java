@@ -60,7 +60,7 @@ public class OutboundPaymentImportService {
 
     /**
      * Returns a <a href=
-     * "https://developer.gocardless.com/api-reference/#api-usage-cursor-pagination">cursor-paginated</a>
+     * "https://docs.gocardless.com/docs/api-reference/data-conventions#cursor-pagination">cursor-paginated</a>
      * list of your outbound payment imports.
      */
     public OutboundPaymentImportListRequest<ListResponse<OutboundPaymentImport>> list() {
@@ -296,7 +296,7 @@ public class OutboundPaymentImportService {
      * Request class for {@link OutboundPaymentImportService#list }.
      *
      * Returns a <a href=
-     * "https://developer.gocardless.com/api-reference/#api-usage-cursor-pagination">cursor-paginated</a>
+     * "https://docs.gocardless.com/docs/api-reference/data-conventions#cursor-pagination">cursor-paginated</a>
      * list of your outbound payment imports.
      */
     public static final class OutboundPaymentImportListRequest<S>

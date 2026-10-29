@@ -64,7 +64,7 @@ public class BlockService {
 
     /**
      * Returns a <a href=
-     * "https://developer.gocardless.com/api-reference/#api-usage-cursor-pagination">cursor-paginated</a>
+     * "https://docs.gocardless.com/docs/api-reference/data-conventions#cursor-pagination">cursor-paginated</a>
      * list of your blocks.
      */
     public BlockListRequest<ListResponse<Block>> list() {
@@ -248,7 +248,7 @@ public class BlockService {
      * Request class for {@link BlockService#list }.
      *
      * Returns a <a href=
-     * "https://developer.gocardless.com/api-reference/#api-usage-cursor-pagination">cursor-paginated</a>
+     * "https://docs.gocardless.com/docs/api-reference/data-conventions#cursor-pagination">cursor-paginated</a>
      * list of your blocks.
      */
     public static final class BlockListRequest<S> extends ListRequest<S, Block> {

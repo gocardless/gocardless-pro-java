@@ -7,10 +7,9 @@ import java.util.Map;
  * Represents a creditor bank account resource returned from the API.
  *
  * Creditor Bank Accounts hold the bank details of a
- * <a href="https://developer.gocardless.com/api-reference/#core-endpoints-creditors">creditor</a>.
- * These are the bank accounts which your
- * <a href="https://developer.gocardless.com/api-reference/#core-endpoints-payouts">payouts</a> will
- * be sent to.
+ * <a href="https://docs.gocardless.com/docs/api-reference/creditor">creditor</a>. These are the
+ * bank accounts which your
+ * <a href="https://docs.gocardless.com/docs/api-reference/payout">payouts</a> will be sent to.
  * 
  * Note that creditor bank accounts must be unique, and so you will encounter a
  * <code>bank_account_exists</code> error if you try to create a duplicate bank account. You may
@@ -41,9 +40,9 @@ public class CreditorBankAccount {
 
     /**
      * Name of the account holder, as known by the bank. Usually this is the same as the name stored
-     * with the linked <a href=
-     * "https://developer.gocardless.com/api-reference/#core-endpoints-creditors">creditor</a>. This
-     * field will be transliterated, upcased and truncated to 18 characters.
+     * with the linked
+     * <a href="https://docs.gocardless.com/docs/api-reference/creditor">creditor</a>. This field
+     * will be transliterated, upcased and truncated to 18 characters.
      */
     public String getAccountHolderName() {
         return accountHolderName;
@@ -60,7 +59,7 @@ public class CreditorBankAccount {
     /**
      * Bank account type. Required for USD-denominated bank accounts. Must not be provided for bank
      * accounts in other currencies. See <a href=
-     * "https://developer.gocardless.com/api-reference/#local-bank-details-united-states">local
+     * "https://docs.gocardless.com/docs/api-reference/local-bank-details#united-states">local
      * details</a> for more information.
      */
     public AccountType getAccountType() {
@@ -86,7 +85,7 @@ public class CreditorBankAccount {
 
     /**
      * Fixed <a href=
-     * "https://developer.gocardless.com/api-reference/#api-usage-dates-and-times">timestamp</a>,
+     * "https://docs.gocardless.com/docs/api-reference/data-conventions#dates-and-times">timestamp</a>,
      * recording when this resource was created.
      */
     public String getCreatedAt() {
@@ -164,8 +163,7 @@ public class CreditorBankAccount {
         private String creditor;
 
         /**
-         * ID of the <a href=
-         * "https://developer.gocardless.com/api-reference/#core-endpoints-creditors">creditor</a>
+         * ID of the <a href="https://docs.gocardless.com/docs/api-reference/creditor">creditor</a>
          * that owns this bank account.
          */
         public String getCreditor() {

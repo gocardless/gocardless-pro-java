@@ -6,11 +6,10 @@ import java.util.List;
 /**
  * Represents a creditor resource returned from the API.
  *
- * Each
- * <a href="https://developer.gocardless.com/api-reference/#core-endpoints-payments">payment</a>
- * taken through the API is linked to a "creditor", to whom the payment is then paid out. In most
- * cases your organisation will have a single "creditor", but the API also supports collecting
- * payments on behalf of others.
+ * Each <a href="https://docs.gocardless.com/docs/api-reference/payment">payment</a> taken through
+ * the API is linked to a "creditor", to whom the payment is then paid out. In most cases your
+ * organisation will have a single "creditor", but the API also supports collecting payments on
+ * behalf of others.
  * 
  * Currently, for Anti Money Laundering reasons, any creditors you add must be directly related to
  * your organisation.
@@ -99,7 +98,7 @@ public class Creditor {
 
     /**
      * Fixed <a href=
-     * "https://developer.gocardless.com/api-reference/#api-usage-dates-and-times">timestamp</a>,
+     * "https://docs.gocardless.com/docs/api-reference/data-conventions#dates-and-times">timestamp</a>,
      * recording when this resource was created.
      */
     public String getCreatedAt() {
@@ -153,9 +152,9 @@ public class Creditor {
     }
 
     /**
-     * Boolean value indicating whether creditor has the <a href=
-     * "https://developer.gocardless.com/api-reference/#core-endpoints-mandate-imports">Mandate
-     * Imports</a> functionality enabled.
+     * Boolean value indicating whether creditor has the
+     * <a href="https://docs.gocardless.com/docs/api-reference/mandate-import">Mandate Imports</a>
+     * functionality enabled.
      */
     public Boolean getMandateImportsEnabled() {
         return mandateImportsEnabled;
@@ -164,9 +163,9 @@ public class Creditor {
     /**
      * Boolean value indicating whether the organisation is responsible for sending all customer
      * notifications (note this is separate from the functionality described <a href=
-     * "https://developer.gocardless.com/getting-started/api/handling-customer-notifications/">here</a>).
-     * If you are a partner app, and this value is true, you should not send notifications on behalf
-     * of this organisation.
+     * "https://docs.gocardless.com/docs/tutorials/handling-customer-notifications">here</a>). If
+     * you are a partner app, and this value is true, you should not send notifications on behalf of
+     * this organisation.
      */
     public Boolean getMerchantResponsibleForNotifications() {
         return merchantResponsibleForNotifications;
@@ -198,8 +197,8 @@ public class Creditor {
      * 
      * The support address, <code>phone_number</code> and <code>email</code> fields are for
      * customers to contact the merchant for support purposes. They must be displayed on the payment
-     * page, please see our <a href=
-     * "https://developer.gocardless.com/api-reference/#appendix-compliance-requirements">compliance
+     * page, please see our
+     * <a href="https://docs.gocardless.com/docs/api-reference/compliance-requirements">compliance
      * requirements</a> for more details.
      */
     public List<SchemeIdentifier> getSchemeIdentifiers() {
@@ -209,7 +208,7 @@ public class Creditor {
     /**
      * The creditor's verification status, indicating whether they can yet receive payouts. For more
      * details on handling verification as a partner, see our <a href=
-     * "https://developer.gocardless.com/getting-started/partners/helping-your-users-get-verified/">"Helping
+     * "https://docs.gocardless.com/docs/partner-integrations/getting-your-users-verified">"Helping
      * your users get verified" guide</a>. One of:
      * 
      * <ul>
@@ -279,8 +278,8 @@ public class Creditor {
         private String defaultUsdPayoutAccount;
 
         /**
-         * ID of the <a href=
-         * "https://developer.gocardless.com/api-reference/#core-endpoints-creditor-bank-accounts">bank
+         * ID of the
+         * <a href="https://docs.gocardless.com/docs/api-reference/creditor-bank-account">bank
          * account</a> which is set up to receive payouts in AUD.
          */
         public String getDefaultAudPayoutAccount() {
@@ -288,8 +287,8 @@ public class Creditor {
         }
 
         /**
-         * ID of the <a href=
-         * "https://developer.gocardless.com/api-reference/#core-endpoints-creditor-bank-accounts">bank
+         * ID of the
+         * <a href="https://docs.gocardless.com/docs/api-reference/creditor-bank-account">bank
          * account</a> which is set up to receive payouts in CAD.
          */
         public String getDefaultCadPayoutAccount() {
@@ -297,8 +296,8 @@ public class Creditor {
         }
 
         /**
-         * ID of the <a href=
-         * "https://developer.gocardless.com/api-reference/#core-endpoints-creditor-bank-accounts">bank
+         * ID of the
+         * <a href="https://docs.gocardless.com/docs/api-reference/creditor-bank-account">bank
          * account</a> which is set up to receive payouts in DKK.
          */
         public String getDefaultDkkPayoutAccount() {
@@ -306,8 +305,8 @@ public class Creditor {
         }
 
         /**
-         * ID of the <a href=
-         * "https://developer.gocardless.com/api-reference/#core-endpoints-creditor-bank-accounts">bank
+         * ID of the
+         * <a href="https://docs.gocardless.com/docs/api-reference/creditor-bank-account">bank
          * account</a> which is set up to receive payouts in EUR.
          */
         public String getDefaultEurPayoutAccount() {
@@ -315,8 +314,8 @@ public class Creditor {
         }
 
         /**
-         * ID of the <a href=
-         * "https://developer.gocardless.com/api-reference/#core-endpoints-creditor-bank-accounts">bank
+         * ID of the
+         * <a href="https://docs.gocardless.com/docs/api-reference/creditor-bank-account">bank
          * account</a> which is set up to receive payouts in GBP.
          */
         public String getDefaultGbpPayoutAccount() {
@@ -324,8 +323,8 @@ public class Creditor {
         }
 
         /**
-         * ID of the <a href=
-         * "https://developer.gocardless.com/api-reference/#core-endpoints-creditor-bank-accounts">bank
+         * ID of the
+         * <a href="https://docs.gocardless.com/docs/api-reference/creditor-bank-account">bank
          * account</a> which is set up to receive payouts in NZD.
          */
         public String getDefaultNzdPayoutAccount() {
@@ -333,8 +332,8 @@ public class Creditor {
         }
 
         /**
-         * ID of the <a href=
-         * "https://developer.gocardless.com/api-reference/#core-endpoints-creditor-bank-accounts">bank
+         * ID of the
+         * <a href="https://docs.gocardless.com/docs/api-reference/creditor-bank-account">bank
          * account</a> which is set up to receive payouts in SEK.
          */
         public String getDefaultSekPayoutAccount() {
@@ -342,8 +341,8 @@ public class Creditor {
         }
 
         /**
-         * ID of the <a href=
-         * "https://developer.gocardless.com/api-reference/#core-endpoints-creditor-bank-accounts">bank
+         * ID of the
+         * <a href="https://docs.gocardless.com/docs/api-reference/creditor-bank-account">bank
          * account</a> which is set up to receive payouts in USD.
          */
         public String getDefaultUsdPayoutAccount() {
@@ -426,7 +425,7 @@ public class Creditor {
 
         /**
          * Fixed <a href=
-         * "https://developer.gocardless.com/api-reference/#api-usage-dates-and-times">timestamp</a>,
+         * "https://docs.gocardless.com/docs/api-reference/data-conventions#dates-and-times">timestamp</a>,
          * recording when this resource was created.
          */
         public String getCreatedAt() {
@@ -459,7 +458,7 @@ public class Creditor {
          * customer, and the charge date of a payment using this scheme identifier.
          * 
          * By default, GoCardless sends these notifications automatically. Please see our <a href=
-         * "https://developer.gocardless.com/api-reference/#appendix-compliance-requirements">compliance
+         * "https://docs.gocardless.com/docs/api-reference/compliance-requirements">compliance
          * requirements</a> for more details.
          */
         public Integer getMinimumAdvanceNotice() {

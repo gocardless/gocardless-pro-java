@@ -13,13 +13,12 @@ import java.util.Map;
  * Service class for working with refund resources.
  *
  * Refund objects represent (partial) refunds of a
- * <a href="https://developer.gocardless.com/api-reference/#core-endpoints-payments">payment</a>
- * back to the
- * <a href="https://developer.gocardless.com/api-reference/#core-endpoints-customers">customer</a>.
+ * <a href="https://docs.gocardless.com/docs/api-reference/payment">payment</a> back to the
+ * <a href="https://docs.gocardless.com/docs/api-reference/customer">customer</a>.
  * 
  * GoCardless will notify you via a
- * <a href="https://developer.gocardless.com/api-reference/#appendix-webhooks">webhook</a> whenever
- * a refund is created, and will update the <code>amount_refunded</code> property of the payment.
+ * <a href="https://docs.gocardless.com/docs/api-reference/webhooks">webhook</a> whenever a refund
+ * is created, and will update the <code>amount_refunded</code> property of the payment.
  */
 public class RefundService {
     private final HttpClient httpClient;
@@ -52,7 +51,7 @@ public class RefundService {
 
     /**
      * Returns a <a href=
-     * "https://developer.gocardless.com/api-reference/#api-usage-cursor-pagination">cursor-paginated</a>
+     * "https://docs.gocardless.com/docs/api-reference/data-conventions#cursor-pagination">cursor-paginated</a>
      * list of your refunds.
      */
     public RefundListRequest<ListResponse<Refund>> list() {
@@ -114,8 +113,7 @@ public class RefundService {
         }
 
         /**
-         * ID of the <a href=
-         * "https://developer.gocardless.com/api-reference/#core-endpoints-mandates">mandate</a>
+         * ID of the <a href="https://docs.gocardless.com/docs/api-reference/mandate">mandate</a>
          * against which the refund is being made. <br>
          * </br>
          * <p class="restricted-notice">
@@ -132,8 +130,7 @@ public class RefundService {
         }
 
         /**
-         * ID of the <a href=
-         * "https://developer.gocardless.com/api-reference/#core-endpoints-payments">payment</a>
+         * ID of the <a href="https://docs.gocardless.com/docs/api-reference/payment">payment</a>
          * against which the refund is being made.
          */
         public RefundCreateRequest withLinksPayment(String payment) {
@@ -311,9 +308,9 @@ public class RefundService {
             private String payment;
 
             /**
-             * ID of the <a href=
-             * "https://developer.gocardless.com/api-reference/#core-endpoints-mandates">mandate</a>
-             * against which the refund is being made. <br>
+             * ID of the
+             * <a href="https://docs.gocardless.com/docs/api-reference/mandate">mandate</a> against
+             * which the refund is being made. <br>
              * </br>
              * <p class="restricted-notice">
              * <strong>Restricted</strong>: You must request access to Mandate Refunds by contacting
@@ -326,9 +323,9 @@ public class RefundService {
             }
 
             /**
-             * ID of the <a href=
-             * "https://developer.gocardless.com/api-reference/#core-endpoints-payments">payment</a>
-             * against which the refund is being made.
+             * ID of the
+             * <a href="https://docs.gocardless.com/docs/api-reference/payment">payment</a> against
+             * which the refund is being made.
              */
             public Links withPayment(String payment) {
                 this.payment = payment;
@@ -341,7 +338,7 @@ public class RefundService {
      * Request class for {@link RefundService#list }.
      *
      * Returns a <a href=
-     * "https://developer.gocardless.com/api-reference/#api-usage-cursor-pagination">cursor-paginated</a>
+     * "https://docs.gocardless.com/docs/api-reference/data-conventions#cursor-pagination">cursor-paginated</a>
      * list of your refunds.
      */
     public static final class RefundListRequest<S> extends ListRequest<S, Refund> {

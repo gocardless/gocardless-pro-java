@@ -3,9 +3,8 @@ package com.gocardless.resources;
 /**
  * Represents a payment account resource returned from the API.
  *
- * Access the details of bank accounts provided for you by GoCardless that are used to fund <a href=
- * "https://developer.gocardless.com/api-reference/#core-endpoints-outbound-payments">Outbound
- * Payments</a>.
+ * Access the details of bank accounts provided for you by GoCardless that are used to fund
+ * <a href="https://docs.gocardless.com/docs/api-reference/outbound-payment">Outbound Payments</a>.
  */
 public class PaymentAccount {
     private PaymentAccount() {
@@ -30,9 +29,9 @@ public class PaymentAccount {
 
     /**
      * Name of the account holder, as known by the bank. Usually this is the same as the name stored
-     * with the linked <a href=
-     * "https://developer.gocardless.com/api-reference/#core-endpoints-creditors">creditor</a>. This
-     * field will be transliterated, upcased and truncated to 18 characters.
+     * with the linked
+     * <a href="https://docs.gocardless.com/docs/api-reference/creditor">creditor</a>. This field
+     * will be transliterated, upcased and truncated to 18 characters.
      */
     public String getAccountHolderName() {
         return accountHolderName;
@@ -85,8 +84,7 @@ public class PaymentAccount {
         private String creditor;
 
         /**
-         * ID of the <a href=
-         * "https://developer.gocardless.com/api-reference/#core-endpoints-creditors">creditor</a>
+         * ID of the <a href="https://docs.gocardless.com/docs/api-reference/creditor">creditor</a>
          * that owns this bank account.
          */
         public String getCreditor() {

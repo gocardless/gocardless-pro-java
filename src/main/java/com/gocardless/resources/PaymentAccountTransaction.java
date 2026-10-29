@@ -6,9 +6,8 @@ import com.google.gson.annotations.SerializedName;
  * Represents a payment account transaction resource returned from the API.
  *
  * Payment account transactions represent movements of funds on a given payment account. The payment
- * account is provisioned by GoCardless and is used to fund <a href=
- * "https://developer.gocardless.com/api-reference/#core-endpoints-outbound-payments">outbound
- * payments</a>.
+ * account is provisioned by GoCardless and is used to fund
+ * <a href="https://docs.gocardless.com/docs/api-reference/outbound-payment">outbound payments</a>.
  */
 public class PaymentAccountTransaction {
     private PaymentAccountTransaction() {
@@ -125,7 +124,7 @@ public class PaymentAccountTransaction {
 
         /**
          * ID of the <a href=
-         * "https://developer.gocardless.com/api-reference/#core-endpoints-outbound-payments">outbound_payment</a>
+         * "https://docs.gocardless.com/docs/api-reference/outbound-payment">outbound_payment</a>
          * linked to the transaction
          */
         public String getOutboundPayment() {
@@ -140,8 +139,7 @@ public class PaymentAccountTransaction {
         }
 
         /**
-         * ID of the <a href=
-         * "https://developer.gocardless.com/api-reference/#core-endpoints-payouts">payout</a>
+         * ID of the <a href="https://docs.gocardless.com/docs/api-reference/payout">payout</a>
          * linked to the transaction.
          */
         public String getPayout() {

@@ -36,7 +36,7 @@ public class PayoutItemService {
 
     /**
      * Returns a <a href=
-     * "https://developer.gocardless.com/api-reference/#api-usage-cursor-pagination">cursor-paginated</a>
+     * "https://docs.gocardless.com/docs/api-reference/data-conventions#cursor-pagination">cursor-paginated</a>
      * list of items in the payout.
      * 
      * <strong>This endpoint only serves requests for payouts created in the last 6 months. Requests
@@ -54,7 +54,7 @@ public class PayoutItemService {
      * Request class for {@link PayoutItemService#list }.
      *
      * Returns a <a href=
-     * "https://developer.gocardless.com/api-reference/#api-usage-cursor-pagination">cursor-paginated</a>
+     * "https://docs.gocardless.com/docs/api-reference/data-conventions#cursor-pagination">cursor-paginated</a>
      * list of items in the payout.
      * 
      * <strong>This endpoint only serves requests for payouts created in the last 6 months. Requests
