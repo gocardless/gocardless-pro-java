@@ -176,6 +176,7 @@ public class BillingRequestService {
      */
     public static final class BillingRequestCreateRequest
             extends IdempotentPostRequest<BillingRequest> {
+        private AccountInformationRequest accountInformationRequest;
         private Boolean fallbackEnabled;
         private InstalmentScheduleRequest instalmentScheduleRequest;
         private Links links;
@@ -186,6 +187,38 @@ public class BillingRequestService {
         private PaymentRequest paymentRequest;
         private PurposeCode purposeCode;
         private SubscriptionRequest subscriptionRequest;
+
+        public BillingRequestCreateRequest withAccountInformationRequest(
+                AccountInformationRequest accountInformationRequest) {
+            this.accountInformationRequest = accountInformationRequest;
+            return this;
+        }
+
+        /**
+         * <a href=
+         * "https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2#Officially_assigned_code_elements">ISO
+         * 3166-1 alpha-2 code.</a>
+         */
+        public BillingRequestCreateRequest withAccountInformationRequestCountryCode(
+                String countryCode) {
+            if (accountInformationRequest == null) {
+                accountInformationRequest = new AccountInformationRequest();
+            }
+            accountInformationRequest.withCountryCode(countryCode);
+            return this;
+        }
+
+        /**
+         * List of scopes for the account information request
+         */
+        public BillingRequestCreateRequest withAccountInformationRequestScopes(
+                List<String> scopes) {
+            if (accountInformationRequest == null) {
+                accountInformationRequest = new AccountInformationRequest();
+            }
+            accountInformationRequest.withScopes(scopes);
+            return this;
+        }
 
         /**
          * (Optional) If true, this billing request can fallback from instant payment to direct
@@ -1056,6 +1089,29 @@ public class BillingRequestService {
             @Override
             public String toString() {
                 return name().toLowerCase();
+            }
+        }
+
+        public static class AccountInformationRequest {
+            private String countryCode;
+            private List<String> scopes;
+
+            /**
+             * <a href=
+             * "https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2#Officially_assigned_code_elements">ISO
+             * 3166-1 alpha-2 code.</a>
+             */
+            public AccountInformationRequest withCountryCode(String countryCode) {
+                this.countryCode = countryCode;
+                return this;
+            }
+
+            /**
+             * List of scopes for the account information request
+             */
+            public AccountInformationRequest withScopes(List<String> scopes) {
+                this.scopes = scopes;
+                return this;
             }
         }
 

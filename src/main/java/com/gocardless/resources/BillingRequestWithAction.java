@@ -221,6 +221,7 @@ public class BillingRequestWithAction {
             // blank to prevent instantiation
         }
 
+        private AccountInformationRequest accountInformationRequest;
         private List<Action> actions;
         private String createdAt;
         private Boolean fallbackEnabled;
@@ -237,6 +238,13 @@ public class BillingRequestWithAction {
         private Resources resources;
         private Status status;
         private SubscriptionRequest subscriptionRequest;
+
+        /**
+         * Request for account information
+         */
+        public AccountInformationRequest getAccountInformationRequest() {
+            return accountInformationRequest;
+        }
 
         /**
          * List of actions that can be performed before this billing request can be fulfilled.
@@ -454,6 +462,42 @@ public class BillingRequestWithAction {
             FULFILLED, @SerializedName("cancelled")
             CANCELLED, @SerializedName("unknown")
             UNKNOWN
+        }
+
+        /**
+         * Represents a account information request resource returned from the API.
+         *
+         * Request for account information
+         */
+        public static class AccountInformationRequest {
+            private AccountInformationRequest() {
+                // blank to prevent instantiation
+            }
+
+            private String countryCode;
+            private List<Scope> scopes;
+
+            /**
+             * <a href=
+             * "https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2#Officially_assigned_code_elements">ISO
+             * 3166-1 alpha-2 code.</a>
+             */
+            public String getCountryCode() {
+                return countryCode;
+            }
+
+            /**
+             * List of scopes for the account information request
+             */
+            public List<Scope> getScopes() {
+                return scopes;
+            }
+
+            public enum Scope {
+                @SerializedName("account_verification")
+                ACCOUNT_VERIFICATION, @SerializedName("unknown")
+                UNKNOWN
+            }
         }
 
         /**
@@ -947,6 +991,7 @@ public class BillingRequestWithAction {
                 // blank to prevent instantiation
             }
 
+            private String accountInformationRequest;
             private String bankAuthorisation;
             private String creditor;
             private String customer;
@@ -962,6 +1007,13 @@ public class BillingRequestWithAction {
             private String paymentRequestPayment;
             private String subscriptionRequest;
             private String subscriptionRequestSubscription;
+
+            /**
+             * (Optional) ID of associated account information request
+             */
+            public String getAccountInformationRequest() {
+                return accountInformationRequest;
+            }
 
             /**
              * (Optional) ID of the
