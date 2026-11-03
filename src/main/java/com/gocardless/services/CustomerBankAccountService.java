@@ -202,6 +202,10 @@ public class CustomerBankAccountService {
         /**
          * <a href="https://en.wikipedia.org/wiki/ISO_4217#Active_codes">ISO 4217</a> currency code.
          * Currently "AUD", "CAD", "DKK", "EUR", "GBP", "NZD", "SEK" and "USD" are supported.
+         * 
+         * Optional, as the currency is normally worked out from the bank details. An IBAN from a
+         * country that is not in the Eurozone, such as a GB IBAN, is treated as a bank account in
+         * that country's own currency. Set <code>EUR</code> to use it for SEPA Core Direct Debit.
          */
         public CustomerBankAccountCreateRequest withCurrency(String currency) {
             this.currency = currency;
