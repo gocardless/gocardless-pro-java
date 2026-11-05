@@ -1,5 +1,6 @@
 package com.gocardless.resources;
 
+import com.google.gson.annotations.SerializedName;
 import java.util.List;
 import java.util.Map;
 
@@ -25,6 +26,7 @@ public class Institution {
     private String logoUrl;
     private String name;
     private List<String> roles;
+    private Status status;
 
     /**
      * <a href=
@@ -76,6 +78,21 @@ public class Institution {
      */
     public List<String> getRoles() {
         return roles;
+    }
+
+    /**
+     * The status of the institution
+     */
+    public Status getStatus() {
+        return status;
+    }
+
+    public enum Status {
+        @SerializedName("enabled")
+        ENABLED, @SerializedName("disabled")
+        DISABLED, @SerializedName("temporarily_disabled")
+        TEMPORARILY_DISABLED, @SerializedName("unknown")
+        UNKNOWN
     }
 
     /**
