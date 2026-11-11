@@ -1451,6 +1451,7 @@ public class BillingRequest {
         private Customer customer;
         private CustomerBankAccount customerBankAccount;
         private CustomerBillingDetail customerBillingDetail;
+        private Mandate mandate;
 
         /**
          * Embedded customer
@@ -1471,6 +1472,13 @@ public class BillingRequest {
          */
         public CustomerBillingDetail getCustomerBillingDetail() {
             return customerBillingDetail;
+        }
+
+        /**
+         * Embedded mandate, only once the mandate request has been fulfilled
+         */
+        public Mandate getMandate() {
+            return mandate;
         }
 
         /**
@@ -1880,6 +1888,38 @@ public class BillingRequest {
              */
             public String getSwedishIdentityNumber() {
                 return swedishIdentityNumber;
+            }
+        }
+
+        /**
+         * Represents a mandate resource returned from the API.
+         *
+         * Embedded mandate, only once the mandate request has been fulfilled
+         */
+        public static class Mandate {
+            private Mandate() {
+                // blank to prevent instantiation
+            }
+
+            private String id;
+            private String reference;
+
+            /**
+             * Unique identifier, beginning with "MD". Note that this prefix may not apply to
+             * mandates created before 2016.
+             */
+            public String getId() {
+                return id;
+            }
+
+            /**
+             * Unique reference. Different schemes have different length and
+             * <a href="https://docs.gocardless.com/docs/api-reference/character-sets">character
+             * set</a> requirements. GoCardless will generate a unique reference satisfying the
+             * different scheme requirements if this field is left blank.
+             */
+            public String getReference() {
+                return reference;
             }
         }
     }
