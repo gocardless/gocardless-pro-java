@@ -1,6 +1,20 @@
 <!-- This file is generated, please add to it using `knope document-change` in the client-library-templates repo -->
 # Changelog
 
+## 9.20.1 (2026-11-13)
+
+### Fixes
+
+#### Update OkHttp dependency from 5.5.0 to 5.5.1
+
+> Fix: [Block 8 compromised eMudhra intermediate certificates][Mozilla_eMudhra]. Note that this
+update is not necessary for Android devices with Google Play Services as Google has issued an
+[automatic update][Google_eMudhra]. This change protects JVMs and AOSP devices that are exposed
+to the compromised certificates.
+
+
+https://github.com/lysine-dev/okhttp/blob/HEAD/CHANGELOG.md#Version-551
+
 ## 9.20.0 (2026-11-11)
 
 ### Features
