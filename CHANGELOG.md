@@ -1,6 +1,12 @@
 <!-- This file is generated, please add to it using `knope document-change` in the client-library-templates repo -->
 # Changelog
 
+## 9.21.0 (2026-11-17)
+
+### Features
+
+- Add `mandate_cancelled` scenario simulator for ACH, Autogiro, Bacs, BECS, Betalingsservice, PAD and SEPA mandates
+
 ## 9.20.1 (2026-11-13)
 
 ### Fixes
