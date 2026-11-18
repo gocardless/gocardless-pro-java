@@ -101,7 +101,8 @@ public class OutboundPaymentImportEntry {
 
     public enum Scheme {
         @SerializedName("faster_payments")
-        FASTER_PAYMENTS, @SerializedName("unknown")
+        FASTER_PAYMENTS, @SerializedName("bacs")
+        BACS, @SerializedName("unknown")
         UNKNOWN
     }
 
@@ -215,7 +216,8 @@ public class OutboundPaymentImportEntry {
 
             public enum Scheme {
                 @SerializedName("faster_payments")
-                FASTER_PAYMENTS, @SerializedName("unknown")
+                FASTER_PAYMENTS, @SerializedName("bacs")
+                BACS, @SerializedName("unknown")
                 UNKNOWN
             }
         }
